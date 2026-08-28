@@ -451,3 +451,4 @@ Includes connector highlighting and structural breakdown tags:
 5. [ ] Check all `<input>` and `<select>` elements for valid `data-ans="..."` attributes.
 6. [ ] Check reading evidence marks (`<mark class="evidence" id="ev-...">`) and synonym pairs (`<span class="syn-pair-1" data-q="...">`).
 7. [ ] Open in browser and verify navigation, timer (<kbd>T</kbd>), navigator grid (<kbd>G</kbd>), and answer evaluation.
+8. [ ] Run `npm run update-index` (or `node scripts/update-index.js`) to automatically register the new deck in `index.html`!
