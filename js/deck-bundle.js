@@ -58,15 +58,57 @@ class DeckEngine {
     }
 
     setupStageScale() {
+        this.aspectRatio = localStorage.getItem('deck_aspect_ratio') || '16:9';
+        this.applyAspectRatio(this.aspectRatio, false);
+
         const scale = () => {
             if (!this.stage) return;
-            const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
-            const x = (window.innerWidth - 1920 * factor) / 2;
-            const y = (window.innerHeight - 1080 * factor) / 2;
+            const targetW = this.aspectRatio === '4:3' ? 1440 : 1920;
+            const targetH = 1080;
+            const factor = Math.min(window.innerWidth / targetW, window.innerHeight / targetH);
+            const x = (window.innerWidth - targetW * factor) / 2;
+            const y = (window.innerHeight - targetH * factor) / 2;
             this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
         };
+        this.scaleStage = scale;
         scale();
         window.addEventListener('resize', scale);
+    }
+
+    toggleAspectRatio() {
+        const nextRatio = this.aspectRatio === '16:9' ? '4:3' : '16:9';
+        this.applyAspectRatio(nextRatio, true);
+    }
+
+    applyAspectRatio(ratio, showToast = true) {
+        this.aspectRatio = ratio;
+        document.documentElement.setAttribute('data-aspect', ratio);
+        localStorage.setItem('deck_aspect_ratio', ratio);
+        if (this.scaleStage) this.scaleStage();
+
+        // Update Aspect Button in HUD if present
+        const btn = document.getElementById('toolAspectBtn');
+        if (btn) {
+            const label = btn.querySelector('.tool-label');
+            if (label) label.textContent = ratio;
+            btn.title = `Aspect Ratio: ${ratio} (Shift+A)`;
+        }
+
+        if (showToast) {
+            this.showToastNotification(`📐 Aspect Ratio: ${ratio} Mode`);
+        }
+    }
+
+    showToastNotification(text) {
+        const indicator = document.getElementById('fontIndicator');
+        if (indicator) {
+            indicator.textContent = text;
+            indicator.classList.add('show');
+            clearTimeout(this.fontToastTimer);
+            this.fontToastTimer = setTimeout(() => {
+                indicator.classList.remove('show');
+            }, 1400);
+        }
     }
 
     setupKeyboardNav() {
@@ -189,6 +231,9 @@ class DeckEngine {
     checkAnswers(container) {
         if (!container) container = document.querySelector('.slide.active');
         if (typeof container === 'string') container = document.getElementById(container);
+        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
+            container = container.closest('.question-pane') || container.closest('.slide') || container.closest('.notebook') || container;
+        }
         if (!container) return;
 
         // Check blank inputs
@@ -224,6 +269,9 @@ class DeckEngine {
     revealKeys(container) {
         if (!container) container = document.querySelector('.slide.active');
         if (typeof container === 'string') container = document.getElementById(container);
+        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
+            container = container.closest('.question-pane') || container.closest('.slide') || container.closest('.notebook') || container;
+        }
         if (!container) return;
 
         container.querySelectorAll('.blank-input').forEach(input => {
@@ -254,6 +302,9 @@ class DeckEngine {
     resetTask(container) {
         if (!container) container = document.querySelector('.slide.active');
         if (typeof container === 'string') container = document.getElementById(container);
+        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
+            container = container.closest('.question-pane') || container.closest('.slide') || container.closest('.notebook') || container;
+        }
         if (!container) return;
 
         container.querySelectorAll('.blank-input, .select-input').forEach(input => {
@@ -375,6 +426,27 @@ class DeckEngine {
 
 // Global auto-instantiation on window
 window.DeckEngine = DeckEngine;
+
+// Universal Global Helper Functions for all presentation decks
+window.checkAnswers = (id) => (window.deckEngine ? window.deckEngine.checkAnswers(id) : null);
+window.revealAnswers = window.revealKeys = (id) => (window.deckEngine ? window.deckEngine.revealAnswers(id) : null);
+window.resetAnswers = window.resetTask = (id) => (window.deckEngine ? window.deckEngine.resetAnswers(id) : null);
+window.checkBlanks = (id) => (window.deckEngine ? window.deckEngine.checkBlanks(id) : null);
+window.revealBlanks = (id) => (window.deckEngine ? window.deckEngine.revealBlanks(id) : null);
+window.resetBlanks = (id) => (window.deckEngine ? window.deckEngine.resetBlanks(id) : null);
+window.checkSelects = (id) => (window.deckEngine ? window.deckEngine.checkSelects(id) : null);
+window.revealSelects = (id) => (window.deckEngine ? window.deckEngine.revealSelects(id) : null);
+window.resetSelects = (id) => (window.deckEngine ? window.deckEngine.resetSelects(id) : null);
+window.toggleOptCard = (card) => (window.deckEngine ? window.deckEngine.toggleOptCard(card) : null);
+window.checkMultiOpts = (id) => (window.deckEngine ? window.deckEngine.checkMultiOpts(id) : null);
+window.revealMultiOpts = (id) => (window.deckEngine ? window.deckEngine.revealMultiOpts(id) : null);
+window.resetMultiOpts = (id) => (window.deckEngine ? window.deckEngine.resetMultiOpts(id) : null);
+window.toggleExplanations = (id) => (window.deckEngine ? window.deckEngine.toggleExplanations(id) : null);
+window.toggleSynonymExplanation = (q, ev) => (window.deckEngine ? window.deckEngine.toggleSynonymExplanation(q, ev) : null);
+window.switchHighLineTab = (tab) => (window.deckEngine ? window.deckEngine.switchHighLineTab(tab) : null);
+window.jumpToSlide = (idx) => (window.deckEngine ? window.deckEngine.jumpToSlide(idx) : null);
+window.jumpToSkill = (skill) => (window.deckEngine ? window.deckEngine.jumpToSkill(skill) : null);
+
 window.addEventListener('DOMContentLoaded', () => {
     if (!window.deckEngine) {
         window.deckEngine = new DeckEngine();
@@ -1153,9 +1225,10 @@ window.teacherHighlighter = new TeacherHighlighter();
  * ==========================================================================
  * STEP-BY-STEP REVEAL ENGINE (StepRevealEngine)
  * Enables single-item question reveal for Socratic IELTS classroom teaching
- * - Click any question card to reveal just that question & explanation
+ * - Supports ALL exercise types: Reading (.q-card), Grammar Cloze (.blank-input),
+ *   Vocabulary (.select-input), and Multi-choice (.opt-card)
  * - Auto-scrolls reading passage to center on target evidence
- * - Keyboard shortcut: 'E' to step-reveal next unsolved question
+ * - Keyboard shortcut: 'E' to step-reveal next unsolved question/input
  * ==========================================================================
  */
 
@@ -1172,7 +1245,7 @@ class StepRevealEngine {
             this.bindEvents();
         }
 
-        // Shortcut 'E' to reveal next question on active slide
+        // Shortcut 'E' to reveal next item on active slide
         document.addEventListener('keydown', (e) => {
             if ((e.key === 'e' || e.key === 'E') && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
                 e.preventDefault();
@@ -1182,7 +1255,7 @@ class StepRevealEngine {
     }
 
     bindEvents() {
-        // Allow clicking directly on question cards or badges to toggle single reveal
+        // 1. Allow clicking directly on question cards or single reveal button
         document.querySelectorAll('.q-card').forEach(card => {
             if (card.dataset.stepBound) return;
             card.dataset.stepBound = 'true';
@@ -1206,48 +1279,151 @@ class StepRevealEngine {
             }
         });
 
-        // Add Step Reveal button to action rows
+        // 2. Add Step Reveal button to action rows across ALL exercise slides
         document.querySelectorAll('.action-row').forEach(row => {
             if (row.querySelector('.btn-step-reveal')) return;
-            const btn = document.createElement('button');
-            btn.className = 'btn-action btn-step-reveal';
-            btn.innerHTML = '👉 Step Reveal (E)';
-            btn.title = 'Reveal questions one by one for classroom discussion';
-            btn.onclick = () => this.revealNextInContainer(row.parentElement);
-            row.insertBefore(btn, row.children[1] || null);
+            const container = row.closest('.question-pane') || row.closest('.page-content') || row.closest('.notebook') || row.parentElement;
+            
+            // Check if there are any interactive elements on this slide/container
+            const hasInteractives = container && (
+                container.querySelector('.q-card') ||
+                container.querySelector('.select-input') ||
+                container.querySelector('.blank-input') ||
+                container.querySelector('.opt-card')
+            );
+
+            if (hasInteractives) {
+                const btn = document.createElement('button');
+                btn.className = 'btn-action btn-step-reveal';
+                btn.innerHTML = '👉 Step Reveal (E)';
+                btn.title = 'Reveal questions one by one for classroom discussion';
+                btn.onclick = () => this.revealNextInContainer(container);
+                row.insertBefore(btn, row.children[1] || null);
+            }
         });
 
         this.injectStyles();
     }
 
+    /**
+     * Finds all unrevealed interactive units (cards, standalone inputs, opt-cards) in DOM order
+     */
+    getUnrevealedItems(container) {
+        if (!container) return [];
+        const units = [];
+        const processedInputs = new Set();
+
+        // 1. Check for question cards
+        const qCards = Array.from(container.querySelectorAll('.q-card'));
+        qCards.forEach(card => {
+            const inputs = Array.from(card.querySelectorAll('.blank-input, .select-input'));
+            const isUnsolved = inputs.length > 0
+                ? inputs.some(inp => !inp.classList.contains('correct'))
+                : !card.classList.contains('revealed');
+
+            if (isUnsolved) {
+                units.push({
+                    type: 'card',
+                    el: card
+                });
+            }
+            inputs.forEach(inp => processedInputs.add(inp));
+        });
+
+        // 2. Check for standalone blank and select inputs not inside a .q-card
+        const allInputs = Array.from(container.querySelectorAll('.blank-input, .select-input'));
+        allInputs.forEach(input => {
+            if (!processedInputs.has(input) && !input.classList.contains('correct') && input.dataset.ans) {
+                units.push({
+                    type: 'input',
+                    el: input
+                });
+            }
+        });
+
+        // 3. Check for multi-option cards (.opt-card)
+        const optCards = Array.from(container.querySelectorAll('.opt-card'));
+        optCards.forEach(card => {
+            if (card.dataset.correct === 'true' && !card.classList.contains('correct-opt') && !card.classList.contains('selected')) {
+                units.push({
+                    type: 'opt-card',
+                    el: card
+                });
+            }
+        });
+
+        // Sort units by DOM document order
+        units.sort((a, b) => {
+            const pos = a.el.compareDocumentPosition(b.el);
+            if (pos & Node.DOCUMENT_POSITION_FOLLOWING) return -1;
+            if (pos & Node.DOCUMENT_POSITION_PRECEDING) return 1;
+            return 0;
+        });
+
+        return units;
+    }
+
     revealSingleCard(card) {
-        // Reveal blank inputs
+        // Reveal blank inputs inside card
         card.querySelectorAll('.blank-input').forEach(input => {
             if (input.dataset.ans) {
                 const acceptable = input.dataset.ans.split('|')[0];
                 input.value = acceptable;
                 input.classList.add('correct');
-                input.classList.remove('incorrect');
+                input.classList.remove('wrong', 'incorrect');
             }
         });
 
-        // Reveal select dropdowns
+        // Reveal select dropdowns inside card
         card.querySelectorAll('.select-input').forEach(sel => {
             if (sel.dataset.ans) {
                 sel.value = sel.dataset.ans;
                 sel.classList.add('correct');
-                sel.classList.remove('incorrect');
+                sel.classList.remove('wrong', 'incorrect');
             }
         });
 
+        card.classList.add('revealed');
+
         // Show explanation box if exists
         const exp = card.querySelector('.item-explanation');
-        if (exp) exp.style.display = 'block';
+        if (exp) {
+            exp.classList.add('show');
+            exp.style.display = 'block';
+        }
 
         // Auto-trigger evidence highlight in passage if linked
         const qId = card.dataset.q;
         if (qId && window.readingHighlighter) {
             window.readingHighlighter.showEvidence(qId);
+        } else if (qId && window.deckEngine) {
+            const synBtn = card.querySelector('.syn-btn');
+            const evId = synBtn ? synBtn.dataset.ev : `ev-${qId}`;
+            if (evId) window.deckEngine.toggleSynonymExplanation(qId, evId);
+        }
+    }
+
+    revealSingleInput(input) {
+        if (!input || !input.dataset.ans) return;
+
+        if (input.classList.contains('blank-input')) {
+            input.value = input.dataset.ans.split('|')[0];
+            input.classList.add('correct');
+            input.classList.remove('wrong', 'incorrect');
+        } else if (input.classList.contains('select-input')) {
+            input.value = input.dataset.ans;
+            input.classList.add('correct');
+            input.classList.remove('wrong', 'incorrect');
+        }
+
+        // Reveal associated explanation in parent container/item if present
+        const parent = input.closest('.card, .cloze-box, .exercise-box, .q-item, p, li, tr, div');
+        if (parent) {
+            const exp = parent.querySelector('.item-explanation');
+            if (exp) {
+                exp.classList.add('show');
+                exp.style.display = 'block';
+            }
         }
     }
 
@@ -1259,18 +1435,20 @@ class StepRevealEngine {
 
     revealNextInContainer(container) {
         if (!container) return;
-        const cards = Array.from(container.querySelectorAll('.q-card'));
-        const unrevealed = cards.find(card => {
-            const blank = card.querySelector('.blank-input');
-            const select = card.querySelector('.select-input');
-            if (blank && !blank.classList.contains('correct')) return true;
-            if (select && !select.classList.contains('correct')) return true;
-            return false;
-        });
+        const unrevealedUnits = this.getUnrevealedItems(container);
+        if (unrevealedUnits.length === 0) return;
 
-        if (unrevealed) {
-            this.revealSingleCard(unrevealed);
-            unrevealed.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        const nextUnit = unrevealedUnits[0];
+        if (nextUnit.type === 'card') {
+            this.revealSingleCard(nextUnit.el);
+            nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else if (nextUnit.type === 'input') {
+            this.revealSingleInput(nextUnit.el);
+            nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else if (nextUnit.type === 'opt-card') {
+            nextUnit.el.classList.add('selected', 'correct-opt');
+            nextUnit.el.classList.remove('wrong-opt');
+            nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     }
 
@@ -3293,35 +3471,481 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 
+/* ==================== MODULE: laser-pointer.js ==================== */
+/**
+ * Laser Pointer Module (LaserPointer)
+ * Provides a high-visibility glowing red laser dot that follows mouse movement.
+ * Toggle shortcut: 'L'
+ */
+
+class LaserPointer {
+    constructor() {
+        this.isActive = false;
+        this.dot = null;
+        this.init();
+    }
+
+    init() {
+        // Inject styles if not present
+        if (!document.getElementById('laserPointerStyles')) {
+            const style = document.createElement('style');
+            style.id = 'laserPointerStyles';
+            style.textContent = `
+                #laserPointerDot {
+                    position: fixed;
+                    width: 18px;
+                    height: 18px;
+                    border-radius: 50%;
+                    background: #ef4444;
+                    box-shadow: 0 0 16px 4px #ef4444, 0 0 2px 2px #fff;
+                    pointer-events: none;
+                    z-index: 99999;
+                    transform: translate(-50%, -50%);
+                    display: none;
+                    transition: transform 0.05s ease-out;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Create dot element
+        const dot = document.createElement('div');
+        dot.id = 'laserPointerDot';
+        document.body.appendChild(dot);
+        this.dot = dot;
+
+        // Mouse tracking
+        window.addEventListener('mousemove', (e) => {
+            if (this.isActive && this.dot) {
+                this.dot.style.left = `${e.clientX}px`;
+                this.dot.style.top = `${e.clientY}px`;
+            }
+        });
+    }
+
+    toggle() {
+        this.isActive ? this.deactivate() : this.activate();
+    }
+
+    activate() {
+        this.isActive = true;
+        if (this.dot) this.dot.style.display = 'block';
+
+        // Update button UI
+        const btn = document.getElementById('toolLaserBtn');
+        if (btn) btn.classList.add('active');
+
+        // Mutually exclusive with pen annotation
+        if (window.penAnnotation && window.penAnnotation.isActive) {
+            window.penAnnotation.deactivate();
+        }
+    }
+
+    deactivate() {
+        this.isActive = false;
+        if (this.dot) this.dot.style.display = 'none';
+
+        // Update button UI
+        const btn = document.getElementById('toolLaserBtn');
+        if (btn) btn.classList.remove('active');
+    }
+}
+
+// Global auto-instantiation
+let laserPointer;
+window.addEventListener('DOMContentLoaded', () => {
+    laserPointer = new LaserPointer();
+    window.laserPointer = laserPointer;
+});
+
+
+/* ==================== MODULE: pen-annotation.js ==================== */
+/**
+ * Pen Annotation Module (PenAnnotation)
+ * Provides an on-slide transparent drawing and sketch canvas.
+ * Shortcuts: 'P' to toggle pen, 'C' to clear drawings.
+ */
+
+class PenAnnotation {
+    constructor() {
+        this.isActive = false;
+        this.canvas = null;
+        this.ctx = null;
+        this.init();
+    }
+
+    init() {
+        // Inject styles if not present
+        if (!document.getElementById('penAnnotationStyles')) {
+            const style = document.createElement('style');
+            style.id = 'penAnnotationStyles';
+            style.textContent = `
+                #annotationCanvas {
+                    position: fixed;
+                    inset: 0;
+                    width: 100vw;
+                    height: 100vh;
+                    z-index: 9990;
+                    pointer-events: none;
+                    cursor: crosshair;
+                }
+                #annotationCanvas.active {
+                    pointer-events: auto;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.id = 'annotationCanvas';
+        document.body.appendChild(canvas);
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        canvas.addEventListener('mousedown', (e) => {
+            if (!this.isActive) return;
+            isDrawing = true;
+            [lastX, lastY] = [e.clientX, e.clientY];
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing || !this.isActive) return;
+            this.ctx.beginPath();
+            this.ctx.moveTo(lastX, lastY);
+            this.ctx.lineTo(e.clientX, e.clientY);
+            this.ctx.strokeStyle = '#ef4444';
+            this.ctx.lineWidth = 3.5;
+            this.ctx.lineCap = 'round';
+            this.ctx.lineJoin = 'round';
+            this.ctx.stroke();
+            [lastX, lastY] = [e.clientX, e.clientY];
+        });
+
+        window.addEventListener('mouseup', () => { isDrawing = false; });
+    }
+
+    toggle() {
+        this.isActive ? this.deactivate() : this.activate();
+    }
+
+    activate() {
+        this.isActive = true;
+        if (this.canvas) this.canvas.classList.add('active');
+
+        const btn = document.getElementById('toolPenBtn');
+        if (btn) btn.classList.add('active');
+
+        // Mutually exclusive with laser pointer
+        if (window.laserPointer && window.laserPointer.isActive) {
+            window.laserPointer.deactivate();
+        }
+    }
+
+    deactivate() {
+        this.isActive = false;
+        if (this.canvas) this.canvas.classList.remove('active');
+
+        const btn = document.getElementById('toolPenBtn');
+        if (btn) btn.classList.remove('active');
+    }
+
+    clear() {
+        if (this.canvas && this.ctx) {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+    }
+}
+
+// Global auto-instantiation
+let penAnnotation;
+window.addEventListener('DOMContentLoaded', () => {
+    penAnnotation = new PenAnnotation();
+    window.penAnnotation = penAnnotation;
+});
+
+
+/* ==================== MODULE: classroom-timer.js ==================== */
+/**
+ * Classroom Timer Module (ClassroomTimer)
+ * Provides an interactive countdown timer and stopwatch with audio alert chimes.
+ * Toggle shortcut: 'T'
+ */
+
+class ClassroomTimer {
+    constructor() {
+        this.timerInterval = null;
+        this.timerSeconds = 0;
+        this.timerRunning = false;
+        this.modal = null;
+        this.init();
+    }
+
+    init() {
+        // Inject styles if not present
+        if (!document.getElementById('classroomTimerStyles')) {
+            const style = document.createElement('style');
+            style.id = 'classroomTimerStyles';
+            style.textContent = `
+                .timer-modal {
+                    position: absolute;
+                    top: 50px;
+                    right: 0;
+                    width: 280px;
+                    background: rgba(15, 23, 42, 0.95);
+                    backdrop-filter: blur(14px);
+                    border: 1px solid rgba(255, 255, 255, 0.16);
+                    border-radius: 14px;
+                    padding: 16px;
+                    color: #ffffff;
+                    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
+                    animation: timerFadeIn 0.2s ease;
+                    z-index: 10001;
+                }
+                .timer-modal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-weight: 700;
+                    font-size: 14px;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                    padding-bottom: 8px;
+                    margin-bottom: 12px;
+                }
+                .timer-modal-close {
+                    background: transparent;
+                    border: none;
+                    color: #94a3b8;
+                    font-size: 18px;
+                    cursor: pointer;
+                    line-height: 1;
+                }
+                .timer-modal-close:hover { color: #ffffff; }
+                .timer-display {
+                    font-family: 'JetBrains Mono', monospace, monospace;
+                    font-size: 38px;
+                    font-weight: 800;
+                    text-align: center;
+                    letter-spacing: 2px;
+                    color: #38bdf8;
+                    margin: 8px 0 14px 0;
+                }
+                .timer-display.ended {
+                    color: #ef4444;
+                    animation: timerPulseAlert 0.6s infinite alternate;
+                }
+                .timer-presets {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 5px;
+                    margin-bottom: 12px;
+                }
+                .timer-preset-btn {
+                    background: rgba(255, 255, 255, 0.08);
+                    border: 1px solid rgba(255, 255, 255, 0.12);
+                    color: #cbd5e1;
+                    padding: 5px 0;
+                    border-radius: 6px;
+                    font-size: 11px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: background 0.15s;
+                }
+                .timer-preset-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+                .timer-actions {
+                    display: flex;
+                    gap: 8px;
+                }
+                .timer-action-btn {
+                    flex: 1;
+                    background: rgba(255, 255, 255, 0.12);
+                    border: none;
+                    color: #fff;
+                    padding: 7px;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    cursor: pointer;
+                }
+                .timer-action-btn.start-btn {
+                    background: #10b981;
+                }
+                .timer-action-btn.start-btn.running {
+                    background: #f59e0b;
+                }
+                @keyframes timerFadeIn {
+                    from { opacity: 0; transform: translateY(-8px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes timerPulseAlert {
+                    from { transform: scale(1); }
+                    to { transform: scale(1.08); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        this.initModal();
+    }
+
+    initModal() {
+        const hud = document.getElementById('presentationToolsHUD') || document.body;
+        
+        const modal = document.createElement('div');
+        modal.className = 'timer-modal';
+        modal.id = 'timerModal';
+        modal.style.display = 'none';
+        modal.innerHTML = `
+            <div class="timer-modal-header">
+                <span>⏱️ Classroom Timer</span>
+                <button class="timer-modal-close" onclick="classroomTimer.toggleModal()">×</button>
+            </div>
+            <div class="timer-display" id="timerDisplay">00:00</div>
+            <div class="timer-presets">
+                <button class="timer-preset-btn" onclick="classroomTimer.setTimer(60)">1 min</button>
+                <button class="timer-preset-btn" onclick="classroomTimer.setTimer(120)">2 min</button>
+                <button class="timer-preset-btn" onclick="classroomTimer.setTimer(300)">5 min</button>
+                <button class="timer-preset-btn" onclick="classroomTimer.setTimer(600)">10 min</button>
+            </div>
+            <div class="timer-actions">
+                <button class="timer-action-btn start-btn" id="timerStartBtn" onclick="classroomTimer.toggleRun()">Start</button>
+                <button class="timer-action-btn" onclick="classroomTimer.reset()">Reset</button>
+            </div>
+        `;
+        hud.appendChild(modal);
+        this.modal = modal;
+    }
+
+    toggleModal() {
+        if (!this.modal) {
+            this.modal = document.getElementById('timerModal');
+        }
+        if (this.modal) {
+            this.modal.style.display = this.modal.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+
+    setTimer(seconds) {
+        this.timerSeconds = seconds;
+        this.updateDisplay();
+    }
+
+    updateDisplay() {
+        const display = document.getElementById('timerDisplay');
+        if (!display) return;
+        const mins = Math.floor(this.timerSeconds / 60);
+        const secs = this.timerSeconds % 60;
+        display.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        display.classList.remove('ended');
+    }
+
+    toggleRun() {
+        const startBtn = document.getElementById('timerStartBtn');
+        if (this.timerRunning) {
+            clearInterval(this.timerInterval);
+            this.timerRunning = false;
+            if (startBtn) {
+                startBtn.textContent = 'Resume';
+                startBtn.classList.remove('running');
+            }
+        } else {
+            if (this.timerSeconds <= 0) this.timerSeconds = 120;
+            this.timerRunning = true;
+            if (startBtn) {
+                startBtn.textContent = 'Pause';
+                startBtn.classList.add('running');
+            }
+            this.timerInterval = setInterval(() => {
+                if (this.timerSeconds > 0) {
+                    this.timerSeconds--;
+                    this.updateDisplay();
+                } else {
+                    clearInterval(this.timerInterval);
+                    this.timerRunning = false;
+                    const display = document.getElementById('timerDisplay');
+                    if (display) display.classList.add('ended');
+                    if (startBtn) {
+                        startBtn.textContent = 'Start';
+                        startBtn.classList.remove('running');
+                    }
+                    this.playChime();
+                }
+            }, 1000);
+        }
+    }
+
+    reset() {
+        clearInterval(this.timerInterval);
+        this.timerRunning = false;
+        this.timerSeconds = 0;
+        this.updateDisplay();
+        const startBtn = document.getElementById('timerStartBtn');
+        if (startBtn) {
+            startBtn.textContent = 'Start';
+            startBtn.classList.remove('running');
+        }
+    }
+
+    playChime() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+            osc.frequency.setValueAtTime(880, ctx.currentTime + 0.15); // A5
+            gain.gain.setValueAtTime(0.3, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.8);
+        } catch (e) {
+            // AudioContext not permitted without user interaction
+        }
+    }
+}
+
+// Global auto-instantiation
+let classroomTimer;
+window.addEventListener('DOMContentLoaded', () => {
+    classroomTimer = new ClassroomTimer();
+    window.classroomTimer = classroomTimer;
+});
+
+
 /* ==================== MODULE: presentation-tools.js ==================== */
 /**
- * Presentation Classroom Tools (PresentationTools)
- * Extends the presentation decks with essential teaching tools:
- * - ⏱️ Interactive Classroom Timer & Stopwatch (with audio chime)
- * - 🔴 Laser Pointer Mode (toggle: 'L')
- * - 🖊️ On-Slide Drawing / Pen Annotation Canvas (toggle: 'P', clear: 'C')
- * - ⛶ Fullscreen Mode (toggle: 'F')
- * - ❓ Help / Keybindings Overlay (toggle: '?')
- * - 📊 Exercise Auto-Scoring & Reset All
+ * Presentation Classroom Tools Coordinator (PresentationTools)
+ * Coordinates toolbar HUD, shortcuts dispatch, and presentation utilities:
+ * - 🎛️ Floating Teacher Tools HUD Bar with Collapse / Hide Toggle
+ * - 📐 Aspect Ratio Switching ('Shift+A')
+ * - ⛶ Fullscreen Toggle ('F')
+ * - ❓ Help / Keybindings Overlay ('?')
+ * - ⌨️ Global Keyboard Shortcut Dispatcher
  */
 
 class PresentationTools {
     constructor(deckEngine) {
         this.deckEngine = deckEngine;
-        this.isLaserActive = false;
-        this.isPenActive = false;
-        this.timerInterval = null;
-        this.timerSeconds = 0;
-        this.timerRunning = false;
-        
+        this.isCollapsed = localStorage.getItem('deck_tools_collapsed') === 'true';
         this.initUI();
-        this.initLaserPointer();
-        this.initDrawingCanvas();
         this.initKeyboardShortcuts();
+        if (this.isCollapsed) {
+            this.collapseHUD(false);
+        }
     }
 
     /**
-     * Initializes the floating toolbar and modals
+     * Initializes the floating toolbar, collapsed trigger, and help modal
      */
     initUI() {
         // Create container
@@ -3329,7 +3953,14 @@ class PresentationTools {
         toolContainer.id = 'presentationToolsHUD';
         toolContainer.className = 'presentation-tools-hud';
         toolContainer.innerHTML = `
-            <div class="tools-bar">
+            <!-- Collapsed Mini Trigger Pill -->
+            <button class="tools-collapsed-trigger" id="toolsCollapsedTrigger" title="Show Teacher Toolkit (Shift+X)" onclick="presentationTools.toggleHUD()">
+                🛠️ <span class="collapsed-badge">Tools</span>
+            </button>
+
+            <!-- Expanded Tools Bar -->
+            <div class="tools-bar" id="toolsBar">
+                <button class="tool-btn" id="toolAspectBtn" title="Switch Aspect Ratio (16:9 / 4:3) (Shift+A)" onclick="window.deckEngine && window.deckEngine.toggleAspectRatio()">📐 <span class="tool-label">16:9</span></button>
                 <button class="tool-btn" id="toolThemeBtn" title="Theme Aesthetics (Shift+T)" onclick="window.deckThemeEngine && window.deckThemeEngine.openModal()">🎨 <span class="tool-label">Theme</span></button>
                 <button class="tool-btn" id="toolHighlightBtn" title="Teacher Highlighter (H)" onclick="window.teacherHighlighter && window.teacherHighlighter.toggle()">🖍️ <span class="tool-label">Highlight</span></button>
                 <button class="tool-btn" id="toolTimerBtn" title="Classroom Timer (T)" onclick="presentationTools.toggleTimerModal()">⏱️ <span class="tool-label">Timer</span></button>
@@ -3339,36 +3970,18 @@ class PresentationTools {
                 <button class="tool-btn" id="toolPenBtn" title="Draw / Annotate (P)" onclick="presentationTools.togglePen()">✏️ <span class="tool-label">Draw</span></button>
                 <button class="tool-btn" id="toolFullscreenBtn" title="Fullscreen (F)" onclick="presentationTools.toggleFullscreen()">⛶</button>
                 <button class="tool-btn" id="toolHelpBtn" title="Keyboard Shortcuts (?)" onclick="presentationTools.toggleHelpModal()">❓</button>
+                <button class="tool-btn tool-collapse-btn" id="toolCollapseBtn" title="Hide Toolkit (Shift+X)" onclick="presentationTools.toggleHUD()">✕</button>
             </div>
 
             <!-- Highlighter Palette -->
             <div class="highlighter-palette" id="highlighterPalette" style="display:none;">
-                <button class="highlighter-color-btn active" style="background:#facc15;" onclick="teacherHighlighter.setColor(0)" title="Fluorescent Yellow"></button>
-                <button class="highlighter-color-btn" style="background:#4ade80;" onclick="teacherHighlighter.setColor(1)" title="Neon Green"></button>
-                <button class="highlighter-color-btn" style="background:#38bdf8;" onclick="teacherHighlighter.setColor(2)" title="Sky Cyan"></button>
-                <button class="highlighter-color-btn" style="background:#f472b6;" onclick="teacherHighlighter.setColor(3)" title="Coral Pink"></button>
+                <button class="highlighter-color-btn active" style="background:#facc15;" onclick="teacherHighlighter && teacherHighlighter.setColor(0)" title="Fluorescent Yellow"></button>
+                <button class="highlighter-color-btn" style="background:#4ade80;" onclick="teacherHighlighter && teacherHighlighter.setColor(1)" title="Neon Green"></button>
+                <button class="highlighter-color-btn" style="background:#38bdf8;" onclick="teacherHighlighter && teacherHighlighter.setColor(2)" title="Sky Cyan"></button>
+                <button class="highlighter-color-btn" style="background:#f472b6;" onclick="teacherHighlighter && teacherHighlighter.setColor(3)" title="Coral Pink"></button>
                 <div class="highlighter-divider"></div>
-                <button class="highlighter-tool-btn" onclick="teacherHighlighter.undo()" title="Undo Last Stroke (Ctrl+Z)">↩️ Undo</button>
-                <button class="highlighter-tool-btn" onclick="teacherHighlighter.clear()" title="Clear All Highlights (C)">🗑️ Clear</button>
-            </div>
-
-            <!-- Timer Modal / HUD -->
-            <div class="tool-modal" id="timerModal" style="display:none;">
-                <div class="tool-modal-header">
-                    <span>⏱️ Classroom Timer</span>
-                    <button class="modal-close" onclick="presentationTools.toggleTimerModal()">×</button>
-                </div>
-                <div class="timer-display" id="timerDisplay">00:00</div>
-                <div class="timer-presets">
-                    <button class="preset-btn" onclick="presentationTools.setTimer(60)">1 min</button>
-                    <button class="preset-btn" onclick="presentationTools.setTimer(120)">2 min</button>
-                    <button class="preset-btn" onclick="presentationTools.setTimer(300)">5 min</button>
-                    <button class="preset-btn" onclick="presentationTools.setTimer(600)">10 min</button>
-                </div>
-                <div class="timer-actions">
-                    <button class="action-btn start-btn" id="timerStartBtn" onclick="presentationTools.toggleTimerRun()">Start</button>
-                    <button class="action-btn" onclick="presentationTools.resetTimer()">Reset</button>
-                </div>
+                <button class="highlighter-tool-btn" onclick="teacherHighlighter && teacherHighlighter.undo()" title="Undo Last Stroke (Ctrl+Z)">↩️ Undo</button>
+                <button class="highlighter-tool-btn" onclick="teacherHighlighter && teacherHighlighter.clear()" title="Clear All Highlights (C)">🗑️ Clear</button>
             </div>
 
             <!-- Help Modal -->
@@ -3381,6 +3994,8 @@ class PresentationTools {
                     <div><kbd>→</kbd> / <kbd>Space</kbd></div><div>Next Slide</div>
                     <div><kbd>←</kbd></div><div>Previous Slide</div>
                     <div><kbd>G</kbd></div><div>Slide Grid Navigator</div>
+                    <div><kbd>Shift+X</kbd></div><div>Hide / Show Teacher Toolkit</div>
+                    <div><kbd>Shift+A</kbd></div><div>Toggle 16:9 / 4:3 Aspect Ratio</div>
                     <div><kbd>H</kbd></div><div>Toggle Highlighter Tool</div>
                     <div><kbd>L</kbd></div><div>Toggle Laser Pointer</div>
                     <div><kbd>P</kbd></div><div>Toggle Drawing Pen</div>
@@ -3389,6 +4004,10 @@ class PresentationTools {
                     <div><kbd>B</kbd> / <kbd>W</kbd></div><div>Blackout / Whiteout Screen</div>
                     <div><kbd>S</kbd></div><div>Spotlight Dimmer</div>
                     <div><kbd>T</kbd></div><div>Toggle Classroom Timer</div>
+                    <div><kbd>R</kbd></div><div>Student Picker Wheel</div>
+                    <div><kbd>N</kbd></div><div>Teacher Presenter Notes</div>
+                    <div><kbd>Z</kbd></div><div>Paragraph Loupe</div>
+                    <div><kbd>E</kbd></div><div>Step Reveal Answers</div>
                     <div><kbd>F</kbd></div><div>Toggle Fullscreen Mode</div>
                     <div><kbd>?</kbd></div><div>Toggle Shortcuts Cheatsheet</div>
                 </div>
@@ -3396,7 +4015,7 @@ class PresentationTools {
         `;
         document.body.appendChild(toolContainer);
 
-        // Inject Styles for Tools
+        // Inject Styles for Tools HUD
         const style = document.createElement('style');
         style.id = 'presentationToolsStyles';
         style.textContent = `
@@ -3418,6 +4037,7 @@ class PresentationTools {
                 border-radius: 30px;
                 border: 1px solid rgba(255, 255, 255, 0.16);
                 box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+                transition: opacity 0.25s ease, transform 0.25s ease;
             }
             .tool-btn {
                 background: transparent;
@@ -3445,6 +4065,60 @@ class PresentationTools {
             .tool-label {
                 font-size: 12px;
             }
+            .tool-collapse-btn {
+                padding: 5px 8px;
+                font-size: 12px;
+                color: #94a3b8;
+                margin-left: 2px;
+            }
+            .tool-collapse-btn:hover {
+                color: #ef4444;
+                background: rgba(239, 68, 68, 0.15);
+            }
+
+            /* Collapsed Trigger Pill */
+            .tools-collapsed-trigger {
+                display: none;
+                align-items: center;
+                gap: 6px;
+                background: rgba(15, 23, 42, 0.75);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                color: #e2e8f0;
+                padding: 6px 12px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 700;
+                cursor: pointer;
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+                transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+                opacity: 0.65;
+            }
+            .tools-collapsed-trigger:hover {
+                opacity: 1;
+                background: rgba(15, 23, 42, 0.95);
+                transform: scale(1.05);
+                box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+                color: #ffffff;
+            }
+            .collapsed-badge {
+                font-size: 11px;
+                letter-spacing: 0.5px;
+            }
+
+            /* Collapsed State Overrides */
+            .presentation-tools-hud.collapsed .tools-bar {
+                display: none;
+            }
+            .presentation-tools-hud.collapsed .tools-collapsed-trigger {
+                display: flex;
+            }
+            .presentation-tools-hud.collapsed .tool-modal {
+                display: none !important;
+            }
+            .presentation-tools-hud.collapsed .highlighter-palette {
+                display: none !important;
+            }
 
             /* Tool Modals */
             .tool-modal {
@@ -3462,7 +4136,7 @@ class PresentationTools {
                 animation: toolFadeIn 0.2s ease;
             }
             .tool-modal.help-modal {
-                width: 340px;
+                width: 360px;
             }
             .tool-modal-header {
                 display: flex;
@@ -3484,59 +4158,6 @@ class PresentationTools {
             }
             .modal-close:hover { color: #ffffff; }
 
-            /* Timer Specifics */
-            .timer-display {
-                font-family: 'JetBrains Mono', monospace, monospace;
-                font-size: 38px;
-                font-weight: 800;
-                text-align: center;
-                letter-spacing: 2px;
-                color: #38bdf8;
-                margin: 8px 0 14px 0;
-            }
-            .timer-display.ended {
-                color: #ef4444;
-                animation: pulseAlert 0.6s infinite alternate;
-            }
-            .timer-presets {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 5px;
-                margin-bottom: 12px;
-            }
-            .preset-btn {
-                background: rgba(255, 255, 255, 0.08);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                color: #cbd5e1;
-                padding: 5px 0;
-                border-radius: 6px;
-                font-size: 11px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: background 0.15s;
-            }
-            .preset-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
-            .timer-actions {
-                display: flex;
-                gap: 8px;
-            }
-            .action-btn {
-                flex: 1;
-                background: rgba(255, 255, 255, 0.12);
-                border: none;
-                color: #fff;
-                padding: 7px;
-                border-radius: 8px;
-                font-weight: 600;
-                cursor: pointer;
-            }
-            .action-btn.start-btn {
-                background: #10b981;
-            }
-            .action-btn.start-btn.running {
-                background: #f59e0b;
-            }
-
             /* Help Grid */
             .help-grid {
                 display: grid;
@@ -3557,225 +4178,89 @@ class PresentationTools {
                 color: #ffffff;
             }
 
-            /* Laser Pointer Dot */
-            #laserPointerDot {
-                position: fixed;
-                width: 18px;
-                height: 18px;
-                border-radius: 50%;
-                background: #ef4444;
-                box-shadow: 0 0 16px 4px #ef4444, 0 0 2px 2px #fff;
-                pointer-events: none;
-                z-index: 99999;
-                transform: translate(-50%, -50%);
-                display: none;
-                transition: transform 0.05s ease-out;
-            }
-
-            /* Drawing Canvas */
-            #annotationCanvas {
-                position: fixed;
-                inset: 0;
-                width: 100vw;
-                height: 100vh;
-                z-index: 9990;
-                pointer-events: none;
-                cursor: crosshair;
-            }
-            #annotationCanvas.active {
-                pointer-events: auto;
-            }
-
             @keyframes toolFadeIn {
                 from { opacity: 0; transform: translateY(-8px); }
                 to { opacity: 1; transform: translateY(0); }
-            }
-            @keyframes pulseAlert {
-                from { transform: scale(1); }
-                to { transform: scale(1.08); }
             }
         `;
         document.head.appendChild(style);
     }
 
     /**
-     * Initializes Laser Pointer
+     * Hide / Show HUD methods
      */
-    initLaserPointer() {
-        const dot = document.createElement('div');
-        dot.id = 'laserPointerDot';
-        document.body.appendChild(dot);
-
-        window.addEventListener('mousemove', (e) => {
-            if (this.isLaserActive) {
-                dot.style.left = `${e.clientX}px`;
-                dot.style.top = `${e.clientY}px`;
-            }
-        });
+    toggleHUD() {
+        this.isCollapsed ? this.expandHUD() : this.collapseHUD();
     }
 
-    toggleLaser() {
-        this.isLaserActive = !this.isLaserActive;
-        const dot = document.getElementById('laserPointerDot');
-        const btn = document.getElementById('toolLaserBtn');
-        if (dot) dot.style.display = this.isLaserActive ? 'block' : 'none';
-        if (btn) btn.classList.toggle('active', this.isLaserActive);
-        
-        // Disable pen if laser active
-        if (this.isLaserActive && this.isPenActive) {
-            this.togglePen();
+    collapseHUD(showToast = true) {
+        this.isCollapsed = true;
+        const hud = document.getElementById('presentationToolsHUD');
+        if (hud) hud.classList.add('collapsed');
+        localStorage.setItem('deck_tools_collapsed', 'true');
+        if (showToast && window.deckEngine && typeof window.deckEngine.showToastNotification === 'function') {
+            window.deckEngine.showToastNotification('Teacher Toolkit Hidden (Shift+X to show)');
+        }
+    }
+
+    expandHUD(showToast = true) {
+        this.isCollapsed = false;
+        const hud = document.getElementById('presentationToolsHUD');
+        if (hud) hud.classList.remove('collapsed');
+        localStorage.setItem('deck_tools_collapsed', 'false');
+        if (showToast && window.deckEngine && typeof window.deckEngine.showToastNotification === 'function') {
+            window.deckEngine.showToastNotification('Teacher Toolkit Visible');
         }
     }
 
     /**
-     * Initializes On-screen Annotation Canvas
+     * Laser pointer delegation
      */
-    initDrawingCanvas() {
-        const canvas = document.createElement('canvas');
-        canvas.id = 'annotationCanvas';
-        document.body.appendChild(canvas);
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
-
-        const resizeCanvas = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        };
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        let isDrawing = false;
-        let lastX = 0;
-        let lastY = 0;
-
-        canvas.addEventListener('mousedown', (e) => {
-            if (!this.isPenActive) return;
-            isDrawing = true;
-            [lastX, lastY] = [e.clientX, e.clientY];
-        });
-
-        canvas.addEventListener('mousemove', (e) => {
-            if (!isDrawing || !this.isPenActive) return;
-            this.ctx.beginPath();
-            this.ctx.moveTo(lastX, lastY);
-            this.ctx.lineTo(e.clientX, e.clientY);
-            this.ctx.strokeStyle = '#ef4444';
-            this.ctx.lineWidth = 3.5;
-            this.ctx.lineCap = 'round';
-            this.ctx.lineJoin = 'round';
-            this.ctx.stroke();
-            [lastX, lastY] = [e.clientX, e.clientY];
-        });
-
-        window.addEventListener('mouseup', () => { isDrawing = false; });
+    toggleLaser() {
+        if (window.laserPointer) {
+            window.laserPointer.toggle();
+        }
     }
 
+    /**
+     * Pen drawing delegation
+     */
     togglePen() {
-        this.isPenActive = !this.isPenActive;
-        const btn = document.getElementById('toolPenBtn');
-        if (this.canvas) {
-            this.canvas.classList.toggle('active', this.isPenActive);
-        }
-        if (btn) btn.classList.toggle('active', this.isPenActive);
-
-        // Disable laser if pen active
-        if (this.isPenActive && this.isLaserActive) {
-            this.toggleLaser();
+        if (window.penAnnotation) {
+            window.penAnnotation.toggle();
         }
     }
 
     clearCanvas() {
-        if (this.canvas && this.ctx) {
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        if (window.penAnnotation) {
+            window.penAnnotation.clear();
         }
     }
 
     /**
-     * Timer Functionality
+     * Timer delegation
      */
     toggleTimerModal() {
-        const modal = document.getElementById('timerModal');
-        if (modal) {
-            modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+        if (window.classroomTimer) {
+            window.classroomTimer.toggleModal();
         }
     }
 
     setTimer(seconds) {
-        this.timerSeconds = seconds;
-        this.updateTimerDisplay();
-    }
-
-    updateTimerDisplay() {
-        const display = document.getElementById('timerDisplay');
-        if (!display) return;
-        const mins = Math.floor(this.timerSeconds / 60);
-        const secs = this.timerSeconds % 60;
-        display.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-        display.classList.remove('ended');
+        if (window.classroomTimer) {
+            window.classroomTimer.setTimer(seconds);
+        }
     }
 
     toggleTimerRun() {
-        const startBtn = document.getElementById('timerStartBtn');
-        if (this.timerRunning) {
-            clearInterval(this.timerInterval);
-            this.timerRunning = false;
-            if (startBtn) {
-                startBtn.textContent = 'Resume';
-                startBtn.classList.remove('running');
-            }
-        } else {
-            if (this.timerSeconds <= 0) this.timerSeconds = 120;
-            this.timerRunning = true;
-            if (startBtn) {
-                startBtn.textContent = 'Pause';
-                startBtn.classList.add('running');
-            }
-            this.timerInterval = setInterval(() => {
-                if (this.timerSeconds > 0) {
-                    this.timerSeconds--;
-                    this.updateTimerDisplay();
-                } else {
-                    clearInterval(this.timerInterval);
-                    this.timerRunning = false;
-                    const display = document.getElementById('timerDisplay');
-                    if (display) display.classList.add('ended');
-                    if (startBtn) {
-                        startBtn.textContent = 'Start';
-                        startBtn.classList.remove('running');
-                    }
-                    this.playChime();
-                }
-            }, 1000);
+        if (window.classroomTimer) {
+            window.classroomTimer.toggleRun();
         }
     }
 
     resetTimer() {
-        clearInterval(this.timerInterval);
-        this.timerRunning = false;
-        this.timerSeconds = 0;
-        this.updateTimerDisplay();
-        const startBtn = document.getElementById('timerStartBtn');
-        if (startBtn) {
-            startBtn.textContent = 'Start';
-            startBtn.classList.remove('running');
-        }
-    }
-
-    playChime() {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
-            osc.frequency.setValueAtTime(880, ctx.currentTime + 0.15); // A5
-            gain.gain.setValueAtTime(0.3, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
-            osc.start();
-            osc.stop(ctx.currentTime + 0.8);
-        } catch (e) {
-            // AudioContext not allowed without gesture
+        if (window.classroomTimer) {
+            window.classroomTimer.reset();
         }
     }
 
@@ -3805,7 +4290,7 @@ class PresentationTools {
     }
 
     /**
-     * Keyboard Shortcuts Hook
+     * Global Keyboard Shortcuts Dispatcher
      */
     initKeyboardShortcuts() {
         document.addEventListener('keydown', (e) => {
@@ -3813,7 +4298,13 @@ class PresentationTools {
                 return;
             }
             const key = e.key.toLowerCase();
-            if (key === 'l') {
+            if (e.shiftKey && key === 'x') {
+                e.preventDefault();
+                this.toggleHUD();
+            } else if (e.shiftKey && key === 'a') {
+                e.preventDefault();
+                if (window.deckEngine) window.deckEngine.toggleAspectRatio();
+            } else if (key === 'l') {
                 e.preventDefault();
                 this.toggleLaser();
             } else if (key === 'p') {
@@ -3822,13 +4313,14 @@ class PresentationTools {
             } else if (key === 'c') {
                 e.preventDefault();
                 this.clearCanvas();
+                if (window.teacherHighlighter) window.teacherHighlighter.clear();
             } else if (key === 't') {
                 e.preventDefault();
                 this.toggleTimerModal();
             } else if (key === 'f') {
                 e.preventDefault();
                 this.toggleFullscreen();
-            } else if (key === '?' || key === 'h') {
+            } else if (key === '?' || (e.shiftKey && e.key === '/')) {
                 e.preventDefault();
                 this.toggleHelpModal();
             } else if (key === 'escape') {
@@ -3836,8 +4328,8 @@ class PresentationTools {
                 const helpModal = document.getElementById('helpModal');
                 if (timerModal) timerModal.style.display = 'none';
                 if (helpModal) helpModal.style.display = 'none';
-                if (this.isPenActive) this.togglePen();
-                if (this.isLaserActive) this.toggleLaser();
+                if (window.penAnnotation && window.penAnnotation.isActive) window.penAnnotation.deactivate();
+                if (window.laserPointer && window.laserPointer.isActive) window.laserPointer.deactivate();
             }
         });
     }
@@ -3847,5 +4339,6 @@ class PresentationTools {
 let presentationTools;
 window.addEventListener('DOMContentLoaded', () => {
     presentationTools = new PresentationTools(window.deckEngine);
+    window.presentationTools = presentationTools;
 });
 

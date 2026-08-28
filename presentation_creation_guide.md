@@ -15,7 +15,9 @@ HTML presentations/
 ├── reading_passages_and_questions_guide.md
 ├── js/                            # Universal modular JavaScript engine
 │   ├── deck-engine.js             # Master bundle & auto-loader
+│   ├── deck-core.js               # Stage scaling, slide lifecycle & nav
 │   ├── deck-components.js         # Auto-hydrates vertical tabs, HUD, action buttons
+│   ├── deck-theme-engine.js       # Dynamic theme presets & styling
 │   ├── reading-highlighter.js     # Auto-reveals evidence, synonym pairing, smooth scroll
 │   ├── reading-grounder.js        # Synonym badge formatting & hover highlights
 │   ├── vocab-bank.js              # Click-to-fill chips & speech pronunciation
@@ -25,7 +27,10 @@ HTML presentations/
 │   ├── presentation-spotlight.js  # Focus screen mutes (Keys: B / W / S)
 │   ├── flashcard-engine.js        # 3D interactive flip cards
 │   ├── print-optimizer.js         # Multi-page handout PDF export (Ctrl+P)
-│   └── presentation-tools.js      # Classroom timer, laser pointer, annotation pen
+│   ├── laser-pointer.js           # Glowing laser pointer cursor (Key: L)
+│   ├── pen-annotation.js          # On-slide drawing & sketches (Keys: P / C)
+│   ├── classroom-timer.js         # Interactive countdown timer with chime (Key: T)
+│   └── presentation-tools.js      # Toolbar HUD coordinator & key dispatcher
 ├── expert 5/
 │   ├── module-04.html
 │   ├── module-05.html

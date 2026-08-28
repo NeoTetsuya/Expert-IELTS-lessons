@@ -358,7 +358,7 @@
                 </div>
             </section>
 
-            <!-- SLIDE 5: 9a Grammar: Present Perfect vs Past Simple -->
+            <!-- SLIDE 5: 9a Grammar: Present Perfect vs Past Simple & Verb Conjugation -->
             <section class="slide" data-skill="grammar">
                 <div class="slide-inner">
                     <div class="notebook">
@@ -366,49 +366,46 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background:var(--col-grammar)">9a Grammar</span>
-                                <span class="slide-number">Tense Matrix</span>
+                                <span class="slide-number">Tense Matrix &amp; Forms</span>
                             </div>
-                            <h2 class="slide-title">Present Perfect vs. Past Simple</h2>
+                            <h2 class="slide-title">Present Perfect vs. Past Simple Practice</h2>
                             <p class="slide-subtitle">Mastering the distinction between completed historical events and ongoing/relevant states.</p>
 
                             <div class="two-col">
                                 <div class="col">
-                                    <div class="rule-card">
-                                        <h3 style="font-size:20px; font-weight:800; color:var(--col-grammar);">📅 Past Simple (Finished Past)</h3>
-                                        <p>Used for actions completed at a definite, finished time in the past.</p>
-                                        <div style="background:#f8fafc; padding:10px 14px; border-radius:6px; font-family:var(--font-mono); font-size:15px; color:#334155;">
-                                            <strong>Key Markers:</strong> <em>yesterday, last year, 20 years ago, in 2011, when [I got my tablet]</em>
+                                    <div class="card" id="grammarTimeMarkers" style="font-size:16.5px; line-height:1.75; padding:18px 20px;">
+                                        <div style="font-weight:700; font-size:15px; color:var(--col-grammar); margin-bottom:6px;">Part 1: Key Time Markers</div>
+                                        <p>1. I’ve <input type="text" class="blank-input" data-ans="never" style="width:80px;"> bought a newspaper but I sometimes read my friend’s.</p>
+                                        <p>2. My father has read the same newspaper <input type="text" class="blank-input" data-ans="since" style="width:80px;"> he was 18.</p>
+                                        <p>3. Did you see the news <input type="text" class="blank-input" data-ans="yesterday" style="width:105px;">? They <input type="text" class="blank-input" data-ans="still" style="width:65px;"> haven't opened the road.</p>
+                                        <p>4. The election was two days <input type="text" class="blank-input" data-ans="ago" style="width:65px;"> but they haven't announced the result <input type="text" class="blank-input" data-ans="yet" style="width:65px;">.</p>
+                                        <p>5. I don’t want to watch the news now because I’ve <input type="text" class="blank-input" data-ans="already" style="width:85px;"> seen it once today.</p>
+                                        <p>6. Newspaper sales fell a lot <input type="text" class="blank-input" data-ans="last year" style="width:95px;"> but have increased a little <input type="text" class="blank-input" data-ans="lately" style="width:80px;">.</p>
+                                        <p>7. I started using a news app <input type="text" class="blank-input" data-ans="when" style="width:75px;"> I got my tablet.</p>
+                                        <p>8. The country has suffered economic difficulties <input type="text" class="blank-input" data-ans="for" style="width:60px;"> a number of years.</p>
+                                        
+                                        <div class="action-row" style="margin-top:10px;">
+                                            <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('grammarTimeMarkers')">Check Markers</button>
+                                            <button class="btn-action" onclick="deckEngine.revealBlanks('grammarTimeMarkers')">Reveal</button>
+                                            <button class="btn-action" onclick="deckEngine.resetBlanks('grammarTimeMarkers')">Reset</button>
                                         </div>
-                                        <p style="margin-top:6px;"><em>Example:</em> "The election was two days <strong>ago</strong>."</p>
-                                    </div>
-
-                                    <div class="rule-card" style="margin-top:14px;">
-                                        <h3 style="font-size:20px; font-weight:800; color:var(--col-reading);">⏳ Present Perfect (Connected to Present)</h3>
-                                        <p>Used for recent events, life experiences, or states continuing up to now.</p>
-                                        <div style="background:#f8fafc; padding:10px 14px; border-radius:6px; font-family:var(--font-mono); font-size:15px; color:#334155;">
-                                            <strong>Key Markers:</strong> <em>already, ever, never, since, still, yet, lately, recently</em>
-                                        </div>
-                                        <p style="margin-top:6px;"><em>Example:</em> "My father has read the same newspaper <strong>since</strong> he was 18."</p>
                                     </div>
                                 </div>
 
                                 <div class="col">
-                                    <div class="card" id="grammarTimeMarkers" style="font-size:18px; line-height:1.9;">
-                                        <div style="font-weight:700; font-size:15px; color:var(--text-muted); margin-bottom:8px;">Fill in the correct time marker:</div>
-                                        
-                                        <p>1. I’ve <input type="text" class="blank-input" data-ans="never" style="width:110px;"> bought a newspaper but I sometimes read my friend’s.</p>
-                                        <p>2. My father has read the same newspaper <input type="text" class="blank-input" data-ans="since" style="width:110px;"> he was 18.</p>
-                                        <p>3. Did you see the news <input type="text" class="blank-input" data-ans="yesterday" style="width:130px;">? They <input type="text" class="blank-input" data-ans="still" style="width:90px;"> haven't opened the motorway.</p>
-                                        <p>4. The election was two days <input type="text" class="blank-input" data-ans="ago" style="width:80px;"> but they haven't announced the result <input type="text" class="blank-input" data-ans="yet" style="width:80px;">.</p>
-                                        <p>5. I don’t want to watch the news now because I’ve <input type="text" class="blank-input" data-ans="already" style="width:100px;"> seen it once today.</p>
-                                        <p>6. Newspaper sales fell a lot <input type="text" class="blank-input" data-ans="last year" style="width:130px;"> but have increased a little <input type="text" class="blank-input" data-ans="lately" style="width:100px;">.</p>
-                                        <p>7. I started using a news app <input type="text" class="blank-input" data-ans="when" style="width:90px;"> I got my tablet.</p>
-                                        <p>8. The country has suffered economic difficulties <input type="text" class="blank-input" data-ans="for" style="width:70px;"> a number of years.</p>
+                                    <div class="card" id="grammarVerbConjugation" style="font-size:16.5px; line-height:1.75; padding:18px 20px;">
+                                        <div style="font-weight:700; font-size:15px; color:var(--col-reading); margin-bottom:6px;">Part 2: Verb Conjugation (Present Perfect / Past Simple)</div>
+                                        <p>1. I <input type="text" class="blank-input" data-ans="haven't used|have not used" style="width:130px;" placeholder="not use"> social media for months.</p>
+                                        <p>2. <input type="text" class="blank-input" data-ans="Have you heard" style="width:145px;" placeholder="you / hear"> the news about the new university?</p>
+                                        <p>3. My brother <input type="text" class="blank-input" data-ans="decided" style="width:90px;" placeholder="decide"> to close his Twitter account last Monday.</p>
+                                        <p>4. They <input type="text" class="blank-input" data-ans="haven't made|have not made" style="width:135px;" placeholder="not make"> enough money this year, so the paper is going to close.</p>
+                                        <p>5. I <input type="text" class="blank-input" data-ans="haven't seen|have not seen" style="width:130px;" placeholder="not see"> the news this evening but I <input type="text" class="blank-input" data-ans="saw" style="width:65px;" placeholder="see"> it at lunchtime.</p>
+                                        <p>6. I <input type="text" class="blank-input" data-ans="stopped" style="width:85px;" placeholder="stop"> buying that paper when the price <input type="text" class="blank-input" data-ans="went up" style="width:85px;" placeholder="go up">.</p>
 
-                                        <div class="action-row">
-                                            <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('grammarTimeMarkers')">Check Answers</button>
-                                            <button class="btn-action" onclick="deckEngine.revealBlanks('grammarTimeMarkers')">Reveal Answers</button>
-                                            <button class="btn-action" onclick="deckEngine.resetBlanks('grammarTimeMarkers')">Reset</button>
+                                        <div class="action-row" style="margin-top:10px;">
+                                            <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('grammarVerbConjugation')">Check Verbs</button>
+                                            <button class="btn-action" onclick="deckEngine.revealBlanks('grammarVerbConjugation')">Reveal</button>
+                                            <button class="btn-action" onclick="deckEngine.resetBlanks('grammarVerbConjugation')">Reset</button>
                                         </div>
                                     </div>
                                 </div>
@@ -418,7 +415,7 @@
                 </div>
             </section>
 
-            <!-- SLIDE 6: 9a Grammar: Verb Conjugation & "Breaking News" Cloze -->
+            <!-- SLIDE 6: 9a Grammar: "Breaking News" Cloze -->
             <section class="slide" data-skill="grammar">
                 <div class="slide-inner">
                     <div class="notebook">
@@ -465,32 +462,49 @@
 
                             <div class="two-col" id="mediaVocabTask">
                                 <div class="col">
-                                    <div class="card">
+                                    <h3 style="font-size:18px; font-weight:700; color:var(--col-vocab); margin-bottom:8px;">Part 1: Media Terminology</h3>
+                                    <div class="card-sm">
                                         <p>1. <select class="select-input" data-ans="Paparazzi"><option value="">--</option><option value="Paparazzi">Paparazzi</option><option value="Journalism">Journalism</option></select> can sell photographs of celebrities for a lot of money.</p>
                                     </div>
-                                    <div class="card">
+                                    <div class="card-sm">
                                         <p>2. I’d like to write for newspapers, so I’m doing a course in <select class="select-input" data-ans="journalism"><option value="">--</option><option value="journalism">journalism</option><option value="tabloid">tabloid</option></select>.</p>
                                     </div>
-                                    <div class="card">
+                                    <div class="card-sm">
                                         <p>3. I think everyone has a right to <select class="select-input" data-ans="privacy"><option value="">--</option><option value="privacy">privacy</option><option value="press">press</option></select> in their personal lives.</p>
                                     </div>
-                                    <div class="card">
-                                        <p>4. You shouldn’t use <select class="select-input" data-ans="tabloid"><option value="">--</option><option value="tabloid">tabloid</option><option value="mass media">mass media</option></select> newspapers for academic research.</p>
+                                    <div class="card-sm">
+                                        <p>4. Although I don’t often buy a newspaper, I look at the <select class="select-input" data-ans="headlines"><option value="">--</option><option value="headlines">headlines</option><option value="tabloids">tabloids</option></select> to see the main news stories.</p>
+                                    </div>
+                                    <div class="card-sm">
+                                        <p>5. The report was in the local <select class="select-input" data-ans="press"><option value="">--</option><option value="press">press</option><option value="privacy">privacy</option></select> but didn't appear nationally.</p>
+                                    </div>
+                                    <div class="card-sm">
+                                        <p>6. You shouldn’t use <select class="select-input" data-ans="tabloid"><option value="">--</option><option value="tabloid">tabloid</option><option value="mass media">mass media</option></select> newspapers for academic research.</p>
                                     </div>
                                 </div>
 
                                 <div class="col">
-                                    <div class="card">
-                                        <p>5. Newspaper articles are more detailed and <select class="select-input" data-ans="informative"><option value="">--</option><option value="informative">informative</option><option value="depressing">depressing</option></select> than TV news.</p>
+                                    <h3 style="font-size:18px; font-weight:700; color:var(--col-reading); margin-bottom:8px;">Part 2: Academic Adjectives</h3>
+                                    <div class="card-sm">
+                                        <p>1. Newspaper articles are more detailed and <select class="select-input" data-ans="informative"><option value="">--</option><option value="informative">informative</option><option value="depressing">depressing</option></select> than TV news.</p>
                                     </div>
-                                    <div class="card">
-                                        <p>6. I never watch the TV news because I find it too <select class="select-input" data-ans="depressing"><option value="">--</option><option value="depressing">depressing</option><option value="entertaining">entertaining</option></select>; it is full of disasters.</p>
+                                    <div class="card-sm">
+                                        <p>2. I never watch the TV news because I find it too <select class="select-input" data-ans="depressing"><option value="">--</option><option value="depressing">depressing</option><option value="entertaining">entertaining</option></select>; it is full of disasters.</p>
                                     </div>
-                                    <div class="card">
-                                        <p>7. TV news can be very <select class="select-input" data-ans="effective"><option value="">--</option><option value="effective">effective</option><option value="believable">believable</option></select> in raising people’s awareness about world events.</p>
+                                    <div class="card-sm">
+                                        <p>3. The news is not supposed to be <select class="select-input" data-ans="entertaining"><option value="">--</option><option value="entertaining">entertaining</option><option value="boring">boring</option></select> or funny.</p>
+                                    </div>
+                                    <div class="card-sm">
+                                        <p>4. Many news stories about celebrities are not very <select class="select-input" data-ans="believable"><option value="">--</option><option value="believable">believable</option><option value="informative">informative</option></select>; they are invented.</p>
+                                    </div>
+                                    <div class="card-sm">
+                                        <p>5. TV news can be very <select class="select-input" data-ans="effective"><option value="">--</option><option value="effective">effective</option><option value="believable">believable</option></select> in raising people’s awareness about world events.</p>
+                                    </div>
+                                    <div class="card-sm">
+                                        <p>6. I find the news is <select class="select-input" data-ans="boring"><option value="">--</option><option value="boring">boring</option><option value="depressing">depressing</option></select> because it seems to be the same every day.</p>
                                     </div>
 
-                                    <div class="action-row">
+                                    <div class="action-row" style="margin-top:10px;">
                                         <button class="btn-action btn-primary" onclick="deckEngine.checkSelects('mediaVocabTask')">Check Answers</button>
                                         <button class="btn-action" onclick="deckEngine.revealSelects('mediaVocabTask')">Reveal Answers</button>
                                         <button class="btn-action" onclick="deckEngine.resetSelects('mediaVocabTask')">Reset</button>

@@ -19,6 +19,45 @@
     --text-muted: #64748b;
     --stage-bg: #0b1120;
     --viewport-bg: radial-gradient(circle at 80% 20%, #1e293b 0%, #0b1120 70%);
+    --stage-width: 1920px;
+    --stage-height: 1080px;
+    --notebook-width: 1800px;
+    --notebook-height: 980px;
+}
+
+/* Aspect Ratio Overrides for Legacy Projectors */
+[data-aspect="4:3"], :root[data-aspect="4:3"] {
+    --stage-width: 1440px;
+    --stage-height: 1080px;
+    --notebook-width: 1360px;
+    --notebook-height: 980px;
+    --page-pad: 36px 68px 36px 38px;
+}
+
+[data-aspect="4:3"] .slide-title {
+    font-size: calc(40px * var(--font-scale, 1));
+}
+
+[data-aspect="4:3"] .slide-subtitle {
+    font-size: calc(19px * var(--font-scale, 1));
+    margin-bottom: 12px;
+}
+
+[data-aspect="4:3"] .two-col, 
+[data-aspect="4:3"] .split-view-container {
+    gap: 18px !important;
+}
+
+[data-aspect="4:3"] .card {
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    font-size: calc(17px * var(--font-scale, 1));
+}
+
+[data-aspect="4:3"] .discuss-card {
+    padding: 15px 18px;
+    gap: 14px !important;
+    margin-bottom: 10px;
 }
 
 /* Theme 1: Academic Editorial (Default) */
@@ -99,18 +138,19 @@ html, body {
     position: absolute;
     left: 0;
     top: 0;
-    width: 1920px;
-    height: 1080px;
+    width: var(--stage-width, 1920px);
+    height: var(--stage-height, 1080px);
     overflow: hidden;
     transform-origin: 0 0;
     background: var(--slide-bg, #0a0a0a);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .slide {
     position: absolute;
     inset: 0;
-    width: 1920px;
-    height: 1080px;
+    width: var(--stage-width, 1920px);
+    height: var(--stage-height, 1080px);
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
@@ -157,14 +197,15 @@ html, body {
 }
 
 .notebook {
-    width: 1800px;
-    height: 980px;
+    width: var(--notebook-width, 1800px);
+    height: var(--notebook-height, 980px);
     background: var(--bg-page, #f8fafc);
     border-radius: 14px;
     position: relative;
     display: flex;
     box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
     overflow: hidden;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .skill-stripe {

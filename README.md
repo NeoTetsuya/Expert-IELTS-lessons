@@ -12,7 +12,9 @@ Interactive, animation-rich, 16:9 HTML slide presentations designed for IELTS Ac
 ├── reading_passages_and_questions_guide.md
 ├── js/                            # Universal modular presentation engine
 │   ├── deck-engine.js             # Master bundle & loader
+│   ├── deck-core.js               # Stage scaling, slide lifecycle & nav
 │   ├── deck-components.js         # Auto-hydrates vertical tabs & HUD
+│   ├── deck-theme-engine.js       # Dynamic theme presets & styling
 │   ├── reading-highlighter.js     # Evidence & synonym synchronization
 │   ├── reading-grounder.js        # Synonym tags & hover sync
 │   ├── vocab-bank.js              # Click-to-fill chips & pronunciation
@@ -22,7 +24,10 @@ Interactive, animation-rich, 16:9 HTML slide presentations designed for IELTS Ac
 │   ├── presentation-spotlight.js  # Focus screen mutes (B / W / S keys)
 │   ├── flashcard-engine.js        # 3D interactive flip cards
 │   ├── print-optimizer.js         # Multi-page handout PDF export (Ctrl+P)
-│   └── presentation-tools.js      # Timer, laser pointer, annotation pen
+│   ├── laser-pointer.js           # Glowing laser pointer cursor (L key)
+│   ├── pen-annotation.js          # On-slide drawing & sketches (P / C keys)
+│   ├── classroom-timer.js         # Interactive timer with chime (T key)
+│   └── presentation-tools.js      # Toolbar HUD coordinator & key dispatcher
 ├── expert 5/                      # Expert IELTS Level 5 Course Modules
 │   ├── module-04.html             # Module 4: The Mind
 │   ├── module-05.html             # Module 5: The World Around Us
@@ -54,6 +59,8 @@ Interactive, animation-rich, 16:9 HTML slide presentations designed for IELTS Ac
 | <kbd>P</kbd> | Pen Annotation | Draw live sketches or ink notes on screen |
 | <kbd>C</kbd> | Clear Overlay | Clears all highlighter marks and canvas drawings instantly |
 | <kbd>Ctrl+Z</kbd> | Undo Stroke | Undo last highlight or drawing stroke |
+| <kbd>Shift+X</kbd> | Hide Toolkit | Toggle/collapse floating teacher tools toolbar |
+| <kbd>Shift+A</kbd> | Aspect Ratio | Toggle between 16:9 widescreen and 4:3 projector resolution |
 | <kbd>Shift+T</kbd> | Theme Switcher | Cycle live between 6 aesthetic typography & atmosphere presets |
 | <kbd>B</kbd> / <kbd>W</kbd> | Blackout / Whiteout | Pitch black or white screen to focus attention |
 | <kbd>S</kbd> | Spotlight Dimmer | Highlights circular area around the mouse cursor |

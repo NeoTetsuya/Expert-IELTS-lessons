@@ -5,172 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expert IELTS 6 — Module 2: Feelings</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet">
+
     <!-- Base Styles & Theme System -->
     <link rel="stylesheet" href="../presentation-base.css">
     <style>
-        /* Exact 50% / 50% Equal Split-Screen Layout */
-        .two-col, .split-view-container {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            gap: 26px !important;
-            width: 100% !important;
-            flex: 1 !important;
-            min-height: 0 !important;
-            overflow: hidden !important;
-        }
-
-        .reading-pane {
-            font-size: 21px !important;
-            line-height: 1.85 !important;
-            padding: 24px 30px !important;
-            background: #ffffff;
-            border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
-            border-radius: 14px;
-            overflow-y: auto;
-            min-width: 0 !important;
-            height: 100% !important;
-            box-sizing: border-box;
-            color: #1e293b;
-        }
-        .reading-pane p {
-            font-size: 21px !important;
-            line-height: 1.85 !important;
-            margin-bottom: 16px !important;
-        }
-
-        .para-tag {
-            font-size: 16px !important;
-            font-weight: 800 !important;
-            padding: 4px 10px !important;
-            border-radius: 5px !important;
-            vertical-align: baseline !important;
-        }
-
-        .question-pane {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            overflow-y: auto;
-            min-width: 0 !important;
-            height: 100% !important;
-            padding-right: 6px;
-            box-sizing: border-box;
-        }
-
-        .question-pane p {
-            font-size: 18.5px !important;
-            line-height: 1.5 !important;
-        }
-
-        .q-card {
-            background: #ffffff;
-            border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
-            border-radius: 10px;
-            padding: 16px 20px !important;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            font-size: 20px !important;
-            line-height: 1.55 !important;
-            color: var(--text-body, #1e293b);
-            box-sizing: border-box;
-            width: 100% !important;
-            min-width: 0 !important;
-        }
-
-        .q-card > div {
-            display: flex !important;
-            justify-content: space-between !important;
-            align-items: flex-start !important;
-            gap: 14px !important;
-            width: 100% !important;
-        }
-
-        .q-card > div > span {
-            flex: 1 1 auto !important;
-            min-width: 0 !important;
-            font-size: 20px !important;
-            line-height: 1.5 !important;
-            overflow-wrap: break-word !important;
-            word-break: normal !important;
-        }
-
-        .q-card select.select-input {
-            flex: 0 0 auto !important;
-            min-width: 130px !important;
-            max-width: 180px !important;
-            font-size: 18px !important;
-            padding: 8px 14px !important;
-            font-weight: 700 !important;
-        }
-
-        .select-input, .blank-input {
-            font-size: 18px !important;
-            padding: 8px 14px !important;
-            font-weight: 700 !important;
-        }
-
-        .btn-action {
-            font-size: 16px !important;
-            padding: 10px 22px !important;
-            font-weight: 700 !important;
-        }
-
-        .item-explanation {
-            display: none !important;
-            font-size: 17px !important;
-            line-height: 1.6 !important;
-            background: rgba(37, 99, 235, 0.08);
-            border-left: 4px solid var(--col-reading);
-            padding: 10px 14px;
-            border-radius: 0 6px 6px 0;
-            margin-top: 8px;
-        }
-
-        .item-explanation.show,
-        .q-card.revealed .item-explanation {
-            display: block !important;
-            animation: fadeIn 0.3s ease;
+        :root {
+            --col-reading: #2563eb;
+            --col-grammar: #f43f5e;
+            --col-vocab:   #059669;
+            --col-writing: #7c3aed;
+            --col-review:  #0891b2;
+            
+            --stage-bg: #111827;
+            --viewport-bg: radial-gradient(circle at 80% 20%, #881337 0%, #111827 70%);
         }
     </style>
 </head>
 
 <body>
     <div class="deck-viewport">
-        <div class="deck-stage" id="deckStage">
+        <main class="deck-stage" id="deckStage">
 
             <!-- SLIDE 1: Title & Course Roadmap -->
-            <section class="slide" id="slide-1" data-skill="general">
-                <div class="slide-inner">
-                    <div class="notebook" style="justify-content: center; align-items: center; background: radial-gradient(circle at center, rgba(225, 29, 72, 0.08) 0%, var(--bg-page) 70%);">
-                        <div class="skill-stripe" style="background: var(--col-grammar);"></div>
-                        <div class="page-content" style="align-items: center; justify-content: center; text-align: center; max-width: 1240px;">
-                            <span class="skill-badge" style="background: var(--col-grammar); font-size: 15px; padding: 6px 20px; margin-bottom: 18px;">IELTS Band 6.0 – 7.0 • Expert 6</span>
-                            <h1 class="slide-title" style="font-size: 64px; line-height: 1.15; margin-bottom: 16px;">Module 2: Feelings</h1>
-                            <p style="font-size: 22px; color: var(--text-muted); max-width: 920px; line-height: 1.6; margin-bottom: 36px;">
-                                Complete Unabridged Course Material covering <strong>Module 2a (Feeling Good)</strong> and <strong>Module 2b (Looking Good)</strong>: Side-by-side reading passages with grounded evidence, defining relative clauses, lexical intensifiers, and Band 6+ Task 2 opinion essays.
-                            </p>
-
-                            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; width: 100%;">
-                                <div class="card" style="text-align: left; border-top: 4px solid var(--col-reading); padding: 20px;">
-                                    <div style="font-size: 13.5px; font-weight: 800; color: var(--col-reading); text-transform: uppercase;">01. Reading</div>
-                                    <div style="font-weight: 800; font-size: 17px; margin: 6px 0;">Epic Moments &amp; Clothes Identity</div>
-                                    <div style="font-size: 13.5px; color: var(--text-muted);">Passages A–G, Critical Response, Y/N/NG &amp; Info Matching</div>
+            <section class="slide title-slide active visible" id="slide-1" data-skill="title">
+                <div class="title-slide-inner">
+                    <div class="title-notebook">
+                        <div class="title-left">
+                            <div class="title-module-badge reveal">Module 02</div>
+                            <h1 class="title-main reveal">Feelings <span class="title-amp">&amp;</span> Expression</h1>
+                            <p class="title-sub reveal">IELTS Academic Preparation Masterclass<br>Feeling Good, Looking Good, Defining Relative Clauses, Lexical Intensifiers &amp; Task 2 Opinion Models</p>
+                        </div>
+                        <div class="title-right">
+                            <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Lesson Syllabus</div>
+                            <div class="title-skills-grid reveal">
+                                <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('read')">
+                                    <div class="title-skill-name" style="color:var(--col-reading)">📖 Reading</div>
+                                    <div class="title-skill-desc">Epic Moments &amp; Clothes Identity</div>
                                 </div>
-                                <div class="card" style="text-align: left; border-top: 4px solid var(--col-grammar); padding: 20px;">
-                                    <div style="font-size: 13.5px; font-weight: 800; color: var(--col-grammar); text-transform: uppercase;">02. Grammar</div>
-                                    <div style="font-weight: 800; font-size: 17px; margin: 6px 0;">Defining Relative Clauses</div>
-                                    <div style="font-size: 13.5px; color: var(--text-muted);">Subject vs Object rules, pronoun omission &amp; agreement</div>
+                                <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('grammar')">
+                                    <div class="title-skill-name" style="color:var(--col-grammar)">📐 Grammar</div>
+                                    <div class="title-skill-desc">Defining Relative Clauses &amp; Pronoun Rules</div>
                                 </div>
-                                <div class="card" style="text-align: left; border-top: 4px solid var(--col-vocab); padding: 20px;">
-                                    <div style="font-size: 13.5px; font-weight: 800; color: var(--col-vocab); text-transform: uppercase;">03. Vocabulary</div>
-                                    <div style="font-weight: 800; font-size: 17px; margin: 6px 0;">Feelings &amp; Intensifiers</div>
-                                    <div style="font-size: 13.5px; color: var(--text-muted);">Parts of speech, extreme adjectives &amp; collocations</div>
+                                <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('vocab')">
+                                    <div class="title-skill-name" style="color:var(--col-vocab)">🗂️ Vocabulary</div>
+                                    <div class="title-skill-desc">Feelings, Intensifiers &amp; Collocations</div>
                                 </div>
-                                <div class="card" style="text-align: left; border-top: 4px solid var(--col-writing); padding: 20px;">
-                                    <div style="font-size: 13.5px; font-weight: 800; color: var(--col-writing); text-transform: uppercase;">04. Writing</div>
-                                    <div style="font-weight: 800; font-size: 17px; margin: 6px 0;">Task 2 Opinion Models</div>
-                                    <div style="font-size: 13.5px; color: var(--text-muted);">Family ties &amp; Male vs Female appearance trends</div>
+                                <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('write')">
+                                    <div class="title-skill-name" style="color:var(--col-writing)">✍️ Writing</div>
+                                    <div class="title-skill-desc">Task 2 Male vs Female Appearance Trends</div>
                                 </div>
                             </div>
                         </div>
@@ -195,10 +82,8 @@
                             <div class="two-col" style="flex: 1; min-height: 0;">
                                 <!-- Reading Left Pane (Full Unabridged Passage) -->
                                 <div class="reading-pane">
-                                    <h3 style="font-family: var(--font-display); font-size: 20px; margin-bottom: 12px; color: var(--text-dark);">
-                                        Passage: Extraordinary Experiences &amp; Social Cost
                                     <h3 style="font-family: var(--font-display); font-size: 20px; margin-bottom: 12px; color: var(--col-reading);">
-                                        "Feeling Good" — Passage Excerpt
+                                        "Feeling Good" — Extraordinary Experiences &amp; Social Cost
                                     </h3>
                                     <p><span class="para-tag">[A]</span> We love to reminisce and tell others about our extraordinary experiences – that time we climbed Mount Kilimanjaro, got to taste that rare food or ran into a celebrity on the street – but new research suggests this may not be such a wise idea. In fact, the findings, published in the latest edition of a psychology journal, suggest that <mark class="evidence" id="ev-kw-3" data-q="kw-3"><span class="syn-pair-1" data-q="kw-3">sharing these extraordinary experiences are not as beneficial as we might think and can actually come at a social cost</span></mark>.</p>
                                     
@@ -1516,7 +1401,7 @@
                 </div>
             </section>
 
-        </div>
+        </main>
     </div>
 
     <!-- Master Presentation Bundle -->

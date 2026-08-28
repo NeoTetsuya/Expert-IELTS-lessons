@@ -1,31 +1,26 @@
 /**
- * Presentation Classroom Tools (PresentationTools)
- * Extends the presentation decks with essential teaching tools:
- * - ⏱️ Interactive Classroom Timer & Stopwatch (with audio chime)
- * - 🔴 Laser Pointer Mode (toggle: 'L')
- * - 🖊️ On-Slide Drawing / Pen Annotation Canvas (toggle: 'P', clear: 'C')
- * - ⛶ Fullscreen Mode (toggle: 'F')
- * - ❓ Help / Keybindings Overlay (toggle: '?')
- * - 📊 Exercise Auto-Scoring & Reset All
+ * Presentation Classroom Tools Coordinator (PresentationTools)
+ * Coordinates toolbar HUD, shortcuts dispatch, and presentation utilities:
+ * - 🎛️ Floating Teacher Tools HUD Bar with Collapse / Hide Toggle
+ * - 📐 Aspect Ratio Switching ('Shift+A')
+ * - ⛶ Fullscreen Toggle ('F')
+ * - ❓ Help / Keybindings Overlay ('?')
+ * - ⌨️ Global Keyboard Shortcut Dispatcher
  */
 
 class PresentationTools {
     constructor(deckEngine) {
         this.deckEngine = deckEngine;
-        this.isLaserActive = false;
-        this.isPenActive = false;
-        this.timerInterval = null;
-        this.timerSeconds = 0;
-        this.timerRunning = false;
-        
+        this.isCollapsed = localStorage.getItem('deck_tools_collapsed') === 'true';
         this.initUI();
-        this.initLaserPointer();
-        this.initDrawingCanvas();
         this.initKeyboardShortcuts();
+        if (this.isCollapsed) {
+            this.collapseHUD(false);
+        }
     }
 
     /**
-     * Initializes the floating toolbar and modals
+     * Initializes the floating toolbar, collapsed trigger, and help modal
      */
     initUI() {
         // Create container
@@ -33,7 +28,14 @@ class PresentationTools {
         toolContainer.id = 'presentationToolsHUD';
         toolContainer.className = 'presentation-tools-hud';
         toolContainer.innerHTML = `
-            <div class="tools-bar">
+            <!-- Collapsed Mini Trigger Pill -->
+            <button class="tools-collapsed-trigger" id="toolsCollapsedTrigger" title="Show Teacher Toolkit (Shift+X)" onclick="presentationTools.toggleHUD()">
+                🛠️ <span class="collapsed-badge">Tools</span>
+            </button>
+
+            <!-- Expanded Tools Bar -->
+            <div class="tools-bar" id="toolsBar">
+                <button class="tool-btn" id="toolAspectBtn" title="Switch Aspect Ratio (16:9 / 4:3) (Shift+A)" onclick="window.deckEngine && window.deckEngine.toggleAspectRatio()">📐 <span class="tool-label">16:9</span></button>
                 <button class="tool-btn" id="toolThemeBtn" title="Theme Aesthetics (Shift+T)" onclick="window.deckThemeEngine && window.deckThemeEngine.openModal()">🎨 <span class="tool-label">Theme</span></button>
                 <button class="tool-btn" id="toolHighlightBtn" title="Teacher Highlighter (H)" onclick="window.teacherHighlighter && window.teacherHighlighter.toggle()">🖍️ <span class="tool-label">Highlight</span></button>
                 <button class="tool-btn" id="toolTimerBtn" title="Classroom Timer (T)" onclick="presentationTools.toggleTimerModal()">⏱️ <span class="tool-label">Timer</span></button>
@@ -43,36 +45,18 @@ class PresentationTools {
                 <button class="tool-btn" id="toolPenBtn" title="Draw / Annotate (P)" onclick="presentationTools.togglePen()">✏️ <span class="tool-label">Draw</span></button>
                 <button class="tool-btn" id="toolFullscreenBtn" title="Fullscreen (F)" onclick="presentationTools.toggleFullscreen()">⛶</button>
                 <button class="tool-btn" id="toolHelpBtn" title="Keyboard Shortcuts (?)" onclick="presentationTools.toggleHelpModal()">❓</button>
+                <button class="tool-btn tool-collapse-btn" id="toolCollapseBtn" title="Hide Toolkit (Shift+X)" onclick="presentationTools.toggleHUD()">✕</button>
             </div>
 
             <!-- Highlighter Palette -->
             <div class="highlighter-palette" id="highlighterPalette" style="display:none;">
-                <button class="highlighter-color-btn active" style="background:#facc15;" onclick="teacherHighlighter.setColor(0)" title="Fluorescent Yellow"></button>
-                <button class="highlighter-color-btn" style="background:#4ade80;" onclick="teacherHighlighter.setColor(1)" title="Neon Green"></button>
-                <button class="highlighter-color-btn" style="background:#38bdf8;" onclick="teacherHighlighter.setColor(2)" title="Sky Cyan"></button>
-                <button class="highlighter-color-btn" style="background:#f472b6;" onclick="teacherHighlighter.setColor(3)" title="Coral Pink"></button>
+                <button class="highlighter-color-btn active" style="background:#facc15;" onclick="teacherHighlighter && teacherHighlighter.setColor(0)" title="Fluorescent Yellow"></button>
+                <button class="highlighter-color-btn" style="background:#4ade80;" onclick="teacherHighlighter && teacherHighlighter.setColor(1)" title="Neon Green"></button>
+                <button class="highlighter-color-btn" style="background:#38bdf8;" onclick="teacherHighlighter && teacherHighlighter.setColor(2)" title="Sky Cyan"></button>
+                <button class="highlighter-color-btn" style="background:#f472b6;" onclick="teacherHighlighter && teacherHighlighter.setColor(3)" title="Coral Pink"></button>
                 <div class="highlighter-divider"></div>
-                <button class="highlighter-tool-btn" onclick="teacherHighlighter.undo()" title="Undo Last Stroke (Ctrl+Z)">↩️ Undo</button>
-                <button class="highlighter-tool-btn" onclick="teacherHighlighter.clear()" title="Clear All Highlights (C)">🗑️ Clear</button>
-            </div>
-
-            <!-- Timer Modal / HUD -->
-            <div class="tool-modal" id="timerModal" style="display:none;">
-                <div class="tool-modal-header">
-                    <span>⏱️ Classroom Timer</span>
-                    <button class="modal-close" onclick="presentationTools.toggleTimerModal()">×</button>
-                </div>
-                <div class="timer-display" id="timerDisplay">00:00</div>
-                <div class="timer-presets">
-                    <button class="preset-btn" onclick="presentationTools.setTimer(60)">1 min</button>
-                    <button class="preset-btn" onclick="presentationTools.setTimer(120)">2 min</button>
-                    <button class="preset-btn" onclick="presentationTools.setTimer(300)">5 min</button>
-                    <button class="preset-btn" onclick="presentationTools.setTimer(600)">10 min</button>
-                </div>
-                <div class="timer-actions">
-                    <button class="action-btn start-btn" id="timerStartBtn" onclick="presentationTools.toggleTimerRun()">Start</button>
-                    <button class="action-btn" onclick="presentationTools.resetTimer()">Reset</button>
-                </div>
+                <button class="highlighter-tool-btn" onclick="teacherHighlighter && teacherHighlighter.undo()" title="Undo Last Stroke (Ctrl+Z)">↩️ Undo</button>
+                <button class="highlighter-tool-btn" onclick="teacherHighlighter && teacherHighlighter.clear()" title="Clear All Highlights (C)">🗑️ Clear</button>
             </div>
 
             <!-- Help Modal -->
@@ -85,6 +69,8 @@ class PresentationTools {
                     <div><kbd>→</kbd> / <kbd>Space</kbd></div><div>Next Slide</div>
                     <div><kbd>←</kbd></div><div>Previous Slide</div>
                     <div><kbd>G</kbd></div><div>Slide Grid Navigator</div>
+                    <div><kbd>Shift+X</kbd></div><div>Hide / Show Teacher Toolkit</div>
+                    <div><kbd>Shift+A</kbd></div><div>Toggle 16:9 / 4:3 Aspect Ratio</div>
                     <div><kbd>H</kbd></div><div>Toggle Highlighter Tool</div>
                     <div><kbd>L</kbd></div><div>Toggle Laser Pointer</div>
                     <div><kbd>P</kbd></div><div>Toggle Drawing Pen</div>
@@ -93,6 +79,10 @@ class PresentationTools {
                     <div><kbd>B</kbd> / <kbd>W</kbd></div><div>Blackout / Whiteout Screen</div>
                     <div><kbd>S</kbd></div><div>Spotlight Dimmer</div>
                     <div><kbd>T</kbd></div><div>Toggle Classroom Timer</div>
+                    <div><kbd>R</kbd></div><div>Student Picker Wheel</div>
+                    <div><kbd>N</kbd></div><div>Teacher Presenter Notes</div>
+                    <div><kbd>Z</kbd></div><div>Paragraph Loupe</div>
+                    <div><kbd>E</kbd></div><div>Step Reveal Answers</div>
                     <div><kbd>F</kbd></div><div>Toggle Fullscreen Mode</div>
                     <div><kbd>?</kbd></div><div>Toggle Shortcuts Cheatsheet</div>
                 </div>
@@ -100,7 +90,7 @@ class PresentationTools {
         `;
         document.body.appendChild(toolContainer);
 
-        // Inject Styles for Tools
+        // Inject Styles for Tools HUD
         const style = document.createElement('style');
         style.id = 'presentationToolsStyles';
         style.textContent = `
@@ -122,6 +112,7 @@ class PresentationTools {
                 border-radius: 30px;
                 border: 1px solid rgba(255, 255, 255, 0.16);
                 box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+                transition: opacity 0.25s ease, transform 0.25s ease;
             }
             .tool-btn {
                 background: transparent;
@@ -149,6 +140,60 @@ class PresentationTools {
             .tool-label {
                 font-size: 12px;
             }
+            .tool-collapse-btn {
+                padding: 5px 8px;
+                font-size: 12px;
+                color: #94a3b8;
+                margin-left: 2px;
+            }
+            .tool-collapse-btn:hover {
+                color: #ef4444;
+                background: rgba(239, 68, 68, 0.15);
+            }
+
+            /* Collapsed Trigger Pill */
+            .tools-collapsed-trigger {
+                display: none;
+                align-items: center;
+                gap: 6px;
+                background: rgba(15, 23, 42, 0.75);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                color: #e2e8f0;
+                padding: 6px 12px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 700;
+                cursor: pointer;
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+                transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+                opacity: 0.65;
+            }
+            .tools-collapsed-trigger:hover {
+                opacity: 1;
+                background: rgba(15, 23, 42, 0.95);
+                transform: scale(1.05);
+                box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+                color: #ffffff;
+            }
+            .collapsed-badge {
+                font-size: 11px;
+                letter-spacing: 0.5px;
+            }
+
+            /* Collapsed State Overrides */
+            .presentation-tools-hud.collapsed .tools-bar {
+                display: none;
+            }
+            .presentation-tools-hud.collapsed .tools-collapsed-trigger {
+                display: flex;
+            }
+            .presentation-tools-hud.collapsed .tool-modal {
+                display: none !important;
+            }
+            .presentation-tools-hud.collapsed .highlighter-palette {
+                display: none !important;
+            }
 
             /* Tool Modals */
             .tool-modal {
@@ -166,7 +211,7 @@ class PresentationTools {
                 animation: toolFadeIn 0.2s ease;
             }
             .tool-modal.help-modal {
-                width: 340px;
+                width: 360px;
             }
             .tool-modal-header {
                 display: flex;
@@ -188,59 +233,6 @@ class PresentationTools {
             }
             .modal-close:hover { color: #ffffff; }
 
-            /* Timer Specifics */
-            .timer-display {
-                font-family: 'JetBrains Mono', monospace, monospace;
-                font-size: 38px;
-                font-weight: 800;
-                text-align: center;
-                letter-spacing: 2px;
-                color: #38bdf8;
-                margin: 8px 0 14px 0;
-            }
-            .timer-display.ended {
-                color: #ef4444;
-                animation: pulseAlert 0.6s infinite alternate;
-            }
-            .timer-presets {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 5px;
-                margin-bottom: 12px;
-            }
-            .preset-btn {
-                background: rgba(255, 255, 255, 0.08);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                color: #cbd5e1;
-                padding: 5px 0;
-                border-radius: 6px;
-                font-size: 11px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: background 0.15s;
-            }
-            .preset-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
-            .timer-actions {
-                display: flex;
-                gap: 8px;
-            }
-            .action-btn {
-                flex: 1;
-                background: rgba(255, 255, 255, 0.12);
-                border: none;
-                color: #fff;
-                padding: 7px;
-                border-radius: 8px;
-                font-weight: 600;
-                cursor: pointer;
-            }
-            .action-btn.start-btn {
-                background: #10b981;
-            }
-            .action-btn.start-btn.running {
-                background: #f59e0b;
-            }
-
             /* Help Grid */
             .help-grid {
                 display: grid;
@@ -261,225 +253,89 @@ class PresentationTools {
                 color: #ffffff;
             }
 
-            /* Laser Pointer Dot */
-            #laserPointerDot {
-                position: fixed;
-                width: 18px;
-                height: 18px;
-                border-radius: 50%;
-                background: #ef4444;
-                box-shadow: 0 0 16px 4px #ef4444, 0 0 2px 2px #fff;
-                pointer-events: none;
-                z-index: 99999;
-                transform: translate(-50%, -50%);
-                display: none;
-                transition: transform 0.05s ease-out;
-            }
-
-            /* Drawing Canvas */
-            #annotationCanvas {
-                position: fixed;
-                inset: 0;
-                width: 100vw;
-                height: 100vh;
-                z-index: 9990;
-                pointer-events: none;
-                cursor: crosshair;
-            }
-            #annotationCanvas.active {
-                pointer-events: auto;
-            }
-
             @keyframes toolFadeIn {
                 from { opacity: 0; transform: translateY(-8px); }
                 to { opacity: 1; transform: translateY(0); }
-            }
-            @keyframes pulseAlert {
-                from { transform: scale(1); }
-                to { transform: scale(1.08); }
             }
         `;
         document.head.appendChild(style);
     }
 
     /**
-     * Initializes Laser Pointer
+     * Hide / Show HUD methods
      */
-    initLaserPointer() {
-        const dot = document.createElement('div');
-        dot.id = 'laserPointerDot';
-        document.body.appendChild(dot);
-
-        window.addEventListener('mousemove', (e) => {
-            if (this.isLaserActive) {
-                dot.style.left = `${e.clientX}px`;
-                dot.style.top = `${e.clientY}px`;
-            }
-        });
+    toggleHUD() {
+        this.isCollapsed ? this.expandHUD() : this.collapseHUD();
     }
 
-    toggleLaser() {
-        this.isLaserActive = !this.isLaserActive;
-        const dot = document.getElementById('laserPointerDot');
-        const btn = document.getElementById('toolLaserBtn');
-        if (dot) dot.style.display = this.isLaserActive ? 'block' : 'none';
-        if (btn) btn.classList.toggle('active', this.isLaserActive);
-        
-        // Disable pen if laser active
-        if (this.isLaserActive && this.isPenActive) {
-            this.togglePen();
+    collapseHUD(showToast = true) {
+        this.isCollapsed = true;
+        const hud = document.getElementById('presentationToolsHUD');
+        if (hud) hud.classList.add('collapsed');
+        localStorage.setItem('deck_tools_collapsed', 'true');
+        if (showToast && window.deckEngine && typeof window.deckEngine.showToastNotification === 'function') {
+            window.deckEngine.showToastNotification('Teacher Toolkit Hidden (Shift+X to show)');
+        }
+    }
+
+    expandHUD(showToast = true) {
+        this.isCollapsed = false;
+        const hud = document.getElementById('presentationToolsHUD');
+        if (hud) hud.classList.remove('collapsed');
+        localStorage.setItem('deck_tools_collapsed', 'false');
+        if (showToast && window.deckEngine && typeof window.deckEngine.showToastNotification === 'function') {
+            window.deckEngine.showToastNotification('Teacher Toolkit Visible');
         }
     }
 
     /**
-     * Initializes On-screen Annotation Canvas
+     * Laser pointer delegation
      */
-    initDrawingCanvas() {
-        const canvas = document.createElement('canvas');
-        canvas.id = 'annotationCanvas';
-        document.body.appendChild(canvas);
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
-
-        const resizeCanvas = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        };
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        let isDrawing = false;
-        let lastX = 0;
-        let lastY = 0;
-
-        canvas.addEventListener('mousedown', (e) => {
-            if (!this.isPenActive) return;
-            isDrawing = true;
-            [lastX, lastY] = [e.clientX, e.clientY];
-        });
-
-        canvas.addEventListener('mousemove', (e) => {
-            if (!isDrawing || !this.isPenActive) return;
-            this.ctx.beginPath();
-            this.ctx.moveTo(lastX, lastY);
-            this.ctx.lineTo(e.clientX, e.clientY);
-            this.ctx.strokeStyle = '#ef4444';
-            this.ctx.lineWidth = 3.5;
-            this.ctx.lineCap = 'round';
-            this.ctx.lineJoin = 'round';
-            this.ctx.stroke();
-            [lastX, lastY] = [e.clientX, e.clientY];
-        });
-
-        window.addEventListener('mouseup', () => { isDrawing = false; });
+    toggleLaser() {
+        if (window.laserPointer) {
+            window.laserPointer.toggle();
+        }
     }
 
+    /**
+     * Pen drawing delegation
+     */
     togglePen() {
-        this.isPenActive = !this.isPenActive;
-        const btn = document.getElementById('toolPenBtn');
-        if (this.canvas) {
-            this.canvas.classList.toggle('active', this.isPenActive);
-        }
-        if (btn) btn.classList.toggle('active', this.isPenActive);
-
-        // Disable laser if pen active
-        if (this.isPenActive && this.isLaserActive) {
-            this.toggleLaser();
+        if (window.penAnnotation) {
+            window.penAnnotation.toggle();
         }
     }
 
     clearCanvas() {
-        if (this.canvas && this.ctx) {
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        if (window.penAnnotation) {
+            window.penAnnotation.clear();
         }
     }
 
     /**
-     * Timer Functionality
+     * Timer delegation
      */
     toggleTimerModal() {
-        const modal = document.getElementById('timerModal');
-        if (modal) {
-            modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+        if (window.classroomTimer) {
+            window.classroomTimer.toggleModal();
         }
     }
 
     setTimer(seconds) {
-        this.timerSeconds = seconds;
-        this.updateTimerDisplay();
-    }
-
-    updateTimerDisplay() {
-        const display = document.getElementById('timerDisplay');
-        if (!display) return;
-        const mins = Math.floor(this.timerSeconds / 60);
-        const secs = this.timerSeconds % 60;
-        display.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-        display.classList.remove('ended');
+        if (window.classroomTimer) {
+            window.classroomTimer.setTimer(seconds);
+        }
     }
 
     toggleTimerRun() {
-        const startBtn = document.getElementById('timerStartBtn');
-        if (this.timerRunning) {
-            clearInterval(this.timerInterval);
-            this.timerRunning = false;
-            if (startBtn) {
-                startBtn.textContent = 'Resume';
-                startBtn.classList.remove('running');
-            }
-        } else {
-            if (this.timerSeconds <= 0) this.timerSeconds = 120;
-            this.timerRunning = true;
-            if (startBtn) {
-                startBtn.textContent = 'Pause';
-                startBtn.classList.add('running');
-            }
-            this.timerInterval = setInterval(() => {
-                if (this.timerSeconds > 0) {
-                    this.timerSeconds--;
-                    this.updateTimerDisplay();
-                } else {
-                    clearInterval(this.timerInterval);
-                    this.timerRunning = false;
-                    const display = document.getElementById('timerDisplay');
-                    if (display) display.classList.add('ended');
-                    if (startBtn) {
-                        startBtn.textContent = 'Start';
-                        startBtn.classList.remove('running');
-                    }
-                    this.playChime();
-                }
-            }, 1000);
+        if (window.classroomTimer) {
+            window.classroomTimer.toggleRun();
         }
     }
 
     resetTimer() {
-        clearInterval(this.timerInterval);
-        this.timerRunning = false;
-        this.timerSeconds = 0;
-        this.updateTimerDisplay();
-        const startBtn = document.getElementById('timerStartBtn');
-        if (startBtn) {
-            startBtn.textContent = 'Start';
-            startBtn.classList.remove('running');
-        }
-    }
-
-    playChime() {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
-            osc.frequency.setValueAtTime(880, ctx.currentTime + 0.15); // A5
-            gain.gain.setValueAtTime(0.3, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
-            osc.start();
-            osc.stop(ctx.currentTime + 0.8);
-        } catch (e) {
-            // AudioContext not allowed without gesture
+        if (window.classroomTimer) {
+            window.classroomTimer.reset();
         }
     }
 
@@ -509,7 +365,7 @@ class PresentationTools {
     }
 
     /**
-     * Keyboard Shortcuts Hook
+     * Global Keyboard Shortcuts Dispatcher
      */
     initKeyboardShortcuts() {
         document.addEventListener('keydown', (e) => {
@@ -517,7 +373,13 @@ class PresentationTools {
                 return;
             }
             const key = e.key.toLowerCase();
-            if (key === 'l') {
+            if (e.shiftKey && key === 'x') {
+                e.preventDefault();
+                this.toggleHUD();
+            } else if (e.shiftKey && key === 'a') {
+                e.preventDefault();
+                if (window.deckEngine) window.deckEngine.toggleAspectRatio();
+            } else if (key === 'l') {
                 e.preventDefault();
                 this.toggleLaser();
             } else if (key === 'p') {
@@ -526,13 +388,14 @@ class PresentationTools {
             } else if (key === 'c') {
                 e.preventDefault();
                 this.clearCanvas();
+                if (window.teacherHighlighter) window.teacherHighlighter.clear();
             } else if (key === 't') {
                 e.preventDefault();
                 this.toggleTimerModal();
             } else if (key === 'f') {
                 e.preventDefault();
                 this.toggleFullscreen();
-            } else if (key === '?' || key === 'h') {
+            } else if (key === '?' || (e.shiftKey && e.key === '/')) {
                 e.preventDefault();
                 this.toggleHelpModal();
             } else if (key === 'escape') {
@@ -540,8 +403,8 @@ class PresentationTools {
                 const helpModal = document.getElementById('helpModal');
                 if (timerModal) timerModal.style.display = 'none';
                 if (helpModal) helpModal.style.display = 'none';
-                if (this.isPenActive) this.togglePen();
-                if (this.isLaserActive) this.toggleLaser();
+                if (window.penAnnotation && window.penAnnotation.isActive) window.penAnnotation.deactivate();
+                if (window.laserPointer && window.laserPointer.isActive) window.laserPointer.deactivate();
             }
         });
     }
@@ -551,4 +414,5 @@ class PresentationTools {
 let presentationTools;
 window.addEventListener('DOMContentLoaded', () => {
     presentationTools = new PresentationTools(window.deckEngine);
+    window.presentationTools = presentationTools;
 });

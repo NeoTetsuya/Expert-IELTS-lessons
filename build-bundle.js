@@ -27,6 +27,9 @@ const filesToBundle = [
     'presentation-spotlight.js',
     'flashcard-engine.js',
     'print-optimizer.js',
+    'laser-pointer.js',
+    'pen-annotation.js',
+    'classroom-timer.js',
     'presentation-tools.js'
 ];
 
@@ -48,12 +51,11 @@ filesToBundle.forEach(fileName => {
     }
 });
 
-const outputPath1 = path.join(jsDir, 'deck-engine.js');
-const outputPath2 = path.join(jsDir, 'deck-bundle.js');
+const outputPath = path.join(jsDir, 'deck-bundle.js');
 
-fs.writeFileSync(outputPath1, bundleCode, 'utf8');
-fs.writeFileSync(outputPath2, bundleCode, 'utf8');
+fs.writeFileSync(outputPath, bundleCode, 'utf8');
 
 console.log('✓ Master bundle built successfully:');
-console.log(`  - ${outputPath1} (${(fs.statSync(outputPath1).size / 1024).toFixed(1)} KB)`);
-console.log(`  - ${outputPath2} (${(fs.statSync(outputPath2).size / 1024).toFixed(1)} KB)`);
+console.log(`  - ${outputPath} (${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB)`);
+
+

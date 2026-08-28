@@ -51,15 +51,57 @@ class DeckEngine {
     }
 
     setupStageScale() {
+        this.aspectRatio = localStorage.getItem('deck_aspect_ratio') || '16:9';
+        this.applyAspectRatio(this.aspectRatio, false);
+
         const scale = () => {
             if (!this.stage) return;
-            const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
-            const x = (window.innerWidth - 1920 * factor) / 2;
-            const y = (window.innerHeight - 1080 * factor) / 2;
+            const targetW = this.aspectRatio === '4:3' ? 1440 : 1920;
+            const targetH = 1080;
+            const factor = Math.min(window.innerWidth / targetW, window.innerHeight / targetH);
+            const x = (window.innerWidth - targetW * factor) / 2;
+            const y = (window.innerHeight - targetH * factor) / 2;
             this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
         };
+        this.scaleStage = scale;
         scale();
         window.addEventListener('resize', scale);
+    }
+
+    toggleAspectRatio() {
+        const nextRatio = this.aspectRatio === '16:9' ? '4:3' : '16:9';
+        this.applyAspectRatio(nextRatio, true);
+    }
+
+    applyAspectRatio(ratio, showToast = true) {
+        this.aspectRatio = ratio;
+        document.documentElement.setAttribute('data-aspect', ratio);
+        localStorage.setItem('deck_aspect_ratio', ratio);
+        if (this.scaleStage) this.scaleStage();
+
+        // Update Aspect Button in HUD if present
+        const btn = document.getElementById('toolAspectBtn');
+        if (btn) {
+            const label = btn.querySelector('.tool-label');
+            if (label) label.textContent = ratio;
+            btn.title = `Aspect Ratio: ${ratio} (Shift+A)`;
+        }
+
+        if (showToast) {
+            this.showToastNotification(`📐 Aspect Ratio: ${ratio} Mode`);
+        }
+    }
+
+    showToastNotification(text) {
+        const indicator = document.getElementById('fontIndicator');
+        if (indicator) {
+            indicator.textContent = text;
+            indicator.classList.add('show');
+            clearTimeout(this.fontToastTimer);
+            this.fontToastTimer = setTimeout(() => {
+                indicator.classList.remove('show');
+            }, 1400);
+        }
     }
 
     setupKeyboardNav() {
@@ -182,6 +224,9 @@ class DeckEngine {
     checkAnswers(container) {
         if (!container) container = document.querySelector('.slide.active');
         if (typeof container === 'string') container = document.getElementById(container);
+        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
+            container = container.closest('.question-pane') || container.closest('.slide') || container.closest('.notebook') || container;
+        }
         if (!container) return;
 
         // Check blank inputs
@@ -217,6 +262,9 @@ class DeckEngine {
     revealKeys(container) {
         if (!container) container = document.querySelector('.slide.active');
         if (typeof container === 'string') container = document.getElementById(container);
+        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
+            container = container.closest('.question-pane') || container.closest('.slide') || container.closest('.notebook') || container;
+        }
         if (!container) return;
 
         container.querySelectorAll('.blank-input').forEach(input => {
@@ -247,6 +295,9 @@ class DeckEngine {
     resetTask(container) {
         if (!container) container = document.querySelector('.slide.active');
         if (typeof container === 'string') container = document.getElementById(container);
+        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
+            container = container.closest('.question-pane') || container.closest('.slide') || container.closest('.notebook') || container;
+        }
         if (!container) return;
 
         container.querySelectorAll('.blank-input, .select-input').forEach(input => {
@@ -368,6 +419,27 @@ class DeckEngine {
 
 // Global auto-instantiation on window
 window.DeckEngine = DeckEngine;
+
+// Universal Global Helper Functions for all presentation decks
+window.checkAnswers = (id) => (window.deckEngine ? window.deckEngine.checkAnswers(id) : null);
+window.revealAnswers = window.revealKeys = (id) => (window.deckEngine ? window.deckEngine.revealAnswers(id) : null);
+window.resetAnswers = window.resetTask = (id) => (window.deckEngine ? window.deckEngine.resetAnswers(id) : null);
+window.checkBlanks = (id) => (window.deckEngine ? window.deckEngine.checkBlanks(id) : null);
+window.revealBlanks = (id) => (window.deckEngine ? window.deckEngine.revealBlanks(id) : null);
+window.resetBlanks = (id) => (window.deckEngine ? window.deckEngine.resetBlanks(id) : null);
+window.checkSelects = (id) => (window.deckEngine ? window.deckEngine.checkSelects(id) : null);
+window.revealSelects = (id) => (window.deckEngine ? window.deckEngine.revealSelects(id) : null);
+window.resetSelects = (id) => (window.deckEngine ? window.deckEngine.resetSelects(id) : null);
+window.toggleOptCard = (card) => (window.deckEngine ? window.deckEngine.toggleOptCard(card) : null);
+window.checkMultiOpts = (id) => (window.deckEngine ? window.deckEngine.checkMultiOpts(id) : null);
+window.revealMultiOpts = (id) => (window.deckEngine ? window.deckEngine.revealMultiOpts(id) : null);
+window.resetMultiOpts = (id) => (window.deckEngine ? window.deckEngine.resetMultiOpts(id) : null);
+window.toggleExplanations = (id) => (window.deckEngine ? window.deckEngine.toggleExplanations(id) : null);
+window.toggleSynonymExplanation = (q, ev) => (window.deckEngine ? window.deckEngine.toggleSynonymExplanation(q, ev) : null);
+window.switchHighLineTab = (tab) => (window.deckEngine ? window.deckEngine.switchHighLineTab(tab) : null);
+window.jumpToSlide = (idx) => (window.deckEngine ? window.deckEngine.jumpToSlide(idx) : null);
+window.jumpToSkill = (skill) => (window.deckEngine ? window.deckEngine.jumpToSkill(skill) : null);
+
 window.addEventListener('DOMContentLoaded', () => {
     if (!window.deckEngine) {
         window.deckEngine = new DeckEngine();
