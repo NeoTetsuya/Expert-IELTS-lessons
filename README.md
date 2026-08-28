@@ -28,7 +28,9 @@ Interactive, animation-rich, 16:9 HTML slide presentations designed for IELTS Ac
 │   ├── module-05.html             # Module 5: The World Around Us
 │   ├── module-06.html             # Module 6: Communication
 │   ├── module-07.html             # Module 7: City Life & Public Spaces
-│   └── module-08.html             # Module 8: Activity — Sport & Work and Play
+│   ├── module-08.html             # Module 8: Activity — Sport & Work and Play
+│   ├── module-09.html             # Module 9: Media — The News & Technology
+│   └── module-10.html             # Module 10: Communicating — Being Understood & Understanding Others
 ├── expert 6/                      # Expert IELTS Level 6 Course Modules
 └── expert 7.5/                    # Expert IELTS Level 7.5 Course Modules
 ```
