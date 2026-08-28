@@ -163,6 +163,80 @@ window.addEventListener('DOMContentLoaded', () => {
     DeckComponents.init();
 });
 
+// Universal Global Helper Functions for Exercise Buttons
+window.checkAnswers = function(btnOrContainerId) {
+    let container = null;
+    if (typeof btnOrContainerId === 'string') {
+        container = document.getElementById(btnOrContainerId);
+    } else if (btnOrContainerId instanceof Element) {
+        container = btnOrContainerId.closest('.page-content') || btnOrContainerId.closest('.slide') || document.querySelector('.slide.active');
+    } else {
+        container = document.querySelector('.slide.active');
+    }
+    if (window.deckEngine) {
+        window.deckEngine.checkAnswers(container);
+    } else if (container) {
+        container.querySelectorAll('.blank-input, .select-input').forEach(input => {
+            const ans = (input.dataset.ans || '').toLowerCase().trim();
+            const val = (input.value || '').toLowerCase().trim();
+            if (ans && val) {
+                const acceptable = ans.split('|').map(a => a.trim());
+                if (acceptable.includes(val)) {
+                    input.classList.add('correct');
+                    input.classList.remove('wrong', 'incorrect');
+                } else {
+                    input.classList.add('wrong');
+                    input.classList.remove('correct');
+                }
+            }
+        });
+        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+    }
+};
+
+window.revealAnswers = window.revealKeys = function(btnOrContainerId) {
+    let container = null;
+    if (typeof btnOrContainerId === 'string') {
+        container = document.getElementById(btnOrContainerId);
+    } else if (btnOrContainerId instanceof Element) {
+        container = btnOrContainerId.closest('.page-content') || btnOrContainerId.closest('.slide') || document.querySelector('.slide.active');
+    } else {
+        container = document.querySelector('.slide.active');
+    }
+    if (window.deckEngine) {
+        window.deckEngine.revealKeys(container);
+    } else if (container) {
+        container.querySelectorAll('.blank-input, .select-input').forEach(input => {
+            if (input.dataset.ans) {
+                input.value = input.dataset.ans.split('|')[0];
+                input.classList.add('correct');
+                input.classList.remove('wrong', 'incorrect');
+            }
+        });
+        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+    }
+};
+
+window.resetAnswers = window.resetTask = function(btnOrContainerId) {
+    let container = null;
+    if (typeof btnOrContainerId === 'string') {
+        container = document.getElementById(btnOrContainerId);
+    } else if (btnOrContainerId instanceof Element) {
+        container = btnOrContainerId.closest('.page-content') || btnOrContainerId.closest('.slide') || document.querySelector('.slide.active');
+    } else {
+        container = document.querySelector('.slide.active');
+    }
+    if (window.deckEngine) {
+        window.deckEngine.resetTask(container);
+    } else if (container) {
+        container.querySelectorAll('.blank-input, .select-input').forEach(input => {
+            input.value = '';
+            input.classList.remove('correct', 'wrong', 'incorrect');
+        });
+        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
+    }
+};
+
 // Hook tab update into showSlide
 if (window.DeckEngine) {
     const originalShowSlide = DeckEngine.prototype.showSlide;
@@ -1642,9 +1716,17 @@ class ReadingHighlighter {
         if (!evId && qKey) {
             evId = `ev-${qKey}`;
         }
-        const evTarget = document.getElementById(evId);
+
+        let evTarget = evId ? document.getElementById(evId) : null;
+        if (!evTarget && qKey) {
+            evTarget = document.querySelector(`mark.evidence[data-q="${qKey}"], mark.evidence#ev-${qKey}, mark.evidence[data-ev="${evId}"]`);
+        }
+        if (!evTarget && evId) {
+            evTarget = document.querySelector(`mark.evidence[data-ev="${evId}"]`);
+        }
+
         const synSpans = document.querySelectorAll(`[data-q="${qKey}"]`);
-        const isCurrentlyActive = evTarget && evTarget.classList.contains('highlighted') && this.activeEvidenceId === evId;
+        const isCurrentlyActive = evTarget && evTarget.classList.contains('highlighted') && this.activeEvidenceId === (evId || qKey);
 
         // Clear all previous single-question highlights
         document.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
@@ -1653,7 +1735,7 @@ class ReadingHighlighter {
         if (!isCurrentlyActive && evTarget) {
             evTarget.classList.add('highlighted', 'glow-pulse');
             synSpans.forEach(s => s.classList.add('active-syn'));
-            this.activeEvidenceId = evId;
+            this.activeEvidenceId = evId || qKey;
 
             // Smooth scroll into view inside the scrollable reading pane
             const readingPane = evTarget.closest('.reading-pane');
@@ -1680,6 +1762,10 @@ class ReadingHighlighter {
         }
     }
 
+    showEvidence(qKey, evId) {
+        this.focusEvidence(qKey, evId);
+    }
+
     /**
      * Auto-detects the slide element containing the specified container
      */
@@ -1692,19 +1778,33 @@ class ReadingHighlighter {
     }
 
     /**
-     * Auto-binds click handlers on synonym buttons
+     * Auto-binds click handlers on synonym buttons and question cards
      */
     bindSynonymClicks() {
         document.addEventListener('click', (e) => {
             const btn = e.target.closest('.syn-btn');
-            if (!btn) return;
+            if (btn) {
+                const dataQ = btn.dataset.q;
+                const dataEv = btn.dataset.ev;
+                if (dataQ) {
+                    e.preventDefault();
+                    this.focusEvidence(dataQ, dataEv);
+                    const qCard = btn.closest('.q-card');
+                    if (qCard) {
+                        const exp = qCard.querySelector('.item-explanation');
+                        if (exp) exp.classList.toggle('show');
+                    }
+                }
+                return;
+            }
 
-            // If the button has an inline onclick, let DeckEngine/ReadingHighlighter handle it
-            const dataQ = btn.dataset.q;
-            const dataEv = btn.dataset.ev;
-            if (dataQ) {
-                e.preventDefault();
-                this.focusEvidence(dataQ, dataEv);
+            // Clicking question card text focuses evidence
+            const qCard = e.target.closest('.q-card[data-q]');
+            if (qCard && !e.target.closest('select, input, button')) {
+                const dataQ = qCard.dataset.q;
+                if (dataQ) {
+                    this.focusEvidence(dataQ);
+                }
             }
         });
     }
@@ -1733,45 +1833,45 @@ class ReadingHighlighter {
 
             // Hook checkBlanks & checkSelects
             const origCheckBlanks = DeckEngine.prototype.checkBlanks;
-            DeckEngine.prototype.checkBlanks = function(containerId) {
+            DeckEngine.prototype.checkBlanks = function (containerId) {
                 origCheckBlanks.call(this, containerId);
                 self.highlightAll(containerId);
             };
 
             const origCheckSelects = DeckEngine.prototype.checkSelects;
-            DeckEngine.prototype.checkSelects = function(containerId) {
+            DeckEngine.prototype.checkSelects = function (containerId) {
                 origCheckSelects.call(this, containerId);
                 self.highlightAll(containerId);
             };
 
             // Hook revealBlanks & revealSelects
             const origRevealBlanks = DeckEngine.prototype.revealBlanks;
-            DeckEngine.prototype.revealBlanks = function(containerId) {
+            DeckEngine.prototype.revealBlanks = function (containerId) {
                 origRevealBlanks.call(this, containerId);
                 self.highlightAll(containerId);
             };
 
             const origRevealSelects = DeckEngine.prototype.revealSelects;
-            DeckEngine.prototype.revealSelects = function(containerId) {
+            DeckEngine.prototype.revealSelects = function (containerId) {
                 origRevealSelects.call(this, containerId);
                 self.highlightAll(containerId);
             };
 
             // Hook resetBlanks & resetSelects
             const origResetBlanks = DeckEngine.prototype.resetBlanks;
-            DeckEngine.prototype.resetBlanks = function(containerId) {
+            DeckEngine.prototype.resetBlanks = function (containerId) {
                 origResetBlanks.call(this, containerId);
                 self.clearAll(containerId);
             };
 
             const origResetSelects = DeckEngine.prototype.resetSelects;
-            DeckEngine.prototype.resetSelects = function(containerId) {
+            DeckEngine.prototype.resetSelects = function (containerId) {
                 origResetSelects.call(this, containerId);
                 self.clearAll(containerId);
             };
 
             // Hook toggleSynonymExplanation
-            DeckEngine.prototype.toggleSynonymExplanation = function(qKey, evId) {
+            DeckEngine.prototype.toggleSynonymExplanation = function (qKey, evId) {
                 self.focusEvidence(qKey, evId);
             };
         }
@@ -1779,7 +1879,7 @@ class ReadingHighlighter {
 }
 
 // Inject glow and preview CSS styles for evidence marks
-(function() {
+(function () {
     const style = document.createElement('style');
     style.id = 'readingHighlighterStyles';
     style.textContent = `

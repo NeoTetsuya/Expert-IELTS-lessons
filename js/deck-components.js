@@ -156,6 +156,80 @@ window.addEventListener('DOMContentLoaded', () => {
     DeckComponents.init();
 });
 
+// Universal Global Helper Functions for Exercise Buttons
+window.checkAnswers = function(btnOrContainerId) {
+    let container = null;
+    if (typeof btnOrContainerId === 'string') {
+        container = document.getElementById(btnOrContainerId);
+    } else if (btnOrContainerId instanceof Element) {
+        container = btnOrContainerId.closest('.page-content') || btnOrContainerId.closest('.slide') || document.querySelector('.slide.active');
+    } else {
+        container = document.querySelector('.slide.active');
+    }
+    if (window.deckEngine) {
+        window.deckEngine.checkAnswers(container);
+    } else if (container) {
+        container.querySelectorAll('.blank-input, .select-input').forEach(input => {
+            const ans = (input.dataset.ans || '').toLowerCase().trim();
+            const val = (input.value || '').toLowerCase().trim();
+            if (ans && val) {
+                const acceptable = ans.split('|').map(a => a.trim());
+                if (acceptable.includes(val)) {
+                    input.classList.add('correct');
+                    input.classList.remove('wrong', 'incorrect');
+                } else {
+                    input.classList.add('wrong');
+                    input.classList.remove('correct');
+                }
+            }
+        });
+        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+    }
+};
+
+window.revealAnswers = window.revealKeys = function(btnOrContainerId) {
+    let container = null;
+    if (typeof btnOrContainerId === 'string') {
+        container = document.getElementById(btnOrContainerId);
+    } else if (btnOrContainerId instanceof Element) {
+        container = btnOrContainerId.closest('.page-content') || btnOrContainerId.closest('.slide') || document.querySelector('.slide.active');
+    } else {
+        container = document.querySelector('.slide.active');
+    }
+    if (window.deckEngine) {
+        window.deckEngine.revealKeys(container);
+    } else if (container) {
+        container.querySelectorAll('.blank-input, .select-input').forEach(input => {
+            if (input.dataset.ans) {
+                input.value = input.dataset.ans.split('|')[0];
+                input.classList.add('correct');
+                input.classList.remove('wrong', 'incorrect');
+            }
+        });
+        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+    }
+};
+
+window.resetAnswers = window.resetTask = function(btnOrContainerId) {
+    let container = null;
+    if (typeof btnOrContainerId === 'string') {
+        container = document.getElementById(btnOrContainerId);
+    } else if (btnOrContainerId instanceof Element) {
+        container = btnOrContainerId.closest('.page-content') || btnOrContainerId.closest('.slide') || document.querySelector('.slide.active');
+    } else {
+        container = document.querySelector('.slide.active');
+    }
+    if (window.deckEngine) {
+        window.deckEngine.resetTask(container);
+    } else if (container) {
+        container.querySelectorAll('.blank-input, .select-input').forEach(input => {
+            input.value = '';
+            input.classList.remove('correct', 'wrong', 'incorrect');
+        });
+        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
+    }
+};
+
 // Hook tab update into showSlide
 if (window.DeckEngine) {
     const originalShowSlide = DeckEngine.prototype.showSlide;
