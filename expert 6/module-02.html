@@ -117,6 +117,7 @@
         }
 
         .item-explanation {
+            display: none !important;
             font-size: 17px !important;
             line-height: 1.6 !important;
             background: rgba(37, 99, 235, 0.08);
@@ -124,6 +125,12 @@
             padding: 10px 14px;
             border-radius: 0 6px 6px 0;
             margin-top: 8px;
+        }
+
+        .item-explanation.show,
+        .q-card.revealed .item-explanation {
+            display: block !important;
+            animation: fadeIn 0.3s ease;
         }
     </style>
 </head>
