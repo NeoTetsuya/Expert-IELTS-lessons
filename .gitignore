@@ -1,0 +1,18 @@
+# Operating System & Editor Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.vscode/
+.idea/
+
+# Local Backups and Temp Files
+backup_files/
+*.bak
+*.backup
+*.tmp
+temp/
+scratch/
+
+# Node / Scratch scripts
+node_modules/
