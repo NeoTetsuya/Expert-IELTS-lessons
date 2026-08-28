@@ -303,6 +303,69 @@ html, body {
 .col::-webkit-scrollbar { width: 6px; }
 .col::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
+/* Universal Cards & Content Boxes */
+.card {
+    background: var(--card-bg, #ffffff);
+    border-radius: var(--card-radius, 12px);
+    padding: 22px 26px;
+    border: var(--card-border, 1.5px solid var(--border-soft, rgba(0,0,0,0.08)));
+    margin-bottom: 14px;
+    box-shadow: var(--card-shadow, 0 2px 8px rgba(0,0,0,0.04));
+    font-size: calc(19px * var(--font-scale, 1));
+    line-height: 1.7;
+    color: var(--text-body, #1e293b);
+}
+
+.card-sm {
+    background: var(--card-bg, #ffffff);
+    border-radius: 8px;
+    padding: 14px 18px;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    margin-bottom: 10px;
+    font-size: calc(17.5px * var(--font-scale, 1));
+    line-height: 1.6;
+}
+
+/* Discussion Question Cards */
+.discuss-card {
+    background: var(--card-bg, #ffffff);
+    border-radius: var(--card-radius, 14px);
+    padding: 20px 24px;
+    border: var(--card-border, 1.5px solid var(--border-soft, rgba(0,0,0,0.08)));
+    margin-bottom: 14px;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 18px !important;
+    box-shadow: var(--card-shadow, 0 4px 12px rgba(0,0,0,0.03));
+}
+
+.discuss-num {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-size: calc(22px * var(--font-scale, 1));
+    font-weight: 800;
+    color: #ffffff !important;
+    flex-shrink: 0 !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+}
+
+.discuss-text {
+    font-size: calc(20px * var(--font-scale, 1));
+    color: var(--text-body, #1e293b);
+    line-height: 1.65;
+    flex: 1 1 auto !important;
+    min-width: 0;
+}
+
 .reading-pane {
     background: #ffffff;
     border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));

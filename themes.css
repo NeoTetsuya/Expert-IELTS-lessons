@@ -89,6 +89,7 @@
 }
 
 [data-theme="bold-signal"] .card,
+[data-theme="bold-signal"] .discuss-card,
 [data-theme="bold-signal"] .rule-card,
 [data-theme="bold-signal"] .q-card,
 [data-theme="bold-signal"] .model-breakdown-card {
@@ -252,6 +253,7 @@
 }
 
 [data-theme="botanical"] .card,
+[data-theme="botanical"] .discuss-card,
 [data-theme="botanical"] .rule-card,
 [data-theme="botanical"] .q-card,
 [data-theme="botanical"] .model-breakdown-card {
@@ -314,6 +316,7 @@
 }
 
 [data-theme="voltage"] .card,
+[data-theme="voltage"] .discuss-card,
 [data-theme="voltage"] .rule-card,
 [data-theme="voltage"] .q-card,
 [data-theme="voltage"] .model-breakdown-card {
@@ -376,6 +379,16 @@
     font-weight: 900;
     letter-spacing: 0.5px;
     color: #1c1917;
+}
+
+[data-theme="vintage"] .card,
+[data-theme="vintage"] .discuss-card,
+[data-theme="vintage"] .rule-card,
+[data-theme="vintage"] .q-card,
+[data-theme="vintage"] .model-breakdown-card {
+    background: #faf6ef !important;
+    border: 1px solid #d6cebe !important;
+    box-shadow: 0 4px 12px rgba(41, 37, 36, 0.06) !important;
 }
 
 [data-theme="vintage"] .card,
