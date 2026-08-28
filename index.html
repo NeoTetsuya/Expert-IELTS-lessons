@@ -722,7 +722,7 @@
         </article>
 
         <!-- Module 10 -->
-        <article class="module-card" style="--module-accent: #eab308;">
+        <article class="module-card" data-level="expert-5" style="--module-accent: #eab308;">
             <div>
                 <div class="card-header-row">
                     <span class="mod-badge">Module 10</span>
@@ -753,6 +753,41 @@
             <div class="card-actions">
                 <a href="expert 5/module-10.html" class="btn-launch" target="_blank">🚀 Launch Presentation</a>
                 <button class="btn-preview" onclick="openModal('expert 5/module-10.html', 'Module 10: Communicating & Cultures')" title="Preview in Modal">👁️</button>
+            </div>
+        </article>
+
+        <!-- Expert 6 Module 02 -->
+        <article class="module-card" data-level="expert-6" style="--module-accent: #e11d48;">
+            <div>
+                <div class="card-header-row">
+                    <span class="mod-badge" style="background:linear-gradient(135deg, #e11d48, #be123c);">Expert 6 • Mod 02</span>
+                    <span class="slide-count-tag">15 Slides</span>
+                </div>
+                <h3 class="mod-title">Feelings (Band 6.0 – 7.0)</h3>
+                <p class="mod-desc">Extraordinary experiences vs social cost, enclothed cognition, relative clauses, and appearance essays.</p>
+
+                <div class="parts-container">
+                    <div class="part-item">
+                        <span class="part-tag" style="background:#e11d48;">2a</span>
+                        <span><strong>Feeling Good:</strong> Epic Moments, Y/N/NG &amp; Relative Clause Omission</span>
+                    </div>
+                    <div class="part-item">
+                        <span class="part-tag" style="background:#7c3aed;">2b</span>
+                        <span><strong>Looking Good:</strong> Enclothed Cognition, Adjectives &amp; Gender Trends</span>
+                    </div>
+                </div>
+
+                <div class="skills-row">
+                    <span class="skill-chip" style="color:#60a5fa;">📖 Split Reading</span>
+                    <span class="skill-chip" style="color:#fb923c;">📐 Relative Clauses</span>
+                    <span class="skill-chip" style="color:#34d399;">🗂️ Lexical Intensifiers</span>
+                    <span class="skill-chip" style="color:#c084fc;">✍️ Task 2 Models</span>
+                </div>
+            </div>
+
+            <div class="card-actions">
+                <a href="expert 6/module-02.html" class="btn-launch" target="_blank">🚀 Launch Presentation</a>
+                <button class="btn-preview" onclick="openModal('expert 6/module-02.html', 'Expert 6 Module 02: Feelings')" title="Preview in Modal">👁️</button>
             </div>
         </article>
 
@@ -812,8 +847,18 @@
             document.querySelectorAll('.level-tab').forEach(t => t.classList.remove('active'));
             event.target.classList.add('active');
 
-            if (level !== 'expert-5') {
-                alert(`The presentation decks for ${event.target.textContent} are currently being authored according to the universal guidelines!`);
+            const cards = document.querySelectorAll('.module-card');
+            cards.forEach(card => {
+                const cardLevel = card.dataset.level || 'expert-5';
+                if (level === 'all' || cardLevel === level) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (level === 'expert-7.5') {
+                alert(`Expert 7.5 presentations are scheduled for authoring next!`);
             }
         }
 
