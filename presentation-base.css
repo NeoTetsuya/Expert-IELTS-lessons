@@ -4,6 +4,70 @@
    interactive controls, typography, and responsive font scaling.
    ========================================================================== */
 
+/* 1. Google Fonts Suite (Playfair, DM Sans, Space Grotesk, Plus Jakarta, Manrope, Outfit, Cormorant, Syne, Bodoni) */
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant+Garamond:ital,wght@0,400..700;1,400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400..700&family=Manrope:wght@400..800&family=Outfit:wght@300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Space+Grotesk:wght@400..700&family=Syne:wght@500..800&display=swap');
+
+:root {
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --bg-page: #f8fafc;
+    --text-dark: #0f172a;
+    --text-muted: #64748b;
+    --stage-bg: #0b1120;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #1e293b 0%, #0b1120 70%);
+}
+
+/* Theme 1: Academic Editorial (Default) */
+[data-theme="academic"], :root:not([data-theme]) {
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+}
+
+/* Theme 2: Bold Signal (High Impact, Punchy Modern) */
+[data-theme="bold-signal"] {
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --col-grammar: #f43f5e;
+    --stage-bg: #111827;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #881337 0%, #111827 70%);
+}
+
+/* Theme 3: Electric Studio (Tech, Minimalist, Precision) */
+[data-theme="electric"] {
+    --font-display: 'Manrope', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+    --col-reading: #2563eb;
+    --stage-bg: #030712;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #1e1b4b 0%, #030712 70%);
+}
+
+/* Theme 4: Dark Botanical (Refined, Premium Serif, Organic) */
+[data-theme="botanical"] {
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --col-vocab: #059669;
+    --stage-bg: #061a14;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #064e3b 0%, #061a14 70%);
+}
+
+/* Theme 5: Creative Voltage (Dynamic, Avant-garde) */
+[data-theme="voltage"] {
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --col-writing: #9333ea;
+    --stage-bg: #090514;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #3b0764 0%, #090514 70%);
+}
+
+/* Theme 6: Vintage Editorial (Literary Masterclass, Classic) */
+[data-theme="vintage"] {
+    --font-display: 'Bodoni Moda', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --stage-bg: #1c1917;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #44403c 0%, #1c1917 70%);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -1006,3 +1070,129 @@ span.syn-pair-3.active-syn {
     from { opacity: 0; transform: translateY(3px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Theme Picker Modal & Toast Alert */
+.theme-picker-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.25s ease;
+}
+
+.theme-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(8px);
+}
+
+.theme-modal-dialog {
+    position: relative;
+    z-index: 1;
+    background: #0f172a;
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+    width: 90%;
+    max-width: 920px;
+    padding: 32px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+.theme-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 16px;
+}
+
+.theme-modal-header h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: #f8fafc;
+    margin-bottom: 4px;
+}
+
+.theme-modal-header p {
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+.theme-modal-close {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 28px;
+    cursor: pointer;
+}
+.theme-modal-close:hover { color: #fff; }
+
+.theme-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.theme-card-option {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-card-option:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #38bdf8;
+    transform: translateY(-3px);
+}
+
+.theme-card-option.active {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.12);
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+}
+
+.theme-preview-banner {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.theme-icon { font-size: 22px; }
+
+.theme-card-body { padding: 14px; }
+.theme-card-title { font-weight: 800; font-size: 15px; color: #f8fafc; margin-bottom: 2px; }
+.theme-card-fonts { font-family: var(--font-mono); font-size: 11.5px; color: #38bdf8; margin-bottom: 6px; }
+.theme-card-desc { font-size: 12.5px; color: #94a3b8; line-height: 1.4; }
+
+.theme-toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: rgba(15, 23, 42, 0.94);
+    border: 1.5px solid #38bdf8;
+    color: #f8fafc;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.3);
+    z-index: 1000000;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-toast.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+

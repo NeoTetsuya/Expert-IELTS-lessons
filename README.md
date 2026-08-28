@@ -47,6 +47,7 @@ Interactive, animation-rich, 16:9 HTML slide presentations designed for IELTS Ac
 | <kbd>T</kbd> | Classroom Timer | Countdown timer (1m, 2m, 5m, 10m) with alert chime |
 | <kbd>L</kbd> | Laser Pointer | Glowing red pointer cursor |
 | <kbd>P</kbd> / <kbd>C</kbd> | Pen Annotation / Clear | Draw live sketches or underline text on screen |
+| <kbd>Shift+T</kbd> | Theme Switcher | Cycle live between 6 aesthetic typography & atmosphere presets |
 | <kbd>B</kbd> / <kbd>W</kbd> | Blackout / Whiteout | Pitch black or white screen to focus attention |
 | <kbd>S</kbd> | Spotlight Dimmer | Highlights circular area around the mouse cursor |
 | <kbd>+</kbd> / <kbd>−</kbd> / <kbd>0</kbd> | Font Zoom | Zoom text between 75% and 150% |
