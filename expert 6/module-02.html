@@ -12,7 +12,7 @@
         .two-col, .split-view-container {
             display: grid !important;
             grid-template-columns: 1fr 1fr !important;
-            gap: 24px !important;
+            gap: 26px !important;
             width: 100% !important;
             flex: 1 !important;
             min-height: 0 !important;
@@ -20,9 +20,9 @@
         }
 
         .reading-pane {
-            font-size: 16px;
-            line-height: 1.7;
-            padding: 22px 26px;
+            font-size: 21px !important;
+            line-height: 1.85 !important;
+            padding: 24px 30px !important;
             background: #ffffff;
             border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
             border-radius: 14px;
@@ -30,32 +30,48 @@
             min-width: 0 !important;
             height: 100% !important;
             box-sizing: border-box;
+            color: #1e293b;
         }
         .reading-pane p {
-            margin-bottom: 14px;
+            font-size: 21px !important;
+            line-height: 1.85 !important;
+            margin-bottom: 16px !important;
+        }
+
+        .para-tag {
+            font-size: 16px !important;
+            font-weight: 800 !important;
+            padding: 4px 10px !important;
+            border-radius: 5px !important;
+            vertical-align: baseline !important;
         }
 
         .question-pane {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             overflow-y: auto;
             min-width: 0 !important;
             height: 100% !important;
-            padding-right: 4px;
+            padding-right: 6px;
             box-sizing: border-box;
+        }
+
+        .question-pane p {
+            font-size: 18.5px !important;
+            line-height: 1.5 !important;
         }
 
         .q-card {
             background: #ffffff;
             border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
             border-radius: 10px;
-            padding: 12px 16px;
+            padding: 16px 20px !important;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            font-size: 15.5px;
-            line-height: 1.55;
+            gap: 10px;
+            font-size: 20px !important;
+            line-height: 1.55 !important;
             color: var(--text-body, #1e293b);
             box-sizing: border-box;
             width: 100% !important;
@@ -66,44 +82,48 @@
             display: flex !important;
             justify-content: space-between !important;
             align-items: flex-start !important;
-            gap: 12px !important;
+            gap: 14px !important;
             width: 100% !important;
         }
 
         .q-card > div > span {
             flex: 1 1 auto !important;
             min-width: 0 !important;
+            font-size: 20px !important;
+            line-height: 1.5 !important;
             overflow-wrap: break-word !important;
             word-break: normal !important;
         }
 
         .q-card select.select-input {
             flex: 0 0 auto !important;
-            min-width: 110px !important;
-            max-width: 150px !important;
+            min-width: 130px !important;
+            max-width: 180px !important;
+            font-size: 18px !important;
+            padding: 8px 14px !important;
+            font-weight: 700 !important;
         }
 
         .select-input, .blank-input {
-            font-size: 15px !important;
-            padding: 6px 12px !important;
+            font-size: 18px !important;
+            padding: 8px 14px !important;
             font-weight: 700 !important;
-            flex-shrink: 0;
         }
 
         .btn-action {
-            font-size: 14.5px !important;
-            padding: 9px 18px !important;
+            font-size: 16px !important;
+            padding: 10px 22px !important;
             font-weight: 700 !important;
         }
 
         .item-explanation {
-            font-size: 14px;
-            line-height: 1.5;
+            font-size: 17px !important;
+            line-height: 1.6 !important;
             background: rgba(37, 99, 235, 0.08);
-            border-left: 3px solid var(--col-reading);
-            padding: 8px 12px;
+            border-left: 4px solid var(--col-reading);
+            padding: 10px 14px;
             border-radius: 0 6px 6px 0;
-            margin-top: 6px;
+            margin-top: 8px;
         }
     </style>
 </head>

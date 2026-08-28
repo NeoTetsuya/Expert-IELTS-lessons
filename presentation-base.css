@@ -307,26 +307,29 @@ html, body {
     background: #ffffff;
     border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
     border-radius: 14px;
-    padding: 24px 28px;
+    padding: 24px 30px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    line-height: 1.8;
-    font-size: calc(17px * var(--font-scale, 1));
+    gap: 18px;
+    line-height: 1.85;
+    font-size: calc(21px * var(--font-scale, 1));
     color: var(--text-body, #1e293b);
     scroll-behavior: smooth;
     min-width: 0;
     width: 100%;
 }
-.reading-pane::-webkit-scrollbar { width: 7px; }
-.reading-pane::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-.reading-pane::-webkit-scrollbar { width: 7px; }
+.reading-pane p {
+    font-size: calc(21px * var(--font-scale, 1));
+    line-height: 1.85;
+    margin-bottom: 14px;
+}
+.reading-pane::-webkit-scrollbar { width: 8px; }
 .reading-pane::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
 
 .reading-pane h3 {
     font-family: var(--font-display, 'Space Grotesk', sans-serif);
-    font-size: calc(28px * var(--font-scale, 1));
+    font-size: calc(24px * var(--font-scale, 1));
     font-weight: 700;
     color: var(--text-dark, #0f172a);
     border-bottom: 3px solid var(--col-reading, #dc2626);
@@ -339,34 +342,39 @@ html, body {
     background: rgba(220, 38, 38, 0.1);
     color: var(--col-reading, #dc2626);
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: calc(13px * var(--font-scale, 1));
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 4px;
+    font-size: calc(16px * var(--font-scale, 1));
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 5px;
     margin-right: 8px;
-    vertical-align: middle;
+    vertical-align: baseline;
 }
 
 .question-pane {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
     overflow-y: auto;
     padding-right: 6px;
 }
-.question-pane::-webkit-scrollbar { width: 7px; }
+.question-pane::-webkit-scrollbar { width: 8px; }
 .question-pane::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+.question-pane p {
+    font-size: calc(18.5px * var(--font-scale, 1));
+    line-height: 1.5;
+}
 
 .q-card {
     background: #ffffff;
     border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
     border-radius: 10px;
-    padding: 12px 16px;
+    padding: 16px 20px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    font-size: calc(16px * var(--font-scale, 1));
-    line-height: 1.5;
+    gap: 10px;
+    font-size: calc(20px * var(--font-scale, 1));
+    line-height: 1.55;
     color: var(--text-body, #1e293b);
     box-sizing: border-box;
     width: 100%;
@@ -377,31 +385,35 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 12px;
+    gap: 14px;
     width: 100%;
 }
 
 .q-card > div > span {
     flex: 1 1 auto;
     min-width: 0;
+    font-size: calc(20px * var(--font-scale, 1));
+    line-height: 1.5;
     overflow-wrap: break-word;
     word-break: normal;
 }
 
 .q-card select.select-input {
     flex: 0 0 auto;
-    min-width: 110px;
-    max-width: 150px;
+    min-width: 130px;
+    max-width: 180px;
+    font-size: calc(18px * var(--font-scale, 1));
+    padding: 8px 14px;
 }
 
 /* Form Inputs & Selects */
 .blank-input {
     background: #fdfbf7;
     border: 1.5px solid #94a3b8;
-    padding: 4px 12px;
+    padding: 6px 14px;
     border-radius: 6px;
     font-family: var(--font-body, 'DM Sans', sans-serif);
-    font-size: calc(18px * var(--font-scale, 1));
+    font-size: calc(19px * var(--font-scale, 1));
     font-weight: 600;
     color: var(--text-dark, #0f172a);
     outline: none;
@@ -428,10 +440,16 @@ html, body {
 .select-input {
     background: #fdfbf7;
     border: 1.5px solid #94a3b8;
-    padding: 5px 12px;
+    padding: 7px 14px;
     border-radius: 6px;
     font-family: var(--font-body, 'DM Sans', sans-serif);
-    font-size: calc(16px * var(--font-scale, 1));
+    font-size: calc(18px * var(--font-scale, 1));
+    font-weight: 700;
+    color: var(--text-dark, #0f172a);
+    outline: none;
+    cursor: pointer;
+    margin: 0 4px;
+}
     font-weight: 600;
     color: var(--text-dark, #0f172a);
     outline: none;
