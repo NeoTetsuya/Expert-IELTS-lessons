@@ -35,17 +35,17 @@ class PresentationTools {
 
             <!-- Expanded Tools Bar -->
             <div class="tools-bar" id="toolsBar">
-                <button class="tool-btn" id="toolAspectBtn" title="Switch Aspect Ratio (16:9 / 4:3) (Shift+A)" onclick="window.deckEngine && window.deckEngine.toggleAspectRatio()">📐 <span class="tool-label">16:9</span></button>
-                <button class="tool-btn" id="toolThemeBtn" title="Theme Aesthetics (Shift+T)" onclick="window.deckThemeEngine && window.deckThemeEngine.openModal()">🎨 <span class="tool-label">Theme</span></button>
-                <button class="tool-btn" id="toolHighlightBtn" title="Teacher Highlighter (H)" onclick="window.teacherHighlighter && window.teacherHighlighter.toggle()">🖍️ <span class="tool-label">Highlight</span></button>
-                <button class="tool-btn" id="toolTimerBtn" title="Classroom Timer (T)" onclick="presentationTools.toggleTimerModal()">⏱️ <span class="tool-label">Timer</span></button>
-                <button class="tool-btn" id="toolStudentBtn" title="Random Student Selector (R)" onclick="window.studentPicker && window.studentPicker.toggle()">🎲 <span class="tool-label">Picker</span></button>
-                <button class="tool-btn" id="toolNotesBtn" title="Teacher Presenter Notes (N)" onclick="window.presenterNotesEngine && window.presenterNotesEngine.toggle()">📝 <span class="tool-label">Notes</span></button>
-                <button class="tool-btn" id="toolLaserBtn" title="Laser Pointer (L)" onclick="presentationTools.toggleLaser()">🔴 <span class="tool-label">Laser</span></button>
-                <button class="tool-btn" id="toolPenBtn" title="Draw / Annotate (P)" onclick="presentationTools.togglePen()">✏️ <span class="tool-label">Draw</span></button>
-                <button class="tool-btn" id="toolFullscreenBtn" title="Fullscreen (F)" onclick="presentationTools.toggleFullscreen()">⛶</button>
-                <button class="tool-btn" id="toolHelpBtn" title="Keyboard Shortcuts (?)" onclick="presentationTools.toggleHelpModal()">❓</button>
-                <button class="tool-btn tool-collapse-btn" id="toolCollapseBtn" title="Hide Toolkit (Shift+X)" onclick="presentationTools.toggleHUD()">✕</button>
+                <button class="tool-btn" id="toolAspectBtn" title="Switch Aspect Ratio (16:9 / 4:3) (Shift+A)" onclick="window.deckEngine && window.deckEngine.toggleAspectRatio()"><span class="tool-icon">📐</span><span class="tool-label">16:9</span></button>
+                <button class="tool-btn" id="toolThemeBtn" title="Theme Aesthetics (Shift+T)" onclick="window.deckThemeEngine && window.deckThemeEngine.openModal()"><span class="tool-icon">🎨</span><span class="tool-label">Theme</span></button>
+                <button class="tool-btn" id="toolHighlightBtn" title="Teacher Highlighter (H)" onclick="window.teacherHighlighter && window.teacherHighlighter.toggle()"><span class="tool-icon">🖍️</span><span class="tool-label">Highlight</span></button>
+                <button class="tool-btn" id="toolTimerBtn" title="Classroom Timer (T)" onclick="presentationTools.toggleTimerModal()"><span class="tool-icon">⏱️</span><span class="tool-label">Timer</span></button>
+                <button class="tool-btn" id="toolStudentBtn" title="Random Student Selector (R)" onclick="window.studentPicker && window.studentPicker.toggle()"><span class="tool-icon">🎲</span><span class="tool-label">Picker</span></button>
+                <button class="tool-btn" id="toolNotesBtn" title="Teacher Presenter Notes (N)" onclick="window.presenterNotesEngine && window.presenterNotesEngine.toggle()"><span class="tool-icon">📝</span><span class="tool-label">Notes</span></button>
+                <button class="tool-btn" id="toolLaserBtn" title="Laser Pointer (L)" onclick="presentationTools.toggleLaser()"><span class="tool-icon">🔴</span><span class="tool-label">Laser</span></button>
+                <button class="tool-btn" id="toolPenBtn" title="Draw / Annotate (P)" onclick="presentationTools.togglePen()"><span class="tool-icon">✏️</span><span class="tool-label">Draw</span></button>
+                <button class="tool-btn" id="toolFullscreenBtn" title="Fullscreen (F)" onclick="presentationTools.toggleFullscreen()"><span class="tool-icon">⛶</span><span class="tool-label">Fullscreen</span></button>
+                <button class="tool-btn" id="toolHelpBtn" title="Keyboard Shortcuts (?)" onclick="presentationTools.toggleHelpModal()"><span class="tool-icon">❓</span><span class="tool-label">Help</span></button>
+                <button class="tool-btn tool-collapse-btn" id="toolCollapseBtn" title="Hide Toolkit (Shift+X)" onclick="presentationTools.toggleHUD()"><span class="tool-icon">✕</span><span class="tool-label">Hide</span></button>
             </div>
 
             <!-- Highlighter Palette -->
@@ -105,10 +105,10 @@ class PresentationTools {
             .tools-bar {
                 display: flex;
                 align-items: center;
-                gap: 6px;
+                gap: 4px;
                 background: rgba(15, 23, 42, 0.88);
-                backdrop-filter: blur(10px);
-                padding: 5px 8px;
+                backdrop-filter: blur(12px);
+                padding: 4px 6px;
                 border-radius: 30px;
                 border: 1px solid rgba(255, 255, 255, 0.16);
                 box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
@@ -118,33 +118,56 @@ class PresentationTools {
                 background: transparent;
                 border: none;
                 color: #e2e8f0;
-                padding: 5px 10px;
+                padding: 6px 8px;
                 border-radius: 20px;
-                font-size: 13px;
+                font-size: 13.5px;
                 font-weight: 600;
                 cursor: pointer;
-                display: flex;
+                display: inline-flex;
                 align-items: center;
-                gap: 4px;
-                transition: all 0.2s ease;
+                justify-content: center;
+                transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+                white-space: nowrap;
+                position: relative;
             }
             .tool-btn:hover {
                 background: rgba(255, 255, 255, 0.18);
                 color: #ffffff;
+                padding: 6px 12px;
             }
             .tool-btn.active {
                 background: #3b82f6;
                 color: #ffffff;
                 box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+                padding: 6px 12px;
+            }
+            .tool-icon {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
             }
             .tool-label {
+                max-width: 0;
+                opacity: 0;
+                overflow: hidden;
+                white-space: nowrap;
                 font-size: 12px;
+                font-weight: 600;
+                transition: max-width 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease, margin 0.18s ease;
+                margin-left: 0;
+                pointer-events: none;
+            }
+            .tool-btn:hover .tool-label,
+            .tool-btn.active .tool-label {
+                max-width: 85px;
+                opacity: 1;
+                margin-left: 5px;
             }
             .tool-collapse-btn {
-                padding: 5px 8px;
+                padding: 6px 8px;
                 font-size: 12px;
                 color: #94a3b8;
-                margin-left: 2px;
             }
             .tool-collapse-btn:hover {
                 color: #ef4444;

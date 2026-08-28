@@ -26,8 +26,11 @@ class EssayAnalyzer {
 
         if (isHighlighted) {
             essayElement.classList.remove('highlighted-connectors');
-            essayElement.querySelectorAll('.connector-mark').forEach(span => {
-                span.outerHTML = span.textContent;
+            essayElement.querySelectorAll('p, .essay-p, li').forEach(p => {
+                if (p.dataset.origHtml) {
+                    p.innerHTML = p.dataset.origHtml;
+                    delete p.dataset.origHtml;
+                }
             });
         } else {
             essayElement.classList.add('highlighted-connectors');
@@ -38,8 +41,27 @@ class EssayAnalyzer {
     highlightConnectorsInElement(element) {
         const paragraphs = element.querySelectorAll('p, .essay-p, li');
         paragraphs.forEach(p => {
-            p.innerHTML = p.innerHTML.replace(this.linkingWordsRegex, (match) => {
-                return `<mark class="connector-mark">${match}</mark>`;
+            if (!p.dataset.origHtml) {
+                p.dataset.origHtml = p.innerHTML;
+            }
+
+            const walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            let node;
+            while ((node = walker.nextNode())) {
+                if (node.parentElement && !node.parentElement.classList.contains('connector-mark')) {
+                    textNodes.push(node);
+                }
+            }
+
+            textNodes.forEach(textNode => {
+                const text = textNode.nodeValue;
+                if (this.linkingWordsRegex.test(text)) {
+                    this.linkingWordsRegex.lastIndex = 0;
+                    const span = document.createElement('span');
+                    span.innerHTML = text.replace(this.linkingWordsRegex, '<mark class="connector-mark">$1</mark>');
+                    textNode.parentNode.replaceChild(span, textNode);
+                }
             });
         });
     }
@@ -70,12 +92,13 @@ class EssayAnalyzer {
     style.id = 'essayAnalyzerStyles';
     style.textContent = `
         mark.connector-mark {
-            background: #fed7aa !important;
-            color: #9a3412 !important;
-            font-weight: 700;
+            background: rgba(254, 240, 138, 0.88) !important;
+            color: inherit !important;
+            border-bottom: 2px solid #ca8a04;
             padding: 1px 4px;
-            border-radius: 4px;
-            border-bottom: 2px solid #ea580c;
+            border-radius: 3px;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
         }
     `;
     document.head.appendChild(style);

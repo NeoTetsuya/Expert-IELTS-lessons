@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Module 4: Well-being — IELTS Preparation</title>
     <meta name="description"
-        content="Complete IELTS preparation materials for Module 4: Well-being (4a Health & 4b Nature), covering reading matching sentence endings, past simple vs past continuous, medical & environmental vocabulary, topic sentences, and Task 2 opinion essay models.">
+        content="Complete IELTS preparation materials for Module 4: Well-being (4a Health & 4b Nature), covering reading matching sentence endings, past simple vs past continuous, medical & environmental vocabulary, topic sentences, IELTS Speaking, and Task 2 opinion essay models.">
 
     <!-- Google Fonts: Botanical Vitality & Wellness -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +51,34 @@
             --stage-bg: #091712;
             --slide-bg: #091712;
         }
+
+        .bio-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-soft);
+        }
+        .bio-table th {
+            background: rgba(22, 163, 74, 0.12);
+            color: var(--col-vocab);
+            padding: 10px 14px;
+            font-weight: 700;
+            font-size: 15.5px;
+            text-align: left;
+            border-bottom: 2px solid rgba(22, 163, 74, 0.3);
+        }
+        .bio-table td {
+            padding: 10px 14px;
+            font-size: 15px;
+            border-bottom: 1px solid var(--border-soft);
+            color: var(--text-dark);
+        }
+        .bio-table tr:last-child td {
+            border-bottom: none;
+        }
     </style>
 </head>
 
@@ -64,8 +92,6 @@
             <section class="slide title-slide active visible" id="slide-1" data-skill="title">
                 <div class="title-slide-inner">
                     <div class="title-notebook">
-                        <!-- Clickable Vertical Tabs on the Right Edge -->
-
                         <div class="title-left">
                             <div class="title-module-badge reveal">Module 04</div>
                             <h1 class="title-main reveal">Well-being<br><span class="title-amp">&amp;</span> Living</h1>
@@ -80,11 +106,11 @@
                                         <div style="font-size:14.5px; color:var(--text-muted);">Monitoring Fitness, Past Simple vs Continuous, Healthcare Vocabulary &amp; Task 2 Paraphrasing</div>
                                     </div>
                                 </div>
-                                <div style="display:flex; align-items:center; gap:14px; cursor:pointer;" onclick="deckEngine.jumpToSlide(10)">
-                                    <div style="width:12px; height:12px; border-radius:50%; background:var(--col-grammar);"></div>
+                                <div style="display:flex; align-items:center; gap:14px; cursor:pointer;" onclick="deckEngine.jumpToSlide(11)">
+                                    <div style="width:12px; height:12px; border-radius:50%; background:var(--col-vocab);"></div>
                                     <div>
                                         <div style="font-size:21px; font-weight:700; color:var(--text-dark);">4b · Nature</div>
-                                        <div style="font-size:14.5px; color:var(--text-muted);">Remedies from Nature, Ecosystems &amp; Wildlife, Topic Sentences, Animal Testing Model Essay</div>
+                                        <div style="font-size:14.5px; color:var(--text-muted);">Remedies from Nature, Ecosystems &amp; Wildlife, Topic Sentences, Animal Testing Model Essay &amp; Speaking</div>
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +144,6 @@
             <section class="slide" id="slide-2" data-skill="read">
                 <div class="section-slide">
                     <div class="section-inner">
-
                         <div class="section-left" style="background: linear-gradient(135deg, #115e59, #0d9488);">
                             <div class="section-module-tag reveal">Module 4a</div>
                             <div class="section-number reveal">4a</div>
@@ -136,11 +161,11 @@
                                     <div class="section-topic-dot" style="background:var(--col-grammar)"></div>
                                     <span>2. Language Development: Past Simple vs. Past Continuous (Usage, Matrix &amp; Cloze)</span>
                                 </div>
-                                <div class="section-topic" onclick="deckEngine.jumpToSlide(7)">
+                                <div class="section-topic" onclick="deckEngine.jumpToSlide(8)">
                                     <div class="section-topic-dot" style="background:var(--col-vocab)"></div>
                                     <span>3. Vocabulary: Illnesses, Symptoms, Injuries, Medical Treatments &amp; Collocations</span>
                                 </div>
-                                <div class="section-topic" onclick="deckEngine.jumpToSlide(9)">
+                                <div class="section-topic" onclick="deckEngine.jumpToSlide(10)">
                                     <div class="section-topic-dot" style="background:var(--col-writing)"></div>
                                     <span>4. Writing Task 2: Paraphrasing Prompts &amp; Model Gym Introduction Breakdown</span>
                                 </div>
@@ -151,7 +176,7 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 3: 4A READING CONTEXT & STRATEGY
+                 SLIDE 3: 4A READING CONTEXT & UNDERSTAND CONNECTIONS
                  ============================================================== -->
             <section class="slide" id="slide-3" data-skill="read">
                 <div class="slide-inner">
@@ -161,37 +186,63 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-reading);">4a Reading Context</span>
-                                <span class="slide-number">03 / 16</span>
+                                <span class="slide-number">03 / 18</span>
                             </div>
-                            <h2 class="slide-title">Before You Read: Technology in Health &amp; Strategy</h2>
-                            <p class="slide-subtitle">Examining the psychological impact of digital fitness trackers and sentence connection strategies.</p>
+                            <h2 class="slide-title">Before You Read: Technology &amp; Logical Connections</h2>
+                            <p class="slide-subtitle">Identify logical relationships between clauses: conditions, contrasts, causes, time events, and purposes.</p>
 
                             <div class="two-col">
                                 <div class="col">
-                                    <h3 style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">💬 Warm-Up Discussion</h3>
+                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">💬 Warm-Up Discussion &amp; Strategy</h3>
                                     <div class="discuss-card reveal">
                                         <div class="discuss-num" style="background: var(--col-reading);">1</div>
-                                        <div class="discuss-text">Do fitness trackers and health apps truly motivate people to adopt healthier habits, or do they encourage artificial targets?</div>
+                                        <div class="discuss-text">What apps and wearable devices exist to help people improve their health or fitness? (e.g. smartwatches, calorie counters, pedometers).</div>
                                     </div>
                                     <div class="discuss-card reveal">
                                         <div class="discuss-num" style="background: var(--col-reading);">2</div>
-                                        <div class="discuss-text">What happens when people rely so heavily on devices that they stop listening to their own bodies?</div>
+                                        <div class="discuss-text">What is one advantage (motivation, habit tracking) and one disadvantage (obsession with artificial metrics, ignoring physical signals)?</div>
+                                    </div>
+                                    <div class="card reveal" style="border-left:4px solid var(--col-reading); margin-top:10px; background:#f0fdfa;">
+                                        <strong>🎯 Matching Strategy:</strong> Analyze transition words in the stem (e.g., <em>if</em> = condition, <em>because/as</em> = reason, <em>so that</em> = purpose, <em>while/whereas</em> = contrast).
                                     </div>
                                 </div>
 
-                                <div class="col">
-                                    <h3 style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">🎯 Strategy: Matching Sentence Endings</h3>
-                                    <div class="card reveal" style="border-left:4px solid var(--col-reading);">
-                                        <strong>1. Understand Logical Connections:</strong>
-                                        <ul style="padding-left:18px; margin-top:6px; font-size:16.5px; line-height:1.65; display:flex; flex-direction:column; gap:4px;">
-                                            <li>Identify the grammatical and logical relationship in the stem (e.g. <em>because</em> = cause/reason, <em>when</em> = condition/time).</li>
-                                            <li>Look for synonyms and paraphrased equivalents in the passage.</li>
-                                            <li>Check that the combined sentence is grammatically correct and matches the text's factual meaning.</li>
-                                        </ul>
+                                <div class="col" id="connectionsEx">
+                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Exercise 1: Match Sentence to Logical Relationship</h3>
+                                    <div class="q-card">
+                                        <div><strong>1.</strong> I’ll do my project on a fitness app <em>if my supervisor agrees</em>.
+                                            <select class="select-input" data-ans="F" style="width:170px;"><option value="">Select...</option><option value="A">A. cause and effect</option><option value="B">B. problem and solution</option><option value="C">C. contrasting ideas</option><option value="D">D. time-related events</option><option value="E">E. action and purpose</option><option value="F">F. plan and condition</option></select>
+                                        </div>
                                     </div>
-                                    <div class="card reveal" style="background:#f8fafc;">
-                                        <strong>Key Insight from "Monitoring Fitness":</strong><br>
-                                        Fitness apps track limited data (steps/heart rate) but cannot track overall lifestyle balance (e.g. exercising for 2 hours, then eating fast food on the sofa).
+                                    <div class="q-card">
+                                        <div><strong>2.</strong> Some want the forest conserved <em>while others want it farmed</em>.
+                                            <select class="select-input" data-ans="C" style="width:170px;"><option value="">Select...</option><option value="A">A. cause and effect</option><option value="B">B. problem and solution</option><option value="C">C. contrasting ideas</option><option value="D">D. time-related events</option><option value="E">E. action and purpose</option><option value="F">F. plan and condition</option></select>
+                                        </div>
+                                    </div>
+                                    <div class="q-card">
+                                        <div><strong>3.</strong> Jack went to Australia <em>because he wanted to attend a conference</em>.
+                                            <select class="select-input" data-ans="E" style="width:170px;"><option value="">Select...</option><option value="A">A. cause and effect</option><option value="B">B. problem and solution</option><option value="C">C. contrasting ideas</option><option value="D">D. time-related events</option><option value="E">E. action and purpose</option><option value="F">F. plan and condition</option></select>
+                                        </div>
+                                    </div>
+                                    <div class="q-card">
+                                        <div><strong>4.</strong> <em>Due to cutting down rainforests</em>, we lost medicinal plants.
+                                            <select class="select-input" data-ans="A" style="width:170px;"><option value="">Select...</option><option value="A">A. cause and effect</option><option value="B">B. problem and solution</option><option value="C">C. contrasting ideas</option><option value="D">D. time-related events</option><option value="E">E. action and purpose</option><option value="F">F. plan and condition</option></select>
+                                        </div>
+                                    </div>
+                                    <div class="q-card">
+                                        <div><strong>5.</strong> He published articles <em>soon after he started teaching</em>.
+                                            <select class="select-input" data-ans="D" style="width:170px;"><option value="">Select...</option><option value="A">A. cause and effect</option><option value="B">B. problem and solution</option><option value="C">C. contrasting ideas</option><option value="D">D. time-related events</option><option value="E">E. action and purpose</option><option value="F">F. plan and condition</option></select>
+                                        </div>
+                                    </div>
+                                    <div class="q-card">
+                                        <div><strong>6.</strong> International action is essential <em>if we want to slow climate change</em>.
+                                            <select class="select-input" data-ans="B" style="width:170px;"><option value="">Select...</option><option value="A">A. cause and effect</option><option value="B">B. problem and solution</option><option value="C">C. contrasting ideas</option><option value="D">D. time-related events</option><option value="E">E. action and purpose</option><option value="F">F. plan and condition</option></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="action-row">
+                                        <button class="btn-action btn-primary" onclick="deckEngine.checkSelects('connectionsEx')">Check Answers</button>
+                                        <button class="btn-action" onclick="deckEngine.revealSelects('connectionsEx')">Reveal All</button>
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +262,7 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-reading);">4a Reading Passage</span>
-                                <span class="slide-number">04 / 16</span>
+                                <span class="slide-number">04 / 18</span>
                             </div>
                             <h2 class="slide-title">"Monitoring Fitness" &amp; Matching Sentence Endings</h2>
                             <p class="slide-subtitle">Read the passage about digital health tracking and match sentence beginnings 1–5 to endings A–G.</p>
@@ -249,7 +300,7 @@
                                     
                                     <p><span class="para-tag">[Paragraph E]</span> 
                                         <mark class="evidence" id="ev-4a-4">
-                                            What sports psychologists <span class="syn-pair-1" data-q="4a-4">recommend users of electronic fitness devices to do</span> is 
+                                            <span class="syn-pair-1" data-q="4a-4">What sports psychologists recommend</span> users of electronic fitness devices to do is 
                                             <span class="syn-pair-2" data-q="4a-4">raise their awareness of how their body looks</span>.
                                         </mark>
                                         No one actually needs an app to tell them that they have had a bad night’s sleep; the bags under their eyes can do that just as well. And if people want to lose weight, they may find it more effective to take a regular look at themselves in the mirror rather than try to motivate themselves to diet by checking everything they eat against a calorie counting app. Unfortunately, tracking the calories is also ineffective because the body metabolises calories from sugar differently than those from fat.
@@ -257,7 +308,7 @@
                                     
                                     <p><span class="para-tag">[Paragraph F]</span> 
                                         <mark class="evidence" id="ev-4a-5">
-                                            Keeping a fitness diary is also <span class="syn-pair-1" data-q="4a-5">useful</span>. In it, people should record what they ate and what their mood was two or three hours later. Tracking calories in a food app after eating a large tub of ice cream is not going to solve anyone’s problems. Reflecting on how bad they felt after eating it will. Keeping a fitness diary 
+                                            <span class="syn-pair-1" data-q="4a-5">Keeping a fitness diary is also useful</span>. In it, people should record what they ate and what their mood was two or three hours later. Tracking calories in a food app after eating a large tub of ice cream is not going to solve anyone’s problems. Reflecting on how bad they felt after eating it will. Keeping a fitness diary 
                                             <span class="syn-pair-2" data-q="4a-5">helps people to eat well and exercise</span> not for the sake of meeting the app’s artificial targets, but because exercise makes everyone feel, look and be better.
                                         </mark>
                                     </p>
@@ -265,88 +316,121 @@
 
                                 <!-- Right Question Pane -->
                                 <div class="question-pane" id="matchTask4a">
-                                    <div style="font-size:17px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">Match Beginnings 1–5 to Correct Endings:</div>
-
-                                    <div class="q-card">
-                                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                                            <span><strong>1.</strong> Sports scientists <span class="syn-pair-1" data-q="4a-1">approve of the decision</span> to use fitness apps because...</span>
-                                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('4a-1', 'ev-4a-1')">💡 Synonyms</button>
+                                    <div class="q-card" data-q="4a-1">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <strong>1. Sports scientists approve of the decision to use fitness apps because...</strong>
+                                            <button class="syn-btn" data-ev="ev-4a-1">💡 Evidence</button>
                                         </div>
-                                        <div>
-                                            <select class="select-input" data-ans="D"><option value="">--</option><option value="A">A: they give an unrealistic impression</option><option value="B">B: people become attached to devices</option><option value="C">C: pay more attention to appearance</option><option value="D">D: user wishes to develop better practices</option><option value="E">E: someone wants to lose weight</option><option value="F">F: they lose motivation to be active</option><option value="G">G: won't help achieve goals</option></select>
-                                        </div>
+                                        <select class="select-input" data-ans="D" style="width:100%;">
+                                            <option value="">Choose ending A–G...</option>
+                                            <option value="A">A. they can give an unrealistic impression of a person’s level of fitness</option>
+                                            <option value="B">B. people become very attached to their electronic devices</option>
+                                            <option value="C">C. anyone interested in becoming fitter should pay more attention to their appearance</option>
+                                            <option value="D">D. it shows that the user wishes to develop better fitness practices</option>
+                                            <option value="E">E. someone wants to lose weight</option>
+                                            <option value="F">F. they lose the motivation to be active</option>
+                                            <option value="G">G. they won’t help you achieve your goals</option>
+                                        </select>
                                         <div class="item-explanation">
                                             <div class="syn-key-box">
-                                                <span class="syn-tag green">Green Match:</span> <em>"approve of decision to use"</em> ↔ <em>"recognise that deciding to use... is good"</em>
+                                                <span class="syn-tag green">Green Match:</span> <em>"approve of the decision"</em> ↔ <em>"recognise that deciding to use... is good"</em>
                                             </div>
                                             <div class="syn-key-box">
-                                                <span class="syn-tag purple">Purple Match:</span> <em>"wishes to develop better practices" (D)</em> ↔ <em>"keen to improve their habits"</em>
+                                                <span class="syn-tag purple">Purple Match:</span> <em>"wishes to develop better fitness practices" (D)</em> ↔ <em>"curious about health and keen to improve their habits"</em>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="q-card">
-                                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                                            <span><strong>2.</strong> People have reported that when their fitness apps <span class="syn-pair-1" data-q="4a-2">stop working</span>...</span>
-                                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('4a-2', 'ev-4a-2')">💡 Synonyms</button>
+                                    <div class="q-card" data-q="4a-2">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <strong>2. People have reported that when their fitness apps stop working...</strong>
+                                            <button class="syn-btn" data-ev="ev-4a-2">💡 Evidence</button>
                                         </div>
-                                        <div>
-                                            <select class="select-input" data-ans="F"><option value="">--</option><option value="A">A: they give an unrealistic impression</option><option value="B">B: people become attached to devices</option><option value="C">C: pay more attention to appearance</option><option value="D">D: user wishes to develop better practices</option><option value="E">E: someone wants to lose weight</option><option value="F">F: they lose motivation to be active</option><option value="G">G: won't help achieve goals</option></select>
-                                        </div>
+                                        <select class="select-input" data-ans="F" style="width:100%;">
+                                            <option value="">Choose ending A–G...</option>
+                                            <option value="A">A. they can give an unrealistic impression of a person’s level of fitness</option>
+                                            <option value="B">B. people become very attached to their electronic devices</option>
+                                            <option value="C">C. anyone interested in becoming fitter should pay more attention to their appearance</option>
+                                            <option value="D">D. it shows that the user wishes to develop better fitness practices</option>
+                                            <option value="E">E. someone wants to lose weight</option>
+                                            <option value="F">F. they lose the motivation to be active</option>
+                                            <option value="G">G. they won’t help you achieve your goals</option>
+                                        </select>
                                         <div class="item-explanation">
                                             <div class="syn-key-box">
                                                 <span class="syn-tag green">Green Match:</span> <em>"stop working"</em> ↔ <em>"when their devices broke"</em>
                                             </div>
                                             <div class="syn-key-box">
-                                                <span class="syn-tag purple">Purple Match:</span> <em>"lose motivation to be active" (F)</em> ↔ <em>"there seemed little point in heading out for that walk"</em>
+                                                <span class="syn-tag purple">Purple Match:</span> <em>"lose the motivation to be active" (F)</em> ↔ <em>"there seemed little point in heading out for that walk"</em>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="q-card">
-                                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                                            <span><strong>3.</strong> It is not sensible to rely too much on fitness apps because...</span>
-                                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('4a-3', 'ev-4a-3')">💡 Synonyms</button>
+                                    <div class="q-card" data-q="4a-3">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <strong>3. It is not sensible to rely too much on fitness apps because...</strong>
+                                            <button class="syn-btn" data-ev="ev-4a-3">💡 Evidence</button>
                                         </div>
-                                        <div>
-                                            <select class="select-input" data-ans="A"><option value="">--</option><option value="A">A: they give an unrealistic impression</option><option value="B">B: people become attached to devices</option><option value="C">C: pay more attention to appearance</option><option value="D">D: user wishes to develop better practices</option><option value="E">E: someone wants to lose weight</option><option value="F">F: they lose motivation to be active</option><option value="G">G: won't help achieve goals</option></select>
-                                        </div>
+                                        <select class="select-input" data-ans="A" style="width:100%;">
+                                            <option value="">Choose ending A–G...</option>
+                                            <option value="A">A. they can give an unrealistic impression of a person’s level of fitness</option>
+                                            <option value="B">B. people become very attached to their electronic devices</option>
+                                            <option value="C">C. anyone interested in becoming fitter should pay more attention to their appearance</option>
+                                            <option value="D">D. it shows that the user wishes to develop better fitness practices</option>
+                                            <option value="E">E. someone wants to lose weight</option>
+                                            <option value="F">F. they lose the motivation to be active</option>
+                                            <option value="G">G. they won’t help you achieve your goals</option>
+                                        </select>
                                         <div class="item-explanation">
                                             <div class="syn-key-box">
-                                                <span class="syn-tag green">Green Match:</span> <em>"measure limited pieces of info"</em> ↔ <em>"unrealistic impression of fitness" (A)</em>
+                                                <span class="syn-tag green">Green Match:</span> <em>"measure very limited pieces"</em> ↔ <em>"does not give a clear overall picture"</em>
                                             </div>
                                             <div class="syn-key-box">
-                                                <span class="syn-tag purple">Purple Match:</span> <em>"does not give a clear overall picture"</em> ↔ <em>"deceive themselves about how healthy"</em>
+                                                <span class="syn-tag purple">Purple Match:</span> <em>"unrealistic impression of fitness" (A)</em> ↔ <em>"help people to deceive themselves about how healthy their lifestyle is"</em>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="q-card">
-                                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                                            <span><strong>4.</strong> Sports psychologists <span class="syn-pair-1" data-q="4a-4">recommend</span> that...</span>
-                                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('4a-4', 'ev-4a-4')">💡 Synonyms</button>
+                                    <div class="q-card" data-q="4a-4">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <strong>4. Sports psychologists recommend that...</strong>
+                                            <button class="syn-btn" data-ev="ev-4a-4">💡 Evidence</button>
                                         </div>
-                                        <div>
-                                            <select class="select-input" data-ans="C"><option value="">--</option><option value="A">A: they give an unrealistic impression</option><option value="B">B: people become attached to devices</option><option value="C">C: pay more attention to appearance</option><option value="D">D: user wishes to develop better practices</option><option value="E">E: someone wants to lose weight</option><option value="F">F: they lose motivation to be active</option><option value="G">G: won't help achieve goals</option></select>
-                                        </div>
+                                        <select class="select-input" data-ans="C" style="width:100%;">
+                                            <option value="">Choose ending A–G...</option>
+                                            <option value="A">A. they can give an unrealistic impression of a person’s level of fitness</option>
+                                            <option value="B">B. people become very attached to their electronic devices</option>
+                                            <option value="C">C. anyone interested in becoming fitter should pay more attention to their appearance</option>
+                                            <option value="D">D. it shows that the user wishes to develop better fitness practices</option>
+                                            <option value="E">E. someone wants to lose weight</option>
+                                            <option value="F">F. they lose the motivation to be active</option>
+                                            <option value="G">G. they won’t help you achieve your goals</option>
+                                        </select>
                                         <div class="item-explanation">
                                             <div class="syn-key-box">
-                                                <span class="syn-tag green">Green Match:</span> <em>"recommend users to do"</em> ↔ <em>"should pay more attention"</em>
+                                                <span class="syn-tag green">Green Match:</span> <em>"sports psychologists recommend"</em> ↔ <em>"What sports psychologists recommend users... to do"</em>
                                             </div>
                                             <div class="syn-key-box">
-                                                <span class="syn-tag purple">Purple Match:</span> <em>"raise awareness of body looks"</em> ↔ <em>"pay more attention to appearance" (C)</em>
+                                                <span class="syn-tag purple">Purple Match:</span> <em>"pay more attention to appearance" (C)</em> ↔ <em>"raise awareness of how their body looks / look at mirror"</em>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="q-card">
-                                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                                            <span><strong>5.</strong> Writing a fitness diary is <span class="syn-pair-1" data-q="4a-5">helpful</span> when...</span>
-                                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('4a-5', 'ev-4a-5')">💡 Synonyms</button>
+                                    <div class="q-card" data-q="4a-5">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <strong>5. Writing a fitness diary is helpful when...</strong>
+                                            <button class="syn-btn" data-ev="ev-4a-5">💡 Evidence</button>
                                         </div>
-                                        <div>
-                                            <select class="select-input" data-ans="E"><option value="">--</option><option value="A">A: they give an unrealistic impression</option><option value="B">B: people become attached to devices</option><option value="C">C: pay more attention to appearance</option><option value="D">D: user wishes to develop better practices</option><option value="E">E: someone wants to lose weight</option><option value="F">F: they lose motivation to be active</option><option value="G">G: won't help achieve goals</option></select>
-                                        </div>
+                                        <select class="select-input" data-ans="E" style="width:100%;">
+                                            <option value="">Choose ending A–G...</option>
+                                            <option value="A">A. they can give an unrealistic impression of a person’s level of fitness</option>
+                                            <option value="B">B. people become very attached to their electronic devices</option>
+                                            <option value="C">C. anyone interested in becoming fitter should pay more attention to their appearance</option>
+                                            <option value="D">D. it shows that the user wishes to develop better fitness practices</option>
+                                            <option value="E">E. someone wants to lose weight</option>
+                                            <option value="F">F. they lose the motivation to be active</option>
+                                            <option value="G">G. they won’t help you achieve your goals</option>
+                                        </select>
                                         <div class="item-explanation">
                                             <div class="syn-key-box">
                                                 <span class="syn-tag green">Green Match:</span> <em>"helpful"</em> ↔ <em>"useful"</em>
@@ -380,7 +464,7 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-grammar);">4a Grammar Masterclass</span>
-                                <span class="slide-number">05 / 16</span>
+                                <span class="slide-number">05 / 18</span>
                             </div>
                             <h2 class="slide-title">Past Simple vs. Past Continuous</h2>
                             <p class="slide-subtitle">Mastering completed actions, progressive background scenes, and interrupted actions.</p>
@@ -437,7 +521,7 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 6: 4A GRAMMAR PRACTICE (EX A & EX B FULL FORM ACCURACY)
+                 SLIDE 6: 4A GRAMMAR PRACTICE (EXERCISES 2A & 3A)
                  ============================================================== -->
             <section class="slide" id="slide-6" data-skill="grammar">
                 <div class="slide-inner">
@@ -447,63 +531,67 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-grammar);">4a Grammar Practice</span>
-                                <span class="slide-number">Ex A &amp; B</span>
+                                <span class="slide-number">06 / 18</span>
                             </div>
                             <h2 class="slide-title">Tense Selection &amp; Sentence Construction</h2>
                             <p class="slide-subtitle">Complete sentences using correct past simple or past continuous forms based on grammatical triggers.</p>
 
                             <div class="two-col">
-                                <div class="col" id="grammarTenseExA">
-                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:8px;">Exercise A: Past Simple Precision</h3>
+                                <!-- Col 1: Past Simple Form -->
+                                <div class="col" id="grammarEx2a">
+                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Part 1: Past Simple Sentences (Ex 2a)</h3>
+                                    
                                     <div class="card-sm">
-                                        1. Last year the number of people buying apps <input type="text" class="blank-input" data-ans="increased" style="width:120px;" placeholder="increase"> dramatically.
+                                        1. Last year app downloads <input type="text" class="blank-input" data-ans="increased" style="width:110px;" placeholder="increase"> dramatically.
                                     </div>
                                     <div class="card-sm">
-                                        2. Two years ago I went on a diet but I <input type="text" class="blank-input" data-ans="didn't lose|did not lose" style="width:125px;" placeholder="not lose"> much weight.
+                                        2. Two years ago I <input type="text" class="blank-input" data-ans="went" style="width:80px;" placeholder="go"> on a diet but I <input type="text" class="blank-input" data-ans="didn't lose|did not lose" style="width:110px;" placeholder="not lose"> much weight.
                                     </div>
                                     <div class="card-sm">
-                                        3. They <input type="text" class="blank-input" data-ans="did" style="width:65px;" placeholder="do"> various tests last month and the results <input type="text" class="blank-input" data-ans="were" style="width:75px;" placeholder="be"> very surprising.
+                                        3. They <input type="text" class="blank-input" data-ans="did" style="width:75px;" placeholder="do"> tests last month and results <input type="text" class="blank-input" data-ans="were" style="width:80px;" placeholder="be"> surprising.
                                     </div>
                                     <div class="card-sm">
-                                        4. During the winter, the students <input type="text" class="blank-input" data-ans="weren't|were not" style="width:90px;" placeholder="not be"> very healthy and <input type="text" class="blank-input" data-ans="didn't do|did not do" style="width:105px;" placeholder="not do"> any exercise.
+                                        4. In winter, students <input type="text" class="blank-input" data-ans="weren't|were not" style="width:90px;" placeholder="not be"> healthy and <input type="text" class="blank-input" data-ans="didn't do|did not do" style="width:105px;" placeholder="not do"> exercise.
                                     </div>
                                     <div class="card-sm">
-                                        5. 150 years ago people <input type="text" class="blank-input" data-ans="didn't have|did not have" style="width:125px;" placeholder="not have"> modern medicines, so more people <input type="text" class="blank-input" data-ans="died" style="width:75px;" placeholder="die"> of minor illnesses.
+                                        5. 150 years ago people <input type="text" class="blank-input" data-ans="didn't have|did not have" style="width:115px;" placeholder="not have"> modern medicines, so more <input type="text" class="blank-input" data-ans="died" style="width:75px;" placeholder="die">.
                                     </div>
                                     <div class="card-sm">
-                                        6. In the past, people generally <input type="text" class="blank-input" data-ans="had" style="width:65px;" placeholder="have"> more active jobs than they do now, so they <input type="text" class="blank-input" data-ans="were" style="width:75px;" placeholder="be"> fitter.
+                                        6. In the past, people <input type="text" class="blank-input" data-ans="had" style="width:75px;" placeholder="have"> active jobs, so they <input type="text" class="blank-input" data-ans="were" style="width:80px;" placeholder="be"> fitter.
                                     </div>
+
                                     <div class="action-row">
-                                        <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('grammarTenseExA')">Check Ex A</button>
-                                        <button class="btn-action" onclick="deckEngine.revealBlanks('grammarTenseExA')">Reveal</button>
-                                        <button class="btn-action" onclick="deckEngine.resetBlanks('grammarTenseExA')">Reset</button>
+                                        <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('grammarEx2a')">Check Part 1</button>
+                                        <button class="btn-action" onclick="deckEngine.revealBlanks('grammarEx2a')">Reveal</button>
                                     </div>
                                 </div>
 
-                                <div class="col" id="grammarTenseExB">
-                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:8px;">Exercise B: Past Continuous Forms</h3>
+                                <!-- Col 2: Past Continuous Form -->
+                                <div class="col" id="grammarEx5">
+                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Part 2: Past Continuous Form (Ex 5)</h3>
+                                    
                                     <div class="card-sm">
-                                        1. At 8 o'clock this morning I <input type="text" class="blank-input" data-ans="was working out" style="width:160px;" placeholder="work out"> at the gym.
+                                        1. At 8 o’clock this morning I <input type="text" class="blank-input" data-ans="was working out" style="width:160px;" placeholder="work out"> at the gym.
                                     </div>
                                     <div class="card-sm">
-                                        2. They <input type="text" class="blank-input" data-ans="weren't following|were not following" style="width:180px;" placeholder="not follow"> a very healthy lifestyle at that time.
+                                        2. They <input type="text" class="blank-input" data-ans="weren't following|were not following" style="width:170px;" placeholder="not follow"> a healthy lifestyle at that time.
                                     </div>
                                     <div class="card-sm">
-                                        3. All last year his health <input type="text" class="blank-input" data-ans="was slowly getting" style="width:180px;" placeholder="slowly get"> worse.
+                                        3. All last year his health <input type="text" class="blank-input" data-ans="was slowly getting" style="width:170px;" placeholder="slowly get"> worse.
                                     </div>
                                     <div class="card-sm">
-                                        4. <input type="text" class="blank-input" data-ans="Was she trying" style="width:140px;" placeholder="she / try"> to lose weight before the holiday?
+                                        4. <input type="text" class="blank-input" data-ans="Was she trying" style="width:145px;" placeholder="she / try"> to lose weight before the holiday?
                                     </div>
                                     <div class="card-sm">
-                                        5. I <input type="text" class="blank-input" data-ans="wasn't feeling|was not feeling" style="width:150px;" placeholder="not feel"> well, so I didn't go for a run.
+                                        5. I <input type="text" class="blank-input" data-ans="wasn't feeling|was not feeling" style="width:150px;" placeholder="not feel"> well, so I didn’t go for a run.
                                     </div>
                                     <div class="card-sm">
-                                        6. It <input type="text" class="blank-input" data-ans="was becoming" style="width:145px;" placeholder="become"> more difficult for them to follow a healthy lifestyle.
+                                        6. It <input type="text" class="blank-input" data-ans="was becoming" style="width:140px;" placeholder="become"> more difficult for them to eat well.
                                     </div>
+
                                     <div class="action-row">
-                                        <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('grammarTenseExB')">Check Ex B</button>
-                                        <button class="btn-action" onclick="deckEngine.revealBlanks('grammarTenseExB')">Reveal</button>
-                                        <button class="btn-action" onclick="deckEngine.resetBlanks('grammarTenseExB')">Reset</button>
+                                        <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('grammarEx5')">Check Part 2</button>
+                                        <button class="btn-action" onclick="deckEngine.revealBlanks('grammarEx5')">Reveal</button>
                                     </div>
                                 </div>
                             </div>
@@ -513,7 +601,7 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 7: 4A GRAMMAR EXERCISE C (PAST SIMPLE VS PAST CONTINUOUS)
+                 SLIDE 7: 4A GRAMMAR IN CONTEXT (EXERCISE 6)
                  ============================================================== -->
             <section class="slide" id="slide-7" data-skill="grammar">
                 <div class="slide-inner">
@@ -523,41 +611,68 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-grammar);">4a Grammar In Context</span>
-                                <span class="slide-number">Ex C</span>
+                                <span class="slide-number">07 / 18</span>
                             </div>
                             <h2 class="slide-title">Exercise C: Past Simple vs. Past Continuous</h2>
                             <p class="slide-subtitle">Select the correct verb forms in italics to complete each narrative sentence.</p>
 
-                            <div class="two-col" id="grammarTenseExC">
-                                <div class="col">
-                                    <div class="card-sm">
-                                        1. While I <select class="select-input" data-ans="was growing up"><option value="">--</option><option value="grew up">grew up</option><option value="was growing up">was growing up</option></select>, I <select class="select-input" data-ans="ate"><option value="">--</option><option value="ate">ate</option><option value="was eating">was eating</option></select> a lot of sweets and biscuits.
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; flex:1; overflow-y:auto;" id="grammarEx6">
+                                <div class="q-card">
+                                    <div><strong>1.</strong> While I 
+                                        <select class="select-input" data-ans="was growing up"><option value="">--</option><option value="grew up">grew up</option><option value="was growing up">was growing up</option></select>, 
+                                        I <select class="select-input" data-ans="ate"><option value="">--</option><option value="ate">ate</option><option value="was eating">was eating</option></select> 
+                                        a lot of sweets and biscuits.
                                     </div>
-                                    <div class="card-sm">
-                                        2. Ten years ago I <select class="select-input" data-ans="had"><option value="">--</option><option value="had">had</option><option value="was having">was having</option></select> a healthier diet than I do now.
-                                    </div>
-                                    <div class="card-sm">
-                                        3. When I <select class="select-input" data-ans="was"><option value="">--</option><option value="was">was</option><option value="was being">was being</option></select> younger, I <select class="select-input" data-ans="went"><option value="">--</option><option value="went">went</option><option value="was going">was going</option></select> swimming regularly.
-                                    </div>
+                                    <div class="item-explanation">Background state in progress (<em>was growing up</em>) + habitual past action (<em>ate</em>).</div>
                                 </div>
 
-                                <div class="col">
-                                    <div class="card-sm">
-                                        4. At 10 p.m. last night I <select class="select-input" data-ans="was watching"><option value="">--</option><option value="watched">watched</option><option value="was watching">was watching</option></select> TV and at 11 p.m. I <select class="select-input" data-ans="went"><option value="">--</option><option value="went">went</option><option value="was going">was going</option></select> to bed.
+                                <div class="q-card">
+                                    <div><strong>2.</strong> Ten years ago I 
+                                        <select class="select-input" data-ans="had"><option value="">--</option><option value="had">had</option><option value="was having">was having</option></select> 
+                                        a healthier diet than I do now.
                                     </div>
-                                    <div class="card-sm">
-                                        5. Last year I <select class="select-input" data-ans="did"><option value="">--</option><option value="did">did</option><option value="was doing">was doing</option></select> no exercise and I <select class="select-input" data-ans="ate"><option value="">--</option><option value="ate">ate</option><option value="was eating">was eating</option></select> lots of fast food.
-                                    </div>
-                                    <div class="card-sm">
-                                        6. I <select class="select-input" data-ans="stayed"><option value="">--</option><option value="stayed">stayed</option><option value="was staying">was staying</option></select> at home on Sunday because it <select class="select-input" data-ans="was raining"><option value="">--</option><option value="rained">rained</option><option value="was raining">was raining</option></select>.
-                                    </div>
-
-                                    <div class="action-row">
-                                        <button class="btn-action btn-primary" onclick="deckEngine.checkSelects('grammarTenseExC')">Check Ex C</button>
-                                        <button class="btn-action" onclick="deckEngine.revealSelects('grammarTenseExC')">Reveal Ex C</button>
-                                        <button class="btn-action" onclick="deckEngine.resetSelects('grammarTenseExC')">Reset</button>
-                                    </div>
+                                    <div class="item-explanation">Finished past state with specific time expression (<em>Ten years ago</em>) takes Past Simple.</div>
                                 </div>
+
+                                <div class="q-card">
+                                    <div><strong>3.</strong> When I 
+                                        <select class="select-input" data-ans="was"><option value="">--</option><option value="was">was</option><option value="was being">was being</option></select> 
+                                        younger, I <select class="select-input" data-ans="went"><option value="">--</option><option value="went">went</option><option value="was going">was going</option></select> 
+                                        swimming regularly.
+                                    </div>
+                                    <div class="item-explanation">Stative verb <em>be</em> takes past simple (<em>was</em>) + past routine (<em>went</em>).</div>
+                                </div>
+
+                                <div class="q-card">
+                                    <div><strong>4.</strong> At 10 p.m. last night I 
+                                        <select class="select-input" data-ans="was watching"><option value="">--</option><option value="watched">watched</option><option value="was watching">was watching</option></select> 
+                                        TV and at 11 p.m. I <select class="select-input" data-ans="went"><option value="">--</option><option value="went">went</option><option value="was going">was going</option></select> to bed.
+                                    </div>
+                                    <div class="item-explanation">Action in progress at exact point in time (<em>was watching</em>) vs sequential event (<em>went</em>).</div>
+                                </div>
+
+                                <div class="q-card">
+                                    <div><strong>5.</strong> Last year I 
+                                        <select class="select-input" data-ans="did"><option value="">--</option><option value="did">did</option><option value="was doing">was doing</option></select> 
+                                        no exercise and I <select class="select-input" data-ans="ate"><option value="">--</option><option value="ate">ate</option><option value="was eating">was eating</option></select> 
+                                        lots of fast food.
+                                    </div>
+                                    <div class="item-explanation">Completed facts over a defined past period (<em>Last year</em>).</div>
+                                </div>
+
+                                <div class="q-card">
+                                    <div><strong>6.</strong> I 
+                                        <select class="select-input" data-ans="stayed"><option value="">--</option><option value="stayed">stayed</option><option value="was staying">was staying</option></select> 
+                                        at home on Sunday because it <select class="select-input" data-ans="was raining"><option value="">--</option><option value="rained">rained</option><option value="was raining">was raining</option></select>.
+                                    </div>
+                                    <div class="item-explanation">Completed decision (<em>stayed</em>) caused by ongoing background weather (<em>was raining</em>).</div>
+                                </div>
+                            </div>
+
+                            <div class="action-row">
+                                <button class="btn-action btn-primary" onclick="deckEngine.checkSelects('grammarEx6')">Check Choices</button>
+                                <button class="btn-action" onclick="deckEngine.revealSelects('grammarEx6')">Reveal All</button>
+                                <button class="btn-action" onclick="deckEngine.toggleExplanations('grammarEx6')">🔍 Explanations</button>
                             </div>
                         </div>
                     </div>
@@ -565,7 +680,7 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 8: 4A GRAMMAR CLOZE (CHANGES IN LIFESTYLE)
+                 SLIDE 8: 4A APPLIED GRAMMAR (CHANGES IN LIFESTYLE CLOZE)
                  ============================================================== -->
             <section class="slide" id="slide-8" data-skill="grammar">
                 <div class="slide-inner">
@@ -575,31 +690,31 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-grammar);">4a Applied Grammar</span>
-                                <span class="slide-number">Text Cloze</span>
+                                <span class="slide-number">08 / 18</span>
                             </div>
                             <h2 class="slide-title">Context Cloze: "Changes in Lifestyle"</h2>
                             <p class="slide-subtitle">Fill in each blank with: <em>ago, did, didn't, last, was, were, weren't, when, while</em>.</p>
 
-                            <div class="card" id="lifestyleCloze" style="padding:28px 34px; font-size:calc(19.5px * var(--font-scale, 1)); line-height:2.25; overflow-y:auto; max-height:680px;">
+                            <div id="lifestyleCloze" class="card" style="padding:28px 34px; font-size:18px; line-height:2.1; overflow-y:auto; flex:1;">
                                 Over the years our ideas and habits regarding health can change dramatically. For example, in the middle of the 
-                                <strong>1.</strong> <input type="text" class="blank-input" data-ans="last" style="width:75px;" placeholder="word"> century many people didn’t realise the dangers of smoking. By the 1960s scientists 
-                                <strong>2.</strong> <input type="text" class="blank-input" data-ans="were" style="width:75px;" placeholder="word"> just starting to realise that smoking can affect health, but it 
-                                <strong>3.</strong> <input type="text" class="blank-input" data-ans="was" style="width:70px;" placeholder="word"> only later that the public really began to understand the dangers.<br><br>
-
+                                <strong>1.</strong> <input type="text" class="blank-input" data-ans="last" style="width:75px;" placeholder="1"> century many people didn’t realise the dangers of smoking. By the 1960s scientists 
+                                <strong>2.</strong> <input type="text" class="blank-input" data-ans="were" style="width:75px;" placeholder="2"> just starting to realise that smoking can affect health, but it 
+                                <strong>3.</strong> <input type="text" class="blank-input" data-ans="was" style="width:75px;" placeholder="3"> only later that the public really began to understand the dangers.
+                                <br><br>
                                 Our habits regarding diet and exercise were also very different in the past. People now eat much more sugar than they 
-                                <strong>4.</strong> <input type="text" class="blank-input" data-ans="did" style="width:65px;" placeholder="word"> in the past. This is because 150 years 
-                                <strong>5.</strong> <input type="text" class="blank-input" data-ans="ago" style="width:70px;" placeholder="word"> sugar was a luxury food, so many people 
-                                <strong>6.</strong> <input type="text" class="blank-input" data-ans="didn't" style="width:85px;" placeholder="word"> eat a great deal of it. At that time most people had a diet high in bread, vegetables, fruit and fish, which 
-                                <strong>7.</strong> <input type="text" class="blank-input" data-ans="weren't" style="width:95px;" placeholder="word"> as expensive as meat. They usually had physical jobs and were very active 
-                                <strong>8.</strong> <input type="text" class="blank-input" data-ans="while" style="width:80px;" placeholder="word"> they were working, so they didn’t have to worry about exercise. It was only 
-                                <strong>9.</strong> <input type="text" class="blank-input" data-ans="when" style="width:80px;" placeholder="word"> people started to do less active jobs and eat more sugar that they started to have weight problems. Therefore, it’s easy to see why people at that time 
-                                <strong>10.</strong> <input type="text" class="blank-input" data-ans="weren't" style="width:95px;" placeholder="word"> always trying to lose weight like they are now.
+                                <strong>4.</strong> <input type="text" class="blank-input" data-ans="did" style="width:75px;" placeholder="4"> in the past. This is because 150 years 
+                                <strong>5.</strong> <input type="text" class="blank-input" data-ans="ago" style="width:75px;" placeholder="5"> sugar was a luxury food, so many people 
+                                <strong>6.</strong> <input type="text" class="blank-input" data-ans="didn't" style="width:85px;" placeholder="6"> eat a great deal of it. At that time most people had a diet high in bread, vegetables, fruit and fish, which 
+                                <strong>7.</strong> <input type="text" class="blank-input" data-ans="weren't" style="width:90px;" placeholder="7"> as expensive as meat. They usually had physical jobs and were very active 
+                                <strong>8.</strong> <input type="text" class="blank-input" data-ans="while" style="width:80px;" placeholder="8"> they were working, so they didn’t have to worry about exercise. It was only 
+                                <strong>9.</strong> <input type="text" class="blank-input" data-ans="when" style="width:80px;" placeholder="9"> people started to do less active jobs and eat more sugar that they started to have weight problems. Therefore, it’s easy to see why people at that time 
+                                <strong>10.</strong> <input type="text" class="blank-input" data-ans="weren't" style="width:90px;" placeholder="10"> always trying to lose weight like they are now and why they didn’t need to go to the gym.
+                            </div>
 
-                                <div class="action-row" style="margin-top:20px;">
-                                    <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('lifestyleCloze')">Check Answers</button>
-                                    <button class="btn-action" onclick="deckEngine.revealBlanks('lifestyleCloze')">Reveal All</button>
-                                    <button class="btn-action" onclick="deckEngine.resetBlanks('lifestyleCloze')">Reset</button>
-                                </div>
+                            <div class="action-row">
+                                <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('lifestyleCloze')">Check Cloze</button>
+                                <button class="btn-action" onclick="deckEngine.revealBlanks('lifestyleCloze')">Reveal Answers</button>
+                                <button class="btn-action" onclick="deckEngine.resetBlanks('lifestyleCloze')">Reset</button>
                             </div>
                         </div>
                     </div>
@@ -607,7 +722,7 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 9: 4A VOCABULARY ILLNESSES, SYMPTOMS & INJURIES
+                 SLIDE 9: 4A VOCABULARY (ILLNESSES, SYMPTOMS & INJURIES)
                  ============================================================== -->
             <section class="slide" id="slide-9" data-skill="vocab">
                 <div class="slide-inner">
@@ -617,58 +732,67 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-vocab);">4a Vocabulary</span>
-                                <span class="slide-number">Illnesses &amp; Injuries</span>
+                                <span class="slide-number">09 / 18</span>
                             </div>
                             <h2 class="slide-title">Medical Lexicon: Illnesses, Symptoms &amp; Injuries</h2>
                             <p class="slide-subtitle">Master exact healthcare terms for IELTS Speaking Part 1/2 and Listening Section 1.</p>
 
                             <div class="two-col">
-                                <div class="col" id="symptomMatchEx">
-                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Part 1: Symptom ➔ Medical Noun</h3>
+                                <!-- Symptoms -->
+                                <div class="col" id="symptomsVocabEx">
+                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Part 1: Symptoms &amp; Conditions</h3>
+                                    
                                     <div class="card-sm">
-                                        1. Runny nose, itchy skin, rash = <input type="text" class="blank-input" data-ans="allergy" style="width:110px;" placeholder="noun">
+                                        1. Eating too much food quickly gives you a <input type="text" class="blank-input" data-ans="stomachache" style="width:130px;" placeholder="condition">.
                                     </div>
                                     <div class="card-sm">
-                                        2. Severe chest pain, breathing trouble = <input type="text" class="blank-input" data-ans="heart attack" style="width:145px;" placeholder="noun phrase">
+                                        2. It is painful to speak because of a <input type="text" class="blank-input" data-ans="sore throat" style="width:120px;" placeholder="symptom">.
                                     </div>
                                     <div class="card-sm">
-                                        3. Tired, anxious due to modern life = <input type="text" class="blank-input" data-ans="stress" style="width:95px;" placeholder="noun">
+                                        3. She needed an emergency dentist for severe <input type="text" class="blank-input" data-ans="toothache" style="width:115px;" placeholder="pain">.
                                     </div>
                                     <div class="card-sm">
-                                        4. Illness caused by bad/contaminated food = <input type="text" class="blank-input" data-ans="food poisoning" style="width:160px;" placeholder="noun phrase">
+                                        4. Bring tissues if you have a <input type="text" class="blank-input" data-ans="runny nose" style="width:120px;" placeholder="symptom">.
                                     </div>
                                     <div class="card-sm">
-                                        5. Chronic breathing difficulty &amp; coughing = <input type="text" class="blank-input" data-ans="asthma" style="width:105px;" placeholder="noun">
+                                        5. Normal human body <input type="text" class="blank-input" data-ans="temperature" style="width:125px;" placeholder="measurement"> is 37°C.
                                     </div>
                                     <div class="card-sm">
-                                        6. Illness caused by bacteria or virus = <input type="text" class="blank-input" data-ans="infection" style="width:115px;" placeholder="noun">
+                                        6. Screen fatigue causes eye strain and a <input type="text" class="blank-input" data-ans="headache" style="width:110px;" placeholder="condition">.
                                     </div>
-                                    <div class="card-sm">
-                                        7. High temperature, aching body, fatigue = <input type="text" class="blank-input" data-ans="flu" style="width:75px;" placeholder="noun">
-                                    </div>
-                                    <div class="card-sm">
-                                        8. Runny nose, minor cough, and sneezing = <input type="text" class="blank-input" data-ans="cold" style="width:85px;" placeholder="noun">
-                                    </div>
+
                                     <div class="action-row">
-                                        <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('symptomMatchEx')">Check Symptoms</button>
-                                        <button class="btn-action" onclick="deckEngine.revealBlanks('symptomMatchEx')">Reveal</button>
-                                        <button class="btn-action" onclick="deckEngine.resetBlanks('symptomMatchEx')">Reset</button>
+                                        <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('symptomsVocabEx')">Check Symptoms</button>
+                                        <button class="btn-action" onclick="deckEngine.revealBlanks('symptomsVocabEx')">Reveal</button>
                                     </div>
                                 </div>
 
-                                <div class="col">
-                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Part 2: Accidents &amp; Verbal Collocations</h3>
-                                    <div class="card-sm" style="border-left:4px solid var(--col-vocab);">
-                                        <strong>Insects:</strong> Mosquito <strong>bites</strong> vs. Bee / Wasp <strong>stings</strong>.
+                                <!-- Injuries -->
+                                <div class="col" id="injuriesVocabEx">
+                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Part 2: Accidents &amp; Injuries</h3>
+                                    
+                                    <div class="card-sm">
+                                        1. He suffered a serious <input type="text" class="blank-input" data-ans="injury" style="width:90px;" placeholder="noun"> to his spine.
                                     </div>
-                                    <div class="card-sm" style="border-left:4px solid var(--col-vocab);">
-                                        <strong>Bones &amp; Joints:</strong> <strong>Break</strong> a bone (<em>break an arm</em>) vs. <strong>Sprain</strong> a joint (<em>sprain an ankle</em>).
+                                    <div class="card-sm">
+                                        2. The fire victim was treated for severe skin <input type="text" class="blank-input" data-ans="burns" style="width:85px;" placeholder="noun">.
                                     </div>
-                                    <div class="card-sm" style="border-left:4px solid var(--col-vocab);">
-                                        <strong>Skin &amp; Flesh:</strong> <strong>Burn</strong> oneself (steam/hot oil) vs. <strong>Cut</strong> oneself (knives/glass).
+                                    <div class="card-sm">
+                                        3. A dark purple <input type="text" class="blank-input" data-ans="bruise" style="width:90px;" placeholder="noun"> formed after I bumped my knee.
                                     </div>
-                                    <div class="card-sm" style="border-left:4px solid var(--col-vocab);">
-                                        <strong>Impacts:</strong> <strong>Bruise</strong> = a painful purple mark on the skin following a blow.
+                                    <div class="card-sm">
+                                        4. Insect <input type="text" class="blank-input" data-ans="bites" style="width:80px;" placeholder="noun"> can transmit dangerous viruses.
+                                    </div>
+                                    <div class="card-sm">
+                                        5. The athlete <input type="text" class="blank-input" data-ans="broke|fractured" style="width:90px;" placeholder="verb"> his leg during the match.
+                                    </div>
+                                    <div class="card-sm">
+                                        6. Be careful with sharp kitchen knives so you don't <input type="text" class="blank-input" data-ans="cut" style="width:75px;" placeholder="verb"> yourself.
+                                    </div>
+
+                                    <div class="action-row">
+                                        <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('injuriesVocabEx')">Check Injuries</button>
+                                        <button class="btn-action" onclick="deckEngine.revealBlanks('injuriesVocabEx')">Reveal</button>
                                     </div>
                                 </div>
                             </div>
@@ -678,9 +802,9 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 9: 4A VOCABULARY TREATMENTS & STAYING HEALTHY
+                 SLIDE 10: 4A VOCABULARY (TREATMENTS & COLLOCATIONS)
                  ============================================================== -->
-            <section class="slide" id="slide-9" data-skill="vocab">
+            <section class="slide" id="slide-10" data-skill="vocab">
                 <div class="slide-inner">
                     <div class="notebook">
                         <div class="skill-stripe" style="background: var(--col-vocab);"></div>
@@ -688,46 +812,59 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-vocab);">4a Medical Treatments</span>
-                                <span class="slide-number">09 / 16</span>
+                                <span class="slide-number">10 / 18</span>
                             </div>
                             <h2 class="slide-title">Medical Treatments &amp; Lifestyle Collocations</h2>
                             <p class="slide-subtitle">Distinguish precise clinical terms and natural speaking collocations for healthy living.</p>
 
                             <div class="two-col">
-                                <div class="col" id="treatmentMatchEx">
-                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Clinical Definitions</h3>
+                                <!-- Col 1: Definitions -->
+                                <div class="col" id="treatmentMatchingEx">
+                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Part 1: Key Treatment Concepts</h3>
+                                    
                                     <div class="card-sm">
-                                        1. Doctor's written medicine paper = <input type="text" class="blank-input" data-ans="prescription" style="width:150px;" placeholder="treatment term">
+                                        • <strong>Prescription:</strong> Official doctor's note authorizing medicine.
                                     </div>
                                     <div class="card-sm">
-                                        2. Operation cutting open the body = <input type="text" class="blank-input" data-ans="surgery" style="width:115px;" placeholder="treatment term">
+                                        • <strong>Surgery:</strong> Invasive medical procedure performed by a surgeon.
                                     </div>
                                     <div class="card-sm">
-                                        3. Medicine used to kill bacterial infections = <input type="text" class="blank-input" data-ans="antibiotics" style="width:140px;" placeholder="treatment term">
+                                        • <strong>Antibiotics:</strong> Powerful medications used to kill infectious bacteria.
                                     </div>
                                     <div class="card-sm">
-                                        4. Injection to prevent disease before it occurs = <input type="text" class="blank-input" data-ans="vaccination" style="width:150px;" placeholder="treatment term">
+                                        • <strong>Vaccination:</strong> An injection giving immunization against disease.
                                     </div>
                                     <div class="card-sm">
-                                        5. Medicine that makes illness disappear completely = <input type="text" class="blank-input" data-ans="cure" style="width:85px;" placeholder="term">
-                                    </div>
-                                    <div class="action-row">
-                                        <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('treatmentMatchEx')">Check Treatments</button>
-                                        <button class="btn-action" onclick="deckEngine.revealBlanks('treatmentMatchEx')">Reveal</button>
+                                        • <strong>Prevention:</strong> Proactive measures to stop illness (<em>"Prevention is better than cure"</em>).
                                     </div>
                                 </div>
 
-                                <div class="col">
-                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Speaking Collocations: Staying Healthy</h3>
-                                    <div class="card" style="background:#f8fafc;">
-                                        <ul style="padding-left:18px; font-size:16.5px; line-height:1.75; display:flex; flex-direction:column; gap:6px;">
-                                            <li>Have a <strong>balanced diet</strong> (rich in nutrients, fiber, vegetables).</li>
-                                            <li>Get <strong>enough sleep</strong> (allowing the body to recover and heal).</li>
-                                            <li>Go for regular <strong>medical check-ups</strong>.</li>
-                                            <li>Stay in / keep in <strong>shape</strong> (through active cardiovascular training).</li>
-                                            <li>Do / practise <strong>regular exercise</strong>.</li>
-                                            <li><em>"<strong>Prevention</strong> is better than cure."</em></li>
-                                        </ul>
+                                <!-- Col 2: Collocations -->
+                                <div class="col" id="collocationEx">
+                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Part 2: Verb + Noun Collocations</h3>
+                                    
+                                    <div class="card-sm">
+                                        1. The best way to recover after you <input type="text" class="blank-input" data-ans="have|undergo" style="width:90px;" placeholder="verb"> major surgery.
+                                    </div>
+                                    <div class="card-sm">
+                                        2. Doctors should not <input type="text" class="blank-input" data-ans="write|give" style="width:85px;" placeholder="verb"> unnecessary prescriptions.
+                                    </div>
+                                    <div class="card-sm">
+                                        3. Scientists hope to <input type="text" class="blank-input" data-ans="find|develop|discover" style="width:95px;" placeholder="verb"> a permanent cure for diabetes.
+                                    </div>
+                                    <div class="card-sm">
+                                        4. It is essential to <input type="text" class="blank-input" data-ans="have|maintain" style="width:90px;" placeholder="verb"> a balanced diet.
+                                    </div>
+                                    <div class="card-sm">
+                                        5. You should <input type="text" class="blank-input" data-ans="get" style="width:75px;" placeholder="verb"> enough sleep every night.
+                                    </div>
+                                    <div class="card-sm">
+                                        6. Adults must <input type="text" class="blank-input" data-ans="do|take" style="width:80px;" placeholder="verb"> regular cardiovascular exercise.
+                                    </div>
+
+                                    <div class="action-row">
+                                        <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('collocationEx')">Check Collocations</button>
+                                        <button class="btn-action" onclick="deckEngine.revealBlanks('collocationEx')">Reveal</button>
                                     </div>
                                 </div>
                             </div>
@@ -737,9 +874,9 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 10: 4A WRITING TASK 2 (PARAPHRASING INTRODUCTIONS)
+                 SLIDE 11: 4A WRITING (PARAPHRASING & MODEL INTRODUCTION)
                  ============================================================== -->
-            <section class="slide" id="slide-10" data-skill="write">
+            <section class="slide" id="slide-11" data-skill="write">
                 <div class="slide-inner">
                     <div class="notebook">
                         <div class="skill-stripe" style="background: var(--col-writing);"></div>
@@ -747,46 +884,35 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-writing);">4a Writing Task 2</span>
-                                <span class="slide-number">10 / 16</span>
+                                <span class="slide-number">11 / 18</span>
                             </div>
                             <h2 class="slide-title">Paraphrasing in Introductions &amp; Model Gym Essay</h2>
                             <p class="slide-subtitle">Master the 3-sentence introduction structure for "Do advantages outweigh disadvantages?" prompts.</p>
 
                             <div class="two-col">
                                 <div class="col">
-                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Paraphrasing Matrix</h3>
-                                    <table class="data-table" style="margin-bottom:12px;">
-                                        <thead>
-                                            <tr>
-                                                <th>Prompt Phrase</th>
-                                                <th>Academic Paraphrase</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Schoolchildren of all ages</td>
-                                                <td>Pupils aged 5 to 18 / Young people</td>
-                                            </tr>
-                                            <tr>
-                                                <td>A sports lesson every day</td>
-                                                <td>Daily physical education session</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Help improve their fitness</td>
-                                                <td>Make them fitter and healthier</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <div class="card-sm" style="background:#f8fafc;">
-                                        <strong>Strong vs. Weak Paraphrase:</strong><br>
-                                        ✓ <em>"Some form of physical exercise should be a daily part of every child's life."</em> (Preserves exact scope)<br>
-                                        ✗ <em>"Teachers need to give lessons in how to play sports well."</em> (Too narrow)
+                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">The 3-Sentence Introduction Formula</h3>
+                                    
+                                    <div class="rule-card" style="border-top-color:var(--col-writing); margin-bottom:12px;">
+                                        <strong>Sentence 1: Paraphrased Context</strong><br>
+                                        Introduce the general topic area using synonyms and grammatical rephrasing (e.g. <em>"taking out a gym membership"</em> for <em>"joining a gym"</em>).
+                                    </div>
+                                    <div class="rule-card" style="border-top-color:var(--col-reading); margin-bottom:12px;">
+                                        <strong>Sentence 2: Stating the Debate</strong><br>
+                                        Acknowledge that there are conflicting perspectives (e.g. <em>"belonging to a gym has both positive and negative aspects..."</em>).
+                                    </div>
+                                    <div class="rule-card" style="border-top-color:var(--col-grammar);">
+                                        <strong>Sentence 3: Clear Thesis / Direction</strong><br>
+                                        Outline the analytical direction (e.g. <em>"It is sensible to evaluate both aspects before paying membership fees."</em>).
                                     </div>
                                 </div>
 
                                 <div class="col">
-                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Model Introduction (Gym Memberships)</h3>
+                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Model Introduction Breakdown</h3>
+                                    <div style="font-size:15px; color:var(--text-muted); margin-bottom:8px;">
+                                        <em>Prompt: Some people keep fit by joining a gym but gyms can be crowded and costly. Do advantages outweigh disadvantages?</em>
+                                    </div>
+
                                     <div class="model-breakdown-card">
                                         <span class="model-tag tag-intro">Sentence 1: Paraphrased Context</span>
                                         <p style="margin-top:4px;">
@@ -813,12 +939,11 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 11: MODULE 4B SECTION DIVIDER
+                 SLIDE 12: MODULE 4B SECTION DIVIDER
                  ============================================================== -->
-            <section class="slide" id="slide-11" data-skill="read">
+            <section class="slide" id="slide-12" data-skill="read">
                 <div class="section-slide">
                     <div class="section-inner">
-
                         <div class="section-left" style="background: linear-gradient(135deg, #14532d, #16a34a);">
                             <div class="section-module-tag reveal">Module 4b</div>
                             <div class="section-number reveal">4b</div>
@@ -826,23 +951,27 @@
                         </div>
                         <div class="section-right">
                             <div class="section-title reveal">Nature<br><span style="font-style:italic; color:var(--col-vocab);">&amp; Medicine</span></div>
-                            <p class="section-desc reveal">Natural Remedies · Wildlife &amp; Ecosystems · Topic Sentences · Animal Testing Essay</p>
+                            <p class="section-desc reveal">Natural Remedies · Wildlife &amp; Ecosystems · Topic Sentences · Animal Testing Essay · Speaking</p>
                             <div class="section-topics reveal">
-                                <div class="section-topic" onclick="deckEngine.jumpToSlide(11)">
+                                <div class="section-topic" onclick="deckEngine.jumpToSlide(12)">
                                     <div class="section-topic-dot" style="background:var(--col-reading)"></div>
                                     <span>1. Reading: "Remedies from Nature" (Biodiversity, Rainforests &amp; Sentence Matching)</span>
                                 </div>
-                                <div class="section-topic" onclick="deckEngine.jumpToSlide(12)">
-                                    <div class="section-topic-dot" style="background:var(--col-vocab)"></div>
-                                    <span>2. Vocabulary: Wildlife, Ecosystems Cloze &amp; Environmental Verbs</span>
-                                </div>
                                 <div class="section-topic" onclick="deckEngine.jumpToSlide(13)">
+                                    <div class="section-topic-dot" style="background:var(--col-vocab)"></div>
+                                    <span>2. Vocabulary: Wildlife Classifications, Ecosystems Cloze &amp; Nature Verbs</span>
+                                </div>
+                                <div class="section-topic" onclick="deckEngine.jumpToSlide(14)">
                                     <div class="section-topic-dot" style="background:var(--col-grammar)"></div>
                                     <span>3. Paragraph Coherence: Topic Sentences &amp; Drug Testing Logic Ordering</span>
                                 </div>
-                                <div class="section-topic" onclick="deckEngine.jumpToSlide(14)">
+                                <div class="section-topic" onclick="deckEngine.jumpToSlide(15)">
                                     <div class="section-topic-dot" style="background:var(--col-writing)"></div>
                                     <span>4. Writing Task 2: Complete 4-Paragraph Model Essay on Animal Testing</span>
+                                </div>
+                                <div class="section-topic" onclick="deckEngine.jumpToSlide(16)">
+                                    <div class="section-topic-dot" style="background:var(--col-review)"></div>
+                                    <span>5. IELTS Speaking: Health, Nature &amp; Ecological Preservation</span>
                                 </div>
                             </div>
                         </div>
@@ -851,9 +980,9 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 12: 4B READING SPLIT-VIEW (REMEDIES FROM NATURE)
+                 SLIDE 13: 4B READING SPLIT-VIEW (REMEDIES FROM NATURE)
                  ============================================================== -->
-            <section class="slide" id="slide-12" data-skill="read">
+            <section class="slide" id="slide-13" data-skill="read">
                 <div class="slide-inner">
                     <div class="notebook">
                         <div class="skill-stripe" style="background: var(--col-reading);"></div>
@@ -861,7 +990,7 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-reading);">4b Reading Passage</span>
-                                <span class="slide-number">12 / 16</span>
+                                <span class="slide-number">13 / 18</span>
                             </div>
                             <h2 class="slide-title">"Remedies from Nature" &amp; Sentence Matching</h2>
                             <p class="slide-subtitle">Read the text about biodiversity in modern pharmacology and complete statements 1–6.</p>
@@ -878,159 +1007,160 @@
                                     
                                     <p><span class="para-tag">[Paragraph B]</span> 
                                         <mark class="evidence" id="ev-4b-2">
-                                            <span class="syn-pair-1" data-q="4b-2">Most people are amazed to discover</span> that our dependence on nature for health has not reduced. Over the past quarter century, 
-                                            <span class="syn-pair-2" data-q="4b-2">more than half of all the products that drug companies have developed actually use, or copy, substances from the natural world</span>.
+                                            <span class="syn-pair-1" data-q="4b-2">Most people are amazed to discover that our dependence on nature for health has not reduced</span>. Over the past quarter century, 
+                                            <span class="syn-pair-2" data-q="4b-2">more than half of all the products that drug companies have developed actually use, or copy, substances from the natural world</span>. Moreover, the WHO estimates that in many developing countries, 80 percent of the population relies on traditional medicines from natural sources.
                                         </mark>
-                                        Moreover, the World Health Organization estimates that in many developing countries, 80 percent of the population relies on traditional medicines from natural sources.
                                     </p>
                                     
                                     <p><span class="para-tag">[Paragraph C]</span> 
                                         <mark class="evidence" id="ev-4b-3">
-                                            However, <span class="syn-pair-1" data-q="4b-3">scientists generally believe</span> that researchers have 
-                                            <span class="syn-pair-2" data-q="4b-3">fully examined less than one percent of all species</span> in order to discover their possible uses in medical treatments. They believe that nature still holds many valuable cures for research to discover.
+                                            However, scientists generally believe that 
+                                            <span class="syn-pair-1" data-q="4b-3">researchers have fully examined less than one percent of all species</span> in order to discover their possible uses in medical treatments. They believe that 
+                                            <span class="syn-pair-2" data-q="4b-3">nature still holds many valuable cures for research to discover</span>. In particular, they point to the importance of tropical rainforests.
                                         </mark>
-                                        In particular, they point to the importance of tropical rainforests as a potential source of new medicines. Although rainforests cover only six percent of the earth’s land surface, they contain over half of its biodiversity.
                                     </p>
                                     
                                     <p><span class="para-tag">[Paragraph D]</span> 
                                         <mark class="evidence" id="ev-4b-4">
-                                            Unfortunately, the <span class="syn-pair-1" data-q="4b-4">ecosystems that provide some of the world’s most important drugs... are also the ecosystems that are most at risk today</span>. There are concerns that warming temperatures mean that few coral reefs will remain by the end of the century. Meanwhile, agriculture and various major development projects are making the world’s rainforests vanish at an alarming rate – the world is losing more than 320 km2 every day. The inevitable result is that 
-                                            <span class="syn-pair-2" data-q="4b-4">many species with important medicinal powers will become extinct</span>.
+                                            Unfortunately, the ecosystems that provide some of the world’s most important drugs, such as rainforests and coral reefs, are also the ecosystems that are most at risk today. Warming temperatures mean few coral reefs will remain. Meanwhile, rainforests vanish at an alarming rate – losing more than 320 km² daily. 
+                                            <span class="syn-pair-1" data-q="4b-4">The inevitable result is that many species with important medicinal powers will become extinct</span>.
                                         </mark>
                                     </p>
                                     
                                     <p><span class="para-tag">[Paragraph E]</span> 
                                         <mark class="evidence" id="ev-4b-5">
-                                            <span class="syn-pair-1" data-q="4b-5">Another problem is that most of nature’s medicines do not come from big and beautiful mammals</span>, such as tigers and elephants. Instead, they come from the 
-                                            <span class="syn-pair-2" data-q="4b-5">least popular of the world’s ecosystems: plants, fungi and invertebrates</span>. Some particularly valuable species are often either poisonous or so small that we cannot see them without a microscope. This makes campaigning for their preservation much more difficult.
+                                            Another problem is that most of nature’s medicines do not come from big and beautiful mammals, such as tigers and elephants. Instead, 
+                                            <span class="syn-pair-1" data-q="4b-5">they come from the least popular of the world’s ecosystems: plants, fungi and invertebrates</span>. Some particularly valuable species are 
+                                            <span class="syn-pair-2" data-q="4b-5">often either poisonous or so small that we cannot see them without a microscope</span>.
                                         </mark>
                                     </p>
                                     
                                     <p><span class="para-tag">[Paragraph F]</span> 
                                         <mark class="evidence" id="ev-4b-6">
-                                            An additional problem is the fact that <span class="syn-pair-1" data-q="4b-6">medical schools teach their students very little about the discovery of new treatments</span>. Few young doctors, for example, know that the blood pressure medicine captopril, one of the best-selling drugs of all time, comes from the poison of a Brazilian snake. Antibiotics, most of which come from nature, are a miracle drug but doctors use far too many of them. This is partly because 
-                                            <span class="syn-pair-2" data-q="4b-6">they do not realise the dangers involved or how closely connected these drugs are with the natural world</span>.
+                                            An additional problem is the fact that 
+                                            <span class="syn-pair-1" data-q="4b-6">medical schools teach their students very little about the discovery of new treatments</span>. Few young doctors, for example, know that captopril comes from the poison of a Brazilian snake. Antibiotics are a miracle drug but doctors use far too many because they do not realise how closely connected they are with nature.
                                         </mark>
                                     </p>
-                                    
-                                    <p><span class="para-tag">[Paragraph G]</span> Nature and medicine are closely connected. We must protect nature. If we don’t, we not only risk losing many plant and animal species but we are also risking our own health. In all the discussions about saving the world’s biodiversity from extinction, people often forget one point: the world’s species provide people with a large number of life-saving medicines.</p>
                                 </div>
 
                                 <div class="question-pane" id="matchTask4b">
-                                    <div style="font-size:17px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">Match Beginnings 1–6 to Correct Endings:</div>
-
-                                    <div class="q-card">
-                                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                                            <span><strong>1.</strong> It is <span class="syn-pair-1" data-q="4b-1">many thousands of years</span> since...</span>
-                                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('4b-1', 'ev-4b-1')">💡 Synonyms</button>
+                                    <div class="q-card" data-q="4b-1">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <strong>1. It is many thousands of years since...</strong>
+                                            <button class="syn-btn" data-ev="ev-4b-1">💡 Evidence</button>
                                         </div>
-                                        <div>
-                                            <select class="select-input" data-ans="E"><option value="">--</option><option value="A">A: cures will disappear forever</option><option value="B">B: valuable species seem unattractive</option><option value="D">D: students learn more about treatments</option><option value="E">E: discovered power of natural substances</option><option value="G">G: many medicines still unknown</option><option value="I">I: medicine makes so much use of nature</option></select>
-                                        </div>
-                                        <div class="item-explanation">
-                                            <div class="syn-key-box">
-                                                <span class="syn-tag green">Green Match:</span> <em>"thousands of years since"</em> ↔ <em>"used over 60,000 years ago / 5,000 year-old"</em>
-                                            </div>
-                                            <div class="syn-key-box">
-                                                <span class="syn-tag purple">Purple Match:</span> <em>"discovered power of natural substances" (E)</em> ↔ <em>"medicinal plants / fungus able to kill bacteria"</em>
-                                            </div>
-                                        </div>
+                                        <select class="select-input" data-ans="E" style="width:100%;">
+                                            <option value="">Choose ending A–I...</option>
+                                            <option value="A">A. many potential cures will disappear forever</option>
+                                            <option value="B">B. some of the most medically valuable species do not seem very attractive</option>
+                                            <option value="C">C. natural medicines can be more effective than modern drugs</option>
+                                            <option value="D">D. medical students learn more about the development of treatments</option>
+                                            <option value="E">E. people discovered how powerful natural substances can be</option>
+                                            <option value="F">F. researching new treatments takes considerable time</option>
+                                            <option value="G">G. many possible medicines from the natural world are still unknown</option>
+                                            <option value="H">H. medical knowledge is not growing quickly enough to fight new diseases</option>
+                                            <option value="I">I. modern medicine still makes so much use of nature</option>
+                                        </select>
                                     </div>
 
-                                    <div class="q-card">
-                                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                                            <span><strong>2.</strong> People are often <span class="syn-pair-1" data-q="4b-2">very surprised to learn</span> that...</span>
-                                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('4b-2', 'ev-4b-2')">💡 Synonyms</button>
+                                    <div class="q-card" data-q="4b-2">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <strong>2. People are often very surprised to learn that...</strong>
+                                            <button class="syn-btn" data-ev="ev-4b-2">💡 Evidence</button>
                                         </div>
-                                        <div>
-                                            <select class="select-input" data-ans="I"><option value="">--</option><option value="A">A: cures will disappear forever</option><option value="B">B: valuable species seem unattractive</option><option value="D">D: students learn more about treatments</option><option value="E">E: discovered power of natural substances</option><option value="G">G: many medicines still unknown</option><option value="I">I: medicine makes so much use of nature</option></select>
-                                        </div>
-                                        <div class="item-explanation">
-                                            <div class="syn-key-box">
-                                                <span class="syn-tag green">Green Match:</span> <em>"very surprised to learn"</em> ↔ <em>"amazed to discover"</em>
-                                            </div>
-                                            <div class="syn-key-box">
-                                                <span class="syn-tag purple">Purple Match:</span> <em>"medicine makes so much use of nature" (I)</em> ↔ <em>"more than half of all products use or copy substances from nature"</em>
-                                            </div>
-                                        </div>
+                                        <select class="select-input" data-ans="I" style="width:100%;">
+                                            <option value="">Choose ending A–I...</option>
+                                            <option value="A">A. many potential cures will disappear forever</option>
+                                            <option value="B">B. some of the most medically valuable species do not seem very attractive</option>
+                                            <option value="C">C. natural medicines can be more effective than modern drugs</option>
+                                            <option value="D">D. medical students learn more about the development of treatments</option>
+                                            <option value="E">E. people discovered how powerful natural substances can be</option>
+                                            <option value="F">F. researching new treatments takes considerable time</option>
+                                            <option value="G">G. many possible medicines from the natural world are still unknown</option>
+                                            <option value="H">H. medical knowledge is not growing quickly enough to fight new diseases</option>
+                                            <option value="I">I. modern medicine still makes so much use of nature</option>
+                                        </select>
                                     </div>
 
-                                    <div class="q-card">
-                                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                                            <span><strong>3.</strong> Scientists <span class="syn-pair-1" data-q="4b-3">estimate</span> that...</span>
-                                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('4b-3', 'ev-4b-3')">💡 Synonyms</button>
+                                    <div class="q-card" data-q="4b-3">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <strong>3. Scientists estimate that...</strong>
+                                            <button class="syn-btn" data-ev="ev-4b-3">💡 Evidence</button>
                                         </div>
-                                        <div>
-                                            <select class="select-input" data-ans="G"><option value="">--</option><option value="A">A: cures will disappear forever</option><option value="B">B: valuable species seem unattractive</option><option value="D">D: students learn more about treatments</option><option value="E">E: discovered power of natural substances</option><option value="G">G: many medicines still unknown</option><option value="I">I: medicine makes so much use of nature</option></select>
-                                        </div>
-                                        <div class="item-explanation">
-                                            <div class="syn-key-box">
-                                                <span class="syn-tag green">Green Match:</span> <em>"scientists estimate that"</em> ↔ <em>"scientists generally believe that"</em>
-                                            </div>
-                                            <div class="syn-key-box">
-                                                <span class="syn-tag purple">Purple Match:</span> <em>"many medicines still unknown" (G)</em> ↔ <em>"examined less than one percent of all species"</em>
-                                            </div>
-                                        </div>
+                                        <select class="select-input" data-ans="G" style="width:100%;">
+                                            <option value="">Choose ending A–I...</option>
+                                            <option value="A">A. many potential cures will disappear forever</option>
+                                            <option value="B">B. some of the most medically valuable species do not seem very attractive</option>
+                                            <option value="C">C. natural medicines can be more effective than modern drugs</option>
+                                            <option value="D">D. medical students learn more about the development of treatments</option>
+                                            <option value="E">E. people discovered how powerful natural substances can be</option>
+                                            <option value="F">F. researching new treatments takes considerable time</option>
+                                            <option value="G">G. many possible medicines from the natural world are still unknown</option>
+                                            <option value="H">H. medical knowledge is not growing quickly enough to fight new diseases</option>
+                                            <option value="I">I. modern medicine still makes so much use of nature</option>
+                                        </select>
                                     </div>
 
-                                    <div class="q-card">
-                                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                                            <span><strong>4.</strong> <span class="syn-pair-1" data-q="4b-4">Destroying different ecosystems</span> means that...</span>
-                                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('4b-4', 'ev-4b-4')">💡 Synonyms</button>
+                                    <div class="q-card" data-q="4b-4">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <strong>4. Destroying different ecosystems means that...</strong>
+                                            <button class="syn-btn" data-ev="ev-4b-4">💡 Evidence</button>
                                         </div>
-                                        <div>
-                                            <select class="select-input" data-ans="A"><option value="">--</option><option value="A">A: cures will disappear forever</option><option value="B">B: valuable species seem unattractive</option><option value="D">D: students learn more about treatments</option><option value="E">E: discovered power of natural substances</option><option value="G">G: many medicines still unknown</option><option value="I">I: medicine makes so much use of nature</option></select>
-                                        </div>
-                                        <div class="item-explanation">
-                                            <div class="syn-key-box">
-                                                <span class="syn-tag green">Green Match:</span> <em>"destroying ecosystems"</em> ↔ <em>"ecosystems at risk / rainforests vanish"</em>
-                                            </div>
-                                            <div class="syn-key-box">
-                                                <span class="syn-tag purple">Purple Match:</span> <em>"cures will disappear forever" (A)</em> ↔ <em>"species with medicinal powers will become extinct"</em>
-                                            </div>
-                                        </div>
+                                        <select class="select-input" data-ans="A" style="width:100%;">
+                                            <option value="">Choose ending A–I...</option>
+                                            <option value="A">A. many potential cures will disappear forever</option>
+                                            <option value="B">B. some of the most medically valuable species do not seem very attractive</option>
+                                            <option value="C">C. natural medicines can be more effective than modern drugs</option>
+                                            <option value="D">D. medical students learn more about the development of treatments</option>
+                                            <option value="E">E. people discovered how powerful natural substances can be</option>
+                                            <option value="F">F. researching new treatments takes considerable time</option>
+                                            <option value="G">G. many possible medicines from the natural world are still unknown</option>
+                                            <option value="H">H. medical knowledge is not growing quickly enough to fight new diseases</option>
+                                            <option value="I">I. modern medicine still makes so much use of nature</option>
+                                        </select>
                                     </div>
 
-                                    <div class="q-card">
-                                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                                            <span><strong>5.</strong> What is making the problem worse is <span class="syn-pair-1" data-q="4b-5">the fact that</span>...</span>
-                                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('4b-5', 'ev-4b-5')">💡 Synonyms</button>
+                                    <div class="q-card" data-q="4b-5">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <strong>5. What is making the problem worse is the fact that...</strong>
+                                            <button class="syn-btn" data-ev="ev-4b-5">💡 Evidence</button>
                                         </div>
-                                        <div>
-                                            <select class="select-input" data-ans="B"><option value="">--</option><option value="A">A: cures will disappear forever</option><option value="B">B: valuable species seem unattractive</option><option value="D">D: students learn more about treatments</option><option value="E">E: discovered power of natural substances</option><option value="G">G: many medicines still unknown</option><option value="I">I: medicine makes so much use of nature</option></select>
-                                        </div>
-                                        <div class="item-explanation">
-                                            <div class="syn-key-box">
-                                                <span class="syn-tag green">Green Match:</span> <em>"problem worse / not big mammals"</em> ↔ <em>"come from least popular ecosystems"</em>
-                                            </div>
-                                            <div class="syn-key-box">
-                                                <span class="syn-tag purple">Purple Match:</span> <em>"valuable species seem unattractive" (B)</em> ↔ <em>"fungi & invertebrates / poisonous or microscope small"</em>
-                                            </div>
-                                        </div>
+                                        <select class="select-input" data-ans="B" style="width:100%;">
+                                            <option value="">Choose ending A–I...</option>
+                                            <option value="A">A. many potential cures will disappear forever</option>
+                                            <option value="B">B. some of the most medically valuable species do not seem very attractive</option>
+                                            <option value="C">C. natural medicines can be more effective than modern drugs</option>
+                                            <option value="D">D. medical students learn more about the development of treatments</option>
+                                            <option value="E">E. people discovered how powerful natural substances can be</option>
+                                            <option value="F">F. researching new treatments takes considerable time</option>
+                                            <option value="G">G. many possible medicines from the natural world are still unknown</option>
+                                            <option value="H">H. medical knowledge is not growing quickly enough to fight new diseases</option>
+                                            <option value="I">I. modern medicine still makes so much use of nature</option>
+                                        </select>
                                     </div>
 
-                                    <div class="q-card">
-                                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                                            <span><strong>6.</strong> The writer thinks the situation will improve if...</span>
-                                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('4b-6', 'ev-4b-6')">💡 Synonyms</button>
+                                    <div class="q-card" data-q="4b-6">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <strong>6. The writer thinks the situation will improve if...</strong>
+                                            <button class="syn-btn" data-ev="ev-4b-6">💡 Evidence</button>
                                         </div>
-                                        <div>
-                                            <select class="select-input" data-ans="D"><option value="">--</option><option value="A">A: cures will disappear forever</option><option value="B">B: valuable species seem unattractive</option><option value="D">D: students learn more about treatments</option><option value="E">E: discovered power of natural substances</option><option value="G">G: many medicines still unknown</option><option value="I">I: medicine makes so much use of nature</option></select>
-                                        </div>
-                                        <div class="item-explanation">
-                                            <div class="syn-key-box">
-                                                <span class="syn-tag green">Green Match:</span> <em>"situation will improve if"</em> ↔ <em>"medical schools teach students very little (needs change)"</em>
-                                            </div>
-                                            <div class="syn-key-box">
-                                                <span class="syn-tag purple">Purple Match:</span> <em>"students learn more about treatments" (D)</em> ↔ <em>"realise connection between miracle drugs and nature"</em>
-                                            </div>
-                                        </div>
+                                        <select class="select-input" data-ans="D" style="width:100%;">
+                                            <option value="">Choose ending A–I...</option>
+                                            <option value="A">A. many potential cures will disappear forever</option>
+                                            <option value="B">B. some of the most medically valuable species do not seem very attractive</option>
+                                            <option value="C">C. natural medicines can be more effective than modern drugs</option>
+                                            <option value="D">D. medical students learn more about the development of treatments</option>
+                                            <option value="E">E. people discovered how powerful natural substances can be</option>
+                                            <option value="F">F. researching new treatments takes considerable time</option>
+                                            <option value="G">G. many possible medicines from the natural world are still unknown</option>
+                                            <option value="H">H. medical knowledge is not growing quickly enough to fight new diseases</option>
+                                            <option value="I">I. modern medicine still makes so much use of nature</option>
+                                        </select>
                                     </div>
 
                                     <div class="action-row">
                                         <button class="btn-action btn-primary" onclick="deckEngine.checkSelects('matchTask4b')">Check Answers</button>
                                         <button class="btn-action" onclick="deckEngine.revealSelects('matchTask4b')">Reveal All</button>
-                                        <button class="btn-action" onclick="deckEngine.toggleExplanations('matchTask4b')">🔍 Explanations</button>
                                     </div>
                                 </div>
                             </div>
@@ -1040,9 +1170,9 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 13: 4B VOCABULARY WILDLIFE & NATURE VERBS
+                 SLIDE 14: 4B VOCABULARY (WILDLIFE & ECOSYSTEMS)
                  ============================================================== -->
-            <section class="slide" id="slide-13" data-skill="vocab">
+            <section class="slide" id="slide-14" data-skill="vocab">
                 <div class="slide-inner">
                     <div class="notebook">
                         <div class="skill-stripe" style="background: var(--col-vocab);"></div>
@@ -1050,10 +1180,10 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-vocab);">4b Vocabulary</span>
-                                <span class="slide-number">13 / 16</span>
+                                <span class="slide-number">14 / 18</span>
                             </div>
-                            <h2 class="slide-title">Wildlife, Ecosystems &amp; Environmental Verbs</h2>
-                            <p class="slide-subtitle">Master academic conservation vocabulary and practical verb collocations.</p>
+                            <h2 class="slide-title">Wildlife, Ecosystems &amp; Biological Classification</h2>
+                            <p class="slide-subtitle">Master academic conservation vocabulary, kingdom taxonomy, and practical verb collocations.</p>
 
                             <div class="two-col">
                                 <div class="col" id="wildlifeVocabEx">
@@ -1077,29 +1207,51 @@
                                     </div>
                                 </div>
 
-                                <div class="col" id="natureVerbsEx">
-                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Part 2: Nature Verbs Practice</h3>
-                                    <div class="card-sm">
-                                        1. Do not <input type="text" class="blank-input" data-ans="pick" style="width:75px;" placeholder="verb"> flowers from the wild; leave them intact.
-                                    </div>
-                                    <div class="card-sm">
-                                        2. People should not be allowed to <input type="text" class="blank-input" data-ans="fish" style="width:75px;" placeholder="verb"> in protected rivers.
-                                    </div>
-                                    <div class="card-sm">
-                                        3. We must introduce strong laws to <input type="text" class="blank-input" data-ans="protect" style="width:95px;" placeholder="verb"> rare plants.
-                                    </div>
-                                    <div class="card-sm">
-                                        4. Help local people <input type="text" class="blank-input" data-ans="farm" style="width:75px;" placeholder="verb"> the land sustainably.
-                                    </div>
-                                    <div class="card-sm">
-                                        5. <input type="text" class="blank-input" data-ans="Hunting" style="width:95px;" placeholder="verb-ing"> wild animals for sport is cruel.
-                                    </div>
-                                    <div class="card-sm">
-                                        6. Many families now <input type="text" class="blank-input" data-ans="grow" style="width:75px;" placeholder="verb"> their own organic vegetables.
-                                    </div>
-                                    <div class="action-row">
-                                        <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('natureVerbsEx')">Check Verbs</button>
-                                        <button class="btn-action" onclick="deckEngine.revealBlanks('natureVerbsEx')">Reveal</button>
+                                <div class="col">
+                                    <h3 style="font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:10px;">Part 2: Animal Kingdom Taxonomy</h3>
+                                    <table class="bio-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Reptiles</th>
+                                                <th>Mammals</th>
+                                                <th>Insects</th>
+                                                <th>Birds</th>
+                                                <th>Sea Life</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>alligator</td>
+                                                <td>gorilla</td>
+                                                <td>ant</td>
+                                                <td>eagle</td>
+                                                <td>lobster</td>
+                                            </tr>
+                                            <tr>
+                                                <td>lizard</td>
+                                                <td>sheep</td>
+                                                <td>butterfly</td>
+                                                <td>owl</td>
+                                                <td>octopus</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div id="natureVerbsEx" style="margin-top:12px;">
+                                        <h3 style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:6px;">Active Nature Verbs</h3>
+                                        <div class="card-sm" style="font-size:15px; padding:8px 12px;">
+                                            1. Do not <input type="text" class="blank-input" data-ans="pick" style="width:70px;" placeholder="verb"> wild flowers.
+                                        </div>
+                                        <div class="card-sm" style="font-size:15px; padding:8px 12px;">
+                                            2. Do not <input type="text" class="blank-input" data-ans="fish" style="width:70px;" placeholder="verb"> in protected rivers.
+                                        </div>
+                                        <div class="card-sm" style="font-size:15px; padding:8px 12px;">
+                                            3. Laws must <input type="text" class="blank-input" data-ans="protect" style="width:85px;" placeholder="verb"> rare flora and fauna.
+                                        </div>
+                                        <div class="action-row" style="margin-top:8px;">
+                                            <button class="btn-action btn-primary" onclick="deckEngine.checkBlanks('natureVerbsEx')">Check Verbs</button>
+                                            <button class="btn-action" onclick="deckEngine.revealBlanks('natureVerbsEx')">Reveal</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1109,9 +1261,9 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 14: 4B WRITING PARAGRAPH COHERENCE (TOPIC SENTENCES)
+                 SLIDE 15: 4B WRITING PARAGRAPH COHERENCE (TOPIC SENTENCES)
                  ============================================================== -->
-            <section class="slide" id="slide-14" data-skill="grammar">
+            <section class="slide" id="slide-15" data-skill="grammar">
                 <div class="slide-inner">
                     <div class="notebook">
                         <div class="skill-stripe" style="background: var(--col-grammar);"></div>
@@ -1119,7 +1271,7 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-grammar);">4b Paragraph Coherence</span>
-                                <span class="slide-number">14 / 16</span>
+                                <span class="slide-number">15 / 18</span>
                             </div>
                             <h2 class="slide-title">Paragraph Coherence: Topic Sentences &amp; Logic Flow</h2>
                             <p class="slide-subtitle">Order scrambled sentences into a unified academic body paragraph (Topic ➔ Detail ➔ Explanation ➔ Result).</p>
@@ -1179,9 +1331,9 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 15: 4B WRITING TASK 2 MODEL ESSAY (ANIMAL TESTING)
+                 SLIDE 16: 4B WRITING TASK 2 MODEL ESSAY (ANIMAL TESTING)
                  ============================================================== -->
-            <section class="slide" id="slide-15" data-skill="write">
+            <section class="slide" id="slide-16" data-skill="write">
                 <div class="slide-inner">
                     <div class="notebook">
                         <div class="skill-stripe" style="background: var(--col-writing);"></div>
@@ -1189,7 +1341,7 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-writing);">4b Task 2 Model Essay</span>
-                                <span class="slide-number">15 / 16</span>
+                                <span class="slide-number">16 / 18</span>
                             </div>
                             <h2 class="slide-title">Full Model Essay: Animal Testing of Medicines</h2>
                             <p class="slide-subtitle"><em>Prompt: Some believe it is wrong to test new medicines on animals. Do advantages outweigh disadvantages?</em></p>
@@ -1233,9 +1385,70 @@
             </section>
 
             <!-- ==============================================================
-                 SLIDE 16: MODULE 4 SUMMARY DASHBOARD
+                 SLIDE 17: IELTS SPEAKING (HEALTH, FITNESS & PRESERVATION)
                  ============================================================== -->
-            <section class="slide" id="slide-16" data-skill="review">
+            <section class="slide" id="slide-17" data-skill="review">
+                <div class="slide-inner">
+                    <div class="notebook">
+                        <div class="skill-stripe" style="background: var(--col-review);"></div>
+
+                        <div class="page-content">
+                            <div class="slide-header">
+                                <span class="skill-badge" style="background: var(--col-review);">IELTS Speaking Masterclass</span>
+                                <span class="slide-number">17 / 18</span>
+                            </div>
+                            <h2 class="slide-title">IELTS Speaking: Health, Habits &amp; Ecosystems</h2>
+                            <p class="slide-subtitle">High-scoring Band 7.5+ model responses across Parts 1, 2, and 3.</p>
+
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; flex:1; overflow-y:auto;">
+                                <div class="card" style="border-left:4px solid var(--col-reading); padding:20px 24px;">
+                                    <div style="font-size:19px; font-weight:800; color:var(--col-reading); margin-bottom:8px;">🗣️ Part 1: Quick Fire Topics</div>
+                                    <div style="font-size:15.5px; line-height:1.65; display:flex; flex-direction:column; gap:10px;">
+                                        <div>
+                                            <strong>Q: Do you do regular physical activity?</strong><br>
+                                            <em>"Yes, absolutely. I make a conscious effort to go for a brisk thirty-minute walk every evening, and on weekends I usually swim with friends to stay in shape."</em>
+                                        </div>
+                                        <div>
+                                            <strong>Q: Do you like spending time in natural places?</strong><br>
+                                            <em>"Definitely. Being surrounded by lush greenery and fresh air in local botanical gardens helps me decompress and clear my mind after stressful work."</em>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card" style="border-left:4px solid var(--col-grammar); padding:20px 24px;">
+                                    <div style="font-size:19px; font-weight:800; color:var(--col-grammar); margin-bottom:8px;">🎙️ Part 2: Long Turn (Cue Card)</div>
+                                    <div style="font-size:15px; line-height:1.6; background:rgba(217, 119, 6, 0.06); padding:12px; border-radius:8px; margin-bottom:8px;">
+                                        <strong>Describe a healthy habit you have recently developed.</strong><br>
+                                        Say: What it is · When you started · Why you began · And how it benefited you.
+                                    </div>
+                                    <p style="font-size:15px; line-height:1.65; color:var(--text-body);">
+                                        <em>"I’d like to talk about meal prepping healthy home-cooked lunches every Sunday. Previously, I grabbed fast food which made me feel sluggish. Prepping balanced meals with lean protein and vegetables has saved money and boosted my daily afternoon focus tremendously."</em>
+                                    </p>
+                                </div>
+
+                                <div class="card" style="grid-column:1 / -1; border-left:4px solid var(--col-writing); padding:18px 24px;">
+                                    <div style="font-size:19px; font-weight:800; color:var(--col-writing); margin-bottom:6px;">💬 Part 3: In-Depth Discussion</div>
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:15.5px; line-height:1.65;">
+                                        <div>
+                                            <strong>Q: Should governments promote youth fitness?</strong><br>
+                                            <em>"Without doubt. Sedentary screen time is rising. Subsidizing local athletic clubs and mandating dynamic physical education instills vital lifelong habits."</em>
+                                        </div>
+                                        <div>
+                                            <strong>Q: Why is preserving biodiversity essential?</strong><br>
+                                            <em>"Over half of modern pharmaceuticals originate from natural substances in rainforests and coral reefs. Protecting ecosystems preserves life-saving treatments."</em>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==============================================================
+                 SLIDE 18: MODULE 4 SUMMARY DASHBOARD
+                 ============================================================== -->
+            <section class="slide" id="slide-18" data-skill="review">
                 <div class="slide-inner">
                     <div class="notebook">
                         <div class="skill-stripe" style="background: var(--col-review);"></div>
@@ -1243,7 +1456,7 @@
                         <div class="page-content">
                             <div class="slide-header">
                                 <span class="skill-badge" style="background: var(--col-review);">Module 04 Summary</span>
-                                <span class="slide-number">16 / 16</span>
+                                <span class="slide-number">18 / 18</span>
                             </div>
                             <h2 class="slide-title">Module 4: Core Competencies &amp; Exam Checklist</h2>
                             <p class="slide-subtitle">Mastery review across all IELTS skills learned in Health (4a) and Nature (4b).</p>
@@ -1251,7 +1464,7 @@
                             <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; flex:1; overflow-y:auto;">
                                 <div class="card" style="border-left:4px solid var(--col-reading); padding:22px 26px;">
                                     <div style="font-size:20px; font-weight:800; color:var(--col-reading); margin-bottom:6px;">📖 Reading Strategies</div>
-                                    <ul style="padding-left:20px; font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.7; display:flex; flex-direction:column; gap:6px;">
+                                    <ul style="padding-left:20px; font-size:16.5px; line-height:1.7; display:flex; flex-direction:column; gap:6px;">
                                         <li><strong>Matching Sentence Endings:</strong> Identify linking triggers (reasons, causes, results) and match them grammatically and factually.</li>
                                         <li><strong>Connection Awareness:</strong> Distinguish between superficial app targets and holistic lifestyle indicators.</li>
                                     </ul>
@@ -1259,7 +1472,7 @@
 
                                 <div class="card" style="border-left:4px solid var(--col-grammar); padding:22px 26px;">
                                     <div style="font-size:20px; font-weight:800; color:var(--col-grammar); margin-bottom:6px;">📚 Grammatical Precision</div>
-                                    <ul style="padding-left:20px; font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.7; display:flex; flex-direction:column; gap:6px;">
+                                    <ul style="padding-left:20px; font-size:16.5px; line-height:1.7; display:flex; flex-direction:column; gap:6px;">
                                         <li><strong>Past Simple vs Continuous:</strong> Use past simple for completed events and past continuous for ongoing background actions.</li>
                                         <li><strong>Interrupted Events:</strong> <em>While + Past Continuous</em>, <em>When + Past Simple</em>. Avoid continuous forms with stative verbs.</li>
                                     </ul>
@@ -1267,7 +1480,7 @@
 
                                 <div class="card" style="border-left:4px solid var(--col-vocab); padding:22px 26px;">
                                     <div style="font-size:20px; font-weight:800; color:var(--col-vocab); margin-bottom:6px;">📝 Lexical Range</div>
-                                    <ul style="padding-left:20px; font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.7; display:flex; flex-direction:column; gap:6px;">
+                                    <ul style="padding-left:20px; font-size:16.5px; line-height:1.7; display:flex; flex-direction:column; gap:6px;">
                                         <li><strong>Healthcare &amp; Medicine:</strong> Symptoms (<em>allergy, asthma, stress</em>), Injuries (<em>sprain, fracture</em>), Treatments (<em>antibiotics, surgery, prescription</em>).</li>
                                         <li><strong>Nature &amp; Ecology:</strong> <em>Biodiversity, habitat loss, endangered species, invertebrates, coral reefs</em>.</li>
                                     </ul>
@@ -1275,7 +1488,7 @@
 
                                 <div class="card" style="border-left:4px solid var(--col-writing); padding:22px 26px;">
                                     <div style="font-size:20px; font-weight:800; color:var(--col-writing); margin-bottom:6px;">✍️ Task 2 Essay Mastery</div>
-                                    <ul style="padding-left:20px; font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.7; display:flex; flex-direction:column; gap:6px;">
+                                    <ul style="padding-left:20px; font-size:16.5px; line-height:1.7; display:flex; flex-direction:column; gap:6px;">
                                         <li><strong>Paraphrased Introductions:</strong> Rewrite prompt concepts using synonyms, outline both perspectives, state thesis.</li>
                                         <li><strong>Topic Sentence Coherence:</strong> Order body paragraphs logically (<em>Topic ➔ Reason ➔ Explanation ➔ Result</em>).</li>
                                     </ul>

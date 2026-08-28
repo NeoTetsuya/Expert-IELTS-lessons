@@ -162,6 +162,12 @@ class DeckEngine {
         if (window.DeckComponents) {
             DeckComponents.updateActiveTab();
         }
+        if (window.paragraphLoupe) {
+            window.paragraphLoupe.clearFocus();
+        }
+        window.dispatchEvent(new CustomEvent('slidechanged', {
+            detail: { index, slide: this.slides[index] }
+        }));
     }
 
     nextSlide() {
@@ -229,11 +235,20 @@ class DeckEngine {
         }
         if (!container) return;
 
+        // Normalization helper (normalizes curly quotes, apostrophes, and spacing)
+        const normalizeStr = (str) => {
+            if (!str) return '';
+            return str.trim().toLowerCase()
+                .replace(/[\u2018\u2019\u0060\u00B4]/g, "'")
+                .replace(/[\u201C\u201D]/g, '"')
+                .replace(/\s+/g, ' ');
+        };
+
         // Check blank inputs
         container.querySelectorAll('.blank-input').forEach(input => {
             if (input.dataset.ans) {
-                const rawVal = input.value.trim().toLowerCase();
-                const validAnswers = input.dataset.ans.toLowerCase().split('|').map(a => a.trim());
+                const rawVal = normalizeStr(input.value);
+                const validAnswers = input.dataset.ans.split('|').map(a => normalizeStr(a));
                 const isMatch = rawVal !== '' && validAnswers.some(ans => rawVal === ans);
                 input.classList.remove('correct', 'wrong', 'incorrect');
                 input.classList.add(isMatch ? 'correct' : 'wrong');
@@ -243,13 +258,14 @@ class DeckEngine {
         // Check select inputs
         container.querySelectorAll('.select-input').forEach(select => {
             if (select.dataset.ans) {
-                const val = select.value.trim().toUpperCase();
-                const ans = select.dataset.ans.trim().toUpperCase();
+                const val = normalizeStr(select.value);
+                const validAnswers = select.dataset.ans.split('|').map(a => normalizeStr(a));
                 select.classList.remove('correct', 'wrong', 'incorrect');
                 if (val === '') {
                     select.classList.add('wrong');
                 } else {
-                    select.classList.add(val === ans ? 'correct' : 'wrong');
+                    const isMatch = validAnswers.some(ans => val === ans);
+                    select.classList.add(isMatch ? 'correct' : 'wrong');
                 }
             }
         });
@@ -272,6 +288,9 @@ class DeckEngine {
                 input.value = input.dataset.ans.split('|')[0];
                 input.classList.remove('wrong', 'incorrect');
                 input.classList.add('correct');
+                if (window.DeckComponents?.autoResizeBlank) {
+                    DeckComponents.autoResizeBlank(input);
+                }
             }
         });
 
@@ -286,6 +305,9 @@ class DeckEngine {
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
         document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
         document.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+        if (window.vocabBank) {
+            window.vocabBank.updateChipStates(container);
+        }
     }
 
     revealAnswers(container) {
@@ -303,11 +325,17 @@ class DeckEngine {
         container.querySelectorAll('.blank-input, .select-input').forEach(input => {
             input.value = '';
             input.classList.remove('correct', 'wrong', 'incorrect');
+            if (input.classList.contains('blank-input') && window.DeckComponents?.autoResizeBlank) {
+                DeckComponents.autoResizeBlank(input);
+            }
         });
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
         document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
         document.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted'));
+        if (window.vocabBank) {
+            window.vocabBank.updateChipStates(container);
+        }
     }
 
     resetAnswers(container) {
@@ -389,8 +417,11 @@ class DeckEngine {
     }
 
     toggleSynonymExplanation(qKey, evId) {
-        const evTarget = document.getElementById(evId);
-        const synSpans = document.querySelectorAll(`[data-q="${qKey}"]`);
+        if (!evId && qKey) evId = `ev-${qKey}`;
+        if (!qKey && evId) qKey = evId.replace(/^ev-/, '');
+
+        const evTarget = evId ? document.getElementById(evId) : null;
+        const synSpans = qKey ? document.querySelectorAll(`[data-q="${qKey}"]`) : [];
         const isCurrentlyActive = evTarget && evTarget.classList.contains('highlighted');
 
         document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
@@ -402,6 +433,14 @@ class DeckEngine {
                 evTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
             synSpans.forEach(s => s.classList.add('active-syn'));
+        }
+
+        if (qKey) {
+            const card = document.querySelector(`.q-card[data-q="${qKey}"]`);
+            if (card) {
+                const exp = card.querySelector('.item-explanation');
+                if (exp) exp.classList.toggle('show', !isCurrentlyActive);
+            }
         }
     }
 

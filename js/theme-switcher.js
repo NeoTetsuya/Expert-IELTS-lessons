@@ -8,7 +8,13 @@
 class ThemeSwitcher {
     constructor() {
         this.STORAGE_KEY = 'deck_hub_theme';
-        this.currentTheme = localStorage.getItem(this.STORAGE_KEY) || 'dark';
+        let saved = 'dark';
+        try {
+            saved = localStorage.getItem(this.STORAGE_KEY) || 'dark';
+        } catch (e) {
+            console.warn('localStorage unavailable:', e);
+        }
+        this.currentTheme = saved;
         this.init();
     }
 
@@ -34,7 +40,11 @@ class ThemeSwitcher {
     applyTheme(theme) {
         this.currentTheme = theme;
         document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem(this.STORAGE_KEY, theme);
+        try {
+            localStorage.setItem(this.STORAGE_KEY, theme);
+        } catch (e) {
+            console.warn('localStorage unavailable:', e);
+        }
 
         const btn = document.getElementById('themeToggleBtn');
         if (btn) {

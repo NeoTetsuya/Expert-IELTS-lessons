@@ -11,7 +11,13 @@
 class VocabBank {
     constructor() {
         this.activeInput = null;
-        this.currentAccent = localStorage.getItem('ielts_speech_accent') || 'en-GB'; // default British RP
+        let savedAccent = 'en-GB';
+        try {
+            savedAccent = localStorage.getItem('ielts_speech_accent') || 'en-GB';
+        } catch (e) {
+            console.warn('localStorage unavailable:', e);
+        }
+        this.currentAccent = savedAccent; // default British RP
         this.speechRate = 0.92;
         this.init();
     }
@@ -35,21 +41,26 @@ class VocabBank {
             const container = chip.closest('.card, .q-card, .two-col, .page-content, .slide');
             if (!container) return;
 
-            // Find target blank (either previously focused blank or first empty blank in this container)
+            // Find target blank (either focused blank or next empty blank in container)
             let targetBlank = this.activeInput;
-            if (!targetBlank || !container.contains(targetBlank)) {
-                targetBlank = container.querySelector('.blank-input:not([value]), .blank-input[value=""]');
+            const allBlanks = Array.from(container.querySelectorAll('.blank-input'));
+            if (!targetBlank || !container.contains(targetBlank) || targetBlank.value.trim() !== '') {
+                targetBlank = allBlanks.find(inp => inp.value.trim() === '') || allBlanks[0];
             }
 
             if (targetBlank) {
                 targetBlank.value = word;
                 targetBlank.dispatchEvent(new Event('input', { bubbles: true }));
+                if (window.DeckComponents?.autoResizeBlank) {
+                    DeckComponents.autoResizeBlank(targetBlank);
+                }
                 this.updateChipStates(container);
-                // Move focus to next blank
-                const allBlanks = Array.from(container.querySelectorAll('.blank-input'));
+
+                // Advance focus to the next available blank
                 const currentIndex = allBlanks.indexOf(targetBlank);
-                if (currentIndex >= 0 && currentIndex < allBlanks.length - 1) {
-                    this.activeInput = allBlanks[currentIndex + 1];
+                const nextBlank = allBlanks.slice(currentIndex + 1).find(inp => inp.value.trim() === '');
+                if (nextBlank) {
+                    this.activeInput = nextBlank;
                     this.activeInput.focus();
                 } else {
                     this.activeInput = null;
@@ -65,6 +76,18 @@ class VocabBank {
         document.addEventListener('focusin', (e) => {
             if (e.target.classList.contains('blank-input')) {
                 this.activeInput = e.target;
+            }
+        });
+
+        // Double click blank to clear it and restore chip to bank
+        document.addEventListener('dblclick', (e) => {
+            if (e.target.classList.contains('blank-input')) {
+                e.target.value = '';
+                e.target.dispatchEvent(new Event('input', { bubbles: true }));
+                const container = e.target.closest('.card, .q-card, .two-col, .page-content, .slide');
+                if (container) {
+                    this.updateChipStates(container);
+                }
             }
         });
 
@@ -129,7 +152,11 @@ class VocabBank {
 
     setAccent(accent) {
         this.currentAccent = accent;
-        localStorage.setItem('ielts_speech_accent', accent);
+        try {
+            localStorage.setItem('ielts_speech_accent', accent);
+        } catch (e) {
+            console.warn('localStorage unavailable:', e);
+        }
     }
 
     injectAccentSelectorStyles() {

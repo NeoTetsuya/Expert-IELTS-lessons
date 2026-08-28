@@ -67,7 +67,12 @@ class DeckThemeEngine {
         ];
 
         // Determine default or saved theme
-        const saved = localStorage.getItem(this.STORAGE_KEY);
+        let saved = null;
+        try {
+            saved = localStorage.getItem(this.STORAGE_KEY);
+        } catch (e) {
+            console.warn('localStorage unavailable:', e);
+        }
         const docDefault = document.documentElement.getAttribute('data-theme') || 
                            document.body.getAttribute('data-theme') || 'academic';
         this.currentTheme = saved || docDefault;
@@ -99,7 +104,11 @@ class DeckThemeEngine {
         
         document.documentElement.setAttribute('data-theme', theme.id);
         document.body.setAttribute('data-theme', theme.id);
-        localStorage.setItem(this.STORAGE_KEY, theme.id);
+        try {
+            localStorage.setItem(this.STORAGE_KEY, theme.id);
+        } catch (e) {
+            console.warn('localStorage unavailable:', e);
+        }
 
         if (showToast) {
             this.showToast(`${theme.icon} Theme: ${theme.name} (${theme.displayFont} + ${theme.bodyFont})`);

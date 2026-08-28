@@ -13,6 +13,123 @@ class DeckComponents {
         this.hydrateTabs();
         this.hydrateExerciseActions();
         this.hydrateSynonymButtons();
+        this.hydrateBlanksAndInputs();
+        this.bindAutoExpandBlanks();
+    }
+
+    /**
+     * Dynamically auto-expands .blank-input width so full words are never clipped or truncated
+     */
+    static autoResizeBlank(input) {
+        if (!input || !input.classList.contains('blank-input')) return;
+        if (!input.dataset.defaultWidth) {
+            input.dataset.defaultWidth = input.style.width || `${input.offsetWidth}px` || '80px';
+        }
+
+        const text = input.value || input.placeholder || '';
+        if (!text) {
+            input.style.width = input.dataset.defaultWidth;
+            return;
+        }
+
+        if (!DeckComponents.measureCanvas) {
+            DeckComponents.measureCanvas = document.createElement('canvas');
+            DeckComponents.measureCtx = DeckComponents.measureCanvas.getContext('2d');
+        }
+
+        const style = window.getComputedStyle(input);
+        const font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+        DeckComponents.measureCtx.font = font;
+
+        const metrics = DeckComponents.measureCtx.measureText(text);
+        const textWidth = Math.ceil(metrics.width);
+
+        const paddingLeft = parseFloat(style.paddingLeft) || 14;
+        const paddingRight = parseFloat(style.paddingRight) || 14;
+        const requiredWidth = textWidth + paddingLeft + paddingRight + 14;
+
+        const defaultWidth = parseFloat(input.dataset.defaultWidth) || 80;
+        const newWidth = Math.max(defaultWidth, requiredWidth);
+
+        input.style.width = `${newWidth}px`;
+    }
+
+    static bindAutoExpandBlanks() {
+        document.addEventListener('input', (e) => {
+            if (e.target && e.target.classList.contains('blank-input')) {
+                DeckComponents.autoResizeBlank(e.target);
+            }
+        });
+
+        document.querySelectorAll('.blank-input').forEach(input => {
+            DeckComponents.autoResizeBlank(input);
+        });
+    }
+
+    /**
+     * Guarantees all exercise inputs start clean and never show answers immediately:
+     * - Clears any initial value on .blank-input and provides subtle sequential number placeholders [1], [2], [3]...
+     * - Resets all .select-input dropdowns to their first unselected option
+     * - Ensures explanations and evidence highlights start completely hidden
+     */
+    static hydrateBlanksAndInputs() {
+        document.querySelectorAll('.slide').forEach(slide => {
+            const containers = slide.querySelectorAll('.card, .question-pane, .page-content, .notebook');
+            const processedInputs = new Set();
+
+            containers.forEach(container => {
+                const blanks = Array.from(container.querySelectorAll('.blank-input'));
+                let count = 0;
+                blanks.forEach(input => {
+                    if (processedInputs.has(input)) return;
+                    processedInputs.add(input);
+
+                    // Clear value so answers are never displayed upfront
+                    input.value = '';
+                    input.classList.remove('correct', 'wrong', 'incorrect');
+
+                    // If no explicit placeholder exists, assign clean sequential number placeholder [1], [2], etc.
+                    if (!input.placeholder || input.placeholder.trim() === '') {
+                        count++;
+                        input.placeholder = `[${count}]`;
+                    }
+                });
+            });
+
+            // Handle any standalone blanks
+            let standaloneCount = 0;
+            slide.querySelectorAll('.blank-input').forEach(input => {
+                if (!processedInputs.has(input)) {
+                    input.value = '';
+                    input.classList.remove('correct', 'wrong', 'incorrect');
+                    if (!input.placeholder || input.placeholder.trim() === '') {
+                        standaloneCount++;
+                        input.placeholder = `[${standaloneCount}]`;
+                    }
+                }
+            });
+
+            // Ensure selects start at initial option
+            slide.querySelectorAll('.select-input').forEach(sel => {
+                sel.selectedIndex = 0;
+                sel.classList.remove('correct', 'wrong', 'incorrect');
+            });
+
+            // Ensure explanations start hidden
+            slide.querySelectorAll('.item-explanation').forEach(exp => {
+                exp.classList.remove('show');
+            });
+
+            // Ensure evidence marks start plain
+            slide.querySelectorAll('mark.evidence').forEach(m => {
+                m.classList.remove('highlighted', 'glow-pulse');
+            });
+
+            // Ensure synonym pairs start un-highlighted
+            slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => {
+                s.classList.remove('active-syn');
+            });
+        });
     }
 
     /**
@@ -140,13 +257,16 @@ class DeckComponents {
     }
 
     /**
-     * Auto-binds synonym buttons that specify data-q and data-ev
+     * Auto-binds synonym buttons that specify data-q or data-ev
      */
     static hydrateSynonymButtons() {
-        document.querySelectorAll('.syn-btn[data-q]').forEach(btn => {
-            const qKey = btn.dataset.q;
-            const evId = btn.dataset.ev || `ev-${qKey}`;
-            btn.onclick = () => window.deckEngine?.toggleSynonymExplanation(qKey, evId);
+        document.querySelectorAll('.syn-btn').forEach(btn => {
+            const qKey = btn.dataset.q || btn.closest('.q-card')?.dataset.q || (btn.dataset.ev ? btn.dataset.ev.replace(/^ev-/, '') : null);
+            const evId = btn.dataset.ev || (qKey ? `ev-${qKey}` : null);
+            btn.onclick = (e) => {
+                e.stopPropagation();
+                window.deckEngine?.toggleSynonymExplanation(qKey, evId);
+            };
         });
     }
 }

@@ -169,6 +169,12 @@ class DeckEngine {
         if (window.DeckComponents) {
             DeckComponents.updateActiveTab();
         }
+        if (window.paragraphLoupe) {
+            window.paragraphLoupe.clearFocus();
+        }
+        window.dispatchEvent(new CustomEvent('slidechanged', {
+            detail: { index, slide: this.slides[index] }
+        }));
     }
 
     nextSlide() {
@@ -236,11 +242,20 @@ class DeckEngine {
         }
         if (!container) return;
 
+        // Normalization helper (normalizes curly quotes, apostrophes, and spacing)
+        const normalizeStr = (str) => {
+            if (!str) return '';
+            return str.trim().toLowerCase()
+                .replace(/[\u2018\u2019\u0060\u00B4]/g, "'")
+                .replace(/[\u201C\u201D]/g, '"')
+                .replace(/\s+/g, ' ');
+        };
+
         // Check blank inputs
         container.querySelectorAll('.blank-input').forEach(input => {
             if (input.dataset.ans) {
-                const rawVal = input.value.trim().toLowerCase();
-                const validAnswers = input.dataset.ans.toLowerCase().split('|').map(a => a.trim());
+                const rawVal = normalizeStr(input.value);
+                const validAnswers = input.dataset.ans.split('|').map(a => normalizeStr(a));
                 const isMatch = rawVal !== '' && validAnswers.some(ans => rawVal === ans);
                 input.classList.remove('correct', 'wrong', 'incorrect');
                 input.classList.add(isMatch ? 'correct' : 'wrong');
@@ -250,13 +265,14 @@ class DeckEngine {
         // Check select inputs
         container.querySelectorAll('.select-input').forEach(select => {
             if (select.dataset.ans) {
-                const val = select.value.trim().toUpperCase();
-                const ans = select.dataset.ans.trim().toUpperCase();
+                const val = normalizeStr(select.value);
+                const validAnswers = select.dataset.ans.split('|').map(a => normalizeStr(a));
                 select.classList.remove('correct', 'wrong', 'incorrect');
                 if (val === '') {
                     select.classList.add('wrong');
                 } else {
-                    select.classList.add(val === ans ? 'correct' : 'wrong');
+                    const isMatch = validAnswers.some(ans => val === ans);
+                    select.classList.add(isMatch ? 'correct' : 'wrong');
                 }
             }
         });
@@ -279,6 +295,9 @@ class DeckEngine {
                 input.value = input.dataset.ans.split('|')[0];
                 input.classList.remove('wrong', 'incorrect');
                 input.classList.add('correct');
+                if (window.DeckComponents?.autoResizeBlank) {
+                    DeckComponents.autoResizeBlank(input);
+                }
             }
         });
 
@@ -293,6 +312,9 @@ class DeckEngine {
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
         document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
         document.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+        if (window.vocabBank) {
+            window.vocabBank.updateChipStates(container);
+        }
     }
 
     revealAnswers(container) {
@@ -310,11 +332,17 @@ class DeckEngine {
         container.querySelectorAll('.blank-input, .select-input').forEach(input => {
             input.value = '';
             input.classList.remove('correct', 'wrong', 'incorrect');
+            if (input.classList.contains('blank-input') && window.DeckComponents?.autoResizeBlank) {
+                DeckComponents.autoResizeBlank(input);
+            }
         });
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
         document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
         document.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted'));
+        if (window.vocabBank) {
+            window.vocabBank.updateChipStates(container);
+        }
     }
 
     resetAnswers(container) {
@@ -396,8 +424,11 @@ class DeckEngine {
     }
 
     toggleSynonymExplanation(qKey, evId) {
-        const evTarget = document.getElementById(evId);
-        const synSpans = document.querySelectorAll(`[data-q="${qKey}"]`);
+        if (!evId && qKey) evId = `ev-${qKey}`;
+        if (!qKey && evId) qKey = evId.replace(/^ev-/, '');
+
+        const evTarget = evId ? document.getElementById(evId) : null;
+        const synSpans = qKey ? document.querySelectorAll(`[data-q="${qKey}"]`) : [];
         const isCurrentlyActive = evTarget && evTarget.classList.contains('highlighted');
 
         document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
@@ -409,6 +440,14 @@ class DeckEngine {
                 evTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
             synSpans.forEach(s => s.classList.add('active-syn'));
+        }
+
+        if (qKey) {
+            const card = document.querySelector(`.q-card[data-q="${qKey}"]`);
+            if (card) {
+                const exp = card.querySelector('.item-explanation');
+                if (exp) exp.classList.toggle('show', !isCurrentlyActive);
+            }
         }
     }
 
@@ -473,6 +512,123 @@ class DeckComponents {
         this.hydrateTabs();
         this.hydrateExerciseActions();
         this.hydrateSynonymButtons();
+        this.hydrateBlanksAndInputs();
+        this.bindAutoExpandBlanks();
+    }
+
+    /**
+     * Dynamically auto-expands .blank-input width so full words are never clipped or truncated
+     */
+    static autoResizeBlank(input) {
+        if (!input || !input.classList.contains('blank-input')) return;
+        if (!input.dataset.defaultWidth) {
+            input.dataset.defaultWidth = input.style.width || `${input.offsetWidth}px` || '80px';
+        }
+
+        const text = input.value || input.placeholder || '';
+        if (!text) {
+            input.style.width = input.dataset.defaultWidth;
+            return;
+        }
+
+        if (!DeckComponents.measureCanvas) {
+            DeckComponents.measureCanvas = document.createElement('canvas');
+            DeckComponents.measureCtx = DeckComponents.measureCanvas.getContext('2d');
+        }
+
+        const style = window.getComputedStyle(input);
+        const font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+        DeckComponents.measureCtx.font = font;
+
+        const metrics = DeckComponents.measureCtx.measureText(text);
+        const textWidth = Math.ceil(metrics.width);
+
+        const paddingLeft = parseFloat(style.paddingLeft) || 14;
+        const paddingRight = parseFloat(style.paddingRight) || 14;
+        const requiredWidth = textWidth + paddingLeft + paddingRight + 14;
+
+        const defaultWidth = parseFloat(input.dataset.defaultWidth) || 80;
+        const newWidth = Math.max(defaultWidth, requiredWidth);
+
+        input.style.width = `${newWidth}px`;
+    }
+
+    static bindAutoExpandBlanks() {
+        document.addEventListener('input', (e) => {
+            if (e.target && e.target.classList.contains('blank-input')) {
+                DeckComponents.autoResizeBlank(e.target);
+            }
+        });
+
+        document.querySelectorAll('.blank-input').forEach(input => {
+            DeckComponents.autoResizeBlank(input);
+        });
+    }
+
+    /**
+     * Guarantees all exercise inputs start clean and never show answers immediately:
+     * - Clears any initial value on .blank-input and provides subtle sequential number placeholders [1], [2], [3]...
+     * - Resets all .select-input dropdowns to their first unselected option
+     * - Ensures explanations and evidence highlights start completely hidden
+     */
+    static hydrateBlanksAndInputs() {
+        document.querySelectorAll('.slide').forEach(slide => {
+            const containers = slide.querySelectorAll('.card, .question-pane, .page-content, .notebook');
+            const processedInputs = new Set();
+
+            containers.forEach(container => {
+                const blanks = Array.from(container.querySelectorAll('.blank-input'));
+                let count = 0;
+                blanks.forEach(input => {
+                    if (processedInputs.has(input)) return;
+                    processedInputs.add(input);
+
+                    // Clear value so answers are never displayed upfront
+                    input.value = '';
+                    input.classList.remove('correct', 'wrong', 'incorrect');
+
+                    // If no explicit placeholder exists, assign clean sequential number placeholder [1], [2], etc.
+                    if (!input.placeholder || input.placeholder.trim() === '') {
+                        count++;
+                        input.placeholder = `[${count}]`;
+                    }
+                });
+            });
+
+            // Handle any standalone blanks
+            let standaloneCount = 0;
+            slide.querySelectorAll('.blank-input').forEach(input => {
+                if (!processedInputs.has(input)) {
+                    input.value = '';
+                    input.classList.remove('correct', 'wrong', 'incorrect');
+                    if (!input.placeholder || input.placeholder.trim() === '') {
+                        standaloneCount++;
+                        input.placeholder = `[${standaloneCount}]`;
+                    }
+                }
+            });
+
+            // Ensure selects start at initial option
+            slide.querySelectorAll('.select-input').forEach(sel => {
+                sel.selectedIndex = 0;
+                sel.classList.remove('correct', 'wrong', 'incorrect');
+            });
+
+            // Ensure explanations start hidden
+            slide.querySelectorAll('.item-explanation').forEach(exp => {
+                exp.classList.remove('show');
+            });
+
+            // Ensure evidence marks start plain
+            slide.querySelectorAll('mark.evidence').forEach(m => {
+                m.classList.remove('highlighted', 'glow-pulse');
+            });
+
+            // Ensure synonym pairs start un-highlighted
+            slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => {
+                s.classList.remove('active-syn');
+            });
+        });
     }
 
     /**
@@ -600,13 +756,16 @@ class DeckComponents {
     }
 
     /**
-     * Auto-binds synonym buttons that specify data-q and data-ev
+     * Auto-binds synonym buttons that specify data-q or data-ev
      */
     static hydrateSynonymButtons() {
-        document.querySelectorAll('.syn-btn[data-q]').forEach(btn => {
-            const qKey = btn.dataset.q;
-            const evId = btn.dataset.ev || `ev-${qKey}`;
-            btn.onclick = () => window.deckEngine?.toggleSynonymExplanation(qKey, evId);
+        document.querySelectorAll('.syn-btn').forEach(btn => {
+            const qKey = btn.dataset.q || btn.closest('.q-card')?.dataset.q || (btn.dataset.ev ? btn.dataset.ev.replace(/^ev-/, '') : null);
+            const evId = btn.dataset.ev || (qKey ? `ev-${qKey}` : null);
+            btn.onclick = (e) => {
+                e.stopPropagation();
+                window.deckEngine?.toggleSynonymExplanation(qKey, evId);
+            };
         });
     }
 }
@@ -793,7 +952,12 @@ class DeckThemeEngine {
         ];
 
         // Determine default or saved theme
-        const saved = localStorage.getItem(this.STORAGE_KEY);
+        let saved = null;
+        try {
+            saved = localStorage.getItem(this.STORAGE_KEY);
+        } catch (e) {
+            console.warn('localStorage unavailable:', e);
+        }
         const docDefault = document.documentElement.getAttribute('data-theme') || 
                            document.body.getAttribute('data-theme') || 'academic';
         this.currentTheme = saved || docDefault;
@@ -825,7 +989,11 @@ class DeckThemeEngine {
         
         document.documentElement.setAttribute('data-theme', theme.id);
         document.body.setAttribute('data-theme', theme.id);
-        localStorage.setItem(this.STORAGE_KEY, theme.id);
+        try {
+            localStorage.setItem(this.STORAGE_KEY, theme.id);
+        } catch (e) {
+            console.warn('localStorage unavailable:', e);
+        }
 
         if (showToast) {
             this.showToast(`${theme.icon} Theme: ${theme.name} (${theme.displayFont} + ${theme.bodyFont})`);
@@ -932,13 +1100,13 @@ window.deckThemeEngine = new DeckThemeEngine();
 /* ==================== MODULE: teacher-highlighter.js ==================== */
 /**
  * ==========================================================================
- * TEACHER HIGHLIGHTER ENGINE (TeacherHighlighter)
- * Translucent Fluorescent Highlighter for Teaching & Presentation Decks
- * - Safe overlay canvas: Never distorts text or mutates slide DOM elements
- * - Realistic marker chisel-tip strokes with translucent fluorescent glow
- * - Multi-color support (Fluorescent Yellow, Neon Green, Sky Cyan, Coral Pink)
- * - Stroke undo & instant clean canvas clear
- * - Keyboard shortcuts: 'H' (toggle), 'C' (clear), 'Ctrl+Z' (undo)
+ * TEACHER REAL TEXT HIGHLIGHTER ENGINE (TeacherHighlighter)
+ * Interactive Text-Selection Highlighter for Classroom Presentations
+ * - Directly highlights selected text in the slide with fluorescent marker tones
+ * - Preserves original font styling and text legibility (no font re-coloring)
+ * - Multi-color support: Fluorescent Yellow, Neon Green, Sky Cyan, Coral Pink
+ * - Click any highlighted text to remove/unhighlight
+ * - Keyboard shortcuts: 'H' (toggle mode), 'C' (clear all), 'Ctrl+Z' (undo)
  * ==========================================================================
  */
 
@@ -947,95 +1115,58 @@ class TeacherHighlighter {
         this.deckEngine = deckEngine;
         this.isActive = false;
         this.colors = [
-            { name: 'Yellow', rgba: 'rgba(250, 204, 21, 0.45)', hex: '#facc15', label: '🟡' },
-            { name: 'Green',  rgba: 'rgba(74, 222, 128, 0.42)', hex: '#4ade80', label: '🟢' },
-            { name: 'Cyan',   rgba: 'rgba(56, 189, 248, 0.42)', hex: '#38bdf8', label: '🔵' },
-            { name: 'Pink',   rgba: 'rgba(244, 114, 182, 0.45)', hex: '#f472b6', label: '🌸' }
+            { name: 'Yellow', bg: 'rgba(254, 240, 138, 0.85)', hex: '#facc15', border: '#ca8a04', label: '🟡' },
+            { name: 'Green',  bg: 'rgba(187, 247, 208, 0.85)', hex: '#4ade80', border: '#16a34a', label: '🟢' },
+            { name: 'Cyan',   bg: 'rgba(186, 230, 253, 0.85)', hex: '#38bdf8', border: '#0284c7', label: '🔵' },
+            { name: 'Pink',   bg: 'rgba(251, 207, 232, 0.85)', hex: '#f472b6', border: '#db2777', label: '🌸' }
         ];
         this.currentColorIndex = 0;
-        this.strokeWidth = 26;
-        this.history = []; // Array of drawn paths for undo
-        this.currentPath = [];
+        this.history = []; // Array of arrays of created <mark> elements
 
-        this.initCanvas();
-        this.initEvents();
+        this.init();
+    }
+
+    init() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.bindEvents());
+        } else {
+            this.bindEvents();
+        }
         this.injectStyles();
     }
 
-    initCanvas() {
-        let canvas = document.getElementById('highlighterCanvas');
-        if (!canvas) {
-            canvas = document.createElement('canvas');
-            canvas.id = 'highlighterCanvas';
-            canvas.className = 'highlighter-canvas';
-            document.body.appendChild(canvas);
-        }
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
-
-        const resize = () => {
-            const dpr = window.devicePixelRatio || 1;
-            canvas.width = window.innerWidth * dpr;
-            canvas.height = window.innerHeight * dpr;
-            canvas.style.width = `${window.innerWidth}px`;
-            canvas.style.height = `${window.innerHeight}px`;
-            this.ctx.scale(dpr, dpr);
-            this.redrawHistory();
-        };
-
-        resize();
-        window.addEventListener('resize', resize);
-    }
-
-    initEvents() {
-        let isDrawing = false;
-
-        this.canvas.addEventListener('mousedown', (e) => {
+    bindEvents() {
+        // Highlight on mouseup when active and text is selected
+        document.addEventListener('mouseup', (e) => {
             if (!this.isActive) return;
-            isDrawing = true;
-            this.currentPath = [{ x: e.clientX, y: e.clientY }];
-            this.drawPoint(e.clientX, e.clientY);
+            // Avoid triggering when clicking inside HUD controls or modals
+            if (e.target.closest('#presentationToolsHUD, .tool-modal, .highlighter-palette, .notes-header')) return;
+
+            setTimeout(() => {
+                const selection = window.getSelection();
+                if (selection && !selection.isCollapsed && selection.toString().trim().length > 0) {
+                    this.highlightSelection(this.colors[this.currentColorIndex]);
+                }
+            }, 10);
         });
-
-        this.canvas.addEventListener('mousemove', (e) => {
-            if (!isDrawing || !this.isActive) return;
-            const pt = { x: e.clientX, y: e.clientY };
-            this.currentPath.push(pt);
-            this.drawSegment(this.currentPath[this.currentPath.length - 2], pt);
-        });
-
-        const stopDrawing = () => {
-            if (!isDrawing) return;
-            isDrawing = false;
-            if (this.currentPath.length > 0) {
-                this.history.push({
-                    color: this.colors[this.currentColorIndex].rgba,
-                    width: this.strokeWidth,
-                    points: [...this.currentPath]
-                });
-                this.currentPath = [];
-            }
-        };
-
-        window.addEventListener('mouseup', stopDrawing);
-        window.addEventListener('blur', stopDrawing);
 
         // Global shortcuts
         document.addEventListener('keydown', (e) => {
             if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
 
-            // 'H' key toggles highlighter
+            // 'H' key toggles highlighter mode
             if ((e.key === 'h' || e.key === 'H') && !e.ctrlKey && !e.metaKey) {
                 e.preventDefault();
                 this.toggle();
             }
 
-            // 'C' key clears highlights when active
+            // 'C' key clears highlights when mode is active
             if ((e.key === 'c' || e.key === 'C') && this.isActive && !e.ctrlKey) {
+                e.preventDefault();
                 this.clear();
             }
 
-            // 'Ctrl + Z' undoes last highlight stroke
+            // 'Ctrl + Z' undoes last highlight
             if (e.ctrlKey && (e.key === 'z' || e.key === 'Z') && this.isActive) {
                 e.preventDefault();
                 this.undo();
@@ -1043,61 +1174,9 @@ class TeacherHighlighter {
         });
     }
 
-    drawPoint(x, y) {
-        this.ctx.save();
-        this.ctx.fillStyle = this.colors[this.currentColorIndex].rgba;
-        this.ctx.beginPath();
-        this.ctx.arc(x, y, this.strokeWidth / 2, 0, Math.PI * 2);
-        this.ctx.fill();
-        this.ctx.restore();
-    }
-
-    drawSegment(p1, p2) {
-        if (!p1 || !p2) return;
-        this.ctx.save();
-        this.ctx.strokeStyle = this.colors[this.currentColorIndex].rgba;
-        this.ctx.lineWidth = this.strokeWidth;
-        this.ctx.lineCap = 'round';
-        this.ctx.lineJoin = 'round';
-        this.ctx.beginPath();
-        this.ctx.moveTo(p1.x, p1.y);
-        this.ctx.lineTo(p2.x, p2.y);
-        this.ctx.stroke();
-        this.ctx.restore();
-    }
-
-    redrawHistory() {
-        const dpr = window.devicePixelRatio || 1;
-        this.ctx.clearRect(0, 0, this.canvas.width / dpr, this.canvas.height / dpr);
-
-        this.history.forEach(stroke => {
-            if (stroke.points.length === 1) {
-                this.ctx.save();
-                this.ctx.fillStyle = stroke.color;
-                this.ctx.beginPath();
-                this.ctx.arc(stroke.points[0].x, stroke.points[0].y, stroke.width / 2, 0, Math.PI * 2);
-                this.ctx.fill();
-                this.ctx.restore();
-            } else if (stroke.points.length > 1) {
-                this.ctx.save();
-                this.ctx.strokeStyle = stroke.color;
-                this.ctx.lineWidth = stroke.width;
-                this.ctx.lineCap = 'round';
-                this.ctx.lineJoin = 'round';
-                this.ctx.beginPath();
-                this.ctx.moveTo(stroke.points[0].x, stroke.points[0].y);
-                for (let i = 1; i < stroke.points.length; i++) {
-                    this.ctx.lineTo(stroke.points[i].x, stroke.points[i].y);
-                }
-                this.ctx.stroke();
-                this.ctx.restore();
-            }
-        });
-    }
-
     toggle() {
         this.isActive = !this.isActive;
-        this.canvas.classList.toggle('active', this.isActive);
+        document.body.classList.toggle('highlighter-mode-active', this.isActive);
 
         const btn = document.getElementById('toolHighlightBtn');
         if (btn) btn.classList.toggle('active', this.isActive);
@@ -1105,10 +1184,8 @@ class TeacherHighlighter {
         const palette = document.getElementById('highlighterPalette');
         if (palette) palette.style.display = this.isActive ? 'flex' : 'none';
 
-        // If pen or laser is on, turn them off to avoid conflict
-        if (this.isActive && window.presentationTools) {
-            if (window.presentationTools.isPenActive) window.presentationTools.togglePen();
-            if (window.presentationTools.isLaserActive) window.presentationTools.toggleLaser();
+        if (this.isActive && window.deckEngine) {
+            window.deckEngine.showToastNotification(`🖍️ Text Highlighter: ${this.colors[this.currentColorIndex].name} (Select text to highlight)`);
         }
     }
 
@@ -1118,27 +1195,133 @@ class TeacherHighlighter {
             document.querySelectorAll('.highlighter-color-btn').forEach((btn, i) => {
                 btn.classList.toggle('active', i === index);
             });
+            if (window.deckEngine) {
+                window.deckEngine.showToastNotification(`🖍️ Color: ${this.colors[index].name}`);
+            }
         }
     }
 
-    setWidth(width) {
-        this.strokeWidth = width;
-        document.querySelectorAll('.highlighter-width-btn').forEach(btn => {
-            btn.classList.toggle('active', parseInt(btn.dataset.width) === width);
+    highlightSelection(colorObj) {
+        const selection = window.getSelection();
+        if (!selection || selection.isCollapsed || selection.rangeCount === 0) return;
+
+        const range = selection.getRangeAt(0);
+        const selectedText = selection.toString().trim();
+        if (!selectedText) return;
+
+        const commonAncestor = range.commonAncestorContainer;
+        const rootElement = commonAncestor.nodeType === Node.ELEMENT_NODE ? commonAncestor : commonAncestor.parentNode;
+
+        // Skip non-content UI
+        if (rootElement.closest('.presentation-tools-hud, .tool-modal, .presenter-notes-drawer')) {
+            return;
+        }
+
+        const treeWalker = document.createTreeWalker(
+            rootElement,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode: (node) => {
+                    if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+                    try {
+                        if (range.intersectsNode(node)) {
+                            return NodeFilter.FILTER_ACCEPT;
+                        }
+                    } catch(err) {}
+                    return NodeFilter.FILTER_REJECT;
+                }
+            }
+        );
+
+        const textNodes = [];
+        let currentNode = treeWalker.nextNode();
+        while (currentNode) {
+            textNodes.push(currentNode);
+            currentNode = treeWalker.nextNode();
+        }
+
+        if (textNodes.length === 0 && commonAncestor.nodeType === Node.TEXT_NODE) {
+            textNodes.push(commonAncestor);
+        }
+
+        const createdMarks = [];
+
+        textNodes.forEach(textNode => {
+            const isStart = (textNode === range.startContainer);
+            const isEnd = (textNode === range.endContainer);
+            const startOffset = isStart ? range.startOffset : 0;
+            const endOffset = isEnd ? range.endOffset : textNode.nodeValue.length;
+
+            if (startOffset >= endOffset) return;
+
+            const text = textNode.nodeValue;
+            const targetText = text.substring(startOffset, endOffset);
+            if (!targetText.trim()) return;
+
+            const beforeText = text.substring(0, startOffset);
+            const afterText = text.substring(endOffset);
+
+            const mark = document.createElement('mark');
+            mark.className = 'teacher-text-highlight';
+            mark.dataset.colorName = colorObj.name;
+            mark.style.backgroundColor = colorObj.bg;
+            mark.style.borderColor = colorObj.border;
+            mark.textContent = targetText;
+            mark.title = 'Click to unhighlight';
+
+            mark.addEventListener('click', (e) => {
+                if (this.isActive) {
+                    e.stopPropagation();
+                    this.removeHighlight(mark);
+                }
+            });
+
+            const parent = textNode.parentNode;
+            if (!parent) return;
+
+            const fragment = document.createDocumentFragment();
+            if (beforeText) fragment.appendChild(document.createTextNode(beforeText));
+            fragment.appendChild(mark);
+            if (afterText) fragment.appendChild(document.createTextNode(afterText));
+
+            parent.replaceChild(fragment, textNode);
+            createdMarks.push(mark);
         });
+
+        selection.removeAllRanges();
+
+        if (createdMarks.length > 0) {
+            this.history.push(createdMarks);
+        }
+    }
+
+    removeHighlight(mark) {
+        if (!mark || !mark.parentNode) return;
+        const text = mark.textContent;
+        const textNode = document.createTextNode(text);
+        const parent = mark.parentNode;
+        parent.replaceChild(textNode, mark);
+        parent.normalize(); // Merges adjacent text nodes smoothly
     }
 
     undo() {
         if (this.history.length > 0) {
-            this.history.pop();
-            this.redrawHistory();
+            const lastBatch = this.history.pop();
+            lastBatch.forEach(mark => this.removeHighlight(mark));
+            if (window.deckEngine) {
+                window.deckEngine.showToastNotification('↩️ Undid highlight');
+            }
         }
     }
 
     clear() {
+        const activeSlide = document.querySelector('.slide.active') || document.body;
+        const highlights = activeSlide.querySelectorAll('.teacher-text-highlight');
+        highlights.forEach(mark => this.removeHighlight(mark));
         this.history = [];
-        const dpr = window.devicePixelRatio || 1;
-        this.ctx.clearRect(0, 0, this.canvas.width / dpr, this.canvas.height / dpr);
+        if (window.deckEngine) {
+            window.deckEngine.showToastNotification('🗑️ Cleared highlights');
+        }
     }
 
     injectStyles() {
@@ -1146,18 +1329,26 @@ class TeacherHighlighter {
         const style = document.createElement('style');
         style.id = 'teacherHighlighterStyles';
         style.textContent = `
-            #highlighterCanvas {
-                position: fixed;
-                inset: 0;
-                width: 100vw;
-                height: 100vh;
-                z-index: 9980;
-                pointer-events: none;
-                cursor: default;
+            body.highlighter-mode-active {
+                cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23facc15' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='m9 11-6 6v3h3l6-6'/%3E%3Cpath d='m22 7-3-3a2.83 2.83 0 0 0-4 0l-4 4 7 7 4-4a2.83 2.83 0 0 0 0-4Z'/%3E%3C/svg%3E") 2 22, text !important;
             }
-            #highlighterCanvas.active {
-                pointer-events: auto;
-                cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='%23facc15' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='m9 11-6 6v3h3l6-6'/%3E%3Cpath d='m22 7-3-3a2.83 2.83 0 0 0-4 0l-4 4 7 7 4-4a2.83 2.83 0 0 0 0-4Z'/%3E%3C/svg%3E") 2 24, crosshair;
+            body.highlighter-mode-active * {
+                user-select: text !important;
+            }
+            mark.teacher-text-highlight {
+                color: inherit !important;
+                background-color: rgba(254, 240, 138, 0.85);
+                border-bottom: 2px solid #ca8a04;
+                border-radius: 3px;
+                padding: 1px 3px;
+                cursor: pointer;
+                transition: background-color 0.2s ease, opacity 0.2s ease;
+                box-decoration-break: clone;
+                -webkit-box-decoration-break: clone;
+            }
+            mark.teacher-text-highlight:hover {
+                filter: brightness(0.92);
+                outline: 1px dashed rgba(0, 0, 0, 0.3);
             }
             .highlighter-palette {
                 position: absolute;
@@ -1255,31 +1446,7 @@ class StepRevealEngine {
     }
 
     bindEvents() {
-        // 1. Allow clicking directly on question cards or single reveal button
-        document.querySelectorAll('.q-card').forEach(card => {
-            if (card.dataset.stepBound) return;
-            card.dataset.stepBound = 'true';
-
-            // Add a subtle individual reveal icon if not present
-            const header = card.querySelector('div') || card;
-            const singleRevealBtn = document.createElement('button');
-            singleRevealBtn.className = 'btn-single-reveal';
-            singleRevealBtn.innerHTML = '👁️ Reveal';
-            singleRevealBtn.title = 'Reveal only this answer (Shortcut: click card or press E)';
-            singleRevealBtn.onclick = (ev) => {
-                ev.stopPropagation();
-                this.revealSingleCard(card);
-            };
-
-            const synBtn = card.querySelector('.syn-btn');
-            if (synBtn) {
-                synBtn.parentNode.insertBefore(singleRevealBtn, synBtn);
-            } else {
-                header.appendChild(singleRevealBtn);
-            }
-        });
-
-        // 2. Add Step Reveal button to action rows across ALL exercise slides
+        // 1. Add Step Reveal button to action rows across ALL exercise slides (same line as action buttons)
         document.querySelectorAll('.action-row').forEach(row => {
             if (row.querySelector('.btn-step-reveal')) return;
             const container = row.closest('.question-pane') || row.closest('.page-content') || row.closest('.notebook') || row.parentElement;
@@ -1296,10 +1463,22 @@ class StepRevealEngine {
                 const btn = document.createElement('button');
                 btn.className = 'btn-action btn-step-reveal';
                 btn.innerHTML = '👉 Step Reveal (E)';
-                btn.title = 'Reveal questions one by one for classroom discussion';
+                btn.title = 'Reveal questions one by one (Shortcut: E)';
                 btn.onclick = () => this.revealNextInContainer(container);
                 row.insertBefore(btn, row.children[1] || null);
             }
+        });
+
+        // 2. Allow clicking anywhere on a question card to reveal it without injecting disruptive UI buttons
+        document.querySelectorAll('.q-card').forEach(card => {
+            if (card.dataset.stepBound) return;
+            card.dataset.stepBound = 'true';
+            card.addEventListener('click', (e) => {
+                if (window.getSelection && window.getSelection().toString().trim().length > 0) return;
+                if (e.target.tagName !== 'SELECT' && e.target.tagName !== 'INPUT' && !e.target.closest('button') && !e.target.closest('a')) {
+                    this.revealSingleCard(card);
+                }
+            });
         });
 
         this.injectStyles();
@@ -1371,6 +1550,9 @@ class StepRevealEngine {
                 input.value = acceptable;
                 input.classList.add('correct');
                 input.classList.remove('wrong', 'incorrect');
+                if (window.DeckComponents?.autoResizeBlank) {
+                    DeckComponents.autoResizeBlank(input);
+                }
             }
         });
 
@@ -1394,11 +1576,11 @@ class StepRevealEngine {
 
         // Auto-trigger evidence highlight in passage if linked
         const qId = card.dataset.q;
+        const synBtn = card.querySelector('.syn-btn');
+        const evId = synBtn ? synBtn.dataset.ev : (qId ? `ev-${qId}` : null);
         if (qId && window.readingHighlighter) {
-            window.readingHighlighter.showEvidence(qId);
+            window.readingHighlighter.showEvidence(qId, evId);
         } else if (qId && window.deckEngine) {
-            const synBtn = card.querySelector('.syn-btn');
-            const evId = synBtn ? synBtn.dataset.ev : `ev-${qId}`;
             if (evId) window.deckEngine.toggleSynonymExplanation(qId, evId);
         }
     }
@@ -1410,6 +1592,9 @@ class StepRevealEngine {
             input.value = input.dataset.ans.split('|')[0];
             input.classList.add('correct');
             input.classList.remove('wrong', 'incorrect');
+            if (window.DeckComponents?.autoResizeBlank) {
+                DeckComponents.autoResizeBlank(input);
+            }
         } else if (input.classList.contains('select-input')) {
             input.value = input.dataset.ans;
             input.classList.add('correct');
@@ -1457,22 +1642,6 @@ class StepRevealEngine {
         const style = document.createElement('style');
         style.id = 'stepRevealStyles';
         style.textContent = `
-            .btn-single-reveal {
-                background: rgba(37, 99, 235, 0.12);
-                border: 1px solid rgba(37, 99, 235, 0.35);
-                color: var(--col-reading, #2563eb);
-                font-size: 11.5px;
-                font-weight: 700;
-                padding: 3px 8px;
-                border-radius: 6px;
-                cursor: pointer;
-                transition: all 0.18s ease;
-                margin-left: 6px;
-            }
-            .btn-single-reveal:hover {
-                background: var(--col-reading, #2563eb);
-                color: #ffffff;
-            }
             .btn-step-reveal {
                 background: rgba(5, 150, 105, 0.12) !important;
                 border-color: rgba(5, 150, 105, 0.4) !important;
@@ -2366,12 +2535,12 @@ class ReadingHighlighter {
         document.addEventListener('click', (e) => {
             const btn = e.target.closest('.syn-btn');
             if (btn) {
-                const dataQ = btn.dataset.q;
-                const dataEv = btn.dataset.ev;
-                if (dataQ) {
+                const qCard = btn.closest('.q-card');
+                const dataQ = btn.dataset.q || qCard?.dataset?.q || (btn.dataset.ev ? btn.dataset.ev.replace(/^ev-/, '') : null);
+                const dataEv = btn.dataset.ev || (dataQ ? `ev-${dataQ}` : null);
+                if (dataQ || dataEv) {
                     e.preventDefault();
                     this.focusEvidence(dataQ, dataEv);
-                    const qCard = btn.closest('.q-card');
                     if (qCard) {
                         const exp = qCard.querySelector('.item-explanation');
                         if (exp) exp.classList.toggle('show');
@@ -2382,7 +2551,7 @@ class ReadingHighlighter {
 
             // Clicking question card text focuses evidence
             const qCard = e.target.closest('.q-card[data-q]');
-            if (qCard && !e.target.closest('select, input, button')) {
+            if (qCard && !e.target.closest('select, input, button, a')) {
                 const dataQ = qCard.dataset.q;
                 if (dataQ) {
                     this.focusEvidence(dataQ);
@@ -2509,7 +2678,13 @@ window.addEventListener('DOMContentLoaded', () => {
 class VocabBank {
     constructor() {
         this.activeInput = null;
-        this.currentAccent = localStorage.getItem('ielts_speech_accent') || 'en-GB'; // default British RP
+        let savedAccent = 'en-GB';
+        try {
+            savedAccent = localStorage.getItem('ielts_speech_accent') || 'en-GB';
+        } catch (e) {
+            console.warn('localStorage unavailable:', e);
+        }
+        this.currentAccent = savedAccent; // default British RP
         this.speechRate = 0.92;
         this.init();
     }
@@ -2533,21 +2708,26 @@ class VocabBank {
             const container = chip.closest('.card, .q-card, .two-col, .page-content, .slide');
             if (!container) return;
 
-            // Find target blank (either previously focused blank or first empty blank in this container)
+            // Find target blank (either focused blank or next empty blank in container)
             let targetBlank = this.activeInput;
-            if (!targetBlank || !container.contains(targetBlank)) {
-                targetBlank = container.querySelector('.blank-input:not([value]), .blank-input[value=""]');
+            const allBlanks = Array.from(container.querySelectorAll('.blank-input'));
+            if (!targetBlank || !container.contains(targetBlank) || targetBlank.value.trim() !== '') {
+                targetBlank = allBlanks.find(inp => inp.value.trim() === '') || allBlanks[0];
             }
 
             if (targetBlank) {
                 targetBlank.value = word;
                 targetBlank.dispatchEvent(new Event('input', { bubbles: true }));
+                if (window.DeckComponents?.autoResizeBlank) {
+                    DeckComponents.autoResizeBlank(targetBlank);
+                }
                 this.updateChipStates(container);
-                // Move focus to next blank
-                const allBlanks = Array.from(container.querySelectorAll('.blank-input'));
+
+                // Advance focus to the next available blank
                 const currentIndex = allBlanks.indexOf(targetBlank);
-                if (currentIndex >= 0 && currentIndex < allBlanks.length - 1) {
-                    this.activeInput = allBlanks[currentIndex + 1];
+                const nextBlank = allBlanks.slice(currentIndex + 1).find(inp => inp.value.trim() === '');
+                if (nextBlank) {
+                    this.activeInput = nextBlank;
                     this.activeInput.focus();
                 } else {
                     this.activeInput = null;
@@ -2563,6 +2743,18 @@ class VocabBank {
         document.addEventListener('focusin', (e) => {
             if (e.target.classList.contains('blank-input')) {
                 this.activeInput = e.target;
+            }
+        });
+
+        // Double click blank to clear it and restore chip to bank
+        document.addEventListener('dblclick', (e) => {
+            if (e.target.classList.contains('blank-input')) {
+                e.target.value = '';
+                e.target.dispatchEvent(new Event('input', { bubbles: true }));
+                const container = e.target.closest('.card, .q-card, .two-col, .page-content, .slide');
+                if (container) {
+                    this.updateChipStates(container);
+                }
             }
         });
 
@@ -2627,7 +2819,11 @@ class VocabBank {
 
     setAccent(accent) {
         this.currentAccent = accent;
-        localStorage.setItem('ielts_speech_accent', accent);
+        try {
+            localStorage.setItem('ielts_speech_accent', accent);
+        } catch (e) {
+            console.warn('localStorage unavailable:', e);
+        }
     }
 
     injectAccentSelectorStyles() {
@@ -2702,8 +2898,11 @@ class EssayAnalyzer {
 
         if (isHighlighted) {
             essayElement.classList.remove('highlighted-connectors');
-            essayElement.querySelectorAll('.connector-mark').forEach(span => {
-                span.outerHTML = span.textContent;
+            essayElement.querySelectorAll('p, .essay-p, li').forEach(p => {
+                if (p.dataset.origHtml) {
+                    p.innerHTML = p.dataset.origHtml;
+                    delete p.dataset.origHtml;
+                }
             });
         } else {
             essayElement.classList.add('highlighted-connectors');
@@ -2714,8 +2913,27 @@ class EssayAnalyzer {
     highlightConnectorsInElement(element) {
         const paragraphs = element.querySelectorAll('p, .essay-p, li');
         paragraphs.forEach(p => {
-            p.innerHTML = p.innerHTML.replace(this.linkingWordsRegex, (match) => {
-                return `<mark class="connector-mark">${match}</mark>`;
+            if (!p.dataset.origHtml) {
+                p.dataset.origHtml = p.innerHTML;
+            }
+
+            const walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            let node;
+            while ((node = walker.nextNode())) {
+                if (node.parentElement && !node.parentElement.classList.contains('connector-mark')) {
+                    textNodes.push(node);
+                }
+            }
+
+            textNodes.forEach(textNode => {
+                const text = textNode.nodeValue;
+                if (this.linkingWordsRegex.test(text)) {
+                    this.linkingWordsRegex.lastIndex = 0;
+                    const span = document.createElement('span');
+                    span.innerHTML = text.replace(this.linkingWordsRegex, '<mark class="connector-mark">$1</mark>');
+                    textNode.parentNode.replaceChild(span, textNode);
+                }
             });
         });
     }
@@ -2746,12 +2964,13 @@ class EssayAnalyzer {
     style.id = 'essayAnalyzerStyles';
     style.textContent = `
         mark.connector-mark {
-            background: #fed7aa !important;
-            color: #9a3412 !important;
-            font-weight: 700;
+            background: rgba(254, 240, 138, 0.88) !important;
+            color: inherit !important;
+            border-bottom: 2px solid #ca8a04;
             padding: 1px 4px;
-            border-radius: 4px;
-            border-bottom: 2px solid #ea580c;
+            border-radius: 3px;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
         }
     `;
     document.head.appendChild(style);
@@ -3960,17 +4179,17 @@ class PresentationTools {
 
             <!-- Expanded Tools Bar -->
             <div class="tools-bar" id="toolsBar">
-                <button class="tool-btn" id="toolAspectBtn" title="Switch Aspect Ratio (16:9 / 4:3) (Shift+A)" onclick="window.deckEngine && window.deckEngine.toggleAspectRatio()">📐 <span class="tool-label">16:9</span></button>
-                <button class="tool-btn" id="toolThemeBtn" title="Theme Aesthetics (Shift+T)" onclick="window.deckThemeEngine && window.deckThemeEngine.openModal()">🎨 <span class="tool-label">Theme</span></button>
-                <button class="tool-btn" id="toolHighlightBtn" title="Teacher Highlighter (H)" onclick="window.teacherHighlighter && window.teacherHighlighter.toggle()">🖍️ <span class="tool-label">Highlight</span></button>
-                <button class="tool-btn" id="toolTimerBtn" title="Classroom Timer (T)" onclick="presentationTools.toggleTimerModal()">⏱️ <span class="tool-label">Timer</span></button>
-                <button class="tool-btn" id="toolStudentBtn" title="Random Student Selector (R)" onclick="window.studentPicker && window.studentPicker.toggle()">🎲 <span class="tool-label">Picker</span></button>
-                <button class="tool-btn" id="toolNotesBtn" title="Teacher Presenter Notes (N)" onclick="window.presenterNotesEngine && window.presenterNotesEngine.toggle()">📝 <span class="tool-label">Notes</span></button>
-                <button class="tool-btn" id="toolLaserBtn" title="Laser Pointer (L)" onclick="presentationTools.toggleLaser()">🔴 <span class="tool-label">Laser</span></button>
-                <button class="tool-btn" id="toolPenBtn" title="Draw / Annotate (P)" onclick="presentationTools.togglePen()">✏️ <span class="tool-label">Draw</span></button>
-                <button class="tool-btn" id="toolFullscreenBtn" title="Fullscreen (F)" onclick="presentationTools.toggleFullscreen()">⛶</button>
-                <button class="tool-btn" id="toolHelpBtn" title="Keyboard Shortcuts (?)" onclick="presentationTools.toggleHelpModal()">❓</button>
-                <button class="tool-btn tool-collapse-btn" id="toolCollapseBtn" title="Hide Toolkit (Shift+X)" onclick="presentationTools.toggleHUD()">✕</button>
+                <button class="tool-btn" id="toolAspectBtn" title="Switch Aspect Ratio (16:9 / 4:3) (Shift+A)" onclick="window.deckEngine && window.deckEngine.toggleAspectRatio()"><span class="tool-icon">📐</span><span class="tool-label">16:9</span></button>
+                <button class="tool-btn" id="toolThemeBtn" title="Theme Aesthetics (Shift+T)" onclick="window.deckThemeEngine && window.deckThemeEngine.openModal()"><span class="tool-icon">🎨</span><span class="tool-label">Theme</span></button>
+                <button class="tool-btn" id="toolHighlightBtn" title="Teacher Highlighter (H)" onclick="window.teacherHighlighter && window.teacherHighlighter.toggle()"><span class="tool-icon">🖍️</span><span class="tool-label">Highlight</span></button>
+                <button class="tool-btn" id="toolTimerBtn" title="Classroom Timer (T)" onclick="presentationTools.toggleTimerModal()"><span class="tool-icon">⏱️</span><span class="tool-label">Timer</span></button>
+                <button class="tool-btn" id="toolStudentBtn" title="Random Student Selector (R)" onclick="window.studentPicker && window.studentPicker.toggle()"><span class="tool-icon">🎲</span><span class="tool-label">Picker</span></button>
+                <button class="tool-btn" id="toolNotesBtn" title="Teacher Presenter Notes (N)" onclick="window.presenterNotesEngine && window.presenterNotesEngine.toggle()"><span class="tool-icon">📝</span><span class="tool-label">Notes</span></button>
+                <button class="tool-btn" id="toolLaserBtn" title="Laser Pointer (L)" onclick="presentationTools.toggleLaser()"><span class="tool-icon">🔴</span><span class="tool-label">Laser</span></button>
+                <button class="tool-btn" id="toolPenBtn" title="Draw / Annotate (P)" onclick="presentationTools.togglePen()"><span class="tool-icon">✏️</span><span class="tool-label">Draw</span></button>
+                <button class="tool-btn" id="toolFullscreenBtn" title="Fullscreen (F)" onclick="presentationTools.toggleFullscreen()"><span class="tool-icon">⛶</span><span class="tool-label">Fullscreen</span></button>
+                <button class="tool-btn" id="toolHelpBtn" title="Keyboard Shortcuts (?)" onclick="presentationTools.toggleHelpModal()"><span class="tool-icon">❓</span><span class="tool-label">Help</span></button>
+                <button class="tool-btn tool-collapse-btn" id="toolCollapseBtn" title="Hide Toolkit (Shift+X)" onclick="presentationTools.toggleHUD()"><span class="tool-icon">✕</span><span class="tool-label">Hide</span></button>
             </div>
 
             <!-- Highlighter Palette -->
@@ -4030,10 +4249,10 @@ class PresentationTools {
             .tools-bar {
                 display: flex;
                 align-items: center;
-                gap: 6px;
+                gap: 4px;
                 background: rgba(15, 23, 42, 0.88);
-                backdrop-filter: blur(10px);
-                padding: 5px 8px;
+                backdrop-filter: blur(12px);
+                padding: 4px 6px;
                 border-radius: 30px;
                 border: 1px solid rgba(255, 255, 255, 0.16);
                 box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
@@ -4043,33 +4262,56 @@ class PresentationTools {
                 background: transparent;
                 border: none;
                 color: #e2e8f0;
-                padding: 5px 10px;
+                padding: 6px 8px;
                 border-radius: 20px;
-                font-size: 13px;
+                font-size: 13.5px;
                 font-weight: 600;
                 cursor: pointer;
-                display: flex;
+                display: inline-flex;
                 align-items: center;
-                gap: 4px;
-                transition: all 0.2s ease;
+                justify-content: center;
+                transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+                white-space: nowrap;
+                position: relative;
             }
             .tool-btn:hover {
                 background: rgba(255, 255, 255, 0.18);
                 color: #ffffff;
+                padding: 6px 12px;
             }
             .tool-btn.active {
                 background: #3b82f6;
                 color: #ffffff;
                 box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+                padding: 6px 12px;
+            }
+            .tool-icon {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
             }
             .tool-label {
+                max-width: 0;
+                opacity: 0;
+                overflow: hidden;
+                white-space: nowrap;
                 font-size: 12px;
+                font-weight: 600;
+                transition: max-width 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease, margin 0.18s ease;
+                margin-left: 0;
+                pointer-events: none;
+            }
+            .tool-btn:hover .tool-label,
+            .tool-btn.active .tool-label {
+                max-width: 85px;
+                opacity: 1;
+                margin-left: 5px;
             }
             .tool-collapse-btn {
-                padding: 5px 8px;
+                padding: 6px 8px;
                 font-size: 12px;
                 color: #94a3b8;
-                margin-left: 2px;
             }
             .tool-collapse-btn:hover {
                 color: #ef4444;

@@ -143,12 +143,12 @@ class ReadingHighlighter {
         document.addEventListener('click', (e) => {
             const btn = e.target.closest('.syn-btn');
             if (btn) {
-                const dataQ = btn.dataset.q;
-                const dataEv = btn.dataset.ev;
-                if (dataQ) {
+                const qCard = btn.closest('.q-card');
+                const dataQ = btn.dataset.q || qCard?.dataset?.q || (btn.dataset.ev ? btn.dataset.ev.replace(/^ev-/, '') : null);
+                const dataEv = btn.dataset.ev || (dataQ ? `ev-${dataQ}` : null);
+                if (dataQ || dataEv) {
                     e.preventDefault();
                     this.focusEvidence(dataQ, dataEv);
-                    const qCard = btn.closest('.q-card');
                     if (qCard) {
                         const exp = qCard.querySelector('.item-explanation');
                         if (exp) exp.classList.toggle('show');
@@ -159,7 +159,7 @@ class ReadingHighlighter {
 
             // Clicking question card text focuses evidence
             const qCard = e.target.closest('.q-card[data-q]');
-            if (qCard && !e.target.closest('select, input, button')) {
+            if (qCard && !e.target.closest('select, input, button, a')) {
                 const dataQ = qCard.dataset.q;
                 if (dataQ) {
                     this.focusEvidence(dataQ);

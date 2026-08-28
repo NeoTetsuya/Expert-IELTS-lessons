@@ -237,14 +237,14 @@ Tag specific synonym keywords with `<span class="syn-pair-1" data-q="[qId]">` an
 Ideal for Matching Endings, Headings, or Multiple-Choice letters.
 
 ```html
-<div class="q-card">
+<div class="q-card" data-q="4a-1">
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
         <span><strong>1.</strong> Sports scientists <span class="syn-pair-1" data-q="4a-1">approve of the decision</span> to use fitness apps because...</span>
-        <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('4a-1', 'ev-4a-1')">💡 Synonyms</button>
+        <button class="syn-btn" data-ev="ev-4a-1">💡 Evidence</button>
     </div>
     
-    <div>
-        <select class="select-input" data-ans="D">
+    <div style="margin-top: 8px;">
+        <select class="select-input" data-ans="D" style="width: 140px;">
             <option value="">-- Select Ending --</option>
             <option value="A">A: they give an unrealistic impression</option>
             <option value="B">B: people become attached to devices</option>
@@ -283,7 +283,7 @@ Ideal for Summary Completion, Flowchart Completion, and Short Answer questions.
             <input type="text" class="blank-input" id="bv1" data-ans="chocolate" placeholder="[1]..." style="width:125px;"> 
             manufacturing business outside the city.
         </div>
-        <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('7a-1', 'ev-7a-1')">💡 Synonyms</button>
+        <button class="syn-btn" data-ev="ev-7a-1">💡 Evidence</button>
     </div>
 
     <div class="item-explanation">
@@ -353,18 +353,16 @@ Use distinct colored synonym tags for visual clarity:
 
 ### Action Controls Bar
 
-Place standard action buttons at the bottom of the `.question-pane`:
+Place standard action buttons at the bottom of the `.question-pane` on a single clean row:
 
 ```html
 <div class="action-row">
-    <!-- For select-based tasks -->
-    <button class="btn-action btn-primary" onclick="deckEngine.checkSelects('matchTask4a')">✓ Check</button>
-    <button class="btn-action" onclick="deckEngine.toggleExplanations('matchTask4a')">🔍 Explanations</button>
-    <button class="btn-action" onclick="deckEngine.revealSelects('matchTask4a')">👁️ Reveal</button>
-    <button class="btn-action" onclick="deckEngine.resetSelects('matchTask4a')">↺ Reset</button>
+    <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answers</button>
+    <button class="btn-action" onclick="revealAnswers(this)">Reveal Keys</button>
+    <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
 </div>
 ```
-*(For text input tasks, use `deckEngine.checkBlanks`, `deckEngine.revealBlanks`, `deckEngine.resetBlanks`).*
+*(The step-reveal button `👉 Step Reveal (E)` is automatically attached to this row by the engine).*
 
 ---
 
