@@ -513,12 +513,6 @@ html, body {
     cursor: pointer;
     margin: 0 4px;
 }
-    font-weight: 600;
-    color: var(--text-dark, #0f172a);
-    outline: none;
-    cursor: pointer;
-    margin: 0 4px;
-}
 .select-input.correct {
     border-color: #10b981 !important;
     background: #ecfdf5 !important;
