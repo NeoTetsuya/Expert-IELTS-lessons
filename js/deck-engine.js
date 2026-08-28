@@ -1,7 +1,388 @@
 /**
  * Universal IELTS Presentation Master Bundle
  * Auto-instantiates DeckEngine on window.deckEngine
+ * Generated from modular files in /js/
  */
+
+/* ==================== MODULE: deck-core.js ==================== */
+/**
+ * DeckEngine Core Module
+ * Handles 1920x1080 stage scaling, slide lifecycle, keyboard/touch navigation,
+ * font scaling, and core exercise verification/reveal logic.
+ */
+class DeckEngine {
+    constructor() {
+        this.slides = document.querySelectorAll('.slide');
+        this.currentSlide = 0;
+        this.stage = document.getElementById('deckStage');
+        this.counter = document.getElementById('slideCounter');
+        this.fontScale = 1.0;
+        this.fontToastTimer = null;
+
+        // Auto-detect skill mapping from slide data-skill attributes
+        this.skillMap = {};
+        this.buildSkillMap();
+
+        this.setupStageScale();
+        this.setupKeyboardNav();
+        this.setupTouchNav();
+
+        // Check if there's a hash in URL (e.g. #slide-4)
+        const initialSlide = this.getSlideFromHash();
+        this.showSlide(initialSlide >= 0 ? initialSlide : 0);
+    }
+
+    buildSkillMap() {
+        this.slides.forEach((slide, idx) => {
+            const skill = slide.dataset.skill;
+            if (skill && skill !== 'title' && skill !== 'section') {
+                if (!this.skillMap[skill]) {
+                    this.skillMap[skill] = [];
+                }
+                this.skillMap[skill].push(idx);
+            }
+        });
+    }
+
+    getSlideFromHash() {
+        const hash = window.location.hash;
+        if (!hash) return -1;
+        const match = hash.match(/#?(?:slide-)?(\d+)/i);
+        if (match) {
+            const slideNum = parseInt(match[1], 10);
+            if (!isNaN(slideNum) && slideNum >= 1 && slideNum <= this.slides.length) {
+                return slideNum - 1;
+            }
+        }
+        return -1;
+    }
+
+    setupStageScale() {
+        const scale = () => {
+            if (!this.stage) return;
+            const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+            const x = (window.innerWidth - 1920 * factor) / 2;
+            const y = (window.innerHeight - 1080 * factor) / 2;
+            this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+        };
+        scale();
+        window.addEventListener('resize', scale);
+    }
+
+    setupKeyboardNav() {
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+                return;
+            }
+
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                e.preventDefault();
+                this.nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                e.preventDefault();
+                this.prevSlide();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                this.showSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                this.showSlide(this.slides.length - 1);
+            } else if (e.key === '+' || e.key === '=') {
+                e.preventDefault();
+                this.changeFontSize(1);
+            } else if (e.key === '-' || e.key === '_') {
+                e.preventDefault();
+                this.changeFontSize(-1);
+            } else if (e.key === '0') {
+                e.preventDefault();
+                this.resetFontSize();
+            }
+        });
+    }
+
+    setupTouchNav() {
+        let startX = 0;
+        document.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            const diff = startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) {
+                diff > 0 ? this.nextSlide() : this.prevSlide();
+            }
+        }, { passive: true });
+    }
+
+    showSlide(index) {
+        if (index < 0 || index >= this.slides.length) return;
+        this.slides.forEach((s, i) => {
+            s.classList.toggle('active', i === index);
+            s.classList.toggle('visible', i === index);
+        });
+        this.currentSlide = index;
+        if (this.counter) {
+            this.counter.textContent = `${index + 1} / ${this.slides.length}`;
+        }
+        if (window.DeckComponents) {
+            DeckComponents.updateActiveTab();
+        }
+    }
+
+    nextSlide() {
+        if (this.currentSlide < this.slides.length - 1) {
+            this.showSlide(this.currentSlide + 1);
+        }
+    }
+
+    prevSlide() {
+        if (this.currentSlide > 0) {
+            this.showSlide(this.currentSlide - 1);
+        }
+    }
+
+    jumpToSlide(index) {
+        this.showSlide(index);
+    }
+
+    jumpToSkill(skillKey) {
+        const targetIndices = this.skillMap[skillKey];
+        if (!targetIndices || targetIndices.length === 0) return;
+
+        if (targetIndices.length === 1) {
+            this.showSlide(targetIndices[0]);
+            return;
+        }
+
+        const nextIdx = targetIndices.find(idx => idx > this.currentSlide);
+        if (nextIdx !== undefined) {
+            this.showSlide(nextIdx);
+        } else {
+            this.showSlide(targetIndices[0]);
+        }
+    }
+
+    changeFontSize(delta) {
+        this.fontScale = parseFloat((this.fontScale + delta * 0.08).toFixed(2));
+        this.fontScale = Math.min(Math.max(this.fontScale, 0.75), 1.5);
+        this.applyFontScale();
+    }
+
+    resetFontSize() {
+        this.fontScale = 1.0;
+        this.applyFontScale();
+    }
+
+    applyFontScale() {
+        document.documentElement.style.setProperty('--font-scale', this.fontScale);
+        const indicator = document.getElementById('fontIndicator');
+        if (indicator) {
+            indicator.textContent = `Font Size: ${Math.round(this.fontScale * 100)}%`;
+            indicator.classList.add('show');
+            clearTimeout(this.fontToastTimer);
+            this.fontToastTimer = setTimeout(() => {
+                indicator.classList.remove('show');
+            }, 1400);
+        }
+    }
+
+    checkAnswers(container) {
+        if (!container) container = document.querySelector('.slide.active');
+        if (typeof container === 'string') container = document.getElementById(container);
+        if (!container) return;
+
+        // Check blank inputs
+        container.querySelectorAll('.blank-input').forEach(input => {
+            if (input.dataset.ans) {
+                const rawVal = input.value.trim().toLowerCase();
+                const validAnswers = input.dataset.ans.toLowerCase().split('|').map(a => a.trim());
+                const isMatch = rawVal !== '' && validAnswers.some(ans => rawVal === ans);
+                input.classList.remove('correct', 'wrong', 'incorrect');
+                input.classList.add(isMatch ? 'correct' : 'wrong');
+            }
+        });
+
+        // Check select inputs
+        container.querySelectorAll('.select-input').forEach(select => {
+            if (select.dataset.ans) {
+                const val = select.value.trim().toUpperCase();
+                const ans = select.dataset.ans.trim().toUpperCase();
+                select.classList.remove('correct', 'wrong', 'incorrect');
+                if (val === '') {
+                    select.classList.add('wrong');
+                } else {
+                    select.classList.add(val === ans ? 'correct' : 'wrong');
+                }
+            }
+        });
+
+        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+        document.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+    }
+
+    revealKeys(container) {
+        if (!container) container = document.querySelector('.slide.active');
+        if (typeof container === 'string') container = document.getElementById(container);
+        if (!container) return;
+
+        container.querySelectorAll('.blank-input').forEach(input => {
+            if (input.dataset.ans) {
+                input.value = input.dataset.ans.split('|')[0];
+                input.classList.remove('wrong', 'incorrect');
+                input.classList.add('correct');
+            }
+        });
+
+        container.querySelectorAll('.select-input').forEach(select => {
+            if (select.dataset.ans) {
+                select.value = select.dataset.ans;
+                select.classList.remove('wrong', 'incorrect');
+                select.classList.add('correct');
+            }
+        });
+
+        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+        document.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+    }
+
+    revealAnswers(container) {
+        this.revealKeys(container);
+    }
+
+    resetTask(container) {
+        if (!container) container = document.querySelector('.slide.active');
+        if (typeof container === 'string') container = document.getElementById(container);
+        if (!container) return;
+
+        container.querySelectorAll('.blank-input, .select-input').forEach(input => {
+            input.value = '';
+            input.classList.remove('correct', 'wrong', 'incorrect');
+        });
+
+        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
+        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
+        document.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted'));
+    }
+
+    resetAnswers(container) {
+        this.resetTask(container);
+    }
+
+    checkBlanks(containerId) {
+        this.checkAnswers(containerId);
+    }
+
+    revealBlanks(containerId) {
+        this.revealKeys(containerId);
+    }
+
+    resetBlanks(containerId) {
+        this.resetTask(containerId);
+    }
+
+    checkSelects(containerId) {
+        this.checkAnswers(containerId);
+    }
+
+    revealSelects(containerId) {
+        this.revealKeys(containerId);
+    }
+
+    resetSelects(containerId) {
+        this.resetTask(containerId);
+    }
+
+    toggleOptCard(card) {
+        card.classList.toggle('selected');
+    }
+
+    checkMultiOpts(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const cards = container.querySelectorAll('.opt-card');
+        cards.forEach(card => {
+            const isCorrect = card.dataset.correct === 'true';
+            const isSelected = card.classList.contains('selected');
+            card.classList.remove('correct-opt', 'wrong-opt');
+            if (isSelected) {
+                card.classList.add(isCorrect ? 'correct-opt' : 'wrong-opt');
+            } else if (isCorrect) {
+                card.classList.add('correct-opt');
+            }
+        });
+    }
+
+    revealMultiOpts(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const cards = container.querySelectorAll('.opt-card');
+        cards.forEach(card => {
+            card.classList.remove('wrong-opt');
+            if (card.dataset.correct === 'true') {
+                card.classList.add('selected', 'correct-opt');
+            } else {
+                card.classList.remove('selected');
+            }
+        });
+    }
+
+    resetMultiOpts(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const cards = container.querySelectorAll('.opt-card');
+        cards.forEach(card => {
+            card.classList.remove('selected', 'correct-opt', 'wrong-opt');
+        });
+    }
+
+    toggleExplanations(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const explanations = container.querySelectorAll('.item-explanation');
+        explanations.forEach(exp => exp.classList.toggle('show'));
+    }
+
+    toggleSynonymExplanation(qKey, evId) {
+        const evTarget = document.getElementById(evId);
+        const synSpans = document.querySelectorAll(`[data-q="${qKey}"]`);
+        const isCurrentlyActive = evTarget && evTarget.classList.contains('highlighted');
+
+        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
+        document.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted'));
+
+        if (!isCurrentlyActive) {
+            if (evTarget) {
+                evTarget.classList.add('highlighted');
+                evTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            synSpans.forEach(s => s.classList.add('active-syn'));
+        }
+    }
+
+    switchHighLineTab(tabNum) {
+        const b1 = document.getElementById('stBtn1');
+        const b2 = document.getElementById('stBtn2');
+        const p1 = document.getElementById('stPane1');
+        const p2 = document.getElementById('stPane2');
+        if (b1) b1.classList.toggle('active', tabNum === 1);
+        if (b2) b2.classList.toggle('active', tabNum === 2);
+        if (p1) p1.style.display = tabNum === 1 ? 'block' : 'none';
+        if (p2) p2.style.display = tabNum === 2 ? 'block' : 'none';
+    }
+}
+
+// Global auto-instantiation on window
+window.DeckEngine = DeckEngine;
+window.addEventListener('DOMContentLoaded', () => {
+    if (!window.deckEngine) {
+        window.deckEngine = new DeckEngine();
+    }
+    if (window.DeckComponents) {
+        DeckComponents.init();
+    }
+});
 
 
 /* ==================== MODULE: deck-components.js ==================== */
@@ -173,20 +554,32 @@ window.checkAnswers = function(btnOrContainerId) {
     } else {
         container = document.querySelector('.slide.active');
     }
-    if (window.deckEngine) {
+    if (window.deckEngine && typeof window.deckEngine.checkAnswers === 'function') {
         window.deckEngine.checkAnswers(container);
     } else if (container) {
-        container.querySelectorAll('.blank-input, .select-input').forEach(input => {
-            const ans = (input.dataset.ans || '').toLowerCase().trim();
-            const val = (input.value || '').toLowerCase().trim();
-            if (ans && val) {
-                const acceptable = ans.split('|').map(a => a.trim());
-                if (acceptable.includes(val)) {
+        container.querySelectorAll('.blank-input').forEach(input => {
+            if (input.dataset.ans) {
+                const val = input.value.trim().toLowerCase();
+                const expected = input.dataset.ans.toLowerCase().split('|').map(s => s.trim());
+                if (val && expected.includes(val)) {
                     input.classList.add('correct');
                     input.classList.remove('wrong', 'incorrect');
                 } else {
                     input.classList.add('wrong');
                     input.classList.remove('correct');
+                }
+            }
+        });
+        container.querySelectorAll('.select-input').forEach(sel => {
+            if (sel.dataset.ans) {
+                const val = sel.value.trim().toUpperCase();
+                const expected = sel.dataset.ans.trim().toUpperCase();
+                if (val && val === expected) {
+                    sel.classList.add('correct');
+                    sel.classList.remove('wrong', 'incorrect');
+                } else {
+                    sel.classList.add('wrong');
+                    sel.classList.remove('correct');
                 }
             }
         });
@@ -203,14 +596,23 @@ window.revealAnswers = window.revealKeys = function(btnOrContainerId) {
     } else {
         container = document.querySelector('.slide.active');
     }
-    if (window.deckEngine) {
+    if (window.deckEngine && typeof window.deckEngine.revealKeys === 'function') {
         window.deckEngine.revealKeys(container);
+    } else if (window.deckEngine && typeof window.deckEngine.revealAnswers === 'function') {
+        window.deckEngine.revealAnswers(container);
     } else if (container) {
-        container.querySelectorAll('.blank-input, .select-input').forEach(input => {
+        container.querySelectorAll('.blank-input').forEach(input => {
             if (input.dataset.ans) {
                 input.value = input.dataset.ans.split('|')[0];
                 input.classList.add('correct');
                 input.classList.remove('wrong', 'incorrect');
+            }
+        });
+        container.querySelectorAll('.select-input').forEach(sel => {
+            if (sel.dataset.ans) {
+                sel.value = sel.dataset.ans;
+                sel.classList.add('correct');
+                sel.classList.remove('wrong', 'incorrect');
             }
         });
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
@@ -226,8 +628,10 @@ window.resetAnswers = window.resetTask = function(btnOrContainerId) {
     } else {
         container = document.querySelector('.slide.active');
     }
-    if (window.deckEngine) {
+    if (window.deckEngine && typeof window.deckEngine.resetTask === 'function') {
         window.deckEngine.resetTask(container);
+    } else if (window.deckEngine && typeof window.deckEngine.resetAnswers === 'function') {
+        window.deckEngine.resetAnswers(container);
     } else if (container) {
         container.querySelectorAll('.blank-input, .select-input').forEach(input => {
             input.value = '';
@@ -3445,354 +3849,3 @@ window.addEventListener('DOMContentLoaded', () => {
     presentationTools = new PresentationTools(window.deckEngine);
 });
 
-
-/* ==================== MODULE: DeckEngine Core ==================== */
-class DeckEngine {
-    constructor() {
-        this.slides = document.querySelectorAll('.slide');
-        this.currentSlide = 0;
-        this.stage = document.getElementById('deckStage');
-        this.counter = document.getElementById('slideCounter');
-        this.fontScale = 1.0;
-        this.fontToastTimer = null;
-
-        // Auto-detect skill mapping from slide data-skill attributes
-        this.skillMap = {};
-        this.buildSkillMap();
-
-        this.setupStageScale();
-        this.setupKeyboardNav();
-        this.setupTouchNav();
-
-        // Check if there's a hash in URL (e.g. #slide-4)
-        const initialSlide = this.getSlideFromHash();
-        this.showSlide(initialSlide >= 0 ? initialSlide : 0);
-    }
-
-    buildSkillMap() {
-        this.slides.forEach((slide, idx) => {
-            const skill = slide.dataset.skill;
-            if (skill && skill !== 'title' && skill !== 'section') {
-                if (!this.skillMap[skill]) {
-                    this.skillMap[skill] = [];
-                }
-                this.skillMap[skill].push(idx);
-            }
-        });
-    }
-
-    getSlideFromHash() {
-        const hash = window.location.hash;
-        if (!hash) return -1;
-        const match = hash.match(/#?(?:slide-)?(\d+)/i);
-        if (match) {
-            const slideNum = parseInt(match[1], 10);
-            if (!isNaN(slideNum) && slideNum >= 1 && slideNum <= this.slides.length) {
-                return slideNum - 1;
-            }
-        }
-        return -1;
-    }
-
-    setupStageScale() {
-        const scale = () => {
-            if (!this.stage) return;
-            const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
-            const x = (window.innerWidth - 1920 * factor) / 2;
-            const y = (window.innerHeight - 1080 * factor) / 2;
-            this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
-        };
-        scale();
-        window.addEventListener('resize', scale);
-    }
-
-    setupKeyboardNav() {
-        document.addEventListener('keydown', (e) => {
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
-                return;
-            }
-
-            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
-                e.preventDefault();
-                this.nextSlide();
-            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-                e.preventDefault();
-                this.prevSlide();
-            } else if (e.key === 'Home') {
-                e.preventDefault();
-                this.showSlide(0);
-            } else if (e.key === 'End') {
-                e.preventDefault();
-                this.showSlide(this.slides.length - 1);
-            } else if (e.key === '+' || e.key === '=') {
-                e.preventDefault();
-                this.changeFontSize(1);
-            } else if (e.key === '-' || e.key === '_') {
-                e.preventDefault();
-                this.changeFontSize(-1);
-            } else if (e.key === '0') {
-                e.preventDefault();
-                this.resetFontSize();
-            }
-        });
-    }
-
-    setupTouchNav() {
-        let startX = 0;
-        document.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        }, { passive: true });
-
-        document.addEventListener('touchend', (e) => {
-            const diff = startX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 50) {
-                diff > 0 ? this.nextSlide() : this.prevSlide();
-            }
-        }, { passive: true });
-    }
-
-    showSlide(index) {
-        if (index < 0 || index >= this.slides.length) return;
-        this.slides.forEach((s, i) => {
-            s.classList.toggle('active', i === index);
-            s.classList.toggle('visible', i === index);
-        });
-        this.currentSlide = index;
-        if (this.counter) {
-            this.counter.textContent = `${index + 1} / ${this.slides.length}`;
-        }
-        if (window.DeckComponents) {
-            DeckComponents.updateActiveTab();
-        }
-    }
-
-    nextSlide() {
-        if (this.currentSlide < this.slides.length - 1) {
-            this.showSlide(this.currentSlide + 1);
-        }
-    }
-
-    prevSlide() {
-        if (this.currentSlide > 0) {
-            this.showSlide(this.currentSlide - 1);
-        }
-    }
-
-    jumpToSlide(index) {
-        this.showSlide(index);
-    }
-
-    jumpToSkill(skillKey) {
-        const targetIndices = this.skillMap[skillKey];
-        if (!targetIndices || targetIndices.length === 0) return;
-
-        if (targetIndices.length === 1) {
-            this.showSlide(targetIndices[0]);
-            return;
-        }
-
-        const nextIdx = targetIndices.find(idx => idx > this.currentSlide);
-        if (nextIdx !== undefined) {
-            this.showSlide(nextIdx);
-        } else {
-            this.showSlide(targetIndices[0]);
-        }
-    }
-
-    changeFontSize(delta) {
-        this.fontScale = parseFloat((this.fontScale + delta * 0.08).toFixed(2));
-        this.fontScale = Math.min(Math.max(this.fontScale, 0.75), 1.5);
-        this.applyFontScale();
-    }
-
-    resetFontSize() {
-        this.fontScale = 1.0;
-        this.applyFontScale();
-    }
-
-    applyFontScale() {
-        document.documentElement.style.setProperty('--font-scale', this.fontScale);
-        const indicator = document.getElementById('fontIndicator');
-        if (indicator) {
-            indicator.textContent = `Font Size: ${Math.round(this.fontScale * 100)}%`;
-            indicator.classList.add('show');
-            clearTimeout(this.fontToastTimer);
-            this.fontToastTimer = setTimeout(() => {
-                indicator.classList.remove('show');
-            }, 1400);
-        }
-    }
-
-    checkBlanks(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const inputs = container.querySelectorAll('.blank-input');
-        inputs.forEach(input => {
-            const rawVal = input.value.trim().toLowerCase();
-            const validAnswers = input.dataset.ans.toLowerCase().split('|').map(a => a.trim());
-            const isMatch = rawVal !== '' && validAnswers.some(ans => rawVal === ans);
-            input.classList.remove('correct', 'wrong');
-            input.classList.add(isMatch ? 'correct' : 'wrong');
-        });
-        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-        document.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
-    }
-
-    revealBlanks(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const inputs = container.querySelectorAll('.blank-input');
-        inputs.forEach(input => {
-            input.value = input.dataset.ans.split('|')[0];
-            input.classList.remove('wrong');
-            input.classList.add('correct');
-        });
-        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-        document.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
-    }
-
-    resetBlanks(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const inputs = container.querySelectorAll('.blank-input');
-        inputs.forEach(input => {
-            input.value = '';
-            input.classList.remove('correct', 'wrong');
-        });
-        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
-    }
-
-    checkSelects(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const selects = container.querySelectorAll('.select-input');
-        selects.forEach(select => {
-            const val = select.value.trim().toUpperCase();
-            const ans = select.dataset.ans.trim().toUpperCase();
-            select.classList.remove('correct', 'wrong');
-            if (val === '') {
-                select.classList.add('wrong');
-            } else {
-                select.classList.add(val === ans ? 'correct' : 'wrong');
-            }
-        });
-        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-        document.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
-    }
-
-    revealSelects(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const selects = container.querySelectorAll('.select-input');
-        selects.forEach(select => {
-            select.value = select.dataset.ans;
-            select.classList.remove('wrong');
-            select.classList.add('correct');
-        });
-        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-        document.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
-    }
-
-    resetSelects(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const selects = container.querySelectorAll('.select-input');
-        selects.forEach(select => {
-            select.value = '';
-            select.classList.remove('correct', 'wrong');
-        });
-        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
-        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
-        document.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted'));
-    }
-
-    toggleOptCard(card) {
-        card.classList.toggle('selected');
-    }
-
-    checkMultiOpts(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const cards = container.querySelectorAll('.opt-card');
-        cards.forEach(card => {
-            const isCorrect = card.dataset.correct === 'true';
-            const isSelected = card.classList.contains('selected');
-            card.classList.remove('correct-opt', 'wrong-opt');
-            if (isSelected) {
-                card.classList.add(isCorrect ? 'correct-opt' : 'wrong-opt');
-            } else if (isCorrect) {
-                card.classList.add('correct-opt');
-            }
-        });
-    }
-
-    revealMultiOpts(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const cards = container.querySelectorAll('.opt-card');
-        cards.forEach(card => {
-            card.classList.remove('wrong-opt');
-            if (card.dataset.correct === 'true') {
-                card.classList.add('selected', 'correct-opt');
-            } else {
-                card.classList.remove('selected');
-            }
-        });
-    }
-
-    resetMultiOpts(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const cards = container.querySelectorAll('.opt-card');
-        cards.forEach(card => {
-            card.classList.remove('selected', 'correct-opt', 'wrong-opt');
-        });
-    }
-
-    toggleExplanations(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const explanations = container.querySelectorAll('.item-explanation');
-        explanations.forEach(exp => exp.classList.toggle('show'));
-    }
-
-    toggleSynonymExplanation(qKey, evId) {
-        const evTarget = document.getElementById(evId);
-        const synSpans = document.querySelectorAll(`[data-q="${qKey}"]`);
-        const isCurrentlyActive = evTarget && evTarget.classList.contains('highlighted');
-
-        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
-        document.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted'));
-
-        if (!isCurrentlyActive) {
-            if (evTarget) {
-                evTarget.classList.add('highlighted');
-                evTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-            synSpans.forEach(s => s.classList.add('active-syn'));
-        }
-    }
-
-    switchHighLineTab(tabNum) {
-        const b1 = document.getElementById('stBtn1');
-        const b2 = document.getElementById('stBtn2');
-        const p1 = document.getElementById('stPane1');
-        const p2 = document.getElementById('stPane2');
-        if (b1) b1.classList.toggle('active', tabNum === 1);
-        if (b2) b2.classList.toggle('active', tabNum === 2);
-        if (p1) p1.style.display = tabNum === 1 ? 'block' : 'none';
-        if (p2) p2.style.display = tabNum === 2 ? 'block' : 'none';
-    }
-}
-
-// Global auto-instantiation on window
-window.addEventListener('DOMContentLoaded', () => {
-    window.deckEngine = new DeckEngine();
-    if (window.DeckComponents) {
-        DeckComponents.init();
-    }
-});

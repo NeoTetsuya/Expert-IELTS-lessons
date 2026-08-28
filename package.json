@@ -4,6 +4,8 @@
   "description": "Universal Interactive IELTS Academic Slide Decks & Presentation System",
   "main": "index.html",
   "scripts": {
+    "build": "node build-bundle.js",
+    "build:bundle": "node build-bundle.js",
     "update-index": "node scripts/update-index.js"
   },
   "keywords": [
