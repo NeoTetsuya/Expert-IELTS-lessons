@@ -670,6 +670,825 @@ class TeacherHighlighter {
 window.teacherHighlighter = new TeacherHighlighter();
 
 
+/* ==================== MODULE: step-reveal.js ==================== */
+/**
+ * ==========================================================================
+ * STEP-BY-STEP REVEAL ENGINE (StepRevealEngine)
+ * Enables single-item question reveal for Socratic IELTS classroom teaching
+ * - Click any question card to reveal just that question & explanation
+ * - Auto-scrolls reading passage to center on target evidence
+ * - Keyboard shortcut: 'E' to step-reveal next unsolved question
+ * ==========================================================================
+ */
+
+class StepRevealEngine {
+    constructor(deckEngine) {
+        this.deckEngine = deckEngine;
+        this.init();
+    }
+
+    init() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.bindEvents());
+        } else {
+            this.bindEvents();
+        }
+
+        // Shortcut 'E' to reveal next question on active slide
+        document.addEventListener('keydown', (e) => {
+            if ((e.key === 'e' || e.key === 'E') && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
+                e.preventDefault();
+                this.revealNextOnActiveSlide();
+            }
+        });
+    }
+
+    bindEvents() {
+        // Allow clicking directly on question cards or badges to toggle single reveal
+        document.querySelectorAll('.q-card').forEach(card => {
+            if (card.dataset.stepBound) return;
+            card.dataset.stepBound = 'true';
+
+            // Add a subtle individual reveal icon if not present
+            const header = card.querySelector('div') || card;
+            const singleRevealBtn = document.createElement('button');
+            singleRevealBtn.className = 'btn-single-reveal';
+            singleRevealBtn.innerHTML = '👁️ Reveal';
+            singleRevealBtn.title = 'Reveal only this answer (Shortcut: click card or press E)';
+            singleRevealBtn.onclick = (ev) => {
+                ev.stopPropagation();
+                this.revealSingleCard(card);
+            };
+
+            const synBtn = card.querySelector('.syn-btn');
+            if (synBtn) {
+                synBtn.parentNode.insertBefore(singleRevealBtn, synBtn);
+            } else {
+                header.appendChild(singleRevealBtn);
+            }
+        });
+
+        // Add Step Reveal button to action rows
+        document.querySelectorAll('.action-row').forEach(row => {
+            if (row.querySelector('.btn-step-reveal')) return;
+            const btn = document.createElement('button');
+            btn.className = 'btn-action btn-step-reveal';
+            btn.innerHTML = '👉 Step Reveal (E)';
+            btn.title = 'Reveal questions one by one for classroom discussion';
+            btn.onclick = () => this.revealNextInContainer(row.parentElement);
+            row.insertBefore(btn, row.children[1] || null);
+        });
+
+        this.injectStyles();
+    }
+
+    revealSingleCard(card) {
+        // Reveal blank inputs
+        card.querySelectorAll('.blank-input').forEach(input => {
+            if (input.dataset.ans) {
+                const acceptable = input.dataset.ans.split('|')[0];
+                input.value = acceptable;
+                input.classList.add('correct');
+                input.classList.remove('incorrect');
+            }
+        });
+
+        // Reveal select dropdowns
+        card.querySelectorAll('.select-input').forEach(sel => {
+            if (sel.dataset.ans) {
+                sel.value = sel.dataset.ans;
+                sel.classList.add('correct');
+                sel.classList.remove('incorrect');
+            }
+        });
+
+        // Show explanation box if exists
+        const exp = card.querySelector('.item-explanation');
+        if (exp) exp.style.display = 'block';
+
+        // Auto-trigger evidence highlight in passage if linked
+        const qId = card.dataset.q;
+        if (qId && window.readingHighlighter) {
+            window.readingHighlighter.showEvidence(qId);
+        }
+    }
+
+    revealNextOnActiveSlide() {
+        const activeSlide = document.querySelector('.slide.active');
+        if (!activeSlide) return;
+        this.revealNextInContainer(activeSlide);
+    }
+
+    revealNextInContainer(container) {
+        if (!container) return;
+        const cards = Array.from(container.querySelectorAll('.q-card'));
+        const unrevealed = cards.find(card => {
+            const blank = card.querySelector('.blank-input');
+            const select = card.querySelector('.select-input');
+            if (blank && !blank.classList.contains('correct')) return true;
+            if (select && !select.classList.contains('correct')) return true;
+            return false;
+        });
+
+        if (unrevealed) {
+            this.revealSingleCard(unrevealed);
+            unrevealed.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    injectStyles() {
+        if (document.getElementById('stepRevealStyles')) return;
+        const style = document.createElement('style');
+        style.id = 'stepRevealStyles';
+        style.textContent = `
+            .btn-single-reveal {
+                background: rgba(37, 99, 235, 0.12);
+                border: 1px solid rgba(37, 99, 235, 0.35);
+                color: var(--col-reading, #2563eb);
+                font-size: 11.5px;
+                font-weight: 700;
+                padding: 3px 8px;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: all 0.18s ease;
+                margin-left: 6px;
+            }
+            .btn-single-reveal:hover {
+                background: var(--col-reading, #2563eb);
+                color: #ffffff;
+            }
+            .btn-step-reveal {
+                background: rgba(5, 150, 105, 0.12) !important;
+                border-color: rgba(5, 150, 105, 0.4) !important;
+                color: var(--col-vocab, #059669) !important;
+                font-weight: 700 !important;
+            }
+            .btn-step-reveal:hover {
+                background: var(--col-vocab, #059669) !important;
+                color: #ffffff !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Global instantiation
+window.stepRevealEngine = new StepRevealEngine();
+
+
+/* ==================== MODULE: student-picker.js ==================== */
+/**
+ * ==========================================================================
+ * RANDOM STUDENT SELECTOR (StudentPicker)
+ * Interactive Cold-Call / Random Selector for Classroom Engagement
+ * - Animated roulette spin effect
+ * - Customizable student names list or fast number mode (1 to N)
+ * - Saved in localStorage for future class sessions
+ * - Keyboard shortcut: 'R' (toggle)
+ * ==========================================================================
+ */
+
+class StudentPicker {
+    constructor() {
+        this.STORAGE_KEY = 'ielts_class_roster';
+        this.students = this.loadStudents();
+        this.isSpinning = false;
+
+        this.init();
+    }
+
+    loadStudents() {
+        const saved = localStorage.getItem(this.STORAGE_KEY);
+        if (saved) {
+            try { return JSON.parse(saved); } catch(e) {}
+        }
+        return ['Alex', 'David', 'Emma', 'Grace', 'Henry', 'James', 'Lucas', 'Mia', 'Oliver', 'Sophie'];
+    }
+
+    saveStudents() {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.students));
+    }
+
+    init() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.injectUI());
+        } else {
+            this.injectUI();
+        }
+
+        // Global shortcut 'R'
+        document.addEventListener('keydown', (e) => {
+            if ((e.key === 'r' || e.key === 'R') && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
+                e.preventDefault();
+                this.toggle();
+            }
+        });
+    }
+
+    injectUI() {
+        if (document.getElementById('studentPickerModal')) return;
+
+        const modal = document.createElement('div');
+        modal.id = 'studentPickerModal';
+        modal.className = 'student-picker-modal';
+        modal.style.display = 'none';
+
+        modal.innerHTML = `
+            <div class="student-modal-backdrop" onclick="studentPicker.close()"></div>
+            <div class="student-modal-dialog">
+                <div class="student-modal-header">
+                    <div>
+                        <h2>🎲 Random Student Selector</h2>
+                        <p>Engage students with fair cold-calling &amp; speaking turns.</p>
+                    </div>
+                    <button class="student-modal-close" onclick="studentPicker.close()">×</button>
+                </div>
+
+                <div class="picker-display-stage">
+                    <div class="picker-result-name" id="pickerResultName">Click Spin to Pick!</div>
+                </div>
+
+                <div class="picker-controls-row">
+                    <button class="btn-picker-spin" id="pickerSpinBtn" onclick="studentPicker.spin()">🎲 SPIN WHEEL</button>
+                    <button class="btn-picker-edit" onclick="studentPicker.toggleRosterEditor()">✏️ Edit Roster</button>
+                </div>
+
+                <!-- Roster Editor Drawer -->
+                <div class="roster-editor-box" id="rosterEditorBox" style="display:none;">
+                    <label>Enter Student Names (comma or newline separated):</label>
+                    <textarea id="rosterInput" rows="4">${this.students.join(', ')}</textarea>
+                    <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:8px;">
+                        <button class="btn-action" onclick="studentPicker.setQuickNumbers(15)">1–15 Numbers</button>
+                        <button class="btn-action btn-primary" onclick="studentPicker.saveRosterFromInput()">Save Roster</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        this.injectStyles();
+    }
+
+    spin() {
+        if (this.isSpinning || this.students.length === 0) return;
+        this.isSpinning = true;
+
+        const resultEl = document.getElementById('pickerResultName');
+        const spinBtn = document.getElementById('pickerSpinBtn');
+        if (spinBtn) spinBtn.disabled = true;
+
+        let counter = 0;
+        const totalCycles = 24 + Math.floor(Math.random() * 8);
+        const interval = 60;
+
+        const step = () => {
+            const randomIndex = Math.floor(Math.random() * this.students.length);
+            resultEl.textContent = this.students[randomIndex];
+            resultEl.style.transform = `scale(${1 + (counter % 3) * 0.04})`;
+            counter++;
+
+            if (counter < totalCycles) {
+                setTimeout(step, interval + counter * 6);
+            } else {
+                this.isSpinning = false;
+                if (spinBtn) spinBtn.disabled = false;
+                resultEl.style.transform = 'scale(1.15)';
+                resultEl.style.color = '#38bdf8';
+                this.playChime();
+            }
+        };
+
+        step();
+    }
+
+    playChime() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+            osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.3); // A5
+            gain.gain.setValueAtTime(0.2, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.45);
+        } catch(e) {}
+    }
+
+    toggleRosterEditor() {
+        const box = document.getElementById('rosterEditorBox');
+        if (box) {
+            box.style.display = box.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+
+    saveRosterFromInput() {
+        const input = document.getElementById('rosterInput');
+        if (!input) return;
+        const names = input.value.split(/[,\n]+/).map(n => n.trim()).filter(n => n.length > 0);
+        if (names.length > 0) {
+            this.students = names;
+            this.saveStudents();
+            this.toggleRosterEditor();
+        }
+    }
+
+    setQuickNumbers(count = 15) {
+        const numbers = [];
+        for (let i = 1; i <= count; i++) numbers.push(`Student #${i}`);
+        this.students = numbers;
+        this.saveStudents();
+        const input = document.getElementById('rosterInput');
+        if (input) input.value = numbers.join(', ');
+        this.toggleRosterEditor();
+    }
+
+    open() {
+        const modal = document.getElementById('studentPickerModal');
+        if (modal) modal.style.display = 'flex';
+    }
+
+    close() {
+        const modal = document.getElementById('studentPickerModal');
+        if (modal) modal.style.display = 'none';
+    }
+
+    toggle() {
+        const modal = document.getElementById('studentPickerModal');
+        if (modal && modal.style.display === 'flex') {
+            this.close();
+        } else {
+            this.open();
+        }
+    }
+
+    injectStyles() {
+        if (document.getElementById('studentPickerStyles')) return;
+        const style = document.createElement('style');
+        style.id = 'studentPickerStyles';
+        style.textContent = `
+            .student-picker-modal {
+                position: fixed;
+                inset: 0;
+                z-index: 100000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .student-modal-backdrop {
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.78);
+                backdrop-filter: blur(8px);
+            }
+            .student-modal-dialog {
+                position: relative;
+                z-index: 1;
+                background: #0f172a;
+                border: 1.5px solid rgba(255, 255, 255, 0.16);
+                border-radius: 18px;
+                width: 90%;
+                max-width: 540px;
+                padding: 28px;
+                box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+                color: #ffffff;
+            }
+            .student-modal-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding-bottom: 12px;
+            }
+            .student-modal-header h2 { font-size: 20px; font-weight: 800; }
+            .student-modal-header p { font-size: 13px; color: #94a3b8; }
+            .student-modal-close {
+                background: transparent;
+                border: none;
+                color: #94a3b8;
+                font-size: 26px;
+                cursor: pointer;
+            }
+            .student-modal-close:hover { color: #fff; }
+            .picker-display-stage {
+                background: rgba(255, 255, 255, 0.05);
+                border: 2px dashed rgba(56, 189, 248, 0.35);
+                border-radius: 14px;
+                height: 120px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+            .picker-result-name {
+                font-size: 32px;
+                font-weight: 900;
+                color: #f8fafc;
+                transition: transform 0.1s ease, color 0.2s ease;
+                text-align: center;
+            }
+            .picker-controls-row {
+                display: flex;
+                gap: 10px;
+            }
+            .btn-picker-spin {
+                flex: 1;
+                background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+                color: #ffffff;
+                font-size: 16px;
+                font-weight: 800;
+                padding: 14px 20px;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                box-shadow: 0 4px 18px rgba(37, 99, 235, 0.4);
+                transition: all 0.2s ease;
+            }
+            .btn-picker-spin:hover { transform: translateY(-2px); filter: brightness(1.1); }
+            .btn-picker-edit {
+                background: rgba(255, 255, 255, 0.08);
+                color: #cbd5e1;
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                padding: 14px 18px;
+                border-radius: 10px;
+                cursor: pointer;
+                font-weight: 700;
+            }
+            .btn-picker-edit:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
+            .roster-editor-box {
+                margin-top: 16px;
+                padding-top: 16px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .roster-editor-box label { font-size: 12px; font-weight: 700; color: #94a3b8; display: block; margin-bottom: 6px; }
+            .roster-editor-box textarea {
+                width: 100%;
+                background: #1e293b;
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: 8px;
+                color: #f8fafc;
+                padding: 8px 12px;
+                font-family: inherit;
+                font-size: 13.5px;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Global instantiation
+window.studentPicker = new StudentPicker();
+
+
+/* ==================== MODULE: paragraph-loupe.js ==================== */
+/**
+ * ==========================================================================
+ * PARAGRAPH FOCUS LOUPE (ParagraphLoupe)
+ * Isolates and magnifies individual reading paragraphs for projector clarity
+ * - Click any paragraph tag [Paragraph X] to zoom in (140% scale)
+ * - Dims neighboring paragraphs for laser-focused reading analysis
+ * - Keyboard shortcut: 'Z' (cycles through paragraphs) / 'Escape' to reset
+ * ==========================================================================
+ */
+
+class ParagraphLoupe {
+    constructor() {
+        this.activePara = null;
+        this.init();
+    }
+
+    init() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.bindTags());
+        } else {
+            this.bindTags();
+        }
+
+        // Global shortcut 'Z' to cycle focus on active slide
+        document.addEventListener('keydown', (e) => {
+            if ((e.key === 'z' || e.key === 'Z') && !e.ctrlKey && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
+                e.preventDefault();
+                this.cycleNextParagraph();
+            }
+
+            if (e.key === 'Escape' && this.activePara) {
+                this.clearFocus();
+            }
+        });
+    }
+
+    bindTags() {
+        document.querySelectorAll('.reading-pane p').forEach(p => {
+            const tag = p.querySelector('.para-tag');
+            if (tag) {
+                tag.style.cursor = 'zoom-in';
+                tag.title = 'Click to focus & magnify this paragraph (Shortcut: Z)';
+                tag.onclick = (e) => {
+                    e.stopPropagation();
+                    this.toggleFocus(p);
+                };
+            }
+        });
+
+        this.injectStyles();
+    }
+
+    toggleFocus(paraEl) {
+        if (this.activePara === paraEl) {
+            this.clearFocus();
+        } else {
+            this.focusParagraph(paraEl);
+        }
+    }
+
+    focusParagraph(paraEl) {
+        this.clearFocus();
+        this.activePara = paraEl;
+
+        const pane = paraEl.closest('.reading-pane');
+        if (pane) {
+            pane.classList.add('loupe-active');
+            paraEl.classList.add('loupe-focused');
+            paraEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    clearFocus() {
+        if (this.activePara) {
+            const pane = this.activePara.closest('.reading-pane');
+            if (pane) pane.classList.remove('loupe-active');
+            this.activePara.classList.remove('loupe-focused');
+            this.activePara = null;
+        }
+    }
+
+    cycleNextParagraph() {
+        const activeSlide = document.querySelector('.slide.active');
+        if (!activeSlide) return;
+        const paragraphs = Array.from(activeSlide.querySelectorAll('.reading-pane p'));
+        if (paragraphs.length === 0) return;
+
+        let nextIndex = 0;
+        if (this.activePara) {
+            const currentIndex = paragraphs.indexOf(this.activePara);
+            nextIndex = (currentIndex + 1) % (paragraphs.length + 1);
+        }
+
+        if (nextIndex < paragraphs.length) {
+            this.focusParagraph(paragraphs[nextIndex]);
+        } else {
+            this.clearFocus();
+        }
+    }
+
+    injectStyles() {
+        if (document.getElementById('paragraphLoupeStyles')) return;
+        const style = document.createElement('style');
+        style.id = 'paragraphLoupeStyles';
+        style.textContent = `
+            .reading-pane.loupe-active p {
+                opacity: 0.28;
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            .reading-pane.loupe-active p.loupe-focused {
+                opacity: 1 !important;
+                transform: scale(1.04);
+                transform-origin: left center;
+                background: rgba(56, 189, 248, 0.08);
+                border-left: 4px solid var(--col-reading, #2563eb);
+                padding: 8px 12px;
+                border-radius: 0 8px 8px 0;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            }
+            .para-tag:hover {
+                transform: scale(1.1);
+                color: #ffffff;
+                background: var(--col-reading, #2563eb) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Global instantiation
+window.paragraphLoupe = new ParagraphLoupe();
+
+
+/* ==================== MODULE: presenter-notes.js ==================== */
+/**
+ * ==========================================================================
+ * TEACHER PRESENTER NOTES DRAWER (PresenterNotesEngine)
+ * Collapsible side-drawer displaying pedagogical talking points,
+ * pacing cues, and common IELTS student pitfalls for the active slide.
+ * Keyboard shortcut: 'N' (toggle notes)
+ * ==========================================================================
+ */
+
+class PresenterNotesEngine {
+    constructor(deckEngine) {
+        this.deckEngine = deckEngine;
+        this.isOpen = false;
+        this.init();
+    }
+
+    init() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.injectUI());
+        } else {
+            this.injectUI();
+        }
+
+        // Shortcut 'N' toggles presenter notes
+        document.addEventListener('keydown', (e) => {
+            if ((e.key === 'n' || e.key === 'N') && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
+                e.preventDefault();
+                this.toggle();
+            }
+        });
+    }
+
+    injectUI() {
+        if (document.getElementById('presenterNotesDrawer')) return;
+
+        const drawer = document.createElement('aside');
+        drawer.id = 'presenterNotesDrawer';
+        drawer.className = 'presenter-notes-drawer';
+        drawer.innerHTML = `
+            <div class="notes-header">
+                <div>
+                    <h3>📝 Teacher Presenter Notes</h3>
+                    <span class="notes-slide-tag" id="notesSlideTag">Slide 1</span>
+                </div>
+                <button class="notes-close-btn" onclick="presenterNotesEngine.toggle()">×</button>
+            </div>
+            <div class="notes-content" id="notesContent">
+                <!-- Dynamically hydrated -->
+            </div>
+        `;
+        document.body.appendChild(drawer);
+        this.injectStyles();
+
+        // Listen to slide changes to update notes
+        window.addEventListener('slidechanged', () => this.updateNotesForCurrentSlide());
+        this.updateNotesForCurrentSlide();
+    }
+
+    toggle() {
+        this.isOpen = !this.isOpen;
+        const drawer = document.getElementById('presenterNotesDrawer');
+        const btn = document.getElementById('toolNotesBtn');
+        if (drawer) drawer.classList.toggle('open', this.isOpen);
+        if (btn) btn.classList.toggle('active', this.isOpen);
+        if (this.isOpen) this.updateNotesForCurrentSlide();
+    }
+
+    updateNotesForCurrentSlide() {
+        const activeSlide = document.querySelector('.slide.active');
+        const tagEl = document.getElementById('notesSlideTag');
+        const contentEl = document.getElementById('notesContent');
+        if (!activeSlide || !contentEl) return;
+
+        const skill = activeSlide.dataset.skill || 'general';
+        const slideNum = activeSlide.querySelector('.slide-number')?.textContent || 'General Overview';
+        if (tagEl) tagEl.textContent = slideNum;
+
+        // Extract custom slide notes or generate pedagogical guidance based on skill
+        let customNote = activeSlide.querySelector('.teacher-note')?.innerHTML;
+        if (!customNote) {
+            customNote = this.getDefaultGuidance(skill, activeSlide);
+        }
+
+        contentEl.innerHTML = customNote;
+    }
+
+    getDefaultGuidance(skill, slide) {
+        switch(skill) {
+            case 'read':
+                return `
+                    <div class="note-section">
+                        <h4>🎯 Objective &amp; Timing (10–12 min)</h4>
+                        <p>Have students scan the passage for parallel expressions before answering questions.</p>
+                    </div>
+                    <div class="note-section warning">
+                        <h4>⚠️ Common Student Traps</h4>
+                        <p>Students often mistake <strong>NOT GIVEN</strong> for <strong>FALSE/NO</strong>. Remind them: if the text lacks direct confirmation or denial, it must be NOT GIVEN.</p>
+                    </div>
+                    <div class="note-section tip">
+                        <h4>💡 Teacher Tip</h4>
+                        <p>Use the <kbd>E</kbd> key for Step Reveal to discuss each question card Socratic-style.</p>
+                    </div>
+                `;
+            case 'grammar':
+                return `
+                    <div class="note-section">
+                        <h4>🎯 Objective &amp; Timing (8–10 min)</h4>
+                        <p>Clarify tense markers and clause construction. Elicit example sentences from 2–3 students.</p>
+                    </div>
+                    <div class="note-section tip">
+                        <h4>💡 Collocation Check</h4>
+                        <p>Highlight prepositions and time adverbials (e.g. <em>since 2011</em> vs <em>in 2011</em>).</p>
+                    </div>
+                `;
+            case 'write':
+                return `
+                    <div class="note-section">
+                        <h4>🎯 Objective &amp; Timing (12–15 min)</h4>
+                        <p>Analyze paragraph coherence, cohesive devices, and data comparison structures.</p>
+                    </div>
+                    <div class="note-section">
+                        <h4>📊 Band 7.0+ Criteria</h4>
+                        <p>Ensure students note the contrast transition words (<em>while, in contrast, whereas</em>) highlighted on screen.</p>
+                    </div>
+                `;
+            case 'vocab':
+                return `
+                    <div class="note-section">
+                        <h4>🎯 Objective &amp; Timing (6–8 min)</h4>
+                        <p>Drill pronunciation using the Multi-Accent speech player. Test word formation suffixes.</p>
+                    </div>
+                `;
+            default:
+                return `
+                    <div class="note-section">
+                        <h4>🎯 Presentation Guidance</h4>
+                        <p>Introduce the module syllabus and set the pacing expectations for today's masterclass.</p>
+                    </div>
+                `;
+        }
+    }
+
+    injectStyles() {
+        if (document.getElementById('presenterNotesStyles')) return;
+        const style = document.createElement('style');
+        style.id = 'presenterNotesStyles';
+        style.textContent = `
+            .presenter-notes-drawer {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 360px;
+                height: 100vh;
+                background: #0f172a;
+                border-left: 1.5px solid rgba(255, 255, 255, 0.16);
+                box-shadow: -10px 0 35px rgba(0, 0, 0, 0.6);
+                z-index: 99999;
+                transform: translateX(100%);
+                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                display: flex;
+                flex-direction: column;
+                color: #f8fafc;
+            }
+            .presenter-notes-drawer.open {
+                transform: translateX(0);
+            }
+            .notes-header {
+                padding: 20px 24px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+            .notes-header h3 { font-size: 16px; font-weight: 800; }
+            .notes-slide-tag { font-family: var(--font-mono); font-size: 12px; color: #38bdf8; }
+            .notes-close-btn {
+                background: transparent;
+                border: none;
+                color: #94a3b8;
+                font-size: 24px;
+                cursor: pointer;
+            }
+            .notes-close-btn:hover { color: #ffffff; }
+            .notes-content {
+                flex: 1;
+                padding: 24px;
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+            .note-section {
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                padding: 14px 16px;
+            }
+            .note-section h4 { font-size: 13.5px; font-weight: 800; margin-bottom: 6px; color: #38bdf8; }
+            .note-section p { font-size: 13px; color: #cbd5e1; line-height: 1.55; }
+            .note-section.warning { border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.08); }
+            .note-section.warning h4 { color: #f87171; }
+            .note-section.tip { border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.08); }
+            .note-section.tip h4 { color: #34d399; }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Global instantiation
+window.presenterNotesEngine = new PresenterNotesEngine();
+
+
 /* ==================== MODULE: reading-grounder.js ==================== */
 /**
  * Reading Grounder & Synonym Engine (ReadingGrounder)
@@ -1002,12 +1821,14 @@ window.addEventListener('DOMContentLoaded', () => {
  * 1. Click-to-fill: Clicking a word bank chip automatically places it into the active or next empty blank.
  * 2. Visual tracking: Chips get marked as used/struck-through when their word is filled into an input.
  * 3. Double-click to clear: Clicking a filled blank returns the word to the bank.
- * 4. Audio pronunciation: Built-in text-to-speech option on vocabulary cards.
+ * 4. IELTS Multi-Accent Pronunciation (British 🇬🇧 / Australian 🇦🇺 / American 🇺🇸).
  */
 
 class VocabBank {
     constructor() {
         this.activeInput = null;
+        this.currentAccent = localStorage.getItem('ielts_speech_accent') || 'en-GB'; // default British RP
+        this.speechRate = 0.92;
         this.init();
     }
 
@@ -1015,6 +1836,7 @@ class VocabBank {
         this.bindWordChips();
         this.bindBlankInputs();
         this.bindAudioPronunciation();
+        this.injectAccentSelectorStyles();
     }
 
     /**
@@ -1093,67 +1915,80 @@ class VocabBank {
     }
 
     /**
-     * Optional Pronunciation for Vocabulary items (.pronounce-btn / .speak-btn)
+     * IELTS Multi-Accent Speech Player
      */
     bindAudioPronunciation() {
         document.addEventListener('click', (e) => {
             const btn = e.target.closest('.pronounce-btn, .speak-btn, [data-speak]');
             if (!btn) return;
 
-            const textToSpeak = btn.dataset.speak || btn.parentElement.textContent.replace(/🔊|🎧/g, '').trim();
-            if ('speechSynthesis' in window && textToSpeak) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(textToSpeak);
-                utterance.lang = 'en-GB';
-                utterance.rate = 0.9;
-                window.speechSynthesis.speak(utterance);
-            }
+            const textToSpeak = btn.dataset.speak || btn.parentElement.textContent.replace(/🔊|🎧|🇬🇧|🇦🇺|🇺🇸/g, '').trim();
+            this.speak(textToSpeak);
         });
+    }
+
+    speak(text, customLang = null) {
+        if (!('speechSynthesis' in window) || !text) return;
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = customLang || this.currentAccent;
+        utterance.rate = this.speechRate;
+
+        // Try selecting a natural sounding voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const matchingVoice = voices.find(v => v.lang === utterance.lang || v.lang.startsWith(utterance.lang.split('-')[0]));
+        if (matchingVoice) utterance.voice = matchingVoice;
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    setAccent(accent) {
+        this.currentAccent = accent;
+        localStorage.setItem('ielts_speech_accent', accent);
+    }
+
+    injectAccentSelectorStyles() {
+        if (document.getElementById('vocabBankStyles')) return;
+        const style = document.createElement('style');
+        style.id = 'vocabBankStyles';
+        style.textContent = `
+            .word-chip, .vocab-chip {
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                padding: 5px 12px;
+                background: #ffffff;
+                border: 1.5px solid var(--border-soft, #cbd5e1);
+                border-radius: 6px;
+                font-family: var(--font-body, sans-serif);
+                font-size: calc(15px * var(--font-scale, 1));
+                font-weight: 600;
+                color: var(--text-dark, #0f172a);
+                cursor: pointer;
+                transition: all 0.2s ease;
+                user-select: none;
+                margin: 3px;
+            }
+            .word-chip:hover, .vocab-chip:hover {
+                border-color: var(--col-vocab, #16a34a);
+                background: #f0fdf4;
+                transform: translateY(-1px);
+            }
+            .word-chip.chip-used, .vocab-chip.chip-used {
+                opacity: 0.45;
+                text-decoration: line-through;
+                background: #f1f5f9;
+                cursor: default;
+                transform: none;
+            }
+        `;
+        document.head.appendChild(style);
     }
 }
 
-// Inject styling for used word chips
-(function() {
-    const style = document.createElement('style');
-    style.id = 'vocabBankStyles';
-    style.textContent = `
-        .word-chip, .vocab-chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 5px 12px;
-            background: #ffffff;
-            border: 1.5px solid var(--border-soft, #cbd5e1);
-            border-radius: 6px;
-            font-family: var(--font-body, sans-serif);
-            font-size: calc(15px * var(--font-scale, 1));
-            font-weight: 600;
-            color: var(--text-dark, #0f172a);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            user-select: none;
-            margin: 3px;
-        }
-        .word-chip:hover, .vocab-chip:hover {
-            border-color: var(--col-vocab, #16a34a);
-            background: #f0fdf4;
-            transform: translateY(-1px);
-        }
-        .word-chip.chip-used, .vocab-chip.chip-used {
-            opacity: 0.45;
-            text-decoration: line-through;
-            background: #f1f5f9;
-            cursor: default;
-            transform: none;
-        }
-    `;
-    document.head.appendChild(style);
-})();
-
 // Global auto-instantiation
-let vocabBank;
-window.addEventListener('DOMContentLoaded', () => {
-    vocabBank = new VocabBank();
-});
+window.vocabBank = new VocabBank();
 
 
 /* ==================== MODULE: essay-analyzer.js ==================== */
@@ -1994,6 +2829,8 @@ class PresentationTools {
                 <button class="tool-btn" id="toolThemeBtn" title="Theme Aesthetics (Shift+T)" onclick="window.deckThemeEngine && window.deckThemeEngine.openModal()">🎨 <span class="tool-label">Theme</span></button>
                 <button class="tool-btn" id="toolHighlightBtn" title="Teacher Highlighter (H)" onclick="window.teacherHighlighter && window.teacherHighlighter.toggle()">🖍️ <span class="tool-label">Highlight</span></button>
                 <button class="tool-btn" id="toolTimerBtn" title="Classroom Timer (T)" onclick="presentationTools.toggleTimerModal()">⏱️ <span class="tool-label">Timer</span></button>
+                <button class="tool-btn" id="toolStudentBtn" title="Random Student Selector (R)" onclick="window.studentPicker && window.studentPicker.toggle()">🎲 <span class="tool-label">Picker</span></button>
+                <button class="tool-btn" id="toolNotesBtn" title="Teacher Presenter Notes (N)" onclick="window.presenterNotesEngine && window.presenterNotesEngine.toggle()">📝 <span class="tool-label">Notes</span></button>
                 <button class="tool-btn" id="toolLaserBtn" title="Laser Pointer (L)" onclick="presentationTools.toggleLaser()">🔴 <span class="tool-label">Laser</span></button>
                 <button class="tool-btn" id="toolPenBtn" title="Draw / Annotate (P)" onclick="presentationTools.togglePen()">✏️ <span class="tool-label">Draw</span></button>
                 <button class="tool-btn" id="toolFullscreenBtn" title="Fullscreen (F)" onclick="presentationTools.toggleFullscreen()">⛶</button>

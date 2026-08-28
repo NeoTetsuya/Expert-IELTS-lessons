@@ -45,6 +45,10 @@ Interactive, animation-rich, 16:9 HTML slide presentations designed for IELTS Ac
 | <kbd>←</kbd> | Previous Slide | Return to previous slide |
 | <kbd>G</kbd> | Slide Grid Navigator | Fullscreen slide overview with instant topic search |
 | <kbd>T</kbd> | Classroom Timer | Countdown timer (1m, 2m, 5m, 10m) with alert chime |
+| <kbd>E</kbd> | Step Reveal | Unveil answers one-by-one with linked evidence highlights |
+| <kbd>R</kbd> | Student Selector | Animated cold-call / random student picker wheel |
+| <kbd>Z</kbd> | Paragraph Loupe | Magnify & isolate individual reading paragraphs on projector |
+| <kbd>N</kbd> | Presenter Notes | Slide-over drawer with timing cues & common IELTS traps |
 | <kbd>H</kbd> | Teacher Highlighter | Translucent fluorescent marker with multi-color palette (Yellow, Green, Cyan, Pink) |
 | <kbd>L</kbd> | Laser Pointer | Glowing red pointer cursor |
 | <kbd>P</kbd> | Pen Annotation | Draw live sketches or ink notes on screen |

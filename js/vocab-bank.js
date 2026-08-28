@@ -5,12 +5,14 @@
  * 1. Click-to-fill: Clicking a word bank chip automatically places it into the active or next empty blank.
  * 2. Visual tracking: Chips get marked as used/struck-through when their word is filled into an input.
  * 3. Double-click to clear: Clicking a filled blank returns the word to the bank.
- * 4. Audio pronunciation: Built-in text-to-speech option on vocabulary cards.
+ * 4. IELTS Multi-Accent Pronunciation (British 🇬🇧 / Australian 🇦🇺 / American 🇺🇸).
  */
 
 class VocabBank {
     constructor() {
         this.activeInput = null;
+        this.currentAccent = localStorage.getItem('ielts_speech_accent') || 'en-GB'; // default British RP
+        this.speechRate = 0.92;
         this.init();
     }
 
@@ -18,6 +20,7 @@ class VocabBank {
         this.bindWordChips();
         this.bindBlankInputs();
         this.bindAudioPronunciation();
+        this.injectAccentSelectorStyles();
     }
 
     /**
@@ -96,64 +99,77 @@ class VocabBank {
     }
 
     /**
-     * Optional Pronunciation for Vocabulary items (.pronounce-btn / .speak-btn)
+     * IELTS Multi-Accent Speech Player
      */
     bindAudioPronunciation() {
         document.addEventListener('click', (e) => {
             const btn = e.target.closest('.pronounce-btn, .speak-btn, [data-speak]');
             if (!btn) return;
 
-            const textToSpeak = btn.dataset.speak || btn.parentElement.textContent.replace(/🔊|🎧/g, '').trim();
-            if ('speechSynthesis' in window && textToSpeak) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(textToSpeak);
-                utterance.lang = 'en-GB';
-                utterance.rate = 0.9;
-                window.speechSynthesis.speak(utterance);
-            }
+            const textToSpeak = btn.dataset.speak || btn.parentElement.textContent.replace(/🔊|🎧|🇬🇧|🇦🇺|🇺🇸/g, '').trim();
+            this.speak(textToSpeak);
         });
+    }
+
+    speak(text, customLang = null) {
+        if (!('speechSynthesis' in window) || !text) return;
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = customLang || this.currentAccent;
+        utterance.rate = this.speechRate;
+
+        // Try selecting a natural sounding voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const matchingVoice = voices.find(v => v.lang === utterance.lang || v.lang.startsWith(utterance.lang.split('-')[0]));
+        if (matchingVoice) utterance.voice = matchingVoice;
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    setAccent(accent) {
+        this.currentAccent = accent;
+        localStorage.setItem('ielts_speech_accent', accent);
+    }
+
+    injectAccentSelectorStyles() {
+        if (document.getElementById('vocabBankStyles')) return;
+        const style = document.createElement('style');
+        style.id = 'vocabBankStyles';
+        style.textContent = `
+            .word-chip, .vocab-chip {
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                padding: 5px 12px;
+                background: #ffffff;
+                border: 1.5px solid var(--border-soft, #cbd5e1);
+                border-radius: 6px;
+                font-family: var(--font-body, sans-serif);
+                font-size: calc(15px * var(--font-scale, 1));
+                font-weight: 600;
+                color: var(--text-dark, #0f172a);
+                cursor: pointer;
+                transition: all 0.2s ease;
+                user-select: none;
+                margin: 3px;
+            }
+            .word-chip:hover, .vocab-chip:hover {
+                border-color: var(--col-vocab, #16a34a);
+                background: #f0fdf4;
+                transform: translateY(-1px);
+            }
+            .word-chip.chip-used, .vocab-chip.chip-used {
+                opacity: 0.45;
+                text-decoration: line-through;
+                background: #f1f5f9;
+                cursor: default;
+                transform: none;
+            }
+        `;
+        document.head.appendChild(style);
     }
 }
 
-// Inject styling for used word chips
-(function() {
-    const style = document.createElement('style');
-    style.id = 'vocabBankStyles';
-    style.textContent = `
-        .word-chip, .vocab-chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 5px 12px;
-            background: #ffffff;
-            border: 1.5px solid var(--border-soft, #cbd5e1);
-            border-radius: 6px;
-            font-family: var(--font-body, sans-serif);
-            font-size: calc(15px * var(--font-scale, 1));
-            font-weight: 600;
-            color: var(--text-dark, #0f172a);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            user-select: none;
-            margin: 3px;
-        }
-        .word-chip:hover, .vocab-chip:hover {
-            border-color: var(--col-vocab, #16a34a);
-            background: #f0fdf4;
-            transform: translateY(-1px);
-        }
-        .word-chip.chip-used, .vocab-chip.chip-used {
-            opacity: 0.45;
-            text-decoration: line-through;
-            background: #f1f5f9;
-            cursor: default;
-            transform: none;
-        }
-    `;
-    document.head.appendChild(style);
-})();
-
 // Global auto-instantiation
-let vocabBank;
-window.addEventListener('DOMContentLoaded', () => {
-    vocabBank = new VocabBank();
-});
+window.vocabBank = new VocabBank();
