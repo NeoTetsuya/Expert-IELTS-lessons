@@ -35,11 +35,23 @@ class PresentationTools {
         toolContainer.innerHTML = `
             <div class="tools-bar">
                 <button class="tool-btn" id="toolThemeBtn" title="Theme Aesthetics (Shift+T)" onclick="window.deckThemeEngine && window.deckThemeEngine.openModal()">🎨 <span class="tool-label">Theme</span></button>
+                <button class="tool-btn" id="toolHighlightBtn" title="Teacher Highlighter (H)" onclick="window.teacherHighlighter && window.teacherHighlighter.toggle()">🖍️ <span class="tool-label">Highlight</span></button>
                 <button class="tool-btn" id="toolTimerBtn" title="Classroom Timer (T)" onclick="presentationTools.toggleTimerModal()">⏱️ <span class="tool-label">Timer</span></button>
                 <button class="tool-btn" id="toolLaserBtn" title="Laser Pointer (L)" onclick="presentationTools.toggleLaser()">🔴 <span class="tool-label">Laser</span></button>
                 <button class="tool-btn" id="toolPenBtn" title="Draw / Annotate (P)" onclick="presentationTools.togglePen()">✏️ <span class="tool-label">Draw</span></button>
                 <button class="tool-btn" id="toolFullscreenBtn" title="Fullscreen (F)" onclick="presentationTools.toggleFullscreen()">⛶</button>
                 <button class="tool-btn" id="toolHelpBtn" title="Keyboard Shortcuts (?)" onclick="presentationTools.toggleHelpModal()">❓</button>
+            </div>
+
+            <!-- Highlighter Palette -->
+            <div class="highlighter-palette" id="highlighterPalette" style="display:none;">
+                <button class="highlighter-color-btn active" style="background:#facc15;" onclick="teacherHighlighter.setColor(0)" title="Fluorescent Yellow"></button>
+                <button class="highlighter-color-btn" style="background:#4ade80;" onclick="teacherHighlighter.setColor(1)" title="Neon Green"></button>
+                <button class="highlighter-color-btn" style="background:#38bdf8;" onclick="teacherHighlighter.setColor(2)" title="Sky Cyan"></button>
+                <button class="highlighter-color-btn" style="background:#f472b6;" onclick="teacherHighlighter.setColor(3)" title="Coral Pink"></button>
+                <div class="highlighter-divider"></div>
+                <button class="highlighter-tool-btn" onclick="teacherHighlighter.undo()" title="Undo Last Stroke (Ctrl+Z)">↩️ Undo</button>
+                <button class="highlighter-tool-btn" onclick="teacherHighlighter.clear()" title="Clear All Highlights (C)">🗑️ Clear</button>
             </div>
 
             <!-- Timer Modal / HUD -->
@@ -70,15 +82,17 @@ class PresentationTools {
                 <div class="help-grid">
                     <div><kbd>→</kbd> / <kbd>Space</kbd></div><div>Next Slide</div>
                     <div><kbd>←</kbd></div><div>Previous Slide</div>
-                    <div><kbd>Home</kbd> / <kbd>End</kbd></div><div>First / Last Slide</div>
-                    <div><kbd>+</kbd> / <kbd>−</kbd></div><div>Scale Font Size (Zoom)</div>
-                    <div><kbd>0</kbd></div><div>Reset Font Size (100%)</div>
+                    <div><kbd>G</kbd></div><div>Slide Grid Navigator</div>
+                    <div><kbd>H</kbd></div><div>Toggle Highlighter Tool</div>
                     <div><kbd>L</kbd></div><div>Toggle Laser Pointer</div>
                     <div><kbd>P</kbd></div><div>Toggle Drawing Pen</div>
-                    <div><kbd>C</kbd></div><div>Clear Canvas Drawings</div>
-                    <div><kbd>T</kbd></div><div>Toggle Timer Modal</div>
+                    <div><kbd>C</kbd></div><div>Clear Highlights / Drawings</div>
+                    <div><kbd>Shift+T</kbd></div><div>Cycle Theme Presets</div>
+                    <div><kbd>B</kbd> / <kbd>W</kbd></div><div>Blackout / Whiteout Screen</div>
+                    <div><kbd>S</kbd></div><div>Spotlight Dimmer</div>
+                    <div><kbd>T</kbd></div><div>Toggle Classroom Timer</div>
                     <div><kbd>F</kbd></div><div>Toggle Fullscreen Mode</div>
-                    <div><kbd>?</kbd> / <kbd>H</kbd></div><div>Toggle This Help Menu</div>
+                    <div><kbd>?</kbd></div><div>Toggle Shortcuts Cheatsheet</div>
                 </div>
             </div>
         `;

@@ -45,15 +45,18 @@ Interactive, animation-rich, 16:9 HTML slide presentations designed for IELTS Ac
 | <kbd>←</kbd> | Previous Slide | Return to previous slide |
 | <kbd>G</kbd> | Slide Grid Navigator | Fullscreen slide overview with instant topic search |
 | <kbd>T</kbd> | Classroom Timer | Countdown timer (1m, 2m, 5m, 10m) with alert chime |
+| <kbd>H</kbd> | Teacher Highlighter | Translucent fluorescent marker with multi-color palette (Yellow, Green, Cyan, Pink) |
 | <kbd>L</kbd> | Laser Pointer | Glowing red pointer cursor |
-| <kbd>P</kbd> / <kbd>C</kbd> | Pen Annotation / Clear | Draw live sketches or underline text on screen |
+| <kbd>P</kbd> | Pen Annotation | Draw live sketches or ink notes on screen |
+| <kbd>C</kbd> | Clear Overlay | Clears all highlighter marks and canvas drawings instantly |
+| <kbd>Ctrl+Z</kbd> | Undo Stroke | Undo last highlight or drawing stroke |
 | <kbd>Shift+T</kbd> | Theme Switcher | Cycle live between 6 aesthetic typography & atmosphere presets |
 | <kbd>B</kbd> / <kbd>W</kbd> | Blackout / Whiteout | Pitch black or white screen to focus attention |
 | <kbd>S</kbd> | Spotlight Dimmer | Highlights circular area around the mouse cursor |
 | <kbd>+</kbd> / <kbd>−</kbd> / <kbd>0</kbd> | Font Zoom | Zoom text between 75% and 150% |
 | <kbd>F</kbd> | Fullscreen | Toggle fullscreen mode |
 | <kbd>Ctrl+P</kbd> | PDF Export | Reconfigures slides into multi-page printable handouts |
-| <kbd>?</kbd> / <kbd>H</kbd> | Shortcuts Help | Opens keyboard shortcuts cheatsheet |
+| <kbd>?</kbd> | Shortcuts Help | Opens keyboard shortcuts cheatsheet |
 
 ---
 
