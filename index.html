@@ -14,10 +14,18 @@
     <style>
         :root {
             --bg-dark: #070d19;
+            --bg-body-grad: 
+                radial-gradient(at 10% 20%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(168, 85, 247, 0.15) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
             --bg-card: rgba(15, 23, 42, 0.85);
             --bg-card-hover: rgba(30, 41, 59, 0.95);
             --border-card: rgba(255, 255, 255, 0.1);
             --border-hover: rgba(56, 189, 248, 0.5);
+            --header-bg: rgba(7, 13, 25, 0.75);
+            --footer-bg: rgba(7, 13, 25, 0.95);
+            --parts-bg: rgba(0, 0, 0, 0.25);
+            --modal-header-bg: #0f172a;
             
             --col-primary: #38bdf8;
             --col-reading: #3b82f6;
@@ -33,6 +41,26 @@
             --font-mono: 'JetBrains Mono', monospace;
         }
 
+        :root[data-theme="light"] {
+            --bg-dark: #f8fafc;
+            --bg-body-grad: 
+                radial-gradient(at 10% 20%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(168, 85, 247, 0.08) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+            --bg-card: rgba(255, 255, 255, 0.92);
+            --bg-card-hover: #ffffff;
+            --border-card: rgba(203, 213, 225, 0.85);
+            --border-hover: rgba(2, 132, 199, 0.6);
+            --header-bg: rgba(255, 255, 255, 0.88);
+            --footer-bg: rgba(241, 245, 249, 0.96);
+            --parts-bg: rgba(241, 245, 249, 0.95);
+            --modal-header-bg: #f8fafc;
+            
+            --col-primary: #0284c7;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -41,30 +69,29 @@
 
         body {
             background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(at 10% 20%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
-                radial-gradient(at 90% 80%, rgba(168, 85, 247, 0.15) 0px, transparent 50%),
-                radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+            background-image: var(--bg-body-grad);
             background-attachment: fixed;
             color: var(--text-main);
             font-family: var(--font-body);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Top Header Navigation */
         header {
-            padding: 32px 5% 24px 5%;
+            padding: 24px 5% 20px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(7, 13, 25, 0.7);
+            border-bottom: 1px solid var(--border-card);
+            background: var(--header-bg);
             backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .brand-container {
@@ -102,23 +129,35 @@
             gap: 14px;
         }
 
-        .btn-gh {
+        .btn-theme-toggle {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             background: rgba(255, 255, 255, 0.08);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-main);
+            padding: 9px 18px;
+            border-radius: 10px;
+            border: 1.5px solid var(--border-card);
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
+            cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .btn-gh:hover {
+        .btn-theme-toggle:hover {
             background: rgba(255, 255, 255, 0.16);
+            border-color: var(--col-primary);
+            transform: translateY(-1px);
+        }
+
+        :root[data-theme="light"] .btn-theme-toggle {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        :root[data-theme="light"] .btn-theme-toggle:hover {
+            background: #f1f5f9;
             border-color: var(--col-primary);
         }
 
@@ -449,10 +488,9 @@
             <h1 class="brand-title">Expert <span>Masterclass</span> Presentations</h1>
         </div>
         <div class="header-actions">
-            <a href="https://github.com/NeoTetsuya/Expert-IELTS-lessons" target="_blank" class="btn-gh">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                GitHub Repository
-            </a>
+            <button id="themeToggleBtn" class="btn-theme-toggle" title="Toggle Light / Dark Mode (Shortcut: D)">
+                ☀️ Light Mode
+            </button>
         </div>
     </header>
 
@@ -784,6 +822,8 @@
             if (e.key === 'Escape') closeModal();
         });
     </script>
+    <!-- Theme Switcher Engine -->
+    <script src="js/theme-switcher.js"></script>
 </body>
 
 </html>
