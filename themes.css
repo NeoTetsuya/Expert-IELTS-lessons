@@ -1,0 +1,404 @@
+/* ==========================================================================
+   EXPERT IELTS PRESENTATIONS - DRAMATIC THEME PRESETS (themes.css)
+   Inspired by Frontend-Slides Design Aesthetics:
+   1. Academic Editorial  (Classic Oxford / Harvard Navy & Cream)
+   2. Bold Signal         (Brutalist High-Impact Coral & Sharp Shadows)
+   3. Electric Studio     (Cyberpunk Glowing Neon Cobalt & Dark Glass)
+   4. Dark Botanical      (Organic Emerald, Antique Gold & Ivory)
+   5. Creative Voltage    (Avant-Garde Deep Violet & Acid Lime)
+   6. Vintage Editorial   (Aged Sepia Newsprint & Bodoni Serif)
+   ========================================================================== */
+
+/* ==========================================================================
+   1. ACADEMIC EDITORIAL (Default)
+   ========================================================================== */
+[data-theme="academic"], :root:not([data-theme]) {
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #0b1120;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #1e293b 0%, #0b1120 70%);
+    --bg-page: #f8fafc;
+    --text-dark: #0f172a;
+    --text-muted: #64748b;
+
+    --col-reading: #2563eb;
+    --col-grammar: #ea580c;
+    --col-vocab:   #059669;
+    --col-writing: #7c3aed;
+    --col-review:  #0891b2;
+
+    --card-bg: #ffffff;
+    --card-border: 1px solid #e2e8f0;
+    --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    --card-radius: 12px;
+}
+
+[data-theme="academic"] .notebook {
+    background: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="academic"] .slide-title {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: -0.5px;
+}
+
+
+/* ==========================================================================
+   2. BOLD SIGNAL (Brutalist Modern, High-Impact Coral & Chunky Shadows)
+   ========================================================================== */
+[data-theme="bold-signal"] {
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #111827;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #881337 0%, #111827 75%);
+    --bg-page: #ffffff;
+    --text-dark: #09090b;
+    --text-muted: #52525b;
+
+    --col-reading: #0284c7;
+    --col-grammar: #e11d48;
+    --col-vocab:   #059669;
+    --col-writing: #d97706;
+    --col-review:  #4f46e5;
+
+    --card-bg: #ffffff;
+    --card-border: 2.5px solid #09090b;
+    --card-shadow: 5px 5px 0px #09090b;
+    --card-radius: 6px;
+}
+
+[data-theme="bold-signal"] .notebook {
+    background: #ffffff;
+    border: 3px solid #09090b;
+    border-radius: 8px;
+    box-shadow: 12px 12px 0px #e11d48, 24px 24px 0px rgba(0,0,0,0.5);
+}
+
+[data-theme="bold-signal"] .slide-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    color: #09090b;
+}
+
+[data-theme="bold-signal"] .card,
+[data-theme="bold-signal"] .rule-card,
+[data-theme="bold-signal"] .q-card,
+[data-theme="bold-signal"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 2px solid #09090b !important;
+    border-radius: 6px !important;
+    box-shadow: 4px 4px 0px #09090b !important;
+}
+
+[data-theme="bold-signal"] .btn-action {
+    border: 2px solid #09090b !important;
+    border-radius: 6px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    box-shadow: 3px 3px 0px #09090b !important;
+}
+
+[data-theme="bold-signal"] .btn-action:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px #09090b !important;
+}
+
+[data-theme="bold-signal"] .blank-input,
+[data-theme="bold-signal"] .select-input {
+    border: 2px solid #09090b !important;
+    border-radius: 4px !important;
+    font-weight: 700 !important;
+    background: #f4f4f5 !important;
+}
+
+
+/* ==========================================================================
+   3. ELECTRIC STUDIO (Cyberpunk Dark Mode, Glowing Neon Cobalt & Glass)
+   ========================================================================== */
+[data-theme="electric"] {
+    --font-display: 'Manrope', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #020617;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #1e1b4b 0%, #020617 70%);
+    --bg-page: #0f172a;
+    --text-dark: #f8fafc;
+    --text-muted: #94a3b8;
+
+    --col-reading: #38bdf8;
+    --col-grammar: #fb923c;
+    --col-vocab:   #34d399;
+    --col-writing: #c084fc;
+    --col-review:  #22d3ee;
+
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --card-border: 1.5px solid rgba(56, 189, 248, 0.3);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.1);
+    --card-radius: 14px;
+}
+
+[data-theme="electric"] .notebook {
+    background: #0f172a;
+    border: 1.5px solid rgba(56, 189, 248, 0.4);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.2), 0 25px 80px rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="electric"] .slide-title {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    color: #f8fafc;
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+[data-theme="electric"] .reading-pane,
+[data-theme="electric"] .question-pane {
+    background: rgba(15, 23, 42, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="electric"] .card,
+[data-theme="electric"] .rule-card,
+[data-theme="electric"] .q-card,
+[data-theme="electric"] .model-breakdown-card {
+    background: rgba(30, 41, 59, 0.75) !important;
+    border: 1.5px solid rgba(56, 189, 248, 0.25) !important;
+    color: #f8fafc !important;
+    backdrop-filter: blur(12px) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 12px rgba(56, 189, 248, 0.08) !important;
+}
+
+[data-theme="electric"] .blank-input,
+[data-theme="electric"] .select-input {
+    background: rgba(15, 23, 42, 0.9) !important;
+    border: 1.5px solid rgba(56, 189, 248, 0.4) !important;
+    color: #38bdf8 !important;
+}
+
+[data-theme="electric"] .btn-action {
+    background: rgba(56, 189, 248, 0.15) !important;
+    border: 1.5px solid #38bdf8 !important;
+    color: #38bdf8 !important;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.25) !important;
+}
+
+[data-theme="electric"] .btn-action.btn-primary {
+    background: #0284c7 !important;
+    color: #ffffff !important;
+    border-color: #38bdf8 !important;
+}
+
+[data-theme="electric"] mark.evidence {
+    background: rgba(56, 189, 248, 0.25) !important;
+    border-bottom: 2px solid #38bdf8 !important;
+    color: #ffffff !important;
+}
+
+
+/* ==========================================================================
+   4. DARK BOTANICAL (Organic Luxury, Emerald Green, Antique Gold & Warm Ivory)
+   ========================================================================== */
+[data-theme="botanical"] {
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #041a14;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #064e3b 0%, #041a14 75%);
+    --bg-page: #fbf9f4;
+    --text-dark: #132a22;
+    --text-muted: #52796f;
+
+    --col-reading: #059669;
+    --col-grammar: #d97706;
+    --col-vocab:   #10b981;
+    --col-writing: #047857;
+    --col-review:  #0d9488;
+
+    --card-bg: #ffffff;
+    --card-border: 1px solid #d1fae5;
+    --card-shadow: 0 6px 20px rgba(6, 78, 59, 0.08);
+    --card-radius: 12px;
+}
+
+[data-theme="botanical"] .notebook {
+    background: #fbf9f4;
+    border: 2px solid #065f46;
+    box-shadow: 0 20px 60px rgba(4, 26, 20, 0.5), 0 0 0 1px rgba(212, 165, 116, 0.4);
+}
+
+[data-theme="botanical"] .slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 40px;
+    color: #064e3b;
+    letter-spacing: 0.5px;
+}
+
+[data-theme="botanical"] .skill-badge {
+    background: #065f46 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: 1px;
+}
+
+[data-theme="botanical"] .card,
+[data-theme="botanical"] .rule-card,
+[data-theme="botanical"] .q-card,
+[data-theme="botanical"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1px solid #d1fae5 !important;
+    box-shadow: 0 4px 18px rgba(6, 78, 59, 0.06) !important;
+}
+
+[data-theme="botanical"] .btn-action.btn-primary {
+    background: #059669 !important;
+    border-color: #047857 !important;
+    color: #ffffff !important;
+}
+
+
+/* ==========================================================================
+   5. CREATIVE VOLTAGE (Avant-Garde Deep Violet, Hot Magenta & Acid Lime)
+   ========================================================================== */
+[data-theme="voltage"] {
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #090514;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #4c1d95 0%, #090514 75%);
+    --bg-page: #130e24;
+    --text-dark: #f8fafc;
+    --text-muted: #a78bfa;
+
+    --col-reading: #818cf8;
+    --col-grammar: #f43f5e;
+    --col-vocab:   #a3e635;
+    --col-writing: #ec4899;
+    --col-review:  #c084fc;
+
+    --card-bg: rgba(30, 21, 54, 0.85);
+    --card-border: 1.5px solid rgba(236, 72, 153, 0.35);
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(236, 72, 153, 0.15);
+    --card-radius: 16px;
+}
+
+[data-theme="voltage"] .notebook {
+    background: #130e24;
+    border: 2px solid #ec4899;
+    box-shadow: 0 0 50px rgba(236, 72, 153, 0.25), 0 25px 80px rgba(0, 0, 0, 0.85);
+}
+
+[data-theme="voltage"] .slide-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    color: #fdf4ff;
+    letter-spacing: -0.5px;
+}
+
+[data-theme="voltage"] .reading-pane,
+[data-theme="voltage"] .question-pane {
+    background: rgba(19, 14, 36, 0.7) !important;
+    border: 1px solid rgba(167, 139, 250, 0.25) !important;
+    color: #f1f5f9 !important;
+}
+
+[data-theme="voltage"] .card,
+[data-theme="voltage"] .rule-card,
+[data-theme="voltage"] .q-card,
+[data-theme="voltage"] .model-breakdown-card {
+    background: rgba(30, 21, 54, 0.85) !important;
+    border: 1.5px solid rgba(236, 72, 153, 0.3) !important;
+    color: #fdf4ff !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="voltage"] .blank-input,
+[data-theme="voltage"] .select-input {
+    background: #1e1536 !important;
+    border: 1.5px solid #a855f7 !important;
+    color: #a3e635 !important;
+}
+
+[data-theme="voltage"] .btn-action.btn-primary {
+    background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%) !important;
+    border-color: #f472b6 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.4) !important;
+}
+
+
+/* ==========================================================================
+   6. VINTAGE EDITORIAL (Aged Linen Sepia Newsprint & Bodoni High-Contrast)
+   ========================================================================== */
+[data-theme="vintage"] {
+    --font-display: 'Bodoni Moda', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #1c1917;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #44403c 0%, #1c1917 75%);
+    --bg-page: #f4ece1;
+    --text-dark: #292524;
+    --text-muted: #78716c;
+
+    --col-reading: #9a3412;
+    --col-grammar: #b45309;
+    --col-vocab:   #15803d;
+    --col-writing: #7e22ce;
+    --col-review:  #0369a1;
+
+    --card-bg: #faf6ef;
+    --card-border: 1px solid #d6cebe;
+    --card-shadow: 0 4px 14px rgba(41, 37, 36, 0.08);
+    --card-radius: 4px;
+}
+
+[data-theme="vintage"] .notebook {
+    background: #f4ece1;
+    border: 1px solid #d6cebe;
+    border-radius: 4px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(180, 83, 9, 0.05);
+}
+
+[data-theme="vintage"] .slide-title {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    color: #1c1917;
+}
+
+[data-theme="vintage"] .card,
+[data-theme="vintage"] .rule-card,
+[data-theme="vintage"] .q-card,
+[data-theme="vintage"] .model-breakdown-card {
+    background: #faf6ef !important;
+    border: 1px solid #d6cebe !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 8px rgba(41, 37, 36, 0.06) !important;
+}
+
+[data-theme="vintage"] .blank-input,
+[data-theme="vintage"] .select-input {
+    background: #ffffff !important;
+    border: 1px solid #a8a29e !important;
+    border-radius: 2px !important;
+    font-family: var(--font-mono);
+}
+
+[data-theme="vintage"] .btn-action.btn-primary {
+    background: #9a3412 !important;
+    border-color: #7c2d12 !important;
+    color: #ffffff !important;
+    border-radius: 3px !important;
+}
