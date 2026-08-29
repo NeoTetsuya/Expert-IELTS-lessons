@@ -1,0 +1,155 @@
+/* Base Stage Styles */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #0a0a0a);
+    font-family: var(--font-body, 'DM Sans', sans-serif);
+    -webkit-font-smoothing: antialiased;
+}
+
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--viewport-bg, radial-gradient(circle at 80% 20%, #1e1b4b 0%, #0a0a0a 70%));
+}
+
+.deck-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--stage-width, 1920px);
+    height: var(--stage-height, 1080px);
+    overflow: hidden;
+    transform-origin: 0 0;
+    background: var(--slide-bg, #0a0a0a);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    width: var(--stage-width, 1920px);
+    height: var(--stage-height, 1080px);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.slide.active, .slide.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .slide, .reveal {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Staggered Reveals */
+.reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity var(--dur, 0.45s) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                transform var(--dur, 0.45s) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+}
+.slide.visible .reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal:nth-child(1) { transition-delay: 0.04s; }
+.reveal:nth-child(2) { transition-delay: 0.08s; }
+.reveal:nth-child(3) { transition-delay: 0.12s; }
+.reveal:nth-child(4) { transition-delay: 0.16s; }
+
+/* Notebook Page Layout */
+.slide-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 36px;
+    font-family: var(--font-body, 'DM Sans', sans-serif);
+}
+
+.notebook {
+    width: var(--notebook-width, 1800px);
+    height: var(--notebook-height, 980px);
+    background: var(--bg-page, #f8fafc);
+    border-radius: 14px;
+    position: relative;
+    display: flex;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skill-stripe {
+    width: 10px;
+    flex-shrink: 0;
+}
+
+.page-content {
+    flex: 1;
+    padding: var(--page-pad, 48px 84px 44px 54px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Vertical Skill Tabs */
+.notebook-tabs {
+    position: absolute;
+    right: 0;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    z-index: 50;
+}
+
+.notebook-tab {
+    width: 46px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 8px 0 0 8px;
+    transition: transform 0.22s ease, filter 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: -3px 3px 10px rgba(0,0,0,0.18);
+    user-select: none;
+}
+
+.notebook-tab:hover {
+    transform: translateX(-8px);
+    filter: brightness(1.12);
+}
+
+.notebook-tab.active {
+    transform: translateX(-12px);
+    font-weight: 900;
+    box-shadow: -5px 5px 14px rgba(0,0,0,0.3);
+    border: 2px solid #ffffff;
+    border-right: none;
+}
+
+.tab-read { background: var(--col-reading, #dc2626); }
+.tab-grammar { background: var(--col-grammar, #0891b2); }
+.tab-vocab { background: var(--col-vocab, #7c3aed); }
+.tab-write { background: var(--col-writing, #059669); }
+.tab-review { background: var(--col-summary, #d97706); }
+

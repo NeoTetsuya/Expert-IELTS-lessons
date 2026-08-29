@@ -1,0 +1,97 @@
+/* Universal Cards & Content Boxes */
+.card {
+    background: var(--card-bg, #ffffff);
+    border-radius: var(--card-radius, 12px);
+    padding: 22px 26px;
+    border: var(--card-border, 1.5px solid var(--border-soft, rgba(0,0,0,0.08)));
+    margin-bottom: 14px;
+    box-shadow: var(--card-shadow, 0 2px 8px rgba(0,0,0,0.04));
+    font-size: calc(20px * var(--font-scale, 1));
+    line-height: 1.7;
+    color: var(--text-body, #1e293b);
+}
+
+.card-sm {
+    background: var(--card-bg, #ffffff);
+    border-radius: 8px;
+    padding: 15px 20px;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    margin-bottom: 10px;
+    font-size: calc(19px * var(--font-scale, 1));
+    line-height: 1.65;
+}
+
+/* Discussion Question Cards */
+.discuss-card {
+    background: var(--card-bg, #ffffff);
+    border-radius: var(--card-radius, 14px);
+    padding: 20px 24px;
+    border: var(--card-border, 1.5px solid var(--border-soft, rgba(0,0,0,0.08)));
+    margin-bottom: 14px;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 18px !important;
+    box-shadow: var(--card-shadow, 0 4px 12px rgba(0,0,0,0.03));
+}
+
+.discuss-num {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-size: calc(22px * var(--font-scale, 1));
+    font-weight: 800;
+    color: #ffffff !important;
+    flex-shrink: 0 !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+}
+
+.discuss-text {
+    font-size: calc(20px * var(--font-scale, 1));
+    color: var(--text-body, #1e293b);
+    line-height: 1.65;
+    flex: 1 1 auto !important;
+    min-width: 0;
+}
+
+.reading-pane {
+    background: #ffffff;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    border-radius: 14px;
+    padding: 24px 30px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    line-height: 1.85;
+    font-size: calc(21px * var(--font-scale, 1));
+    color: var(--text-body, #1e293b);
+    scroll-behavior: smooth;
+    min-width: 0;
+    width: 100%;
+}
+.reading-pane p {
+    font-size: calc(21px * var(--font-scale, 1));
+    line-height: 1.85;
+    margin-bottom: 14px;
+}
+.reading-pane::-webkit-scrollbar { width: 8px; }
+.reading-pane::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+.reading-pane h3 {
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-size: calc(24px * var(--font-scale, 1));
+    font-weight: 700;
+    color: var(--text-dark, #0f172a);
+    border-bottom: 3px solid var(--col-reading, #dc2626);
+    padding-bottom: 6px;
+    font-style: italic;
+}
+

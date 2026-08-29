@@ -1,0 +1,310 @@
+/* Model Essays */
+.essay-card {
+    background: #ffffff;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    border-radius: 12px;
+    padding: 24px 28px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    line-height: 1.85;
+    font-size: calc(17.5px * var(--font-scale, 1));
+    color: var(--text-body, #1e293b);
+}
+.essay-card::-webkit-scrollbar { width: 6px; }
+.essay-card::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+.essay-p {
+    padding: 10px 14px;
+    border-radius: 6px;
+    background: #f8fafc;
+    border-left: 4px solid var(--col-writing, #059669);
+}
+
+.essay-label {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: calc(12px * var(--font-scale, 1));
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+/* Sub-Tab Navigation Bar */
+.subtab-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.subtab-btn {
+    background: #ffffff;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: calc(14.5px * var(--font-scale, 1));
+    font-weight: 600;
+    color: var(--text-muted, #64748b);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.subtab-btn:hover {
+    background: #f8fafc;
+    border-color: var(--text-muted, #64748b);
+}
+.subtab-btn.active {
+    background: var(--col-reading, #dc2626);
+    color: white;
+    border-color: var(--col-reading, #dc2626);
+}
+
+/* Model Breakdown Cards & Tags */
+.model-breakdown-card {
+    background: #ffffff;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    font-size: calc(18px * var(--font-scale, 1));
+    line-height: 1.75;
+}
+.model-tag {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: calc(13px * var(--font-scale, 1));
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 6px;
+}
+.tag-intro {
+    background: rgba(79, 70, 229, 0.12);
+    color: var(--col-writing, #4f46e5);
+}
+.tag-body {
+    background: rgba(31, 138, 84, 0.12);
+    color: var(--col-reading, #15803d);
+}
+.tag-overview {
+    background: rgba(217, 119, 6, 0.12);
+    color: var(--col-grammar, #d97706);
+}
+
+/* Grammar & Concept Rule Cards */
+.rule-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    border-top: 5px solid var(--col-grammar, #d97706);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    font-size: calc(17.5px * var(--font-scale, 1));
+    line-height: 1.7;
+}
+
+/* Section Divider Slides */
+.section-slide {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body, 'DM Sans', sans-serif);
+}
+
+.section-inner {
+    width: 1800px;
+    height: 980px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    display: flex;
+    position: relative;
+}
+
+.section-left {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 72px 56px;
+    position: relative;
+    color: white;
+    overflow: hidden;
+}
+
+.section-right {
+    flex: 1;
+    background: var(--bg-page, #f8fafc);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 72px 84px 72px 64px;
+}
+
+.section-module-tag {
+    font-size: 15px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 20px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+}
+
+.section-number {
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-size: 160px;
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-sublabel {
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-style: italic;
+    font-size: 24px;
+    opacity: 0.7;
+    margin-top: 10px;
+}
+
+.section-title {
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-size: 68px;
+    font-weight: 900;
+    color: var(--text-dark, #0f172a);
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+
+.section-desc {
+    font-size: 23px;
+    color: var(--text-muted, #475569);
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.section-topics {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.section-topic {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 21px;
+    color: var(--text-dark, #0f172a);
+}
+
+.section-topic-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Title Slide Specific */
+.title-slide-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 36px;
+    font-family: var(--font-body, 'DM Sans', sans-serif);
+}
+
+.title-notebook {
+    width: 1800px;
+    height: 980px;
+    background: var(--bg-page, #f8fafc);
+    border-radius: 14px;
+    position: relative;
+    display: flex;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.title-left {
+    width: 50%;
+    padding: 72px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border-soft, rgba(0,0,0,0.08));
+}
+
+.title-right {
+    width: 50%;
+    padding: 72px 84px 72px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title-module-badge {
+    display: inline-flex;
+    padding: 6px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--col-reading, #dc2626);
+    color: white;
+    margin-bottom: 24px;
+    width: fit-content;
+}
+
+.title-main {
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-size: 84px;
+    font-weight: 900;
+    color: var(--text-dark, #0f172a);
+    line-height: 1.05;
+    margin-bottom: 16px;
+}
+
+.title-amp {
+    font-style: italic;
+    color: var(--col-grammar, #0891b2);
+}
+
+.title-sub {
+    font-size: 22px;
+    color: var(--text-muted, #475569);
+    line-height: 1.6;
+}
+
+.title-skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 26px;
+}
+
+.title-skill-card {
+    padding: 18px 22px;
+    border-radius: 10px;
+    background: white;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.title-skill-name {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text-dark, #0f172a);
+    margin-bottom: 4px;
+}
+
+.title-skill-desc {
+    font-size: 14.5px;
+    color: var(--text-muted, #475569);
+}
+

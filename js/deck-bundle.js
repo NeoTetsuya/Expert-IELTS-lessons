@@ -1,5 +1,5 @@
 /**
- * Universal IELTS Presentation Master Bundle (JS)
+ * Universal IELTS Presentation Master Bundle
  * Auto-instantiates DeckEngine on window.deckEngine
  * Generated from modular files in /js/
  */

@@ -6,6 +6,8 @@
   "scripts": {
     "build": "node build-bundle.js",
     "build:bundle": "node build-bundle.js",
+    "build:css": "node build-bundle.js",
+    "watch:css": "node scripts/watch-css.js",
     "update-index": "node scripts/update-index.js"
   },
   "keywords": [

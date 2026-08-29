@@ -1,0 +1,28 @@
+/* Scrollable Writing Model Essay Pane */
+.writing-model-pane {
+    background: #ffffff;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    border-left: 7px solid var(--col-writing, #7c3aed);
+    border-radius: 14px;
+    padding: 26px 32px;
+    overflow-y: auto !important;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    line-height: 1.9;
+    font-size: calc(24px * var(--font-scale, 1));
+    color: var(--text-body, #1e293b);
+    scroll-behavior: smooth;
+    min-width: 0;
+    width: 100%;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+.writing-model-pane p {
+    font-size: calc(24px * var(--font-scale, 1));
+    line-height: 1.9;
+    margin-bottom: 16px;
+    color: #0f172a;
+}
+.writing-model-pane::-webkit-scrollbar { width: 8px; }
+.writing-model-pane::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+

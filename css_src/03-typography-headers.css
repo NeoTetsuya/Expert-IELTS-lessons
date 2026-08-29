@@ -1,0 +1,78 @@
+/* Header Elements */
+.slide-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+}
+
+.skill-badge {
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+    font-family: var(--font-body, 'DM Sans', sans-serif);
+}
+
+.slide-number {
+    font-size: 15px;
+    color: var(--text-light, #64748b);
+    letter-spacing: 1px;
+    margin-left: auto;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-weight: 600;
+}
+
+.slide-title {
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--text-dark, #0f172a);
+    line-height: 1.1;
+    margin-bottom: 6px;
+}
+
+.slide-subtitle {
+    font-size: 22px;
+    color: var(--text-muted, #475569);
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+/* Two Column & Split-view Reading Layout (50% / 50% Equal Split) */
+.two-col, .split-view-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 28px !important;
+    width: 100% !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+}
+
+.split-view-container > *, .two-col > .reading-pane, .two-col > .question-pane {
+    min-width: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow-y: auto !important;
+}
+
+.two-col > .card, .two-col > .col, .two-col > div {
+    min-width: 0;
+    width: 100%;
+    height: auto;
+}
+
+.col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+.col::-webkit-scrollbar { width: 6px; }
+.col::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
