@@ -33,6 +33,7 @@
 
     // 2. Ordered list of modular presentation engine components
     const modules = [
+        'template-engine.js',
         'deck-core.js',
         'deck-components.js',
         'deck-theme-engine.js',
