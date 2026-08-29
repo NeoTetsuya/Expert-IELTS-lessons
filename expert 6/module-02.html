@@ -315,8 +315,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph B]
                                     </h3>
@@ -327,13 +327,44 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('extraordinary')">extraordinary</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ɪkˈstrɔː.dɪn.ər.i/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(adj.)</em>: 
+                                                    <span style="color: #334155;">Very unusual, special, or remarkable.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('extraordinary')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('satisfaction')">satisfaction</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˌsæt.ɪsˈfæk.ʃən/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">A pleasant feeling of fulfillment or pleasure.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('satisfaction')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('pleasurable')">pleasurable</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈpleʒ.ər.ə.bəl/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(adj.)</em>: 
+                                                    <span style="color: #334155;">Giving a feeling of happy satisfaction in the moment.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('pleasurable')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -403,8 +434,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph D]
                                     </h3>
@@ -415,13 +446,44 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('social interaction')">social interaction</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈsəʊ.ʃəl ˌɪn.tərˈæk.ʃən/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">Direct communication and connection between people.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('social interaction')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('grounded in')">grounded in</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈɡraʊn.dɪd ɪn/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(verb/adj.)</em>: 
+                                                    <span style="color: #334155;">Firmly based on or rooted in fundamental qualities.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('grounded in')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('in common')">in common</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ɪn ˈkɒm.ən/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(phrase)</em>: 
+                                                    <span style="color: #334155;">Shared equally between two or more parties.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('in common')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -491,8 +553,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph A]
                                     </h3>
@@ -503,13 +565,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('reminisce')">reminisce</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˌrem.ɪˈnɪs/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(verb)</em>: 
+                                                    <span style="color: #334155;">To talk or write about enjoyable past experiences.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('reminisce')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('unusual')">unusual</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ʌnˈjuː.ʒu.əl/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(adj.)</em>: 
+                                                    <span style="color: #334155;">Rare, notable, or not commonly occurring.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('unusual')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -579,8 +662,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph C]
                                     </h3>
@@ -591,13 +674,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('mistakenly thought')">mistakenly thought</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/mɪˈsteɪ.kən.li θɔːt/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(phrase)</em>: 
+                                                    <span style="color: #334155;">Held an incorrect or inaccurate belief before evidence.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('mistakenly thought')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('star of the conversation')">star of the conversation</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/stɑːr əv ðə ˌkɒn.vəˈseɪ.ʃən/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(phrase)</em>: 
+                                                    <span style="color: #334155;">The main center of social praise and attention.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('star of the conversation')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -914,8 +1018,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Critique 1]
                                     </h3>
@@ -926,13 +1030,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('participants')">participants</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/pɑːˈtɪs.ɪ.pənts/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">People taking part in an experiment or study.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('participants')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('effective research')">effective research</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ɪˈfek.tɪv rɪˈsɜːtʃ/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">Studies that produce valid, reliable findings.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('effective research')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1001,8 +1126,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Critique 1]
                                     </h3>
@@ -1013,13 +1138,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('reflected')">reflected</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/rɪˈflek.tɪd/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(verb)</em>: 
+                                                    <span style="color: #334155;">Accurately represented or showed true dynamics.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('reflected')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('laboratory test')">laboratory test</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ləˈbɒr.ə.tər.i test/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">An artificial experiment in a controlled environment.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('laboratory test')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1088,8 +1234,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Critique 2]
                                     </h3>
@@ -1100,13 +1246,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('left out')">left out</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/left aʊt/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(phrase)</em>: 
+                                                    <span style="color: #334155;">Excluded or alienated from social conversation.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('left out')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('situations')">situations</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˌsɪtʃ.uˈeɪ.ʃənz/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">Social circumstances or events.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('situations')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1175,8 +1342,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Critique 2]
                                     </h3>
@@ -1187,13 +1354,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('wealthier')">wealthier</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈwel.θi.ər/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(adj.)</em>: 
+                                                    <span style="color: #334155;">Possessing greater financial resources or money.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('wealthier')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('vacation')">vacation</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/veɪˈkeɪ.ʃən/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">A period of travel and holiday away from work.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('vacation')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1259,8 +1447,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Critique 2]
                                     </h3>
@@ -1271,13 +1459,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('ambitions')">ambitions</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/æmˈbɪʃ.ənz/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">Strong desires and life goals to achieve success.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('ambitions')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('interests')">interests</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈɪn.trəsts/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">Hobbies or subjects of personal curiosity.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('interests')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1343,8 +1552,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Critique 2]
                                     </h3>
@@ -1355,13 +1564,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('contentment')">contentment</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/kənˈtent.mənt/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">A state of peaceful life happiness.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('contentment')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('ordinary')">ordinary</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈɔː.dɪn.ər.i/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(adj.)</em>: 
+                                                    <span style="color: #334155;">Normal, common, or everyday.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('ordinary')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -2022,8 +2252,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph C]
                                     </h3>
@@ -2034,13 +2264,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('impressing others')">impressing others</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ɪmˈpres.ɪŋ ˈʌð.əz/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(phrase)</em>: 
+                                                    <span style="color: #334155;">Gaining admiration and social attention from peers.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('impressing others')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('notice them')">notice them</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈnəʊ.tɪs ðem/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(phrase)</em>: 
+                                                    <span style="color: #334155;">Observe or pay visual attention to someone.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('notice them')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -2109,8 +2360,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph F]
                                     </h3>
@@ -2121,13 +2372,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('addicted to')">addicted to</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/əˈdɪk.tɪd tuː/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(adj.)</em>: 
+                                                    <span style="color: #334155;">Unwilling or unable to stop a habitual behavior.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('addicted to')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('regularly')">regularly</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈreɡ.jə.lə.li/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(adv.)</em>: 
+                                                    <span style="color: #334155;">At repeated and predictable intervals.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('regularly')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -2196,8 +2468,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph D]
                                     </h3>
@@ -2208,13 +2480,44 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('criteria')">criteria</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/kraɪˈtɪə.ri.ə/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun pl.)</em>: 
+                                                    <span style="color: #334155;">Standards or principles by which something is evaluated.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('criteria')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('competence')">competence</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈkɒm.pɪ.təns/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">The ability to perform work successfully and effectively.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('competence')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('appearance')">appearance</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/əˈpɪə.rəns/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">The outward physical look of someone.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('appearance')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -2283,8 +2586,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph B]
                                     </h3>
@@ -2295,13 +2598,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('tailor-made')">tailor-made</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈteɪ.lə meɪd/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(adj.)</em>: 
+                                                    <span style="color: #334155;">Custom-designed and sewn for one individual.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('tailor-made')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('competent')">competent</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈkɒm.pɪ.tənt/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(adj.)</em>: 
+                                                    <span style="color: #334155;">Possessing the necessary skills and capability.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('competent')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -2373,8 +2697,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph B]
                                     </h3>
@@ -2385,13 +2709,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('snap judgement')">snap judgement</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/snæp ˈdʒʌdʒ.mənt/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">An immediate decision made in less than a second.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('snap judgement')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('almost immediately')">almost immediately</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈɔːl.məʊst ɪˈmiː.di.ət.li/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(adv.)</em>: 
+                                                    <span style="color: #334155;">Without hesitation or delay.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('almost immediately')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -2460,8 +2805,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph E]
                                     </h3>
@@ -2472,13 +2817,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('enclothed cognition')">enclothed cognition</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ɪnˈkləʊðd kɒɡˈnɪʃ.ən/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">Psychological influence of clothes on mental processes.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('enclothed cognition')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('sustained attention')">sustained attention</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/səˈsteɪnd əˈten.ʃən/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">Ability to maintain concentration over time.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('sustained attention')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -2799,8 +3165,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph A]
                                     </h3>
@@ -2811,13 +3177,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('decision-making')">decision-making</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/dɪˈsɪʒ.ən ˌmeɪ.kɪŋ/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">The cognitive process of making choices.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('decision-making')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('visual communication')">visual communication</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈvɪʒ.u.əl kəˌmjuː.nɪˈkeɪ.ʃən/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">Conveying ideas and identity through visual presentation.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('visual communication')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -2883,8 +3270,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph D]
                                     </h3>
@@ -2895,13 +3282,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('attractive')">attractive</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/əˈtræk.tɪv/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(adj.)</em>: 
+                                                    <span style="color: #334155;">Appealing and pleasing to look at.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('attractive')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('sociable')">sociable</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈsəʊ.ʃə.bəl/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(adj.)</em>: 
+                                                    <span style="color: #334155;">Willing to talk and engage with friends.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('sociable')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -2967,8 +3375,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph C]
                                     </h3>
@@ -2979,13 +3387,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('compensatory shopping')">compensatory shopping</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/kəmˈpen.sə.tər.i ˈʃɒp.ɪŋ/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">Buying goods to ease negative emotions or guilt.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('compensatory shopping')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('vicious cycle')">vicious cycle</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˈvɪʃ.əs ˈsaɪ.kəl/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">A repeating situation where one trouble causes another.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('vicious cycle')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -3051,8 +3480,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph C/D]
                                     </h3>
@@ -3063,13 +3492,24 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('on their own')">on their own</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ɒn ðeər əʊn/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(phrase)</em>: 
+                                                    <span style="color: #334155;">Alone, without companions or assistance.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('on their own')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -3135,8 +3575,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph E]
                                     </h3>
@@ -3147,13 +3587,24 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('unresolved mechanisms')">unresolved mechanisms</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ˌʌn.rɪˈzɒlvd ˈmek.ə.nɪ.zəmz/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">Psychological or brain processes not yet understood.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('unresolved mechanisms')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -3219,8 +3670,8 @@
                             </p>
 
                             <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                                <!-- Left Column: Dedicated Passage Excerpt -->
-                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column;">
+                                <!-- Left Column: Dedicated Passage Excerpt & Key Vocabulary Box -->
+                                <div class="reading-pane" style="flex: 1.15; display: flex; flex-direction: column; overflow-y: auto;">
                                     <h3 style="font-family: var(--font-display); font-size: 18px; margin-bottom: 8px; color: var(--col-reading);">
                                         Passage Excerpt: [Paragraph F]
                                     </h3>
@@ -3231,13 +3682,34 @@
                                         </p>
                                     </div>
 
-                                    <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 14px 18px; margin-top: auto;">
-                                        <div style="font-size: 15px; font-weight: 800; color: var(--col-reading); margin-bottom: 4px;">
-                                            💡 Interactive Vocabulary
+                                    <!-- Automatic Vocabulary & Pronunciation Guide Box -->
+                                    <div class="vocab-guide-card" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-top: auto;">
+                                        <div style="font-size: 13.5px; font-weight: 800; color: #15803d; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>📖 Target Vocabulary &amp; Definitions:</span>
+                                            <span style="font-size: 11.5px; font-weight: 600; color: #047857;">Google Female UK Voice 🇬🇧</span>
                                         </div>
-                                        <p style="font-size: 14px; line-height: 1.5; color: var(--text-dark); margin-bottom: 0;">
-                                            Click any keyword or vocabulary term to hear native <strong>Google Female UK pronunciation</strong> and view concise definitions.
-                                        </p>
+                                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                                            
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('shared dress codes')">shared dress codes</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/ʃeəd dres kəʊdz/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">Uniform styles of attire adopted by a group.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('shared dress codes')">🔊</button>
+                                            </div>
+
+                                            <div style="background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #dcfce7; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                                                <div style="font-size: 13px; line-height: 1.4; color: #1e293b;">
+                                                    <strong style="color: #065f46; cursor: pointer;" onclick="ReadingGrounder.speakWord('belonging')">belonging</strong> 
+                                                    <span style="color:#64748b; font-size:11.5px; font-family:'JetBrains Mono', monospace;">/bɪˈlɒŋ.ɪŋ/</span> 
+                                                    <em style="color:#059669; font-size:11.5px;">(noun)</em>: 
+                                                    <span style="color: #334155;">The feeling of being an accepted member of a social circle.</span>
+                                                </div>
+                                                <button class="vp-audio-btn" style="flex-shrink: 0; padding: 3px 7px; font-size: 11px;" title="Listen in Google Female UK Voice" onclick="ReadingGrounder.speakWord('belonging')">🔊</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
