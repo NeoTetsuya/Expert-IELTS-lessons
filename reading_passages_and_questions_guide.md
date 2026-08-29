@@ -147,77 +147,88 @@ Train students to analyze and deconstruct questions before scanning the text.
 Demonstrate the step-by-step scanning and paraphrase matching procedure on a single question alongside only its relevant paragraph.
 
 ### Key Features
-1. **Left Pane (Passage Excerpt)**: Contains only the specific paragraph containing the answer (e.g. Paragraph [B]), with `<mark class="evidence" id="ev-..." data-q="...">` wrapping the matching green and purple spans.
-2. **Right Pane (Question 1 Walkthrough)**: Contains the single Question 1 card with `💡 Evidence` jump button, dropdown/input, and rich pedagogical explanation.
-3. **Synchronized Evidence Highlighting**: Clicking `💡 Evidence` or `Show Evidence / Highlights` illuminates both the excerpt and question simultaneously with smooth scrolling.
+1. **Up-to-Down (Stacked) Centered Layout**: Content is structured in a vertically stacked container (`.walkthrough-container`) centered on the slide (`max-width: 1180px; margin: auto;`).
+2. **Larger Font Sizes for High Legibility**:
+   - Passage excerpt text: `22px` (`line-height: 1.75`)
+   - Question text: `21px` (`line-height: 1.6`)
+   - Dropdowns & Explanation: `17.5px`–`18px`
+3. **Top Box (Passage Excerpt)**: Contains only the specific paragraph containing the answer (e.g. Paragraph [B]), with `<mark class="evidence" id="ev-..." data-q="...">` wrapping the matching green, purple, and gold vocabulary spans.
+4. **Bottom Box (Interactive Question Card)**: Contains the single question card with `💡 Evidence` jump button, dropdown/input, and rich pedagogical explanation.
+5. **Synchronized Evidence Highlighting**: Clicking `💡 Evidence` or `Show Evidence / Highlights` illuminates both the excerpt and question simultaneously.
 
 ### HTML Template
 
 ```html
-<!-- STAGE 2: 1-QUESTION MODEL WALKTHROUGH SLIDE -->
+<!-- 1-QUESTION MODEL WALKTHROUGH SLIDE (UP-TO-DOWN CENTERED LAYOUT) -->
 <section class="slide" id="slide-read-model" data-skill="read">
     <div class="slide-inner">
         <div class="notebook">
             <div class="skill-stripe" style="background: var(--col-reading);"></div>
-            <div class="page-content">
+            <div class="page-content" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <div class="slide-header">
                     <div class="slide-title-group">
                         <span class="skill-badge" style="background: var(--col-reading);">Reading Strategy • Model Walkthrough</span>
                         <h2 class="slide-title">Model Walkthrough: Question 1 &amp; Paragraph [B]</h2>
                     </div>
-                    <div class="slide-number">03 / 25</div>
+                    <div class="slide-number">04 / 42</div>
                 </div>
 
-                <p class="slide-subtitle" style="font-size: 18px; color: var(--text-muted); margin-bottom: 12px;">
-                    Demonstration: Compare the direct color highlighting in Question 1 with Paragraph B.
+                <p class="slide-subtitle" style="font-size: 17.5px; color: var(--text-muted); margin-bottom: 6px;">
+                    Compare the dedicated passage excerpt with the question below to evaluate your answer.
                 </p>
 
-                <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
-                    <!-- Left Col: Dedicated Paragraph Excerpt -->
-                    <div class="reading-pane" style="flex: 1.1;">
-                        <h3 style="font-family: var(--font-display); font-size: 19px; margin-bottom: 10px; color: var(--col-reading);">
-                            Passage Excerpt: Paragraph [B]
-                        </h3>
-
-                        <div style="background: #ffffff; border: 2px solid #93c5fd; border-radius: 10px; padding: 18px 22px; margin-bottom: 14px;">
-                            <p style="font-size: 20px; line-height: 1.7; margin-bottom: 0;">
-                                <span class="para-tag">[B]</span> <mark class="evidence" id="ev-model-1" data-q="model-1"><span class="syn-pair-1" data-q="model-1">"Extraordinary experiences</span> are <span class="syn-pair-2" data-q="model-1">pleasurable in the moment but can leave us socially worse off in the long run,"</span></mark> says study author Gus Cooney.
-                            </p>
+                <!-- Centered Up-to-Down (Stacked) Walkthrough Container -->
+                <div class="walkthrough-container" style="max-width: 1180px; width: 100%; margin: auto; display: flex; flex-direction: column; gap: 16px; justify-content: center; flex: 1; min-height: 0;">
+                    <!-- TOP BOX: Dedicated Passage Excerpt -->
+                    <div class="card" style="background: #ffffff; border: 2px solid #93c5fd; border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 20px 28px; box-shadow: 0 4px 14px rgba(0,0,0,0.03);">
+                        <div style="font-size: 14.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--col-reading); margin-bottom: 8px;">
+                            📖 Passage Excerpt: [Paragraph B]
                         </div>
-
-                        <div class="card" style="background: rgba(37, 99, 235, 0.05); border-left: 4px solid var(--col-reading); padding: 16px 20px;">
-                            <div style="font-size: 16px; font-weight: 800; color: var(--col-reading); margin-bottom: 6px;">
-                                🔍 Color-to-Color Grounding
-                            </div>
-                            <p style="font-size: 15px; line-height: 1.6; color: var(--text-dark); margin-bottom: 0;">
-                                • <strong>Green ↔ Green:</strong> <em>"Sharing experiences"</em> matches <em>"Extraordinary experiences"</em>.<br>
-                                • <strong>Purple ↔ Purple:</strong> <em>"immediate and long-term"</em> matches <em>"pleasurable in the moment / in the long run"</em>.
-                            </p>
-                        </div>
+                        <p style="font-size: 22px; line-height: 1.75; margin-bottom: 0; color: #1e293b;">
+                            <span class="para-tag">[Paragraph B]</span> <mark class="evidence" id="ev-wt-m2a-1" data-q="wt-m2a-1"><span class="syn-pair-1" data-q="wt-m2a-1">"<span class="vocab-word" data-word="extraordinary" data-def="Very unusual, special, or remarkable." data-ipa="/ɪkˈstrɔː.dɪn.ər.i/" data-pos="adj.">Extraordinary</span> experiences</span> are <span class="syn-pair-2" data-q="wt-m2a-1"><span class="vocab-word" data-word="pleasurable" data-def="Giving a feeling of happy satisfaction in the moment." data-ipa="/ˈpleʒ.ər.ə.bəl/" data-pos="adj.">pleasurable</span> in the moment but can leave us socially worse off in the long run,"</span></mark> says study author Gus Cooney.
+                        </p>
                     </div>
 
-                    <!-- Right Col: Single Question 1 Card -->
-                    <div class="question-pane" style="flex: 0.9; display: flex; flex-direction: column;">
-                        <h3 style="font-family: var(--font-display); font-size: 19px; margin-bottom: 8px; color: var(--col-reading);">
-                            Question 1 Deconstruction
-                        </h3>
+                    <!-- BOTTOM BOX: Interactive Question Card -->
+                    <div class="q-card" data-q="wt-m2a-1" style="background: #ffffff; border: 2px solid #cbd5e1; border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 22px 28px; box-shadow: 0 4px 14px rgba(0,0,0,0.03);">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;">
+                            <span style="font-weight: 700; font-size: 21px; line-height: 1.6; color: #0f172a;">
+                                1. <span class="syn-pair-1" data-q="wt-m2a-1">Sharing experiences</span> provides us with <span class="syn-pair-2" data-q="wt-m2a-1">immediate and long-term <span class="vocab-word" data-word="satisfaction" data-def="A pleasant feeling of fulfillment or pleasure." data-ipa="/ˌsæt.ɪsˈfæk.ʃən/" data-pos="noun">satisfaction</span></span>.
+                            </span>
+                            <button class="syn-btn" data-ev="ev-wt-m2a-1" data-q="wt-m2a-1" style="flex-shrink: 0; font-size: 14px; padding: 6px 14px;">💡 Evidence</button>
+                        </div>
 
-                        <div class="q-card" data-q="model-1">
-                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-                                <span style="font-weight: 700; font-size: 16.5px; line-height: 1.55;">
-                                    1. <span class="syn-pair-1" data-q="model-1">Sharing experiences</span> provides us with <span class="syn-pair-2" data-q="model-1">immediate and long-term satisfaction</span>.
-                                </span>
-                                <button class="syn-btn" data-ev="ev-model-1" data-q="model-1">💡 Evidence</button>
+                        <div style="margin-top: 14px; display: flex; align-items: center; gap: 14px;">
+                            <select class="select-input" data-ans="B" style="min-width: 200px; font-size: 17.5px; padding: 9px 16px; border-radius: 8px; font-weight: 600;">
+                                <option value="">Select Answer...</option>
+                                <option value="A">Sentence A</option>
+                                <option value="B">Sentence B</option>
+                                <option value="C">Sentence C</option>
+                                <option value="D">Sentence D</option>
+                            </select>
+                        </div>
+
+                        <div class="item-explanation" style="font-size: 18px; margin-top: 14px; padding: 14px 18px;">
+                            <div class="syn-key-box" style="margin-top:0; font-size: 17.5px;">
+                                <span class="syn-tag green" style="font-size: 14.5px;">Green Match:</span> <em>"Sharing experiences"</em> ↔ <em>"Extraordinary experiences"</em>
                             </div>
-                            <div style="margin-top: 10px;">
-                                <select class="select-input" data-ans="B" style="width: 150px; font-size: 16px;">
-                                    <option value="">Sentence...</option>
-                                    <option value="A">Sentence A</option>
-                                    <option value="B">Sentence B</option>
-                                    <option value="C">Sentence C</option>
-                                    <option value="D">Sentence D</option>
-                                </select>
+                            <div class="syn-key-box" style="font-size: 17.5px;">
+                                <span class="syn-tag purple" style="font-size: 14.5px;">Purple Match:</span> <em>"immediate &amp; long-term satisfaction"</em> ↔ <em>"pleasurable in moment / worse off in long run"</em> (Sentence B)
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-row" style="margin-top: 12px;">
+                    <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answer</button>
+                    <button class="btn-action" onclick="revealAnswers(this)">Show Evidence / Highlights</button>
+                    <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+```
                             <div class="item-explanation">
                                 <div class="syn-key-box" style="margin-top: 0;">
                                     <span class="syn-tag green">Green Match:</span> <em>"Sharing experiences"</em> ↔ <em>"Extraordinary experiences"</em>
