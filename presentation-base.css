@@ -557,6 +557,166 @@ html, body {
     line-height: 1.7;
 }
 
+/* =========================================================================
+   WRITING ANNOTATIONS, SIGNPOSTING PHRASES & INTERACTIVE MODAL
+   ========================================================================= */
+
+.hl-phrase {
+    background-color: #dbeafe;
+    color: #1e40af;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 6px;
+    border-bottom: 2px solid #3b82f6;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline;
+}
+.hl-phrase:hover {
+    background-color: #bfdbfe;
+    transform: translateY(-1px);
+}
+
+.hl-vocab {
+    background-color: #dcfce7;
+    color: #166534;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 6px;
+    border-bottom: 2px solid #22c55e;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline;
+}
+.hl-vocab:hover {
+    background-color: #bbf7d0;
+    transform: translateY(-1px);
+}
+
+.hide-writing-highlights .hl-phrase,
+.hide-writing-highlights .hl-vocab {
+    background-color: transparent !important;
+    border-bottom-color: transparent !important;
+    color: inherit !important;
+    font-weight: normal !important;
+    padding: 0 !important;
+}
+
+/* Modal Overlay for Writing Annotation Breakdown */
+.writing-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.writing-modal-overlay.show {
+    opacity: 1;
+}
+
+.writing-modal-card {
+    background: #ffffff;
+    border-radius: 16px;
+    max-width: 620px;
+    width: 90%;
+    padding: 28px 32px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border: 1.5px solid #cbd5e1;
+    transform: scale(0.95);
+    transition: transform 0.2s ease;
+}
+.writing-modal-card.show {
+    transform: scale(1);
+}
+
+.writing-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 18px;
+    border-bottom: 1.5px solid #e2e8f0;
+    padding-bottom: 12px;
+}
+.writing-modal-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 6px;
+    background: #e0e7ff;
+    color: #4338ca;
+    margin-bottom: 6px;
+}
+.writing-modal-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+}
+.writing-modal-close {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+}
+.writing-modal-close:hover {
+    color: #0f172a;
+    background: #f1f5f9;
+}
+
+.writing-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+.wm-section {
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+.wm-function {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #1e293b;
+}
+.wm-upgrade {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+}
+.wm-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+.wm-function .wm-label { color: #64748b; }
+.wm-upgrade .wm-label { color: #047857; }
+.writing-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
 .para-tag {
     display: inline-block;
     background: rgba(220, 38, 38, 0.1);

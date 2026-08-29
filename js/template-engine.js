@@ -243,6 +243,11 @@
                         <!-- Right Col: Scrollable Band 6+ Model Essay -->
                         <div class="writing-model-pane" data-slot="model-essay"></div>
                     </div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="toggleWritingHighlights(this)">💡 Highlight Signposts &amp; Lexicon</button>
+                        <button class="btn-action" onclick="speakEssay(this)">🔊 Listen Model Essay</button>
+                    </div>
                 </div>
             </div>
         </div>
