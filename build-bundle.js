@@ -39,6 +39,7 @@ const jsFilesToBundle = [
     'classroom-timer.js',
     'deck-charts.js',
     'presentation-tools.js',
+    'presenter-view.js',
     'lesson-protection.js'
 ];
 

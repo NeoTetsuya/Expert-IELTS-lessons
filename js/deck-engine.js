@@ -55,7 +55,8 @@
         'laser-pointer.js',
         'pen-annotation.js',
         'classroom-timer.js',
-        'presentation-tools.js'
+        'presentation-tools.js',
+        'presenter-view.js'
     ];
 
     // 3. Inject scripts synchronously so they execute in order before DOMContentLoaded

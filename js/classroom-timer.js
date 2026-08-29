@@ -156,9 +156,12 @@ class ClassroomTimer {
         }
     }
 
-    setTimer(seconds) {
+    setTimer(seconds, broadcast = true) {
         this.timerSeconds = seconds;
         this.updateDisplay();
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('TIMER_CMD', { action: 'set', seconds: seconds });
+        }
     }
 
     updateDisplay() {
@@ -170,7 +173,7 @@ class ClassroomTimer {
         display.classList.remove('ended');
     }
 
-    toggleRun() {
+    toggleRun(broadcast = true) {
         const startBtn = document.getElementById('timerStartBtn');
         if (this.timerRunning) {
             clearInterval(this.timerInterval);
@@ -179,12 +182,18 @@ class ClassroomTimer {
                 startBtn.textContent = 'Resume';
                 startBtn.classList.remove('running');
             }
+            if (broadcast && window.presenterSyncEngine) {
+                window.presenterSyncEngine.emit('TIMER_CMD', { action: 'pause' });
+            }
         } else {
             if (this.timerSeconds <= 0) this.timerSeconds = 120;
             this.timerRunning = true;
             if (startBtn) {
                 startBtn.textContent = 'Pause';
                 startBtn.classList.add('running');
+            }
+            if (broadcast && window.presenterSyncEngine) {
+                window.presenterSyncEngine.emit('TIMER_CMD', { action: 'start', seconds: this.timerSeconds });
             }
             this.timerInterval = setInterval(() => {
                 if (this.timerSeconds > 0) {
@@ -205,7 +214,7 @@ class ClassroomTimer {
         }
     }
 
-    reset() {
+    reset(broadcast = true) {
         clearInterval(this.timerInterval);
         this.timerRunning = false;
         this.timerSeconds = 0;
@@ -214,6 +223,9 @@ class ClassroomTimer {
         if (startBtn) {
             startBtn.textContent = 'Start';
             startBtn.classList.remove('running');
+        }
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('TIMER_CMD', { action: 'reset' });
         }
     }
 

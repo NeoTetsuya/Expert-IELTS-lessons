@@ -170,6 +170,14 @@ class StudentPicker {
         if (modal) modal.style.display = 'flex';
     }
 
+    openModal() {
+        this.open();
+    }
+
+    pickRandomStudent(broadcast = false) {
+        this.spin(broadcast);
+    }
+
     close() {
         const modal = document.getElementById('studentPickerModal');
         if (modal) modal.style.display = 'none';

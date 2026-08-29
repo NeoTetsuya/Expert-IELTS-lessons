@@ -45,6 +45,11 @@ class LaserPointer {
             if (this.isActive && this.dot) {
                 this.dot.style.left = `${e.clientX}px`;
                 this.dot.style.top = `${e.clientY}px`;
+                if (window.presenterSyncEngine) {
+                    const normX = e.clientX / window.innerWidth;
+                    const normY = e.clientY / window.innerHeight;
+                    window.presenterSyncEngine.emit('LASER_MOVE', { normX, normY });
+                }
             }
         });
     }
@@ -53,7 +58,7 @@ class LaserPointer {
         this.isActive ? this.deactivate() : this.activate();
     }
 
-    activate() {
+    activate(broadcast = true) {
         this.isActive = true;
         if (this.dot) this.dot.style.display = 'block';
 
@@ -65,15 +70,23 @@ class LaserPointer {
         if (window.penAnnotation && window.penAnnotation.isActive) {
             window.penAnnotation.deactivate();
         }
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('LASER_STATE', { active: true });
+        }
     }
 
-    deactivate() {
+    deactivate(broadcast = true) {
         this.isActive = false;
         if (this.dot) this.dot.style.display = 'none';
 
         // Update button UI
         const btn = document.getElementById('toolLaserBtn');
         if (btn) btn.classList.remove('active');
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('LASER_STATE', { active: false });
+        }
     }
 }
 

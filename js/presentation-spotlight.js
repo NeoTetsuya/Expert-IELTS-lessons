@@ -127,10 +127,32 @@ class PresentationSpotlight {
             this.clearMute();
         });
     }
+
+    updatePosition(x, y) {
+        const mask = document.getElementById('spotlightMask');
+        if (mask) {
+            mask.style.setProperty('--cursor-x', `${x}px`);
+            mask.style.setProperty('--cursor-y', `${y}px`);
+        }
+    }
+
+    activate() {
+        this.isSpotlight = true;
+        const mask = document.getElementById('spotlightMask');
+        if (mask) mask.style.display = 'block';
+    }
+
+    deactivate() {
+        this.isSpotlight = false;
+        const mask = document.getElementById('spotlightMask');
+        if (mask) mask.style.display = 'none';
+    }
 }
 
 // Global auto-instantiation
 let presentationSpotlight;
 window.addEventListener('DOMContentLoaded', () => {
     presentationSpotlight = new PresentationSpotlight();
+    window.presentationSpotlight = presentationSpotlight;
 });
+

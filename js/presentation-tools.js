@@ -35,6 +35,7 @@ class PresentationTools {
 
             <!-- Expanded Tools Bar -->
             <div class="tools-bar" id="toolsBar">
+                <button class="tool-btn" id="toolPresenterBtn" title="Open Presenter View in Dual-Window (Alt+P)" onclick="window.presenterViewUI && window.presenterViewUI.openPresenterWindow()"><span class="tool-icon">👨‍🏫</span><span class="tool-label">Presenter</span></button>
                 <button class="tool-btn" id="toolAspectBtn" title="Switch Aspect Ratio (16:9 / 4:3) (Shift+A)" onclick="window.deckEngine && window.deckEngine.toggleAspectRatio()"><span class="tool-icon">📐</span><span class="tool-label">16:9</span></button>
                 <button class="tool-btn" id="toolThemeBtn" title="Theme Aesthetics (Shift+T)" onclick="window.deckThemeEngine && window.deckThemeEngine.openModal()"><span class="tool-icon">🎨</span><span class="tool-label">Theme</span></button>
                 <button class="tool-btn" id="toolHighlightBtn" title="Teacher Highlighter (H)" onclick="window.teacherHighlighter && window.teacherHighlighter.toggle()"><span class="tool-icon">🖍️</span><span class="tool-label">Highlight</span></button>
@@ -68,6 +69,7 @@ class PresentationTools {
                 <div class="help-grid">
                     <div><kbd>→</kbd> / <kbd>Space</kbd></div><div>Next Slide</div>
                     <div><kbd>←</kbd></div><div>Previous Slide</div>
+                    <div><kbd>Alt+P</kbd></div><div>Presenter Cockpit (Dual View)</div>
                     <div><kbd>G</kbd></div><div>Slide Grid Navigator</div>
                     <div><kbd>Shift+X</kbd></div><div>Hide / Show Teacher Toolkit</div>
                     <div><kbd>Shift+A</kbd></div><div>Toggle 16:9 / 4:3 Aspect Ratio</div>

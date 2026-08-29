@@ -50,11 +50,16 @@ class PenAnnotation {
         let isDrawing = false;
         let lastX = 0;
         let lastY = 0;
+        let currentStroke = [];
 
         canvas.addEventListener('mousedown', (e) => {
             if (!this.isActive) return;
             isDrawing = true;
             [lastX, lastY] = [e.clientX, e.clientY];
+            currentStroke = [{
+                normX: e.clientX / window.innerWidth,
+                normY: e.clientY / window.innerHeight
+            }];
         });
 
         canvas.addEventListener('mousemove', (e) => {
@@ -67,17 +72,45 @@ class PenAnnotation {
             this.ctx.lineCap = 'round';
             this.ctx.lineJoin = 'round';
             this.ctx.stroke();
+
+            currentStroke.push({
+                normX: e.clientX / window.innerWidth,
+                normY: e.clientY / window.innerHeight
+            });
+
+            if (currentStroke.length > 3 && window.presenterSyncEngine) {
+                window.presenterSyncEngine.emit('PEN_DRAW', {
+                    stroke: currentStroke,
+                    color: '#ef4444',
+                    width: 3.5
+                });
+                currentStroke = [{
+                    normX: e.clientX / window.innerWidth,
+                    normY: e.clientY / window.innerHeight
+                }];
+            }
+
             [lastX, lastY] = [e.clientX, e.clientY];
         });
 
-        window.addEventListener('mouseup', () => { isDrawing = false; });
+        window.addEventListener('mouseup', () => {
+            if (isDrawing && currentStroke.length > 0 && window.presenterSyncEngine) {
+                window.presenterSyncEngine.emit('PEN_DRAW', {
+                    stroke: currentStroke,
+                    color: '#ef4444',
+                    width: 3.5
+                });
+            }
+            isDrawing = false;
+            currentStroke = [];
+        });
     }
 
     toggle() {
         this.isActive ? this.deactivate() : this.activate();
     }
 
-    activate() {
+    activate(broadcast = true) {
         this.isActive = true;
         if (this.canvas) this.canvas.classList.add('active');
 
@@ -88,19 +121,30 @@ class PenAnnotation {
         if (window.laserPointer && window.laserPointer.isActive) {
             window.laserPointer.deactivate();
         }
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('PEN_STATE', { active: true });
+        }
     }
 
-    deactivate() {
+    deactivate(broadcast = true) {
         this.isActive = false;
         if (this.canvas) this.canvas.classList.remove('active');
 
         const btn = document.getElementById('toolPenBtn');
         if (btn) btn.classList.remove('active');
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('PEN_STATE', { active: false });
+        }
     }
 
-    clear() {
+    clear(broadcast = true) {
         if (this.canvas && this.ctx) {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('PEN_CLEAR', {});
         }
     }
 }
