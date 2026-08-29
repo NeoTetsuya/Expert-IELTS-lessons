@@ -1,66 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="bold-signal">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expert IELTS 6 • Module 02: Feelings &amp; Expression</title>
+    <title>Expert IELTS 6 — Module 2: Feelings</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet">
 
     <!-- Core Stylesheets -->
     <link rel="stylesheet" href="../presentation-base.css">
+    <style>
+        :root {
+            --col-reading: #2563eb;
+            --col-grammar: #f43f5e;
+            --col-vocab:   #059669;
+            --col-writing: #7c3aed;
+            --col-review:  #0891b2;
+            
+            --stage-bg: #111827;
+            --viewport-bg: radial-gradient(circle at 80% 20%, #881337 0%, #111827 70%);
+        }
+    </style>
 </head>
 
 <body>
-    <div class="presentation-viewport">
-        <!-- Persistent Interactive Navigation Sidebar -->
-        <div class="theme-sidebar">
-            <div class="skill-tab active" data-skill="title">INTRO</div>
-            <div class="skill-tab" data-skill="read">READ</div>
-            <div class="skill-tab" data-skill="grammar">GRAMMAR</div>
-            <div class="skill-tab" data-skill="vocab">VOCAB</div>
-            <div class="skill-tab" data-skill="write">WRITE</div>
-            <div class="skill-tab" data-skill="review">REVIEW</div>
-        </div>
-
-        <!-- Main Slide Presentation Canvas -->
-        <main class="slides-track">
+    <div class="deck-viewport">
+        <main class="deck-stage" id="deckStage">
             <!-- SLIDE 1: Title & Course Roadmap -->
             <slide-card template="title" skill="title">
-                <span slot="badge">MODULE 02</span>
-                <span slot="title">Feelings &amp;<br>Expression</span>
+                <span slot="badge">Module 02</span>
+                <span slot="title">Feelings <span class="title-amp">&amp;</span> Expression</span>
                 <span slot="subtitle">IELTS Academic Preparation Masterclass<br>Feeling Good, Looking Good, Defining Relative Clauses, Lexical Intensifiers &amp; Task 2 Opinion Models</span>
-                <div slot="tags">
-                    <span class="skill-badge" style="background: var(--col-reading);">Reading: Paraphrase Matching &amp; YES/NO/NOT GIVEN</span>
-                    <span class="skill-badge" style="background: var(--col-grammar);">Grammar: Defining Relative Clauses</span>
-                    <span class="skill-badge" style="background: var(--col-vocab);">Vocab: Adjectives &amp; Intensifiers</span>
-                    <span class="skill-badge" style="background: var(--col-writing);">Writing: Task 2 Opinion Essay</span>
-                </div>
                 <div slot="roadmap">
-                    <h3 style="font-family: var(--font-display); font-size: 20px; color: var(--text-dark); margin-bottom: 16px;">
-                        Lesson Syllabus
-                    </h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-                        <div class="card" style="padding: 16px; margin: 0; border-left: 4px solid var(--col-reading);">
-                            <div style="font-weight: 800; color: var(--col-reading); font-size: 16px;">📖 Reading</div>
-                            <div style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Epic Moments &amp; Clothes Identity</div>
-                        </div>
-                        <div class="card" style="padding: 16px; margin: 0; border-left: 4px solid var(--col-grammar);">
-                            <div style="font-weight: 800; color: var(--col-grammar); font-size: 16px;">📐 Grammar</div>
-                            <div style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Defining Relative Clauses</div>
-                        </div>
-                        <div class="card" style="padding: 16px; margin: 0; border-left: 4px solid var(--col-vocab);">
-                            <div style="font-weight: 800; color: var(--col-vocab); font-size: 16px;">📁 Vocabulary</div>
-                            <div style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Feelings, Intensifiers &amp; Collocations</div>
-                        </div>
-                        <div class="card" style="padding: 16px; margin: 0; border-left: 4px solid var(--col-writing);">
-                            <div style="font-weight: 800; color: var(--col-writing); font-size: 16px;">✍️ Writing</div>
-                            <div style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Task 2 Male vs Female Appearance</div>
-                        </div>
+                    <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('read')">
+                        <div class="title-skill-name" style="color:var(--col-reading)">📖 Reading</div>
+                        <div class="title-skill-desc">Epic Moments &amp; Clothes Identity</div>
+                    </div>
+                    <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('grammar')">
+                        <div class="title-skill-name" style="color:var(--col-grammar)">📐 Grammar</div>
+                        <div class="title-skill-desc">Defining Relative Clauses &amp; Pronoun Rules</div>
+                    </div>
+                    <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('vocab')">
+                        <div class="title-skill-name" style="color:var(--col-vocab)">🗂️ Vocabulary</div>
+                        <div class="title-skill-desc">Feelings, Intensifiers &amp; Collocations</div>
+                    </div>
+                    <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('write')">
+                        <div class="title-skill-name" style="color:var(--col-writing)">✍️ Writing</div>
+                        <div class="title-skill-desc">Task 2 Male vs Female Appearance Trends</div>
                     </div>
                 </div>
             </slide-card>

@@ -1,6 +1,6 @@
 /**
  * =========================================================================
- * TEMPLATE ENGINE (Synchronous & Offline Compatible for file:// and http://)
+ * TEMPLATE ENGINE (Exact Design-System Compatible for file:// and http://)
  * Expert IELTS Course Presentations Architecture
  * =========================================================================
  */
@@ -8,22 +8,21 @@
 (function () {
     'use strict';
 
-    // 13 Master Built-in Slide Templates (Zero CORS, 100% Offline Compatible)
+    // 13 Master Built-in Slide Templates
     const BUILTIN_TEMPLATES = `
 <!-- 1. TITLE SLIDE TEMPLATE -->
 <template id="tmpl-title">
     <section class="slide title-slide" data-skill="title">
-        <div class="slide-inner">
-            <div class="notebook">
-                <div class="skill-stripe" style="background: var(--col-primary);"></div>
-                <div class="page-content title-layout" style="padding: 40px 60px;">
-                    <div class="title-left">
-                        <span class="skill-badge" style="background: var(--col-primary); font-size: 15px; padding: 6px 16px; border-radius: 6px;" data-slot="badge"></span>
-                        <h1 class="title-main" style="font-size: 56px; line-height: 1.1; margin: 16px 0 12px;" data-slot="title"></h1>
-                        <p class="title-sub" style="font-size: 24px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px;" data-slot="subtitle"></p>
-                        <div class="title-tags" data-slot="tags"></div>
-                    </div>
-                    <div class="title-right" data-slot="roadmap"></div>
+        <div class="title-slide-inner">
+            <div class="title-notebook">
+                <div class="title-left">
+                    <div class="title-module-badge reveal" data-slot="badge">Module 02</div>
+                    <h1 class="title-main reveal" data-slot="title"></h1>
+                    <p class="title-sub reveal" data-slot="subtitle"></p>
+                </div>
+                <div class="title-right">
+                    <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Lesson Syllabus</div>
+                    <div class="title-skills-grid reveal" data-slot="roadmap"></div>
                 </div>
             </div>
         </div>
@@ -433,6 +432,11 @@
                 const skill = el.getAttribute('skill') || el.getAttribute('data-skill') || section.getAttribute('data-skill') || 'read';
                 section.setAttribute('data-skill', skill);
 
+                // Add active and visible class to first slide
+                if (index === 0) {
+                    section.classList.add('active', 'visible');
+                }
+
                 // Update dynamic slide number in header
                 const numEl = section.querySelector('[data-slot="slide-number"], .slide-number');
                 if (numEl) {
@@ -454,7 +458,7 @@
                     const slotName = child.getAttribute('slot');
                     const target = section.querySelector(`[data-slot="${slotName}"]`);
                     if (target) {
-                        // Transfer attributes from slot child if present (e.g. data-q, data-ev, tag, num, ans, options)
+                        // Transfer attributes from slot child if present
                         if (child.hasAttribute('tag')) {
                             const hdr = section.querySelector('[data-slot="passage-header"]');
                             if (hdr) hdr.innerHTML = `📖 Passage Excerpt: Paragraph [${child.getAttribute('tag')}]`;
