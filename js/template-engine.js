@@ -196,7 +196,7 @@
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-grammar);" data-slot="skill-stripe"></div>
-                <div class="page-content" style="padding: 28px 48px 24px;">
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
                     <div class="slide-header">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-grammar); font-size: 14px; padding: 4px 12px;" data-slot="badge"></span>
@@ -207,7 +207,7 @@
 
                     <p style="font-size: 19px; color: var(--text-muted); margin-bottom: 12px;" data-slot="instruction"></p>
 
-                    <div data-slot="grid"></div>
+                    <div style="flex: 1; min-height: 0;" data-slot="grid"></div>
 
                     <div class="action-row" style="margin-top: 10px;">
                         <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answers</button>
@@ -458,7 +458,14 @@
                     const slotName = child.getAttribute('slot');
                     const target = section.querySelector(`[data-slot="${slotName}"]`);
                     if (target) {
-                        // Transfer attributes from slot child if present
+                        // Transfer classes, styles, and custom attributes from child element
+                        if (child.className && child.className !== '') {
+                            target.className = (target.className ? target.className + ' ' : '') + child.className;
+                        }
+                        if (child.style.cssText) {
+                            target.style.cssText = (target.style.cssText ? target.style.cssText + ';' : '') + child.style.cssText;
+                        }
+
                         if (child.hasAttribute('tag')) {
                             const hdr = section.querySelector('[data-slot="passage-header"]');
                             if (hdr) hdr.innerHTML = `📖 Passage Excerpt: Paragraph [${child.getAttribute('tag')}]`;

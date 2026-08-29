@@ -165,9 +165,41 @@ class DeckEngine {
         if (window.paragraphLoupe) {
             window.paragraphLoupe.clearFocus();
         }
+        
+        // Auto-adjust content scale to fit slide height perfectly
+        this.autoFitSlide(this.slides[index]);
+
         window.dispatchEvent(new CustomEvent('slidechanged', {
             detail: { index, slide: this.slides[index] }
         }));
+    }
+
+    /**
+     * Universal Content Auto-Fitter
+     * Automatically adjusts font-scaling and vertical dimensions so long content fits without clipping
+     */
+    autoFitSlide(slide) {
+        if (!slide) return;
+        const notebook = slide.querySelector('.notebook, .title-notebook');
+        const pageContent = slide.querySelector('.page-content, .title-notebook');
+        if (!notebook || !pageContent) return;
+
+        // Reset previous transforms
+        pageContent.style.removeProperty('transform');
+        pageContent.style.removeProperty('transform-origin');
+        pageContent.style.removeProperty('height');
+
+        requestAnimationFrame(() => {
+            const availableHeight = notebook.clientHeight;
+            const scrollH = pageContent.scrollHeight;
+
+            if (scrollH > availableHeight + 6) {
+                const fitRatio = Math.max(0.68, (availableHeight - 12) / scrollH);
+                pageContent.style.transform = `scale(${fitRatio.toFixed(3)})`;
+                pageContent.style.transformOrigin = 'top center';
+                pageContent.style.height = `${(availableHeight / fitRatio).toFixed(1)}px`;
+            }
+        });
     }
 
     nextSlide() {
