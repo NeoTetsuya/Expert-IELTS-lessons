@@ -404,6 +404,6 @@
     }
   }
 
-  // Instantiate and export to window
-  window.readingAnalyzer = new ReadingAnalyzer();
+  // Disabled for revision - do not auto-instantiate
+  window.ReadingAnalyzer = ReadingAnalyzer;
 })();
