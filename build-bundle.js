@@ -1,15 +1,17 @@
 /**
  * Master Bundle Builder for IELTS Interactive HTML Presentations
- * Combines all modular JavaScript files into:
- *   1. js/deck-engine.js
- *   2. js/deck-bundle.js
+ * Combines:
+ *   1. Modular JavaScript files into js/deck-bundle.js
+ *   2. Modular CSS files from css/ into presentation-base.bundle.css
  */
 const fs = require('fs');
 const path = require('path');
 
 const jsDir = path.join(__dirname, 'js');
+const cssDir = path.join(__dirname, 'css');
 
-const filesToBundle = [
+// 1. Bundle JavaScript Modules
+const jsFilesToBundle = [
     'deck-core.js',
     'deck-components.js',
     'deck-theme-engine.js',
@@ -33,29 +35,61 @@ const filesToBundle = [
     'presentation-tools.js'
 ];
 
-let bundleCode = `/**
- * Universal IELTS Presentation Master Bundle
+let jsBundleCode = `/**
+ * Universal IELTS Presentation Master Bundle (JS)
  * Auto-instantiates DeckEngine on window.deckEngine
  * Generated from modular files in /js/
  */
 `;
 
-filesToBundle.forEach(fileName => {
+jsFilesToBundle.forEach(fileName => {
     const filePath = path.join(jsDir, fileName);
     if (fs.existsSync(filePath)) {
         const content = fs.readFileSync(filePath, 'utf8');
-        bundleCode += `\n/* ==================== MODULE: ${fileName} ==================== */\n`;
-        bundleCode += content + '\n';
+        jsBundleCode += `\n/* ==================== MODULE: ${fileName} ==================== */\n`;
+        jsBundleCode += content + '\n';
     } else {
-        console.warn(`⚠️ Warning: Module ${fileName} not found in ${jsDir}`);
+        console.warn(`⚠️ Warning: JS Module ${fileName} not found in ${jsDir}`);
     }
 });
 
-const outputPath = path.join(jsDir, 'deck-bundle.js');
+const jsOutputPath = path.join(jsDir, 'deck-bundle.js');
+fs.writeFileSync(jsOutputPath, jsBundleCode, 'utf8');
+console.log('✓ Master JS bundle built:');
+console.log(`  - ${jsOutputPath} (${(fs.statSync(jsOutputPath).size / 1024).toFixed(1)} KB)`);
 
-fs.writeFileSync(outputPath, bundleCode, 'utf8');
+// 2. Bundle CSS Modules
+const cssFilesToBundle = [
+    'tokens.css',
+    'layout.css',
+    'typography.css',
+    'components.css',
+    'skills.css',
+    'animations.css',
+    'controls.css'
+];
 
-console.log('✓ Master bundle built successfully:');
-console.log(`  - ${outputPath} (${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB)`);
+let cssBundleCode = `/* ==========================================================================
+   UNIVERSAL PRESENTATION BASE STYLESHEET (COMPILED MASTER BUNDLE)
+   Compiled automatically from modular components in /css/
+   ========================================================================== */
+`;
+
+cssFilesToBundle.forEach(fileName => {
+    const filePath = path.join(cssDir, fileName);
+    if (fs.existsSync(filePath)) {
+        const content = fs.readFileSync(filePath, 'utf8');
+        cssBundleCode += `\n/* ==================== COMPONENT: ${fileName} ==================== */\n`;
+        cssBundleCode += content + '\n';
+    } else {
+        console.warn(`⚠️ Warning: CSS Module ${fileName} not found in ${cssDir}`);
+    }
+});
+
+const cssOutputPath = path.join(__dirname, 'presentation-base.bundle.css');
+fs.writeFileSync(cssOutputPath, cssBundleCode, 'utf8');
+console.log('✓ Master CSS bundle built:');
+console.log(`  - ${cssOutputPath} (${(fs.statSync(cssOutputPath).size / 1024).toFixed(1)} KB)`);
+
 
 
