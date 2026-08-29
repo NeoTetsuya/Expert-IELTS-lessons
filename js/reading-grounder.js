@@ -230,14 +230,8 @@ class ReadingGrounder {
         const def = el.dataset.def || (dictData ? dictData.def : 'Key academic term targeted in the reading passage & questions.');
         const colloc = el.dataset.colloc || (dictData ? dictData.colloc : '');
 
-        // Auto-play native speech pronunciation
+        // Auto-play native speech pronunciation in Google Female UK voice
         this.speakWord(cleanWord);
-
-        // Highlight matching question/passage elements if linked
-        const qId = el.dataset.q;
-        if (qId && window.readingHighlighter) {
-            window.readingHighlighter.showEvidence(qId);
-        }
 
         // Get or create popover element
         let popover = document.getElementById('vocabPopover');

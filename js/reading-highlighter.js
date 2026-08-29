@@ -160,30 +160,14 @@ class ReadingHighlighter {
                 return;
             }
 
-            // Clicking question card text focuses evidence
-            const qCard = e.target.closest('.q-card[data-q]');
-            if (qCard && !e.target.closest('select, input, button, a')) {
-                const dataQ = qCard.dataset.q;
-                if (dataQ) {
-                    this.focusEvidence(dataQ);
-                }
-            }
         });
     }
 
     /**
-     * Auto-binds question card hover for interactive previewing
+     * Question hover preview disabled to prevent unintentional answer exposure
      */
     bindQuestionHover() {
-        document.querySelectorAll('.q-card[data-q]').forEach(card => {
-            const qKey = card.dataset.q;
-            card.addEventListener('mouseenter', () => {
-                document.querySelectorAll(`mark.evidence[id*="${qKey}"]`).forEach(m => m.classList.add('hover-preview'));
-            });
-            card.addEventListener('mouseleave', () => {
-                document.querySelectorAll(`mark.evidence[id*="${qKey}"]`).forEach(m => m.classList.remove('hover-preview'));
-            });
-        });
+        // Restricted to explicit button actions
     }
 
     /**
