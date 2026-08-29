@@ -17,6 +17,8 @@ const jsFilesToBundle = [
     'deck-core.js',
     'deck-components.js',
     'deck-theme-engine.js',
+    'image-viewer.js',
+    'mobile.js',
     'teacher-highlighter.js',
     'step-reveal.js',
     'student-picker.js',
@@ -36,7 +38,8 @@ const jsFilesToBundle = [
     'pen-annotation.js',
     'classroom-timer.js',
     'deck-charts.js',
-    'presentation-tools.js'
+    'presentation-tools.js',
+    'lesson-protection.js'
 ];
 
 let jsBundleCode = `/**

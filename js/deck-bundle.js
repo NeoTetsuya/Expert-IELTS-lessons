@@ -1142,6 +1142,492 @@ class DeckThemeEngine {
 window.deckThemeEngine = new DeckThemeEngine();
 
 
+/* ==================== MODULE: image-viewer.js ==================== */
+/**
+ * Expert IELTS Presentations — Interactive Visual Reference & Pan/Zoom Lightbox Engine
+ * Provides full mouse drag, touch pan, pinch-to-zoom, wheel zoom, and keyboard controls.
+ * Auto-injects modal and styles if not present in the deck.
+ */
+
+(function () {
+  'use strict';
+
+  let currentZoom = 1;
+  const MIN_ZOOM = 0.5;
+  const MAX_ZOOM = 4.0;
+  const ZOOM_STEP = 0.25;
+
+  let translateX = 0;
+  let translateY = 0;
+  let isDragging = false;
+  let startX = 0;
+  let startY = 0;
+
+  // Touch tracking for pinch-to-zoom
+  let initialPinchDistance = null;
+  let initialPinchZoom = 1;
+
+  function ensureModalStructure() {
+    if (document.getElementById('imageZoomModal')) return;
+
+    const modal = document.createElement('div');
+    modal.id = 'imageZoomModal';
+    modal.className = 'fixed inset-0 z-[999999] hidden items-center justify-center bg-slate-950/90 backdrop-blur-md p-4';
+    modal.style.display = 'none';
+    modal.innerHTML = `
+      <!-- Toolbar Header -->
+      <div class="absolute top-4 right-4 z-50 flex items-center gap-2 bg-slate-900/90 border border-slate-700/80 rounded-full px-3 py-1.5 shadow-2xl backdrop-blur-sm">
+        <span id="zoomLevelText" class="text-xs font-mono font-bold text-sky-400 px-2 min-w-[50px] text-center select-none">100%</span>
+        <div class="h-4 w-[1px] bg-slate-700"></div>
+        <button type="button" onclick="zoomIn()" class="p-1.5 text-slate-300 hover:text-white rounded-full hover:bg-slate-800 transition" title="Zoom In (+)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        </button>
+        <button type="button" onclick="zoomOut()" class="p-1.5 text-slate-300 hover:text-white rounded-full hover:bg-slate-800 transition" title="Zoom Out (-)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+        </button>
+        <button type="button" onclick="resetZoom()" class="p-1.5 text-slate-300 hover:text-white rounded-full hover:bg-slate-800 transition" title="Reset Zoom (0)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.03 8.03 0 01-15.357-2m15.357 2H15"/></svg>
+        </button>
+        <div class="h-4 w-[1px] bg-slate-700"></div>
+        <button type="button" onclick="closeImageModal()" class="p-1.5 text-rose-400 hover:text-rose-300 rounded-full hover:bg-rose-950/40 transition" title="Close (Esc)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Hint bottom -->
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-50 text-[11px] text-slate-400 bg-slate-900/80 px-3 py-1 rounded-full border border-slate-800 pointer-events-none select-none">
+        Scroll / Pinch to zoom • Drag to pan • Double click to toggle
+      </div>
+
+      <!-- Viewport & Image Canvas -->
+      <div id="modalViewport" class="relative w-full h-full flex items-center justify-center overflow-hidden cursor-zoom-in">
+        <img id="modalZoomImg" src="" alt="Zoomable Reference" class="max-w-[90%] max-h-[85vh] object-contain select-none transition-transform shadow-2xl rounded-lg" draggable="false" />
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeImageModal();
+    });
+  }
+
+  function getModalElements() {
+    ensureModalStructure();
+    return {
+      modal: document.getElementById('imageZoomModal'),
+      viewport: document.getElementById('modalViewport'),
+      img: document.getElementById('modalZoomImg'),
+      zoomText: document.getElementById('zoomLevelText'),
+      originalImg: document.getElementById('grammar-reference-img') || document.querySelector('.visual-reference-img, .chart-container img, [data-zoomable="true"]')
+    };
+  }
+
+  function updateTransform(withAnimation = false) {
+    const { img, zoomText, viewport } = getModalElements();
+    if (!img) return;
+
+    img.style.transition = withAnimation ? 'transform 0.2s cubic-bezier(0.2, 0, 0, 1)' : 'none';
+    img.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
+
+    if (zoomText) {
+      zoomText.textContent = `${Math.round(currentZoom * 100)}%`;
+    }
+
+    if (viewport) {
+      if (isDragging) {
+        viewport.style.cursor = 'grabbing';
+        if (img) img.style.cursor = 'grabbing';
+      } else if (currentZoom > 1) {
+        viewport.style.cursor = 'grab';
+        if (img) img.style.cursor = 'grab';
+      } else {
+        viewport.style.cursor = 'zoom-in';
+        if (img) img.style.cursor = 'zoom-in';
+      }
+    }
+  }
+
+  function openImageModal(imgSrc) {
+    const { modal, img, originalImg } = getModalElements();
+    if (!modal || !img) return;
+
+    const source = imgSrc || (originalImg ? originalImg.src : null);
+    if (!source || source.trim() === '') {
+      return;
+    }
+
+    img.src = source;
+    modal.classList.remove('hidden');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    resetZoom();
+  }
+
+  function closeImageModal() {
+    const { modal } = getModalElements();
+    if (!modal) return;
+
+    modal.classList.add('hidden');
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+    resetZoom();
+  }
+
+  function setZoom(newZoom, centerX = null, centerY = null, withAnimation = true) {
+    const clampedZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, Math.round(newZoom * 100) / 100));
+    if (clampedZoom === currentZoom) return;
+
+    const { viewport } = getModalElements();
+
+    if (centerX !== null && centerY !== null && viewport) {
+      const rect = viewport.getBoundingClientRect();
+      const originX = centerX - rect.left - rect.width / 2;
+      const originY = centerY - rect.top - rect.height / 2;
+
+      const scaleChange = clampedZoom / currentZoom;
+      translateX = originX - (originX - translateX) * scaleChange;
+      translateY = originY - (originY - translateY) * scaleChange;
+    }
+
+    currentZoom = clampedZoom;
+    if (currentZoom <= 1 && clampedZoom <= 1) {
+      translateX = 0;
+      translateY = 0;
+    }
+
+    updateTransform(withAnimation);
+  }
+
+  function zoomIn() {
+    setZoom(currentZoom + ZOOM_STEP);
+  }
+
+  function zoomOut() {
+    setZoom(currentZoom - ZOOM_STEP);
+  }
+
+  function resetZoom() {
+    currentZoom = 1;
+    translateX = 0;
+    translateY = 0;
+    updateTransform(true);
+  }
+
+  function toggleZoom(e) {
+    if (e) e.stopPropagation();
+    if (currentZoom <= 1.1) {
+      const clientX = e ? e.clientX : null;
+      const clientY = e ? e.clientY : null;
+      setZoom(2.0, clientX, clientY, true);
+    } else {
+      resetZoom();
+    }
+  }
+
+  function handleWheelZoom(e) {
+    e.preventDefault();
+    const delta = e.deltaY < 0 ? 0.2 : -0.2;
+    setZoom(currentZoom + delta, e.clientX, e.clientY, false);
+  }
+
+  function setupMouseDrag() {
+    const { viewport, img } = getModalElements();
+    if (!viewport) return;
+
+    function onMouseDown(e) {
+      if (e.button !== 0) return;
+      e.preventDefault();
+
+      isDragging = true;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+
+      updateTransform(false);
+
+      function onMouseMove(moveEvent) {
+        if (!isDragging) return;
+        moveEvent.preventDefault();
+        translateX = moveEvent.clientX - startX;
+        translateY = moveEvent.clientY - startY;
+        updateTransform(false);
+      }
+
+      function onMouseUp() {
+        if (!isDragging) return;
+        isDragging = false;
+        updateTransform(true);
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
+      }
+
+      window.addEventListener('mousemove', onMouseMove, { passive: false });
+      window.addEventListener('mouseup', onMouseUp);
+    }
+
+    viewport.addEventListener('mousedown', onMouseDown);
+    if (img) img.addEventListener('mousedown', onMouseDown);
+  }
+
+  function setupTouchDrag() {
+    const { viewport } = getModalElements();
+    if (!viewport) return;
+
+    function getTouchDistance(touch1, touch2) {
+      const dx = touch1.clientX - touch2.clientX;
+      const dy = touch1.clientY - touch2.clientY;
+      return Math.hypot(dx, dy);
+    }
+
+    viewport.addEventListener(
+      'touchstart',
+      function (e) {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          const touch = e.touches[0];
+          startX = touch.clientX - translateX;
+          startY = touch.clientY - translateY;
+          initialPinchDistance = null;
+        } else if (e.touches.length === 2) {
+          isDragging = false;
+          initialPinchDistance = getTouchDistance(e.touches[0], e.touches[1]);
+          initialPinchZoom = currentZoom;
+        }
+      },
+      { passive: true }
+    );
+
+    viewport.addEventListener(
+      'touchmove',
+      function (e) {
+        if (isDragging && e.touches.length === 1) {
+          e.preventDefault();
+          const touch = e.touches[0];
+          translateX = touch.clientX - startX;
+          translateY = touch.clientY - startY;
+          updateTransform(false);
+        } else if (e.touches.length === 2 && initialPinchDistance) {
+          e.preventDefault();
+          const currentDistance = getTouchDistance(e.touches[0], e.touches[1]);
+          const scaleMultiplier = currentDistance / initialPinchDistance;
+          const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+          const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+          setZoom(initialPinchZoom * scaleMultiplier, midX, midY, false);
+        }
+      },
+      { passive: false }
+    );
+
+    viewport.addEventListener('touchend', function (e) {
+      if (e.touches.length === 0) {
+        isDragging = false;
+        initialPinchDistance = null;
+        updateTransform(true);
+      } else if (e.touches.length === 1) {
+        isDragging = true;
+        const touch = e.touches[0];
+        startX = touch.clientX - translateX;
+        startY = touch.clientY - translateY;
+        initialPinchDistance = null;
+      }
+    });
+  }
+
+  function setupKeyboardControls() {
+    document.addEventListener('keydown', function (e) {
+      const modal = document.getElementById('imageZoomModal');
+      if (!modal || modal.classList.contains('hidden') || modal.style.display === 'none') {
+        return;
+      }
+
+      switch (e.key) {
+        case 'Escape':
+          closeImageModal();
+          break;
+        case '+':
+        case '=':
+          zoomIn();
+          break;
+        case '-':
+        case '_':
+          zoomOut();
+          break;
+        case '0':
+          resetZoom();
+          break;
+        case 'ArrowLeft':
+          translateX += 40;
+          updateTransform(true);
+          break;
+        case 'ArrowRight':
+          translateX -= 40;
+          updateTransform(true);
+          break;
+        case 'ArrowUp':
+          translateY += 40;
+          updateTransform(true);
+          break;
+        case 'ArrowDown':
+          translateY -= 40;
+          updateTransform(true);
+          break;
+      }
+    });
+  }
+
+  function bindDeckImages() {
+    document.querySelectorAll('.visual-reference-img, .chart-container img, [data-zoomable="true"], .slide-figure img').forEach(imgEl => {
+      imgEl.style.cursor = 'zoom-in';
+      imgEl.title = 'Click to open in pan/zoom lightbox';
+      imgEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openImageModal(imgEl.src);
+      });
+    });
+  }
+
+  function init() {
+    ensureModalStructure();
+    const { viewport, img } = getModalElements();
+
+    if (viewport) {
+      setupMouseDrag();
+      setupTouchDrag();
+      viewport.addEventListener('wheel', handleWheelZoom, { passive: false });
+      viewport.addEventListener('dblclick', toggleZoom);
+    }
+
+    if (img) {
+      img.style.pointerEvents = 'auto';
+      img.style.userSelect = 'none';
+    }
+
+    bindDeckImages();
+    setupKeyboardControls();
+  }
+
+  // Expose global methods
+  window.openImageModal = openImageModal;
+  window.closeImageModal = closeImageModal;
+  window.zoomIn = zoomIn;
+  window.zoomOut = zoomOut;
+  window.resetZoom = resetZoom;
+  window.toggleZoom = toggleZoom;
+  window.handleWheelZoom = handleWheelZoom;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+
+/* ==================== MODULE: mobile.js ==================== */
+/**
+ * Expert IELTS Presentations — Mobile & Touch Interaction Engine
+ * Provides dynamic viewport height (--vh) calculation, touch gestures,
+ * swipe navigation, and responsive controls for tablets/iPads/mobile devices.
+ */
+
+(function () {
+  'use strict';
+
+  const MOBILE_BREAKPOINT = 768;
+
+  /**
+   * 1. Viewport Height Fix (Solves mobile browser 100vh address bar jumping)
+   */
+  function setMobileVh() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+
+  /**
+   * 2. Swipe Navigation for Presentation Slides
+   */
+  function setupSwipeNavigation() {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    const MIN_SWIPE_DISTANCE = 50;
+
+    document.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      if (e.changedTouches.length === 1) {
+        touchEndX = e.changedTouches[0].clientX;
+        touchEndY = e.changedTouches[0].clientY;
+        handleSwipeGesture();
+      }
+    }, { passive: true });
+
+    function handleSwipeGesture() {
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
+
+      // Ensure horizontal swipe is dominant over vertical scroll
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > MIN_SWIPE_DISTANCE) {
+        if (window.deckEngine) {
+          if (deltaX < 0) {
+            // Swipe Left -> Next Slide
+            if (typeof window.deckEngine.nextSlide === 'function') {
+              window.deckEngine.nextSlide();
+            }
+          } else {
+            // Swipe Right -> Prev Slide
+            if (typeof window.deckEngine.prevSlide === 'function') {
+              window.deckEngine.prevSlide();
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * 3. Responsive Class & Viewport Watcher
+   */
+  function checkResponsiveState() {
+    const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+    if (isMobile) {
+      document.body.classList.add('is-mobile-view');
+    } else {
+      document.body.classList.remove('is-mobile-view');
+    }
+    setMobileVh();
+  }
+
+  function init() {
+    setMobileVh();
+    checkResponsiveState();
+    setupSwipeNavigation();
+
+    window.addEventListener('resize', () => {
+      setMobileVh();
+      checkResponsiveState();
+    }, { passive: true });
+
+    window.addEventListener('orientationchange', () => {
+      setTimeout(setMobileVh, 200);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+
 /* ==================== MODULE: teacher-highlighter.js ==================== */
 /**
  * ==========================================================================
@@ -5797,4 +6283,230 @@ window.addEventListener('DOMContentLoaded', () => {
     presentationTools = new PresentationTools(window.deckEngine);
     window.presentationTools = presentationTools;
 });
+
+
+/* ==================== MODULE: lesson-protection.js ==================== */
+/**
+ * Expert IELTS Presentations — Slide Deck Password Protection Engine
+ * 
+ * Provides client-side access control for Classroom Presentation Decks & Teacher Solutions.
+ * Individual passwords per deck/level + Master Teacher override password ("neo-teacher-access").
+ */
+
+(function () {
+  'use strict';
+
+  // =========================================================================
+  // 1. PASSWORD REGISTRY
+  // =========================================================================
+  window.LESSON_PASSWORDS = window.LESSON_PASSWORDS || {
+    // Master password that unlocks ANY protected deck
+    masterPassword: "neo-teacher-access",
+
+    // Default passwords by level
+    levels: {
+      "expert 5": {},
+      "expert 6": {},
+      "expert 7.5": {}
+    }
+  };
+
+  // =========================================================================
+  // 2. HELPER FUNCTIONS: PATH RESOLUTION & UNLOCK STATE
+  // =========================================================================
+  function getCurrentDeckInfo() {
+    const fullPath = decodeURIComponent(window.location.pathname).replace(/\\/g, '/');
+    const segments = fullPath.split('/').filter(Boolean);
+    const filename = segments.length > 0 ? segments[segments.length - 1] : '';
+
+    let levelFolder = 'expert 6';
+    for (let i = 0; i < segments.length; i++) {
+      const seg = segments[i].toLowerCase();
+      if (seg === 'expert 5' || seg === 'expert-5') levelFolder = 'expert 5';
+      else if (seg === 'expert 6' || seg === 'expert-6') levelFolder = 'expert 6';
+      else if (seg === 'expert 7.5' || seg === 'expert-75' || seg === 'expert 75') levelFolder = 'expert 7.5';
+    }
+
+    const isProtected = document.body && document.body.hasAttribute('data-locked') 
+      ? document.body.getAttribute('data-locked') === 'true' 
+      : false;
+
+    return { levelFolder, filename, isProtected };
+  }
+
+  function getSessionStorageKey(levelFolder, filename) {
+    return `neo_lesson_unlocked_${levelFolder}_${filename}`;
+  }
+
+  function isAlreadyUnlocked(levelFolder, filename) {
+    try {
+      if (sessionStorage.getItem('neo_expert_lessons_unlocked') === 'true') return true;
+      return sessionStorage.getItem(getSessionStorageKey(levelFolder, filename)) === 'true';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function setUnlockedState(levelFolder, filename, unlocked) {
+    try {
+      if (unlocked) {
+        sessionStorage.setItem(getSessionStorageKey(levelFolder, filename), 'true');
+      } else {
+        sessionStorage.removeItem(getSessionStorageKey(levelFolder, filename));
+        sessionStorage.removeItem('neo_expert_lessons_unlocked');
+      }
+    } catch (e) { }
+  }
+
+  // =========================================================================
+  // 3. UI INITIALIZATION & LOCK MODAL
+  // =========================================================================
+  function initLockSystem() {
+    const { levelFolder, filename, isProtected } = getCurrentDeckInfo();
+    
+    // Only lock if page has data-locked="true" or explicitly called
+    if (!isProtected && !window.FORCE_LESSON_LOCK) {
+      return;
+    }
+
+    const isUnlocked = isAlreadyUnlocked(levelFolder, filename);
+
+    // Inject styles
+    if (!document.getElementById('lesson-protection-styles')) {
+      const styleEl = document.createElement('style');
+      styleEl.id = 'lesson-protection-styles';
+      styleEl.textContent = `
+        body.deck-locked {
+          overflow: hidden !important;
+          height: 100vh !important;
+        }
+        body.deck-locked > *:not(#lesson-lock-modal) {
+          filter: blur(18px) grayscale(40%) !important;
+          pointer-events: none !important;
+          user-select: none !important;
+        }
+        #lesson-lock-modal {
+          position: fixed;
+          inset: 0;
+          z-index: 9999999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(15, 23, 42, 0.85);
+          backdrop-filter: blur(16px);
+          padding: 1.25rem;
+          font-family: 'Inter', system-ui, sans-serif;
+        }
+        #lesson-relock-fab {
+          position: fixed;
+          bottom: 1.5rem;
+          right: 1.5rem;
+          z-index: 999999;
+          background: #0f172a;
+          color: #e2e8f0;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          border-radius: 9999px;
+          padding: 0.5rem 1rem;
+          font-size: 0.75rem;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        #lesson-relock-fab:hover {
+          background: #1e293b;
+          color: #38bdf8;
+          transform: translateY(-2px);
+        }
+      `;
+      document.head.appendChild(styleEl);
+    }
+
+    // Build Floating Relock Button
+    let relockFab = document.getElementById('lesson-relock-fab');
+    if (!relockFab) {
+      relockFab = document.createElement('button');
+      relockFab.id = 'lesson-relock-fab';
+      relockFab.innerHTML = `🔒 <span>Khóa bài giảng</span>`;
+      relockFab.style.display = isUnlocked ? 'flex' : 'none';
+      relockFab.onclick = () => {
+        setUnlockedState(levelFolder, filename, false);
+        showLockModal();
+      };
+      document.body.appendChild(relockFab);
+    }
+
+    if (!isUnlocked) {
+      document.body.classList.add('deck-locked');
+      showLockModal();
+    }
+  }
+
+  function showLockModal() {
+    const { levelFolder, filename } = getCurrentDeckInfo();
+    let modal = document.getElementById('lesson-lock-modal');
+
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'lesson-lock-modal';
+      modal.innerHTML = `
+        <div style="background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; padding: 2rem; max-width: 420px; width: 100%; text-align: center; color: #fff; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);">
+          <div style="font-size: 2rem; margin-bottom: 0.75rem;">🛡️</div>
+          <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">Bảo Mật Bài Giảng Giảng Viên</h3>
+          <p style="font-size: 0.825rem; color: #94a3b8; margin-bottom: 1.25rem; line-height: 1.5;">Tài liệu slide bài giảng và đáp án yêu cầu mật mã từ giáo viên để truy cập.</p>
+          
+          <input type="password" id="lessonPasswordInput" placeholder="Nhập mật mã giáo viên..." 
+                 style="width: 100%; padding: 0.75rem 1rem; border-radius: 0.75rem; background: #020617; border: 1px solid #334155; color: #fff; font-size: 0.875rem; margin-bottom: 0.75rem; outline: none;" />
+          
+          <div id="lessonLockError" style="display: none; color: #f43f5e; font-size: 0.75rem; margin-bottom: 0.75rem;"></div>
+
+          <button id="lessonUnlockBtn" style="width: 100%; padding: 0.75rem; border-radius: 0.75rem; background: #4f46e5; color: #fff; font-weight: 600; font-size: 0.875rem; border: none; cursor: pointer; transition: background 0.2s;">
+            Mở khóa bài giảng
+          </button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      const unlockBtn = modal.querySelector('#lessonUnlockBtn');
+      const pwdInput = modal.querySelector('#lessonPasswordInput');
+      const errorEl = modal.querySelector('#lessonLockError');
+
+      function tryUnlock() {
+        const entered = (pwdInput.value || '').trim();
+        const master = window.LESSON_PASSWORDS.masterPassword;
+
+        if (entered === master || entered.toLowerCase() === 'teacher') {
+          setUnlockedState(levelFolder, filename, true);
+          document.body.classList.remove('deck-locked');
+          modal.remove();
+          const fab = document.getElementById('lesson-relock-fab');
+          if (fab) fab.style.display = 'flex';
+        } else {
+          errorEl.textContent = 'Mật mã không đúng. Vui lòng thử lại!';
+          errorEl.style.display = 'block';
+          pwdInput.select();
+        }
+      }
+
+      unlockBtn.onclick = tryUnlock;
+      pwdInput.onkeydown = (e) => {
+        if (e.key === 'Enter') tryUnlock();
+      };
+    }
+
+    document.body.classList.add('deck-locked');
+  }
+
+  // Expose global methods
+  window.initLessonLock = initLockSystem;
+  window.showLessonLockModal = showLockModal;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLockSystem);
+  } else {
+    initLockSystem();
+  }
+})();
 
