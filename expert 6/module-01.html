@@ -62,42 +62,156 @@
                 <span slot="subtitle">Digital photography mechanics, topic sentence deconstruction, matching headings, communication collocations, phrasal verbs, noun forms and present tense precision.</span>
             </slide-card>
 
-            <!-- SLIDE 3: 1a Pre-Reading Strategy (Topic Sentences Analysis) -->
-            <slide-card template="strategy" skill="read" title="Reading Strategy: Topic Sentence Deconstruction (Ex 3a–4c)" subtitle="Analyze Paragraphs B &amp; C: Identify topic sentences, comparison targets, and repeated keyword anchors.">
-                <div slot="sentences">
-                    <div class="card q-card strategy-card" data-q="strat-1a-b" style="border-left: 6px solid var(--col-reading); padding: 18px 24px; border-radius: 12px; margin-bottom: 14px;">
-                        <p class="sentence-text" style="font-size: 21px; font-weight: 700; color: #0f172a; line-height: 1.7; margin: 0;">
-                            <strong>Paragraph B Topic Sentence:</strong> "The biggest cause of <span class="syn-pair-1">photographic artefacts</span> is the contrast between how the <span class="syn-pair-2">‘depth of field’</span> works in modern cameras and in the <span class="syn-pair-1">human eye</span>."
-                        </p>
-                        <div style="font-size: 16.5px; color: var(--text-dark); margin-top: 10px; display: flex; flex-direction: column; gap: 4px;">
-                            <div>• <strong>What topic sentence does (Ex 3a):</strong> Explains the main subject of the paragraph.</div>
-                            <div>• <strong>Things compared:</strong> The human eye and digital cameras.</div>
-                            <div>• <strong>Repeated keyword topic (Ex 3b):</strong> <span class="syn-tag green" style="font-size:14px;">Distance</span> (depth of field, far away, very near, near).</div>
-                            <div>• <strong>Best heading (Ex 3c):</strong> <em>Digital cameras and people see distance differently.</em></div>
+            <!-- SLIDE 3: 1a Reading Strategy - Paragraph B Topic Sentence & Heading Exercise (Ex 3a–3c) -->
+            <slide-card template="exercise-grid" skill="read" title="Reading 1a Strategy: Paragraph B Topic Sentence &amp; Heading (Ex 3a–3c)" instruction="Read Paragraph B. Analyze the topic sentence, identify the comparison and repeated keywords, and select the best heading.">
+                <div slot="grid" style="display: flex; gap: 24px; width: 100%; height: 100%;">
+                    <!-- Left: Paragraph B Excerpt -->
+                    <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; overflow-y: auto;">
+                        <div class="card" style="border-left: 6px solid var(--col-reading); padding: 20px 24px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <span class="para-tag" style="font-size: 15px;">Paragraph B</span>
+                                <span style="font-size: 14.5px; font-weight: 700; color: var(--col-reading);">Focus: Distance &amp; Perception</span>
+                            </div>
+                            <p style="font-size: 18.5px; line-height: 1.8; color: var(--text-dark); margin: 0;">
+                                <u>The biggest cause of photographic artefacts is the contrast between how the ‘depth of field’ works in modern cameras and in the human eye.</u> This is because, although it is now possible to take excellent pictures of things <em>far away</em>, the quality of photos of objects that are <em>very near</em> is less accurate. Light causes these misrepresentations. The level of light never changes when humans stare at objects. However, this is not what happens with digital cameras. When a camera points at a light, the light becomes stronger and stronger. Orbs, which are perfect circles of light, are the most common photographic artefact and they are often the result of light reflecting off water or insects in the air <em>near</em> the camera.
+                            </p>
                         </div>
                     </div>
 
-                    <div class="card q-card strategy-card" data-q="strat-1a-c" style="border-left: 6px solid var(--col-reading); padding: 18px 24px; border-radius: 12px; margin-bottom: 14px;">
-                        <p class="sentence-text" style="font-size: 21px; font-weight: 700; color: #0f172a; line-height: 1.7; margin: 0;">
-                            <strong>Paragraph C Topic Sentence:</strong> "However, digital cameras are also <span class="syn-pair-1">significantly different</span> from the <span class="syn-pair-2">old film cameras</span>."
-                        </p>
-                        <div style="font-size: 16.5px; color: var(--text-dark); margin-top: 10px; display: flex; flex-direction: column; gap: 4px;">
-                            <div>• <strong>Position (Ex 4a):</strong> Second sentence of Paragraph C.</div>
-                            <div>• <strong>Repeated keyword topic (Ex 4b):</strong> <span class="syn-tag purple" style="font-size:14px;">Time</span> (more than once, period of less than a second, during photo, for longer).</div>
-                            <div>• <strong>Best heading (Ex 4c):</strong> <em>Inaccurate photos caused by advanced timing methods.</em></div>
+                    <!-- Right: Interactive Exercise Questions (Ex 3a, 3b, 3c) -->
+                    <div style="flex: 1; display: flex; flex-direction: column; gap: 12px; overflow-y: auto;" id="topicSentenceEx3Tasks">
+                        <!-- Ex 3a - Part 1 -->
+                        <div class="card q-card" data-q="ts-3a-1" style="border-left: 5px solid var(--col-reading); padding: 14px 18px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="font-size: 17.5px; color: var(--col-reading);">1. Topic Sentence Function (Ex 3a):</strong>
+                                <select class="select-input" data-ans="B" style="font-size: 15.5px; font-weight: 700;">
+                                    <option value="">Select answer...</option>
+                                    <option value="A">A. Give specific minor details</option>
+                                    <option value="B">B. Explain the main subject of the paragraph</option>
+                                    <option value="C">C. Conclude the whole article</option>
+                                </select>
+                            </div>
+                            <div class="item-explanation" style="font-size: 15px; margin-top: 6px;">
+                                <strong>Answer B:</strong> A topic sentence clearly states the overall main subject of the paragraph.
+                            </div>
+                        </div>
+
+                        <!-- Ex 3a - Part 2 -->
+                        <div class="card q-card" data-q="ts-3a-2" style="border-left: 5px solid var(--col-reading); padding: 14px 18px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="font-size: 17.5px; color: var(--col-reading);">2. Things Compared (Ex 3a):</strong>
+                                <select class="select-input" data-ans="cameras_eye" style="font-size: 15.5px; font-weight: 700;">
+                                    <option value="">Select comparison...</option>
+                                    <option value="cameras_eye">The human eye and digital cameras</option>
+                                    <option value="old_new">Old film cameras and smartphones</option>
+                                    <option value="light_dark">Bright sunlight and room lighting</option>
+                                </select>
+                            </div>
+                            <div class="item-explanation" style="font-size: 15px; margin-top: 6px;">
+                                <strong>Answer:</strong> The topic sentence contrasts depth of field in modern cameras with the human eye.
+                            </div>
+                        </div>
+
+                        <!-- Ex 3b -->
+                        <div class="card q-card" data-q="ts-3b" style="border-left: 5px solid var(--col-reading); padding: 14px 18px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="font-size: 17.5px; color: var(--col-reading);">3. Repeated Keyword Topic (Ex 3b):</strong>
+                                <select class="select-input" data-ans="Distance" style="font-size: 15.5px; font-weight: 700;">
+                                    <option value="">Select repeated topic...</option>
+                                    <option value="Distance">Distance (depth of field, far away, very near, near)</option>
+                                    <option value="Design">Design (camera buttons, sensor shapes, lens color)</option>
+                                    <option value="Recent Changes">Recent Changes (updates, newer versions, downloads)</option>
+                                </select>
+                            </div>
+                            <div class="item-explanation" style="font-size: 15px; margin-top: 6px;">
+                                <strong>Answer: Distance</strong> — The repeated lexical chain focuses entirely on distance perception.
+                            </div>
+                        </div>
+
+                        <!-- Ex 3c -->
+                        <div class="card q-card" data-q="ts-3c" style="border-left: 5px solid var(--col-reading); padding: 14px 18px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="font-size: 17.5px; color: var(--col-reading);">4. Best Heading for Para B (Ex 3c):</strong>
+                                <select class="select-input" data-ans="heading_2" style="font-size: 15.5px; font-weight: 700;">
+                                    <option value="">Select best heading...</option>
+                                    <option value="heading_1">1. How modern cameras are manufactured</option>
+                                    <option value="heading_2">2. Digital cameras and people see distance differently</option>
+                                    <option value="heading_3">3. Why photographers prefer human models</option>
+                                </select>
+                            </div>
+                            <div class="item-explanation" style="font-size: 15px; margin-top: 6px;">
+                                <strong>Answer: Heading 2</strong> — Accurately matches the topic sentence and distance lexical chain.
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div slot="guide">
-                    <div class="card" style="background: #ffffff; border-left: 6px solid var(--col-reading); padding: 24px 28px; border-radius: 14px;">
-                        <h3 style="font-family: var(--font-display); font-size: 24px; color: var(--col-reading); margin-bottom: 14px;">
-                            🎯 Topic Sentence Essentials
-                        </h3>
-                        <ul style="padding-left: 20px; font-size: 19px; line-height: 1.75; color: var(--text-dark); display: flex; flex-direction: column; gap: 10px;">
-                            <li><strong>Sentence 1 or 2:</strong> IELTS academic paragraphs almost always state their core focus immediately.</li>
-                            <li><strong>Lexical Chains:</strong> Scan for thematic clusters (e.g. *distance, near, far* vs. *time, second, longer*).</li>
-                            <li><strong>Contrast Markers:</strong> Words like *However, In contrast, Contrary to* signal the true main topic.</li>
-                        </ul>
+            </slide-card>
+
+            <!-- SLIDE 4: 1a Reading Strategy - Paragraph C Topic Sentence & Heading Exercise (Ex 4a–4c) -->
+            <slide-card template="exercise-grid" skill="read" title="Reading 1a Strategy: Paragraph C Topic Sentence &amp; Heading (Ex 4a–4c)" instruction="Read Paragraph C. Identify the topic sentence, repeated keywords, and select the best heading.">
+                <div slot="grid" style="display: flex; gap: 24px; width: 100%; height: 100%;">
+                    <!-- Left: Paragraph C Excerpt -->
+                    <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; overflow-y: auto;">
+                        <div class="card" style="border-left: 6px solid var(--col-reading); padding: 20px 24px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <span class="para-tag" style="font-size: 15px;">Paragraph C</span>
+                                <span style="font-size: 14.5px; font-weight: 700; color: var(--col-reading);">Focus: Shutter Timing &amp; Mists</span>
+                            </div>
+                            <p style="font-size: 18.5px; line-height: 1.8; color: var(--text-dark); margin: 0;">
+                                (1) It is easy to see why humans see differently from digital cameras. (2) <u>However, digital cameras are also significantly different from the old film cameras.</u> (3) In many ways, digital cameras give less reliable results. For example, modern functions allow digital cameras to scan the image <em>more than once</em> over a <em>period of less than a second</em>, or to automatically select how long the lens is open. Generally this produces better photos, but if the camera moves <em>during the photo</em>, it may record multiple images, creating the appearance of ghostly forms. Ghostly mists often appear when the camera picks up the photographer’s own breath on a cold night when the lens is open <em>for longer</em>. This never happened with film cameras.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Interactive Exercise Questions (Ex 4a, 4b, 4c) -->
+                    <div style="flex: 1; display: flex; flex-direction: column; gap: 12px; overflow-y: auto;" id="topicSentenceEx4Tasks">
+                        <!-- Ex 4a -->
+                        <div class="card q-card" data-q="ts-4a" style="border-left: 5px solid var(--col-reading); padding: 14px 18px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="font-size: 17.5px; color: var(--col-reading);">1. Topic Sentence Location (Ex 4a):</strong>
+                                <select class="select-input" data-ans="sentence_2" style="font-size: 15.5px; font-weight: 700;">
+                                    <option value="">Select sentence...</option>
+                                    <option value="sentence_1">Sentence 1 (It is easy to see why humans see differently...)</option>
+                                    <option value="sentence_2">Sentence 2 (However, digital cameras are also significantly different...)</option>
+                                    <option value="sentence_3">Sentence 3 (In many ways, digital cameras give less reliable...)</option>
+                                </select>
+                            </div>
+                            <div class="item-explanation" style="font-size: 15px; margin-top: 6px;">
+                                <strong>Answer: Sentence 2</strong> — Starts with contrast marker <em>"However,"</em> introducing the true subject.
+                            </div>
+                        </div>
+
+                        <!-- Ex 4b -->
+                        <div class="card q-card" data-q="ts-4b" style="border-left: 5px solid var(--col-reading); padding: 14px 18px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="font-size: 17.5px; color: var(--col-reading);">2. Repeated Keyword Topic (Ex 4b):</strong>
+                                <select class="select-input" data-ans="Time" style="font-size: 15.5px; font-weight: 700;">
+                                    <option value="">Select repeated topic...</option>
+                                    <option value="Time">Time (more than once, period of less than a second, for longer)</option>
+                                    <option value="Cost">Cost (prices, discount deals, shop expenses)</option>
+                                    <option value="Location">Location (studios, outdoor parks, darkrooms)</option>
+                                </select>
+                            </div>
+                            <div class="item-explanation" style="font-size: 15px; margin-top: 6px;">
+                                <strong>Answer: Time</strong> — The lexical chain centers on exposure duration and timing mechanisms.
+                            </div>
+                        </div>
+
+                        <!-- Ex 4c -->
+                        <div class="card q-card" data-q="ts-4c" style="border-left: 5px solid var(--col-reading); padding: 14px 18px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="font-size: 17.5px; color: var(--col-reading);">3. Best Heading for Para C (Ex 4c):</strong>
+                                <select class="select-input" data-ans="heading_1" style="font-size: 15.5px; font-weight: 700;">
+                                    <option value="">Select best heading...</option>
+                                    <option value="heading_1">1. Inaccurate photos caused by advanced timing methods</option>
+                                    <option value="heading_2">2. The history of traditional film processing</option>
+                                    <option value="heading_3">3. How to take photos in cold weather</option>
+                                </select>
+                            </div>
+                            <div class="item-explanation" style="font-size: 15px; margin-top: 6px;">
+                                <strong>Answer: Heading 1</strong> — Inaccurate photos caused by advanced timing methods.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </slide-card>
