@@ -139,13 +139,21 @@ class VocabBank {
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = customLang || this.currentAccent;
-        utterance.rate = this.speechRate;
+        utterance.lang = customLang || 'en-GB';
+        utterance.rate = this.speechRate || 0.9;
 
-        // Try selecting a natural sounding voice if available
+        // Try selecting Google Female UK voice if available
         const voices = window.speechSynthesis.getVoices();
-        const matchingVoice = voices.find(v => v.lang === utterance.lang || v.lang.startsWith(utterance.lang.split('-')[0]));
-        if (matchingVoice) utterance.voice = matchingVoice;
+        const googleUkFemale = voices.find(v => 
+            v.name.includes('Google') && 
+            (v.name.includes('UK English Female') || (v.lang.replace('_', '-').startsWith('en-GB') && v.name.toLowerCase().includes('female')))
+        );
+        const ukVoice = googleUkFemale || voices.find(v => 
+            (v.lang === 'en-GB' || v.lang === 'en_GB') && 
+            (v.name.toLowerCase().includes('female') || v.name.includes('Natural') || v.name.includes('Libby') || v.name.includes('Hazel') || v.name.includes('Sonia') || v.name.includes('Serena'))
+        ) || voices.find(v => v.lang === 'en-GB' || v.lang === 'en_GB');
+
+        if (ukVoice) utterance.voice = ukVoice;
 
         window.speechSynthesis.speak(utterance);
     }

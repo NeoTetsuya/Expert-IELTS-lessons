@@ -304,14 +304,39 @@ class ReadingGrounder {
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = localStorage.getItem('ielts_speech_accent') || 'en-GB';
+        utterance.lang = 'en-GB';
         utterance.rate = 0.9;
 
-        const voices = window.speechSynthesis.getVoices();
-        const matchingVoice = voices.find(v => v.lang === utterance.lang || v.lang.startsWith(utterance.lang.split('-')[0]));
-        if (matchingVoice) utterance.voice = matchingVoice;
+        const preferredVoice = this.getPreferredVoice();
+        if (preferredVoice) utterance.voice = preferredVoice;
 
         window.speechSynthesis.speak(utterance);
+    }
+
+    static getPreferredVoice() {
+        const voices = window.speechSynthesis.getVoices();
+        if (!voices || voices.length === 0) return null;
+
+        // 1. Prioritize Google UK English Female
+        const googleUkFemale = voices.find(v => 
+            v.name.includes('Google') && 
+            (v.name.includes('UK English Female') || (v.lang.replace('_', '-').startsWith('en-GB') && v.name.toLowerCase().includes('female')))
+        );
+        if (googleUkFemale) return googleUkFemale;
+
+        // 2. Any Google UK English voice
+        const googleUk = voices.find(v => v.name.includes('Google') && (v.lang === 'en-GB' || v.lang === 'en_GB'));
+        if (googleUk) return googleUk;
+
+        // 3. Natural British Female voices (e.g. Microsoft Libby, Hazel, Sonia, Serena)
+        const britishFemale = voices.find(v => 
+            (v.lang === 'en-GB' || v.lang === 'en_GB') && 
+            (v.name.toLowerCase().includes('female') || v.name.includes('Natural') || v.name.includes('Libby') || v.name.includes('Hazel') || v.name.includes('Sonia') || v.name.includes('Serena'))
+        );
+        if (britishFemale) return britishFemale;
+
+        // 4. Any en-GB voice
+        return voices.find(v => v.lang === 'en-GB' || v.lang === 'en_GB') || null;
     }
 
     static injectVocabStyles() {
