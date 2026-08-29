@@ -13,6 +13,7 @@
                     <div class="title-module-badge reveal" data-slot="badge">Module 02</div>
                     <h1 class="title-main reveal" data-slot="title"></h1>
                     <p class="title-sub reveal" data-slot="subtitle"></p>
+                    <div class="title-tags reveal" data-slot="tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;"></div>
                 </div>
                 <div class="title-right">
                     <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Lesson Syllabus</div>
@@ -458,6 +459,32 @@
                         <button class="btn-action" onclick="revealAnswers(this)">👁️ Reveal</button>
                         <button class="btn-action" onclick="resetAnswers(this)">↺ Reset</button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 16. UNIVERSAL STANDARD BACKBONE TEMPLATE -->
+<template id="tmpl-standard">
+    <section class="slide" data-skill="read">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-reading);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge"></span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 12px;" data-slot="subtitle"></p>
+
+                    <div class="slide-body" style="flex: 1; min-height: 0; display: flex; flex-direction: column; overflow-y: auto;" data-slot="content"></div>
+
+                    <div class="action-row" style="margin-top: 10px;" data-slot="actions"></div>
                 </div>
             </div>
         </div>

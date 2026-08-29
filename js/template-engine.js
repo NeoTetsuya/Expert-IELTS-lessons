@@ -20,6 +20,7 @@
                     <div class="title-module-badge reveal" data-slot="badge">Module 02</div>
                     <h1 class="title-main reveal" data-slot="title"></h1>
                     <p class="title-sub reveal" data-slot="subtitle"></p>
+                    <div class="title-tags reveal" data-slot="tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;"></div>
                 </div>
                 <div class="title-right">
                     <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Lesson Syllabus</div>
@@ -470,6 +471,32 @@
         </div>
     </section>
 </template>
+
+<!-- 16. UNIVERSAL STANDARD BACKBONE TEMPLATE -->
+<template id="tmpl-standard">
+    <section class="slide" data-skill="read">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-reading);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge"></span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 12px;" data-slot="subtitle"></p>
+
+                    <div class="slide-body" style="flex: 1; min-height: 0; display: flex; flex-direction: column; overflow-y: auto;" data-slot="content"></div>
+
+                    <div class="action-row" style="margin-top: 10px;" data-slot="actions"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
 `;
 
     class TemplateEngine {
@@ -487,51 +514,235 @@
             this.expandSlides();
         }
 
-        static expandSlides() {
-            const slideElements = document.querySelectorAll('slide-card, [data-template]');
-            const totalSlides = slideElements.length;
-            if (totalSlides === 0) return;
+        static findSlotTarget(section, slotName) {
+            if (!slotName) return null;
+            
+            // 1. Direct attribute match
+            let target = section.querySelector(`[data-slot="${slotName}"]`);
+            if (target) return target;
 
-            slideElements.forEach((el, index) => {
-                const templateName = el.getAttribute('template') || el.getAttribute('data-template');
-                const templateId = templateName.startsWith('tmpl-') ? templateName : `tmpl-${templateName}`;
-                const templateEl = document.getElementById(templateId);
+            // 2. Semantic fallback mappings across all 15 slide templates
+            switch (slotName.toLowerCase()) {
+                case 'content':
+                case 'body':
+                case 'main':
+                    return section.querySelector('[data-slot="content"], [data-slot="grid"], .two-col, [data-slot="rules"], [data-slot="passage"], [data-slot="cards"], [data-slot="flowchart"], .page-content');
+
+                case 'rules':
+                case 'grammar':
+                    return section.querySelector('[data-slot="rules"], [data-slot="content"], [data-slot="left-col"], .two-col > div:first-child');
+
+                case 'contrast-card':
+                case 'contrast':
+                case 'card':
+                case 'table':
+                case 'error-box':
+                case 'right-table':
+                    return section.querySelector('[data-slot="contrast-card"], [data-slot="right-table"], [data-slot="rules-col"], [data-slot="guide"], [data-slot="questions"], .two-col > div:last-child');
+
+                case 'grid':
+                case 'exercises':
+                case 'items':
+                case 'checklist':
+                    return section.querySelector('[data-slot="grid"], [data-slot="cards"], [data-slot="parts-of-speech"], [data-slot="content"], .two-col');
+
+                case 'cards':
+                    return section.querySelector('[data-slot="cards"], [data-slot="grid"], [data-slot="content"]');
+
+                case 'passage':
+                case 'text':
+                case 'excerpt':
+                    return section.querySelector('[data-slot="passage"], [data-slot="passage-text"], [data-slot="left-extract"], [data-slot="left-col"], .reading-pane');
+
+                case 'passage-header':
+                case 'header':
+                    return section.querySelector('[data-slot="passage-header"]');
+
+                case 'passage-text':
+                    return section.querySelector('[data-slot="passage-text"], [data-slot="passage"]');
+
+                case 'questions':
+                case 'question':
+                case 'sentences':
+                case 'sentence':
+                    return section.querySelector('[data-slot="questions"], [data-slot="sentences"], [data-slot="question-card"], [data-slot="sentence"], .question-pane, .two-col > div:last-child');
+
+                case 'question-text':
+                    return section.querySelector('[data-slot="question-text"], [data-slot="question-card"]');
+
+                case 'evidence-btn':
+                case 'evidence':
+                    return section.querySelector('[data-slot="evidence-btn"], .syn-btn');
+
+                case 'input-area':
+                case 'input':
+                case 'options':
+                    return section.querySelector('[data-slot="input-area"]');
+
+                case 'explanation':
+                case 'explanations':
+                    return section.querySelector('[data-slot="explanation"], .item-explanation');
+
+                case 'guide':
+                case 'strategy':
+                    return section.querySelector('[data-slot="guide"], [data-slot="rules"], [data-slot="right-col"], .two-col > div:last-child');
+
+                case 'left-col':
+                case 'left':
+                    return section.querySelector('[data-slot="left-col"], [data-slot="left-extract"], [data-slot="rules"], [data-slot="passage"], [data-slot="sentences"], .two-col > div:first-child');
+
+                case 'right-col':
+                case 'right':
+                    return section.querySelector('[data-slot="right-table"], [data-slot="contrast-card"], [data-slot="rules-col"], [data-slot="guide"], [data-slot="questions"], [data-slot="model-essay"], .two-col > div:last-child');
+
+                case 'model-essay':
+                case 'essay':
+                case 'model':
+                    return section.querySelector('[data-slot="model-essay"], [data-slot="essay"], .writing-model-pane, .two-col > div:last-child');
+
+                case 'prompt':
+                    return section.querySelector('[data-slot="prompt"], [data-slot="left-col"]');
+
+                case 'annotations':
+                    return section.querySelector('[data-slot="annotations"], [data-slot="left-col"]');
+
+                case 'flowchart':
+                case 'chart':
+                case 'steps':
+                    return section.querySelector('[data-slot="flowchart"], .flowchart-container, [data-slot="content"], [data-slot="grid"]');
+
+                case 'tags':
+                case 'roadmap':
+                    return section.querySelector('[data-slot="roadmap"], .title-left, .title-right, [data-slot="content"]');
+
+                case 'badge':
+                    return section.querySelector('[data-slot="badge"], .skill-badge, .title-module-badge');
+
+                case 'title':
+                    return section.querySelector('[data-slot="title"], .slide-title, .title-main');
+
+                case 'subtitle':
+                    return section.querySelector('[data-slot="subtitle"], .slide-subtitle, .title-sub');
+
+                case 'instruction':
+                    return section.querySelector('[data-slot="instruction"], .slide-subtitle');
+
+                default:
+                    return section.querySelector(`[data-slot="${slotName}"], .two-col, [data-slot="content"], [data-slot="grid"], .page-content`);
+            }
+        }
+
+        static getDefaultBadge(skill, templateName, title) {
+            skill = (skill || 'read').toLowerCase();
+            const tmpl = (templateName || '').toLowerCase().replace(/^tmpl-/, '');
+            
+            // 1. Template-specific smart badges
+            if (tmpl === 'walkthrough') return 'Reading Strategy • Model Walkthrough';
+            if (tmpl === 'strategy') return 'Reading Strategy • Pre-Reading';
+            if (tmpl === 'reading-split' || tmpl === 'split-view') return 'IELTS Reading • Split-View';
+            if (tmpl === 'reading-flowchart') return 'Reading • Flow Chart Completion';
+            if (tmpl === 'flowchart') return 'IELTS Reading • Flow Chart';
+            if (tmpl === 'grammar-masterclass') return 'Grammar Masterclass';
+            if (tmpl === 'vocab-cards') return 'Academic Lexicon';
+            if (tmpl === 'syntax-rules') return 'Vocabulary • Syntax & Rules';
+            if (tmpl === 'gap-fill-passage') {
+                return skill === 'grammar' ? 'Grammar Practice • Gap Fill' : 'Vocabulary Practice • Gap Fill';
+            }
+            if (tmpl === 'spelling-table') return 'IELTS Writing • Lexical Accuracy';
+            if (tmpl === 'writing-model') return 'IELTS Writing • Model Answer';
+            if (tmpl === 'summary-checklist') return 'Module Mastery';
+            if (tmpl === 'section-divider') return 'Module Section';
+            if (tmpl === 'exercise-grid' || tmpl === 'grid') {
+                if (skill === 'grammar') return 'Grammar Practice';
+                if (skill === 'vocab') return 'Vocabulary Practice';
+                if (skill === 'write') return 'Writing Practice';
+                return 'Reading Strategy Practice';
+            }
+            
+            // 2. Skill-based fallback
+            switch (skill) {
+                case 'read':
+                case 'reading':
+                    return 'IELTS Reading';
+                case 'grammar':
+                    return 'Grammar Masterclass';
+                case 'vocab':
+                case 'vocabulary':
+                    return 'Academic Vocabulary';
+                case 'write':
+                case 'writing':
+                    return 'IELTS Writing';
+                case 'review':
+                    return 'Module Review';
+                default:
+                    return 'IELTS Preparation';
+            }
+        }
+
+        static expandSlides() {
+            // PASS 1: Expand and replace all <slide-card> / [data-template] elements
+            const slideCards = Array.from(document.querySelectorAll('slide-card, [data-template]'));
+            
+            slideCards.forEach((el, index) => {
+                let templateName = el.getAttribute('template') || el.getAttribute('data-template') || 'standard';
+                if (['blank', 'content', 'default', 'basic'].includes(templateName.toLowerCase())) {
+                    templateName = 'standard';
+                }
+
+                let templateId = templateName.startsWith('tmpl-') ? templateName : `tmpl-${templateName}`;
+                let templateEl = document.getElementById(templateId);
 
                 if (!templateEl) {
-                    console.error(`TemplateEngine: Template #${templateId} not found for slide ${index + 1}!`);
+                    templateEl = document.getElementById('tmpl-standard') || document.getElementById('tmpl-walkthrough');
+                }
+
+                if (!templateEl) {
+                    console.error(`TemplateEngine: No fallback template available for slide-card!`);
                     return;
                 }
 
                 // Clone template content
                 const clone = templateEl.content.cloneNode(true);
                 const section = clone.querySelector('section.slide');
+                if (!section) return;
 
-                // Assign slide ID and index
-                const slideNumStr = String(index + 1).padStart(2, '0');
-                const totalNumStr = String(totalSlides).padStart(2, '0');
-                const slideId = el.getAttribute('id') || `slide-${index + 1}`;
-                section.id = slideId;
+                // Transfer ID if explicitly provided on slide-card
+                if (el.id) {
+                    section.id = el.id;
+                }
 
                 // Transfer skill attribute (read, grammar, vocab, write, review)
                 const skill = el.getAttribute('skill') || el.getAttribute('data-skill') || section.getAttribute('data-skill') || 'read';
                 section.setAttribute('data-skill', skill);
 
-                // Add active and visible class to first slide
-                if (index === 0) {
-                    section.classList.add('active', 'visible');
+                // Dynamically color skill stripe and badges according to skill
+                const skillColorMap = {
+                    'read': 'var(--col-reading)',
+                    'reading': 'var(--col-reading)',
+                    'grammar': 'var(--col-grammar)',
+                    'vocab': 'var(--col-vocab)',
+                    'vocabulary': 'var(--col-vocab)',
+                    'write': 'var(--col-writing)',
+                    'writing': 'var(--col-writing)',
+                    'review': 'var(--col-review)',
+                    'title': 'var(--col-reading)'
+                };
+                const skillCol = skillColorMap[skill.toLowerCase()] || 'var(--col-reading)';
+                const stripe = section.querySelector('.skill-stripe');
+                if (stripe && (!stripe.style.background || stripe.style.background.includes('--col-'))) {
+                    stripe.style.background = skillCol;
                 }
-
-                // Update dynamic slide number in header
-                const numEl = section.querySelector('[data-slot="slide-number"], .slide-number');
-                if (numEl) {
-                    numEl.textContent = `${slideNumStr} / ${totalNumStr}`;
+                const skillBadge = section.querySelector('.skill-badge, [data-slot="badge"]');
+                if (skillBadge && (!skillBadge.style.background || skillBadge.style.background.includes('--col-'))) {
+                    skillBadge.style.background = skillCol;
                 }
 
                 // Fill direct text attributes
-                ['title', 'subtitle', 'badge', 'instruction'].forEach(attr => {
+                ['title', 'subtitle', 'badge', 'tag', 'instruction'].forEach(attr => {
                     const val = el.getAttribute(attr);
                     if (val) {
-                        const target = section.querySelector(`[data-slot="${attr}"]`);
+                        const slotKey = (attr === 'tag') ? 'badge' : attr;
+                        const target = section.querySelector(`[data-slot="${slotKey}"], [data-slot="${attr}"]`);
                         if (target) target.innerHTML = val;
                     }
                 });
@@ -540,12 +751,8 @@
                 const slotChildren = el.querySelectorAll('[slot]');
                 slotChildren.forEach(child => {
                     const slotName = child.getAttribute('slot');
-                    let target = section.querySelector(`[data-slot="${slotName}"]`);
-                    if (!target) {
-                        if (slotName === 'essay') target = section.querySelector('.writing-model-pane, [data-slot="model-essay"]');
-                        if (slotName === 'prompt' || slotName === 'annotations') target = section.querySelector('[data-slot="left-col"]');
-                        if (slotName === 'rules') target = section.querySelector('[data-slot="content"]');
-                    }
+                    const target = this.findSlotTarget(section, slotName);
+
                     if (target) {
                         // Transfer classes, styles, and custom attributes from child element
                         if (child.className && child.className !== '') {
@@ -572,8 +779,9 @@
                             if (markEl) markEl.id = child.getAttribute('data-ev');
                         }
 
-                        // Copy inner HTML (append if target already has content and is a container)
-                        if (target.getAttribute('data-slot') === 'left-col' && target.innerHTML.trim() !== '') {
+                        // Copy inner HTML (append if target is an accumulator or replace)
+                        const targetSlotAttr = target.getAttribute('data-slot');
+                        if ((targetSlotAttr === 'left-col' || targetSlotAttr === 'roadmap' || target.classList.contains('title-left')) && target.innerHTML.trim() !== '') {
                             target.innerHTML += child.innerHTML;
                         } else {
                             target.innerHTML = child.innerHTML;
@@ -581,15 +789,77 @@
                     }
                 });
 
+                // Ensure badge is never empty: populate with universal smart badge if blank
+                const badgeEl = section.querySelector('.skill-badge, [data-slot="badge"]');
+                if (badgeEl && badgeEl.textContent.trim() === '') {
+                    badgeEl.textContent = this.getDefaultBadge(skill, templateName, el.getAttribute('title'));
+                }
+
                 // If element has raw HTML children without explicit slot and target has default slot
                 if (slotChildren.length === 0 && el.innerHTML.trim() !== '') {
-                    const defaultSlot = section.querySelector('[data-slot="content"], [data-slot="grid"]');
+                    const defaultSlot = section.querySelector('[data-slot="content"], [data-slot="grid"], .two-col, [data-slot="rules"], [data-slot="passage"], [data-slot="flowchart"], .page-content');
                     if (defaultSlot) defaultSlot.innerHTML = el.innerHTML;
                 }
 
                 // Replace <slide-card> with fully expanded <section class="slide">
                 el.parentNode.replaceChild(section, el);
             });
+
+            // PASS 2: Universal Slide Reconciliation & Dynamic Numbering across ALL slides in deck
+            const allSlides = Array.from(document.querySelectorAll('section.slide, .slide'));
+            const totalSlides = allSlides.length;
+            if (totalSlides === 0) return;
+
+            const skillColorMap = {
+                'read': 'var(--col-reading)',
+                'reading': 'var(--col-reading)',
+                'grammar': 'var(--col-grammar)',
+                'vocab': 'var(--col-vocab)',
+                'vocabulary': 'var(--col-vocab)',
+                'write': 'var(--col-writing)',
+                'writing': 'var(--col-writing)',
+                'review': 'var(--col-review)',
+                'title': 'var(--col-reading)'
+            };
+
+            let hasActiveSlide = false;
+            allSlides.forEach((slide, idx) => {
+                const slideNumStr = String(idx + 1).padStart(2, '0');
+                const totalNumStr = String(totalSlides).padStart(2, '0');
+                const slideSkill = (slide.dataset.skill || 'read').toLowerCase();
+                const skillCol = skillColorMap[slideSkill] || 'var(--col-reading)';
+
+                // Assign sequential slide ID if none or default pattern
+                if (!slide.id || /^slide-\d+$/.test(slide.id)) {
+                    slide.id = `slide-${idx + 1}`;
+                }
+
+                // Update slide counter in header
+                const numEl = slide.querySelector('[data-slot="slide-number"], .slide-number');
+                if (numEl) {
+                    numEl.textContent = `${slideNumStr} / ${totalNumStr}`;
+                }
+
+                // Ensure badge is never empty on native slides too
+                const badgeEl = slide.querySelector('.skill-badge, [data-slot="badge"]');
+                if (badgeEl) {
+                    if (badgeEl.textContent.trim() === '') {
+                        badgeEl.textContent = this.getDefaultBadge(slideSkill, '', slide.querySelector('.slide-title')?.textContent);
+                    }
+                    if (!badgeEl.style.background || badgeEl.style.background.includes('--col-')) {
+                        badgeEl.style.background = skillCol;
+                    }
+                }
+
+                if (slide.classList.contains('active')) {
+                    hasActiveSlide = true;
+                }
+            });
+
+            // If no slide is marked active, activate the first slide
+            if (!hasActiveSlide && allSlides.length > 0) {
+                allSlides[0].classList.add('active', 'visible');
+            }
         }
     }
 
