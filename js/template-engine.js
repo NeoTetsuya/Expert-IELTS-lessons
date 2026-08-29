@@ -2,13 +2,14 @@
  * =========================================================================
  * TEMPLATE ENGINE (Exact Design-System Compatible for file:// and http://)
  * Expert IELTS Course Presentations Architecture
+ * Universal High-Legibility Typography Scale Built-in
  * =========================================================================
  */
 
 (function () {
     'use strict';
 
-    // 13 Master Built-in Slide Templates
+    // 13 Master Built-in Slide Templates (High-Legibility 21px-26px Scale)
     const BUILTIN_TEMPLATES = `
 <!-- 1. TITLE SLIDE TEMPLATE -->
 <template id="tmpl-title">
@@ -46,7 +47,7 @@
     </section>
 </template>
 
-<!-- 3. UP-TO-DOWN (STACKED) 1-QUESTION WALKTHROUGH TEMPLATE (LARGE FONTS) -->
+<!-- 3. UP-TO-DOWN (STACKED) 1-QUESTION WALKTHROUGH TEMPLATE (26px Passage / 25px Question) -->
 <template id="tmpl-walkthrough">
     <section class="slide" data-skill="read">
         <div class="slide-inner">
@@ -61,7 +62,7 @@
                         <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
-                    <p class="slide-subtitle" style="font-size: 19px; color: var(--text-muted); margin-bottom: 6px;" data-slot="subtitle">
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 6px;" data-slot="subtitle">
                         Compare the dedicated passage excerpt with the question below to evaluate your answer.
                     </p>
 
@@ -72,7 +73,7 @@
                             <div style="font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--col-reading); margin-bottom: 10px;" data-slot="passage-header">
                                 📖 Relevant Passage Excerpt
                             </div>
-                            <p style="font-size: 26px; line-height: 1.8; margin-bottom: 0; color: #0f172a;" data-slot="passage-text"></p>
+                            <p style="font-size: 26px; line-height: 1.85; margin-bottom: 0; color: #0f172a;" data-slot="passage-text"></p>
                         </div>
 
                         <!-- Bottom Box: Interactive Question Card -->
@@ -84,7 +85,7 @@
 
                             <div style="margin-top: 16px; display: flex; align-items: center; gap: 16px;" data-slot="input-area"></div>
 
-                            <div class="item-explanation" style="font-size: 21px; line-height: 1.7; margin-top: 16px; padding: 16px 22px; border-radius: 8px;" data-slot="explanation"></div>
+                            <div class="item-explanation" style="font-size: 21px; line-height: 1.75; margin-top: 16px; padding: 16px 22px; border-radius: 8px;" data-slot="explanation"></div>
                         </div>
                     </div>
 
@@ -105,7 +106,7 @@
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-reading);"></div>
-                <div class="page-content" style="padding: 28px 48px 24px;">
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
                     <div class="slide-header">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge"></span>
@@ -116,7 +117,7 @@
 
                     <div class="two-col" style="flex: 1; min-height: 0; gap: 24px;">
                         <!-- Left Pane: Full Passage -->
-                        <div class="reading-pane" style="flex: 1.15;" data-slot="passage"></div>
+                        <div class="reading-pane" style="flex: 1.15; font-size: 22px; line-height: 1.85;" data-slot="passage"></div>
 
                         <!-- Right Pane: Questions List -->
                         <div class="question-pane" style="flex: 0.85;" data-slot="questions"></div>
@@ -139,7 +140,7 @@
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-reading);"></div>
-                <div class="page-content" style="padding: 28px 48px 24px;">
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
                     <div class="slide-header">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge">Reading Strategy • Pre-Reading</span>
@@ -148,7 +149,7 @@
                         <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
-                    <p class="slide-subtitle" style="font-size: 19px; color: var(--text-muted); margin-bottom: 12px;" data-slot="subtitle"></p>
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 12px;" data-slot="subtitle"></p>
 
                     <div class="two-col" style="flex: 1; min-height: 0; gap: 24px;">
                         <!-- Left Col: Question Sentences -->
@@ -174,7 +175,7 @@
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-grammar);"></div>
-                <div class="page-content" style="padding: 28px 48px 24px;">
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
                     <div class="slide-header">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-grammar); font-size: 14px; padding: 4px 12px;" data-slot="badge">Grammar Masterclass</span>
@@ -205,7 +206,7 @@
                         <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
-                    <p style="font-size: 19px; color: var(--text-muted); margin-bottom: 12px;" data-slot="instruction"></p>
+                    <p style="font-size: 20px; color: var(--text-muted); margin-bottom: 12px;" data-slot="instruction"></p>
 
                     <div style="flex: 1; min-height: 0;" data-slot="grid"></div>
 
@@ -254,7 +255,7 @@
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-vocab);"></div>
-                <div class="page-content" style="padding: 28px 48px 24px;">
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
                     <div class="slide-header">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-vocab); font-size: 14px; padding: 4px 12px;" data-slot="badge">Academic Lexicon</span>
@@ -263,7 +264,7 @@
                         <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
-                    <p style="font-size: 19px; color: var(--text-muted); margin-bottom: 14px;" data-slot="subtitle">
+                    <p style="font-size: 20px; color: var(--text-muted); margin-bottom: 14px;" data-slot="subtitle">
                         Click the 🔊 audio button on any card to hear the official Google Female UK pronunciation.
                     </p>
 
@@ -280,7 +281,7 @@
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-vocab);"></div>
-                <div class="page-content" style="padding: 28px 48px 24px;">
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
                     <div class="slide-header">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-vocab); font-size: 14px; padding: 4px 12px;" data-slot="badge">Vocabulary • Syntax &amp; Rules</span>
@@ -289,11 +290,11 @@
                         <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
-                    <div class="card" style="background: rgba(16, 185, 129, 0.08); border-left: 5px solid var(--col-vocab); font-size: 21px; font-style: italic; line-height: 1.6; margin-bottom: 12px; padding: 16px 22px;" data-slot="sentence"></div>
+                    <div class="card" style="background: rgba(16, 185, 129, 0.08); border-left: 5px solid var(--col-vocab); font-size: 22px; font-style: italic; line-height: 1.65; margin-bottom: 14px; padding: 18px 24px;" data-slot="sentence"></div>
 
-                    <div class="two-col" style="flex: 1; min-height: 0; gap: 18px;">
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; flex: 1.1; overflow-y: auto;" data-slot="parts-of-speech"></div>
-                        <div class="card" style="background: #ffffff; border-left: 5px solid var(--col-grammar); padding: 16px 20px; flex: 0.9; margin-bottom:0; overflow-y:auto;" data-slot="rules"></div>
+                    <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; flex: 1.1; overflow-y: auto;" data-slot="parts-of-speech"></div>
+                        <div class="card" style="background: #ffffff; border-left: 5px solid var(--col-grammar); padding: 22px 26px; flex: 0.9; margin-bottom:0; overflow-y:auto;" data-slot="rules"></div>
                     </div>
                 </div>
             </div>
@@ -307,7 +308,7 @@
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-vocab);"></div>
-                <div class="page-content" style="padding: 28px 48px 24px;">
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
                     <div class="slide-header">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-vocab); font-size: 14px; padding: 4px 12px;" data-slot="badge"></span>
@@ -316,9 +317,9 @@
                         <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
-                    <div class="two-col" style="flex: 1; min-height: 0; gap: 18px;">
-                        <div class="card" style="background: #ffffff; border-left: 5px solid var(--col-vocab); padding: 18px 22px; flex: 1.1; margin-bottom:0; overflow-y: auto;" data-slot="passage"></div>
-                        <div style="display: flex; flex-direction: column; gap: 12px; flex: 0.9; overflow-y: auto;" data-slot="rules-col"></div>
+                    <div class="two-col" style="flex: 1; min-height: 0; gap: 22px;">
+                        <div class="card" style="background: #ffffff; border-left: 5px solid var(--col-vocab); padding: 24px 30px; flex: 1.1; margin-bottom:0; overflow-y: auto;" data-slot="passage"></div>
+                        <div style="display: flex; flex-direction: column; gap: 14px; flex: 0.9; overflow-y: auto;" data-slot="rules-col"></div>
                     </div>
 
                     <div class="action-row" style="margin-top: 10px;">
@@ -338,7 +339,7 @@
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-writing);"></div>
-                <div class="page-content" style="padding: 28px 48px 24px;">
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
                     <div class="slide-header">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-writing); font-size: 14px; padding: 4px 12px;" data-slot="badge">IELTS Writing Task 2 • Lexical Accuracy</span>
@@ -369,7 +370,7 @@
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-review);"></div>
-                <div class="page-content" style="padding: 28px 48px 24px;">
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
                     <div class="slide-header">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-review); font-size: 14px; padding: 4px 12px;" data-slot="badge">Module Mastery</span>
@@ -378,7 +379,7 @@
                         <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
-                    <p class="slide-subtitle" style="font-size: 19px; color: var(--text-muted); margin-bottom: 14px;" data-slot="subtitle"></p>
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 14px;" data-slot="subtitle"></p>
 
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; flex:1; min-height:0; overflow-y:auto;" data-slot="grid"></div>
                 </div>
