@@ -5,21 +5,23 @@ This guide details the complete pedagogical and technical standards for designin
 ---
 
 ## Table of Contents
-1. [Pedagogical Architecture & The 3-Stage Reading Framework](#1-pedagogical-architecture--the-3-stage-reading-framework)
+1. [Pedagogical Architecture & The 4-Stage Reading Framework](#1-pedagogical-architecture--the-4-stage-reading-framework)
 2. [Stage 1: Pre-Reading Question Keyword Deconstruction Slide](#2-stage-1-pre-reading-question-keyword-deconstruction-slide)
 3. [Stage 2: Model Walkthrough Slide (1 Question & Dedicated Paragraph)](#3-stage-2-model-walkthrough-slide-1-question--dedicated-paragraph)
 4. [Stage 3: Full Split-View Reading Passage & Exercise Slide](#4-stage-3-full-split-view-reading-passage--exercise-slide)
-5. [Direct Sentence Color Coding Standards](#5-direct-sentence-color-coding-standards)
-6. [Interactive Controls & JavaScript Action Rows](#6-interactive-controls--javascript-action-rows)
-7. [Question Types & HTML Snippets](#7-question-types--html-snippets)
-8. [Complete End-to-End Code Blueprint](#8-complete-end-to-end-code-blueprint)
-9. [Authoring Checklist & Best Practices](#9-authoring-checklist--best-practices)
+5. [Stage 4: Post-Reading Question-by-Question Answer Guidance Slides](#5-stage-4-post-reading-question-by-question-answer-guidance-slides)
+6. [Interactive Vocabulary Definitions & Audio Pronunciation Popovers](#6-interactive-vocabulary-definitions--audio-pronunciation-popovers)
+7. [Direct Sentence Color Coding Standards](#7-direct-sentence-color-coding-standards)
+8. [Interactive Controls & JavaScript Action Rows](#8-interactive-controls--javascript-action-rows)
+9. [Question Types & HTML Snippets](#9-question-types--html-snippets)
+10. [Complete End-to-End Code Blueprint](#10-complete-end-to-end-code-blueprint)
+11. [Authoring Checklist & Best Practices](#11-authoring-checklist--best-practices)
 
 ---
 
-## 1. Pedagogical Architecture & The 3-Stage Reading Framework
+## 1. Pedagogical Architecture & The 4-Stage Reading Framework
 
-In IELTS exam preparation, throwing students immediately into a full 800-word reading passage creates cognitive overload. Every reading task is structured into a **3-Stage Instructional Sequence**:
+In IELTS exam preparation, throwing students immediately into a full 800-word reading passage creates cognitive overload. Every reading task is structured into a **4-Stage Instructional Sequence**:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -43,6 +45,14 @@ In IELTS exam preparation, throwing students immediately into a full 800-word re
 │  - Left Pane: Complete unabridged reading passage with evidence marks       │
 │  - Right Pane: Full interactive question set (Dropdowns / Blanks / Cards)   │
 │  - Interactive checking, evidence grounding, and rich explanations          │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │
+                                       ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│          STAGE 4: POST-READING QUESTION-BY-QUESTION ANSWER GUIDANCE         │
+│  - Detailed deep-dive review breaking down every question individually      │
+│  - Isolated text evidence excerpts paired with color-grounded matches       │
+│  - Paraphrase Bridge analysis and linguistic trap explanations              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -245,7 +255,55 @@ Provide independent / guided practice across the complete unabridged reading tex
 
 ---
 
-## 5. Direct Sentence Color Coding Standards
+## 5. Stage 4: Post-Reading Question-by-Question Answer Guidance Slides
+
+### Purpose
+Review and deconstruct the answers question-by-question after students attempt the full exercise. Each question is presented alongside its isolated passage excerpt, exact paraphrase bridge, and trap analysis.
+
+### HTML Structure
+```html
+<div class="card" style="border-left: 4px solid var(--col-reading); padding: 12px 18px; background: #ffffff;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <strong style="font-size: 16px; color: var(--col-reading);">Question 1 ➔ Sentence [B]</strong>
+        <span class="syn-tag green">MATCH FOUND</span>
+    </div>
+    <div style="font-size: 14.5px; line-height: 1.5; color: var(--text-dark); margin-bottom: 4px;">
+        <strong>Question:</strong> <span class="syn-pair-1 active-syn">Sharing experiences</span> provides us with <span class="syn-pair-2 active-syn">immediate and long-term satisfaction</span>.
+    </div>
+    <div style="font-size: 14px; line-height: 1.5; background: #f8fafc; border-left: 3px solid var(--col-reading); padding: 6px 10px; border-radius: 4px; margin-bottom: 4px;">
+        <strong>Text [B]:</strong> <em>"<span class="syn-pair-1 active-syn">Extraordinary experiences</span> are <span class="syn-pair-2 active-syn">pleasurable in the moment but can leave us socially worse off in the long run</span>..."</em>
+    </div>
+    <div style="font-size: 13.5px; color: #475569;">
+        🔍 <strong>Bridge:</strong> <em>"in the moment"</em> ↔ <em>immediate</em> &nbsp;|&nbsp; <em>"in the long run"</em> ↔ <em>long-term</em>.
+    </div>
+</div>
+```
+
+---
+
+## 6. Interactive Vocabulary Definitions & Audio Pronunciation Popovers
+
+Wrap key academic vocabulary in `<span class="vocab-word">` with metadata attributes:
+
+```html
+<span class="vocab-word" 
+      data-word="reminisce" 
+      data-def="To talk or write about enjoyable past experiences." 
+      data-ipa="/ˌrem.ɪˈnɪs/" 
+      data-pos="verb" 
+      data-colloc="reminisce about the past">
+    reminisce
+</span>
+```
+
+### Features Triggered on Click:
+1. **Audio Pronunciation**: Plays multi-accent IELTS pronunciation via Web Speech API (`en-GB` / `en-US`).
+2. **Floating Popover**: Displays word title, IPA phonetic transcription, part of speech badge, concise definition, and collocation context.
+3. **Active Glow Highlighting**: Highlights the clicked word with `.active-vocab`.
+
+---
+
+## 7. Direct Sentence Color Coding Standards
 
 Always use the standard dual-layer synonym styling:
 
