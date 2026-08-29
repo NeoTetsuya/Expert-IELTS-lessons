@@ -3698,11 +3698,14 @@ window.addEventListener('DOMContentLoaded', () => {
  * Expert IELTS Presentations — Reading Passage & Question Analyzer Engine (ReadingAnalyzer)
  * 
  * Features:
- * 1. Dynamic SVG Evidence Connection Arrows: Arcs between questions and passage evidence with animated flowing dashed lines.
- * 2. Dual-Language Translation Mode: Instant switching between EN, VIE, and Dual Parallel views.
- * 3. Paraphrase & Synonym Mapping Engine: Visualizes question keywords vs passage paraphrases.
- * 4. Interactive Evidence Popovers: Explains question rationale on hover or click.
- * 5. Keyboard Shortcuts: 'A' to toggle arrows, 'T' to toggle language, 'Esc' to clear focus.
+ * 1. Dynamic SVG Evidence Connection Arrows: Automatically connects Question cards (.q-card, .syn-btn)
+ *    to Reading Passage Evidence highlights (mark.evidence, .syn-pair-1, [data-q]).
+ * 2. Active Slide Awareness: Dynamically re-binds and calculates coordinates on slide navigation.
+ * 3. Dual-Language Translation Mode: Instant switching between EN, VIE, and Dual Parallel views.
+ * 4. Conflict-Free Hotkeys:
+ *    - 'Shift + E': Toggle Evidence Connection Arrows on/off
+ *    - 'Shift + V': Cycle Translation Modes (English -> Vietnamese -> Dual)
+ *    - 'Escape': Clear active arrow and highlights
  */
 
 (function () {
@@ -3730,10 +3733,11 @@ window.addEventListener('DOMContentLoaded', () => {
     setup() {
       this.injectStyles();
       this.ensureSvgCanvas();
-      this.bindEvidenceEvents();
+      this.bindEvidenceConnections();
+      this.bindSlideChangeWatcher();
       this.bindControls();
       this.bindKeyboardShortcuts();
-      console.log('📖 [Expert IELTS] Reading Passage Analyzer & SVG Arrow Engine initialized.');
+      console.log('📖 [Expert IELTS] Slide-Aware Reading Analyzer & Evidence Arrow Engine initialized.');
     }
 
     injectStyles() {
@@ -3750,7 +3754,7 @@ window.addEventListener('DOMContentLoaded', () => {
           width: 100vw;
           height: 100vh;
           pointer-events: none;
-          z-index: 9999;
+          z-index: 99999;
         }
 
         /* Animated flowing arrow path */
@@ -3761,105 +3765,41 @@ window.addEventListener('DOMContentLoaded', () => {
 
         .reading-arrow-path {
           stroke: #10b981;
-          stroke-width: 2.5;
+          stroke-width: 2.75;
           fill: none;
           stroke-dasharray: 6, 4;
-          animation: arrowFlow 1s linear infinite;
-          filter: drop-shadow(0 2px 4px rgba(16, 185, 129, 0.4));
+          animation: arrowFlow 0.9s linear infinite;
+          filter: drop-shadow(0 2px 6px rgba(16, 185, 129, 0.5));
         }
 
-        /* Highlight Targets */
-        .ans-target {
-          cursor: pointer;
-          padding: 2px 6px;
+        /* Active Evidence Highlighting */
+        mark.evidence.active-evidence,
+        .ans-target.active-target,
+        .syn-pair-1.active-target,
+        .syn-pair-2.active-target {
+          outline: 2.5px solid #10b981 !important;
+          box-shadow: 0 0 16px rgba(16, 185, 129, 0.55) !important;
           border-radius: 4px;
-          font-weight: 600;
+          filter: brightness(1.05);
+          z-index: 30;
           transition: all 0.2s ease;
-          position: relative;
-          display: inline;
-          box-decoration-break: clone;
-          -webkit-box-decoration-break: clone;
         }
 
-        .ans-target.active-target, .ans-target:hover {
-          outline: 2px solid #10b981;
-          box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
-          filter: brightness(0.96);
-          z-index: 20;
-        }
-
-        /* Floating Evidence Popover */
-        .explanation-popover {
-          position: absolute;
-          bottom: 125%;
-          left: 50%;
-          transform: translateX(-50%) translateY(10px);
-          opacity: 0;
-          visibility: hidden;
-          width: 320px;
-          background-color: #0f172a;
-          color: #f8fafc;
-          border-radius: 12px;
-          padding: 12px 14px;
-          font-size: 0.8rem;
-          font-family: 'Inter', system-ui, sans-serif;
-          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
-          z-index: 50;
-          transition: all 0.25s ease;
-          pointer-events: none;
-          line-height: 1.45;
-          font-weight: normal;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .explanation-popover::after {
-          content: "";
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          margin-left: -6px;
-          border-width: 6px;
-          border-style: solid;
-          border-color: #0f172a transparent transparent transparent;
-        }
-
-        .ans-target:hover .explanation-popover,
-        .ans-target.active-target .explanation-popover {
-          opacity: 1;
-          visibility: visible;
-          transform: translateX(-50%) translateY(0);
-        }
-
-        /* Question Card Active State */
-        .q-card-active, [data-q].active-card {
+        /* Active Question Card Highlighting */
+        .q-card.q-card-active,
+        .question-item.q-card-active,
+        [data-q].q-card-active {
           border-color: #10b981 !important;
-          box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.5), 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
-        }
-
-        /* Translation Toggle Panel */
-        .deck-lang-toggle {
-          display: inline-flex;
-          align-items: center;
-          background: rgba(15, 23, 42, 0.8);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          border-radius: 9999px;
-          padding: 2px;
-          gap: 2px;
-          font-size: 0.75rem;
-          font-weight: 700;
-        }
-
-        .deck-lang-btn {
-          padding: 3px 8px;
-          border-radius: 9999px;
-          color: #94a3b8;
-          cursor: pointer;
+          box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.5), 0 8px 16px -2px rgba(0, 0, 0, 0.15) !important;
           transition: all 0.2s ease;
         }
 
-        .deck-lang-btn.active {
-          background: #10b981;
-          color: #ffffff;
+        /* Evidence Button Pulse when Connected */
+        .syn-btn.active-syn-btn {
+          background: #10b981 !important;
+          color: #ffffff !important;
+          border-color: #059669 !important;
+          box-shadow: 0 0 10px rgba(16, 185, 129, 0.5) !important;
         }
       `;
       document.head.appendChild(style);
@@ -3872,7 +3812,7 @@ window.addEventListener('DOMContentLoaded', () => {
         svg.id = 'reading-svg-canvas';
         svg.innerHTML = `
           <defs>
-            <marker id="arrow-head" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <marker id="reading-arrow-marker" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
               <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
             </marker>
           </defs>
@@ -3882,56 +3822,139 @@ window.addEventListener('DOMContentLoaded', () => {
       this.svg = svg;
     }
 
-    bindEvidenceEvents() {
-      const targets = document.querySelectorAll('.ans-target, [data-q-target]');
-      const qCards = document.querySelectorAll('.q-card, [data-q], .question-item');
+    /**
+     * Finds the currently active slide container in the deck
+     */
+    getActiveSlide() {
+      return document.querySelector('.slide.active') || document.querySelector('.slide.visible') || document.body;
+    }
 
-      targets.forEach(target => {
-        const qId = target.dataset.q || target.dataset.qTarget;
-        const qCard = document.querySelector(`.q-card[data-q="${qId}"], #q-card-${qId}, .question-item[data-q="${qId}"]`);
+    /**
+     * Binds evidence triggers (.syn-btn, .q-card, mark.evidence, .ans-target)
+     */
+    bindEvidenceConnections() {
+      const activeSlide = this.getActiveSlide();
+      if (!activeSlide) return;
 
-        target.addEventListener('mouseenter', () => this.activatePair(target, qCard));
-        target.addEventListener('mouseleave', () => this.deactivateAll());
-        target.addEventListener('click', (e) => {
+      // 1. Hook into "💡 Evidence" buttons (.syn-btn[data-ev])
+      activeSlide.querySelectorAll('.syn-btn[data-ev]').forEach(btn => {
+        const evId = btn.dataset.ev;
+        const qCard = btn.closest('.q-card, [data-q]');
+        const evMark = activeSlide.querySelector(`#${evId}`) || document.getElementById(evId);
+
+        btn.addEventListener('mouseenter', () => {
+          this.activatePair(evMark, qCard || btn, false);
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          this.deactivateAll();
+        });
+
+        btn.addEventListener('click', (e) => {
           e.stopPropagation();
-          this.activatePair(target, qCard, true);
+          this.activatePair(evMark, qCard || btn, true);
         });
       });
 
-      qCards.forEach(card => {
-        const qId = card.dataset.q || (card.id ? card.id.replace('q-card-', '') : '');
-        const target = document.querySelector(`.ans-target[data-q="${qId}"], [data-q-target="${qId}"]`);
+      // 2. Hook into Question Cards (.q-card[data-q])
+      activeSlide.querySelectorAll('.q-card[data-q]').forEach(qCard => {
+        const qId = qCard.dataset.q;
+        const evMarks = activeSlide.querySelectorAll(`[data-q="${qId}"], mark.evidence[id*="${qId}"]`);
+        const evMark = evMarks.length > 0 ? evMarks[0] : null;
 
-        card.addEventListener('mouseenter', () => this.activatePair(target, card));
-        card.addEventListener('mouseleave', () => this.deactivateAll());
-        card.addEventListener('click', () => {
-          this.activatePair(target, card, false);
+        qCard.addEventListener('mouseenter', () => {
+          if (evMark) this.activatePair(evMark, qCard, false);
         });
+
+        qCard.addEventListener('mouseleave', () => {
+          this.deactivateAll();
+        });
+      });
+
+      // 3. Hook into Evidence Elements in Reading Pane (mark.evidence, .ans-target, .syn-pair-1)
+      activeSlide.querySelectorAll('mark.evidence, .ans-target, .syn-pair-1, .syn-pair-2').forEach(evEl => {
+        const qId = evEl.dataset.q;
+        const evId = evEl.id;
+
+        let qCard = null;
+        if (qId) {
+          qCard = activeSlide.querySelector(`.q-card[data-q="${qId}"], [data-q="${qId}"]`);
+        } else if (evId) {
+          qCard = activeSlide.querySelector(`[data-ev="${evId}"]`);
+        }
+
+        if (qCard) {
+          evEl.style.cursor = 'pointer';
+          evEl.addEventListener('mouseenter', () => {
+            this.activatePair(evEl, qCard, false);
+          });
+          evEl.addEventListener('mouseleave', () => {
+            this.deactivateAll();
+          });
+          evEl.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.activatePair(evEl, qCard, true);
+          });
+        }
+      });
+
+      // 4. Track scrolling inside reading or question split panes
+      activeSlide.querySelectorAll('.reading-pane, .question-pane, .split-view-container').forEach(pane => {
+        pane.addEventListener('scroll', () => this.drawConnection(), { passive: true });
       });
     }
 
-    activatePair(targetEl, cardEl, scrollToCard = false) {
+    /**
+     * Re-binds connections whenever presentation changes slides
+     */
+    bindSlideChangeWatcher() {
+      // Mutation observer on deck stage to detect slide changes
+      const stage = document.getElementById('deckStage') || document.querySelector('.deck-stage') || document.body;
+      if (stage) {
+        const observer = new MutationObserver(() => {
+          this.deactivateAll();
+          setTimeout(() => this.bindEvidenceConnections(), 100);
+        });
+        observer.observe(stage, { attributes: true, subtree: true, attributeFilter: ['class'] });
+      }
+
+      // Custom window event if dispatched by DeckEngine
+      window.addEventListener('slideChange', () => {
+        this.deactivateAll();
+        setTimeout(() => this.bindEvidenceConnections(), 100);
+      });
+    }
+
+    activatePair(evidenceEl, cardEl, scrollToEvidence = false) {
       this.deactivateAll(false);
 
-      if (targetEl) {
-        targetEl.classList.add('active-target');
-        this.activeTarget = targetEl;
+      if (evidenceEl) {
+        evidenceEl.classList.add('active-evidence', 'active-target');
+        this.activeTarget = evidenceEl;
+
+        if (scrollToEvidence && evidenceEl.scrollIntoView) {
+          evidenceEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       }
 
       if (cardEl) {
-        cardEl.classList.add('q-card-active', 'active-card');
+        cardEl.classList.add('q-card-active');
+        const synBtn = cardEl.querySelector('.syn-btn') || (cardEl.classList.contains('syn-btn') ? cardEl : null);
+        if (synBtn) synBtn.classList.add('active-syn-btn');
         this.activeCard = cardEl;
-        if (scrollToCard && cardEl.scrollIntoView) {
-          cardEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
       }
 
       this.startSmoothTracking();
     }
 
     deactivateAll(clearCanvas = true) {
-      document.querySelectorAll('.ans-target').forEach(t => t.classList.remove('active-target'));
-      document.querySelectorAll('.q-card, .question-item, [data-q]').forEach(c => c.classList.remove('q-card-active', 'active-card'));
+      document.querySelectorAll('.active-evidence, .active-target').forEach(t => {
+        t.classList.remove('active-evidence', 'active-target');
+      });
+      document.querySelectorAll('.q-card-active, .active-syn-btn').forEach(c => {
+        c.classList.remove('q-card-active', 'active-syn-btn');
+      });
+
       this.activeTarget = null;
       this.activeCard = null;
       if (clearCanvas) this.clearCanvas();
@@ -3940,7 +3963,7 @@ window.addEventListener('DOMContentLoaded', () => {
     startSmoothTracking() {
       if (this.arrowAnimFrame) cancelAnimationFrame(this.arrowAnimFrame);
       const startTime = performance.now();
-      const duration = 600;
+      const duration = 650;
 
       const step = (now) => {
         this.drawConnection();
@@ -3960,13 +3983,13 @@ window.addEventListener('DOMContentLoaded', () => {
       const fromRect = this.activeTarget.getBoundingClientRect();
       const toRect = this.activeCard.getBoundingClientRect();
 
-      // Ensure both elements are currently visible in viewport
-      if (fromRect.width === 0 || toRect.width === 0) {
+      // Ensure both elements are visible on screen
+      if (fromRect.width === 0 || toRect.width === 0 || fromRect.bottom < 0 || toRect.bottom < 0) {
         this.clearCanvas();
         return;
       }
 
-      // Calculate start and end coordinates
+      // Calculate start and end points
       const startX = fromRect.right > toRect.left ? fromRect.left : fromRect.right;
       const startY = fromRect.top + fromRect.height / 2;
 
@@ -3987,7 +4010,7 @@ window.addEventListener('DOMContentLoaded', () => {
         path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.id = 'reading-arrow-active';
         path.setAttribute('class', 'reading-arrow-path');
-        path.setAttribute('marker-end', 'url(#arrow-head)');
+        path.setAttribute('marker-end', 'url(#reading-arrow-marker)');
         this.svg.appendChild(path);
       }
 
@@ -4000,7 +4023,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     bindControls() {
-      // Toggle Arrows Button
+      // Toggle button in UI if present
       const toggleArrowBtn = document.getElementById('btn-toggle-arrows');
       if (toggleArrowBtn) {
         toggleArrowBtn.addEventListener('click', () => {
@@ -4011,27 +4034,17 @@ window.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      // Language Switchers
-      document.querySelectorAll('[data-reading-lang]').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const lang = e.currentTarget.dataset.readingLang;
-          this.switchLanguage(lang);
-        });
-      });
-
-      // Window resize / scroll tracking
+      // Window resize & global scroll re-anchor
       window.addEventListener('resize', () => this.drawConnection(), { passive: true });
       window.addEventListener('scroll', () => this.drawConnection(), { passive: true });
     }
 
     switchLanguage(lang) {
       this.currentLang = lang;
-      document.querySelectorAll('[data-reading-lang]').forEach(b => {
-        b.classList.toggle('active', b.dataset.readingLang === lang);
-      });
+      const activeSlide = this.getActiveSlide();
+      if (!activeSlide) return;
 
-      // Update text in passage if data-en and data-vi are present
-      document.querySelectorAll('[data-en][data-vi]').forEach(el => {
+      activeSlide.querySelectorAll('[data-en][data-vi]').forEach(el => {
         if (lang === 'vi') {
           el.innerHTML = el.dataset.vi;
         } else if (lang === 'en') {
@@ -4039,39 +4052,55 @@ window.addEventListener('DOMContentLoaded', () => {
         } else if (lang === 'dual') {
           el.innerHTML = `
             <div class="reading-dual-block">
-              <div class="reading-en-pane mb-2 text-slate-800">${el.dataset.en}</div>
+              <div class="reading-en-pane mb-2 text-slate-800 font-medium">${el.dataset.en}</div>
               <div class="reading-vi-pane text-slate-500 italic text-sm border-t border-slate-200 pt-2">${el.dataset.vi}</div>
             </div>
           `;
         }
       });
 
-      // Re-bind evidence targets after DOM update
-      this.bindEvidenceEvents();
+      this.bindEvidenceConnections();
       this.drawConnection();
     }
 
+    /**
+     * Conflict-Free Keyboard Shortcuts:
+     * - 'Shift + E': Toggle Evidence Arrows
+     * - 'Shift + V': Toggle Translation (EN / VIE / Dual)
+     * - 'Escape': Clear active arrow
+     */
     bindKeyboardShortcuts() {
       document.addEventListener('keydown', (e) => {
         if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
 
-        if (e.key === 'a' || e.key === 'A') {
-          // Toggle Arrows
+        const key = e.key.toLowerCase();
+
+        // 1. Shift + E -> Toggle Evidence Connection Arrows (Non-conflicting)
+        if (e.shiftKey && key === 'e') {
+          e.preventDefault();
           this.showArrows = !this.showArrows;
           if (!this.showArrows) this.clearCanvas();
           else this.drawConnection();
-        } else if (e.key === 't' || e.key === 'T') {
-          // Cycle Language EN -> VI -> Dual
+          console.log(`[Reading Analyzer] Evidence Arrows: ${this.showArrows ? 'ON' : 'OFF'}`);
+        }
+
+        // 2. Shift + V -> Cycle Translation Language (EN -> VIE -> Dual)
+        else if (e.shiftKey && key === 'v') {
+          e.preventDefault();
           const nextLang = this.currentLang === 'en' ? 'vi' : (this.currentLang === 'vi' ? 'dual' : 'en');
           this.switchLanguage(nextLang);
-        } else if (e.key === 'Escape') {
+          console.log(`[Reading Analyzer] Language mode: ${nextLang.toUpperCase()}`);
+        }
+
+        // 3. Escape -> Clear active arrow
+        else if (key === 'escape') {
           this.deactivateAll();
         }
       });
     }
   }
 
-  // Instantiate and export
+  // Instantiate and export to window
   window.readingAnalyzer = new ReadingAnalyzer();
 })();
 
