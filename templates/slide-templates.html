@@ -385,3 +385,73 @@
         </div>
     </section>
 </template>
+
+<!-- 14. READING SPLIT-VIEW WITH INTERACTIVE FLOW CHART COMPLETION TEMPLATE -->
+<template id="tmpl-reading-flowchart">
+    <section class="slide" data-skill="read">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-reading);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge">Reading · Flow Chart Completion</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 19px; color: var(--text-muted); margin-bottom: 8px;" data-slot="subtitle">
+                        Complete the flow chart below. Choose NO MORE THAN TWO WORDS from the passage for each answer.
+                    </p>
+
+                    <div class="split-view-container" style="flex: 1; min-height: 0; display: flex; gap: 24px;">
+                        <!-- Left Pane: Full Passage -->
+                        <div class="reading-pane" style="flex: 1.15; font-size: 22px; line-height: 1.85; overflow-y: auto;" data-slot="passage"></div>
+
+                        <!-- Right Pane: Flow Chart Step Cards Container -->
+                        <div class="question-pane flowchart-container" style="flex: 0.85; overflow-y: auto;" data-slot="flowchart"></div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="checkAnswers(this)">✓ Check</button>
+                        <button class="btn-action" onclick="toggleExplanations(this)">🔍 Explanations</button>
+                        <button class="btn-action" onclick="revealAnswers(this)">👁️ Reveal</button>
+                        <button class="btn-action" onclick="resetAnswers(this)">↺ Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 15. STANDALONE FLOW CHART TASK TEMPLATE -->
+<template id="tmpl-flowchart">
+    <section class="slide" data-skill="read">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-reading);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge">Flow Chart Task</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 12px;" data-slot="subtitle"></p>
+
+                    <div class="flowchart-container" style="max-width: 1100px; width: 100%; margin: 0 auto; flex: 1; min-height: 0; overflow-y: auto;" data-slot="flowchart"></div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="checkAnswers(this)">✓ Check</button>
+                        <button class="btn-action" onclick="toggleExplanations(this)">🔍 Explanations</button>
+                        <button class="btn-action" onclick="revealAnswers(this)">👁️ Reveal</button>
+                        <button class="btn-action" onclick="resetAnswers(this)">↺ Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

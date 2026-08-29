@@ -142,7 +142,40 @@
                 </div>
             </slide-card>
 
-            <!-- 5. Summary & Checklist Example -->
+            <!-- 5. Reading Split-View with Flow Chart Completion Example -->
+            <slide-card template="reading-flowchart" skill="read" title="Bournville: An Unusual Community (Flow Chart Completion)" subtitle="Complete the chronological milestones using NO MORE THAN TWO WORDS from the passage.">
+                <div slot="passage">
+                    <h3>Bournville: An Unusual Community</h3>
+                    <p><span class="para-tag">Para A</span> In 1879 George and Richard Cadbury left the city centre of Birmingham and built a <mark class="evidence" id="ev-demo-1"><span class="syn-pair-1">chocolate factory</span></mark> in the countryside.</p>
+                    <p><span class="para-tag">Para B</span> From 1890, they built workers' houses, all equipped with large <mark class="evidence" id="ev-demo-2"><span class="syn-pair-1">gardens</span></mark>.</p>
+                    <p><span class="para-tag">Para C</span> In 1900, the Cadbury Trust was established to transform the village into a true <mark class="evidence" id="ev-demo-3"><span class="syn-pair-1">community</span></mark>.</p>
+                </div>
+                <div slot="flowchart">
+                    <div class="flowchart-step-card">
+                        <span class="step-date-tag">1879</span>
+                        <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                            <div>Cadburys moved their <input type="text" class="blank-input" data-ans="chocolate" placeholder="[1]..." style="width:130px;"> business outside the city.</div>
+                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('demo-1', 'ev-demo-1')">💡 Synonyms</button>
+                        </div>
+                    </div>
+                    <div class="flowchart-step-card">
+                        <span class="step-date-tag">From 1890</span>
+                        <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                            <div>Constructed houses for employees with big <input type="text" class="blank-input" data-ans="gardens" placeholder="[2]..." style="width:130px;">.</div>
+                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('demo-2', 'ev-demo-2')">💡 Synonyms</button>
+                        </div>
+                    </div>
+                    <div class="flowchart-step-card">
+                        <span class="step-date-tag">1900</span>
+                        <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                            <div>Trust formed to develop the area into a genuine <input type="text" class="blank-input" data-ans="community" placeholder="[3]..." style="width:130px;">.</div>
+                            <button class="syn-btn" onclick="deckEngine.toggleSynonymExplanation('demo-3', 'ev-demo-3')">💡 Synonyms</button>
+                        </div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- 6. Summary & Checklist Example -->
             <slide-card template="summary-checklist" skill="review" title="Module Mastery &amp; Exam Checklist" subtitle="Comprehensive review across all 4 skill domains.">
                 <div slot="grid">
                     <div class="card" style="border-left:6px solid var(--col-reading); padding:24px 28px; margin-bottom:0;">
