@@ -397,13 +397,20 @@ Ideal for Summary Completion, Flowchart Completion, and Short Answer questions.
 
 ## 8. Complete End-to-End Code Blueprint
 
-When creating a new reading module, insert all 3 stages consecutively:
+When creating a new reading module, insert all stages consecutively:
 
 ```
-Slide N   : [STAGE 1] Pre-reading Question Keyword Deconstruction Slide
-Slide N+1 : [STAGE 2] 1-Question Model Walkthrough Slide (with dedicated paragraph excerpt)
-Slide N+2 : [STAGE 3] Full Split-View Reading Passage & Complete Question Set Slide
+Slide N       : [STAGE 1] Pre-reading Question Keyword Deconstruction Slide
+Slide N+1     : [STAGE 2] Full Split-View Reading Passage & Complete Question Set Slide
+Slide N+2...M : [STAGE 3] Question-by-Question Model Walkthrough Slides (1 SLIDE PER QUESTION)
 ```
+
+> [!IMPORTANT]
+> **STRICT 1-QUESTION-PER-SLIDE WALKTHROUGH RULE:**
+> - **Every single reading question MUST have its own individual walkthrough slide** (`template="walkthrough"`).
+> - **NEVER combine multiple questions (e.g. Q7–Q10, Q1–Q5) into a single walkthrough slide.**
+> - Each walkthrough slide must isolate **only the specific paragraph excerpt** containing the answer and pair it with that single question card, allowing focused, legible class analysis with large typography (`21px`–`22px`).
+> - This applies to **ALL question types**: Matching Headings, True/False/Not Given, Yes/No/Not Given, Multiple Choice, Sentence Completion, Summary Completion, Flowchart Completion, and Matching Information.
 
 ---
 
@@ -411,11 +418,13 @@ Slide N+2 : [STAGE 3] Full Split-View Reading Passage & Complete Question Set Sl
 
 Before finalizing any reading presentation, verify against this checklist:
 
-1. [ ] **3-Stage Sequence**: Does every reading task have its dedicated Strategy Slide (Stage 1) and Model Walkthrough (Stage 2) preceding the full text (Stage 3)?
-2. [ ] **Direct Sentence Colors**: Are keywords wrapped in `.syn-pair-1` (Anchor) and `.syn-pair-2` (Qualifier) directly on the sentence text without separate spoiler boxes?
-3. [ ] **List of Headings UI**: Is the List of Headings rendered as a dedicated card with large typography (`18.5px`–`19px`), line-by-line format, and monospace Roman numerals (`i.`, `ii.`, etc.) rather than a cramped single paragraph?
-4. [ ] **Full Content Guarantee**: Are all reading exercises, topic sentence questions, sentence completions, and walkthroughs from the source course material fully included?
-5. [ ] **Action Row Present**: Does every strategy and exercise slide contain a clean `.action-row` with `Show Highlights / Check Answers` and `Reset`?
-6. [ ] **Step Reveal Shortcut**: Does pressing <kbd>E</kbd> or clicking question cards step-reveal highlights one-by-one?
-7. [ ] **Smooth Auto-Scroll**: Does clicking `💡 Evidence` on the model or full exercise slide smoothly center the reading pane on the target `<mark class="evidence">`?
-8. [ ] **Clean Reset**: Does clicking `Reset` return all inputs and highlights to their pristine unrevealed state?
+1. [ ] **1 Slide Per Question Walkthrough**: Does **every single reading question** have its own dedicated walkthrough slide with its isolated passage excerpt, question input, and green/purple evidence breakdown? (Never combined into multi-question slides).
+2. [ ] **Pre-Reading Strategy Slide**: Does every reading task have its dedicated Strategy Slide (Stage 1) preceding the full text?
+3. [ ] **Direct Sentence Colors**: Are keywords wrapped in `.syn-pair-1` (Anchor) and `.syn-pair-2` (Qualifier) directly on the sentence text without separate spoiler boxes?
+4. [ ] **List of Headings UI**: Is the List of Headings rendered as a dedicated card with large typography (`18.5px`–`19px`), line-by-line format, and monospace Roman numerals (`i.`, `ii.`, etc.) rather than a cramped single paragraph?
+5. [ ] **Full Content Guarantee**: Are all reading exercises, topic sentence questions, sentence completions, and walkthroughs from the source course material fully included?
+6. [ ] **Action Row Present**: Does every strategy and exercise slide contain a clean `.action-row` with `Show Highlights / Check Answers` and `Reset`?
+7. [ ] **Step Reveal Shortcut**: Does pressing <kbd>E</kbd> or clicking question cards step-reveal highlights one-by-one?
+8. [ ] **Smooth Auto-Scroll**: Does clicking `💡 Evidence` on the model or full exercise slide smoothly center the reading pane on the target `<mark class="evidence">`?
+9. [ ] **Clean Reset**: Does clicking `Reset` return all inputs and highlights to their pristine unrevealed state?
+

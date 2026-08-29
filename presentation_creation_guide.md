@@ -475,7 +475,18 @@ When building HTML presentations from course markdown documents (`md files/`):
 </div>
 ```
 
-### C. Standard Template Slot Directory
+### D. Strict 1-Question-Per-Slide Reading Walkthrough Requirement
+- **Individual Question Isolation**: **Every single reading question MUST have its own dedicated walkthrough slide** (`template="walkthrough"`).
+- **Zero Question Grouping**: **Never combine multiple questions (e.g. Q7–Q10, Q1–Q5) into a single walkthrough slide.**
+- **Components of Every Walkthrough Slide**:
+  1. **Top Box (`slot="passage-text"`)**: The exact isolated paragraph/sentence containing the evidence, wrapped in `<mark class="evidence">` with dual-color synonym tags.
+  2. **Bottom Box (`slot="question-text"` & `slot="input-area"`)**: The single question card with interactive input (`<select>` or `<input>`), `💡 Evidence` button, and rich explanation breakdown (`slot="explanation"`).
+  3. **Action Row**: `Check Answer`, `👉 Step Reveal (E)`, `Show Evidence / Highlights`, and `Reset`.
+- **Universality**: Applies across all question types: Matching Headings, True/False/Not Given, Yes/No/Not Given, Multiple Choice, Sentence Completion, Summary Completion, Flowchart Completion, and Matching Information.
+
+---
+
+### E. Standard Template Slot Directory
 
 | Template ID | Primary Slots | Fallback Aliases | Description |
 | :--- | :--- | :--- | :--- |
