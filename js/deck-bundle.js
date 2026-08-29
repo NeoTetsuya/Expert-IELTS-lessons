@@ -479,11 +479,19 @@ class DeckEngine {
             synSpans.forEach(s => s.classList.add('active-syn'));
         }
 
-        if (qKey) {
-            const card = document.querySelector(`.q-card[data-q="${qKey}"]`);
-            if (card) {
-                const exp = card.querySelector('.item-explanation');
-                if (exp) exp.classList.toggle('show', !isCurrentlyActive);
+        if (qKey || evId) {
+            const selector = [
+                qKey ? `.q-card[data-q="${qKey}"]` : null,
+                qKey ? `.flowchart-step-card[data-q="${qKey}"]` : null,
+                evId ? `.q-card[data-ev="${evId}"]` : null,
+                evId ? `.flowchart-step-card[data-ev="${evId}"]` : null
+            ].filter(Boolean).join(', ');
+
+            if (selector) {
+                document.querySelectorAll(selector).forEach(card => {
+                    const exp = card.querySelector('.item-explanation');
+                    if (exp) exp.classList.toggle('show', !isCurrentlyActive);
+                });
             }
         }
     }
@@ -3009,7 +3017,7 @@ class ReadingHighlighter {
             evTarget = document.querySelector(`mark.evidence[data-ev="${evId}"]`);
         }
 
-        const synSpans = document.querySelectorAll(`[data-q="${qKey}"]`);
+        const synSpans = qKey ? document.querySelectorAll(`[data-q="${qKey}"]`) : [];
         const isCurrentlyActive = (evTarget && evTarget.classList.contains('highlighted') && this.activeEvidenceId === (evId || qKey)) ||
                                   (synSpans.length > 0 && Array.from(synSpans).every(s => s.classList.contains('active-syn')) && this.activeEvidenceId === qKey);
 
@@ -3047,6 +3055,23 @@ class ReadingHighlighter {
             synSpans.forEach(s => s.classList.remove('active-syn'));
             this.activeEvidenceId = null;
         }
+
+        // Toggle corresponding item-explanation in question cards and flowchart cards
+        if (qKey || evId) {
+            const selector = [
+                qKey ? `.q-card[data-q="${qKey}"]` : null,
+                qKey ? `.flowchart-step-card[data-q="${qKey}"]` : null,
+                evId ? `.q-card[data-ev="${evId}"]` : null,
+                evId ? `.flowchart-step-card[data-ev="${evId}"]` : null
+            ].filter(Boolean).join(', ');
+
+            if (selector) {
+                document.querySelectorAll(selector).forEach(card => {
+                    const exp = card.querySelector('.item-explanation');
+                    if (exp) exp.classList.toggle('show', !isCurrentlyActive);
+                });
+            }
+        }
     }
 
     showEvidence(qKey, evId) {
@@ -3065,26 +3090,24 @@ class ReadingHighlighter {
     }
 
     /**
-     * Auto-binds click handlers on synonym buttons and question cards
+     * Auto-binds click handlers on synonym buttons and question/flowchart cards
      */
     bindSynonymClicks() {
         document.addEventListener('click', (e) => {
             const btn = e.target.closest('.syn-btn');
             if (btn) {
-                const qCard = btn.closest('.q-card');
-                const dataQ = btn.dataset.q || qCard?.dataset?.q || (btn.dataset.ev ? btn.dataset.ev.replace(/^ev-/, '') : null);
+                const card = btn.closest('.q-card, .flowchart-step-card');
+                const dataQ = btn.dataset.q || card?.dataset?.q || (btn.dataset.ev ? btn.dataset.ev.replace(/^ev-/, '') : null);
                 const dataEv = btn.dataset.ev || (dataQ ? `ev-${dataQ}` : null);
                 if (dataQ || dataEv) {
                     e.preventDefault();
                     this.focusEvidence(dataQ, dataEv);
-                    if (qCard) {
-                        const exp = qCard.querySelector('.item-explanation');
+                    if (card) {
+                        const exp = card.querySelector('.item-explanation');
                         if (exp) exp.classList.toggle('show');
                     }
                 }
-                return;
             }
-
         });
     }
 

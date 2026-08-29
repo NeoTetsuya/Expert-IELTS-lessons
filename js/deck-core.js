@@ -472,11 +472,19 @@ class DeckEngine {
             synSpans.forEach(s => s.classList.add('active-syn'));
         }
 
-        if (qKey) {
-            const card = document.querySelector(`.q-card[data-q="${qKey}"]`);
-            if (card) {
-                const exp = card.querySelector('.item-explanation');
-                if (exp) exp.classList.toggle('show', !isCurrentlyActive);
+        if (qKey || evId) {
+            const selector = [
+                qKey ? `.q-card[data-q="${qKey}"]` : null,
+                qKey ? `.flowchart-step-card[data-q="${qKey}"]` : null,
+                evId ? `.q-card[data-ev="${evId}"]` : null,
+                evId ? `.flowchart-step-card[data-ev="${evId}"]` : null
+            ].filter(Boolean).join(', ');
+
+            if (selector) {
+                document.querySelectorAll(selector).forEach(card => {
+                    const exp = card.querySelector('.item-explanation');
+                    if (exp) exp.classList.toggle('show', !isCurrentlyActive);
+                });
             }
         }
     }
