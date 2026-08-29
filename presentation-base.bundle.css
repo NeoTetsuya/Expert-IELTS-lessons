@@ -815,23 +815,24 @@ mark.evidence.highlight-active {
 .flowchart-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 14px;
     flex: 1;
     overflow-y: auto;
-    padding-right: 4px;
+    padding: 4px 6px 12px 2px;
 }
 .flowchart-container::-webkit-scrollbar { width: 6px; }
 .flowchart-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
 .flowchart-step-card {
+    position: relative;
     background: #ffffff;
     border: 1.5px solid #e2e8f0;
-    border-left: 5px solid var(--col-reading, #2563eb);
-    border-radius: 10px;
-    padding: 13px 18px;
+    border-left: 6px solid var(--col-reading, #2563eb);
+    border-radius: 12px;
+    padding: 14px 20px;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     font-size: calc(18px * var(--font-scale, 1));
@@ -841,14 +842,44 @@ mark.evidence.highlight-active {
 
 .flowchart-step-card:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
     border-color: #cbd5e1;
 }
 
 .flowchart-step-card.info-step {
-    background: #fafaf9;
+    background: #f8fafc;
     border-left-color: #94a3b8;
     color: var(--text-muted, #64748b);
+}
+
+/* Automated Flow Arrow Indicator between consecutive flowchart steps */
+.flowchart-step-card:not(:last-child)::after {
+    content: '↓';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+    color: #2563eb;
+    background: #eff6ff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 50%;
+    z-index: 3;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.12);
+    pointer-events: none;
+}
+
+.flowchart-step-card.info-step:not(:last-child)::after {
+    color: #64748b;
+    background: #f1f5f9;
+    border-color: #cbd5e1;
 }
 
 .step-date-tag,
@@ -873,11 +904,30 @@ mark.evidence.highlight-active {
     border-color: #e2e8f0;
 }
 
-.flowchart-connector {
-    width: 2px;
-    height: 12px;
-    background: #cbd5e1;
-    margin: -4px auto -4px auto;
+/* Explicit Flowchart Connector / Timeline Arrow */
+.flowchart-connector,
+.flowchart-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: -4px auto;
+    color: var(--col-reading, #2563eb);
+    font-size: 15px;
+    font-weight: 800;
+    padding: 2px 12px;
+    border-radius: 12px;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    width: fit-content;
+    z-index: 2;
+}
+
+.flowchart-connector::before,
+.flowchart-arrow::before {
+    content: '↓';
+    font-weight: 900;
+    font-size: 16px;
 }
 
 /* Writing Model Essay Pane */
