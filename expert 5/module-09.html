@@ -532,9 +532,9 @@
                                 <button class="btn-action" data-essay-action="connectors" data-target="modelEssayPie">✨ Highlight Contrast Connectors</button>
                             </div>
 
-                            <div class="two-col" id="modelEssayPie">
-                                <div class="col">
-                                    <div class="card" style="padding:16px 20px;">
+                            <div class="two-col" style="flex:1; min-height:0; gap:24px; align-items:stretch;">
+                                <div class="col" style="flex:0.85;">
+                                    <div class="card" style="padding:16px 20px; border-radius:12px;">
                                         <div style="font-weight:700; font-size:16px; margin-bottom:8px; color:var(--text-dark);">Survey Data: Main Source of News</div>
                                         <table class="data-table">
                                             <thead>
@@ -568,24 +568,27 @@
                                             </tbody>
                                         </table>
                                     </div>
-
-                                    <div class="model-breakdown-card">
-                                        <span class="model-tag tag-intro">Introduction &amp; Overview</span>
-                                        <p class="essay-p">The charts illustrate the principal source of news for young adults (aged 16–24) and for people over 55 across 26 countries. The charts show that the two age groups access news in rather different ways: a majority of younger people get their news online, while the older generation, in contrast, choose television as their main source.</p>
-                                    </div>
                                 </div>
 
-                                <div class="col">
-                                    <div class="model-breakdown-card">
-                                        <span class="model-tag tag-body">Body 1 (Radio &amp; Broadcast)</span>
-                                        <p class="essay-p">Although use of TV and the internet differ for these two age groups, the radio is the least important source of information for both groups. A similarly small proportion of each group – 5 percent and 8 percent – name the radio as their main source of news.</p>
+                                <div class="writing-model-pane" style="flex:1.15;">
+                                    <div style="font-weight: 800; font-size: 21px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--col-writing); margin-bottom: 14px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">
+                                        Band 8+ Task 1 Model Breakdown
                                     </div>
-
-                                    <div class="model-breakdown-card">
-                                        <span class="model-tag tag-body">Body 2 (Print Media Contrast)</span>
-                                        <p class="essay-p">Printed newspapers and magazines, the most traditional way of accessing news, still has some importance for both age groups. However, they are more popular with older people: 12 percent of the over-55s name this as their main source of information, in comparison with only 6 percent of 16- to 24-year-olds.</p>
-                                    </div>
+                                    <p>
+                                        <span class="hl-phrase" data-title="The charts illustrate..." data-type="Introduction Paraphrase Frame" data-desc="Identifies demographics, channels, and geographic reach." data-upgrade="The provided pie charts delineate the primary media channels utilized for news consumption among young adults compared with seniors across 26 surveyed nations.">The charts illustrate the principal source of news for young adults (aged 16–24) and for people over 55 across 26 countries</span>. <span class="hl-phrase" data-title="The charts show that the two age groups access news in rather different ways: ... while ... in contrast ..." data-type="Dual Demographic Overview Statement" data-desc="Captures the stark generational divide." data-upgrade="Overall, news gathering habits demonstrate a profound generational polarization: a decisive majority of youth prioritize digital channels, whereas elderly demographics rely predominantly on terrestrial broadcasts.">The charts show that the two age groups access news in rather different ways: a majority of younger people get their news online, while the older generation, in contrast, choose television as their main source</span>.
+                                    </p>
+                                    <p>
+                                        <span class="hl-phrase" data-title="According to the data, ..." data-type="Data Citation Frame" data-desc="Introduces the digital media dominant statistics." data-upgrade="Specifically, nearly two-thirds of young respondents cite internet sources:">According to the data</span>, <span class="hl-vocab" data-title="nearly two thirds of younger people (64 percent) choose online news" data-type="Fractional Metric" data-desc="Rephrasing 64%." data-upgrade="a dominant 64% proportion of youth rely on digital mediums">nearly two thirds of younger people (64 percent) choose online news</span>, while <span class="hl-vocab" data-title="only a quarter of older adults" data-type="Proportion Comparison" data-desc="Rephrasing 25%." data-upgrade="merely 25% of seniors">only a quarter of older adults</span> do so. Conversely, <span class="hl-vocab" data-title="over half of the over-55s (55 percent)" data-type="Dominant Demographic Metric" data-desc="Rephrasing 55%." data-upgrade="a commanding 55% majority of older citizens">over half of the over-55s (55 percent)</span> rely on television, compared to <span class="hl-vocab" data-title="just a quarter of the youth demographic" data-type="Minority Ratio" data-desc="Contrasting 25%." data-upgrade="merely 25% of their younger counterparts">just a quarter of the youth demographic</span>.
+                                    </p>
+                                    <p>
+                                        <span class="hl-phrase" data-title="Traditional print and radio media account for..." data-type="Minority Category Grouping" data-desc="Groups smaller remaining categories together." data-upgrade="Traditional print and radio broadcasting play a distinctly marginal role across both cohorts:">Traditional print and radio media account for</span> only minor proportions in both groups. Newspapers are used by <span class="hl-vocab" data-title="12 percent of older adults compared with only 6 percent of younger people" data-type="Minority Disparity Phrasing" data-desc="Contrasting 12% vs 6%." data-upgrade="12% of seniors versus a negligible 6% of youth">12 percent of older adults compared with only 6 percent of younger people</span>, while radio remains the least preferred source for both.
+                                    </p>
                                 </div>
+                            </div>
+
+                            <div class="action-row" style="margin-top: 10px;">
+                                <button class="btn-action btn-primary" onclick="toggleWritingHighlights(this)">💡 Highlight Signposts &amp; Lexicon</button>
+                                <button class="btn-action" onclick="speakEssay(this)">🔊 Listen Model Report</button>
                             </div>
                         </div>
                     </div>
@@ -923,9 +926,9 @@
                                 <button class="btn-action" data-essay-action="connectors" data-target="modelEssayBar">✨ Highlight Trend Connectors</button>
                             </div>
 
-                            <div class="two-col" id="modelEssayBar">
-                                <div class="col">
-                                    <div class="card" style="padding:16px 20px;">
+                            <div class="two-col" style="flex:1; min-height:0; gap:24px; align-items:stretch;">
+                                <div class="col" style="flex:0.85;">
+                                    <div class="card" style="padding:16px 20px; border-radius:12px;">
                                         <div style="font-weight:700; font-size:16px; margin-bottom:8px; color:var(--text-dark);">US Device Ownership Data (2010 vs 2015)</div>
                                         <table class="data-table">
                                             <thead>
@@ -964,24 +967,27 @@
                                             </tbody>
                                         </table>
                                     </div>
-
-                                    <div class="model-breakdown-card">
-                                        <span class="model-tag tag-intro">Introduction &amp; Overview</span>
-                                        <p class="essay-p">The charts illustrate the proportions of adults in the USA who owned five different types of digital equipment in 2010 and 2015. In 2015 a higher percentage of people owned mobile phones, e-readers and tablets than in 2010. However, ownership of laptops and games consoles declined over the period.</p>
-                                    </div>
                                 </div>
 
-                                <div class="col">
-                                    <div class="model-breakdown-card">
-                                        <span class="model-tag tag-body">Body 1 (Rising Trends)</span>
-                                        <p class="essay-p">The device that the largest number of people owned in both years was the mobile phone, rising from just over 80 percent to 92 percent. The increase in ownership was greatest for tablets: only 3 percent had one in 2010, in comparison with 45 percent in 2015. The third device whose popularity increased in a similar way was the e-reader.</p>
+                                <div class="writing-model-pane" style="flex:1.15;">
+                                    <div style="font-weight: 800; font-size: 21px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--col-writing); margin-bottom: 14px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">
+                                        Band 8+ Task 1 Model Breakdown
                                     </div>
-
-                                    <div class="model-breakdown-card">
-                                        <span class="model-tag tag-body">Body 2 (Declining Trends)</span>
-                                        <p class="essay-p">In contrast, ownership of both laptops and games consoles fell over the period. Ownership of laptops declined slightly from 79 to 73 percent, and the fall in games console ownership was similarly small.</p>
-                                    </div>
+                                    <p>
+                                        <span class="hl-phrase" data-title="The charts illustrate the proportions of adults in the USA who owned..." data-type="Introduction Paraphrase Frame" data-desc="Specifies parameter, subject group, geographic market, and comparative dates." data-upgrade="The bar charts illustrate changes in the ownership rates of five consumer digital devices among American adults between 2010 and 2015.">The charts illustrate the proportions of adults in the USA who owned five different types of digital equipment in 2010 and 2015</span>. <span class="hl-phrase" data-title="Overall, ... a higher percentage of people owned... However, ownership of... declined over the period." data-type="Balanced Two-Way Overview Statement" data-desc="Separates rising growth categories from plateauing/contracting devices." data-upgrade="Overall, ownership of mobile phones, tablets, and e-readers demonstrated substantial growth, whereas laptop and gaming console penetration experienced modest declines.">In 2015 a higher percentage of people owned mobile phones, e-readers and tablets than in 2010. However, ownership of laptops and games consoles declined over the period</span>.
+                                    </p>
+                                    <p>
+                                        <span class="hl-phrase" data-title="The device that the largest number of people owned in both years was..." data-type="Dominant Device Analysis" data-desc="Focuses on market-leading hardware." data-upgrade="Mobile phones remained the quintessential digital asset throughout the period:">The device that the largest number of people owned in both years was the mobile phone</span>, <span class="hl-vocab" data-title="rising from just over 80 percent to 92 percent" data-type="Data Range Collocation" data-desc="Quantifies smartphone saturation." data-upgrade="climbing from 82% to a commanding 92%">rising from just over 80 percent to 92 percent</span>. <span class="hl-phrase" data-title="The increase in ownership was greatest for tablets: ..." data-type="Exponential Growth Highlight" data-desc="Pins fifteen-fold adoption surge." data-upgrade="Tablet adoption witnessed the most dramatic expansion:">The increase in ownership was greatest for tablets</span>: <span class="hl-vocab" data-title="only 3 percent had one in 2010, in comparison with 45 percent in 2015" data-type="Rapid Adoption Collocation" data-desc="Highlights explosive growth." data-upgrade="surging from a negligible 3% in 2010 to 45% by 2015">only 3 percent had one in 2010, in comparison with 45 percent in 2015</span>. A similar upward trend occurred in e-readers (rising from 4% to 19%).
+                                    </p>
+                                    <p>
+                                        <span class="hl-phrase" data-title="In contrast, ownership of both laptops and games consoles fell over the period." data-type="Contrast Secondary Grouping" data-desc="Groups the two slight downward categories." data-upgrade="Conversely, laptop and console ownership underwent modest contractions:">In contrast, ownership of both laptops and games consoles fell over the period</span>. Laptop ownership <span class="hl-vocab" data-title="declined slightly from 79 to 73 percent" data-type="Moderate Fall Collocation" data-desc="Identifies slight downward trend." data-upgrade="retreated slightly from 79% to 73%">declined slightly from 79 to 73 percent</span>, and the dip in games console usage was similarly modest (42% to 40%).
+                                    </p>
                                 </div>
+                            </div>
+
+                            <div class="action-row" style="margin-top: 10px;">
+                                <button class="btn-action btn-primary" onclick="toggleWritingHighlights(this)">💡 Highlight Signposts &amp; Lexicon</button>
+                                <button class="btn-action" onclick="speakEssay(this)">🔊 Listen Model Report</button>
                             </div>
                         </div>
                     </div>
