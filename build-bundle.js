@@ -34,6 +34,7 @@ const jsFilesToBundle = [
     'laser-pointer.js',
     'pen-annotation.js',
     'classroom-timer.js',
+    'deck-charts.js',
     'presentation-tools.js'
 ];
 

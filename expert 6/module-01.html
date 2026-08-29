@@ -491,36 +491,52 @@
                 </div>
             </slide-card>
 
-            <!-- SLIDE 18: 1a Writing Task 1 - Writing an Overview Sentence -->
+            <!-- SLIDE 18: 1a Writing Task 1 - Writing an Overview Sentence with Interactive Bar Chart -->
             <slide-card template="writing-model" skill="write" title="Writing 1a (Task 1): Crafting Introductions &amp; Clear Overviews" subtitle="Prompt: Reasons why people choose to make or break friendship connections on social media.">
                 <div slot="prompt">
-                    <div style="font-size:18px; line-height:1.6;">
+                    <div style="font-size:17.5px; line-height:1.55; margin-bottom:12px;">
                         <strong>Task 1 Prompt:</strong> <em>The chart shows the main reasons why people choose to make or break friendship connections on a popular social media site. Write an introductory sentence and an overview sentence for the chart.</em>
                     </div>
+                    <!-- Interactive Social Media Bar Chart -->
+                    <div class="ielts-chart-container" id="chart-social-media-connections"></div>
                 </div>
                 <div slot="essay">
-                    <div class="card" style="border-left:6px solid var(--col-writing); padding:22px 28px; margin-bottom:16px;">
-                        <div style="font-size:20px; font-weight:800; color:var(--col-writing); margin-bottom:8px;">1. Introduction (Paraphrase the Prompt)</div>
-                        <p style="font-size:21px; line-height:1.75; color:var(--text-dark); margin:0;">
+                    <div class="card" style="border-left:6px solid var(--col-writing); padding:20px 24px; margin-bottom:14px;">
+                        <div style="font-size:19px; font-weight:800; color:var(--col-writing); margin-bottom:8px;">1. Introduction (Paraphrase the Prompt)</div>
+                        <p style="font-size:20.5px; line-height:1.7; color:var(--text-dark); margin:0;">
                             <span class="hl-phrase" data-phrase="Introduction Formula" data-note="Paraphrases 'shows the main reasons why people choose to make or break' into 'illustrates the reasons people gave for starting or ending friendships'.">The chart illustrates the reasons people gave for starting or ending friendships on a social media site.</span>
                         </p>
                     </div>
 
-                    <div class="card" style="border-left:6px solid var(--col-reading); padding:22px 28px;">
-                        <div style="font-size:20px; font-weight:800; color:var(--col-reading); margin-bottom:8px;">2. Band 7+ Overview Sentence (Key Trends / Contrasts)</div>
-                        <p style="font-size:21px; line-height:1.75; color:var(--text-dark); margin:0;">
+                    <div class="card" style="border-left:6px solid var(--col-reading); padding:20px 24px;">
+                        <div style="font-size:19px; font-weight:800; color:var(--col-reading); margin-bottom:8px;">2. Band 7+ Overview Sentence (Key Trends / Contrasts)</div>
+                        <p style="font-size:20.5px; line-height:1.7; color:var(--text-dark); margin:0;">
                             <span class="hl-phrase" data-phrase="Contrasting Complex Structure" data-note="Uses 'While [Clause A], [Clause B]' to contrast the dominant reasons of one category with the diverse reasons of another.">While two main reasons dominate the reasons to begin friendships, a variety of reasons were given for ending friendships.</span>
                         </p>
                     </div>
                 </div>
                 <div slot="annotations">
-                    <div class="card" style="background:#ffffff; border-top:4px solid var(--col-writing); padding:20px 24px;">
-                        <h4 style="color:var(--col-writing); font-size:20px; font-weight:800; margin-bottom:10px;">✍️ Overview Golden Rules</h4>
-                        <ul style="padding-left:18px; font-size:18px; line-height:1.7; color:var(--text-dark);">
+                    <div class="card" style="background:#ffffff; border-top:4px solid var(--col-writing); padding:18px 22px;">
+                        <h4 style="color:var(--col-writing); font-size:19px; font-weight:800; margin-bottom:8px;">✍️ Overview Golden Rules</h4>
+                        <ul style="padding-left:18px; font-size:17.5px; line-height:1.65; color:var(--text-dark);">
                             <li><strong>No specific data:</strong> Do not list percentages or raw numbers in the overview.</li>
                             <li><strong>Major trends:</strong> Highlight the highest/lowest or key contrast.</li>
                             <li><strong>Signpost word:</strong> Start with <em>"Overall,"</em> or use a complex <em>"While..."</em> clause.</li>
                         </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 19: 1a Writing Task 1 - Mini Trend Sketches (A, B, C) -->
+            <slide-card template="summary-checklist" skill="write" title="Writing 1a Strategy: Matching Trends to Visual Sketches (A, B, C)" subtitle="Analyze the 3 trend archetypes: Inverted trends, Single-group dominance, and Parallel trajectories.">
+                <div slot="grid" style="grid-column:1 / -1;">
+                    <div class="card" style="border-left:6px solid var(--col-writing); padding:20px 24px;">
+                        <div style="font-size:20px; font-weight:800; color:var(--col-writing); margin-bottom:8px;">📊 Task 1 Overview Visual Archetypes</div>
+                        <p style="font-size:18px; line-height:1.6; color:var(--text-dark); margin-bottom:12px;">
+                            Match overview descriptions to their geometric trend profiles:
+                        </p>
+                        <!-- Interactive Mini Sketches Grid -->
+                        <div id="chart-mini-trend-sketches"></div>
                     </div>
                 </div>
             </slide-card>
@@ -942,12 +958,14 @@
                 </div>
             </slide-card>
 
-            <!-- SLIDE 34: 1b Writing Task 1 - Full Official Model Answer (Band 6+) -->
+            <!-- SLIDE 35: 1b Writing Task 1 - Full Official Model Answer (Band 6+) with Interactive Line Graph -->
             <slide-card template="writing-model" skill="write" title="Writing 1b (Task 1): Complete Official Model Answer (Band 6+)" subtitle="Cinema ticket and DVD sales in the USA and internationally (2001–2010).">
                 <div slot="prompt">
-                    <div style="font-size:18px; line-height:1.6;">
+                    <div style="font-size:17px; line-height:1.55; margin-bottom:10px;">
                         <strong>Task 1 Prompt:</strong> <em>The graph below shows the amount of income from cinema ticket and DVD sales in the USA and internationally from 2001 to 2010. Summarise by selecting and reporting the main features, and make comparisons where relevant. (Write at least 150 words).</em>
                     </div>
+                    <!-- Interactive Cinema vs DVD Sales Multi-Line Graph -->
+                    <div class="ielts-chart-container" id="chart-cinema-dvd-sales"></div>
                 </div>
                 <div slot="essay">
                     <p>
