@@ -55,15 +55,25 @@ class StepRevealEngine {
             }
         });
 
-        // 2. Allow clicking anywhere on a question card to reveal it without injecting disruptive UI buttons
-        document.querySelectorAll('.q-card').forEach(card => {
-            if (card.dataset.stepBound) return;
-            card.dataset.stepBound = 'true';
+        // 2. On Strategy slides, allow clicking a strategy card to toggle its keyword highlighting without revealing answers/explanations
+        document.querySelectorAll('.strategy-card').forEach(card => {
+            if (card.dataset.strategyBound) return;
+            card.dataset.strategyBound = 'true';
             card.addEventListener('click', (e) => {
-                if (window.getSelection && window.getSelection().toString().trim().length > 0) return;
-                if (e.target.tagName !== 'SELECT' && e.target.tagName !== 'INPUT' && !e.target.closest('button') && !e.target.closest('a')) {
-                    this.revealSingleCard(card);
-                }
+                if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+                const syns = card.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word');
+                const isAnyActive = Array.from(syns).some(s => s.classList.contains('active-syn') || s.classList.contains('active-vocab'));
+                syns.forEach(s => {
+                    if (isAnyActive) {
+                        s.classList.remove('active-syn', 'active-vocab');
+                    } else {
+                        if (s.classList.contains('vocab-word')) {
+                            s.classList.add('active-vocab');
+                        } else {
+                            s.classList.add('active-syn');
+                        }
+                    }
+                });
             });
         });
 
