@@ -26,6 +26,7 @@ const jsFilesToBundle = [
     'reading-highlighter.js',
     'vocab-bank.js',
     'essay-analyzer.js',
+    'writing-annotator.js',
     'progress-tracker.js',
     'slide-navigator.js',
     'presentation-spotlight.js',

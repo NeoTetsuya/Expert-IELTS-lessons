@@ -175,40 +175,51 @@
 .mini-sketches-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-top: 10px;
+    gap: 12px;
+    width: 100%;
 }
 
 .mini-sketch-card {
     background: #fffdf5;
     border: 2px solid #fed7aa;
     border-radius: 10px;
-    padding: 12px;
+    padding: 12px 10px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .mini-sketch-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    border-color: #ea580c;
 }
 
 .mini-sketch-badge {
     position: absolute;
     top: 8px;
     left: 8px;
-    background: #ffffff;
-    border: 2px solid #ea580c;
-    color: #ea580c;
+    background: #ea580c;
+    color: #ffffff;
     font-weight: 800;
-    font-size: 14px;
-    width: 24px;
-    height: 24px;
+    font-size: 13px;
+    width: 22px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(234, 88, 12, 0.3);
 }
+
+.mini-sketch-title {
+    font-weight: 700;
+    font-size: 14.5px;
+    margin-bottom: 6px;
+    color: #1e293b;
+    text-align: center;
+    padding-left: 20px;
+}
+
