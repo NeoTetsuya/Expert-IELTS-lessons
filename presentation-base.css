@@ -352,7 +352,7 @@ html, body {
     border: var(--card-border, 1.5px solid var(--border-soft, rgba(0,0,0,0.08)));
     margin-bottom: 14px;
     box-shadow: var(--card-shadow, 0 2px 8px rgba(0,0,0,0.04));
-    font-size: calc(19px * var(--font-scale, 1));
+    font-size: calc(20px * var(--font-scale, 1));
     line-height: 1.7;
     color: var(--text-body, #1e293b);
 }
@@ -360,11 +360,11 @@ html, body {
 .card-sm {
     background: var(--card-bg, #ffffff);
     border-radius: 8px;
-    padding: 14px 18px;
+    padding: 15px 20px;
     border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
     margin-bottom: 10px;
-    font-size: calc(17.5px * var(--font-scale, 1));
-    line-height: 1.6;
+    font-size: calc(19px * var(--font-scale, 1));
+    line-height: 1.65;
 }
 
 /* Discussion Question Cards */
