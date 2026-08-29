@@ -120,39 +120,39 @@ HTML presentations/
 
 ---
 
-## 4. Standard 17–18 Slide Module Blueprint
+## 4. Standard Slide Module Blueprint & The 3-Stage Reading Framework
 
-Every complete IELTS module deck follows this structured instructional sequence:
+Every reading task in an IELTS module deck uses a **3-Stage Instructional Sequence** preceding independent practice:
+1. **Stage 1 (Pre-reading Keyword Analysis)**: Question keyword deconstruction with direct **🟢 Green (Anchor)** and **🟣 Purple (Qualifier/Claim)** sentence highlighting and step-reveal (<kbd>E</kbd>).
+2. **Stage 2 (Model Walkthrough)**: 1-question model walkthrough alongside a dedicated single paragraph excerpt.
+3. **Stage 3 (Full Split-View Reading)**: Full unabridged reading text and complete interactive question set.
 
-| Slide # | Slide Type | `data-skill` | Description |
+| Slide Range | Slide Type | `data-skill` | Description |
 | :---: | :--- | :--- | :--- |
 | **01** | **Title & Course Roadmap** | `title` | Module badge, main title, subtitle, and interactive 4-skill syllabus cards. |
-| **02** | **Part A Reading** | `read` | 50/50 Split-view passage with dual-color synonym grounding & interactive questions. |
-| **03** | **Part A Reading Strategy / Critical View** | `read` / `grammar` | Secondary text analysis (e.g. YES/NO/NOT GIVEN, matching sentence endings). |
-| **04** | **Part A Grammar Focus** | `grammar` | Rules summary, interactive transformation cards, or cloze practice. |
-| **05** | **Part A Academic Rewriting** | `grammar` / `write` | Informal draft vs. Band 8+ academic model transformation. |
-| **06** | **Part A Vocabulary Focus** | `vocab` | Collocation cards, prefix/suffix word formations, click-to-fill bank. |
-| **07** | **Part A Speaking / Pronunciation** | `vocab` / `review` | Connected speech, intonation drills, or Part 1 quick-fire topics. |
-| **08** | **Part B Section Divider** | `section` | Two-column transition banner introducing Part B topic & skills. |
-| **09** | **Part B Reading (Main Task)** | `read` | Full academic reading passage (Paragraphs A–F) & Matching Information. |
-| **10** | **Part B Reading (Questions 7–13)** | `read` | Matching Headings, Summary Gap-fill, or YES/NO/NOT GIVEN. |
-| **11** | **Part B Grammar Mastery** | `grammar` | Advanced grammar (e.g., intensifiers, mixed conditionals, inversion). |
-| **12** | **Part B Vocabulary In Use** | `vocab` | Topic-specific taxonomy table (e.g. Animal Kingdom / Phrasal Verbs). |
-| **13** | **Part B Writing Analysis** | `write` | Task 1/2 question prompt deconstruction, essay planning & thesis formulation. |
-| **14** | **Part B Model Essay Breakdown** | `write` | Color-coded 4-paragraph Band 8.5+ model essay with connector highlighting. |
-| **15** | **Part B Writing / Error Correction** | `write` | Common spelling traps, student draft critique, or cohesion practice. |
-| **16** | **IELTS Speaking Masterclass** | `review` / `vocab` | Parts 1, 2 Cue Card (with Band 8 response), and Part 3 abstract discussion. |
-| **17** | **Summary & Exam Competencies** | `review` | Complete 5-skill achievement checklist and key exam takeaways. |
+| **02** | **Part A Reading Strategy (Stage 1)** | `read` | Pre-reading question keyword deconstruction with direct green/purple sentence highlighting. |
+| **03** | **Part A Reading Model (Stage 2)** | `read` | Model walkthrough of Question 1 alongside its dedicated paragraph excerpt. |
+| **04** | **Part A Full Reading Task (Stage 3)** | `read` | 50/50 Split-view passage with dual-color synonym grounding & interactive questions. |
+| **05–07** | **Part A Secondary Reading / Critical View** | `read` | Preparatory strategy pair + full split-view task (e.g. YES/NO/NOT GIVEN). |
+| **08–10** | **Part A Grammar Mastery** | `grammar` | Rules summary, academic transformations, and cloze practice. |
+| **11** | **Part A Writing / Vocabulary Focus** | `write` / `vocab` | Collocation cards, prefix/suffix word formations, or essay planning. |
+| **12** | **Part B Section Divider** | `section` | Two-column transition banner introducing Part B topic & skills. |
+| **13–15** | **Part B Reading (Main Task)** | `read` | 3-Stage Reading Sequence: Strategy Slide + Model Walkthrough + Full Reading Task. |
+| **16–18** | **Part B Secondary Reading** | `read` | 3-Stage Reading Sequence for Questions 7–13 (e.g. Matching Headings or Y/N/NG). |
+| **19–21** | **Part B Vocabulary In Use** | `vocab` | Syntactic breakdown, parts of speech, and intensifier collocations. |
+| **22–23** | **Part B Writing Mastery** | `write` | Common spelling traps, model essay breakdown, and prompt deconstruction. |
+| **24** | **IELTS Speaking Masterclass** | `review` / `vocab` | Parts 1, 2 Cue Card (with Band 8 response), and Part 3 abstract discussion. |
+| **25** | **Summary & Exam Competencies** | `review` | Complete 5-skill achievement checklist and key exam takeaways. |
 
 ---
 
 ## 5. Slide Recipes & Code Templates
 
-### A. Split-View Reading with Dual-Color Synonym Grounding (`data-skill="read"`)
-
-The reading interface uses a 50/50 split container:
-- **Left Pane (`.reading-pane`)**: Scrollable academic text with `<mark class="evidence" id="ev-...">` wrapping `.syn-pair-1` (Green) and `.syn-pair-2` (Purple).
-- **Right Pane (`.question-pane`)**: Interactive question cards (`.q-card`) with `<button class="syn-btn" data-ev="...">💡 Evidence</button>` and detailed `.item-explanation` boxes.
+### A. The 3-Stage Reading Sequence (`data-skill="read"`)
+Refer to the dedicated [reading_passages_and_questions_guide.md](file:///d:/Teaching/HTML%20presentations/reading_passages_and_questions_guide.md) for full blueprints:
+- **Stage 1 (Strategy Slide)**: Question cards with direct `.syn-pair-1` (Green) and `.syn-pair-2` (Purple) sentence spans and `<button onclick="revealAnswers(this)">💡 Show Highlights</button>`.
+- **Stage 2 (Model Walkthrough Slide)**: Left reading pane with dedicated single paragraph `<mark class="evidence">` and right pane with 1 Question card and `💡 Evidence` button.
+- **Stage 3 (Full Split-View Slide)**: 50/50 Split-view container with full text and complete interactive exercise.
 
 ```html
 <section class="slide" id="slide-2" data-skill="read">
