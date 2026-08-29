@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert IELTS • Master Template Catalog &amp; Blueprint Gallery</title>
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href="presentation-base.css">
+    <style>
+        .catalog-badge {
+            background: #4f46e5;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation-viewport">
+        <!-- Persistent Interactive Navigation Sidebar -->
+        <div class="theme-sidebar">
+            <div class="skill-tab active" data-skill="title">DEMO</div>
+            <div class="skill-tab" data-skill="read">READ</div>
+            <div class="skill-tab" data-skill="grammar">GRAMMAR</div>
+            <div class="skill-tab" data-skill="vocab">VOCAB</div>
+            <div class="skill-tab" data-skill="write">WRITE</div>
+            <div class="skill-tab" data-skill="review">REVIEW</div>
+        </div>
+
+        <main class="slides-track">
+            <!-- 1. Title Slide -->
+            <slide-card template="title" skill="title">
+                <span slot="badge">Template System • Master Catalog</span>
+                <span slot="title">IELTS Slide Templates &amp; Layout Catalog</span>
+                <span slot="subtitle">Declarative, reusable blueprints for all IELTS lessons and question types.</span>
+                <div slot="tags">
+                    <span class="catalog-badge">13 Standardized Layouts</span>
+                    <span class="catalog-badge">Dynamic Numbering</span>
+                    <span class="catalog-badge">High-Legibility 26px Fonts</span>
+                </div>
+                <div slot="roadmap">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                        <div class="card" style="padding: 16px; margin: 0;">📖 1-Q Walkthroughs</div>
+                        <div class="card" style="padding: 16px; margin: 0;">📚 Reading Split-Views</div>
+                        <div class="card" style="padding: 16px; margin: 0;">🎯 Keyword Strategies</div>
+                        <div class="card" style="padding: 16px; margin: 0;">📝 Grammar &amp; Vocab Grids</div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- 2. Up-to-Down Walkthrough Example -->
+            <slide-card template="walkthrough" skill="read">
+                <span slot="badge">Reading Strategy • Model Walkthrough</span>
+                <span slot="title">Model Walkthrough: Question 1 &amp; Paragraph [B]</span>
+                <span slot="subtitle">Demonstration: Up-to-Down Centered View with dedicated excerpt and question below.</span>
+                
+                <div slot="passage-header">📖 Passage Excerpt: Paragraph [B]</div>
+                <div slot="passage-text">
+                    <span class="para-tag" style="font-size:20px; font-weight:800; margin-right:6px;">[B]</span> <mark class="evidence" id="ev-demo-1" data-q="demo-1"><span class="syn-pair-1" data-q="demo-1">"Extraordinary experiences</span> are <span class="syn-pair-2" data-q="demo-1">pleasurable in the moment but can leave us socially worse off in the long run,"</span></mark> says study author Gus Cooney.
+                </div>
+
+                <span slot="question-text">
+                    1. <span class="syn-pair-1" data-q="demo-1">Sharing experiences</span> provides us with <span class="syn-pair-2" data-q="demo-1">immediate and long-term satisfaction</span>.
+                </span>
+                
+                <div slot="input-area">
+                    <select class="select-input" data-ans="B" style="min-width: 220px; font-size: 21px; padding: 10px 18px; font-weight: 700;">
+                        <option value="">Select Answer...</option>
+                        <option value="A">Sentence A</option>
+                        <option value="B">Sentence B</option>
+                        <option value="C">Sentence C</option>
+                        <option value="D">Sentence D</option>
+                    </select>
+                </div>
+
+                <div slot="explanation">
+                    <div class="syn-key-box" style="margin-top:0;">
+                        <span class="syn-tag green">Green Match:</span> <em>"Sharing experiences"</em> ↔ <em>"Extraordinary experiences"</em>
+                    </div>
+                    <div class="syn-key-box">
+                        <span class="syn-tag purple">Purple Match:</span> <em>"immediate &amp; long-term"</em> ↔ <em>"pleasurable in moment / worse off in long run"</em> (Sentence B)
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- 3. Pre-Reading Strategy Example -->
+            <slide-card template="strategy" skill="read" title="YES/NO/NOT GIVEN: Question Keyword Deconstruction" subtitle="Click any sentence or press E to step-reveal the direct sentence highlights.">
+                <div slot="sentences">
+                    <div class="card q-card strategy-card" data-q="strat-demo-1" style="border-left: 5px solid var(--col-reading); padding: 14px 20px;">
+                        <p class="sentence-text" style="font-size: 19px; font-weight: 700; color: var(--text-dark); line-height: 1.6; margin: 0;">
+                            1. <span class="syn-pair-1" data-q="strat-demo-1">There were too few participants</span> <span class="syn-pair-2" data-q="strat-demo-1">for effective research</span>.
+                        </p>
+                    </div>
+                    <div class="card q-card strategy-card" data-q="strat-demo-2" style="border-left: 5px solid var(--col-reading); padding: 14px 20px;">
+                        <p class="sentence-text" style="font-size: 19px; font-weight: 700; color: var(--text-dark); line-height: 1.6; margin: 0;">
+                            2. The study <span class="syn-pair-1" data-q="strat-demo-2">reflected what happens</span> <span class="syn-pair-2" data-q="strat-demo-2">in the real world</span>.
+                        </p>
+                    </div>
+                </div>
+                <div slot="guide">
+                    <div class="card" style="background: #ffffff; border-left: 5px solid #16a34a; padding: 16px 20px;">
+                        <div style="font-size: 17px; font-weight: 800; color: #16a34a; margin-bottom: 4px;">✔️ YES (Agrees with View)</div>
+                        <div style="font-size: 15.5px; line-height: 1.5; color: var(--text-dark);">The writer explicitly affirms the exact purple claim and green anchor.</div>
+                    </div>
+                    <div class="card" style="background: #ffffff; border-left: 5px solid #dc2626; padding: 16px 20px;">
+                        <div style="font-size: 17px; font-weight: 800; color: #dc2626; margin-bottom: 4px;">❌ NO (Contradicts View)</div>
+                        <div style="font-size: 15.5px; line-height: 1.5; color: var(--text-dark);">The writer explicitly denies or contradicts the purple condition.</div>
+                    </div>
+                    <div class="card" style="background: #ffffff; border-left: 5px solid #9333ea; padding: 16px 20px;">
+                        <div style="font-size: 17px; font-weight: 800; color: #9333ea; margin-bottom: 4px;">❓ NOT GIVEN (Impossible to Say)</div>
+                        <div style="font-size: 15.5px; line-height: 1.5; color: var(--text-dark);">The passage mentions the topic, but the purple claim is never verified.</div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- 4. Vocabulary Cards Example -->
+            <slide-card template="vocab-cards" skill="vocab" title="Academic Lexicon &amp; Pronunciation Audio">
+                <div slot="cards">
+                    <div class="card" style="background: #ffffff; border-top: 4px solid var(--col-vocab); padding: 22px; display: flex; flex-direction: column;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight: 800; font-size: 23px; color: var(--text-dark);">Goal</span>
+                            <button class="speak-btn" data-speak="Goal" style="background:none; border:none; cursor:pointer; font-size:20px;">🔊</button>
+                        </div>
+                        <div style="font-size: 16px; color: var(--col-grammar); font-weight:700; margin: 4px 0 8px 0;">Noun</div>
+                        <p style="font-size: 18.5px; line-height: 1.55; color: var(--text-dark);">An aim or target to achieve.</p>
+                    </div>
+                    <div class="card" style="background: #ffffff; border-top: 4px solid var(--col-vocab); padding: 22px; display: flex; flex-direction: column;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight: 800; font-size: 23px; color: var(--text-dark);">Assume</span>
+                            <button class="speak-btn" data-speak="Assume" style="background:none; border:none; cursor:pointer; font-size:20px;">🔊</button>
+                        </div>
+                        <div style="font-size: 16px; color: var(--col-grammar); font-weight:700; margin: 4px 0 8px 0;">Verb</div>
+                        <p style="font-size: 18.5px; line-height: 1.55; color: var(--text-dark);">To accept as true without proof.</p>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- 5. Summary & Checklist Example -->
+            <slide-card template="summary-checklist" skill="review" title="Module Mastery &amp; Exam Checklist" subtitle="Comprehensive review across all 4 skill domains.">
+                <div slot="grid">
+                    <div class="card" style="border-left:6px solid var(--col-reading); padding:24px 28px; margin-bottom:0;">
+                        <div style="font-size:22px; font-weight:800; color:var(--col-reading); margin-bottom:10px;">📖 Reading Strategies</div>
+                        <ul style="padding-left:20px; font-size:21px; line-height:1.75; display:flex; flex-direction:column; gap:8px; margin-bottom:0;">
+                            <li><strong>YES / NO / NOT GIVEN:</strong> Disagreement (NO) vs absence of facts (NOT GIVEN).</li>
+                            <li><strong>Matching Information (A–F):</strong> Locate exact paragraph details by scanning synonyms.</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-left:6px solid var(--col-writing); padding:24px 28px; margin-bottom:0;">
+                        <div style="font-size:22px; font-weight:800; color:var(--col-writing); margin-bottom:10px;">✍️ Writing Task 2</div>
+                        <ul style="padding-left:20px; font-size:21px; line-height:1.75; display:flex; flex-direction:column; gap:8px; margin-bottom:0;">
+                            <li><strong>Opinion Essay Structure:</strong> Clear thesis with balanced body arguments.</li>
+                            <li><strong>Spelling Accuracy:</strong> Double vowels, missing consonants, and homophones.</li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+        </main>
+    </div>
+
+    <!-- Template Engine & Presentation Scripts -->
+    <script src="js/template-engine.js"></script>
+    <script src="js/deck-engine.js"></script>
+</body>
+
+</html>

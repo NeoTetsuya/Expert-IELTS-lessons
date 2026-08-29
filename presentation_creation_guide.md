@@ -11,9 +11,13 @@ All course presentations adhere to a standardized modular directory layout:
 ```
 HTML presentations/
 ├── presentation-base.css              # Universal master stylesheet (Stage, layout, cards, typography, HUD)
+├── templates/
+│   └── slide-templates.html           # Universal HTML5 Slide Template Catalog (13 Standardized Layouts)
+├── templates-catalog.html             # Live visual template blueprint gallery for teachers
 ├── presentation_creation_guide.md     # This comprehensive creation guide
 ├── reading_passages_and_questions_guide.md # Deep-dive guide for reading & evidence grounding
 ├── js/                                # Universal modular JavaScript engine
+│   ├── template-engine.js             # Declarative slide-card expander & dynamic slide counter
 │   ├── deck-engine.js                 # Master bundle entry point & auto-loader
 │   ├── deck-bundle.js                 # Recompiled high-performance distribution bundle
 │   ├── deck-core.js                   # Stage scaling, slide lifecycle, keyboard nav & validation
@@ -36,7 +40,6 @@ HTML presentations/
 │   └── presentation-tools.js          # Toolbar HUD coordinator & key dispatcher
 ├── expert 5/
 │   ├── module-04.html
-│   ├── module-08.html
 │   └── ...
 ├── expert 6/
 │   ├── module-02.html
