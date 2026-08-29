@@ -303,8 +303,10 @@ class DeckEngine {
         });
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-        document.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+        const slideContext = container.closest('.slide') || document.querySelector('.slide.active') || document;
+        slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+        slideContext.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
+        slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
         }
@@ -331,8 +333,11 @@ class DeckEngine {
         });
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
-        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
-        document.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted'));
+        const slideContext = container.closest('.slide') || document.querySelector('.slide.active') || document;
+        slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
+        slideContext.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
+        slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
+        slideContext.querySelectorAll('.card, .q-card').forEach(c => c.classList.remove('revealed'));
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
         }

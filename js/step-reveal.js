@@ -158,9 +158,12 @@ class StepRevealEngine {
             }
         });
 
-        // Reveal direct keyword highlights inside card
+        // Reveal direct keyword and vocabulary highlights inside card
         card.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => {
             s.classList.add('active-syn');
+        });
+        card.querySelectorAll('.vocab-word, .vocab-term').forEach(v => {
+            v.classList.add('active-vocab');
         });
 
         card.classList.add('revealed');
