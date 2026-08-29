@@ -413,7 +413,9 @@ Before finalizing any reading presentation, verify against this checklist:
 
 1. [ ] **3-Stage Sequence**: Does every reading task have its dedicated Strategy Slide (Stage 1) and Model Walkthrough (Stage 2) preceding the full text (Stage 3)?
 2. [ ] **Direct Sentence Colors**: Are keywords wrapped in `.syn-pair-1` (Anchor) and `.syn-pair-2` (Qualifier) directly on the sentence text without separate spoiler boxes?
-3. [ ] **Action Row Present**: Does every strategy and exercise slide contain a clean `.action-row` with `Show Highlights / Check Answers` and `Reset`?
-4. [ ] **Step Reveal Shortcut**: Does pressing <kbd>E</kbd> or clicking question cards step-reveal highlights one-by-one?
-5. [ ] **Smooth Auto-Scroll**: Does clicking `💡 Evidence` on the model or full exercise slide smoothly center the reading pane on the target `<mark class="evidence">`?
-6. [ ] **Clean Reset**: Does clicking `Reset` return all inputs and highlights to their pristine unrevealed state?
+3. [ ] **List of Headings UI**: Is the List of Headings rendered as a dedicated card with large typography (`18.5px`–`19px`), line-by-line format, and monospace Roman numerals (`i.`, `ii.`, etc.) rather than a cramped single paragraph?
+4. [ ] **Full Content Guarantee**: Are all reading exercises, topic sentence questions, sentence completions, and walkthroughs from the source course material fully included?
+5. [ ] **Action Row Present**: Does every strategy and exercise slide contain a clean `.action-row` with `Show Highlights / Check Answers` and `Reset`?
+6. [ ] **Step Reveal Shortcut**: Does pressing <kbd>E</kbd> or clicking question cards step-reveal highlights one-by-one?
+7. [ ] **Smooth Auto-Scroll**: Does clicking `💡 Evidence` on the model or full exercise slide smoothly center the reading pane on the target `<mark class="evidence">`?
+8. [ ] **Clean Reset**: Does clicking `Reset` return all inputs and highlights to their pristine unrevealed state?

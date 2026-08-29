@@ -184,7 +184,10 @@
                         <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
-                    <div class="two-col" style="flex: 1; min-height: 0; gap: 24px;" data-slot="content"></div>
+                    <div class="two-col" style="flex: 1; min-height: 0; gap: 24px;">
+                        <div style="display: flex; flex-direction: column; gap: 14px; flex: 1.1; overflow-y: auto;" data-slot="rules"></div>
+                        <div style="display: flex; flex-direction: column; gap: 14px; flex: 0.9; overflow-y: auto;" data-slot="contrast-card"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -221,7 +224,7 @@
     </section>
 </template>
 
-<!-- 8. WRITING TASK 2 MODEL TEMPLATE (Scrollable & High-Legibility 24px Scale) -->
+<!-- 8. WRITING TASK 2 / TASK 1 MODEL TEMPLATE (Scrollable & High-Legibility 24px Scale) -->
 <template id="tmpl-writing-model">
     <section class="slide" data-skill="write">
         <div class="slide-inner">
@@ -230,18 +233,23 @@
                 <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
                     <div class="slide-header" style="margin-bottom: 8px;">
                         <div class="slide-title-group">
-                            <span class="skill-badge" style="background: var(--col-writing); font-size: 14px; padding: 4px 12px;" data-slot="badge">IELTS Writing Task 2 • Model Answer</span>
+                            <span class="skill-badge" style="background: var(--col-writing); font-size: 14px; padding: 4px 12px;" data-slot="badge">IELTS Writing • Model Answer</span>
                             <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
                         </div>
                         <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
                     <div class="two-col" style="flex: 1; min-height: 0; gap: 28px; align-items: stretch;">
-                        <!-- Left Col: Prompt & Plan -->
-                        <div class="col" style="display: flex; flex-direction: column; gap: 16px; flex: 0.9; overflow-y: auto;" data-slot="left-col"></div>
+                        <!-- Left Col: Prompt & Plan / Annotations -->
+                        <div class="col" style="display: flex; flex-direction: column; gap: 16px; flex: 0.9; overflow-y: auto;" data-slot="left-col">
+                            <div data-slot="prompt"></div>
+                            <div data-slot="annotations"></div>
+                        </div>
 
-                        <!-- Right Col: Scrollable Band 6+ Model Essay -->
-                        <div class="writing-model-pane" data-slot="model-essay"></div>
+                        <!-- Right Col: Scrollable Model Essay -->
+                        <div class="writing-model-pane" style="flex: 1.1; overflow-y: auto;" data-slot="model-essay">
+                            <div data-slot="essay"></div>
+                        </div>
                     </div>
 
                     <div class="action-row" style="margin-top: 10px;">
@@ -532,7 +540,12 @@
                 const slotChildren = el.querySelectorAll('[slot]');
                 slotChildren.forEach(child => {
                     const slotName = child.getAttribute('slot');
-                    const target = section.querySelector(`[data-slot="${slotName}"]`);
+                    let target = section.querySelector(`[data-slot="${slotName}"]`);
+                    if (!target) {
+                        if (slotName === 'essay') target = section.querySelector('.writing-model-pane, [data-slot="model-essay"]');
+                        if (slotName === 'prompt' || slotName === 'annotations') target = section.querySelector('[data-slot="left-col"]');
+                        if (slotName === 'rules') target = section.querySelector('[data-slot="content"]');
+                    }
                     if (target) {
                         // Transfer classes, styles, and custom attributes from child element
                         if (child.className && child.className !== '') {
@@ -559,8 +572,12 @@
                             if (markEl) markEl.id = child.getAttribute('data-ev');
                         }
 
-                        // Copy inner HTML
-                        target.innerHTML = child.innerHTML;
+                        // Copy inner HTML (append if target already has content and is a container)
+                        if (target.getAttribute('data-slot') === 'left-col' && target.innerHTML.trim() !== '') {
+                            target.innerHTML += child.innerHTML;
+                        } else {
+                            target.innerHTML = child.innerHTML;
+                        }
                     }
                 });
 

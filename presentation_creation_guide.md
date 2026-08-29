@@ -445,5 +445,42 @@ Before finalizing any new presentation deck, complete this verification checklis
 4. [ ] **Action Rows**: Fixed on a single horizontal row (`Check Answers`, `👉 Step Reveal (E)`, `Reveal Keys`, `Reset`).
 5. [ ] **Smart Validation**: All `<input class="blank-input">` and `<select class="select-input">` have accurate `data-ans="..."` attributes.
 6. [ ] **Speaking Masterclass & Rewriting**: Includes Part 2 cue cards and academic rewriting models where appropriate.
-7. [ ] **Module Summary Slide**: Slide 17/18 contains the 5-skill core competency checklist.
+7. [ ] **Module Summary Slide**: Contains the core competency checklist.
 8. [ ] **Rebuild & Index Sync**: Rebuild the master bundle (`node build-bundle.js`) and update the master index (`npm run update-index`).
+
+---
+
+## 9. Authoring Rules for 100% Complete Syllabus Integration
+
+When building HTML presentations from course markdown documents (`md files/`):
+
+### A. Full Content Guarantee (No Missing Exercises)
+- **Zero Omissions**: Include **every single exercise, vocabulary drill, grammar rule, sentence completion item, and model answer** from the source markdown document.
+- **No Empty Placeholders**: Every slide must have its template slots properly populated with full exercises, rules, or explanations.
+
+### B. List of Headings UI Standard
+- In Matching Headings reading slides, **never cram all headings into a single continuous paragraph**.
+- Always render the **List of Headings as a dedicated card** with:
+  1. Font size of **`18.5px`–`19px`** with generous line height (`1.55`).
+  2. **One line per heading**.
+  3. Fixed-width monospace Roman numerals (`<strong style="font-family:var(--font-mono); width:32px; display:inline-block;">i.</strong>`) styled with `var(--col-reading)`.
+
+```html
+<div class="card" style="background:#ffffff; border:1.5px solid #cbd5e1; border-left:6px solid var(--col-reading); padding:16px 20px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+    <div style="font-size:18px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--col-reading); margin-bottom:10px;">📋 List of Headings</div>
+    <div style="display:flex; flex-direction:column; gap:8px; font-size:18.5px; line-height:1.55; color:#0f172a;">
+        <div><strong style="color:var(--col-reading); font-family:var(--font-mono); width:32px; display:inline-block;">i.</strong> Sharing half-understood ideas</div>
+        <div><strong style="color:var(--col-reading); font-family:var(--font-mono); width:32px; display:inline-block;">ii.</strong> An old situation that’s now more intense</div>
+    </div>
+</div>
+```
+
+### C. Standard Template Slot Directory
+
+| Template ID | Primary Slots | Fallback Aliases | Description |
+| :--- | :--- | :--- | :--- |
+| `tmpl-grammar-masterclass` | `rules`, `contrast-card` | `content` | Left rule cards + right common error contrast box. |
+| `tmpl-writing-model` | `prompt`, `essay`, `annotations` | `left-col`, `model-essay` | Left prompt & tips + right scrollable model essay with phrase popovers. |
+| `tmpl-reading-flowchart` | `passage`, `flowchart` | `questions` | Left reading pane + right interactive flowchart step cards. |
+| `tmpl-gap-fill-passage` | `passage`, `rules-col` | `content` | Interactive cloze passage + right grammatical/lexical rules column. |
+| `tmpl-walkthrough` | `passage-header`, `passage-text`, `question-text`, `input-area`, `explanation` | — | Focused 1-question deep dive with verbatim excerpt. |
