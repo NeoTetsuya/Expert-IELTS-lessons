@@ -324,14 +324,19 @@ html, body {
     width: 100% !important;
     flex: 1 !important;
     min-height: 0 !important;
-    overflow: hidden !important;
 }
 
-.two-col > *, .split-view-container > * {
+.split-view-container > *, .two-col > .reading-pane, .two-col > .question-pane {
     min-width: 0 !important;
     width: 100% !important;
     height: 100% !important;
     overflow-y: auto !important;
+}
+
+.two-col > .card, .two-col > .col, .two-col > div {
+    min-width: 0;
+    width: 100%;
+    height: auto;
 }
 
 .col {
