@@ -502,6 +502,29 @@ html, body {
     word-break: normal;
 }
 
+/* Strategy & Keyword Cards */
+.strategy-card, .q-card.strategy-card {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.strategy-card:hover, .q-card.strategy-card:hover {
+    border-color: var(--col-reading, #2563eb);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+}
+
+.strategy-card .sentence-text,
+.q-card.strategy-card > div,
+.strategy-item {
+    display: block !important;
+    font-size: calc(18.5px * var(--font-scale, 1));
+    font-weight: 700;
+    line-height: 1.6;
+    color: var(--text-body, #1e293b);
+    white-space: normal;
+    text-align: left;
+}
+
 .q-card select.select-input {
     flex: 0 0 auto;
     min-width: 130px;

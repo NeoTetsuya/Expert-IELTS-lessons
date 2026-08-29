@@ -85,38 +85,41 @@ class ReadingHighlighter {
         }
 
         const synSpans = document.querySelectorAll(`[data-q="${qKey}"]`);
-        const isCurrentlyActive = evTarget && evTarget.classList.contains('highlighted') && this.activeEvidenceId === (evId || qKey);
+        const isCurrentlyActive = (evTarget && evTarget.classList.contains('highlighted') && this.activeEvidenceId === (evId || qKey)) ||
+                                  (synSpans.length > 0 && Array.from(synSpans).every(s => s.classList.contains('active-syn')) && this.activeEvidenceId === qKey);
 
-        // Clear all previous single-question highlights
-        document.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
-        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
-
-        if (!isCurrentlyActive && evTarget) {
-            evTarget.classList.add('highlighted', 'glow-pulse');
+        if (!isCurrentlyActive) {
+            if (evTarget) {
+                evTarget.classList.add('highlighted', 'glow-pulse');
+            }
             synSpans.forEach(s => s.classList.add('active-syn'));
             this.activeEvidenceId = evId || qKey;
 
             // Smooth scroll into view inside the scrollable reading pane
-            const readingPane = evTarget.closest('.reading-pane');
-            if (readingPane) {
-                const paneRect = readingPane.getBoundingClientRect();
-                const targetRect = evTarget.getBoundingClientRect();
-                const relativeTop = targetRect.top - paneRect.top + readingPane.scrollTop;
-                const centerOffset = relativeTop - (paneRect.height / 2) + (targetRect.height / 2);
+            if (evTarget) {
+                const readingPane = evTarget.closest('.reading-pane');
+                if (readingPane) {
+                    const paneRect = readingPane.getBoundingClientRect();
+                    const targetRect = evTarget.getBoundingClientRect();
+                    const relativeTop = targetRect.top - paneRect.top + readingPane.scrollTop;
+                    const centerOffset = relativeTop - (paneRect.height / 2) + (targetRect.height / 2);
 
-                readingPane.scrollTo({
-                    top: Math.max(0, centerOffset),
-                    behavior: 'smooth'
-                });
-            } else {
-                evTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    readingPane.scrollTo({
+                        top: Math.max(0, centerOffset),
+                        behavior: 'smooth'
+                    });
+                } else {
+                    evTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
+                // Remove pulse animation after 2.5s while keeping highlight
+                setTimeout(() => {
+                    evTarget.classList.remove('glow-pulse');
+                }, 2500);
             }
-
-            // Remove pulse animation after 2.5s while keeping highlight
-            setTimeout(() => {
-                evTarget.classList.remove('glow-pulse');
-            }, 2500);
         } else {
+            if (evTarget) evTarget.classList.remove('highlighted', 'glow-pulse');
+            synSpans.forEach(s => s.classList.remove('active-syn'));
             this.activeEvidenceId = null;
         }
     }

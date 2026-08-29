@@ -82,9 +82,16 @@ class StepRevealEngine {
         const qCards = Array.from(container.querySelectorAll('.q-card'));
         qCards.forEach(card => {
             const inputs = Array.from(card.querySelectorAll('.blank-input, .select-input'));
-            const isUnsolved = inputs.length > 0
-                ? inputs.some(inp => !inp.classList.contains('correct'))
-                : !card.classList.contains('revealed');
+            const synSpans = Array.from(card.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3'));
+            
+            let isUnsolved = false;
+            if (inputs.length > 0) {
+                isUnsolved = inputs.some(inp => !inp.classList.contains('correct'));
+            } else if (synSpans.length > 0) {
+                isUnsolved = synSpans.some(s => !s.classList.contains('active-syn')) || !card.classList.contains('revealed');
+            } else {
+                isUnsolved = !card.classList.contains('revealed');
+            }
 
             if (isUnsolved) {
                 units.push({
@@ -149,6 +156,11 @@ class StepRevealEngine {
                 sel.classList.add('correct');
                 sel.classList.remove('wrong', 'incorrect');
             }
+        });
+
+        // Reveal direct keyword highlights inside card
+        card.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => {
+            s.classList.add('active-syn');
         });
 
         card.classList.add('revealed');
