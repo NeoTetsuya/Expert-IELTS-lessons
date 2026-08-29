@@ -692,9 +692,16 @@ html, body {
     transition: all 0.2s ease;
     display: inline;
 }
-.hl-phrase:hover {
+.hl-phrase:hover,
+.hl-phrase:focus-visible {
     background-color: #bfdbfe;
     transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+    outline: none;
+}
+.hl-phrase.active-phrase {
+    background-color: #93c5fd;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
 }
 
 .hl-vocab {
