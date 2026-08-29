@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="bold-signal">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert IELTS 6 — Module 1: Communication</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet">
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href="../presentation-base.css">
+    <style>
+        :root {
+            --col-reading: #2563eb;
+            --col-grammar: #f43f5e;
+            --col-vocab:   #059669;
+            --col-writing: #7c3aed;
+            --col-review:  #0891b2;
+            
+            --stage-bg: #111827;
+            --viewport-bg: radial-gradient(circle at 80% 20%, #881337 0%, #111827 70%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="deck-viewport">
+        <main class="deck-stage" id="deckStage">
+            <!-- SLIDE 1: Title & Course Roadmap -->
+            <slide-card template="title" skill="title">
+                <span slot="badge">Module 01</span>
+                <span slot="title">Communication <span class="title-amp">&amp;</span> Media</span>
+                <span slot="subtitle">IELTS Academic Preparation Masterclass<br>Digital Camera Artefacts, Online Reading Habits, Present/Past Tense Precision &amp; Task 1 Data Overviews</span>
+                <div slot="roadmap">
+                    <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('read')">
+                        <div class="title-skill-name" style="color:var(--col-reading)">📖 Reading</div>
+                        <div class="title-skill-desc">Ghost Photos &amp; Brain Health Online</div>
+                    </div>
+                    <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('grammar')">
+                        <div class="title-skill-name" style="color:var(--col-grammar)">📐 Grammar</div>
+                        <div class="title-skill-desc">Present Simple/Continuous &amp; Past Tenses</div>
+                    </div>
+                    <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('vocab')">
+                        <div class="title-skill-name" style="color:var(--col-vocab)">🗂️ Vocabulary</div>
+                        <div class="title-skill-desc">Collocations, Phrasal Verbs &amp; Media Terms</div>
+                    </div>
+                    <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('write')">
+                        <div class="title-skill-name" style="color:var(--col-writing)">✍️ Writing</div>
+                        <div class="title-skill-desc">Task 1 Overview Sentences &amp; Cinema Trends</div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 2: Section 1a Divider -->
+            <slide-card template="section-divider" skill="title">
+                <span slot="badge">Section 1a</span>
+                <span slot="title">Communication Today</span>
+                <span slot="subtitle">Digital photography mechanics, topic sentence deconstruction, matching headings, communication collocations and present tense precision.</span>
+            </slide-card>
+
+            <!-- SLIDE 3: 1a Pre-Reading Strategy (Topic Sentences) -->
+            <slide-card template="strategy" skill="read" title="Reading Strategy: Topic Sentence Deconstruction" subtitle="Analyze Paragraphs B &amp; C: Identify the main subject and repeated keyword anchors to determine paragraph headings.">
+                <div slot="sentences">
+                    <div class="card q-card strategy-card" data-q="strat-1a-1" style="border-left: 6px solid var(--col-reading); padding: 18px 24px; border-radius: 12px; margin-bottom: 12px;">
+                        <p class="sentence-text" style="font-size: 22px; font-weight: 700; color: #0f172a; line-height: 1.7; margin: 0;">
+                            <strong>Paragraph B:</strong> "The biggest cause of <span class="syn-pair-1">photographic artefacts</span> is the contrast between how the <span class="syn-pair-2">‘depth of field’</span> works in modern cameras and in the <span class="syn-pair-1">human eye</span>."
+                        </p>
+                        <div style="font-size: 16.5px; color: var(--text-muted); margin-top: 8px;">
+                            Repeated Anchor Topic: <strong style="color: var(--col-reading);">Distance</strong> (depth of field, far away, very near, near). Best Heading: <em>Digital cameras and people see distance differently.</em>
+                        </div>
+                    </div>
+                    <div class="card q-card strategy-card" data-q="strat-1a-2" style="border-left: 6px solid var(--col-reading); padding: 18px 24px; border-radius: 12px; margin-bottom: 12px;">
+                        <p class="sentence-text" style="font-size: 22px; font-weight: 700; color: #0f172a; line-height: 1.7; margin: 0;">
+                            <strong>Paragraph C:</strong> "However, digital cameras are also <span class="syn-pair-1">significantly different</span> from the <span class="syn-pair-2">old film cameras</span>."
+                        </p>
+                        <div style="font-size: 16.5px; color: var(--text-muted); margin-top: 8px;">
+                            Repeated Anchor Topic: <strong style="color: var(--col-reading);">Time</strong> (more than once, a period of less than a second, during the photo, for longer). Best Heading: <em>Inaccurate photos caused by advanced timing methods.</em>
+                        </div>
+                    </div>
+                </div>
+                <div slot="guide">
+                    <div class="card" style="background: #ffffff; border-left: 6px solid var(--col-reading); padding: 24px 28px; border-radius: 14px;">
+                        <h3 style="font-family: var(--font-display); font-size: 24px; color: var(--col-reading); margin-bottom: 14px;">
+                            🎯 Topic Sentence Essentials
+                        </h3>
+                        <ul style="padding-left: 20px; font-size: 20px; line-height: 1.75; color: var(--text-dark); display: flex; flex-direction: column; gap: 10px;">
+                            <li><strong>Position:</strong> Usually sentence 1 or 2 of the paragraph.</li>
+                            <li><strong>Function:</strong> States the main claim or comparative scope.</li>
+                            <li><strong>Repetition Scanning:</strong> Look for lexical chains of related words (e.g. *seconds, timing, period*).</li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 4: 1a Split-View Reading (Ghost Photos Heading Match) -->
+            <slide-card template="reading-split" skill="read" title="Reading 1a: Digital Camera Artefacts (Heading Matching)" subtitle="Match Paragraphs A, D, E, F, and G with the correct headings (i–vii).">
+                <div slot="passage">
+                    <h3>THAT’S NOT A GHOST IN YOUR PICTURE, IT’S JUST THE WAY YOUR DIGITAL CAMERA WORKS</h3>
+                    <p><span class="para-tag">Para A</span> <mark class="evidence" id="ev-1a-a" data-q="1a-a">There has been a clear relationship between technological development over the years and a fascination with ‘ghost’ photography... <span class="syn-pair-1" data-q="1a-a">Scientists call them ‘photographic artefacts’</span>, because they show things that only exist because it is a photograph. Put simply, contrary to popular belief, <span class="syn-pair-2" data-q="1a-a">things in photos look different from real life</span>.</mark></p>
+
+                    <p><span class="para-tag">Para B</span> The biggest cause of photographic artefacts is the contrast between how the ‘depth of field’ works in modern cameras and in the human eye. This is because, although it is now possible to take excellent pictures of things far away, the quality of photos of objects that are very near is less accurate. Light causes these misrepresentations...</p>
+
+                    <p><span class="para-tag">Para C</span> It is easy to see why humans see differently from digital cameras. However, digital cameras are also significantly different from the old film cameras. In many ways, digital cameras give less reliable results. For example, modern functions allow digital cameras to scan the image more than once over a period of less than a second...</p>
+
+                    <p><span class="para-tag">Para D</span> <mark class="evidence" id="ev-1a-d" data-q="1a-d">Filming under certain conditions will often produce unusual light effects in digital prints. For instance, <span class="syn-pair-1" data-q="1a-d">glass often makes objects such as a light source behind the photographer appear</span> in the printed photo. If the glass is clean, it may not be obvious that there was a window...</mark></p>
+
+                    <p><span class="para-tag">Para E</span> <mark class="evidence" id="ev-1a-e" data-q="1a-e">Most digital cameras come with a good zoom function... However, as you go nearer, instead of seeing the image as a continuous picture, <span class="syn-pair-1" data-q="1a-e">the digital image becomes pixelated</span>, which means it appears as a group of coloured rectangles. <span class="syn-pair-2" data-q="1a-e">What you see in print is very different from the object in real life</span>...</mark></p>
+
+                    <p><span class="para-tag">Para F</span> <mark class="evidence" id="ev-1a-f" data-q="1a-f">A final group of photos have started appearing on the internet. <span class="syn-pair-1" data-q="1a-f">Fakes, images created by computer</span>, are not as common on internet sites as you’d imagine, even though it’s possible to produce believable images with <span class="syn-pair-2" data-q="1a-f">photo-editing software</span>...</mark></p>
+
+                    <p><span class="para-tag">Para G</span> <mark class="evidence" id="ev-1a-g" data-q="1a-g">In considering photographic artefacts, it is necessary to also consider the story... <span class="syn-pair-1" data-q="1a-g">relying on witness statements to support the claims</span>, which are often unreliable. One thing is sure: ghostly images will continue to appear until smart phone technology moves on.</mark></p>
+                </div>
+
+                <div slot="questions" id="reading1aTasks">
+                    <div class="card" style="background:#f8fafc; border-left:4px solid var(--col-reading); padding:10px 14px; font-size:16px;">
+                        <strong>List of Headings:</strong><br>
+                        <strong>i</strong> When you have to learn more from the photographer &bull; 
+                        <strong>ii</strong> Not an exact copy of what we see &bull; 
+                        <strong>iii</strong> One material that always creates difficulties &bull; 
+                        <strong>iv</strong> Web companies that cheat customers &bull; 
+                        <strong>v</strong> Altering images to deceive the viewer &bull; 
+                        <strong>vi</strong> The closer you get, the more images change &bull; 
+                        <strong>vii</strong> A lack of mystery in today’s images
+                    </div>
+
+                    <div class="q-card" data-q="1a-a" data-ev="ev-1a-a">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span><strong>1. Paragraph A:</strong> <select class="select-input" data-ans="ii"><option value="">--</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option></select></span>
+                            <button class="syn-btn" data-q="1a-a" data-ev="ev-1a-a" onclick="deckEngine.toggleSynonymExplanation('1a-a', 'ev-1a-a')">💡 Evidence</button>
+                        </div>
+                        <div class="item-explanation"><strong>ii:</strong> <em>"things in photos look different from real life"</em> ↔ <em>"Not an exact copy of what we see"</em>.</div>
+                    </div>
+
+                    <div class="q-card" data-q="1a-d" data-ev="ev-1a-d">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span><strong>2. Paragraph D:</strong> <select class="select-input" data-ans="iii"><option value="">--</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option></select></span>
+                            <button class="syn-btn" data-q="1a-d" data-ev="ev-1a-d" onclick="deckEngine.toggleSynonymExplanation('1a-d', 'ev-1a-d')">💡 Evidence</button>
+                        </div>
+                        <div class="item-explanation"><strong>iii:</strong> <em>"glass often makes objects... appear"</em> ↔ <em>"One material that always creates difficulties"</em>.</div>
+                    </div>
+
+                    <div class="q-card" data-q="1a-e" data-ev="ev-1a-e">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span><strong>3. Paragraph E:</strong> <select class="select-input" data-ans="vi"><option value="">--</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option></select></span>
+                            <button class="syn-btn" data-q="1a-e" data-ev="ev-1a-e" onclick="deckEngine.toggleSynonymExplanation('1a-e', 'ev-1a-e')">💡 Evidence</button>
+                        </div>
+                        <div class="item-explanation"><strong>vi:</strong> <em>"as you go nearer... image becomes pixelated"</em> ↔ <em>"The closer you get, the more images change"</em>.</div>
+                    </div>
+
+                    <div class="q-card" data-q="1a-f" data-ev="ev-1a-f">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span><strong>4. Paragraph F:</strong> <select class="select-input" data-ans="v"><option value="">--</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option></select></span>
+                            <button class="syn-btn" data-q="1a-f" data-ev="ev-1a-f" onclick="deckEngine.toggleSynonymExplanation('1a-f', 'ev-1a-f')">💡 Evidence</button>
+                        </div>
+                        <div class="item-explanation"><strong>v:</strong> <em>"Fakes, images created by computer... photo-editing software"</em> ↔ <em>"Altering images to deceive the viewer"</em>.</div>
+                    </div>
+
+                    <div class="q-card" data-q="1a-g" data-ev="ev-1a-g">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span><strong>5. Paragraph G:</strong> <select class="select-input" data-ans="i"><option value="">--</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="iv">iv</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option></select></span>
+                            <button class="syn-btn" data-q="1a-g" data-ev="ev-1a-g" onclick="deckEngine.toggleSynonymExplanation('1a-g', 'ev-1a-g')">💡 Evidence</button>
+                        </div>
+                        <div class="item-explanation"><strong>i:</strong> <em>"relying on witness statements to support claims"</em> ↔ <em>"When you have to learn more from the photographer"</em>.</div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 5: Walkthrough 1a - Para A -->
+            <slide-card template="walkthrough" skill="read" title="Walkthrough: Paragraph A Heading Match">
+                <span slot="passage-header">📖 Passage Excerpt: Paragraph A</span>
+                <span slot="passage-text">
+                    "Scientists call them ‘photographic artefacts’, because they show things that only exist because it is a photograph. Put simply, contrary to popular belief, <mark class="evidence" id="ev-wt-1a-a" data-q="wt-1a-a"><span class="syn-pair-1" data-q="wt-1a-a">things in photos look different from real life</span></mark>."
+                </span>
+                <span slot="question-text">1. Paragraph A Heading Match</span>
+                <div slot="input-area">
+                    <span style="font-size:22px; font-weight:700;">Choose Heading:</span>
+                    <select class="select-input" data-ans="ii">
+                        <option value="">--</option>
+                        <option value="i">i. When you have to learn more from the photographer</option>
+                        <option value="ii">ii. Not an exact copy of what we see</option>
+                        <option value="iii">iii. One material that always creates difficulties</option>
+                        <option value="v">v. Altering images to deceive the viewer</option>
+                        <option value="vi">vi. The closer you get, the more images change</option>
+                    </select>
+                </div>
+                <div slot="explanation">
+                    <div class="syn-key-box"><span class="syn-tag green">Green Match:</span> <em>"things in photos look different from real life"</em> ↔ <em>"Not an exact copy of what we see"</em>.</div>
+                    <div style="margin-top:6px;"><strong>Rationale:</strong> The author concludes Paragraph A with a direct summary of artefacts: photographs do not represent what the human eye perceives in reality.</div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 6: Walkthrough 1a - Para D -->
+            <slide-card template="walkthrough" skill="read" title="Walkthrough: Paragraph D Heading Match">
+                <span slot="passage-header">📖 Passage Excerpt: Paragraph D</span>
+                <span slot="passage-text">
+                    "Filming under certain conditions will often produce unusual light effects in digital prints. For instance, <mark class="evidence" id="ev-wt-1a-d" data-q="wt-1a-d"><span class="syn-pair-1" data-q="wt-1a-d">glass often makes objects</span> such as a light source behind the photographer <span class="syn-pair-2" data-q="wt-1a-d">appear in the printed photo</span></mark>. If the glass is clean, it may not be obvious that there was a window..."
+                </span>
+                <span slot="question-text">2. Paragraph D Heading Match</span>
+                <div slot="input-area">
+                    <span style="font-size:22px; font-weight:700;">Choose Heading:</span>
+                    <select class="select-input" data-ans="iii">
+                        <option value="">--</option>
+                        <option value="i">i. When you have to learn more from the photographer</option>
+                        <option value="ii">ii. Not an exact copy of what we see</option>
+                        <option value="iii">iii. One material that always creates difficulties</option>
+                        <option value="v">v. Altering images to deceive the viewer</option>
+                        <option value="vi">vi. The closer you get, the more images change</option>
+                    </select>
+                </div>
+                <div slot="explanation">
+                    <div class="syn-key-box"><span class="syn-tag green">Green Match:</span> <em>"glass"</em> ↔ <em>"One material"</em></div>
+                    <div class="syn-key-box"><span class="syn-tag purple">Purple Match:</span> <em>"makes objects... appear in photo (streetlights looking like UFOs)"</em> ↔ <em>"always creates difficulties"</em></div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 7: Walkthrough 1a - Para E -->
+            <slide-card template="walkthrough" skill="read" title="Walkthrough: Paragraph E Heading Match">
+                <span slot="passage-header">📖 Passage Excerpt: Paragraph E</span>
+                <span slot="passage-text">
+                    "Most digital cameras come with a good zoom function... However, <mark class="evidence" id="ev-wt-1a-e" data-q="wt-1a-e"><span class="syn-pair-1" data-q="wt-1a-e">as you go nearer</span>, instead of seeing the image as a continuous picture, <span class="syn-pair-2" data-q="wt-1a-e">the digital image becomes pixelated</span></mark>, which means it appears as a group of coloured rectangles. Zoom out, and it looks more like a doll. Zoom out further, and you see it's actually a rope..."
+                </span>
+                <span slot="question-text">3. Paragraph E Heading Match</span>
+                <div slot="input-area">
+                    <span style="font-size:22px; font-weight:700;">Choose Heading:</span>
+                    <select class="select-input" data-ans="vi">
+                        <option value="">--</option>
+                        <option value="i">i. When you have to learn more from the photographer</option>
+                        <option value="iii">iii. One material that always creates difficulties</option>
+                        <option value="v">v. Altering images to deceive the viewer</option>
+                        <option value="vi">vi. The closer you get, the more images change</option>
+                        <option value="vii">vii. A lack of mystery in today’s images</option>
+                    </select>
+                </div>
+                <div slot="explanation">
+                    <div class="syn-key-box"><span class="syn-tag green">Green Match:</span> <em>"as you go nearer / zoom out / zoom out further"</em> ↔ <em>"The closer you get"</em></div>
+                    <div class="syn-key-box"><span class="syn-tag purple">Purple Match:</span> <em>"becomes pixelated / ghostly face -> doll -> rope"</em> ↔ <em>"the more images change"</em></div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 8: Walkthrough 1a - Para F -->
+            <slide-card template="walkthrough" skill="read" title="Walkthrough: Paragraph F Heading Match">
+                <span slot="passage-header">📖 Passage Excerpt: Paragraph F</span>
+                <span slot="passage-text">
+                    "<mark class="evidence" id="ev-wt-1a-f" data-q="wt-1a-f"><span class="syn-pair-1" data-q="wt-1a-f">Fakes, images created by computer</span>, are not as common on internet sites as you’d imagine, even though it’s possible to produce believable images with <span class="syn-pair-2" data-q="wt-1a-f">photo-editing software</span></mark>. Many smartphones contain apps which make it very easy to produce versions of photos with human forms added."
+                </span>
+                <span slot="question-text">4. Paragraph F Heading Match</span>
+                <div slot="input-area">
+                    <span style="font-size:22px; font-weight:700;">Choose Heading:</span>
+                    <select class="select-input" data-ans="v">
+                        <option value="">--</option>
+                        <option value="i">i. When you have to learn more from the photographer</option>
+                        <option value="iv">iv. Web companies that cheat customers</option>
+                        <option value="v">v. Altering images to deceive the viewer</option>
+                        <option value="vi">vi. The closer you get, the more images change</option>
+                        <option value="vii">vii. A lack of mystery in today’s images</option>
+                    </select>
+                </div>
+                <div slot="explanation">
+                    <div class="syn-key-box"><span class="syn-tag green">Green Match:</span> <em>"Fakes / photo-editing software / smartphone apps"</em> ↔ <em>"Altering images"</em></div>
+                    <div class="syn-key-box"><span class="syn-tag purple">Purple Match:</span> <em>"produce believable images with human forms added"</em> ↔ <em>"to deceive the viewer"</em></div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 9: Walkthrough 1a - Para G -->
+            <slide-card template="walkthrough" skill="read" title="Walkthrough: Paragraph G Heading Match">
+                <span slot="passage-header">📖 Passage Excerpt: Paragraph G</span>
+                <span slot="passage-text">
+                    "In considering photographic artefacts, it is necessary to also consider the story. In many cases, the ghostly nature depends entirely on the photographer’s claim ‘that wasn’t there when I took the photo’... <mark class="evidence" id="ev-wt-1a-g" data-q="wt-1a-g"><span class="syn-pair-1" data-q="wt-1a-g">Such photos end up relying on witness statements</span> <span class="syn-pair-2" data-q="wt-1a-g">to support the claims</span></mark>, which are often unreliable."
+                </span>
+                <span slot="question-text">5. Paragraph G Heading Match</span>
+                <div slot="input-area">
+                    <span style="font-size:22px; font-weight:700;">Choose Heading:</span>
+                    <select class="select-input" data-ans="i">
+                        <option value="">--</option>
+                        <option value="i">i. When you have to learn more from the photographer</option>
+                        <option value="iv">iv. Web companies that cheat customers</option>
+                        <option value="v">v. Altering images to deceive the viewer</option>
+                        <option value="vii">vii. A lack of mystery in today’s images</option>
+                    </select>
+                </div>
+                <div slot="explanation">
+                    <div class="syn-key-box"><span class="syn-tag green">Green Match:</span> <em>"photographer's claim / witness statements"</em> ↔ <em>"learn more from the photographer"</em></div>
+                    <div class="syn-key-box"><span class="syn-tag purple">Purple Match:</span> <em>"depends entirely on the story / enquiries"</em> ↔ <em>"When you have to learn more"</em></div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 10: 1a Vocabulary - Collocations -->
+            <slide-card template="gap-fill-passage" skill="vocab" title="Vocabulary 1a: Key Academic Collocations" subtitle="Click word chips or type the correct academic collocation into each sentence.">
+                <div slot="passage">
+                    <div style="font-size:16px; font-weight:800; color:var(--col-vocab); margin-bottom:10px;">WORD BANK (Collocations):</div>
+                    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+                        <span class="word-chip" data-word="physical appearance">physical appearance</span>
+                        <span class="word-chip" data-word="Social media">Social media</span>
+                        <span class="word-chip" data-word="become aware">become aware</span>
+                        <span class="word-chip" data-word="clear relationship">clear relationship</span>
+                        <span class="word-chip" data-word="share information">share information</span>
+                        <span class="word-chip" data-word="Technological development">Technological development</span>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:12px; font-size:19px; line-height:1.7;">
+                        <div><strong>1.</strong> It’s often acceptable to make decisions based on people’s <input type="text" class="blank-input" data-ans="physical appearance" style="width:220px;">.</div>
+                        <div><strong>2.</strong> <input type="text" class="blank-input" data-ans="Social media" style="width:160px;"> rarely contain honest representations of friends’ lives.</div>
+                        <div><strong>3.</strong> People usually <input type="text" class="blank-input" data-ans="become aware" style="width:180px;"> of international events through online news feeds.</div>
+                        <div><strong>4.</strong> There is a <input type="text" class="blank-input" data-ans="clear relationship" style="width:200px;"> between online stories and general public opinion.</div>
+                        <div><strong>5.</strong> Now that researchers <input type="text" class="blank-input" data-ans="share information" style="width:200px;"> on the web, there are more scientific advances.</div>
+                        <div><strong>6.</strong> <input type="text" class="blank-input" data-ans="Technological development" style="width:260px;"> is not always a good thing.</div>
+                    </div>
+                </div>
+                <div slot="rules-col">
+                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-vocab); padding:20px 24px;">
+                        <h4 style="color:var(--col-vocab); font-size:20px; font-weight:800; margin-bottom:10px;">💡 IELTS Lexical Resource Tip</h4>
+                        <p style="font-size:17.5px; line-height:1.65; color:var(--text-dark);">Using strong, natural collocations like <em>"clear relationship"</em> and <em>"become aware of"</em> helps you hit Band 7+ for natural lexical phrasing in Task 2 essays.</p>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 11: 1a Vocabulary - Phrasal Verbs & Multi-meaning words -->
+            <slide-card template="summary-checklist" skill="vocab" title="Vocabulary 1a: Phrasal Verbs &amp; Academic Polysemy" subtitle="Master essential communication verbs and contextual meanings in IELTS reading and writing.">
+                <div slot="grid">
+                    <div class="card" style="border-left:6px solid var(--col-vocab); padding:22px 26px;">
+                        <div style="font-size:22px; font-weight:800; color:var(--col-vocab); margin-bottom:12px;">🔗 Communication Phrasal Verbs</div>
+                        <ul style="padding-left:18px; font-size:18.5px; line-height:1.75; display:flex; flex-direction:column; gap:6px;">
+                            <li><strong>get across:</strong> explain clearly</li>
+                            <li><strong>bring up:</strong> mention / raise a topic</li>
+                            <li><strong>point out:</strong> draw attention to a fact</li>
+                            <li><strong>sum up:</strong> summarise the main points</li>
+                            <li><strong>pick up on:</strong> notice a detail</li>
+                            <li><strong>spell out:</strong> explain in detail step-by-step</li>
+                            <li><strong>back someone up:</strong> support someone in an argument</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="border-left:6px solid var(--col-grammar); padding:22px 26px;">
+                        <div style="font-size:22px; font-weight:800; color:var(--col-grammar); margin-bottom:12px;">📚 Academic vs. Everyday Meanings</div>
+                        <div style="display:flex; flex-direction:column; gap:10px; font-size:18px; line-height:1.6;">
+                            <div><strong>Point:</strong> <em>Idea/Argument</em> (Academic) vs. <em>Sharp tip</em> (Everyday)</div>
+                            <div><strong>Account:</strong> <em>Written report/description</em> (Academic) vs. <em>Bank account</em> (Everyday)</div>
+                            <div><strong>Area:</strong> <em>Field of study</em> (Academic) vs. <em>Geographic region</em> (Everyday)</div>
+                            <div><strong>Argue:</strong> <em>Give structured reasons</em> (Academic) vs. <em>Disagree angrily</em> (Everyday)</div>
+                        </div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 12: 1a Vocabulary - Noun Forms "Teentalk" -->
+            <slide-card template="gap-fill-passage" skill="vocab" title="Vocabulary 1a: Word Formation (Noun Suffixes)" subtitle="Complete the research summary with the correct noun forms of the words in brackets.">
+                <div slot="passage">
+                    <div style="font-size:19px; line-height:2.1; color:var(--text-dark);" id="teentalkTask">
+                        Talk about teenagers, and the <input type="text" class="blank-input" data-ans="conversation" style="width:170px;"> <em>(1. converse)</em> often turns to the problems that teenagers face. Older people might argue that <input type="text" class="blank-input" data-ans="communication" style="width:190px;"> <em>(2. communicate)</em> is difficult because young people and adults do not share the same values. But a study has shown that there is still general <input type="text" class="blank-input" data-ans="agreement" style="width:160px;"> <em>(3. agree)</em> among both generations. Interestingly, teenagers might want to develop better <input type="text" class="blank-input" data-ans="understanding" style="width:190px;"> <em>(4. understand)</em> of each other. Over half the teens said their friends valued <input type="text" class="blank-input" data-ans="popularity" style="width:160px;"> <em>(5. popular)</em> more than honesty. Changes in <input type="text" class="blank-input" data-ans="technology" style="width:160px;"> <em>(6. technical)</em> have not made much <input type="text" class="blank-input" data-ans="difference" style="width:150px;"> <em>(7. differ)</em> to the way young people relate. And when it came to difficult <input type="text" class="blank-input" data-ans="discussions" style="width:170px;"> <em>(8. discussion)</em>, over half trusted their parents’ <input type="text" class="blank-input" data-ans="decision|decisions" style="width:160px;"> <em>(9. decide)</em>.
+                    </div>
+                </div>
+                <div slot="rules-col">
+                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-vocab); padding:20px 24px;">
+                        <h4 style="color:var(--col-vocab); font-size:20px; font-weight:800; margin-bottom:10px;">🔤 Common Suffixes</h4>
+                        <ul style="padding-left:18px; font-size:18px; line-height:1.7; color:var(--text-dark);">
+                            <li><strong>-tion / -sion:</strong> conversation, communication, decision</li>
+                            <li><strong>-ment:</strong> agreement</li>
+                            <li><strong>-ing:</strong> understanding</li>
+                            <li><strong>-ity:</strong> popularity</li>
+                            <li><strong>-ence:</strong> difference</li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 13: 1a Grammar Masterclass - Present Tenses -->
+            <slide-card template="grammar-masterclass" skill="grammar" title="Grammar 1a: Present Simple vs. Present Continuous &amp; State Verbs">
+                <div slot="rules">
+                    <div class="rule-card" style="margin-bottom:14px;">
+                        <div style="font-size:21px; font-weight:800; color:var(--col-grammar); margin-bottom:6px;">1. Present Simple (Routines, Facts &amp; Permanent States)</div>
+                        <p style="font-size:18px; line-height:1.6; margin:0;">Used for universal truths, habitual actions, and permanent situations.<br><em>"Digital cameras give less reliable results." / "She visits the library regularly."</em></p>
+                    </div>
+                    <div class="rule-card" style="margin-bottom:14px;">
+                        <div style="font-size:21px; font-weight:800; color:var(--col-reading); margin-bottom:6px;">2. Present Continuous (In-Progress &amp; Temporary Trends)</div>
+                        <p style="font-size:18px; line-height:1.6; margin:0;">Used for actions happening right now, temporary states, or changing trends.<br><em>"Times are changing fast, and more people are using smartphones."</em></p>
+                    </div>
+                    <div class="rule-card">
+                        <div style="font-size:21px; font-weight:800; color:var(--col-vocab); margin-bottom:6px;">3. State Verbs (Non-Continuous Verbs)</div>
+                        <p style="font-size:18px; line-height:1.6; margin:0;">Verbs of cognition, emotion, senses, and possession are NOT normally used in continuous forms:<br><em>agree, know, belong, prefer, need, understand, feel, hate, want, include</em>.</p>
+                    </div>
+                </div>
+                <div slot="contrast-card">
+                    <div class="card" style="background:#fff7ed; border:2px solid #fdba74; padding:22px; border-radius:12px;">
+                        <h4 style="color:#c2410c; font-size:20px; font-weight:800; margin-bottom:10px;">⚠️ Common IELTS Error</h4>
+                        <div style="font-size:18px; line-height:1.65; color:#7c2d12;">
+                            ❌ <em>"I am wanting a new phone plan."</em><br>
+                            ✔️ <strong>"I want a new phone plan."</strong> (State verb of desire)<br><br>
+                            ❌ <em>"What is that including?"</em><br>
+                            ✔️ <strong>"What does that include?"</strong> (State verb of composition)
+                        </div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 14: 1a Grammar Practice - Online Moods Gap-Fill -->
+            <slide-card template="gap-fill-passage" skill="grammar" title="Grammar 1a Practice: The Study of Online Moods" subtitle="Select the grammatically accurate present simple or present continuous form for each numbered gap.">
+                <div slot="passage">
+                    <div style="font-size:18.5px; line-height:2.0; color:var(--text-dark);" id="onlineMoodsTask">
+                        The study of online moods (1) <select class="select-input" data-ans="is"><option value="">--</option><option value="is">is</option><option value="is being">is being</option></select> a large field of research. Every time you type a word, little signs of your mood (2) <select class="select-input" data-ans="show"><option value="">--</option><option value="show">show</option><option value="are showing">are showing</option></select> themselves. For example, type a lot of mistakes late at night, and the computer rightly or wrongly (3) <select class="select-input" data-ans="thinks"><option value="">--</option><option value="thinks">thinks</option><option value="is thinking">is thinking</option></select> you (4) <select class="select-input" data-ans="are"><option value="">--</option><option value="are">are</option><option value="are being">are being</option></select> tired! Anything you have recently viewed online (5) <select class="select-input" data-ans="appears"><option value="">--</option><option value="appears">appears</option><option value="is appearing">is appearing</option></select> on your screen in adverts. Changes in your status (6) <select class="select-input" data-ans="send"><option value="">--</option><option value="send">send</option><option value="are sending">are sending</option></select> the kind of information restaurant and clothing companies love, while clicking ‘upset stomach’ (7) <select class="select-input" data-ans="produces"><option value="">--</option><option value="produces">produces</option><option value="is producing">is producing</option></select> a very different set of adverts. One recent study (8) <select class="select-input" data-ans="shows"><option value="">--</option><option value="shows">shows</option><option value="is showing">is showing</option></select> that bad moods appear more often than good moods. Healthcare services and the government (9) <select class="select-input" data-ans="hope"><option value="">--</option><option value="hope">hope</option><option value="are hoping">are hoping</option></select> information like this may help them make better decisions.
+                    </div>
+                </div>
+                <div slot="rules-col">
+                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-grammar); padding:20px 24px;">
+                        <h4 style="color:var(--col-grammar); font-size:20px; font-weight:800; margin-bottom:10px;">🔍 Grounding Clues</h4>
+                        <ul style="padding-left:18px; font-size:17.5px; line-height:1.65; color:var(--text-dark); display:flex; flex-direction:column; gap:8px;">
+                            <li><strong>General facts:</strong> <em>is, show, appears, produces</em> (Present Simple).</li>
+                            <li><strong>Verbs of thinking/feeling:</strong> <em>thinks, hope</em> (State verbs = Simple).</li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 15: 1a Writing Task 1 - Writing an Overview Sentence -->
+            <slide-card template="writing-model" skill="write" title="Writing 1a (Task 1): Crafting Introductions &amp; Clear Overviews" subtitle="Prompt: Reasons why people choose to make or break friendship connections on social media.">
+                <div slot="prompt">
+                    <div style="font-size:18px; line-height:1.6;">
+                        <strong>Task 1 Prompt:</strong> <em>The chart shows the main reasons why people choose to make or break friendship connections on a popular social media site. Write an introductory sentence and an overview sentence for the chart.</em>
+                    </div>
+                </div>
+                <div slot="essay">
+                    <div class="card" style="border-left:6px solid var(--col-writing); padding:22px 28px; margin-bottom:16px;">
+                        <div style="font-size:20px; font-weight:800; color:var(--col-writing); margin-bottom:8px;">1. Introduction (Paraphrase the Prompt)</div>
+                        <p style="font-size:21px; line-height:1.75; color:var(--text-dark); margin:0;">
+                            <span class="hl-phrase" data-phrase="Introduction Formula" data-note="Paraphrases 'shows the main reasons why people choose to make or break' into 'illustrates the reasons people gave for starting or ending friendships'.">The chart illustrates the reasons people gave for starting or ending friendships on a social media site.</span>
+                        </p>
+                    </div>
+
+                    <div class="card" style="border-left:6px solid var(--col-reading); padding:22px 28px;">
+                        <div style="font-size:20px; font-weight:800; color:var(--col-reading); margin-bottom:8px;">2. Band 7+ Overview Sentence (Key Trends / Contrasts)</div>
+                        <p style="font-size:21px; line-height:1.75; color:var(--text-dark); margin:0;">
+                            <span class="hl-phrase" data-phrase="Contrasting Complex Structure" data-note="Uses 'While [Clause A], [Clause B]' to contrast the dominant reasons of one category with the diverse reasons of another.">While two main reasons dominate the reasons to begin friendships, a variety of reasons were given for ending friendships.</span>
+                        </p>
+                    </div>
+                </div>
+                <div slot="annotations">
+                    <div class="card" style="background:#ffffff; border-top:4px solid var(--col-writing); padding:20px 24px;">
+                        <h4 style="color:var(--col-writing); font-size:20px; font-weight:800; margin-bottom:10px;">✍️ Overview Golden Rules</h4>
+                        <ul style="padding-left:18px; font-size:18px; line-height:1.7; color:var(--text-dark);">
+                            <li><strong>No specific data:</strong> Do not list percentages or raw numbers in the overview.</li>
+                            <li><strong>Major trends:</strong> Highlight the highest/lowest or key contrast.</li>
+                            <li><strong>Signpost word:</strong> Start with <em>"Overall,"</em> or use a complex <em>"While..."</em> clause.</li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 16: Section 1b Divider -->
+            <slide-card template="section-divider" skill="title">
+                <span slot="badge">Section 1b</span>
+                <span slot="title">Back to the Old Ways</span>
+                <span slot="subtitle">The cognitive impact of digital reading, sentence completion, media vocabulary, irregular past tenses and Task 1 cinema sales trends.</span>
+            </slide-card>
+
+            <!-- SLIDE 17: 1b Split-View Reading (Brain Health Online) -->
+            <slide-card template="reading-split" skill="read" title="Reading 1b: Why Reading Online May Slow Your Brain Down" subtitle="Match headings for Paragraphs B–G and complete sentences 7–10 with ONE WORD ONLY.">
+                <div slot="passage">
+                    <h3>Why reading online may be slowing your brain down</h3>
+                    <p><span class="para-tag">Para A</span> If the person reading this article were reading online, I would need to keep things brief. A lot of you would have left already. <mark class="evidence" id="ev-1b-7" data-q="1b-7">For every 150 ‘readers’ who open an article on the internet, <span class="syn-pair-1" data-q="1b-7">one in three of them will leave within seconds</span></mark>. Of the 100 who stay, only 95 will be able to concentrate... Put simply, only a very small number of people actually read articles on the web.</p>
+
+                    <p><span class="para-tag">Para B</span> <mark class="evidence" id="ev-1b-b" data-q="1b-b">Not being able to stay focused is a problem... <span class="syn-pair-1" data-q="1b-b">people were able to remember more information from an article that they read on paper</span>, than a similar group who read the same article online... <span class="syn-pair-2" data-q="1b-b">getting the physical text out of the library means you’re less likely to forget</span>.</mark></p>
+
+                    <p><span class="para-tag">Para C</span> <mark class="evidence" id="ev-1b-c" data-q="1b-c">Even more dispiriting is the way these poor understandings are being passed on to others. Evidence suggests that <span class="syn-pair-1" data-q="1b-c">people are creating links to articles they have not fully read, and even adding comments before getting to the end</span>.</mark> <mark class="evidence" id="ev-1b-8" data-q="1b-8">Josh Schartz found that <span class="syn-pair-1" data-q="1b-8">the overall number of comments and the number of people who scrolled down to the end did not match</span></mark>.</p>
+
+                    <p><span class="para-tag">Para D</span> <mark class="evidence" id="ev-1b-d" data-q="1b-d">Studies of the brain have suggested that we should be more concerned about this... <span class="syn-pair-1" data-q="1b-d">In fact, the brain is constantly changing and re-organizing itself, losing the connections that it does not need</span>.</mark> <mark class="evidence" id="ev-1b-9" data-q="1b-9">Michael Merzenich has long argued <span class="syn-pair-1" data-q="1b-9">against the argument that the brain is formed in the early years of childhood, then remains stable</span></mark>.</p>
+
+                    <p><span class="para-tag">Para E</span> <mark class="evidence" id="ev-1b-e" data-q="1b-e">Many have argued that this is nothing new... However, <span class="syn-pair-1" data-q="1b-e">Alvin Toffler argued that the amount of free information that is thrown at us every day is different from anything that came before</span>. <span class="syn-pair-2" data-q="1b-e">We now have so much choice</span> that many people refuse to waste their time...</mark></p>
+
+                    <p><span class="para-tag">Para F</span> <mark class="evidence" id="ev-1b-f" data-q="1b-f">The problem is even worse when you consider the kind of things we read online. <span class="syn-pair-1" data-q="1b-f">our brains prefer to read things that are shocking, such as gossiping</span>, describing the embarrassment of others... Some experts have referred to this as <span class="syn-pair-2" data-q="1b-f">‘psychological obesity’</span>.</mark></p>
+
+                    <p><span class="para-tag">Para G</span> <mark class="evidence" id="ev-1b-g" data-q="1b-g">Online news sites only recommend articles on things we have shown an interest in before. In other words, what Nicholas Negroponte called <span class="syn-pair-1" data-q="1b-g">‘The Daily Me’, bringing personalized content, also means that you miss being introduced to new concepts</span>... <span class="syn-pair-2" data-q="1b-g">never knowing what is happening outside of your personal interests</span>.</mark></p>
+                </div>
+
+                <div slot="questions" id="reading1bTasks">
+                    <div class="card" style="background:#f8fafc; border-left:4px solid var(--col-reading); padding:10px 14px; font-size:15px;">
+                        <strong>List of Headings:</strong><br>
+                        <strong>i</strong> Sharing half-understood ideas &bull; 
+                        <strong>ii</strong> An old situation that’s now more intense &bull; 
+                        <strong>iii</strong> Too much knowledge can be bad &bull; 
+                        <strong>v</strong> Pleasure in unhealthy content &bull; 
+                        <strong>vi</strong> Longer-lasting memories from books &bull; 
+                        <strong>vii</strong> Increased capacity for critical thought &bull; 
+                        <strong>viii</strong> Living in a world of your own &bull; 
+                        <strong>x</strong> A biological response to habits
+                    </div>
+
+                    <div class="q-card" data-q="1b-b" data-ev="ev-1b-b">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span><strong>1. Paragraph B:</strong> <select class="select-input" data-ans="vi"><option value="">--</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="x">x</option></select></span>
+                            <button class="syn-btn" data-q="1b-b" data-ev="ev-1b-b" onclick="deckEngine.toggleSynonymExplanation('1b-b', 'ev-1b-b')">💡 Evidence</button>
+                        </div>
+                        <div class="item-explanation"><strong>vi:</strong> <em>"remember more information from article on paper"</em> ↔ <em>"Longer-lasting memories from books"</em>.</div>
+                    </div>
+
+                    <div class="q-card" data-q="1b-c" data-ev="ev-1b-c">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span><strong>2. Paragraph C:</strong> <select class="select-input" data-ans="i"><option value="">--</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="x">x</option></select></span>
+                            <button class="syn-btn" data-q="1b-c" data-ev="ev-1b-c" onclick="deckEngine.toggleSynonymExplanation('1b-c', 'ev-1b-c')">💡 Evidence</button>
+                        </div>
+                        <div class="item-explanation"><strong>i:</strong> <em>"creating links to articles they have not fully read"</em> ↔ <em>"Sharing half-understood ideas"</em>.</div>
+                    </div>
+
+                    <div class="q-card" data-q="1b-d" data-ev="ev-1b-d">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span><strong>3. Paragraph D:</strong> <select class="select-input" data-ans="x"><option value="">--</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="x">x</option></select></span>
+                            <button class="syn-btn" data-q="1b-d" data-ev="ev-1b-d" onclick="deckEngine.toggleSynonymExplanation('1b-d', 'ev-1b-d')">💡 Evidence</button>
+                        </div>
+                        <div class="item-explanation"><strong>x:</strong> <em>"brain is constantly changing... losing connections"</em> ↔ <em>"A biological response to habits"</em>.</div>
+                    </div>
+
+                    <div class="q-card" data-q="1b-e" data-ev="ev-1b-e">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span><strong>4. Paragraph E:</strong> <select class="select-input" data-ans="ii"><option value="">--</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="x">x</option></select></span>
+                            <button class="syn-btn" data-q="1b-e" data-ev="ev-1b-e" onclick="deckEngine.toggleSynonymExplanation('1b-e', 'ev-1b-e')">💡 Evidence</button>
+                        </div>
+                        <div class="item-explanation"><strong>ii:</strong> <em>"amount of free info thrown at us is different from anything before"</em> ↔ <em>"An old situation that’s now more intense"</em>.</div>
+                    </div>
+
+                    <div class="q-card" data-q="1b-f" data-ev="ev-1b-f">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span><strong>5. Paragraph F:</strong> <select class="select-input" data-ans="v"><option value="">--</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="x">x</option></select></span>
+                            <button class="syn-btn" data-q="1b-f" data-ev="ev-1b-f" onclick="deckEngine.toggleSynonymExplanation('1b-f', 'ev-1b-f')">💡 Evidence</button>
+                        </div>
+                        <div class="item-explanation"><strong>v:</strong> <em>"prefer to read things that are shocking... psychological obesity"</em> ↔ <em>"Pleasure in unhealthy content"</em>.</div>
+                    </div>
+
+                    <div class="q-card" data-q="1b-g" data-ev="ev-1b-g">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span><strong>6. Paragraph G:</strong> <select class="select-input" data-ans="viii"><option value="">--</option><option value="i">i</option><option value="ii">ii</option><option value="iii">iii</option><option value="v">v</option><option value="vi">vi</option><option value="vii">vii</option><option value="viii">viii</option><option value="x">x</option></select></span>
+                            <button class="syn-btn" data-q="1b-g" data-ev="ev-1b-g" onclick="deckEngine.toggleSynonymExplanation('1b-g', 'ev-1b-g')">💡 Evidence</button>
+                        </div>
+                        <div class="item-explanation"><strong>viii:</strong> <em>"The Daily Me... never knowing what is happening outside personal interests"</em> ↔ <em>"Living in a world of your own"</em>.</div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 18: Walkthrough 1b - Para B -->
+            <slide-card template="walkthrough" skill="read" title="Walkthrough: Paragraph B Heading Match">
+                <span slot="passage-header">📖 Passage Excerpt: Paragraph B</span>
+                <span slot="passage-text">
+                    "A. V. Kak found in one study that <mark class="evidence" id="ev-wt-1b-b" data-q="wt-1b-b"><span class="syn-pair-1" data-q="wt-1b-b">people were able to remember more information from an article that they read on paper</span>, than a similar group who read the same article online... <span class="syn-pair-2" data-q="wt-1b-b">getting the physical text out of the library means you’re less likely to forget</span></mark>."
+                </span>
+                <span slot="question-text">1. Paragraph B Heading Match</span>
+                <div slot="input-area">
+                    <span style="font-size:22px; font-weight:700;">Choose Heading:</span>
+                    <select class="select-input" data-ans="vi">
+                        <option value="">--</option>
+                        <option value="i">i. Sharing half-understood ideas</option>
+                        <option value="ii">ii. An old situation that’s now more intense</option>
+                        <option value="v">v. Pleasure in unhealthy content</option>
+                        <option value="vi">vi. Longer-lasting memories from books</option>
+                        <option value="viii">viii. Living in a world of your own</option>
+                        <option value="x">x. A biological response to habits</option>
+                    </select>
+                </div>
+                <div slot="explanation">
+                    <div class="syn-key-box"><span class="syn-tag green">Green Match:</span> <em>"remember more information / less likely to forget"</em> ↔ <em>"Longer-lasting memories"</em></div>
+                    <div class="syn-key-box"><span class="syn-tag purple">Purple Match:</span> <em>"read on paper / physical text from library"</em> ↔ <em>"from books"</em></div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 19: Walkthrough 1b - Para C -->
+            <slide-card template="walkthrough" skill="read" title="Walkthrough: Paragraph C Heading Match">
+                <span slot="passage-header">📖 Passage Excerpt: Paragraph C</span>
+                <span slot="passage-text">
+                    "Even more dispiriting is the way these poor understandings are being passed on to others. Evidence suggests that <mark class="evidence" id="ev-wt-1b-c" data-q="wt-1b-c"><span class="syn-pair-1" data-q="wt-1b-c">people are creating links to articles they have not fully read</span>, and even <span class="syn-pair-2" data-q="wt-1b-c">adding comments before getting to the end</span></mark>."
+                </span>
+                <span slot="question-text">2. Paragraph C Heading Match</span>
+                <div slot="input-area">
+                    <span style="font-size:22px; font-weight:700;">Choose Heading:</span>
+                    <select class="select-input" data-ans="i">
+                        <option value="">--</option>
+                        <option value="i">i. Sharing half-understood ideas</option>
+                        <option value="ii">ii. An old situation that’s now more intense</option>
+                        <option value="v">v. Pleasure in unhealthy content</option>
+                        <option value="vi">vi. Longer-lasting memories from books</option>
+                        <option value="viii">viii. Living in a world of your own</option>
+                    </select>
+                </div>
+                <div slot="explanation">
+                    <div class="syn-key-box"><span class="syn-tag green">Green Match:</span> <em>"articles they have not fully read / poor understandings"</em> ↔ <em>"half-understood ideas"</em></div>
+                    <div class="syn-key-box"><span class="syn-tag purple">Purple Match:</span> <em>"creating links / adding comments"</em> ↔ <em>"Sharing"</em></div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 20: Walkthrough 1b - Para D -->
+            <slide-card template="walkthrough" skill="read" title="Walkthrough: Paragraph D Heading Match">
+                <span slot="passage-header">📖 Passage Excerpt: Paragraph D</span>
+                <span slot="passage-text">
+                    "Studies of the brain have suggested that we should be more concerned... <mark class="evidence" id="ev-wt-1b-d" data-q="wt-1b-d"><span class="syn-pair-1" data-q="wt-1b-d">the brain is constantly changing and re-organizing itself</span>, <span class="syn-pair-2" data-q="wt-1b-d">losing the connections that it does not need</span></mark>. As people spend less time thinking... their brains react by re-wiring..."
+                </span>
+                <span slot="question-text">3. Paragraph D Heading Match</span>
+                <div slot="input-area">
+                    <span style="font-size:22px; font-weight:700;">Choose Heading:</span>
+                    <select class="select-input" data-ans="x">
+                        <option value="">--</option>
+                        <option value="i">i. Sharing half-understood ideas</option>
+                        <option value="ii">ii. An old situation that’s now more intense</option>
+                        <option value="v">v. Pleasure in unhealthy content</option>
+                        <option value="viii">viii. Living in a world of your own</option>
+                        <option value="x">x. A biological response to habits</option>
+                    </select>
+                </div>
+                <div slot="explanation">
+                    <div class="syn-key-box"><span class="syn-tag green">Green Match:</span> <em>"brain is constantly changing / re-wiring"</em> ↔ <em>"A biological response"</em></div>
+                    <div class="syn-key-box"><span class="syn-tag purple">Purple Match:</span> <em>"spend less time thinking for longer periods"</em> ↔ <em>"to habits"</em></div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 21: Walkthrough 1b - Para E -->
+            <slide-card template="walkthrough" skill="read" title="Walkthrough: Paragraph E Heading Match">
+                <span slot="passage-header">📖 Passage Excerpt: Paragraph E</span>
+                <span slot="passage-text">
+                    "Many have argued that this is nothing new. People have always started novels and not finished them... However, <mark class="evidence" id="ev-wt-1b-e" data-q="wt-1b-e"><span class="syn-pair-1" data-q="wt-1b-e">Alvin Toffler argued that the amount of free information that is thrown at us every day is different from anything that came before</span></mark>."
+                </span>
+                <span slot="question-text">4. Paragraph E Heading Match</span>
+                <div slot="input-area">
+                    <span style="font-size:22px; font-weight:700;">Choose Heading:</span>
+                    <select class="select-input" data-ans="ii">
+                        <option value="">--</option>
+                        <option value="i">i. Sharing half-understood ideas</option>
+                        <option value="ii">ii. An old situation that’s now more intense</option>
+                        <option value="v">v. Pleasure in unhealthy content</option>
+                        <option value="viii">viii. Living in a world of your own</option>
+                        <option value="x">x. A biological response to habits</option>
+                    </select>
+                </div>
+                <div slot="explanation">
+                    <div class="syn-key-box"><span class="syn-tag green">Green Match:</span> <em>"this is nothing new / people have always started novels"</em> ↔ <em>"An old situation"</em></div>
+                    <div class="syn-key-box"><span class="syn-tag purple">Purple Match:</span> <em>"amount of free information thrown at us is different from before"</em> ↔ <em>"that's now more intense"</em></div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 22: Walkthrough 1b - Para F -->
+            <slide-card template="walkthrough" skill="read" title="Walkthrough: Paragraph F Heading Match">
+                <span slot="passage-header">📖 Passage Excerpt: Paragraph F</span>
+                <span slot="passage-text">
+                    "Unfortunately, just as our bodies are programmed to want to eat fats and sugars, things which we know are not good for us, <mark class="evidence" id="ev-wt-1b-f" data-q="wt-1b-f"><span class="syn-pair-1" data-q="wt-1b-f">our brains prefer to read things that are shocking</span>, such as gossiping... Some experts have referred to this as <span class="syn-pair-2" data-q="wt-1b-f">‘psychological obesity’</span></mark>."
+                </span>
+                <span slot="question-text">5. Paragraph F Heading Match</span>
+                <div slot="input-area">
+                    <span style="font-size:22px; font-weight:700;">Choose Heading:</span>
+                    <select class="select-input" data-ans="v">
+                        <option value="">--</option>
+                        <option value="i">i. Sharing half-understood ideas</option>
+                        <option value="ii">ii. An old situation that’s now more intense</option>
+                        <option value="v">v. Pleasure in unhealthy content</option>
+                        <option value="viii">viii. Living in a world of your own</option>
+                        <option value="x">x. A biological response to habits</option>
+                    </select>
+                </div>
+                <div slot="explanation">
+                    <div class="syn-key-box"><span class="syn-tag green">Green Match:</span> <em>"brains prefer to read / want to eat"</em> ↔ <em>"Pleasure"</em></div>
+                    <div class="syn-key-box"><span class="syn-tag purple">Purple Match:</span> <em>"shocking / gossiping / psychological obesity"</em> ↔ <em>"in unhealthy content"</em></div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 23: Walkthrough 1b - Para G -->
+            <slide-card template="walkthrough" skill="read" title="Walkthrough: Paragraph G Heading Match">
+                <span slot="passage-header">📖 Passage Excerpt: Paragraph G</span>
+                <span slot="passage-text">
+                    "Online news sites only recommend articles on things we have shown an interest in before. In other words, <mark class="evidence" id="ev-wt-1b-g" data-q="wt-1b-g"><span class="syn-pair-1" data-q="wt-1b-g">what Nicholas Negroponte called ‘The Daily Me’</span>, bringing personalized content, also means you miss new concepts... <span class="syn-pair-2" data-q="wt-1b-g">never knowing what is happening outside of your personal interests</span></mark>."
+                </span>
+                <span slot="question-text">6. Paragraph G Heading Match</span>
+                <div slot="input-area">
+                    <span style="font-size:22px; font-weight:700;">Choose Heading:</span>
+                    <select class="select-input" data-ans="viii">
+                        <option value="">--</option>
+                        <option value="i">i. Sharing half-understood ideas</option>
+                        <option value="ii">ii. An old situation that’s now more intense</option>
+                        <option value="v">v. Pleasure in unhealthy content</option>
+                        <option value="viii">viii. Living in a world of your own</option>
+                        <option value="x">x. A biological response to habits</option>
+                    </select>
+                </div>
+                <div slot="explanation">
+                    <div class="syn-key-box"><span class="syn-tag green">Green Match:</span> <em>"‘The Daily Me’ / personalized content"</em> ↔ <em>"Living in a world"</em></div>
+                    <div class="syn-key-box"><span class="syn-tag purple">Purple Match:</span> <em>"never knowing what is happening outside your interests"</em> ↔ <em>"of your own"</em></div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 24: Walkthrough 1b - Sentence Completion Q7-Q10 -->
+            <slide-card template="walkthrough" skill="read" title="Walkthrough: Sentence Completion Q7–Q10">
+                <span slot="passage-header">📖 Passage Excerpts: Paragraphs A, C, D &amp; F</span>
+                <span slot="passage-text">
+                    • <strong>Para A:</strong> "one in three of them will leave within <mark class="evidence" id="ev-wt-1b-7" data-q="wt-1b-7"><span class="syn-pair-1">seconds</span></mark>."<br>
+                    • <strong>Para C:</strong> "the overall number of <mark class="evidence" id="ev-wt-1b-8" data-q="wt-1b-8"><span class="syn-pair-1">comments</span></mark> and people who scrolled down did not match."<br>
+                    • <strong>Para D:</strong> "against the argument that the brain is formed in the early years of <mark class="evidence" id="ev-wt-1b-9" data-q="wt-1b-9"><span class="syn-pair-1">childhood</span></mark>, then remains stable."
+                </span>
+                <span slot="question-text">Questions 7–10 (ONE WORD ONLY)</span>
+                <div slot="input-area" style="display:flex; flex-direction:column; gap:10px; width:100%;">
+                    <div><strong>7.</strong> Around a third of internet surfers stay on a page for <input type="text" class="blank-input" data-ans="seconds" placeholder="[7]..." style="width:130px;">.</div>
+                    <div><strong>8.</strong> According to Josh Schartz, the number of <input type="text" class="blank-input" data-ans="comments" placeholder="[8]..." style="width:140px;"> is greater than the number of people who finish reading.</div>
+                    <div><strong>9.</strong> Brains still changed after the period of <input type="text" class="blank-input" data-ans="childhood" placeholder="[9]..." style="width:140px;"> came to an end.</div>
+                    <div><strong>10.</strong> ‘Psychological obesity’ is the preference for shocking <input type="text" class="blank-input" data-ans="content|things" placeholder="[10]..." style="width:130px;"> in articles.</div>
+                </div>
+                <div slot="explanation">
+                    <div class="syn-key-box"><span class="syn-tag green">Q7 Match:</span> <em>"one in three"</em> ↔ <em>"Around a third"</em> &bull; Target: <strong>seconds</strong></div>
+                    <div class="syn-key-box"><span class="syn-tag green">Q8 Match:</span> <em>"number of comments... did not match scrolled down"</em> &bull; Target: <strong>comments</strong></div>
+                    <div class="syn-key-box"><span class="syn-tag green">Q9 Match:</span> <em>"early years of childhood"</em> &bull; Target: <strong>childhood</strong></div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 25: 1b Grammar Masterclass - Past Simple Irregulars -->
+            <slide-card template="grammar-masterclass" skill="grammar" title="Grammar 1b: Past Simple &amp; High-Frequency Irregular Verbs">
+                <div slot="rules">
+                    <div class="rule-card" style="margin-bottom:14px;">
+                        <div style="font-size:21px; font-weight:800; color:var(--col-grammar); margin-bottom:6px;">1. Past Simple Function</div>
+                        <p style="font-size:18px; line-height:1.6; margin:0;">Used to describe completed actions, historical milestones, and narratives at a specific time in the past.<br><em>"In AD 200, the invention of paper let them share ideas cheaply."</em></p>
+                    </div>
+                    <div class="rule-card">
+                        <div style="font-size:21px; font-weight:800; color:var(--col-reading); margin-bottom:6px;">2. Irregular Verbs in Academic History Narratives</div>
+                        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; font-size:17px; margin-top:8px;">
+                            <div>begin &rarr; <strong>began</strong></div>
+                            <div>mean &rarr; <strong>meant</strong></div>
+                            <div>lead &rarr; <strong>led</strong></div>
+                            <div>choose &rarr; <strong>chose</strong></div>
+                            <div>let &rarr; <strong>let</strong></div>
+                            <div>write &rarr; <strong>wrote</strong></div>
+                            <div>undertake &rarr; <strong>undertook</strong></div>
+                            <div>deal &rarr; <strong>dealt</strong></div>
+                            <div>rise &rarr; <strong>rose</strong></div>
+                            <div>rebuild &rarr; <strong>rebuilt</strong></div>
+                            <div>dream &rarr; <strong>dreamed/dreamt</strong></div>
+                            <div>draw &rarr; <strong>drew</strong></div>
+                        </div>
+                    </div>
+                </div>
+                <div slot="contrast-card">
+                    <div class="card" style="background:#fff7ed; border:2px solid #fdba74; padding:22px; border-radius:12px;">
+                        <h4 style="color:#c2410c; font-size:20px; font-weight:800; margin-bottom:10px;">⚠️ Common Spelling Gotchas</h4>
+                        <div style="font-size:17.5px; line-height:1.65; color:#7c2d12;">
+                            ❌ <em>"lead"</em> (past) &rarr; ✔️ <strong>led</strong><br>
+                            ❌ <em>"choosed"</em> &rarr; ✔️ <strong>chose</strong><br>
+                            ❌ <em>"writed"</em> &rarr; ✔️ <strong>wrote</strong><br>
+                            ❌ <em>"rised"</em> &rarr; ✔️ <strong>rose</strong>
+                        </div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 26: 1b Grammar Practice - Chinese Media History -->
+            <slide-card template="gap-fill-passage" skill="grammar" title="Grammar 1b Practice: Chinese Media History" subtitle="Type the past simple form of each verb in brackets to complete the historical narrative.">
+                <div slot="passage">
+                    <div style="font-size:18px; line-height:2.0; color:var(--text-dark);" id="chineseHistoryTask">
+                        By the year 1400, everything was in place for the Industrial Revolution to begin, not in Britain, where it eventually <input type="text" class="blank-input" data-ans="began" style="width:110px;"> (1. begin), but in China. Advances in media <input type="text" class="blank-input" data-ans="meant" style="width:110px;"> (2. mean) the Chinese were able to advance science. The discovery of black ink <input type="text" class="blank-input" data-ans="led" style="width:100px;"> (3. lead) to a revolution, while other nations still <input type="text" class="blank-input" data-ans="chose" style="width:110px;"> (4. choose) to cut words into stone. The invention of paper in AD 200 also <input type="text" class="blank-input" data-ans="let" style="width:100px;"> (5. let) them share ideas cheaply. Before that, they <input type="text" class="blank-input" data-ans="wrote" style="width:110px;"> (6. write) documents on bamboo or silk. Once they had affordable paper, they <input type="text" class="blank-input" data-ans="undertook" style="width:140px;"> (7. undertake) printing. By using wooden letters which could be moved, they <input type="text" class="blank-input" data-ans="dealt" style="width:110px;"> (8. deal) with the challenge of producing copies in minutes. The amount of shared knowledge <input type="text" class="blank-input" data-ans="rose" style="width:100px;"> (9. rise) rapidly. Around 400 BC, Mo Tzu <input type="text" class="blank-input" data-ans="drew" style="width:100px;"> (10. draw) up plans for a working camera.
+                    </div>
+                </div>
+                <div slot="rules-col">
+                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-grammar); padding:20px 24px;">
+                        <h4 style="color:var(--col-grammar); font-size:20px; font-weight:800; margin-bottom:10px;">📜 Historical Narration</h4>
+                        <p style="font-size:17.5px; line-height:1.65; color:var(--text-dark);">Narrative paragraphs in Task 1 process/history questions require consistent past simple forms with correct vowel shifts (e.g. *i &rarr; a/o: begin &rarr; began, write &rarr; wrote, rise &rarr; rose*).</p>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 27: 1b Vocabulary - The Media -->
+            <slide-card template="gap-fill-passage" skill="vocab" title="Vocabulary 1b: The Media &amp; News Terminology" subtitle="Complete the essay extract on the historical power of media using the target vocabulary.">
+                <div slot="passage">
+                    <div style="font-size:16px; font-weight:800; color:var(--col-vocab); margin-bottom:10px;">WORD BANK:</div>
+                    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;">
+                        <span class="word-chip" data-word="content">content</span>
+                        <span class="word-chip" data-word="journalists">journalists</span>
+                        <span class="word-chip" data-word="agencies">agencies</span>
+                        <span class="word-chip" data-word="broadcast">broadcast</span>
+                        <span class="word-chip" data-word="views">views</span>
+                        <span class="word-chip" data-word="audience">audience</span>
+                        <span class="word-chip" data-word="events">events</span>
+                        <span class="word-chip" data-word="issues">issues</span>
+                    </div>
+
+                    <div style="font-size:18.5px; line-height:2.0; color:var(--text-dark);" id="mediaVocabTask">
+                        These days, the (1) <input type="text" class="blank-input" data-ans="content" style="width:130px;"> of many newspapers might be fashion and animal photos, but for many years media was as powerful as the government. The work of the (2) <input type="text" class="blank-input" data-ans="journalists" style="width:150px;"> who researched stories, and international news (3) <input type="text" class="blank-input" data-ans="agencies" style="width:140px;"> which sold those stories, were vital. Very few people had the power to (4) <input type="text" class="blank-input" data-ans="broadcast" style="width:140px;"> programmes, and people trusted the (5) <input type="text" class="blank-input" data-ans="views" style="width:120px;"> they expressed. Television companies believed it was their duty to educate their (6) <input type="text" class="blank-input" data-ans="audience" style="width:140px;">. As well as reporting on daily (7) <input type="text" class="blank-input" data-ans="events" style="width:130px;">, there were special programmes on big (8) <input type="text" class="blank-input" data-ans="issues" style="width:130px;"> like the environment.
+                    </div>
+                </div>
+                <div slot="rules-col">
+                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-vocab); padding:20px 24px;">
+                        <h4 style="color:var(--col-vocab); font-size:20px; font-weight:800; margin-bottom:10px;">📰 Media Collocations</h4>
+                        <ul style="padding-left:18px; font-size:17.5px; line-height:1.65; color:var(--text-dark);">
+                            <li><strong>broadcast</strong> a programme / report</li>
+                            <li>target / educate an <strong>audience</strong></li>
+                            <li>cover major <strong>issues</strong> / current <strong>events</strong></li>
+                            <li>news <strong>agencies</strong> &amp; investigative <strong>journalists</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 28: 1b Writing Task 1 - Describe a Chart (Cinema vs DVD Sales) -->
+            <slide-card template="writing-model" skill="write" title="Writing 1b (Task 1): Dynamic Chart Model (Cinema vs. DVD Sales)" subtitle="Summarise income from cinema and DVD sales in the USA and internationally (2001–2010).">
+                <div slot="prompt">
+                    <div style="font-size:18px; line-height:1.6;">
+                        <strong>Task 1 Prompt:</strong> <em>The graph shows the amount of income from cinema ticket and DVD sales in the USA and internationally from 2001 to 2010. Summarise by selecting and reporting the main features, and make comparisons where relevant. (At least 150 words).</em>
+                    </div>
+                </div>
+                <div slot="essay">
+                    <p>
+                        <span class="hl-phrase" data-phrase="Introductory Paraphrase" data-note="Paraphrases prompt clearly without repeating raw phrasing.">The chart gives an overview of the changes in cinema and DVD sales in the United States and the rest of the world over a ten-year period from 2001 to 2010.</span>
+                    </p>
+                    <p>
+                        <span class="hl-phrase" data-phrase="Comprehensive Overview" data-note="Identifies two key overall macro-trends: DVD dominance overall, and international overtaking US market.">From the chart, we can tell that overall, DVD sales have been higher than cinema visits, and the international market has become significantly more important than the US market over the period.</span>
+                    </p>
+                    <p>
+                        <span class="hl-phrase" data-phrase="US Market Breakdown" data-note="Compares US cinema ($10B) vs DVD ($20B), slight peak in 2005, and 2010 endpoint ($11B vs $18B).">At the beginning of the period, just under half of the US income came from cinema sales compared to DVDs, at $10 billion and $20 billion, respectively. Despite a slight rise in DVD sales around 2005, they finished in more or less the same position, at around $18 billion and $11 billion by 2010.</span>
+                    </p>
+                    <p>
+                        <span class="hl-phrase" data-phrase="International Surge &amp; Comparison" data-note="Highlights rapid growth to $32B (more than twice domestic sales).">However, there were much bigger changes in international sales, with sales of DVDs rising from $11 billion to $22 billion by 2010. International cinema sales also experienced rapid growth, finishing as the largest market segment worth over $32 billion. This was more than twice as much as domestic sales.</span>
+                    </p>
+                </div>
+                <div slot="annotations">
+                    <div class="card" style="background:#ffffff; border-top:4px solid var(--col-writing); padding:20px 24px;">
+                        <h4 style="color:var(--col-writing); font-size:20px; font-weight:800; margin-bottom:10px;">📊 Prepositions of Movement</h4>
+                        <div style="font-size:18px; line-height:1.7; color:var(--text-dark);">
+                            • Stood <strong>at</strong> $11.5 billion (fixed point)<br>
+                            • Rose <strong>by</strong> $6.5 billion (margin of change)<br>
+                            • Rose <strong>to</strong> $18 billion (end destination)<br>
+                            • Reached <strong>[no preposition]</strong> $22 billion
+                        </div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 29: Module 1 Mastery & Exam Checklist -->
+            <slide-card template="summary-checklist" skill="review" title="Module 01 Mastery &amp; Exam Checklist" subtitle="Review core test strategies and linguistic competencies mastered in this module.">
+                <div slot="grid">
+                    <div class="card" style="border-left:6px solid var(--col-reading); padding:24px 28px;">
+                        <div style="font-size:22px; font-weight:800; color:var(--col-reading); margin-bottom:10px;">📖 Reading Strategies</div>
+                        <ul style="padding-left:20px; font-size:18.5px; line-height:1.75; display:flex; flex-direction:column; gap:8px;">
+                            <li><strong>Topic Sentences:</strong> Scan sentence 1/2 for comparative anchors (e.g. human eye vs digital sensors).</li>
+                            <li><strong>Heading Matching:</strong> Match general paragraph meaning rather than single isolated words.</li>
+                            <li><strong>Sentence Completion:</strong> Strict adherence to word limits (*ONE WORD ONLY*).</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="border-left:6px solid var(--col-writing); padding:24px 28px;">
+                        <div style="font-size:22px; font-weight:800; color:var(--col-writing); margin-bottom:10px;">✍️ Task 1 Data Analytics</div>
+                        <ul style="padding-left:20px; font-size:18.5px; line-height:1.75; display:flex; flex-direction:column; gap:8px;">
+                            <li><strong>Overview Clause:</strong> Use <em>"While [Category A] dominated, [Category B] varied widely"</em>.</li>
+                            <li><strong>Preposition Precision:</strong> Distinguish <em>rose by</em> (amount of change) from <em>rose to</em> (endpoint).</li>
+                            <li><strong>Grammar Range:</strong> Accurate present simple/continuous vs past simple irregulars.</li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+        </main>
+    </div>
+
+    <!-- Template Engine & Presentation Bundle -->
+    <script src="../js/template-engine.js"></script>
+    <script src="../js/deck-bundle.js"></script>
+</body>
+
+</html>
