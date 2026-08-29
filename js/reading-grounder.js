@@ -1,9 +1,10 @@
 /**
  * Reading Grounder & Vocabulary Explainer Engine (ReadingGrounder)
  * Handles:
- * 1. Interactive Vocabulary Popovers (Definitions, IPA, Audio Pronunciation, and Highlighting).
- * 2. Automatic synonym badge rendering from data-syn attributes.
- * 3. Evidence hover focus synchronization.
+ * 1. Interactive Vocabulary Popovers (Definitions, IPA, Audio Pronunciation, and Dual-Pane Highlighting).
+ * 2. Automatic dictionary lookup for reading question keywords and passage evidence.
+ * 3. Automatic synonym badge rendering from data-syn attributes.
+ * 4. Evidence hover focus synchronization.
  */
 
 class ReadingGrounder {
@@ -15,19 +16,173 @@ class ReadingGrounder {
     }
 
     /**
+     * Built-in IELTS Academic Dictionary for Reading Questions & Target Passage Excerpts
+     */
+    static get dictionary() {
+        return {
+            'sharing experiences': {
+                word: 'sharing experiences',
+                pos: 'phrase',
+                ipa: '/ˈʃeə.rɪŋ ɪkˈspɪə.ri.ən.sɪz/',
+                def: 'Communicating and recounting personal events to others in social interactions.',
+                colloc: 'Paraphrases: "extraordinary experiences" / "tell others"'
+            },
+            'satisfaction': {
+                word: 'satisfaction',
+                pos: 'noun',
+                ipa: '/ˌsæt.ɪsˈfæk.ʃən/',
+                def: 'A pleasant feeling of fulfillment or pleasure.',
+                colloc: 'gain / derive satisfaction from'
+            },
+            'immediate and long-term': {
+                word: 'immediate & long-term',
+                pos: 'phrase',
+                ipa: '/ɪˈmiː.di.ət ænd lɒŋ tɜːm/',
+                def: 'Happening in the present moment as well as extending far into the future.',
+                colloc: 'Paraphrases: "in the moment" vs. "in the long run"'
+            },
+            'extraordinary': {
+                word: 'extraordinary',
+                pos: 'adj.',
+                ipa: '/ɪkˈstrɔː.dɪn.ər.i/',
+                def: 'Very unusual, special, or remarkable; far beyond ordinary.',
+                colloc: 'extraordinary experience / achievement'
+            },
+            'pleasurable': {
+                word: 'pleasurable',
+                pos: 'adj.',
+                ipa: '/ˈpleʒ.ər.ə.bəl/',
+                def: 'Giving a feeling of happy satisfaction or enjoyable sensation.',
+                colloc: 'pleasurable in the moment'
+            },
+            'reminisce': {
+                word: 'reminisce',
+                pos: 'verb',
+                ipa: '/ˌrem.ɪˈnɪs/',
+                def: 'To talk, write, or think about enjoyable past experiences.',
+                colloc: 'reminisce about the past / fond memories'
+            },
+            'social communication': {
+                word: 'social communication',
+                pos: 'noun',
+                ipa: '/ˈsəʊ.ʃəl kəˌmjuː.nɪˈkeɪ.ʃən/',
+                def: 'The exchange of ideas and information between people in social settings.',
+                colloc: 'Paraphrases: "social interaction"'
+            },
+            'in common': {
+                word: 'in common',
+                pos: 'idiom / phrase',
+                ipa: '/ɪn ˈkɒm.ən/',
+                def: 'Shared equally between two or more parties; possessing shared traits.',
+                colloc: 'have things in common ↔ grounded in similarities'
+            },
+            'grounded in': {
+                word: 'grounded in',
+                pos: 'verb / adj.',
+                ipa: '/ˈɡraʊn.dɪd ɪn/',
+                def: 'Firmly based on, rooted in, or determined by foundational factors.',
+                colloc: 'grounded in similarities / evidence'
+            },
+            'unusual experiences': {
+                word: 'unusual experiences',
+                pos: 'noun phrase',
+                ipa: '/ʌnˈjuː.ʒu.əl ɪkˈspɪə.ri.ən.sɪz/',
+                def: 'Novel, rare, or out-of-the-ordinary events in life.',
+                colloc: 'Paraphrases: "extraordinary experiences"'
+            },
+            'mistakenly thought': {
+                word: 'mistakenly thought',
+                pos: 'verb phrase',
+                ipa: '/mɪˈsteɪ.kən.li θɔːt/',
+                def: 'Held an incorrect or inaccurate belief before research evidence.',
+                colloc: 'believed ↔ mistakenly thought'
+            },
+            'participants': {
+                word: 'participants',
+                pos: 'noun',
+                ipa: '/pɑːˈtɪs.ɪ.pənts/',
+                def: 'People who take part in a scientific experiment, study, or survey.',
+                colloc: 'study participants / sample size'
+            },
+            'reflected': {
+                word: 'reflected',
+                pos: 'verb',
+                ipa: '/rɪˈflek.tɪd/',
+                def: 'Accurately mirrored, reproduced, or represented real-world dynamics.',
+                colloc: 'reflected what happens in the real world'
+            },
+            'criteria': {
+                word: 'criteria',
+                pos: 'noun (pl.)',
+                ipa: '/kraɪˈtɪə.ri.ə/',
+                def: 'Standards or principles by which something is judged or decided.',
+                colloc: 'different criteria ↔ appearance vs. competence'
+            },
+            'tailor-made': {
+                word: 'tailor-made',
+                pos: 'adj.',
+                ipa: '/ˈteɪ.lə meɪd/',
+                def: 'Made specifically for a particular individual or purpose.',
+                colloc: 'specially designed clothes ↔ tailor-made suit'
+            },
+            'competent': {
+                word: 'competent',
+                pos: 'adj.',
+                ipa: '/ˈkɒm.pɪ.tənt/',
+                def: 'Having the necessary ability, knowledge, or skill to do something successfully.',
+                colloc: 'highly competent / professional'
+            },
+            'snap judgement': {
+                word: 'snap judgement',
+                pos: 'noun',
+                ipa: '/snæp ˈdʒʌdʒ.mənt/',
+                def: 'A decision or opinion made instantly without deliberation.',
+                colloc: 'almost immediately ↔ snap judgement / in one second'
+            },
+            'enclothed cognition': {
+                word: 'enclothed cognition',
+                pos: 'noun',
+                ipa: '/ɪnˈkləʊðd kɒɡˈnɪʃ.ən/',
+                def: 'The systematic influence of clothing on wearers\' psychological processes and cognitive focus.',
+                colloc: 'theory of enclothed cognition'
+            },
+            'impressing others': {
+                word: 'impressing others',
+                pos: 'phrase',
+                ipa: '/ɪmˈpres.ɪŋ ˈʌð.əz/',
+                def: 'Gaining admiration or attention from peers through luxury or display.',
+                colloc: 'other people notice them ↔ impressing others'
+            },
+            'belonging': {
+                word: 'belonging',
+                pos: 'noun',
+                ipa: '/bɪˈlɒŋ.ɪŋ/',
+                def: 'A sense of being accepted, connected, and part of a social group.',
+                colloc: 'signal group belonging ↔ dress in a similar way'
+            }
+        };
+    }
+
+    /**
      * Interactive Vocabulary Highlighting, Pronunciation, and Short Definitions
      */
     static bindVocabExplainer() {
         document.addEventListener('click', (e) => {
-            const vocabTarget = e.target.closest('.vocab-word, .vocab-term, [data-def]');
+            const target = e.target.closest('.vocab-word, .vocab-term, .syn-pair-1, .syn-pair-2, .syn-pair-3, [data-def]');
             
-            // If clicking inside the popover itself (e.g. replay audio), don't close
+            // If clicking inside the popover itself (e.g. replay audio or close), don't close
             if (e.target.closest('#vocabPopover')) return;
 
-            if (vocabTarget) {
-                e.preventDefault();
-                e.stopPropagation();
-                this.showVocabPopover(vocabTarget);
+            if (target) {
+                // If it's a synonym span or vocab word, look up its definition
+                const text = target.textContent.trim().toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()"]/g, "").trim();
+                const matchedDict = this.lookupDict(text, target);
+
+                if (matchedDict || target.dataset.def || target.classList.contains('vocab-word')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.showVocabPopover(target, matchedDict);
+                }
             } else {
                 this.hideVocabPopover();
             }
@@ -40,21 +195,49 @@ class ReadingGrounder {
         });
     }
 
-    static showVocabPopover(el) {
+    static lookupDict(rawText, el) {
+        if (!rawText) return null;
+        const dict = this.dictionary;
+
+        // Exact match
+        if (dict[rawText]) return dict[rawText];
+
+        // Partial or substring match
+        for (const [key, val] of Object.entries(dict)) {
+            if (rawText.includes(key) || key.includes(rawText)) {
+                return val;
+            }
+        }
+
+        // Check data attributes on element
+        if (el.dataset.word && dict[el.dataset.word.toLowerCase()]) {
+            return dict[el.dataset.word.toLowerCase()];
+        }
+
+        return null;
+    }
+
+    static showVocabPopover(el, dictData = null) {
         // Remove previous active glow
         document.querySelectorAll('.vocab-word.active-vocab, .vocab-term.active-vocab').forEach(v => {
             v.classList.remove('active-vocab');
         });
         el.classList.add('active-vocab');
 
-        const word = el.dataset.word || el.textContent.trim().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "");
-        const def = el.dataset.def || 'Academic keyword crucial for passage comprehension and question matching.';
-        const ipa = el.dataset.ipa || '';
-        const pos = el.dataset.pos || '';
-        const colloc = el.dataset.colloc || '';
+        const cleanWord = el.dataset.word || (dictData ? dictData.word : el.textContent.trim().replace(/[.,/#!$%^&*;:{}=\-_`~()"]/g, ""));
+        const pos = el.dataset.pos || (dictData ? dictData.pos : 'IELTS KEYWORD');
+        const ipa = el.dataset.ipa || (dictData ? dictData.ipa : '');
+        const def = el.dataset.def || (dictData ? dictData.def : 'Key academic term targeted in the reading passage & questions.');
+        const colloc = el.dataset.colloc || (dictData ? dictData.colloc : '');
 
         // Auto-play native speech pronunciation
-        this.speakWord(word);
+        this.speakWord(cleanWord);
+
+        // Highlight matching question/passage elements if linked
+        const qId = el.dataset.q;
+        if (qId && window.readingHighlighter) {
+            window.readingHighlighter.showEvidence(qId);
+        }
 
         // Get or create popover element
         let popover = document.getElementById('vocabPopover');
@@ -68,18 +251,20 @@ class ReadingGrounder {
         popover.innerHTML = `
             <div class="vp-header">
                 <div class="vp-title-group">
-                    <span class="vp-word">${word}</span>
-                    ${pos ? `<span class="vp-pos">${pos}</span>` : ''}
-                    ${ipa ? `<span class="vp-ipa">${ipa}</span>` : ''}
+                    <span class="vp-word">${cleanWord}</span>
+                    <div style="display: flex; gap: 6px; align-items: center; margin-top: 2px;">
+                        ${pos ? `<span class="vp-pos">${pos}</span>` : ''}
+                        ${ipa ? `<span class="vp-ipa">${ipa}</span>` : ''}
+                    </div>
                 </div>
                 <div class="vp-actions">
-                    <button class="vp-audio-btn" title="Listen to pronunciation" onclick="ReadingGrounder.speakWord('${word.replace(/'/g, "\\'")}')">🔊 Listen</button>
+                    <button class="vp-audio-btn" title="Listen to pronunciation" onclick="ReadingGrounder.speakWord('${cleanWord.replace(/'/g, "\\'")}')">🔊 Listen</button>
                     <button class="vp-close-btn" title="Close" onclick="ReadingGrounder.hideVocabPopover()">✕</button>
                 </div>
             </div>
             <div class="vp-body">
                 <div class="vp-def">${def}</div>
-                ${colloc ? `<div class="vp-colloc"><strong>Collocation / Context:</strong> <em>${colloc}</em></div>` : ''}
+                ${colloc ? `<div class="vp-colloc"><strong>Target Linkage:</strong> <em>${colloc}</em></div>` : ''}
             </div>
         `;
 
@@ -159,13 +344,13 @@ class ReadingGrounder {
                 position: fixed;
                 z-index: 10000;
                 display: none;
-                width: 320px;
+                width: 330px;
                 max-width: 90vw;
                 background: #ffffff;
                 border: 2px solid #10b981;
                 border-radius: 12px;
                 padding: 14px 16px;
-                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 12px 28px -5px rgba(0, 0, 0, 0.22), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
                 font-family: var(--font-body, 'DM Sans', sans-serif);
                 animation: popoverFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             }
@@ -187,14 +372,14 @@ class ReadingGrounder {
             }
 
             .vp-word {
-                font-size: 18px;
+                font-size: 17.5px;
                 font-weight: 800;
                 color: #0f172a;
                 font-family: var(--font-display, sans-serif);
             }
 
             .vp-pos {
-                font-size: 12px;
+                font-size: 11.5px;
                 font-weight: 700;
                 color: #059669;
                 text-transform: uppercase;
@@ -205,7 +390,7 @@ class ReadingGrounder {
             }
 
             .vp-ipa {
-                font-size: 13px;
+                font-size: 12.5px;
                 color: #64748b;
                 font-family: 'JetBrains Mono', monospace;
             }
@@ -251,17 +436,18 @@ class ReadingGrounder {
             }
 
             .vp-body {
-                font-size: 14.5px;
+                font-size: 14px;
                 line-height: 1.5;
                 color: #334155;
             }
 
             .vp-def {
                 margin-bottom: 6px;
+                font-weight: 500;
             }
 
             .vp-colloc {
-                font-size: 13px;
+                font-size: 12.5px;
                 color: #475569;
                 background: #f8fafc;
                 padding: 6px 8px;
