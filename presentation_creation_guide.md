@@ -120,29 +120,42 @@ HTML presentations/
 
 ---
 
-## 4. Standard Slide Module Blueprint & The 3-Stage Reading Framework
+> [!IMPORTANT]
+> ### 🛑 MANDATORY RULE: OMIT SPEAKING SKILLS ACROSS ALL DECKS
+> **Never create Speaking slides or Speaking exercises in any HTML presentation in this repository.**
+> The presentations in this repository focus exclusively on **Reading**, **Grammar**, **Vocabulary**, and **Writing (Task 2 & Spelling)**. Speaking skills are intentionally taught in separate formats and must ALWAYS be omitted when building or updating course presentations.
 
-Every reading task in an IELTS module deck uses a **3-Stage Instructional Sequence** preceding independent practice:
+---
+
+## 4. Standard Slide Module Blueprint & The 4-Stage Reading Framework
+
+Every reading task in an IELTS module deck uses a **4-Stage Instructional Sequence**:
 1. **Stage 1 (Pre-reading Keyword Analysis)**: Question keyword deconstruction with direct **🟢 Green (Anchor)** and **🟣 Purple (Qualifier/Claim)** sentence highlighting and step-reveal (<kbd>E</kbd>).
-2. **Stage 2 (Model Walkthrough)**: 1-question model walkthrough alongside a dedicated single paragraph excerpt.
-3. **Stage 3 (Full Split-View Reading)**: Full unabridged reading text and complete interactive question set.
+2. **Stage 2 (Full Split-View Reading)**: Full unabridged reading text and complete interactive question set.
+3. **Stage 3 (1-Question-Per-Slide Walkthroughs)**: Dedicated interactive exercise slides for each question alongside its isolated passage excerpt, unrevealed by default, with **Google Female UK Voice (`en-GB`)** audio pronunciation and definitions.
+4. **Stage 4 (Grammar, Lexicon & Writing Mastery)**: Deep-dive academic grammar, vocabulary, spelling traps, and essay structure.
 
 | Slide Range | Slide Type | `data-skill` | Description |
 | :---: | :--- | :--- | :--- |
-| **01** | **Title & Course Roadmap** | `title` | Module badge, main title, subtitle, and interactive 4-skill syllabus cards. |
+| **01** | **Title & Course Roadmap** | `title` | Module badge, main title, subtitle, and 3-skill syllabus cards (Reading, Grammar/Vocab, Writing). |
 | **02** | **Part A Reading Strategy (Stage 1)** | `read` | Pre-reading question keyword deconstruction with direct green/purple sentence highlighting. |
-| **03** | **Part A Reading Model (Stage 2)** | `read` | Model walkthrough of Question 1 alongside its dedicated paragraph excerpt. |
-| **04** | **Part A Full Reading Task (Stage 3)** | `read` | 50/50 Split-view passage with dual-color synonym grounding & interactive questions. |
-| **05–07** | **Part A Secondary Reading / Critical View** | `read` | Preparatory strategy pair + full split-view task (e.g. YES/NO/NOT GIVEN). |
-| **08–10** | **Part A Grammar Mastery** | `grammar` | Rules summary, academic transformations, and cloze practice. |
-| **11** | **Part A Writing / Vocabulary Focus** | `write` / `vocab` | Collocation cards, prefix/suffix word formations, or essay planning. |
-| **12** | **Part B Section Divider** | `section` | Two-column transition banner introducing Part B topic & skills. |
-| **13–15** | **Part B Reading (Main Task)** | `read` | 3-Stage Reading Sequence: Strategy Slide + Model Walkthrough + Full Reading Task. |
-| **16–18** | **Part B Secondary Reading** | `read` | 3-Stage Reading Sequence for Questions 7–13 (e.g. Matching Headings or Y/N/NG). |
-| **19–21** | **Part B Vocabulary In Use** | `vocab` | Syntactic breakdown, parts of speech, and intensifier collocations. |
-| **22–23** | **Part B Writing Mastery** | `write` | Common spelling traps, model essay breakdown, and prompt deconstruction. |
-| **24** | **IELTS Speaking Masterclass** | `review` / `vocab` | Parts 1, 2 Cue Card (with Band 8 response), and Part 3 abstract discussion. |
-| **25** | **Summary & Exam Competencies** | `review` | Complete 5-skill achievement checklist and key exam takeaways. |
+| **03** | **Part A Full Reading Task (Stage 2)** | `read` | 50/50 Split-view passage with dual-color synonym grounding & interactive questions. |
+| **04–07** | **Part A 1-Question Walkthroughs (Stage 3)** | `read` | Individual interactive exercise slides (1 question per slide) + dedicated paragraph excerpts. |
+| **08** | **Part A Secondary Reading Strategy** | `read` | Keyword deconstruction for Part A secondary task (e.g. YES/NO/NOT GIVEN). |
+| **09** | **Part A Full Secondary Reading Task** | `read` | Full split-view critical response passage & questions. |
+| **10–15** | **Part A Secondary 1-Q Walkthroughs** | `read` | Dedicated 1-question interactive slides for Questions 1 to 6. |
+| **16–18** | **Part A Grammar Mastery** | `grammar` | Rules summary, academic transformations, and cloze practice. |
+| **19** | **Part A Writing Focus** | `write` | Opinion essay thesis & body paragraph balance. |
+| **20** | **Part B Section Divider** | `section` | Two-column transition banner introducing Part B topic & skills. |
+| **21** | **Part B Reading Strategy** | `read` | Keyword deconstruction for Part B reading task (e.g. Matching Information). |
+| **22** | **Part B Full Reading Task** | `read` | Full split-view passage & questions. |
+| **23–28** | **Part B 1-Question Walkthroughs** | `read` | Dedicated 1-question interactive slides for Questions 1 to 6. |
+| **29** | **Part B Secondary Reading Strategy** | `read` | Keyword deconstruction for Questions 7 to 12. |
+| **30** | **Part B Full Secondary Reading Task** | `read` | Full split-view passage & Y/N/NG questions. |
+| **31–36** | **Part B Secondary 1-Q Walkthroughs** | `read` | Dedicated 1-question interactive slides for Questions 7 to 12. |
+| **37–39** | **Part B Vocabulary In Use** | `vocab` | Syntactic breakdown, parts of speech, and intensifier collocations. |
+| **40–41** | **Part B Writing & Spelling Mastery** | `write` | Common spelling traps, essay outline, and prompt deconstruction. |
+| **42** | **Summary & Exam Competencies** | `review` | Complete achievement checklist and key exam takeaways. *(NO speaking slides)* |
 
 ---
 
