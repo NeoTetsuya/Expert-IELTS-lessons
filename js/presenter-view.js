@@ -187,6 +187,7 @@ class PresenterViewUI {
         this.isWhiteout = false;
         this.isSpotlight = false;
         this.isHandlingRemoteNavigation = false;
+        this.presenterWindowRef = null;
 
         this.init();
     }
@@ -231,12 +232,14 @@ class PresenterViewUI {
     openPresenterWindow() {
         const url = new URL(window.location.href);
         url.searchParams.set('presenter', 'true');
+        const windowName = 'ielts_presenter_view_' + window.location.pathname.replace(/[^a-zA-Z0-9]/g, '_');
         const presenterWindow = window.open(
             url.toString(),
-            'ielts_presenter_view_' + window.location.pathname,
+            windowName,
             'width=1380,height=880,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes'
         );
         if (presenterWindow) {
+            this.presenterWindowRef = presenterWindow;
             presenterWindow.focus();
         } else {
             alert('Popup was blocked by your browser. Please allow popups for Presenter View.');
@@ -249,6 +252,21 @@ class PresenterViewUI {
      * =========================================================================
      */
     setupAudienceSyncListener() {
+        // Automatically close Presenter View if Audience Window closes
+        const closePresenter = () => {
+            try {
+                this.sync.emit('HOST_CLOSED', {});
+            } catch (e) {}
+            try {
+                if (this.presenterWindowRef && !this.presenterWindowRef.closed) {
+                    this.presenterWindowRef.close();
+                }
+            } catch (e) {}
+        };
+        window.addEventListener('beforeunload', closePresenter);
+        window.addEventListener('pagehide', closePresenter);
+        window.addEventListener('unload', closePresenter);
+
         // When audience view receives sync request, reply with complete current state
         this.sync.on('SYNC_REQUEST', () => {
             this.broadcastCurrentAudienceState();
@@ -744,6 +762,11 @@ class PresenterViewUI {
      * =========================================================================
      */
     setupPresenterSyncListeners() {
+        // Automatically close Presenter View if the main presentation view closes
+        this.sync.on('HOST_CLOSED', () => {
+            window.close();
+        });
+
         // Initial state sync from Audience
         this.sync.on('SYNC_RESPONSE', (state) => {
             if (window.deckEngine && typeof state.currentSlide === 'number') {
