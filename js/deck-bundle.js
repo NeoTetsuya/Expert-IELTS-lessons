@@ -3911,10 +3911,11 @@ window.studentPicker = new StudentPicker();
 /**
  * ==========================================================================
  * PARAGRAPH FOCUS LOUPE (ParagraphLoupe)
- * Isolates and magnifies individual reading paragraphs for projector clarity
- * - Click any paragraph tag [Paragraph X] to zoom in (140% scale)
+ * Isolates, magnifies, and illuminates reading paragraphs for classroom clarity
+ * - Click any paragraph tag [Paragraph X] to zoom in & spotlight
  * - Dims neighboring paragraphs for laser-focused reading analysis
  * - Keyboard shortcut: 'Z' (cycles through paragraphs) / 'Escape' to reset
+ * - Fully synced across Presenter View & Audience Display
  * ==========================================================================
  */
 
@@ -3926,38 +3927,48 @@ class ParagraphLoupe {
 
     init() {
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.bindTags());
+            document.addEventListener('DOMContentLoaded', () => this.bindEvents());
         } else {
-            this.bindTags();
+            this.bindEvents();
         }
+    }
 
-        // Global shortcut 'Z' to cycle focus on active slide
+    bindEvents() {
+        this.injectStyles();
+
+        // 1. Delegated click listener for all paragraph tags (works with dynamic templates)
+        document.addEventListener('click', (e) => {
+            const tag = e.target.closest('.para-tag');
+            if (tag) {
+                e.stopPropagation();
+                const p = tag.closest('p') || tag.parentElement;
+                if (p) {
+                    this.toggleFocus(p);
+                    this.notifySync();
+                }
+            }
+        });
+
+        // 2. Global keyboard shortcut 'Z' to cycle focus on active slide
         document.addEventListener('keydown', (e) => {
-            if ((e.key === 'z' || e.key === 'Z') && !e.ctrlKey && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
+            if ((e.key === 'z' || e.key === 'Z') && !e.ctrlKey && !e.altKey && !e.metaKey && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
                 e.preventDefault();
                 this.cycleNextParagraph();
+                this.notifySync();
             }
 
             if (e.key === 'Escape' && this.activePara) {
                 this.clearFocus();
+                this.notifySync();
             }
         });
     }
 
-    bindTags() {
-        document.querySelectorAll('.reading-pane p').forEach(p => {
-            const tag = p.querySelector('.para-tag');
-            if (tag) {
-                tag.style.cursor = 'zoom-in';
-                tag.title = 'Click to focus & magnify this paragraph (Shortcut: Z)';
-                tag.onclick = (e) => {
-                    e.stopPropagation();
-                    this.toggleFocus(p);
-                };
-            }
-        });
-
-        this.injectStyles();
+    /**
+     * Master toggle method called by UI buttons and Presenter View
+     */
+    toggle() {
+        this.cycleNextParagraph();
     }
 
     toggleFocus(paraEl) {
@@ -3970,30 +3981,63 @@ class ParagraphLoupe {
 
     focusParagraph(paraEl) {
         this.clearFocus();
-        this.activePara = paraEl;
+        if (!paraEl) return;
 
-        const pane = paraEl.closest('.reading-pane');
+        this.activePara = paraEl;
+        const pane = paraEl.closest('.reading-pane') || paraEl.closest('[data-slot="passage"]') || paraEl.parentElement;
         if (pane) {
             pane.classList.add('loupe-active');
-            paraEl.classList.add('loupe-focused');
-            paraEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
+        paraEl.classList.add('loupe-focused');
+
+        try {
+            paraEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch (_) {}
     }
 
     clearFocus() {
         if (this.activePara) {
-            const pane = this.activePara.closest('.reading-pane');
+            const pane = this.activePara.closest('.reading-pane') || this.activePara.closest('[data-slot="passage"]') || this.activePara.parentElement;
             if (pane) pane.classList.remove('loupe-active');
             this.activePara.classList.remove('loupe-focused');
             this.activePara = null;
         }
+
+        // Also clean any orphan classes
+        document.querySelectorAll('.loupe-focused').forEach(el => el.classList.remove('loupe-focused'));
+        document.querySelectorAll('.loupe-active').forEach(el => el.classList.remove('loupe-active'));
+    }
+
+    getActiveSlideParagraphs() {
+        // Target active slide in current document
+        const activeSlide = document.querySelector('.slide.active');
+        if (!activeSlide) return [];
+
+        // 1. Prefer paragraphs with .para-tag
+        let paragraphs = Array.from(activeSlide.querySelectorAll('.para-tag'))
+            .map(tag => tag.closest('p') || tag.parentElement)
+            .filter(Boolean);
+
+        // 2. Fallback: all paragraphs in reading pane
+        if (paragraphs.length === 0) {
+            paragraphs = Array.from(activeSlide.querySelectorAll('.reading-pane p, [data-slot="passage"] p, .card p'));
+        }
+
+        // Remove duplicates
+        return [...new Set(paragraphs)];
     }
 
     cycleNextParagraph() {
-        const activeSlide = document.querySelector('.slide.active');
-        if (!activeSlide) return;
-        const paragraphs = Array.from(activeSlide.querySelectorAll('.reading-pane p'));
-        if (paragraphs.length === 0) return;
+        const paragraphs = this.getActiveSlideParagraphs();
+        if (paragraphs.length === 0) {
+            // Also attempt inside iframe if in presenter view
+            const iframe = document.getElementById('currentSlideFrame') || document.querySelector('iframe.slide-frame');
+            if (iframe && iframe.contentWindow && iframe.contentWindow.paragraphLoupe) {
+                iframe.contentWindow.paragraphLoupe.cycleNextParagraph();
+                return;
+            }
+            return;
+        }
 
         let nextIndex = 0;
         if (this.activePara) {
@@ -4008,28 +4052,45 @@ class ParagraphLoupe {
         }
     }
 
+    notifySync() {
+        if (window.presenterViewSync && typeof window.presenterViewSync.emit === 'function') {
+            window.presenterViewSync.emit('PARAGRAPH_LOUPE_CMD', {});
+        }
+    }
+
     injectStyles() {
         if (document.getElementById('paragraphLoupeStyles')) return;
         const style = document.createElement('style');
         style.id = 'paragraphLoupeStyles';
         style.textContent = `
-            .reading-pane.loupe-active p {
-                opacity: 0.28;
-                transition: opacity 0.3s ease, transform 0.3s ease;
+            .reading-pane.loupe-active p,
+            [data-slot="passage"].loupe-active p {
+                opacity: 0.22 !important;
+                filter: blur(0.25px);
+                transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
             }
-            .reading-pane.loupe-active p.loupe-focused {
+            .reading-pane.loupe-active p.loupe-focused,
+            [data-slot="passage"].loupe-active p.loupe-focused,
+            p.loupe-focused {
                 opacity: 1 !important;
-                transform: scale(1.04);
+                filter: none !important;
+                transform: scale(1.035) translateY(-2px) !important;
                 transform-origin: left center;
-                background: rgba(56, 189, 248, 0.08);
-                border-left: 4px solid var(--col-reading, #2563eb);
-                padding: 8px 12px;
-                border-radius: 0 8px 8px 0;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                background: rgba(37, 99, 235, 0.08) !important;
+                border-left: 5px solid var(--col-reading, #2563eb) !important;
+                padding: 10px 16px !important;
+                border-radius: 0 10px 10px 0 !important;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
+                z-index: 10;
+                position: relative;
+            }
+            .para-tag {
+                cursor: zoom-in !important;
+                transition: transform 0.15s ease, background 0.15s ease;
             }
             .para-tag:hover {
-                transform: scale(1.1);
-                color: #ffffff;
+                transform: scale(1.08);
+                color: #ffffff !important;
                 background: var(--col-reading, #2563eb) !important;
             }
         `;
