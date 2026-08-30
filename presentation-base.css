@@ -257,7 +257,9 @@ html, body {
     color: #ffffff;
     cursor: pointer;
     border-radius: 8px 0 0 8px;
-    transition: transform 0.22s ease, filter 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 180ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                filter 140ms ease-out,
+                box-shadow 180ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
     box-shadow: -3px 3px 10px rgba(0,0,0,0.18);
     user-select: none;
 }
@@ -265,6 +267,10 @@ html, body {
 .notebook-tab:hover {
     transform: translateX(-8px);
     filter: brightness(1.12);
+}
+
+.notebook-tab:active {
+    transform: translateX(-5px) scale(0.96);
 }
 
 .notebook-tab.active {

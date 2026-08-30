@@ -3781,6 +3781,11 @@ class StudentPicker {
                 padding: 28px;
                 box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
                 color: #ffffff;
+                animation: modalPopIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            @keyframes modalPopIn {
+                0% { opacity: 0; transform: scale(0.95) translateY(10px); }
+                100% { opacity: 1; transform: scale(1) translateY(0); }
             }
             .student-modal-header {
                 display: flex;
@@ -3798,8 +3803,10 @@ class StudentPicker {
                 color: #94a3b8;
                 font-size: 26px;
                 cursor: pointer;
+                transition: color 120ms ease-out, transform 120ms ease-out;
             }
-            .student-modal-close:hover { color: #fff; }
+            .student-modal-close:hover { color: #fff; transform: scale(1.1); }
+            .student-modal-close:active { transform: scale(0.92); }
             .picker-display-stage {
                 background: rgba(255, 255, 255, 0.05);
                 border: 2px dashed rgba(56, 189, 248, 0.35);
@@ -3814,7 +3821,7 @@ class StudentPicker {
                 font-size: 32px;
                 font-weight: 900;
                 color: #f8fafc;
-                transition: transform 0.1s ease, color 0.2s ease;
+                transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms ease-out;
                 text-align: center;
             }
             .picker-controls-row {
@@ -3832,9 +3839,10 @@ class StudentPicker {
                 border-radius: 10px;
                 cursor: pointer;
                 box-shadow: 0 4px 18px rgba(37, 99, 235, 0.4);
-                transition: all 0.2s ease;
+                transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), filter 140ms ease-out;
             }
             .btn-picker-spin:hover { transform: translateY(-2px); filter: brightness(1.1); }
+            .btn-picker-spin:active { transform: scale(0.97); }
             .btn-picker-edit {
                 background: rgba(255, 255, 255, 0.08);
                 color: #cbd5e1;
@@ -3843,8 +3851,10 @@ class StudentPicker {
                 border-radius: 10px;
                 cursor: pointer;
                 font-weight: 700;
+                transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 140ms ease-out;
             }
-            .btn-picker-edit:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
+            .btn-picker-edit:hover { background: rgba(255, 255, 255, 0.15); color: #fff; transform: translateY(-1px); }
+            .btn-picker-edit:active { transform: scale(0.96); }
             .roster-editor-box {
                 margin-top: 16px;
                 padding-top: 16px;
@@ -6764,9 +6774,10 @@ class ClassroomTimer {
                     font-size: 11px;
                     font-weight: 600;
                     cursor: pointer;
-                    transition: background 0.15s;
+                    transition: background-color 130ms ease-out, transform 130ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
                 }
-                .timer-preset-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+                .timer-preset-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; transform: translateY(-1px); }
+                .timer-preset-btn:active { transform: scale(0.94); }
                 .timer-actions {
                     display: flex;
                     gap: 8px;
@@ -6780,6 +6791,14 @@ class ClassroomTimer {
                     border-radius: 8px;
                     font-weight: 600;
                     cursor: pointer;
+                    transition: opacity 130ms ease-out, transform 130ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+                }
+                .timer-action-btn:hover {
+                    opacity: 0.92;
+                    transform: translateY(-1px);
+                }
+                .timer-action-btn:active {
+                    transform: scale(0.95);
                 }
                 .timer-action-btn.start-btn {
                     background: #10b981;
@@ -6788,8 +6807,8 @@ class ClassroomTimer {
                     background: #f59e0b;
                 }
                 @keyframes timerFadeIn {
-                    from { opacity: 0; transform: translateY(-8px); }
-                    to { opacity: 1; transform: translateY(0); }
+                    from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+                    to { opacity: 1; transform: translateY(0) scale(1); }
                 }
                 @keyframes timerPulseAlert {
                     from { transform: scale(1); }

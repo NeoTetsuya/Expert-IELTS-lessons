@@ -81,9 +81,10 @@ class ClassroomTimer {
                     font-size: 11px;
                     font-weight: 600;
                     cursor: pointer;
-                    transition: background 0.15s;
+                    transition: background-color 130ms ease-out, transform 130ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
                 }
-                .timer-preset-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+                .timer-preset-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; transform: translateY(-1px); }
+                .timer-preset-btn:active { transform: scale(0.94); }
                 .timer-actions {
                     display: flex;
                     gap: 8px;
@@ -97,6 +98,14 @@ class ClassroomTimer {
                     border-radius: 8px;
                     font-weight: 600;
                     cursor: pointer;
+                    transition: opacity 130ms ease-out, transform 130ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+                }
+                .timer-action-btn:hover {
+                    opacity: 0.92;
+                    transform: translateY(-1px);
+                }
+                .timer-action-btn:active {
+                    transform: scale(0.95);
                 }
                 .timer-action-btn.start-btn {
                     background: #10b981;
@@ -105,8 +114,8 @@ class ClassroomTimer {
                     background: #f59e0b;
                 }
                 @keyframes timerFadeIn {
-                    from { opacity: 0; transform: translateY(-8px); }
-                    to { opacity: 1; transform: translateY(0); }
+                    from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+                    to { opacity: 1; transform: translateY(0) scale(1); }
                 }
                 @keyframes timerPulseAlert {
                     from { transform: scale(1); }
