@@ -10,10 +10,12 @@ graph TB
 
     subgraph "Styling Layer"
         CSS_SRC["css_src/ (12 modular CSS files)"]
+        THEME_SRC["themes_src/ (5 modular theme files)"]
         BUILD["build-bundle.js (Node)"]
         CSS_OUT["presentation-base.css"]
-        THEMES["themes.css (6 theme presets)"]
+        THEMES["themes.css (24 themes compiled)"]
         CSS_SRC --> BUILD --> CSS_OUT
+        THEME_SRC --> BUILD --> THEMES
         THEMES --> CSS_OUT
     end
 

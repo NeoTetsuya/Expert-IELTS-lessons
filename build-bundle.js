@@ -91,6 +91,33 @@ if (fs.existsSync(cssSrcDir)) {
     console.log(`  - ${cssOutputPath} (${(fs.statSync(cssOutputPath).size / 1024).toFixed(1)} KB) [${cssFiles.length} modules]`);
 }
 
+// ==========================================
+// 3. BUNDLE MODULAR THEMES (themes_src/ -> themes.css)
+// ==========================================
+const themesSrcDir = path.join(__dirname, 'themes_src');
+if (fs.existsSync(themesSrcDir)) {
+    const themeFiles = fs.readdirSync(themesSrcDir)
+        .filter(f => f.endsWith('.css'))
+        .sort();
+
+    let themesBundleCode = `/* ==========================================================================
+   EXPERT IELTS PRESENTATIONS - DRAMATIC THEME PRESETS (themes.css)
+   Compiled from modular sources in /themes_src/
+   ========================================================================== */\n\n`;
+
+    themeFiles.forEach((file, index) => {
+        const filePath = path.join(themesSrcDir, file);
+        const content = fs.readFileSync(filePath, 'utf8');
+        themesBundleCode += `/* ==================== THEME MODULE: ${file} ==================== */\n`;
+        themesBundleCode += content + '\n\n';
+    });
+
+    const themesOutputPath = path.join(__dirname, 'themes.css');
+    fs.writeFileSync(themesOutputPath, themesBundleCode, 'utf8');
+    console.log('✓ Master Themes bundle built from /themes_src/:');
+    console.log(`  - ${themesOutputPath} (${(fs.statSync(themesOutputPath).size / 1024).toFixed(1)} KB) [${themeFiles.length} theme modules]`);
+}
+
 
 
 

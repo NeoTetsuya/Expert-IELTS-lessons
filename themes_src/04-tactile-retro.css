@@ -1,0 +1,245 @@
+/* ==========================================================================
+   MODULE 04: TACTILE & RETRO THEMES (Sticky Notes, Windows 95, Cassette)
+   ========================================================================== */
+
+/* 21. DARK BOTANICAL (Organic Luxury, Emerald Green, Antique Gold & Warm Ivory) */
+[data-theme="botanical"] {
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #041a14;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #064e3b 0%, #041a14 75%);
+    --bg-page: #fbf9f4;
+    --text-dark: #132a22;
+    --text-muted: #52796f;
+
+    --col-reading: #059669;
+    --col-grammar: #d97706;
+    --col-vocab:   #10b981;
+    --col-writing: #047857;
+    --col-review:  #0d9488;
+
+    --card-bg: #ffffff;
+    --card-border: 1px solid #d1fae5;
+    --card-shadow: 0 6px 20px rgba(6, 78, 59, 0.08);
+    --card-radius: 12px;
+}
+
+[data-theme="botanical"] .notebook {
+    background: #fbf9f4;
+    border: 2px solid #065f46;
+    box-shadow: 0 20px 60px rgba(4, 26, 20, 0.5), 0 0 0 1px rgba(212, 165, 116, 0.4);
+}
+
+[data-theme="botanical"] .slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 40px;
+    color: #064e3b;
+    letter-spacing: 0.5px;
+}
+
+[data-theme="botanical"] .skill-badge {
+    background: #065f46 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: 1px;
+}
+
+[data-theme="botanical"] .card,
+[data-theme="botanical"] .discuss-card,
+[data-theme="botanical"] .rule-card,
+[data-theme="botanical"] .q-card,
+[data-theme="botanical"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1px solid #d1fae5 !important;
+    box-shadow: 0 4px 18px rgba(6, 78, 59, 0.06) !important;
+}
+
+[data-theme="botanical"] .btn-action.btn-primary {
+    background: #059669 !important;
+    border-color: #047857 !important;
+    color: #ffffff !important;
+}
+
+
+/* 22. PIN & PAPER (Sticky Notes, Handwritten Ink & Corkboard Warmth) */
+[data-theme="pin-and-paper"] {
+    --font-display: 'Caveat', cursive;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #292524;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #44403c 0%, #1c1917 75%);
+    --bg-page: #fef08a;
+    --text-dark: #1e3a8a;
+    --text-muted: #64748b;
+
+    --col-reading: #1e40af;
+    --col-grammar: #dc2626;
+    --col-vocab:   #15803d;
+    --col-writing: #7e22ce;
+    --col-review:  #0284c7;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #fde047;
+    --card-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    --card-radius: 8px;
+}
+
+[data-theme="pin-and-paper"] .notebook {
+    background: #fffbeb;
+    border: 2px solid #eab308;
+    border-radius: 12px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="pin-and-paper"] .slide-title {
+    font-family: 'Caveat', cursive;
+    font-size: 46px;
+    font-weight: 700;
+    color: #1e3a8a;
+}
+
+[data-theme="pin-and-paper"] .card,
+[data-theme="pin-and-paper"] .rule-card,
+[data-theme="pin-and-paper"] .discuss-card,
+[data-theme="pin-and-paper"] .q-card,
+[data-theme="pin-and-paper"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #fde047 !important;
+    border-top: 4px solid #eab308 !important;
+    color: #1e3a8a !important;
+}
+
+[data-theme="pin-and-paper"] .btn-action.btn-primary {
+    background: #1e40af !important;
+    border-color: #1e3a8a !important;
+    color: #ffffff !important;
+}
+
+
+/* 23. SAKURA CHROMA (Japanese Retro Cassette, Warm Cream, Vermillion & Pink) */
+[data-theme="sakura-chroma"] {
+    --font-display: 'Outfit', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #1f1c18;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #7c2d12 0%, #1f1c18 75%);
+    --bg-page: #faf6ed;
+    --text-dark: #1c1917;
+    --text-muted: #78716c;
+
+    --col-reading: #ea580c;
+    --col-grammar: #ec4899;
+    --col-vocab:   #059669;
+    --col-writing: #9333ea;
+    --col-review:  #0284c7;
+
+    --card-bg: #ffffff;
+    --card-border: 2px solid #ea580c;
+    --card-shadow: 4px 4px 0px rgba(234, 88, 12, 0.2);
+    --card-radius: 10px;
+}
+
+[data-theme="sakura-chroma"] .notebook {
+    background: #faf6ed;
+    border: 2.5px solid #ea580c;
+    border-radius: 12px;
+    box-shadow: 8px 8px 0px rgba(236, 72, 153, 0.3), 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="sakura-chroma"] .slide-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    color: #ea580c;
+    letter-spacing: -0.5px;
+}
+
+[data-theme="sakura-chroma"] .card,
+[data-theme="sakura-chroma"] .rule-card,
+[data-theme="sakura-chroma"] .discuss-card,
+[data-theme="sakura-chroma"] .q-card,
+[data-theme="sakura-chroma"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 2px solid #fed7aa !important;
+    border-left: 6px solid #ea580c !important;
+    color: #1c1917 !important;
+}
+
+[data-theme="sakura-chroma"] .btn-action.btn-primary {
+    background: linear-gradient(135deg, #ea580c 0%, #ec4899 100%) !important;
+    border-color: #f97316 !important;
+    color: #ffffff !important;
+}
+
+
+/* 24. RETRO WINDOWS 95 (Nostalgic 3D Gray, Navy Title Bars & Pixel Fonts) */
+[data-theme="retro-windows"] {
+    --font-display: 'VT323', monospace;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'VT323', monospace;
+
+    --stage-bg: #008080;
+    --viewport-bg: #008080;
+    --bg-page: #c0c0c0;
+    --text-dark: #000000;
+    --text-muted: #555555;
+
+    --col-reading: #000080;
+    --col-grammar: #800000;
+    --col-vocab:   #008000;
+    --col-writing: #800080;
+    --col-review:  #008080;
+
+    --card-bg: #ffffff;
+    --card-border: 2px outset #ffffff;
+    --card-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf;
+    --card-radius: 0px;
+}
+
+[data-theme="retro-windows"] .notebook {
+    background: #c0c0c0;
+    border: 3px outset #ffffff;
+    border-radius: 0px;
+    box-shadow: 4px 4px 0px #000000;
+}
+
+[data-theme="retro-windows"] .slide-title {
+    font-family: 'VT323', monospace;
+    font-size: 38px;
+    background: #000080;
+    color: #ffffff;
+    padding: 2px 10px;
+}
+
+[data-theme="retro-windows"] .card,
+[data-theme="retro-windows"] .rule-card,
+[data-theme="retro-windows"] .discuss-card,
+[data-theme="retro-windows"] .q-card,
+[data-theme="retro-windows"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 2px inset #dfdfdf !important;
+    border-radius: 0px !important;
+    color: #000000 !important;
+}
+
+[data-theme="retro-windows"] .btn-action {
+    background: #c0c0c0 !important;
+    border: 2px outset #ffffff !important;
+    border-radius: 0px !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+}
+
+[data-theme="retro-windows"] .btn-action:active {
+    border: 2px inset #ffffff !important;
+}
+
+[data-theme="retro-windows"] .btn-action.btn-primary {
+    background: #000080 !important;
+    border: 2px outset #ffffff !important;
+    color: #ffffff !important;
+}

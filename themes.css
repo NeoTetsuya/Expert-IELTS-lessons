@@ -1,14 +1,9 @@
 /* ==========================================================================
    EXPERT IELTS PRESENTATIONS - DRAMATIC THEME PRESETS (themes.css)
-   Inspired by Frontend-Slides Design Aesthetics:
-   1. Academic Editorial  (Classic Oxford / Harvard Navy & Cream)
-   2. Bold Signal         (Brutalist High-Impact Coral & Sharp Shadows)
-   3. Electric Studio     (Cyberpunk Glowing Neon Cobalt & Dark Glass)
-   4. Dark Botanical      (Organic Emerald, Antique Gold & Ivory)
-   5. Creative Voltage    (Avant-Garde Deep Violet & Acid Lime)
-   6. Vintage Editorial   (Aged Sepia Newsprint & Bodoni Serif)
+   Compiled from modular sources in /themes_src/
    ========================================================================== */
 
+/* ==================== THEME MODULE: 00-theme-shield.css ==================== */
 /* ==========================================================================
    GLOBAL DARK THEME CONTRAST & LEGIBILITY SHIELD
    Applies to all dark themes: electric, voltage, vellum, broadside, 8-bit-orbit
@@ -227,9 +222,12 @@
 }
 
 
+/* ==================== THEME MODULE: 01-editorial.css ==================== */
 /* ==========================================================================
-   1. ACADEMIC EDITORIAL (Default)
+   MODULE 01: EDITORIAL THEMES (Classics, Literary Serifs & Natural Luxury)
    ========================================================================== */
+
+/* 1. ACADEMIC EDITORIAL (Default) */
 [data-theme="academic"], :root:not([data-theme]) {
     --font-display: 'Playfair Display', serif;
     --font-body: 'DM Sans', sans-serif;
@@ -265,9 +263,467 @@
 }
 
 
+/* 2. VINTAGE EDITORIAL (Aged Linen Sepia Newsprint & Bodoni High-Contrast) */
+[data-theme="vintage"] {
+    --font-display: 'Bodoni Moda', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #1c1917;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #44403c 0%, #1c1917 75%);
+    --bg-page: #f4ece1;
+    --text-dark: #292524;
+    --text-muted: #78716c;
+
+    --col-reading: #9a3412;
+    --col-grammar: #b45309;
+    --col-vocab:   #15803d;
+    --col-writing: #7e22ce;
+    --col-review:  #0369a1;
+
+    --card-bg: #faf6ef;
+    --card-border: 1px solid #d6cebe;
+    --card-shadow: 0 4px 14px rgba(41, 37, 36, 0.08);
+    --card-radius: 4px;
+}
+
+[data-theme="vintage"] .notebook {
+    background: #f4ece1;
+    border: 1px solid #d6cebe;
+    border-radius: 4px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(180, 83, 9, 0.05);
+}
+
+[data-theme="vintage"] .slide-title {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    color: #1c1917;
+}
+
+[data-theme="vintage"] .card,
+[data-theme="vintage"] .discuss-card,
+[data-theme="vintage"] .rule-card,
+[data-theme="vintage"] .q-card,
+[data-theme="vintage"] .model-breakdown-card {
+    background: #faf6ef !important;
+    border: 1px solid #d6cebe !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 8px rgba(41, 37, 36, 0.06) !important;
+}
+
+[data-theme="vintage"] .blank-input,
+[data-theme="vintage"] .select-input {
+    background: #ffffff !important;
+    border: 1px solid #a8a29e !important;
+    border-radius: 2px !important;
+    font-family: var(--font-mono);
+}
+
+[data-theme="vintage"] .btn-action.btn-primary {
+    background: #9a3412 !important;
+    border-color: #7c2d12 !important;
+    color: #ffffff !important;
+    border-radius: 3px !important;
+}
+
+
+/* 3. SOFT EDITORIAL (Cormorant Serif on Warm Paper with Sage & Blush) */
+[data-theme="soft-editorial"] {
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Outfit', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #1c1917;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #44403c 0%, #1c1917 75%);
+    --bg-page: #fdfbf7;
+    --text-dark: #1c1917;
+    --text-muted: #78716c;
+
+    --col-reading: #059669;
+    --col-grammar: #e11d48;
+    --col-vocab:   #65a30d;
+    --col-writing: #d97706;
+    --col-review:  #0891b2;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #e7e5e4;
+    --card-shadow: 0 4px 20px rgba(28, 25, 23, 0.05);
+    --card-radius: 14px;
+}
+
+[data-theme="soft-editorial"] .notebook {
+    background: #fdfbf7;
+    border: 1.5px solid #e7e5e4;
+    border-radius: 16px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="soft-editorial"] .slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 38px;
+    letter-spacing: -0.5px;
+    color: #1c1917;
+}
+
+[data-theme="soft-editorial"] .card,
+[data-theme="soft-editorial"] .rule-card,
+[data-theme="soft-editorial"] .discuss-card,
+[data-theme="soft-editorial"] .q-card,
+[data-theme="soft-editorial"] .reading-pane,
+[data-theme="soft-editorial"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #e7e5e4 !important;
+    box-shadow: 0 4px 14px rgba(28, 25, 23, 0.04) !important;
+    color: #1c1917 !important;
+}
+
+[data-theme="soft-editorial"] .btn-action.btn-primary {
+    background: #059669 !important;
+    border-color: #047857 !important;
+    color: #ffffff !important;
+}
+
+
+/* 4. EDITORIAL FOREST (Deep Pine Green, Dusty Blush Pink & Warm Parchment) */
+[data-theme="editorial-forest"] {
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #061a14;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #064e3b 0%, #061a14 75%);
+    --bg-page: #fcfbf7;
+    --text-dark: #064e3b;
+    --text-muted: #52796f;
+
+    --col-reading: #064e3b;
+    --col-grammar: #db2777;
+    --col-vocab:   #059669;
+    --col-writing: #7c3aed;
+    --col-review:  #0d9488;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #d1fae5;
+    --card-shadow: 0 4px 18px rgba(6, 78, 59, 0.08);
+    --card-radius: 12px;
+}
+
+[data-theme="editorial-forest"] .notebook {
+    background: #fcfbf7;
+    border: 2px solid #064e3b;
+    border-radius: 14px;
+    box-shadow: 0 24px 70px rgba(6, 26, 20, 0.5);
+}
+
+[data-theme="editorial-forest"] .slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 38px;
+    color: #064e3b;
+}
+
+[data-theme="editorial-forest"] .card,
+[data-theme="editorial-forest"] .rule-card,
+[data-theme="editorial-forest"] .discuss-card,
+[data-theme="editorial-forest"] .q-card,
+[data-theme="editorial-forest"] .reading-pane,
+[data-theme="editorial-forest"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #d1fae5 !important;
+    color: #064e3b !important;
+}
+
+[data-theme="editorial-forest"] .btn-action.btn-primary {
+    background: #064e3b !important;
+    border-color: #047857 !important;
+    color: #ffffff !important;
+}
+
+
+/* 5. EDITORIAL TRI-TONE (Dusty Pink, Mustard Cream & Deep Burgundy) */
+[data-theme="editorial-tri-tone"] {
+    --font-display: 'Bodoni Moda', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #4a1020;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #7a1f35 0%, #20040b 75%);
+    --bg-page: #fbf5eb;
+    --text-dark: #7a1f35;
+    --text-muted: #884d5c;
+
+    --col-reading: #7a1f35;
+    --col-grammar: #db2777;
+    --col-vocab:   #059669;
+    --col-writing: #d97706;
+    --col-review:  #0891b2;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #f2b6c6;
+    --card-shadow: 0 6px 20px rgba(122, 31, 53, 0.08);
+    --card-radius: 12px;
+}
+
+[data-theme="editorial-tri-tone"] .notebook {
+    background: #fbf5eb;
+    border: 2px solid #7a1f35;
+    border-radius: 14px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="editorial-tri-tone"] .slide-title {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 900;
+    color: #7a1f35;
+}
+
+[data-theme="editorial-tri-tone"] .card,
+[data-theme="editorial-tri-tone"] .rule-card,
+[data-theme="editorial-tri-tone"] .discuss-card,
+[data-theme="editorial-tri-tone"] .q-card,
+[data-theme="editorial-tri-tone"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #f2b6c6 !important;
+    color: #7a1f35 !important;
+}
+
+[data-theme="editorial-tri-tone"] .btn-action.btn-primary {
+    background: #7a1f35 !important;
+    border-color: #5c1426 !important;
+    color: #ffffff !important;
+}
+
+
+/* 6. EMERALD EDITORIAL (Vivid Emerald Green, Navy Ink & Paper Cream) */
+[data-theme="emerald-editorial"] {
+    --font-display: 'Bodoni Moda', serif;
+    --font-body: 'Manrope', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #06261a;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #064e3b 0%, #06261a 75%);
+    --bg-page: #f1e9d6;
+    --text-dark: #0f1a5c;
+    --text-muted: #52796f;
+
+    --col-reading: #0f1a5c;
+    --col-grammar: #d97706;
+    --col-vocab:   #059669;
+    --col-writing: #7c3aed;
+    --col-review:  #0891b2;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #3cd896;
+    --card-shadow: 0 6px 20px rgba(6, 78, 59, 0.08);
+    --card-radius: 12px;
+}
+
+[data-theme="emerald-editorial"] .notebook {
+    background: #f1e9d6;
+    border: 2.5px solid #065f46;
+    border-radius: 14px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="emerald-editorial"] .slide-title {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 800;
+    color: #0f1a5c;
+}
+
+[data-theme="emerald-editorial"] .card,
+[data-theme="emerald-editorial"] .rule-card,
+[data-theme="emerald-editorial"] .discuss-card,
+[data-theme="emerald-editorial"] .q-card,
+[data-theme="emerald-editorial"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #d1fae5 !important;
+    border-left: 5px solid #065f46 !important;
+    color: #0f1a5c !important;
+}
+
+[data-theme="emerald-editorial"] .btn-action.btn-primary {
+    background: #065f46 !important;
+    border-color: #047857 !important;
+    color: #ffffff !important;
+}
+
+
+/* 7. GROVE EARTH (Natural Organic Earthy Olive & Warm Stone) */
+[data-theme="grove"] {
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #1c1917;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #365314 0%, #1c1917 75%);
+    --bg-page: #f7f6f2;
+    --text-dark: #27272a;
+    --text-muted: #65a30d;
+
+    --col-reading: #3f6212;
+    --col-grammar: #ea580c;
+    --col-vocab:   #65a30d;
+    --col-writing: #7c3aed;
+    --col-review:  #0d9488;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #e7e5e4;
+    --card-shadow: 0 4px 18px rgba(63, 98, 18, 0.06);
+    --card-radius: 12px;
+}
+
+[data-theme="grove"] .notebook {
+    background: #f7f6f2;
+    border: 2px solid #3f6212;
+    border-radius: 14px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="grove"] .slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    color: #3f6212;
+}
+
+[data-theme="grove"] .card,
+[data-theme="grove"] .rule-card,
+[data-theme="grove"] .discuss-card,
+[data-theme="grove"] .q-card,
+[data-theme="grove"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #dcfce7 !important;
+    color: #27272a !important;
+}
+
+[data-theme="grove"] .btn-action.btn-primary {
+    background: #3f6212 !important;
+    border-color: #365314 !important;
+    color: #ffffff !important;
+}
+
+
+/* 8. MONOCHROME LEDGER (Ivory Ledger Paper & Pure Ink-Black Type) */
+[data-theme="monochrome"] {
+    --font-display: 'Lora', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #18181b;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #27272a 0%, #18181b 75%);
+    --bg-page: #fafadf;
+    --text-dark: #1a1a16;
+    --text-muted: #5e5e54;
+
+    --col-reading: #1a1a16;
+    --col-grammar: #3f3f46;
+    --col-vocab:   #27272a;
+    --col-writing: #52525b;
+    --col-review:  #71717a;
+
+    --card-bg: #f5f0e4;
+    --card-border: 1px solid #d4cebe;
+    --card-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    --card-radius: 4px;
+}
+
+[data-theme="monochrome"] .notebook {
+    background: #fafadf;
+    border: 1.5px solid #1a1a16;
+    border-radius: 4px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="monochrome"] .slide-title {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    color: #1a1a16;
+    border-bottom: 2px solid #1a1a16;
+    padding-bottom: 6px;
+}
+
+[data-theme="monochrome"] .card,
+[data-theme="monochrome"] .rule-card,
+[data-theme="monochrome"] .discuss-card,
+[data-theme="monochrome"] .q-card,
+[data-theme="monochrome"] .model-breakdown-card {
+    background: #f5f0e4 !important;
+    border: 1px solid #1a1a16 !important;
+    border-radius: 2px !important;
+    color: #1a1a16 !important;
+}
+
+[data-theme="monochrome"] .btn-action.btn-primary {
+    background: #1a1a16 !important;
+    border-color: #000000 !important;
+    color: #ffffff !important;
+    border-radius: 2px !important;
+}
+
+
+/* 9. CARTESIAN (Quiet Minimalist Bone & Classical Playfair Elegance) */
+[data-theme="cartesian"] {
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #1c1917;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #292524 0%, #1c1917 75%);
+    --bg-page: #ede8e0;
+    --text-dark: #1a1a1a;
+    --text-muted: #5a5a5a;
+
+    --col-reading: #1a1a1a;
+    --col-grammar: #8a8178;
+    --col-vocab:   #525252;
+    --col-writing: #737373;
+    --col-review:  #404040;
+
+    --card-bg: #f8f6f2;
+    --card-border: 1px solid #b8b0a4;
+    --card-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    --card-radius: 8px;
+}
+
+[data-theme="cartesian"] .notebook {
+    background: #ede8e0;
+    border: 1.5px solid #b8b0a4;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="cartesian"] .slide-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-style: italic;
+    color: #1a1a1a;
+}
+
+[data-theme="cartesian"] .card,
+[data-theme="cartesian"] .rule-card,
+[data-theme="cartesian"] .discuss-card,
+[data-theme="cartesian"] .q-card,
+[data-theme="cartesian"] .model-breakdown-card {
+    background: #f8f6f2 !important;
+    border: 1px solid #b8b0a4 !important;
+    color: #1a1a1a !important;
+}
+
+[data-theme="cartesian"] .btn-action.btn-primary {
+    background: #1a1a1a !important;
+    border-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+
+/* ==================== THEME MODULE: 02-bold-brutalist.css ==================== */
 /* ==========================================================================
-   2. BOLD SIGNAL (Brutalist Modern, High-Impact Coral & Chunky Shadows)
+   MODULE 02: BOLD & NEOBRUTALIST THEMES (High Contrast, Geometric, Impact)
    ========================================================================== */
+
+/* 10. BOLD SIGNAL (Brutalist Modern, High-Impact Coral & Chunky Shadows) */
 [data-theme="bold-signal"] {
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -339,9 +795,299 @@
 }
 
 
+/* 11. BLOCKFRAME (Neobrutalist Pastel Blocks & Chunky Black Borders) */
+[data-theme="block-frame"] {
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #18181b;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #3f3f46 0%, #18181b 75%);
+    --bg-page: #fef08a;
+    --text-dark: #000000;
+    --text-muted: #3f3f46;
+
+    --col-reading: #2563eb;
+    --col-grammar: #e11d48;
+    --col-vocab:   #16a34a;
+    --col-writing: #9333ea;
+    --col-review:  #0891b2;
+
+    --card-bg: #ffffff;
+    --card-border: 2.5px solid #000000;
+    --card-shadow: 4px 4px 0px #000000;
+    --card-radius: 6px;
+}
+
+[data-theme="block-frame"] .notebook {
+    background: #ffffff;
+    border: 3px solid #000000;
+    border-radius: 8px;
+    box-shadow: 8px 8px 0px #000000, 0 20px 60px rgba(0,0,0,0.5);
+}
+
+[data-theme="block-frame"] .slide-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 900;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+[data-theme="block-frame"] .card,
+[data-theme="block-frame"] .rule-card,
+[data-theme="block-frame"] .discuss-card,
+[data-theme="block-frame"] .q-card,
+[data-theme="block-frame"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 2.5px solid #000000 !important;
+    border-radius: 6px !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+    color: #000000 !important;
+}
+
+[data-theme="block-frame"] .btn-action.btn-primary {
+    background: #facc15 !important;
+    border: 2.5px solid #000000 !important;
+    color: #000000 !important;
+    font-weight: 900 !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+}
+
+
+/* 12. CORAL MAGAZINE (Warm Cream Paper, Saturated Coral & Ink) */
+[data-theme="coral"] {
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #141414;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #451a1a 0%, #141414 75%);
+    --bg-page: #f5f0e8;
+    --text-dark: #1a1a1a;
+    --text-muted: #6b6b6b;
+
+    --col-reading: #e85d5d;
+    --col-grammar: #ea580c;
+    --col-vocab:   #059669;
+    --col-writing: #7c3aed;
+    --col-review:  #0284c7;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #e8e0d4;
+    --card-shadow: 0 4px 20px rgba(26, 26, 26, 0.06);
+    --card-radius: 10px;
+}
+
+[data-theme="coral"] .notebook {
+    background: #f5f0e8;
+    border: 2px solid #e85d5d;
+    border-radius: 12px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="coral"] .slide-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 1px;
+    color: #e85d5d;
+}
+
+[data-theme="coral"] .card,
+[data-theme="coral"] .rule-card,
+[data-theme="coral"] .discuss-card,
+[data-theme="coral"] .q-card,
+[data-theme="coral"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #e8e0d4 !important;
+    color: #1a1a1a !important;
+}
+
+[data-theme="coral"] .btn-action.btn-primary {
+    background: #e85d5d !important;
+    border-color: #d44a4a !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+
+
+/* 13. COBALT GRID (Technical Precision, Cobalt Blue & Graph Paper) */
+[data-theme="cobalt-grid"] {
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #030712;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #1e3a8a 0%, #030712 75%);
+    --bg-page: #ffffff;
+    --text-dark: #09090b;
+    --text-muted: #475569;
+
+    --col-reading: #2563eb;
+    --col-grammar: #dc2626;
+    --col-vocab:   #0d9488;
+    --col-writing: #4f46e5;
+    --col-review:  #0284c7;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #2563eb;
+    --card-shadow: 4px 4px 0px rgba(37, 99, 235, 0.15);
+    --card-radius: 8px;
+}
+
+[data-theme="cobalt-grid"] .notebook {
+    background: #ffffff;
+    border: 2px solid #2563eb;
+    border-radius: 10px;
+    box-shadow: 8px 8px 0px #2563eb, 0 20px 60px rgba(0, 0, 0, 0.5);
+    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+[data-theme="cobalt-grid"] .slide-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    color: #2563eb;
+    letter-spacing: -0.5px;
+}
+
+[data-theme="cobalt-grid"] .card,
+[data-theme="cobalt-grid"] .rule-card,
+[data-theme="cobalt-grid"] .discuss-card,
+[data-theme="cobalt-grid"] .q-card,
+[data-theme="cobalt-grid"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #2563eb !important;
+    border-radius: 8px !important;
+    color: #09090b !important;
+}
+
+[data-theme="cobalt-grid"] .btn-action.btn-primary {
+    background: #2563eb !important;
+    border-color: #1d4ed8 !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+
+
+/* 14. BIENNALE YELLOW (Solar Yellow on Warm Parchment with Deep Indigo) */
+[data-theme="biennale-yellow"] {
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #1e1b4b;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #312e81 0%, #0f172a 75%);
+    --bg-page: #fbf9f4;
+    --text-dark: #1e1b4b;
+    --text-muted: #64748b;
+
+    --col-reading: #1e1b4b;
+    --col-grammar: #d97706;
+    --col-vocab:   #059669;
+    --col-writing: #7c3aed;
+    --col-review:  #0284c7;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #fef08a;
+    --card-shadow: 0 4px 18px rgba(245, 158, 11, 0.08);
+    --card-radius: 12px;
+}
+
+[data-theme="biennale-yellow"] .notebook {
+    background: #fbf9f4;
+    border: 2px solid #f59e0b;
+    border-radius: 14px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="biennale-yellow"] .slide-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    color: #1e1b4b;
+    border-left: 6px solid #f59e0b;
+    padding-left: 12px;
+}
+
+[data-theme="biennale-yellow"] .card,
+[data-theme="biennale-yellow"] .rule-card,
+[data-theme="biennale-yellow"] .discuss-card,
+[data-theme="biennale-yellow"] .q-card,
+[data-theme="biennale-yellow"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #fef08a !important;
+    color: #1e1b4b !important;
+}
+
+[data-theme="biennale-yellow"] .btn-action.btn-primary {
+    background: #f59e0b !important;
+    border-color: #d97706 !important;
+    color: #1e1b4b !important;
+    font-weight: 800 !important;
+}
+
+
+/* 15. STENCIL & TABLET (Bone Paper, Archaeological Terracotta & Ochre) */
+[data-theme="stencil-tablet"] {
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #1c1917;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #44403c 0%, #1c1917 75%);
+    --bg-page: #f4efe0;
+    --text-dark: #0a0a0a;
+    --text-muted: #a06a3c;
+
+    --col-reading: #a06a3c;
+    --col-grammar: #c73b7a;
+    --col-vocab:   #2d7e73;
+    --col-writing: #3f73b7;
+    --col-review:  #ee7a2e;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #e2dcc9;
+    --card-shadow: 0 4px 16px rgba(160, 106, 60, 0.08);
+    --card-radius: 6px;
+}
+
+[data-theme="stencil-tablet"] .notebook {
+    background: #f4efe0;
+    border: 2px solid #a06a3c;
+    border-radius: 8px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="stencil-tablet"] .slide-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 900;
+    color: #a06a3c;
+    text-transform: uppercase;
+}
+
+[data-theme="stencil-tablet"] .card,
+[data-theme="stencil-tablet"] .rule-card,
+[data-theme="stencil-tablet"] .discuss-card,
+[data-theme="stencil-tablet"] .q-card,
+[data-theme="stencil-tablet"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #e2dcc9 !important;
+    border-left: 5px solid #a06a3c !important;
+    color: #0a0a0a !important;
+}
+
+[data-theme="stencil-tablet"] .btn-action.btn-primary {
+    background: #a06a3c !important;
+    border-color: #8c582e !important;
+    color: #ffffff !important;
+}
+
+
+/* ==================== THEME MODULE: 03-dark-cyber.css ==================== */
 /* ==========================================================================
-   3. ELECTRIC STUDIO (Cyberpunk Dark Mode, Glowing Neon Cobalt & Glass)
+   MODULE 03: DARK & CYBERPUNK THEMES (Neon, Deep Space & High Contrast Dark)
    ========================================================================== */
+
+/* 16. ELECTRIC STUDIO (Cyberpunk Dark Mode, Glowing Neon Cobalt & Glass) */
 [data-theme="electric"] {
     --font-display: 'Manrope', sans-serif;
     --font-body: 'Outfit', sans-serif;
@@ -423,73 +1169,7 @@
 }
 
 
-/* ==========================================================================
-   4. DARK BOTANICAL (Organic Luxury, Emerald Green, Antique Gold & Warm Ivory)
-   ========================================================================== */
-[data-theme="botanical"] {
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #041a14;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #064e3b 0%, #041a14 75%);
-    --bg-page: #fbf9f4;
-    --text-dark: #132a22;
-    --text-muted: #52796f;
-
-    --col-reading: #059669;
-    --col-grammar: #d97706;
-    --col-vocab:   #10b981;
-    --col-writing: #047857;
-    --col-review:  #0d9488;
-
-    --card-bg: #ffffff;
-    --card-border: 1px solid #d1fae5;
-    --card-shadow: 0 6px 20px rgba(6, 78, 59, 0.08);
-    --card-radius: 12px;
-}
-
-[data-theme="botanical"] .notebook {
-    background: #fbf9f4;
-    border: 2px solid #065f46;
-    box-shadow: 0 20px 60px rgba(4, 26, 20, 0.5), 0 0 0 1px rgba(212, 165, 116, 0.4);
-}
-
-[data-theme="botanical"] .slide-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
-    font-style: italic;
-    font-size: 40px;
-    color: #064e3b;
-    letter-spacing: 0.5px;
-}
-
-[data-theme="botanical"] .skill-badge {
-    background: #065f46 !important;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    letter-spacing: 1px;
-}
-
-[data-theme="botanical"] .card,
-[data-theme="botanical"] .discuss-card,
-[data-theme="botanical"] .rule-card,
-[data-theme="botanical"] .q-card,
-[data-theme="botanical"] .model-breakdown-card {
-    background: #ffffff !important;
-    border: 1px solid #d1fae5 !important;
-    box-shadow: 0 4px 18px rgba(6, 78, 59, 0.06) !important;
-}
-
-[data-theme="botanical"] .btn-action.btn-primary {
-    background: #059669 !important;
-    border-color: #047857 !important;
-    color: #ffffff !important;
-}
-
-
-/* ==========================================================================
-   5. CREATIVE VOLTAGE (Avant-Garde Deep Violet, Hot Magenta & Acid Lime)
-   ========================================================================== */
+/* 17. CREATIVE VOLTAGE (Avant-Garde Deep Violet, Hot Magenta & Acid Lime) */
 [data-theme="voltage"] {
     --font-display: 'Syne', sans-serif;
     --font-body: 'Space Grotesk', sans-serif;
@@ -559,206 +1239,7 @@
 }
 
 
-/* ==========================================================================
-   6. VINTAGE EDITORIAL (Aged Linen Sepia Newsprint & Bodoni High-Contrast)
-   ========================================================================== */
-[data-theme="vintage"] {
-    --font-display: 'Bodoni Moda', serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #1c1917;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #44403c 0%, #1c1917 75%);
-    --bg-page: #f4ece1;
-    --text-dark: #292524;
-    --text-muted: #78716c;
-
-    --col-reading: #9a3412;
-    --col-grammar: #b45309;
-    --col-vocab:   #15803d;
-    --col-writing: #7e22ce;
-    --col-review:  #0369a1;
-
-    --card-bg: #faf6ef;
-    --card-border: 1px solid #d6cebe;
-    --card-shadow: 0 4px 14px rgba(41, 37, 36, 0.08);
-    --card-radius: 4px;
-}
-
-[data-theme="vintage"] .notebook {
-    background: #f4ece1;
-    border: 1px solid #d6cebe;
-    border-radius: 4px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(180, 83, 9, 0.05);
-}
-
-[data-theme="vintage"] .slide-title {
-    font-family: 'Bodoni Moda', serif;
-    font-weight: 900;
-    letter-spacing: 0.5px;
-    color: #1c1917;
-}
-
-[data-theme="vintage"] .card,
-[data-theme="vintage"] .discuss-card,
-[data-theme="vintage"] .rule-card,
-[data-theme="vintage"] .q-card,
-[data-theme="vintage"] .model-breakdown-card {
-    background: #faf6ef !important;
-    border: 1px solid #d6cebe !important;
-    box-shadow: 0 4px 12px rgba(41, 37, 36, 0.06) !important;
-}
-
-[data-theme="vintage"] .card,
-[data-theme="vintage"] .rule-card,
-[data-theme="vintage"] .q-card,
-[data-theme="vintage"] .model-breakdown-card {
-    background: #faf6ef !important;
-    border: 1px solid #d6cebe !important;
-    border-radius: 4px !important;
-    box-shadow: 0 2px 8px rgba(41, 37, 36, 0.06) !important;
-}
-
-[data-theme="vintage"] .blank-input,
-[data-theme="vintage"] .select-input {
-    background: #ffffff !important;
-    border: 1px solid #a8a29e !important;
-    border-radius: 2px !important;
-    font-family: var(--font-mono);
-}
-
-[data-theme="vintage"] .btn-action.btn-primary {
-    background: #9a3412 !important;
-    border-color: #7c2d12 !important;
-    color: #ffffff !important;
-    border-radius: 3px !important;
-}
-
-
-/* ==========================================================================
-   7. SOFT EDITORIAL (Cormorant Serif on Warm Paper with Sage & Blush)
-   ========================================================================== */
-[data-theme="soft-editorial"] {
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Outfit', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #1c1917;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #44403c 0%, #1c1917 75%);
-    --bg-page: #fdfbf7;
-    --text-dark: #1c1917;
-    --text-muted: #78716c;
-
-    --col-reading: #059669;
-    --col-grammar: #e11d48;
-    --col-vocab:   #65a30d;
-    --col-writing: #d97706;
-    --col-review:  #0891b2;
-
-    --card-bg: #ffffff;
-    --card-border: 1.5px solid #e7e5e4;
-    --card-shadow: 0 4px 20px rgba(28, 25, 23, 0.05);
-    --card-radius: 14px;
-}
-
-[data-theme="soft-editorial"] .notebook {
-    background: #fdfbf7;
-    border: 1.5px solid #e7e5e4;
-    border-radius: 16px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
-}
-
-[data-theme="soft-editorial"] .slide-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
-    font-size: 38px;
-    letter-spacing: -0.5px;
-    color: #1c1917;
-}
-
-[data-theme="soft-editorial"] .card,
-[data-theme="soft-editorial"] .rule-card,
-[data-theme="soft-editorial"] .discuss-card,
-[data-theme="soft-editorial"] .q-card,
-[data-theme="soft-editorial"] .reading-pane,
-[data-theme="soft-editorial"] .model-breakdown-card {
-    background: #ffffff !important;
-    border: 1.5px solid #e7e5e4 !important;
-    box-shadow: 0 4px 14px rgba(28, 25, 23, 0.04) !important;
-    color: #1c1917 !important;
-}
-
-[data-theme="soft-editorial"] .btn-action.btn-primary {
-    background: #059669 !important;
-    border-color: #047857 !important;
-    color: #ffffff !important;
-}
-
-
-/* ==========================================================================
-   8. COBALT GRID (Technical Precision, Cobalt Blue & Graph Paper)
-   ========================================================================== */
-[data-theme="cobalt-grid"] {
-    --font-display: 'Space Grotesk', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #030712;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #1e3a8a 0%, #030712 75%);
-    --bg-page: #ffffff;
-    --text-dark: #09090b;
-    --text-muted: #475569;
-
-    --col-reading: #2563eb;
-    --col-grammar: #dc2626;
-    --col-vocab:   #0d9488;
-    --col-writing: #4f46e5;
-    --col-review:  #0284c7;
-
-    --card-bg: #ffffff;
-    --card-border: 1.5px solid #2563eb;
-    --card-shadow: 4px 4px 0px rgba(37, 99, 235, 0.15);
-    --card-radius: 8px;
-}
-
-[data-theme="cobalt-grid"] .notebook {
-    background: #ffffff;
-    border: 2px solid #2563eb;
-    border-radius: 10px;
-    box-shadow: 8px 8px 0px #2563eb, 0 20px 60px rgba(0, 0, 0, 0.5);
-    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-    background-size: 24px 24px;
-}
-
-[data-theme="cobalt-grid"] .slide-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 800;
-    color: #2563eb;
-    letter-spacing: -0.5px;
-}
-
-[data-theme="cobalt-grid"] .card,
-[data-theme="cobalt-grid"] .rule-card,
-[data-theme="cobalt-grid"] .discuss-card,
-[data-theme="cobalt-grid"] .q-card,
-[data-theme="cobalt-grid"] .model-breakdown-card {
-    background: #ffffff !important;
-    border: 1.5px solid #2563eb !important;
-    border-radius: 8px !important;
-    color: #09090b !important;
-}
-
-[data-theme="cobalt-grid"] .btn-action.btn-primary {
-    background: #2563eb !important;
-    border-color: #1d4ed8 !important;
-    color: #ffffff !important;
-    font-weight: 800 !important;
-}
-
-
-/* ==========================================================================
-   9. VELLUM (Deep Midnight Navy, Warm Golden-Amber Serifs & Dusty Teal)
-   ========================================================================== */
+/* 18. VELLUM (Deep Midnight Navy, Warm Golden-Amber Serifs & Dusty Teal) */
 [data-theme="vellum"] {
     --font-display: 'Cormorant Garamond', serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -816,125 +1297,7 @@
 }
 
 
-/* ==========================================================================
-   10. SAKURA CHROMA (Japanese Retro Cassette, Warm Cream, Vermillion & Pink)
-   ========================================================================== */
-[data-theme="sakura-chroma"] {
-    --font-display: 'Outfit', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #1f1c18;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #7c2d12 0%, #1f1c18 75%);
-    --bg-page: #faf6ed;
-    --text-dark: #1c1917;
-    --text-muted: #78716c;
-
-    --col-reading: #ea580c;
-    --col-grammar: #ec4899;
-    --col-vocab:   #059669;
-    --col-writing: #9333ea;
-    --col-review:  #0284c7;
-
-    --card-bg: #ffffff;
-    --card-border: 2px solid #ea580c;
-    --card-shadow: 4px 4px 0px rgba(234, 88, 12, 0.2);
-    --card-radius: 10px;
-}
-
-[data-theme="sakura-chroma"] .notebook {
-    background: #faf6ed;
-    border: 2.5px solid #ea580c;
-    border-radius: 12px;
-    box-shadow: 8px 8px 0px rgba(236, 72, 153, 0.3), 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-[data-theme="sakura-chroma"] .slide-title {
-    font-family: 'Outfit', sans-serif;
-    font-weight: 900;
-    color: #ea580c;
-    letter-spacing: -0.5px;
-}
-
-[data-theme="sakura-chroma"] .card,
-[data-theme="sakura-chroma"] .rule-card,
-[data-theme="sakura-chroma"] .discuss-card,
-[data-theme="sakura-chroma"] .q-card,
-[data-theme="sakura-chroma"] .model-breakdown-card {
-    background: #ffffff !important;
-    border: 2px solid #fed7aa !important;
-    border-left: 6px solid #ea580c !important;
-    color: #1c1917 !important;
-}
-
-[data-theme="sakura-chroma"] .btn-action.btn-primary {
-    background: linear-gradient(135deg, #ea580c 0%, #ec4899 100%) !important;
-    border-color: #f97316 !important;
-    color: #ffffff !important;
-}
-
-
-/* ==========================================================================
-   11. EDITORIAL FOREST (Deep Pine Green, Dusty Blush Pink & Warm Parchment)
-   ========================================================================== */
-[data-theme="editorial-forest"] {
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #061a14;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #064e3b 0%, #061a14 75%);
-    --bg-page: #fcfbf7;
-    --text-dark: #064e3b;
-    --text-muted: #52796f;
-
-    --col-reading: #064e3b;
-    --col-grammar: #db2777;
-    --col-vocab:   #059669;
-    --col-writing: #7c3aed;
-    --col-review:  #0d9488;
-
-    --card-bg: #ffffff;
-    --card-border: 1.5px solid #d1fae5;
-    --card-shadow: 0 4px 18px rgba(6, 78, 59, 0.08);
-    --card-radius: 12px;
-}
-
-[data-theme="editorial-forest"] .notebook {
-    background: #fcfbf7;
-    border: 2px solid #064e3b;
-    border-radius: 14px;
-    box-shadow: 0 24px 70px rgba(6, 26, 20, 0.5);
-}
-
-[data-theme="editorial-forest"] .slide-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
-    font-size: 38px;
-    color: #064e3b;
-}
-
-[data-theme="editorial-forest"] .card,
-[data-theme="editorial-forest"] .rule-card,
-[data-theme="editorial-forest"] .discuss-card,
-[data-theme="editorial-forest"] .q-card,
-[data-theme="editorial-forest"] .reading-pane,
-[data-theme="editorial-forest"] .model-breakdown-card {
-    background: #ffffff !important;
-    border: 1.5px solid #d1fae5 !important;
-    color: #064e3b !important;
-}
-
-[data-theme="editorial-forest"] .btn-action.btn-primary {
-    background: #064e3b !important;
-    border-color: #047857 !important;
-    color: #ffffff !important;
-}
-
-
-/* ==========================================================================
-   12. BROADSIDE (Pitch-Black Broadsheet Void & Fire Orange)
-   ========================================================================== */
+/* 19. BROADSIDE (Pitch-Black Broadsheet Void & Fire Orange) */
 [data-theme="broadside"] {
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -999,9 +1362,7 @@
 }
 
 
-/* ==========================================================================
-   13. 8-BIT ORBIT (CRT Pixel-Art Arcade, Neon Cyan & Magenta)
-   ========================================================================== */
+/* 20. 8-BIT ORBIT (CRT Pixel-Art Arcade, Neon Cyan & Magenta) */
 [data-theme="8-bit-orbit"] {
     --font-display: 'Press Start 2P', monospace;
     --font-body: 'Space Grotesk', sans-serif;
@@ -1061,416 +1422,74 @@
 }
 
 
+/* ==================== THEME MODULE: 04-tactile-retro.css ==================== */
 /* ==========================================================================
-   14. BIENNALE YELLOW (Solar Yellow on Warm Parchment with Deep Indigo)
+   MODULE 04: TACTILE & RETRO THEMES (Sticky Notes, Windows 95, Cassette)
    ========================================================================== */
-[data-theme="biennale-yellow"] {
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
 
-    --stage-bg: #1e1b4b;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #312e81 0%, #0f172a 75%);
-    --bg-page: #fbf9f4;
-    --text-dark: #1e1b4b;
-    --text-muted: #64748b;
-
-    --col-reading: #1e1b4b;
-    --col-grammar: #d97706;
-    --col-vocab:   #059669;
-    --col-writing: #7c3aed;
-    --col-review:  #0284c7;
-
-    --card-bg: #ffffff;
-    --card-border: 1.5px solid #fef08a;
-    --card-shadow: 0 4px 18px rgba(245, 158, 11, 0.08);
-    --card-radius: 12px;
-}
-
-[data-theme="biennale-yellow"] .notebook {
-    background: #fbf9f4;
-    border: 2px solid #f59e0b;
-    border-radius: 14px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
-}
-
-[data-theme="biennale-yellow"] .slide-title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    color: #1e1b4b;
-    border-left: 6px solid #f59e0b;
-    padding-left: 12px;
-}
-
-[data-theme="biennale-yellow"] .card,
-[data-theme="biennale-yellow"] .rule-card,
-[data-theme="biennale-yellow"] .discuss-card,
-[data-theme="biennale-yellow"] .q-card,
-[data-theme="biennale-yellow"] .model-breakdown-card {
-    background: #ffffff !important;
-    border: 1.5px solid #fef08a !important;
-    color: #1e1b4b !important;
-}
-
-[data-theme="biennale-yellow"] .btn-action.btn-primary {
-    background: #f59e0b !important;
-    border-color: #d97706 !important;
-    color: #1e1b4b !important;
-    font-weight: 800 !important;
-}
-
-
-/* ==========================================================================
-   15. BLOCKFRAME (Neobrutalist Pastel Blocks & Chunky Black Borders)
-   ========================================================================== */
-[data-theme="block-frame"] {
-    --font-display: 'Space Grotesk', sans-serif;
+/* 21. DARK BOTANICAL (Organic Luxury, Emerald Green, Antique Gold & Warm Ivory) */
+[data-theme="botanical"] {
+    --font-display: 'Cormorant Garamond', serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
-    --stage-bg: #18181b;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #3f3f46 0%, #18181b 75%);
-    --bg-page: #fef08a;
-    --text-dark: #000000;
-    --text-muted: #3f3f46;
-
-    --col-reading: #2563eb;
-    --col-grammar: #e11d48;
-    --col-vocab:   #16a34a;
-    --col-writing: #9333ea;
-    --col-review:  #0891b2;
-
-    --card-bg: #ffffff;
-    --card-border: 2.5px solid #000000;
-    --card-shadow: 4px 4px 0px #000000;
-    --card-radius: 6px;
-}
-
-[data-theme="block-frame"] .notebook {
-    background: #ffffff;
-    border: 3px solid #000000;
-    border-radius: 8px;
-    box-shadow: 8px 8px 0px #000000, 0 20px 60px rgba(0,0,0,0.5);
-}
-
-[data-theme="block-frame"] .slide-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 900;
-    color: #000000;
-    text-transform: uppercase;
-}
-
-[data-theme="block-frame"] .card,
-[data-theme="block-frame"] .rule-card,
-[data-theme="block-frame"] .discuss-card,
-[data-theme="block-frame"] .q-card,
-[data-theme="block-frame"] .model-breakdown-card {
-    background: #ffffff !important;
-    border: 2.5px solid #000000 !important;
-    border-radius: 6px !important;
-    box-shadow: 4px 4px 0px #000000 !important;
-    color: #000000 !important;
-}
-
-[data-theme="block-frame"] .btn-action.btn-primary {
-    background: #facc15 !important;
-    border: 2.5px solid #000000 !important;
-    color: #000000 !important;
-    font-weight: 900 !important;
-    box-shadow: 3px 3px 0px #000000 !important;
-}
-
-
-/* ==========================================================================
-   16. CORAL MAGAZINE (Warm Cream Paper, Saturated Coral & Ink)
-   ========================================================================== */
-[data-theme="coral"] {
-    --font-display: 'Bebas Neue', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #141414;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #451a1a 0%, #141414 75%);
-    --bg-page: #f5f0e8;
-    --text-dark: #1a1a1a;
-    --text-muted: #6b6b6b;
-
-    --col-reading: #e85d5d;
-    --col-grammar: #ea580c;
-    --col-vocab:   #059669;
-    --col-writing: #7c3aed;
-    --col-review:  #0284c7;
-
-    --card-bg: #ffffff;
-    --card-border: 1.5px solid #e8e0d4;
-    --card-shadow: 0 4px 20px rgba(26, 26, 26, 0.06);
-    --card-radius: 10px;
-}
-
-[data-theme="coral"] .notebook {
-    background: #f5f0e8;
-    border: 2px solid #e85d5d;
-    border-radius: 12px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
-}
-
-[data-theme="coral"] .slide-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    letter-spacing: 1px;
-    color: #e85d5d;
-}
-
-[data-theme="coral"] .card,
-[data-theme="coral"] .rule-card,
-[data-theme="coral"] .discuss-card,
-[data-theme="coral"] .q-card,
-[data-theme="coral"] .model-breakdown-card {
-    background: #ffffff !important;
-    border: 1.5px solid #e8e0d4 !important;
-    color: #1a1a1a !important;
-}
-
-[data-theme="coral"] .btn-action.btn-primary {
-    background: #e85d5d !important;
-    border-color: #d44a4a !important;
-    color: #ffffff !important;
-    font-weight: 800 !important;
-}
-
-
-/* ==========================================================================
-   17. EDITORIAL TRI-TONE (Dusty Pink, Mustard Cream & Deep Burgundy)
-   ========================================================================== */
-[data-theme="editorial-tri-tone"] {
-    --font-display: 'Bodoni Moda', serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #4a1020;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #7a1f35 0%, #20040b 75%);
-    --bg-page: #fbf5eb;
-    --text-dark: #7a1f35;
-    --text-muted: #884d5c;
-
-    --col-reading: #7a1f35;
-    --col-grammar: #db2777;
-    --col-vocab:   #059669;
-    --col-writing: #d97706;
-    --col-review:  #0891b2;
-
-    --card-bg: #ffffff;
-    --card-border: 1.5px solid #f2b6c6;
-    --card-shadow: 0 6px 20px rgba(122, 31, 53, 0.08);
-    --card-radius: 12px;
-}
-
-[data-theme="editorial-tri-tone"] .notebook {
-    background: #fbf5eb;
-    border: 2px solid #7a1f35;
-    border-radius: 14px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
-}
-
-[data-theme="editorial-tri-tone"] .slide-title {
-    font-family: 'Bodoni Moda', serif;
-    font-weight: 900;
-    color: #7a1f35;
-}
-
-[data-theme="editorial-tri-tone"] .card,
-[data-theme="editorial-tri-tone"] .rule-card,
-[data-theme="editorial-tri-tone"] .discuss-card,
-[data-theme="editorial-tri-tone"] .q-card,
-[data-theme="editorial-tri-tone"] .model-breakdown-card {
-    background: #ffffff !important;
-    border: 1.5px solid #f2b6c6 !important;
-    color: #7a1f35 !important;
-}
-
-[data-theme="editorial-tri-tone"] .btn-action.btn-primary {
-    background: #7a1f35 !important;
-    border-color: #5c1426 !important;
-    color: #ffffff !important;
-}
-
-
-/* ==========================================================================
-   18. EMERALD EDITORIAL (Vivid Emerald Green, Navy Ink & Paper Cream)
-   ========================================================================== */
-[data-theme="emerald-editorial"] {
-    --font-display: 'Bodoni Moda', serif;
-    --font-body: 'Manrope', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #06261a;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #064e3b 0%, #06261a 75%);
-    --bg-page: #f1e9d6;
-    --text-dark: #0f1a5c;
+    --stage-bg: #041a14;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #064e3b 0%, #041a14 75%);
+    --bg-page: #fbf9f4;
+    --text-dark: #132a22;
     --text-muted: #52796f;
 
-    --col-reading: #0f1a5c;
+    --col-reading: #059669;
     --col-grammar: #d97706;
-    --col-vocab:   #059669;
-    --col-writing: #7c3aed;
-    --col-review:  #0891b2;
+    --col-vocab:   #10b981;
+    --col-writing: #047857;
+    --col-review:  #0d9488;
 
     --card-bg: #ffffff;
-    --card-border: 1.5px solid #3cd896;
+    --card-border: 1px solid #d1fae5;
     --card-shadow: 0 6px 20px rgba(6, 78, 59, 0.08);
     --card-radius: 12px;
 }
 
-[data-theme="emerald-editorial"] .notebook {
-    background: #f1e9d6;
-    border: 2.5px solid #065f46;
-    border-radius: 14px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+[data-theme="botanical"] .notebook {
+    background: #fbf9f4;
+    border: 2px solid #065f46;
+    box-shadow: 0 20px 60px rgba(4, 26, 20, 0.5), 0 0 0 1px rgba(212, 165, 116, 0.4);
 }
 
-[data-theme="emerald-editorial"] .slide-title {
-    font-family: 'Bodoni Moda', serif;
-    font-weight: 800;
-    color: #0f1a5c;
+[data-theme="botanical"] .slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 40px;
+    color: #064e3b;
+    letter-spacing: 0.5px;
 }
 
-[data-theme="emerald-editorial"] .card,
-[data-theme="emerald-editorial"] .rule-card,
-[data-theme="emerald-editorial"] .discuss-card,
-[data-theme="emerald-editorial"] .q-card,
-[data-theme="emerald-editorial"] .model-breakdown-card {
-    background: #ffffff !important;
-    border: 1.5px solid #d1fae5 !important;
-    border-left: 5px solid #065f46 !important;
-    color: #0f1a5c !important;
-}
-
-[data-theme="emerald-editorial"] .btn-action.btn-primary {
+[data-theme="botanical"] .skill-badge {
     background: #065f46 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: 1px;
+}
+
+[data-theme="botanical"] .card,
+[data-theme="botanical"] .discuss-card,
+[data-theme="botanical"] .rule-card,
+[data-theme="botanical"] .q-card,
+[data-theme="botanical"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1px solid #d1fae5 !important;
+    box-shadow: 0 4px 18px rgba(6, 78, 59, 0.06) !important;
+}
+
+[data-theme="botanical"] .btn-action.btn-primary {
+    background: #059669 !important;
     border-color: #047857 !important;
     color: #ffffff !important;
 }
 
 
-/* ==========================================================================
-   19. GROVE EARTH (Natural Organic Earthy Olive & Warm Stone)
-   ========================================================================== */
-[data-theme="grove"] {
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #1c1917;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #365314 0%, #1c1917 75%);
-    --bg-page: #f7f6f2;
-    --text-dark: #27272a;
-    --text-muted: #65a30d;
-
-    --col-reading: #3f6212;
-    --col-grammar: #ea580c;
-    --col-vocab:   #65a30d;
-    --col-writing: #7c3aed;
-    --col-review:  #0d9488;
-
-    --card-bg: #ffffff;
-    --card-border: 1.5px solid #e7e5e4;
-    --card-shadow: 0 4px 18px rgba(63, 98, 18, 0.06);
-    --card-radius: 12px;
-}
-
-[data-theme="grove"] .notebook {
-    background: #f7f6f2;
-    border: 2px solid #3f6212;
-    border-radius: 14px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
-}
-
-[data-theme="grove"] .slide-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
-    color: #3f6212;
-}
-
-[data-theme="grove"] .card,
-[data-theme="grove"] .rule-card,
-[data-theme="grove"] .discuss-card,
-[data-theme="grove"] .q-card,
-[data-theme="grove"] .model-breakdown-card {
-    background: #ffffff !important;
-    border: 1.5px solid #dcfce7 !important;
-    color: #27272a !important;
-}
-
-[data-theme="grove"] .btn-action.btn-primary {
-    background: #3f6212 !important;
-    border-color: #365314 !important;
-    color: #ffffff !important;
-}
-
-
-/* ==========================================================================
-   20. MONOCHROME LEDGER (Ivory Ledger Paper & Pure Ink-Black Type)
-   ========================================================================== */
-[data-theme="monochrome"] {
-    --font-display: 'Lora', serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #18181b;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #27272a 0%, #18181b 75%);
-    --bg-page: #fafadf;
-    --text-dark: #1a1a16;
-    --text-muted: #5e5e54;
-
-    --col-reading: #1a1a16;
-    --col-grammar: #3f3f46;
-    --col-vocab:   #27272a;
-    --col-writing: #52525b;
-    --col-review:  #71717a;
-
-    --card-bg: #f5f0e4;
-    --card-border: 1px solid #d4cebe;
-    --card-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    --card-radius: 4px;
-}
-
-[data-theme="monochrome"] .notebook {
-    background: #fafadf;
-    border: 1.5px solid #1a1a16;
-    border-radius: 4px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-}
-
-[data-theme="monochrome"] .slide-title {
-    font-family: 'Lora', serif;
-    font-weight: 700;
-    color: #1a1a16;
-    border-bottom: 2px solid #1a1a16;
-    padding-bottom: 6px;
-}
-
-[data-theme="monochrome"] .card,
-[data-theme="monochrome"] .rule-card,
-[data-theme="monochrome"] .discuss-card,
-[data-theme="monochrome"] .q-card,
-[data-theme="monochrome"] .model-breakdown-card {
-    background: #f5f0e4 !important;
-    border: 1px solid #1a1a16 !important;
-    border-radius: 2px !important;
-    color: #1a1a16 !important;
-}
-
-[data-theme="monochrome"] .btn-action.btn-primary {
-    background: #1a1a16 !important;
-    border-color: #000000 !important;
-    color: #ffffff !important;
-    border-radius: 2px !important;
-}
-
-
-/* ==========================================================================
-   21. PIN & PAPER (Sticky Notes, Handwritten Ink & Corkboard Warmth)
-   ========================================================================== */
+/* 22. PIN & PAPER (Sticky Notes, Handwritten Ink & Corkboard Warmth) */
 [data-theme="pin-and-paper"] {
     --font-display: 'Caveat', cursive;
     --font-body: 'DM Sans', sans-serif;
@@ -1526,9 +1545,63 @@
 }
 
 
-/* ==========================================================================
-   22. RETRO WINDOWS 95 (Nostalgic 3D Gray, Navy Title Bars & Pixel Fonts)
-   ========================================================================== */
+/* 23. SAKURA CHROMA (Japanese Retro Cassette, Warm Cream, Vermillion & Pink) */
+[data-theme="sakura-chroma"] {
+    --font-display: 'Outfit', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #1f1c18;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #7c2d12 0%, #1f1c18 75%);
+    --bg-page: #faf6ed;
+    --text-dark: #1c1917;
+    --text-muted: #78716c;
+
+    --col-reading: #ea580c;
+    --col-grammar: #ec4899;
+    --col-vocab:   #059669;
+    --col-writing: #9333ea;
+    --col-review:  #0284c7;
+
+    --card-bg: #ffffff;
+    --card-border: 2px solid #ea580c;
+    --card-shadow: 4px 4px 0px rgba(234, 88, 12, 0.2);
+    --card-radius: 10px;
+}
+
+[data-theme="sakura-chroma"] .notebook {
+    background: #faf6ed;
+    border: 2.5px solid #ea580c;
+    border-radius: 12px;
+    box-shadow: 8px 8px 0px rgba(236, 72, 153, 0.3), 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="sakura-chroma"] .slide-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    color: #ea580c;
+    letter-spacing: -0.5px;
+}
+
+[data-theme="sakura-chroma"] .card,
+[data-theme="sakura-chroma"] .rule-card,
+[data-theme="sakura-chroma"] .discuss-card,
+[data-theme="sakura-chroma"] .q-card,
+[data-theme="sakura-chroma"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 2px solid #fed7aa !important;
+    border-left: 6px solid #ea580c !important;
+    color: #1c1917 !important;
+}
+
+[data-theme="sakura-chroma"] .btn-action.btn-primary {
+    background: linear-gradient(135deg, #ea580c 0%, #ec4899 100%) !important;
+    border-color: #f97316 !important;
+    color: #ffffff !important;
+}
+
+
+/* 24. RETRO WINDOWS 95 (Nostalgic 3D Gray, Navy Title Bars & Pixel Fonts) */
 [data-theme="retro-windows"] {
     --font-display: 'VT323', monospace;
     --font-body: 'DM Sans', sans-serif;
@@ -1597,116 +1670,3 @@
 }
 
 
-/* ==========================================================================
-   23. STENCIL & TABLET (Bone Paper, Archaeological Terracotta & Ochre)
-   ========================================================================== */
-[data-theme="stencil-tablet"] {
-    --font-display: 'Space Grotesk', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #1c1917;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #44403c 0%, #1c1917 75%);
-    --bg-page: #f4efe0;
-    --text-dark: #0a0a0a;
-    --text-muted: #a06a3c;
-
-    --col-reading: #a06a3c;
-    --col-grammar: #c73b7a;
-    --col-vocab:   #2d7e73;
-    --col-writing: #3f73b7;
-    --col-review:  #ee7a2e;
-
-    --card-bg: #ffffff;
-    --card-border: 1.5px solid #e2dcc9;
-    --card-shadow: 0 4px 16px rgba(160, 106, 60, 0.08);
-    --card-radius: 6px;
-}
-
-[data-theme="stencil-tablet"] .notebook {
-    background: #f4efe0;
-    border: 2px solid #a06a3c;
-    border-radius: 8px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
-}
-
-[data-theme="stencil-tablet"] .slide-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 900;
-    color: #a06a3c;
-    text-transform: uppercase;
-}
-
-[data-theme="stencil-tablet"] .card,
-[data-theme="stencil-tablet"] .rule-card,
-[data-theme="stencil-tablet"] .discuss-card,
-[data-theme="stencil-tablet"] .q-card,
-[data-theme="stencil-tablet"] .model-breakdown-card {
-    background: #ffffff !important;
-    border: 1.5px solid #e2dcc9 !important;
-    border-left: 5px solid #a06a3c !important;
-    color: #0a0a0a !important;
-}
-
-[data-theme="stencil-tablet"] .btn-action.btn-primary {
-    background: #a06a3c !important;
-    border-color: #8c582e !important;
-    color: #ffffff !important;
-}
-
-
-/* ==========================================================================
-   24. CARTESIAN (Quiet Minimalist Bone & Classical Playfair Elegance)
-   ========================================================================== */
-[data-theme="cartesian"] {
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-
-    --stage-bg: #1c1917;
-    --viewport-bg: radial-gradient(circle at 80% 20%, #292524 0%, #1c1917 75%);
-    --bg-page: #ede8e0;
-    --text-dark: #1a1a1a;
-    --text-muted: #5a5a5a;
-
-    --col-reading: #1a1a1a;
-    --col-grammar: #8a8178;
-    --col-vocab:   #525252;
-    --col-writing: #737373;
-    --col-review:  #404040;
-
-    --card-bg: #f8f6f2;
-    --card-border: 1px solid #b8b0a4;
-    --card-shadow: 0 4px 14px rgba(0,0,0,0.04);
-    --card-radius: 8px;
-}
-
-[data-theme="cartesian"] .notebook {
-    background: #ede8e0;
-    border: 1.5px solid #b8b0a4;
-    border-radius: 10px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-}
-
-[data-theme="cartesian"] .slide-title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-style: italic;
-    color: #1a1a1a;
-}
-
-[data-theme="cartesian"] .card,
-[data-theme="cartesian"] .rule-card,
-[data-theme="cartesian"] .discuss-card,
-[data-theme="cartesian"] .q-card,
-[data-theme="cartesian"] .model-breakdown-card {
-    background: #f8f6f2 !important;
-    border: 1px solid #b8b0a4 !important;
-    color: #1a1a1a !important;
-}
-
-[data-theme="cartesian"] .btn-action.btn-primary {
-    background: #1a1a1a !important;
-    border-color: #000000 !important;
-    color: #ffffff !important;
-}

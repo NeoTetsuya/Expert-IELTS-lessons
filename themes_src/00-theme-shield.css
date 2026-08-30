@@ -1,0 +1,216 @@
+/* ==========================================================================
+   GLOBAL DARK THEME CONTRAST & LEGIBILITY SHIELD
+   Applies to all dark themes: electric, voltage, vellum, broadside, 8-bit-orbit
+   ========================================================================== */
+[data-theme="electric"],
+[data-theme="voltage"],
+[data-theme="vellum"],
+[data-theme="broadside"],
+[data-theme="8-bit-orbit"] {
+    --text-dark: #f8fafc;
+    --text-body: #e2e8f0;
+    --text-muted: #94a3b8;
+}
+
+[data-theme="electric"] .notebook,
+[data-theme="voltage"] .notebook,
+[data-theme="vellum"] .notebook,
+[data-theme="broadside"] .notebook,
+[data-theme="8-bit-orbit"] .notebook {
+    color: #f8fafc !important;
+}
+
+[data-theme="electric"] .card,
+[data-theme="voltage"] .card,
+[data-theme="vellum"] .card,
+[data-theme="broadside"] .card,
+[data-theme="8-bit-orbit"] .card,
+[data-theme="electric"] .rule-card,
+[data-theme="voltage"] .rule-card,
+[data-theme="vellum"] .rule-card,
+[data-theme="broadside"] .rule-card,
+[data-theme="8-bit-orbit"] .rule-card,
+[data-theme="electric"] .q-card,
+[data-theme="voltage"] .q-card,
+[data-theme="vellum"] .q-card,
+[data-theme="broadside"] .q-card,
+[data-theme="8-bit-orbit"] .q-card,
+[data-theme="electric"] .discuss-card,
+[data-theme="voltage"] .discuss-card,
+[data-theme="vellum"] .discuss-card,
+[data-theme="broadside"] .discuss-card,
+[data-theme="8-bit-orbit"] .discuss-card,
+[data-theme="electric"] .reading-pane,
+[data-theme="voltage"] .reading-pane,
+[data-theme="vellum"] .reading-pane,
+[data-theme="broadside"] .reading-pane,
+[data-theme="8-bit-orbit"] .reading-pane,
+[data-theme="electric"] .walkthrough-container,
+[data-theme="voltage"] .walkthrough-container,
+[data-theme="vellum"] .walkthrough-container,
+[data-theme="broadside"] .walkthrough-container,
+[data-theme="8-bit-orbit"] .walkthrough-container,
+[data-theme="electric"] .model-breakdown-card,
+[data-theme="voltage"] .model-breakdown-card,
+[data-theme="vellum"] .model-breakdown-card,
+[data-theme="broadside"] .model-breakdown-card,
+[data-theme="8-bit-orbit"] .model-breakdown-card {
+    color: #f8fafc !important;
+}
+
+/* Force child elements with inline color:#0f172a or #1a1a1a to adopt crisp light text */
+[data-theme="electric"] [style*="color:#0f172a"],
+[data-theme="electric"] [style*="color: #0f172a"],
+[data-theme="electric"] [style*="color:#1a1a1a"],
+[data-theme="voltage"] [style*="color:#0f172a"],
+[data-theme="voltage"] [style*="color: #0f172a"],
+[data-theme="voltage"] [style*="color:#1a1a1a"],
+[data-theme="vellum"] [style*="color:#0f172a"],
+[data-theme="vellum"] [style*="color: #0f172a"],
+[data-theme="vellum"] [style*="color:#1a1a1a"],
+[data-theme="broadside"] [style*="color:#0f172a"],
+[data-theme="broadside"] [style*="color: #0f172a"],
+[data-theme="broadside"] [style*="color:#1a1a1a"],
+[data-theme="8-bit-orbit"] [style*="color:#0f172a"],
+[data-theme="8-bit-orbit"] [style*="color: #0f172a"],
+[data-theme="8-bit-orbit"] [style*="color:#1a1a1a"] {
+    color: #f8fafc !important;
+}
+
+[data-theme="electric"] .card *,
+[data-theme="voltage"] .card *,
+[data-theme="vellum"] .card *,
+[data-theme="broadside"] .card *,
+[data-theme="8-bit-orbit"] .card *,
+[data-theme="electric"] .q-card *,
+[data-theme="voltage"] .q-card *,
+[data-theme="vellum"] .q-card *,
+[data-theme="broadside"] .q-card *,
+[data-theme="8-bit-orbit"] .q-card *,
+[data-theme="electric"] .walkthrough-container *,
+[data-theme="voltage"] .walkthrough-container *,
+[data-theme="vellum"] .walkthrough-container *,
+[data-theme="broadside"] .walkthrough-container *,
+[data-theme="8-bit-orbit"] .walkthrough-container * {
+    color: inherit;
+}
+
+/* Explicit text preservation for headings, excerpt, and question text */
+[data-theme="electric"] [data-slot="passage-text"],
+[data-theme="voltage"] [data-slot="passage-text"],
+[data-theme="vellum"] [data-slot="passage-text"],
+[data-theme="broadside"] [data-slot="passage-text"],
+[data-theme="8-bit-orbit"] [data-slot="passage-text"],
+[data-theme="electric"] [data-slot="question-text"],
+[data-theme="voltage"] [data-slot="question-text"],
+[data-theme="vellum"] [data-slot="question-text"],
+[data-theme="broadside"] [data-slot="question-text"],
+[data-theme="8-bit-orbit"] [data-slot="question-text"] {
+    color: #f8fafc !important;
+}
+
+/* Evidence highlights & synonyms contrast in dark themes */
+[data-theme="electric"] mark.evidence,
+[data-theme="voltage"] mark.evidence,
+[data-theme="vellum"] mark.evidence,
+[data-theme="broadside"] mark.evidence,
+[data-theme="8-bit-orbit"] mark.evidence {
+    color: #f8fafc !important;
+}
+
+[data-theme="electric"] mark.evidence.highlighted,
+[data-theme="voltage"] mark.evidence.highlighted,
+[data-theme="vellum"] mark.evidence.highlighted,
+[data-theme="broadside"] mark.evidence.highlighted,
+[data-theme="8-bit-orbit"] mark.evidence.highlighted {
+    background: rgba(254, 240, 138, 0.22) !important;
+    color: #fef08a !important;
+    border-bottom: 2px solid #facc15 !important;
+}
+
+[data-theme="electric"] span.syn-pair-1.active-syn,
+[data-theme="voltage"] span.syn-pair-1.active-syn,
+[data-theme="vellum"] span.syn-pair-1.active-syn,
+[data-theme="broadside"] span.syn-pair-1.active-syn,
+[data-theme="8-bit-orbit"] span.syn-pair-1.active-syn {
+    background: rgba(74, 222, 128, 0.22) !important;
+    color: #86efac !important;
+    border-bottom: 2.5px solid #4ade80 !important;
+}
+
+[data-theme="electric"] span.syn-pair-2.active-syn,
+[data-theme="voltage"] span.syn-pair-2.active-syn,
+[data-theme="vellum"] span.syn-pair-2.active-syn,
+[data-theme="broadside"] span.syn-pair-2.active-syn,
+[data-theme="8-bit-orbit"] span.syn-pair-2.active-syn {
+    background: rgba(192, 132, 252, 0.22) !important;
+    color: #d8b4fe !important;
+    border-bottom: 2.5px solid #c084fc !important;
+}
+
+[data-theme="electric"] span.vocab-word,
+[data-theme="voltage"] span.vocab-word,
+[data-theme="vellum"] span.vocab-word,
+[data-theme="broadside"] span.vocab-word,
+[data-theme="8-bit-orbit"] span.vocab-word {
+    color: inherit !important;
+    text-decoration: underline dotted #f59e0b 2px !important;
+}
+
+/* Secondary Action Buttons (Reveal Keys, Reset, Step Reveal) in dark themes */
+[data-theme="electric"] .btn-action:not(.btn-primary),
+[data-theme="voltage"] .btn-action:not(.btn-primary),
+[data-theme="vellum"] .btn-action:not(.btn-primary),
+[data-theme="broadside"] .btn-action:not(.btn-primary),
+[data-theme="8-bit-orbit"] .btn-action:not(.btn-primary) {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
+    color: #f8fafc !important;
+}
+
+[data-theme="electric"] .btn-action:not(.btn-primary):hover,
+[data-theme="voltage"] .btn-action:not(.btn-primary):hover,
+[data-theme="vellum"] .btn-action:not(.btn-primary):hover,
+[data-theme="broadside"] .btn-action:not(.btn-primary):hover,
+[data-theme="8-bit-orbit"] .btn-action:not(.btn-primary):hover {
+    background: rgba(255, 255, 255, 0.18) !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Inputs and Selects in dark themes */
+[data-theme="electric"] .blank-input,
+[data-theme="voltage"] .blank-input,
+[data-theme="vellum"] .blank-input,
+[data-theme="broadside"] .blank-input,
+[data-theme="8-bit-orbit"] .blank-input,
+[data-theme="electric"] .select-input,
+[data-theme="voltage"] .select-input,
+[data-theme="vellum"] .select-input,
+[data-theme="broadside"] .select-input,
+[data-theme="8-bit-orbit"] .select-input {
+    background: rgba(15, 23, 42, 0.95) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="electric"] .select-input option,
+[data-theme="voltage"] .select-input option,
+[data-theme="vellum"] .select-input option,
+[data-theme="broadside"] .select-input option,
+[data-theme="8-bit-orbit"] .select-input option {
+    background: #0f172a !important;
+    color: #ffffff !important;
+}
+
+/* Explanations & Evidence Hints */
+[data-theme="electric"] .item-explanation,
+[data-theme="voltage"] .item-explanation,
+[data-theme="vellum"] .item-explanation,
+[data-theme="broadside"] .item-explanation,
+[data-theme="8-bit-orbit"] .item-explanation {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #cbd5e1 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-left: 4px solid var(--col-reading) !important;
+}

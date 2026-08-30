@@ -1,0 +1,361 @@
+/* ==========================================================================
+   MODULE 02: BOLD & NEOBRUTALIST THEMES (High Contrast, Geometric, Impact)
+   ========================================================================== */
+
+/* 10. BOLD SIGNAL (Brutalist Modern, High-Impact Coral & Chunky Shadows) */
+[data-theme="bold-signal"] {
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #111827;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #881337 0%, #111827 75%);
+    --bg-page: #ffffff;
+    --text-dark: #09090b;
+    --text-muted: #52525b;
+
+    --col-reading: #0284c7;
+    --col-grammar: #e11d48;
+    --col-vocab:   #059669;
+    --col-writing: #d97706;
+    --col-review:  #4f46e5;
+
+    --card-bg: #ffffff;
+    --card-border: 2.5px solid #09090b;
+    --card-shadow: 5px 5px 0px #09090b;
+    --card-radius: 6px;
+}
+
+[data-theme="bold-signal"] .notebook {
+    background: #ffffff;
+    border: 3px solid #09090b;
+    border-radius: 8px;
+    box-shadow: 12px 12px 0px #e11d48, 24px 24px 0px rgba(0,0,0,0.5);
+}
+
+[data-theme="bold-signal"] .slide-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    color: #09090b;
+}
+
+[data-theme="bold-signal"] .card,
+[data-theme="bold-signal"] .discuss-card,
+[data-theme="bold-signal"] .rule-card,
+[data-theme="bold-signal"] .q-card,
+[data-theme="bold-signal"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 2px solid #09090b !important;
+    border-radius: 6px !important;
+    box-shadow: 4px 4px 0px #09090b !important;
+}
+
+[data-theme="bold-signal"] .btn-action {
+    border: 2px solid #09090b !important;
+    border-radius: 6px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    box-shadow: 3px 3px 0px #09090b !important;
+}
+
+[data-theme="bold-signal"] .btn-action:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px #09090b !important;
+}
+
+[data-theme="bold-signal"] .blank-input,
+[data-theme="bold-signal"] .select-input {
+    border: 2px solid #09090b !important;
+    border-radius: 4px !important;
+    font-weight: 700 !important;
+    background: #f4f4f5 !important;
+}
+
+
+/* 11. BLOCKFRAME (Neobrutalist Pastel Blocks & Chunky Black Borders) */
+[data-theme="block-frame"] {
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #18181b;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #3f3f46 0%, #18181b 75%);
+    --bg-page: #fef08a;
+    --text-dark: #000000;
+    --text-muted: #3f3f46;
+
+    --col-reading: #2563eb;
+    --col-grammar: #e11d48;
+    --col-vocab:   #16a34a;
+    --col-writing: #9333ea;
+    --col-review:  #0891b2;
+
+    --card-bg: #ffffff;
+    --card-border: 2.5px solid #000000;
+    --card-shadow: 4px 4px 0px #000000;
+    --card-radius: 6px;
+}
+
+[data-theme="block-frame"] .notebook {
+    background: #ffffff;
+    border: 3px solid #000000;
+    border-radius: 8px;
+    box-shadow: 8px 8px 0px #000000, 0 20px 60px rgba(0,0,0,0.5);
+}
+
+[data-theme="block-frame"] .slide-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 900;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+[data-theme="block-frame"] .card,
+[data-theme="block-frame"] .rule-card,
+[data-theme="block-frame"] .discuss-card,
+[data-theme="block-frame"] .q-card,
+[data-theme="block-frame"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 2.5px solid #000000 !important;
+    border-radius: 6px !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+    color: #000000 !important;
+}
+
+[data-theme="block-frame"] .btn-action.btn-primary {
+    background: #facc15 !important;
+    border: 2.5px solid #000000 !important;
+    color: #000000 !important;
+    font-weight: 900 !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+}
+
+
+/* 12. CORAL MAGAZINE (Warm Cream Paper, Saturated Coral & Ink) */
+[data-theme="coral"] {
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #141414;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #451a1a 0%, #141414 75%);
+    --bg-page: #f5f0e8;
+    --text-dark: #1a1a1a;
+    --text-muted: #6b6b6b;
+
+    --col-reading: #e85d5d;
+    --col-grammar: #ea580c;
+    --col-vocab:   #059669;
+    --col-writing: #7c3aed;
+    --col-review:  #0284c7;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #e8e0d4;
+    --card-shadow: 0 4px 20px rgba(26, 26, 26, 0.06);
+    --card-radius: 10px;
+}
+
+[data-theme="coral"] .notebook {
+    background: #f5f0e8;
+    border: 2px solid #e85d5d;
+    border-radius: 12px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="coral"] .slide-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 1px;
+    color: #e85d5d;
+}
+
+[data-theme="coral"] .card,
+[data-theme="coral"] .rule-card,
+[data-theme="coral"] .discuss-card,
+[data-theme="coral"] .q-card,
+[data-theme="coral"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #e8e0d4 !important;
+    color: #1a1a1a !important;
+}
+
+[data-theme="coral"] .btn-action.btn-primary {
+    background: #e85d5d !important;
+    border-color: #d44a4a !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+
+
+/* 13. COBALT GRID (Technical Precision, Cobalt Blue & Graph Paper) */
+[data-theme="cobalt-grid"] {
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #030712;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #1e3a8a 0%, #030712 75%);
+    --bg-page: #ffffff;
+    --text-dark: #09090b;
+    --text-muted: #475569;
+
+    --col-reading: #2563eb;
+    --col-grammar: #dc2626;
+    --col-vocab:   #0d9488;
+    --col-writing: #4f46e5;
+    --col-review:  #0284c7;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #2563eb;
+    --card-shadow: 4px 4px 0px rgba(37, 99, 235, 0.15);
+    --card-radius: 8px;
+}
+
+[data-theme="cobalt-grid"] .notebook {
+    background: #ffffff;
+    border: 2px solid #2563eb;
+    border-radius: 10px;
+    box-shadow: 8px 8px 0px #2563eb, 0 20px 60px rgba(0, 0, 0, 0.5);
+    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+[data-theme="cobalt-grid"] .slide-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    color: #2563eb;
+    letter-spacing: -0.5px;
+}
+
+[data-theme="cobalt-grid"] .card,
+[data-theme="cobalt-grid"] .rule-card,
+[data-theme="cobalt-grid"] .discuss-card,
+[data-theme="cobalt-grid"] .q-card,
+[data-theme="cobalt-grid"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #2563eb !important;
+    border-radius: 8px !important;
+    color: #09090b !important;
+}
+
+[data-theme="cobalt-grid"] .btn-action.btn-primary {
+    background: #2563eb !important;
+    border-color: #1d4ed8 !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+
+
+/* 14. BIENNALE YELLOW (Solar Yellow on Warm Parchment with Deep Indigo) */
+[data-theme="biennale-yellow"] {
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #1e1b4b;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #312e81 0%, #0f172a 75%);
+    --bg-page: #fbf9f4;
+    --text-dark: #1e1b4b;
+    --text-muted: #64748b;
+
+    --col-reading: #1e1b4b;
+    --col-grammar: #d97706;
+    --col-vocab:   #059669;
+    --col-writing: #7c3aed;
+    --col-review:  #0284c7;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #fef08a;
+    --card-shadow: 0 4px 18px rgba(245, 158, 11, 0.08);
+    --card-radius: 12px;
+}
+
+[data-theme="biennale-yellow"] .notebook {
+    background: #fbf9f4;
+    border: 2px solid #f59e0b;
+    border-radius: 14px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="biennale-yellow"] .slide-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    color: #1e1b4b;
+    border-left: 6px solid #f59e0b;
+    padding-left: 12px;
+}
+
+[data-theme="biennale-yellow"] .card,
+[data-theme="biennale-yellow"] .rule-card,
+[data-theme="biennale-yellow"] .discuss-card,
+[data-theme="biennale-yellow"] .q-card,
+[data-theme="biennale-yellow"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #fef08a !important;
+    color: #1e1b4b !important;
+}
+
+[data-theme="biennale-yellow"] .btn-action.btn-primary {
+    background: #f59e0b !important;
+    border-color: #d97706 !important;
+    color: #1e1b4b !important;
+    font-weight: 800 !important;
+}
+
+
+/* 15. STENCIL & TABLET (Bone Paper, Archaeological Terracotta & Ochre) */
+[data-theme="stencil-tablet"] {
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #1c1917;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #44403c 0%, #1c1917 75%);
+    --bg-page: #f4efe0;
+    --text-dark: #0a0a0a;
+    --text-muted: #a06a3c;
+
+    --col-reading: #a06a3c;
+    --col-grammar: #c73b7a;
+    --col-vocab:   #2d7e73;
+    --col-writing: #3f73b7;
+    --col-review:  #ee7a2e;
+
+    --card-bg: #ffffff;
+    --card-border: 1.5px solid #e2dcc9;
+    --card-shadow: 0 4px 16px rgba(160, 106, 60, 0.08);
+    --card-radius: 6px;
+}
+
+[data-theme="stencil-tablet"] .notebook {
+    background: #f4efe0;
+    border: 2px solid #a06a3c;
+    border-radius: 8px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="stencil-tablet"] .slide-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 900;
+    color: #a06a3c;
+    text-transform: uppercase;
+}
+
+[data-theme="stencil-tablet"] .card,
+[data-theme="stencil-tablet"] .rule-card,
+[data-theme="stencil-tablet"] .discuss-card,
+[data-theme="stencil-tablet"] .q-card,
+[data-theme="stencil-tablet"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1.5px solid #e2dcc9 !important;
+    border-left: 5px solid #a06a3c !important;
+    color: #0a0a0a !important;
+}
+
+[data-theme="stencil-tablet"] .btn-action.btn-primary {
+    background: #a06a3c !important;
+    border-color: #8c582e !important;
+    color: #ffffff !important;
+}

@@ -1,0 +1,337 @@
+/* ==========================================================================
+   MODULE 03: DARK & CYBERPUNK THEMES (Neon, Deep Space & High Contrast Dark)
+   ========================================================================== */
+
+/* 16. ELECTRIC STUDIO (Cyberpunk Dark Mode, Glowing Neon Cobalt & Glass) */
+[data-theme="electric"] {
+    --font-display: 'Manrope', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #020617;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #1e1b4b 0%, #020617 70%);
+    --bg-page: #0f172a;
+    --text-dark: #f8fafc;
+    --text-muted: #94a3b8;
+
+    --col-reading: #38bdf8;
+    --col-grammar: #fb923c;
+    --col-vocab:   #34d399;
+    --col-writing: #c084fc;
+    --col-review:  #22d3ee;
+
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --card-border: 1.5px solid rgba(56, 189, 248, 0.3);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.1);
+    --card-radius: 14px;
+}
+
+[data-theme="electric"] .notebook {
+    background: #0f172a;
+    border: 1.5px solid rgba(56, 189, 248, 0.4);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.2), 0 25px 80px rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="electric"] .slide-title {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    color: #f8fafc;
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+[data-theme="electric"] .reading-pane,
+[data-theme="electric"] .question-pane {
+    background: rgba(15, 23, 42, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="electric"] .card,
+[data-theme="electric"] .rule-card,
+[data-theme="electric"] .q-card,
+[data-theme="electric"] .model-breakdown-card {
+    background: rgba(30, 41, 59, 0.75) !important;
+    border: 1.5px solid rgba(56, 189, 248, 0.25) !important;
+    color: #f8fafc !important;
+    backdrop-filter: blur(12px) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 12px rgba(56, 189, 248, 0.08) !important;
+}
+
+[data-theme="electric"] .blank-input,
+[data-theme="electric"] .select-input {
+    background: rgba(15, 23, 42, 0.9) !important;
+    border: 1.5px solid rgba(56, 189, 248, 0.4) !important;
+    color: #38bdf8 !important;
+}
+
+[data-theme="electric"] .btn-action {
+    background: rgba(56, 189, 248, 0.15) !important;
+    border: 1.5px solid #38bdf8 !important;
+    color: #38bdf8 !important;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.25) !important;
+}
+
+[data-theme="electric"] .btn-action.btn-primary {
+    background: #0284c7 !important;
+    color: #ffffff !important;
+    border-color: #38bdf8 !important;
+}
+
+[data-theme="electric"] mark.evidence {
+    background: rgba(56, 189, 248, 0.25) !important;
+    border-bottom: 2px solid #38bdf8 !important;
+    color: #ffffff !important;
+}
+
+
+/* 17. CREATIVE VOLTAGE (Avant-Garde Deep Violet, Hot Magenta & Acid Lime) */
+[data-theme="voltage"] {
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #090514;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #4c1d95 0%, #090514 75%);
+    --bg-page: #130e24;
+    --text-dark: #f8fafc;
+    --text-muted: #a78bfa;
+
+    --col-reading: #818cf8;
+    --col-grammar: #f43f5e;
+    --col-vocab:   #a3e635;
+    --col-writing: #ec4899;
+    --col-review:  #c084fc;
+
+    --card-bg: rgba(30, 21, 54, 0.85);
+    --card-border: 1.5px solid rgba(236, 72, 153, 0.35);
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(236, 72, 153, 0.15);
+    --card-radius: 16px;
+}
+
+[data-theme="voltage"] .notebook {
+    background: #130e24;
+    border: 2px solid #ec4899;
+    box-shadow: 0 0 50px rgba(236, 72, 153, 0.25), 0 25px 80px rgba(0, 0, 0, 0.85);
+}
+
+[data-theme="voltage"] .slide-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    color: #fdf4ff;
+    letter-spacing: -0.5px;
+}
+
+[data-theme="voltage"] .reading-pane,
+[data-theme="voltage"] .question-pane {
+    background: rgba(19, 14, 36, 0.7) !important;
+    border: 1px solid rgba(167, 139, 250, 0.25) !important;
+    color: #f1f5f9 !important;
+}
+
+[data-theme="voltage"] .card,
+[data-theme="voltage"] .discuss-card,
+[data-theme="voltage"] .rule-card,
+[data-theme="voltage"] .q-card,
+[data-theme="voltage"] .model-breakdown-card {
+    background: rgba(30, 21, 54, 0.85) !important;
+    border: 1.5px solid rgba(236, 72, 153, 0.3) !important;
+    color: #fdf4ff !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="voltage"] .blank-input,
+[data-theme="voltage"] .select-input {
+    background: #1e1536 !important;
+    border: 1.5px solid #a855f7 !important;
+    color: #a3e635 !important;
+}
+
+[data-theme="voltage"] .btn-action.btn-primary {
+    background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%) !important;
+    border-color: #f472b6 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.4) !important;
+}
+
+
+/* 18. VELLUM (Deep Midnight Navy, Warm Golden-Amber Serifs & Dusty Teal) */
+[data-theme="vellum"] {
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #030712;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #1e293b 0%, #030712 75%);
+    --bg-page: #0b132b;
+    --text-dark: #f8fafc;
+    --text-muted: #94a3b8;
+
+    --col-reading: #14b8a6;
+    --col-grammar: #f59e0b;
+    --col-vocab:   #10b981;
+    --col-writing: #a855f7;
+    --col-review:  #38bdf8;
+
+    --card-bg: rgba(28, 37, 65, 0.85);
+    --card-border: 1.5px solid rgba(245, 158, 11, 0.3);
+    --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(245, 158, 11, 0.1);
+    --card-radius: 14px;
+}
+
+[data-theme="vellum"] .notebook {
+    background: #0b132b;
+    border: 1.5px solid rgba(245, 158, 11, 0.4);
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.15), 0 25px 80px rgba(0, 0, 0, 0.85);
+}
+
+[data-theme="vellum"] .slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 40px;
+    color: #fbbf24;
+    text-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+[data-theme="vellum"] .card,
+[data-theme="vellum"] .rule-card,
+[data-theme="vellum"] .discuss-card,
+[data-theme="vellum"] .q-card,
+[data-theme="vellum"] .reading-pane,
+[data-theme="vellum"] .model-breakdown-card {
+    background: rgba(28, 37, 65, 0.85) !important;
+    border: 1.5px solid rgba(245, 158, 11, 0.25) !important;
+    color: #f8fafc !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+[data-theme="vellum"] .btn-action.btn-primary {
+    background: #d97706 !important;
+    border-color: #f59e0b !important;
+    color: #ffffff !important;
+}
+
+
+/* 19. BROADSIDE (Pitch-Black Broadsheet Void & Fire Orange) */
+[data-theme="broadside"] {
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #000000;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #431407 0%, #000000 75%);
+    --bg-page: #09090b;
+    --text-dark: #ffffff;
+    --text-muted: #a1a1aa;
+
+    --col-reading: #ff5722;
+    --col-grammar: #f97316;
+    --col-vocab:   #10b981;
+    --col-writing: #ec4899;
+    --col-review:  #38bdf8;
+
+    --card-bg: rgba(24, 24, 27, 0.9);
+    --card-border: 1.5px solid rgba(255, 87, 34, 0.4);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+    --card-radius: 8px;
+}
+
+[data-theme="broadside"] .notebook {
+    background: #09090b;
+    border: 2px solid #ff5722;
+    border-radius: 10px;
+    box-shadow: 0 0 50px rgba(255, 87, 34, 0.25), 0 25px 80px rgba(0, 0, 0, 0.9);
+}
+
+[data-theme="broadside"] .slide-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+[data-theme="broadside"] .card,
+[data-theme="broadside"] .rule-card,
+[data-theme="broadside"] .discuss-card,
+[data-theme="broadside"] .q-card,
+[data-theme="broadside"] .reading-pane,
+[data-theme="broadside"] .model-breakdown-card {
+    background: rgba(24, 24, 27, 0.9) !important;
+    border: 1.5px solid rgba(255, 87, 34, 0.35) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="broadside"] .blank-input,
+[data-theme="broadside"] .select-input {
+    background: #18181b !important;
+    border: 1.5px solid #ff5722 !important;
+    color: #ff5722 !important;
+}
+
+[data-theme="broadside"] .btn-action.btn-primary {
+    background: #ff5722 !important;
+    border-color: #ea580c !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+
+
+/* 20. 8-BIT ORBIT (CRT Pixel-Art Arcade, Neon Cyan & Magenta) */
+[data-theme="8-bit-orbit"] {
+    --font-display: 'Press Start 2P', monospace;
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+
+    --stage-bg: #0a0e27;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #1e1b4b 0%, #0a0e27 75%);
+    --bg-page: #0f1b3d;
+    --text-dark: #f8fafc;
+    --text-muted: #94a3b8;
+
+    --col-reading: #5edcf4;
+    --col-grammar: #f0a6ca;
+    --col-vocab:   #f4d03f;
+    --col-writing: #c084fc;
+    --col-review:  #38bdf8;
+
+    --card-bg: rgba(10, 14, 39, 0.85);
+    --card-border: 2px solid #5edcf4;
+    --card-shadow: 0 0 20px rgba(94, 220, 244, 0.25), 0 10px 30px rgba(0,0,0,0.6);
+    --card-radius: 4px;
+}
+
+[data-theme="8-bit-orbit"] .notebook {
+    background: #0f1b3d;
+    border: 3px solid #f0a6ca;
+    border-radius: 6px;
+    box-shadow: 0 0 40px rgba(240, 166, 202, 0.3), 0 25px 80px rgba(0, 0, 0, 0.9);
+}
+
+[data-theme="8-bit-orbit"] .slide-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 24px;
+    line-height: 1.4;
+    color: #5edcf4;
+    text-shadow: 0 0 12px rgba(94, 220, 244, 0.6);
+}
+
+[data-theme="8-bit-orbit"] .card,
+[data-theme="8-bit-orbit"] .rule-card,
+[data-theme="8-bit-orbit"] .discuss-card,
+[data-theme="8-bit-orbit"] .q-card,
+[data-theme="8-bit-orbit"] .reading-pane,
+[data-theme="8-bit-orbit"] .model-breakdown-card {
+    background: rgba(10, 14, 39, 0.85) !important;
+    border: 2px solid #5edcf4 !important;
+    color: #f8fafc !important;
+    border-radius: 4px !important;
+}
+
+[data-theme="8-bit-orbit"] .btn-action.btn-primary {
+    background: #5edcf4 !important;
+    border-color: #38bdf8 !important;
+    color: #0a0e27 !important;
+    font-weight: 800 !important;
+    border-radius: 4px !important;
+}
