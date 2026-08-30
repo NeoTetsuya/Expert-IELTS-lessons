@@ -26,6 +26,7 @@ class PresenterSyncEngine {
         this.isConnected = false;
         this.hasRemotePeer = false;
         this.lastPeerHeartbeat = 0;
+        this.processedMessageIds = new Set();
 
         this.initChannel();
     }
@@ -96,6 +97,15 @@ class PresenterSyncEngine {
 
     handleIncomingMessage(message) {
         if (!message || message.senderId === this.instanceId) return;
+
+        // Deduplicate messages across BroadcastChannel and Storage events
+        const msgId = `${message.senderId}_${message.timestamp}_${message.type}_${message.nonce || 0}`;
+        if (this.processedMessageIds.has(msgId)) return;
+        this.processedMessageIds.add(msgId);
+        if (this.processedMessageIds.size > 200) {
+            const first = this.processedMessageIds.values().next().value;
+            this.processedMessageIds.delete(first);
+        }
 
         this.hasRemotePeer = true;
         this.lastPeerHeartbeat = Date.now();
@@ -176,6 +186,7 @@ class PresenterViewUI {
         this.isBlackout = false;
         this.isWhiteout = false;
         this.isSpotlight = false;
+        this.isHandlingRemoteNavigation = false;
 
         this.init();
     }
@@ -247,7 +258,9 @@ class PresenterViewUI {
         this.sync.on('NAVIGATE_SLIDE', (data) => {
             if (window.deckEngine && typeof data.slideIndex === 'number') {
                 if (window.deckEngine.currentSlide !== data.slideIndex) {
+                    this.isHandlingRemoteNavigation = true;
                     window.deckEngine.showSlide(data.slideIndex, false);
+                    setTimeout(() => { this.isHandlingRemoteNavigation = false; }, 80);
                 }
             }
         });
@@ -753,8 +766,10 @@ class PresenterViewUI {
         this.sync.on('NAVIGATE_SLIDE', (data) => {
             if (window.deckEngine && typeof data.slideIndex === 'number') {
                 if (window.deckEngine.currentSlide !== data.slideIndex) {
+                    this.isHandlingRemoteNavigation = true;
                     window.deckEngine.showSlide(data.slideIndex, false);
                     this.updatePresenterSlideView();
+                    setTimeout(() => { this.isHandlingRemoteNavigation = false; }, 80);
                 }
             }
         });
@@ -811,10 +826,11 @@ class PresenterViewUI {
         });
 
         // Slide change in Presenter window
-        window.addEventListener('slidechanged', () => {
+        window.addEventListener('slidechanged', (e) => {
             this.updatePresenterSlideView();
-            if (window.deckEngine) {
-                this.sync.emit('NAVIGATE_SLIDE', { slideIndex: window.deckEngine.currentSlide });
+            // Prevent echoing when update was caused by incoming sync or when broadcast is false
+            if (this.isHandlingRemoteNavigation || (e.detail && e.detail.broadcast === false)) {
+                return;
             }
         });
     }

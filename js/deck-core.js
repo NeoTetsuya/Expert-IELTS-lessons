@@ -155,6 +155,10 @@ class DeckEngine {
 
     showSlide(index, broadcast = true) {
         if (index < 0 || index >= this.slides.length) return;
+        if (this.currentSlide === index && this.slides[index] && this.slides[index].classList.contains('active')) {
+            return;
+        }
+
         this.slides.forEach((s, i) => {
             s.classList.toggle('active', i === index);
             s.classList.toggle('visible', i === index);
@@ -178,7 +182,7 @@ class DeckEngine {
         }
 
         window.dispatchEvent(new CustomEvent('slidechanged', {
-            detail: { index, slide: this.slides[index] }
+            detail: { index, slide: this.slides[index], broadcast }
         }));
     }
 
