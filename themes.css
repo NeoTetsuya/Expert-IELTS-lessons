@@ -56,6 +56,11 @@
 [data-theme="vellum"] .reading-pane,
 [data-theme="broadside"] .reading-pane,
 [data-theme="8-bit-orbit"] .reading-pane,
+[data-theme="electric"] .walkthrough-container,
+[data-theme="voltage"] .walkthrough-container,
+[data-theme="vellum"] .walkthrough-container,
+[data-theme="broadside"] .walkthrough-container,
+[data-theme="8-bit-orbit"] .walkthrough-container,
 [data-theme="electric"] .model-breakdown-card,
 [data-theme="voltage"] .model-breakdown-card,
 [data-theme="vellum"] .model-breakdown-card,
@@ -83,17 +88,84 @@
     color: #f8fafc !important;
 }
 
-[data-theme="electric"] .card p,
-[data-theme="voltage"] .card p,
-[data-theme="vellum"] .card p,
-[data-theme="broadside"] .card p,
-[data-theme="8-bit-orbit"] .card p,
-[data-theme="electric"] .card div,
-[data-theme="voltage"] .card div,
-[data-theme="vellum"] .card div,
-[data-theme="broadside"] .card div,
-[data-theme="8-bit-orbit"] .card div {
+[data-theme="electric"] .card *,
+[data-theme="voltage"] .card *,
+[data-theme="vellum"] .card *,
+[data-theme="broadside"] .card *,
+[data-theme="8-bit-orbit"] .card *,
+[data-theme="electric"] .q-card *,
+[data-theme="voltage"] .q-card *,
+[data-theme="vellum"] .q-card *,
+[data-theme="broadside"] .q-card *,
+[data-theme="8-bit-orbit"] .q-card *,
+[data-theme="electric"] .walkthrough-container *,
+[data-theme="voltage"] .walkthrough-container *,
+[data-theme="vellum"] .walkthrough-container *,
+[data-theme="broadside"] .walkthrough-container *,
+[data-theme="8-bit-orbit"] .walkthrough-container * {
     color: inherit;
+}
+
+/* Explicit text preservation for headings, excerpt, and question text */
+[data-theme="electric"] [data-slot="passage-text"],
+[data-theme="voltage"] [data-slot="passage-text"],
+[data-theme="vellum"] [data-slot="passage-text"],
+[data-theme="broadside"] [data-slot="passage-text"],
+[data-theme="8-bit-orbit"] [data-slot="passage-text"],
+[data-theme="electric"] [data-slot="question-text"],
+[data-theme="voltage"] [data-slot="question-text"],
+[data-theme="vellum"] [data-slot="question-text"],
+[data-theme="broadside"] [data-slot="question-text"],
+[data-theme="8-bit-orbit"] [data-slot="question-text"] {
+    color: #f8fafc !important;
+}
+
+/* Evidence highlights & synonyms contrast in dark themes */
+[data-theme="electric"] mark.evidence,
+[data-theme="voltage"] mark.evidence,
+[data-theme="vellum"] mark.evidence,
+[data-theme="broadside"] mark.evidence,
+[data-theme="8-bit-orbit"] mark.evidence {
+    color: #f8fafc !important;
+}
+
+[data-theme="electric"] mark.evidence.highlighted,
+[data-theme="voltage"] mark.evidence.highlighted,
+[data-theme="vellum"] mark.evidence.highlighted,
+[data-theme="broadside"] mark.evidence.highlighted,
+[data-theme="8-bit-orbit"] mark.evidence.highlighted {
+    background: rgba(254, 240, 138, 0.22) !important;
+    color: #fef08a !important;
+    border-bottom: 2px solid #facc15 !important;
+}
+
+[data-theme="electric"] span.syn-pair-1.active-syn,
+[data-theme="voltage"] span.syn-pair-1.active-syn,
+[data-theme="vellum"] span.syn-pair-1.active-syn,
+[data-theme="broadside"] span.syn-pair-1.active-syn,
+[data-theme="8-bit-orbit"] span.syn-pair-1.active-syn {
+    background: rgba(74, 222, 128, 0.22) !important;
+    color: #86efac !important;
+    border-bottom: 2.5px solid #4ade80 !important;
+}
+
+[data-theme="electric"] span.syn-pair-2.active-syn,
+[data-theme="voltage"] span.syn-pair-2.active-syn,
+[data-theme="vellum"] span.syn-pair-2.active-syn,
+[data-theme="broadside"] span.syn-pair-2.active-syn,
+[data-theme="8-bit-orbit"] span.syn-pair-2.active-syn {
+    background: rgba(192, 132, 252, 0.22) !important;
+    color: #d8b4fe !important;
+    border-bottom: 2.5px solid #c084fc !important;
+}
+
+[data-theme="electric"] span.vocab-word,
+[data-theme="voltage"] span.vocab-word,
+[data-theme="vellum"] span.vocab-word,
+[data-theme="broadside"] span.vocab-word,
+[data-theme="8-bit-orbit"] span.vocab-word {
+    color: inherit !important;
+    text-decoration: underline dotted #f59e0b 2px !important;
 }
 
 /* Secondary Action Buttons (Reveal Keys, Reset, Step Reveal) in dark themes */

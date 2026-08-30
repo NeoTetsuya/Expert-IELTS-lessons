@@ -77,17 +77,17 @@
                     <!-- Centered Walkthrough Container -->
                     <div class="walkthrough-container" style="max-width: 1550px; width: 96%; margin: auto; display: flex; flex-direction: column; gap: 18px; justify-content: center; flex: 1; min-height: 0;">
                         <!-- Top Box: Dedicated Passage Excerpt -->
-                        <div class="card" style="background: #ffffff; border: 2px solid #93c5fd; border-left: 7px solid var(--col-reading); border-radius: 14px; padding: 24px 32px; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+                        <div class="card" style="border-left: 7px solid var(--col-reading); border-radius: 14px; padding: 24px 32px;">
                             <div style="font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--col-reading); margin-bottom: 10px;" data-slot="passage-header">
                                 📖 Relevant Passage Excerpt
                             </div>
-                            <p style="font-size: 26px; line-height: 1.85; margin-bottom: 0; color: #0f172a;" data-slot="passage-text"></p>
+                            <p style="font-size: 26px; line-height: 1.85; margin-bottom: 0; color: inherit;" data-slot="passage-text"></p>
                         </div>
 
                         <!-- Bottom Box: Interactive Question Card -->
-                        <div class="q-card" style="background: #ffffff; border: 2px solid #cbd5e1; border-left: 7px solid var(--col-reading); border-radius: 14px; padding: 24px 32px; box-shadow: 0 4px 16px rgba(0,0,0,0.03);" data-slot="question-card">
+                        <div class="q-card" style="border-left: 7px solid var(--col-reading); border-radius: 14px; padding: 24px 32px;" data-slot="question-card">
                             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
-                                <span style="font-weight: 700; font-size: 25px; line-height: 1.65; color: #0f172a;" data-slot="question-text"></span>
+                                <span style="font-weight: 700; font-size: 25px; line-height: 1.65; color: inherit;" data-slot="question-text"></span>
                                 <button class="syn-btn" style="flex-shrink: 0; font-size: 16px; padding: 8px 18px; font-weight: 700;" data-slot="evidence-btn">💡 Evidence</button>
                             </div>
 
