@@ -4,8 +4,8 @@
    interactive controls, typography, and responsive font scaling.
    ========================================================================== */
 
-/* 1. Google Fonts Suite (Playfair, DM Sans, Space Grotesk, Plus Jakarta, Manrope, Outfit, Cormorant, Syne, Bodoni) */
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant+Garamond:ital,wght@0,400..700;1,400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400..700&family=Manrope:wght@400..800&family=Outfit:wght@300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Space+Grotesk:wght@400..700&family=Syne:wght@500..800&display=swap');
+/* 1. Google Fonts Suite */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat:wght@400..700&family=Cormorant+Garamond:ital,wght@0,400..700;1,400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Manrope:wght@400..800&family=Outfit:wght@300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Press+Start+2P&family=Space+Grotesk:wght@400..700&family=Space+Mono:wght@400;700&family=Syne:wght@500..800&family=VT323&display=swap');
 
 /* 2. Distinct Presentation Aesthetic Themes */
 @import url('themes.css');

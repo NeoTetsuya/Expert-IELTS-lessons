@@ -117,6 +117,114 @@ class DeckThemeEngine {
                 icon: '📰',
                 desc: 'Ultra-dark pitch-black broadsheet void with blazing fire orange.',
                 previewBg: 'linear-gradient(135deg, #ff5722, #000000)'
+            },
+            {
+                id: '8-bit-orbit',
+                name: '8-Bit Orbit',
+                displayFont: 'Press Start 2P',
+                bodyFont: 'Space Grotesk',
+                icon: '👾',
+                desc: 'CRT pixel-art neon arcade on deep space void with cyan & magenta.',
+                previewBg: 'linear-gradient(135deg, #5edcf4, #f0a6ca)'
+            },
+            {
+                id: 'biennale-yellow',
+                name: 'Biennale Yellow',
+                displayFont: 'Playfair Display',
+                bodyFont: 'DM Sans',
+                icon: '☀️',
+                desc: 'Solar yellow on warm parchment with deep indigo serif headlines.',
+                previewBg: 'linear-gradient(135deg, #f59e0b, #1e1b4b)'
+            },
+            {
+                id: 'block-frame',
+                name: 'BlockFrame',
+                displayFont: 'Space Grotesk',
+                bodyFont: 'Plus Jakarta Sans',
+                icon: '🧱',
+                desc: 'Neobrutalist pastel color blocks with chunky black graphic borders.',
+                previewBg: 'linear-gradient(135deg, #facc15, #000000)'
+            },
+            {
+                id: 'coral',
+                name: 'Coral Magazine',
+                displayFont: 'Bebas Neue',
+                bodyFont: 'DM Sans',
+                icon: '🪸',
+                desc: 'Warm cream paper, saturated coral accents, and bold condensed type.',
+                previewBg: 'linear-gradient(135deg, #e85d5d, #1a1a1a)'
+            },
+            {
+                id: 'editorial-tri-tone',
+                name: 'Editorial Tri-Tone',
+                displayFont: 'Bodoni Moda',
+                bodyFont: 'DM Sans',
+                icon: '🍷',
+                desc: 'Dusty blush pink, mustard cream, and deep burgundy literary styling.',
+                previewBg: 'linear-gradient(135deg, #7a1f35, #f2b6c6)'
+            },
+            {
+                id: 'emerald-editorial',
+                name: 'Emerald Editorial',
+                displayFont: 'Bodoni Moda',
+                bodyFont: 'Manrope',
+                icon: '💎',
+                desc: 'Vivid emerald green field, deep navy ink, and warm paper cream.',
+                previewBg: 'linear-gradient(135deg, #065f46, #3cd896)'
+            },
+            {
+                id: 'grove',
+                name: 'Grove Earth',
+                displayFont: 'Cormorant Garamond',
+                bodyFont: 'Plus Jakarta Sans',
+                icon: '🍃',
+                desc: 'Natural organic earthy olive, warm stone neutral, and subtle serenity.',
+                previewBg: 'linear-gradient(135deg, #3f6212, #65a30d)'
+            },
+            {
+                id: 'monochrome',
+                name: 'Monochrome Ledger',
+                displayFont: 'Lora',
+                bodyFont: 'DM Sans',
+                icon: '🖋️',
+                desc: 'Ivory ledger paper with pure ink-black typography and clean lines.',
+                previewBg: 'linear-gradient(135deg, #1a1a16, #fafadf)'
+            },
+            {
+                id: 'pin-and-paper',
+                name: 'Pin & Paper',
+                displayFont: 'Caveat',
+                bodyFont: 'DM Sans',
+                icon: '📌',
+                desc: 'Yellow sticky notes, handwritten blue ink, and warm tactile paper.',
+                previewBg: 'linear-gradient(135deg, #eab308, #1e40af)'
+            },
+            {
+                id: 'retro-windows',
+                name: 'Retro Windows 95',
+                displayFont: 'VT323',
+                bodyFont: 'DM Sans',
+                icon: '💾',
+                desc: 'Windows 95 nostalgic 3D gray, navy title bars, and pixel typography.',
+                previewBg: 'linear-gradient(135deg, #000080, #c0c0c0)'
+            },
+            {
+                id: 'stencil-tablet',
+                name: 'Stencil & Tablet',
+                displayFont: 'Space Grotesk',
+                bodyFont: 'DM Sans',
+                icon: '🏺',
+                desc: 'Bone paper, archaeological terracotta, teal, and stencil-cut display.',
+                previewBg: 'linear-gradient(135deg, #a06a3c, #2d7e73)'
+            },
+            {
+                id: 'cartesian',
+                name: 'Cartesian Elegance',
+                displayFont: 'Playfair Display',
+                bodyFont: 'Plus Jakarta Sans',
+                icon: '🕊️',
+                desc: 'Quiet warm bone minimalist palette with classical Playfair serifs.',
+                previewBg: 'linear-gradient(135deg, #1a1a1a, #ede8e0)'
             }
         ];
 

@@ -701,9 +701,9 @@ All reading passages must tag paragraphs:
 
 ---
 
-## 8. Theme System Quick Reference
+## 8. Theme System Quick Reference (24 Themes)
 
-| Theme ID | Font Display | Font Body | Aesthetic | Scheme |
+| Theme ID | Font Display | Font Body | Aesthetic & Mood | Scheme |
 |:---|:---|:---|:---|:---|
 | `academic` | Playfair Display | DM Sans | Classic Oxford Navy & Cream | Light |
 | `bold-signal` | Space Grotesk | Plus Jakarta Sans | Brutalist Coral & Sharp Shadows | Light |
@@ -717,8 +717,20 @@ All reading passages must tag paragraphs:
 | `sakura-chroma` | Outfit | DM Sans | Vintage Japanese Cassette, Vermillion & Pink | Light |
 | `editorial-forest` | Cormorant Garamond | DM Sans | Deep Pine Green, Dusty Blush & Warm Parchment | Light |
 | `broadside` | Space Grotesk | Plus Jakarta Sans | Pitch-Black Broadsheet Void & Fire Orange | Dark |
+| `8-bit-orbit` | Press Start 2P | Space Grotesk | CRT Pixel-Art Arcade, Neon Cyan & Magenta | Dark |
+| `biennale-yellow` | Playfair Display | DM Sans | Solar Yellow, Parchment & Deep Indigo | Light |
+| `block-frame` | Space Grotesk | Plus Jakarta Sans | Neobrutalist Pastel Blocks & Chunky Black Borders | Light |
+| `coral` | Bebas Neue | DM Sans | Warm Cream Paper, Saturated Coral & Ink | Light |
+| `editorial-tri-tone` | Bodoni Moda | DM Sans | Dusty Pink, Mustard Cream & Deep Burgundy | Light |
+| `emerald-editorial` | Bodoni Moda | Manrope | Vivid Emerald Green, Navy Ink & Paper Cream | Light |
+| `grove` | Cormorant Garamond | Plus Jakarta Sans | Natural Organic Earthy Olive & Warm Stone | Light |
+| `monochrome` | Lora | DM Sans | Ivory Ledger Paper & Pure Ink-Black Typographic Restraint | Light |
+| `pin-and-paper` | Caveat | DM Sans | Yellow Sticky Notes, Handwritten Ink & Corkboard | Light |
+| `retro-windows` | VT323 | DM Sans | Windows 95 Nostalgic 3D Gray, Navy Bars & Pixel Type | Light |
+| `stencil-tablet` | Space Grotesk | DM Sans | Bone Paper, Archaeological Terracotta & Ochre | Light |
+| `cartesian` | Playfair Display | Plus Jakarta Sans | Quiet Minimalist Bone & Classical Playfair Elegance | Light |
 
-Apply via: `<html data-theme="bold-signal">` — switchable live with <kbd>Shift+T</kbd> or through the Teacher's Toolkit & HUD Theme Modal.
+Apply via: `<html data-theme="coral">` — switchable live with <kbd>Shift+T</kbd> or through the Teacher's Toolkit & HUD Theme Modal.
 
 ---
 
