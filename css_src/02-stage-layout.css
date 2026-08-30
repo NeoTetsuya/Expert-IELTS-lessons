@@ -152,4 +152,79 @@ html, body {
 .tab-vocab { background: var(--col-vocab, #7c3aed); }
 .tab-write { background: var(--col-writing, #059669); }
 .tab-review { background: var(--col-summary, #d97706); }
+
+/* ==========================================================================
+   PRINT ENGINE (Save-as-PDF & One-Page-Per-Slide Export)
+   ========================================================================== */
+@page {
+    size: 1920px 1080px;
+    margin: 0;
+}
+
+@media print {
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: none !important;
+        overflow: visible !important;
+        height: auto !important;
+        width: auto !important;
+    }
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .deck-viewport {
+        position: static !important;
+        inset: auto !important;
+        background: none !important;
+        overflow: visible !important;
+    }
+    .deck-stage {
+        position: static !important;
+        transform: none !important;
+        width: auto !important;
+        height: auto !important;
+        background: none !important;
+    }
+    .slide {
+        position: relative !important;
+        inset: auto !important;
+        width: var(--stage-width, 1920px) !important;
+        height: var(--stage-height, 1080px) !important;
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        break-after: page;
+        page-break-after: always;
+        break-inside: avoid;
+        overflow: hidden;
+    }
+    .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    /* Hide presentation chrome during print */
+    #presentationToolsHUD,
+    .nav-hint,
+    #slideCounter,
+    .font-controls,
+    .font-indicator,
+    .aspect-toast,
+    .theme-picker-modal,
+    .theme-toast,
+    .canva-presenter-cockpit,
+    .presenter-laser-dot,
+    .presenter-notes-drawer,
+    #timerModal,
+    #studentPickerModal,
+    #writingAnnotatorModal {
+        display: none !important;
+    }
+}
 
