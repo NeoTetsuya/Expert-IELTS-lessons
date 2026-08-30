@@ -117,6 +117,9 @@ class DeckEngine {
 
     setupKeyboardNav() {
         document.addEventListener('keydown', (e) => {
+            if (document.documentElement.classList.contains('presenter-window') || (document.body && document.body.classList.contains('presenter-window'))) {
+                return;
+            }
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
                 return;
             }
@@ -964,8 +967,8 @@ window.resetAnswers = window.resetTask = function(btnOrContainerId) {
 // Hook tab update into showSlide
 if (window.DeckEngine) {
     const originalShowSlide = DeckEngine.prototype.showSlide;
-    DeckEngine.prototype.showSlide = function(index) {
-        originalShowSlide.call(this, index);
+    DeckEngine.prototype.showSlide = function(index, broadcast = true) {
+        originalShowSlide.call(this, index, broadcast);
         DeckComponents.updateActiveTab();
     };
 }
@@ -6414,6 +6417,9 @@ class PresentationTools {
      */
     initKeyboardShortcuts() {
         document.addEventListener('keydown', (e) => {
+            if (document.documentElement.classList.contains('presenter-window') || (document.body && document.body.classList.contains('presenter-window'))) {
+                return;
+            }
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
                 return;
             }

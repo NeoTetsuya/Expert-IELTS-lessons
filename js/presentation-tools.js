@@ -394,6 +394,9 @@ class PresentationTools {
      */
     initKeyboardShortcuts() {
         document.addEventListener('keydown', (e) => {
+            if (document.documentElement.classList.contains('presenter-window') || (document.body && document.body.classList.contains('presenter-window'))) {
+                return;
+            }
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
                 return;
             }
