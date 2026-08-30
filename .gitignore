@@ -17,3 +17,7 @@ scratch/
 # Node / Scratch scripts
 node_modules/
 beautiful-html-templates-main/
+
+# Local Skills (Keep only ielts-presentation-authoring tracked)
+.agents/skills/*
+!.agents/skills/ielts-presentation-authoring/
