@@ -23,6 +23,16 @@
     --stage-height: 1080px;
     --notebook-width: 1800px;
     --notebook-height: 980px;
+
+    /* Design Engineering Motion Tokens */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --spring-snappy: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --dur-instant: 100ms;
+    --dur-fast: 150ms;
+    --dur-normal: 220ms;
+    --dur-delight: 350ms;
 }
 
 /* Aspect Ratio Overrides for Legacy Projectors */
@@ -927,7 +937,9 @@ html, body {
     border-radius: 6px;
     border-bottom: 2px solid #3b82f6;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 140ms ease-out,
+                transform 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                box-shadow 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
     display: inline;
 }
 .hl-phrase:hover,
@@ -936,6 +948,9 @@ html, body {
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
     outline: none;
+}
+.hl-phrase:active {
+    transform: scale(0.98);
 }
 .hl-phrase.active-phrase {
     background-color: #93c5fd;
@@ -950,12 +965,16 @@ html, body {
     border-radius: 6px;
     border-bottom: 2px solid #22c55e;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 140ms ease-out,
+                transform 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
     display: inline;
 }
 .hl-vocab:hover {
     background-color: #bbf7d0;
     transform: translateY(-1px);
+}
+.hl-vocab:active {
+    transform: scale(0.98);
 }
 
 .hide-writing-highlights .hl-phrase,
@@ -981,10 +1000,12 @@ html, body {
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.2s ease;
+    pointer-events: none;
+    transition: opacity 180ms ease-out;
 }
 .writing-modal-overlay.show {
     opacity: 1;
+    pointer-events: auto;
 }
 
 .writing-modal-card {
@@ -996,7 +1017,7 @@ html, body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     border: 1.5px solid #cbd5e1;
     transform: scale(0.95);
-    transition: transform 0.2s ease;
+    transition: transform 220ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
 }
 .writing-modal-card.show {
     transform: scale(1);
@@ -1036,11 +1057,17 @@ html, body {
     cursor: pointer;
     padding: 4px 8px;
     border-radius: 6px;
-    transition: all 0.15s ease;
+    transition: color 120ms ease-out,
+                background-color 120ms ease-out,
+                transform 120ms ease-out;
 }
 .writing-modal-close:hover {
     color: #0f172a;
     background: #f1f5f9;
+    transform: scale(1.1);
+}
+.writing-modal-close:active {
+    transform: scale(0.92);
 }
 
 .writing-modal-body {
@@ -1146,12 +1173,19 @@ html, body {
 /* Strategy & Keyword Cards */
 .strategy-card, .q-card.strategy-card {
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: transform 180ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                border-color 150ms ease-out,
+                box-shadow 180ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 .strategy-card:hover, .q-card.strategy-card:hover {
+    transform: translateY(-2px);
     border-color: var(--col-reading, #2563eb);
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+}
+
+.strategy-card:active, .q-card.strategy-card:active {
+    transform: scale(0.985);
 }
 
 .strategy-card .sentence-text,
@@ -1185,7 +1219,9 @@ html, body {
     font-weight: 600;
     color: var(--text-dark, #0f172a);
     outline: none;
-    transition: all 0.2s;
+    transition: border-color 150ms ease-out,
+                background-color 150ms ease-out,
+                box-shadow 180ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
     display: inline-block;
     margin: 0 4px;
 }
@@ -1200,7 +1236,7 @@ html, body {
 .blank-input:focus {
     border-color: var(--col-reading, #dc2626);
     background: #fff;
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
 }
 .blank-input.correct {
     border-color: #10b981 !important;
@@ -1225,6 +1261,12 @@ html, body {
     outline: none;
     cursor: pointer;
     margin: 0 4px;
+    transition: border-color 150ms ease-out,
+                box-shadow 180ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+}
+.select-input:focus {
+    border-color: var(--col-reading, #dc2626);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
 }
 .select-input.correct {
     border-color: #10b981 !important;
@@ -1248,9 +1290,19 @@ html, body {
     cursor: pointer;
     font-size: calc(18px * var(--font-scale, 1));
     color: var(--text-body, #1e293b);
-    transition: all 0.2s;
+    transition: transform 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                border-color 140ms ease-out,
+                background-color 140ms ease-out,
+                box-shadow 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
 }
-.opt-card:hover { border-color: var(--col-reading, #dc2626); }
+.opt-card:hover {
+    transform: translateY(-1.5px);
+    border-color: var(--col-reading, #dc2626);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+.opt-card:active {
+    transform: scale(0.98);
+}
 .opt-card.selected { background: rgba(220, 38, 38, 0.06); border-color: var(--col-reading, #dc2626); }
 .opt-card.correct-opt { background: #ecfdf5 !important; border-color: #10b981 !important; color: #065f46 !important; }
 .opt-card.wrong-opt { background: #fef2f2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
@@ -1412,15 +1464,21 @@ span.vocab-term.active-vocab {
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: transform 150ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                background-color 130ms ease-out,
+                border-color 130ms ease-out;
     display: inline-flex;
     align-items: center;
     gap: 4px;
     flex-shrink: 0;
 }
 .syn-btn:hover {
+    transform: translateY(-1px);
     background: #fef2f2;
     border-color: var(--col-reading, #dc2626);
+}
+.syn-btn:active {
+    transform: scale(0.95);
 }
 
 /* Action Buttons */
@@ -1443,16 +1501,38 @@ span.vocab-term.active-vocab {
     font-size: 14.5px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: transform 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                background-color 140ms ease-out,
+                border-color 140ms ease-out,
+                box-shadow 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     white-space: nowrap;
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
-.btn-action:hover { background: #f8fafc; border-color: #94a3b8; }
-.btn-action.btn-primary { background: var(--col-reading, #dc2626); color: white; border-color: var(--col-reading, #dc2626); }
-.btn-action.btn-primary:hover { opacity: 0.92; }
+.btn-action:hover {
+    transform: translateY(-1px);
+    background: #f8fafc;
+    border-color: #94a3b8;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+.btn-action:active {
+    transform: scale(0.97);
+}
+.btn-action.btn-primary {
+    background: var(--col-reading, #dc2626);
+    color: white;
+    border-color: var(--col-reading, #dc2626);
+}
+.btn-action.btn-primary:hover {
+    transform: translateY(-1px);
+    opacity: 0.94;
+    box-shadow: 0 4px 14px rgba(220, 38, 38, 0.25);
+}
+.btn-action.btn-primary:active {
+    transform: scale(0.97);
+}
 
 /* Data Tables */
 .data-table {
@@ -1525,11 +1605,18 @@ span.vocab-term.active-vocab {
     font-weight: 600;
     color: var(--text-muted, #64748b);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: transform 150ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                background-color 130ms ease-out,
+                border-color 130ms ease-out,
+                color 130ms ease-out;
 }
 .subtab-btn:hover {
     background: #f8fafc;
     border-color: var(--text-muted, #64748b);
+    transform: translateY(-1px);
+}
+.subtab-btn:active {
+    transform: scale(0.96);
 }
 .subtab-btn.active {
     background: var(--col-reading, #dc2626);
@@ -1876,6 +1963,17 @@ span.vocab-term.active-vocab {
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes modalPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
 /* Theme Picker Modal & Toast Alert */
 .theme-picker-modal {
     position: fixed;
@@ -1884,7 +1982,7 @@ span.vocab-term.active-vocab {
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: fadeIn 0.25s ease;
+    animation: fadeIn 0.2s ease-out;
 }
 
 .theme-modal-backdrop {
@@ -1908,6 +2006,7 @@ span.vocab-term.active-vocab {
     padding: 28px 32px;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
     overflow: hidden;
+    animation: modalPopIn 240ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
 }
 
 .theme-modal-header {
@@ -1938,8 +2037,10 @@ span.vocab-term.active-vocab {
     color: #94a3b8;
     font-size: 28px;
     cursor: pointer;
+    transition: color 120ms ease-out, transform 120ms ease-out;
 }
-.theme-modal-close:hover { color: #fff; }
+.theme-modal-close:hover { color: #fff; transform: scale(1.1); }
+.theme-modal-close:active { transform: scale(0.92); }
 
 .theme-grid {
     display: grid;
@@ -1972,13 +2073,20 @@ span.vocab-term.active-vocab {
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                border-color 140ms ease-out,
+                background-color 140ms ease-out,
+                box-shadow 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 .theme-card-option:hover {
     background: rgba(255, 255, 255, 0.08);
     border-color: #38bdf8;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
+}
+
+.theme-card-option:active {
+    transform: scale(0.98);
 }
 
 .theme-card-option.active {
@@ -2017,7 +2125,8 @@ span.vocab-term.active-vocab {
     z-index: 1000000;
     pointer-events: none;
     opacity: 0;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 220ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                opacity 180ms ease-out;
 }
 
 .theme-toast.visible {
@@ -2076,12 +2185,20 @@ span.vocab-term.active-vocab {
     cursor: pointer;
     padding: 3px 8px;
     border-radius: 6px;
-    transition: all 0.2s ease;
+    transition: background-color 130ms ease-out,
+                color 130ms ease-out,
+                opacity 150ms ease-out,
+                transform 150ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 .ielts-legend-item:hover {
     background: #f1f5f9;
     color: #0f172a;
+    transform: translateY(-1px);
+}
+
+.ielts-legend-item:active {
+    transform: scale(0.96);
 }
 
 .ielts-legend-item.dimmed {

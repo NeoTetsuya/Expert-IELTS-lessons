@@ -47,11 +47,18 @@
     font-weight: 600;
     color: var(--text-muted, #64748b);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: transform 150ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                background-color 130ms ease-out,
+                border-color 130ms ease-out,
+                color 130ms ease-out;
 }
 .subtab-btn:hover {
     background: #f8fafc;
     border-color: var(--text-muted, #64748b);
+    transform: translateY(-1px);
+}
+.subtab-btn:active {
+    transform: scale(0.96);
 }
 .subtab-btn.active {
     background: var(--col-reading, #dc2626);

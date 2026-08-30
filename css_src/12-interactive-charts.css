@@ -48,12 +48,20 @@
     cursor: pointer;
     padding: 3px 8px;
     border-radius: 6px;
-    transition: all 0.2s ease;
+    transition: background-color 130ms ease-out,
+                color 130ms ease-out,
+                opacity 150ms ease-out,
+                transform 150ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 .ielts-legend-item:hover {
     background: #f1f5f9;
     color: #0f172a;
+    transform: translateY(-1px);
+}
+
+.ielts-legend-item:active {
+    transform: scale(0.96);
 }
 
 .ielts-legend-item.dimmed {

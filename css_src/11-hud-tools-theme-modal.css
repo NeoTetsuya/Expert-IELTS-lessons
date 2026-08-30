@@ -88,6 +88,17 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes modalPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
 /* Theme Picker Modal & Toast Alert */
 .theme-picker-modal {
     position: fixed;
@@ -96,7 +107,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: fadeIn 0.25s ease;
+    animation: fadeIn 0.2s ease-out;
 }
 
 .theme-modal-backdrop {
@@ -120,6 +131,7 @@
     padding: 28px 32px;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
     overflow: hidden;
+    animation: modalPopIn 240ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
 }
 
 .theme-modal-header {
@@ -150,8 +162,10 @@
     color: #94a3b8;
     font-size: 28px;
     cursor: pointer;
+    transition: color 120ms ease-out, transform 120ms ease-out;
 }
-.theme-modal-close:hover { color: #fff; }
+.theme-modal-close:hover { color: #fff; transform: scale(1.1); }
+.theme-modal-close:active { transform: scale(0.92); }
 
 .theme-grid {
     display: grid;
@@ -184,13 +198,20 @@
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                border-color 140ms ease-out,
+                background-color 140ms ease-out,
+                box-shadow 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 .theme-card-option:hover {
     background: rgba(255, 255, 255, 0.08);
     border-color: #38bdf8;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
+}
+
+.theme-card-option:active {
+    transform: scale(0.98);
 }
 
 .theme-card-option.active {
@@ -229,7 +250,8 @@
     z-index: 1000000;
     pointer-events: none;
     opacity: 0;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 220ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                opacity 180ms ease-out;
 }
 
 .theme-toast.visible {

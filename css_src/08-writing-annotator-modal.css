@@ -10,7 +10,9 @@
     border-radius: 6px;
     border-bottom: 2px solid #3b82f6;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 140ms ease-out,
+                transform 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                box-shadow 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
     display: inline;
 }
 .hl-phrase:hover,
@@ -19,6 +21,9 @@
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
     outline: none;
+}
+.hl-phrase:active {
+    transform: scale(0.98);
 }
 .hl-phrase.active-phrase {
     background-color: #93c5fd;
@@ -33,12 +38,16 @@
     border-radius: 6px;
     border-bottom: 2px solid #22c55e;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 140ms ease-out,
+                transform 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
     display: inline;
 }
 .hl-vocab:hover {
     background-color: #bbf7d0;
     transform: translateY(-1px);
+}
+.hl-vocab:active {
+    transform: scale(0.98);
 }
 
 .hide-writing-highlights .hl-phrase,
@@ -64,10 +73,12 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.2s ease;
+    pointer-events: none;
+    transition: opacity 180ms ease-out;
 }
 .writing-modal-overlay.show {
     opacity: 1;
+    pointer-events: auto;
 }
 
 .writing-modal-card {
@@ -79,7 +90,7 @@
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     border: 1.5px solid #cbd5e1;
     transform: scale(0.95);
-    transition: transform 0.2s ease;
+    transition: transform 220ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
 }
 .writing-modal-card.show {
     transform: scale(1);
@@ -119,11 +130,17 @@
     cursor: pointer;
     padding: 4px 8px;
     border-radius: 6px;
-    transition: all 0.15s ease;
+    transition: color 120ms ease-out,
+                background-color 120ms ease-out,
+                transform 120ms ease-out;
 }
 .writing-modal-close:hover {
     color: #0f172a;
     background: #f1f5f9;
+    transform: scale(1.1);
+}
+.writing-modal-close:active {
+    transform: scale(0.92);
 }
 
 .writing-modal-body {
