@@ -27,6 +27,10 @@ Interactive, animation-rich, 16:9 HTML slide presentations designed for IELTS Ac
 │   ├── laser-pointer.js           # Glowing laser pointer cursor (L key)
 │   ├── pen-annotation.js          # On-slide drawing & sketches (P / C keys)
 │   ├── classroom-timer.js         # Interactive timer with chime (T key)
+│   ├── presenter-sync.js          # Dual-screen BroadcastChannel sync engine
+│   ├── presenter-drawing.js       # Presenter canvas drawing & laser pointer
+│   ├── presenter-notes.js         # Teacher notes & pedagogical cues (N key)
+│   ├── presenter-view.js          # Canva-style Presenter Cockpit UI (Alt+P)
 │   └── presentation-tools.js      # Toolbar HUD coordinator & key dispatcher
 ├── expert 5/                      # Expert IELTS Level 5 Course Modules
 │   ├── module-04.html             # Module 4: The Mind

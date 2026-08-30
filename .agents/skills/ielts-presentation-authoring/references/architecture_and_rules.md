@@ -39,7 +39,7 @@ graph TB
         PICKER["student-picker.js"]
         NOTES["presenter-notes.js"]
         NAV["slide-navigator.js"]
-        LOUPE["paragraph-loupe.js"]
+        LOUPE["paragraph-loupe.js (multi-screen sync)"]
         SPOT["presentation-spotlight.js"]
         LASER["laser-pointer.js"]
         PEN["pen-annotation.js"]
@@ -47,7 +47,9 @@ graph TB
         PRINT["print-optimizer.js"]
         CHARTS["deck-charts.js"]
         WRITE["writing-annotator.js"]
-        PVIEW["presenter-view.js"]
+        PSYNC["presenter-sync.js (BroadcastChannel hub)"]
+        PDRAW["presenter-drawing.js (canvas & laser studio)"]
+        PVIEW["presenter-view.js (cockpit UI & filmstrip)"]
     end
 
     HTML --> CSS_OUT

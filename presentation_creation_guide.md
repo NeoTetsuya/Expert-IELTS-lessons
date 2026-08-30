@@ -30,8 +30,11 @@ HTML presentations/
 │   ├── essay-analyzer.js              # Cohesion & structural analysis breakdown tools
 │   ├── classroom-timer.js             # Interactive countdown timer with alert chime (Key: T)
 │   ├── student-picker.js              # Random student name selector wheel (Key: R)
-│   ├── presenter-notes.js             # Teacher presenter notes panel (Key: N)
-│   ├── paragraph-loupe.js             # Reading paragraph zoom magnifier (Key: Z)
+│   ├── paragraph-loupe.js             # Reading paragraph zoom magnifier with multi-screen sync (Key: Z)
+│   ├── presenter-sync.js              # Zero-latency BroadcastChannel & LocalStorage dual-screen sync hub
+│   ├── presenter-drawing.js           # Interactive canvas drawing studio, laser pointer & highlighters
+│   ├── presenter-notes.js             # Teacher presenter notes panel & pedagogical cues (Key: N)
+│   ├── presenter-view.js              # Canva-style Presenter Cockpit UI & Filmstrip carousel (Alt+P)
 │   ├── slide-navigator.js             # Slide Grid search overlay (Key: G)
 │   ├── presentation-spotlight.js      # Focus spotlight mask (Key: S) & Mutes (Keys: B / W)
 │   ├── teacher-highlighter.js         # Multi-color live marker (Key: H)
