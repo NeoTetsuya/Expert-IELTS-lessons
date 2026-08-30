@@ -19,12 +19,27 @@ class ReadingHighlighter {
         this.bindSynonymClicks();
         this.bindQuestionHover();
         this.hookDeckEngine();
+        this.setupSyncListeners();
+    }
+
+    setupSyncListeners() {
+        if (window.presenterSyncEngine) {
+            window.presenterSyncEngine.on('EVIDENCE_FOCUS', (data) => {
+                if (data && (data.qKey || data.evId)) {
+                    this.focusEvidence(data.qKey, data.evId, false);
+                }
+            });
+
+            window.presenterSyncEngine.on('EVIDENCE_CLEAR', (data) => {
+                this.clearAll(data?.containerId, false);
+            });
+        }
     }
 
     /**
      * Highlights all evidence and synonym pairs associated with an exercise container or current slide
      */
-    highlightAll(containerId) {
+    highlightAll(containerId, broadcast = true) {
         const slide = this.getSlideForContainer(containerId);
         if (!slide) return;
 
@@ -38,17 +53,29 @@ class ReadingHighlighter {
             span.classList.add('active-syn');
         });
 
+        // Also apply to preview clone in presenter view if present
+        const previewClone = document.querySelector('.slide.preview-clone');
+        if (previewClone) {
+            previewClone.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+            previewClone.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+            previewClone.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+        }
+
         // Show all item explanations
         const container = containerId ? document.getElementById(containerId) : slide;
         if (container) {
             container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+        }
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', { action: 'highlightAll', containerId });
         }
     }
 
     /**
      * Clears all evidence highlights, synonym badges, and explanations in the slide
      */
-    clearAll(containerId) {
+    clearAll(containerId, broadcast = true) {
         const slide = this.getSlideForContainer(containerId);
         if (!slide) return;
 
@@ -60,43 +87,61 @@ class ReadingHighlighter {
             span.classList.remove('active-syn');
         });
 
+        // Also clear in preview clone
+        const previewClone = document.querySelector('.slide.preview-clone');
+        if (previewClone) {
+            previewClone.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
+            previewClone.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
+            previewClone.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
+        }
+
         const container = containerId ? document.getElementById(containerId) : slide;
         if (container) {
             container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
         }
 
         this.activeEvidenceId = null;
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EVIDENCE_CLEAR', { containerId });
+        }
     }
 
     /**
      * Toggles highlight and smooth-scrolls to specific evidence for question qKey
      */
-    focusEvidence(qKey, evId) {
+    focusEvidence(qKey, evId, broadcast = true) {
         if (!evId && qKey) {
             evId = `ev-${qKey}`;
         }
 
-        let evTarget = evId ? document.getElementById(evId) : null;
-        if (!evTarget && qKey) {
-            evTarget = document.querySelector(`mark.evidence[data-q="${qKey}"], mark.evidence#ev-${qKey}, mark.evidence[data-ev="${evId}"]`);
+        const allEvTargets = [];
+        if (evId) {
+            const byId = document.getElementById(evId);
+            if (byId) allEvTargets.push(byId);
+            document.querySelectorAll(`mark.evidence[data-ev="${evId}"], mark.evidence#${evId}`).forEach(el => {
+                if (!allEvTargets.includes(el)) allEvTargets.push(el);
+            });
         }
-        if (!evTarget && evId) {
-            evTarget = document.querySelector(`mark.evidence[data-ev="${evId}"]`);
+        if (qKey) {
+            document.querySelectorAll(`mark.evidence[data-q="${qKey}"], mark.evidence#ev-${qKey}`).forEach(el => {
+                if (!allEvTargets.includes(el)) allEvTargets.push(el);
+            });
         }
 
-        const synSpans = qKey ? document.querySelectorAll(`[data-q="${qKey}"]`) : [];
-        const isCurrentlyActive = (evTarget && evTarget.classList.contains('highlighted') && this.activeEvidenceId === (evId || qKey)) ||
-                                  (synSpans.length > 0 && Array.from(synSpans).every(s => s.classList.contains('active-syn')) && this.activeEvidenceId === qKey);
+        const synSpans = qKey ? Array.from(document.querySelectorAll(`[data-q="${qKey}"]`)) : [];
+        const isCurrentlyActive = (allEvTargets.length > 0 && allEvTargets.some(t => t.classList.contains('highlighted')) && this.activeEvidenceId === (evId || qKey)) ||
+                                  (synSpans.length > 0 && synSpans.every(s => s.classList.contains('active-syn')) && this.activeEvidenceId === qKey);
 
         if (!isCurrentlyActive) {
-            if (evTarget) {
-                evTarget.classList.add('highlighted', 'glow-pulse');
-            }
+            allEvTargets.forEach(target => {
+                target.classList.add('highlighted', 'glow-pulse');
+            });
             synSpans.forEach(s => s.classList.add('active-syn'));
             this.activeEvidenceId = evId || qKey;
 
-            // Smooth scroll into view inside the scrollable reading pane
-            if (evTarget) {
+            // Smooth scroll into view inside the scrollable reading pane (for both main and preview)
+            allEvTargets.forEach(evTarget => {
                 const readingPane = evTarget.closest('.reading-pane');
                 if (readingPane) {
                     const paneRect = readingPane.getBoundingClientRect();
@@ -116,9 +161,11 @@ class ReadingHighlighter {
                 setTimeout(() => {
                     evTarget.classList.remove('glow-pulse');
                 }, 2500);
-            }
+            });
         } else {
-            if (evTarget) evTarget.classList.remove('highlighted', 'glow-pulse');
+            allEvTargets.forEach(target => {
+                target.classList.remove('highlighted', 'glow-pulse');
+            });
             synSpans.forEach(s => s.classList.remove('active-syn'));
             this.activeEvidenceId = null;
         }
@@ -139,10 +186,18 @@ class ReadingHighlighter {
                 });
             }
         }
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EVIDENCE_FOCUS', {
+                qKey,
+                evId,
+                active: !isCurrentlyActive
+            });
+        }
     }
 
-    showEvidence(qKey, evId) {
-        this.focusEvidence(qKey, evId);
+    showEvidence(qKey, evId, broadcast = true) {
+        this.focusEvidence(qKey, evId, broadcast);
     }
 
     /**
@@ -168,7 +223,7 @@ class ReadingHighlighter {
                 const dataEv = btn.dataset.ev || (dataQ ? `ev-${dataQ}` : null);
                 if (dataQ || dataEv) {
                     e.preventDefault();
-                    this.focusEvidence(dataQ, dataEv);
+                    this.focusEvidence(dataQ, dataEv, true);
                     if (card) {
                         const exp = card.querySelector('.item-explanation');
                         if (exp) exp.classList.toggle('show');
@@ -196,44 +251,44 @@ class ReadingHighlighter {
             const origCheckBlanks = DeckEngine.prototype.checkBlanks;
             DeckEngine.prototype.checkBlanks = function (containerId) {
                 origCheckBlanks.call(this, containerId);
-                self.highlightAll(containerId);
+                self.highlightAll(containerId, false);
             };
 
             const origCheckSelects = DeckEngine.prototype.checkSelects;
             DeckEngine.prototype.checkSelects = function (containerId) {
                 origCheckSelects.call(this, containerId);
-                self.highlightAll(containerId);
+                self.highlightAll(containerId, false);
             };
 
             // Hook revealBlanks & revealSelects
             const origRevealBlanks = DeckEngine.prototype.revealBlanks;
             DeckEngine.prototype.revealBlanks = function (containerId) {
                 origRevealBlanks.call(this, containerId);
-                self.highlightAll(containerId);
+                self.highlightAll(containerId, false);
             };
 
             const origRevealSelects = DeckEngine.prototype.revealSelects;
             DeckEngine.prototype.revealSelects = function (containerId) {
                 origRevealSelects.call(this, containerId);
-                self.highlightAll(containerId);
+                self.highlightAll(containerId, false);
             };
 
             // Hook resetBlanks & resetSelects
             const origResetBlanks = DeckEngine.prototype.resetBlanks;
             DeckEngine.prototype.resetBlanks = function (containerId) {
                 origResetBlanks.call(this, containerId);
-                self.clearAll(containerId);
+                self.clearAll(containerId, false);
             };
 
             const origResetSelects = DeckEngine.prototype.resetSelects;
             DeckEngine.prototype.resetSelects = function (containerId) {
                 origResetSelects.call(this, containerId);
-                self.clearAll(containerId);
+                self.clearAll(containerId, false);
             };
 
             // Hook toggleSynonymExplanation
             DeckEngine.prototype.toggleSynonymExplanation = function (qKey, evId) {
-                self.focusEvidence(qKey, evId);
+                self.focusEvidence(qKey, evId, true);
             };
         }
     }

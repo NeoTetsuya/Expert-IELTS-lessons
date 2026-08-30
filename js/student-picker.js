@@ -32,16 +32,48 @@ class StudentPicker {
 
     init() {
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.injectUI());
+            document.addEventListener('DOMContentLoaded', () => {
+                this.injectUI();
+                this.setupSyncListeners();
+            });
         } else {
             this.injectUI();
+            this.setupSyncListeners();
         }
 
         // Global shortcut 'R'
         document.addEventListener('keydown', (e) => {
             if ((e.key === 'r' || e.key === 'R') && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
                 e.preventDefault();
-                this.toggle();
+                this.toggle(true);
+            }
+        });
+    }
+
+    setupSyncListeners() {
+        if (!window.presenterSyncEngine) return;
+
+        window.presenterSyncEngine.on('STUDENT_PICKER_MODAL', (data) => {
+            if (data && data.open) {
+                this.open(false);
+            } else {
+                this.close(false);
+            }
+        });
+
+        window.presenterSyncEngine.on('STUDENT_SPIN', (data) => {
+            if (data && data.student) {
+                this.open(false);
+                this.spin(data.student, false, data.totalCycles);
+            }
+        });
+
+        window.presenterSyncEngine.on('STUDENT_ROSTER_SYNC', (data) => {
+            if (data && Array.isArray(data.students)) {
+                this.students = data.students;
+                this.saveStudents();
+                const input = document.getElementById('rosterInput');
+                if (input) input.value = this.students.join(', ');
             }
         });
     }
@@ -55,14 +87,14 @@ class StudentPicker {
         modal.style.display = 'none';
 
         modal.innerHTML = `
-            <div class="student-modal-backdrop" onclick="studentPicker.close()"></div>
+            <div class="student-modal-backdrop" onclick="studentPicker.close(true)"></div>
             <div class="student-modal-dialog">
                 <div class="student-modal-header">
                     <div>
                         <h2>🎲 Random Student Selector</h2>
                         <p>Engage students with fair cold-calling &amp; speaking turns.</p>
                     </div>
-                    <button class="student-modal-close" onclick="studentPicker.close()">×</button>
+                    <button class="student-modal-close" onclick="studentPicker.close(true)">×</button>
                 </div>
 
                 <div class="picker-display-stage">
@@ -70,7 +102,7 @@ class StudentPicker {
                 </div>
 
                 <div class="picker-controls-row">
-                    <button class="btn-picker-spin" id="pickerSpinBtn" onclick="studentPicker.spin()">🎲 SPIN WHEEL</button>
+                    <button class="btn-picker-spin" id="pickerSpinBtn" onclick="studentPicker.spin(null, true)">🎲 SPIN WHEEL</button>
                     <button class="btn-picker-edit" onclick="studentPicker.toggleRosterEditor()">✏️ Edit Roster</button>
                 </div>
 
@@ -89,31 +121,58 @@ class StudentPicker {
         this.injectStyles();
     }
 
-    spin() {
+    spin(targetStudent = null, broadcast = true, customCycles = null) {
         if (this.isSpinning || this.students.length === 0) return;
         this.isSpinning = true;
+
+        const chosenStudent = targetStudent || this.students[Math.floor(Math.random() * this.students.length)];
+        const totalCycles = customCycles || (24 + Math.floor(Math.random() * 8));
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('STUDENT_SPIN', {
+                student: chosenStudent,
+                totalCycles: totalCycles
+            });
+            window.presenterSyncEngine.emit('STUDENT_PICKED', {
+                student: chosenStudent
+            });
+        }
 
         const resultEl = document.getElementById('pickerResultName');
         const spinBtn = document.getElementById('pickerSpinBtn');
         if (spinBtn) spinBtn.disabled = true;
 
         let counter = 0;
-        const totalCycles = 24 + Math.floor(Math.random() * 8);
         const interval = 60;
 
         const step = () => {
-            const randomIndex = Math.floor(Math.random() * this.students.length);
-            resultEl.textContent = this.students[randomIndex];
-            resultEl.style.transform = `scale(${1 + (counter % 3) * 0.04})`;
-            counter++;
-
-            if (counter < totalCycles) {
+            if (counter < totalCycles - 1) {
+                const randomIndex = Math.floor(Math.random() * this.students.length);
+                if (resultEl) {
+                    resultEl.textContent = this.students[randomIndex];
+                    resultEl.style.transform = `scale(${1 + (counter % 3) * 0.04})`;
+                }
+                counter++;
                 setTimeout(step, interval + counter * 6);
             } else {
                 this.isSpinning = false;
                 if (spinBtn) spinBtn.disabled = false;
-                resultEl.style.transform = 'scale(1.15)';
-                resultEl.style.color = '#38bdf8';
+                if (resultEl) {
+                    resultEl.textContent = chosenStudent;
+                    resultEl.style.transform = 'scale(1.15)';
+                    resultEl.style.color = '#38bdf8';
+                }
+
+                // Update Cockpit display badge if present
+                const pill = document.getElementById('cpPickedStudentDisplay');
+                const nameEl = document.getElementById('cpPickedStudentName');
+                if (pill && nameEl) {
+                    nameEl.textContent = chosenStudent;
+                    pill.style.display = 'flex';
+                    pill.classList.add('pulse');
+                    setTimeout(() => pill.classList.remove('pulse'), 800);
+                }
+
                 this.playChime();
             }
         };
@@ -152,6 +211,9 @@ class StudentPicker {
             this.students = names;
             this.saveStudents();
             this.toggleRosterEditor();
+            if (window.presenterSyncEngine) {
+                window.presenterSyncEngine.emit('STUDENT_ROSTER_SYNC', { students: names });
+            }
         }
     }
 
@@ -163,32 +225,41 @@ class StudentPicker {
         const input = document.getElementById('rosterInput');
         if (input) input.value = numbers.join(', ');
         this.toggleRosterEditor();
+        if (window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('STUDENT_ROSTER_SYNC', { students: numbers });
+        }
     }
 
-    open() {
+    open(broadcast = true) {
         const modal = document.getElementById('studentPickerModal');
         if (modal) modal.style.display = 'flex';
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('STUDENT_PICKER_MODAL', { open: true });
+        }
     }
 
     openModal() {
-        this.open();
+        this.open(true);
     }
 
-    pickRandomStudent(broadcast = false) {
-        this.spin(broadcast);
+    pickRandomStudent(broadcast = true) {
+        this.spin(null, broadcast);
     }
 
-    close() {
+    close(broadcast = true) {
         const modal = document.getElementById('studentPickerModal');
         if (modal) modal.style.display = 'none';
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('STUDENT_PICKER_MODAL', { open: false });
+        }
     }
 
-    toggle() {
+    toggle(broadcast = true) {
         const modal = document.getElementById('studentPickerModal');
         if (modal && modal.style.display === 'flex') {
-            this.close();
+            this.close(broadcast);
         } else {
-            this.open();
+            this.open(broadcast);
         }
     }
 

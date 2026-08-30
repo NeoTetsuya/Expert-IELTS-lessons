@@ -28,11 +28,116 @@ class TeacherHighlighter {
 
     init() {
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.bindEvents());
+            document.addEventListener('DOMContentLoaded', () => {
+                this.bindEvents();
+                this.setupSyncListeners();
+            });
         } else {
             this.bindEvents();
+            this.setupSyncListeners();
         }
         this.injectStyles();
+    }
+
+    setupSyncListeners() {
+        if (!window.presenterSyncEngine) return;
+
+        window.presenterSyncEngine.on('HIGHLIGHTER_ADD', (data) => {
+            if (data && data.targetText) {
+                this.applyRemoteHighlight(data);
+            }
+        });
+
+        window.presenterSyncEngine.on('HIGHLIGHTER_REMOVE', (data) => {
+            if (data && data.text) {
+                document.querySelectorAll('.teacher-text-highlight').forEach(mark => {
+                    if (mark.textContent === data.text && mark.parentNode) {
+                        const textNode = document.createTextNode(mark.textContent);
+                        const parent = mark.parentNode;
+                        parent.replaceChild(textNode, mark);
+                        parent.normalize();
+                    }
+                });
+            }
+        });
+
+        window.presenterSyncEngine.on('HIGHLIGHTER_UNDO', () => {
+            this.undo(false);
+        });
+
+        window.presenterSyncEngine.on('HIGHLIGHTER_CLEAR', () => {
+            this.clear(false);
+        });
+    }
+
+    applyRemoteHighlight(data) {
+        const activeSlide = (window.deckEngine && window.deckEngine.slides[data.slideIndex]) || document.querySelector('.slide.active');
+        const previewClone = document.querySelector('.slide.preview-clone');
+        const roots = [activeSlide, previewClone].filter(Boolean);
+
+        const colorObj = {
+            name: data.colorName || 'Yellow',
+            bg: data.bg || 'rgba(254, 240, 138, 0.85)',
+            border: data.border || '#ca8a04'
+        };
+
+        const createdMarks = [];
+
+        roots.forEach(root => {
+            const treeWalker = document.createTreeWalker(
+                root,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: (node) => {
+                        if (!node.nodeValue || !node.nodeValue.includes(data.targetText)) return NodeFilter.FILTER_REJECT;
+                        if (node.parentElement && node.parentElement.closest('.presentation-tools-hud, .tool-modal, .presenter-notes-drawer')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
+
+            let textNode = treeWalker.nextNode();
+            while (textNode) {
+                const text = textNode.nodeValue;
+                const idx = text.indexOf(data.targetText);
+                if (idx !== -1) {
+                    const beforeText = text.substring(0, idx);
+                    const afterText = text.substring(idx + data.targetText.length);
+
+                    const mark = document.createElement('mark');
+                    mark.className = 'teacher-text-highlight';
+                    mark.dataset.colorName = colorObj.name;
+                    mark.style.backgroundColor = colorObj.bg;
+                    mark.style.borderColor = colorObj.border;
+                    mark.textContent = data.targetText;
+                    mark.title = 'Click to unhighlight';
+
+                    mark.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.removeHighlight(mark, true);
+                    });
+
+                    const parent = textNode.parentNode;
+                    if (parent) {
+                        const fragment = document.createDocumentFragment();
+                        if (beforeText) fragment.appendChild(document.createTextNode(beforeText));
+                        fragment.appendChild(mark);
+                        if (afterText) fragment.appendChild(document.createTextNode(afterText));
+
+                        parent.replaceChild(fragment, textNode);
+                        createdMarks.push(mark);
+                    }
+                    break;
+                }
+                textNode = treeWalker.nextNode();
+            }
+        });
+
+        if (createdMarks.length > 0) {
+            this.history.push(createdMarks);
+        }
     }
 
     bindEvents() {
@@ -40,7 +145,7 @@ class TeacherHighlighter {
         document.addEventListener('mouseup', (e) => {
             if (!this.isActive) return;
             // Avoid triggering when clicking inside HUD controls or modals
-            if (e.target.closest('#presentationToolsHUD, .tool-modal, .highlighter-palette, .notes-header')) return;
+            if (e.target.closest('#presentationToolsHUD, .tool-modal, .highlighter-palette, .notes-header, .cp-header, .cp-notes-col')) return;
 
             setTimeout(() => {
                 const selection = window.getSelection();
@@ -52,7 +157,7 @@ class TeacherHighlighter {
 
         // Global shortcuts
         document.addEventListener('keydown', (e) => {
-            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
+            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) || e.target.isContentEditable) return;
 
             // 'H' key toggles highlighter mode
             if ((e.key === 'h' || e.key === 'H') && !e.ctrlKey && !e.metaKey) {
@@ -74,12 +179,15 @@ class TeacherHighlighter {
         });
     }
 
-    toggle() {
+    toggle(broadcast = true) {
         this.isActive = !this.isActive;
         document.body.classList.toggle('highlighter-mode-active', this.isActive);
 
         const btn = document.getElementById('toolHighlightBtn');
         if (btn) btn.classList.toggle('active', this.isActive);
+
+        const cpBtn = document.getElementById('btnCpHighlighter');
+        if (cpBtn) cpBtn.classList.toggle('active', this.isActive);
 
         const palette = document.getElementById('highlighterPalette');
         if (palette) palette.style.display = this.isActive ? 'flex' : 'none';
@@ -101,7 +209,7 @@ class TeacherHighlighter {
         }
     }
 
-    highlightSelection(colorObj) {
+    highlightSelection(colorObj, broadcast = true) {
         const selection = window.getSelection();
         if (!selection || selection.isCollapsed || selection.rangeCount === 0) return;
 
@@ -113,7 +221,7 @@ class TeacherHighlighter {
         const rootElement = commonAncestor.nodeType === Node.ELEMENT_NODE ? commonAncestor : commonAncestor.parentNode;
 
         // Skip non-content UI
-        if (rootElement.closest('.presentation-tools-hud, .tool-modal, .presenter-notes-drawer')) {
+        if (rootElement.closest('.presentation-tools-hud, .tool-modal, .presenter-notes-drawer, .cp-header, .cp-notes-col')) {
             return;
         }
 
@@ -170,10 +278,8 @@ class TeacherHighlighter {
             mark.title = 'Click to unhighlight';
 
             mark.addEventListener('click', (e) => {
-                if (this.isActive) {
-                    e.stopPropagation();
-                    this.removeHighlight(mark);
-                }
+                e.stopPropagation();
+                this.removeHighlight(mark, true);
             });
 
             const parent = textNode.parentNode;
@@ -193,21 +299,36 @@ class TeacherHighlighter {
         if (createdMarks.length > 0) {
             this.history.push(createdMarks);
         }
+
+        if (broadcast && window.presenterSyncEngine) {
+            const slideIndex = window.deckEngine ? window.deckEngine.currentSlide : 0;
+            window.presenterSyncEngine.emit('HIGHLIGHTER_ADD', {
+                slideIndex,
+                targetText: selectedText,
+                colorName: colorObj.name,
+                bg: colorObj.bg,
+                border: colorObj.border
+            });
+        }
     }
 
-    removeHighlight(mark) {
+    removeHighlight(mark, broadcast = true) {
         if (!mark || !mark.parentNode) return;
         const text = mark.textContent;
         const textNode = document.createTextNode(text);
         const parent = mark.parentNode;
         parent.replaceChild(textNode, mark);
         parent.normalize(); // Merges adjacent text nodes smoothly
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('HIGHLIGHTER_REMOVE', { text });
+        }
     }
 
     undo(broadcast = true) {
         if (this.history.length > 0) {
             const lastBatch = this.history.pop();
-            lastBatch.forEach(mark => this.removeHighlight(mark));
+            lastBatch.forEach(mark => this.removeHighlight(mark, false));
             if (window.deckEngine) {
                 window.deckEngine.showToastNotification('↩️ Undid highlight');
             }
@@ -218,9 +339,17 @@ class TeacherHighlighter {
     }
 
     clear(broadcast = true) {
-        const activeSlide = document.querySelector('.slide.active') || document.body;
-        const highlights = activeSlide.querySelectorAll('.teacher-text-highlight');
-        highlights.forEach(mark => this.removeHighlight(mark));
+        const highlights = document.querySelectorAll('.teacher-text-highlight');
+        highlights.forEach(mark => {
+            if (mark.parentNode) {
+                const textNode = document.createTextNode(mark.textContent);
+                const parent = mark.parentNode;
+                parent.replaceChild(textNode, mark);
+            }
+        });
+        document.querySelectorAll('.slide, .preview-clone, .page-content').forEach(el => {
+            try { el.normalize(); } catch(e) {}
+        });
         this.history = [];
         if (window.deckEngine) {
             window.deckEngine.showToastNotification('🗑️ Cleared highlights');

@@ -19,6 +19,7 @@ class DeckEngine {
         this.setupStageScale();
         this.setupKeyboardNav();
         this.setupTouchNav();
+        this.setupSyncListeners();
 
         // Check if there's a hash in URL (e.g. #slide-4)
         const initialSlide = this.getSlideFromHash();
@@ -162,10 +163,15 @@ class DeckEngine {
             return;
         }
 
-        this.slides.forEach((s, i) => {
-            s.classList.toggle('active', i === index);
-            s.classList.toggle('visible', i === index);
-        });
+        // Only toggle the two affected slides instead of iterating all
+        const prevSlide = this.slides[this.currentSlide];
+        const nextSlide = this.slides[index];
+        if (prevSlide) {
+            prevSlide.classList.remove('active', 'visible');
+        }
+        if (nextSlide) {
+            nextSlide.classList.add('active', 'visible');
+        }
         this.currentSlide = index;
         if (this.counter) {
             this.counter.textContent = `${index + 1} / ${this.slides.length}`;
@@ -187,6 +193,10 @@ class DeckEngine {
         window.dispatchEvent(new CustomEvent('slidechanged', {
             detail: { index, slide: this.slides[index], broadcast }
         }));
+
+        // Update URL hash for bookmark/share support (without triggering scroll)
+        const slideId = this.slides[index].id || `slide-${index + 1}`;
+        history.replaceState(null, '', `#${slideId}`);
     }
 
     toggleBlackout(force = null) {
@@ -231,20 +241,24 @@ class DeckEngine {
         const pageContent = slide.querySelector('.page-content, .title-notebook');
         if (!notebook || !pageContent) return;
 
-        // Reset previous transforms
-        pageContent.style.removeProperty('transform');
-        pageContent.style.removeProperty('transform-origin');
-        pageContent.style.removeProperty('height');
-
+        // Reset and measure in a single rAF to minimize layout thrashing
         requestAnimationFrame(() => {
+            pageContent.style.removeProperty('transform');
+            pageContent.style.removeProperty('transform-origin');
+            pageContent.style.removeProperty('height');
+
+            // Force layout calc after clearing
             const availableHeight = notebook.clientHeight;
             const scrollH = pageContent.scrollHeight;
 
             if (scrollH > availableHeight + 6) {
                 const fitRatio = Math.max(0.68, (availableHeight - 12) / scrollH);
-                pageContent.style.transform = `scale(${fitRatio.toFixed(3)})`;
-                pageContent.style.transformOrigin = 'top center';
-                pageContent.style.height = `${(availableHeight / fitRatio).toFixed(1)}px`;
+                // Batch all writes after reads
+                requestAnimationFrame(() => {
+                    pageContent.style.transform = `scale(${fitRatio.toFixed(3)})`;
+                    pageContent.style.transformOrigin = 'top center';
+                    pageContent.style.height = `${(availableHeight / fitRatio).toFixed(1)}px`;
+                });
             }
         });
     }
@@ -306,7 +320,37 @@ class DeckEngine {
         }
     }
 
-    checkAnswers(container) {
+    setupSyncListeners() {
+        if (!window.presenterSyncEngine) return;
+
+        window.presenterSyncEngine.on('EXERCISE_ACTION', (data) => {
+            if (!data) return;
+            const target = data.containerId ? document.getElementById(data.containerId) : (this.slides[data.slideIndex] || document.querySelector('.slide.active'));
+            if (!target) return;
+
+            if (data.action === 'check') {
+                this.checkAnswers(target, false);
+            } else if (data.action === 'reveal') {
+                this.revealKeys(target, false);
+            } else if (data.action === 'reset') {
+                this.resetTask(target, false);
+            } else if (data.action === 'toggleOptCard' && typeof data.cardIndex === 'number') {
+                const card = target.querySelectorAll('.opt-card')[data.cardIndex];
+                if (card) this.toggleOptCard(card, false);
+            } else if (data.action === 'toggleExplanations') {
+                this.toggleExplanations(target, false);
+            } else if (data.action === 'highlightAll' && window.readingHighlighter) {
+                window.readingHighlighter.highlightAll(data.containerId, false);
+            }
+
+            // If in presenter window, refresh preview clone
+            if (window.presenterViewUI && typeof window.presenterViewUI.updatePresenterSlideView === 'function') {
+                window.presenterViewUI.updatePresenterSlideView();
+            }
+        });
+    }
+
+    checkAnswers(container, broadcast = true) {
         if (!container) container = document.querySelector('.slide.active');
         if (typeof container === 'string') container = document.getElementById(container);
         if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
@@ -350,11 +394,28 @@ class DeckEngine {
         });
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-        document.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+        const slideContext = container.closest('.slide') || document.querySelector('.slide.active') || container;
+        slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+        slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+
+        // Show score toast
+        const allInputs = container.querySelectorAll('.blank-input[data-ans], .select-input[data-ans]');
+        if (allInputs.length > 0) {
+            const correctCount = container.querySelectorAll('.blank-input.correct, .select-input.correct').length;
+            this.showToastNotification(`✅ ${correctCount} / ${allInputs.length} correct`);
+        }
+
+        if (broadcast && window.presenterSyncEngine) {
+            const containerId = (typeof container === 'string' ? container : container?.id || null);
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'check',
+                containerId,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    revealKeys(container) {
+    revealKeys(container, broadcast = true) {
         if (!container) container = document.querySelector('.slide.active');
         if (typeof container === 'string') container = document.getElementById(container);
         if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
@@ -375,27 +436,38 @@ class DeckEngine {
 
         container.querySelectorAll('.select-input').forEach(select => {
             if (select.dataset.ans) {
-                select.value = select.dataset.ans;
+                // Use first valid answer variant for pipe-separated alternatives
+                const firstAnswer = select.dataset.ans.split('|')[0].trim();
+                select.value = firstAnswer;
                 select.classList.remove('wrong', 'incorrect');
                 select.classList.add('correct');
             }
         });
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        const slideContext = container.closest('.slide') || document.querySelector('.slide.active') || document;
+        const slideContext = container.closest('.slide') || document.querySelector('.slide.active') || container;
         slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
         slideContext.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
         slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
         }
+
+        if (broadcast && window.presenterSyncEngine) {
+            const containerId = (typeof container === 'string' ? container : container?.id || null);
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'reveal',
+                containerId,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    revealAnswers(container) {
-        this.revealKeys(container);
+    revealAnswers(container, broadcast = true) {
+        this.revealKeys(container, broadcast);
     }
 
-    resetTask(container) {
+    resetTask(container, broadcast = true) {
         if (!container) container = document.querySelector('.slide.active');
         if (typeof container === 'string') container = document.getElementById(container);
         if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
@@ -420,42 +492,61 @@ class DeckEngine {
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
         }
+
+        if (broadcast && window.presenterSyncEngine) {
+            const containerId = (typeof container === 'string' ? container : container?.id || null);
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'reset',
+                containerId,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    resetAnswers(container) {
-        this.resetTask(container);
+    resetAnswers(container, broadcast = true) {
+        this.resetTask(container, broadcast);
     }
 
-    checkBlanks(containerId) {
-        this.checkAnswers(containerId);
+    checkBlanks(containerId, broadcast = true) {
+        this.checkAnswers(containerId, broadcast);
     }
 
-    revealBlanks(containerId) {
-        this.revealKeys(containerId);
+    revealBlanks(containerId, broadcast = true) {
+        this.revealKeys(containerId, broadcast);
     }
 
-    resetBlanks(containerId) {
-        this.resetTask(containerId);
+    resetBlanks(containerId, broadcast = true) {
+        this.resetTask(containerId, broadcast);
     }
 
-    checkSelects(containerId) {
-        this.checkAnswers(containerId);
+    checkSelects(containerId, broadcast = true) {
+        this.checkAnswers(containerId, broadcast);
     }
 
-    revealSelects(containerId) {
-        this.revealKeys(containerId);
+    revealSelects(containerId, broadcast = true) {
+        this.revealKeys(containerId, broadcast);
     }
 
-    resetSelects(containerId) {
-        this.resetTask(containerId);
+    resetSelects(containerId, broadcast = true) {
+        this.resetTask(containerId, broadcast);
     }
 
-    toggleOptCard(card) {
+    toggleOptCard(card, broadcast = true) {
         card.classList.toggle('selected');
+        if (broadcast && window.presenterSyncEngine) {
+            const slide = card.closest('.slide') || document.querySelector('.slide.active');
+            const allCards = Array.from(slide ? slide.querySelectorAll('.opt-card') : []);
+            const cardIndex = allCards.indexOf(card);
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'toggleOptCard',
+                slideIndex: this.currentSlide,
+                cardIndex
+            });
+        }
     }
 
-    checkMultiOpts(containerId) {
-        const container = document.getElementById(containerId);
+    checkMultiOpts(containerId, broadcast = true) {
+        const container = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
         if (!container) return;
         const cards = container.querySelectorAll('.opt-card');
         cards.forEach(card => {
@@ -468,10 +559,17 @@ class DeckEngine {
                 card.classList.add('correct-opt');
             }
         });
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'check',
+                containerId: container.id || null,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    revealMultiOpts(containerId) {
-        const container = document.getElementById(containerId);
+    revealMultiOpts(containerId, broadcast = true) {
+        const container = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
         if (!container) return;
         const cards = container.querySelectorAll('.opt-card');
         cards.forEach(card => {
@@ -482,25 +580,59 @@ class DeckEngine {
                 card.classList.remove('selected');
             }
         });
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'reveal',
+                containerId: container.id || null,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    resetMultiOpts(containerId) {
-        const container = document.getElementById(containerId);
+    resetMultiOpts(containerId, broadcast = true) {
+        const container = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
         if (!container) return;
         const cards = container.querySelectorAll('.opt-card');
         cards.forEach(card => {
             card.classList.remove('selected', 'correct-opt', 'wrong-opt');
         });
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'reset',
+                containerId: container.id || null,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    toggleExplanations(containerId) {
-        const container = document.getElementById(containerId);
+    toggleExplanations(containerId, broadcast = true) {
+        let container;
+        if (containerId instanceof HTMLElement) {
+            container = containerId.closest('.page-content') || containerId.closest('.slide') || document.querySelector('.slide.active');
+        } else if (typeof containerId === 'string') {
+            container = document.getElementById(containerId);
+        } else {
+            container = document.querySelector('.slide.active');
+        }
         if (!container) return;
         const explanations = container.querySelectorAll('.item-explanation');
         explanations.forEach(exp => exp.classList.toggle('show'));
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'toggleExplanations',
+                containerId: container.id || null,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    toggleSynonymExplanation(qKey, evId) {
+    toggleSynonymExplanation(qKey, evId, broadcast = true) {
+        if (window.readingHighlighter) {
+            window.readingHighlighter.focusEvidence(qKey, evId, broadcast);
+            return;
+        }
+
         if (!evId && qKey) evId = `ev-${qKey}`;
         if (!qKey && evId) qKey = evId.replace(/^ev-/, '');
 
@@ -533,6 +665,14 @@ class DeckEngine {
                     if (exp) exp.classList.toggle('show', !isCurrentlyActive);
                 });
             }
+        }
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EVIDENCE_FOCUS', {
+                qKey,
+                evId,
+                active: !isCurrentlyActive
+            });
         }
     }
 

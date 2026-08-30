@@ -338,6 +338,56 @@ class PresenterViewUI {
         this.sync.on('HIGHLIGHTER_UNDO', () => {
             if (window.teacherHighlighter) window.teacherHighlighter.undo(false);
         });
+        this.sync.on('HIGHLIGHTER_ADD', (data) => {
+            if (window.teacherHighlighter) window.teacherHighlighter.applyRemoteHighlight(data);
+        });
+
+        // Remote Evidence Focus / Clear
+        this.sync.on('EVIDENCE_FOCUS', (data) => {
+            if (window.readingHighlighter && data && (data.qKey || data.evId)) {
+                window.readingHighlighter.focusEvidence(data.qKey, data.evId, false);
+            }
+        });
+        this.sync.on('EVIDENCE_CLEAR', (data) => {
+            if (window.readingHighlighter) {
+                window.readingHighlighter.clearAll(data?.containerId, false);
+            }
+        });
+
+        // Remote Exercise Actions
+        this.sync.on('EXERCISE_ACTION', (data) => {
+            if (!data || !window.deckEngine) return;
+            const target = data.containerId ? document.getElementById(data.containerId) : (window.deckEngine.slides[data.slideIndex] || document.querySelector('.slide.active'));
+            if (!target) return;
+
+            if (data.action === 'check') {
+                window.deckEngine.checkAnswers(target, false);
+            } else if (data.action === 'reveal') {
+                window.deckEngine.revealKeys(target, false);
+            } else if (data.action === 'reset') {
+                window.deckEngine.resetTask(target, false);
+            } else if (data.action === 'toggleOptCard' && typeof data.cardIndex === 'number') {
+                const card = target.querySelectorAll('.opt-card')[data.cardIndex];
+                if (card) window.deckEngine.toggleOptCard(card, false);
+            } else if (data.action === 'toggleExplanations') {
+                window.deckEngine.toggleExplanations(target, false);
+            }
+        });
+
+        // Remote Input & Select Sync
+        this.sync.on('INPUT_SYNC', (data) => {
+            if (!data || typeof data.slideIndex !== 'number' || typeof data.inputIndex !== 'number') return;
+            const slide = window.deckEngine ? window.deckEngine.slides[data.slideIndex] : document.querySelector('.slide.active');
+            if (slide) {
+                const allInputs = slide.querySelectorAll('.blank-input, .select-input');
+                const targetInput = allInputs[data.inputIndex];
+                if (targetInput && targetInput.value !== data.value) {
+                    targetInput.value = data.value;
+                    targetInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    targetInput.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            }
+        });
 
         // Remote Step Reveal
         this.sync.on('STEP_REVEAL_CMD', () => {
@@ -347,8 +397,8 @@ class PresenterViewUI {
         // Remote Student Picker
         this.sync.on('STUDENT_PICK_CMD', (data) => {
             if (window.studentPicker) {
-                if (!window.studentPicker.isOpen) window.studentPicker.toggle();
-                window.studentPicker.spin();
+                window.studentPicker.open(false);
+                window.studentPicker.spin(data?.student, false);
             }
         });
 
@@ -843,6 +893,65 @@ class PresenterViewUI {
             }
         });
 
+        // Sync Evidence Focus / Clear
+        this.sync.on('EVIDENCE_FOCUS', (data) => {
+            if (window.readingHighlighter && data && (data.qKey || data.evId)) {
+                window.readingHighlighter.focusEvidence(data.qKey, data.evId, false);
+            }
+        });
+        this.sync.on('EVIDENCE_CLEAR', (data) => {
+            if (window.readingHighlighter) {
+                window.readingHighlighter.clearAll(data?.containerId, false);
+            }
+        });
+
+        // Sync Exercise Actions
+        this.sync.on('EXERCISE_ACTION', (data) => {
+            if (!data || !window.deckEngine) return;
+            const target = data.containerId ? document.getElementById(data.containerId) : (window.deckEngine.slides[data.slideIndex] || document.querySelector('.slide.active'));
+            if (!target) return;
+
+            if (data.action === 'check') {
+                window.deckEngine.checkAnswers(target, false);
+            } else if (data.action === 'reveal') {
+                window.deckEngine.revealKeys(target, false);
+            } else if (data.action === 'reset') {
+                window.deckEngine.resetTask(target, false);
+            } else if (data.action === 'toggleOptCard' && typeof data.cardIndex === 'number') {
+                const card = target.querySelectorAll('.opt-card')[data.cardIndex];
+                if (card) window.deckEngine.toggleOptCard(card, false);
+            } else if (data.action === 'toggleExplanations') {
+                window.deckEngine.toggleExplanations(target, false);
+            }
+            this.updatePresenterSlideView();
+        });
+
+        // Sync Input & Select
+        this.sync.on('INPUT_SYNC', (data) => {
+            if (!data || typeof data.slideIndex !== 'number' || typeof data.inputIndex !== 'number') return;
+            const slide = window.deckEngine ? window.deckEngine.slides[data.slideIndex] : document.querySelector('.slide.active');
+            if (slide) {
+                const allInputs = slide.querySelectorAll('.blank-input, .select-input');
+                const targetInput = allInputs[data.inputIndex];
+                if (targetInput && targetInput.value !== data.value) {
+                    targetInput.value = data.value;
+                }
+            }
+            const scaler = document.getElementById('cpCurrentSlideScaler');
+            if (scaler) {
+                const cloneInputs = scaler.querySelectorAll('.blank-input, .select-input');
+                const cloneTarget = cloneInputs[data.inputIndex];
+                if (cloneTarget && cloneTarget.value !== data.value) {
+                    cloneTarget.value = data.value;
+                }
+            }
+        });
+
+        // Sync Highlighter Add / Remove
+        this.sync.on('HIGHLIGHTER_ADD', (data) => {
+            if (window.teacherHighlighter) window.teacherHighlighter.applyRemoteHighlight(data);
+        });
+
         // Sync Student Picked
         this.sync.on('STUDENT_PICKED', (data) => {
             this.showPickedStudent(data.student);
@@ -1091,6 +1200,9 @@ class PresenterViewUI {
         document.getElementById('btnCpTimerModal')?.addEventListener('click', () => {
             this.switchTab('toolkit');
             document.getElementById('cpCountdownDisplay')?.scrollIntoView({ behavior: 'smooth' });
+            if (window.classroomTimer) {
+                window.classroomTimer.showModal(true);
+            }
         });
 
         // Theme Switcher
@@ -1152,6 +1264,9 @@ class PresenterViewUI {
                 document.querySelectorAll('#cpHighlighterPalette .cp-swatch').forEach(s => s.classList.remove('active'));
                 swatch.classList.add('active');
                 this.highlighterColorIndex = parseInt(swatch.dataset.index || '0', 10);
+                if (window.teacherHighlighter) {
+                    window.teacherHighlighter.setColor(this.highlighterColorIndex);
+                }
             };
         });
 
@@ -1167,7 +1282,6 @@ class PresenterViewUI {
         // Undo & Clear Ink
         document.getElementById('btnToolUndoHighlight')?.addEventListener('click', () => {
             if (window.teacherHighlighter) window.teacherHighlighter.undo(true);
-            this.sync.emit('HIGHLIGHTER_UNDO', {});
         });
 
         document.getElementById('btnToolClearDrawings')?.addEventListener('click', () => {
@@ -1178,10 +1292,9 @@ class PresenterViewUI {
         document.querySelectorAll('.cp-quick-timer-btn').forEach(btn => {
             btn.onclick = () => {
                 const sec = parseInt(btn.dataset.sec, 10);
-                if (!isNaN(sec)) {
-                    if (window.classroomTimer) window.classroomTimer.setTimer(sec, true);
-                    this.updateTimerDisplay(sec);
-                    this.sync.emit('TIMER_CMD', { action: 'set', seconds: sec });
+                if (!isNaN(sec) && window.classroomTimer) {
+                    window.classroomTimer.setTimer(sec, true);
+                    window.classroomTimer.showModal(true);
                 }
             };
         });
@@ -1190,20 +1303,13 @@ class PresenterViewUI {
         document.getElementById('btnToolTimerToggle')?.addEventListener('click', () => {
             if (window.classroomTimer) {
                 window.classroomTimer.toggleRun(true);
-                const running = window.classroomTimer.timerRunning;
-                const toggleBtn = document.getElementById('btnToolTimerToggle');
-                if (toggleBtn) toggleBtn.textContent = running ? '⏸ Pause Timer' : '▶ Start Timer';
-                this.sync.emit('TIMER_CMD', { action: running ? 'start' : 'pause' });
+                window.classroomTimer.showModal(true);
             }
         });
 
         document.getElementById('btnToolTimerReset')?.addEventListener('click', () => {
             if (window.classroomTimer) {
                 window.classroomTimer.reset(true);
-                this.updateTimerDisplay(0);
-                const toggleBtn = document.getElementById('btnToolTimerToggle');
-                if (toggleBtn) toggleBtn.textContent = '▶ Start Timer';
-                this.sync.emit('TIMER_CMD', { action: 'reset' });
             }
         });
 
@@ -1259,23 +1365,31 @@ class PresenterViewUI {
         if (penPal) penPal.style.display = this.penActive ? 'block' : 'none';
         if (hlPal) hlPal.style.display = this.highlighterActive ? 'block' : 'none';
 
-        // Update Canvas Cursor
+        // Update Canvas Cursor & Pointer Events
+        // ONLY laser and pen need drawing canvas pointer events!
+        // Highlighter MUST allow selecting text on the slide!
         const canvas = document.getElementById('presenterDrawCanvas');
         const laserDot = document.getElementById('presenterLaserDot');
         if (canvas) {
-            canvas.style.pointerEvents = (this.penActive || this.laserActive || this.highlighterActive) ? 'auto' : 'none';
+            canvas.style.pointerEvents = (this.penActive || this.laserActive) ? 'auto' : 'none';
             if (this.penActive) {
                 canvas.style.cursor = 'crosshair';
             } else if (this.laserActive) {
                 canvas.style.cursor = 'none';
-            } else if (this.highlighterActive) {
-                canvas.style.cursor = 'text';
             } else {
                 canvas.style.cursor = 'default';
             }
         }
         if (laserDot && !this.laserActive) {
             laserDot.style.display = 'none';
+        }
+
+        // Toggle TeacherHighlighter engine state
+        if (this.highlighterActive && window.teacherHighlighter && !window.teacherHighlighter.isActive) {
+            window.teacherHighlighter.toggle(false);
+            window.teacherHighlighter.setColor(this.highlighterColorIndex);
+        } else if (!this.highlighterActive && window.teacherHighlighter && window.teacherHighlighter.isActive) {
+            window.teacherHighlighter.toggle(false);
         }
 
         // Sync with Audience Screen
@@ -1293,12 +1407,8 @@ class PresenterViewUI {
 
     triggerStudentPicker() {
         if (window.studentPicker) {
-            const chosen = window.studentPicker.students[Math.floor(Math.random() * window.studentPicker.students.length)] || 'Student';
-            this.showPickedStudent(chosen);
-            if (!window.studentPicker.isOpen) window.studentPicker.toggle();
-            window.studentPicker.spin();
-            this.sync.emit('STUDENT_PICK_CMD', {});
-            this.sync.emit('STUDENT_PICKED', { student: chosen });
+            window.studentPicker.open(true);
+            window.studentPicker.spin(null, true);
         }
     }
 
@@ -1377,10 +1487,9 @@ class PresenterViewUI {
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
-        if (window.penAnnotation) window.penAnnotation.clear(false);
-        if (window.teacherHighlighter) window.teacherHighlighter.clear(false);
-        this.sync.emit('PEN_CLEAR', {});
-        this.sync.emit('HIGHLIGHTER_CLEAR', {});
+        if (window.penAnnotation) window.penAnnotation.clear(true);
+        if (window.teacherHighlighter) window.teacherHighlighter.clear(true);
+        if (window.readingHighlighter) window.readingHighlighter.clearAll(null, true);
     }
 
     updateTimerDisplay(seconds) {
@@ -1498,6 +1607,7 @@ class PresenterViewUI {
             clone.classList.add('active', 'preview-clone');
             scaler.appendChild(clone);
             this.scalePreviewElement(scaler);
+            this.bindPreviewSlideInteractions(scaler, currentSlide, currentIndex);
         }
 
         // Update Filmstrip active card & scroll
@@ -1505,6 +1615,85 @@ class PresenterViewUI {
 
         // Update Notes
         this.updatePedagogicalNotes(currentSlide, currentIndex);
+    }
+
+    bindPreviewSlideInteractions(scaler, currentSlide, currentIndex) {
+        if (!scaler || !currentSlide) return;
+
+        // Synchronize inputs & dropdowns typed directly on the preview slide
+        scaler.querySelectorAll('.blank-input, .select-input').forEach((input, idx) => {
+            const syncInput = () => {
+                const allRealInputs = currentSlide.querySelectorAll('.blank-input, .select-input');
+                const realInput = allRealInputs[idx];
+                if (realInput) {
+                    realInput.value = input.value;
+                    realInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    realInput.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+                this.sync.emit('INPUT_SYNC', {
+                    slideIndex: currentIndex,
+                    inputIndex: idx,
+                    value: input.value
+                });
+            };
+            input.addEventListener('input', syncInput);
+            input.addEventListener('change', syncInput);
+        });
+
+        // Click delegation inside preview slide
+        scaler.addEventListener('click', (e) => {
+            // Synonym / Evidence buttons
+            const synBtn = e.target.closest('.syn-btn');
+            if (synBtn) {
+                const card = synBtn.closest('.q-card, .flowchart-step-card');
+                const dataQ = synBtn.dataset.q || card?.dataset?.q || (synBtn.dataset.ev ? synBtn.dataset.ev.replace(/^ev-/, '') : null);
+                const dataEv = synBtn.dataset.ev || (dataQ ? `ev-${dataQ}` : null);
+                if (window.readingHighlighter && (dataQ || dataEv)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.readingHighlighter.focusEvidence(dataQ, dataEv, true);
+                    if (card) {
+                        const exp = card.querySelector('.item-explanation');
+                        if (exp) exp.classList.toggle('show');
+                    }
+                }
+                return;
+            }
+
+            // Word chips
+            const wordChip = e.target.closest('.word-chip');
+            if (wordChip && window.vocabBank) {
+                e.preventDefault();
+                e.stopPropagation();
+                window.vocabBank.handleChipClick(wordChip, currentSlide);
+                setTimeout(() => this.updatePresenterSlideView(), 60);
+                return;
+            }
+
+            // Option cards (.opt-card)
+            const optCard = e.target.closest('.opt-card');
+            if (optCard) {
+                e.preventDefault();
+                e.stopPropagation();
+                const allCloneCards = Array.from(scaler.querySelectorAll('.opt-card'));
+                const cardIdx = allCloneCards.indexOf(optCard);
+                const allRealCards = Array.from(currentSlide.querySelectorAll('.opt-card'));
+                const realCard = allRealCards[cardIdx];
+                if (realCard && window.deckEngine) {
+                    window.deckEngine.toggleOptCard(realCard, true);
+                    optCard.classList.toggle('selected', realCard.classList.contains('selected'));
+                }
+                return;
+            }
+
+            // Action buttons (Check, Reveal, Reset)
+            const actionBtn = e.target.closest('button');
+            if (actionBtn && actionBtn.onclick) {
+                setTimeout(() => {
+                    this.updatePresenterSlideView();
+                }, 60);
+            }
+        });
     }
 
     scalePreviewElement(scaler) {
@@ -2046,6 +2235,7 @@ class PresenterViewUI {
                 overflow: hidden;
                 background: #0b0f19;
                 pointer-events: none;
+                color: var(--text-dark, #0f172a);
             }
             .slide-preview-scaler .slide {
                 width: 100% !important;
@@ -2055,6 +2245,28 @@ class PresenterViewUI {
                 display: flex !important;
                 opacity: 1 !important;
                 visibility: visible !important;
+                color: var(--text-dark, #0f172a);
+            }
+            .slide-preview-scaler .slide-inner,
+            .slide-preview-scaler .notebook,
+            .slide-preview-scaler .page-content {
+                color: var(--text-dark, #0f172a);
+            }
+            .slide-preview-scaler .rule-card,
+            .slide-preview-scaler .card,
+            .slide-preview-scaler .discuss-card,
+            .slide-preview-scaler .reading-pane,
+            .slide-preview-scaler .essay-card,
+            .slide-preview-scaler .model-breakdown-card,
+            .slide-preview-scaler .q-card {
+                color: var(--text-dark, #0f172a);
+            }
+            .slide-preview-scaler p,
+            .slide-preview-scaler li,
+            .slide-preview-scaler span,
+            .slide-preview-scaler em,
+            .slide-preview-scaler strong {
+                color: inherit;
             }
             .presenter-draw-canvas {
                 position: absolute;

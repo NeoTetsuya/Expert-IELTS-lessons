@@ -139,7 +139,7 @@ class VocabBank {
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = customLang || 'en-GB';
+        utterance.lang = customLang || this.currentAccent || 'en-GB';
         utterance.rate = this.speechRate || 0.9;
 
         // Try selecting Google Female UK voice if available

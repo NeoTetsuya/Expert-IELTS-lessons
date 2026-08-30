@@ -62,8 +62,8 @@ class ClassroomTimer {
                     color: #38bdf8;
                     margin: 8px 0 14px 0;
                 }
-                .timer-display.ended {
-                    color: #ef4444;
+                .timer-display.ended, .cp-timer-countdown-display.ended {
+                    color: #ef4444 !important;
                     animation: timerPulseAlert 0.6s infinite alternate;
                 }
                 .timer-presets {
@@ -117,6 +117,31 @@ class ClassroomTimer {
         }
 
         this.initModal();
+        this.setupSyncListeners();
+    }
+
+    setupSyncListeners() {
+        if (!window.presenterSyncEngine) return;
+
+        window.presenterSyncEngine.on('TIMER_CMD', (data) => {
+            if (!data) return;
+            if (data.action === 'set' && typeof data.seconds === 'number') {
+                this.setTimer(data.seconds, false);
+                this.showModal(false);
+            } else if (data.action === 'start') {
+                if (typeof data.seconds === 'number') this.timerSeconds = data.seconds;
+                if (!this.timerRunning) this.toggleRun(false);
+                this.showModal(false);
+            } else if (data.action === 'pause') {
+                if (this.timerRunning) this.toggleRun(false);
+            } else if (data.action === 'reset') {
+                this.reset(false);
+            } else if (data.action === 'show' || data.action === 'showModal') {
+                this.showModal(false);
+            } else if (data.action === 'hide' || data.action === 'hideModal') {
+                this.hideModal(false);
+            }
+        });
     }
 
     initModal() {
@@ -129,7 +154,7 @@ class ClassroomTimer {
         modal.innerHTML = `
             <div class="timer-modal-header">
                 <span>⏱️ Classroom Timer</span>
-                <button class="timer-modal-close" onclick="classroomTimer.toggleModal()">×</button>
+                <button class="timer-modal-close" onclick="classroomTimer.hideModal(true)">×</button>
             </div>
             <div class="timer-display" id="timerDisplay">00:00</div>
             <div class="timer-presets">
@@ -147,12 +172,40 @@ class ClassroomTimer {
         this.modal = modal;
     }
 
+    showModal(broadcast = false) {
+        if (!this.modal) {
+            this.modal = document.getElementById('timerModal');
+        }
+        if (this.modal) {
+            this.modal.style.display = 'block';
+        }
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('TIMER_CMD', { action: 'show' });
+        }
+    }
+
+    hideModal(broadcast = false) {
+        if (!this.modal) {
+            this.modal = document.getElementById('timerModal');
+        }
+        if (this.modal) {
+            this.modal.style.display = 'none';
+        }
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('TIMER_CMD', { action: 'hide' });
+        }
+    }
+
     toggleModal() {
         if (!this.modal) {
             this.modal = document.getElementById('timerModal');
         }
         if (this.modal) {
-            this.modal.style.display = this.modal.style.display === 'none' ? 'block' : 'none';
+            if (this.modal.style.display === 'none') {
+                this.showModal(true);
+            } else {
+                this.hideModal(true);
+            }
         }
     }
 
@@ -165,22 +218,43 @@ class ClassroomTimer {
     }
 
     updateDisplay() {
-        const display = document.getElementById('timerDisplay');
-        if (!display) return;
         const mins = Math.floor(this.timerSeconds / 60);
         const secs = this.timerSeconds % 60;
-        display.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-        display.classList.remove('ended');
+        const timeStr = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+        // Update modal display
+        const display = document.getElementById('timerDisplay');
+        if (display) {
+            display.textContent = timeStr;
+            display.classList.toggle('ended', this.timerSeconds <= 0 && !this.timerRunning);
+        }
+
+        // Update Presenter Cockpit countdown displays
+        const cpDisplay = document.getElementById('cpCountdownDisplay');
+        if (cpDisplay) {
+            cpDisplay.textContent = timeStr;
+            cpDisplay.classList.toggle('ended', this.timerSeconds <= 0 && !this.timerRunning);
+        }
+
+        document.querySelectorAll('.cp-timer-countdown-display').forEach(el => {
+            el.textContent = timeStr;
+            el.classList.toggle('ended', this.timerSeconds <= 0 && !this.timerRunning);
+        });
     }
 
     toggleRun(broadcast = true) {
         const startBtn = document.getElementById('timerStartBtn');
+        const cpToggleBtn = document.getElementById('btnToolTimerToggle');
+
         if (this.timerRunning) {
             clearInterval(this.timerInterval);
             this.timerRunning = false;
             if (startBtn) {
                 startBtn.textContent = 'Resume';
                 startBtn.classList.remove('running');
+            }
+            if (cpToggleBtn) {
+                cpToggleBtn.textContent = '▶ Start Timer';
             }
             if (broadcast && window.presenterSyncEngine) {
                 window.presenterSyncEngine.emit('TIMER_CMD', { action: 'pause' });
@@ -192,6 +266,9 @@ class ClassroomTimer {
                 startBtn.textContent = 'Pause';
                 startBtn.classList.add('running');
             }
+            if (cpToggleBtn) {
+                cpToggleBtn.textContent = '⏸ Pause Timer';
+            }
             if (broadcast && window.presenterSyncEngine) {
                 window.presenterSyncEngine.emit('TIMER_CMD', { action: 'start', seconds: this.timerSeconds });
             }
@@ -202,11 +279,13 @@ class ClassroomTimer {
                 } else {
                     clearInterval(this.timerInterval);
                     this.timerRunning = false;
-                    const display = document.getElementById('timerDisplay');
-                    if (display) display.classList.add('ended');
+                    this.updateDisplay();
                     if (startBtn) {
                         startBtn.textContent = 'Start';
                         startBtn.classList.remove('running');
+                    }
+                    if (cpToggleBtn) {
+                        cpToggleBtn.textContent = '▶ Start Timer';
                     }
                     this.playChime();
                 }
@@ -223,6 +302,10 @@ class ClassroomTimer {
         if (startBtn) {
             startBtn.textContent = 'Start';
             startBtn.classList.remove('running');
+        }
+        const cpToggleBtn = document.getElementById('btnToolTimerToggle');
+        if (cpToggleBtn) {
+            cpToggleBtn.textContent = '▶ Start Timer';
         }
         if (broadcast && window.presenterSyncEngine) {
             window.presenterSyncEngine.emit('TIMER_CMD', { action: 'reset' });

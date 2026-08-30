@@ -268,5 +268,7 @@ class StepRevealEngine {
     }
 }
 
-// Global instantiation
-window.stepRevealEngine = new StepRevealEngine();
+// Global instantiation (deferred to ensure DeckEngine is available)
+window.addEventListener('DOMContentLoaded', () => {
+    window.stepRevealEngine = new StepRevealEngine(window.deckEngine);
+});

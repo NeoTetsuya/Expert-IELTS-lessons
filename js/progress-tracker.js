@@ -13,7 +13,8 @@ class ProgressTracker {
     }
 
     init() {
-        this.restoreResponses();
+        // Defer restore to guarantee it runs after hydrateBlanksAndInputs clears values
+        setTimeout(() => this.restoreResponses(), 0);
         this.bindAutoSave();
         this.renderReviewDashboard();
     }
@@ -22,8 +23,13 @@ class ProgressTracker {
      * Auto-saves all inputs and selects when modified
      */
     bindAutoSave() {
-        document.addEventListener('change', () => this.saveResponses());
-        document.addEventListener('input', () => this.saveResponses());
+        let saveTimeout = null;
+        const debouncedSave = () => {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => this.saveResponses(), 400);
+        };
+        document.addEventListener('change', debouncedSave);
+        document.addEventListener('input', debouncedSave);
     }
 
     saveResponses() {

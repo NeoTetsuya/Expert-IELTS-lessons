@@ -423,6 +423,9 @@ class PresentationTools {
             } else if (key === 'f') {
                 e.preventDefault();
                 this.toggleFullscreen();
+            } else if (key === 'g') {
+                e.preventDefault();
+                if (window.slideNavigator) window.slideNavigator.toggle();
             } else if (key === '?' || (e.shiftKey && e.key === '/')) {
                 e.preventDefault();
                 this.toggleHelpModal();
@@ -433,6 +436,10 @@ class PresentationTools {
                 if (helpModal) helpModal.style.display = 'none';
                 if (window.penAnnotation && window.penAnnotation.isActive) window.penAnnotation.deactivate();
                 if (window.laserPointer && window.laserPointer.isActive) window.laserPointer.deactivate();
+            } else if (e.ctrlKey && key === 'z' && !e.shiftKey) {
+                e.preventDefault();
+                if (window.teacherHighlighter) window.teacherHighlighter.undo();
+                if (window.penAnnotation) window.penAnnotation.undo();
             }
         });
     }

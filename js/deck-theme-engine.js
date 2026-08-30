@@ -63,6 +63,60 @@ class DeckThemeEngine {
                 icon: '📜',
                 desc: 'Sophisticated literary masterclass with Bodoni high-contrast serifs.',
                 previewBg: 'linear-gradient(135deg, #44403c, #1c1917)'
+            },
+            {
+                id: 'soft-editorial',
+                name: 'Soft Editorial',
+                displayFont: 'Cormorant Garamond',
+                bodyFont: 'Outfit',
+                icon: '🌸',
+                desc: 'Warm almond paper with sage, blush rose, and elegant editorial serifs.',
+                previewBg: 'linear-gradient(135deg, #059669, #e11d48)'
+            },
+            {
+                id: 'cobalt-grid',
+                name: 'Cobalt Grid',
+                displayFont: 'Space Grotesk',
+                bodyFont: 'DM Sans',
+                icon: '📐',
+                desc: 'Technical precision graph-paper aesthetic with electric cobalt blue.',
+                previewBg: 'linear-gradient(135deg, #2563eb, #0284c7)'
+            },
+            {
+                id: 'vellum',
+                name: 'Vellum',
+                displayFont: 'Cormorant Garamond',
+                bodyFont: 'Plus Jakarta Sans',
+                icon: '🌌',
+                desc: 'Deep midnight navy canvas with golden-amber serifs and dusty teal.',
+                previewBg: 'linear-gradient(135deg, #fbbf24, #0b132b)'
+            },
+            {
+                id: 'sakura-chroma',
+                name: 'Sakura Chroma',
+                displayFont: 'Outfit',
+                bodyFont: 'DM Sans',
+                icon: '📼',
+                desc: 'Vintage Japanese cassette aesthetic with vermillion and sakura pink.',
+                previewBg: 'linear-gradient(135deg, #ea580c, #ec4899)'
+            },
+            {
+                id: 'editorial-forest',
+                name: 'Editorial Forest',
+                displayFont: 'Cormorant Garamond',
+                bodyFont: 'DM Sans',
+                icon: '🌲',
+                desc: 'Deep pine green, dusty blush pink, and warm parchment typography.',
+                previewBg: 'linear-gradient(135deg, #064e3b, #db2777)'
+            },
+            {
+                id: 'broadside',
+                name: 'Broadside',
+                displayFont: 'Space Grotesk',
+                bodyFont: 'Plus Jakarta Sans',
+                icon: '📰',
+                desc: 'Ultra-dark pitch-black broadsheet void with blazing fire orange.',
+                previewBg: 'linear-gradient(135deg, #ff5722, #000000)'
             }
         ];
 

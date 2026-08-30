@@ -4,6 +4,878 @@
  * Generated from modular files in /js/
  */
 
+/* ==================== MODULE: template-engine.js ==================== */
+/**
+ * =========================================================================
+ * TEMPLATE ENGINE (Exact Design-System Compatible for file:// and http://)
+ * Expert IELTS Course Presentations Architecture
+ * Universal High-Legibility Typography Scale Built-in
+ * =========================================================================
+ */
+
+(function () {
+    'use strict';
+
+    // 13 Master Built-in Slide Templates (High-Legibility 21px-26px Scale)
+    const BUILTIN_TEMPLATES = `
+<!-- 1. TITLE SLIDE TEMPLATE -->
+<template id="tmpl-title">
+    <section class="slide title-slide" data-skill="title">
+        <div class="title-slide-inner">
+            <div class="title-notebook">
+                <div class="title-left">
+                    <div class="title-module-badge reveal" data-slot="badge">Module 02</div>
+                    <h1 class="title-main reveal" data-slot="title"></h1>
+                    <p class="title-sub reveal" data-slot="subtitle"></p>
+                    <div class="title-tags reveal" data-slot="tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;"></div>
+                </div>
+                <div class="title-right">
+                    <div style="font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:12px;">Lesson Syllabus</div>
+                    <div class="title-skills-grid reveal" data-slot="roadmap"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 2. SECTION DIVIDER TEMPLATE -->
+<template id="tmpl-section-divider">
+    <section class="slide" data-skill="title">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-vocab);"></div>
+                <div class="page-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px 60px;">
+                    <span class="skill-badge" style="background: var(--col-vocab); font-size: 16px; padding: 6px 18px; margin-bottom: 16px;" data-slot="badge"></span>
+                    <h2 class="slide-title" style="font-size: 52px; margin-bottom: 16px;" data-slot="title"></h2>
+                    <p class="slide-subtitle" style="font-size: 24px; max-width: 900px; margin: 0 auto 30px;" data-slot="subtitle"></p>
+                    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;" data-slot="content"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 3. UP-TO-DOWN (STACKED) 1-QUESTION WALKTHROUGH TEMPLATE (26px Passage / 25px Question) -->
+<template id="tmpl-walkthrough">
+    <section class="slide" data-skill="read">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-reading);"></div>
+                <div class="page-content" style="display: flex; flex-direction: column; justify-content: space-between; padding: 28px 48px 24px;">
+                    <div class="slide-header" style="margin-bottom: 4px;">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge">Reading Strategy • Walkthrough</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 6px;" data-slot="subtitle">
+                        Compare the dedicated passage excerpt with the question below to evaluate your answer.
+                    </p>
+
+                    <!-- Centered Walkthrough Container -->
+                    <div class="walkthrough-container" style="max-width: 1550px; width: 96%; margin: auto; display: flex; flex-direction: column; gap: 18px; justify-content: center; flex: 1; min-height: 0;">
+                        <!-- Top Box: Dedicated Passage Excerpt -->
+                        <div class="card" style="background: #ffffff; border: 2px solid #93c5fd; border-left: 7px solid var(--col-reading); border-radius: 14px; padding: 24px 32px; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+                            <div style="font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--col-reading); margin-bottom: 10px;" data-slot="passage-header">
+                                📖 Relevant Passage Excerpt
+                            </div>
+                            <p style="font-size: 26px; line-height: 1.85; margin-bottom: 0; color: #0f172a;" data-slot="passage-text"></p>
+                        </div>
+
+                        <!-- Bottom Box: Interactive Question Card -->
+                        <div class="q-card" style="background: #ffffff; border: 2px solid #cbd5e1; border-left: 7px solid var(--col-reading); border-radius: 14px; padding: 24px 32px; box-shadow: 0 4px 16px rgba(0,0,0,0.03);" data-slot="question-card">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
+                                <span style="font-weight: 700; font-size: 25px; line-height: 1.65; color: #0f172a;" data-slot="question-text"></span>
+                                <button class="syn-btn" style="flex-shrink: 0; font-size: 16px; padding: 8px 18px; font-weight: 700;" data-slot="evidence-btn">💡 Evidence</button>
+                            </div>
+
+                            <div style="margin-top: 16px; display: flex; align-items: center; gap: 16px;" data-slot="input-area"></div>
+
+                            <div class="item-explanation" style="font-size: 21px; line-height: 1.75; margin-top: 16px; padding: 16px 22px; border-radius: 8px;" data-slot="explanation"></div>
+                        </div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answer</button>
+                        <button class="btn-action" onclick="revealAnswers(this)">Show Evidence / Highlights</button>
+                        <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 4. SIDE-BY-SIDE READING SPLIT-VIEW TEMPLATE -->
+<template id="tmpl-reading-split">
+    <section class="slide" data-skill="read">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-reading);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge"></span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <div class="two-col" style="flex: 1; min-height: 0; gap: 24px;">
+                        <!-- Left Pane: Full Passage -->
+                        <div class="reading-pane" style="flex: 1.15; font-size: 22px; line-height: 1.85;" data-slot="passage"></div>
+
+                        <!-- Right Pane: Questions List -->
+                        <div class="question-pane" style="flex: 0.85;" data-slot="questions"></div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 12px;">
+                        <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answers</button>
+                        <button class="btn-action" onclick="revealAnswers(this)">Reveal Keys</button>
+                        <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 5. PRE-READING STRATEGY & KEYWORD DECONSTRUCTION TEMPLATE -->
+<template id="tmpl-strategy">
+    <section class="slide" data-skill="read">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-reading);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge">Reading Strategy • Pre-Reading</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 12px;" data-slot="subtitle"></p>
+
+                    <div class="two-col" style="flex: 1; min-height: 0; gap: 24px;">
+                        <!-- Left Col: Question Sentences -->
+                        <div style="display: flex; flex-direction: column; gap: 12px; flex: 1.2; overflow-y: auto;" data-slot="sentences"></div>
+
+                        <!-- Right Col: Strategy Guide -->
+                        <div style="display: flex; flex-direction: column; gap: 14px; flex: 0.8; overflow-y: auto;" data-slot="guide"></div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 14px;">
+                        <button class="btn-action btn-primary" onclick="revealAnswers(this)">💡 Show Highlights</button>
+                        <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 6. GRAMMAR MASTERCLASS TEMPLATE -->
+<template id="tmpl-grammar-masterclass">
+    <section class="slide" data-skill="grammar">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-grammar);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-grammar); font-size: 14px; padding: 4px 12px;" data-slot="badge">Grammar Masterclass</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <div class="two-col" style="flex: 1; min-height: 0; gap: 24px;">
+                        <div style="display: flex; flex-direction: column; gap: 14px; flex: 1.1; overflow-y: auto;" data-slot="rules"></div>
+                        <div style="display: flex; flex-direction: column; gap: 14px; flex: 0.9; overflow-y: auto;" data-slot="contrast-card"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 7. EXERCISE GRID / MULTI-ITEM TEMPLATE -->
+<template id="tmpl-exercise-grid">
+    <section class="slide" data-skill="grammar">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-grammar);" data-slot="skill-stripe"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-grammar); font-size: 14px; padding: 4px 12px;" data-slot="badge"></span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p style="font-size: 20px; color: var(--text-muted); margin-bottom: 12px;" data-slot="instruction"></p>
+
+                    <div style="flex: 1; min-height: 0;" data-slot="grid"></div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answers</button>
+                        <button class="btn-action" onclick="revealAnswers(this)">Reveal Keys</button>
+                        <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 8. WRITING TASK 2 / TASK 1 MODEL TEMPLATE (Scrollable & High-Legibility 24px Scale) -->
+<template id="tmpl-writing-model">
+    <section class="slide" data-skill="write">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-writing);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header" style="margin-bottom: 8px;">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-writing); font-size: 14px; padding: 4px 12px;" data-slot="badge">IELTS Writing • Model Answer</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <div class="two-col" style="flex: 1; min-height: 0; gap: 28px; align-items: stretch;">
+                        <!-- Left Col: Prompt & Plan / Annotations -->
+                        <div class="col" style="display: flex; flex-direction: column; gap: 16px; flex: 0.9; overflow-y: auto;" data-slot="left-col">
+                            <div data-slot="prompt"></div>
+                            <div data-slot="annotations"></div>
+                        </div>
+
+                        <!-- Right Col: Scrollable Model Essay -->
+                        <div class="writing-model-pane" style="flex: 1.1; overflow-y: auto;" data-slot="model-essay">
+                            <div data-slot="essay"></div>
+                        </div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="toggleWritingHighlights(this)">💡 Highlight Signposts &amp; Lexicon</button>
+                        <button class="btn-action" onclick="speakEssay(this)">🔊 Listen Model Essay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 9. VOCABULARY CARDS TEMPLATE -->
+<template id="tmpl-vocab-cards">
+    <section class="slide" data-skill="vocab">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-vocab);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-vocab); font-size: 14px; padding: 4px 12px;" data-slot="badge">Academic Lexicon</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p style="font-size: 20px; color: var(--text-muted); margin-bottom: 14px;" data-slot="subtitle">
+                        Click the 🔊 audio button on any card to hear the official Google Female UK pronunciation.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; flex: 1; min-height: 0; overflow-y: auto;" data-slot="cards"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 10. SYNTAX & SENTENCE RULES TEMPLATE -->
+<template id="tmpl-syntax-rules">
+    <section class="slide" data-skill="vocab">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-vocab);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-vocab); font-size: 14px; padding: 4px 12px;" data-slot="badge">Vocabulary • Syntax &amp; Rules</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <div class="card" style="background: rgba(16, 185, 129, 0.08); border-left: 5px solid var(--col-vocab); font-size: 22px; font-style: italic; line-height: 1.65; margin-bottom: 14px; padding: 18px 24px;" data-slot="sentence"></div>
+
+                    <div class="two-col" style="flex: 1; min-height: 0; gap: 20px;">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; flex: 1.1; overflow-y: auto;" data-slot="parts-of-speech"></div>
+                        <div class="card" style="background: #ffffff; border-left: 5px solid var(--col-grammar); padding: 22px 26px; flex: 0.9; margin-bottom:0; overflow-y:auto;" data-slot="rules"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 11. GAP-FILL PASSAGE & INTENSIFIERS TEMPLATE -->
+<template id="tmpl-gap-fill-passage">
+    <section class="slide" data-skill="vocab">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-vocab);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-vocab); font-size: 14px; padding: 4px 12px;" data-slot="badge"></span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <div class="two-col" style="flex: 1; min-height: 0; gap: 22px;">
+                        <div class="card" style="background: #ffffff; border-left: 5px solid var(--col-vocab); padding: 24px 30px; flex: 1.1; margin-bottom:0; overflow-y: auto;" data-slot="passage"></div>
+                        <div style="display: flex; flex-direction: column; gap: 14px; flex: 0.9; overflow-y: auto;" data-slot="rules-col"></div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Gap-Fill</button>
+                        <button class="btn-action" onclick="revealAnswers(this)">Reveal Keys</button>
+                        <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 12. SPELLING TABLE & ERROR ANALYSIS TEMPLATE -->
+<template id="tmpl-spelling-table">
+    <section class="slide" data-skill="write">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-writing);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-writing); font-size: 14px; padding: 4px 12px;" data-slot="badge">IELTS Writing Task 2 • Lexical Accuracy</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <div class="two-col" style="flex: 1; min-height: 0; gap: 24px;">
+                        <div class="card" style="background: #ffffff; border-left: 6px solid var(--col-writing); padding: 26px 32px; flex: 1.05; margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto;" data-slot="left-extract"></div>
+                        <div class="card" style="background: #ffffff; border-top: 6px solid var(--col-writing); padding: 26px 32px; flex: 0.95; margin-bottom: 0; overflow-y: auto;" data-slot="right-table"></div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Spelling</button>
+                        <button class="btn-action" onclick="revealAnswers(this)">Reveal Keys</button>
+                        <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 13. SUMMARY & MASTERY CHECKLIST TEMPLATE -->
+<template id="tmpl-summary-checklist">
+    <section class="slide" data-skill="review">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-review);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-review); font-size: 14px; padding: 4px 12px;" data-slot="badge">Module Mastery</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 14px;" data-slot="subtitle"></p>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; flex:1; min-height:0; overflow-y:auto;" data-slot="grid"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 14. READING SPLIT-VIEW WITH INTERACTIVE FLOW CHART COMPLETION TEMPLATE -->
+<template id="tmpl-reading-flowchart">
+    <section class="slide" data-skill="read">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-reading);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge">Reading · Flow Chart Completion</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 19px; color: var(--text-muted); margin-bottom: 8px;" data-slot="subtitle">
+                        Complete the flow chart below. Choose NO MORE THAN TWO WORDS from the passage for each answer.
+                    </p>
+
+                    <div class="split-view-container" style="flex: 1; min-height: 0; display: flex; gap: 24px;">
+                        <!-- Left Pane: Full Passage -->
+                        <div class="reading-pane" style="flex: 1.15; font-size: 22px; line-height: 1.85; overflow-y: auto;" data-slot="passage"></div>
+
+                        <!-- Right Pane: Flow Chart Step Cards Container -->
+                        <div class="question-pane flowchart-container" style="flex: 0.85; overflow-y: auto;" data-slot="flowchart"></div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="checkAnswers(this)">✓ Check</button>
+                        <button class="btn-action" onclick="toggleExplanations(this)">🔍 Explanations</button>
+                        <button class="btn-action" onclick="revealAnswers(this)">👁️ Reveal</button>
+                        <button class="btn-action" onclick="resetAnswers(this)">↺ Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 15. STANDALONE FLOW CHART TASK TEMPLATE -->
+<template id="tmpl-flowchart">
+    <section class="slide" data-skill="read">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-reading);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge">Flow Chart Task</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 12px;" data-slot="subtitle"></p>
+
+                    <div class="flowchart-container" style="max-width: 1100px; width: 100%; margin: 0 auto; flex: 1; min-height: 0; overflow-y: auto;" data-slot="flowchart"></div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="checkAnswers(this)">✓ Check</button>
+                        <button class="btn-action" onclick="toggleExplanations(this)">🔍 Explanations</button>
+                        <button class="btn-action" onclick="revealAnswers(this)">👁️ Reveal</button>
+                        <button class="btn-action" onclick="resetAnswers(this)">↺ Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 16. UNIVERSAL STANDARD BACKBONE TEMPLATE -->
+<template id="tmpl-standard">
+    <section class="slide" data-skill="read">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-reading);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge"></span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 12px;" data-slot="subtitle"></p>
+
+                    <div class="slide-body" style="flex: 1; min-height: 0; display: flex; flex-direction: column; overflow-y: auto;" data-slot="content"></div>
+
+                    <div class="action-row" style="margin-top: 10px;" data-slot="actions"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+`;
+
+    class TemplateEngine {
+        static init() {
+            // 1. Inject built-in templates synchronously into DOM if not present
+            if (!document.getElementById('tmpl-walkthrough')) {
+                const container = document.createElement('div');
+                container.id = 'slide-templates-catalog';
+                container.style.display = 'none';
+                container.innerHTML = BUILTIN_TEMPLATES;
+                document.body.prepend(container);
+            }
+
+            // 2. Expand all slide-card elements synchronously
+            this.expandSlides();
+        }
+
+        static findSlotTarget(section, slotName) {
+            if (!slotName) return null;
+            
+            // 1. Direct attribute match
+            let target = section.querySelector(`[data-slot="${slotName}"]`);
+            if (target) return target;
+
+            // 2. Semantic fallback mappings across all 15 slide templates
+            switch (slotName.toLowerCase()) {
+                case 'content':
+                case 'body':
+                case 'main':
+                    return section.querySelector('[data-slot="content"], [data-slot="grid"], .two-col, [data-slot="rules"], [data-slot="passage"], [data-slot="cards"], [data-slot="flowchart"], .page-content');
+
+                case 'rules':
+                case 'grammar':
+                    return section.querySelector('[data-slot="rules"], [data-slot="content"], [data-slot="left-col"], .two-col > div:first-child');
+
+                case 'contrast-card':
+                case 'contrast':
+                case 'card':
+                case 'table':
+                case 'error-box':
+                case 'right-table':
+                    return section.querySelector('[data-slot="contrast-card"], [data-slot="right-table"], [data-slot="rules-col"], [data-slot="guide"], [data-slot="questions"], .two-col > div:last-child');
+
+                case 'grid':
+                case 'exercises':
+                case 'items':
+                case 'checklist':
+                    return section.querySelector('[data-slot="grid"], [data-slot="cards"], [data-slot="parts-of-speech"], [data-slot="content"], .two-col');
+
+                case 'cards':
+                    return section.querySelector('[data-slot="cards"], [data-slot="grid"], [data-slot="content"]');
+
+                case 'passage':
+                case 'text':
+                case 'excerpt':
+                    return section.querySelector('[data-slot="passage"], [data-slot="passage-text"], [data-slot="left-extract"], [data-slot="left-col"], .reading-pane');
+
+                case 'passage-header':
+                case 'header':
+                    return section.querySelector('[data-slot="passage-header"]');
+
+                case 'passage-text':
+                    return section.querySelector('[data-slot="passage-text"], [data-slot="passage"]');
+
+                case 'questions':
+                case 'question':
+                case 'sentences':
+                case 'sentence':
+                    return section.querySelector('[data-slot="questions"], [data-slot="sentences"], [data-slot="question-card"], [data-slot="sentence"], .question-pane, .two-col > div:last-child');
+
+                case 'question-text':
+                    return section.querySelector('[data-slot="question-text"], [data-slot="question-card"]');
+
+                case 'evidence-btn':
+                case 'evidence':
+                    return section.querySelector('[data-slot="evidence-btn"], .syn-btn');
+
+                case 'input-area':
+                case 'input':
+                case 'options':
+                    return section.querySelector('[data-slot="input-area"]');
+
+                case 'explanation':
+                case 'explanations':
+                    return section.querySelector('[data-slot="explanation"], .item-explanation');
+
+                case 'guide':
+                case 'strategy':
+                    return section.querySelector('[data-slot="guide"], [data-slot="rules"], [data-slot="right-col"], .two-col > div:last-child');
+
+                case 'left-col':
+                case 'left':
+                    return section.querySelector('[data-slot="left-col"], [data-slot="left-extract"], [data-slot="rules"], [data-slot="passage"], [data-slot="sentences"], .two-col > div:first-child');
+
+                case 'right-col':
+                case 'right':
+                    return section.querySelector('[data-slot="right-table"], [data-slot="contrast-card"], [data-slot="rules-col"], [data-slot="guide"], [data-slot="questions"], [data-slot="model-essay"], .two-col > div:last-child');
+
+                case 'model-essay':
+                case 'essay':
+                case 'model':
+                    return section.querySelector('[data-slot="model-essay"], [data-slot="essay"], .writing-model-pane, .two-col > div:last-child');
+
+                case 'prompt':
+                    return section.querySelector('[data-slot="prompt"], [data-slot="left-col"]');
+
+                case 'annotations':
+                    return section.querySelector('[data-slot="annotations"], [data-slot="left-col"]');
+
+                case 'flowchart':
+                case 'chart':
+                case 'steps':
+                    return section.querySelector('[data-slot="flowchart"], .flowchart-container, [data-slot="content"], [data-slot="grid"]');
+
+                case 'tags':
+                case 'roadmap':
+                    return section.querySelector('[data-slot="roadmap"], .title-left, .title-right, [data-slot="content"]');
+
+                case 'badge':
+                    return section.querySelector('[data-slot="badge"], .skill-badge, .title-module-badge');
+
+                case 'title':
+                    return section.querySelector('[data-slot="title"], .slide-title, .title-main');
+
+                case 'subtitle':
+                    return section.querySelector('[data-slot="subtitle"], .slide-subtitle, .title-sub');
+
+                case 'instruction':
+                    return section.querySelector('[data-slot="instruction"], .slide-subtitle');
+
+                default:
+                    return section.querySelector(`[data-slot="${slotName}"], .two-col, [data-slot="content"], [data-slot="grid"], .page-content`);
+            }
+        }
+
+        static getDefaultBadge(skill, templateName, title) {
+            skill = (skill || 'read').toLowerCase();
+            const tmpl = (templateName || '').toLowerCase().replace(/^tmpl-/, '');
+            
+            // 1. Template-specific smart badges
+            if (tmpl === 'walkthrough') return 'Reading Strategy • Model Walkthrough';
+            if (tmpl === 'strategy') return 'Reading Strategy • Pre-Reading';
+            if (tmpl === 'reading-split' || tmpl === 'split-view') return 'IELTS Reading • Split-View';
+            if (tmpl === 'reading-flowchart') return 'Reading • Flow Chart Completion';
+            if (tmpl === 'flowchart') return 'IELTS Reading • Flow Chart';
+            if (tmpl === 'grammar-masterclass') return 'Grammar Masterclass';
+            if (tmpl === 'vocab-cards') return 'Academic Lexicon';
+            if (tmpl === 'syntax-rules') return 'Vocabulary • Syntax & Rules';
+            if (tmpl === 'gap-fill-passage') {
+                return skill === 'grammar' ? 'Grammar Practice • Gap Fill' : 'Vocabulary Practice • Gap Fill';
+            }
+            if (tmpl === 'spelling-table') return 'IELTS Writing • Lexical Accuracy';
+            if (tmpl === 'writing-model') return 'IELTS Writing • Model Answer';
+            if (tmpl === 'summary-checklist') return 'Module Mastery';
+            if (tmpl === 'section-divider') return 'Module Section';
+            if (tmpl === 'exercise-grid' || tmpl === 'grid') {
+                if (skill === 'grammar') return 'Grammar Practice';
+                if (skill === 'vocab') return 'Vocabulary Practice';
+                if (skill === 'write') return 'Writing Practice';
+                return 'Reading Strategy Practice';
+            }
+            
+            // 2. Skill-based fallback
+            switch (skill) {
+                case 'read':
+                case 'reading':
+                    return 'IELTS Reading';
+                case 'grammar':
+                    return 'Grammar Masterclass';
+                case 'vocab':
+                case 'vocabulary':
+                    return 'Academic Vocabulary';
+                case 'write':
+                case 'writing':
+                    return 'IELTS Writing';
+                case 'review':
+                    return 'Module Review';
+                default:
+                    return 'IELTS Preparation';
+            }
+        }
+
+        static expandSlides() {
+            // PASS 1: Expand and replace all <slide-card> / [data-template] elements
+            const slideCards = Array.from(document.querySelectorAll('slide-card, [data-template]'));
+            
+            slideCards.forEach((el, index) => {
+                let templateName = el.getAttribute('template') || el.getAttribute('data-template') || 'standard';
+                if (['blank', 'content', 'default', 'basic'].includes(templateName.toLowerCase())) {
+                    templateName = 'standard';
+                }
+
+                let templateId = templateName.startsWith('tmpl-') ? templateName : `tmpl-${templateName}`;
+                let templateEl = document.getElementById(templateId);
+
+                if (!templateEl) {
+                    templateEl = document.getElementById('tmpl-standard') || document.getElementById('tmpl-walkthrough');
+                }
+
+                if (!templateEl) {
+                    console.error(`TemplateEngine: No fallback template available for slide-card!`);
+                    return;
+                }
+
+                // Clone template content
+                const clone = templateEl.content.cloneNode(true);
+                const section = clone.querySelector('section.slide');
+                if (!section) return;
+
+                // Transfer ID if explicitly provided on slide-card
+                if (el.id) {
+                    section.id = el.id;
+                }
+
+                // Transfer skill attribute (read, grammar, vocab, write, review)
+                const skill = el.getAttribute('skill') || el.getAttribute('data-skill') || section.getAttribute('data-skill') || 'read';
+                section.setAttribute('data-skill', skill);
+
+                // Dynamically color skill stripe and badges according to skill
+                const skillColorMap = {
+                    'read': 'var(--col-reading)',
+                    'reading': 'var(--col-reading)',
+                    'grammar': 'var(--col-grammar)',
+                    'vocab': 'var(--col-vocab)',
+                    'vocabulary': 'var(--col-vocab)',
+                    'write': 'var(--col-writing)',
+                    'writing': 'var(--col-writing)',
+                    'review': 'var(--col-review)',
+                    'title': 'var(--col-reading)'
+                };
+                const skillCol = skillColorMap[skill.toLowerCase()] || 'var(--col-reading)';
+                const stripe = section.querySelector('.skill-stripe');
+                if (stripe && (!stripe.style.background || stripe.style.background.includes('--col-'))) {
+                    stripe.style.background = skillCol;
+                }
+                const skillBadge = section.querySelector('.skill-badge, [data-slot="badge"]');
+                if (skillBadge && (!skillBadge.style.background || skillBadge.style.background.includes('--col-'))) {
+                    skillBadge.style.background = skillCol;
+                }
+
+                // Fill direct text attributes
+                ['title', 'subtitle', 'badge', 'tag', 'instruction'].forEach(attr => {
+                    const val = el.getAttribute(attr);
+                    if (val) {
+                        const slotKey = (attr === 'tag') ? 'badge' : attr;
+                        const target = section.querySelector(`[data-slot="${slotKey}"], [data-slot="${attr}"]`);
+                        if (target) target.innerHTML = val;
+                    }
+                });
+
+                // Transfer all named slots from child elements
+                const slotChildren = el.querySelectorAll('[slot]');
+                slotChildren.forEach(child => {
+                    const slotName = child.getAttribute('slot');
+                    const target = this.findSlotTarget(section, slotName);
+
+                    if (target) {
+                        // Transfer classes, styles, and custom attributes from child element
+                        if (child.className && child.className !== '') {
+                            target.className = (target.className ? target.className + ' ' : '') + child.className;
+                        }
+                        if (child.style.cssText) {
+                            target.style.cssText = (target.style.cssText ? target.style.cssText + ';' : '') + child.style.cssText;
+                        }
+
+                        if (child.hasAttribute('tag')) {
+                            const hdr = section.querySelector('[data-slot="passage-header"]');
+                            if (hdr) hdr.innerHTML = `📖 Passage Excerpt: Paragraph [${child.getAttribute('tag')}]`;
+                        }
+                        if (child.hasAttribute('data-q')) {
+                            const qCard = section.querySelector('.q-card, [data-slot="question-card"]');
+                            if (qCard) qCard.setAttribute('data-q', child.getAttribute('data-q'));
+                            const evBtn = section.querySelector('.syn-btn, [data-slot="evidence-btn"]');
+                            if (evBtn) evBtn.setAttribute('data-q', child.getAttribute('data-q'));
+                        }
+                        if (child.hasAttribute('data-ev')) {
+                            const evBtn = section.querySelector('.syn-btn, [data-slot="evidence-btn"]');
+                            if (evBtn) evBtn.setAttribute('data-ev', child.getAttribute('data-ev'));
+                            const markEl = section.querySelector('mark.evidence');
+                            if (markEl) markEl.id = child.getAttribute('data-ev');
+                        }
+
+                        // Copy inner HTML (append if target is an accumulator or replace)
+                        const targetSlotAttr = target.getAttribute('data-slot');
+                        if ((targetSlotAttr === 'left-col' || targetSlotAttr === 'roadmap' || target.classList.contains('title-left')) && target.innerHTML.trim() !== '') {
+                            target.innerHTML += child.innerHTML;
+                        } else {
+                            target.innerHTML = child.innerHTML;
+                        }
+                    }
+                });
+
+                // Ensure badge is never empty: populate with universal smart badge if blank
+                const badgeEl = section.querySelector('.skill-badge, [data-slot="badge"]');
+                if (badgeEl && badgeEl.textContent.trim() === '') {
+                    badgeEl.textContent = this.getDefaultBadge(skill, templateName, el.getAttribute('title'));
+                }
+
+                // If element has raw HTML children without explicit slot and target has default slot
+                if (slotChildren.length === 0 && el.innerHTML.trim() !== '') {
+                    const defaultSlot = section.querySelector('[data-slot="content"], [data-slot="grid"], .two-col, [data-slot="rules"], [data-slot="passage"], [data-slot="flowchart"], .page-content');
+                    if (defaultSlot) defaultSlot.innerHTML = el.innerHTML;
+                }
+
+                // Replace <slide-card> with fully expanded <section class="slide">
+                el.parentNode.replaceChild(section, el);
+            });
+
+            // PASS 2: Universal Slide Reconciliation & Dynamic Numbering across ALL slides in deck
+            const allSlides = Array.from(document.querySelectorAll('section.slide, .slide'));
+            const totalSlides = allSlides.length;
+            if (totalSlides === 0) return;
+
+            const skillColorMap = {
+                'read': 'var(--col-reading)',
+                'reading': 'var(--col-reading)',
+                'grammar': 'var(--col-grammar)',
+                'vocab': 'var(--col-vocab)',
+                'vocabulary': 'var(--col-vocab)',
+                'write': 'var(--col-writing)',
+                'writing': 'var(--col-writing)',
+                'review': 'var(--col-review)',
+                'title': 'var(--col-reading)'
+            };
+
+            let hasActiveSlide = false;
+            allSlides.forEach((slide, idx) => {
+                const slideNumStr = String(idx + 1).padStart(2, '0');
+                const totalNumStr = String(totalSlides).padStart(2, '0');
+                const slideSkill = (slide.dataset.skill || 'read').toLowerCase();
+                const skillCol = skillColorMap[slideSkill] || 'var(--col-reading)';
+
+                // Assign sequential slide ID if none or default pattern
+                if (!slide.id || /^slide-\d+$/.test(slide.id)) {
+                    slide.id = `slide-${idx + 1}`;
+                }
+
+                // Update slide counter in header
+                const numEl = slide.querySelector('[data-slot="slide-number"], .slide-number');
+                if (numEl) {
+                    numEl.textContent = `${slideNumStr} / ${totalNumStr}`;
+                }
+
+                // Ensure badge is never empty on native slides too
+                const badgeEl = slide.querySelector('.skill-badge, [data-slot="badge"]');
+                if (badgeEl) {
+                    if (badgeEl.textContent.trim() === '') {
+                        badgeEl.textContent = this.getDefaultBadge(slideSkill, '', slide.querySelector('.slide-title')?.textContent);
+                    }
+                    if (!badgeEl.style.background || badgeEl.style.background.includes('--col-')) {
+                        badgeEl.style.background = skillCol;
+                    }
+                }
+
+                if (slide.classList.contains('active')) {
+                    hasActiveSlide = true;
+                }
+            });
+
+            // If no slide is marked active, activate the first slide
+            if (!hasActiveSlide && allSlides.length > 0) {
+                allSlides[0].classList.add('active', 'visible');
+            }
+        }
+    }
+
+    // Execute immediately and synchronously before deck-engine starts
+    window.TemplateEngine = TemplateEngine;
+    TemplateEngine.init();
+})();
+
+
 /* ==================== MODULE: deck-core.js ==================== */
 /**
  * DeckEngine Core Module
@@ -26,6 +898,7 @@ class DeckEngine {
         this.setupStageScale();
         this.setupKeyboardNav();
         this.setupTouchNav();
+        this.setupSyncListeners();
 
         // Check if there's a hash in URL (e.g. #slide-4)
         const initialSlide = this.getSlideFromHash();
@@ -169,10 +1042,15 @@ class DeckEngine {
             return;
         }
 
-        this.slides.forEach((s, i) => {
-            s.classList.toggle('active', i === index);
-            s.classList.toggle('visible', i === index);
-        });
+        // Only toggle the two affected slides instead of iterating all
+        const prevSlide = this.slides[this.currentSlide];
+        const nextSlide = this.slides[index];
+        if (prevSlide) {
+            prevSlide.classList.remove('active', 'visible');
+        }
+        if (nextSlide) {
+            nextSlide.classList.add('active', 'visible');
+        }
         this.currentSlide = index;
         if (this.counter) {
             this.counter.textContent = `${index + 1} / ${this.slides.length}`;
@@ -194,6 +1072,10 @@ class DeckEngine {
         window.dispatchEvent(new CustomEvent('slidechanged', {
             detail: { index, slide: this.slides[index], broadcast }
         }));
+
+        // Update URL hash for bookmark/share support (without triggering scroll)
+        const slideId = this.slides[index].id || `slide-${index + 1}`;
+        history.replaceState(null, '', `#${slideId}`);
     }
 
     toggleBlackout(force = null) {
@@ -238,20 +1120,24 @@ class DeckEngine {
         const pageContent = slide.querySelector('.page-content, .title-notebook');
         if (!notebook || !pageContent) return;
 
-        // Reset previous transforms
-        pageContent.style.removeProperty('transform');
-        pageContent.style.removeProperty('transform-origin');
-        pageContent.style.removeProperty('height');
-
+        // Reset and measure in a single rAF to minimize layout thrashing
         requestAnimationFrame(() => {
+            pageContent.style.removeProperty('transform');
+            pageContent.style.removeProperty('transform-origin');
+            pageContent.style.removeProperty('height');
+
+            // Force layout calc after clearing
             const availableHeight = notebook.clientHeight;
             const scrollH = pageContent.scrollHeight;
 
             if (scrollH > availableHeight + 6) {
                 const fitRatio = Math.max(0.68, (availableHeight - 12) / scrollH);
-                pageContent.style.transform = `scale(${fitRatio.toFixed(3)})`;
-                pageContent.style.transformOrigin = 'top center';
-                pageContent.style.height = `${(availableHeight / fitRatio).toFixed(1)}px`;
+                // Batch all writes after reads
+                requestAnimationFrame(() => {
+                    pageContent.style.transform = `scale(${fitRatio.toFixed(3)})`;
+                    pageContent.style.transformOrigin = 'top center';
+                    pageContent.style.height = `${(availableHeight / fitRatio).toFixed(1)}px`;
+                });
             }
         });
     }
@@ -313,7 +1199,37 @@ class DeckEngine {
         }
     }
 
-    checkAnswers(container) {
+    setupSyncListeners() {
+        if (!window.presenterSyncEngine) return;
+
+        window.presenterSyncEngine.on('EXERCISE_ACTION', (data) => {
+            if (!data) return;
+            const target = data.containerId ? document.getElementById(data.containerId) : (this.slides[data.slideIndex] || document.querySelector('.slide.active'));
+            if (!target) return;
+
+            if (data.action === 'check') {
+                this.checkAnswers(target, false);
+            } else if (data.action === 'reveal') {
+                this.revealKeys(target, false);
+            } else if (data.action === 'reset') {
+                this.resetTask(target, false);
+            } else if (data.action === 'toggleOptCard' && typeof data.cardIndex === 'number') {
+                const card = target.querySelectorAll('.opt-card')[data.cardIndex];
+                if (card) this.toggleOptCard(card, false);
+            } else if (data.action === 'toggleExplanations') {
+                this.toggleExplanations(target, false);
+            } else if (data.action === 'highlightAll' && window.readingHighlighter) {
+                window.readingHighlighter.highlightAll(data.containerId, false);
+            }
+
+            // If in presenter window, refresh preview clone
+            if (window.presenterViewUI && typeof window.presenterViewUI.updatePresenterSlideView === 'function') {
+                window.presenterViewUI.updatePresenterSlideView();
+            }
+        });
+    }
+
+    checkAnswers(container, broadcast = true) {
         if (!container) container = document.querySelector('.slide.active');
         if (typeof container === 'string') container = document.getElementById(container);
         if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
@@ -357,11 +1273,28 @@ class DeckEngine {
         });
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        document.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-        document.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+        const slideContext = container.closest('.slide') || document.querySelector('.slide.active') || container;
+        slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+        slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+
+        // Show score toast
+        const allInputs = container.querySelectorAll('.blank-input[data-ans], .select-input[data-ans]');
+        if (allInputs.length > 0) {
+            const correctCount = container.querySelectorAll('.blank-input.correct, .select-input.correct').length;
+            this.showToastNotification(`✅ ${correctCount} / ${allInputs.length} correct`);
+        }
+
+        if (broadcast && window.presenterSyncEngine) {
+            const containerId = (typeof container === 'string' ? container : container?.id || null);
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'check',
+                containerId,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    revealKeys(container) {
+    revealKeys(container, broadcast = true) {
         if (!container) container = document.querySelector('.slide.active');
         if (typeof container === 'string') container = document.getElementById(container);
         if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
@@ -382,27 +1315,38 @@ class DeckEngine {
 
         container.querySelectorAll('.select-input').forEach(select => {
             if (select.dataset.ans) {
-                select.value = select.dataset.ans;
+                // Use first valid answer variant for pipe-separated alternatives
+                const firstAnswer = select.dataset.ans.split('|')[0].trim();
+                select.value = firstAnswer;
                 select.classList.remove('wrong', 'incorrect');
                 select.classList.add('correct');
             }
         });
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        const slideContext = container.closest('.slide') || document.querySelector('.slide.active') || document;
+        const slideContext = container.closest('.slide') || document.querySelector('.slide.active') || container;
         slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
         slideContext.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
         slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
         }
+
+        if (broadcast && window.presenterSyncEngine) {
+            const containerId = (typeof container === 'string' ? container : container?.id || null);
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'reveal',
+                containerId,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    revealAnswers(container) {
-        this.revealKeys(container);
+    revealAnswers(container, broadcast = true) {
+        this.revealKeys(container, broadcast);
     }
 
-    resetTask(container) {
+    resetTask(container, broadcast = true) {
         if (!container) container = document.querySelector('.slide.active');
         if (typeof container === 'string') container = document.getElementById(container);
         if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
@@ -427,42 +1371,61 @@ class DeckEngine {
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
         }
+
+        if (broadcast && window.presenterSyncEngine) {
+            const containerId = (typeof container === 'string' ? container : container?.id || null);
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'reset',
+                containerId,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    resetAnswers(container) {
-        this.resetTask(container);
+    resetAnswers(container, broadcast = true) {
+        this.resetTask(container, broadcast);
     }
 
-    checkBlanks(containerId) {
-        this.checkAnswers(containerId);
+    checkBlanks(containerId, broadcast = true) {
+        this.checkAnswers(containerId, broadcast);
     }
 
-    revealBlanks(containerId) {
-        this.revealKeys(containerId);
+    revealBlanks(containerId, broadcast = true) {
+        this.revealKeys(containerId, broadcast);
     }
 
-    resetBlanks(containerId) {
-        this.resetTask(containerId);
+    resetBlanks(containerId, broadcast = true) {
+        this.resetTask(containerId, broadcast);
     }
 
-    checkSelects(containerId) {
-        this.checkAnswers(containerId);
+    checkSelects(containerId, broadcast = true) {
+        this.checkAnswers(containerId, broadcast);
     }
 
-    revealSelects(containerId) {
-        this.revealKeys(containerId);
+    revealSelects(containerId, broadcast = true) {
+        this.revealKeys(containerId, broadcast);
     }
 
-    resetSelects(containerId) {
-        this.resetTask(containerId);
+    resetSelects(containerId, broadcast = true) {
+        this.resetTask(containerId, broadcast);
     }
 
-    toggleOptCard(card) {
+    toggleOptCard(card, broadcast = true) {
         card.classList.toggle('selected');
+        if (broadcast && window.presenterSyncEngine) {
+            const slide = card.closest('.slide') || document.querySelector('.slide.active');
+            const allCards = Array.from(slide ? slide.querySelectorAll('.opt-card') : []);
+            const cardIndex = allCards.indexOf(card);
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'toggleOptCard',
+                slideIndex: this.currentSlide,
+                cardIndex
+            });
+        }
     }
 
-    checkMultiOpts(containerId) {
-        const container = document.getElementById(containerId);
+    checkMultiOpts(containerId, broadcast = true) {
+        const container = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
         if (!container) return;
         const cards = container.querySelectorAll('.opt-card');
         cards.forEach(card => {
@@ -475,10 +1438,17 @@ class DeckEngine {
                 card.classList.add('correct-opt');
             }
         });
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'check',
+                containerId: container.id || null,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    revealMultiOpts(containerId) {
-        const container = document.getElementById(containerId);
+    revealMultiOpts(containerId, broadcast = true) {
+        const container = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
         if (!container) return;
         const cards = container.querySelectorAll('.opt-card');
         cards.forEach(card => {
@@ -489,25 +1459,59 @@ class DeckEngine {
                 card.classList.remove('selected');
             }
         });
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'reveal',
+                containerId: container.id || null,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    resetMultiOpts(containerId) {
-        const container = document.getElementById(containerId);
+    resetMultiOpts(containerId, broadcast = true) {
+        const container = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
         if (!container) return;
         const cards = container.querySelectorAll('.opt-card');
         cards.forEach(card => {
             card.classList.remove('selected', 'correct-opt', 'wrong-opt');
         });
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'reset',
+                containerId: container.id || null,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    toggleExplanations(containerId) {
-        const container = document.getElementById(containerId);
+    toggleExplanations(containerId, broadcast = true) {
+        let container;
+        if (containerId instanceof HTMLElement) {
+            container = containerId.closest('.page-content') || containerId.closest('.slide') || document.querySelector('.slide.active');
+        } else if (typeof containerId === 'string') {
+            container = document.getElementById(containerId);
+        } else {
+            container = document.querySelector('.slide.active');
+        }
         if (!container) return;
         const explanations = container.querySelectorAll('.item-explanation');
         explanations.forEach(exp => exp.classList.toggle('show'));
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'toggleExplanations',
+                containerId: container.id || null,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
-    toggleSynonymExplanation(qKey, evId) {
+    toggleSynonymExplanation(qKey, evId, broadcast = true) {
+        if (window.readingHighlighter) {
+            window.readingHighlighter.focusEvidence(qKey, evId, broadcast);
+            return;
+        }
+
         if (!evId && qKey) evId = `ev-${qKey}`;
         if (!qKey && evId) qKey = evId.replace(/^ev-/, '');
 
@@ -540,6 +1544,14 @@ class DeckEngine {
                     if (exp) exp.classList.toggle('show', !isCurrentlyActive);
                 });
             }
+        }
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EVIDENCE_FOCUS', {
+                qKey,
+                evId,
+                active: !isCurrentlyActive
+            });
         }
     }
 
@@ -867,103 +1879,6 @@ window.addEventListener('DOMContentLoaded', () => {
     DeckComponents.init();
 });
 
-// Universal Global Helper Functions for Exercise Buttons
-window.checkAnswers = function(btnOrContainerId) {
-    let container = null;
-    if (typeof btnOrContainerId === 'string') {
-        container = document.getElementById(btnOrContainerId);
-    } else if (btnOrContainerId instanceof Element) {
-        container = btnOrContainerId.closest('.page-content') || btnOrContainerId.closest('.slide') || document.querySelector('.slide.active');
-    } else {
-        container = document.querySelector('.slide.active');
-    }
-    if (window.deckEngine && typeof window.deckEngine.checkAnswers === 'function') {
-        window.deckEngine.checkAnswers(container);
-    } else if (container) {
-        container.querySelectorAll('.blank-input').forEach(input => {
-            if (input.dataset.ans) {
-                const val = input.value.trim().toLowerCase();
-                const expected = input.dataset.ans.toLowerCase().split('|').map(s => s.trim());
-                if (val && expected.includes(val)) {
-                    input.classList.add('correct');
-                    input.classList.remove('wrong', 'incorrect');
-                } else {
-                    input.classList.add('wrong');
-                    input.classList.remove('correct');
-                }
-            }
-        });
-        container.querySelectorAll('.select-input').forEach(sel => {
-            if (sel.dataset.ans) {
-                const val = sel.value.trim().toUpperCase();
-                const expected = sel.dataset.ans.trim().toUpperCase();
-                if (val && val === expected) {
-                    sel.classList.add('correct');
-                    sel.classList.remove('wrong', 'incorrect');
-                } else {
-                    sel.classList.add('wrong');
-                    sel.classList.remove('correct');
-                }
-            }
-        });
-        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-    }
-};
-
-window.revealAnswers = window.revealKeys = function(btnOrContainerId) {
-    let container = null;
-    if (typeof btnOrContainerId === 'string') {
-        container = document.getElementById(btnOrContainerId);
-    } else if (btnOrContainerId instanceof Element) {
-        container = btnOrContainerId.closest('.page-content') || btnOrContainerId.closest('.slide') || document.querySelector('.slide.active');
-    } else {
-        container = document.querySelector('.slide.active');
-    }
-    if (window.deckEngine && typeof window.deckEngine.revealKeys === 'function') {
-        window.deckEngine.revealKeys(container);
-    } else if (window.deckEngine && typeof window.deckEngine.revealAnswers === 'function') {
-        window.deckEngine.revealAnswers(container);
-    } else if (container) {
-        container.querySelectorAll('.blank-input').forEach(input => {
-            if (input.dataset.ans) {
-                input.value = input.dataset.ans.split('|')[0];
-                input.classList.add('correct');
-                input.classList.remove('wrong', 'incorrect');
-            }
-        });
-        container.querySelectorAll('.select-input').forEach(sel => {
-            if (sel.dataset.ans) {
-                sel.value = sel.dataset.ans;
-                sel.classList.add('correct');
-                sel.classList.remove('wrong', 'incorrect');
-            }
-        });
-        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-    }
-};
-
-window.resetAnswers = window.resetTask = function(btnOrContainerId) {
-    let container = null;
-    if (typeof btnOrContainerId === 'string') {
-        container = document.getElementById(btnOrContainerId);
-    } else if (btnOrContainerId instanceof Element) {
-        container = btnOrContainerId.closest('.page-content') || btnOrContainerId.closest('.slide') || document.querySelector('.slide.active');
-    } else {
-        container = document.querySelector('.slide.active');
-    }
-    if (window.deckEngine && typeof window.deckEngine.resetTask === 'function') {
-        window.deckEngine.resetTask(container);
-    } else if (window.deckEngine && typeof window.deckEngine.resetAnswers === 'function') {
-        window.deckEngine.resetAnswers(container);
-    } else if (container) {
-        container.querySelectorAll('.blank-input, .select-input').forEach(input => {
-            input.value = '';
-            input.classList.remove('correct', 'wrong', 'incorrect');
-        });
-        container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
-    }
-};
-
 // Hook tab update into showSlide
 if (window.DeckEngine) {
     const originalShowSlide = DeckEngine.prototype.showSlide;
@@ -1040,6 +1955,60 @@ class DeckThemeEngine {
                 icon: '📜',
                 desc: 'Sophisticated literary masterclass with Bodoni high-contrast serifs.',
                 previewBg: 'linear-gradient(135deg, #44403c, #1c1917)'
+            },
+            {
+                id: 'soft-editorial',
+                name: 'Soft Editorial',
+                displayFont: 'Cormorant Garamond',
+                bodyFont: 'Outfit',
+                icon: '🌸',
+                desc: 'Warm almond paper with sage, blush rose, and elegant editorial serifs.',
+                previewBg: 'linear-gradient(135deg, #059669, #e11d48)'
+            },
+            {
+                id: 'cobalt-grid',
+                name: 'Cobalt Grid',
+                displayFont: 'Space Grotesk',
+                bodyFont: 'DM Sans',
+                icon: '📐',
+                desc: 'Technical precision graph-paper aesthetic with electric cobalt blue.',
+                previewBg: 'linear-gradient(135deg, #2563eb, #0284c7)'
+            },
+            {
+                id: 'vellum',
+                name: 'Vellum',
+                displayFont: 'Cormorant Garamond',
+                bodyFont: 'Plus Jakarta Sans',
+                icon: '🌌',
+                desc: 'Deep midnight navy canvas with golden-amber serifs and dusty teal.',
+                previewBg: 'linear-gradient(135deg, #fbbf24, #0b132b)'
+            },
+            {
+                id: 'sakura-chroma',
+                name: 'Sakura Chroma',
+                displayFont: 'Outfit',
+                bodyFont: 'DM Sans',
+                icon: '📼',
+                desc: 'Vintage Japanese cassette aesthetic with vermillion and sakura pink.',
+                previewBg: 'linear-gradient(135deg, #ea580c, #ec4899)'
+            },
+            {
+                id: 'editorial-forest',
+                name: 'Editorial Forest',
+                displayFont: 'Cormorant Garamond',
+                bodyFont: 'DM Sans',
+                icon: '🌲',
+                desc: 'Deep pine green, dusty blush pink, and warm parchment typography.',
+                previewBg: 'linear-gradient(135deg, #064e3b, #db2777)'
+            },
+            {
+                id: 'broadside',
+                name: 'Broadside',
+                displayFont: 'Space Grotesk',
+                bodyFont: 'Plus Jakarta Sans',
+                icon: '📰',
+                desc: 'Ultra-dark pitch-black broadsheet void with blazing fire orange.',
+                previewBg: 'linear-gradient(135deg, #ff5722, #000000)'
             }
         ];
 
@@ -1710,11 +2679,116 @@ class TeacherHighlighter {
 
     init() {
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.bindEvents());
+            document.addEventListener('DOMContentLoaded', () => {
+                this.bindEvents();
+                this.setupSyncListeners();
+            });
         } else {
             this.bindEvents();
+            this.setupSyncListeners();
         }
         this.injectStyles();
+    }
+
+    setupSyncListeners() {
+        if (!window.presenterSyncEngine) return;
+
+        window.presenterSyncEngine.on('HIGHLIGHTER_ADD', (data) => {
+            if (data && data.targetText) {
+                this.applyRemoteHighlight(data);
+            }
+        });
+
+        window.presenterSyncEngine.on('HIGHLIGHTER_REMOVE', (data) => {
+            if (data && data.text) {
+                document.querySelectorAll('.teacher-text-highlight').forEach(mark => {
+                    if (mark.textContent === data.text && mark.parentNode) {
+                        const textNode = document.createTextNode(mark.textContent);
+                        const parent = mark.parentNode;
+                        parent.replaceChild(textNode, mark);
+                        parent.normalize();
+                    }
+                });
+            }
+        });
+
+        window.presenterSyncEngine.on('HIGHLIGHTER_UNDO', () => {
+            this.undo(false);
+        });
+
+        window.presenterSyncEngine.on('HIGHLIGHTER_CLEAR', () => {
+            this.clear(false);
+        });
+    }
+
+    applyRemoteHighlight(data) {
+        const activeSlide = (window.deckEngine && window.deckEngine.slides[data.slideIndex]) || document.querySelector('.slide.active');
+        const previewClone = document.querySelector('.slide.preview-clone');
+        const roots = [activeSlide, previewClone].filter(Boolean);
+
+        const colorObj = {
+            name: data.colorName || 'Yellow',
+            bg: data.bg || 'rgba(254, 240, 138, 0.85)',
+            border: data.border || '#ca8a04'
+        };
+
+        const createdMarks = [];
+
+        roots.forEach(root => {
+            const treeWalker = document.createTreeWalker(
+                root,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: (node) => {
+                        if (!node.nodeValue || !node.nodeValue.includes(data.targetText)) return NodeFilter.FILTER_REJECT;
+                        if (node.parentElement && node.parentElement.closest('.presentation-tools-hud, .tool-modal, .presenter-notes-drawer')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
+
+            let textNode = treeWalker.nextNode();
+            while (textNode) {
+                const text = textNode.nodeValue;
+                const idx = text.indexOf(data.targetText);
+                if (idx !== -1) {
+                    const beforeText = text.substring(0, idx);
+                    const afterText = text.substring(idx + data.targetText.length);
+
+                    const mark = document.createElement('mark');
+                    mark.className = 'teacher-text-highlight';
+                    mark.dataset.colorName = colorObj.name;
+                    mark.style.backgroundColor = colorObj.bg;
+                    mark.style.borderColor = colorObj.border;
+                    mark.textContent = data.targetText;
+                    mark.title = 'Click to unhighlight';
+
+                    mark.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.removeHighlight(mark, true);
+                    });
+
+                    const parent = textNode.parentNode;
+                    if (parent) {
+                        const fragment = document.createDocumentFragment();
+                        if (beforeText) fragment.appendChild(document.createTextNode(beforeText));
+                        fragment.appendChild(mark);
+                        if (afterText) fragment.appendChild(document.createTextNode(afterText));
+
+                        parent.replaceChild(fragment, textNode);
+                        createdMarks.push(mark);
+                    }
+                    break;
+                }
+                textNode = treeWalker.nextNode();
+            }
+        });
+
+        if (createdMarks.length > 0) {
+            this.history.push(createdMarks);
+        }
     }
 
     bindEvents() {
@@ -1722,7 +2796,7 @@ class TeacherHighlighter {
         document.addEventListener('mouseup', (e) => {
             if (!this.isActive) return;
             // Avoid triggering when clicking inside HUD controls or modals
-            if (e.target.closest('#presentationToolsHUD, .tool-modal, .highlighter-palette, .notes-header')) return;
+            if (e.target.closest('#presentationToolsHUD, .tool-modal, .highlighter-palette, .notes-header, .cp-header, .cp-notes-col')) return;
 
             setTimeout(() => {
                 const selection = window.getSelection();
@@ -1734,7 +2808,7 @@ class TeacherHighlighter {
 
         // Global shortcuts
         document.addEventListener('keydown', (e) => {
-            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
+            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) || e.target.isContentEditable) return;
 
             // 'H' key toggles highlighter mode
             if ((e.key === 'h' || e.key === 'H') && !e.ctrlKey && !e.metaKey) {
@@ -1756,12 +2830,15 @@ class TeacherHighlighter {
         });
     }
 
-    toggle() {
+    toggle(broadcast = true) {
         this.isActive = !this.isActive;
         document.body.classList.toggle('highlighter-mode-active', this.isActive);
 
         const btn = document.getElementById('toolHighlightBtn');
         if (btn) btn.classList.toggle('active', this.isActive);
+
+        const cpBtn = document.getElementById('btnCpHighlighter');
+        if (cpBtn) cpBtn.classList.toggle('active', this.isActive);
 
         const palette = document.getElementById('highlighterPalette');
         if (palette) palette.style.display = this.isActive ? 'flex' : 'none';
@@ -1783,7 +2860,7 @@ class TeacherHighlighter {
         }
     }
 
-    highlightSelection(colorObj) {
+    highlightSelection(colorObj, broadcast = true) {
         const selection = window.getSelection();
         if (!selection || selection.isCollapsed || selection.rangeCount === 0) return;
 
@@ -1795,7 +2872,7 @@ class TeacherHighlighter {
         const rootElement = commonAncestor.nodeType === Node.ELEMENT_NODE ? commonAncestor : commonAncestor.parentNode;
 
         // Skip non-content UI
-        if (rootElement.closest('.presentation-tools-hud, .tool-modal, .presenter-notes-drawer')) {
+        if (rootElement.closest('.presentation-tools-hud, .tool-modal, .presenter-notes-drawer, .cp-header, .cp-notes-col')) {
             return;
         }
 
@@ -1852,10 +2929,8 @@ class TeacherHighlighter {
             mark.title = 'Click to unhighlight';
 
             mark.addEventListener('click', (e) => {
-                if (this.isActive) {
-                    e.stopPropagation();
-                    this.removeHighlight(mark);
-                }
+                e.stopPropagation();
+                this.removeHighlight(mark, true);
             });
 
             const parent = textNode.parentNode;
@@ -1875,21 +2950,36 @@ class TeacherHighlighter {
         if (createdMarks.length > 0) {
             this.history.push(createdMarks);
         }
+
+        if (broadcast && window.presenterSyncEngine) {
+            const slideIndex = window.deckEngine ? window.deckEngine.currentSlide : 0;
+            window.presenterSyncEngine.emit('HIGHLIGHTER_ADD', {
+                slideIndex,
+                targetText: selectedText,
+                colorName: colorObj.name,
+                bg: colorObj.bg,
+                border: colorObj.border
+            });
+        }
     }
 
-    removeHighlight(mark) {
+    removeHighlight(mark, broadcast = true) {
         if (!mark || !mark.parentNode) return;
         const text = mark.textContent;
         const textNode = document.createTextNode(text);
         const parent = mark.parentNode;
         parent.replaceChild(textNode, mark);
         parent.normalize(); // Merges adjacent text nodes smoothly
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('HIGHLIGHTER_REMOVE', { text });
+        }
     }
 
     undo(broadcast = true) {
         if (this.history.length > 0) {
             const lastBatch = this.history.pop();
-            lastBatch.forEach(mark => this.removeHighlight(mark));
+            lastBatch.forEach(mark => this.removeHighlight(mark, false));
             if (window.deckEngine) {
                 window.deckEngine.showToastNotification('↩️ Undid highlight');
             }
@@ -1900,9 +2990,17 @@ class TeacherHighlighter {
     }
 
     clear(broadcast = true) {
-        const activeSlide = document.querySelector('.slide.active') || document.body;
-        const highlights = activeSlide.querySelectorAll('.teacher-text-highlight');
-        highlights.forEach(mark => this.removeHighlight(mark));
+        const highlights = document.querySelectorAll('.teacher-text-highlight');
+        highlights.forEach(mark => {
+            if (mark.parentNode) {
+                const textNode = document.createTextNode(mark.textContent);
+                const parent = mark.parentNode;
+                parent.replaceChild(textNode, mark);
+            }
+        });
+        document.querySelectorAll('.slide, .preview-clone, .page-content').forEach(el => {
+            try { el.normalize(); } catch(e) {}
+        });
         this.history = [];
         if (window.deckEngine) {
             window.deckEngine.showToastNotification('🗑️ Cleared highlights');
@@ -2270,8 +3368,10 @@ class StepRevealEngine {
     }
 }
 
-// Global instantiation
-window.stepRevealEngine = new StepRevealEngine();
+// Global instantiation (deferred to ensure DeckEngine is available)
+window.addEventListener('DOMContentLoaded', () => {
+    window.stepRevealEngine = new StepRevealEngine(window.deckEngine);
+});
 
 
 /* ==================== MODULE: student-picker.js ==================== */
@@ -2309,16 +3409,48 @@ class StudentPicker {
 
     init() {
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.injectUI());
+            document.addEventListener('DOMContentLoaded', () => {
+                this.injectUI();
+                this.setupSyncListeners();
+            });
         } else {
             this.injectUI();
+            this.setupSyncListeners();
         }
 
         // Global shortcut 'R'
         document.addEventListener('keydown', (e) => {
             if ((e.key === 'r' || e.key === 'R') && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
                 e.preventDefault();
-                this.toggle();
+                this.toggle(true);
+            }
+        });
+    }
+
+    setupSyncListeners() {
+        if (!window.presenterSyncEngine) return;
+
+        window.presenterSyncEngine.on('STUDENT_PICKER_MODAL', (data) => {
+            if (data && data.open) {
+                this.open(false);
+            } else {
+                this.close(false);
+            }
+        });
+
+        window.presenterSyncEngine.on('STUDENT_SPIN', (data) => {
+            if (data && data.student) {
+                this.open(false);
+                this.spin(data.student, false, data.totalCycles);
+            }
+        });
+
+        window.presenterSyncEngine.on('STUDENT_ROSTER_SYNC', (data) => {
+            if (data && Array.isArray(data.students)) {
+                this.students = data.students;
+                this.saveStudents();
+                const input = document.getElementById('rosterInput');
+                if (input) input.value = this.students.join(', ');
             }
         });
     }
@@ -2332,14 +3464,14 @@ class StudentPicker {
         modal.style.display = 'none';
 
         modal.innerHTML = `
-            <div class="student-modal-backdrop" onclick="studentPicker.close()"></div>
+            <div class="student-modal-backdrop" onclick="studentPicker.close(true)"></div>
             <div class="student-modal-dialog">
                 <div class="student-modal-header">
                     <div>
                         <h2>🎲 Random Student Selector</h2>
                         <p>Engage students with fair cold-calling &amp; speaking turns.</p>
                     </div>
-                    <button class="student-modal-close" onclick="studentPicker.close()">×</button>
+                    <button class="student-modal-close" onclick="studentPicker.close(true)">×</button>
                 </div>
 
                 <div class="picker-display-stage">
@@ -2347,7 +3479,7 @@ class StudentPicker {
                 </div>
 
                 <div class="picker-controls-row">
-                    <button class="btn-picker-spin" id="pickerSpinBtn" onclick="studentPicker.spin()">🎲 SPIN WHEEL</button>
+                    <button class="btn-picker-spin" id="pickerSpinBtn" onclick="studentPicker.spin(null, true)">🎲 SPIN WHEEL</button>
                     <button class="btn-picker-edit" onclick="studentPicker.toggleRosterEditor()">✏️ Edit Roster</button>
                 </div>
 
@@ -2366,31 +3498,58 @@ class StudentPicker {
         this.injectStyles();
     }
 
-    spin() {
+    spin(targetStudent = null, broadcast = true, customCycles = null) {
         if (this.isSpinning || this.students.length === 0) return;
         this.isSpinning = true;
+
+        const chosenStudent = targetStudent || this.students[Math.floor(Math.random() * this.students.length)];
+        const totalCycles = customCycles || (24 + Math.floor(Math.random() * 8));
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('STUDENT_SPIN', {
+                student: chosenStudent,
+                totalCycles: totalCycles
+            });
+            window.presenterSyncEngine.emit('STUDENT_PICKED', {
+                student: chosenStudent
+            });
+        }
 
         const resultEl = document.getElementById('pickerResultName');
         const spinBtn = document.getElementById('pickerSpinBtn');
         if (spinBtn) spinBtn.disabled = true;
 
         let counter = 0;
-        const totalCycles = 24 + Math.floor(Math.random() * 8);
         const interval = 60;
 
         const step = () => {
-            const randomIndex = Math.floor(Math.random() * this.students.length);
-            resultEl.textContent = this.students[randomIndex];
-            resultEl.style.transform = `scale(${1 + (counter % 3) * 0.04})`;
-            counter++;
-
-            if (counter < totalCycles) {
+            if (counter < totalCycles - 1) {
+                const randomIndex = Math.floor(Math.random() * this.students.length);
+                if (resultEl) {
+                    resultEl.textContent = this.students[randomIndex];
+                    resultEl.style.transform = `scale(${1 + (counter % 3) * 0.04})`;
+                }
+                counter++;
                 setTimeout(step, interval + counter * 6);
             } else {
                 this.isSpinning = false;
                 if (spinBtn) spinBtn.disabled = false;
-                resultEl.style.transform = 'scale(1.15)';
-                resultEl.style.color = '#38bdf8';
+                if (resultEl) {
+                    resultEl.textContent = chosenStudent;
+                    resultEl.style.transform = 'scale(1.15)';
+                    resultEl.style.color = '#38bdf8';
+                }
+
+                // Update Cockpit display badge if present
+                const pill = document.getElementById('cpPickedStudentDisplay');
+                const nameEl = document.getElementById('cpPickedStudentName');
+                if (pill && nameEl) {
+                    nameEl.textContent = chosenStudent;
+                    pill.style.display = 'flex';
+                    pill.classList.add('pulse');
+                    setTimeout(() => pill.classList.remove('pulse'), 800);
+                }
+
                 this.playChime();
             }
         };
@@ -2429,6 +3588,9 @@ class StudentPicker {
             this.students = names;
             this.saveStudents();
             this.toggleRosterEditor();
+            if (window.presenterSyncEngine) {
+                window.presenterSyncEngine.emit('STUDENT_ROSTER_SYNC', { students: names });
+            }
         }
     }
 
@@ -2440,32 +3602,41 @@ class StudentPicker {
         const input = document.getElementById('rosterInput');
         if (input) input.value = numbers.join(', ');
         this.toggleRosterEditor();
+        if (window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('STUDENT_ROSTER_SYNC', { students: numbers });
+        }
     }
 
-    open() {
+    open(broadcast = true) {
         const modal = document.getElementById('studentPickerModal');
         if (modal) modal.style.display = 'flex';
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('STUDENT_PICKER_MODAL', { open: true });
+        }
     }
 
     openModal() {
-        this.open();
+        this.open(true);
     }
 
-    pickRandomStudent(broadcast = false) {
-        this.spin(broadcast);
+    pickRandomStudent(broadcast = true) {
+        this.spin(null, broadcast);
     }
 
-    close() {
+    close(broadcast = true) {
         const modal = document.getElementById('studentPickerModal');
         if (modal) modal.style.display = 'none';
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('STUDENT_PICKER_MODAL', { open: false });
+        }
     }
 
-    toggle() {
+    toggle(broadcast = true) {
         const modal = document.getElementById('studentPickerModal');
         if (modal && modal.style.display === 'flex') {
-            this.close();
+            this.close(broadcast);
         } else {
-            this.open();
+            this.open(broadcast);
         }
     }
 
@@ -3503,12 +4674,27 @@ class ReadingHighlighter {
         this.bindSynonymClicks();
         this.bindQuestionHover();
         this.hookDeckEngine();
+        this.setupSyncListeners();
+    }
+
+    setupSyncListeners() {
+        if (window.presenterSyncEngine) {
+            window.presenterSyncEngine.on('EVIDENCE_FOCUS', (data) => {
+                if (data && (data.qKey || data.evId)) {
+                    this.focusEvidence(data.qKey, data.evId, false);
+                }
+            });
+
+            window.presenterSyncEngine.on('EVIDENCE_CLEAR', (data) => {
+                this.clearAll(data?.containerId, false);
+            });
+        }
     }
 
     /**
      * Highlights all evidence and synonym pairs associated with an exercise container or current slide
      */
-    highlightAll(containerId) {
+    highlightAll(containerId, broadcast = true) {
         const slide = this.getSlideForContainer(containerId);
         if (!slide) return;
 
@@ -3522,17 +4708,29 @@ class ReadingHighlighter {
             span.classList.add('active-syn');
         });
 
+        // Also apply to preview clone in presenter view if present
+        const previewClone = document.querySelector('.slide.preview-clone');
+        if (previewClone) {
+            previewClone.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+            previewClone.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+            previewClone.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+        }
+
         // Show all item explanations
         const container = containerId ? document.getElementById(containerId) : slide;
         if (container) {
             container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+        }
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', { action: 'highlightAll', containerId });
         }
     }
 
     /**
      * Clears all evidence highlights, synonym badges, and explanations in the slide
      */
-    clearAll(containerId) {
+    clearAll(containerId, broadcast = true) {
         const slide = this.getSlideForContainer(containerId);
         if (!slide) return;
 
@@ -3544,43 +4742,61 @@ class ReadingHighlighter {
             span.classList.remove('active-syn');
         });
 
+        // Also clear in preview clone
+        const previewClone = document.querySelector('.slide.preview-clone');
+        if (previewClone) {
+            previewClone.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
+            previewClone.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
+            previewClone.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
+        }
+
         const container = containerId ? document.getElementById(containerId) : slide;
         if (container) {
             container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
         }
 
         this.activeEvidenceId = null;
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EVIDENCE_CLEAR', { containerId });
+        }
     }
 
     /**
      * Toggles highlight and smooth-scrolls to specific evidence for question qKey
      */
-    focusEvidence(qKey, evId) {
+    focusEvidence(qKey, evId, broadcast = true) {
         if (!evId && qKey) {
             evId = `ev-${qKey}`;
         }
 
-        let evTarget = evId ? document.getElementById(evId) : null;
-        if (!evTarget && qKey) {
-            evTarget = document.querySelector(`mark.evidence[data-q="${qKey}"], mark.evidence#ev-${qKey}, mark.evidence[data-ev="${evId}"]`);
+        const allEvTargets = [];
+        if (evId) {
+            const byId = document.getElementById(evId);
+            if (byId) allEvTargets.push(byId);
+            document.querySelectorAll(`mark.evidence[data-ev="${evId}"], mark.evidence#${evId}`).forEach(el => {
+                if (!allEvTargets.includes(el)) allEvTargets.push(el);
+            });
         }
-        if (!evTarget && evId) {
-            evTarget = document.querySelector(`mark.evidence[data-ev="${evId}"]`);
+        if (qKey) {
+            document.querySelectorAll(`mark.evidence[data-q="${qKey}"], mark.evidence#ev-${qKey}`).forEach(el => {
+                if (!allEvTargets.includes(el)) allEvTargets.push(el);
+            });
         }
 
-        const synSpans = qKey ? document.querySelectorAll(`[data-q="${qKey}"]`) : [];
-        const isCurrentlyActive = (evTarget && evTarget.classList.contains('highlighted') && this.activeEvidenceId === (evId || qKey)) ||
-                                  (synSpans.length > 0 && Array.from(synSpans).every(s => s.classList.contains('active-syn')) && this.activeEvidenceId === qKey);
+        const synSpans = qKey ? Array.from(document.querySelectorAll(`[data-q="${qKey}"]`)) : [];
+        const isCurrentlyActive = (allEvTargets.length > 0 && allEvTargets.some(t => t.classList.contains('highlighted')) && this.activeEvidenceId === (evId || qKey)) ||
+                                  (synSpans.length > 0 && synSpans.every(s => s.classList.contains('active-syn')) && this.activeEvidenceId === qKey);
 
         if (!isCurrentlyActive) {
-            if (evTarget) {
-                evTarget.classList.add('highlighted', 'glow-pulse');
-            }
+            allEvTargets.forEach(target => {
+                target.classList.add('highlighted', 'glow-pulse');
+            });
             synSpans.forEach(s => s.classList.add('active-syn'));
             this.activeEvidenceId = evId || qKey;
 
-            // Smooth scroll into view inside the scrollable reading pane
-            if (evTarget) {
+            // Smooth scroll into view inside the scrollable reading pane (for both main and preview)
+            allEvTargets.forEach(evTarget => {
                 const readingPane = evTarget.closest('.reading-pane');
                 if (readingPane) {
                     const paneRect = readingPane.getBoundingClientRect();
@@ -3600,9 +4816,11 @@ class ReadingHighlighter {
                 setTimeout(() => {
                     evTarget.classList.remove('glow-pulse');
                 }, 2500);
-            }
+            });
         } else {
-            if (evTarget) evTarget.classList.remove('highlighted', 'glow-pulse');
+            allEvTargets.forEach(target => {
+                target.classList.remove('highlighted', 'glow-pulse');
+            });
             synSpans.forEach(s => s.classList.remove('active-syn'));
             this.activeEvidenceId = null;
         }
@@ -3623,10 +4841,18 @@ class ReadingHighlighter {
                 });
             }
         }
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EVIDENCE_FOCUS', {
+                qKey,
+                evId,
+                active: !isCurrentlyActive
+            });
+        }
     }
 
-    showEvidence(qKey, evId) {
-        this.focusEvidence(qKey, evId);
+    showEvidence(qKey, evId, broadcast = true) {
+        this.focusEvidence(qKey, evId, broadcast);
     }
 
     /**
@@ -3652,7 +4878,7 @@ class ReadingHighlighter {
                 const dataEv = btn.dataset.ev || (dataQ ? `ev-${dataQ}` : null);
                 if (dataQ || dataEv) {
                     e.preventDefault();
-                    this.focusEvidence(dataQ, dataEv);
+                    this.focusEvidence(dataQ, dataEv, true);
                     if (card) {
                         const exp = card.querySelector('.item-explanation');
                         if (exp) exp.classList.toggle('show');
@@ -3680,44 +4906,44 @@ class ReadingHighlighter {
             const origCheckBlanks = DeckEngine.prototype.checkBlanks;
             DeckEngine.prototype.checkBlanks = function (containerId) {
                 origCheckBlanks.call(this, containerId);
-                self.highlightAll(containerId);
+                self.highlightAll(containerId, false);
             };
 
             const origCheckSelects = DeckEngine.prototype.checkSelects;
             DeckEngine.prototype.checkSelects = function (containerId) {
                 origCheckSelects.call(this, containerId);
-                self.highlightAll(containerId);
+                self.highlightAll(containerId, false);
             };
 
             // Hook revealBlanks & revealSelects
             const origRevealBlanks = DeckEngine.prototype.revealBlanks;
             DeckEngine.prototype.revealBlanks = function (containerId) {
                 origRevealBlanks.call(this, containerId);
-                self.highlightAll(containerId);
+                self.highlightAll(containerId, false);
             };
 
             const origRevealSelects = DeckEngine.prototype.revealSelects;
             DeckEngine.prototype.revealSelects = function (containerId) {
                 origRevealSelects.call(this, containerId);
-                self.highlightAll(containerId);
+                self.highlightAll(containerId, false);
             };
 
             // Hook resetBlanks & resetSelects
             const origResetBlanks = DeckEngine.prototype.resetBlanks;
             DeckEngine.prototype.resetBlanks = function (containerId) {
                 origResetBlanks.call(this, containerId);
-                self.clearAll(containerId);
+                self.clearAll(containerId, false);
             };
 
             const origResetSelects = DeckEngine.prototype.resetSelects;
             DeckEngine.prototype.resetSelects = function (containerId) {
                 origResetSelects.call(this, containerId);
-                self.clearAll(containerId);
+                self.clearAll(containerId, false);
             };
 
             // Hook toggleSynonymExplanation
             DeckEngine.prototype.toggleSynonymExplanation = function (qKey, evId) {
-                self.focusEvidence(qKey, evId);
+                self.focusEvidence(qKey, evId, true);
             };
         }
     }
@@ -3900,7 +5126,7 @@ class VocabBank {
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = customLang || 'en-GB';
+        utterance.lang = customLang || this.currentAccent || 'en-GB';
         utterance.rate = this.speechRate || 0.9;
 
         // Try selecting Google Female UK voice if available
@@ -4340,7 +5566,8 @@ class ProgressTracker {
     }
 
     init() {
-        this.restoreResponses();
+        // Defer restore to guarantee it runs after hydrateBlanksAndInputs clears values
+        setTimeout(() => this.restoreResponses(), 0);
         this.bindAutoSave();
         this.renderReviewDashboard();
     }
@@ -4349,8 +5576,13 @@ class ProgressTracker {
      * Auto-saves all inputs and selects when modified
      */
     bindAutoSave() {
-        document.addEventListener('change', () => this.saveResponses());
-        document.addEventListener('input', () => this.saveResponses());
+        let saveTimeout = null;
+        const debouncedSave = () => {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => this.saveResponses(), 400);
+        };
+        document.addEventListener('change', debouncedSave);
+        document.addEventListener('input', debouncedSave);
     }
 
     saveResponses() {
@@ -5402,8 +6634,8 @@ class ClassroomTimer {
                     color: #38bdf8;
                     margin: 8px 0 14px 0;
                 }
-                .timer-display.ended {
-                    color: #ef4444;
+                .timer-display.ended, .cp-timer-countdown-display.ended {
+                    color: #ef4444 !important;
                     animation: timerPulseAlert 0.6s infinite alternate;
                 }
                 .timer-presets {
@@ -5457,6 +6689,31 @@ class ClassroomTimer {
         }
 
         this.initModal();
+        this.setupSyncListeners();
+    }
+
+    setupSyncListeners() {
+        if (!window.presenterSyncEngine) return;
+
+        window.presenterSyncEngine.on('TIMER_CMD', (data) => {
+            if (!data) return;
+            if (data.action === 'set' && typeof data.seconds === 'number') {
+                this.setTimer(data.seconds, false);
+                this.showModal(false);
+            } else if (data.action === 'start') {
+                if (typeof data.seconds === 'number') this.timerSeconds = data.seconds;
+                if (!this.timerRunning) this.toggleRun(false);
+                this.showModal(false);
+            } else if (data.action === 'pause') {
+                if (this.timerRunning) this.toggleRun(false);
+            } else if (data.action === 'reset') {
+                this.reset(false);
+            } else if (data.action === 'show' || data.action === 'showModal') {
+                this.showModal(false);
+            } else if (data.action === 'hide' || data.action === 'hideModal') {
+                this.hideModal(false);
+            }
+        });
     }
 
     initModal() {
@@ -5469,7 +6726,7 @@ class ClassroomTimer {
         modal.innerHTML = `
             <div class="timer-modal-header">
                 <span>⏱️ Classroom Timer</span>
-                <button class="timer-modal-close" onclick="classroomTimer.toggleModal()">×</button>
+                <button class="timer-modal-close" onclick="classroomTimer.hideModal(true)">×</button>
             </div>
             <div class="timer-display" id="timerDisplay">00:00</div>
             <div class="timer-presets">
@@ -5487,12 +6744,40 @@ class ClassroomTimer {
         this.modal = modal;
     }
 
+    showModal(broadcast = false) {
+        if (!this.modal) {
+            this.modal = document.getElementById('timerModal');
+        }
+        if (this.modal) {
+            this.modal.style.display = 'block';
+        }
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('TIMER_CMD', { action: 'show' });
+        }
+    }
+
+    hideModal(broadcast = false) {
+        if (!this.modal) {
+            this.modal = document.getElementById('timerModal');
+        }
+        if (this.modal) {
+            this.modal.style.display = 'none';
+        }
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('TIMER_CMD', { action: 'hide' });
+        }
+    }
+
     toggleModal() {
         if (!this.modal) {
             this.modal = document.getElementById('timerModal');
         }
         if (this.modal) {
-            this.modal.style.display = this.modal.style.display === 'none' ? 'block' : 'none';
+            if (this.modal.style.display === 'none') {
+                this.showModal(true);
+            } else {
+                this.hideModal(true);
+            }
         }
     }
 
@@ -5505,22 +6790,43 @@ class ClassroomTimer {
     }
 
     updateDisplay() {
-        const display = document.getElementById('timerDisplay');
-        if (!display) return;
         const mins = Math.floor(this.timerSeconds / 60);
         const secs = this.timerSeconds % 60;
-        display.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-        display.classList.remove('ended');
+        const timeStr = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+        // Update modal display
+        const display = document.getElementById('timerDisplay');
+        if (display) {
+            display.textContent = timeStr;
+            display.classList.toggle('ended', this.timerSeconds <= 0 && !this.timerRunning);
+        }
+
+        // Update Presenter Cockpit countdown displays
+        const cpDisplay = document.getElementById('cpCountdownDisplay');
+        if (cpDisplay) {
+            cpDisplay.textContent = timeStr;
+            cpDisplay.classList.toggle('ended', this.timerSeconds <= 0 && !this.timerRunning);
+        }
+
+        document.querySelectorAll('.cp-timer-countdown-display').forEach(el => {
+            el.textContent = timeStr;
+            el.classList.toggle('ended', this.timerSeconds <= 0 && !this.timerRunning);
+        });
     }
 
     toggleRun(broadcast = true) {
         const startBtn = document.getElementById('timerStartBtn');
+        const cpToggleBtn = document.getElementById('btnToolTimerToggle');
+
         if (this.timerRunning) {
             clearInterval(this.timerInterval);
             this.timerRunning = false;
             if (startBtn) {
                 startBtn.textContent = 'Resume';
                 startBtn.classList.remove('running');
+            }
+            if (cpToggleBtn) {
+                cpToggleBtn.textContent = '▶ Start Timer';
             }
             if (broadcast && window.presenterSyncEngine) {
                 window.presenterSyncEngine.emit('TIMER_CMD', { action: 'pause' });
@@ -5532,6 +6838,9 @@ class ClassroomTimer {
                 startBtn.textContent = 'Pause';
                 startBtn.classList.add('running');
             }
+            if (cpToggleBtn) {
+                cpToggleBtn.textContent = '⏸ Pause Timer';
+            }
             if (broadcast && window.presenterSyncEngine) {
                 window.presenterSyncEngine.emit('TIMER_CMD', { action: 'start', seconds: this.timerSeconds });
             }
@@ -5542,11 +6851,13 @@ class ClassroomTimer {
                 } else {
                     clearInterval(this.timerInterval);
                     this.timerRunning = false;
-                    const display = document.getElementById('timerDisplay');
-                    if (display) display.classList.add('ended');
+                    this.updateDisplay();
                     if (startBtn) {
                         startBtn.textContent = 'Start';
                         startBtn.classList.remove('running');
+                    }
+                    if (cpToggleBtn) {
+                        cpToggleBtn.textContent = '▶ Start Timer';
                     }
                     this.playChime();
                 }
@@ -5563,6 +6874,10 @@ class ClassroomTimer {
         if (startBtn) {
             startBtn.textContent = 'Start';
             startBtn.classList.remove('running');
+        }
+        const cpToggleBtn = document.getElementById('btnToolTimerToggle');
+        if (cpToggleBtn) {
+            cpToggleBtn.textContent = '▶ Start Timer';
         }
         if (broadcast && window.presenterSyncEngine) {
             window.presenterSyncEngine.emit('TIMER_CMD', { action: 'reset' });
@@ -6446,6 +7761,9 @@ class PresentationTools {
             } else if (key === 'f') {
                 e.preventDefault();
                 this.toggleFullscreen();
+            } else if (key === 'g') {
+                e.preventDefault();
+                if (window.slideNavigator) window.slideNavigator.toggle();
             } else if (key === '?' || (e.shiftKey && e.key === '/')) {
                 e.preventDefault();
                 this.toggleHelpModal();
@@ -6456,6 +7774,10 @@ class PresentationTools {
                 if (helpModal) helpModal.style.display = 'none';
                 if (window.penAnnotation && window.penAnnotation.isActive) window.penAnnotation.deactivate();
                 if (window.laserPointer && window.laserPointer.isActive) window.laserPointer.deactivate();
+            } else if (e.ctrlKey && key === 'z' && !e.shiftKey) {
+                e.preventDefault();
+                if (window.teacherHighlighter) window.teacherHighlighter.undo();
+                if (window.penAnnotation) window.penAnnotation.undo();
             }
         });
     }
@@ -6810,6 +8132,56 @@ class PresenterViewUI {
         this.sync.on('HIGHLIGHTER_UNDO', () => {
             if (window.teacherHighlighter) window.teacherHighlighter.undo(false);
         });
+        this.sync.on('HIGHLIGHTER_ADD', (data) => {
+            if (window.teacherHighlighter) window.teacherHighlighter.applyRemoteHighlight(data);
+        });
+
+        // Remote Evidence Focus / Clear
+        this.sync.on('EVIDENCE_FOCUS', (data) => {
+            if (window.readingHighlighter && data && (data.qKey || data.evId)) {
+                window.readingHighlighter.focusEvidence(data.qKey, data.evId, false);
+            }
+        });
+        this.sync.on('EVIDENCE_CLEAR', (data) => {
+            if (window.readingHighlighter) {
+                window.readingHighlighter.clearAll(data?.containerId, false);
+            }
+        });
+
+        // Remote Exercise Actions
+        this.sync.on('EXERCISE_ACTION', (data) => {
+            if (!data || !window.deckEngine) return;
+            const target = data.containerId ? document.getElementById(data.containerId) : (window.deckEngine.slides[data.slideIndex] || document.querySelector('.slide.active'));
+            if (!target) return;
+
+            if (data.action === 'check') {
+                window.deckEngine.checkAnswers(target, false);
+            } else if (data.action === 'reveal') {
+                window.deckEngine.revealKeys(target, false);
+            } else if (data.action === 'reset') {
+                window.deckEngine.resetTask(target, false);
+            } else if (data.action === 'toggleOptCard' && typeof data.cardIndex === 'number') {
+                const card = target.querySelectorAll('.opt-card')[data.cardIndex];
+                if (card) window.deckEngine.toggleOptCard(card, false);
+            } else if (data.action === 'toggleExplanations') {
+                window.deckEngine.toggleExplanations(target, false);
+            }
+        });
+
+        // Remote Input & Select Sync
+        this.sync.on('INPUT_SYNC', (data) => {
+            if (!data || typeof data.slideIndex !== 'number' || typeof data.inputIndex !== 'number') return;
+            const slide = window.deckEngine ? window.deckEngine.slides[data.slideIndex] : document.querySelector('.slide.active');
+            if (slide) {
+                const allInputs = slide.querySelectorAll('.blank-input, .select-input');
+                const targetInput = allInputs[data.inputIndex];
+                if (targetInput && targetInput.value !== data.value) {
+                    targetInput.value = data.value;
+                    targetInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    targetInput.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            }
+        });
 
         // Remote Step Reveal
         this.sync.on('STEP_REVEAL_CMD', () => {
@@ -6819,8 +8191,8 @@ class PresenterViewUI {
         // Remote Student Picker
         this.sync.on('STUDENT_PICK_CMD', (data) => {
             if (window.studentPicker) {
-                if (!window.studentPicker.isOpen) window.studentPicker.toggle();
-                window.studentPicker.spin();
+                window.studentPicker.open(false);
+                window.studentPicker.spin(data?.student, false);
             }
         });
 
@@ -7315,6 +8687,65 @@ class PresenterViewUI {
             }
         });
 
+        // Sync Evidence Focus / Clear
+        this.sync.on('EVIDENCE_FOCUS', (data) => {
+            if (window.readingHighlighter && data && (data.qKey || data.evId)) {
+                window.readingHighlighter.focusEvidence(data.qKey, data.evId, false);
+            }
+        });
+        this.sync.on('EVIDENCE_CLEAR', (data) => {
+            if (window.readingHighlighter) {
+                window.readingHighlighter.clearAll(data?.containerId, false);
+            }
+        });
+
+        // Sync Exercise Actions
+        this.sync.on('EXERCISE_ACTION', (data) => {
+            if (!data || !window.deckEngine) return;
+            const target = data.containerId ? document.getElementById(data.containerId) : (window.deckEngine.slides[data.slideIndex] || document.querySelector('.slide.active'));
+            if (!target) return;
+
+            if (data.action === 'check') {
+                window.deckEngine.checkAnswers(target, false);
+            } else if (data.action === 'reveal') {
+                window.deckEngine.revealKeys(target, false);
+            } else if (data.action === 'reset') {
+                window.deckEngine.resetTask(target, false);
+            } else if (data.action === 'toggleOptCard' && typeof data.cardIndex === 'number') {
+                const card = target.querySelectorAll('.opt-card')[data.cardIndex];
+                if (card) window.deckEngine.toggleOptCard(card, false);
+            } else if (data.action === 'toggleExplanations') {
+                window.deckEngine.toggleExplanations(target, false);
+            }
+            this.updatePresenterSlideView();
+        });
+
+        // Sync Input & Select
+        this.sync.on('INPUT_SYNC', (data) => {
+            if (!data || typeof data.slideIndex !== 'number' || typeof data.inputIndex !== 'number') return;
+            const slide = window.deckEngine ? window.deckEngine.slides[data.slideIndex] : document.querySelector('.slide.active');
+            if (slide) {
+                const allInputs = slide.querySelectorAll('.blank-input, .select-input');
+                const targetInput = allInputs[data.inputIndex];
+                if (targetInput && targetInput.value !== data.value) {
+                    targetInput.value = data.value;
+                }
+            }
+            const scaler = document.getElementById('cpCurrentSlideScaler');
+            if (scaler) {
+                const cloneInputs = scaler.querySelectorAll('.blank-input, .select-input');
+                const cloneTarget = cloneInputs[data.inputIndex];
+                if (cloneTarget && cloneTarget.value !== data.value) {
+                    cloneTarget.value = data.value;
+                }
+            }
+        });
+
+        // Sync Highlighter Add / Remove
+        this.sync.on('HIGHLIGHTER_ADD', (data) => {
+            if (window.teacherHighlighter) window.teacherHighlighter.applyRemoteHighlight(data);
+        });
+
         // Sync Student Picked
         this.sync.on('STUDENT_PICKED', (data) => {
             this.showPickedStudent(data.student);
@@ -7563,6 +8994,9 @@ class PresenterViewUI {
         document.getElementById('btnCpTimerModal')?.addEventListener('click', () => {
             this.switchTab('toolkit');
             document.getElementById('cpCountdownDisplay')?.scrollIntoView({ behavior: 'smooth' });
+            if (window.classroomTimer) {
+                window.classroomTimer.showModal(true);
+            }
         });
 
         // Theme Switcher
@@ -7624,6 +9058,9 @@ class PresenterViewUI {
                 document.querySelectorAll('#cpHighlighterPalette .cp-swatch').forEach(s => s.classList.remove('active'));
                 swatch.classList.add('active');
                 this.highlighterColorIndex = parseInt(swatch.dataset.index || '0', 10);
+                if (window.teacherHighlighter) {
+                    window.teacherHighlighter.setColor(this.highlighterColorIndex);
+                }
             };
         });
 
@@ -7639,7 +9076,6 @@ class PresenterViewUI {
         // Undo & Clear Ink
         document.getElementById('btnToolUndoHighlight')?.addEventListener('click', () => {
             if (window.teacherHighlighter) window.teacherHighlighter.undo(true);
-            this.sync.emit('HIGHLIGHTER_UNDO', {});
         });
 
         document.getElementById('btnToolClearDrawings')?.addEventListener('click', () => {
@@ -7650,10 +9086,9 @@ class PresenterViewUI {
         document.querySelectorAll('.cp-quick-timer-btn').forEach(btn => {
             btn.onclick = () => {
                 const sec = parseInt(btn.dataset.sec, 10);
-                if (!isNaN(sec)) {
-                    if (window.classroomTimer) window.classroomTimer.setTimer(sec, true);
-                    this.updateTimerDisplay(sec);
-                    this.sync.emit('TIMER_CMD', { action: 'set', seconds: sec });
+                if (!isNaN(sec) && window.classroomTimer) {
+                    window.classroomTimer.setTimer(sec, true);
+                    window.classroomTimer.showModal(true);
                 }
             };
         });
@@ -7662,20 +9097,13 @@ class PresenterViewUI {
         document.getElementById('btnToolTimerToggle')?.addEventListener('click', () => {
             if (window.classroomTimer) {
                 window.classroomTimer.toggleRun(true);
-                const running = window.classroomTimer.timerRunning;
-                const toggleBtn = document.getElementById('btnToolTimerToggle');
-                if (toggleBtn) toggleBtn.textContent = running ? '⏸ Pause Timer' : '▶ Start Timer';
-                this.sync.emit('TIMER_CMD', { action: running ? 'start' : 'pause' });
+                window.classroomTimer.showModal(true);
             }
         });
 
         document.getElementById('btnToolTimerReset')?.addEventListener('click', () => {
             if (window.classroomTimer) {
                 window.classroomTimer.reset(true);
-                this.updateTimerDisplay(0);
-                const toggleBtn = document.getElementById('btnToolTimerToggle');
-                if (toggleBtn) toggleBtn.textContent = '▶ Start Timer';
-                this.sync.emit('TIMER_CMD', { action: 'reset' });
             }
         });
 
@@ -7731,23 +9159,31 @@ class PresenterViewUI {
         if (penPal) penPal.style.display = this.penActive ? 'block' : 'none';
         if (hlPal) hlPal.style.display = this.highlighterActive ? 'block' : 'none';
 
-        // Update Canvas Cursor
+        // Update Canvas Cursor & Pointer Events
+        // ONLY laser and pen need drawing canvas pointer events!
+        // Highlighter MUST allow selecting text on the slide!
         const canvas = document.getElementById('presenterDrawCanvas');
         const laserDot = document.getElementById('presenterLaserDot');
         if (canvas) {
-            canvas.style.pointerEvents = (this.penActive || this.laserActive || this.highlighterActive) ? 'auto' : 'none';
+            canvas.style.pointerEvents = (this.penActive || this.laserActive) ? 'auto' : 'none';
             if (this.penActive) {
                 canvas.style.cursor = 'crosshair';
             } else if (this.laserActive) {
                 canvas.style.cursor = 'none';
-            } else if (this.highlighterActive) {
-                canvas.style.cursor = 'text';
             } else {
                 canvas.style.cursor = 'default';
             }
         }
         if (laserDot && !this.laserActive) {
             laserDot.style.display = 'none';
+        }
+
+        // Toggle TeacherHighlighter engine state
+        if (this.highlighterActive && window.teacherHighlighter && !window.teacherHighlighter.isActive) {
+            window.teacherHighlighter.toggle(false);
+            window.teacherHighlighter.setColor(this.highlighterColorIndex);
+        } else if (!this.highlighterActive && window.teacherHighlighter && window.teacherHighlighter.isActive) {
+            window.teacherHighlighter.toggle(false);
         }
 
         // Sync with Audience Screen
@@ -7765,12 +9201,8 @@ class PresenterViewUI {
 
     triggerStudentPicker() {
         if (window.studentPicker) {
-            const chosen = window.studentPicker.students[Math.floor(Math.random() * window.studentPicker.students.length)] || 'Student';
-            this.showPickedStudent(chosen);
-            if (!window.studentPicker.isOpen) window.studentPicker.toggle();
-            window.studentPicker.spin();
-            this.sync.emit('STUDENT_PICK_CMD', {});
-            this.sync.emit('STUDENT_PICKED', { student: chosen });
+            window.studentPicker.open(true);
+            window.studentPicker.spin(null, true);
         }
     }
 
@@ -7849,10 +9281,9 @@ class PresenterViewUI {
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
-        if (window.penAnnotation) window.penAnnotation.clear(false);
-        if (window.teacherHighlighter) window.teacherHighlighter.clear(false);
-        this.sync.emit('PEN_CLEAR', {});
-        this.sync.emit('HIGHLIGHTER_CLEAR', {});
+        if (window.penAnnotation) window.penAnnotation.clear(true);
+        if (window.teacherHighlighter) window.teacherHighlighter.clear(true);
+        if (window.readingHighlighter) window.readingHighlighter.clearAll(null, true);
     }
 
     updateTimerDisplay(seconds) {
@@ -7970,6 +9401,7 @@ class PresenterViewUI {
             clone.classList.add('active', 'preview-clone');
             scaler.appendChild(clone);
             this.scalePreviewElement(scaler);
+            this.bindPreviewSlideInteractions(scaler, currentSlide, currentIndex);
         }
 
         // Update Filmstrip active card & scroll
@@ -7977,6 +9409,85 @@ class PresenterViewUI {
 
         // Update Notes
         this.updatePedagogicalNotes(currentSlide, currentIndex);
+    }
+
+    bindPreviewSlideInteractions(scaler, currentSlide, currentIndex) {
+        if (!scaler || !currentSlide) return;
+
+        // Synchronize inputs & dropdowns typed directly on the preview slide
+        scaler.querySelectorAll('.blank-input, .select-input').forEach((input, idx) => {
+            const syncInput = () => {
+                const allRealInputs = currentSlide.querySelectorAll('.blank-input, .select-input');
+                const realInput = allRealInputs[idx];
+                if (realInput) {
+                    realInput.value = input.value;
+                    realInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    realInput.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+                this.sync.emit('INPUT_SYNC', {
+                    slideIndex: currentIndex,
+                    inputIndex: idx,
+                    value: input.value
+                });
+            };
+            input.addEventListener('input', syncInput);
+            input.addEventListener('change', syncInput);
+        });
+
+        // Click delegation inside preview slide
+        scaler.addEventListener('click', (e) => {
+            // Synonym / Evidence buttons
+            const synBtn = e.target.closest('.syn-btn');
+            if (synBtn) {
+                const card = synBtn.closest('.q-card, .flowchart-step-card');
+                const dataQ = synBtn.dataset.q || card?.dataset?.q || (synBtn.dataset.ev ? synBtn.dataset.ev.replace(/^ev-/, '') : null);
+                const dataEv = synBtn.dataset.ev || (dataQ ? `ev-${dataQ}` : null);
+                if (window.readingHighlighter && (dataQ || dataEv)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.readingHighlighter.focusEvidence(dataQ, dataEv, true);
+                    if (card) {
+                        const exp = card.querySelector('.item-explanation');
+                        if (exp) exp.classList.toggle('show');
+                    }
+                }
+                return;
+            }
+
+            // Word chips
+            const wordChip = e.target.closest('.word-chip');
+            if (wordChip && window.vocabBank) {
+                e.preventDefault();
+                e.stopPropagation();
+                window.vocabBank.handleChipClick(wordChip, currentSlide);
+                setTimeout(() => this.updatePresenterSlideView(), 60);
+                return;
+            }
+
+            // Option cards (.opt-card)
+            const optCard = e.target.closest('.opt-card');
+            if (optCard) {
+                e.preventDefault();
+                e.stopPropagation();
+                const allCloneCards = Array.from(scaler.querySelectorAll('.opt-card'));
+                const cardIdx = allCloneCards.indexOf(optCard);
+                const allRealCards = Array.from(currentSlide.querySelectorAll('.opt-card'));
+                const realCard = allRealCards[cardIdx];
+                if (realCard && window.deckEngine) {
+                    window.deckEngine.toggleOptCard(realCard, true);
+                    optCard.classList.toggle('selected', realCard.classList.contains('selected'));
+                }
+                return;
+            }
+
+            // Action buttons (Check, Reveal, Reset)
+            const actionBtn = e.target.closest('button');
+            if (actionBtn && actionBtn.onclick) {
+                setTimeout(() => {
+                    this.updatePresenterSlideView();
+                }, 60);
+            }
+        });
     }
 
     scalePreviewElement(scaler) {
@@ -8518,6 +10029,7 @@ class PresenterViewUI {
                 overflow: hidden;
                 background: #0b0f19;
                 pointer-events: none;
+                color: var(--text-dark, #0f172a);
             }
             .slide-preview-scaler .slide {
                 width: 100% !important;
@@ -8527,6 +10039,28 @@ class PresenterViewUI {
                 display: flex !important;
                 opacity: 1 !important;
                 visibility: visible !important;
+                color: var(--text-dark, #0f172a);
+            }
+            .slide-preview-scaler .slide-inner,
+            .slide-preview-scaler .notebook,
+            .slide-preview-scaler .page-content {
+                color: var(--text-dark, #0f172a);
+            }
+            .slide-preview-scaler .rule-card,
+            .slide-preview-scaler .card,
+            .slide-preview-scaler .discuss-card,
+            .slide-preview-scaler .reading-pane,
+            .slide-preview-scaler .essay-card,
+            .slide-preview-scaler .model-breakdown-card,
+            .slide-preview-scaler .q-card {
+                color: var(--text-dark, #0f172a);
+            }
+            .slide-preview-scaler p,
+            .slide-preview-scaler li,
+            .slide-preview-scaler span,
+            .slide-preview-scaler em,
+            .slide-preview-scaler strong {
+                color: inherit;
             }
             .presenter-draw-canvas {
                 position: absolute;

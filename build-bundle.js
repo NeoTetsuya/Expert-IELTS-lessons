@@ -14,6 +14,7 @@ const cssSrcDir = path.join(__dirname, 'css_src');
 // 1. BUNDLE JAVASCRIPT MODULES
 // ==========================================
 const jsFilesToBundle = [
+    'template-engine.js',
     'deck-core.js',
     'deck-components.js',
     'deck-theme-engine.js',
