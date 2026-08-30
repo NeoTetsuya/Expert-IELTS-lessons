@@ -21,3 +21,6 @@ beautiful-html-templates-main/
 # Local Skills (Keep only ielts-presentation-authoring tracked)
 .agents/skills/*
 !.agents/skills/ielts-presentation-authoring/
+
+# Local Grammar Sources Reference Files
+references/grammar_sources/
