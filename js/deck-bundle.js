@@ -2120,6 +2120,33 @@ class DeckThemeEngine {
                 icon: '🕊️',
                 desc: 'Quiet warm bone minimalist palette with classical Playfair serifs.',
                 previewBg: 'linear-gradient(135deg, #1a1a1a, #ede8e0)'
+            },
+            {
+                id: 'bauhaus-bold',
+                name: 'Bauhaus Bold',
+                displayFont: 'Archivo Black',
+                bodyFont: 'Inter',
+                icon: '📐',
+                desc: 'Modernist brutalist manifesto with pure off-white canvas, heavy black geometry and cobalt blue.',
+                previewBg: 'linear-gradient(135deg, #2541ee, #0a0a0a)'
+            },
+            {
+                id: 'swiss-ikb',
+                name: 'Swiss IKB',
+                displayFont: 'Inter (Light)',
+                bodyFont: 'Inter',
+                icon: '🇨🇭',
+                desc: 'International Style with Yves Klein Blue, hairline scaffold grid and ultra-crisp Grotesk.',
+                previewBg: 'linear-gradient(135deg, #002fa7, #fafaf8)'
+            },
+            {
+                id: 'kraft-paper',
+                name: 'Kraft Paper',
+                displayFont: 'Fraunces',
+                bodyFont: 'DM Sans',
+                icon: '📦',
+                desc: 'Tactile craft notebook paper with deep charcoal ink and copper rust accents.',
+                previewBg: 'linear-gradient(135deg, #a35b2a, #2a1e13)'
             }
         ];
 

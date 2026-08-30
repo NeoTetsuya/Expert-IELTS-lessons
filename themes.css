@@ -1081,6 +1081,136 @@
     color: #ffffff !important;
 }
 
+/* 16. BAUHAUS BOLD (Modernist Manifesto, Archivo Black, Pure Off-White & Offset Solid Shadows) */
+[data-theme="bauhaus-bold"] {
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #1a1a1a;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #2b2b2b 0%, #111111 75%);
+    --bg-page: #f4f1ea;
+    --text-dark: #0a0a0a;
+    --text-muted: #5a5a5a;
+
+    --col-reading: #2541ee;
+    --col-grammar: #e63b2e;
+    --col-vocab:   #059669;
+    --col-writing: #f5a623;
+    --col-review:  #7c3aed;
+
+    --card-bg: #ffffff;
+    --card-border: 3.5px solid #0a0a0a;
+    --card-shadow: 6px 6px 0px #0a0a0a;
+    --card-radius: 0px;
+}
+
+[data-theme="bauhaus-bold"] .notebook {
+    background: #f4f1ea;
+    border: 4px solid #0a0a0a;
+    border-radius: 0px;
+    box-shadow: 12px 12px 0px #2541ee, 24px 24px 0px #0a0a0a;
+}
+
+[data-theme="bauhaus-bold"] .slide-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 900;
+    color: #0a0a0a;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+}
+
+[data-theme="bauhaus-bold"] .card,
+[data-theme="bauhaus-bold"] .rule-card,
+[data-theme="bauhaus-bold"] .discuss-card,
+[data-theme="bauhaus-bold"] .q-card,
+[data-theme="bauhaus-bold"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 3px solid #0a0a0a !important;
+    border-radius: 0px !important;
+    box-shadow: 6px 6px 0px #0a0a0a !important;
+    color: #0a0a0a !important;
+}
+
+[data-theme="bauhaus-bold"] .btn-action {
+    border-radius: 0px !important;
+    border: 2.5px solid #0a0a0a !important;
+    box-shadow: 4px 4px 0px #0a0a0a !important;
+    font-weight: 800 !important;
+}
+[data-theme="bauhaus-bold"] .btn-action:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #0a0a0a !important;
+}
+[data-theme="bauhaus-bold"] .btn-action:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #0a0a0a !important;
+}
+
+[data-theme="bauhaus-bold"] .btn-action.btn-primary {
+    background: #2541ee !important;
+    color: #ffffff !important;
+    border-color: #0a0a0a !important;
+}
+
+/* 17. SWISS IKB (International Klein Blue, Hairline Scaffold Grid & Light Grotesk) */
+[data-theme="swiss-ikb"] {
+    --font-display: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #0e1118;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #1e293b 0%, #0a0e17 75%);
+    --bg-page: #fafaf8;
+    --text-dark: #0a0a0a;
+    --text-muted: #737373;
+
+    --col-reading: #002fa7;
+    --col-grammar: #dc2626;
+    --col-vocab:   #059669;
+    --col-writing: #d97706;
+    --col-review:  #4f46e5;
+
+    --card-bg: #ffffff;
+    --card-border: 1px solid #e0e0e0;
+    --card-shadow: 0 4px 16px rgba(0, 47, 167, 0.06);
+    --card-radius: 0px;
+}
+
+[data-theme="swiss-ikb"] .notebook {
+    background: #fafaf8;
+    border: 1px solid #d4d4d2;
+    border-radius: 0px;
+    box-shadow: 0 20px 60px rgba(0, 47, 167, 0.12), 0 0 0 1px #002fa7;
+}
+
+[data-theme="swiss-ikb"] .slide-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    color: #0a0a0a;
+    letter-spacing: -0.03em;
+}
+
+[data-theme="swiss-ikb"] .card,
+[data-theme="swiss-ikb"] .rule-card,
+[data-theme="swiss-ikb"] .discuss-card,
+[data-theme="swiss-ikb"] .q-card,
+[data-theme="swiss-ikb"] .model-breakdown-card {
+    background: #ffffff !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 0px !important;
+    border-top: 3px solid #002fa7 !important;
+    color: #0a0a0a !important;
+}
+
+[data-theme="swiss-ikb"] .btn-action.btn-primary {
+    background: #002fa7 !important;
+    border-color: #002fa7 !important;
+    border-radius: 0px !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
 
 /* ==================== THEME MODULE: 03-dark-cyber.css ==================== */
 /* ==========================================================================
@@ -1667,6 +1797,63 @@
     background: #000080 !important;
     border: 2px outset #ffffff !important;
     color: #ffffff !important;
+}
+
+/* 25. KRAFT PAPER (Tactile Coarse Kraft Paper, Deep Charcoal Brown Ink & Copper Rust Accent) */
+[data-theme="kraft-paper"] {
+    --font-display: 'Fraunces', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #2a1e13;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #4a3827 0%, #1f150c 75%);
+    --bg-page: #eedfc7;
+    --text-dark: #2a1e13;
+    --text-muted: #6e5a40;
+
+    --col-reading: #a35b2a;
+    --col-grammar: #b91c1c;
+    --col-vocab:   #15803d;
+    --col-writing: #c2410c;
+    --col-review:  #7e22ce;
+
+    --card-bg: #f8efe0;
+    --card-border: 1.5px solid #d4c0a1;
+    --card-shadow: 0 4px 16px rgba(42, 30, 19, 0.08);
+    --card-radius: 8px;
+}
+
+[data-theme="kraft-paper"] .notebook {
+    background: #eedfc7;
+    border: 2px solid #b8a486;
+    border-radius: 10px;
+    box-shadow: 0 24px 70px rgba(42, 30, 19, 0.5), 0 0 0 1px rgba(184, 164, 134, 0.4);
+}
+
+[data-theme="kraft-paper"] .slide-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-style: italic;
+    color: #2a1e13;
+    letter-spacing: -0.02em;
+}
+
+[data-theme="kraft-paper"] .card,
+[data-theme="kraft-paper"] .rule-card,
+[data-theme="kraft-paper"] .discuss-card,
+[data-theme="kraft-paper"] .q-card,
+[data-theme="kraft-paper"] .model-breakdown-card {
+    background: #f8efe0 !important;
+    border: 1.5px solid #d4c0a1 !important;
+    border-left: 4px solid #a35b2a !important;
+    color: #2a1e13 !important;
+}
+
+[data-theme="kraft-paper"] .btn-action.btn-primary {
+    background: #a35b2a !important;
+    border-color: #8a481d !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
 }
 
 

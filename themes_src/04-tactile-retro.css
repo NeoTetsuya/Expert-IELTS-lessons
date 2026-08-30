@@ -243,3 +243,60 @@
     border: 2px outset #ffffff !important;
     color: #ffffff !important;
 }
+
+/* 25. KRAFT PAPER (Tactile Coarse Kraft Paper, Deep Charcoal Brown Ink & Copper Rust Accent) */
+[data-theme="kraft-paper"] {
+    --font-display: 'Fraunces', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --stage-bg: #2a1e13;
+    --viewport-bg: radial-gradient(circle at 80% 20%, #4a3827 0%, #1f150c 75%);
+    --bg-page: #eedfc7;
+    --text-dark: #2a1e13;
+    --text-muted: #6e5a40;
+
+    --col-reading: #a35b2a;
+    --col-grammar: #b91c1c;
+    --col-vocab:   #15803d;
+    --col-writing: #c2410c;
+    --col-review:  #7e22ce;
+
+    --card-bg: #f8efe0;
+    --card-border: 1.5px solid #d4c0a1;
+    --card-shadow: 0 4px 16px rgba(42, 30, 19, 0.08);
+    --card-radius: 8px;
+}
+
+[data-theme="kraft-paper"] .notebook {
+    background: #eedfc7;
+    border: 2px solid #b8a486;
+    border-radius: 10px;
+    box-shadow: 0 24px 70px rgba(42, 30, 19, 0.5), 0 0 0 1px rgba(184, 164, 134, 0.4);
+}
+
+[data-theme="kraft-paper"] .slide-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-style: italic;
+    color: #2a1e13;
+    letter-spacing: -0.02em;
+}
+
+[data-theme="kraft-paper"] .card,
+[data-theme="kraft-paper"] .rule-card,
+[data-theme="kraft-paper"] .discuss-card,
+[data-theme="kraft-paper"] .q-card,
+[data-theme="kraft-paper"] .model-breakdown-card {
+    background: #f8efe0 !important;
+    border: 1.5px solid #d4c0a1 !important;
+    border-left: 4px solid #a35b2a !important;
+    color: #2a1e13 !important;
+}
+
+[data-theme="kraft-paper"] .btn-action.btn-primary {
+    background: #a35b2a !important;
+    border-color: #8a481d !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
