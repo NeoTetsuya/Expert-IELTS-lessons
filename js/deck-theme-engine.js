@@ -98,7 +98,7 @@ class DeckThemeEngine {
         });
     }
 
-    applyTheme(themeId, showToast = true) {
+    applyTheme(themeId, showToast = true, broadcast = true) {
         const theme = this.themes.find(t => t.id === themeId) || this.themes[0];
         this.currentTheme = theme.id;
         
@@ -112,6 +112,10 @@ class DeckThemeEngine {
 
         if (showToast) {
             this.showToast(`${theme.icon} Theme: ${theme.name} (${theme.displayFont} + ${theme.bodyFont})`);
+        }
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('THEME_CHANGE', { themeId: theme.id });
         }
 
         // Update active state in modal if open

@@ -73,11 +73,15 @@ class DeckEngine {
         this.applyAspectRatio(nextRatio, true);
     }
 
-    applyAspectRatio(ratio, showToast = true) {
+    applyAspectRatio(ratio, showToast = true, broadcast = true) {
         this.aspectRatio = ratio;
         document.documentElement.setAttribute('data-aspect', ratio);
         localStorage.setItem('deck_aspect_ratio', ratio);
         if (this.scaleStage) this.scaleStage();
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('ASPECT_RATIO', { ratio });
+        }
 
         // Update Aspect Button in HUD if present
         const btn = document.getElementById('toolAspectBtn');

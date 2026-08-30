@@ -69,7 +69,7 @@ class PresentationSpotlight {
         document.head.appendChild(style);
     }
 
-    toggleBlackout() {
+    toggleBlackout(broadcast = true) {
         this.isBlackout = !this.isBlackout;
         this.isWhiteout = false;
         const overlay = document.getElementById('screenMuteOverlay');
@@ -77,9 +77,12 @@ class PresentationSpotlight {
             overlay.className = 'screen-mute-overlay blackout';
             overlay.style.display = this.isBlackout ? 'block' : 'none';
         }
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('BLACKOUT_STATE', { blackout: this.isBlackout, whiteout: false });
+        }
     }
 
-    toggleWhiteout() {
+    toggleWhiteout(broadcast = true) {
         this.isWhiteout = !this.isWhiteout;
         this.isBlackout = false;
         const overlay = document.getElementById('screenMuteOverlay');
@@ -87,21 +90,30 @@ class PresentationSpotlight {
             overlay.className = 'screen-mute-overlay whiteout';
             overlay.style.display = this.isWhiteout ? 'block' : 'none';
         }
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('BLACKOUT_STATE', { blackout: false, whiteout: this.isWhiteout });
+        }
     }
 
-    toggleSpotlight() {
+    toggleSpotlight(broadcast = true) {
         this.isSpotlight = !this.isSpotlight;
         const mask = document.getElementById('spotlightMask');
         if (mask) {
             mask.style.display = this.isSpotlight ? 'block' : 'none';
         }
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('SPOTLIGHT_STATE', { active: this.isSpotlight });
+        }
     }
 
-    clearMute() {
+    clearMute(broadcast = true) {
         this.isBlackout = false;
         this.isWhiteout = false;
         const overlay = document.getElementById('screenMuteOverlay');
         if (overlay) overlay.style.display = 'none';
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('BLACKOUT_STATE', { blackout: false, whiteout: false });
+        }
     }
 
     bindShortcuts() {
@@ -128,24 +140,35 @@ class PresentationSpotlight {
         });
     }
 
-    updatePosition(x, y) {
+    updatePosition(x, y, broadcast = false) {
         const mask = document.getElementById('spotlightMask');
         if (mask) {
             mask.style.setProperty('--cursor-x', `${x}px`);
             mask.style.setProperty('--cursor-y', `${y}px`);
         }
+        if (broadcast && window.presenterSyncEngine) {
+            const normX = x / window.innerWidth;
+            const normY = y / window.innerHeight;
+            window.presenterSyncEngine.emit('SPOTLIGHT_MOVE', { normX, normY });
+        }
     }
 
-    activate() {
+    activate(broadcast = true) {
         this.isSpotlight = true;
         const mask = document.getElementById('spotlightMask');
         if (mask) mask.style.display = 'block';
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('SPOTLIGHT_STATE', { active: true });
+        }
     }
 
-    deactivate() {
+    deactivate(broadcast = true) {
         this.isSpotlight = false;
         const mask = document.getElementById('spotlightMask');
         if (mask) mask.style.display = 'none';
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('SPOTLIGHT_STATE', { active: false });
+        }
     }
 }
 

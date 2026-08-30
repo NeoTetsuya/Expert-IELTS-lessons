@@ -204,7 +204,7 @@ class TeacherHighlighter {
         parent.normalize(); // Merges adjacent text nodes smoothly
     }
 
-    undo() {
+    undo(broadcast = true) {
         if (this.history.length > 0) {
             const lastBatch = this.history.pop();
             lastBatch.forEach(mark => this.removeHighlight(mark));
@@ -212,15 +212,21 @@ class TeacherHighlighter {
                 window.deckEngine.showToastNotification('↩️ Undid highlight');
             }
         }
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('HIGHLIGHTER_UNDO', {});
+        }
     }
 
-    clear() {
+    clear(broadcast = true) {
         const activeSlide = document.querySelector('.slide.active') || document.body;
         const highlights = activeSlide.querySelectorAll('.teacher-text-highlight');
         highlights.forEach(mark => this.removeHighlight(mark));
         this.history = [];
         if (window.deckEngine) {
             window.deckEngine.showToastNotification('🗑️ Cleared highlights');
+        }
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('HIGHLIGHTER_CLEAR', {});
         }
     }
 
