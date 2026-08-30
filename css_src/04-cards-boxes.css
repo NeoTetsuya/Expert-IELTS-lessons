@@ -94,4 +94,167 @@
     padding-bottom: 6px;
     font-style: italic;
 }
+
+/* ==========================================================================
+   BENTO STAT & METRIC CARDS (Neo-Grid & Editorial Forest Layouts)
+   ========================================================================== */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 14px 0;
+}
+
+.bento-stat {
+    background: var(--card-bg, #ffffff);
+    border: var(--card-border, 1.5px solid var(--border-soft, rgba(0,0,0,0.08)));
+    border-radius: var(--card-radius, 12px);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--card-shadow, 0 4px 12px rgba(0,0,0,0.04));
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bento-stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.bento-num {
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-size: calc(36px * var(--font-scale, 1));
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--col-reading, #dc2626);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+.bento-label {
+    font-size: calc(15px * var(--font-scale, 1));
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted, #64748b);
+}
+
+.bento-tag {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: calc(11px * var(--font-scale, 1));
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.05);
+    align-self: flex-start;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   HANDWRITTEN EXAMINER MARGINALIA (Pin & Paper Aesthetic)
+   ========================================================================== */
+.handwritten-tip {
+    font-family: 'Caveat', cursive, sans-serif;
+    font-size: calc(24px * var(--font-scale, 1));
+    line-height: 1.35;
+    color: var(--col-grammar, #0891b2);
+    padding: 8px 12px;
+    margin-top: 10px;
+    border-top: 1.5px dashed rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.handwritten-tip::before {
+    content: "✍️";
+    font-size: 18px;
+}
+
+/* ==========================================================================
+   CAPSULE METERS & PROGRESS BARS (Capsule Aesthetic)
+   ========================================================================== */
+.capsule-meter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 12px 0;
+}
+
+.capsule-meter-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.capsule-meter-label {
+    width: 140px;
+    font-weight: 700;
+    font-size: calc(16px * var(--font-scale, 1));
+    color: var(--text-dark, #0f172a);
+    flex-shrink: 0;
+}
+
+.capsule-track {
+    flex: 1;
+    height: 28px;
+    background: rgba(0,0,0,0.06);
+    border-radius: 999px;
+    border: 1.5px solid rgba(0,0,0,0.15);
+    overflow: hidden;
+    position: relative;
+}
+
+.capsule-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--col-reading, #dc2626);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 12px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    font-family: var(--font-mono, monospace);
+    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   HAIRLINE INDEX ROWS (Cobalt Grid & Monochrome Aesthetic)
+   ========================================================================== */
+.hairline-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border-soft, rgba(0,0,0,0.1));
+}
+
+.hairline-row {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-soft, rgba(0,0,0,0.1));
+    align-items: baseline;
+}
+
+.hairline-num {
+    font-family: var(--font-mono, monospace);
+    font-size: calc(14px * var(--font-scale, 1));
+    font-weight: 700;
+    color: var(--col-reading, #dc2626);
+}
+
+.hairline-content strong {
+    color: var(--text-dark, #0f172a);
+    font-size: calc(19px * var(--font-scale, 1));
+}
+
+.hairline-desc {
+    color: var(--text-muted, #64748b);
+    font-size: calc(16px * var(--font-scale, 1));
+    margin-top: 4px;
+}
 
