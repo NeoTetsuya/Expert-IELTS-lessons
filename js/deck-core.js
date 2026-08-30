@@ -130,7 +130,7 @@ class DeckEngine {
             } else if (e.key === 'End') {
                 e.preventDefault();
                 this.showSlide(this.slides.length - 1);
-            } else if (e.key === 'r' || e.key === 'R') {
+            } else if (e.shiftKey && (e.key === 'r' || e.key === 'R')) {
                 e.preventDefault();
                 this.showSlide(0);
             } else if (e.key === '+' || e.key === '=') {

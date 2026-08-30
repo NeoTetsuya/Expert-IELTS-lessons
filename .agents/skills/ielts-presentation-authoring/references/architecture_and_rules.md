@@ -745,3 +745,36 @@ Stage 4 → Grammar / Vocab / Writing Mastery
 
 > [!IMPORTANT]
 > Every reading question gets its own walkthrough slide. Never group questions.
+
+---
+
+## 10. Master Keyboard Shortcuts Reference
+
+| Shortcut | Function / Tool | Scope |
+|:---|:---|:---|
+| <kbd>→</kbd> / <kbd>Space</kbd> / <kbd>PgDn</kbd> | Next Slide | Presentation Navigation |
+| <kbd>←</kbd> / <kbd>PgUp</kbd> | Previous Slide | Presentation Navigation |
+| <kbd>Home</kbd> / <kbd>Shift + R</kbd> | Reset to Slide 1 | Presentation Navigation |
+| <kbd>End</kbd> | Jump to Last Slide | Presentation Navigation |
+| <kbd>Alt + P</kbd> | Launch Presenter Cockpit (Dual Screen) | Teacher Tools |
+| <kbd>G</kbd> | Slide Grid Navigator & Search | Teacher Tools |
+| <kbd>Shift + X</kbd> | Hide / Show Teacher Toolkit HUD | HUD Controls |
+| <kbd>Shift + A</kbd> | Toggle 16:9 / 4:3 Aspect Ratio | Stage Geometry |
+| <kbd>Shift + T</kbd> | Cycle 24 Theme Presets | Deck Theme Engine |
+| <kbd>H</kbd> | Toggle Teacher Highlighter Pen | Annotation |
+| <kbd>L</kbd> | Toggle Laser Pointer Dot | Annotation |
+| <kbd>P</kbd> | Toggle Drawing Pen | Annotation |
+| <kbd>C</kbd> | Clear All Drawings & Highlights | Annotation |
+| <kbd>Ctrl + Z</kbd> | Undo Last Drawing / Highlight Stroke | Annotation |
+| <kbd>B</kbd> / <kbd>.</kbd> | Blackout Screen (Mute) | Classroom Spotlight |
+| <kbd>W</kbd> | Whiteout Screen (Whiteboard) | Classroom Spotlight |
+| <kbd>S</kbd> | Follow-Cursor Spotlight Dimmer | Classroom Spotlight |
+| <kbd>T</kbd> | Toggle Classroom Timer | Classroom Tools |
+| <kbd>R</kbd> | Random Student Roulette Wheel | Classroom Tools |
+| <kbd>N</kbd> | Presenter Notes Drawer | Teacher Tools |
+| <kbd>Z</kbd> | Paragraph Loupe Focus & Zoom | Reading Mode |
+| <kbd>E</kbd> | Step Reveal Exercise Answers | Interactivity |
+| <kbd>F</kbd> | Toggle Fullscreen Mode | View Controls |
+| <kbd>+</kbd> / <kbd>-</kbd> / <kbd>0</kbd> | Zoom Font (+ / - / Reset 100%) | Typography Scale |
+| <kbd>?</kbd> | Show Keyboard Shortcuts Cheatsheet | Help Modal |
+| <kbd>Escape</kbd> | Close All Modals / Deactivate Active Tools | Universal Exit |

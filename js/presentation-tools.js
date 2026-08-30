@@ -69,6 +69,7 @@ class PresentationTools {
                 <div class="help-grid">
                     <div><kbd>→</kbd> / <kbd>Space</kbd></div><div>Next Slide</div>
                     <div><kbd>←</kbd></div><div>Previous Slide</div>
+                    <div><kbd>Home</kbd> / <kbd>Shift+R</kbd></div><div>Reset to Slide 1</div>
                     <div><kbd>Alt+P</kbd></div><div>Presenter Cockpit (Dual View)</div>
                     <div><kbd>G</kbd></div><div>Slide Grid Navigator</div>
                     <div><kbd>Shift+X</kbd></div><div>Hide / Show Teacher Toolkit</div>
@@ -81,11 +82,12 @@ class PresentationTools {
                     <div><kbd>B</kbd> / <kbd>W</kbd></div><div>Blackout / Whiteout Screen</div>
                     <div><kbd>S</kbd></div><div>Spotlight Dimmer</div>
                     <div><kbd>T</kbd></div><div>Toggle Classroom Timer</div>
-                    <div><kbd>R</kbd></div><div>Student Picker Wheel</div>
+                    <div><kbd>R</kbd></div><div>Random Student Picker Wheel</div>
                     <div><kbd>N</kbd></div><div>Teacher Presenter Notes</div>
-                    <div><kbd>Z</kbd></div><div>Paragraph Loupe</div>
+                    <div><kbd>Z</kbd></div><div>Paragraph Loupe Focus</div>
                     <div><kbd>E</kbd></div><div>Step Reveal Answers</div>
                     <div><kbd>F</kbd></div><div>Toggle Fullscreen Mode</div>
+                    <div><kbd>+</kbd> / <kbd>-</kbd> / <kbd>0</kbd></div><div>Font Size Scaling (Zoom / Reset)</div>
                     <div><kbd>?</kbd></div><div>Toggle Shortcuts Cheatsheet</div>
                 </div>
             </div>
