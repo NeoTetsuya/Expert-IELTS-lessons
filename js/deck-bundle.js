@@ -4917,12 +4917,18 @@ class ReadingHighlighter {
             span.classList.add('active-syn');
         });
 
-        // Also apply to preview clone in presenter view if present
-        const previewClone = document.querySelector('.slide.preview-clone');
-        if (previewClone) {
-            previewClone.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
-            previewClone.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-            previewClone.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+        // Activate all vocabulary terms
+        slide.querySelectorAll('.vocab-word, .vocab-term').forEach(v => {
+            v.classList.add('active-vocab');
+        });
+
+        // Also apply to preview scaler / preview clone in presenter view
+        const scaler = document.getElementById('cpCurrentSlideScaler');
+        if (scaler) {
+            scaler.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+            scaler.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+            scaler.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
+            scaler.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
         }
 
         // Show all item explanations
@@ -4951,12 +4957,17 @@ class ReadingHighlighter {
             span.classList.remove('active-syn');
         });
 
-        // Also clear in preview clone
-        const previewClone = document.querySelector('.slide.preview-clone');
-        if (previewClone) {
-            previewClone.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
-            previewClone.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
-            previewClone.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
+        slide.querySelectorAll('.vocab-word, .vocab-term').forEach(v => {
+            v.classList.remove('active-vocab');
+        });
+
+        // Also clear in presenter preview scaler
+        const scaler = document.getElementById('cpCurrentSlideScaler');
+        if (scaler) {
+            scaler.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
+            scaler.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
+            scaler.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
+            scaler.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
         }
 
         const container = containerId ? document.getElementById(containerId) : slide;
@@ -4981,27 +4992,29 @@ class ReadingHighlighter {
 
         const allEvTargets = [];
         if (evId) {
-            const byId = document.getElementById(evId);
-            if (byId) allEvTargets.push(byId);
-            document.querySelectorAll(`mark.evidence[data-ev="${evId}"], mark.evidence#${evId}`).forEach(el => {
+            document.querySelectorAll(`[id="${evId}"], mark.evidence[data-ev="${evId}"], mark.evidence#${evId}`).forEach(el => {
                 if (!allEvTargets.includes(el)) allEvTargets.push(el);
             });
         }
         if (qKey) {
-            document.querySelectorAll(`mark.evidence[data-q="${qKey}"], mark.evidence#ev-${qKey}`).forEach(el => {
+            document.querySelectorAll(`[id="ev-${qKey}"], mark.evidence[data-q="${qKey}"], mark.evidence#ev-${qKey}`).forEach(el => {
                 if (!allEvTargets.includes(el)) allEvTargets.push(el);
             });
         }
 
-        const synSpans = qKey ? Array.from(document.querySelectorAll(`[data-q="${qKey}"]`)) : [];
+        const synSpans = qKey ? Array.from(document.querySelectorAll(`[data-q="${qKey}"], .syn-pair-1[data-q="${qKey}"], .syn-pair-2[data-q="${qKey}"], .syn-pair-3[data-q="${qKey}"]`)) : [];
         const isCurrentlyActive = (allEvTargets.length > 0 && allEvTargets.some(t => t.classList.contains('highlighted')) && this.activeEvidenceId === (evId || qKey)) ||
                                   (synSpans.length > 0 && synSpans.every(s => s.classList.contains('active-syn')) && this.activeEvidenceId === qKey);
 
         if (!isCurrentlyActive) {
             allEvTargets.forEach(target => {
                 target.classList.add('highlighted', 'glow-pulse');
+                target.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
             });
-            synSpans.forEach(s => s.classList.add('active-syn'));
+            synSpans.forEach(s => {
+                s.classList.add('active-syn');
+                s.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
+            });
             this.activeEvidenceId = evId || qKey;
 
             // Smooth scroll into view inside the scrollable reading pane (for both main and preview)
@@ -5029,8 +5042,12 @@ class ReadingHighlighter {
         } else {
             allEvTargets.forEach(target => {
                 target.classList.remove('highlighted', 'glow-pulse');
+                target.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
             });
-            synSpans.forEach(s => s.classList.remove('active-syn'));
+            synSpans.forEach(s => {
+                s.classList.remove('active-syn');
+                s.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
+            });
             this.activeEvidenceId = null;
         }
 
@@ -9656,16 +9673,44 @@ class PresenterViewUI {
 
         // Click delegation inside preview slide
         scaler.addEventListener('click', (e) => {
-            // Synonym / Evidence buttons
-            const synBtn = e.target.closest('.syn-btn');
+            // 1. Vocabulary terms & Explainer popovers
+            const vocabTerm = e.target.closest('.vocab-word, .vocab-term, [data-def]');
+            if (vocabTerm && window.ReadingGrounder) {
+                e.preventDefault();
+                e.stopPropagation();
+                const text = vocabTerm.textContent.trim().toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()"]/g, "").trim();
+                const matchedDict = ReadingGrounder.lookupDict ? ReadingGrounder.lookupDict(text, vocabTerm) : null;
+                ReadingGrounder.showVocabPopover(vocabTerm, matchedDict);
+                return;
+            }
+
+            // 2. Synonym / Evidence buttons
+            const synBtn = e.target.closest('.syn-btn, [onclick*="toggleSynonymExplanation"]');
             if (synBtn) {
                 const card = synBtn.closest('.q-card, .flowchart-step-card');
-                const dataQ = synBtn.dataset.q || card?.dataset?.q || (synBtn.dataset.ev ? synBtn.dataset.ev.replace(/^ev-/, '') : null);
-                const dataEv = synBtn.dataset.ev || (dataQ ? `ev-${dataQ}` : null);
-                if (window.readingHighlighter && (dataQ || dataEv)) {
+                let dataQ = synBtn.dataset.q || card?.dataset?.q;
+                let dataEv = synBtn.dataset.ev;
+
+                const onclickAttr = synBtn.getAttribute('onclick');
+                if ((!dataQ || !dataEv) && onclickAttr) {
+                    const match = onclickAttr.match(/toggleSynonymExplanation\(['"]([^'"]+)['"](?:,\s*['"]([^'"]+)['"])?\)/);
+                    if (match) {
+                        dataQ = dataQ || match[1];
+                        dataEv = dataEv || match[2] || `ev-${match[1]}`;
+                    }
+                }
+
+                if (!dataEv && dataQ) dataEv = `ev-${dataQ}`;
+                if (!dataQ && dataEv) dataQ = dataEv.replace(/^ev-/, '');
+
+                if (dataQ || dataEv) {
                     e.preventDefault();
                     e.stopPropagation();
-                    window.readingHighlighter.focusEvidence(dataQ, dataEv, true);
+                    if (window.readingHighlighter) {
+                        window.readingHighlighter.focusEvidence(dataQ, dataEv, true);
+                    } else if (window.deckEngine) {
+                        window.deckEngine.toggleSynonymExplanation(dataQ, dataEv, true);
+                    }
                     if (card) {
                         const exp = card.querySelector('.item-explanation');
                         if (exp) exp.classList.toggle('show');
@@ -9674,7 +9719,7 @@ class PresenterViewUI {
                 return;
             }
 
-            // Word chips
+            // 3. Word chips
             const wordChip = e.target.closest('.word-chip');
             if (wordChip && window.vocabBank) {
                 e.preventDefault();
@@ -9684,7 +9729,7 @@ class PresenterViewUI {
                 return;
             }
 
-            // Option cards (.opt-card)
+            // 4. Option cards (.opt-card)
             const optCard = e.target.closest('.opt-card');
             if (optCard) {
                 e.preventDefault();
@@ -9700,7 +9745,7 @@ class PresenterViewUI {
                 return;
             }
 
-            // Action buttons (Check, Reveal, Reset)
+            // 5. Action buttons (Check, Reveal, Reset)
             const actionBtn = e.target.closest('button');
             if (actionBtn && actionBtn.onclick) {
                 setTimeout(() => {

@@ -1642,16 +1642,44 @@ class PresenterViewUI {
 
         // Click delegation inside preview slide
         scaler.addEventListener('click', (e) => {
-            // Synonym / Evidence buttons
-            const synBtn = e.target.closest('.syn-btn');
+            // 1. Vocabulary terms & Explainer popovers
+            const vocabTerm = e.target.closest('.vocab-word, .vocab-term, [data-def]');
+            if (vocabTerm && window.ReadingGrounder) {
+                e.preventDefault();
+                e.stopPropagation();
+                const text = vocabTerm.textContent.trim().toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()"]/g, "").trim();
+                const matchedDict = ReadingGrounder.lookupDict ? ReadingGrounder.lookupDict(text, vocabTerm) : null;
+                ReadingGrounder.showVocabPopover(vocabTerm, matchedDict);
+                return;
+            }
+
+            // 2. Synonym / Evidence buttons
+            const synBtn = e.target.closest('.syn-btn, [onclick*="toggleSynonymExplanation"]');
             if (synBtn) {
                 const card = synBtn.closest('.q-card, .flowchart-step-card');
-                const dataQ = synBtn.dataset.q || card?.dataset?.q || (synBtn.dataset.ev ? synBtn.dataset.ev.replace(/^ev-/, '') : null);
-                const dataEv = synBtn.dataset.ev || (dataQ ? `ev-${dataQ}` : null);
-                if (window.readingHighlighter && (dataQ || dataEv)) {
+                let dataQ = synBtn.dataset.q || card?.dataset?.q;
+                let dataEv = synBtn.dataset.ev;
+
+                const onclickAttr = synBtn.getAttribute('onclick');
+                if ((!dataQ || !dataEv) && onclickAttr) {
+                    const match = onclickAttr.match(/toggleSynonymExplanation\(['"]([^'"]+)['"](?:,\s*['"]([^'"]+)['"])?\)/);
+                    if (match) {
+                        dataQ = dataQ || match[1];
+                        dataEv = dataEv || match[2] || `ev-${match[1]}`;
+                    }
+                }
+
+                if (!dataEv && dataQ) dataEv = `ev-${dataQ}`;
+                if (!dataQ && dataEv) dataQ = dataEv.replace(/^ev-/, '');
+
+                if (dataQ || dataEv) {
                     e.preventDefault();
                     e.stopPropagation();
-                    window.readingHighlighter.focusEvidence(dataQ, dataEv, true);
+                    if (window.readingHighlighter) {
+                        window.readingHighlighter.focusEvidence(dataQ, dataEv, true);
+                    } else if (window.deckEngine) {
+                        window.deckEngine.toggleSynonymExplanation(dataQ, dataEv, true);
+                    }
                     if (card) {
                         const exp = card.querySelector('.item-explanation');
                         if (exp) exp.classList.toggle('show');
@@ -1660,7 +1688,7 @@ class PresenterViewUI {
                 return;
             }
 
-            // Word chips
+            // 3. Word chips
             const wordChip = e.target.closest('.word-chip');
             if (wordChip && window.vocabBank) {
                 e.preventDefault();
@@ -1670,7 +1698,7 @@ class PresenterViewUI {
                 return;
             }
 
-            // Option cards (.opt-card)
+            // 4. Option cards (.opt-card)
             const optCard = e.target.closest('.opt-card');
             if (optCard) {
                 e.preventDefault();
@@ -1686,7 +1714,7 @@ class PresenterViewUI {
                 return;
             }
 
-            // Action buttons (Check, Reveal, Reset)
+            // 5. Action buttons (Check, Reveal, Reset)
             const actionBtn = e.target.closest('button');
             if (actionBtn && actionBtn.onclick) {
                 setTimeout(() => {
