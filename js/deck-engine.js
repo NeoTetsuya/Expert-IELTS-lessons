@@ -56,6 +56,8 @@
         'pen-annotation.js',
         'classroom-timer.js',
         'presentation-tools.js',
+        'presenter-sync.js',
+        'presenter-drawing.js',
         'presenter-view.js'
     ];
 

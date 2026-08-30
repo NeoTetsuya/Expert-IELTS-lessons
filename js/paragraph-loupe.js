@@ -142,9 +142,35 @@ class ParagraphLoupe {
         }
     }
 
-    notifySync() {
-        if (window.presenterViewSync && typeof window.presenterViewSync.emit === 'function') {
-            window.presenterViewSync.emit('PARAGRAPH_LOUPE_CMD', {});
+    notifySync(clear = false) {
+        const syncEngine = window.presenterSyncEngine || window.presenterViewSync;
+        if (syncEngine && typeof syncEngine.emit === 'function') {
+            const paragraphs = this.getActiveSlideParagraphs();
+            const paraIndex = (!clear && this.activePara) ? paragraphs.indexOf(this.activePara) : -1;
+            syncEngine.emit('PARAGRAPH_LOUPE_CMD', {
+                slideIndex: window.deckEngine ? window.deckEngine.currentSlide : 0,
+                paraIndex,
+                clear: clear || (paraIndex === -1)
+            });
+        }
+    }
+
+    applyRemoteSync(data) {
+        if (!data) {
+            this.cycleNextParagraph();
+            return;
+        }
+
+        if (data.clear || data.paraIndex === -1) {
+            this.clearFocus();
+            return;
+        }
+
+        const paragraphs = this.getActiveSlideParagraphs();
+        if (typeof data.paraIndex === 'number' && data.paraIndex >= 0 && data.paraIndex < paragraphs.length) {
+            this.focusParagraph(paragraphs[data.paraIndex]);
+        } else {
+            this.cycleNextParagraph();
         }
     }
 
