@@ -514,6 +514,178 @@
             this.expandSlides();
         }
 
+        static resolveDataPath(path) {
+            if (!path) return null;
+            const parts = path.split('.');
+            let current = window.moduleData || window.module3Data || window.module2Data || window.module1Data;
+            if (parts[0] in window) {
+                current = window[parts[0]];
+                parts.shift();
+            }
+            for (const part of parts) {
+                if (current && typeof current === 'object' && part in current) {
+                    current = current[part];
+                } else {
+                    return null;
+                }
+            }
+            return current;
+        }
+
+        static hydrateSlideFromData(section, el, data, skillCol) {
+            if (!data || typeof data !== 'object') return;
+
+            // Direct properties
+            if (data.title) {
+                const t = section.querySelector('[data-slot="title"], .slide-title, .title-main');
+                if (t) t.innerHTML = data.title;
+            }
+            if (data.subtitle) {
+                const s = section.querySelector('[data-slot="subtitle"], .slide-subtitle, .title-sub');
+                if (s) s.innerHTML = data.subtitle;
+            }
+            if (data.badge) {
+                const b = section.querySelector('[data-slot="badge"], .skill-badge, .title-module-badge');
+                if (b) b.innerHTML = data.badge;
+            }
+            if (data.instruction) {
+                const inst = section.querySelector('[data-slot="instruction"], .slide-subtitle');
+                if (inst) inst.innerHTML = data.instruction;
+            }
+
+            // Title slide specific: tags & roadmap
+            if (data.tags && Array.isArray(data.tags)) {
+                const tagsContainer = section.querySelector('[data-slot="tags"]');
+                if (tagsContainer) {
+                    tagsContainer.innerHTML = data.tags.map(t => `<span class="skill-chip" style="background:${t.bg}; color:#fff; font-size:15px; font-weight:700; padding:6px 14px; border-radius:20px;">${t.text}</span>`).join('');
+                }
+            }
+            if (data.roadmap && Array.isArray(data.roadmap)) {
+                const rmContainer = section.querySelector('[data-slot="roadmap"]');
+                if (rmContainer) {
+                    rmContainer.innerHTML = data.roadmap.map(item => `
+                        <div class="roadmap-card" style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid ${skillCol}; border-radius:10px; padding:12px 16px; margin-bottom:10px;">
+                            <div style="font-size:16px; font-weight:800; color:var(--text-dark); margin-bottom:4px;">${item.num ? `Section ${item.num}: ` : ''}${item.title}</div>
+                            <div style="font-size:14.5px; color:#475569; line-height:1.5;">${item.desc}</div>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            // Walkthrough specific: excerpt, header, question, inputArea/wordBank, explanation
+            if (data.excerpt || data.passageText) {
+                const pText = section.querySelector('[data-slot="passage-text"]') || section.querySelector('[data-slot="passage"]');
+                if (pText) pText.innerHTML = data.excerpt || data.passageText;
+            }
+            if (data.header || data.passageHeader) {
+                const pHdr = section.querySelector('[data-slot="passage-header"]');
+                if (pHdr) pHdr.innerHTML = data.header || data.passageHeader;
+            }
+            if (data.question || data.questionText) {
+                const qText = section.querySelector('[data-slot="question-text"]') || section.querySelector('[data-slot="question-card"]');
+                if (qText) qText.innerHTML = data.question || data.questionText;
+            }
+            if (data.qNum) {
+                const qCard = section.querySelector('.q-card, [data-slot="question-card"]');
+                if (qCard) qCard.setAttribute('data-q', `wt-${data.qNum}`);
+                const evBtn = section.querySelector('.syn-btn, [data-slot="evidence-btn"]');
+                if (evBtn) {
+                    evBtn.setAttribute('data-q', `wt-${data.qNum}`);
+                    if (data.evId) evBtn.setAttribute('data-ev', data.evId);
+                }
+            }
+            if (data.ans || data.inputAns) {
+                const ansVal = data.ans || data.inputAns;
+                const inputContainer = section.querySelector('[data-slot="input-area"]');
+                if (inputContainer) {
+                    if (ansVal === 'YES' || ansVal === 'NO' || ansVal === 'NOT GIVEN') {
+                        inputContainer.innerHTML = `
+                            <div style="display:flex; align-items:center; gap:12px;">
+                                <span style="font-weight:700; font-size:19px;">Your Choice:</span>
+                                <select class="select-input" data-ans="${ansVal}" style="width:180px; font-weight:700;">
+                                    <option value="">Select...</option>
+                                    <option value="YES">YES</option>
+                                    <option value="NO">NO</option>
+                                    <option value="NOT GIVEN">NOT GIVEN</option>
+                                </select>
+                            </div>
+                        `;
+                    } else {
+                        const wb = data.wordBank || (window.module3Data && window.module3Data.reading3a && window.module3Data.reading3a.wordBank);
+                        if (wb && Array.isArray(wb)) {
+                            const chipsHtml = wb.map(w => `<span class="word-chip" data-word="${w}">${w}</span>`).join('');
+                            inputContainer.innerHTML = `
+                                <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+                                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:#f8fafc; padding:10px 14px; border-radius:8px; border:1px solid #cbd5e1;">
+                                        <span style="font-size:14px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-right:4px;">📦 Word Bank:</span>
+                                        ${chipsHtml}
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:12px;">
+                                        <span style="font-weight:700; font-size:19px;">Your Choice:</span>
+                                        <input type="text" class="blank-input" data-ans="${ansVal}" placeholder="Type or click word..." style="width:230px; font-weight:700;">
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            inputContainer.innerHTML = `
+                                <div style="display:flex; align-items:center; gap:12px;">
+                                    <span style="font-weight:700; font-size:19px;">Your Choice:</span>
+                                    <input type="text" class="blank-input" data-ans="${ansVal}" placeholder="Type answer..." style="width:230px; font-weight:700;">
+                                </div>
+                            `;
+                        }
+                    }
+                }
+            }
+            if (data.explanation) {
+                const expl = section.querySelector('[data-slot="explanation"], .item-explanation');
+                if (expl) expl.innerHTML = data.explanation;
+            }
+
+            // Split reading specific: passage, wordBank, summaryText, questions
+            if (data.passage) {
+                const passEl = section.querySelector('[data-slot="passage"], .reading-pane');
+                if (passEl) passEl.innerHTML = data.passage;
+            }
+            if (data.summaryText || (data.questions && Array.isArray(data.questions))) {
+                const qPane = section.querySelector('[data-slot="questions"], .question-pane');
+                if (qPane) {
+                    if (data.summaryText) {
+                        const wbChips = (data.wordBank && Array.isArray(data.wordBank))
+                            ? data.wordBank.map(w => `<span class="word-chip" data-word="${w}" style="background:#ffffff; border:1px solid #cbd5e1; padding:4px 10px; border-radius:6px; font-weight:700; font-size:15px;">${w}</span>`).join('')
+                            : '';
+                        qPane.innerHTML = `
+                            ${wbChips ? `
+                            <div class="card" style="background:#f8fafc; border:1.5px solid #cbd5e1; border-left:5px solid var(--col-reading); padding:12px 16px; margin-bottom:12px;">
+                                <div style="font-size:15px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-bottom:8px;">📦 Word Bank (Use words exactly as shown)</div>
+                                <div class="vocab-chips-container" style="display:flex; flex-wrap:wrap; gap:6px;">
+                                    ${wbChips}
+                                </div>
+                            </div>` : ''}
+                            <div class="card" style="padding:18px 22px; font-size:19.5px; line-height:2.1; color:#0f172a; background:#ffffff; border:1px solid #e2e8f0; border-radius:10px;">
+                                ${data.summaryText}
+                            </div>
+                        `;
+                    } else if (data.questions && Array.isArray(data.questions)) {
+                        qPane.innerHTML = data.questions.map(q => `
+                            <div class="q-card" data-q="${q.qNum}" ${q.evId ? `data-ev="${q.evId}"` : ''} style="background:#ffffff; border:1px solid #cbd5e1; border-radius:10px; padding:12px 16px; margin-bottom:10px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                    <strong style="font-size:18px;">${q.text}</strong>
+                                    ${q.evId ? `<button class="syn-btn" data-ev="${q.evId}" onclick="deckEngine.toggleSynonymExplanation('${q.qNum}', '${q.evId}')" style="padding:2px 8px; font-size:13px;" title="Highlight Evidence">💡 Evidence</button>` : ''}
+                                </div>
+                                <select class="select-input" data-ans="${q.ans}" style="width:100%; font-weight:700;">
+                                    <option value="">Select...</option>
+                                    <option value="YES">YES</option>
+                                    <option value="NO">NO</option>
+                                    <option value="NOT GIVEN">NOT GIVEN</option>
+                                </select>
+                            </div>
+                        `).join('');
+                    }
+                }
+            }
+        }
+
         static findSlotTarget(section, slotName) {
             if (!slotName) return null;
             
@@ -737,7 +909,16 @@
                     skillBadge.style.background = skillCol;
                 }
 
-                // Fill direct text attributes
+                // Dynamic Data Binding: Hydrate from external data module if data-bind is provided
+                const bindPath = el.getAttribute('data-bind') || el.getAttribute('data-data-key');
+                if (bindPath) {
+                    const dataObj = this.resolveDataPath(bindPath);
+                    if (dataObj) {
+                        this.hydrateSlideFromData(section, el, dataObj, skillCol);
+                    }
+                }
+
+                // Fill direct text attributes (overrides data-bind if explicitly present on tag)
                 ['title', 'subtitle', 'badge', 'tag', 'instruction'].forEach(attr => {
                     const val = el.getAttribute(attr);
                     if (val) {
