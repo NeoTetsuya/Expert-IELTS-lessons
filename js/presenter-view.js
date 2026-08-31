@@ -333,6 +333,14 @@ class PresenterViewUI {
         const isWhiteout = window.presentationSpotlight ? window.presentationSpotlight.isWhiteout : false;
         const isSpotlight = window.presentationSpotlight ? window.presentationSpotlight.isSpotlight : false;
 
+        const inputsData = [];
+        const slide = (window.deckEngine.slides && window.deckEngine.slides[currentSlide]) || document.querySelector('.slide.active');
+        if (slide) {
+            slide.querySelectorAll('.blank-input, .select-input, input, select, textarea').forEach((inp, i) => {
+                inputsData.push({ index: i, value: inp.value, className: inp.className });
+            });
+        }
+
         this.sync.emit('SYNC_RESPONSE', {
             currentSlide,
             aspectRatio,
@@ -341,7 +349,8 @@ class PresenterViewUI {
             timerRunning,
             isBlackout,
             isWhiteout,
-            isSpotlight
+            isSpotlight,
+            inputsData
         });
     }
 
@@ -678,6 +687,18 @@ class PresenterViewUI {
             if (window.deckEngine && typeof state.currentSlide === 'number') {
                 window.deckEngine.showSlide(state.currentSlide, false);
             }
+            if (Array.isArray(state.inputsData) && typeof state.currentSlide === 'number') {
+                const slide = (window.deckEngine && window.deckEngine.slides) ? window.deckEngine.slides[state.currentSlide] : document.querySelector('.slide.active');
+                if (slide) {
+                    const allInputs = slide.querySelectorAll('.blank-input, .select-input, input, select, textarea');
+                    state.inputsData.forEach(item => {
+                        if (allInputs[item.index]) {
+                            allInputs[item.index].value = item.value;
+                            allInputs[item.index].className = item.className;
+                        }
+                    });
+                }
+            }
             if (state.aspectRatio && window.deckEngine) {
                 window.deckEngine.applyAspectRatio(state.aspectRatio, false, false);
             }
@@ -792,6 +813,9 @@ class PresenterViewUI {
                 if (targetInput && targetInput.value !== data.value) {
                     targetInput.value = data.value;
                 }
+                if (targetInput && data.className) {
+                    targetInput.className = data.className;
+                }
             }
             const scaler = document.getElementById('cpCurrentSlideScaler');
             if (scaler) {
@@ -799,6 +823,9 @@ class PresenterViewUI {
                 const cloneTarget = cloneInputs[data.inputIndex];
                 if (cloneTarget && cloneTarget.value !== data.value) {
                     cloneTarget.value = data.value;
+                }
+                if (cloneTarget && data.className) {
+                    cloneTarget.className = data.className;
                 }
             }
         });
@@ -1441,6 +1468,39 @@ class PresenterViewUI {
     }
 
     /**
+     * Copy form input values, check states, and interactive classes from source to destination elements
+     */
+    syncFormValues(srcElement, destElement) {
+        if (!srcElement || !destElement) return;
+
+        const srcInputs = srcElement.querySelectorAll('input, select, textarea');
+        const destInputs = destElement.querySelectorAll('input, select, textarea');
+        srcInputs.forEach((src, idx) => {
+            const dest = destInputs[idx];
+            if (!dest) return;
+            if (src.tagName === 'SELECT') {
+                dest.value = src.value;
+            } else if (src.type === 'checkbox' || src.type === 'radio') {
+                dest.checked = src.checked;
+            } else {
+                dest.value = src.value;
+            }
+            dest.className = src.className;
+        });
+
+        // Also sync item-explanations, marks, synonym pairs, and opt-cards
+        const srcCards = srcElement.querySelectorAll('.q-card, .opt-card, .word-chip, .item-explanation, mark.evidence, .syn-pair-1, .syn-pair-2, .syn-pair-3');
+        const destCards = destElement.querySelectorAll('.q-card, .opt-card, .word-chip, .item-explanation, mark.evidence, .syn-pair-1, .syn-pair-2, .syn-pair-3');
+        srcCards.forEach((src, idx) => {
+            const dest = destCards[idx];
+            if (dest) {
+                dest.className = src.className;
+                if (src.style.display) dest.style.display = src.style.display;
+            }
+        });
+    }
+
+    /**
      * Update Presenter Slide Preview & Notes
      */
     updatePresenterSlideView() {
@@ -1462,6 +1522,7 @@ class PresenterViewUI {
             const clone = currentSlide.cloneNode(true);
             clone.classList.add('active', 'preview-clone');
             scaler.appendChild(clone);
+            this.syncFormValues(currentSlide, clone);
             this.scalePreviewElement(scaler);
             this.bindPreviewSlideInteractions(scaler, currentSlide, currentIndex);
         }
@@ -1489,7 +1550,8 @@ class PresenterViewUI {
                 this.sync.emit('INPUT_SYNC', {
                     slideIndex: currentIndex,
                     inputIndex: idx,
-                    value: input.value
+                    value: input.value,
+                    className: input.className
                 });
             };
             input.addEventListener('input', syncInput);
@@ -1570,12 +1632,34 @@ class PresenterViewUI {
                 return;
             }
 
-            // 5. Action buttons (Check, Reveal, Reset)
-            const actionBtn = e.target.closest('button');
-            if (actionBtn && actionBtn.onclick) {
-                setTimeout(() => {
+            // 5. Action buttons (Check, Reveal, Reset, Step Reveal)
+            const actionBtn = e.target.closest('button, .btn-action');
+            if (actionBtn) {
+                const btnText = (actionBtn.textContent || '').trim().toLowerCase();
+                if (actionBtn.classList.contains('btn-step-reveal') || btnText.includes('step reveal')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.triggerStepReveal();
+                    return;
+                } else if (btnText.includes('check')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (window.deckEngine) window.deckEngine.checkAnswers(currentSlide, true);
                     this.updatePresenterSlideView();
-                }, 60);
+                    return;
+                } else if (btnText.includes('reveal') || btnText.includes('show evidence') || btnText.includes('show highlight')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (window.deckEngine) window.deckEngine.revealKeys(currentSlide, true);
+                    this.updatePresenterSlideView();
+                    return;
+                } else if (btnText.includes('reset')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (window.deckEngine) window.deckEngine.resetTask(currentSlide, true);
+                    this.updatePresenterSlideView();
+                    return;
+                }
             }
         });
     }

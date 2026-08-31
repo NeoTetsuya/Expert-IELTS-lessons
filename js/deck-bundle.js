@@ -4893,21 +4893,23 @@ window.addEventListener('DOMContentLoaded', () => {
  * 
  * Automatically manages all reading highlighting behaviors:
  * 1. Reveals evidence marks (<mark class="evidence">) and synonym pairs (.syn-pair-*) when checking or revealing answers.
- * 2. Clears highlights and explanations when resetting exercises.
- * 3. Smooth-scrolls the reading passage to center on the exact evidence when clicking synonym buttons.
- * 4. Adds glowing focus pulses when hovering over or selecting question items.
- * 5. Hooks transparently into DeckEngine's exercise methods.
+ * 2. Spotlight Context Dimming: dims surrounding text to highlight target evidence with zero distraction.
+ * 3. Keyboard Navigation: Press 'E' / 'Shift+E' to cycle evidence, '1'-'9' to jump to Question N, 'Esc' to clear.
+ * 4. Clears highlights and explanations when resetting exercises.
+ * 5. Smooth-scrolls the reading passage to center on the exact evidence when clicking synonym buttons.
+ * 6. Hooks transparently into DeckEngine's exercise methods and Presenter View sync.
  */
 
 class ReadingHighlighter {
     constructor() {
         this.activeEvidenceId = null;
+        this.currentEvidenceIndex = -1;
         this.init();
     }
 
     init() {
         this.bindSynonymClicks();
-        this.bindQuestionHover();
+        this.bindKeyboardShortcuts();
         this.hookDeckEngine();
         this.setupSyncListeners();
     }
@@ -4948,6 +4950,12 @@ class ReadingHighlighter {
             v.classList.add('active-vocab');
         });
 
+        // Ensure reading pane is not dimmed in "Show All" mode
+        slide.querySelectorAll('.reading-pane').forEach(pane => {
+            pane.classList.remove('spotlight-mode');
+            pane.querySelectorAll('.spotlight-target').forEach(p => p.classList.remove('spotlight-target'));
+        });
+
         // Also apply to preview scaler / preview clone in presenter view
         const scaler = document.getElementById('cpCurrentSlideScaler');
         if (scaler) {
@@ -4955,6 +4963,7 @@ class ReadingHighlighter {
             scaler.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
             scaler.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
             scaler.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+            scaler.querySelectorAll('.reading-pane').forEach(p => p.classList.remove('spotlight-mode'));
         }
 
         // Show all item explanations
@@ -4969,7 +4978,7 @@ class ReadingHighlighter {
     }
 
     /**
-     * Clears all evidence highlights, synonym badges, and explanations in the slide
+     * Clears all evidence highlights, synonym badges, spotlight dimming, and explanations in the slide
      */
     clearAll(containerId, broadcast = true) {
         const slide = this.getSlideForContainer(containerId);
@@ -4987,6 +4996,12 @@ class ReadingHighlighter {
             v.classList.remove('active-vocab');
         });
 
+        // Clear Spotlight Context Dimming
+        slide.querySelectorAll('.reading-pane').forEach(pane => {
+            pane.classList.remove('spotlight-mode');
+            pane.querySelectorAll('.spotlight-target').forEach(p => p.classList.remove('spotlight-target'));
+        });
+
         // Also clear in presenter preview scaler
         const scaler = document.getElementById('cpCurrentSlideScaler');
         if (scaler) {
@@ -4994,6 +5009,7 @@ class ReadingHighlighter {
             scaler.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
             scaler.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
             scaler.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
+            scaler.querySelectorAll('.reading-pane').forEach(p => p.classList.remove('spotlight-mode'));
         }
 
         const container = containerId ? document.getElementById(containerId) : slide;
@@ -5002,6 +5018,7 @@ class ReadingHighlighter {
         }
 
         this.activeEvidenceId = null;
+        this.currentEvidenceIndex = -1;
 
         if (broadcast && window.presenterSyncEngine) {
             window.presenterSyncEngine.emit('EVIDENCE_CLEAR', { containerId });
@@ -5009,7 +5026,7 @@ class ReadingHighlighter {
     }
 
     /**
-     * Toggles highlight and smooth-scrolls to specific evidence for question qKey
+     * Toggles highlight and smooth-scrolls to specific evidence with Spotlight Dimming
      */
     focusEvidence(qKey, evId, broadcast = true) {
         if (!evId && qKey) {
@@ -5032,18 +5049,37 @@ class ReadingHighlighter {
         const isCurrentlyActive = (allEvTargets.length > 0 && allEvTargets.some(t => t.classList.contains('highlighted')) && this.activeEvidenceId === (evId || qKey)) ||
                                   (synSpans.length > 0 && synSpans.every(s => s.classList.contains('active-syn')) && this.activeEvidenceId === qKey);
 
+        const currentSlide = document.querySelector('.slide.active') || document.body;
+
         if (!isCurrentlyActive) {
+            // First clear prior active highlights on the slide
+            currentSlide.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
+            currentSlide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
+            currentSlide.querySelectorAll('.reading-pane').forEach(p => p.querySelectorAll('.spotlight-target').forEach(pt => pt.classList.remove('spotlight-target')));
+
             allEvTargets.forEach(target => {
                 target.classList.add('highlighted', 'glow-pulse');
                 target.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
+
+                const parentPara = target.closest('p, div.para-block');
+                if (parentPara) {
+                    parentPara.classList.add('spotlight-target');
+                }
+
+                const readingPane = target.closest('.reading-pane');
+                if (readingPane) {
+                    readingPane.classList.add('spotlight-mode');
+                }
             });
+
             synSpans.forEach(s => {
                 s.classList.add('active-syn');
                 s.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
             });
+
             this.activeEvidenceId = evId || qKey;
 
-            // Smooth scroll into view inside the scrollable reading pane (for both main and preview)
+            // Smooth scroll into view inside reading pane
             allEvTargets.forEach(evTarget => {
                 const readingPane = evTarget.closest('.reading-pane');
                 if (readingPane) {
@@ -5060,7 +5096,7 @@ class ReadingHighlighter {
                     evTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
 
-                // Remove pulse animation after 2.5s while keeping highlight
+                // Remove pulse glow after 2.5s while keeping spotlight & highlight
                 setTimeout(() => {
                     evTarget.classList.remove('glow-pulse');
                 }, 2500);
@@ -5069,11 +5105,15 @@ class ReadingHighlighter {
             allEvTargets.forEach(target => {
                 target.classList.remove('highlighted', 'glow-pulse');
                 target.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
+                const parentPara = target.closest('p, div.para-block');
+                if (parentPara) parentPara.classList.remove('spotlight-target');
             });
             synSpans.forEach(s => {
                 s.classList.remove('active-syn');
                 s.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
             });
+
+            currentSlide.querySelectorAll('.reading-pane').forEach(p => p.classList.remove('spotlight-mode'));
             this.activeEvidenceId = null;
         }
 
@@ -5141,14 +5181,60 @@ class ReadingHighlighter {
     }
 
     /**
-     * Question hover preview disabled to prevent unintentional answer exposure
+     * Keyboard Shortcuts:
+     * - 'E' / 'Shift+E': Cycle forward / backward through evidence on current slide
+     * - '1'-'9': Jump directly to Question N evidence
+     * - 'Escape': Clear spotlight & evidence
      */
-    bindQuestionHover() {
-        // Restricted to explicit button actions
+    bindKeyboardShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            // Ignore when typing inside input, textarea, or select elements
+            const activeTag = document.activeElement ? document.activeElement.tagName : '';
+            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(activeTag) || document.activeElement.isContentEditable) {
+                return;
+            }
+
+            const currentSlide = document.querySelector('.slide.active');
+            if (!currentSlide) return;
+
+            const synButtons = Array.from(currentSlide.querySelectorAll('.syn-btn, [data-ev]'));
+            if (synButtons.length === 0) return;
+
+            // 'E' Key: Cycle Evidence
+            if (e.key.toLowerCase() === 'e' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    // Previous Evidence
+                    this.currentEvidenceIndex = (this.currentEvidenceIndex - 1 + synButtons.length) % synButtons.length;
+                } else {
+                    // Next Evidence
+                    this.currentEvidenceIndex = (this.currentEvidenceIndex + 1) % synButtons.length;
+                }
+                const targetBtn = synButtons[this.currentEvidenceIndex];
+                if (targetBtn) {
+                    targetBtn.click();
+                }
+            }
+
+            // '1' to '9': Direct Question Jump
+            if (/^[1-9]$/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey) {
+                const targetIndex = parseInt(e.key, 10) - 1;
+                if (targetIndex >= 0 && targetIndex < synButtons.length) {
+                    e.preventDefault();
+                    this.currentEvidenceIndex = targetIndex;
+                    synButtons[targetIndex].click();
+                }
+            }
+
+            // 'Escape': Clear Spotlight
+            if (e.key === 'Escape') {
+                this.clearAll(null, true);
+            }
+        });
     }
 
     /**
-     * Transparently hooks into DeckEngine's check/reveal/reset methods
+     * Transparently hooks into DeckEngine's check/reveal/reset and slide transition methods
      */
     hookDeckEngine() {
         if (typeof window.DeckEngine !== 'undefined') {
@@ -5197,15 +5283,44 @@ class ReadingHighlighter {
             DeckEngine.prototype.toggleSynonymExplanation = function (qKey, evId) {
                 self.focusEvidence(qKey, evId, true);
             };
+
+            // Hook slide changes to automatically reset spotlight index
+            const origShowSlide = DeckEngine.prototype.showSlide;
+            if (origShowSlide) {
+                DeckEngine.prototype.showSlide = function (index, direction) {
+                    origShowSlide.call(this, index, direction);
+                    self.activeEvidenceId = null;
+                    self.currentEvidenceIndex = -1;
+                };
+            }
         }
     }
 }
 
-// Inject glow and preview CSS styles for evidence marks
+// Inject Spotlight Context Dimming and Glow Animation CSS
 (function () {
     const style = document.createElement('style');
     style.id = 'readingHighlighterStyles';
     style.textContent = `
+        /* Spotlight Context Dimming */
+        .reading-pane {
+            transition: all 0.3s ease;
+        }
+        .reading-pane.spotlight-mode > p,
+        .reading-pane.spotlight-mode > div:not(.spotlight-exempt) {
+            opacity: 0.32;
+            transition: opacity 0.35s cubic-bezier(0.32, 0.72, 0, 1), filter 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        .reading-pane.spotlight-mode > p.spotlight-target,
+        .reading-pane.spotlight-mode > p:has(mark.highlighted),
+        .reading-pane.spotlight-mode > p:has(.active-syn),
+        .reading-pane.spotlight-mode > h3 {
+            opacity: 1 !important;
+            filter: none !important;
+            position: relative;
+            z-index: 5;
+        }
+
         mark.evidence {
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
@@ -5218,12 +5333,17 @@ class ReadingHighlighter {
             font-weight: 600;
         }
         mark.evidence.glow-pulse {
-            box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.45);
+            box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.5), 0 4px 14px rgba(56, 189, 248, 0.3);
             background: #fef9c3 !important;
+            animation: evidencePulse 1.6s ease-in-out infinite;
         }
-        mark.evidence.hover-preview {
-            background: rgba(254, 240, 138, 0.5) !important;
-            border-bottom: 2px dashed #ca8a04 !important;
+        @keyframes evidencePulse {
+            0%, 100% {
+                box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.4), 0 2px 8px rgba(56, 189, 248, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 0 7px rgba(56, 189, 248, 0.7), 0 6px 18px rgba(56, 189, 248, 0.4);
+            }
         }
     `;
     document.head.appendChild(style);
@@ -8746,6 +8866,14 @@ class PresenterViewUI {
         const isWhiteout = window.presentationSpotlight ? window.presentationSpotlight.isWhiteout : false;
         const isSpotlight = window.presentationSpotlight ? window.presentationSpotlight.isSpotlight : false;
 
+        const inputsData = [];
+        const slide = (window.deckEngine.slides && window.deckEngine.slides[currentSlide]) || document.querySelector('.slide.active');
+        if (slide) {
+            slide.querySelectorAll('.blank-input, .select-input, input, select, textarea').forEach((inp, i) => {
+                inputsData.push({ index: i, value: inp.value, className: inp.className });
+            });
+        }
+
         this.sync.emit('SYNC_RESPONSE', {
             currentSlide,
             aspectRatio,
@@ -8754,7 +8882,8 @@ class PresenterViewUI {
             timerRunning,
             isBlackout,
             isWhiteout,
-            isSpotlight
+            isSpotlight,
+            inputsData
         });
     }
 
@@ -9091,6 +9220,18 @@ class PresenterViewUI {
             if (window.deckEngine && typeof state.currentSlide === 'number') {
                 window.deckEngine.showSlide(state.currentSlide, false);
             }
+            if (Array.isArray(state.inputsData) && typeof state.currentSlide === 'number') {
+                const slide = (window.deckEngine && window.deckEngine.slides) ? window.deckEngine.slides[state.currentSlide] : document.querySelector('.slide.active');
+                if (slide) {
+                    const allInputs = slide.querySelectorAll('.blank-input, .select-input, input, select, textarea');
+                    state.inputsData.forEach(item => {
+                        if (allInputs[item.index]) {
+                            allInputs[item.index].value = item.value;
+                            allInputs[item.index].className = item.className;
+                        }
+                    });
+                }
+            }
             if (state.aspectRatio && window.deckEngine) {
                 window.deckEngine.applyAspectRatio(state.aspectRatio, false, false);
             }
@@ -9205,6 +9346,9 @@ class PresenterViewUI {
                 if (targetInput && targetInput.value !== data.value) {
                     targetInput.value = data.value;
                 }
+                if (targetInput && data.className) {
+                    targetInput.className = data.className;
+                }
             }
             const scaler = document.getElementById('cpCurrentSlideScaler');
             if (scaler) {
@@ -9212,6 +9356,9 @@ class PresenterViewUI {
                 const cloneTarget = cloneInputs[data.inputIndex];
                 if (cloneTarget && cloneTarget.value !== data.value) {
                     cloneTarget.value = data.value;
+                }
+                if (cloneTarget && data.className) {
+                    cloneTarget.className = data.className;
                 }
             }
         });
@@ -9854,6 +10001,39 @@ class PresenterViewUI {
     }
 
     /**
+     * Copy form input values, check states, and interactive classes from source to destination elements
+     */
+    syncFormValues(srcElement, destElement) {
+        if (!srcElement || !destElement) return;
+
+        const srcInputs = srcElement.querySelectorAll('input, select, textarea');
+        const destInputs = destElement.querySelectorAll('input, select, textarea');
+        srcInputs.forEach((src, idx) => {
+            const dest = destInputs[idx];
+            if (!dest) return;
+            if (src.tagName === 'SELECT') {
+                dest.value = src.value;
+            } else if (src.type === 'checkbox' || src.type === 'radio') {
+                dest.checked = src.checked;
+            } else {
+                dest.value = src.value;
+            }
+            dest.className = src.className;
+        });
+
+        // Also sync item-explanations, marks, synonym pairs, and opt-cards
+        const srcCards = srcElement.querySelectorAll('.q-card, .opt-card, .word-chip, .item-explanation, mark.evidence, .syn-pair-1, .syn-pair-2, .syn-pair-3');
+        const destCards = destElement.querySelectorAll('.q-card, .opt-card, .word-chip, .item-explanation, mark.evidence, .syn-pair-1, .syn-pair-2, .syn-pair-3');
+        srcCards.forEach((src, idx) => {
+            const dest = destCards[idx];
+            if (dest) {
+                dest.className = src.className;
+                if (src.style.display) dest.style.display = src.style.display;
+            }
+        });
+    }
+
+    /**
      * Update Presenter Slide Preview & Notes
      */
     updatePresenterSlideView() {
@@ -9875,6 +10055,7 @@ class PresenterViewUI {
             const clone = currentSlide.cloneNode(true);
             clone.classList.add('active', 'preview-clone');
             scaler.appendChild(clone);
+            this.syncFormValues(currentSlide, clone);
             this.scalePreviewElement(scaler);
             this.bindPreviewSlideInteractions(scaler, currentSlide, currentIndex);
         }
@@ -9902,7 +10083,8 @@ class PresenterViewUI {
                 this.sync.emit('INPUT_SYNC', {
                     slideIndex: currentIndex,
                     inputIndex: idx,
-                    value: input.value
+                    value: input.value,
+                    className: input.className
                 });
             };
             input.addEventListener('input', syncInput);
@@ -9983,12 +10165,34 @@ class PresenterViewUI {
                 return;
             }
 
-            // 5. Action buttons (Check, Reveal, Reset)
-            const actionBtn = e.target.closest('button');
-            if (actionBtn && actionBtn.onclick) {
-                setTimeout(() => {
+            // 5. Action buttons (Check, Reveal, Reset, Step Reveal)
+            const actionBtn = e.target.closest('button, .btn-action');
+            if (actionBtn) {
+                const btnText = (actionBtn.textContent || '').trim().toLowerCase();
+                if (actionBtn.classList.contains('btn-step-reveal') || btnText.includes('step reveal')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.triggerStepReveal();
+                    return;
+                } else if (btnText.includes('check')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (window.deckEngine) window.deckEngine.checkAnswers(currentSlide, true);
                     this.updatePresenterSlideView();
-                }, 60);
+                    return;
+                } else if (btnText.includes('reveal') || btnText.includes('show evidence') || btnText.includes('show highlight')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (window.deckEngine) window.deckEngine.revealKeys(currentSlide, true);
+                    this.updatePresenterSlideView();
+                    return;
+                } else if (btnText.includes('reset')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (window.deckEngine) window.deckEngine.resetTask(currentSlide, true);
+                    this.updatePresenterSlideView();
+                    return;
+                }
             }
         });
     }
