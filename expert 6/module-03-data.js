@@ -12,7 +12,7 @@ window.module3Data = {
         band: "Band 6.0 – 7.0",
         title: "Work & Study",
         subtitle: "IELTS Academic Preparation Masterclass",
-        slidesCount: 27
+        slidesCount: 37
     },
 
     // Chart Configuration Schemas for General Chart Engine
