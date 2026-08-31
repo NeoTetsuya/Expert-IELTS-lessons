@@ -281,5 +281,32 @@ window.module1Data = {
                 explanation: `<div class="syn-key-box"><span class="syn-tag green">Anchor Paraphrase:</span> <em>"The Daily Me... never knowing what is happening outside of your personal interests"</em> ↔ <strong>viii. Living in a world of your own</strong>.</div>`
             }
         ]
+    },
+    charts: {
+        friendshipReasons: {
+            title: "Reasons to Make or Break Friendship Connections (%)",
+            categories: ["Real-life Known", "Shared Interests", "Mutual Friends", "Disliked Posts", "Offensive Comments", "Lack of Contact"],
+            series: [
+                { id: "make", name: "Reasons to Make Connection", color: "#2563eb", data: [78, 62, 54, 0, 0, 0] },
+                { id: "break", name: "Reasons to Break Connection", color: "#dc2626", data: [0, 0, 0, 58, 67, 48] }
+            ],
+            yMax: 100,
+            yStep: 20,
+            yFormat: (val) => val + "%"
+        },
+        cinemaDvdSales: {
+            title: "Cinema Ticket vs. DVD Sales (2001–2010) in US$ Billion",
+            xCategories: ["2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"],
+            series: [
+                { id: "us_cinema", name: "US Cinema Ticket Sales", color: "#2563eb", data: [10, 10.5, 11, 11.2, 11.5, 12, 12.2, 12, 11.5, 11] },
+                { id: "us_dvd", name: "US DVD Sales", color: "#f59e0b", data: [20, 21.5, 23, 24, 25, 23.5, 22, 20.5, 19, 18] },
+                { id: "intl_cinema", name: "International Cinema Ticket Sales", color: "#059669", data: [11, 12.5, 14, 16.5, 19, 22, 25, 28, 30.5, 32.5] },
+                { id: "intl_dvd", name: "International DVD Sales", color: "#dc2626", data: [11.5, 13.5, 16, 18, 17.5, 18.5, 19.5, 20.5, 21.5, 22] }
+            ],
+            yMin: 0,
+            yMax: 35,
+            yStep: 5,
+            yUnit: "$B"
+        }
     }
 };
