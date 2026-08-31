@@ -355,7 +355,7 @@
             <slide-card template="exercise-grid" skill="write" title="Writing 3a Task 1: Undergraduate Degree Costs Bar Chart" instruction="Analyze the cost breakdown across 4 countries and complete the comparative reporting sentences.">
                 <div slot="grid" style="display:flex; gap:24px; width:100%; height:100%;">
                     <div style="flex:1.1; display:flex; flex-direction:column; justify-content:center;">
-                        <div class="ielts-chart-container" id="chart-degree-costs"></div>
+                        <div class="ielts-chart-container" id="chart-degree-costs" data-chart-type="grouped-bar" data-chart-config="degreeCostChartConfig"></div>
                     </div>
                     <div style="flex:0.9; display:flex; flex-direction:column; gap:12px; font-size:18px; line-height:1.65; overflow-y:auto;">
                         <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-writing);">
@@ -413,7 +413,7 @@
             <!-- SLIDE 14: 3a Writing Task 1 Extra - Public vs Private Schools Dual Pie Charts -->
             <slide-card template="exercise-grid" skill="write" title="Writing 3a Extra: Public vs. Private School Distribution (Dual Pie Charts)" instruction="Compare proportions between total students (9:1 ratio) and total school institutions (3:1 ratio).">
                 <div slot="grid" style="display:flex; flex-direction:column; width:100%; height:100%; gap:14px;">
-                    <div class="ielts-chart-container" id="chart-school-pies"></div>
+                    <div class="ielts-chart-container" id="chart-school-pies" data-chart-type="pie-grid" data-chart-config="schoolPieChartConfig"></div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
                         <div class="card" style="padding:14px 18px; border-left:4px solid var(--col-reading);">
                             <div style="font-weight:800; font-size:17.5px; color:var(--col-reading); margin-bottom:4px;">1. Student Enrollment Asymmetry</div>
@@ -771,7 +771,7 @@
                     <div style="font-size:16.5px; margin-bottom:8px; background:#ffffff; padding:10px 14px; border-radius:6px; border-left:4px solid var(--col-writing);">
                         <strong>Prompt:</strong> <em>The graph shows the average amount of money women earned as a percentage of men's earnings in the USA from 1975 to 2005.</em>
                     </div>
-                    <div class="ielts-chart-container" id="chart-womens-earnings"></div>
+                    <div class="ielts-chart-container" id="chart-womens-earnings" data-chart-type="multi-line" data-chart-config="womensEarningsChartConfig"></div>
                 </div>
                 <div slot="essay">
                     <div class="card" style="border-left: 6px solid var(--col-writing); padding: 18px 22px; margin-bottom: 12px; background:#ffffff; border-radius:10px;">
@@ -829,7 +829,7 @@
             <slide-card template="exercise-grid" skill="review" title="Module 03 Mastery: Lifetime Income Bar Chart &amp; Exam Checklist" instruction="Complete the comparative analysis of lifetime educational earnings and review final competencies.">
                 <div slot="grid" style="display:flex; gap:20px; width:100%; height:100%;">
                     <div style="flex:1.1; display:flex; flex-direction:column; gap:10px;">
-                        <div class="ielts-chart-container" id="chart-education-income"></div>
+                        <div class="ielts-chart-container" id="chart-education-income" data-chart-type="single-bar" data-chart-config="educationIncomeChartConfig"></div>
                         <div style="font-size:16.5px; line-height:1.75; color:var(--text-dark); background:#ffffff; padding:12px 16px; border-radius:8px; border:1px solid #cbd5e1;" id="eduIncomeCloze">
                             When people stayed in education for <strong>1.</strong> <input type="text" class="blank-input" data-ans="longer" style="width:90px;">, they had <strong>2.</strong> <input type="text" class="blank-input" data-ans="higher" style="width:90px;"> earnings. High school graduates earned the <strong>3.</strong> <input type="text" class="blank-input" data-ans="lowest" style="width:90px;"> ($1.2M). Associate degrees were not much <strong>4.</strong> <input type="text" class="blank-input" data-ans="bigger|higher" style="width:90px;"> ($1.4M). The <strong>5.</strong> <input type="text" class="blank-input" data-ans="greatest" style="width:100px;"> difference was at top tiers: Doctorates were three times <strong>6.</strong> <input type="text" class="blank-input" data-ans="better off" style="width:110px;"> ($3.4M), but even a PhD was <strong>7.</strong> <input type="text" class="blank-input" data-ans="less important" style="width:130px;"> than a professional degree ($4.4M), proving some degrees are <strong>8.</strong> <input type="text" class="blank-input" data-ans="more valuable" style="width:130px;">.
                         </div>
@@ -861,9 +861,24 @@
         </main>
     </div>
 
+    <!-- Module 3 Curriculum Dataset -->
+    <script src="module-03-data.js"></script>
+
     <!-- Template Engine & Presentation Bundle -->
     <script src="../js/template-engine.js"></script>
     <script src="../js/deck-bundle.js"></script>
+
+    <!-- Direct Chart Engine Initialization Hook -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.deckCharts && window.module3Data) {
+                deckCharts.register('chart-degree-costs', 'grouped-bar', module3Data.charts.degreeCosts);
+                deckCharts.register('chart-school-pies', 'pie-grid', module3Data.charts.schoolPies);
+                deckCharts.register('chart-womens-earnings', 'multi-line', module3Data.charts.womensEarnings);
+                deckCharts.register('chart-education-income', 'single-bar', module3Data.charts.educationIncome);
+            }
+        });
+    </script>
 </body>
 
 </html>

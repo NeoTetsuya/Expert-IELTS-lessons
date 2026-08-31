@@ -7295,232 +7295,117 @@ window.addEventListener('DOMContentLoaded', () => {
 /* ==================== MODULE: deck-charts.js ==================== */
 /**
  * =========================================================================
- * IELTS Interactive Chart Engine (Task 1 Academic Data Visualizations)
- * Supports: Dual Group Bar Charts, Multi-Line Graphs, and Mini Trend Sketches
- * 100% Native SVG, Zero External Dependencies, Offline-First
+ * IELTS General Interactive SVG Chart Engine (Task 1 Academic Data Visualizations)
+ * Supports: Grouped Bar Charts, Multi-Line Graphs, Pie/Donut Charts, Single Bar Charts
+ * 100% Native SVG, Zero External Dependencies, Offline-First & Responsive
  * =========================================================================
  */
 
 class DeckCharts {
     constructor() {
-        this.activeTooltips = new Map();
+        this.registry = new Map();
         this.init();
     }
 
     init() {
         document.addEventListener('DOMContentLoaded', () => {
-            this.autoHydrateCharts();
+            this.hydrateAll();
         });
 
-        // Re-check on slide change if charts are dynamically mounted
         document.addEventListener('slidechange', () => {
-            this.autoHydrateCharts();
+            this.hydrateAll();
         });
-    }
-
-    autoHydrateCharts() {
-        // Hydrate Social Media Friendship Bar Chart (Module 1a)
-        const socialChartEl = document.getElementById('chart-social-media-connections');
-        if (socialChartEl && !socialChartEl.dataset.rendered) {
-            this.renderSocialMediaBarChart(socialChartEl);
-            socialChartEl.dataset.rendered = 'true';
-        }
-
-        // Hydrate Cinema vs DVD Multi-Line Graph (Module 1b)
-        const cinemaChartEl = document.getElementById('chart-cinema-dvd-sales');
-        if (cinemaChartEl && !cinemaChartEl.dataset.rendered) {
-            this.renderCinemaDvdLineChart(cinemaChartEl);
-            cinemaChartEl.dataset.rendered = 'true';
-        }
-
-        // Hydrate Mini Trend Sketches
-        const miniSketchesEl = document.getElementById('chart-mini-trend-sketches');
-        if (miniSketchesEl && !miniSketchesEl.dataset.rendered) {
-            this.renderMiniTrendSketches(miniSketchesEl);
-            miniSketchesEl.dataset.rendered = 'true';
-        }
-
-        // Hydrate Degree Cost Bar Chart (Module 3a)
-        const degreeChartEl = document.getElementById('chart-degree-costs');
-        if (degreeChartEl && !degreeChartEl.dataset.rendered) {
-            this.renderDegreeCostBarChart(degreeChartEl);
-            degreeChartEl.dataset.rendered = 'true';
-        }
-
-        // Hydrate Public vs Private School Pie Charts (Module 3a Extra)
-        const schoolPieEl = document.getElementById('chart-school-pies');
-        if (schoolPieEl && !schoolPieEl.dataset.rendered) {
-            this.renderSchoolPieCharts(schoolPieEl);
-            schoolPieEl.dataset.rendered = 'true';
-        }
-
-        // Hydrate Women's Earnings Multi-Line Graph (Module 3b)
-        const womensEarningsEl = document.getElementById('chart-womens-earnings');
-        if (womensEarningsEl && !womensEarningsEl.dataset.rendered) {
-            this.renderWomensEarningsLineChart(womensEarningsEl);
-            womensEarningsEl.dataset.rendered = 'true';
-        }
-
-        // Hydrate Education Lifetime Income Bar Chart (Module 3 Review)
-        const eduIncomeEl = document.getElementById('chart-education-income');
-        if (eduIncomeEl && !eduIncomeEl.dataset.rendered) {
-            this.renderEducationIncomeBarChart(eduIncomeEl);
-            eduIncomeEl.dataset.rendered = 'true';
-        }
     }
 
     /**
-     * Module 1a: Social Media Friendship Connections (Group Bar Chart)
+     * Register a chart to be automatically mounted when its container is rendered.
      */
-    renderSocialMediaBarChart(container) {
-        const friendCategories = [
-            { label: 'Know in real life', value: 82 },
-            { label: 'Mutual friends', value: 60 },
-            { label: 'Business networks', value: 11 },
-            { label: 'Attractiveness', value: 8 },
-            { label: 'Increasing friend count', value: 7 }
-        ];
-
-        const unfriendCategories = [
-            { label: 'Offensive comments', value: 55 },
-            { label: "Don't know well", value: 42 },
-            { label: 'Trying to sell something', value: 38 },
-            { label: 'Depressing comments', value: 22 },
-            { label: 'Lack of interaction', value: 20 }
-        ];
-
-        const width = 640;
-        const height = 380;
-        const margin = { top: 35, right: 30, bottom: 95, left: 45 };
-        const plotWidth = width - margin.left - margin.right;
-        const plotHeight = height - margin.top - margin.bottom;
-
-        let html = `
-            <div class="ielts-chart-header">
-                <h4 class="ielts-chart-title">Reasons to Friend vs. Unfriend on Social Media (%)</h4>
-                <div class="ielts-chart-legend">
-                    <div class="ielts-legend-item" data-series="friend">
-                        <span class="ielts-legend-color" style="background:#0284c7;"></span>
-                        <span>Percentage who friend</span>
-                    </div>
-                    <div class="ielts-legend-item" data-series="unfriend">
-                        <span class="ielts-legend-color" style="background:#ea580c;"></span>
-                        <span>Percentage who unfriend</span>
-                    </div>
-                </div>
-            </div>
-            <div style="position:relative; width:100%;">
-                <div class="ielts-chart-tooltip" id="tooltip-social-chart"></div>
-                <svg viewBox="0 0 ${width} ${height}" class="ielts-chart-svg">
-                    <!-- Background Grid -->
-        `;
-
-        // Y Axis Grid lines (0 to 90 by 10)
-        for (let yVal = 0; yVal <= 90; yVal += 10) {
-            const yPos = margin.top + plotHeight - (yVal / 90) * plotHeight;
-            html += `
-                <line x1="${margin.left}" y1="${yPos}" x2="${margin.left + plotWidth}" y2="${yPos}" class="chart-grid-line" />
-                <text x="${margin.left - 8}" y="${yPos + 4}" text-anchor="end" class="chart-axis-text">${yVal}</text>
-            `;
+    register(containerId, type, config) {
+        this.registry.set(containerId, { type, config });
+        const el = document.getElementById(containerId);
+        if (el) {
+            this.renderRegisteredChart(el, type, config);
         }
-
-        // Axes
-        html += `
-            <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${margin.top + plotHeight}" class="chart-axis-line" />
-            <line x1="${margin.left}" y1="${margin.top + plotHeight}" x2="${margin.left + plotWidth}" y2="${margin.top + plotHeight}" class="chart-axis-line" />
-        `;
-
-        // Total 10 columns across the width
-        const totalBars = 10;
-        const barWidth = 36;
-        const colStep = plotWidth / totalBars;
-
-        // Render "Friend" bars (Blue)
-        friendCategories.forEach((cat, idx) => {
-            const x = margin.left + idx * colStep + (colStep - barWidth) / 2;
-            const barH = (cat.value / 90) * plotHeight;
-            const y = margin.top + plotHeight - barH;
-
-            html += `
-                <g class="chart-bar-group" data-series="friend" data-label="${cat.label}" data-val="${cat.value}%">
-                    <rect x="${x}" y="${y}" width="${barWidth}" height="${barH}" rx="3" fill="#0284c7" class="chart-bar" />
-                    <text x="${x + barWidth / 2}" y="${margin.top + plotHeight + 12}" text-anchor="end" transform="rotate(-45, ${x + barWidth / 2}, ${margin.top + plotHeight + 12})" class="chart-axis-text" style="font-size:11px; font-weight:600;">${cat.label}</text>
-                </g>
-            `;
-        });
-
-        // Render "Unfriend" bars (Orange/Red)
-        unfriendCategories.forEach((cat, idx) => {
-            const x = margin.left + (idx + 5) * colStep + (colStep - barWidth) / 2;
-            const barH = (cat.value / 90) * plotHeight;
-            const y = margin.top + plotHeight - barH;
-
-            html += `
-                <g class="chart-bar-group" data-series="unfriend" data-label="${cat.label}" data-val="${cat.value}%">
-                    <rect x="${x}" y="${y}" width="${barWidth}" height="${barH}" rx="3" fill="#ea580c" class="chart-bar" />
-                    <text x="${x + barWidth / 2}" y="${margin.top + plotHeight + 12}" text-anchor="end" transform="rotate(-45, ${x + barWidth / 2}, ${margin.top + plotHeight + 12})" class="chart-axis-text" style="font-size:11px; font-weight:600;">${cat.label}</text>
-                </g>
-            `;
-        });
-
-        html += `
-                </svg>
-            </div>
-        `;
-
-        container.innerHTML = html;
-        this.bindChartEvents(container, 'tooltip-social-chart');
     }
 
-    /**
-     * Module 1b: Cinema ticket & DVD sales in USA & internationally (Multi-Line Graph)
-     */
-    renderCinemaDvdLineChart(container) {
-        const years = [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010];
-
-        const series = [
-            {
-                id: 'us-dvd',
-                name: 'North American DVD sales',
-                color: '#0369a1',
-                data: [21, 23, 24, 25, 24, 22.5, 22.2, 22, 19.5, 18.5]
-            },
-            {
-                id: 'us-cinema',
-                name: 'North American cinema sales',
-                color: '#dc2626',
-                data: [10, 11, 11, 10.8, 9.5, 10.2, 10.1, 9.5, 11.2, 11.5]
-            },
-            {
-                id: 'intl-dvd',
-                name: 'International DVD sales',
-                color: '#16a34a',
-                data: [11, 13.2, 13.2, 18, 16, 18.2, 18.2, 19, 20.2, 22]
-            },
-            {
-                id: 'intl-cinema',
-                name: 'International cinema sales',
-                color: '#7c3aed',
-                data: [20, 23.5, 24.2, 28.5, 25.5, 26.5, 26.5, 27.2, 30.2, 32]
+    hydrateAll() {
+        // Hydrate registered charts
+        this.registry.forEach((item, id) => {
+            const el = document.getElementById(id);
+            if (el && !el.dataset.rendered) {
+                this.renderRegisteredChart(el, item.type, item.config);
+                el.dataset.rendered = 'true';
             }
-        ];
+        });
 
-        const width = 680;
-        const height = 380;
-        const margin = { top: 30, right: 30, bottom: 45, left: 55 };
+        // Hydrate data-chart elements
+        document.querySelectorAll('[data-chart-type]').forEach(el => {
+            if (!el.dataset.rendered && el.id) {
+                const type = el.dataset.chartType;
+                const configName = el.dataset.chartConfig;
+                const config = configName && window[configName] ? window[configName] : null;
+                if (config) {
+                    this.renderRegisteredChart(el, type, config);
+                    el.dataset.rendered = 'true';
+                }
+            }
+        });
+    }
+
+    renderRegisteredChart(container, type, config) {
+        if (typeof container === 'string') {
+            container = document.querySelector(container);
+        }
+        if (!container) return;
+
+        switch (type) {
+            case 'grouped-bar':
+                this.renderGroupedBarChart(container, config);
+                break;
+            case 'single-bar':
+                this.renderSingleBarChart(container, config);
+                break;
+            case 'multi-line':
+                this.renderMultiLineChart(container, config);
+                break;
+            case 'pie-grid':
+                this.renderPieChartGrid(container, config);
+                break;
+            default:
+                console.warn(`DeckCharts: Unknown chart type "${type}"`);
+        }
+    }
+
+    /**
+     * Reusable Grouped Bar Chart
+     */
+    renderGroupedBarChart(container, config) {
+        const {
+            title = '',
+            categories = [],
+            series = [],
+            yMax = 100,
+            yStep = 20,
+            width = 680,
+            height = 390,
+            margin = { top: 35, right: 30, bottom: 50, left: 65 },
+            yFormat = (val) => val.toLocaleString()
+        } = config;
+
         const plotWidth = width - margin.left - margin.right;
         const plotHeight = height - margin.top - margin.bottom;
+        const tooltipId = `tooltip-${Math.random().toString(36).substr(2, 9)}`;
 
         let html = `
             <div class="ielts-chart-header">
-                <h4 class="ielts-chart-title">Cinema Ticket &amp; DVD Sales (US$ billion, 2001–2010)</h4>
+                <h4 class="ielts-chart-title">${title}</h4>
                 <div class="ielts-chart-legend">
         `;
 
         series.forEach(s => {
             html += `
-                <div class="ielts-legend-item" data-line-id="${s.id}">
-                    <span class="ielts-legend-line" style="background:${s.color};"></span>
+                <div class="ielts-legend-item" data-series="${s.id}">
+                    <span class="ielts-legend-color" style="background:${s.color};"></span>
                     <span>${s.name}</span>
                 </div>
             `;
@@ -7530,411 +7415,19 @@ class DeckCharts {
                 </div>
             </div>
             <div style="position:relative; width:100%;">
-                <div class="ielts-chart-tooltip" id="tooltip-cinema-chart"></div>
-                <svg viewBox="0 0 ${width} ${height}" class="ielts-chart-svg">
-        `;
-
-        // Y Axis Grid lines (0 to 40 by 10)
-        for (let yVal = 0; yVal <= 40; yVal += 10) {
-            const yPos = margin.top + plotHeight - (yVal / 40) * plotHeight;
-            html += `
-                <line x1="${margin.left}" y1="${yPos}" x2="${margin.left + plotWidth}" y2="${yPos}" class="chart-grid-line" />
-                <text x="${margin.left - 10}" y="${yPos + 4}" text-anchor="end" class="chart-axis-text">${yVal}</text>
-            `;
-        }
-
-        // Y Axis Label
-        html += `
-            <text x="${margin.left - 35}" y="${margin.top + plotHeight / 2}" text-anchor="middle" transform="rotate(-90, ${margin.left - 35}, ${margin.top + plotHeight / 2})" class="chart-axis-text" style="font-weight:700; fill:#475569;">US$ billion</text>
-        `;
-
-        // X Axis Years
-        const xStep = plotWidth / (years.length - 1);
-        years.forEach((yr, idx) => {
-            const xPos = margin.left + idx * xStep;
-            html += `
-                <line x1="${xPos}" y1="${margin.top + plotHeight}" x2="${xPos}" y2="${margin.top + plotHeight + 5}" class="chart-axis-line" />
-                <text x="${xPos}" y="${margin.top + plotHeight + 22}" text-anchor="middle" class="chart-axis-text" style="font-weight:600;">${yr}</text>
-            `;
-        });
-
-        // Axes lines
-        html += `
-            <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${margin.top + plotHeight}" class="chart-axis-line" />
-            <line x1="${margin.left}" y1="${margin.top + plotHeight}" x2="${margin.left + plotWidth}" y2="${margin.top + plotHeight}" class="chart-axis-line" />
-        `;
-
-        // Render polylines and interactive dots for each series
-        series.forEach(s => {
-            const points = s.data.map((val, idx) => {
-                const x = margin.left + idx * xStep;
-                const y = margin.top + plotHeight - (val / 40) * plotHeight;
-                return `${x},${y}`;
-            }).join(' ');
-
-            html += `
-                <g class="chart-series-group" data-line-id="${s.id}">
-                    <polyline points="${points}" stroke="${s.color}" class="chart-line" />
-            `;
-
-            s.data.forEach((val, idx) => {
-                const x = margin.left + idx * xStep;
-                const y = margin.top + plotHeight - (val / 40) * plotHeight;
-                html += `
-                    <circle cx="${x}" cy="${y}" r="4" stroke="${s.color}" class="chart-dot" data-label="${s.name} (${years[idx]})" data-val="$${val} Billion" />
-                `;
-            });
-
-            html += `</g>`;
-        });
-
-        html += `
-                </svg>
-            </div>
-        `;
-
-        container.innerHTML = html;
-        this.bindLineChartEvents(container, 'tooltip-cinema-chart');
-    }
-
-    /**
-     * Module 1a: Mini Trend Sketches (A, B, C)
-     */
-    renderMiniTrendSketches(container) {
-        container.innerHTML = `
-            <div class="mini-sketches-grid">
-                <!-- Sketch A -->
-                <div class="mini-sketch-card">
-                    <span class="mini-sketch-badge">A</span>
-                    <div style="font-weight:700; font-size:15px; margin-bottom:6px; color:#1e293b;">Mobile vs. Landline</div>
-                    <svg viewBox="0 0 160 120" style="width:100%; height:110px; background:#fff7ed; border-radius:6px; border:1px solid #fed7aa;">
-                        <line x1="15" y1="15" x2="15" y2="105" stroke="#94a3b8" stroke-width="1.5" />
-                        <line x1="15" y1="105" x2="145" y2="105" stroke="#94a3b8" stroke-width="1.5" />
-                        <!-- Mobile line (falling) -->
-                        <line x1="20" y1="25" x2="140" y2="90" stroke="#0284c7" stroke-width="3" stroke-linecap="round" />
-                        <!-- Landline line (rising) -->
-                        <line x1="20" y1="85" x2="140" y2="20" stroke="#ea580c" stroke-width="3" stroke-linecap="round" />
-                    </svg>
-                    <div style="display:flex; gap:10px; font-size:12px; margin-top:6px;">
-                        <span style="color:#0284c7; font-weight:700;">— Mobile</span>
-                        <span style="color:#ea580c; font-weight:700;">— Landline</span>
-                    </div>
-                </div>
-
-                <!-- Sketch B -->
-                <div class="mini-sketch-card">
-                    <span class="mini-sketch-badge">B</span>
-                    <div style="font-weight:700; font-size:15px; margin-bottom:6px; color:#1e293b;">Usage by Age Groups</div>
-                    <svg viewBox="0 0 160 120" style="width:100%; height:110px; background:#fff7ed; border-radius:6px; border:1px solid #fed7aa;">
-                        <line x1="15" y1="15" x2="15" y2="105" stroke="#94a3b8" stroke-width="1.5" />
-                        <line x1="15" y1="105" x2="145" y2="105" stroke="#94a3b8" stroke-width="1.5" />
-                        <!-- Under 25 (Tall) -->
-                        <rect x="25" y="25" width="22" height="80" fill="#0369a1" rx="2" />
-                        <!-- 26-35 -->
-                        <rect x="55" y="65" width="22" height="40" fill="#d97706" rx="2" />
-                        <!-- 46-55 -->
-                        <rect x="85" y="75" width="22" height="30" fill="#0284c7" rx="2" />
-                        <!-- Over 56 -->
-                        <rect x="115" y="75" width="22" height="30" fill="#c2410c" rx="2" />
-                    </svg>
-                    <div style="font-size:12px; font-weight:600; color:#64748b; margin-top:6px;">Under 25 dominates</div>
-                </div>
-
-                <!-- Sketch C -->
-                <div class="mini-sketch-card">
-                    <span class="mini-sketch-badge">C</span>
-                    <div style="font-weight:700; font-size:15px; margin-bottom:6px; color:#1e293b;">Internet vs. Phone Calls</div>
-                    <svg viewBox="0 0 160 120" style="width:100%; height:110px; background:#fff7ed; border-radius:6px; border:1px solid #fed7aa;">
-                        <line x1="15" y1="15" x2="15" y2="105" stroke="#94a3b8" stroke-width="1.5" />
-                        <line x1="15" y1="105" x2="145" y2="105" stroke="#94a3b8" stroke-width="1.5" />
-                        <!-- Internet (High rising) -->
-                        <line x1="20" y1="40" x2="140" y2="20" stroke="#ea580c" stroke-width="3" stroke-linecap="round" />
-                        <!-- Phone calls (Low flat) -->
-                        <line x1="20" y1="92" x2="140" y2="95" stroke="#0284c7" stroke-width="3" stroke-linecap="round" />
-                    </svg>
-                    <div style="display:flex; gap:10px; font-size:12px; margin-top:6px;">
-                        <span style="color:#ea580c; font-weight:700;">— Internet</span>
-                        <span style="color:#0284c7; font-weight:700;">— Phone calls</span>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    /**
-     * Module 3a: Average Cost of an Undergraduate Degree in 2015 (Group Bar Chart)
-     */
-    renderDegreeCostBarChart(container) {
-        const countries = [
-            {
-                name: 'UK',
-                studyFees: 30000,
-                livingCosts: 37000,
-                totalCost: 67000
-            },
-            {
-                name: 'Australia',
-                studyFees: 57000,
-                livingCosts: 42000,
-                totalCost: 99000
-            },
-            {
-                name: 'United States',
-                studyFees: 56500,
-                livingCosts: 32000,
-                totalCost: 88500
-            },
-            {
-                name: 'Germany',
-                studyFees: 13000,
-                livingCosts: 41000,
-                totalCost: 54000
-            }
-        ];
-
-        const width = 680;
-        const height = 400;
-        const margin = { top: 35, right: 30, bottom: 50, left: 65 };
-        const plotWidth = width - margin.left - margin.right;
-        const plotHeight = height - margin.top - margin.bottom;
-
-        let html = `
-            <div class="ielts-chart-header">
-                <h4 class="ielts-chart-title">Average Cost of an Undergraduate Degree in 2015 (in US$)</h4>
-                <div class="ielts-chart-legend">
-                    <div class="ielts-legend-item" data-series="fees">
-                        <span class="ielts-legend-color" style="background:#0284c7;"></span>
-                        <span>Study fees (3-year)</span>
-                    </div>
-                    <div class="ielts-legend-item" data-series="living">
-                        <span class="ielts-legend-color" style="background:#dc2626;"></span>
-                        <span>Living costs (3-year)</span>
-                    </div>
-                    <div class="ielts-legend-item" data-series="total">
-                        <span class="ielts-legend-color" style="background:#16a34a;"></span>
-                        <span>Total (3-year degree)</span>
-                    </div>
-                </div>
-            </div>
-            <div style="position:relative; width:100%;">
-                <div class="ielts-chart-tooltip" id="tooltip-degree-chart"></div>
+                <div class="ielts-chart-tooltip" id="${tooltipId}"></div>
                 <svg viewBox="0 0 ${width} ${height}" class="ielts-chart-svg">
                     <rect x="${margin.left}" y="${margin.top}" width="${plotWidth}" height="${plotHeight}" fill="#fffbeb" rx="4" />
         `;
 
-        // Y Axis Grid lines (0 to 120,000 in steps of 20,000)
-        const yMax = 120000;
-        for (let yVal = 0; yVal <= yMax; yVal += 20000) {
+        // Y Grid
+        for (let yVal = 0; yVal <= yMax; yVal += yStep) {
             const yPos = margin.top + plotHeight - (yVal / yMax) * plotHeight;
             html += `
                 <line x1="${margin.left}" y1="${yPos}" x2="${margin.left + plotWidth}" y2="${yPos}" class="chart-grid-line" stroke="#d6d3d1" stroke-dasharray="4,4" />
-                <text x="${margin.left - 10}" y="${yPos + 4}" text-anchor="end" class="chart-axis-text" style="font-size:12px; font-weight:600;">${yVal.toLocaleString()}</text>
+                <text x="${margin.left - 10}" y="${yPos + 4}" text-anchor="end" class="chart-axis-text" style="font-size:12px; font-weight:600;">${yFormat(yVal)}</text>
             `;
         }
-
-        // Axes
-        html += `
-            <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${margin.top + plotHeight}" class="chart-axis-line" stroke="#78716c" stroke-width="1.5" />
-            <line x1="${margin.left}" y1="${margin.top + plotHeight}" x2="${margin.left + plotWidth}" y2="${margin.top + plotHeight}" class="chart-axis-line" stroke="#78716c" stroke-width="1.5" />
-        `;
-
-        // Grouped bars per country
-        const groupWidth = plotWidth / countries.length;
-        const barWidth = 28;
-        const gap = 6;
-        const totalBarsWidth = barWidth * 3 + gap * 2;
-        const offset = (groupWidth - totalBarsWidth) / 2;
-
-        countries.forEach((c, idx) => {
-            const groupX = margin.left + idx * groupWidth + offset;
-
-            // Bar 1: Study Fees (Blue)
-            const h1 = (c.studyFees / yMax) * plotHeight;
-            const y1 = margin.top + plotHeight - h1;
-            html += `
-                <g class="chart-bar-group" data-series="fees" data-label="${c.name} - Study Fees" data-val="$${c.studyFees.toLocaleString()}">
-                    <rect x="${groupX}" y="${y1}" width="${barWidth}" height="${h1}" rx="3" fill="#0284c7" class="chart-bar" />
-                </g>
-            `;
-
-            // Bar 2: Living Costs (Red)
-            const h2 = (c.livingCosts / yMax) * plotHeight;
-            const y2 = margin.top + plotHeight - h2;
-            html += `
-                <g class="chart-bar-group" data-series="living" data-label="${c.name} - Living Costs" data-val="$${c.livingCosts.toLocaleString()}">
-                    <rect x="${groupX + barWidth + gap}" y="${y2}" width="${barWidth}" height="${h2}" rx="3" fill="#dc2626" class="chart-bar" />
-                </g>
-            `;
-
-            // Bar 3: Total Degree Cost (Green)
-            const h3 = (c.totalCost / yMax) * plotHeight;
-            const y3 = margin.top + plotHeight - h3;
-            html += `
-                <g class="chart-bar-group" data-series="total" data-label="${c.name} - Total Cost" data-val="$${c.totalCost.toLocaleString()}">
-                    <rect x="${groupX + (barWidth + gap) * 2}" y="${y3}" width="${barWidth}" height="${h3}" rx="3" fill="#16a34a" class="chart-bar" />
-                </g>
-            `;
-
-            // Country Label
-            const centerX = margin.left + idx * groupWidth + groupWidth / 2;
-            html += `
-                <text x="${centerX}" y="${margin.top + plotHeight + 24}" text-anchor="middle" class="chart-axis-text" style="font-size:14px; font-weight:700; fill:#1e293b;">${c.name}</text>
-            `;
-        });
-
-        html += `
-                </svg>
-            </div>
-        `;
-
-        container.innerHTML = html;
-        this.bindChartEvents(container, 'tooltip-degree-chart');
-    }
-
-    /**
-     * Module 3a Extra: Public vs Private Schools (Dual Pie Charts)
-     */
-    renderSchoolPieCharts(container) {
-        const width = 640;
-        const height = 310;
-
-        let html = `
-            <div class="ielts-chart-header">
-                <h4 class="ielts-chart-title">Public vs. Private Sector Schooling Distribution</h4>
-                <div class="ielts-chart-legend">
-                    <div class="ielts-legend-item">
-                        <span class="ielts-legend-color" style="background:#0284c7;"></span>
-                        <span>Public Sector</span>
-                    </div>
-                    <div class="ielts-legend-item">
-                        <span class="ielts-legend-color" style="background:#c2410c;"></span>
-                        <span>Private Sector</span>
-                    </div>
-                </div>
-            </div>
-            <div style="display:flex; justify-content:space-around; align-items:center; width:100%; padding:10px 0;">
-                <!-- Pie 1: Number of students (90% Public / 10% Private) -->
-                <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                    <div style="font-weight:700; font-size:16.5px; color:#1e293b; margin-bottom:8px;">Number of students in schools</div>
-                    <svg viewBox="0 0 200 200" style="width:190px; height:190px;">
-                        <!-- Public 90% Arc (0 to 324 deg) -->
-                        <path d="M 100,100 L 100,20 A 80,80 0 1,1 52.98,35.28 Z" fill="#0284c7" stroke="#ffffff" stroke-width="2.5" />
-                        <!-- Private 10% Arc (324 to 360 deg) -->
-                        <path d="M 100,100 L 52.98,35.28 A 80,80 0 0,1 100,20 Z" fill="#ea580c" stroke="#ffffff" stroke-width="2.5" />
-                        <!-- Labels -->
-                        <text x="100" y="115" fill="#ffffff" font-size="22" font-weight="800" text-anchor="middle">90%</text>
-                        <text x="76" y="28" fill="#ea580c" font-size="15" font-weight="800" text-anchor="middle">10%</text>
-                    </svg>
-                    <div style="display:flex; gap:16px; margin-top:8px; font-size:14px; font-weight:700;">
-                        <span style="color:#0284c7;">■ Public: 90%</span>
-                        <span style="color:#ea580c;">■ Private: 10%</span>
-                    </div>
-                </div>
-
-                <!-- Pie 2: Number of schools (75% Public / 25% Private) -->
-                <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
-                    <div style="font-weight:700; font-size:16.5px; color:#1e293b; margin-bottom:8px;">Number of schools</div>
-                    <svg viewBox="0 0 200 200" style="width:190px; height:190px;">
-                        <!-- Public 75% Arc (0 to 270 deg) -->
-                        <path d="M 100,100 L 100,20 A 80,80 0 1,1 20,100 Z" fill="#0284c7" stroke="#ffffff" stroke-width="2.5" />
-                        <!-- Private 25% Arc (270 to 360 deg) -->
-                        <path d="M 100,100 L 20,100 A 80,80 0 0,1 100,20 Z" fill="#ea580c" stroke="#ffffff" stroke-width="2.5" />
-                        <!-- Labels -->
-                        <text x="115" y="125" fill="#ffffff" font-size="22" font-weight="800" text-anchor="middle">75%</text>
-                        <text x="55" y="65" fill="#ffffff" font-size="18" font-weight="800" text-anchor="middle">25%</text>
-                    </svg>
-                    <div style="display:flex; gap:16px; margin-top:8px; font-size:14px; font-weight:700;">
-                        <span style="color:#0284c7;">■ Public: 75%</span>
-                        <span style="color:#ea580c;">■ Private: 25%</span>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        container.innerHTML = html;
-    }
-
-    /**
-     * Module 3b Extra: Women's weekly earnings as % of men's wages (Multi-Line Graph)
-     */
-    renderWomensEarningsLineChart(container) {
-        const years = [1975, 1980, 1985, 1990, 1995, 2000, 2005];
-
-        const series = [
-            {
-                id: 'age-16-24',
-                name: '16 to 24 years',
-                color: '#e11d48',
-                data: [78, 82, 89, 90, 91, 92, 92]
-            },
-            {
-                id: 'age-25-34',
-                name: '25 to 34 years',
-                color: '#0284c7',
-                data: [67, 70, 75, 80, 83, 84, 89]
-            },
-            {
-                id: 'age-35-44',
-                name: '35 to 44 years',
-                color: '#16a34a',
-                data: [59, 59, 64, 70, 73, 70, 74]
-            },
-            {
-                id: 'age-45-54',
-                name: '45 to 54 years',
-                color: '#9333ea',
-                data: [57, 56, 60, 64, 67, 73, 75]
-            }
-        ];
-
-        const width = 680;
-        const height = 390;
-        const margin = { top: 30, right: 110, bottom: 45, left: 55 };
-        const plotWidth = width - margin.left - margin.right;
-        const plotHeight = height - margin.top - margin.bottom;
-
-        let html = `
-            <div class="ielts-chart-header">
-                <h4 class="ielts-chart-title">Women's Weekly Earnings as a Percentage of Men's Wages (USA, 1975–2005)</h4>
-                <div class="ielts-chart-legend">
-        `;
-
-        series.forEach(s => {
-            html += `
-                <div class="ielts-legend-item" data-line-id="${s.id}">
-                    <span class="ielts-legend-line" style="background:${s.color};"></span>
-                    <span>${s.name}</span>
-                </div>
-            `;
-        });
-
-        html += `
-                </div>
-            </div>
-            <div style="position:relative; width:100%;">
-                <div class="ielts-chart-tooltip" id="tooltip-womens-chart"></div>
-                <svg viewBox="0 0 ${width} ${height}" class="ielts-chart-svg">
-                    <rect x="${margin.left}" y="${margin.top}" width="${plotWidth}" height="${plotHeight}" fill="#fffbeb" rx="4" />
-        `;
-
-        // Y Axis Grid lines (50% to 100% by 10)
-        for (let yVal = 50; yVal <= 100; yVal += 10) {
-            const yPos = margin.top + plotHeight - ((yVal - 50) / 50) * plotHeight;
-            html += `
-                <line x1="${margin.left}" y1="${yPos}" x2="${margin.left + plotWidth}" y2="${yPos}" class="chart-grid-line" stroke="#d6d3d1" stroke-dasharray="4,4" />
-                <text x="${margin.left - 10}" y="${yPos + 4}" text-anchor="end" class="chart-axis-text" style="font-weight:600;">${yVal}%</text>
-            `;
-        }
-
-        // X Axis Years
-        const xStep = plotWidth / (years.length - 1);
-        years.forEach((yr, idx) => {
-            const xPos = margin.left + idx * xStep;
-            html += `
-                <line x1="${xPos}" y1="${margin.top + plotHeight}" x2="${xPos}" y2="${margin.top + plotHeight + 5}" class="chart-axis-line" stroke="#78716c" />
-                <text x="${xPos}" y="${margin.top + plotHeight + 22}" text-anchor="middle" class="chart-axis-text" style="font-weight:700;">${yr}</text>
-            `;
-        });
 
         // Axes lines
         html += `
@@ -7942,33 +7435,35 @@ class DeckCharts {
             <line x1="${margin.left}" y1="${margin.top + plotHeight}" x2="${margin.left + plotWidth}" y2="${margin.top + plotHeight}" class="chart-axis-line" stroke="#78716c" stroke-width="1.5" />
         `;
 
-        // Render series polylines
-        series.forEach(s => {
-            const points = s.data.map((val, idx) => {
-                const x = margin.left + idx * xStep;
-                const y = margin.top + plotHeight - ((val - 50) / 50) * plotHeight;
-                return `${x},${y}`;
-            }).join(' ');
+        // Calculate bars
+        const groupWidth = plotWidth / categories.length;
+        const numSeries = series.length;
+        const barWidth = Math.max(14, Math.min(32, (groupWidth * 0.7) / numSeries));
+        const gap = 4;
+        const totalBarsWidth = barWidth * numSeries + gap * (numSeries - 1);
+        const groupOffset = (groupWidth - totalBarsWidth) / 2;
 
-            html += `
-                <g class="chart-series-group" data-line-id="${s.id}">
-                    <polyline points="${points}" stroke="${s.color}" stroke-width="3.5" fill="none" class="chart-line" />
-            `;
+        categories.forEach((cat, catIdx) => {
+            const catName = typeof cat === 'string' ? cat : cat.name;
+            const groupX = margin.left + catIdx * groupWidth + groupOffset;
 
-            s.data.forEach((val, idx) => {
-                const x = margin.left + idx * xStep;
-                const y = margin.top + plotHeight - ((val - 50) / 50) * plotHeight;
+            series.forEach((s, sIdx) => {
+                const val = typeof cat === 'object' && cat[s.id] !== undefined ? cat[s.id] : s.data[catIdx];
+                const barH = (val / yMax) * plotHeight;
+                const barY = margin.top + plotHeight - barH;
+                const barX = groupX + sIdx * (barWidth + gap);
+
                 html += `
-                    <circle cx="${x}" cy="${y}" r="4.5" fill="${s.color}" stroke="#ffffff" stroke-width="1.5" class="chart-dot" data-label="${s.name} (${years[idx]})" data-val="${val}% of men's wages" />
+                    <g class="chart-bar-group" data-series="${s.id}" data-label="${catName} - ${s.name}" data-val="${yFormat(val)}">
+                        <rect x="${barX}" y="${barY}" width="${barWidth}" height="${barH}" rx="3" fill="${s.color}" class="chart-bar" />
+                    </g>
                 `;
             });
 
-            // End line label
-            const lastX = margin.left + (years.length - 1) * xStep;
-            const lastY = margin.top + plotHeight - ((s.data[s.data.length - 1] - 50) / 50) * plotHeight;
+            // Category label below axis
+            const centerX = margin.left + catIdx * groupWidth + groupWidth / 2;
             html += `
-                <text x="${lastX + 8}" y="${lastY + 4}" fill="${s.color}" font-size="12" font-weight="700">${s.name}</text>
-                </g>
+                <text x="${centerX}" y="${margin.top + plotHeight + 24}" text-anchor="middle" class="chart-axis-text" style="font-size:14px; font-weight:700; fill:#1e293b;">${catName}</text>
             `;
         });
 
@@ -7978,45 +7473,44 @@ class DeckCharts {
         `;
 
         container.innerHTML = html;
-        this.bindLineChartEvents(container, 'tooltip-womens-chart');
+        this.bindBarChartEvents(container, tooltipId);
     }
 
     /**
-     * Module 3 Review: Lifetime Income by Education Level (Bar Chart)
+     * Reusable Single Bar Chart with gradient options
      */
-    renderEducationIncomeBarChart(container) {
-        const data = [
-            { level: 'High School', value: 1.2, display: '$1.2M' },
-            { level: "Associate's", value: 1.4, display: '$1.4M' },
-            { level: "Bachelor's", value: 2.1, display: '$2.1M' },
-            { level: "Master's", value: 2.5, display: '$2.5M' },
-            { level: 'Doctorate (PhD)', value: 3.4, display: '$3.4M' },
-            { level: 'Professional', value: 4.4, display: '$4.4M' }
-        ];
+    renderSingleBarChart(container, config) {
+        const {
+            title = '',
+            data = [], // [{ label: '', value: 0, display: '' }]
+            yMax = 5.0,
+            yStep = 1.0,
+            width = 640,
+            height = 360,
+            margin = { top: 30, right: 30, bottom: 65, left: 55 },
+            yFormat = (val) => `$${val.toFixed(1)}M`
+        } = config;
 
-        const width = 640;
-        const height = 360;
-        const margin = { top: 30, right: 30, bottom: 65, left: 55 };
         const plotWidth = width - margin.left - margin.right;
         const plotHeight = height - margin.top - margin.bottom;
+        const tooltipId = `tooltip-${Math.random().toString(36).substr(2, 9)}`;
 
         let html = `
             <div class="ielts-chart-header">
-                <h4 class="ielts-chart-title">Lifetime Earnings by Education Level (USA, in $ Millions)</h4>
+                <h4 class="ielts-chart-title">${title}</h4>
             </div>
             <div style="position:relative; width:100%;">
-                <div class="ielts-chart-tooltip" id="tooltip-edu-chart"></div>
+                <div class="ielts-chart-tooltip" id="${tooltipId}"></div>
                 <svg viewBox="0 0 ${width} ${height}" class="ielts-chart-svg">
                     <rect x="${margin.left}" y="${margin.top}" width="${plotWidth}" height="${plotHeight}" fill="#f8fafc" rx="4" />
         `;
 
-        // Y Axis Grid lines (0 to 5.0 in steps of 1.0)
-        const yMax = 5.0;
-        for (let yVal = 0; yVal <= yMax; yVal += 1.0) {
+        // Y Axis Grid lines
+        for (let yVal = 0; yVal <= yMax; yVal += yStep) {
             const yPos = margin.top + plotHeight - (yVal / yMax) * plotHeight;
             html += `
                 <line x1="${margin.left}" y1="${yPos}" x2="${margin.left + plotWidth}" y2="${yPos}" class="chart-grid-line" stroke="#e2e8f0" stroke-dasharray="4,4" />
-                <text x="${margin.left - 10}" y="${yPos + 4}" text-anchor="end" class="chart-axis-text" style="font-size:12px; font-weight:600;">$${yVal.toFixed(1)}M</text>
+                <text x="${margin.left - 10}" y="${yPos + 4}" text-anchor="end" class="chart-axis-text" style="font-size:12px; font-weight:600;">${yFormat(yVal)}</text>
             `;
         }
 
@@ -8035,17 +7529,14 @@ class DeckCharts {
             const y = margin.top + plotHeight - barH;
 
             html += `
-                <g class="chart-bar-group" data-label="${d.level}" data-val="${d.display}">
+                <g class="chart-bar-group" data-label="${d.label}" data-val="${d.display || d.value}">
                     <rect x="${x}" y="${y}" width="${barWidth}" height="${barH}" rx="4" fill="url(#barGrad-${idx})" class="chart-bar" />
-                    <!-- Value on top of bar -->
-                    <text x="${x + barWidth / 2}" y="${y - 6}" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">${d.display}</text>
-                    <!-- Label below axis -->
-                    <text x="${x + barWidth / 2}" y="${margin.top + plotHeight + 14}" text-anchor="end" transform="rotate(-35, ${x + barWidth / 2}, ${margin.top + plotHeight + 14})" class="chart-axis-text" style="font-size:12px; font-weight:700; fill:#1e293b;">${d.level}</text>
+                    <text x="${x + barWidth / 2}" y="${y - 6}" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">${d.display || d.value}</text>
+                    <text x="${x + barWidth / 2}" y="${margin.top + plotHeight + 14}" text-anchor="end" transform="rotate(-35, ${x + barWidth / 2}, ${margin.top + plotHeight + 14})" class="chart-axis-text" style="font-size:12px; font-weight:700; fill:#1e293b;">${d.label}</text>
                 </g>
             `;
         });
 
-        // Add defs for gradient bars
         html += `
             <defs>
         `;
@@ -8064,13 +7555,187 @@ class DeckCharts {
         `;
 
         container.innerHTML = html;
-        this.bindChartEvents(container, 'tooltip-edu-chart');
+        this.bindBarChartEvents(container, tooltipId);
+    }
+
+    /**
+     * Reusable Multi-Line Graph
+     */
+    renderMultiLineChart(container, config) {
+        const {
+            title = '',
+            xCategories = [],
+            series = [],
+            yMin = 0,
+            yMax = 100,
+            yStep = 20,
+            yUnit = '%',
+            width = 680,
+            height = 390,
+            margin = { top: 30, right: 120, bottom: 45, left: 55 }
+        } = config;
+
+        const plotWidth = width - margin.left - margin.right;
+        const plotHeight = height - margin.top - margin.bottom;
+        const tooltipId = `tooltip-${Math.random().toString(36).substr(2, 9)}`;
+
+        let html = `
+            <div class="ielts-chart-header">
+                <h4 class="ielts-chart-title">${title}</h4>
+                <div class="ielts-chart-legend">
+        `;
+
+        series.forEach(s => {
+            html += `
+                <div class="ielts-legend-item" data-line-id="${s.id}">
+                    <span class="ielts-legend-line" style="background:${s.color};"></span>
+                    <span>${s.name}</span>
+                </div>
+            `;
+        });
+
+        html += `
+                </div>
+            </div>
+            <div style="position:relative; width:100%;">
+                <div class="ielts-chart-tooltip" id="${tooltipId}"></div>
+                <svg viewBox="0 0 ${width} ${height}" class="ielts-chart-svg">
+                    <rect x="${margin.left}" y="${margin.top}" width="${plotWidth}" height="${plotHeight}" fill="#fffbeb" rx="4" />
+        `;
+
+        // Y Grid
+        for (let yVal = yMin; yVal <= yMax; yVal += yStep) {
+            const yPos = margin.top + plotHeight - ((yVal - yMin) / (yMax - yMin)) * plotHeight;
+            html += `
+                <line x1="${margin.left}" y1="${yPos}" x2="${margin.left + plotWidth}" y2="${yPos}" class="chart-grid-line" stroke="#d6d3d1" stroke-dasharray="4,4" />
+                <text x="${margin.left - 10}" y="${yPos + 4}" text-anchor="end" class="chart-axis-text" style="font-weight:600;">${yVal}${yUnit}</text>
+            `;
+        }
+
+        // X Axis Points
+        const xStep = plotWidth / (xCategories.length - 1);
+        xCategories.forEach((cat, idx) => {
+            const xPos = margin.left + idx * xStep;
+            html += `
+                <line x1="${xPos}" y1="${margin.top + plotHeight}" x2="${xPos}" y2="${margin.top + plotHeight + 5}" class="chart-axis-line" stroke="#78716c" />
+                <text x="${xPos}" y="${margin.top + plotHeight + 22}" text-anchor="middle" class="chart-axis-text" style="font-weight:700;">${cat}</text>
+            `;
+        });
+
+        // Axes lines
+        html += `
+            <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${margin.top + plotHeight}" class="chart-axis-line" stroke="#78716c" stroke-width="1.5" />
+            <line x1="${margin.left}" y1="${margin.top + plotHeight}" x2="${margin.left + plotWidth}" y2="${margin.top + plotHeight}" class="chart-axis-line" stroke="#78716c" stroke-width="1.5" />
+        `;
+
+        // Render series
+        series.forEach(s => {
+            const points = s.data.map((val, idx) => {
+                const x = margin.left + idx * xStep;
+                const y = margin.top + plotHeight - ((val - yMin) / (yMax - yMin)) * plotHeight;
+                return `${x},${y}`;
+            }).join(' ');
+
+            html += `
+                <g class="chart-series-group" data-line-id="${s.id}">
+                    <polyline points="${points}" stroke="${s.color}" stroke-width="3.5" fill="none" class="chart-line" />
+            `;
+
+            s.data.forEach((val, idx) => {
+                const x = margin.left + idx * xStep;
+                const y = margin.top + plotHeight - ((val - yMin) / (yMax - yMin)) * plotHeight;
+                html += `
+                    <circle cx="${x}" cy="${y}" r="4.5" fill="${s.color}" stroke="#ffffff" stroke-width="1.5" class="chart-dot" data-label="${s.name} (${xCategories[idx]})" data-val="${val}${yUnit}" />
+                `;
+            });
+
+            // End line label
+            const lastX = margin.left + (xCategories.length - 1) * xStep;
+            const lastY = margin.top + plotHeight - ((s.data[s.data.length - 1] - yMin) / (yMax - yMin)) * plotHeight;
+            html += `
+                <text x="${lastX + 8}" y="${lastY + 4}" fill="${s.color}" font-size="12" font-weight="700">${s.name}</text>
+                </g>
+            `;
+        });
+
+        html += `
+                </svg>
+            </div>
+        `;
+
+        container.innerHTML = html;
+        this.bindLineChartEvents(container, tooltipId);
+    }
+
+    /**
+     * Reusable Pie Chart Grid
+     */
+    renderPieChartGrid(container, config) {
+        const {
+            mainTitle = '',
+            legendItems = [],
+            pies = [] // [{ title, primaryPct, secondaryPct, primaryLabel, secondaryLabel, primaryColor, secondaryColor }]
+        } = config;
+
+        let html = `
+            <div class="ielts-chart-header">
+                <h4 class="ielts-chart-title">${mainTitle}</h4>
+                <div class="ielts-chart-legend">
+        `;
+
+        legendItems.forEach(leg => {
+            html += `
+                <div class="ielts-legend-item">
+                    <span class="ielts-legend-color" style="background:${leg.color};"></span>
+                    <span>${leg.label}</span>
+                </div>
+            `;
+        });
+
+        html += `
+                </div>
+            </div>
+            <div style="display:flex; justify-content:space-around; align-items:center; width:100%; padding:10px 0;">
+        `;
+
+        pies.forEach(pie => {
+            const angle = (pie.primaryPct / 100) * 360;
+            const rad = (angle * Math.PI) / 180;
+            const R = 80;
+            const cx = 100;
+            const cy = 100;
+            const endX = cx + R * Math.sin(rad);
+            const endY = cy - R * Math.cos(rad);
+            const largeArc = pie.primaryPct > 50 ? 1 : 0;
+
+            html += `
+                <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                    <div style="font-weight:700; font-size:16.5px; color:#1e293b; margin-bottom:8px;">${pie.title}</div>
+                    <svg viewBox="0 0 200 200" style="width:190px; height:190px;">
+                        <!-- Primary Arc -->
+                        <path d="M ${cx},${cy} L ${cx},${cy - R} A ${R},${R} 0 ${largeArc},1 ${endX.toFixed(2)},${endY.toFixed(2)} Z" fill="${pie.primaryColor || '#0284c7'}" stroke="#ffffff" stroke-width="2.5" />
+                        <!-- Secondary Arc -->
+                        <path d="M ${cx},${cy} L ${endX.toFixed(2)},${endY.toFixed(2)} A ${R},${R} 0 ${1 - largeArc},1 ${cx},${cy - R} Z" fill="${pie.secondaryColor || '#ea580c'}" stroke="#ffffff" stroke-width="2.5" />
+                        <!-- Labels -->
+                        <text x="${pie.primaryTextX || 100}" y="${pie.primaryTextY || 115}" fill="#ffffff" font-size="22" font-weight="800" text-anchor="middle">${pie.primaryPct}%</text>
+                        <text x="${pie.secondaryTextX || 76}" y="${pie.secondaryTextY || 28}" fill="${pie.secondaryColor || '#ea580c'}" font-size="15" font-weight="800" text-anchor="middle">${pie.secondaryPct}%</text>
+                    </svg>
+                    <div style="display:flex; gap:16px; margin-top:8px; font-size:14px; font-weight:700;">
+                        <span style="color:${pie.primaryColor || '#0284c7'};">■ ${pie.primaryLabel}: ${pie.primaryPct}%</span>
+                        <span style="color:${pie.secondaryColor || '#ea580c'};">■ ${pie.secondaryLabel}: ${pie.secondaryPct}%</span>
+                    </div>
+                </div>
+            `;
+        });
+
+        html += `</div>`;
+        container.innerHTML = html;
     }
 
     /**
      * Tooltip & Interactive Legends Bindings
      */
-    bindChartEvents(container, tooltipId) {
+    bindBarChartEvents(container, tooltipId) {
         const tooltip = container.querySelector(`#${tooltipId}`);
         const barGroups = container.querySelectorAll('.chart-bar-group');
         const legendItems = container.querySelectorAll('.ielts-legend-item');
@@ -8079,6 +7744,7 @@ class DeckCharts {
             grp.addEventListener('mouseenter', (e) => {
                 const label = grp.dataset.label;
                 const val = grp.dataset.val;
+                if (!tooltip) return;
                 tooltip.textContent = `${label}: ${val}`;
                 tooltip.classList.add('show');
 
@@ -8089,7 +7755,7 @@ class DeckCharts {
             });
 
             grp.addEventListener('mouseleave', () => {
-                tooltip.classList.remove('show');
+                if (tooltip) tooltip.classList.remove('show');
             });
         });
 
@@ -8117,6 +7783,7 @@ class DeckCharts {
             dot.addEventListener('mouseenter', (e) => {
                 const label = dot.dataset.label;
                 const val = dot.dataset.val;
+                if (!tooltip) return;
                 tooltip.textContent = `${label}: ${val}`;
                 tooltip.classList.add('show');
 
@@ -8127,7 +7794,7 @@ class DeckCharts {
             });
 
             dot.addEventListener('mouseleave', () => {
-                tooltip.classList.remove('show');
+                if (tooltip) tooltip.classList.remove('show');
             });
         });
 
