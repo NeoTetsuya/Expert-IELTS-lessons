@@ -665,14 +665,15 @@
                 const passEl = section.querySelector('[data-slot="passage"], .reading-pane');
                 if (passEl) passEl.innerHTML = data.passage;
             }
-            if (data.summaryText || (data.questions && Array.isArray(data.questions))) {
+            if (data.summaryText || (data.questions && Array.isArray(data.questions)) || data.summaryBox) {
                 const qPane = section.querySelector('[data-slot="questions"], .question-pane');
                 if (qPane) {
+                    let html = '';
                     if (data.summaryText) {
                         const wbChips = (data.wordBank && Array.isArray(data.wordBank))
                             ? data.wordBank.map(w => `<span class="word-chip" data-word="${w}" style="background:#ffffff; border:1px solid #cbd5e1; padding:4px 10px; border-radius:6px; font-weight:700; font-size:15px;">${w}</span>`).join('')
                             : '';
-                        qPane.innerHTML = `
+                        html += `
                             ${wbChips ? `
                             <div class="card" style="background:#f8fafc; border:1.5px solid #cbd5e1; border-left:5px solid var(--col-reading); padding:12px 16px; margin-bottom:12px;">
                                 <div style="font-size:15px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-bottom:8px;">📦 Word Bank (Use words exactly as shown)</div>
@@ -684,8 +685,10 @@
                                 ${data.summaryText}
                             </div>
                         `;
-                    } else if (data.questions && Array.isArray(data.questions)) {
-                        qPane.innerHTML = data.questions.map(q => `
+                    }
+                    if (data.questions && Array.isArray(data.questions)) {
+                        html += `<div style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-bottom:10px;">📋 Questions 1–6: YES / NO / NOT GIVEN</div>`;
+                        html += data.questions.map(q => `
                             <div class="q-card" data-q="${q.qNum}" ${q.evId ? `data-ev="${q.evId}"` : ''} style="background:#ffffff; border:1px solid #cbd5e1; border-radius:10px; padding:12px 16px; margin-bottom:10px;">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
                                     <strong style="font-size:18px;">${q.text}</strong>
@@ -700,6 +703,10 @@
                             </div>
                         `).join('');
                     }
+                    if (data.summaryBox) {
+                        html += data.summaryBox;
+                    }
+                    qPane.innerHTML = html;
                 }
             }
         }
