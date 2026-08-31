@@ -3604,17 +3604,17 @@ class StepRevealEngine {
         const units = [];
         const processedInputs = new Set();
 
-        // 1. Check for question cards
-        const qCards = Array.from(container.querySelectorAll('.q-card'));
+        // 1. Check for question cards / strategy cards
+        const qCards = Array.from(container.querySelectorAll('.q-card, .strategy-card'));
         qCards.forEach(card => {
             const inputs = Array.from(card.querySelectorAll('.blank-input, .select-input'));
-            const synSpans = Array.from(card.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3'));
+            const synSpans = Array.from(card.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word, .vocab-term'));
             
             let isUnsolved = false;
             if (inputs.length > 0) {
                 isUnsolved = inputs.some(inp => !inp.classList.contains('correct'));
             } else if (synSpans.length > 0) {
-                isUnsolved = synSpans.some(s => !s.classList.contains('active-syn')) || !card.classList.contains('revealed');
+                isUnsolved = !card.classList.contains('revealed') && synSpans.some(s => !s.classList.contains('active-syn') && !s.classList.contains('active-vocab'));
             } else {
                 isUnsolved = !card.classList.contains('revealed');
             }
@@ -3662,6 +3662,8 @@ class StepRevealEngine {
     }
 
     revealSingleCard(card) {
+        if (!card) return;
+
         // Reveal blank inputs inside card
         card.querySelectorAll('.blank-input').forEach(input => {
             if (input.dataset.ans) {
@@ -3701,14 +3703,14 @@ class StepRevealEngine {
             exp.style.display = 'block';
         }
 
-        // Auto-trigger evidence highlight in passage if linked
-        const qId = card.dataset.q;
-        const synBtn = card.querySelector('.syn-btn');
-        const evId = synBtn ? synBtn.dataset.ev : (qId ? `ev-${qId}` : null);
-        if (qId && window.readingHighlighter) {
-            window.readingHighlighter.showEvidence(qId, evId);
-        } else if (qId && window.deckEngine) {
-            if (evId) window.deckEngine.toggleSynonymExplanation(qId, evId);
+        // Auto-trigger evidence highlight in passage only if in reading split question-pane
+        if (!card.classList.contains('strategy-card')) {
+            const qId = card.dataset.q;
+            const synBtn = card.querySelector('.syn-btn');
+            const evId = synBtn ? synBtn.dataset.ev : (qId ? `ev-${qId}` : null);
+            if (qId && window.readingHighlighter && card.closest('.question-pane')) {
+                window.readingHighlighter.showEvidence(qId, evId);
+            }
         }
     }
 
