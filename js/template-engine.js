@@ -48,6 +48,39 @@
     </section>
 </template>
 
+<!-- 2b. STRATEGY / PRE-READING TEMPLATE -->
+<template id="tmpl-strategy">
+    <section class="slide" data-skill="read">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-reading);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge">Reading Strategy • Pre-Reading</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 10px;" data-slot="subtitle"></p>
+
+                    <div class="two-col" style="flex: 1; min-height: 0; display: flex; gap: 24px;">
+                        <div style="flex: 1.2; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;" data-slot="sentences"></div>
+                        <div style="flex: 0.8; overflow-y: auto;" data-slot="guide"></div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="toggleAllHighlights(this)">Show Highlights</button>
+                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+                        <button class="btn-action" onclick="resetStrategySlide(this)">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
 <!-- 3. UP-TO-DOWN (STACKED) 1-QUESTION WALKTHROUGH TEMPLATE (26px Passage / 25px Question) -->
 <template id="tmpl-walkthrough">
     <section class="slide" data-skill="read">
@@ -1066,6 +1099,11 @@
             // If no slide is marked active, activate the first slide
             if (!hasActiveSlide && allSlides.length > 0) {
                 allSlides[0].classList.add('active', 'visible');
+            }
+
+            // Rebind StepRevealEngine if available
+            if (window.stepRevealEngine && typeof window.stepRevealEngine.bindEvents === 'function') {
+                window.stepRevealEngine.bindEvents();
             }
         }
     }

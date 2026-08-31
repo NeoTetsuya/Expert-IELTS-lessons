@@ -268,7 +268,23 @@ class StepRevealEngine {
     }
 }
 
-// Global instantiation (deferred to ensure DeckEngine is available)
+// Global instantiation & global helpers
+function initStepReveal() {
+    if (!window.stepRevealEngine) {
+        window.stepRevealEngine = new StepRevealEngine(window.deckEngine);
+    } else {
+        window.stepRevealEngine.bindEvents();
+    }
+    window.stepReveal = window.stepRevealEngine;
+}
+
+window.stepReveal = function(btn) {
+    if (window.stepRevealEngine) {
+        const container = btn ? (btn.closest('.question-pane') || btn.closest('.slide') || btn.closest('.page-content') || btn.closest('.notebook')) : document.querySelector('.slide.active');
+        window.stepRevealEngine.revealNextInContainer(container || document.querySelector('.slide.active'));
+    }
+};
+
 window.addEventListener('DOMContentLoaded', () => {
-    window.stepRevealEngine = new StepRevealEngine(window.deckEngine);
+    initStepReveal();
 });

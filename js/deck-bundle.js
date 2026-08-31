@@ -55,6 +55,39 @@
     </section>
 </template>
 
+<!-- 2b. STRATEGY / PRE-READING TEMPLATE -->
+<template id="tmpl-strategy">
+    <section class="slide" data-skill="read">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-reading);"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge">Reading Strategy • Pre-Reading</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 10px;" data-slot="subtitle"></p>
+
+                    <div class="two-col" style="flex: 1; min-height: 0; display: flex; gap: 24px;">
+                        <div style="flex: 1.2; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;" data-slot="sentences"></div>
+                        <div style="flex: 0.8; overflow-y: auto;" data-slot="guide"></div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="toggleAllHighlights(this)">Show Highlights</button>
+                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+                        <button class="btn-action" onclick="resetStrategySlide(this)">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
 <!-- 3. UP-TO-DOWN (STACKED) 1-QUESTION WALKTHROUGH TEMPLATE (26px Passage / 25px Question) -->
 <template id="tmpl-walkthrough">
     <section class="slide" data-skill="read">
@@ -1074,6 +1107,11 @@
             if (!hasActiveSlide && allSlides.length > 0) {
                 allSlides[0].classList.add('active', 'visible');
             }
+
+            // Rebind StepRevealEngine if available
+            if (window.stepRevealEngine && typeof window.stepRevealEngine.bindEvents === 'function') {
+                window.stepRevealEngine.bindEvents();
+            }
         }
     }
 
@@ -1775,6 +1813,37 @@ class DeckEngine {
         if (p1) p1.style.display = tabNum === 1 ? 'block' : 'none';
         if (p2) p2.style.display = tabNum === 2 ? 'block' : 'none';
     }
+
+    toggleAllHighlights(target) {
+        const slide = target ? (target.closest('.slide') || target.closest('.page-content') || target.closest('.notebook')) : document.querySelector('.slide.active');
+        if (!slide) return;
+        const syns = slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word');
+        const isAnyActive = Array.from(syns).some(s => s.classList.contains('active-syn') || s.classList.contains('active-vocab'));
+        syns.forEach(s => {
+            if (isAnyActive) {
+                s.classList.remove('active-syn', 'active-vocab');
+            } else {
+                if (s.classList.contains('vocab-word')) {
+                    s.classList.add('active-vocab');
+                } else {
+                    s.classList.add('active-syn');
+                }
+            }
+        });
+        slide.querySelectorAll('.q-card').forEach(c => {
+            if (isAnyActive) c.classList.remove('revealed');
+            else c.classList.add('revealed');
+        });
+    }
+
+    resetStrategySlide(target) {
+        const slide = target ? (target.closest('.slide') || target.closest('.page-content') || target.closest('.notebook')) : document.querySelector('.slide.active');
+        if (!slide) return;
+        slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word').forEach(s => {
+            s.classList.remove('active-syn', 'active-vocab');
+        });
+        slide.querySelectorAll('.q-card').forEach(c => c.classList.remove('revealed'));
+    }
 }
 
 // Global auto-instantiation on window
@@ -1796,6 +1865,8 @@ window.revealMultiOpts = (id) => (window.deckEngine ? window.deckEngine.revealMu
 window.resetMultiOpts = (id) => (window.deckEngine ? window.deckEngine.resetMultiOpts(id) : null);
 window.toggleExplanations = (id) => (window.deckEngine ? window.deckEngine.toggleExplanations(id) : null);
 window.toggleSynonymExplanation = (q, ev) => (window.deckEngine ? window.deckEngine.toggleSynonymExplanation(q, ev) : null);
+window.toggleAllHighlights = (target) => (window.deckEngine ? window.deckEngine.toggleAllHighlights(target) : null);
+window.resetStrategySlide = (target) => (window.deckEngine ? window.deckEngine.resetStrategySlide(target) : null);
 window.switchHighLineTab = (tab) => (window.deckEngine ? window.deckEngine.switchHighLineTab(tab) : null);
 window.jumpToSlide = (idx) => (window.deckEngine ? window.deckEngine.jumpToSlide(idx) : null);
 window.jumpToSkill = (skill) => (window.deckEngine ? window.deckEngine.jumpToSkill(skill) : null);
@@ -3713,9 +3784,25 @@ class StepRevealEngine {
     }
 }
 
-// Global instantiation (deferred to ensure DeckEngine is available)
+// Global instantiation & global helpers
+function initStepReveal() {
+    if (!window.stepRevealEngine) {
+        window.stepRevealEngine = new StepRevealEngine(window.deckEngine);
+    } else {
+        window.stepRevealEngine.bindEvents();
+    }
+    window.stepReveal = window.stepRevealEngine;
+}
+
+window.stepReveal = function(btn) {
+    if (window.stepRevealEngine) {
+        const container = btn ? (btn.closest('.question-pane') || btn.closest('.slide') || btn.closest('.page-content') || btn.closest('.notebook')) : document.querySelector('.slide.active');
+        window.stepRevealEngine.revealNextInContainer(container || document.querySelector('.slide.active'));
+    }
+};
+
 window.addEventListener('DOMContentLoaded', () => {
-    window.stepRevealEngine = new StepRevealEngine(window.deckEngine);
+    initStepReveal();
 });
 
 

@@ -689,6 +689,37 @@ class DeckEngine {
         if (p1) p1.style.display = tabNum === 1 ? 'block' : 'none';
         if (p2) p2.style.display = tabNum === 2 ? 'block' : 'none';
     }
+
+    toggleAllHighlights(target) {
+        const slide = target ? (target.closest('.slide') || target.closest('.page-content') || target.closest('.notebook')) : document.querySelector('.slide.active');
+        if (!slide) return;
+        const syns = slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word');
+        const isAnyActive = Array.from(syns).some(s => s.classList.contains('active-syn') || s.classList.contains('active-vocab'));
+        syns.forEach(s => {
+            if (isAnyActive) {
+                s.classList.remove('active-syn', 'active-vocab');
+            } else {
+                if (s.classList.contains('vocab-word')) {
+                    s.classList.add('active-vocab');
+                } else {
+                    s.classList.add('active-syn');
+                }
+            }
+        });
+        slide.querySelectorAll('.q-card').forEach(c => {
+            if (isAnyActive) c.classList.remove('revealed');
+            else c.classList.add('revealed');
+        });
+    }
+
+    resetStrategySlide(target) {
+        const slide = target ? (target.closest('.slide') || target.closest('.page-content') || target.closest('.notebook')) : document.querySelector('.slide.active');
+        if (!slide) return;
+        slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word').forEach(s => {
+            s.classList.remove('active-syn', 'active-vocab');
+        });
+        slide.querySelectorAll('.q-card').forEach(c => c.classList.remove('revealed'));
+    }
 }
 
 // Global auto-instantiation on window
@@ -710,6 +741,8 @@ window.revealMultiOpts = (id) => (window.deckEngine ? window.deckEngine.revealMu
 window.resetMultiOpts = (id) => (window.deckEngine ? window.deckEngine.resetMultiOpts(id) : null);
 window.toggleExplanations = (id) => (window.deckEngine ? window.deckEngine.toggleExplanations(id) : null);
 window.toggleSynonymExplanation = (q, ev) => (window.deckEngine ? window.deckEngine.toggleSynonymExplanation(q, ev) : null);
+window.toggleAllHighlights = (target) => (window.deckEngine ? window.deckEngine.toggleAllHighlights(target) : null);
+window.resetStrategySlide = (target) => (window.deckEngine ? window.deckEngine.resetStrategySlide(target) : null);
 window.switchHighLineTab = (tab) => (window.deckEngine ? window.deckEngine.switchHighLineTab(tab) : null);
 window.jumpToSlide = (idx) => (window.deckEngine ? window.deckEngine.jumpToSlide(idx) : null);
 window.jumpToSkill = (skill) => (window.deckEngine ? window.deckEngine.jumpToSkill(skill) : null);
