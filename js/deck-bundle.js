@@ -7818,16 +7818,16 @@ class DeckCharts {
                     <div style="font-weight:700; font-size:16.5px; color:#1e293b; margin-bottom:8px;">Number of students in schools</div>
                     <svg viewBox="0 0 200 200" style="width:190px; height:190px;">
                         <!-- Public 90% Arc (0 to 324 deg) -->
-                        <path d="M 100,100 L 100,10 A 90,90 0 1,0 152.9,27.1 Z" fill="#0284c7" stroke="#ffffff" stroke-width="2.5" />
+                        <path d="M 100,100 L 100,20 A 80,80 0 1,1 52.98,35.28 Z" fill="#0284c7" stroke="#ffffff" stroke-width="2.5" />
                         <!-- Private 10% Arc (324 to 360 deg) -->
-                        <path d="M 100,100 L 152.9,27.1 A 90,90 0 0,0 100,10 Z" fill="#c2410c" stroke="#ffffff" stroke-width="2.5" />
+                        <path d="M 100,100 L 52.98,35.28 A 80,80 0 0,1 100,20 Z" fill="#ea580c" stroke="#ffffff" stroke-width="2.5" />
                         <!-- Labels -->
-                        <text x="85" y="115" fill="#ffffff" font-size="20" font-weight="800" text-anchor="middle">90%</text>
-                        <text x="125" y="45" fill="#ffffff" font-size="14" font-weight="800" text-anchor="middle">10%</text>
+                        <text x="100" y="115" fill="#ffffff" font-size="22" font-weight="800" text-anchor="middle">90%</text>
+                        <text x="76" y="28" fill="#ea580c" font-size="15" font-weight="800" text-anchor="middle">10%</text>
                     </svg>
                     <div style="display:flex; gap:16px; margin-top:8px; font-size:14px; font-weight:700;">
                         <span style="color:#0284c7;">■ Public: 90%</span>
-                        <span style="color:#c2410c;">■ Private: 10%</span>
+                        <span style="color:#ea580c;">■ Private: 10%</span>
                     </div>
                 </div>
 
@@ -7836,16 +7836,16 @@ class DeckCharts {
                     <div style="font-weight:700; font-size:16.5px; color:#1e293b; margin-bottom:8px;">Number of schools</div>
                     <svg viewBox="0 0 200 200" style="width:190px; height:190px;">
                         <!-- Public 75% Arc (0 to 270 deg) -->
-                        <path d="M 100,100 L 100,10 A 90,90 0 1,0 10,100 Z" fill="#0284c7" stroke="#ffffff" stroke-width="2.5" />
+                        <path d="M 100,100 L 100,20 A 80,80 0 1,1 20,100 Z" fill="#0284c7" stroke="#ffffff" stroke-width="2.5" />
                         <!-- Private 25% Arc (270 to 360 deg) -->
-                        <path d="M 100,100 L 10,100 A 90,90 0 0,0 100,10 Z" fill="#c2410c" stroke="#ffffff" stroke-width="2.5" />
+                        <path d="M 100,100 L 20,100 A 80,80 0 0,1 100,20 Z" fill="#ea580c" stroke="#ffffff" stroke-width="2.5" />
                         <!-- Labels -->
-                        <text x="95" y="125" fill="#ffffff" font-size="20" font-weight="800" text-anchor="middle">75%</text>
-                        <text x="50" y="60" fill="#ffffff" font-size="15" font-weight="800" text-anchor="middle">25%</text>
+                        <text x="115" y="125" fill="#ffffff" font-size="22" font-weight="800" text-anchor="middle">75%</text>
+                        <text x="55" y="65" fill="#ffffff" font-size="18" font-weight="800" text-anchor="middle">25%</text>
                     </svg>
                     <div style="display:flex; gap:16px; margin-top:8px; font-size:14px; font-weight:700;">
                         <span style="color:#0284c7;">■ Public: 75%</span>
-                        <span style="color:#c2410c;">■ Private: 25%</span>
+                        <span style="color:#ea580c;">■ Private: 25%</span>
                     </div>
                 </div>
             </div>
