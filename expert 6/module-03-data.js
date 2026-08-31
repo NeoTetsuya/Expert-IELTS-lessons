@@ -13,7 +13,7 @@ window.module3Data = {
         moduleNum: "03",
         title: "Work & Study",
         subtitle: "IELTS Academic Preparation Masterclass",
-        slidesCount: 37,
+        slidesCount: 44,
         tags: [
             { text: "Reading 3a/3b", bg: "var(--col-reading)" },
             { text: "Grammar: Comparatives & Verb Patterns", bg: "var(--col-grammar)" },
@@ -287,6 +287,141 @@ window.module3Data = {
                 question: "6. Anita Roddick used emotional appeals for good causes.",
                 ans: "YES",
                 explanation: `<div class="syn-key-box" style="margin-top:0;"><span class="syn-tag green">Claim Agreement:</span> <strong>YES.</strong> <em>"emotional appeals"</em> = <em>"used emotions / break their hearts"</em>; <em>"good causes"</em> = <em>"fundraise for charity"</em>.</div>`
+            }
+        ],
+        boxOptions: [
+            { letter: "A", text: "researchers" },
+            { letter: "B", text: "focus" },
+            { letter: "C", text: "enthusiasm" },
+            { letter: "D", text: "disrespect" },
+            { letter: "E", text: "negative" },
+            { letter: "F", text: "speeches" },
+            { letter: "G", text: "situations" },
+            { letter: "H", text: "no" },
+            { letter: "I", text: "significant" },
+            { letter: "J", text: "managers" },
+            { letter: "K", text: "complaints" },
+            { letter: "L", text: "decision" }
+        ],
+        boxWalkthroughs: [
+            {
+                qNum: 7,
+                title: "Walkthrough: Question 7 & Paragraph E (Significant Effect in Technical Roles)",
+                badge: "Reading 3b Walkthrough • Q7",
+                para: "Para E",
+                header: "📖 Passage Excerpt (Paragraph E)",
+                excerpt: `<span class="para-tag">[Para E]</span> <mark class="evidence" id="ev-wt-3b-7" data-q="wt-3b-7">"In jobs such as mechanics, scientists and accountants, <span class="syn-pair-1" data-q="wt-3b-7">higher emotional intelligence translated into lower performance</span>. These employees were paying attention to facial expressions and vocal tones when they should have been analysing data or repairing cars."</mark>`,
+                question: `7. In the University of Florida study, emotional intelligence had a more <span class="syn-pair-1" data-q="wt-3b-7">[ 7 ]</span> effect on people who worked in jobs such as accountancy and motor repairs.`,
+                ans: "I",
+                boxOptions: [
+                    { letter: "A", text: "researchers" }, { letter: "B", text: "focus" }, { letter: "C", text: "enthusiasm" },
+                    { letter: "D", text: "disrespect" }, { letter: "E", text: "negative" }, { letter: "F", text: "speeches" },
+                    { letter: "G", text: "situations" }, { letter: "H", text: "no" }, { letter: "I", text: "significant" },
+                    { letter: "J", text: "managers" }, { letter: "K", text: "complaints" }, { letter: "L", text: "decision" }
+                ],
+                explanation: `<div class="syn-key-box" style="margin-top:0;"><span class="syn-tag green">Anchor Match:</span> <em>"accountancy and motor repairs"</em> ↔ <em>"mechanics, scientists and accountants"</em>.</div><div class="syn-key-box"><span class="syn-tag purple">Paraphrase Key:</span> <em>"translated into lower performance / reversed results"</em> indicates a <strong>significant</strong> (I) effect.</div>`
+            },
+            {
+                qNum: 8,
+                title: "Walkthrough: Question 8 & Paragraph E (Attention & Primary Focus)",
+                badge: "Reading 3b Walkthrough • Q8",
+                para: "Para E",
+                header: "📖 Passage Excerpt (Paragraph E)",
+                excerpt: `<span class="para-tag">[Para E]</span> <mark class="evidence" id="ev-wt-3b-8" data-q="wt-3b-8">"These employees were <span class="syn-pair-1" data-q="wt-3b-8">paying attention to facial expressions and vocal tones</span> when they <span class="syn-pair-2" data-q="wt-3b-8">should have been analysing data or repairing cars</span>."</mark>`,
+                question: `8. They found that emotionally intelligent people made faces and gestures their main <span class="syn-pair-1" data-q="wt-3b-8">[ 8 ]</span>, which weakened other skills.`,
+                ans: "B",
+                boxOptions: [
+                    { letter: "A", text: "researchers" }, { letter: "B", text: "focus" }, { letter: "C", text: "enthusiasm" },
+                    { letter: "D", text: "disrespect" }, { letter: "E", text: "negative" }, { letter: "F", text: "speeches" },
+                    { letter: "G", text: "situations" }, { letter: "H", text: "no" }, { letter: "I", text: "significant" },
+                    { letter: "J", text: "managers" }, { letter: "K", text: "complaints" }, { letter: "L", text: "decision" }
+                ],
+                explanation: `<div class="syn-key-box" style="margin-top:0;"><span class="syn-tag green">Anchor Match:</span> <em>"paying attention to faces and vocal tones"</em> ↔ <em>"made faces and gestures their main focus"</em>.</div><div class="syn-key-box"><span class="syn-tag purple">Noun Match:</span> <strong>B (focus)</strong>.</div>`
+            },
+            {
+                qNum: 9,
+                title: "Walkthrough: Question 9 & Paragraph F (Challenging Situations)",
+                badge: "Reading 3b Walkthrough • Q9",
+                para: "Para F",
+                header: "📖 Passage Excerpt (Paragraph F)",
+                excerpt: `<span class="para-tag">[Para F]</span> <mark class="evidence" id="ev-wt-3b-9" data-q="wt-3b-9">"However, <span class="syn-pair-1" data-q="wt-3b-9">emotional intelligence was significant when challenging existing situations</span> and speaking up with ideas."</mark>`,
+                question: `9. They concluded that emotional intelligence can matter in some <span class="syn-pair-1" data-q="wt-3b-9">[ 9 ]</span>.`,
+                ans: "G",
+                boxOptions: [
+                    { letter: "A", text: "researchers" }, { letter: "B", text: "focus" }, { letter: "C", text: "enthusiasm" },
+                    { letter: "D", text: "disrespect" }, { letter: "E", text: "negative" }, { letter: "F", text: "speeches" },
+                    { letter: "G", text: "situations" }, { letter: "H", text: "no" }, { letter: "I", text: "significant" },
+                    { letter: "J", text: "managers" }, { letter: "K", text: "complaints" }, { letter: "L", text: "decision" }
+                ],
+                explanation: `<div class="syn-key-box" style="margin-top:0;"><span class="syn-tag green">Anchor Match:</span> <em>"matter in some situations"</em> ↔ <em>"significant when challenging existing situations"</em>.</div><div class="syn-key-box"><span class="syn-tag purple">Exact Match:</span> <strong>G (situations)</strong>.</div>`
+            },
+            {
+                qNum: 10,
+                title: "Walkthrough: Question 10 & Paragraph F (Evaluating Managers)",
+                badge: "Reading 3b Walkthrough • Q10",
+                para: "Para F",
+                header: "📖 Passage Excerpt (Paragraph F)",
+                excerpt: `<span class="para-tag">[Para F]</span> <mark class="evidence" id="ev-wt-3b-10" data-q="wt-3b-10">"In a study at a healthcare company, <span class="syn-pair-1" data-q="wt-3b-10">managers and supervisors were surveyed about workers' behaviour</span> after a series of workplace tests."</mark>`,
+                question: `10. For example, <span class="syn-pair-1" data-q="wt-3b-10">[ 10 ]</span> were asked questions about workers’ behaviour after a series of tests.`,
+                ans: "J",
+                boxOptions: [
+                    { letter: "A", text: "researchers" }, { letter: "B", text: "focus" }, { letter: "C", text: "enthusiasm" },
+                    { letter: "D", text: "disrespect" }, { letter: "E", text: "negative" }, { letter: "F", text: "speeches" },
+                    { letter: "G", text: "situations" }, { letter: "H", text: "no" }, { letter: "I", text: "significant" },
+                    { letter: "J", text: "managers" }, { letter: "K", text: "complaints" }, { letter: "L", text: "decision" }
+                ],
+                explanation: `<div class="syn-key-box" style="margin-top:0;"><span class="syn-tag green">Anchor Match:</span> <em>"were asked questions about workers' behaviour"</em> ↔ <em>"managers were surveyed about workers' behaviour"</em>.</div><div class="syn-key-box"><span class="syn-tag purple">Noun Match:</span> <strong>J (managers)</strong>.</div>`
+            },
+            {
+                qNum: 11,
+                title: "Walkthrough: Question 11 & Paragraph F (Absence of Correlation in Helping)",
+                badge: "Reading 3b Walkthrough • Q11",
+                para: "Para F",
+                header: "📖 Passage Excerpt (Paragraph F)",
+                excerpt: `<span class="para-tag">[Para F]</span> <mark class="evidence" id="ev-wt-3b-11" data-q="wt-3b-11">"In a study at a healthcare company, <span class="syn-pair-1" data-q="wt-3b-11">the relationship between emotional intelligence and helping colleagues didn’t exist</span>. Helping is driven by motivations and values."</mark>`,
+                question: `11. They observed <span class="syn-pair-1" data-q="wt-3b-11">[ 11 ]</span> difference between workers with high or low EI when it came to helpfulness.`,
+                ans: "H",
+                boxOptions: [
+                    { letter: "A", text: "researchers" }, { letter: "B", text: "focus" }, { letter: "C", text: "enthusiasm" },
+                    { letter: "D", text: "disrespect" }, { letter: "E", text: "negative" }, { letter: "F", text: "speeches" },
+                    { letter: "G", text: "situations" }, { letter: "H", text: "no" }, { letter: "I", text: "significant" },
+                    { letter: "J", text: "managers" }, { letter: "K", text: "complaints" }, { letter: "L", text: "decision" }
+                ],
+                explanation: `<div class="syn-key-box" style="margin-top:0;"><span class="syn-tag green">Anchor Match:</span> <em>"relationship didn't exist"</em> ↔ <em>"observed NO difference"</em>.</div><div class="syn-key-box"><span class="syn-tag purple">Determiner Match:</span> <strong>H (no)</strong>.</div>`
+            },
+            {
+                qNum: 12,
+                title: "Walkthrough: Question 12 & Paragraph G (Speaking Up & Complaints)",
+                badge: "Reading 3b Walkthrough • Q12",
+                para: "Para G",
+                header: "📖 Passage Excerpt (Paragraph G)",
+                excerpt: `<span class="para-tag">[Para G]</span> <mark class="evidence" id="ev-wt-3b-12" data-q="wt-3b-12">"Emotionally intelligent employees <span class="syn-pair-1" data-q="wt-3b-12">spoke up more effectively, keeping anger in check</span> and expressing enthusiasm without threatening leaders."</mark>`,
+                question: `12. They found that workers with higher EI felt more comfortable making <span class="syn-pair-1" data-q="wt-3b-12">[ 12 ]</span> when treated unjustly.`,
+                ans: "K",
+                boxOptions: [
+                    { letter: "A", text: "researchers" }, { letter: "B", text: "focus" }, { letter: "C", text: "enthusiasm" },
+                    { letter: "D", text: "disrespect" }, { letter: "E", text: "negative" }, { letter: "F", text: "speeches" },
+                    { letter: "G", text: "situations" }, { letter: "H", text: "no" }, { letter: "I", text: "significant" },
+                    { letter: "J", text: "managers" }, { letter: "K", text: "complaints" }, { letter: "L", text: "decision" }
+                ],
+                explanation: `<div class="syn-key-box" style="margin-top:0;"><span class="syn-tag green">Anchor Match:</span> <em>"spoke up more effectively"</em> ↔ <em>"felt more comfortable making complaints"</em>.</div><div class="syn-key-box"><span class="syn-tag purple">Noun Match:</span> <strong>K (complaints)</strong>.</div>`
+            },
+            {
+                qNum: 13,
+                title: "Walkthrough: Question 13 & Paragraph G (Expressing Enthusiasm)",
+                badge: "Reading 3b Walkthrough • Q13",
+                para: "Para G",
+                header: "📖 Passage Excerpt (Paragraph G)",
+                excerpt: `<span class="para-tag">[Para G]</span> <mark class="evidence" id="ev-wt-3b-13" data-q="wt-3b-13">"Supervisors were more likely to listen because emotionally intelligent employees were <span class="syn-pair-1" data-q="wt-3b-13">expressing enthusiasm without threatening leaders</span>."</mark>`,
+                question: `13. Supervisors were more likely to listen because the <span class="syn-pair-1" data-q="wt-3b-13">[ 13 ]</span> of emotionally intelligent people made ideas easier to accept.`,
+                ans: "C",
+                boxOptions: [
+                    { letter: "A", text: "researchers" }, { letter: "B", text: "focus" }, { letter: "C", text: "enthusiasm" },
+                    { letter: "D", text: "disrespect" }, { letter: "E", text: "negative" }, { letter: "F", text: "speeches" },
+                    { letter: "G", text: "situations" }, { letter: "H", text: "no" }, { letter: "I", text: "significant" },
+                    { letter: "J", text: "managers" }, { letter: "K", text: "complaints" }, { letter: "L", text: "decision" }
+                ],
+                explanation: `<div class="syn-key-box" style="margin-top:0;"><span class="syn-tag green">Anchor Match:</span> <em>"expressing enthusiasm without threatening leaders"</em> ↔ <em>"the enthusiasm... made ideas easier to accept"</em>.</div><div class="syn-key-box"><span class="syn-tag purple">Noun Match:</span> <strong>C (enthusiasm)</strong>.</div>`
             }
         ]
     }

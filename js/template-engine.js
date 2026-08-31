@@ -598,7 +598,25 @@
                 const ansVal = data.ans || data.inputAns;
                 const inputContainer = section.querySelector('[data-slot="input-area"]');
                 if (inputContainer) {
-                    if (ansVal === 'YES' || ansVal === 'NO' || ansVal === 'NOT GIVEN') {
+                    if (data.boxOptions && Array.isArray(data.boxOptions)) {
+                        const boxHtml = data.boxOptions.map(opt => `<span class="box-chip" style="background:#ffffff; border:1px solid #cbd5e1; padding:4px 10px; border-radius:6px; font-weight:700; font-size:15px;"><strong>${opt.letter}.</strong> ${opt.text}</span>`).join('');
+                        const optionsHtml = data.boxOptions.map(opt => `<option value="${opt.letter}">${opt.letter} (${opt.text})</option>`).join('');
+                        inputContainer.innerHTML = `
+                            <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+                                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:#eff6ff; padding:10px 14px; border-radius:8px; border:1px solid #bfdbfe;">
+                                    <span style="font-size:14px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-right:4px;">📦 Option Box:</span>
+                                    ${boxHtml}
+                                </div>
+                                <div style="display:flex; align-items:center; gap:12px;">
+                                    <span style="font-weight:700; font-size:19px;">Your Choice:</span>
+                                    <select class="select-input" data-ans="${ansVal}" style="width:230px; font-weight:700;">
+                                        <option value="">Select option...</option>
+                                        ${optionsHtml}
+                                    </select>
+                                </div>
+                            </div>
+                        `;
+                    } else if (ansVal === 'YES' || ansVal === 'NO' || ansVal === 'NOT GIVEN') {
                         inputContainer.innerHTML = `
                             <div style="display:flex; align-items:center; gap:12px;">
                                 <span style="font-weight:700; font-size:19px;">Your Choice:</span>
@@ -818,6 +836,7 @@
             if (tmpl === 'vocab-cards') return 'Academic Lexicon';
             if (tmpl === 'syntax-rules') return 'Vocabulary • Syntax & Rules';
             if (tmpl === 'gap-fill-passage') {
+                if (skill === 'read' || skill === 'reading') return 'Reading • Summary Completion';
                 return skill === 'grammar' ? 'Grammar Practice • Gap Fill' : 'Vocabulary Practice • Gap Fill';
             }
             if (tmpl === 'spelling-table') return 'IELTS Writing • Lexical Accuracy';
