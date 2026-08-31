@@ -26,8 +26,8 @@
     </style>
 </head>
 <body>
-    <div class="presentation-stage">
-        <div class="slides-container">
+    <div class="deck-viewport">
+        <main class="deck-stage" id="deckStage">
 
             <!-- SLIDE 1: Title Slide (Bound to meta data) -->
             <slide-card template="title" skill="title" data-bind="meta"></slide-card>
@@ -469,7 +469,7 @@
                 </div>
             </slide-card>
 
-        </div>
+        </main>
     </div>
 
     <!-- Data Backbone (Single Source of Truth) -->

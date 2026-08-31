@@ -577,9 +577,9 @@
                 const s = section.querySelector('[data-slot="subtitle"], .slide-subtitle, .title-sub');
                 if (s) s.innerHTML = data.subtitle;
             }
-            if (data.badge) {
+            if (data.badge || data.moduleNum) {
                 const b = section.querySelector('[data-slot="badge"], .skill-badge, .title-module-badge');
-                if (b) b.innerHTML = data.badge;
+                if (b) b.innerHTML = data.badge || `Module ${data.moduleNum}`;
             }
             if (data.instruction) {
                 const inst = section.querySelector('[data-slot="instruction"], .slide-subtitle');
@@ -597,9 +597,9 @@
                 const rmContainer = section.querySelector('[data-slot="roadmap"]');
                 if (rmContainer) {
                     rmContainer.innerHTML = data.roadmap.map(item => `
-                        <div class="roadmap-card" style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid ${skillCol}; border-radius:10px; padding:12px 16px; margin-bottom:10px;">
-                            <div style="font-size:16px; font-weight:800; color:var(--text-dark); margin-bottom:4px;">${item.num ? `Section ${item.num}: ` : ''}${item.title}</div>
-                            <div style="font-size:14.5px; color:#475569; line-height:1.5;">${item.desc}</div>
+                        <div class="roadmap-card" style="background:#ffffff; border:1px solid #cbd5e1; border-left:5px solid ${skillCol}; border-radius:10px; padding:14px 18px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+                            <div style="font-size:17.5px; font-weight:800; color:var(--text-dark); margin-bottom:4px;">${item.num ? `Section ${item.num}: ` : ''}${item.title}</div>
+                            <div style="font-size:15px; color:#475569; line-height:1.5;">${item.desc}</div>
                         </div>
                     `).join('');
                 }
