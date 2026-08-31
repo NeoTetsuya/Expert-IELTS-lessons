@@ -483,18 +483,30 @@ When building HTML presentations from course markdown documents (`md files/`):
 - **Zero Question Grouping**: **Never combine multiple questions (e.g. Q7–Q10, Q1–Q5) into a single walkthrough slide.**
 - **Components of Every Walkthrough Slide**:
   1. **Top Box (`slot="passage-text"`)**: The exact isolated paragraph/sentence containing the evidence, wrapped in `<mark class="evidence">` with dual-color synonym tags.
-  2. **Bottom Box (`slot="question-text"` & `slot="input-area"`)**: The single question card with interactive input (`<select>` or `<input>`), `💡 Evidence` button, and rich explanation breakdown (`slot="explanation"`).
-  3. **Action Row**: `Check Answer`, `👉 Step Reveal (E)`, `Show Evidence / Highlights`, and `Reset`.
+  2. **Option Box (For Summary Completion with a Box)**: Include the **A–I / A–L option box chips** directly above the question card so students see the word bank.
+  3. **Bottom Box (`slot="question-text"` & `slot="input-area"`)**: The single question card with interactive input (`<select>` or `<input>`), `💡 Evidence` button, and rich explanation breakdown (`slot="explanation"`).
+  4. **Action Row**: `Check Answer`, `👉 Step Reveal (E)`, `Show Evidence / Highlights`, and `Reset`.
 - **Universality**: Applies across all question types: Matching Headings, True/False/Not Given, Yes/No/Not Given, Multiple Choice, Sentence Completion, Summary Completion, Flowchart Completion, and Matching Information.
+
+### E. Declarative Data Separation Architecture (`module-XX-data.js`)
+- **Single Source of Truth**: Extract all passages, questions, word banks, box options, walkthroughs, grammar datasets, and charts into `module-XX-data.js`.
+- **Clean Declarative HTML**: The `.html` file should contain `<slide-card template="..." data-bind="...">` elements without sprawling hardcoded duplicate markup.
+- **100% Unabridged Passage Fidelity**: Passages in `-data.js` must contain **every paragraph (Intro, A through G)** word-for-word from the master markdown file. Never truncate, abbreviate, or omit paragraphs.
+- **No Standalone Reading Questions**: Reading tasks must always be presented in Split-View (`template="reading-split"`), never as standalone gap-fill slides without the passage.
 
 ---
 
-### E. Standard Template Slot Directory
+### F. Standard Template Slot Directory
 
 | Template ID | Primary Slots | Fallback Aliases | Description |
 | :--- | :--- | :--- | :--- |
+| `tmpl-title` | `badge`, `title`, `subtitle`, `tags`, `roadmap` | `content` | Title slide with module info, tags, and clickable syllabus cards. |
+| `tmpl-strategy` | `sentences`, `guide` | `two-col` | Pre-reading question keyword deconstruction with step reveal. |
+| `tmpl-reading-split` | `passage`, `questions` / `summaryBox` | `content` | Left unabridged reading passage + right questions & option boxes. |
+| `tmpl-walkthrough` | `passage-header`, `passage-text`, `question-text`, `input-area`, `explanation` | — | Focused 1-question deep dive with verbatim excerpt and option box. |
 | `tmpl-grammar-masterclass` | `rules`, `contrast-card` | `content` | Left rule cards + right common error contrast box. |
 | `tmpl-writing-model` | `prompt`, `essay`, `annotations` | `left-col`, `model-essay` | Left prompt & tips + right scrollable model essay with phrase popovers. |
 | `tmpl-reading-flowchart` | `passage`, `flowchart` | `questions` | Left reading pane + right interactive flowchart step cards. |
 | `tmpl-gap-fill-passage` | `passage`, `rules-col` | `content` | Interactive cloze passage + right grammatical/lexical rules column. |
-| `tmpl-walkthrough` | `passage-header`, `passage-text`, `question-text`, `input-area`, `explanation` | — | Focused 1-question deep dive with verbatim excerpt. |
+| `tmpl-summary-checklist` | `subtitle`, `grid` | `content` | Module Mastery review checklist with competency cards. |
+

@@ -395,36 +395,112 @@ Ideal for Summary Completion, Flowchart Completion, and Short Answer questions.
 
 ---
 
-## 8. Complete End-to-End Code Blueprint
+## 8. Complete End-to-End Code Blueprint & Data Architecture
 
-When creating a new reading module, insert all stages consecutively:
+When creating a new reading module, follow the **Declarative Data Separation Architecture**:
 
+### A. Master Curriculum Dataset (`module-XX-data.js`)
+
+All text passages, word banks, options, questions, and walkthrough objects live in `module-XX-data.js` as the single source of truth:
+
+```javascript
+window.module3Data = {
+    // 1. Reading Task 3a
+    reading3a: {
+        wordBank: ["admitted", "behaved", "control group", "denied", "educated", "experiences", "imagination", "success", "instructors", "time"],
+        passage: `
+            <h3>A CHINESE APPROACH TO LEARNING</h3>
+            <p><span class="para-tag">Intro</span> A recent experiment carried out by the BBC...</p>
+            <p><span class="para-tag">Para A</span> <strong>The reasons behind the experiment were obvious.</strong> <mark class="evidence" id="ev-3a-1" data-q="3a-1"><span class="syn-pair-1" data-q="3a-1">Chinese students regularly come near the top</span></mark>...</p>
+            <!-- ALL PARAGRAPHS (A through G) 100% UNABRIDGED -->
+        `,
+        summaryText: `
+            The BBC introduced an experiment... <strong>1.</strong> <input type="text" class="blank-input" data-ans="success|triumph" placeholder="word..."> <button class="syn-btn" data-ev="ev-3a-1" onclick="deckEngine.toggleSynonymExplanation('3a-1', 'ev-3a-1')">💡</button>...
+        `,
+        walkthroughs: [
+            {
+                qNum: 1,
+                title: "Walkthrough: Question 1 & Paragraph A (Exam Success)",
+                badge: "Reading 3a Walkthrough • Q1",
+                para: "Para A",
+                header: "📖 Passage Excerpt (Paragraph A)",
+                excerpt: `<span class="para-tag">[Para A]</span> <mark class="evidence" id="ev-wt-3a-1" data-q="wt-3a-1">"The reasons behind the experiment were obvious. <span class="syn-pair-1" data-q="wt-3a-1">Chinese students regularly come near the top</span>..."</mark>`,
+                question: `1. The BBC introduced an experiment because of the exam <span class="syn-pair-2" data-q="wt-3a-1">[ 1 ]</span> of Chinese students.`,
+                ans: "success|triumph",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Anchor Match:</span> <em>"Chinese students in exams"</em> ↔ <em>"triumph in Maths, Reading"</em>.</div>`
+            },
+            // Walkthroughs for Q2 through QN...
+        ]
+    },
+
+    // 2. Summary Completion with a Box (Ex 4)
+    reading3aEx4: {
+        passage: `...`,
+        boxOptions: [
+            { letter: "A", text: "unnecessary" }, { letter: "B", text: "technology" }, { letter: "C", text: "styles" },
+            { letter: "D", text: "hours" }, { letter: "E", text: "interest" }, { letter: "F", text: "environment" },
+            { letter: "G", text: "teachers" }, { letter: "H", text: "benefit" }, { letter: "I", text: "classmates" }
+        ],
+        summaryBox: `...`,
+        walkthroughs: [
+            {
+                qNum: 1,
+                title: "Walkthrough: Question 1 & Paragraph E (Testing Obsession)",
+                badge: "Reading 3a Ex 4 Walkthrough • Q1",
+                para: "Para E",
+                header: "📖 Passage Excerpt (Paragraph E)",
+                excerpt: `<span class="para-tag">[Para E]</span> <mark class="evidence" id="ev-wt-3a-ex4-1" data-q="wt-3a-ex4-1">"All of this suggests that an <span class="syn-pair-1" data-q="wt-3a-ex4-1">obsession with testing</span> does not exist..."</mark>`,
+                question: `1. The author believes the British have an excessive <span class="syn-pair-1" data-q="wt-3a-ex4-1">[ 1 ]</span> in student results.`,
+                ans: "E",
+                boxOptions: [ /* Always include box options for box tasks */ ],
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Anchor Match:</span> <em>"excessive interest"</em> ↔ <em>"obsession with testing"</em>.</div>`
+            }
+        ]
+    }
+};
 ```
-Slide N       : [STAGE 1] Pre-reading Question Keyword Deconstruction Slide
-Slide N+1     : [STAGE 2] Full Split-View Reading Passage & Complete Question Set Slide
-Slide N+2...M : [STAGE 3] Question-by-Question Model Walkthrough Slides (1 SLIDE PER QUESTION)
-```
 
-> [!IMPORTANT]
-> **STRICT 1-QUESTION-PER-SLIDE WALKTHROUGH RULE:**
-> - **Every single reading question MUST have its own individual walkthrough slide** (`template="walkthrough"`).
-> - **NEVER combine multiple questions (e.g. Q7–Q10, Q1–Q5) into a single walkthrough slide.**
-> - Each walkthrough slide must isolate **only the specific paragraph excerpt** containing the answer and pair it with that single question card, allowing focused, legible class analysis with large typography (`21px`–`22px`).
-> - This applies to **ALL question types**: Matching Headings, True/False/Not Given, Yes/No/Not Given, Multiple Choice, Sentence Completion, Summary Completion, Flowchart Completion, and Matching Information.
+### B. Clean Declarative HTML Markup (`module-XX.html`)
+
+```html
+<!-- STAGE 1: Pre-reading Question Keyword Deconstruction Slide -->
+<slide-card template="strategy" skill="read" title="Reading Strategy: Question Deconstruction (Q1–6)" subtitle="Analyze keywords and sentence structures before reading.">
+    <div slot="sentences">
+        <div class="card q-card strategy-card" data-q="strat-1">
+            <p>1. In the <span class="syn-pair-1" data-q="strat-1">Florida study</span>, EI had a more <span class="gap-bracket">[ 1 ]</span> effect on...</p>
+        </div>
+        <!-- Questions 2 to N -->
+    </div>
+    <div slot="guide">
+        <!-- Strategy Scanning Rules & Anchor Guide -->
+    </div>
+</slide-card>
+
+<!-- STAGE 2: Full Split-View Reading Passage & Complete Question Set Slide -->
+<slide-card template="reading-split" skill="read" data-bind="reading3a" badge="Reading 3a • Summary Completion (Ex 3)" title="A Chinese Approach to Learning"></slide-card>
+
+<!-- STAGE 3: Dedicated 1-Question Walkthrough Slides (1 SLIDE PER QUESTION) -->
+<slide-card template="walkthrough" skill="read" data-bind="reading3a.walkthroughs.0"></slide-card>
+<slide-card template="walkthrough" skill="read" data-bind="reading3a.walkthroughs.1"></slide-card>
+<slide-card template="walkthrough" skill="read" data-bind="reading3a.walkthroughs.2"></slide-card>
+<slide-card template="walkthrough" skill="read" data-bind="reading3a.walkthroughs.3"></slide-card>
+<slide-card template="walkthrough" skill="read" data-bind="reading3a.walkthroughs.4"></slide-card>
+<slide-card template="walkthrough" skill="read" data-bind="reading3a.walkthroughs.5"></slide-card>
+```
 
 ---
 
-## 9. Authoring Checklist & Best Practices
+## 9. Critical Quality Rules & Authoring Checklist
 
 Before finalizing any reading presentation, verify against this checklist:
 
-1. [ ] **1 Slide Per Question Walkthrough**: Does **every single reading question** have its own dedicated walkthrough slide with its isolated passage excerpt, question input, and green/purple evidence breakdown? (Never combined into multi-question slides).
-2. [ ] **Pre-Reading Strategy Slide**: Does every reading task have its dedicated Strategy Slide (Stage 1) preceding the full text?
-3. [ ] **Direct Sentence Colors**: Are keywords wrapped in `.syn-pair-1` (Anchor) and `.syn-pair-2` (Qualifier) directly on the sentence text without separate spoiler boxes?
-4. [ ] **List of Headings UI**: Is the List of Headings rendered as a dedicated card with large typography (`18.5px`–`19px`), line-by-line format, and monospace Roman numerals (`i.`, `ii.`, etc.) rather than a cramped single paragraph?
-5. [ ] **Full Content Guarantee**: Are all reading exercises, topic sentence questions, sentence completions, and walkthroughs from the source course material fully included?
-6. [ ] **Action Row Present**: Does every strategy and exercise slide contain a clean `.action-row` with `Show Highlights / Check Answers` and `Reset`?
-7. [ ] **Step Reveal Shortcut**: Does pressing <kbd>E</kbd> or clicking question cards step-reveal highlights one-by-one?
-8. [ ] **Smooth Auto-Scroll**: Does clicking `💡 Evidence` on the model or full exercise slide smoothly center the reading pane on the target `<mark class="evidence">`?
-9. [ ] **Clean Reset**: Does clicking `Reset` return all inputs and highlights to their pristine unrevealed state?
+1. [ ] **100% Unabridged Passage Fidelity**: Does the reading passage in `-data.js` contain **every single paragraph (Intro, A through G)** word-for-word from the master markdown curriculum? (Never summarize, truncate, or abbreviate passage text).
+2. [ ] **No Standalone Question Slides Without Text**: Are reading summary completion / multiple choice / flow-chart tasks rendered in **Split-View** (`template="reading-split"`) with the passage on the left and questions on the right? (Never create passage-less gap-fill slides for reading tasks).
+3. [ ] **1 Slide Per Question Walkthrough**: Does **every single reading question** have its own dedicated walkthrough slide (`template="walkthrough"`) with its isolated passage excerpt, question input, and green/purple evidence breakdown?
+4. [ ] **Option Box Displayed in Box Walkthroughs**: For Summary Completion with a Box, does the walkthrough slide render the **A–I / A–L option box chips** directly above the question?
+5. [ ] **Pre-Reading Strategy Slide**: Does every reading task have its dedicated Strategy Slide (`template="strategy"`) preceding the full text with bracket gaps `[ 1 ]` and direct `.syn-pair-1` / `.syn-pair-2` keyword anchors?
+6. [ ] **Step Reveal Shortcut**: Does pressing <kbd>E</kbd> or clicking `👉 Step Reveal (E)` smoothly advance to the next question and highlight its anchors sequentially without unrevealing previous cards?
+7. [ ] **Smooth Auto-Scroll**: Does clicking `💡 Evidence` on the model or full exercise slide smoothly center the reading pane on the target `<mark class="evidence">`?
+8. [ ] **Clean Reset**: Does clicking `Reset` return all inputs and highlights to their pristine unrevealed state?
+9. [ ] **Build Validation**: Has `node build-bundle.js` and `node -c module-XX-data.js` been executed with zero errors?
 
