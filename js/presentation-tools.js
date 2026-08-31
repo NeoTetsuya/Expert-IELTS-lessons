@@ -75,6 +75,7 @@ class PresentationTools {
                     <div><kbd>Shift+X</kbd></div><div>Hide / Show Teacher Toolkit</div>
                     <div><kbd>Shift+A</kbd></div><div>Toggle 16:9 / 4:3 Aspect Ratio</div>
                     <div><kbd>H</kbd></div><div>Toggle Highlighter Tool</div>
+                    <div><kbd>V</kbd></div><div>Toggle Vocabulary &amp; Keyword Highlights</div>
                     <div><kbd>L</kbd></div><div>Toggle Laser Pointer</div>
                     <div><kbd>P</kbd></div><div>Toggle Drawing Pen</div>
                     <div><kbd>C</kbd></div><div>Clear Highlights / Drawings</div>
@@ -412,6 +413,15 @@ class PresentationTools {
             } else if (key === 'l') {
                 e.preventDefault();
                 this.toggleLaser();
+            } else if (key === 'v') {
+                e.preventDefault();
+                if (window.toggleVocabHighlight) {
+                    window.toggleVocabHighlight();
+                } else if (window.deckEngine && typeof window.deckEngine.toggleVocabHighlight === 'function') {
+                    window.deckEngine.toggleVocabHighlight();
+                } else if (window.readingHighlighter) {
+                    window.readingHighlighter.highlightAll();
+                }
             } else if (key === 'p') {
                 e.preventDefault();
                 this.togglePen();

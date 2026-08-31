@@ -27,14 +27,17 @@
 <!-- 2. SECTION DIVIDER TEMPLATE -->
 <template id="tmpl-section-divider">
     <section class="slide" data-skill="title">
-        <div class="slide-inner">
-            <div class="notebook">
-                <div class="skill-stripe" style="background: var(--col-vocab);"></div>
-                <div class="page-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px 60px;">
-                    <span class="skill-badge" style="background: var(--col-vocab); font-size: 16px; padding: 6px 18px; margin-bottom: 16px;" data-slot="badge"></span>
-                    <h2 class="slide-title" style="font-size: 52px; margin-bottom: 16px;" data-slot="title"></h2>
-                    <p class="slide-subtitle" style="font-size: 24px; max-width: 900px; margin: 0 auto 30px;" data-slot="subtitle"></p>
-                    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;" data-slot="content"></div>
+        <div class="section-slide">
+            <div class="section-inner">
+                <div class="section-left" style="background: linear-gradient(135deg, #155e75, #0d9488);">
+                    <div class="section-module-tag reveal" data-slot="badge">Module Section</div>
+                    <div class="section-number reveal" data-slot="num">00</div>
+                    <div class="section-sublabel reveal" data-slot="sublabel">IELTS Preparation</div>
+                </div>
+                <div class="section-right">
+                    <div class="section-title reveal" data-slot="title"></div>
+                    <p class="section-desc reveal" data-slot="subtitle"></p>
+                    <div class="section-topics reveal" data-slot="content"></div>
                 </div>
             </div>
         </div>

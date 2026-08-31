@@ -1,0 +1,177 @@
+/* ==========================================================================
+   13. SONNER TOAST NOTIFICATION STACK (css_src/13-sonner-toasts.css)
+   ========================================================================== */
+
+.sonner-toast-container {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    pointer-events: none;
+    gap: 0;
+    max-width: 420px;
+    width: calc(100vw - 56px);
+}
+
+.sonner-toast {
+    position: relative;
+    pointer-events: auto;
+    width: 100%;
+    background: rgba(17, 24, 39, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 14px 18px;
+    margin-top: 8px;
+    color: #f8fafc;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    transform-origin: bottom center;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, filter 0.35s ease;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+}
+
+.sonner-toast.sonner-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.sonner-toast.sonner-exiting {
+    opacity: 0;
+    transform: translateY(12px) scale(0.9);
+    filter: blur(4px);
+}
+
+.sonner-toast-body {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.sonner-icon-wrap {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}
+
+.sonner-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.sonner-icon-success {
+    color: #34d399;
+    background: rgba(52, 211, 153, 0.15);
+}
+
+.sonner-icon-error {
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.15);
+}
+
+.sonner-icon-warning {
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.15);
+}
+
+.sonner-icon-info {
+    color: #60a5fa;
+    background: rgba(96, 165, 250, 0.15);
+}
+
+.sonner-icon-loading {
+    color: #a78bfa;
+    background: rgba(167, 139, 250, 0.15);
+}
+
+.sonner-spin {
+    animation: sonnerSpin 1s linear infinite;
+}
+
+@keyframes sonnerSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.sonner-toast-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.sonner-toast-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.3;
+}
+
+.sonner-toast-message {
+    font-size: 13px;
+    color: #cbd5e1;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.sonner-action-btn {
+    background: #3b82f6;
+    color: #ffffff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+    flex-shrink: 0;
+}
+
+.sonner-action-btn:hover {
+    background: #2563eb;
+    transform: scale(1.03);
+}
+
+.sonner-close-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 2px 6px;
+    line-height: 1;
+    border-radius: 6px;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.sonner-close-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Theme Adaptive Colors */
+[data-theme="light-paper"] .sonner-toast,
+[data-theme="warm-editorial"] .sonner-toast {
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light-paper"] .sonner-toast-title,
+[data-theme="warm-editorial"] .sonner-toast-title {
+    color: #0f172a;
+}
+
+[data-theme="light-paper"] .sonner-toast-message,
+[data-theme="warm-editorial"] .sonner-toast-message {
+    color: #475569;
+}

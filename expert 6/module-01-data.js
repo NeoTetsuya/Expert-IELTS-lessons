@@ -13,18 +13,17 @@ window.module1Data = {
         moduleNum: "01",
         title: "Communication",
         subtitle: "IELTS Academic Preparation Masterclass",
-        slidesCount: 46,
+        slidesCount: 37,
         tags: [
             { text: "Reading 1a/1b", bg: "var(--col-reading)" },
-            { text: "Grammar: Present & Past Tenses", bg: "var(--col-grammar)" },
-            { text: "Vocabulary: Media & Collocations", bg: "var(--col-vocab)" },
-            { text: "Writing: Task 1 Line Charts & Overviews", bg: "var(--col-writing)" },
+            { text: "Grammar: Present Tenses", bg: "var(--col-grammar)" },
+            { text: "Writing: Task 1 Line & Bar Charts", bg: "var(--col-writing)" },
             { text: "Mastery Review", bg: "var(--col-review)" }
         ],
         roadmap: [
             { num: "1a", title: "Digital Camera Artefacts & Present Tenses", desc: "Matching Headings strategy, topic sentences, state verbs, and social media trends overview." },
-            { num: "1b", title: "Online Reading Habits & Historical Past Tenses", desc: "Matching Headings, sentence completion, media vocabulary, and Cinema vs. DVD sales line chart report." },
-            { num: "Review", title: "Module 1 Mastery Check", desc: "Self-assessment checklist across all core reading, grammar, vocabulary, and writing skills." }
+            { num: "1b", title: "Online Reading Habits & Task 1 Line Graph Report", desc: "Matching Headings, sentence completion, numerical qualifiers, and Cinema vs. DVD sales report." },
+            { num: "Review", title: "Module 1 Mastery Check", desc: "Self-assessment checklist across all core reading, grammar, and writing skills." }
         ]
     },
 
@@ -279,6 +278,50 @@ window.module1Data = {
                 question: `Select the best heading for <strong>Paragraph G</strong>: <select class="select-input" data-ans="viii"><option value="">Select...</option><option value="i">i. Sharing half-understood ideas</option><option value="ii">ii. An old situation that’s now more intense</option><option value="v">v. Pleasure in unhealthy content</option><option value="vi">vi. Longer-lasting memories from books</option><option value="viii">viii. Living in a world of your own</option><option value="x">x. A biological response to habits</option></select>`,
                 ans: "viii",
                 explanation: `<div class="syn-key-box"><span class="syn-tag green">Anchor Paraphrase:</span> <em>"The Daily Me... never knowing what is happening outside of your personal interests"</em> ↔ <strong>viii. Living in a world of your own</strong>.</div>`
+            },
+            {
+                qNum: 7,
+                title: "Walkthrough: Question 7 (Stay on a Page — Seconds)",
+                badge: "Reading 1b Walkthrough • Q7 Completion",
+                para: "Para A",
+                header: "📖 Passage Excerpt (Paragraph A)",
+                excerpt: `<span class="para-tag">[Para A]</span> "For every 150 ‘readers’ who open an article on the internet, <mark class="evidence" id="ev-wt-1b-7" data-q="wt-1b-7"><span class="syn-pair-1" data-q="wt-1b-7">one in three of them will leave within seconds</span></mark>."`,
+                question: `7. Around a third of internet surfers stay on a page for <input type="text" class="blank-input" data-ans="seconds" placeholder="[7]..." style="width:130px;">.`,
+                ans: "seconds",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Exact Match (ONE WORD ONLY):</span> <em>"one in three"</em> = <strong>Around a third</strong> &rarr; <em>"leave within"</em> &rarr; <strong>seconds</strong>.</div>`
+            },
+            {
+                qNum: 8,
+                title: "Walkthrough: Question 8 (Leave Comments vs Finish Reading)",
+                badge: "Reading 1b Walkthrough • Q8 Completion",
+                para: "Para C",
+                header: "📖 Passage Excerpt (Paragraph C)",
+                excerpt: `<span class="para-tag">[Para C]</span> "However, his research suggests that <mark class="evidence" id="ev-wt-1b-8" data-q="wt-1b-8"><span class="syn-pair-1" data-q="wt-1b-8">the overall number of comments and the number of people who scrolled down to the end of the article did not match</span></mark>."`,
+                question: `8. According to Josh Schartz, the number of people who leave <input type="text" class="blank-input" data-ans="comments" placeholder="[8]..." style="width:130px;"> is greater than the number who finish reading.`,
+                ans: "comments",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Exact Match (ONE WORD ONLY):</span> <em>"number of comments"</em> vs <em>"scrolled down to the end"</em> (finish reading) &rarr; <strong>comments</strong>.</div>`
+            },
+            {
+                qNum: 9,
+                title: "Walkthrough: Question 9 (Brains Change After Childhood)",
+                badge: "Reading 1b Walkthrough • Q9 Completion",
+                para: "Para D",
+                header: "📖 Passage Excerpt (Paragraph D)",
+                excerpt: `<span class="para-tag">[Para D]</span> "<mark class="evidence" id="ev-wt-1b-9" data-q="wt-1b-9">Michael Merzenich has long argued <span class="syn-pair-1" data-q="wt-1b-9">against the argument that the brain is formed in the early years of childhood</span>, then remains stable.</mark> In fact, the brain is constantly changing..."`,
+                question: `9. Michael Merzenich found that brains still changed after the period of <input type="text" class="blank-input" data-ans="childhood" placeholder="[9]..." style="width:130px;"> came to an end.`,
+                ans: "childhood",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Exact Match (ONE WORD ONLY):</span> <em>"early years of childhood"</em> &rarr; <strong>childhood</strong>.</div>`
+            },
+            {
+                qNum: 10,
+                title: "Walkthrough: Question 10 (‘Psychological Obesity’ — Shocking Content)",
+                badge: "Reading 1b Walkthrough • Q10 Completion",
+                para: "Para F & G",
+                header: "📖 Passage Excerpt (Paragraphs F & G)",
+                excerpt: `<span class="para-tag">[Para F]</span> "...our brains prefer to read <mark class="evidence" id="ev-wt-1b-10" data-q="wt-1b-10"><span class="syn-pair-1" data-q="wt-1b-10">things that are shocking</span>... referred to this as ‘psychological obesity’</mark>... <span class="para-tag">[Para G]</span> aware that this kind of <span class="syn-pair-2" data-q="wt-1b-10">content</span> is popular..."`,
+                question: `10. ‘Psychological obesity’ is the natural preference for shocking <input type="text" class="blank-input" data-ans="content|things" placeholder="[10]..." style="width:130px;"> in articles.`,
+                ans: "content|things",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Exact Match (ONE WORD ONLY):</span> <em>"prefer to read things that are shocking" / "this kind of content is popular"</em> &rarr; <strong>content</strong> (or <strong>things</strong>).</div>`
             }
         ]
     },

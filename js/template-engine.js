@@ -34,14 +34,17 @@
 <!-- 2. SECTION DIVIDER TEMPLATE -->
 <template id="tmpl-section-divider">
     <section class="slide" data-skill="title">
-        <div class="slide-inner">
-            <div class="notebook">
-                <div class="skill-stripe" style="background: var(--col-vocab);"></div>
-                <div class="page-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px 60px;">
-                    <span class="skill-badge" style="background: var(--col-vocab); font-size: 16px; padding: 6px 18px; margin-bottom: 16px;" data-slot="badge"></span>
-                    <h2 class="slide-title" style="font-size: 52px; margin-bottom: 16px;" data-slot="title"></h2>
-                    <p class="slide-subtitle" style="font-size: 24px; max-width: 900px; margin: 0 auto 30px;" data-slot="subtitle"></p>
-                    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;" data-slot="content"></div>
+        <div class="section-slide">
+            <div class="section-inner">
+                <div class="section-left" style="background: linear-gradient(135deg, #155e75, #0d9488);">
+                    <div class="section-module-tag reveal" data-slot="badge">Module Section</div>
+                    <div class="section-number reveal" data-slot="num">00</div>
+                    <div class="section-sublabel reveal" data-slot="sublabel">IELTS Preparation</div>
+                </div>
+                <div class="section-right">
+                    <div class="section-title reveal" data-slot="title"></div>
+                    <p class="section-desc reveal" data-slot="subtitle"></p>
+                    <div class="section-topics reveal" data-slot="content"></div>
                 </div>
             </div>
         </div>
@@ -550,19 +553,49 @@
         static resolveDataPath(path) {
             if (!path) return null;
             const parts = path.split('.');
-            let current = window.moduleData || window.module3Data || window.module2Data || window.module1Data;
-            if (parts[0] in window) {
-                current = window[parts[0]];
-                parts.shift();
+            
+            // Check direct window property first (e.g. "module4Data.reading4a")
+            if (parts[0] in window && window[parts[0]] !== undefined) {
+                let current = window[parts[0]];
+                for (let i = 1; i < parts.length; i++) {
+                    if (current && typeof current === 'object' && parts[i] in current) {
+                        current = current[parts[i]];
+                    } else {
+                        return null;
+                    }
+                }
+                return current;
             }
-            for (const part of parts) {
-                if (current && typeof current === 'object' && part in current) {
-                    current = current[part];
-                } else {
-                    return null;
+
+            // Search through moduleData or any window.module*Data
+            let candidateDatasets = [window.moduleData, window.module4Data, window.module3Data, window.module2Data, window.module1Data, window.module5Data, window.module6Data, window.module7Data, window.module8Data, window.module9Data, window.module10Data].filter(Boolean);
+            
+            // If still empty, scan window keys starting with "module"
+            if (candidateDatasets.length === 0) {
+                for (const k in window) {
+                    if (k.startsWith('module') && window[k] && typeof window[k] === 'object') {
+                        candidateDatasets.push(window[k]);
+                    }
                 }
             }
-            return current;
+
+            for (const dataset of candidateDatasets) {
+                let current = dataset;
+                let found = true;
+                for (const part of parts) {
+                    if (current && typeof current === 'object' && part in current) {
+                        current = current[part];
+                    } else {
+                        found = false;
+                        break;
+                    }
+                }
+                if (found && current !== undefined) {
+                    return current;
+                }
+            }
+
+            return null;
         }
 
         static hydrateSlideFromData(section, el, data, skillCol) {
@@ -704,17 +737,17 @@
                     let html = '';
                     if (data.summaryText) {
                         const wbChips = (data.wordBank && Array.isArray(data.wordBank))
-                            ? data.wordBank.map(w => `<span class="word-chip" data-word="${w}" style="background:#ffffff; border:1px solid #cbd5e1; padding:4px 10px; border-radius:6px; font-weight:700; font-size:15px;">${w}</span>`).join('')
+                            ? data.wordBank.map(w => `<span class="word-chip" data-word="${w}">${w}</span>`).join('')
                             : '';
                         html += `
                             ${wbChips ? `
-                            <div class="card" style="background:#f8fafc; border:1.5px solid #cbd5e1; border-left:5px solid var(--col-reading); padding:12px 16px; margin-bottom:12px;">
-                                <div style="font-size:15px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-bottom:8px;">📦 Word Bank (Use words exactly as shown)</div>
-                                <div class="vocab-chips-container" style="display:flex; flex-wrap:wrap; gap:6px;">
+                            <div class="card word-bank-card" style="border-left:5px solid var(--col-reading); margin-bottom:12px;">
+                                <div class="word-bank-header" style="font-size:15px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-bottom:8px;">📦 Word Bank (Use words exactly as shown)</div>
+                                <div class="vocab-chips-container word-chips-container" style="display:flex; flex-wrap:wrap; gap:6px;">
                                     ${wbChips}
                                 </div>
                             </div>` : ''}
-                            <div class="card" style="padding:18px 22px; font-size:19.5px; line-height:2.1; color:#0f172a; background:#ffffff; border:1px solid #e2e8f0; border-radius:10px;">
+                            <div class="card summary-box-card" style="padding:18px 22px; font-size:19.5px; line-height:2.1; border-radius:10px;">
                                 ${data.summaryText}
                             </div>
                         `;
@@ -736,7 +769,8 @@
                     }
                     if (data.questions && Array.isArray(data.questions)) {
                         const isHeadings = !!data.headings;
-                        const headingTitle = isHeadings ? '📋 Matching Headings' : '📋 Questions: YES / NO / NOT GIVEN';
+                        const slideBadge = (el ? el.getAttribute('badge') : null) || data.badge || '';
+                        const headingTitle = data.headingTitle || (slideBadge ? `📋 ${slideBadge.split('•')[1]?.trim() || slideBadge}` : '📋 Questions');
                         html += `<div style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-bottom:10px;">${headingTitle}</div>`;
                         html += data.questions.map(q => {
                             let selectOptions = '<option value="">Select...</option>';
@@ -745,8 +779,13 @@
                                 if (q.ans && !data.headings.some(h => h.roman === q.ans)) {
                                     selectOptions += `<option value="${q.ans}">${q.ans}</option>`;
                                 }
+                            } else if (q.options && Array.isArray(q.options)) {
+                                selectOptions += q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
                             } else if (['YES', 'NO', 'NOT GIVEN'].includes(q.ans)) {
                                 selectOptions += `<option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option>`;
+                            } else if (q.ans && q.ans.startsWith('Paragraph')) {
+                                const paras = ['Paragraph A', 'Paragraph B', 'Paragraph C', 'Paragraph D', 'Paragraph E', 'Paragraph F', 'Paragraph G'];
+                                selectOptions += paras.map(p => `<option value="${p}">${p}</option>`).join('');
                             } else {
                                 selectOptions += `<option value="${q.ans}">${q.ans}</option>`;
                             }
@@ -892,6 +931,14 @@
                 case 'subtitle':
                     return section.querySelector('[data-slot="subtitle"], .slide-subtitle, .title-sub');
 
+                case 'num':
+                case 'section-num':
+                case 'modulenum':
+                    return section.querySelector('[data-slot="num"], .section-number');
+
+                case 'sublabel':
+                    return section.querySelector('[data-slot="sublabel"], .section-sublabel');
+
                 case 'instruction':
                     return section.querySelector('[data-slot="instruction"], .slide-subtitle');
 
@@ -1001,7 +1048,7 @@
                 if (stripe && (!stripe.style.background || stripe.style.background.includes('--col-'))) {
                     stripe.style.background = skillCol;
                 }
-                const skillBadge = section.querySelector('.skill-badge, [data-slot="badge"]');
+                const skillBadge = section.querySelector('.skill-badge');
                 if (skillBadge && (!skillBadge.style.background || skillBadge.style.background.includes('--col-'))) {
                     skillBadge.style.background = skillCol;
                 }
@@ -1024,6 +1071,41 @@
                         if (target) target.innerHTML = val;
                     }
                 });
+
+                // Section-divider specific enhancements
+                const numEl = section.querySelector('[data-slot="num"], .section-number');
+                if (numEl) {
+                    const explicitNum = el.getAttribute('num') || el.getAttribute('data-num');
+                    if (explicitNum) {
+                        numEl.innerHTML = explicitNum;
+                    } else {
+                        const badgeVal = el.getAttribute('badge') || '';
+                        const match = badgeVal.match(/(\d+[a-z]?)/i);
+                        if (match) numEl.innerHTML = match[1].toLowerCase();
+                    }
+                }
+                const leftCol = section.querySelector('.section-left');
+                if (leftCol) {
+                    const leftBgAttr = el.getAttribute('left-bg') || el.getAttribute('data-left-bg');
+                    if (leftBgAttr) {
+                        leftCol.style.background = leftBgAttr;
+                    } else {
+                        const skillGradients = {
+                            'read': 'linear-gradient(135deg, #1e3a8a, #2563eb)',
+                            'reading': 'linear-gradient(135deg, #1e3a8a, #2563eb)',
+                            'grammar': 'linear-gradient(135deg, #c2410c, #ea580c)',
+                            'vocab': 'linear-gradient(135deg, #047857, #059669)',
+                            'vocabulary': 'linear-gradient(135deg, #047857, #059669)',
+                            'write': 'linear-gradient(135deg, #6d28d9, #7c3aed)',
+                            'writing': 'linear-gradient(135deg, #6d28d9, #7c3aed)',
+                            'review': 'linear-gradient(135deg, #b45309, #d97706)',
+                            'title': 'linear-gradient(135deg, #14532d, #15803d)'
+                        };
+                        if (skillGradients[skill.toLowerCase()]) {
+                            leftCol.style.background = skillGradients[skill.toLowerCase()];
+                        }
+                    }
+                }
 
                 // Transfer all named slots from child elements
                 const slotChildren = el.querySelectorAll('[slot]');
@@ -1059,7 +1141,7 @@
 
                         // Copy inner HTML (append if target is an accumulator or replace)
                         const targetSlotAttr = target.getAttribute('data-slot');
-                        if ((targetSlotAttr === 'left-col' || targetSlotAttr === 'roadmap' || target.classList.contains('title-left')) && target.innerHTML.trim() !== '') {
+                        if ((targetSlotAttr === 'roadmap' || target.classList.contains('title-left')) && target.innerHTML.trim() !== '') {
                             target.innerHTML += child.innerHTML;
                         } else {
                             target.innerHTML = child.innerHTML;
@@ -1132,6 +1214,19 @@
                 if (slide.classList.contains('active')) {
                     hasActiveSlide = true;
                 }
+            });
+
+            // PASS 3: Ensure all inline font-size styles dynamically scale with --font-scale
+            allSlides.forEach(slide => {
+                slide.querySelectorAll('*[style*="font-size"]').forEach(el => {
+                    const styleStr = el.getAttribute('style');
+                    if (styleStr && styleStr.includes('font-size') && !styleStr.includes('--font-scale')) {
+                        const updated = styleStr.replace(/font-size\s*:\s*([0-9.]+)px/gi, (match, p1) => {
+                            return `font-size: calc(${p1}px * var(--font-scale, 1))`;
+                        });
+                        el.setAttribute('style', updated);
+                    }
+                });
             });
 
             // If no slide is marked active, activate the first slide

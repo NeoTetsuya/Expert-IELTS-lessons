@@ -13,7 +13,7 @@ window.module2Data = {
         moduleNum: "02",
         title: "Feelings & Expression",
         subtitle: "IELTS Academic Preparation Masterclass",
-        slidesCount: 48,
+        slidesCount: 52,
         tags: [
             { text: "Reading 2a/2b", bg: "var(--col-reading)" },
             { text: "Grammar: Relative Clauses & Intensifiers", bg: "var(--col-grammar)" },
@@ -28,97 +28,265 @@ window.module2Data = {
         ]
     },
 
-    // Reading 2a: Trying to Share Our 'Epic' Moments May Leave Us Feeling Left Out
-    reading2a: {
+    // Reading 2a Strategy & Walkthroughs: Ex 3a & 3b (Statements 1-4 & Sentences A-D)
+    reading2a_part1: {
         passage: `
             <h3>TRYING TO SHARE OUR 'EPIC' MOMENTS MAY LEAVE US FEELING LEFT OUT</h3>
-            <p><span class="para-tag">Para A</span> <strong>We love to reminisce and tell others about our extraordinary experiences</strong> – that time we climbed Mount Kilimanjaro, got to taste that rare food or ran into a celebrity on the street – but new research suggests this may not be such a wise idea. In fact, the findings, published in the latest edition of a psychology journal, suggest that sharing these extraordinary experiences are not as beneficial as we might think and can actually come at a social cost.</p>
-            <p><span class="para-tag">Para B</span> <mark class="evidence" id="ev-2a-1" data-q="2a-1"><span class="syn-pair-1" data-q="2a-1">"Extraordinary experiences are pleasurable in the moment but can leave us socially worse off in the long run,"</span></mark> says psychological scientist and study author Gus Cooney of Harvard University.</p>
-            <p><span class="para-tag">Para C</span> "The participants in our study mistakenly thought that having an extraordinary experience would make them the star of the conversation. But they were wrong, because to be extraordinary is to be different than other people, and</p>
-            <p><span class="para-tag">Para D</span> <mark class="evidence" id="ev-2a-2" data-q="2a-2"><span class="syn-pair-1" data-q="2a-2">social interaction is grounded in similarities</span></mark>."</p>
+            <p><span class="para-tag">Para A</span> <mark class="evidence" id="ev-2a-p3" data-q="2a-p3"><span class="syn-pair-1" data-q="2a-p3"><strong>We love to reminisce and tell others about our extraordinary experiences</strong></span></mark> – that time we climbed Mount Kilimanjaro, got to taste that rare food or ran into a celebrity on the street – but new research suggests this may not be such a wise idea. In fact, the findings, published in the latest edition of a psychology journal, suggest that sharing these extraordinary experiences are not as beneficial as we might think and can actually come at a social cost.</p>
+            <p><span class="para-tag">Para B</span> <mark class="evidence" id="ev-2a-p1" data-q="2a-p1"><span class="syn-pair-1" data-q="2a-p1">"Extraordinary experiences are pleasurable in the moment but can leave us socially worse off in the long run,"</span></mark> says psychological scientist and study author Gus Cooney of Harvard University.</p>
+            <p><span class="para-tag">Para C</span> <mark class="evidence" id="ev-2a-p4" data-q="2a-p4"><span class="syn-pair-1" data-q="2a-p4">"The participants in our study mistakenly thought that having an extraordinary experience would make them the star of the conversation.</span></mark> But they were wrong, because to be extraordinary is to be different than other people, and</p>
+            <p><span class="para-tag">Para D</span> <mark class="evidence" id="ev-2a-p2" data-q="2a-p2"><span class="syn-pair-1" data-q="2a-p2">social interaction is grounded in similarities</span></mark>."</p>
             <p><span class="para-tag">Para E</span> Cooney, who conducted the research with co-authors Daniel T. Gilbert of Harvard University and Timothy D. Wilson of the University of Virginia, was interested in exploring the negative consequences of extraordinary experiences based on his own observations with others. He had noticed that we are keen to tell our friends about new or rare experiences, but most successful conversations are about ordinary topics. He therefore wondered "if there might be times when extraordinary experiences have more costs than benefits, and whether people know what those times are."</p>
             <p><span class="para-tag">Para F</span> To find out if he was right, Cooney, Gilbert and Wilson invited sixty-eight participants to their laboratory in groups of four. In each group, one participant was asked to watch a highly rated video of a street magician performing for a crowd, while the other three participants were asked to watch a lower-rated animated video. Participants were told about each video’s rating. After watching the videos, the participants sat around a table and had a five-minute unstructured conversation about them.</p>
             <p><span class="para-tag">Para G</span> The findings were not what participants expected. It seems we should be more careful when choosing and sharing our experiences, because the participants who watched the higher-rated video, the "extraordinary experiencers", reported feeling worse after the group discussion than those who watched the lower-rated video. Even though, before the experiment, all participants thought that the "extraordinary experiencer" would talk more during the post-video discussion, that person actually spoke less and felt excluded from the conversation as a result.</p>
-            
-            <h3 style="margin-top:24px;">CRITICAL RESPONSE: "FEELING GOOD"</h3>
-            <p><span class="para-tag">Crit 1</span> There are two main reasons why you might not agree with Cooney, Gilbert and Wilson’s research conclusions, and <mark class="evidence" id="ev-2a-q1" data-q="2a-q1"><span class="syn-pair-1" data-q="2a-q1">these do not include the fact that sixty-eight people is not a very high number to include in a study</span></mark>.</p>
-            <p><span class="para-tag">Crit 2</span> Firstly, <mark class="evidence" id="ev-2a-q2" data-q="2a-q2"><span class="syn-pair-1" data-q="2a-q2">the video of a street magician is not the same as an incredible life experience</span></mark>. The research uses cost-benefit analysis, i.e. the benefit of watching the video minus the cost of not being included socially. But it is unlikely that a street performer, even an amazing one, produces results similar to the feeling of an extraordinary experience. So, when the cost of not being included is taken away from the benefit of watching the video, of course the result will be more negative.</p>
-            <p><span class="para-tag">Crit 3</span> Secondly, one wonders why the researchers assume that people who do extraordinary things only spend time with boring people who have no bucket list themselves? In reality, if you explore the Costa Rican rainforest, maybe your friend goes sailing, gets an amazing professional qualification, or watches his child graduate from college. All of these can be considered great topics of conversation. <mark class="evidence" id="ev-2a-q3" data-q="2a-q3"><span class="syn-pair-1" data-q="2a-q3">Of course people will always have lots of everyday experiences to talk about too</span></mark>. After all, when you return from an inspiring trip, you still have to do the laundry and call your parents.</p>
+        `,
+        questions: [
+            { qNum: 1, text: "1. Sharing experiences provides us with immediate and long-term satisfaction.", ans: "B", evId: "ev-2a-p1" },
+            { qNum: 2, text: "2. Social communication is based on things we have in common.", ans: "D", evId: "ev-2a-p2" },
+            { qNum: 3, text: "3. People want to share their unusual experiences with each other.", ans: "A", evId: "ev-2a-p3" },
+            { qNum: 4, text: "4. Before the research, people believed extraordinary experiences bring mostly benefits.", ans: "C", evId: "ev-2a-p4" }
+        ],
+        walkthroughs: [
+            {
+                qNum: 1,
+                title: "Walkthrough: Statement 1 & Sentence B (Satisfaction & Paraphrases)",
+                badge: "Reading 2a Strategy • Walkthrough (Sentence B)",
+                para: "Sentence B",
+                header: "📖 Extract Excerpt: Sentence B (Paragraph B)",
+                excerpt: `<span class="para-tag">[Sentence B]</span> "<mark class="evidence" id="ev-wt-p1" data-q="wt-p1"><span class="syn-pair-1" data-q="wt-p1">Extraordinary experiences</span> are <span class="syn-pair-2" data-q="wt-p1">pleasurable in the moment</span> but can leave us socially <span class="syn-pair-2" data-q="wt-p1">worse off in the long run</span></mark>," says psychological scientist and study author Gus Cooney of Harvard University.`,
+                question: `1. <span class="syn-pair-1" data-q="wt-p1">Sharing experiences</span> provides us with <span class="syn-pair-2" data-q="wt-p1">immediate and long-term satisfaction</span>.`,
+                boxOptions: [
+                    { letter: "A", text: "Sentence A (Para A: Love to reminisce & tell others)" },
+                    { letter: "B", text: "Sentence B (Para B: Pleasurable in moment vs worse off in long run)" },
+                    { letter: "C", text: "Sentence C (Para C: Mistakenly thought star of conversation)" },
+                    { letter: "D", text: "Sentence D (Para D: Social interaction grounded in similarities)" }
+                ],
+                ans: "B",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Paraphrase Match:</span> <em>"pleasurable in the moment"</em> ↔ <strong>immediate satisfaction</strong> &nbsp;|&nbsp; <em>"worse off in the long run"</em> ↔ <strong>long-term satisfaction</strong> &rarr; Matches <strong>Sentence B</strong>.</div>`
+            },
+            {
+                qNum: 2,
+                title: "Walkthrough: Statement 2 & Sentence D (Social Interaction & Similarities)",
+                badge: "Reading 2a Strategy • Walkthrough (Sentence D)",
+                para: "Sentence D",
+                header: "📖 Extract Excerpt: Sentence D (Paragraph D)",
+                excerpt: `<span class="para-tag">[Sentence D]</span> "...to be extraordinary is to be different than other people, and <mark class="evidence" id="ev-wt-p2" data-q="wt-p2"><span class="syn-pair-1" data-q="wt-p2">social interaction</span> is <span class="syn-pair-2" data-q="wt-p2">grounded in similarities</span></mark>."`,
+                question: `2. <span class="syn-pair-1" data-q="wt-p2">Social communication</span> is based on things we have <span class="syn-pair-2" data-q="wt-p2">in common</span>.`,
+                boxOptions: [
+                    { letter: "A", text: "Sentence A (Para A: Love to reminisce & tell others)" },
+                    { letter: "B", text: "Sentence B (Para B: Pleasurable in moment vs worse off in long run)" },
+                    { letter: "C", text: "Sentence C (Para C: Mistakenly thought star of conversation)" },
+                    { letter: "D", text: "Sentence D (Para D: Social interaction grounded in similarities)" }
+                ],
+                ans: "D",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Paraphrase Match:</span> <em>"social communication"</em> ↔ <strong>social interaction</strong> &nbsp;|&nbsp; <em>"in common"</em> ↔ <strong>grounded in similarities</strong> &rarr; Matches <strong>Sentence D</strong>.</div>`
+            },
+            {
+                qNum: 3,
+                title: "Walkthrough: Statement 3 & Sentence A (Sharing Unusual Experiences)",
+                badge: "Reading 2a Strategy • Walkthrough (Sentence A)",
+                para: "Sentence A",
+                header: "📖 Extract Excerpt: Sentence A (Paragraph A)",
+                excerpt: `<span class="para-tag">[Sentence A]</span> "<mark class="evidence" id="ev-wt-p3" data-q="wt-p3">We <span class="syn-pair-1" data-q="wt-p3">love to reminisce and tell others</span> about our <span class="syn-pair-2" data-q="wt-p3">extraordinary experiences</span></mark> – that time we climbed Mount Kilimanjaro, got to taste that rare food or ran into a celebrity on the street – but new research suggests this may not be such a wise idea."`,
+                question: `3. People <span class="syn-pair-1" data-q="wt-p3">want to share</span> their <span class="syn-pair-2" data-q="wt-p3">unusual experiences</span> with each other.`,
+                boxOptions: [
+                    { letter: "A", text: "Sentence A (Para A: Love to reminisce & tell others)" },
+                    { letter: "B", text: "Sentence B (Para B: Pleasurable in moment vs worse off in long run)" },
+                    { letter: "C", text: "Sentence C (Para C: Mistakenly thought star of conversation)" },
+                    { letter: "D", text: "Sentence D (Para D: Social interaction grounded in similarities)" }
+                ],
+                ans: "A",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Paraphrase Match:</span> <em>"love to reminisce and tell others"</em> ↔ <strong>want to share... with each other</strong> &nbsp;|&nbsp; <em>"extraordinary experiences"</em> ↔ <strong>unusual experiences</strong> &rarr; Matches <strong>Sentence A</strong>.</div>`
+            },
+            {
+                qNum: 4,
+                title: "Walkthrough: Statement 4 & Sentence C (Beliefs vs Reality)",
+                badge: "Reading 2a Strategy • Walkthrough (Sentence C)",
+                para: "Sentence C",
+                header: "📖 Extract Excerpt: Sentence C (Paragraph C)",
+                excerpt: `<span class="para-tag">[Sentence C]</span> "<mark class="evidence" id="ev-wt-p4" data-q="wt-p4">The participants in our study <span class="syn-pair-1" data-q="wt-p4">mistakenly thought</span> that having an <span class="syn-pair-1" data-q="wt-p4">extraordinary experience</span> would <span class="syn-pair-2" data-q="wt-p4">make them the star of the conversation</span></mark>. But they were wrong..."`,
+                question: `4. Before the research, people <span class="syn-pair-1" data-q="wt-p4">believed extraordinary experiences</span> bring <span class="syn-pair-2" data-q="wt-p4">mostly benefits</span>.`,
+                boxOptions: [
+                    { letter: "A", text: "Sentence A (Para A: Love to reminisce & tell others)" },
+                    { letter: "B", text: "Sentence B (Para B: Pleasurable in moment vs worse off in long run)" },
+                    { letter: "C", text: "Sentence C (Para C: Mistakenly thought star of conversation)" },
+                    { letter: "D", text: "Sentence D (Para D: Social interaction grounded in similarities)" }
+                ],
+                ans: "C",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Paraphrase Match:</span> <em>"mistakenly thought"</em> ↔ <strong>believed (before research)</strong> &nbsp;|&nbsp; <em>"make them the star of the conversation"</em> ↔ <strong>bring mostly benefits</strong> &rarr; Matches <strong>Sentence C</strong>.</div>`
+            }
+        ]
+    },
+
+    // Reading 2a Passage 1 Split-View & Dedicated Walkthroughs (Ex 6a & 6b, Ex 7a & 7b)
+    reading2a_passage1: {
+        passage: `
+            <h3>TRYING TO SHARE OUR 'EPIC' MOMENTS MAY LEAVE US FEELING LEFT OUT</h3>
+            <p><span class="para-tag">Para A</span> We love to reminisce and tell others about our extraordinary experiences – that time we climbed Mount Kilimanjaro, got to taste that rare food or ran into a celebrity on the street – but new research suggests this may not be such a wise idea. In fact, the findings, published in the latest edition of a psychology journal, suggest that sharing these extraordinary experiences are not as beneficial as we might think and can actually come at a social cost.</p>
+            <p><span class="para-tag">Para B</span> 'Extraordinary experiences are pleasurable in the moment but can leave us socially worse off in the long run,' says psychological scientist and study author Gus Cooney of Harvard University. 'The participants in our study mistakenly thought that having an extraordinary experience would make them the star of the conversation. But they were wrong, because to be extraordinary is to be different than other people, and social interaction is grounded in similarities.'</p>
+            <p><span class="para-tag">Para C</span> Cooney, who conducted the research with co-authors Daniel T. Gilbert of Harvard University and Timothy D. Wilson of the University of Virginia, was interested in exploring the negative consequences of extraordinary experiences based on his own observations with others. <mark class="evidence" id="ev-p1-q1" data-q="p1-q1"><span class="syn-pair-1" data-q="p1-q1">'He had noticed that we are keen to tell our friends about new or rare experiences, but most successful conversations are about ordinary topics</span></mark>. He therefore wondered if there might be times when extraordinary experiences have more costs than benefits, and whether people know what those times are.'</p>
+            <p><span class="para-tag">Para D</span> <mark class="evidence" id="ev-p1-q5" data-q="p1-q5">To find out if he was right, <span class="syn-pair-1" data-q="p1-q5">Cooney, Gilbert and Wilson invited sixty-eight participants to their laboratory in groups of four</span></mark>. <mark class="evidence" id="ev-p1-q2" data-q="p1-q2">In each group, <span class="syn-pair-1" data-q="p1-q2">one participant was asked to watch a highly rated video of a street magician performing for a crowd, while the other three participants were asked to watch a lower-rated animated video</span></mark>. Participants were told about each video's rating. After watching the videos, the participants sat around a table and had a five-minute unstructured conversation about them.</p>
+            <p><span class="para-tag">Para E</span> The findings were not what participants expected. <mark class="evidence" id="ev-p1-q3" data-q="p1-q3"><span class="syn-pair-1" data-q="p1-q3">It seems we should be more careful when choosing and sharing our experiences</span></mark>, because the participants who watched the higher-rated video, the 'extraordinary experiencers', reported feeling worse after the group discussion than those who watched the lower-rated video. Even though, before the experiment, all participants thought that the 'extraordinary experiencer' would talk more during the post-video discussion, <mark class="evidence" id="ev-p1-q4" data-q="p1-q4"><mark class="evidence" id="ev-p1-q6" data-q="p1-q6"><span class="syn-pair-1" data-q="p1-q4">that person actually spoke less and felt excluded from the conversation as a result</span></mark></mark>.</p>
+        `,
+        questions: [
+            { qNum: 1, text: "1. Cooney recognised that people socialise successfully by talking about everyday subjects.", ans: "YES", evId: "ev-p1-q1" },
+            { qNum: 2, text: "2. People who took part in the study chose the film they watched.", ans: "NO", evId: "ev-p1-q2" },
+            { qNum: 3, text: "3. It is a good idea to think before talking about unusual things we did.", ans: "YES", evId: "ev-p1-q3" },
+            { qNum: 4, text: "4. One person spoke for longer when discussing the film clips.", ans: "NO", evId: "ev-p1-q4" },
+            { qNum: 5, text: "5. The people who participated in the study knew each other.", ans: "NOT GIVEN", evId: "ev-p1-q5" },
+            { qNum: 6, text: "6. Some study participants said nothing during the post-video conversation.", ans: "NO", evId: "ev-p1-q6" }
+        ],
+        walkthroughs: [
+            {
+                qNum: 1,
+                title: "Walkthrough: Statement 1 & Paragraph C (Everyday Subjects)",
+                badge: "Reading 2a Passage 1 • Q1",
+                para: "Paragraph C",
+                header: "📖 Passage 1 Excerpt (Paragraph C)",
+                excerpt: `<span class="para-tag">[Para C]</span> "...<mark class="evidence" id="ev-wt-p1-1" data-q="wt-p1-1"><span class="syn-pair-1" data-q="wt-p1-1">He had noticed that we are keen to tell our friends about new or rare experiences, but most successful conversations are about ordinary topics</span></mark>."`,
+                question: `1. Cooney recognised that people socialise successfully by talking about everyday subjects: <select class="select-input" data-ans="YES"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
+                ans: "YES",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Paraphrase Match:</span> <em>"most successful conversations"</em> ↔ <strong>socialise successfully</strong> &nbsp;|&nbsp; <em>"ordinary topics"</em> ↔ <strong>everyday subjects</strong> &rarr; <strong>YES</strong>.</div>`
+            },
+            {
+                qNum: 2,
+                title: "Walkthrough: Statement 2 & Paragraph D (Video Assignment)",
+                badge: "Reading 2a Passage 1 • Q2",
+                para: "Paragraph D",
+                header: "📖 Passage 1 Excerpt (Paragraph D)",
+                excerpt: `<span class="para-tag">[Para D]</span> "...In each group, <mark class="evidence" id="ev-wt-p1-2" data-q="wt-p1-2"><span class="syn-pair-1" data-q="wt-p1-2">one participant was asked to watch a highly rated video... while the other three participants were asked to watch a lower-rated animated video</span></mark>."`,
+                question: `2. People who took part in the study chose the film they watched: <select class="select-input" data-ans="NO"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
+                ans: "NO",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Contradiction:</span> Participants <em>"were asked to watch"</em> (assigned by researchers), contradicting the claim that they <em>"chose"</em> &rarr; <strong>NO</strong>.</div>`
+            },
+            {
+                qNum: 3,
+                title: "Walkthrough: Statement 3 & Paragraph E (Careful Sharing)",
+                badge: "Reading 2a Passage 1 • Q3",
+                para: "Paragraph E",
+                header: "📖 Passage 1 Excerpt (Paragraph E)",
+                excerpt: `<span class="para-tag">[Para E]</span> "<mark class="evidence" id="ev-wt-p1-3" data-q="wt-p1-3"><span class="syn-pair-1" data-q="wt-p1-3">It seems we should be more careful when choosing and sharing our experiences</span></mark>, because the participants who watched the higher-rated video... reported feeling worse..."`,
+                question: `3. It is a good idea to think before talking about unusual things we did: <select class="select-input" data-ans="YES"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
+                ans: "YES",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Paraphrase Match:</span> <em>"be more careful when choosing and sharing"</em> ↔ <strong>a good idea to think before talking</strong> &rarr; <strong>YES</strong>.</div>`
+            },
+            {
+                qNum: 4,
+                title: "Walkthrough: Statement 4 & Paragraph E (Speaking Time in Discussion)",
+                badge: "Reading 2a Passage 1 • Q4",
+                para: "Paragraph E",
+                header: "📖 Passage 1 Excerpt (Paragraph E)",
+                excerpt: `<span class="para-tag">[Para E]</span> "...Even though, before the experiment, all participants thought that the 'extraordinary experiencer' would talk more during the post-video discussion, <mark class="evidence" id="ev-wt-p1-4" data-q="wt-p1-4"><span class="syn-pair-1" data-q="wt-p1-4">that person actually spoke less and felt excluded</span></mark> from the conversation as a result."`,
+                question: `4. One person spoke for longer when discussing the film clips: <select class="select-input" data-ans="NO"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
+                ans: "NO",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Contradiction:</span> The text states the extraordinary experiencer <em>"actually spoke less"</em>, contradicting the claim that one person spoke for longer &rarr; <strong>NO</strong>.</div>`
+            },
+            {
+                qNum: 5,
+                title: "Walkthrough: Statement 5 & Paragraph D (Relationship Between Participants)",
+                badge: "Reading 2a Passage 1 • Q5",
+                para: "Paragraph D",
+                header: "📖 Passage 1 Excerpt (Paragraph D)",
+                excerpt: `<span class="para-tag">[Para D]</span> "<mark class="evidence" id="ev-wt-p1-5" data-q="wt-p1-5">...Cooney, Gilbert and Wilson invited sixty-eight participants to their laboratory in groups of four.</mark>"`,
+                question: `5. The people who participated in the study knew each other: <select class="select-input" data-ans="NOT GIVEN"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
+                ans: "NOT GIVEN",
+                explanation: `<div class="syn-key-box"><span class="syn-tag purple">Absence of Information:</span> The passage states 68 participants were invited in groups of 4, but gives zero evidence about whether they were acquaintances or strangers &rarr; <strong>NOT GIVEN</strong>.</div>`
+            },
+            {
+                qNum: 6,
+                title: "Walkthrough: Statement 6 & Paragraph E (Silent vs. Spoke Less)",
+                badge: "Reading 2a Passage 1 • Q6",
+                para: "Paragraph E",
+                header: "📖 Passage 1 Excerpt (Paragraph E)",
+                excerpt: `<span class="para-tag">[Para E]</span> "...<mark class="evidence" id="ev-wt-p1-6" data-q="wt-p1-6">that person actually spoke less and felt excluded from the conversation as a result.</mark>"`,
+                question: `6. Some study participants said nothing during the post-video conversation: <select class="select-input" data-ans="NO"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
+                ans: "NO",
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Contradiction:</span> Speaking <em>less</em> means they still spoke; they did <em>not</em> say nothing at all &rarr; <strong>NO</strong>.</div>`
+            }
+        ]
+    },
+    reading2a_part2: {
+        passage: `
+            <h3>SCIENCE: SHOULD YOU THROW OUT YOUR BUCKET LIST?</h3>
+            <p><span class="para-tag">Para 1</span> There are two main reasons why you might not agree with Cooney, Gilbert and Wilson’s research conclusions, and <mark class="evidence" id="ev-2a-q1" data-q="2a-q1"><span class="syn-pair-1" data-q="2a-q1">these do not include the fact that sixty-eight people is not a very high number to include in a study</span></mark>. Firstly, <mark class="evidence" id="ev-2a-q2" data-q="2a-q2"><span class="syn-pair-1" data-q="2a-q2">the video of a street magician is not the same as an incredible life experience</span></mark>. The research uses cost-benefit analysis, i.e. the benefit of watching the video minus the cost of not being included socially. But it is unlikely that a street performer, even an amazing one, produces results similar to the feeling of an extraordinary experience. So, when the cost of not being included is taken away from the benefit of watching the video, of course the result will be more negative.</p>
+            <p><span class="para-tag">Para 2</span> Secondly, one wonders why the researchers assume that people who do extraordinary things only spend time with boring people who have no bucket list themselves? In reality, if you explore the Costa Rican rainforest, maybe your friend goes sailing, gets an amazing professional qualification, or watches his child graduate from college. <mark class="evidence" id="ev-2a-q3" data-q="2a-q3"><span class="syn-pair-1" data-q="2a-q3">All of these can be considered great topics of conversation. Of course people will always have lots of everyday experiences to talk about too</span></mark>. After all, when you return from an inspiring trip, you still have to do the laundry and call your parents.</p>
+            <p><span class="para-tag">Para 3</span> Another possible conclusion could be that <mark class="evidence" id="ev-2a-q5" data-q="2a-q5"><span class="syn-pair-1" data-q="2a-q5">if you want to do fantastic things and not be lonely, you should choose friends who have similar ambitions</span></mark>. You can also be careful about the conversation topics you choose.</p>
+            <p><span class="para-tag">Para 4</span> <mark class="evidence" id="ev-2a-q6" data-q="2a-q6">So before you throw your bucket list out the window, <span class="syn-pair-1" data-q="2a-q6">it is worth considering how useful this research is to your life goals and social situation</span></mark>. It certainly cannot hurt to reflect on the warning of the research. If doing great things makes you feel distant from your friends then, yes, you should probably think about how meaningful your goals are. However, if old friends cannot keep up with you or relate to your life goals, then you need to decide how much that should stop you from following your dreams.</p>
         `,
         questions: [
             { qNum: 1, text: "1. There were too few participants for effective research.", ans: "NO", evId: "ev-2a-q1" },
             { qNum: 2, text: "2. The study reflected what happens in the real world.", ans: "NO", evId: "ev-2a-q2" },
             { qNum: 3, text: "3. We have all experienced situations we can share with friends.", ans: "YES", evId: "ev-2a-q3" },
-            { qNum: 4, text: "4. People who go on exciting trips are generally wealthier than those who do not.", ans: "NOT GIVEN", evId: "ev-2a-q3" },
-            { qNum: 5, text: "5. To avoid loneliness, people should choose friends who share their interests.", ans: "NO", evId: "ev-2a-q3" },
-            { qNum: 6, text: "6. People who do ordinary things are happier than those who do extraordinary things.", ans: "NOT GIVEN", evId: "ev-2a-q3" }
+            { qNum: 4, text: "4. People tend to become jealous when they hear amazing stories.", ans: "NOT GIVEN", evId: "ev-2a-q3" },
+            { qNum: 5, text: "5. Those who do interesting activities fail to connect with friends.", ans: "NO", evId: "ev-2a-q5" },
+            { qNum: 6, text: "6. You should organise your aims in their order of importance.", ans: "NOT GIVEN", evId: "ev-2a-q6" }
         ],
         walkthroughs: [
             {
                 qNum: 1,
-                title: "Walkthrough: Question 1 & Critical Response (Participant Number)",
+                title: "Walkthrough: Question 1 & Critical Response (Sample Size Validity)",
                 badge: "Reading 2a Walkthrough • Q1",
-                para: "Critical Response Para 1",
-                header: "📖 Passage Excerpt (Critical Response)",
-                excerpt: `<span class="para-tag">[Crit 1]</span> "There are two main reasons why you might not agree with Cooney, Gilbert and Wilson’s research conclusions, and <mark class="evidence" id="ev-wt-2a-1" data-q="wt-2a-1"><span class="syn-pair-1" data-q="wt-2a-1">these do not include the fact that sixty-eight people is not a very high number to include in a study</span></mark>."`,
+                para: "Para 1",
+                header: "📖 Passage Excerpt (Paragraph 1)",
+                excerpt: `<span class="para-tag">[Para 1]</span> "There are two main reasons why you might not agree with Cooney, Gilbert and Wilson’s research conclusions, and <mark class="evidence" id="ev-wt-2a-1" data-q="wt-2a-1"><span class="syn-pair-1" data-q="wt-2a-1">these do not include the fact that sixty-eight people is not a very high number to include in a study</span></mark>."`,
                 question: `1. There were too few participants for effective research: <select class="select-input" data-ans="NO"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
                 ans: "NO",
-                explanation: `<div class="syn-key-box"><span class="syn-tag green">Anchor Match:</span> The critic explicitly states that disagreement does <em>not</em> include sample size, contradicting the claim &rarr; <strong>NO</strong>.</div>`
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Contradiction:</span> The author explicitly states that reasons for disagreement <em>do not include</em> the sample size (68 people) &rarr; <strong>NO</strong>.</div>`
             },
             {
                 qNum: 2,
-                title: "Walkthrough: Question 2 & Critical Response (Real-World Validity)",
+                title: "Walkthrough: Question 2 & Critical Response (Real-World Authenticity)",
                 badge: "Reading 2a Walkthrough • Q2",
-                para: "Critical Response Para 2",
-                header: "📖 Passage Excerpt (Critical Response)",
-                excerpt: `<span class="para-tag">[Crit 2]</span> "Firstly, <mark class="evidence" id="ev-wt-2a-2" data-q="wt-2a-2"><span class="syn-pair-1" data-q="wt-2a-2">the video of a street magician is not the same as an incredible life experience</span></mark>... But it is unlikely that a street performer... produces results similar to extraordinary experience."`,
+                para: "Para 1",
+                header: "📖 Passage Excerpt (Paragraph 1)",
+                excerpt: `<span class="para-tag">[Para 1]</span> "Firstly, <mark class="evidence" id="ev-wt-2a-2" data-q="wt-2a-2"><span class="syn-pair-1" data-q="wt-2a-2">the video of a street magician is not the same as an incredible life experience</span></mark>... it is unlikely that a street performer, even an amazing one, produces results similar to the feeling of an extraordinary experience."`,
                 question: `2. The study reflected what happens in the real world: <select class="select-input" data-ans="NO"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
                 ans: "NO",
-                explanation: `<div class="syn-key-box"><span class="syn-tag green">Anchor Match:</span> Watching a magician video in a lab is <em>not equivalent</em> to real-world life moments &rarr; <strong>NO</strong>.</div>`
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Contradiction:</span> The author argues watching a video in a laboratory is <em>not the same</em> as genuine real-world experiences &rarr; <strong>NO</strong>.</div>`
             },
             {
                 qNum: 3,
-                title: "Walkthrough: Question 3 & Critical Response (Sharing Everyday Experiences)",
+                title: "Walkthrough: Question 3 & Critical Response (Shared Situations with Friends)",
                 badge: "Reading 2a Walkthrough • Q3",
-                para: "Critical Response Para 3",
-                header: "📖 Passage Excerpt (Critical Response)",
-                excerpt: `<span class="para-tag">[Crit 3]</span> "<mark class="evidence" id="ev-wt-2a-3" data-q="wt-2a-3"><span class="syn-pair-1" data-q="wt-2a-3">Of course people will always have lots of everyday experiences to talk about too.</span> After all, when you return from an inspiring trip, you still have to do the laundry and call your parents.</mark>"`,
+                para: "Para 2",
+                header: "📖 Passage Excerpt (Paragraph 2)",
+                excerpt: `<span class="para-tag">[Para 2]</span> "<mark class="evidence" id="ev-wt-2a-3" data-q="wt-2a-3"><span class="syn-pair-1" data-q="wt-2a-3">All of these can be considered great topics of conversation. Of course people will always have lots of everyday experiences to talk about too.</span> After all, when you return from an inspiring trip, you still have to do the laundry and call your parents.</mark>"`,
                 question: `3. We have all experienced situations we can share with friends: <select class="select-input" data-ans="YES"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
                 ans: "YES",
-                explanation: `<div class="syn-key-box"><span class="syn-tag green">Anchor Match:</span> <em>"people will always have lots of everyday experiences to talk about"</em> confirms the statement &rarr; <strong>YES</strong>.</div>`
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Paraphrase Match:</span> <em>"people will always have lots of everyday experiences to talk about"</em> confirms we all have relatable moments &rarr; <strong>YES</strong>.</div>`
             },
             {
                 qNum: 4,
-                title: "Walkthrough: Question 4 & Critical Response (Wealth of Travelers)",
+                title: "Walkthrough: Question 4 & Critical Response (Jealousy Assumption)",
                 badge: "Reading 2a Walkthrough • Q4",
-                para: "Critical Response Para 3",
-                header: "📖 Passage Excerpt (Critical Response)",
-                excerpt: `<span class="para-tag">[Crit 3]</span> "In reality, if you explore the Costa Rican rainforest, maybe your friend goes sailing, gets an amazing professional qualification, or watches his child graduate from college."`,
-                question: `4. People who go on exciting trips are generally wealthier than those who do not: <select class="select-input" data-ans="NOT GIVEN"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
+                para: "Para 2",
+                header: "📖 Passage Excerpt (Paragraph 2)",
+                excerpt: `<span class="para-tag">[Para 2]</span> "In reality, if you explore the Costa Rican rainforest, maybe your friend goes sailing, gets an amazing professional qualification, or watches his child graduate from college. All of these can be considered great topics of conversation."`,
+                question: `4. People tend to become jealous when they hear amazing stories: <select class="select-input" data-ans="NOT GIVEN"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
                 ans: "NOT GIVEN",
-                explanation: `<div class="syn-key-box"><span class="syn-tag purple">Absence of Comparison:</span> The text lists activities (rainforest, sailing, graduation) but contains zero comparisons regarding personal wealth &rarr; <strong>NOT GIVEN</strong>.</div>`
+                explanation: `<div class="syn-key-box"><span class="syn-tag purple">Absence of Mention:</span> The text discusses friends having their own exciting goals and topics, but <em>nowhere</em> mentions jealousy or envy &rarr; <strong>NOT GIVEN</strong>.</div>`
             },
             {
                 qNum: 5,
-                title: "Walkthrough: Question 5 & Ambitions vs. Interests",
+                title: "Walkthrough: Question 5 & Critical Response (Connecting with Friends)",
                 badge: "Reading 2a Walkthrough • Q5",
-                para: "Critical Response Para 3",
-                header: "📖 Passage Excerpt (Critical Response)",
-                excerpt: `<span class="para-tag">[Crit 3]</span> "...if you want to do fantastic things and not be lonely, you should choose friends who have <mark class="evidence" id="ev-wt-2a-5" data-q="wt-2a-5"><span class="syn-pair-1" data-q="wt-2a-5">similar ambitions</span></mark>."`,
-                question: `5. To avoid loneliness, people should choose friends who share their interests: <select class="select-input" data-ans="NO"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
+                para: "Para 2 & 3",
+                header: "📖 Passage Excerpt (Paragraphs 2 & 3)",
+                excerpt: `<span class="para-tag">[Para 2 & 3]</span> "...if your friend goes sailing... All of these can be considered great topics of conversation... <mark class="evidence" id="ev-wt-2a-5" data-q="wt-2a-5"><span class="syn-pair-1" data-q="wt-2a-5">if you want to do fantastic things and not be lonely, you should choose friends who have similar ambitions</span></mark>."`,
+                question: `5. Those who do interesting activities fail to connect with friends: <select class="select-input" data-ans="NO"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
                 ans: "NO",
-                explanation: `<div class="syn-key-box"><span class="syn-tag green">Lexical Trap:</span> The text specifies choosing friends with similar <em>ambitions</em> (future goals), whereas the question claims general <em>interests</em> (hobbies) &rarr; <strong>NO</strong>.</div>`
+                explanation: `<div class="syn-key-box"><span class="syn-tag green">Contradiction:</span> The author explains that doing interesting things does <em>not</em> mean failing to connect, provided friends have similar ambitions &rarr; <strong>NO</strong>.</div>`
             },
             {
                 qNum: 6,
-                title: "Walkthrough: Question 6 & Happiness of Ordinary vs. Extraordinary",
+                title: "Walkthrough: Question 6 & Critical Response (Organising Aims)",
                 badge: "Reading 2a Walkthrough • Q6",
-                para: "General Text Analysis",
-                header: "📖 Passage Excerpt",
-                excerpt: `<span class="para-tag">[General]</span> "The research focuses on post-conversation mood dynamics and social costs, but nowhere compares absolute life happiness between ordinary and extraordinary individuals."`,
-                question: `6. People who do ordinary things are happier than those who do extraordinary things: <select class="select-input" data-ans="NOT GIVEN"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
+                para: "Para 4",
+                header: "📖 Passage Excerpt (Paragraph 4)",
+                excerpt: `<span class="para-tag">[Para 4]</span> "<mark class="evidence" id="ev-wt-2a-6" data-q="wt-2a-6">So before you throw your bucket list out the window, <span class="syn-pair-1" data-q="wt-2a-6">it is worth considering how useful this research is to your life goals and social situation</span>... think about how meaningful your goals are.</mark>"`,
+                question: `6. You should organise your aims in their order of importance: <select class="select-input" data-ans="NOT GIVEN"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>`,
                 ans: "NOT GIVEN",
-                explanation: `<div class="syn-key-box"><span class="syn-tag purple">Absence of Data:</span> No overall life satisfaction or happiness ranking is presented &rarr; <strong>NOT GIVEN</strong>.</div>`
+                explanation: `<div class="syn-key-box"><span class="syn-tag purple">Absence of Requirement:</span> The text advises reflecting on whether goals are meaningful, but never instructs ordering or ranking them &rarr; <strong>NOT GIVEN</strong>.</div>`
             }
         ]
     },

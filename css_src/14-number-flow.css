@@ -1,0 +1,42 @@
+/* ==========================================================================
+   14. NUMBER FLOW ANIMATED DIGIT ENGINE (css_src/14-number-flow.css)
+   ========================================================================== */
+
+.number-flow-root {
+    display: inline-flex;
+    align-items: center;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    vertical-align: baseline;
+}
+
+.number-flow-char {
+    display: inline-block;
+    position: relative;
+    height: 1.15em;
+    line-height: 1.15em;
+}
+
+.number-flow-digit {
+    overflow: hidden;
+    width: 0.62em;
+    text-align: center;
+}
+
+.number-flow-column {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.number-flow-column > span {
+    height: 1.15em;
+    line-height: 1.15em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

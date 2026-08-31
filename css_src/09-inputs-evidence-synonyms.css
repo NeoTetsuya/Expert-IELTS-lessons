@@ -209,52 +209,64 @@ span.syn-pair-1.active-syn {
     background: #bbf7d0 !important;
     color: #14532d !important;
     font-weight: 700;
-    border-bottom: 2.5px solid #16a34a;
+    border-bottom: 2.5px solid #16a34a !important;
     padding: 2px 6px;
     border-radius: 4px;
+    box-shadow: 0 0 12px rgba(22, 163, 74, 0.4);
 }
 
 span.syn-pair-2.active-syn {
     background: #e9d5ff !important;
     color: #581c87 !important;
     font-weight: 700;
-    border-bottom: 2.5px solid #9333ea;
+    border-bottom: 2.5px solid #9333ea !important;
     padding: 2px 6px;
     border-radius: 4px;
+    box-shadow: 0 0 12px rgba(147, 51, 234, 0.4);
 }
 
 span.syn-pair-3.active-syn {
     background: #bae6fd !important;
     color: #0369a1 !important;
     font-weight: 700;
-    border-bottom: 2.5px solid #0284c7;
+    border-bottom: 2.5px solid #0284c7 !important;
     padding: 2px 6px;
     border-radius: 4px;
+    box-shadow: 0 0 12px rgba(2, 132, 199, 0.4);
 }
 
+/* Vocabulary Highlighting: Underline line + subtle color change, interactive on hover/click */
 span.vocab-word,
-span.vocab-term {
+span.vocab-term,
+.vocab-word,
+.vocab-term {
     cursor: pointer;
-    text-decoration: underline dotted #f59e0b 2px;
+    color: #065f46;
+    font-weight: 600;
+    border-bottom: 2px dashed #059669;
+    padding: 0 2px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    display: inline;
 }
 
 span.vocab-word:hover,
-span.vocab-term:hover {
-    background: #fef9c3;
-    color: #854d0e;
+span.vocab-term:hover,
+.vocab-word:hover,
+.vocab-term:hover {
+    background: #ecfdf5;
+    color: #047857;
+    border-bottom-color: #047857;
 }
 
 span.vocab-word.active-vocab,
-span.vocab-word.active-syn,
-span.vocab-term.active-vocab {
-    background: #fef08a !important;
-    color: #854d0e !important;
-    font-weight: 700;
-    border-bottom: 2.5px solid #d97706 !important;
-    padding: 2px 6px;
-    border-radius: 4px;
-    text-decoration: none;
-    box-shadow: 0 1px 3px rgba(217, 119, 6, 0.2);
+span.vocab-term.active-vocab,
+.vocab-word.active-vocab,
+.vocab-term.active-vocab {
+    background: #d1fae5 !important;
+    color: #064e3b !important;
+    border-bottom: 2px solid #059669 !important;
+    box-shadow: 0 0 8px rgba(5, 150, 105, 0.3);
 }
 
 .syn-key-box {
@@ -383,4 +395,157 @@ span.vocab-term.active-vocab {
     line-height: 1.6;
     vertical-align: top;
 }
+
+/* ==========================================================================
+   WORD BANK & WORD CHIPS (Light & Dark Theme Universal Styling)
+   ========================================================================== */
+.word-bank-card {
+    background: #f8fafc;
+    border: 1.5px solid #cbd5e1;
+    border-left: 5px solid var(--col-reading, #2563eb);
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.word-bank-header {
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--col-reading, #2563eb);
+    margin-bottom: 8px;
+}
+
+.word-chips-container,
+.vocab-chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.word-chip,
+.vocab-chip,
+.word-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: calc(15.5px * var(--font-scale, 1));
+    font-weight: 700;
+    font-family: var(--font-body, 'DM Sans', sans-serif);
+    background: #ffffff;
+    color: #1e293b;
+    border: 1.5px solid #cbd5e1;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    user-select: none;
+    transition: transform 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                background-color 140ms ease-out,
+                border-color 140ms ease-out,
+                color 140ms ease-out,
+                box-shadow 160ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.word-chip:hover,
+.vocab-chip:hover {
+    transform: translateY(-2px);
+    background: var(--col-reading, #2563eb);
+    color: #ffffff !important;
+    border-color: var(--col-reading, #2563eb);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.word-chip:active,
+.vocab-chip:active {
+    transform: scale(0.96);
+}
+
+.word-chip.chip-used,
+.vocab-chip.chip-used {
+    opacity: 0.38;
+    text-decoration: line-through;
+    pointer-events: none;
+    filter: grayscale(0.8);
+}
+
+/* Dark Themes Overrides for Word Bank & Chips */
+[data-theme="academic-editorial"] .word-bank-card,
+[data-theme="electric"] .word-bank-card,
+[data-theme="voltage"] .word-bank-card,
+[data-theme="vellum"] .word-bank-card,
+[data-theme="broadside"] .word-bank-card,
+[data-theme="8-bit-orbit"] .word-bank-card,
+[data-theme="bold-signal"] .word-bank-card,
+[data-theme="dark-editorial"] .word-bank-card,
+[data-theme="midnight-ocean"] .word-bank-card,
+[data-theme="obsidian-gold"] .word-bank-card,
+[data-theme="cyber-slate"] .word-bank-card,
+.dark-theme .word-bank-card {
+    background: rgba(15, 23, 42, 0.65) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+    border-left: 5px solid var(--col-reading, #38bdf8) !important;
+    color: #f8fafc !important;
+}
+
+[data-theme="academic-editorial"] .word-chip,
+[data-theme="academic-editorial"] .vocab-chip,
+[data-theme="electric"] .word-chip,
+[data-theme="electric"] .vocab-chip,
+[data-theme="voltage"] .word-chip,
+[data-theme="voltage"] .vocab-chip,
+[data-theme="vellum"] .word-chip,
+[data-theme="vellum"] .vocab-chip,
+[data-theme="broadside"] .word-chip,
+[data-theme="broadside"] .vocab-chip,
+[data-theme="8-bit-orbit"] .word-chip,
+[data-theme="8-bit-orbit"] .vocab-chip,
+[data-theme="bold-signal"] .word-chip,
+[data-theme="bold-signal"] .vocab-chip,
+[data-theme="dark-editorial"] .word-chip,
+[data-theme="dark-editorial"] .vocab-chip,
+[data-theme="midnight-ocean"] .word-chip,
+[data-theme="midnight-ocean"] .vocab-chip,
+[data-theme="obsidian-gold"] .word-chip,
+[data-theme="obsidian-gold"] .vocab-chip,
+[data-theme="cyber-slate"] .word-chip,
+[data-theme="cyber-slate"] .vocab-chip,
+.dark-theme .word-chip,
+.dark-theme .vocab-chip {
+    background: rgba(30, 41, 59, 0.85) !important;
+    color: #f8fafc !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="academic-editorial"] .word-chip:hover,
+[data-theme="academic-editorial"] .vocab-chip:hover,
+[data-theme="electric"] .word-chip:hover,
+[data-theme="electric"] .vocab-chip:hover,
+[data-theme="voltage"] .word-chip:hover,
+[data-theme="voltage"] .vocab-chip:hover,
+[data-theme="vellum"] .word-chip:hover,
+[data-theme="vellum"] .vocab-chip:hover,
+[data-theme="broadside"] .word-chip:hover,
+[data-theme="broadside"] .vocab-chip:hover,
+[data-theme="8-bit-orbit"] .word-chip:hover,
+[data-theme="8-bit-orbit"] .vocab-chip:hover,
+[data-theme="bold-signal"] .word-chip:hover,
+[data-theme="bold-signal"] .vocab-chip:hover,
+[data-theme="dark-editorial"] .word-chip:hover,
+[data-theme="dark-editorial"] .vocab-chip:hover,
+[data-theme="midnight-ocean"] .word-chip:hover,
+[data-theme="midnight-ocean"] .vocab-chip:hover,
+[data-theme="obsidian-gold"] .word-chip:hover,
+[data-theme="obsidian-gold"] .vocab-chip:hover,
+[data-theme="cyber-slate"] .word-chip:hover,
+[data-theme="cyber-slate"] .vocab-chip:hover,
+.dark-theme .word-chip:hover,
+.dark-theme .vocab-chip:hover {
+    background: var(--col-reading, #38bdf8) !important;
+    color: #0f172a !important;
+    border-color: var(--col-reading, #38bdf8) !important;
+    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.35) !important;
+}
+
 

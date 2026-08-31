@@ -12,7 +12,11 @@ class ReadingGrounder {
         this.renderSynonymBadges();
         this.bindEvidenceHover();
         this.bindVocabExplainer();
+        this.autoTagVocabWords();
         this.injectVocabStyles();
+
+        document.addEventListener('slidechange', () => this.autoTagVocabWords());
+        window.addEventListener('hashchange', () => this.autoTagVocabWords());
     }
 
     /**
@@ -218,10 +222,12 @@ class ReadingGrounder {
     }
 
     static showVocabPopover(el, dictData = null) {
-        // Remove previous active glow
+        // Remove previous active glows across slide
         document.querySelectorAll('.vocab-word.active-vocab, .vocab-term.active-vocab').forEach(v => {
             v.classList.remove('active-vocab');
         });
+
+        // Activate the clicked element softly with dashed/solid underline and soft tint
         el.classList.add('active-vocab');
 
         const cleanWord = el.dataset.word || (dictData ? dictData.word : el.textContent.trim().replace(/[.,/#!$%^&*;:{}=\-_`~()"]/g, ""));
@@ -288,8 +294,8 @@ class ReadingGrounder {
         if (popover) {
             popover.style.display = 'none';
         }
-        document.querySelectorAll('.vocab-word.active-vocab, .vocab-term.active-vocab').forEach(v => {
-            v.classList.remove('active-vocab');
+        document.querySelectorAll('.active-vocab, .active-syn, .q-card-active').forEach(v => {
+            v.classList.remove('active-vocab', 'active-syn', 'q-card-active');
         });
     }
 
@@ -516,6 +522,81 @@ class ReadingGrounder {
             });
 
             container.appendChild(fragment);
+        });
+    }
+
+    /**
+     * Automatically scans reading passages for key vocabulary words and collocations,
+     * adding the subtle dashed underline and distinct color so users can hover/click to inspect.
+     */
+    static autoTagVocabWords() {
+        const dict = this.dictionary;
+        const dictKeys = Object.keys(dict).sort((a, b) => b.length - a.length);
+        if (dictKeys.length === 0) return;
+
+        const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+        const containers = document.querySelectorAll('.reading-pane, [data-slot="passage"], .passage-box, .reading-passage, .passage-content, .two-col > div');
+        containers.forEach(container => {
+            const seenWords = new Set();
+
+            // Pre-seed seenWords with any existing .vocab-word elements
+            container.querySelectorAll('.vocab-word, .vocab-term').forEach(v => {
+                const w = (v.dataset.word || v.textContent).trim().toLowerCase();
+                if (w) seenWords.add(w);
+            });
+
+            const walker = document.createTreeWalker(
+                container,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: (node) => {
+                        const parent = node.parentElement;
+                        if (!parent) return NodeFilter.FILTER_REJECT;
+                        const tag = parent.tagName.toLowerCase();
+                        if (['script', 'style', 'button', 'select', 'textarea', 'input', 'kbd'].includes(tag)) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        if (parent.closest('.vocab-word, .vocab-term, .vocab-popover, #presentationToolsHUD')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
+
+            const textNodes = [];
+            while (walker.nextNode()) {
+                textNodes.push(walker.currentNode);
+            }
+
+            textNodes.forEach(node => {
+                const text = node.nodeValue;
+                if (!text || text.trim().length < 3) return;
+
+                for (const phrase of dictKeys) {
+                    const lowerPhrase = phrase.toLowerCase();
+                    if (seenWords.has(lowerPhrase)) continue;
+
+                    const regex = new RegExp(`\\b(${escapeRegex(phrase)})\\b`, 'i');
+                    if (regex.test(node.nodeValue)) {
+                        seenWords.add(lowerPhrase);
+                        const span = document.createElement('span');
+                        span.innerHTML = node.nodeValue.replace(regex, (match) => {
+                            const entry = dict[lowerPhrase];
+                            const ipa = entry?.ipa || '';
+                            const pos = entry?.pos || '';
+                            const def = entry?.def || '';
+                            const colloc = entry?.colloc || '';
+                            return `<span class="vocab-word" data-word="${match}" data-ipa="${ipa}" data-pos="${pos}" data-def="${def}" data-colloc="${colloc}">${match}</span>`;
+                        });
+                        if (node.parentNode) {
+                            node.parentNode.replaceChild(span, node);
+                        }
+                        break;
+                    }
+                }
+            });
         });
     }
 

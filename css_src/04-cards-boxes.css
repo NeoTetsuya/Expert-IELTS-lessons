@@ -257,4 +257,47 @@
     font-size: calc(16px * var(--font-scale, 1));
     margin-top: 4px;
 }
+
+/* ==========================================================================
+   DYNAMIC AUTO-FIT & SPACING OPTIMIZER (.slide-spacious)
+   ========================================================================== */
+.slide.slide-spacious .two-col {
+    gap: 28px !important;
+}
+
+.slide.slide-spacious .card,
+.slide.slide-spacious .rule-card {
+    padding: calc(22px * var(--font-scale, 1)) calc(26px * var(--font-scale, 1));
+    margin-bottom: calc(18px * var(--font-scale, 1));
+    line-height: var(--line-height-auto, 1.85);
+    border-radius: var(--card-radius, 14px);
+}
+
+.slide.slide-spacious .rule-card {
+    background: #ffffff;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    border-left: 6px solid var(--col-grammar, #0284c7);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+}
+
+.slide.slide-spacious .discuss-card {
+    padding: calc(22px * var(--font-scale, 1)) calc(28px * var(--font-scale, 1)) !important;
+    margin-bottom: calc(18px * var(--font-scale, 1)) !important;
+}
+
+.slide.slide-spacious .discuss-text,
+.slide.slide-spacious .rule-card > div,
+.slide.slide-spacious .card > div,
+.slide.slide-spacious p,
+.slide.slide-spacious li {
+    line-height: var(--line-height-auto, 1.85);
+}
+
+.slide.slide-spacious ul,
+.slide.slide-spacious ol {
+    display: flex;
+    flex-direction: column;
+    gap: calc(10px * var(--font-scale, 1));
+}
+
 

@@ -235,8 +235,9 @@ class DeckEngine {
     }
 
     /**
-     * Universal Content Auto-Fitter
-     * Automatically adjusts font-scaling and vertical dimensions so long content fits without clipping
+     * Universal Content Auto-Fitter & Spacer
+     * Automatically scales up and spaces content when there is excess blank space,
+     * or scales down when content overflows.
      */
     autoFitSlide(slide) {
         if (!slide) return;
@@ -244,23 +245,43 @@ class DeckEngine {
         const pageContent = slide.querySelector('.page-content, .title-notebook');
         if (!notebook || !pageContent) return;
 
-        // Reset and measure in a single rAF to minimize layout thrashing
+        // Skip section divider and title slides which have fixed layouts
+        if (slide.dataset.skill === 'title' || slide.dataset.skill === 'section' || slide.querySelector('.section-slide')) {
+            return;
+        }
+
+        // Measure and optimize in animation frames
         requestAnimationFrame(() => {
+            slide.style.removeProperty('--font-scale');
+            slide.style.removeProperty('--line-height-auto');
+            slide.classList.remove('slide-spacious');
             pageContent.style.removeProperty('transform');
             pageContent.style.removeProperty('transform-origin');
             pageContent.style.removeProperty('height');
 
-            // Force layout calc after clearing
-            const availableHeight = notebook.clientHeight;
+            // Force reflow and measure active dimensions
+            const availableHeight = notebook.clientHeight - 36;
             const scrollH = pageContent.scrollHeight;
 
-            if (scrollH > availableHeight + 6) {
+            if (scrollH > availableHeight + 8) {
+                // OVERFLOW: Scale down gracefully to prevent clipping
                 const fitRatio = Math.max(0.68, (availableHeight - 12) / scrollH);
-                // Batch all writes after reads
                 requestAnimationFrame(() => {
                     pageContent.style.transform = `scale(${fitRatio.toFixed(3)})`;
                     pageContent.style.transformOrigin = 'top center';
                     pageContent.style.height = `${(availableHeight / fitRatio).toFixed(1)}px`;
+                });
+            } else if (scrollH < availableHeight * 0.78) {
+                // UNDERFLOW / SPARE BLANK SPACE:
+                // Auto-expand font size, line-height, card padding, and vertical distribution
+                const heightRatio = availableHeight / Math.max(1, scrollH);
+                const autoFontScale = Math.min(1.28, Math.max(1.0, 1 + (heightRatio - 1) * 0.32));
+                const autoLineHeight = Math.min(2.0, Math.max(1.65, 1.65 + (heightRatio - 1) * 0.28));
+
+                requestAnimationFrame(() => {
+                    slide.style.setProperty('--font-scale', (this.fontScale * autoFontScale).toFixed(2));
+                    slide.style.setProperty('--line-height-auto', autoLineHeight.toFixed(2));
+                    slide.classList.add('slide-spacious');
                 });
             }
         });
@@ -715,10 +736,32 @@ class DeckEngine {
     resetStrategySlide(target) {
         const slide = target ? (target.closest('.slide') || target.closest('.page-content') || target.closest('.notebook')) : document.querySelector('.slide.active');
         if (!slide) return;
-        slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word').forEach(s => {
+        slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word, .vocab-term').forEach(s => {
             s.classList.remove('active-syn', 'active-vocab');
         });
         slide.querySelectorAll('.q-card').forEach(c => c.classList.remove('revealed'));
+    }
+
+    toggleVocabHighlight(target) {
+        const slide = target ? (target.closest('.slide') || target.closest('.page-content') || target.closest('.notebook')) : document.querySelector('.slide.active');
+        if (!slide) return;
+        const vocabs = slide.querySelectorAll('.vocab-word, .vocab-term, .word-chip, .vocab-chip');
+        if (vocabs.length === 0) return;
+        const isAnyActive = Array.from(vocabs).some(v => v.classList.contains('active-vocab'));
+        
+        vocabs.forEach(v => {
+            if (isAnyActive) {
+                v.classList.remove('active-vocab');
+            } else {
+                v.classList.add('active-vocab');
+            }
+        });
+
+        if (window.toast) {
+            window.toast.info(isAnyActive ? 'Vocabulary highlights hidden' : 'Vocabulary highlights revealed', {
+                duration: 2000
+            });
+        }
     }
 }
 
@@ -742,6 +785,7 @@ window.resetMultiOpts = (id) => (window.deckEngine ? window.deckEngine.resetMult
 window.toggleExplanations = (id) => (window.deckEngine ? window.deckEngine.toggleExplanations(id) : null);
 window.toggleSynonymExplanation = (q, ev) => (window.deckEngine ? window.deckEngine.toggleSynonymExplanation(q, ev) : null);
 window.toggleAllHighlights = (target) => (window.deckEngine ? window.deckEngine.toggleAllHighlights(target) : null);
+window.toggleVocabHighlight = (target) => (window.deckEngine ? window.deckEngine.toggleVocabHighlight(target) : null);
 window.resetStrategySlide = (target) => (window.deckEngine ? window.deckEngine.resetStrategySlide(target) : null);
 window.switchHighLineTab = (tab) => (window.deckEngine ? window.deckEngine.switchHighLineTab(tab) : null);
 window.jumpToSlide = (idx) => (window.deckEngine ? window.deckEngine.jumpToSlide(idx) : null);

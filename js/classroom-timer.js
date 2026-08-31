@@ -229,24 +229,38 @@ class ClassroomTimer {
     updateDisplay() {
         const mins = Math.floor(this.timerSeconds / 60);
         const secs = this.timerSeconds % 60;
-        const timeStr = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        const minsStr = String(mins).padStart(2, '0');
+        const secsStr = String(secs).padStart(2, '0');
+        const timeStr = `${minsStr}:${secsStr}`;
 
-        // Update modal display
+        // Update modal display with NumberFlow if available
         const display = document.getElementById('timerDisplay');
         if (display) {
-            display.textContent = timeStr;
+            if (customElements.get('number-flow')) {
+                display.innerHTML = `<number-flow value="${minsStr}"></number-flow>:<number-flow value="${secsStr}"></number-flow>`;
+            } else {
+                display.textContent = timeStr;
+            }
             display.classList.toggle('ended', this.timerSeconds <= 0 && !this.timerRunning);
         }
 
         // Update Presenter Cockpit countdown displays
         const cpDisplay = document.getElementById('cpCountdownDisplay');
         if (cpDisplay) {
-            cpDisplay.textContent = timeStr;
+            if (customElements.get('number-flow')) {
+                cpDisplay.innerHTML = `<number-flow value="${minsStr}"></number-flow>:<number-flow value="${secsStr}"></number-flow>`;
+            } else {
+                cpDisplay.textContent = timeStr;
+            }
             cpDisplay.classList.toggle('ended', this.timerSeconds <= 0 && !this.timerRunning);
         }
 
         document.querySelectorAll('.cp-timer-countdown-display').forEach(el => {
-            el.textContent = timeStr;
+            if (customElements.get('number-flow')) {
+                el.innerHTML = `<number-flow value="${minsStr}"></number-flow>:<number-flow value="${secsStr}"></number-flow>`;
+            } else {
+                el.textContent = timeStr;
+            }
             el.classList.toggle('ended', this.timerSeconds <= 0 && !this.timerRunning);
         });
     }
@@ -297,6 +311,18 @@ class ClassroomTimer {
                         cpToggleBtn.textContent = '▶ Start Timer';
                     }
                     this.playChime();
+                    if (window.toast) {
+                        window.toast.warning('Time is up! Classroom activity completed.', {
+                            title: '⏱️ Timer Finished',
+                            action: {
+                                label: '+1 Min',
+                                onClick: () => {
+                                    this.setTimer(60);
+                                    this.toggleRun();
+                                }
+                            }
+                        });
+                    }
                 }
             }, 1000);
         }
@@ -346,3 +372,4 @@ window.addEventListener('DOMContentLoaded', () => {
     classroomTimer = new ClassroomTimer();
     window.classroomTimer = classroomTimer;
 });
+

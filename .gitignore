@@ -6,9 +6,14 @@ desktop.ini
 .vscode/
 .idea/
 
+# Markdown Source Files
+md files/
+md_files/
+
 # Local Backups and Temp Files
 backup_files/
 *.bak
+*.bak*
 *.backup
 *.tmp
 temp/

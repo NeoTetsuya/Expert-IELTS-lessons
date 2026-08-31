@@ -496,17 +496,347 @@ When building HTML presentations from course markdown documents (`md files/`):
 
 ---
 
-### F. Standard Template Slot Directory
+### G. Chart Persistence on ALL Writing Task 1 Slides
+- **Context-Preserving Dual Pane**: For all Writing Task 1 exercises (data selection, comparative sentence gap-fills, linking phrases, planning, coherence criteria, and model answers), **the prompt and interactive chart MUST be visible on EVERY exercise slide**.
+- **Implementation**: Use `template="writing-model"`. Place the chart container in `slot="prompt"` on the left (`<div class="ielts-chart-container" id="chart-xxx-sYY" data-chart-type="..." data-chart-config="..."></div>`), and the interactive exercise or model in `slot="essay"` and `slot="annotations"` on the right.
+- **Unique Chart Element IDs**: Each slide instance must have a unique DOM ID (e.g. `chart-womens-earnings-s42`, `chart-womens-earnings-s43`, `chart-womens-earnings-s44`) registered in `DOMContentLoaded`.
+
+---
+
+### H. Universal Grammar Reference Integration
+- On all Grammar Masterclass and Practice slides, integrate the **Grammar Reference Modal trigger**:
+  ```html
+  <button class="deck-btn grammar-ref-btn" data-grammar-ref="../references/grammar_sources/expert_6/module_3a_comparative_forms.html" style="background:linear-gradient(135deg, #f43f5e 0%, #e11d48 100%); color:#ffffff; font-weight:700; border:none; padding:8px 16px; border-radius:8px; display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:15px; box-shadow: 0 4px 12px rgba(244,63,94,0.3);">
+      📖 Open Comparative Forms Handbook
+  </button>
+  ```
+- Handled automatically by `GrammarReferenceEngine` in `js/deck-bundle.js`.
+
+---
+
+### I. Strict Markdown Scope & Curriculum Boundary
+- **Zero Extraneous Material**: Keep ONLY content appearing in the source markdown file (`md files/e6/m{X} content.md`).
+- **No Unrequested Speaking**: If the markdown file does not have a speaking section, do NOT generate speaking slides.
+- **No Phantom Modules**: Never include vocabulary or grammar topics not specified in the master markdown document.
+
+---
+
+### J. Unicode Typography Standard (No LaTeX Math Syntax)
+- In slide texts and data annotations, **never write LaTeX math symbols** like `$\rightarrow$` or `$\times$`.
+- Always use clean Unicode glyphs: `➔` or `→`, `×`, `÷`, `±`, `%`, `°`.
+
+---
+
+### K. Mandatory Module Review & Mastery Checklist Slide
+- Every single course module **must conclude with a dedicated Review Checklist slide**:
+  ```html
+  <slide-card template="summary-checklist" skill="review" title="Module XX Mastery &amp; Exam Checklist" subtitle="Review core test strategies and linguistic competencies mastered across Module XX.">
+      <div slot="grid">
+          <div class="card" style="border-left:6px solid var(--col-reading); padding:24px 28px; border-radius:14px;">
+              <div style="font-size:22px; font-weight:800; color:var(--col-reading); margin-bottom:12px;">📖 Reading Competencies</div>
+              ...
+          </div>
+          <div class="card" style="border-left:6px solid var(--col-writing); padding:24px 28px; border-radius:14px;">
+              <div style="font-size:22px; font-weight:800; color:var(--col-writing); margin-bottom:12px;">✍️ Grammar &amp; Task 1 Data Analytics</div>
+              ...
+          </div>
+      </div>
+  </slide-card>
+  ```
+
+---
+
+### L. Tag Balancing & Verification Protocol
+- Every `<slide-card>` MUST have a matching `</slide-card>` and MUST NOT be nested.
+- Always execute the verification command before finalizing:
+  ```bash
+  node -e "const fs = require('fs'); const c = fs.readFileSync('expert 6/module-XX.html', 'utf8'); console.log('Open:', (c.match(/<slide-card/g)||[]).length, 'Close:', (c.match(/<\/slide-card>/g)||[]).length);"
+  ```
+- Total slide count in `-data.js` (`slidesCount`) must match the actual number of `<slide-card>` tags in the `.html` file.
+
+---
+
+### M. Standard Template Slot Directory
 
 | Template ID | Primary Slots | Fallback Aliases | Description |
 | :--- | :--- | :--- | :--- |
 | `tmpl-title` | `badge`, `title`, `subtitle`, `tags`, `roadmap` | `content` | Title slide with module info, tags, and clickable syllabus cards. |
+| `tmpl-section-divider` | `badge`, `num`, `sublabel`, `title`, `subtitle`, `content` | `left-col`, `content` | Modern split section divider: Left gradient panel with giant section number (`4a`, `5a`) + Right panel with curriculum topics. |
 | `tmpl-strategy` | `sentences`, `guide` | `two-col` | Pre-reading question keyword deconstruction with step reveal. |
 | `tmpl-reading-split` | `passage`, `questions` / `summaryBox` | `content` | Left unabridged reading passage + right questions & option boxes. |
 | `tmpl-walkthrough` | `passage-header`, `passage-text`, `question-text`, `input-area`, `explanation` | — | Focused 1-question deep dive with verbatim excerpt and option box. |
-| `tmpl-grammar-masterclass` | `rules`, `contrast-card` | `content` | Left rule cards + right common error contrast box. |
-| `tmpl-writing-model` | `prompt`, `essay`, `annotations` | `left-col`, `model-essay` | Left prompt & tips + right scrollable model essay with phrase popovers. |
+| `tmpl-grammar-masterclass` | `rules`, `contrast-card` | `content` | Left rule cards + right common error contrast box & grammar reference modal button. |
+| `tmpl-writing-model` | `prompt`, `essay`, `annotations` | `left-col`, `model-essay` | Left prompt & persistent chart + right scrollable model essay or interactive exercises. |
 | `tmpl-reading-flowchart` | `passage`, `flowchart` | `questions` | Left reading pane + right interactive flowchart step cards. |
 | `tmpl-gap-fill-passage` | `passage`, `rules-col` | `content` | Interactive cloze passage + right grammatical/lexical rules column. |
+| `tmpl-exercise-grid` | `grid` | `content` | Multi-card interactive exercise layout for sentence transformations & drills. |
 | `tmpl-summary-checklist` | `subtitle`, `grid` | `content` | Module Mastery review checklist with competency cards. |
+
+---
+
+### N. Modern Section Divider Preset (`tmpl-section-divider`)
+
+The Section Divider preset features a high-impact split-screen architecture:
+- **Left Column (~35% width)**: Features a dynamic skill gradient, `.section-module-tag`, giant serif `.section-number` (e.g., `4a`, `5b`), and italic `.section-sublabel` (`IELTS Preparation`).
+- **Right Column (~65% width)**: Displays the styled `.section-title`, `.section-desc`, and `.section-topics` with colored agenda dots.
+
+#### Standard Declarative Authoring:
+```html
+<!-- Section Divider Preset Example -->
+<slide-card template="section-divider" skill="read" badge="Module 5a" num="5a">
+    <span slot="title">Journeys<br><span style="font-style:italic; color:#b45309;">&amp; Global Travel</span></span>
+    <span slot="subtitle">Reading Detailed Information · -ing vs Infinitives · Travel Lexicon · Line Graph Models</span>
+    <div slot="content">
+        <div class="section-topic">
+            <div class="section-topic-dot" style="background:#b91c1c"></div>
+            <span>1. Reading: "A different way to see the world" (Mark Beaumont Cycling)</span>
+        </div>
+        <div class="section-topic">
+            <div class="section-topic-dot" style="background:#b91c1c"></div>
+            <span>2. Language Development: -ing Forms and Infinitives (with/without to)</span>
+        </div>
+        <div class="section-topic">
+            <div class="section-topic-dot" style="background:#15803d"></div>
+            <span>3. Vocabulary: Travel, Transport, Compound Nouns &amp; Phrasal Verbs</span>
+        </div>
+        <div class="section-topic">
+            <div class="section-topic-dot" style="background:#b91c1c"></div>
+            <span>4. Writing Task 1: Describing Line Graphs (Global Tourism Income 1960–2010)</span>
+        </div>
+    </div>
+</slide-card>
+```
+
+---
+
+### O. Dedicated 'Before You Read' Lead-in Preset
+
+Never combine pre-reading warm-up questions with the reading passage. Always allocate a dedicated `template="exercise-grid"` slide using `.discuss-card` components:
+
+```html
+<!-- Dedicated Before You Read Preset -->
+<slide-card template="exercise-grid" skill="read" title="Reading 1a Lead-in: Before You Read &amp; Smart Phone Photography (Ex 1 &amp; 2)" instruction="Discuss photography reliability, images, and camera-generated artefacts.">
+    <div slot="grid" style="display:grid; grid-template-columns:1.05fr 0.95fr; gap:24px;">
+        <!-- Left Column: Interactive Discussion Cards -->
+        <div>
+            <h3 style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">💬 Warm-Up Discussion (Ex 1)</h3>
+            <div class="discuss-card">
+                <div class="discuss-num" style="background:var(--col-reading);">1</div>
+                <div class="discuss-text">What is your favourite <strong>image</strong> on your smart phone? Where did you find or take it?</div>
+            </div>
+            <div class="discuss-card">
+                <div class="discuss-num" style="background:var(--col-reading);">2</div>
+                <div class="discuss-text">Do you think people and objects in photographs appear the same as in real life? Why or why not?</div>
+            </div>
+            <div class="discuss-card">
+                <div class="discuss-num" style="background:var(--col-reading);">3</div>
+                <div class="discuss-text">Are photographs a more reliable record of reality than written descriptions?</div>
+            </div>
+        </div>
+
+        <!-- Right Column: Pre-taught Vocabulary & Context Exploration -->
+        <div>
+            <h3 style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">📸 Vocabulary &amp; Article Preview (Ex 2)</h3>
+            <div class="card" style="padding:18px 22px; border-left:4px solid var(--col-reading); margin-bottom:12px; font-size:18px; line-height:1.65;">
+                <strong>• Image (noun):</strong><br>
+                A picture produced by a camera, on a screen, or drawn on a surface.
+            </div>
+            <div class="card" style="padding:18px 22px; border-left:4px solid var(--col-vocab); font-size:18px; line-height:1.65; background:#f8fafc;">
+                <strong>• Photographic Artefact:</strong><br>
+                Visual anomalies (orbs, mists, reflections) created purely by camera mechanics rather than supernatural phenomena.
+            </div>
+        </div>
+    </div>
+---
+
+### P. Dynamic Content Auto-Resizer & Blank Space Optimizer
+
+The presentation engine features an automatic **bidirectional content scaler and spacer** (`DeckEngine.autoFitSlide`) that ensures slides never feel empty, cramped, or clipped:
+
+1. **Underflow Detection (Spare Blank Space)**:
+   - When active content takes up less than `78%` of the notebook's available height, the engine dynamically activates `.slide-spacious`.
+   - **Font Scaling**: Automatically scales `--font-scale` up to **+28%** ($1.00 \rightarrow 1.28$).
+   - **Line Spacing**: Dynamically opens line height up to **$1.85 - 2.0$** (`--line-height-auto`).
+   - **Card Geometry**: Increases card padding from `16px 20px` to `22px 28px` and expands inter-card gaps so content fills the page harmoniously.
+
+2. **Overflow Protection (Dense Content)**:
+   - When content exceeds the slide viewport, the engine scales the page down cleanly using `transform: scale(...)` without clipping or horizontal overflow.
+
+---
+
+### Q. Native IELTS Task 1 Chart Integration (`DeckCharts`)
+
+All Task 1 data analytics use zero-dependency, lightweight, responsive SVG charts:
+
+#### 1. HTML Container Structure:
+```html
+<div class="ielts-chart-container" 
+     id="chart-unique-id" 
+     data-chart-type="multi-line" 
+     style="width:100%; background:#ffffff; border-radius:12px; padding:12px; border:1.5px solid var(--border-soft, rgba(0,0,0,0.08)); box-shadow:0 2px 8px rgba(0,0,0,0.03); margin-bottom:12px;">
+</div>
+```
+
+#### 2. Dataset Schema in `-data.js`:
+```javascript
+charts: {
+    tourismIncome: {
+        title: "Income from Tourism by Region (1960–2010)",
+        xAxis: ["1960", "1970", "1980", "1990", "2000", "2005", "2010"], // or xCategories
+        yAxisLabel: "Billion US Dollars", // Automatically formats values as $XXB
+        series: [
+            { name: "Europe", data: [40, 110, 240, 220, 360, 440, 480], color: "#2563eb" },
+            { name: "Asia and Pacific", data: [10, 30, 80, 110, 190, 290, 380], color: "#16a34a" },
+            { name: "Americas", data: [25, 60, 140, 160, 230, 250, 280], color: "#ea580c" },
+            { name: "Africa", data: [5, 10, 15, 12, 18, 22, 25], color: "#7c3aed" }
+        ]
+    }
+}
+```
+
+#### 3. Chart Mounting in Module Footer:
+```javascript
+deckCharts.register('chart-unique-id', 'multi-line', module5Data.charts.tourismIncome);
+---
+
+### R. Title Slide Syllabus & Dataset Architecture Rules
+
+To guarantee that the **Lesson Syllabus** and **Split-View Reading Passages** render correctly without blank areas:
+
+#### 1. Title Slide Syllabus Requirement (`slot="roadmap"`):
+Always populate `slot="roadmap"` with structured skill cards on Slide 1:
+```html
+<slide-card template="title" skill="title">
+    <span slot="badge">Module 06</span>
+    <span slot="title">Buying <span class="title-amp">&amp;</span> Selling</span>
+    <span slot="subtitle">IELTS Academic Preparation Masterclass<br>Food Systems, Word-of-Mouth Marketing, be going to, Linking Words &amp; Opinion Essays</span>
+    <div slot="roadmap">
+        <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('read')">
+            <div class="title-skill-name" style="color:var(--col-reading)">📖 Reading 6a</div>
+            <div class="title-skill-desc">The Future of Food &amp; Summary Completion</div>
+        </div>
+        <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('grammar')">
+            <div class="title-skill-name" style="color:var(--col-grammar)">📚 Grammar 6a</div>
+            <div class="title-skill-desc">be going to Intentions &amp; Predictions</div>
+        </div>
+        <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('write')">
+            <div class="title-skill-name" style="color:var(--col-writing)">✍️ Writing 6a</div>
+            <div class="title-skill-desc">Paragraph Coherence &amp; Local Food Diets</div>
+        </div>
+        <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('vocab')">
+            <div class="title-skill-name" style="color:var(--col-vocab)">🛍️ Vocabulary 6b</div>
+            <div class="title-skill-desc">Types of Shops, Nouns &amp; Prepositions</div>
+        </div>
+        <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('read')">
+            <div class="title-skill-name" style="color:var(--col-reading)">📖 Reading 6b</div>
+            <div class="title-skill-desc">Word-of-Mouth Marketing Word Bank</div>
+        </div>
+        <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('write')">
+            <div class="title-skill-name" style="color:var(--col-writing)">✍️ Writing 6b</div>
+            <div class="title-skill-desc">Sentence Linking &amp; Consumerism Essay</div>
+        </div>
+    </div>
+</slide-card>
+```
+
+#### 2. Dataset Script Loading Order:
+The module dataset (`module-XX-data.js`) **MUST** be loaded **BEFORE** the template engine and bundle scripts at the bottom of the HTML file:
+```html
+<!-- 1. Curriculum Dataset First -->
+<script src="module-06-data.js"></script>
+
+<!-- 2. Master Engine & Bundles -->
+<script src="../js/template-engine.js"></script>
+<script src="../js/deck-bundle.js"></script>
+```
+
+#### 3. Reading Dataset Keys in `-data.js`:
+In reading datasets, the property name for summary passages must strictly be `summaryText` (with optional `wordBank: [...]` array):
+```javascript
+reading6a: {
+    title: "The Future of Food?",
+    passage: `...`,
+    summaryText: `Both companies and 1. <input type="text" class="blank-input" data-ans="governments"> ...`
+}
+
+// Ensure global window alias exists for template engine resolution:
+window.reading6a = window.module6Data.reading6a;
+```
+
+---
+
+### S. Reading Walkthrough & Multi-Question Splitting Rules
+
+To ensure optimal pedagogic clarity, zero UI clipping, and consistency across all presentation modules:
+
+#### 1. Strict 1-Question-Per-Slide Rule (Feature / Multi-Select Splitting):
+- **Never group multiple questions onto a single slide.**
+- For multi-select or feature selection questions (e.g. *Questions 8–10: Choose THREE letters A–G*), **split each question into its own dedicated `template="walkthrough"` slide**:
+  - **Slide A (Question 8 - Feature 1 of 3)**: Verbatim paragraph excerpt with highlighted evidence (`mark.evidence`), single question prompt, single dropdown selector, and dedicated synonym match card.
+  - **Slide B (Question 9 - Feature 2 of 3)**: Targeted paragraph excerpt with highlighted evidence, single question prompt, single dropdown selector, and dedicated synonym match card.
+  - **Slide C (Question 10 - Feature 3 of 3)**: Targeted paragraph excerpt with highlighted evidence, single question prompt, single dropdown selector, and dedicated synonym match card.
+
+#### 2. Walkthrough Template Slot Standard (`template="walkthrough"`):
+- All walkthrough slides must adhere to these exact slot names:
+```html
+<slide-card template="walkthrough" skill="read" question-num="Question 8 (Feature 1 of 3)" word-count="CHOOSE A–G" strategy="Scan Paragraph 8 for park activities and match against options A–G.">
+    <span slot="passage-header">Paragraph 8 • Open Air Dining &amp; Picnics</span>
+    <div slot="passage-text">
+        There are playgrounds for children, as well as places to sit and relax or 
+        <mark class="evidence" id="ev-walk-7b-8">
+            <span class="syn-pair-1" data-q="walk-7b-8">share a picnic</span>.
+        </mark>
+    </div>
+    <div slot="question-text">
+        Which feature (1 of 3) does the passage mention as an activity the community can enjoy?
+    </div>
+    <div slot="input-area">
+        <select class="select-input" data-ans="C" style="font-weight:700; width:340px;">
+            <option value="">Select Feature...</option>
+            <option value="A">A movie screenings</option>
+            <option value="B">B special dog walking areas</option>
+            <option value="C">C places for open air eating</option>
+            <option value="D">D children's art clubs</option>
+            <option value="E">E gardening activities</option>
+            <option value="F">F spaces for informal work meetings</option>
+            <option value="G">G organised fitness activities</option>
+        </select>
+    </div>
+    <div slot="explanation">
+        <div class="syn-key-box"><span class="syn-tag green">Option C Match:</span> <em>"places for open air eating"</em> ↔ <em>"places to sit and relax or share a picnic"</em></div>
+    </div>
+</slide-card>
+```
+- **Prohibited Slots**: Never use `slot="answer-input"` or `slot="synonyms"`. All synonym/paraphrase tags must live inside `<div slot="explanation">` using `<div class="syn-key-box">` elements.
+
+#### 3. Grammar Masterclass Template Standard (`template="grammar-masterclass"`):
+- Use `template="grammar-masterclass"` (never `grammar-rule`):
+```html
+<slide-card template="grammar-masterclass" skill="grammar" title="Grammar 7a Masterclass: The Zero Conditional" subtitle="Master real conditions, general truths, habitual actions and clause punctuation.">
+    <div slot="rules">
+        <div class="rule-card">
+            <div style="font-size:20px; font-weight:800; color:var(--col-grammar); margin-bottom:6px;">1. Structure &amp; General Truths</div>
+            <div style="font-size:17px; line-height:1.65;">
+                <strong>If / When + present simple, present simple</strong><br>
+                Describes situations that always happen as a natural or logical result:<br>
+                • <em>"If people live in a small community, they generally feel safer."</em>
+            </div>
+        </div>
+    </div>
+    <div slot="contrast-card">
+        <div style="font-size:20px; font-weight:800; color:var(--col-grammar); margin-bottom:8px;">⚠️ Negative Conditions (*Unless*)</div>
+        <div style="font-size:16.5px; line-height:1.65; color:var(--text-dark); background:rgba(217,119,6,0.08); padding:12px 16px; border-radius:8px; margin-bottom:12px;">
+            <strong>Unless = If ... not:</strong><br>
+            • <em>"Communities don't work well <strong>unless</strong> they have a central point."</em>
+        </div>
+        <button class="deck-btn grammar-ref-btn" data-grammar-ref="../references/grammar_sources/expert_5/module_07.html">📖 Open Zero Conditional Grammar Handbook</button>
+    </div>
+</slide-card>
+```
+
+
+
+
+
+
 

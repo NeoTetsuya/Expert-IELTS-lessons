@@ -41,14 +41,17 @@
 <!-- 2. SECTION DIVIDER TEMPLATE -->
 <template id="tmpl-section-divider">
     <section class="slide" data-skill="title">
-        <div class="slide-inner">
-            <div class="notebook">
-                <div class="skill-stripe" style="background: var(--col-vocab);"></div>
-                <div class="page-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px 60px;">
-                    <span class="skill-badge" style="background: var(--col-vocab); font-size: 16px; padding: 6px 18px; margin-bottom: 16px;" data-slot="badge"></span>
-                    <h2 class="slide-title" style="font-size: 52px; margin-bottom: 16px;" data-slot="title"></h2>
-                    <p class="slide-subtitle" style="font-size: 24px; max-width: 900px; margin: 0 auto 30px;" data-slot="subtitle"></p>
-                    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;" data-slot="content"></div>
+        <div class="section-slide">
+            <div class="section-inner">
+                <div class="section-left" style="background: linear-gradient(135deg, #155e75, #0d9488);">
+                    <div class="section-module-tag reveal" data-slot="badge">Module Section</div>
+                    <div class="section-number reveal" data-slot="num">00</div>
+                    <div class="section-sublabel reveal" data-slot="sublabel">IELTS Preparation</div>
+                </div>
+                <div class="section-right">
+                    <div class="section-title reveal" data-slot="title"></div>
+                    <p class="section-desc reveal" data-slot="subtitle"></p>
+                    <div class="section-topics reveal" data-slot="content"></div>
                 </div>
             </div>
         </div>
@@ -557,19 +560,49 @@
         static resolveDataPath(path) {
             if (!path) return null;
             const parts = path.split('.');
-            let current = window.moduleData || window.module3Data || window.module2Data || window.module1Data;
-            if (parts[0] in window) {
-                current = window[parts[0]];
-                parts.shift();
+            
+            // Check direct window property first (e.g. "module4Data.reading4a")
+            if (parts[0] in window && window[parts[0]] !== undefined) {
+                let current = window[parts[0]];
+                for (let i = 1; i < parts.length; i++) {
+                    if (current && typeof current === 'object' && parts[i] in current) {
+                        current = current[parts[i]];
+                    } else {
+                        return null;
+                    }
+                }
+                return current;
             }
-            for (const part of parts) {
-                if (current && typeof current === 'object' && part in current) {
-                    current = current[part];
-                } else {
-                    return null;
+
+            // Search through moduleData or any window.module*Data
+            let candidateDatasets = [window.moduleData, window.module4Data, window.module3Data, window.module2Data, window.module1Data, window.module5Data, window.module6Data, window.module7Data, window.module8Data, window.module9Data, window.module10Data].filter(Boolean);
+            
+            // If still empty, scan window keys starting with "module"
+            if (candidateDatasets.length === 0) {
+                for (const k in window) {
+                    if (k.startsWith('module') && window[k] && typeof window[k] === 'object') {
+                        candidateDatasets.push(window[k]);
+                    }
                 }
             }
-            return current;
+
+            for (const dataset of candidateDatasets) {
+                let current = dataset;
+                let found = true;
+                for (const part of parts) {
+                    if (current && typeof current === 'object' && part in current) {
+                        current = current[part];
+                    } else {
+                        found = false;
+                        break;
+                    }
+                }
+                if (found && current !== undefined) {
+                    return current;
+                }
+            }
+
+            return null;
         }
 
         static hydrateSlideFromData(section, el, data, skillCol) {
@@ -711,17 +744,17 @@
                     let html = '';
                     if (data.summaryText) {
                         const wbChips = (data.wordBank && Array.isArray(data.wordBank))
-                            ? data.wordBank.map(w => `<span class="word-chip" data-word="${w}" style="background:#ffffff; border:1px solid #cbd5e1; padding:4px 10px; border-radius:6px; font-weight:700; font-size:15px;">${w}</span>`).join('')
+                            ? data.wordBank.map(w => `<span class="word-chip" data-word="${w}">${w}</span>`).join('')
                             : '';
                         html += `
                             ${wbChips ? `
-                            <div class="card" style="background:#f8fafc; border:1.5px solid #cbd5e1; border-left:5px solid var(--col-reading); padding:12px 16px; margin-bottom:12px;">
-                                <div style="font-size:15px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-bottom:8px;">📦 Word Bank (Use words exactly as shown)</div>
-                                <div class="vocab-chips-container" style="display:flex; flex-wrap:wrap; gap:6px;">
+                            <div class="card word-bank-card" style="border-left:5px solid var(--col-reading); margin-bottom:12px;">
+                                <div class="word-bank-header" style="font-size:15px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-bottom:8px;">📦 Word Bank (Use words exactly as shown)</div>
+                                <div class="vocab-chips-container word-chips-container" style="display:flex; flex-wrap:wrap; gap:6px;">
                                     ${wbChips}
                                 </div>
                             </div>` : ''}
-                            <div class="card" style="padding:18px 22px; font-size:19.5px; line-height:2.1; color:#0f172a; background:#ffffff; border:1px solid #e2e8f0; border-radius:10px;">
+                            <div class="card summary-box-card" style="padding:18px 22px; font-size:19.5px; line-height:2.1; border-radius:10px;">
                                 ${data.summaryText}
                             </div>
                         `;
@@ -743,7 +776,8 @@
                     }
                     if (data.questions && Array.isArray(data.questions)) {
                         const isHeadings = !!data.headings;
-                        const headingTitle = isHeadings ? '📋 Matching Headings' : '📋 Questions: YES / NO / NOT GIVEN';
+                        const slideBadge = (el ? el.getAttribute('badge') : null) || data.badge || '';
+                        const headingTitle = data.headingTitle || (slideBadge ? `📋 ${slideBadge.split('•')[1]?.trim() || slideBadge}` : '📋 Questions');
                         html += `<div style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-bottom:10px;">${headingTitle}</div>`;
                         html += data.questions.map(q => {
                             let selectOptions = '<option value="">Select...</option>';
@@ -752,8 +786,13 @@
                                 if (q.ans && !data.headings.some(h => h.roman === q.ans)) {
                                     selectOptions += `<option value="${q.ans}">${q.ans}</option>`;
                                 }
+                            } else if (q.options && Array.isArray(q.options)) {
+                                selectOptions += q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
                             } else if (['YES', 'NO', 'NOT GIVEN'].includes(q.ans)) {
                                 selectOptions += `<option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option>`;
+                            } else if (q.ans && q.ans.startsWith('Paragraph')) {
+                                const paras = ['Paragraph A', 'Paragraph B', 'Paragraph C', 'Paragraph D', 'Paragraph E', 'Paragraph F', 'Paragraph G'];
+                                selectOptions += paras.map(p => `<option value="${p}">${p}</option>`).join('');
                             } else {
                                 selectOptions += `<option value="${q.ans}">${q.ans}</option>`;
                             }
@@ -899,6 +938,14 @@
                 case 'subtitle':
                     return section.querySelector('[data-slot="subtitle"], .slide-subtitle, .title-sub');
 
+                case 'num':
+                case 'section-num':
+                case 'modulenum':
+                    return section.querySelector('[data-slot="num"], .section-number');
+
+                case 'sublabel':
+                    return section.querySelector('[data-slot="sublabel"], .section-sublabel');
+
                 case 'instruction':
                     return section.querySelector('[data-slot="instruction"], .slide-subtitle');
 
@@ -1008,7 +1055,7 @@
                 if (stripe && (!stripe.style.background || stripe.style.background.includes('--col-'))) {
                     stripe.style.background = skillCol;
                 }
-                const skillBadge = section.querySelector('.skill-badge, [data-slot="badge"]');
+                const skillBadge = section.querySelector('.skill-badge');
                 if (skillBadge && (!skillBadge.style.background || skillBadge.style.background.includes('--col-'))) {
                     skillBadge.style.background = skillCol;
                 }
@@ -1031,6 +1078,41 @@
                         if (target) target.innerHTML = val;
                     }
                 });
+
+                // Section-divider specific enhancements
+                const numEl = section.querySelector('[data-slot="num"], .section-number');
+                if (numEl) {
+                    const explicitNum = el.getAttribute('num') || el.getAttribute('data-num');
+                    if (explicitNum) {
+                        numEl.innerHTML = explicitNum;
+                    } else {
+                        const badgeVal = el.getAttribute('badge') || '';
+                        const match = badgeVal.match(/(\d+[a-z]?)/i);
+                        if (match) numEl.innerHTML = match[1].toLowerCase();
+                    }
+                }
+                const leftCol = section.querySelector('.section-left');
+                if (leftCol) {
+                    const leftBgAttr = el.getAttribute('left-bg') || el.getAttribute('data-left-bg');
+                    if (leftBgAttr) {
+                        leftCol.style.background = leftBgAttr;
+                    } else {
+                        const skillGradients = {
+                            'read': 'linear-gradient(135deg, #1e3a8a, #2563eb)',
+                            'reading': 'linear-gradient(135deg, #1e3a8a, #2563eb)',
+                            'grammar': 'linear-gradient(135deg, #c2410c, #ea580c)',
+                            'vocab': 'linear-gradient(135deg, #047857, #059669)',
+                            'vocabulary': 'linear-gradient(135deg, #047857, #059669)',
+                            'write': 'linear-gradient(135deg, #6d28d9, #7c3aed)',
+                            'writing': 'linear-gradient(135deg, #6d28d9, #7c3aed)',
+                            'review': 'linear-gradient(135deg, #b45309, #d97706)',
+                            'title': 'linear-gradient(135deg, #14532d, #15803d)'
+                        };
+                        if (skillGradients[skill.toLowerCase()]) {
+                            leftCol.style.background = skillGradients[skill.toLowerCase()];
+                        }
+                    }
+                }
 
                 // Transfer all named slots from child elements
                 const slotChildren = el.querySelectorAll('[slot]');
@@ -1066,7 +1148,7 @@
 
                         // Copy inner HTML (append if target is an accumulator or replace)
                         const targetSlotAttr = target.getAttribute('data-slot');
-                        if ((targetSlotAttr === 'left-col' || targetSlotAttr === 'roadmap' || target.classList.contains('title-left')) && target.innerHTML.trim() !== '') {
+                        if ((targetSlotAttr === 'roadmap' || target.classList.contains('title-left')) && target.innerHTML.trim() !== '') {
                             target.innerHTML += child.innerHTML;
                         } else {
                             target.innerHTML = child.innerHTML;
@@ -1139,6 +1221,19 @@
                 if (slide.classList.contains('active')) {
                     hasActiveSlide = true;
                 }
+            });
+
+            // PASS 3: Ensure all inline font-size styles dynamically scale with --font-scale
+            allSlides.forEach(slide => {
+                slide.querySelectorAll('*[style*="font-size"]').forEach(el => {
+                    const styleStr = el.getAttribute('style');
+                    if (styleStr && styleStr.includes('font-size') && !styleStr.includes('--font-scale')) {
+                        const updated = styleStr.replace(/font-size\s*:\s*([0-9.]+)px/gi, (match, p1) => {
+                            return `font-size: calc(${p1}px * var(--font-scale, 1))`;
+                        });
+                        el.setAttribute('style', updated);
+                    }
+                });
             });
 
             // If no slide is marked active, activate the first slide
@@ -1397,8 +1492,9 @@ class DeckEngine {
     }
 
     /**
-     * Universal Content Auto-Fitter
-     * Automatically adjusts font-scaling and vertical dimensions so long content fits without clipping
+     * Universal Content Auto-Fitter & Spacer
+     * Automatically scales up and spaces content when there is excess blank space,
+     * or scales down when content overflows.
      */
     autoFitSlide(slide) {
         if (!slide) return;
@@ -1406,23 +1502,43 @@ class DeckEngine {
         const pageContent = slide.querySelector('.page-content, .title-notebook');
         if (!notebook || !pageContent) return;
 
-        // Reset and measure in a single rAF to minimize layout thrashing
+        // Skip section divider and title slides which have fixed layouts
+        if (slide.dataset.skill === 'title' || slide.dataset.skill === 'section' || slide.querySelector('.section-slide')) {
+            return;
+        }
+
+        // Measure and optimize in animation frames
         requestAnimationFrame(() => {
+            slide.style.removeProperty('--font-scale');
+            slide.style.removeProperty('--line-height-auto');
+            slide.classList.remove('slide-spacious');
             pageContent.style.removeProperty('transform');
             pageContent.style.removeProperty('transform-origin');
             pageContent.style.removeProperty('height');
 
-            // Force layout calc after clearing
-            const availableHeight = notebook.clientHeight;
+            // Force reflow and measure active dimensions
+            const availableHeight = notebook.clientHeight - 36;
             const scrollH = pageContent.scrollHeight;
 
-            if (scrollH > availableHeight + 6) {
+            if (scrollH > availableHeight + 8) {
+                // OVERFLOW: Scale down gracefully to prevent clipping
                 const fitRatio = Math.max(0.68, (availableHeight - 12) / scrollH);
-                // Batch all writes after reads
                 requestAnimationFrame(() => {
                     pageContent.style.transform = `scale(${fitRatio.toFixed(3)})`;
                     pageContent.style.transformOrigin = 'top center';
                     pageContent.style.height = `${(availableHeight / fitRatio).toFixed(1)}px`;
+                });
+            } else if (scrollH < availableHeight * 0.78) {
+                // UNDERFLOW / SPARE BLANK SPACE:
+                // Auto-expand font size, line-height, card padding, and vertical distribution
+                const heightRatio = availableHeight / Math.max(1, scrollH);
+                const autoFontScale = Math.min(1.28, Math.max(1.0, 1 + (heightRatio - 1) * 0.32));
+                const autoLineHeight = Math.min(2.0, Math.max(1.65, 1.65 + (heightRatio - 1) * 0.28));
+
+                requestAnimationFrame(() => {
+                    slide.style.setProperty('--font-scale', (this.fontScale * autoFontScale).toFixed(2));
+                    slide.style.setProperty('--line-height-auto', autoLineHeight.toFixed(2));
+                    slide.classList.add('slide-spacious');
                 });
             }
         });
@@ -1877,10 +1993,32 @@ class DeckEngine {
     resetStrategySlide(target) {
         const slide = target ? (target.closest('.slide') || target.closest('.page-content') || target.closest('.notebook')) : document.querySelector('.slide.active');
         if (!slide) return;
-        slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word').forEach(s => {
+        slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word, .vocab-term').forEach(s => {
             s.classList.remove('active-syn', 'active-vocab');
         });
         slide.querySelectorAll('.q-card').forEach(c => c.classList.remove('revealed'));
+    }
+
+    toggleVocabHighlight(target) {
+        const slide = target ? (target.closest('.slide') || target.closest('.page-content') || target.closest('.notebook')) : document.querySelector('.slide.active');
+        if (!slide) return;
+        const vocabs = slide.querySelectorAll('.vocab-word, .vocab-term, .word-chip, .vocab-chip');
+        if (vocabs.length === 0) return;
+        const isAnyActive = Array.from(vocabs).some(v => v.classList.contains('active-vocab'));
+        
+        vocabs.forEach(v => {
+            if (isAnyActive) {
+                v.classList.remove('active-vocab');
+            } else {
+                v.classList.add('active-vocab');
+            }
+        });
+
+        if (window.toast) {
+            window.toast.info(isAnyActive ? 'Vocabulary highlights hidden' : 'Vocabulary highlights revealed', {
+                duration: 2000
+            });
+        }
     }
 }
 
@@ -1904,6 +2042,7 @@ window.resetMultiOpts = (id) => (window.deckEngine ? window.deckEngine.resetMult
 window.toggleExplanations = (id) => (window.deckEngine ? window.deckEngine.toggleExplanations(id) : null);
 window.toggleSynonymExplanation = (q, ev) => (window.deckEngine ? window.deckEngine.toggleSynonymExplanation(q, ev) : null);
 window.toggleAllHighlights = (target) => (window.deckEngine ? window.deckEngine.toggleAllHighlights(target) : null);
+window.toggleVocabHighlight = (target) => (window.deckEngine ? window.deckEngine.toggleVocabHighlight(target) : null);
 window.resetStrategySlide = (target) => (window.deckEngine ? window.deckEngine.resetStrategySlide(target) : null);
 window.switchHighLineTab = (tab) => (window.deckEngine ? window.deckEngine.switchHighLineTab(tab) : null);
 window.jumpToSlide = (idx) => (window.deckEngine ? window.deckEngine.jumpToSlide(idx) : null);
@@ -3831,14 +3970,14 @@ function initStepReveal() {
     } else {
         window.stepRevealEngine.bindEvents();
     }
-    window.stepReveal = window.stepRevealEngine;
 }
 
 window.stepReveal = function(btn) {
-    if (window.stepRevealEngine) {
-        const container = btn ? (btn.closest('.question-pane') || btn.closest('.slide') || btn.closest('.page-content') || btn.closest('.notebook')) : document.querySelector('.slide.active');
-        window.stepRevealEngine.revealNextInContainer(container || document.querySelector('.slide.active'));
+    if (!window.stepRevealEngine) {
+        window.stepRevealEngine = new StepRevealEngine(window.deckEngine);
     }
+    const container = btn ? (btn.closest('.question-pane') || btn.closest('.slide') || btn.closest('.page-content') || btn.closest('.notebook')) : document.querySelector('.slide.active');
+    window.stepRevealEngine.revealNextInContainer(container || document.querySelector('.slide.active'));
 };
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -4690,7 +4829,11 @@ class ReadingGrounder {
         this.renderSynonymBadges();
         this.bindEvidenceHover();
         this.bindVocabExplainer();
+        this.autoTagVocabWords();
         this.injectVocabStyles();
+
+        document.addEventListener('slidechange', () => this.autoTagVocabWords());
+        window.addEventListener('hashchange', () => this.autoTagVocabWords());
     }
 
     /**
@@ -4896,10 +5039,12 @@ class ReadingGrounder {
     }
 
     static showVocabPopover(el, dictData = null) {
-        // Remove previous active glow
+        // Remove previous active glows across slide
         document.querySelectorAll('.vocab-word.active-vocab, .vocab-term.active-vocab').forEach(v => {
             v.classList.remove('active-vocab');
         });
+
+        // Activate the clicked element softly with dashed/solid underline and soft tint
         el.classList.add('active-vocab');
 
         const cleanWord = el.dataset.word || (dictData ? dictData.word : el.textContent.trim().replace(/[.,/#!$%^&*;:{}=\-_`~()"]/g, ""));
@@ -4966,8 +5111,8 @@ class ReadingGrounder {
         if (popover) {
             popover.style.display = 'none';
         }
-        document.querySelectorAll('.vocab-word.active-vocab, .vocab-term.active-vocab').forEach(v => {
-            v.classList.remove('active-vocab');
+        document.querySelectorAll('.active-vocab, .active-syn, .q-card-active').forEach(v => {
+            v.classList.remove('active-vocab', 'active-syn', 'q-card-active');
         });
     }
 
@@ -5194,6 +5339,81 @@ class ReadingGrounder {
             });
 
             container.appendChild(fragment);
+        });
+    }
+
+    /**
+     * Automatically scans reading passages for key vocabulary words and collocations,
+     * adding the subtle dashed underline and distinct color so users can hover/click to inspect.
+     */
+    static autoTagVocabWords() {
+        const dict = this.dictionary;
+        const dictKeys = Object.keys(dict).sort((a, b) => b.length - a.length);
+        if (dictKeys.length === 0) return;
+
+        const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+        const containers = document.querySelectorAll('.reading-pane, [data-slot="passage"], .passage-box, .reading-passage, .passage-content, .two-col > div');
+        containers.forEach(container => {
+            const seenWords = new Set();
+
+            // Pre-seed seenWords with any existing .vocab-word elements
+            container.querySelectorAll('.vocab-word, .vocab-term').forEach(v => {
+                const w = (v.dataset.word || v.textContent).trim().toLowerCase();
+                if (w) seenWords.add(w);
+            });
+
+            const walker = document.createTreeWalker(
+                container,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: (node) => {
+                        const parent = node.parentElement;
+                        if (!parent) return NodeFilter.FILTER_REJECT;
+                        const tag = parent.tagName.toLowerCase();
+                        if (['script', 'style', 'button', 'select', 'textarea', 'input', 'kbd'].includes(tag)) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        if (parent.closest('.vocab-word, .vocab-term, .vocab-popover, #presentationToolsHUD')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
+
+            const textNodes = [];
+            while (walker.nextNode()) {
+                textNodes.push(walker.currentNode);
+            }
+
+            textNodes.forEach(node => {
+                const text = node.nodeValue;
+                if (!text || text.trim().length < 3) return;
+
+                for (const phrase of dictKeys) {
+                    const lowerPhrase = phrase.toLowerCase();
+                    if (seenWords.has(lowerPhrase)) continue;
+
+                    const regex = new RegExp(`\\b(${escapeRegex(phrase)})\\b`, 'i');
+                    if (regex.test(node.nodeValue)) {
+                        seenWords.add(lowerPhrase);
+                        const span = document.createElement('span');
+                        span.innerHTML = node.nodeValue.replace(regex, (match) => {
+                            const entry = dict[lowerPhrase];
+                            const ipa = entry?.ipa || '';
+                            const pos = entry?.pos || '';
+                            const def = entry?.def || '';
+                            const colloc = entry?.colloc || '';
+                            return `<span class="vocab-word" data-word="${match}" data-ipa="${ipa}" data-pos="${pos}" data-def="${def}" data-colloc="${colloc}">${match}</span>`;
+                        });
+                        if (node.parentNode) {
+                            node.parentNode.replaceChild(span, node);
+                        }
+                        break;
+                    }
+                }
+            });
         });
     }
 
@@ -7507,24 +7727,38 @@ class ClassroomTimer {
     updateDisplay() {
         const mins = Math.floor(this.timerSeconds / 60);
         const secs = this.timerSeconds % 60;
-        const timeStr = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        const minsStr = String(mins).padStart(2, '0');
+        const secsStr = String(secs).padStart(2, '0');
+        const timeStr = `${minsStr}:${secsStr}`;
 
-        // Update modal display
+        // Update modal display with NumberFlow if available
         const display = document.getElementById('timerDisplay');
         if (display) {
-            display.textContent = timeStr;
+            if (customElements.get('number-flow')) {
+                display.innerHTML = `<number-flow value="${minsStr}"></number-flow>:<number-flow value="${secsStr}"></number-flow>`;
+            } else {
+                display.textContent = timeStr;
+            }
             display.classList.toggle('ended', this.timerSeconds <= 0 && !this.timerRunning);
         }
 
         // Update Presenter Cockpit countdown displays
         const cpDisplay = document.getElementById('cpCountdownDisplay');
         if (cpDisplay) {
-            cpDisplay.textContent = timeStr;
+            if (customElements.get('number-flow')) {
+                cpDisplay.innerHTML = `<number-flow value="${minsStr}"></number-flow>:<number-flow value="${secsStr}"></number-flow>`;
+            } else {
+                cpDisplay.textContent = timeStr;
+            }
             cpDisplay.classList.toggle('ended', this.timerSeconds <= 0 && !this.timerRunning);
         }
 
         document.querySelectorAll('.cp-timer-countdown-display').forEach(el => {
-            el.textContent = timeStr;
+            if (customElements.get('number-flow')) {
+                el.innerHTML = `<number-flow value="${minsStr}"></number-flow>:<number-flow value="${secsStr}"></number-flow>`;
+            } else {
+                el.textContent = timeStr;
+            }
             el.classList.toggle('ended', this.timerSeconds <= 0 && !this.timerRunning);
         });
     }
@@ -7575,6 +7809,18 @@ class ClassroomTimer {
                         cpToggleBtn.textContent = '▶ Start Timer';
                     }
                     this.playChime();
+                    if (window.toast) {
+                        window.toast.warning('Time is up! Classroom activity completed.', {
+                            title: '⏱️ Timer Finished',
+                            action: {
+                                label: '+1 Min',
+                                onClick: () => {
+                                    this.setTimer(60);
+                                    this.toggleRun();
+                                }
+                            }
+                        });
+                    }
                 }
             }, 1000);
         }
@@ -7624,6 +7870,522 @@ window.addEventListener('DOMContentLoaded', () => {
     classroomTimer = new ClassroomTimer();
     window.classroomTimer = classroomTimer;
 });
+
+
+
+/* ==================== MODULE: toast-manager.js ==================== */
+/**
+ * Expert IELTS Presentations — Modern Toast Manager (Sonner-inspired)
+ * 
+ * High-performance, stacked, accessible toast notification system.
+ * Zero external dependencies, theme-aware, with swipe/click dismissal and action buttons.
+ */
+
+(function () {
+    'use strict';
+
+    class ToastManager {
+        constructor() {
+            this.toasts = [];
+            this.container = null;
+            this.maxVisible = 3;
+            this.initContainer();
+        }
+
+        initContainer() {
+            if (document.getElementById('sonner-toast-container')) {
+                this.container = document.getElementById('sonner-toast-container');
+                return;
+            }
+
+            const container = document.createElement('div');
+            container.id = 'sonner-toast-container';
+            container.className = 'sonner-toast-container';
+            container.setAttribute('aria-live', 'polite');
+            container.setAttribute('aria-atomic', 'true');
+            document.body.appendChild(container);
+            this.container = container;
+        }
+
+        createToastElement(id, message, type = 'info', options = {}) {
+            const toast = document.createElement('div');
+            toast.className = `sonner-toast sonner-toast-${type}`;
+            toast.id = `toast-${id}`;
+            toast.setAttribute('role', 'status');
+
+            const icons = {
+                success: `<svg class="sonner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>`,
+                error: `<svg class="sonner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`,
+                warning: `<svg class="sonner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+                info: `<svg class="sonner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`,
+                loading: `<svg class="sonner-icon sonner-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>`
+            };
+
+            let actionsHtml = '';
+            if (options.action) {
+                actionsHtml = `<button class="sonner-action-btn" id="toast-action-${id}">${options.action.label}</button>`;
+            }
+
+            toast.innerHTML = `
+                <div class="sonner-toast-body">
+                    <span class="sonner-icon-wrap sonner-icon-${type}">${icons[type] || icons.info}</span>
+                    <div class="sonner-toast-content">
+                        <div class="sonner-toast-title">${options.title ? `<strong>${options.title}</strong>` : ''}</div>
+                        <div class="sonner-toast-message">${message}</div>
+                    </div>
+                    ${actionsHtml}
+                    <button class="sonner-close-btn" aria-label="Close">&times;</button>
+                </div>
+            `;
+
+            const closeBtn = toast.querySelector('.sonner-close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => this.dismiss(id));
+            }
+
+            if (options.action && options.action.onClick) {
+                const actionBtn = toast.querySelector(`#toast-action-${id}`);
+                if (actionBtn) {
+                    actionBtn.addEventListener('click', () => {
+                        options.action.onClick();
+                        this.dismiss(id);
+                    });
+                }
+            }
+
+            return toast;
+        }
+
+        show(message, type = 'info', options = {}) {
+            this.initContainer();
+            const id = 't_' + Math.random().toString(36).substr(2, 9);
+            const duration = options.duration !== undefined ? options.duration : 4000;
+
+            const toastEl = this.createToastElement(id, message, type, options);
+            this.container.appendChild(toastEl);
+
+            const toastObj = { id, el: toastEl, timeout: null };
+
+            if (duration > 0) {
+                toastObj.timeout = setTimeout(() => {
+                    this.dismiss(id);
+                }, duration);
+            }
+
+            this.toasts.push(toastObj);
+            this.updateStackPositions();
+
+            // Slide in animation
+            requestAnimationFrame(() => {
+                toastEl.classList.add('sonner-visible');
+            });
+
+            return id;
+        }
+
+        success(message, options = {}) {
+            return this.show(message, 'success', options);
+        }
+
+        error(message, options = {}) {
+            return this.show(message, 'error', options);
+        }
+
+        warning(message, options = {}) {
+            return this.show(message, 'warning', options);
+        }
+
+        info(message, options = {}) {
+            return this.show(message, 'info', options);
+        }
+
+        loading(message, options = {}) {
+            return this.show(message, 'loading', { ...options, duration: 0 });
+        }
+
+        dismiss(id) {
+            const index = this.toasts.findIndex(t => t.id === id);
+            if (index === -1) return;
+
+            const toastObj = this.toasts[index];
+            if (toastObj.timeout) clearTimeout(toastObj.timeout);
+
+            toastObj.el.classList.remove('sonner-visible');
+            toastObj.el.classList.add('sonner-exiting');
+
+            setTimeout(() => {
+                if (toastObj.el.parentNode) {
+                    toastObj.el.parentNode.removeChild(toastObj.el);
+                }
+                this.toasts = this.toasts.filter(t => t.id !== id);
+                this.updateStackPositions();
+            }, 300);
+        }
+
+        updateStackPositions() {
+            const total = this.toasts.length;
+            this.toasts.forEach((toast, idx) => {
+                const depth = total - 1 - idx;
+                if (depth >= this.maxVisible) {
+                    toast.el.style.opacity = '0';
+                    toast.el.style.pointerEvents = 'none';
+                } else {
+                    toast.el.style.opacity = '1';
+                    toast.el.style.pointerEvents = 'auto';
+                    const offsetY = depth * 14;
+                    const scale = 1 - depth * 0.05;
+                    toast.el.style.transform = `translateY(-${offsetY}px) scale(${scale})`;
+                    toast.el.style.zIndex = `${1000 - depth}`;
+                }
+            });
+        }
+    }
+
+    // Expose global singleton
+    window.sonnerToast = new ToastManager();
+    window.toast = window.sonnerToast;
+
+})();
+
+
+/* ==================== MODULE: number-flow.js ==================== */
+/**
+ * Expert IELTS Presentations — Modern Digit Animation Engine (NumberFlow-inspired)
+ * 
+ * Smooth, columnar digit morphing transitions with physics springs.
+ * Eliminates character jumps and layout jitter for timers, slide indicators, and score stats.
+ */
+
+(function () {
+    'use strict';
+
+    class NumberFlowEngine {
+        constructor() {
+            this.initCustomElement();
+        }
+
+        initCustomElement() {
+            if (customElements.get('number-flow')) return;
+
+            customElements.define('number-flow', class extends HTMLElement {
+                static get observedAttributes() {
+                    return ['value', 'format', 'prefix', 'suffix'];
+                }
+
+                constructor() {
+                    super();
+                    this.currentVal = '';
+                }
+
+                connectedCallback() {
+                    this.render(this.getAttribute('value') || '0');
+                }
+
+                attributeChangedCallback(name, oldVal, newVal) {
+                    if (name === 'value' && oldVal !== newVal) {
+                        this.render(newVal || '0');
+                    }
+                }
+
+                render(valStr) {
+                    const prefix = this.getAttribute('prefix') || '';
+                    const suffix = this.getAttribute('suffix') || '';
+                    const chars = (prefix + valStr + suffix).split('');
+
+                    this.innerHTML = '';
+                    this.className = 'number-flow-root';
+
+                    chars.forEach(char => {
+                        const digitEl = document.createElement('span');
+                        digitEl.className = 'number-flow-char';
+
+                        if (/\d/.test(char)) {
+                            digitEl.classList.add('number-flow-digit');
+                            const num = parseInt(char, 10);
+                            digitEl.innerHTML = `
+                                <span class="number-flow-column" style="transform: translateY(-${num * 10}%);">
+                                    <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span>
+                                    <span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                                </span>
+                            `;
+                        } else {
+                            digitEl.textContent = char;
+                        }
+                        this.appendChild(digitEl);
+                    });
+                }
+            });
+        }
+
+        /**
+         * Programmatic helper to animate an element from one number to another
+         */
+        animateElement(element, targetNumber, duration = 800) {
+            if (!element) return;
+            const targetVal = String(targetNumber).padStart(2, '0');
+            element.innerHTML = `<number-flow value="${targetVal}"></number-flow>`;
+        }
+    }
+
+    window.NumberFlow = new NumberFlowEngine();
+
+})();
+
+
+/* ==================== MODULE: command-palette.js ==================== */
+/**
+ * Expert IELTS Presentations — Modern Command Palette (cmdk-inspired)
+ * 
+ * Accessible, fast ⌘K command menu for instant slide navigation,
+ * classroom tool launching, and theme switching.
+ */
+
+(function () {
+    'use strict';
+
+    class CommandPalette {
+        constructor() {
+            this.isOpen = false;
+            this.modal = null;
+            this.input = null;
+            this.list = null;
+            this.items = [];
+            this.filteredItems = [];
+            this.selectedIndex = 0;
+
+            this.init();
+        }
+
+        init() {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.createModal();
+                this.bindGlobalShortcuts();
+            });
+        }
+
+        bindGlobalShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                const isCmdK = (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k';
+                const isSlash = e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA';
+
+                if (isCmdK || isSlash) {
+                    e.preventDefault();
+                    this.toggle();
+                } else if (e.key === 'Escape' && this.isOpen) {
+                    this.close();
+                }
+            });
+        }
+
+        createModal() {
+            if (document.getElementById('cmdk-modal-backdrop')) {
+                this.modal = document.getElementById('cmdk-modal-backdrop');
+                return;
+            }
+
+            const backdrop = document.createElement('div');
+            backdrop.id = 'cmdk-modal-backdrop';
+            backdrop.className = 'cmdk-backdrop cmdk-hidden';
+            backdrop.setAttribute('role', 'dialog');
+            backdrop.setAttribute('aria-modal', 'true');
+            backdrop.setAttribute('aria-label', 'Presentation Command Menu');
+
+            backdrop.innerHTML = `
+                <div class="cmdk-dialog" id="cmdk-dialog">
+                    <div class="cmdk-input-wrap">
+                        <svg class="cmdk-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        <input type="text" id="cmdk-input" class="cmdk-input" placeholder="Type a slide title, tool name, or command (↑↓ to navigate)..." autocomplete="off" spellcheck="false" />
+                        <kbd class="cmdk-esc-badge">ESC</kbd>
+                    </div>
+                    <div class="cmdk-list" id="cmdk-list" role="listbox"></div>
+                    <div class="cmdk-footer">
+                        <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
+                        <span><kbd>↵</kbd> Select</span>
+                        <span><kbd>ESC</kbd> Close</span>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(backdrop);
+            this.modal = backdrop;
+            this.input = document.getElementById('cmdk-input');
+            this.list = document.getElementById('cmdk-list');
+
+            // Backdrop click
+            backdrop.addEventListener('click', (e) => {
+                if (e.target === backdrop) this.close();
+            });
+
+            // Input filtering & navigation
+            this.input.addEventListener('input', () => {
+                this.filter(this.input.value);
+            });
+
+            this.input.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    this.navigate(1);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    this.navigate(-1);
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.executeSelected();
+                }
+            });
+        }
+
+        collectItems() {
+            const items = [];
+
+            // 1. Educator Presenter Tools
+            items.push(
+                { group: 'Presenter Tools', icon: '⏱️', title: 'Classroom Timer', shortcut: 'T', action: () => window.classroomTimer && window.classroomTimer.toggle() },
+                { group: 'Presenter Tools', icon: '✨', title: 'Vocabulary & Key Highlights', shortcut: 'V', action: () => window.toggleVocabHighlight && window.toggleVocabHighlight() },
+                { group: 'Presenter Tools', icon: '🔦', title: 'Presentation Spotlight', shortcut: 'S', action: () => window.presentationSpotlight && window.presentationSpotlight.toggle() },
+                { group: 'Presenter Tools', icon: '🔴', title: 'Laser Pointer', shortcut: 'L', action: () => window.laserPointer && window.laserPointer.toggle() },
+                { group: 'Presenter Tools', icon: '✏️', title: 'Pen Drawing Annotation', shortcut: 'P', action: () => window.presenterDrawing && window.presenterDrawing.toggle() },
+                { group: 'Presenter Tools', icon: '👥', title: 'Random Student Picker', shortcut: 'R', action: () => window.studentPicker && window.studentPicker.toggle() },
+                { group: 'Presenter Tools', icon: '🎨', title: 'Switch Presentation Theme', shortcut: 'Alt+T', action: () => window.themeModal && window.themeModal.open() },
+                { group: 'Presenter Tools', icon: '✍️', title: 'Writing Model Annotator', shortcut: 'W', action: () => window.writingAnnotator && window.writingAnnotator.toggle() }
+            );
+
+            // 2. Slide Navigation Cards
+            const slides = document.querySelectorAll('.deck-stage > slide-card, .deck-stage > .slide, .deck-stage > section');
+            slides.forEach((slide, idx) => {
+                const title = slide.getAttribute('title') || slide.querySelector('h1, h2, h3')?.textContent || `Slide ${idx + 1}`;
+                const subtitle = slide.getAttribute('subtitle') || slide.getAttribute('badge') || '';
+                const skill = slide.getAttribute('skill') || '';
+
+                const skillIcons = {
+                    title: '📌',
+                    read: '📖',
+                    write: '✍️',
+                    grammar: '📐',
+                    vocab: '🔤',
+                    review: '🎯'
+                };
+
+                items.push({
+                    group: 'Slide Navigation',
+                    icon: skillIcons[skill] || '📑',
+                    title: `Slide ${idx + 1}: ${title}`,
+                    subtitle: subtitle,
+                    action: () => {
+                        if (window.deckEngine && typeof window.deckEngine.goToSlide === 'function') {
+                            window.deckEngine.goToSlide(idx);
+                        } else if (window.slideNavigator && typeof window.slideNavigator.goToSlide === 'function') {
+                            window.slideNavigator.goToSlide(idx);
+                        }
+                    }
+                });
+            });
+
+            this.items = items;
+        }
+
+        open() {
+            this.collectItems();
+            this.isOpen = true;
+            this.modal.classList.remove('cmdk-hidden');
+            this.input.value = '';
+            this.filter('');
+            setTimeout(() => this.input.focus(), 50);
+        }
+
+        close() {
+            this.isOpen = false;
+            this.modal.classList.add('cmdk-hidden');
+        }
+
+        toggle() {
+            if (this.isOpen) this.close();
+            else this.open();
+        }
+
+        filter(query) {
+            const q = query.trim().toLowerCase();
+            if (!q) {
+                this.filteredItems = [...this.items];
+            } else {
+                this.filteredItems = this.items.filter(item => 
+                    item.title.toLowerCase().includes(q) || 
+                    (item.subtitle && item.subtitle.toLowerCase().includes(q)) ||
+                    item.group.toLowerCase().includes(q)
+                );
+            }
+            this.selectedIndex = 0;
+            this.renderList();
+        }
+
+        renderList() {
+            if (this.filteredItems.length === 0) {
+                this.list.innerHTML = `<div class="cmdk-empty">No matching slides or tools found</div>`;
+                return;
+            }
+
+            let currentGroup = '';
+            let html = '';
+
+            this.filteredItems.forEach((item, idx) => {
+                if (item.group !== currentGroup) {
+                    currentGroup = item.group;
+                    html += `<div class="cmdk-group-heading">${currentGroup}</div>`;
+                }
+
+                const isSelected = idx === this.selectedIndex;
+                html += `
+                    <div class="cmdk-item ${isSelected ? 'cmdk-selected' : ''}" data-idx="${idx}" role="option" aria-selected="${isSelected}">
+                        <span class="cmdk-item-icon">${item.icon}</span>
+                        <div class="cmdk-item-content">
+                            <div class="cmdk-item-title">${item.title}</div>
+                            ${item.subtitle ? `<div class="cmdk-item-subtitle">${item.subtitle}</div>` : ''}
+                        </div>
+                        ${item.shortcut ? `<kbd class="cmdk-item-kbd">${item.shortcut}</kbd>` : ''}
+                    </div>
+                `;
+            });
+
+            this.list.innerHTML = html;
+
+            // Click handlers
+            this.list.querySelectorAll('.cmdk-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    const idx = parseInt(el.getAttribute('data-idx'), 10);
+                    this.selectedIndex = idx;
+                    this.executeSelected();
+                });
+            });
+
+            // Scroll selected into view
+            const selectedEl = this.list.querySelector('.cmdk-selected');
+            if (selectedEl) {
+                selectedEl.scrollIntoView({ block: 'nearest' });
+            }
+        }
+
+        navigate(delta) {
+            if (this.filteredItems.length === 0) return;
+            this.selectedIndex = (this.selectedIndex + delta + this.filteredItems.length) % this.filteredItems.length;
+            this.renderList();
+        }
+
+        executeSelected() {
+            if (this.filteredItems.length === 0) return;
+            const item = this.filteredItems[this.selectedIndex];
+            if (item && item.action) {
+                this.close();
+                item.action();
+                if (window.toast) {
+                    window.toast.info(`Switched to ${item.title}`);
+                }
+            }
+        }
+    }
+
+    window.commandPalette = new CommandPalette();
+
+})();
 
 
 /* ==================== MODULE: deck-charts.js ==================== */
@@ -7898,16 +8660,35 @@ class DeckCharts {
     renderMultiLineChart(container, config) {
         const {
             title = '',
-            xCategories = [],
             series = [],
-            yMin = 0,
-            yMax = 100,
-            yStep = 20,
-            yUnit = '%',
             width = 680,
-            height = 390,
-            margin = { top: 30, right: 120, bottom: 45, left: 55 }
+            height = 360,
+            margin = { top: 30, right: 120, bottom: 45, left: 60 }
         } = config;
+
+        // Support both xCategories and xAxis aliases
+        const xCategories = config.xCategories || config.xAxis || config.categories || [];
+        
+        // Auto-calculate dynamic y-axis range if not specified
+        const allVals = series.flatMap(s => s.data || []);
+        const rawMax = allVals.length > 0 ? Math.max(...allVals) : 100;
+        const rawMin = allVals.length > 0 ? Math.min(...allVals) : 0;
+        
+        let yMax = config.yMax;
+        if (yMax === undefined) {
+            if (rawMax <= 10) yMax = 10;
+            else if (rawMax <= 50) yMax = 50;
+            else if (rawMax <= 100) yMax = 100;
+            else if (rawMax <= 500) yMax = Math.ceil(rawMax / 50) * 50 + 50;
+            else yMax = Math.ceil(rawMax / 100) * 100;
+        }
+        
+        const yMin = config.yMin !== undefined ? config.yMin : (rawMin < 0 ? Math.floor(rawMin / 10) * 10 : 0);
+        const yStep = config.yStep !== undefined ? config.yStep : (yMax - yMin) / 5;
+        
+        const isDollars = config.yAxisLabel && (config.yAxisLabel.includes('Dollar') || config.yAxisLabel.includes('$'));
+        const yUnit = config.yUnit !== undefined ? config.yUnit : (config.yAxisLabel && config.yAxisLabel.includes('%') ? '%' : '');
+        const yFormat = config.yFormat || ((val) => isDollars ? `$${val}B` : `${val}${yUnit}`);
 
         const plotWidth = width - margin.left - margin.right;
         const plotHeight = height - margin.top - margin.bottom;
@@ -7919,9 +8700,10 @@ class DeckCharts {
                 <div class="ielts-chart-legend">
         `;
 
-        series.forEach(s => {
+        series.forEach((s, idx) => {
+            const lineId = s.id || `series-${idx}`;
             html += `
-                <div class="ielts-legend-item" data-line-id="${s.id}">
+                <div class="ielts-legend-item" data-line-id="${lineId}">
                     <span class="ielts-legend-line" style="background:${s.color};"></span>
                     <span>${s.name}</span>
                 </div>
@@ -7933,37 +8715,39 @@ class DeckCharts {
             </div>
             <div style="position:relative; width:100%;">
                 <div class="ielts-chart-tooltip" id="${tooltipId}"></div>
-                <svg viewBox="0 0 ${width} ${height}" class="ielts-chart-svg">
-                    <rect x="${margin.left}" y="${margin.top}" width="${plotWidth}" height="${plotHeight}" fill="#fffbeb" rx="4" />
+                <svg viewBox="0 0 ${width} ${height}" class="ielts-chart-svg" style="width:100%; height:auto; display:block;">
+                    <rect x="${margin.left}" y="${margin.top}" width="${plotWidth}" height="${plotHeight}" fill="#f8fafc" rx="6" />
         `;
 
         // Y Grid
-        for (let yVal = yMin; yVal <= yMax; yVal += yStep) {
+        for (let yVal = yMin; yVal <= yMax + 0.001; yVal += yStep) {
             const yPos = margin.top + plotHeight - ((yVal - yMin) / (yMax - yMin)) * plotHeight;
             html += `
-                <line x1="${margin.left}" y1="${yPos}" x2="${margin.left + plotWidth}" y2="${yPos}" class="chart-grid-line" stroke="#d6d3d1" stroke-dasharray="4,4" />
-                <text x="${margin.left - 10}" y="${yPos + 4}" text-anchor="end" class="chart-axis-text" style="font-weight:600;">${yVal}${yUnit}</text>
+                <line x1="${margin.left}" y1="${yPos}" x2="${margin.left + plotWidth}" y2="${yPos}" class="chart-grid-line" stroke="#e2e8f0" stroke-dasharray="4,4" />
+                <text x="${margin.left - 10}" y="${yPos + 4}" text-anchor="end" class="chart-axis-text" style="font-size:12px; font-weight:600; fill:#64748b;">${yFormat(Math.round(yVal))}</text>
             `;
         }
 
         // X Axis Points
-        const xStep = plotWidth / (xCategories.length - 1);
+        const xCount = Math.max(1, xCategories.length - 1);
+        const xStep = plotWidth / xCount;
         xCategories.forEach((cat, idx) => {
             const xPos = margin.left + idx * xStep;
             html += `
-                <line x1="${xPos}" y1="${margin.top + plotHeight}" x2="${xPos}" y2="${margin.top + plotHeight + 5}" class="chart-axis-line" stroke="#78716c" />
-                <text x="${xPos}" y="${margin.top + plotHeight + 22}" text-anchor="middle" class="chart-axis-text" style="font-weight:700;">${cat}</text>
+                <line x1="${xPos}" y1="${margin.top + plotHeight}" x2="${xPos}" y2="${margin.top + plotHeight + 5}" class="chart-axis-line" stroke="#94a3b8" />
+                <text x="${xPos}" y="${margin.top + plotHeight + 20}" text-anchor="middle" class="chart-axis-text" style="font-size:12px; font-weight:700; fill:#1e293b;">${cat}</text>
             `;
         });
 
         // Axes lines
         html += `
-            <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${margin.top + plotHeight}" class="chart-axis-line" stroke="#78716c" stroke-width="1.5" />
-            <line x1="${margin.left}" y1="${margin.top + plotHeight}" x2="${margin.left + plotWidth}" y2="${margin.top + plotHeight}" class="chart-axis-line" stroke="#78716c" stroke-width="1.5" />
+            <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${margin.top + plotHeight}" class="chart-axis-line" stroke="#64748b" stroke-width="1.5" />
+            <line x1="${margin.left}" y1="${margin.top + plotHeight}" x2="${margin.left + plotWidth}" y2="${margin.top + plotHeight}" class="chart-axis-line" stroke="#64748b" stroke-width="1.5" />
         `;
 
         // Render series
-        series.forEach(s => {
+        series.forEach((s, sIdx) => {
+            const lineId = s.id || `series-${sIdx}`;
             const points = s.data.map((val, idx) => {
                 const x = margin.left + idx * xStep;
                 const y = margin.top + plotHeight - ((val - yMin) / (yMax - yMin)) * plotHeight;
@@ -7971,25 +8755,28 @@ class DeckCharts {
             }).join(' ');
 
             html += `
-                <g class="chart-series-group" data-line-id="${s.id}">
+                <g class="chart-series-group" data-line-id="${lineId}">
                     <polyline points="${points}" stroke="${s.color}" stroke-width="3.5" fill="none" class="chart-line" />
             `;
 
             s.data.forEach((val, idx) => {
                 const x = margin.left + idx * xStep;
                 const y = margin.top + plotHeight - ((val - yMin) / (yMax - yMin)) * plotHeight;
+                const valDisplay = yFormat(val);
                 html += `
-                    <circle cx="${x}" cy="${y}" r="4.5" fill="${s.color}" stroke="#ffffff" stroke-width="1.5" class="chart-dot" data-label="${s.name} (${xCategories[idx]})" data-val="${val}${yUnit}" />
+                    <circle cx="${x}" cy="${y}" r="4.5" fill="${s.color}" stroke="#ffffff" stroke-width="1.5" class="chart-dot" data-label="${s.name} (${xCategories[idx] || ''})" data-val="${valDisplay}" />
                 `;
             });
 
             // End line label
-            const lastX = margin.left + (xCategories.length - 1) * xStep;
-            const lastY = margin.top + plotHeight - ((s.data[s.data.length - 1] - yMin) / (yMax - yMin)) * plotHeight;
-            html += `
-                <text x="${lastX + 8}" y="${lastY + 4}" fill="${s.color}" font-size="12" font-weight="700">${s.name}</text>
-                </g>
-            `;
+            if (s.data.length > 0 && xCategories.length > 0) {
+                const lastX = margin.left + (xCategories.length - 1) * xStep;
+                const lastY = margin.top + plotHeight - ((s.data[s.data.length - 1] - yMin) / (yMax - yMin)) * plotHeight;
+                html += `
+                    <text x="${lastX + 8}" y="${lastY + 4}" fill="${s.color}" font-size="12" font-weight="700">${s.name}</text>
+                `;
+            }
+            html += `</g>`;
         });
 
         html += `
@@ -8151,6 +8938,333 @@ class DeckCharts {
 window.deckCharts = new DeckCharts();
 
 
+/* ==================== MODULE: grammar-reference.js ==================== */
+/**
+ * ==========================================================================
+ * GRAMMAR REFERENCE VIEWER (GrammarReferenceEngine)
+ * Interactive Modal & Embedded Viewer for Module Grammar Source References
+ * Supports:
+ * - Embedded iframe modal viewer with tabs, tests, and deep explanations
+ * - Dynamic URL and title binding
+ * - Responsive full-screen & new-tab expansion
+ * - Keyboard shortcut (Esc to close)
+ * - Auto-binds elements with [data-grammar-ref]
+ * ==========================================================================
+ */
+
+class GrammarReferenceEngine {
+    constructor() {
+        this.isOpen = false;
+        this.currentUrl = '';
+        this.currentTitle = 'Grammar Reference';
+
+        this.init();
+    }
+
+    init() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.setup());
+        } else {
+            this.setup();
+        }
+    }
+
+    setup() {
+        this.injectModal();
+        this.bindTriggers();
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isOpen) {
+                this.close();
+            }
+        });
+    }
+
+    injectModal() {
+        if (document.getElementById('grammarReferenceModal')) return;
+
+        const modal = document.createElement('div');
+        modal.id = 'grammarReferenceModal';
+        modal.className = 'grammar-ref-modal';
+        modal.style.display = 'none';
+        modal.innerHTML = `
+            <div class="grammar-ref-backdrop" onclick="window.grammarReferenceEngine && window.grammarReferenceEngine.close()"></div>
+            <div class="grammar-ref-dialog">
+                <div class="grammar-ref-header">
+                    <div class="grammar-ref-title-group">
+                        <span class="grammar-ref-badge">📘 Grammar Handbook</span>
+                        <h3 class="grammar-ref-title" id="grammarRefTitle">Grammar Reference</h3>
+                    </div>
+                    <div class="grammar-ref-actions">
+                        <a id="grammarRefExternalLink" href="#" target="_blank" class="grammar-ref-btn" title="Open in New Tab">
+                            ↗ New Tab
+                        </a>
+                        <button class="grammar-ref-btn" onclick="window.grammarReferenceEngine && window.grammarReferenceEngine.toggleFullscreen()" title="Toggle Fullscreen">
+                            ⛶ Fullscreen
+                        </button>
+                        <button class="grammar-ref-close-btn" onclick="window.grammarReferenceEngine && window.grammarReferenceEngine.close()" title="Close (Esc)">
+                            ✕
+                        </button>
+                    </div>
+                </div>
+                <div class="grammar-ref-body">
+                    <div class="grammar-ref-loading" id="grammarRefLoading">
+                        <div class="grammar-ref-spinner"></div>
+                        <span>Loading Grammar Reference...</span>
+                    </div>
+                    <iframe id="grammarRefFrame" class="grammar-ref-frame" src="about:blank" frameborder="0"></iframe>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        // Inject Styles
+        const style = document.createElement('style');
+        style.id = 'grammarRefStyles';
+        style.textContent = `
+            .grammar-ref-modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                z-index: 99999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .grammar-ref-backdrop {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(15, 23, 42, 0.75);
+                backdrop-filter: blur(6px);
+                animation: gRefFadeIn 0.2s ease-out;
+            }
+            .grammar-ref-dialog {
+                position: relative;
+                width: 92vw;
+                height: 90vh;
+                max-width: 1360px;
+                background: #ffffff;
+                border-radius: 20px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1);
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                z-index: 1;
+                animation: gRefScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .grammar-ref-dialog.fullscreen {
+                width: 100vw !important;
+                height: 100vh !important;
+                max-width: 100vw !important;
+                border-radius: 0 !important;
+            }
+            .grammar-ref-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 16px 24px;
+                background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+                color: #ffffff;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .grammar-ref-title-group {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .grammar-ref-badge {
+                background: rgba(99, 102, 241, 0.35);
+                color: #c7d2fe;
+                font-size: 13px;
+                font-weight: 700;
+                padding: 4px 10px;
+                border-radius: 9999px;
+                border: 1px solid rgba(165, 180, 252, 0.3);
+                letter-spacing: 0.5px;
+            }
+            .grammar-ref-title {
+                margin: 0;
+                font-size: 19px;
+                font-weight: 700;
+                color: #ffffff;
+                font-family: inherit;
+            }
+            .grammar-ref-actions {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .grammar-ref-btn {
+                background: rgba(255, 255, 255, 0.12);
+                color: #ffffff;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 8px;
+                padding: 6px 14px;
+                font-size: 13.5px;
+                font-weight: 600;
+                text-decoration: none;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+            }
+            .grammar-ref-btn:hover {
+                background: rgba(255, 255, 255, 0.25);
+                color: #ffffff;
+                transform: translateY(-1px);
+            }
+            .grammar-ref-close-btn {
+                background: rgba(239, 68, 68, 0.2);
+                color: #fca5a5;
+                border: 1px solid rgba(239, 68, 68, 0.4);
+                border-radius: 8px;
+                width: 34px;
+                height: 34px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                margin-left: 6px;
+            }
+            .grammar-ref-close-btn:hover {
+                background: #ef4444;
+                color: #ffffff;
+            }
+            .grammar-ref-body {
+                position: relative;
+                flex: 1;
+                background: #f8fafc;
+                overflow: hidden;
+            }
+            .grammar-ref-frame {
+                width: 100%;
+                height: 100%;
+                border: none;
+                background: #ffffff;
+            }
+            .grammar-ref-loading {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #ffffff;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                font-size: 15px;
+                color: #64748b;
+                z-index: 2;
+                transition: opacity 0.3s ease;
+            }
+            .grammar-ref-spinner {
+                width: 36px;
+                height: 36px;
+                border: 3px solid #e2e8f0;
+                border-top-color: #4f46e5;
+                border-radius: 50%;
+                animation: gRefSpin 0.8s linear infinite;
+            }
+            @keyframes gRefSpin {
+                to { transform: rotate(360deg); }
+            }
+            @keyframes gRefFadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes gRefScaleUp {
+                from { opacity: 0; transform: scale(0.96); }
+                to { opacity: 1; transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    bindTriggers() {
+        document.addEventListener('click', (e) => {
+            const trigger = e.target.closest('[data-grammar-ref]');
+            if (trigger) {
+                e.preventDefault();
+                const url = trigger.getAttribute('data-grammar-ref');
+                const title = trigger.getAttribute('data-grammar-title') || 'Grammar Reference Handbook';
+                this.open(url, title);
+            }
+        });
+    }
+
+    open(url, title) {
+        this.injectModal();
+
+        const modal = document.getElementById('grammarReferenceModal');
+        const frame = document.getElementById('grammarRefFrame');
+        const titleElem = document.getElementById('grammarRefTitle');
+        const linkElem = document.getElementById('grammarRefExternalLink');
+        const loadingElem = document.getElementById('grammarRefLoading');
+
+        if (!modal || !frame) return;
+
+        this.currentUrl = url || this.currentUrl;
+        this.currentTitle = title || this.currentTitle;
+
+        titleElem.textContent = this.currentTitle;
+        linkElem.href = this.currentUrl;
+
+        loadingElem.style.display = 'flex';
+        loadingElem.style.opacity = '1';
+
+        frame.onload = () => {
+            loadingElem.style.opacity = '0';
+            setTimeout(() => {
+                loadingElem.style.display = 'none';
+            }, 300);
+        };
+
+        frame.src = this.currentUrl;
+        modal.style.display = 'flex';
+        this.isOpen = true;
+    }
+
+    close() {
+        const modal = document.getElementById('grammarReferenceModal');
+        const frame = document.getElementById('grammarRefFrame');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+        if (frame) {
+            frame.src = 'about:blank';
+        }
+        this.isOpen = false;
+    }
+
+    toggleFullscreen() {
+        const dialog = document.querySelector('.grammar-ref-dialog');
+        if (dialog) {
+            dialog.classList.toggle('fullscreen');
+        }
+    }
+}
+
+// Global Instance & Helper
+window.grammarReferenceEngine = new GrammarReferenceEngine();
+window.openGrammarReference = function(url, title) {
+    if (window.grammarReferenceEngine) {
+        window.grammarReferenceEngine.open(url, title);
+    }
+};
+
+
 /* ==================== MODULE: presentation-tools.js ==================== */
 /**
  * Presentation Classroom Tools Coordinator (PresentationTools)
@@ -8229,6 +9343,7 @@ class PresentationTools {
                     <div><kbd>Shift+X</kbd></div><div>Hide / Show Teacher Toolkit</div>
                     <div><kbd>Shift+A</kbd></div><div>Toggle 16:9 / 4:3 Aspect Ratio</div>
                     <div><kbd>H</kbd></div><div>Toggle Highlighter Tool</div>
+                    <div><kbd>V</kbd></div><div>Toggle Vocabulary &amp; Keyword Highlights</div>
                     <div><kbd>L</kbd></div><div>Toggle Laser Pointer</div>
                     <div><kbd>P</kbd></div><div>Toggle Drawing Pen</div>
                     <div><kbd>C</kbd></div><div>Clear Highlights / Drawings</div>
@@ -8566,6 +9681,15 @@ class PresentationTools {
             } else if (key === 'l') {
                 e.preventDefault();
                 this.toggleLaser();
+            } else if (key === 'v') {
+                e.preventDefault();
+                if (window.toggleVocabHighlight) {
+                    window.toggleVocabHighlight();
+                } else if (window.deckEngine && typeof window.deckEngine.toggleVocabHighlight === 'function') {
+                    window.deckEngine.toggleVocabHighlight();
+                } else if (window.readingHighlighter) {
+                    window.readingHighlighter.highlightAll();
+                }
             } else if (key === 'p') {
                 e.preventDefault();
                 this.togglePen();
