@@ -13,7 +13,7 @@ window.module3Data = {
         moduleNum: "03",
         title: "Work & Study",
         subtitle: "IELTS Academic Preparation Masterclass",
-        slidesCount: 43,
+        slidesCount: 44,
         tags: [
             { text: "Reading 3a/3b", bg: "var(--col-reading)" },
             { text: "Grammar: Comparatives & Verb Patterns", bg: "var(--col-grammar)" },
