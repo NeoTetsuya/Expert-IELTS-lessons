@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="bold-signal">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert IELTS 6 — Module 3: Work &amp; Study</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet">
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href="../presentation-base.css">
+    <style>
+        :root {
+            --col-reading: #2563eb;
+            --col-grammar: #f43f5e;
+            --col-vocab:   #059669;
+            --col-writing: #7c3aed;
+            --col-review:  #0891b2;
+            
+            --stage-bg: #111827;
+            --viewport-bg: radial-gradient(circle at 80% 20%, #1e1b4b 0%, #111827 70%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="deck-viewport">
+        <main class="deck-stage" id="deckStage">
+            <!-- SLIDE 1: Title & Course Roadmap -->
+            <slide-card template="title" skill="title">
+                <span slot="badge">Module 03</span>
+                <span slot="title">Work <span class="title-amp">&amp;</span> Study</span>
+                <span slot="subtitle">IELTS Academic Preparation Masterclass<br>Comparative Forms, Education Systems, Verb Patterns (-ing vs Infinitives), Task 1 Bar/Line/Pie Analytics &amp; Fast Food Pay Rates</span>
+                <div slot="roadmap">
+                    <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('read')">
+                        <div class="title-skill-name" style="color:var(--col-reading)">📖 Reading</div>
+                        <div class="title-skill-desc">Chinese Education &amp; Emotional Intelligence</div>
+                    </div>
+                    <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('grammar')">
+                        <div class="title-skill-name" style="color:var(--col-grammar)">📐 Grammar</div>
+                        <div class="title-skill-desc">Comparative Matrix &amp; Verb Patterns (-ing/to)</div>
+                    </div>
+                    <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('vocab')">
+                        <div class="title-skill-name" style="color:var(--col-vocab)">🗂️ Vocabulary</div>
+                        <div class="title-skill-desc">Prepositions, Education &amp; Business Lexicon</div>
+                    </div>
+                    <div class="title-skill-card" style="cursor:pointer;" onclick="deckEngine.jumpToSkill('write')">
+                        <div class="title-skill-name" style="color:var(--col-writing)">✍️ Writing</div>
+                        <div class="title-skill-desc">Task 1 Bar, Line &amp; Pie Chart Analytics</div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 2: Section 3a Divider -->
+            <slide-card template="section-divider" skill="title">
+                <span slot="badge">Section 3a</span>
+                <span slot="title">Learning for Life</span>
+                <span slot="subtitle">BBC Chinese education experiment, summary completion strategies, comparative grammar matrix, dependent prepositions, and undergraduate degree costs bar chart.</span>
+            </slide-card>
+
+            <!-- SLIDE 3: 3a Reading Strategy - Pre-Reading Question Deconstruction -->
+            <slide-card template="exercise-grid" skill="read" title="Reading 3a Strategy: Summary Completion Question Deconstruction" instruction="Click each question to analyze the grammatical gaps and expected lexical synonyms before scanning the passage.">
+                <div slot="grid" style="display: flex; gap: 24px; width: 100%; height: 100%;">
+                    <div style="flex: 1.2; display: flex; flex-direction: column; gap: 10px; overflow-y: auto;">
+                        <div class="card q-card strategy-card" style="border-left: 6px solid var(--col-reading); padding: 14px 18px; cursor: pointer;">
+                            <strong>1.</strong> The BBC experiment was introduced because of the <span class="syn-pair-1">success / high scores</span> of Chinese students in international exams.
+                        </div>
+                        <div class="card q-card strategy-card" style="border-left: 6px solid var(--col-reading); padding: 14px 18px; cursor: pointer;">
+                            <strong>2.</strong> Test results of students were compared to a <span class="syn-pair-1">control group</span> receiving regular British lessons.
+                        </div>
+                        <div class="card q-card strategy-card" style="border-left: 6px solid var(--col-reading); padding: 14px 18px; cursor: pointer;">
+                            <strong>3.</strong> Teachers and students were interviewed about their <span class="syn-pair-1">experiences</span> after the experiment.
+                        </div>
+                        <div class="card q-card strategy-card" style="border-left: 6px solid var(--col-reading); padding: 14px 18px; cursor: pointer;">
+                            <strong>4.</strong> Chinese teachers thought students in China were better <span class="syn-pair-2">behaved / disciplined</span>.
+                        </div>
+                        <div class="card q-card strategy-card" style="border-left: 6px solid var(--col-reading); padding: 14px 18px; cursor: pointer;">
+                            <strong>5.</strong> British children <span class="syn-pair-2">admitted</span> they were naughtier due to unfamiliar teaching styles.
+                        </div>
+                        <div class="card q-card strategy-card" style="border-left: 6px solid var(--col-reading); padding: 14px 18px; cursor: pointer;">
+                            <strong>6.</strong> Strict classroom rules meant students felt unable to express their <span class="syn-pair-1">imagination / creativity</span>.
+                        </div>
+                    </div>
+                    <div style="flex: 0.8; display: flex; flex-direction: column; gap: 14px;">
+                        <div class="card" style="background:#ffffff; border-left:6px solid var(--col-reading); padding:18px 22px;">
+                            <h4 style="color:var(--col-reading); font-size:20px; font-weight:800; margin-bottom:8px;">🎯 Summary Completion Scanning Rules</h4>
+                            <ul style="padding-left:18px; font-size:17px; line-height:1.6; color:var(--text-dark);">
+                                <li><strong>Pre-identify Word Class:</strong> Determine if the gap needs a noun (<em>success, control group</em>), verb (<em>admitted</em>), or adjective (<em>behaved</em>).</li>
+                                <li><strong>Paraphrase Match:</strong> Look for exact semantic bridges (e.g. <em>"come near the top / triumph"</em> ↔ <em>"success"</em>).</li>
+                                <li><strong>Distractor Awareness:</strong> Extra box options often share identical part of speech.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 4: 3a Reading Walkthrough - Question 1 & Paragraph A/B -->
+            <slide-card template="walkthrough" skill="read" title="Reading 3a Walkthrough: Scanning for Summary Gaps" subtitle="Examine Paragraph A &amp; B to match the exam performance evidence.">
+                <span slot="passage-header">📖 Passage Excerpt (Paragraphs A &amp; B)</span>
+                <span slot="passage-text">
+                    "Chinese students regularly <mark class="evidence" id="ev-wt-3a-1" data-q="wt-3a-1"><span class="syn-pair-1" data-q="wt-3a-1">come near the top in international comparison tests</span></mark> of students around the planet. They <mark class="evidence" id="ev-wt-3a-1-b" data-q="wt-3a-1"><span class="syn-pair-1" data-q="wt-3a-1">triumph in Maths, Reading and Science</span></mark>, while in the UK, young people have been getting lower marks in recent years. Many in Britain have been wondering if it is time to adopt Chinese methods of education here."
+                </span>
+                <span slot="question-text">
+                    1. The BBC introduced an experiment to bring Chinese teachers to a British school because of the exam <span style="color:var(--col-reading); font-weight:800;">[ 1 ]</span> of Chinese students.
+                </span>
+                <div slot="input-area">
+                    <input type="text" class="blank-input" data-ans="success" placeholder="Type word..." style="width:200px; font-weight:700;">
+                </div>
+                <div slot="explanation">
+                    <span class="syn-tag green">Paraphrase Match:</span> <em>"success in exams"</em> ↔ <em>"come near the top in international comparison tests... triumph in Maths, Reading and Science"</em>.
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 5: 3a Split-View Reading - A Chinese Approach to Learning (Ex 3) -->
+            <slide-card template="reading-split" skill="read" title="Reading 3a: A Chinese Approach to Learning (Summary Completion)" instruction="Read the full text. Complete the summary 1–6 using the words from the word bank. Click 💡 Evidence to scroll to target paragraphs.">
+                <div slot="reading-pane">
+                    <p><span class="para-tag">Para A</span> The reasons behind the experiment were obvious. <mark class="evidence" id="ev-3a-1" data-q="3a-1"><span class="syn-pair-1" data-q="3a-1">Chinese students regularly come near the top in international comparison tests</span></mark> of students around the planet. They <mark class="evidence" id="ev-3a-1b" data-q="3a-1"><span class="syn-pair-1" data-q="3a-1">triumph in Maths, Reading and Science</span></mark>, while in the UK, young people have been getting lower marks in recent years. Many in Britain have been wondering if it is time to adopt Chinese methods of education here.</p>
+                    
+                    <p><span class="para-tag">Para B</span> In the experiment, five teachers were brought from China and put in a UK school. They taught a group of 50 students maths, reading, science and modern languages. The students in the study group, and <mark class="evidence" id="ev-3a-2" data-q="3a-2">another <span class="syn-pair-1" data-q="3a-2">control group</span> who received regular lessons</mark>, were tested at the end of the period and an analysis of the results was carried out. In addition, both teachers and students who participated in the experiment were given <mark class="evidence" id="ev-3a-3" data-q="3a-3"><span class="syn-pair-1" data-q="3a-3">interviews with one of the researchers on how they felt</span> about what happened</mark>.</p>
+                    
+                    <p><span class="para-tag">Para C</span> The biggest difference between the two cultures was the lack of discipline in British schools. One Chinese teacher pointed out, <mark class="evidence" id="ev-3a-4" data-q="3a-4">‘In China we don’t need classroom management skills because <span class="syn-pair-2" data-q="3a-4">everyone is disciplined by nature, by families, by society</span>.’</mark> Interestingly, students <mark class="evidence" id="ev-3a-5" data-q="3a-5"><span class="syn-pair-2" data-q="3a-5">admitted that they found themselves behaving worse during the experiment</span> than they normally would</mark> for their British teachers. Many pointed to the fact that the unfamiliarity of the teacher made them feel less comfortable than they normally would.</p>
+                    
+                    <p><span class="para-tag">Para D</span> Another key issue was that of the role of creativity in a classroom where discipline is king. While it was obvious that British students would benefit from settling down, it was also clear that the UK education system does encourage students to think outside of the box. <mark class="evidence" id="ev-3a-6" data-q="3a-6">The Chinese teachers were uncomfortable with any attempt to ask questions, as it would stop the flow of the lesson they had planned in which there was <span class="syn-pair-1" data-q="3a-6">no opportunity for free-thinking</span>.</mark></p>
+                    
+                    <p><span class="para-tag">Para E</span> All of this suggests that an obsession with testing does not exist in the UK, which would be untrue. The message that test results are all that matters may not be getting through. One young person commented: ‘Their teaching methods did get results but we didn’t always feel we were learning much. They get results because we are in school for so long.’</p>
+                    
+                    <p><span class="para-tag">Para F</span> In India, Professor Sugata Mitra has introduced the ‘Classroom in the Cloud’ based on ‘Hole in the Wall’ experiments, showing students can teach themselves through self-instruction without someone in charge.</p>
+                    
+                    <p><span class="para-tag">Para G</span> Firstly, no one has the monopoly on what is right and wrong with teaching. Secondly, each country has an educational approach which is unique and reflects the values and expectations of its society.</p>
+                </div>
+                <div slot="question-pane">
+                    <!-- Word Bank -->
+                    <div class="vocab-chips-container" style="margin-bottom:14px;">
+                        <span class="word-chip" data-word="admitted">admitted</span>
+                        <span class="word-chip" data-word="behaved">behaved</span>
+                        <span class="word-chip" data-word="control group">control group</span>
+                        <span class="word-chip" data-word="denied">denied</span>
+                        <span class="word-chip" data-word="educated">educated</span>
+                        <span class="word-chip" data-word="experiences">experiences</span>
+                        <span class="word-chip" data-word="imagination">imagination</span>
+                        <span class="word-chip" data-word="study group">study group</span>
+                        <span class="word-chip" data-word="instructors">instructors</span>
+                        <span class="word-chip" data-word="time">time</span>
+                    </div>
+
+                    <div style="font-size:18.5px; line-height:1.9; color:var(--text-dark);" id="chineseLearningSummary">
+                        The BBC introduced an experiment to bring Chinese teachers to a British school because of the <strong>1.</strong> <input type="text" class="blank-input" data-ans="success|triumph" placeholder="word..." style="width:140px;"> <button class="syn-btn" data-ev="ev-3a-1" style="font-size:12px; padding:3px 8px;">💡</button> of Chinese students in exams. The test results of students with the Chinese teachers were compared to the results of a <strong>2.</strong> <input type="text" class="blank-input" data-ans="control group" placeholder="phrase..." style="width:170px;"> <button class="syn-btn" data-ev="ev-3a-2" style="font-size:12px; padding:3px 8px;">💡</button>. Students and teachers were asked about their <strong>3.</strong> <input type="text" class="blank-input" data-ans="experiences" placeholder="word..." style="width:150px;"> <button class="syn-btn" data-ev="ev-3a-3" style="font-size:12px; padding:3px 8px;">💡</button> at the end of the experiment. Chinese teachers thought their students were better <strong>4.</strong> <input type="text" class="blank-input" data-ans="behaved" placeholder="word..." style="width:140px;"> <button class="syn-btn" data-ev="ev-3a-4" style="font-size:12px; padding:3px 8px;">💡</button> than British children. However, the British children <strong>5.</strong> <input type="text" class="blank-input" data-ans="admitted" placeholder="word..." style="width:140px;"> <button class="syn-btn" data-ev="ev-3a-5" style="font-size:12px; padding:3px 8px;">💡</button> that they were particularly naughty because they felt uncomfortable. In addition, class rules meant children felt unable to use their <strong>6.</strong> <input type="text" class="blank-input" data-ans="imagination" placeholder="word..." style="width:160px;"> <button class="syn-btn" data-ev="ev-3a-6" style="font-size:12px; padding:3px 8px;">💡</button> well.
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 6: 3a Reading Test Practice - Summary Completion with a Box (Ex 4) -->
+            <slide-card template="gap-fill-passage" skill="read" title="Reading 3a Test Practice: Summary Completion with Box (Ex 4)" subtitle="Complete the summary using options A–I based on Paragraphs E, F &amp; G.">
+                <div slot="passage">
+                    <!-- Word Box A-I -->
+                    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; background:#f0fdf4; padding:12px 16px; border-radius:8px; border:1px solid #bbf7d0;">
+                        <strong>A.</strong> unnecessary &nbsp;|&nbsp; <strong>B.</strong> technology &nbsp;|&nbsp; <strong>C.</strong> styles &nbsp;|&nbsp; <strong>D.</strong> hours &nbsp;|&nbsp; <strong>E.</strong> interest &nbsp;|&nbsp; <strong>F.</strong> environment &nbsp;|&nbsp; <strong>G.</strong> teachers &nbsp;|&nbsp; <strong>H.</strong> benefit &nbsp;|&nbsp; <strong>I.</strong> classmates
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:14px; font-size:18.5px; line-height:1.7;">
+                        <div><strong>1.</strong> The author believes the British have an excessive <select class="select-input" data-ans="E"><option value="">Select...</option><option value="A">A. unnecessary</option><option value="B">B. technology</option><option value="C">C. styles</option><option value="D">D. hours</option><option value="E">E. interest</option><option value="F">F. environment</option><option value="G">G. teachers</option><option value="H">H. benefit</option><option value="I">I. classmates</option></select> in student results. <em>(Para E: "obsession with testing")</em></div>
+                        
+                        <div><strong>2.</strong> Students felt the positive results of Chinese educators was thanks to their teaching <select class="select-input" data-ans="D"><option value="">Select...</option><option value="A">A. unnecessary</option><option value="B">B. technology</option><option value="C">C. styles</option><option value="D">D. hours</option><option value="E">E. interest</option><option value="F">F. environment</option><option value="G">G. teachers</option><option value="H">H. benefit</option><option value="I">I. classmates</option></select> more than anything else. <em>(Para E: "in school for so long")</em></div>
+                        
+                        <div><strong>3.</strong> In India, educational experts have seen a disorderly classroom as a <select class="select-input" data-ans="H"><option value="">Select...</option><option value="A">A. unnecessary</option><option value="B">B. technology</option><option value="C">C. styles</option><option value="D">D. hours</option><option value="E">E. interest</option><option value="F">F. environment</option><option value="G">G. teachers</option><option value="H">H. benefit</option><option value="I">I. classmates</option></select>. <em>(Para F: "chaos is not necessarily a bad thing")</em></div>
+                        
+                        <div><strong>4.</strong> In one project, researchers tried removing <select class="select-input" data-ans="G"><option value="">Select...</option><option value="A">A. unnecessary</option><option value="B">B. technology</option><option value="C">C. styles</option><option value="D">D. hours</option><option value="E">E. interest</option><option value="F">F. environment</option><option value="G">G. teachers</option><option value="H">H. benefit</option><option value="I">I. classmates</option></select> from classrooms with success. <em>(Para F: "presence of someone in charge is neither essential nor desirable")</em></div>
+                        
+                        <div><strong>5.</strong> Education systems tend to be the result of the <select class="select-input" data-ans="F"><option value="">Select...</option><option value="A">A. unnecessary</option><option value="B">B. technology</option><option value="C">C. styles</option><option value="D">D. hours</option><option value="E">E. interest</option><option value="F">F. environment</option><option value="G">G. teachers</option><option value="H">H. benefit</option><option value="I">I. classmates</option></select> around them. <em>(Para G: "reflects the values and expectations of its society")</em></div>
+                    </div>
+                </div>
+                <div slot="rules-col">
+                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-reading); padding:18px 22px;">
+                        <h4 style="color:var(--col-reading); font-size:20px; font-weight:800; margin-bottom:8px;">💡 Paraphrase Grounding</h4>
+                        <p style="font-size:16.5px; line-height:1.6; color:var(--text-dark);">Notice how IELTS transforms passage clauses into abstract noun phrases: <em>"being in school for so long"</em> becomes <strong>"teaching hours"</strong>, and <em>"someone in charge"</em> becomes <strong>"teachers"</strong>.</p>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 7: 3a Grammar Masterclass - Comparative Forms & Multiples Matrix -->
+            <slide-card template="grammar-masterclass" skill="grammar" title="Grammar 3a: Comparative Forms &amp; Multiples Matrix">
+                <div slot="rules">
+                    <div class="rule-card" style="margin-bottom:12px;">
+                        <div style="font-size:20px; font-weight:800; color:var(--col-grammar); margin-bottom:4px;">1. Syllable &amp; Ending Rules</div>
+                        <ul style="padding-left:18px; font-size:17.5px; line-height:1.6; margin:0;">
+                            <li><strong>1 Syllable:</strong> Add <em>-er / -est</em> (low → <strong>lower</strong>, lowest).</li>
+                            <li><strong>2 Syllables in -y:</strong> Replace <em>-y</em> with <em>-ier</em> (heavy → <strong>heavier</strong>, easy → <strong>easier</strong>).</li>
+                            <li><strong>3+ Syllables:</strong> Use <em>more / less</em> (creatively → <strong>more creatively</strong>, common → <strong>less common</strong>).</li>
+                        </ul>
+                    </div>
+                    <div class="rule-card">
+                        <div style="font-size:20px; font-weight:800; color:var(--col-reading); margin-bottom:4px;">2. Irregulars &amp; Modifiers</div>
+                        <div style="font-size:17.5px; line-height:1.6;">
+                            • good/well → <strong>better</strong> | bad → <strong>worse</strong> | far → <strong>further</strong><br>
+                            • Modifiers for emphasis: <em>significantly, considerably, much, slightly, marginally</em>.
+                        </div>
+                    </div>
+                </div>
+                <div slot="contrast-card">
+                    <div style="font-size:21px; font-weight:800; color:var(--col-grammar); margin-bottom:8px;">⚖️ Comparison with Multiples (High Band)</div>
+                    <div style="font-size:18px; line-height:1.75; color:var(--text-dark);">
+                        <div style="background:rgba(244,63,94,0.08); padding:10px 14px; border-radius:6px; margin-bottom:10px;">
+                            <strong>Twice / Half:</strong> Must use <em>as + adjective + as</em>.<br>
+                            ✅ <em>"Sport was <strong>twice as popular as</strong> art."</em><br>
+                            ❌ <em>"Sport was twice more popular than art."</em>
+                        </div>
+                        <div style="background:rgba(37,99,235,0.08); padding:10px 14px; border-radius:6px;">
+                            <strong>Three / Four Times:</strong> Either <em>four times higher than</em> OR <em>four times as high as</em>.<br>
+                            👉 <em>"Pass rates were <strong>four times higher than</strong> last year."</em>
+                        </div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 8: 3a Grammar Gap-Fill Practice 1 - Comparative Structures (Ex 1) -->
+            <slide-card template="gap-fill-passage" skill="grammar" title="Grammar 3a Practice 1: Comparative Forms (Ex 1)" subtitle="Complete the sentences with the comparative form of the words in brackets.">
+                <div slot="passage">
+                    <div style="display:flex; flex-direction:column; gap:12px; font-size:18.5px; line-height:1.7;">
+                        <div><strong>1.</strong> Computers identify routine illness much <input type="text" class="blank-input" data-ans="more accurately" placeholder="accurately..." style="width:190px;"> than humans.</div>
+                        <div><strong>2.</strong> Computer experts work to make it <input type="text" class="blank-input" data-ans="easier" placeholder="easy..." style="width:130px;"> for normal people to program.</div>
+                        <div><strong>3.</strong> Certain subjects are likely to become <input type="text" class="blank-input" data-ans="less common" placeholder="less / common..." style="width:170px;"> than they used to be.</div>
+                        <div><strong>4.</strong> Creative writing courses have been getting <input type="text" class="blank-input" data-ans="more popular" placeholder="popular..." style="width:170px;"> in recent years.</div>
+                        <div><strong>5.</strong> People will have to think <input type="text" class="blank-input" data-ans="more carefully" placeholder="carefully..." style="width:180px;"> about studying at university.</div>
+                        <div><strong>6.</strong> They won’t be able to spend <input type="text" class="blank-input" data-ans="as much" placeholder="much..." style="width:140px;"> money as they did in the past.</div>
+                        <div><strong>7.</strong> Universities will need to offer <input type="text" class="blank-input" data-ans="fewer" placeholder="few..." style="width:120px;"> fact-based courses in future.</div>
+                        <div><strong>8.</strong> Architecture students will be trained to think <input type="text" class="blank-input" data-ans="more creatively" placeholder="creatively..." style="width:180px;"> in future.</div>
+                    </div>
+                </div>
+                <div slot="rules-col">
+                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-grammar); padding:18px 22px;">
+                        <h4 style="color:var(--col-grammar); font-size:20px; font-weight:800; margin-bottom:8px;">📌 Structure Classification</h4>
+                        <ul style="padding-left:18px; font-size:17.5px; line-height:1.65; color:var(--text-dark);">
+                            <li><strong>Adjectives:</strong> <em>easier, less common, more popular</em></li>
+                            <li><strong>Adverbs:</strong> <em>more accurately, more carefully, more creatively</em></li>
+                            <li><strong>Quantifiers:</strong> <em>as much, fewer</em></li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 9: 3a Grammar Gap-Fill Practice 2 - Phrase Comparatives (Ex 2) -->
+            <slide-card template="exercise-grid" skill="grammar" title="Grammar 3a Practice 2: Phrase &amp; Superlative Precision (Ex 2)" instruction="Complete each comparative or superlative transformation.">
+                <div slot="grid" style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:18px; line-height:1.65;">
+                    <div class="card" style="padding:14px 18px;">
+                        <strong>1.</strong> Is this book as dull as the last one? No, it's <input type="text" class="blank-input" data-ans="duller than|less dull than" style="width:160px;"> the last one.
+                    </div>
+                    <div class="card" style="padding:14px 18px;">
+                        <strong>2.</strong> The public are <input type="text" class="blank-input" data-ans="less aware" style="width:140px;"> of the problem now than in the past.
+                    </div>
+                    <div class="card" style="padding:14px 18px;">
+                        <strong>3.</strong> A solid plan is the <input type="text" class="blank-input" data-ans="most important" style="width:170px;"> factor for starting a business.
+                    </div>
+                    <div class="card" style="padding:14px 18px;">
+                        <strong>4.</strong> This lecture was <input type="text" class="blank-input" data-ans="less interesting" style="width:170px;"> than the previous session.
+                    </div>
+                    <div class="card" style="padding:14px 18px;">
+                        <strong>5.</strong> This is the <input type="text" class="blank-input" data-ans="most disgusting" style="width:170px;"> food I have ever tasted.
+                    </div>
+                    <div class="card" style="padding:14px 18px;">
+                        <strong>6.</strong> This church is one of the <input type="text" class="blank-input" data-ans="most ancient" style="width:160px;"> buildings in the city.
+                    </div>
+                    <div class="card" style="padding:14px 18px;">
+                        <strong>7.</strong> My grandfather is <input type="text" class="blank-input" data-ans="older than" style="width:140px;"> my grandmother.
+                    </div>
+                    <div class="card" style="padding:14px 18px;">
+                        <strong>8.</strong> I am <input type="text" class="blank-input" data-ans="more grateful" style="width:150px;"> for your help than I can say.
+                    </div>
+                    <div class="card" style="padding:14px 18px;">
+                        <strong>9.</strong> Renting a car is <input type="text" class="blank-input" data-ans="less likely" style="width:140px;"> to cause issues than public transit.
+                    </div>
+                    <div class="card" style="padding:14px 18px;">
+                        <strong>10.</strong> If you study hard, you will get a <input type="text" class="blank-input" data-ans="better" style="width:120px;"> score.
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 10: 3a Vocabulary - Dependent Prepositions -->
+            <slide-card template="exercise-grid" skill="vocab" title="Vocabulary 3a: Academic Dependent Prepositions" instruction="Match each academic verb/noun stem with its mandatory dependent preposition.">
+                <div slot="grid" style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:18.5px; line-height:1.7;">
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab);">
+                        <strong>1. research:</strong> carry out research <select class="select-input" data-ans="into"><option value="">--</option><option value="into">into</option><option value="on">on</option><option value="in">in</option><option value="of">of</option><option value="to">to</option><option value="between">between</option></select> early signs of success.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab);">
+                        <strong>2. focused:</strong> learning methods that focused <select class="select-input" data-ans="on"><option value="">--</option><option value="into">into</option><option value="on">on</option><option value="in">in</option><option value="of">of</option><option value="to">to</option><option value="between">between</option></select> self-control.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab);">
+                        <strong>3. participate:</strong> children got to participate <select class="select-input" data-ans="in"><option value="">--</option><option value="into">into</option><option value="on">on</option><option value="in">in</option><option value="of">of</option><option value="to">to</option><option value="between">between</option></select> the sweet experiment.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab);">
+                        <strong>4. analysis:</strong> carried out an analysis <select class="select-input" data-ans="of"><option value="">--</option><option value="into">into</option><option value="on">on</option><option value="in">in</option><option value="of">of</option><option value="to">to</option><option value="between">between</option></select> the test results.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab);">
+                        <strong>5. obvious:</strong> it was obvious <select class="select-input" data-ans="to"><option value="">--</option><option value="into">into</option><option value="on">on</option><option value="in">in</option><option value="of">of</option><option value="to">to</option><option value="between">between</option></select> the researchers.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab);">
+                        <strong>6. contrast:</strong> a strong contrast <select class="select-input" data-ans="between"><option value="">--</option><option value="into">into</option><option value="on">on</option><option value="in">in</option><option value="of">of</option><option value="to">to</option><option value="between">between</option></select> those who passed and failed.
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 11: 3a Vocabulary - Education Lexicon & Adjective Suffixes -->
+            <slide-card template="gap-fill-passage" skill="vocab" title="Vocabulary 3a: Education Lexicon &amp; Suffixes" subtitle="Select the precise academic terms and identify high-frequency adjective endings.">
+                <div slot="passage">
+                    <div style="display:flex; flex-direction:column; gap:14px; font-size:19px; line-height:1.7;">
+                        <div><strong>1.</strong> In my country, <select class="select-input" data-ans="attendance"><option value="">--</option><option value="attendance">attendance</option><option value="assistance">assistance</option></select> at school is compulsory until sixteen.</div>
+                        <div><strong>2.</strong> In <select class="select-input" data-ans="elementary"><option value="">--</option><option value="elementary">elementary</option><option value="secondary">secondary</option></select> school, children learn basic reading, writing and maths.</div>
+                        <div><strong>3.</strong> Having appropriate <input type="text" class="blank-input" data-ans="qualifications" style="width:180px;"> is necessary to apply for specialized jobs.</div>
+                        <div><strong>4.</strong> It is widely acknowledged that <input type="text" class="blank-input" data-ans="higher education" style="width:200px;"> opens up better opportunities.</div>
+                        <div><strong>5.</strong> Some teachers still prefer a <input type="text" class="blank-input" data-ans="traditional method" style="width:200px;"> of teaching.</div>
+                    </div>
+                </div>
+                <div slot="rules-col">
+                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-vocab); padding:18px 22px;">
+                        <h4 style="color:var(--col-vocab); font-size:20px; font-weight:800; margin-bottom:8px;">🔤 Adjective Suffix Formations</h4>
+                        <ul style="padding-left:18px; font-size:17.5px; line-height:1.65; color:var(--text-dark);">
+                            <li><strong>-able:</strong> achievable, doable</li>
+                            <li><strong>-ful:</strong> careful, harmful</li>
+                            <li><strong>-ive:</strong> creative, informative</li>
+                            <li><strong>-al:</strong> alphabetical</li>
+                            <li><strong>-ing:</strong> annoying, disappointing</li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 12: 3a Writing Task 1 - Degree Costs Bar Chart Analytics -->
+            <slide-card template="exercise-grid" skill="write" title="Writing 3a Task 1: Undergraduate Degree Costs Bar Chart" instruction="Analyze the cost breakdown across 4 countries and complete the comparative reporting sentences.">
+                <div slot="grid" style="display:flex; gap:24px; width:100%; height:100%;">
+                    <div style="flex:1.1; display:flex; flex-direction:column; justify-content:center;">
+                        <div class="ielts-chart-container" id="chart-degree-costs"></div>
+                    </div>
+                    <div style="flex:0.9; display:flex; flex-direction:column; gap:12px; font-size:18px; line-height:1.65; overflow-y:auto;">
+                        <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-writing);">
+                            <strong>1.</strong> The total cost of a degree in Australia was <input type="text" class="blank-input" data-ans="over 50 percent higher|over 50% higher" style="width:190px;"> than in the UK.
+                        </div>
+                        <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-writing);">
+                            <strong>2.</strong> Study fees in Australia and the USA were <input type="text" class="blank-input" data-ans="over four times" style="width:160px;"> higher than <input type="text" class="blank-input" data-ans="those of" style="width:120px;"> Germany.
+                        </div>
+                        <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-writing);">
+                            <strong>3.</strong> The total cost in Australia was around 50% higher than <input type="text" class="blank-input" data-ans="that of" style="width:110px;"> the UK.
+                        </div>
+                        <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-writing);">
+                            <strong>4.</strong> Study fees in Australia were almost <input type="text" class="blank-input" data-ans="twice as" style="width:120px;"> high as in the UK.
+                        </div>
+                        <div style="font-size:14.5px; color:var(--text-muted); background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:6px;">
+                            💡 <em>Note: Use "that of" for singular non-count nouns (total cost) and "those of" for plural count nouns (study fees).</em>
+                        </div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 13: 3a Writing Task 1 - Model Linking Paragraph Breakdown -->
+            <slide-card template="writing-annotator" skill="write" title="Writing 3a: Task 1 Model Linking Paragraph Breakdown">
+                <div slot="essay-text">
+                    <p>
+                        <span class="hl-phrase" data-phrase="Superlative Topic Anchor" data-note="Establishes Australia as the highest cost jurisdiction immediately.">The country with the highest overall costs was Australia.</span>
+                        <span class="hl-phrase" data-phrase="Cohesive Addition (Both... and)" data-note="Synthesizes both living expenses and course fees into a unified superlative statement."><strong>Both</strong> the living expenses and the course fees were the highest among the four countries in the study.</span>
+                        <span class="hl-phrase" data-phrase="Intensifier Comparison" data-note="Uses 'almost twice as high as' and 'almost four times as high as that of' for strong comparative variety."><strong>In fact</strong>, the cost of a degree in Australia was almost twice as high as the UK, and almost four times as high as that of Germany.</span>
+                        <span class="hl-phrase" data-phrase="Complex Subordinate Contrast" data-note="Contrasts high tuition fees with cheaper living expenses in the US."><strong>Although</strong> study fees were quite high in the USA, living expenses were much cheaper.</span>
+                        <span class="hl-phrase" data-phrase="Cause-Effect Conclusion" data-note="Draws logical consequence regarding total US costs."><strong>That meant that</strong> the total cost of a degree in the USA was slightly lower than Australia.</span>
+                        <span class="hl-phrase" data-phrase="Macro Summary Connector" data-note="Concludes with geographic grouping (UK and Germany)."><strong>All in all</strong>, it was much cheaper to study in the two European countries, the UK and Germany.</span>
+                    </p>
+                </div>
+                <div slot="annotations">
+                    <div class="card" style="background:#ffffff; border-top:4px solid var(--col-writing); padding:18px 22px;">
+                        <h4 style="color:var(--col-writing); font-size:20px; font-weight:800; margin-bottom:8px;">🌟 Cohesive Devices Mastered</h4>
+                        <ul style="padding-left:18px; font-size:17px; line-height:1.65; color:var(--text-dark);">
+                            <li><strong>Dual Coordination:</strong> <em>"Both the living expenses and..."</em></li>
+                            <li><strong>Emphasis Anchor:</strong> <em>"In fact..."</em></li>
+                            <li><strong>Subordinate Contrast:</strong> <em>"Although study fees were high..."</em></li>
+                            <li><strong>Logical Implication:</strong> <em>"That meant that..."</em></li>
+                            <li><strong>Overview Synthesis:</strong> <em>"All in all, it was much cheaper..."</em></li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 14: 3a Writing Task 1 Extra - Public vs Private Schools Dual Pie Charts -->
+            <slide-card template="exercise-grid" skill="write" title="Writing 3a Extra: Public vs. Private School Distribution (Dual Pie Charts)" instruction="Compare proportions between total students (9:1 ratio) and total school institutions (3:1 ratio).">
+                <div slot="grid" style="display:flex; flex-direction:column; width:100%; height:100%; gap:14px;">
+                    <div class="ielts-chart-container" id="chart-school-pies"></div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div class="card" style="padding:14px 18px; border-left:4px solid var(--col-reading);">
+                            <div style="font-weight:800; font-size:17.5px; color:var(--col-reading); margin-bottom:4px;">1. Student Enrollment Asymmetry</div>
+                            <p style="font-size:16.5px; line-height:1.6; margin:0;">While public schools accommodate <strong>nine out of ten students (90%)</strong>, private schools educate a modest <strong>10% minority</strong>.</p>
+                        </div>
+                        <div class="card" style="padding:14px 18px; border-left:4px solid var(--col-vocab);">
+                            <div style="font-weight:800; font-size:17.5px; color:var(--col-vocab); margin-bottom:4px;">2. Institutional Count Discrepancy</div>
+                            <p style="font-size:16.5px; line-height:1.6; margin:0;">In contrast, private schools make up <strong>one quarter (25%)</strong> of all school buildings, indicating significantly smaller class sizes.</p>
+                        </div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 15: Section 3b Divider -->
+            <slide-card template="section-divider" skill="title">
+                <span slot="badge">Section 3b</span>
+                <span slot="title">The World of Work</span>
+                <span slot="subtitle">The Dark Side of Emotional Intelligence, YES/NO/NOT GIVEN verification, verb patterns (-ing vs infinitives), business collocations, and fast food pay rates table.</span>
+            </slide-card>
+
+            <!-- SLIDE 16: 3b Reading Strategy - Question Deconstruction -->
+            <slide-card template="exercise-grid" skill="read" title="Reading 3b Strategy: YES / NO / NOT GIVEN Claims Deconstruction" instruction="Click each statement to examine the verifiable claim versus common linguistic traps.">
+                <div slot="grid" style="display:flex; flex-direction:column; gap:10px; width:100%; height:100%; overflow-y:auto;">
+                    <div class="card q-card strategy-card" style="border-left:6px solid var(--col-reading); padding:14px 18px; cursor:pointer;">
+                        <strong>1.</strong> Politicians have tried to use emotional intelligence as a tool for social change. → <span class="syn-pair-1">YES: "used by government leaders and educators as the solution to a wide range of problems"</span>
+                    </div>
+                    <div class="card q-card strategy-card" style="border-left:6px solid var(--col-reading); padding:14px 18px; cursor:pointer;">
+                        <strong>2.</strong> Schools and hospitals have seen an improvement in standards since 1995. → <span class="syn-pair-2">NOT GIVEN: EI is taught widely, but no outcome data on standards improvement is stated.</span>
+                    </div>
+                    <div class="card q-card strategy-card" style="border-left:6px solid var(--col-reading); padding:14px 18px; cursor:pointer;">
+                        <strong>3.</strong> Menges’ study showed that people had better recall of facts if a speaker stirred strong feelings. → <span class="syn-pair-2">NO: Speech with emotion made audience remember LESS of content.</span>
+                    </div>
+                    <div class="card q-card strategy-card" style="border-left:6px solid var(--col-reading); padding:14px 18px; cursor:pointer;">
+                        <strong>4.</strong> Emotionally intelligent people make colleagues feel silly more often than others. → <span class="syn-pair-2">NOT GIVEN: Manipulative workers devalued peers, but "more often than others" is unverified.</span>
+                    </div>
+                    <div class="card q-card strategy-card" style="border-left:6px solid var(--col-reading); padding:14px 18px; cursor:pointer;">
+                        <strong>5.</strong> People experience more job satisfaction after emotional awareness training. → <span class="syn-pair-2">NOT GIVEN: No mention of job satisfaction metrics.</span>
+                    </div>
+                    <div class="card q-card strategy-card" style="border-left:6px solid var(--col-reading); padding:14px 18px; cursor:pointer;">
+                        <strong>6.</strong> Anita Roddick used emotional appeals for good causes. → <span class="syn-pair-1">YES: Used emotions to inspire employees to fundraise for charity.</span>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 17: 3b Reading Walkthrough - Question 1 & Paragraph A -->
+            <slide-card template="walkthrough" skill="read" title="Reading 3b Walkthrough: Verifying Writer Claims" subtitle="Compare Question 1 against Paragraph A's assertion on government policy.">
+                <span slot="passage-header">📖 Passage Excerpt (Paragraph A)</span>
+                <span slot="passage-text">
+                    "Since the 1995 publication of Daniel Goleman’s bestseller, Emotional Intelligence, <mark class="evidence" id="ev-wt-3b-1" data-q="wt-3b-1"><span class="syn-pair-1" data-q="wt-3b-1">the idea has been used by government leaders and educators as the solution to a wide range of problems</span></mark>. If we can encourage emotional intelligence among school children, leaders and doctors, we’ll have more caring educational institutions, workplaces and better healthcare."
+                </span>
+                <span slot="question-text">
+                    1. Politicians have tried to use emotional intelligence as a tool for social change.
+                </span>
+                <div slot="input-area">
+                    <select class="select-input" data-ans="YES" style="width:160px; font-weight:700;"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+                </div>
+                <div slot="explanation">
+                    <span class="syn-tag green">Claim Agreement:</span> <em>"Politicians"</em> = <em>"government leaders"</em>; <em>"tool for social change"</em> = <em>"solution to a wide range of problems... more caring educational institutions, workplaces and better healthcare"</em>.
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 18: 3b Split-View Reading - The Dark Side of Emotional Intelligence (Q1-6) -->
+            <slide-card template="reading-split" skill="read" title="Reading 3b: The Dark Side of Emotional Intelligence" instruction="Read the passage. Select YES, NO, or NOT GIVEN for Questions 1–6. Click 💡 Evidence to scroll to evidence.">
+                <div slot="reading-pane">
+                    <p><span class="para-tag">Para A</span> Since the 1995 publication of Daniel Goleman’s bestseller, Emotional Intelligence, <mark class="evidence" id="ev-3b-1" data-q="3b-1"><span class="syn-pair-1" data-q="3b-1">the idea has been used by government leaders and educators as the solution to a wide range of problems</span></mark>. If we can encourage emotional intelligence, we’ll have better workplaces. <mark class="evidence" id="ev-3b-2" data-q="3b-2">As a result, emotional intelligence is now taught widely in secondary schools, business schools and medical schools.</mark></p>
+                    
+                    <p><span class="para-tag">Para B</span> Research led by University of Cambridge Professor Jochen Menges suggested that, <mark class="evidence" id="ev-3b-3" data-q="3b-3">when a leader gave an inspiring speech filled with emotion, the audience was less likely to challenge the message and <span class="syn-pair-2" data-q="3b-3">remembered less of the content</span></mark>. Interestingly, though, audience members were so moved that they believed that they had remembered more.</p>
+                    
+                    <p><span class="para-tag">Para C</span> In a study led by psychologist Stephane Cote of the University of Toronto, university employees filled out a survey about manipulative tendencies. <mark class="evidence" id="ev-3b-4" data-q="3b-4">The employees who engaged in the most harmful behaviours were masters of manipulation with high emotional intelligence, <span class="syn-pair-1" data-q="3b-4">using emotional skills to demean and embarrass peers</span>.</mark></p>
+                    
+                    <p><span class="para-tag">Para D</span> In a study at the Body Shop, Stanford professor Joanne Martin discovered that founder <mark class="evidence" id="ev-3b-6" data-q="3b-6">Anita Roddick <span class="syn-pair-1" data-q="3b-6">used emotions to inspire her employees to fundraise for charity</span></mark>. ‘Whenever we wanted to persuade our staff to support a particular project we always tried to break their hearts.’</p>
+                    
+                    <p><span class="para-tag">Para E</span> In jobs such as mechanics, scientists and accountants, higher emotional intelligence translated into lower performance. These employees were paying attention to facial expressions and vocal tones when they should have been analysing data or repairing cars.</p>
+                    
+                    <p><span class="para-tag">Para F</span> In a study at a healthcare company, the relationship between emotional intelligence and helping colleagues didn’t exist. Helping is driven by motivations and values. However, emotional intelligence was significant when challenging existing situations and speaking up with ideas.</p>
+                    
+                    <p><span class="para-tag">Para G</span> Emotionally intelligent employees spoke up more effectively, keeping anger in check and expressing enthusiasm without threatening leaders.</p>
+                </div>
+                <div slot="question-pane">
+                    <div class="q-card" data-q="3b-1" style="margin-bottom:10px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <strong>1. Politicians have tried to use EI as a tool for social change.</strong>
+                            <button class="syn-btn" data-ev="ev-3b-1">💡 Evidence</button>
+                        </div>
+                        <select class="select-input" data-ans="YES" style="width:100%;"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+                        <div class="item-explanation">Passage confirms government leaders used EI as a solution for broad societal problems.</div>
+                    </div>
+
+                    <div class="q-card" data-q="3b-2" style="margin-bottom:10px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <strong>2. Schools and hospitals have seen an improvement in standards since 1995.</strong>
+                            <button class="syn-btn" data-ev="ev-3b-2">💡 Evidence</button>
+                        </div>
+                        <select class="select-input" data-ans="NOT GIVEN" style="width:100%;"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+                        <div class="item-explanation">Passage mentions EI is taught widely in schools/hospitals, but no measurable standard improvements are reported.</div>
+                    </div>
+
+                    <div class="q-card" data-q="3b-3" style="margin-bottom:10px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <strong>3. Menges’ study showed people had better recall of facts from emotional speeches.</strong>
+                            <button class="syn-btn" data-ev="ev-3b-3">💡 Evidence</button>
+                        </div>
+                        <select class="select-input" data-ans="NO" style="width:100%;"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+                        <div class="item-explanation">Contradicted: the audience remembered LESS of the factual content.</div>
+                    </div>
+
+                    <div class="q-card" data-q="3b-4" style="margin-bottom:10px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <strong>4. Emotionally intelligent people make colleagues feel silly more often than others.</strong>
+                            <button class="syn-btn" data-ev="ev-3b-4">💡 Evidence</button>
+                        </div>
+                        <select class="select-input" data-ans="NOT GIVEN" style="width:100%;"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+                        <div class="item-explanation">Cote's study shows they demean/embarrass peers, but gives no comparative frequency ("more often than others").</div>
+                    </div>
+
+                    <div class="q-card" data-q="3b-5" style="margin-bottom:10px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <strong>5. People experience more job satisfaction after emotional awareness training.</strong>
+                            <button class="syn-btn" data-ev="ev-3b-4">💡 Evidence</button>
+                        </div>
+                        <select class="select-input" data-ans="NOT GIVEN" style="width:100%;"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+                        <div class="item-explanation">No discussion of job satisfaction levels appears in the text.</div>
+                    </div>
+
+                    <div class="q-card" data-q="3b-6" style="margin-bottom:10px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <strong>6. Anita Roddick used emotional appeals for good causes.</strong>
+                            <button class="syn-btn" data-ev="ev-3b-6">💡 Evidence</button>
+                        </div>
+                        <select class="select-input" data-ans="YES" style="width:100%;"><option value="">Select...</option><option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option></select>
+                        <div class="item-explanation">Passage confirms she used emotional appeals to inspire charity fundraising.</div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 19: 3b Reading - Summary Completion with a Box (Q7-13) -->
+            <slide-card template="gap-fill-passage" skill="read" title="Reading 3b: Summary Completion with a Box (Q7–13)" subtitle="Complete the summary using options A–L.">
+                <div slot="passage">
+                    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; background:#eff6ff; padding:10px 14px; border-radius:6px; border:1px solid #bfdbfe; font-size:15px;">
+                        <strong>A.</strong> researchers | <strong>B.</strong> focus | <strong>C.</strong> enthusiasm | <strong>D.</strong> disrespect | <strong>E.</strong> negative | <strong>F.</strong> speeches | <strong>G.</strong> situations | <strong>H.</strong> no | <strong>I.</strong> significant | <strong>J.</strong> managers | <strong>K.</strong> complaints | <strong>L.</strong> decision
+                    </div>
+
+                    <div style="font-size:18px; line-height:2.0; color:var(--text-dark);" id="eiSummaryBoxTask">
+                        In the University of Florida study, emotional intelligence had a more <strong>7.</strong> <select class="select-input" data-ans="I" style="width:140px;"><option value="">--</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I (significant)</option><option value="J">J</option><option value="K">K</option><option value="L">L</option></select> effect on people who worked in jobs such as accountancy and motor repairs. They found that emotionally intelligent people made faces and gestures their main <strong>8.</strong> <select class="select-input" data-ans="B" style="width:130px;"><option value="">--</option><option value="A">A</option><option value="B">B (focus)</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option><option value="J">J</option><option value="K">K</option><option value="L">L</option></select>, which weakened other skills. They concluded that emotional intelligence can matter in some <strong>9.</strong> <select class="select-input" data-ans="G" style="width:140px;"><option value="">--</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G (situations)</option><option value="H">H</option><option value="I">I</option><option value="J">J</option><option value="K">K</option><option value="L">L</option></select>. For example, <strong>10.</strong> <select class="select-input" data-ans="J" style="width:140px;"><option value="">--</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option><option value="J">J (managers)</option><option value="K">K</option><option value="L">L</option></select> were asked questions about workers’ behaviour after a series of tests. They observed <strong>11.</strong> <select class="select-input" data-ans="H" style="width:120px;"><option value="">--</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H (no)</option><option value="I">I</option><option value="J">J</option><option value="K">K</option><option value="L">L</option></select> difference between workers with high or low EI when it came to helpfulness. They found that workers with higher EI felt more comfortable making <strong>12.</strong> <select class="select-input" data-ans="K" style="width:150px;"><option value="">--</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option><option value="J">J</option><option value="K">K (complaints)</option><option value="L">L</option></select> when treated unjustly. Supervisors were more likely to listen because the <strong>13.</strong> <select class="select-input" data-ans="C" style="width:150px;"><option value="">--</option><option value="A">A</option><option value="B">B</option><option value="C">C (enthusiasm)</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option><option value="J">J</option><option value="K">K</option><option value="L">L</option></select> of emotionally intelligent people made ideas easier to accept.
+                    </div>
+                </div>
+                <div slot="rules-col">
+                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-reading); padding:18px 22px;">
+                        <h4 style="color:var(--col-reading); font-size:20px; font-weight:800; margin-bottom:8px;">💡 Linguistic Keys</h4>
+                        <ul style="padding-left:18px; font-size:16.5px; line-height:1.6; color:var(--text-dark);">
+                            <li><strong>7. I:</strong> "hidden costs / reversed results" → <em>significant</em></li>
+                            <li><strong>8. B:</strong> "attention to emotions" → <em>focus</em></li>
+                            <li><strong>10. J:</strong> "managers were asked to evaluate" → <em>managers</em></li>
+                            <li><strong>11. H:</strong> "relationship simply didn't exist" → <em>no difference</em></li>
+                            <li><strong>12. K:</strong> "challenging existing situations" → <em>complaints</em></li>
+                            <li><strong>13. C:</strong> "ability to express enthusiasm" → <em>enthusiasm</em></li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 20: 3b Grammar Masterclass - Verb Patterns (-ing vs Infinitives) -->
+            <slide-card template="grammar-masterclass" skill="grammar" title="Grammar 3b: Verb Patterns (-ing vs. Infinitives)">
+                <div slot="rules">
+                    <div class="rule-card" style="margin-bottom:12px;">
+                        <div style="font-size:20px; font-weight:800; color:var(--col-grammar); margin-bottom:4px;">1. Gerund (-ing Form)</div>
+                        <ul style="padding-left:18px; font-size:17.5px; line-height:1.6; margin:0;">
+                            <li>Follows prepositions: <em>interested <strong>in understanding</strong></em>.</li>
+                            <li>Follows verbs of preference/habit: <em>avoid, dislike, enjoy, practice, stop, spend time, risk</em>.</li>
+                            <li>Used as sentence subjects: <em><strong>Creating</strong> smaller spaces allows freedom.</em></li>
+                        </ul>
+                    </div>
+                    <div class="rule-card">
+                        <div style="font-size:20px; font-weight:800; color:var(--col-reading); margin-bottom:4px;">2. Infinitive (with to)</div>
+                        <div style="font-size:17.5px; line-height:1.6;">
+                            • Follows adjectives: <em>It was difficult <strong>to get</strong> a job.</em><br>
+                            • Verbs of plan/intent/necessity: <em>agree, decide, hope, manage, need, plan, want, try</em>.
+                        </div>
+                    </div>
+                </div>
+                <div slot="contrast-card">
+                    <div style="font-size:21px; font-weight:800; color:var(--col-grammar); margin-bottom:8px;">⚠️ Meaning Shift Verbs</div>
+                    <div style="font-size:18px; line-height:1.75; color:var(--text-dark);">
+                        <div style="background:rgba(244,63,94,0.08); padding:10px 14px; border-radius:6px; margin-bottom:10px;">
+                            <strong>Stop + -ing:</strong> Cease doing an activity.<br>
+                            👉 <em>"You have to stop <strong>sitting</strong> at your desk."</em>
+                        </div>
+                        <div style="background:rgba(37,99,235,0.08); padding:10px 14px; border-radius:6px;">
+                            <strong>Stop + to-infinitive:</strong> Pause in order to do something else.<br>
+                            👉 <em>"He stopped <strong>to answer</strong> his mobile phone."</em>
+                        </div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 21: 3b Grammar Practice 1 - Verb Pattern Choices (Ex 1) -->
+            <slide-card template="exercise-grid" skill="grammar" title="Grammar 3b Practice 1: Verb Pattern Option Choices (Ex 1)" instruction="Select the correct verb form for each sentence context.">
+                <div slot="grid" style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:18.5px; line-height:1.7;">
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-grammar);">
+                        <strong>1.</strong> You need <select class="select-input" data-ans="to include"><option value="">--</option><option value="to include">to include</option><option value="including">including</option></select> a description of the project.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-grammar);">
+                        <strong>2.</strong> It was difficult <select class="select-input" data-ans="to get"><option value="">--</option><option value="to get">to get</option><option value="getting">getting</option></select> an appointment to use the 3D printer.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-grammar);">
+                        <strong>3.</strong> <select class="select-input" data-ans="Creating"><option value="">--</option><option value="To create">To create</option><option value="Creating">Creating</option></select> smaller spaces like this allows people more freedom.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-grammar);">
+                        <strong>4.</strong> A lot of people in that environment dislike <select class="select-input" data-ans="working"><option value="">--</option><option value="to work">to work</option><option value="working">working</option></select> like that.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-grammar);">
+                        <strong>5.</strong> I was really interested in <select class="select-input" data-ans="understanding"><option value="">--</option><option value="to understand">to understand</option><option value="understanding">understanding</option></select> this area better.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-grammar);">
+                        <strong>6.</strong> You just have to stop <select class="select-input" data-ans="sitting"><option value="">--</option><option value="to sit">to sit</option><option value="sitting">sitting</option></select> at your desk all the time.
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 22: 3b Grammar Practice 2 - Text Verb Form Cloze (Ex 2) -->
+            <slide-card template="gap-fill-passage" skill="grammar" title="Grammar 3b Practice 2: Career Strategy Verb Form Cloze (Ex 2)" subtitle="Complete the passage with the correct -ing or infinitive forms.">
+                <div slot="passage">
+                    <div style="font-size:18px; line-height:2.1; color:var(--text-dark);" id="careerStrategyVerbCloze">
+                        If you want <strong>1.</strong> <input type="text" class="blank-input" data-ans="to do" style="width:90px;"> <em>(do)</em> well in your career, start by <strong>2.</strong> <input type="text" class="blank-input" data-ans="making" style="width:100px;"> <em>(make)</em> a plan. It is easy <strong>3.</strong> <input type="text" class="blank-input" data-ans="to get" style="width:90px;"> <em>(get)</em> distracted, so stop <strong>4.</strong> <input type="text" class="blank-input" data-ans="to think" style="width:100px;"> <em>(think)</em> about where you want to be. Avoid <strong>5.</strong> <input type="text" class="blank-input" data-ans="doing" style="width:90px;"> <em>(do)</em> tasks that do not advance your goal. <strong>6.</strong> <input type="text" class="blank-input" data-ans="Asking" style="width:100px;"> <em>(Ask)</em> mentors for feedback helps you <strong>7.</strong> <input type="text" class="blank-input" data-ans="to identify|identify" style="width:110px;"> <em>(identify)</em> areas for improvement. You must manage <strong>8.</strong> <input type="text" class="blank-input" data-ans="to work out" style="width:130px;"> <em>(work out)</em> your schedule without <strong>9.</strong> <input type="text" class="blank-input" data-ans="doing" style="width:90px;"> <em>(do)</em> unnecessary overtime. <strong>10.</strong> <input type="text" class="blank-input" data-ans="Listing" style="width:100px;"> <em>(List)</em> your accomplishments encourages you <strong>11.</strong> <input type="text" class="blank-input" data-ans="to learn" style="width:100px;"> <em>(learn)</em> new skills, instead of <strong>12.</strong> <input type="text" class="blank-input" data-ans="seeing|to see" style="width:100px;"> <em>(see)</em> obstacles. You may practice <strong>13.</strong> <input type="text" class="blank-input" data-ans="teaching|to teach" style="width:110px;"> <em>(teach)</em> peers, and hope <strong>14.</strong> <input type="text" class="blank-input" data-ans="to work|working" style="width:100px;"> <em>(work)</em> on major projects, avoiding <strong>15.</strong> <input type="text" class="blank-input" data-ans="to end up" style="width:110px;"> <em>(end up)</em> <strong>16.</strong> <input type="text" class="blank-input" data-ans="regretting" style="width:120px;"> <em>(regret)</em> missed chances.
+                    </div>
+                </div>
+                <div slot="rules-col">
+                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-grammar); padding:18px 22px;">
+                        <h4 style="color:var(--col-grammar); font-size:20px; font-weight:800; margin-bottom:8px;">💡 Verb Selection Rules</h4>
+                        <ul style="padding-left:18px; font-size:16.5px; line-height:1.65; color:var(--text-dark);">
+                            <li><strong>want / easy / manage / encourage:</strong> + to-infinitive</li>
+                            <li><strong>by / avoid / without / instead of / practice:</strong> + gerund (-ing)</li>
+                            <li><strong>stop to think:</strong> pause in order to reflect</li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 23: 3b Vocabulary - Business & Finance Collocations -->
+            <slide-card template="exercise-grid" skill="vocab" title="Vocabulary 3b: Business, Finance &amp; Economy Collocations" instruction="Match sentence stems (1–8) with their natural business collocations (A–H).">
+                <div slot="grid" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; font-size:17.5px; line-height:1.65;">
+                    <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-vocab);">
+                        <strong>1. Buy-one-get-one-free offers...</strong> <select class="select-input" data-ans="E"><option value="">--</option><option value="A">A. set up a new internet company</option><option value="B">B. creates a better economy</option><option value="C">C. commercials on television</option><option value="D">D. get government funding</option><option value="E">E. increase a company's sales briefly</option><option value="F">F. famous brands over local goods</option><option value="G">G. is the Chinese yuan</option><option value="H">H. invest in local housing</option></select>
+                    </div>
+                    <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-vocab);">
+                        <strong>2. Competition in markets...</strong> <select class="select-input" data-ans="B"><option value="">--</option><option value="A">A. set up a new internet company</option><option value="B">B. creates a better economy</option><option value="C">C. commercials on television</option><option value="D">D. get government funding</option><option value="E">E. increase a company's sales briefly</option><option value="F">F. famous brands over local goods</option><option value="G">G. is the Chinese yuan</option><option value="H">H. invest in local housing</option></select>
+                    </div>
+                    <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-vocab);">
+                        <strong>3. It’s still a good idea to set up...</strong> <select class="select-input" data-ans="A"><option value="">--</option><option value="A">A. a new internet company these days</option><option value="B">B. creates a better economy</option><option value="C">C. commercials on television</option><option value="D">D. get government funding</option><option value="E">E. increase a company's sales briefly</option><option value="F">F. famous brands over local goods</option><option value="G">G. is the Chinese yuan</option><option value="H">H. invest in local housing</option></select>
+                    </div>
+                    <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-vocab);">
+                        <strong>4. I trust famous brands...</strong> <select class="select-input" data-ans="F"><option value="">--</option><option value="A">A. set up a new internet company</option><option value="B">B. creates a better economy</option><option value="C">C. commercials on television</option><option value="D">D. get government funding</option><option value="E">E. increase a company's sales briefly</option><option value="F">F. more than locally produced goods</option><option value="G">G. is the Chinese yuan</option><option value="H">H. invest in local housing</option></select>
+                    </div>
+                    <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-vocab);">
+                        <strong>5. The most useful currency...</strong> <select class="select-input" data-ans="G"><option value="">--</option><option value="A">A. set up a new internet company</option><option value="B">B. creates a better economy</option><option value="C">C. commercials on television</option><option value="D">D. get government funding</option><option value="E">E. increase a company's sales briefly</option><option value="F">F. famous brands over local goods</option><option value="G">G. is the Chinese yuan</option><option value="H">H. invest in local housing</option></select>
+                    </div>
+                    <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-vocab);">
+                        <strong>6. Companies can grow if...</strong> <select class="select-input" data-ans="D"><option value="">--</option><option value="A">A. set up a new internet company</option><option value="B">B. creates a better economy</option><option value="C">C. commercials on television</option><option value="D">D. they get government funding</option><option value="E">E. increase a company's sales briefly</option><option value="F">F. famous brands over local goods</option><option value="G">G. is the Chinese yuan</option><option value="H">H. invest in local housing</option></select>
+                    </div>
+                    <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-vocab);">
+                        <strong>7. Rich foreigners...</strong> <select class="select-input" data-ans="H"><option value="">--</option><option value="A">A. set up a new internet company</option><option value="B">B. creates a better economy</option><option value="C">C. commercials on television</option><option value="D">D. get government funding</option><option value="E">E. increase a company's sales briefly</option><option value="F">F. famous brands over local goods</option><option value="G">G. is the Chinese yuan</option><option value="H">H. invest in housing there</option></select>
+                    </div>
+                    <div class="card" style="padding:12px 16px; border-left:4px solid var(--col-vocab);">
+                        <strong>8. I never watch...</strong> <select class="select-input" data-ans="C"><option value="">--</option><option value="A">A. set up a new internet company</option><option value="B">B. creates a better economy</option><option value="C">C. commercials on television</option><option value="D">D. get government funding</option><option value="E">E. increase a company's sales briefly</option><option value="F">F. famous brands over local goods</option><option value="G">G. is the Chinese yuan</option><option value="H">H. invest in local housing</option></select>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 24: 3b Writing Task 1 - Fast Food Pay Rates Table -->
+            <slide-card template="writing-annotator" skill="write" title="Writing 3b Task 1: Fast Food Industry Pay Rates Table">
+                <div slot="essay-text">
+                    <!-- Data Table -->
+                    <div style="background:#ffffff; border-radius:8px; overflow:hidden; border:1px solid #cbd5e1; margin-bottom:14px;">
+                        <table style="width:100%; border-collapse:collapse; text-align:left; font-size:16.5px;">
+                            <thead style="background:#f1f5f9; color:#0f172a;">
+                                <tr>
+                                    <th style="padding:8px 12px; border-bottom:2px solid #cbd5e1;">Hourly Pay Rate</th>
+                                    <th style="padding:8px 12px; border-bottom:2px solid #cbd5e1;">Age 16–19</th>
+                                    <th style="padding:8px 12px; border-bottom:2px solid #cbd5e1;">Age 20+</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="padding:6px 12px; border-bottom:1px solid #e2e8f0;"><strong>$7.25 or less</strong></td><td style="padding:6px 12px; border-bottom:1px solid #e2e8f0;">13.2%</td><td style="padding:6px 12px; border-bottom:1px solid #e2e8f0;">11.1%</td></tr>
+                                <tr><td style="padding:6px 12px; border-bottom:1px solid #e2e8f0;"><strong>$7.26 – $10.09</strong></td><td style="padding:6px 12px; border-bottom:1px solid #e2e8f0;">70.4%</td><td style="padding:6px 12px; border-bottom:1px solid #e2e8f0;">68.0%</td></tr>
+                                <tr><td style="padding:6px 12px; border-bottom:1px solid #e2e8f0;"><strong>$10.10 – $11.99</strong></td><td style="padding:6px 12px; border-bottom:1px solid #e2e8f0;">8.7%</td><td style="padding:6px 12px; border-bottom:1px solid #e2e8f0;">10.5%</td></tr>
+                                <tr><td style="padding:6px 12px;"><strong>$12.00+</strong></td><td style="padding:6px 12px;">7.8%</td><td style="padding:6px 12px;">10.0%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p style="font-size:17px; line-height:1.75;">
+                        <span class="hl-phrase" data-phrase="Introduction &amp; Overview" data-note="Clear paraphrase of table content followed by general trend comparison between youth and older workers.">The table shows the earnings of people employed in the fast food industry in the United States. We can see from the data that, in general, people under the age of 20 earn less than those over the age of 20.</span>
+                        <span class="hl-phrase" data-phrase="Majority Concentration" data-note="Reports the dominant cluster (around 70% earning $7.26-$10.09).">The majority of people working in these restaurants in both age groups earn below $10 an hour, with $7.26–$10.09 being the most common rate of pay (70.4% for under 20s and 68% for over 20s).</span>
+                        <span class="hl-phrase" data-phrase="Extremes Comparison" data-note="Compares lowest wage tier (13.2% vs 11.1%) and top wage tier over $12.00 (7.8% vs 10.0%).">However, the lowest wage group was slightly higher for teens (13.2% vs 11.1%), while only a very small minority earned over $12.00 an hour.</span>
+                    </p>
+                </div>
+                <div slot="annotations">
+                    <div class="card" style="background:#ffffff; border-top:4px solid var(--col-writing); padding:18px 22px;">
+                        <h4 style="color:var(--col-writing); font-size:20px; font-weight:800; margin-bottom:8px;">📊 Key Table Reporting Moves</h4>
+                        <ul style="padding-left:18px; font-size:16.5px; line-height:1.65; color:var(--text-dark);">
+                            <li><strong>Cluster Identification:</strong> Highlight where 2/3 of data sits ($7.26–$10.09).</li>
+                            <li><strong>Age Cohort Comparison:</strong> Contrast 16–19 teens with 20+ adults.</li>
+                            <li><strong>Extremes Reporting:</strong> Note the min/max percentages.</li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 25: 3b Writing Task 1 Extra - Gender Earnings Gap Line Graph -->
+            <slide-card template="writing-annotator" skill="write" title="Writing 3b Extra: Women's Earnings Gap Multi-Line Graph (1975–2005)">
+                <div slot="essay-text">
+                    <div class="ielts-chart-container" id="chart-womens-earnings"></div>
+                    <p style="font-size:17px; line-height:1.75; margin-top:10px;">
+                        <span class="hl-phrase" data-phrase="Overview Clause" data-note="Identifies that women's earnings relative to men rose across all age cohorts over the 30-year span, with the youngest group maintaining the highest parity.">Overall, women’s earnings as a proportion of men’s wages increased across all four age brackets between 1975 and 2005, with younger females (16–24) consistently achieving the highest percentage.</span>
+                        <span class="hl-phrase" data-phrase="Cohort Trajectories" data-note="Details the 16-24 group rising from 78% to 92%, and the 25-34 group showing the steepest ascent from 67% to 89%.">The 16–24 age category rose steadily from 78% to peak at 92%, while the 25–34 demographic experienced the most dramatic growth, climbing by 22 percentage points to finish at 89%.</span>
+                    </p>
+                </div>
+                <div slot="annotations">
+                    <div class="card" style="background:#ffffff; border-top:4px solid var(--col-writing); padding:18px 22px;">
+                        <h4 style="color:var(--col-writing); font-size:20px; font-weight:800; margin-bottom:8px;">📈 Line Graph Key Insights</h4>
+                        <ul style="padding-left:18px; font-size:16.5px; line-height:1.65; color:var(--text-dark);">
+                            <li><strong>Universal Upward Trend:</strong> All lines rise from 1975 to 2005.</li>
+                            <li><strong>Age Inversion:</strong> Younger women have significantly higher wage parity (92%) than older women (74–75%).</li>
+                            <li><strong>Convergence:</strong> Older brackets (35–44 &amp; 45–54) converged around 74–75% by 2005.</li>
+                        </ul>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 26: Module 3 Review - Higher Education Cloze & Phrase Matching -->
+            <slide-card template="gap-fill-passage" skill="review" title="Module 03 Review: Higher Education Lexicon &amp; Phrase Match">
+                <div slot="passage">
+                    <!-- Word Box -->
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; background:#f0fdfa; padding:8px 12px; border-radius:6px; border:1px solid #99f6e4; font-size:14.5px;">
+                        achievable | campus | creative | disappointed | elementary | formal | harmful | higher | qualification | top
+                    </div>
+                    <div style="font-size:17px; line-height:1.9; color:var(--text-dark);" id="reviewEduCloze">
+                        Any student in <strong>1.</strong> <input type="text" class="blank-input" data-ans="higher" style="width:110px;"> education knows testing is central. For law, a <strong>2.</strong> <input type="text" class="blank-input" data-ans="qualification" style="width:140px;"> is vital, though many careers are <strong>3.</strong> <input type="text" class="blank-input" data-ans="achievable" style="width:130px;"> without exams. Even in <strong>4.</strong> <input type="text" class="blank-input" data-ans="elementary" style="width:130px;"> school, children take tests. Competition for <strong>5.</strong> <input type="text" class="blank-input" data-ans="top" style="width:80px;"> universities is fierce. Excessive focus on grades can be <strong>6.</strong> <input type="text" class="blank-input" data-ans="harmful" style="width:110px;"> to growth. Once leaving <strong>7.</strong> <input type="text" class="blank-input" data-ans="formal" style="width:100px;"> education, students may be <strong>8.</strong> <input type="text" class="blank-input" data-ans="disappointed" style="width:140px;"> by how little tests matter. <strong>9.</strong> <input type="text" class="blank-input" data-ans="Creative" style="width:110px;"> thinking and character matter far beyond a university <strong>10.</strong> <input type="text" class="blank-input" data-ans="campus" style="width:110px;">.
+                    </div>
+                </div>
+                <div slot="rules-col">
+                    <div style="display:flex; flex-direction:column; gap:10px; font-size:16.5px; line-height:1.55;">
+                        <div class="card" style="padding:10px 14px; border-left:4px solid var(--col-review);">
+                            <strong>1.</strong> Successful graduates planned... <select class="select-input" data-ans="B"><option value="">--</option><option value="B">B. to get a job with a top company</option><option value="E">E. to start their own business</option><option value="D">D. to make up 75% of workforce</option></select>
+                        </div>
+                        <div class="card" style="padding:10px 14px; border-left:4px solid var(--col-review);">
+                            <strong>2.</strong> Millennials are interested in... <select class="select-input" data-ans="E"><option value="">--</option><option value="B">B. top company jobs</option><option value="E">E. starting their own business</option><option value="D">D. 75% of workforce</option></select>
+                        </div>
+                        <div class="card" style="padding:10px 14px; border-left:4px solid var(--col-review);">
+                            <strong>3.</strong> Millennials are expected... <select class="select-input" data-ans="D"><option value="">--</option><option value="B">B. top company jobs</option><option value="E">E. start own business</option><option value="D">D. to make up 75% of employment by 2025</option></select>
+                        </div>
+                    </div>
+                </div>
+            </slide-card>
+
+            <!-- SLIDE 27: Module 3 Review & Mastery - Lifetime Earnings Bar Chart & Checklist -->
+            <slide-card template="exercise-grid" skill="review" title="Module 03 Mastery: Lifetime Income Bar Chart &amp; Exam Checklist" instruction="Complete the comparative analysis of lifetime educational earnings and review final competencies.">
+                <div slot="grid" style="display:flex; gap:20px; width:100%; height:100%;">
+                    <div style="flex:1.1; display:flex; flex-direction:column; gap:10px;">
+                        <div class="ielts-chart-container" id="chart-education-income"></div>
+                        <div style="font-size:16.5px; line-height:1.75; color:var(--text-dark); background:#ffffff; padding:12px 16px; border-radius:8px; border:1px solid #cbd5e1;" id="eduIncomeCloze">
+                            When people stayed in education for <strong>1.</strong> <input type="text" class="blank-input" data-ans="longer" style="width:90px;">, they had <strong>2.</strong> <input type="text" class="blank-input" data-ans="higher" style="width:90px;"> earnings. High school graduates earned the <strong>3.</strong> <input type="text" class="blank-input" data-ans="lowest" style="width:90px;"> ($1.2M). Associate degrees were not much <strong>4.</strong> <input type="text" class="blank-input" data-ans="bigger|higher" style="width:90px;"> ($1.4M). The <strong>5.</strong> <input type="text" class="blank-input" data-ans="greatest" style="width:100px;"> difference was at top tiers: Doctorates were three times <strong>6.</strong> <input type="text" class="blank-input" data-ans="better off" style="width:110px;"> ($3.4M), but even a PhD was <strong>7.</strong> <input type="text" class="blank-input" data-ans="less important" style="width:130px;"> than a professional degree ($4.4M), proving some degrees are <strong>8.</strong> <input type="text" class="blank-input" data-ans="more valuable" style="width:130px;">.
+                        </div>
+                    </div>
+                    <div style="flex:0.9; display:flex; flex-direction:column; gap:12px;">
+                        <div class="card" style="border-left:6px solid var(--col-reading); padding:16px 20px;">
+                            <div style="font-size:19px; font-weight:800; color:var(--col-reading); margin-bottom:6px;">📖 Reading Competencies</div>
+                            <ul style="padding-left:18px; font-size:16px; line-height:1.6; margin:0;">
+                                <li>Summary Completion: match word class &amp; synonyms.</li>
+                                <li>YES/NO/NOT GIVEN: isolate unsubstantiated comparisons.</li>
+                            </ul>
+                        </div>
+                        <div class="card" style="border-left:6px solid var(--col-grammar); padding:16px 20px;">
+                            <div style="font-size:19px; font-weight:800; color:var(--col-grammar); margin-bottom:6px;">📐 Grammar Precision</div>
+                            <ul style="padding-left:18px; font-size:16px; line-height:1.6; margin:0;">
+                                <li>Comparative multiples: <em>"twice as ... as"</em> vs <em>"four times higher than"</em>.</li>
+                                <li>Verb patterns: gerunds following prepositions vs infinitives of intent.</li>
+                            </ul>
+                        </div>
+                        <div class="card" style="border-left:6px solid var(--col-writing); padding:16px 20px;">
+                            <div style="font-size:19px; font-weight:800; color:var(--col-writing); margin-bottom:6px;">✍️ Task 1 Data Reporting</div>
+                            <ul style="padding-left:18px; font-size:16px; line-height:1.6; margin:0;">
+                                <li>Bar, line &amp; pie charts: master cluster reporting and <em>that of / those of</em>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </slide-card>
+        </main>
+    </div>
+
+    <!-- Template Engine & Presentation Bundle -->
+    <script src="../js/template-engine.js"></script>
+    <script src="../js/deck-bundle.js"></script>
+</body>
+
+</html>
