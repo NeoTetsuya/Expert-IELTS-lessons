@@ -9,7 +9,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400..700&display=swap"
+        rel="stylesheet">
 
     <!-- Master Stylesheet & Themes -->
     <link rel="stylesheet" href="../presentation-base.css">
@@ -20,10 +22,10 @@
         :root {
             --col-reading: #2563eb;
             --col-grammar: #ea580c;
-            --col-vocab:   #059669;
+            --col-vocab: #059669;
             --col-writing: #7c3aed;
-            --col-review:  #0891b2;
-            
+            --col-review: #0891b2;
+
             --stage-bg: #111827;
             --viewport-bg: radial-gradient(circle at 80% 20%, #1e1b4b 0%, #111827 70%);
         }
@@ -38,94 +40,141 @@
             <slide-card template="title" skill="title" data-bind="meta"></slide-card>
 
             <!-- SLIDE 2: Section 2a Divider -->
-            <slide-card template="section-divider" skill="title" badge="Section 2a" title="Feeling Good" subtitle="Sharing extraordinary experiences, social comparison costs, defining relative clauses, sentence joining, and family vs. colleagues opinion essay.">
+            <slide-card template="section-divider" skill="title" badge="Section 2a" title="Feeling Good"
+                subtitle="Sharing extraordinary experiences, social comparison costs, defining relative clauses, sentence joining, and family vs. colleagues opinion essay.">
                 <div slot="content">
                     <span class="word-chip" style="font-size: 18px; padding: 8px 18px;">✨ Epic Experiences</span>
                     <span class="word-chip" style="font-size: 18px; padding: 8px 18px;">🎯 YES / NO / NOT GIVEN</span>
-                    <span class="word-chip" style="font-size: 18px; padding: 8px 18px;">📐 Defining Relative Clauses</span>
+                    <span class="word-chip" style="font-size: 18px; padding: 8px 18px;">📐 Defining Relative
+                        Clauses</span>
                     <span class="word-chip" style="font-size: 18px; padding: 8px 18px;">✍️ Task 2 Opinion Essay</span>
                 </div>
             </slide-card>
 
             <!-- SLIDE 3: Reading 2a Lead-in - Before You Read & The Bucket List Paradox (Ex 1 & 2) -->
-            <slide-card template="exercise-grid" skill="read" title="Reading 2a Lead-in: Before You Read &amp; The Bucket List Paradox (Ex 1 &amp; 2)" instruction="Discuss extraordinary experiences, bucket list ambitions, and social connection.">
+            <slide-card template="exercise-grid" skill="read"
+                title="Reading 2a Lead-in: Before You Read &amp; The Bucket List Paradox (Ex 1 &amp; 2)"
+                instruction="Discuss extraordinary experiences, bucket list ambitions, and social connection.">
                 <div slot="grid" style="display:grid; grid-template-columns:1.05fr 0.95fr; gap:24px;">
                     <div>
-                        <h3 style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">🪣 Bucket List Discussion (Ex 1)</h3>
+                        <h3 style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">🪣
+                            Bucket List Discussion (Ex 1)</h3>
                         <div class="discuss-card">
                             <div class="discuss-num" style="background:var(--col-reading);">1</div>
-                            <div class="discuss-text"><strong>Bucket List (n):</strong> A list of extraordinary things you want to achieve or experience in your lifetime before you are too old.</div>
+                            <div class="discuss-text"><strong>Bucket List (n):</strong> A list of extraordinary things
+                                you want to achieve or experience in your lifetime before you are too old.</div>
                         </div>
                         <div class="discuss-card">
                             <div class="discuss-num" style="background:var(--col-reading);">2</div>
-                            <div class="discuss-text">Write down <strong>3 extraordinary things</strong> on your list <em>not connected with family or work</em> (e.g. climbing Kilimanjaro, skydiving). Share with a partner!</div>
+                            <div class="discuss-text">Write down <strong>3 extraordinary things</strong> on your list
+                                <em>not connected with family or work</em> (e.g. climbing Kilimanjaro, skydiving). Share
+                                with a partner!
+                            </div>
                         </div>
                     </div>
                     <div>
-                        <h3 style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">🎭 The Social Cost Paradox (Ex 2)</h3>
-                        <div class="card" style="padding:18px 22px; border-left:4px solid var(--col-reading); margin-bottom:12px; font-size:18px; line-height:1.65;">
+                        <h3 style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">🎭 The
+                            Social Cost Paradox (Ex 2)</h3>
+                        <div class="card"
+                            style="padding:18px 22px; border-left:4px solid var(--col-reading); margin-bottom:12px; font-size:18px; line-height:1.65;">
                             <strong>• Common Belief:</strong><br>
-                            Sharing once-in-a-lifetime adventures makes you the star of the social conversation and elevates social standing.
+                            Sharing once-in-a-lifetime adventures makes you the star of the social conversation and
+                            elevates social standing.
                         </div>
-                        <div class="card" style="padding:18px 22px; border-left:4px solid var(--col-vocab); font-size:18px; line-height:1.65; background:#fef9c3;">
+                        <div class="card"
+                            style="padding:18px 22px; border-left:4px solid var(--col-vocab); font-size:18px; line-height:1.65; background:#fef9c3;">
                             <strong>• The Research Finding (Gus Cooney, Harvard):</strong><br>
-                            Extraordinary experiences feel great in the moment but can leave us socially worse off because human connection thrives on shared similarities.
+                            Extraordinary experiences feel great in the moment but can leave us socially worse off
+                            because human connection thrives on shared similarities.
                         </div>
                     </div>
                 </div>
             </slide-card>
 
             <!-- SLIDE 4: Reading 2a Strategy - Keyword Identification & Sentence Overview (Ex 3a & 3b) -->
-            <slide-card template="strategy" skill="read" title="Reading 2a Strategy: Keyword Identification &amp; Sentence Preview" subtitle="Identify core keywords in statements 1–4 and preview extract sentences A–D from the text.">
+            <slide-card template="strategy" skill="read"
+                title="Reading 2a Strategy: Keyword Identification &amp; Sentence Preview"
+                subtitle="Identify core keywords in statements 1–4 and preview extract sentences A–D from the text.">
                 <div slot="sentences">
-                    <div class="card q-card strategy-card" data-q="strat-2a-1" style="border-left: 6px solid var(--col-reading); padding: 18px 22px; border-radius: 12px; margin-bottom: 12px;">
-                        <p class="sentence-text" style="font-size: calc(20px * var(--font-scale, 1)); font-weight: 700; color: #0f172a; margin: 0; line-height: 1.6;">
-                            <strong>1.</strong> <span class="syn-pair-1" data-q="strat-2a-1">Sharing experiences</span> provides us with <span class="syn-pair-2" data-q="strat-2a-1">immediate and long-term satisfaction</span>.
-                        </p>
-                    </div>
-                    
-                    <div class="card q-card strategy-card" data-q="strat-2a-2" style="border-left: 6px solid var(--col-reading); padding: 18px 22px; border-radius: 12px; margin-bottom: 12px;">
-                        <p class="sentence-text" style="font-size: calc(20px * var(--font-scale, 1)); font-weight: 700; color: #0f172a; margin: 0; line-height: 1.6;">
-                            <strong>2.</strong> <span class="syn-pair-1" data-q="strat-2a-2">Social communication</span> is based on things we have <span class="syn-pair-2" data-q="strat-2a-2">in common</span>.
-                        </p>
-                    </div>
-
-                    <div class="card q-card strategy-card" data-q="strat-2a-3" style="border-left: 6px solid var(--col-reading); padding: 18px 22px; border-radius: 12px; margin-bottom: 12px;">
-                        <p class="sentence-text" style="font-size: calc(20px * var(--font-scale, 1)); font-weight: 700; color: #0f172a; margin: 0; line-height: 1.6;">
-                            <strong>3.</strong> People want to <span class="syn-pair-1" data-q="strat-2a-3">share their unusual experiences</span> with each other.
+                    <div class="card q-card strategy-card" data-q="strat-2a-1"
+                        style="border-left: 6px solid var(--col-reading); padding: 18px 22px; border-radius: 12px; margin-bottom: 12px;">
+                        <p class="sentence-text"
+                            style="font-size: calc(20px * var(--font-scale, 1)); font-weight: 700; color: #0f172a; margin: 0; line-height: 1.6;">
+                            <strong>1.</strong> <span class="syn-pair-1" data-q="strat-2a-1">Sharing experiences</span>
+                            provides us with <span class="syn-pair-2" data-q="strat-2a-1">immediate and long-term
+                                satisfaction</span>.
                         </p>
                     </div>
 
-                    <div class="card q-card strategy-card" data-q="strat-2a-4" style="border-left: 6px solid var(--col-reading); padding: 18px 22px; border-radius: 12px;">
-                        <p class="sentence-text" style="font-size: calc(20px * var(--font-scale, 1)); font-weight: 700; color: #0f172a; margin: 0; line-height: 1.6;">
-                            <strong>4.</strong> Before the research, people <span class="syn-pair-1" data-q="strat-2a-4">believed extraordinary experiences</span> bring <span class="syn-pair-2" data-q="strat-2a-4">mostly benefits</span>.
+                    <div class="card q-card strategy-card" data-q="strat-2a-2"
+                        style="border-left: 6px solid var(--col-reading); padding: 18px 22px; border-radius: 12px; margin-bottom: 12px;">
+                        <p class="sentence-text"
+                            style="font-size: calc(20px * var(--font-scale, 1)); font-weight: 700; color: #0f172a; margin: 0; line-height: 1.6;">
+                            <strong>2.</strong> <span class="syn-pair-1" data-q="strat-2a-2">Social communication</span>
+                            is based on things we have <span class="syn-pair-2" data-q="strat-2a-2">in common</span>.
+                        </p>
+                    </div>
+
+                    <div class="card q-card strategy-card" data-q="strat-2a-3"
+                        style="border-left: 6px solid var(--col-reading); padding: 18px 22px; border-radius: 12px; margin-bottom: 12px;">
+                        <p class="sentence-text"
+                            style="font-size: calc(20px * var(--font-scale, 1)); font-weight: 700; color: #0f172a; margin: 0; line-height: 1.6;">
+                            <strong>3.</strong> People want to <span class="syn-pair-1" data-q="strat-2a-3">share their
+                                unusual experiences</span> with each other.
+                        </p>
+                    </div>
+
+                    <div class="card q-card strategy-card" data-q="strat-2a-4"
+                        style="border-left: 6px solid var(--col-reading); padding: 18px 22px; border-radius: 12px;">
+                        <p class="sentence-text"
+                            style="font-size: calc(20px * var(--font-scale, 1)); font-weight: 700; color: #0f172a; margin: 0; line-height: 1.6;">
+                            <strong>4.</strong> Before the research, people <span class="syn-pair-1"
+                                data-q="strat-2a-4">believed extraordinary experiences</span> bring <span
+                                class="syn-pair-2" data-q="strat-2a-4">mostly benefits</span>.
                         </p>
                     </div>
                 </div>
 
                 <div slot="guide">
-                    <div class="card" style="background: #ffffff; border-left: 6px solid var(--col-reading); padding: 22px 26px; border-radius: 14px; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="card"
+                        style="background: #ffffff; border-left: 6px solid var(--col-reading); padding: 22px 26px; border-radius: 14px; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
                         <div>
-                            <h3 style="font-family: var(--font-display); font-size: calc(22px * var(--font-scale, 1)); color: var(--col-reading); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                            <h3
+                                style="font-family: var(--font-display); font-size: calc(22px * var(--font-scale, 1)); color: var(--col-reading); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
                                 📖 Extract Sentences A–D (Ex 3b)
                             </h3>
-                            <div style="display: flex; flex-direction: column; gap: 12px; font-size: calc(17.5px * var(--font-scale, 1)); line-height: 1.65; color: var(--text-dark);">
-                                <div style="background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                                    <strong style="color: var(--col-reading);">Sentence A:</strong> <em>"We love to reminisce and tell others about our extraordinary experiences – that time we climbed Mount Kilimanjaro..."</em>
+                            <div
+                                style="display: flex; flex-direction: column; gap: 12px; font-size: calc(17.5px * var(--font-scale, 1)); line-height: 1.65; color: var(--text-dark);">
+                                <div
+                                    style="background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                    <strong style="color: var(--col-reading);">Sentence A:</strong> <em>"We love to
+                                        reminisce and tell others about our extraordinary experiences – that time we
+                                        climbed Mount Kilimanjaro..."</em>
                                 </div>
-                                <div style="background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                                    <strong style="color: var(--col-reading);">Sentence B:</strong> <em>"Extraordinary experiences are pleasurable in the moment but can leave us socially worse off in the long run..."</em>
+                                <div
+                                    style="background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                    <strong style="color: var(--col-reading);">Sentence B:</strong> <em>"Extraordinary
+                                        experiences are pleasurable in the moment but can leave us socially worse off in
+                                        the long run..."</em>
                                 </div>
-                                <div style="background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                                    <strong style="color: var(--col-reading);">Sentence C:</strong> <em>"The participants in our study mistakenly thought that having an extraordinary experience would make them the star of the conversation."</em>
+                                <div
+                                    style="background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                    <strong style="color: var(--col-reading);">Sentence C:</strong> <em>"The
+                                        participants in our study mistakenly thought that having an extraordinary
+                                        experience would make them the star of the conversation."</em>
                                 </div>
-                                <div style="background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                                    <strong style="color: var(--col-reading);">Sentence D:</strong> <em>"...to be extraordinary is to be different than other people, and social interaction is grounded in similarities."</em>
+                                <div
+                                    style="background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                    <strong style="color: var(--col-reading);">Sentence D:</strong> <em>"...to be
+                                        extraordinary is to be different than other people, and social interaction is
+                                        grounded in similarities."</em>
                                 </div>
                             </div>
                         </div>
-                        <div style="background: #fef9c3; padding: 10px 14px; border-radius: 8px; border: 1px solid #fde047; font-weight: 700; color: #854d0e; font-size: calc(15.5px * var(--font-scale, 1)); margin-top: 12px;">
-                            💡 Press <kbd>E</kbd> or click <strong>Step Reveal (E)</strong> to highlight keywords step-by-step!
+                        <div
+                            style="background: #fef9c3; padding: 10px 14px; border-radius: 8px; border: 1px solid #fde047; font-weight: 700; color: #854d0e; font-size: calc(15.5px * var(--font-scale, 1)); margin-top: 12px;">
+                            💡 Press <kbd>E</kbd> or click <strong>Step Reveal (E)</strong> to highlight keywords
+                            step-by-step!
                         </div>
                     </div>
                 </div>
@@ -138,52 +187,85 @@
             <slide-card template="walkthrough" skill="read" data-bind="reading2a_part1.walkthroughs.3"></slide-card>
 
             <!-- SLIDE 8: Reading 2a Strategy - Text Referencing & Cohesion (Ex 4a & 4b) -->
-            <slide-card template="exercise-grid" skill="read" title="Reading 2a Strategy: Text Referencing &amp; Cohesion (Ex 4a &amp; 4b)" instruction="Analyze the full passage context to identify what each pronoun and cohesion marker refers to.">
+            <slide-card template="exercise-grid" skill="read"
+                title="Reading 2a Strategy: Text Referencing &amp; Cohesion (Ex 4a &amp; 4b)"
+                instruction="Analyze the full passage context to identify what each pronoun and cohesion marker refers to.">
                 <div slot="grid" style="display: flex; gap: 24px; width: 100%; height: 100%;">
                     <!-- Left Column: Pronoun Referencing with Full Context -->
                     <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; overflow-y: auto;">
-                        
+
                         <!-- Item 1: This / These -->
-                        <div class="card q-card" data-q="ref-1" style="border-left: 5px solid var(--col-reading); padding: 18px 22px;">
-                            <div style="font-size: calc(18.5px * var(--font-scale, 1)); font-weight: 800; color: var(--col-reading); margin-bottom: 8px;">
+                        <div class="card q-card" data-q="ref-1"
+                            style="border-left: 5px solid var(--col-reading); padding: 18px 22px;">
+                            <div
+                                style="font-size: calc(18.5px * var(--font-scale, 1)); font-weight: 800; color: var(--col-reading); margin-bottom: 8px;">
                                 1. Paragraph A Context: "This" &amp; "These"
                             </div>
-                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: calc(17.5px * var(--font-scale, 1)); line-height: 1.7; color: #1e293b; margin-bottom: 12px;">
-                                <em>"We love to reminisce and tell others about our extraordinary experiences – that time we climbed Mount Kilimanjaro, got to taste that rare food or ran into a celebrity on the street – but new research suggests <strong style="background: #fef08a; padding: 2px 6px; border-radius: 4px; color: #854d0e;">this</strong> may not be such a wise idea. In fact, findings suggest that sharing <strong style="background: #fef08a; padding: 2px 6px; border-radius: 4px; color: #854d0e;">these</strong> extraordinary experiences can come at a social cost."</em>
+                            <div
+                                style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: calc(17.5px * var(--font-scale, 1)); line-height: 1.7; color: #1e293b; margin-bottom: 12px;">
+                                <em>"We love to reminisce and tell others about our extraordinary experiences – that
+                                    time we climbed Mount Kilimanjaro, got to taste that rare food or ran into a
+                                    celebrity on the street – but new research suggests <strong
+                                        style="background: #fef08a; padding: 2px 6px; border-radius: 4px; color: #854d0e;">this</strong>
+                                    may not be such a wise idea. In fact, findings suggest that sharing <strong
+                                        style="background: #fef08a; padding: 2px 6px; border-radius: 4px; color: #854d0e;">these</strong>
+                                    extraordinary experiences can come at a social cost."</em>
                             </div>
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
-                                <span style="font-size: calc(17px * var(--font-scale, 1)); font-weight: 700; color: var(--text-dark);">What does "this" refer back to?</span>
-                                <select class="select-input" data-ans="sharing" style="font-size: calc(16.5px * var(--font-scale, 1)); font-weight: 700; min-width: 180px; padding: 8px 14px;">
+                                <span
+                                    style="font-size: calc(17px * var(--font-scale, 1)); font-weight: 700; color: var(--text-dark);">What
+                                    does "this" refer back to?</span>
+                                <select class="select-input" data-ans="sharing"
+                                    style="font-size: calc(16.5px * var(--font-scale, 1)); font-weight: 700; min-width: 180px; padding: 8px 14px;">
                                     <option value="">Select referent...</option>
                                     <option value="sharing">Sharing / telling others about epic experiences</option>
                                     <option value="climbing">Climbing Mount Kilimanjaro only</option>
                                     <option value="journal">The psychology journal</option>
                                 </select>
                             </div>
-                            <div class="item-explanation" style="font-size: calc(16px * var(--font-scale, 1)); margin-top: 10px;">
-                                <strong>Answer: Sharing extraordinary experiences</strong> — <em>"this"</em> replaces the whole preceding action (telling others about rare events), while <em>"these"</em> points to the specific examples (climbing Kilimanjaro, rare food, celebrity).
+                            <div class="item-explanation"
+                                style="font-size: calc(16px * var(--font-scale, 1)); margin-top: 10px;">
+                                <strong>Answer: Sharing extraordinary experiences</strong> — <em>"this"</em> replaces
+                                the whole preceding action (telling others about rare events), while <em>"these"</em>
+                                points to the specific examples (climbing Kilimanjaro, rare food, celebrity).
                             </div>
                         </div>
 
                         <!-- Item 2: His / He -->
-                        <div class="card q-card" data-q="ref-2" style="border-left: 5px solid var(--col-reading); padding: 18px 22px;">
-                            <div style="font-size: calc(18.5px * var(--font-scale, 1)); font-weight: 800; color: var(--col-reading); margin-bottom: 8px;">
+                        <div class="card q-card" data-q="ref-2"
+                            style="border-left: 5px solid var(--col-reading); padding: 18px 22px;">
+                            <div
+                                style="font-size: calc(18.5px * var(--font-scale, 1)); font-weight: 800; color: var(--col-reading); margin-bottom: 8px;">
                                 2. Paragraph E Context: "His" &amp; "He"
                             </div>
-                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: calc(17.5px * var(--font-scale, 1)); line-height: 1.7; color: #1e293b; margin-bottom: 12px;">
-                                <em>"<strong style="color: var(--col-reading);">Cooney</strong>, who conducted the research with co-authors Daniel T. Gilbert of Harvard University and Timothy D. Wilson of the University of Virginia, was interested in exploring the negative consequences of extraordinary experiences based on <strong style="background: #fef08a; padding: 2px 6px; border-radius: 4px; color: #854d0e;">his</strong> own observations with others. <strong style="background: #fef08a; padding: 2px 6px; border-radius: 4px; color: #854d0e;">He</strong> had noticed that we are keen to tell our friends..."</em>
+                            <div
+                                style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: calc(17.5px * var(--font-scale, 1)); line-height: 1.7; color: #1e293b; margin-bottom: 12px;">
+                                <em>"<strong style="color: var(--col-reading);">Cooney</strong>, who conducted the
+                                    research with co-authors Daniel T. Gilbert of Harvard University and Timothy D.
+                                    Wilson of the University of Virginia, was interested in exploring the negative
+                                    consequences of extraordinary experiences based on <strong
+                                        style="background: #fef08a; padding: 2px 6px; border-radius: 4px; color: #854d0e;">his</strong>
+                                    own observations with others. <strong
+                                        style="background: #fef08a; padding: 2px 6px; border-radius: 4px; color: #854d0e;">He</strong>
+                                    had noticed that we are keen to tell our friends..."</em>
                             </div>
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
-                                <span style="font-size: calc(17px * var(--font-scale, 1)); font-weight: 700; color: var(--text-dark);">Who does "his" point to?</span>
-                                <select class="select-input" data-ans="gus" style="font-size: calc(16.5px * var(--font-scale, 1)); font-weight: 700; min-width: 180px; padding: 8px 14px;">
+                                <span
+                                    style="font-size: calc(17px * var(--font-scale, 1)); font-weight: 700; color: var(--text-dark);">Who
+                                    does "his" point to?</span>
+                                <select class="select-input" data-ans="gus"
+                                    style="font-size: calc(16.5px * var(--font-scale, 1)); font-weight: 700; min-width: 180px; padding: 8px 14px;">
                                     <option value="">Select referent...</option>
                                     <option value="gus">Gus Cooney (study lead author)</option>
                                     <option value="street">The street magician</option>
                                     <option value="friend">A general friend / co-author</option>
                                 </select>
                             </div>
-                            <div class="item-explanation" style="font-size: calc(16px * var(--font-scale, 1)); margin-top: 10px;">
-                                <strong>Answer: Gus Cooney</strong> — <em>"his"</em> and <em>"He"</em> are anaphoric pronouns referring back to the main subject of the sentence, <strong>Gus Cooney</strong>.
+                            <div class="item-explanation"
+                                style="font-size: calc(16px * var(--font-scale, 1)); margin-top: 10px;">
+                                <strong>Answer: Gus Cooney</strong> — <em>"his"</em> and <em>"He"</em> are anaphoric
+                                pronouns referring back to the main subject of the sentence, <strong>Gus
+                                    Cooney</strong>.
                             </div>
                         </div>
 
@@ -191,37 +273,61 @@
 
                     <!-- Right Column: Former vs Latter & Cohesion Strategy -->
                     <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; overflow-y: auto;">
-                        
+
                         <!-- Item 3: The Former vs The Latter -->
-                        <div class="card q-card" data-q="ref-3" style="border-left: 5px solid var(--col-reading); padding: 18px 22px;">
-                            <div style="font-size: calc(18.5px * var(--font-scale, 1)); font-weight: 800; color: var(--col-reading); margin-bottom: 8px;">
+                        <div class="card q-card" data-q="ref-3"
+                            style="border-left: 5px solid var(--col-reading); padding: 18px 22px;">
+                            <div
+                                style="font-size: calc(18.5px * var(--font-scale, 1)); font-weight: 800; color: var(--col-reading); margin-bottom: 8px;">
                                 3. Academic Cohesion: "The former" vs "The latter"
                             </div>
-                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: calc(17.5px * var(--font-scale, 1)); line-height: 1.7; color: #1e293b; margin-bottom: 12px;">
-                                <em>"Researchers compared <span style="background:#dbeafe; padding:2px 6px; border-radius:4px; font-weight:700; color:#1e40af;">[1] ordinary daily topics</span> with <span style="background:#f3e8ff; padding:2px 6px; border-radius:4px; font-weight:700; color:#6b21a8;">[2] extraordinary events</span>; <strong style="background: #fef08a; padding: 2px 6px; border-radius: 4px; color: #854d0e;">the former</strong> foster social bonding, whereas <strong style="background: #fef08a; padding: 2px 6px; border-radius: 4px; color: #854d0e;">the latter</strong> often isolate the speaker."</em>
+                            <div
+                                style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: calc(17.5px * var(--font-scale, 1)); line-height: 1.7; color: #1e293b; margin-bottom: 12px;">
+                                <em>"Researchers compared <span
+                                        style="background:#dbeafe; padding:2px 6px; border-radius:4px; font-weight:700; color:#1e40af;">[1]
+                                        ordinary daily topics</span> with <span
+                                        style="background:#f3e8ff; padding:2px 6px; border-radius:4px; font-weight:700; color:#6b21a8;">[2]
+                                        extraordinary events</span>; <strong
+                                        style="background: #fef08a; padding: 2px 6px; border-radius: 4px; color: #854d0e;">the
+                                        former</strong> foster social bonding, whereas <strong
+                                        style="background: #fef08a; padding: 2px 6px; border-radius: 4px; color: #854d0e;">the
+                                        latter</strong> often isolate the speaker."</em>
                             </div>
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
-                                <span style="font-size: calc(17px * var(--font-scale, 1)); font-weight: 700; color: var(--text-dark);">What does "the former" refer to?</span>
-                                <select class="select-input" data-ans="ordinary" style="font-size: calc(16.5px * var(--font-scale, 1)); font-weight: 700; min-width: 180px; padding: 8px 14px;">
+                                <span
+                                    style="font-size: calc(17px * var(--font-scale, 1)); font-weight: 700; color: var(--text-dark);">What
+                                    does "the former" refer to?</span>
+                                <select class="select-input" data-ans="ordinary"
+                                    style="font-size: calc(16.5px * var(--font-scale, 1)); font-weight: 700; min-width: 180px; padding: 8px 14px;">
                                     <option value="">Select referent...</option>
                                     <option value="ordinary">1st Item: Ordinary daily topics</option>
                                     <option value="extraordinary">2nd Item: Extraordinary events</option>
                                 </select>
                             </div>
-                            <div class="item-explanation" style="font-size: calc(16px * var(--font-scale, 1)); margin-top: 10px;">
-                                <strong>Answer: Ordinary daily topics</strong> — <strong>The former</strong> always refers back to the <em>first</em> mentioned option, while <strong>The latter</strong> refers to the <em>second</em> mentioned option.
+                            <div class="item-explanation"
+                                style="font-size: calc(16px * var(--font-scale, 1)); margin-top: 10px;">
+                                <strong>Answer: Ordinary daily topics</strong> — <strong>The former</strong> always
+                                refers back to the <em>first</em> mentioned option, while <strong>The latter</strong>
+                                refers to the <em>second</em> mentioned option.
                             </div>
                         </div>
 
                         <!-- Cohesion Strategy Guide Card -->
-                        <div class="card" style="background: #ffffff; border-left: 5px solid var(--col-grammar); padding: 18px 22px; border-radius: 10px;">
-                            <h4 style="color: var(--col-grammar); font-size: calc(18.5px * var(--font-scale, 1)); font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <div class="card"
+                            style="background: #ffffff; border-left: 5px solid var(--col-grammar); padding: 18px 22px; border-radius: 10px;">
+                            <h4
+                                style="color: var(--col-grammar); font-size: calc(18.5px * var(--font-scale, 1)); font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                                 💡 IELTS Cohesion &amp; Reference Rules
                             </h4>
-                            <div style="display: flex; flex-direction: column; gap: 8px; font-size: calc(16.5px * var(--font-scale, 1)); line-height: 1.6; color: var(--text-dark);">
-                                <div>• <strong>Anaphoric (Backward):</strong> Pronouns (<em>this, these, his, its, former</em>) replace previously stated nouns to avoid repetition.</div>
-                                <div>• <strong>Whole-Clause Reference:</strong> Singular <em>"this"</em> often summarizes an entire previous sentence or complex concept rather than just a single word.</div>
-                                <div>• <strong>Tracking Reference Chains:</strong> Always look at the immediately preceding clause to identify the exact noun phrase being replaced.</div>
+                            <div
+                                style="display: flex; flex-direction: column; gap: 8px; font-size: calc(16.5px * var(--font-scale, 1)); line-height: 1.6; color: var(--text-dark);">
+                                <div>• <strong>Anaphoric (Backward):</strong> Pronouns (<em>this, these, his, its,
+                                        former</em>) replace previously stated nouns to avoid repetition.</div>
+                                <div>• <strong>Whole-Clause Reference:</strong> Singular <em>"this"</em> often
+                                    summarizes an entire previous sentence or complex concept rather than just a single
+                                    word.</div>
+                                <div>• <strong>Tracking Reference Chains:</strong> Always look at the immediately
+                                    preceding clause to identify the exact noun phrase being replaced.</div>
                             </div>
                         </div>
 
@@ -230,7 +336,9 @@
             </slide-card>
 
             <!-- SLIDE 9: Reading 2a Passage 1 Split-View Reading (Ex 6a & 6b, Ex 7a & 7b) -->
-            <slide-card template="reading-split" skill="read" data-bind="reading2a_passage1" badge="Reading 2a • Passage 1" title="Trying to Share Our 'Epic' Moments • YES / NO / NOT GIVEN"></slide-card>
+            <slide-card template="reading-split" skill="read" data-bind="reading2a_passage1"
+                badge="Reading 2a • Passage 1"
+                title="Trying to Share Our 'Epic' Moments • YES / NO / NOT GIVEN"></slide-card>
 
             <!-- SLIDES 10–15: Reading 2a Passage 1 Dedicated Walkthroughs (Statements 1–6) -->
             <slide-card template="walkthrough" skill="read" data-bind="reading2a_passage1.walkthroughs.0"></slide-card>
@@ -241,7 +349,8 @@
             <slide-card template="walkthrough" skill="read" data-bind="reading2a_passage1.walkthroughs.5"></slide-card>
 
             <!-- SLIDE 11: Reading 2a Part 2 Split-View Reading - Critical Response: Science (YES / NO / NOT GIVEN) -->
-            <slide-card template="reading-split" skill="read" data-bind="reading2a_part2" badge="Reading 2a • Science" title="Science: Should You Throw Out Your Bucket List? • YES / NO / NOT GIVEN"></slide-card>
+            <slide-card template="reading-split" skill="read" data-bind="reading2a_part2" badge="Reading 2a • Science"
+                title="Science: Should You Throw Out Your Bucket List? • YES / NO / NOT GIVEN"></slide-card>
 
             <!-- SLIDES 12–17: Reading 2a Part 2 Dedicated Walkthroughs (Q1–6) -->
             <slide-card template="walkthrough" skill="read" data-bind="reading2a_part2.walkthroughs.0"></slide-card>
@@ -252,17 +361,22 @@
             <slide-card template="walkthrough" skill="read" data-bind="reading2a_part2.walkthroughs.5"></slide-card>
 
             <!-- SLIDE 13: Grammar 2a Masterclass: Defining Relative Clauses -->
-            <slide-card template="grammar-masterclass" skill="grammar" title="Grammar 2a: Defining Relative Clauses &amp; Pronoun Rules">
+            <slide-card template="grammar-masterclass" skill="grammar"
+                title="Grammar 2a: Defining Relative Clauses &amp; Pronoun Rules">
                 <div slot="rules">
                     <div class="rule-card" style="margin-bottom:12px;">
-                        <div style="font-size:20px; font-weight:800; color:var(--col-grammar); margin-bottom:4px;">1. Purpose &amp; Identification</div>
-                        <p style="font-size:17.5px; line-height:1.6; margin:0 0 6px 0;">Defining relative clauses identify, specify, or classify a noun. Without them, the sentence is incomplete.</p>
-                        <div style="font-size:16px; color:var(--text-muted); background:rgba(0,0,0,0.03); padding:6px 12px; border-radius:6px;">
+                        <div style="font-size:20px; font-weight:800; color:var(--col-grammar); margin-bottom:4px;">1.
+                            Purpose &amp; Identification</div>
+                        <p style="font-size:17.5px; line-height:1.6; margin:0 0 6px 0;">Defining relative clauses
+                            identify, specify, or classify a noun. Without them, the sentence is incomplete.</p>
+                        <div
+                            style="font-size:16px; color:var(--text-muted); background:rgba(0,0,0,0.03); padding:6px 12px; border-radius:6px;">
                             👉 <em>"Happiness is an emotion <strong>which</strong> makes us feel good."</em>
                         </div>
                     </div>
                     <div class="rule-card">
-                        <div style="font-size:20px; font-weight:800; color:var(--col-reading); margin-bottom:4px;">2. Relative Pronoun Reference Chart</div>
+                        <div style="font-size:20px; font-weight:800; color:var(--col-reading); margin-bottom:4px;">2.
+                            Relative Pronoun Reference Chart</div>
                         <ul style="padding-left:18px; font-size:17px; line-height:1.6; margin:0;">
                             <li><strong>People:</strong> <em>who / that</em></li>
                             <li><strong>Things:</strong> <em>which / that</em></li>
@@ -272,69 +386,143 @@
                     </div>
                 </div>
                 <div slot="contrast-card">
-                    <div class="card" style="background:#ffffff; border-top:5px solid var(--col-grammar); padding:18px 22px; margin-bottom:10px;">
-                        <h4 style="color:var(--col-grammar); font-size:18.5px; font-weight:800; margin-bottom:6px;">⚡ Subject vs. Object Pronoun Rules</h4>
+                    <div class="card"
+                        style="background:#ffffff; border-top:5px solid var(--col-grammar); padding:18px 22px; margin-bottom:10px;">
+                        <h4 style="color:var(--col-grammar); font-size:18.5px; font-weight:800; margin-bottom:6px;">⚡
+                            Subject vs. Object Pronoun Rules</h4>
                         <div style="font-size:16.5px; line-height:1.6; color:var(--text-dark);">
-                            • <strong>Subject (Never Omit):</strong> <em>"A person <strong>who</strong> is stressed has high blood pressure."</em> (❌ Do not say: *who he is stressed*).<br>
-                            • <strong>Object (Can Omit):</strong> <em>"Embarrassment is a feeling <strong>(that)</strong> we don’t want to experience."</em>
+                            • <strong>Subject (Never Omit):</strong> <em>"A person <strong>who</strong> is stressed has
+                                high blood pressure."</em> (❌ Do not say: *who he is stressed*).<br>
+                            • <strong>Object (Can Omit):</strong> <em>"Embarrassment is a feeling
+                                <strong>(that)</strong> we don’t want to experience."</em>
                         </div>
                     </div>
                     <div class="card" style="background:#f0fdf4; border:1px solid #86efac; padding:14px 18px;">
-                        <h4 style="color:#166534; font-size:17px; font-weight:800; margin-bottom:4px;">🎓 Academic Formality Note</h4>
-                        <p style="font-size:15.5px; line-height:1.5; color:#14532d; margin:0;">In formal IELTS writing, prefer <strong>which</strong> (for things) and <strong>who</strong> (for people) over <em>that</em>.</p>
+                        <h4 style="color:#166534; font-size:17px; font-weight:800; margin-bottom:4px;">🎓 Academic
+                            Formality Note</h4>
+                        <p style="font-size:15.5px; line-height:1.5; color:#14532d; margin:0;">In formal IELTS writing,
+                            prefer <strong>which</strong> (for things) and <strong>who</strong> (for people) over
+                            <em>that</em>.
+                        </p>
                     </div>
                 </div>
             </slide-card>
 
             <!-- SLIDE 23: Language Development 2a (Ex 1a & 1b: Relative Pronouns & Omission) -->
-            <slide-card template="gap-fill-passage" skill="grammar" title="Language Development 2a: Relative Pronouns &amp; Omission (Ex 1a &amp; 1b)" subtitle="Complete sentences 1–6 with that, when, where, which, or who. Identify where the pronoun can be omitted.">
+            <slide-card template="gap-fill-passage" skill="grammar"
+                title="Language Development 2a: Relative Pronouns &amp; Omission (Ex 1a &amp; 1b)"
+                subtitle="Complete sentences 1–6 with that, when, where, which, or who. Identify where the pronoun can be omitted.">
                 <div slot="passage">
-                    <div style="display:flex; flex-direction:column; gap:12px; font-size:calc(18px * var(--font-scale, 1)); line-height:1.7;">
-                        <div><strong>1.</strong> It is the machine <select class="select-input" data-ans="which"><option value="">--</option><option value="which">which / that</option><option value="where">where</option><option value="when">when</option></select> lets you take money out of the bank.</div>
-                        <div><strong>2.</strong> Most things do seem easier <select class="select-input" data-ans="when"><option value="">--</option><option value="when">when</option><option value="where">where</option><option value="which">which</option></select> you’re happier and less stressed.</div>
-                        <div><strong>3.</strong> This morning I noticed the plum trees <select class="select-input" data-ans="which"><option value="">--</option><option value="which">which / that</option><option value="who">who</option><option value="where">where</option></select> are starting to bloom.</div>
-                        <div><strong>4.</strong> Look carefully at the smile of someone <select class="select-input" data-ans="who"><option value="">--</option><option value="who">who / that [can omit]</option><option value="when">when</option><option value="which">which</option></select> you’re close to.</div>
-                        <div><strong>5.</strong> Visit websites <select class="select-input" data-ans="where"><option value="">--</option><option value="where">where</option><option value="which">which</option><option value="who">who</option></select> you can see amazing photos of nature.</div>
-                        <div><strong>6.</strong> People <select class="select-input" data-ans="who"><option value="">--</option><option value="who">who / that</option><option value="where">where</option><option value="when">when</option></select> hear about the research might start to make an effort.</div>
+                    <div
+                        style="display:flex; flex-direction:column; gap:12px; font-size:calc(18px * var(--font-scale, 1)); line-height:1.7;">
+                        <div><strong>1.</strong> It is the machine <select class="select-input" data-ans="which">
+                                <option value="">--</option>
+                                <option value="which">which / that</option>
+                                <option value="where">where</option>
+                                <option value="when">when</option>
+                            </select> lets you take money out of the bank.</div>
+                        <div><strong>2.</strong> Most things do seem easier <select class="select-input"
+                                data-ans="when">
+                                <option value="">--</option>
+                                <option value="when">when</option>
+                                <option value="where">where</option>
+                                <option value="which">which</option>
+                            </select> you’re happier and less stressed.</div>
+                        <div><strong>3.</strong> This morning I noticed the plum trees <select class="select-input"
+                                data-ans="which">
+                                <option value="">--</option>
+                                <option value="which">which / that</option>
+                                <option value="who">who</option>
+                                <option value="where">where</option>
+                            </select> are starting to bloom.</div>
+                        <div><strong>4.</strong> Look carefully at the smile of someone <select class="select-input"
+                                data-ans="who">
+                                <option value="">--</option>
+                                <option value="who">who / that [can omit]</option>
+                                <option value="when">when</option>
+                                <option value="which">which</option>
+                            </select> you’re close to.</div>
+                        <div><strong>5.</strong> Visit websites <select class="select-input" data-ans="where">
+                                <option value="">--</option>
+                                <option value="where">where</option>
+                                <option value="which">which</option>
+                                <option value="who">who</option>
+                            </select> you can see amazing photos of nature.</div>
+                        <div><strong>6.</strong> People <select class="select-input" data-ans="who">
+                                <option value="">--</option>
+                                <option value="who">who / that</option>
+                                <option value="where">where</option>
+                                <option value="when">when</option>
+                            </select> hear about the research might start to make an effort.</div>
                     </div>
                 </div>
                 <div slot="rules-col">
-                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-grammar); padding:18px 22px; margin-bottom:12px;">
-                        <h4 style="color:var(--col-grammar); font-size:calc(19px * var(--font-scale, 1)); font-weight:800; margin-bottom:8px;">🔍 Pronoun Omission Rule (Ex 1b)</h4>
-                        <p style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark); margin:0;">
-                            In <strong>Sentence 4</strong>, <em>who/that</em> refers to the <strong>object of a preposition</strong> (<em>"close to [someone]"</em>), meaning the relative pronoun can be omitted: <em>"someone you're close to"</em>.
+                    <div class="card"
+                        style="background:#ffffff; border-left:5px solid var(--col-grammar); padding:18px 22px; margin-bottom:12px;">
+                        <h4
+                            style="color:var(--col-grammar); font-size:calc(19px * var(--font-scale, 1)); font-weight:800; margin-bottom:8px;">
+                            🔍 Pronoun Omission Rule (Ex 1b)</h4>
+                        <p
+                            style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark); margin:0;">
+                            In <strong>Sentence 4</strong>, <em>who/that</em> refers to the <strong>object of a
+                                preposition</strong> (<em>"close to [someone]"</em>), meaning the relative pronoun can
+                            be omitted: <em>"someone you're close to"</em>.
                         </p>
                     </div>
-                    <button class="btn-action" style="background:#4f46e5; color:white; width:100%; justify-content:center;" data-grammar-ref="../references/grammar_sources/expert_6/module_2a_relative_clauses.html" data-grammar-title="Module 2a: Defining Relative Clauses Reference Handbook">
+                    <button class="btn-action"
+                        style="background:#4f46e5; color:white; width:100%; justify-content:center;"
+                        data-grammar-ref="https://neotetsuya.github.io/Expert-IELTS/expert%206/module_2a_relative_clauses.html"
+                        data-grammar-title="Module 2a: Defining Relative Clauses Reference Handbook">
                         📖 Open Relative Clauses Handbook
                     </button>
                 </div>
             </slide-card>
 
             <!-- SLIDE 24: Language Development 2a (Ex 2a: Speaking Part 1 Practice with Relative Clauses) -->
-            <slide-card template="summary-checklist" skill="grammar" title="Language Development 2a: Speaking Part 1 Practice (Ex 2a)" subtitle="Build complex fluency responses using relative clause prompts.">
+            <slide-card template="summary-checklist" skill="grammar"
+                title="Language Development 2a: Speaking Part 1 Practice (Ex 2a)"
+                subtitle="Build complex fluency responses using relative clause prompts.">
                 <div slot="grid">
-                    <div class="card" style="border-left:6px solid var(--col-grammar); padding:26px 30px; border-radius:14px;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:16px;">🗣️ Part 1 Speaking Prompts (1–4)</div>
-                        <ul style="padding-left:22px; font-size:calc(18.5px * var(--font-scale, 1)); line-height:1.85; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:14px;">
-                            <li><strong>1. People you enjoy spending time with:</strong> <em>"I like people <u>who</u> share similar interests and have a great sense of humour."</em></li>
-                            <li><strong>2. Time of day you like most:</strong> <em>"I like the time of day <u>when</u> the sun starts to set and everything becomes peaceful."</em></li>
-                            <li><strong>3. Activities in your free time:</strong> <em>"I enjoy activities <u>which</u> challenge my creativity, such as painting."</em></li>
-                            <li><strong>4. Activities you dislike:</strong> <em>"I don't like activities <u>which</u> involve sitting in repetitive meetings for hours."</em></li>
+                    <div class="card"
+                        style="border-left:6px solid var(--col-grammar); padding:26px 30px; border-radius:14px;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:16px;">
+                            🗣️ Part 1 Speaking Prompts (1–4)</div>
+                        <ul
+                            style="padding-left:22px; font-size:calc(18.5px * var(--font-scale, 1)); line-height:1.85; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:14px;">
+                            <li><strong>1. People you enjoy spending time with:</strong> <em>"I like people <u>who</u>
+                                    share similar interests and have a great sense of humour."</em></li>
+                            <li><strong>2. Time of day you like most:</strong> <em>"I like the time of day <u>when</u>
+                                    the sun starts to set and everything becomes peaceful."</em></li>
+                            <li><strong>3. Activities in your free time:</strong> <em>"I enjoy activities <u>which</u>
+                                    challenge my creativity, such as painting."</em></li>
+                            <li><strong>4. Activities you dislike:</strong> <em>"I don't like activities <u>which</u>
+                                    involve sitting in repetitive meetings for hours."</em></li>
                         </ul>
                     </div>
 
-                    <div class="card" style="border-left:6px solid var(--col-grammar); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; justify-content:space-between;">
+                    <div class="card"
+                        style="border-left:6px solid var(--col-grammar); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; justify-content:space-between;">
                         <div>
-                            <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:16px;">🗣️ Part 1 Speaking Prompts (5–8)</div>
-                            <ul style="padding-left:22px; font-size:calc(18.5px * var(--font-scale, 1)); line-height:1.85; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:14px;">
-                                <li><strong>5. Places you enjoy visiting:</strong> <em>"I like places <u>where</u> I can connect with nature away from the bustling city."</em></li>
-                                <li><strong>6. An enjoyable day for you:</strong> <em>"I like days <u>when</u> I have no strict schedules and can relax with family."</em></li>
-                                <li><strong>7. Films you like:</strong> <em>"I like films <u>which</u> make me think deeply about psychological concepts."</em></li>
-                                <li><strong>8. Food you dislike:</strong> <em>"I don't like food <u>which</u> contains artificial preservatives or excessive sugar."</em></li>
+                            <div
+                                style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:16px;">
+                                🗣️ Part 1 Speaking Prompts (5–8)</div>
+                            <ul
+                                style="padding-left:22px; font-size:calc(18.5px * var(--font-scale, 1)); line-height:1.85; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:14px;">
+                                <li><strong>5. Places you enjoy visiting:</strong> <em>"I like places <u>where</u> I can
+                                        connect with nature away from the bustling city."</em></li>
+                                <li><strong>6. An enjoyable day for you:</strong> <em>"I like days <u>when</u> I have no
+                                        strict schedules and can relax with family."</em></li>
+                                <li><strong>7. Films you like:</strong> <em>"I like films <u>which</u> make me think
+                                        deeply about psychological concepts."</em></li>
+                                <li><strong>8. Food you dislike:</strong> <em>"I don't like food <u>which</u> contains
+                                        artificial preservatives or excessive sugar."</em></li>
                             </ul>
                         </div>
-                        <button class="btn-action" style="background:#4f46e5; color:white; width:100%; justify-content:center; margin-top:16px;" data-grammar-ref="../references/grammar_sources/expert_6/module_2a_relative_clauses.html" data-grammar-title="Module 2a: Relative Clauses Reference Handbook">
+                        <button class="btn-action"
+                            style="background:#4f46e5; color:white; width:100%; justify-content:center; margin-top:16px;"
+                            data-grammar-ref="https://neotetsuya.github.io/Expert-IELTS/expert%206/module_2a_relative_clauses.html"
+                            data-grammar-title="Module 2a: Relative Clauses Reference Handbook">
                             📖 Open Relative Clauses Handbook
                         </button>
                     </div>
@@ -342,52 +530,107 @@
             </slide-card>
 
             <!-- SLIDE 25: Language Development 2a (Ex 3b: Joining Sentences about Stress 1–10) -->
-            <slide-card template="gap-fill-passage" skill="grammar" title="Language Development 2a: Joining Sentences on Stress (Ex 3b)" subtitle="Combine separate clauses into complex academic sentences using which, who, when, or where.">
+            <slide-card template="gap-fill-passage" skill="grammar"
+                title="Language Development 2a: Joining Sentences on Stress (Ex 3b)"
+                subtitle="Combine separate clauses into complex academic sentences using which, who, when, or where.">
                 <div slot="passage">
-                    <div style="display:flex; flex-direction:column; gap:12px; font-size:calc(18px * var(--font-scale, 1)); line-height:1.75;">
-                        <div><strong>1.</strong> Things <input type="text" class="blank-input" data-ans="which are irritating|that are irritating" style="width:200px;"> can make us feel stressed. <em>(which)</em></div>
-                        <div><strong>2.</strong> People feel stressed <input type="text" class="blank-input" data-ans="when they have" style="width:160px;"> a lot of work to do. <em>(when)</em></div>
-                        <div><strong>3.</strong> Places <input type="text" class="blank-input" data-ans="where there are" style="width:170px;"> a lot of people can be stressful. <em>(where)</em></div>
-                        <div><strong>4.</strong> Some people <input type="text" class="blank-input" data-ans="who spend time|that spend time" style="width:180px;"> in a noisy environment have higher stress levels. <em>(who)</em></div>
-                        <div><strong>5.</strong> Activities <input type="text" class="blank-input" data-ans="which are very difficult|that are very difficult" style="width:210px;"> cause stress. <em>(which)</em></div>
-                        <div><strong>6.</strong> Employers <input type="text" class="blank-input" data-ans="who ask their employees|that ask their employees" style="width:210px;"> to work too hard cause stress. <em>(who)</em></div>
-                        <div><strong>7.</strong> News <input type="text" class="blank-input" data-ans="which is not good|that is not good" style="width:180px;"> increases stress levels. <em>(which)</em></div>
-                        <div><strong>8.</strong> Meditation can work for people <input type="text" class="blank-input" data-ans="who experience stress|that experience stress" style="width:200px;">. <em>(who)</em></div>
-                        <div><strong>9.</strong> Stress can be good for us <input type="text" class="blank-input" data-ans="when we see the stress as positive|when we see it as positive" style="width:240px;">. <em>(when)</em></div>
-                        <div><strong>10.</strong> Stress tends to have a negative effect <input type="text" class="blank-input" data-ans="when we think it is negative" style="width:230px;">. <em>(when)</em></div>
+                    <div
+                        style="display:flex; flex-direction:column; gap:12px; font-size:calc(18px * var(--font-scale, 1)); line-height:1.75;">
+                        <div><strong>1.</strong> Things <input type="text" class="blank-input"
+                                data-ans="which are irritating|that are irritating" style="width:200px;"> can make us
+                            feel stressed. <em>(which)</em></div>
+                        <div><strong>2.</strong> People feel stressed <input type="text" class="blank-input"
+                                data-ans="when they have" style="width:160px;"> a lot of work to do. <em>(when)</em>
+                        </div>
+                        <div><strong>3.</strong> Places <input type="text" class="blank-input"
+                                data-ans="where there are" style="width:170px;"> a lot of people can be stressful.
+                            <em>(where)</em>
+                        </div>
+                        <div><strong>4.</strong> Some people <input type="text" class="blank-input"
+                                data-ans="who spend time|that spend time" style="width:180px;"> in a noisy environment
+                            have higher stress levels. <em>(who)</em></div>
+                        <div><strong>5.</strong> Activities <input type="text" class="blank-input"
+                                data-ans="which are very difficult|that are very difficult" style="width:210px;"> cause
+                            stress. <em>(which)</em></div>
+                        <div><strong>6.</strong> Employers <input type="text" class="blank-input"
+                                data-ans="who ask their employees|that ask their employees" style="width:210px;"> to
+                            work too hard cause stress. <em>(who)</em></div>
+                        <div><strong>7.</strong> News <input type="text" class="blank-input"
+                                data-ans="which is not good|that is not good" style="width:180px;"> increases stress
+                            levels. <em>(which)</em></div>
+                        <div><strong>8.</strong> Meditation can work for people <input type="text" class="blank-input"
+                                data-ans="who experience stress|that experience stress" style="width:200px;">.
+                            <em>(who)</em>
+                        </div>
+                        <div><strong>9.</strong> Stress can be good for us <input type="text" class="blank-input"
+                                data-ans="when we see the stress as positive|when we see it as positive"
+                                style="width:240px;">. <em>(when)</em></div>
+                        <div><strong>10.</strong> Stress tends to have a negative effect <input type="text"
+                                class="blank-input" data-ans="when we think it is negative" style="width:230px;">.
+                            <em>(when)</em>
+                        </div>
                     </div>
                 </div>
                 <div slot="rules-col">
-                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-grammar); padding:22px 26px; border-radius:12px; margin-bottom:12px;">
-                        <h4 style="color:var(--col-grammar); font-size:calc(20px * var(--font-scale, 1)); font-weight:800; margin-bottom:10px;">💡 Defining Clause Punctuation</h4>
-                        <p style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.7; color:var(--text-dark); margin:0;">
-                            Defining relative clauses give essential information to identify the noun. Therefore, do <strong>NOT</strong> place commas around them.
+                    <div class="card"
+                        style="background:#ffffff; border-left:5px solid var(--col-grammar); padding:22px 26px; border-radius:12px; margin-bottom:12px;">
+                        <h4
+                            style="color:var(--col-grammar); font-size:calc(20px * var(--font-scale, 1)); font-weight:800; margin-bottom:10px;">
+                            💡 Defining Clause Punctuation</h4>
+                        <p
+                            style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.7; color:var(--text-dark); margin:0;">
+                            Defining relative clauses give essential information to identify the noun. Therefore, do
+                            <strong>NOT</strong> place commas around them.
                         </p>
                     </div>
-                    <button class="btn-action" style="background:#4f46e5; color:white; width:100%; justify-content:center;" data-grammar-ref="../references/grammar_sources/expert_6/module_2a_relative_clauses.html" data-grammar-title="Module 2a: Relative Clauses Reference Handbook">
+                    <button class="btn-action"
+                        style="background:#4f46e5; color:white; width:100%; justify-content:center;"
+                        data-grammar-ref="https://neotetsuya.github.io/Expert-IELTS/expert%206/module_2a_relative_clauses.html"
+                        data-grammar-title="Module 2a: Relative Clauses Reference Handbook">
                         📖 Open Relative Clauses Handbook
                     </button>
                 </div>
             </slide-card>
 
             <!-- SLIDE 26: Language Development 2a (Ex 4b: Academic Paragraph Rewriting on Stress) -->
-            <slide-card template="summary-checklist" skill="grammar" title="Language Development 2a: Academic Paragraph Rewriting (Ex 4b)" subtitle="Transform repetitive simple sentences into cohesive Band 7+ academic prose.">
+            <slide-card template="summary-checklist" skill="grammar"
+                title="Language Development 2a: Academic Paragraph Rewriting (Ex 4b)"
+                subtitle="Transform repetitive simple sentences into cohesive Band 7+ academic prose.">
                 <div slot="grid">
                     <div class="card" style="border-left:6px solid #dc2626; padding:26px 30px; border-radius:14px;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:#dc2626; margin-bottom:14px;">❌ Informal Simple Draft (Band 5.0)</div>
-                        <p style="font-size:calc(18px * var(--font-scale, 1)); line-height:1.85; color:var(--text-dark); margin:0;">
-                            "Stress is a common emotion. It can have both a positive and negative effect on a person. It can help you achieve success. For example, it gives you motivation and energy. You need them to complete tasks well. When you are stressed, the brain releases chemicals. They help you to focus better. A person is probably happier in general. He or she is focused and successful."
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:#dc2626; margin-bottom:14px;">
+                            ❌ Informal Simple Draft (Band 5.0)</div>
+                        <p
+                            style="font-size:calc(18px * var(--font-scale, 1)); line-height:1.85; color:var(--text-dark); margin:0;">
+                            "Stress is a common emotion. It can have both a positive and negative effect on a person. It
+                            can help you achieve success. For example, it gives you motivation and energy. You need them
+                            to complete tasks well. When you are stressed, the brain releases chemicals. They help you
+                            to focus better. A person is probably happier in general. He or she is focused and
+                            successful."
                         </p>
                     </div>
 
-                    <div class="card" style="border-left:6px solid #16a34a; padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; justify-content:space-between;">
+                    <div class="card"
+                        style="border-left:6px solid #16a34a; padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; justify-content:space-between;">
                         <div>
-                            <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:#16a34a; margin-bottom:14px;">✅ Band 7+ Academic Transformation</div>
-                            <p style="font-size:calc(18px * var(--font-scale, 1)); line-height:1.85; color:var(--text-dark); margin:0;">
-                                "Stress is a common emotion <strong>which</strong> can have both a positive and negative effect on a person. It can help you achieve success; for example, it gives you motivation and energy <strong>which</strong> you need to complete tasks well. When you are stressed, the brain releases chemicals <strong>which</strong> help you to focus better. Consequently, a person <strong>who</strong> is focused and successful is probably happier in general."
+                            <div
+                                style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:#16a34a; margin-bottom:14px;">
+                                ✅ Band 7+ Academic Transformation</div>
+                            <p
+                                style="font-size:calc(18px * var(--font-scale, 1)); line-height:1.85; color:var(--text-dark); margin:0;">
+                                "Stress is a common emotion <strong>which</strong> can have both a positive and negative
+                                effect on a person. It can help you achieve success; for example, it gives you
+                                motivation and energy <strong>which</strong> you need to complete tasks well. When you
+                                are stressed, the brain releases chemicals <strong>which</strong> help you to focus
+                                better. Consequently, a person <strong>who</strong> is focused and successful is
+                                probably happier in general."
                             </p>
                         </div>
-                        <button class="btn-action" style="background:#4f46e5; color:white; width:100%; justify-content:center; margin-top:16px;" data-grammar-ref="../references/grammar_sources/expert_6/module_2a_relative_clauses.html" data-grammar-title="Module 2a: Relative Clauses Reference Handbook">
+                        <button class="btn-action"
+                            style="background:#4f46e5; color:white; width:100%; justify-content:center; margin-top:16px;"
+                            data-grammar-ref="https://neotetsuya.github.io/Expert-IELTS/expert%206/module_2a_relative_clauses.html"
+                            data-grammar-title="Module 2a: Relative Clauses Reference Handbook">
                             📖 Open Relative Clauses Handbook
                         </button>
                     </div>
@@ -395,70 +638,130 @@
             </slide-card>
 
             <!-- SLIDE 27: Writing 2a Strategy - The 6 Idea Generation Techniques (Ex 1 & 2a) -->
-            <slide-card template="summary-checklist" skill="write" title="Writing 2a Strategy: 6 Techniques for Generating Ideas (Ex 1 &amp; 2a)" subtitle="Prompt: Some people believe money is one of the most important factors in a person's happiness. To what extent do you agree?">
+            <slide-card template="summary-checklist" skill="write"
+                title="Writing 2a Strategy: 6 Techniques for Generating Ideas (Ex 1 &amp; 2a)"
+                subtitle="Prompt: Some people believe money is one of the most important factors in a person's happiness. To what extent do you agree?">
                 <div slot="grid">
-                    <div class="card" style="border-left:6px solid var(--col-writing); padding:24px 28px; border-radius:14px; display:flex; flex-direction:column; gap:14px; justify-content:flex-start;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:2px;">💡 Techniques 1–3</div>
-                        
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
-                            <div style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:4px;">1. Cubing</div>
-                            <div style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">Examine the topic from 6 angles: <em>What, who, when, where, why, how</em> (or describe, compare, evaluate, associate, argue).</div>
+                    <div class="card"
+                        style="border-left:6px solid var(--col-writing); padding:24px 28px; border-radius:14px; display:flex; flex-direction:column; gap:14px; justify-content:flex-start;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:2px;">
+                            💡 Techniques 1–3</div>
+
+                        <div
+                            style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:4px;">
+                                1. Cubing</div>
+                            <div
+                                style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">
+                                Examine the topic from 6 angles: <em>What, who, when, where, why, how</em> (or describe,
+                                compare, evaluate, associate, argue).</div>
                         </div>
 
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
-                            <div style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:4px;">2. Your perspective</div>
-                            <div style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">Relate the prompt to your life (e.g. when money bought basic security vs. when friends brought true joy).</div>
+                        <div
+                            style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:4px;">
+                                2. Your perspective</div>
+                            <div
+                                style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">
+                                Relate the prompt to your life (e.g. when money bought basic security vs. when friends
+                                brought true joy).</div>
                         </div>
 
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
-                            <div style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:4px;">3. Other perspectives</div>
-                            <div style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">Contrast different groups: wealthy vs. poor; young job-seekers vs. elderly retirees; urban vs. rural.</div>
+                        <div
+                            style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:4px;">
+                                3. Other perspectives</div>
+                            <div
+                                style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">
+                                Contrast different groups: wealthy vs. poor; young job-seekers vs. elderly retirees;
+                                urban vs. rural.</div>
                         </div>
                     </div>
 
-                    <div class="card" style="border-left:6px solid var(--col-writing); padding:24px 28px; border-radius:14px; display:flex; flex-direction:column; gap:14px; justify-content:flex-start;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:2px;">💡 Techniques 4–6 &amp; Key Terms</div>
-                        
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
-                            <div style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:4px;">4. Identify examples</div>
-                            <div style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">Specific cases (e.g. paying for vital medical surgery vs. high-pressure executive burnout).</div>
+                    <div class="card"
+                        style="border-left:6px solid var(--col-writing); padding:24px 28px; border-radius:14px; display:flex; flex-direction:column; gap:14px; justify-content:flex-start;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:2px;">
+                            💡 Techniques 4–6 &amp; Key Terms</div>
+
+                        <div
+                            style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:4px;">
+                                4. Identify examples</div>
+                            <div
+                                style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">
+                                Specific cases (e.g. paying for vital medical surgery vs. high-pressure executive
+                                burnout).</div>
                         </div>
 
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
-                            <div style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:4px;">5. Flip a problem</div>
-                            <div style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">Invert the premise: <em>"Does having zero money create happiness?"</em> &rarr; Reveals basic security is vital.</div>
+                        <div
+                            style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:4px;">
+                                5. Flip a problem</div>
+                            <div
+                                style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">
+                                Invert the premise: <em>"Does having zero money create happiness?"</em> &rarr; Reveals
+                                basic security is vital.</div>
                         </div>
 
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
-                            <div style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:4px;">6. Generate vocabulary</div>
-                            <div style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);"><em>financial stability, fundamental necessities, emotional well-being, intrinsic fulfillment</em>.</div>
+                        <div
+                            style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:4px;">
+                                6. Generate vocabulary</div>
+                            <div
+                                style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">
+                                <em>financial stability, fundamental necessities, emotional well-being, intrinsic
+                                    fulfillment</em>.
+                            </div>
                         </div>
 
-                        <div style="background:#eff6ff; border:1px solid #bfdbfe; padding:10px 14px; border-radius:8px; font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:#1e40af;">
-                            📌 <strong>factor:</strong> an essential cause/influence &nbsp;|&nbsp; <strong>To what extent:</strong> how much you agree/disagree.
+                        <div
+                            style="background:#eff6ff; border:1px solid #bfdbfe; padding:10px 14px; border-radius:8px; font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:#1e40af;">
+                            📌 <strong>factor:</strong> an essential cause/influence &nbsp;|&nbsp; <strong>To what
+                                extent:</strong> how much you agree/disagree.
                         </div>
                     </div>
                 </div>
             </slide-card>
 
             <!-- SLIDE 28: Writing 2a Strategy - Reasons For/Against & Plan Selection (Ex 2b, 2c, 3, 4) -->
-            <slide-card template="summary-checklist" skill="write" title="Writing 2a Strategy: Reasons For/Against &amp; Plan Selection (Ex 2b–4)" subtitle="Select your best supporting ideas and choose the most effective essay blueprint.">
+            <slide-card template="summary-checklist" skill="write"
+                title="Writing 2a Strategy: Reasons For/Against &amp; Plan Selection (Ex 2b–4)"
+                subtitle="Select your best supporting ideas and choose the most effective essay blueprint.">
                 <div slot="grid">
-                    <div class="card" style="border-left:6px solid var(--col-writing); padding:24px 28px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:2px;">📋 Reasons For vs. Against Money (Ex 2b)</div>
-                        
-                        <div style="background:#f0fdf4; border:1px solid #86efac; padding:14px 18px; border-radius:10px;">
-                            <div style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#166534; margin-bottom:6px;">✅ Reasons For (Money is Essential)</div>
-                            <ul style="padding-left:20px; font-size:calc(17px * var(--font-scale, 1)); line-height:1.75; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:6px;">
+                    <div class="card"
+                        style="border-left:6px solid var(--col-writing); padding:24px 28px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:2px;">
+                            📋 Reasons For vs. Against Money (Ex 2b)</div>
+
+                        <div
+                            style="background:#f0fdf4; border:1px solid #86efac; padding:14px 18px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#166534; margin-bottom:6px;">
+                                ✅ Reasons For (Money is Essential)</div>
+                            <ul
+                                style="padding-left:20px; font-size:calc(17px * var(--font-scale, 1)); line-height:1.75; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:6px;">
                                 <li>Buys fundamental shelter, nutrition &amp; healthcare</li>
                                 <li>Eliminates daily survival anxiety &amp; acute stress</li>
                                 <li>Affords higher education &amp; life experiences</li>
                             </ul>
                         </div>
 
-                        <div style="background:#fef2f2; border:1px solid #fecaca; padding:14px 18px; border-radius:10px;">
-                            <div style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#991b1b; margin-bottom:6px;">⚠️ Reasons Against (Other Priorities Matter More)</div>
-                            <ul style="padding-left:20px; font-size:calc(17px * var(--font-scale, 1)); line-height:1.75; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:6px;">
+                        <div
+                            style="background:#fef2f2; border:1px solid #fecaca; padding:14px 18px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(18.5px * var(--font-scale, 1)); font-weight:800; color:#991b1b; margin-bottom:6px;">
+                                ⚠️ Reasons Against (Other Priorities Matter More)</div>
+                            <ul
+                                style="padding-left:20px; font-size:calc(17px * var(--font-scale, 1)); line-height:1.75; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:6px;">
                                 <li>Strong family &amp; interpersonal relationships</li>
                                 <li>Physical &amp; psychological mental well-being</li>
                                 <li>Meaningful, purpose-driven work and passions</li>
@@ -466,136 +769,222 @@
                         </div>
                     </div>
 
-                    <div class="card" style="border-left:6px solid var(--col-grammar); padding:24px 28px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:2px;">📐 Plan A vs. Plan B (Ex 4)</div>
-                        
-                        <div style="background:#f8fafc; border:1px solid #cbd5e1; padding:14px 18px; border-radius:10px;">
-                            <div style="font-size:calc(18px * var(--font-scale, 1)); font-weight:800; color:#1e293b; margin-bottom:4px;">Plan A (One-Sided Opinion)</div>
-                            <div style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.7; color:var(--text-dark);">
-                                <strong>Intro:</strong> Stance &rarr; <strong>Body 1:</strong> Reason 1 (+ ex) &rarr; <strong>Body 2:</strong> Reason 2 (+ ex) &rarr; <strong>Conclusion</strong>.
+                    <div class="card"
+                        style="border-left:6px solid var(--col-grammar); padding:24px 28px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:2px;">
+                            📐 Plan A vs. Plan B (Ex 4)</div>
+
+                        <div
+                            style="background:#f8fafc; border:1px solid #cbd5e1; padding:14px 18px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(18px * var(--font-scale, 1)); font-weight:800; color:#1e293b; margin-bottom:4px;">
+                                Plan A (One-Sided Opinion)</div>
+                            <div
+                                style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.7; color:var(--text-dark);">
+                                <strong>Intro:</strong> Stance &rarr; <strong>Body 1:</strong> Reason 1 (+ ex) &rarr;
+                                <strong>Body 2:</strong> Reason 2 (+ ex) &rarr; <strong>Conclusion</strong>.
                             </div>
                         </div>
 
-                        <div style="background:#f0fdf4; border:2px solid #22c55e; padding:14px 18px; border-radius:10px;">
-                            <div style="font-size:calc(18px * var(--font-scale, 1)); font-weight:800; color:#15803d; margin-bottom:4px;">Plan B (Balanced Discussion — Recommended)</div>
-                            <div style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.7; color:var(--text-dark);">
-                                <strong>Intro:</strong> Both sides &rarr; <strong>Body 1:</strong> Financial view &rarr; <strong>Body 2:</strong> Emotional/health view &rarr; <strong>Conclusion:</strong> Nuanced Stance.
+                        <div
+                            style="background:#f0fdf4; border:2px solid #22c55e; padding:14px 18px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(18px * var(--font-scale, 1)); font-weight:800; color:#15803d; margin-bottom:4px;">
+                                Plan B (Balanced Discussion — Recommended)</div>
+                            <div
+                                style="font-size:calc(17px * var(--font-scale, 1)); line-height:1.7; color:var(--text-dark);">
+                                <strong>Intro:</strong> Both sides &rarr; <strong>Body 1:</strong> Financial view &rarr;
+                                <strong>Body 2:</strong> Emotional/health view &rarr; <strong>Conclusion:</strong>
+                                Nuanced Stance.
                             </div>
                         </div>
 
-                        <div style="background:#fef9c3; border:1px solid #fde047; padding:12px 16px; border-radius:10px; font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.65; color:#713f12;">
-                            💡 <strong>Why Plan B?</strong> Perfect for <em>"To what extent"</em> prompts because it evaluates the threshold between survival necessity and emotional fulfillment.
+                        <div
+                            style="background:#fef9c3; border:1px solid #fde047; padding:12px 16px; border-radius:10px; font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.65; color:#713f12;">
+                            💡 <strong>Why Plan B?</strong> Perfect for <em>"To what extent"</em> prompts because it
+                            evaluates the threshold between survival necessity and emotional fulfillment.
                         </div>
                     </div>
                 </div>
             </slide-card>
 
             <!-- SLIDE 29: Writing 2a Model Essay: Band 7+ Money & Happiness Opinion Essay -->
-            <slide-card template="writing-model" skill="write" title="Writing 2a (Task 2): Band 7+ Opinion Essay Model" subtitle="Money and Happiness Model Answer.">
+            <slide-card template="writing-model" skill="write" title="Writing 2a (Task 2): Band 7+ Opinion Essay Model"
+                subtitle="Money and Happiness Model Answer.">
                 <div slot="prompt">
-                    <div style="font-size: calc(17.5px * var(--font-scale, 1)); line-height: 1.55; margin-bottom: 12px;">
-                        <strong>Task 2 Prompt:</strong> <em>Some people believe that money is one of the most important factors in a person's happiness. To what extent do you agree with this?</em>
+                    <div
+                        style="font-size: calc(17.5px * var(--font-scale, 1)); line-height: 1.55; margin-bottom: 12px;">
+                        <strong>Task 2 Prompt:</strong> <em>Some people believe that money is one of the most important
+                            factors in a person's happiness. To what extent do you agree with this?</em>
                     </div>
-                    <div class="card" style="background:#ffffff; border-top:4px solid var(--col-writing); padding:16px 20px;">
-                        <h4 style="color:var(--col-writing); font-size:calc(18px * var(--font-scale, 1)); font-weight:800; margin-bottom:6px;">📌 Thesis Stance</h4>
-                        <p style="font-size:calc(16px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark); margin:0;">Partially agree: Wealth provides essential security and eliminates poverty stress, but emotional bonds and health are far more vital for long-term fulfillment.</p>
+                    <div class="card"
+                        style="background:#ffffff; border-top:4px solid var(--col-writing); padding:16px 20px;">
+                        <h4
+                            style="color:var(--col-writing); font-size:calc(18px * var(--font-scale, 1)); font-weight:800; margin-bottom:6px;">
+                            📌 Thesis Stance</h4>
+                        <p
+                            style="font-size:calc(16px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark); margin:0;">
+                            Partially agree: Wealth provides essential security and eliminates poverty stress, but
+                            emotional bonds and health are far more vital for long-term fulfillment.</p>
                     </div>
                 </div>
                 <div slot="essay">
                     <p>
-                        <span class="hl-phrase" data-phrase="Introduction & Stance" data-note="Clear paraphrase of the prompt with a nuanced, balanced thesis statement.">It is often argued that wealth plays a fundamental role in determining human happiness. In my view, while financial security is essential for meeting basic physical needs, it is not the sole or even the primary factor in achieving genuine contentment.</span>
+                        <span class="hl-phrase" data-phrase="Introduction & Stance"
+                            data-note="Clear paraphrase of the prompt with a nuanced, balanced thesis statement.">It is
+                            often argued that wealth plays a fundamental role in determining human happiness. In my
+                            view, while financial security is essential for meeting basic physical needs, it is not the
+                            sole or even the primary factor in achieving genuine contentment.</span>
                     </p>
                     <p>
-                        <span class="hl-phrase" data-phrase="Body 1: Financial Foundation" data-note="Validates the importance of income for shelter, nutrition, healthcare, and educational opportunity.">On the one hand, money is indispensable because it provides access to fundamental living standards. Without adequate income, individuals experience continuous anxiety regarding shelter, nutrition, and medical treatment. For example, families who are unable to afford quality education or healthcare for their children face enormous stress, which inevitably damages their quality of life. Furthermore, having sufficient financial resources affords people the freedom to pursue leisure activities and travel, which can enhance daily satisfaction.</span>
+                        <span class="hl-phrase" data-phrase="Body 1: Financial Foundation"
+                            data-note="Validates the importance of income for shelter, nutrition, healthcare, and educational opportunity.">On
+                            the one hand, money is indispensable because it provides access to fundamental living
+                            standards. Without adequate income, individuals experience continuous anxiety regarding
+                            shelter, nutrition, and medical treatment. For example, families who are unable to afford
+                            quality education or healthcare for their children face enormous stress, which inevitably
+                            damages their quality of life. Furthermore, having sufficient financial resources affords
+                            people the freedom to pursue leisure activities and travel, which can enhance daily
+                            satisfaction.</span>
                     </p>
                     <p>
-                        <span class="hl-phrase" data-phrase="Body 2: Non-Monetary Core" data-note="Demonstrates that relationships, mental health, and purpose matter more once basic needs are met.">On the other hand, non-material factors are far more influential once basic comfort has been secured. Strong interpersonal relationships with family and friends provide emotional support and a sense of belonging that wealth cannot purchase. In fact, many wealthy individuals suffer from acute loneliness or depression because of extreme work pressure. Moreover, good physical health and a fulfilling sense of purpose in life are critical components of well-being that exist independently of one's bank balance.</span>
+                        <span class="hl-phrase" data-phrase="Body 2: Non-Monetary Core"
+                            data-note="Demonstrates that relationships, mental health, and purpose matter more once basic needs are met.">On
+                            the other hand, non-material factors are far more influential once basic comfort has been
+                            secured. Strong interpersonal relationships with family and friends provide emotional
+                            support and a sense of belonging that wealth cannot purchase. In fact, many wealthy
+                            individuals suffer from acute loneliness or depression because of extreme work pressure.
+                            Moreover, good physical health and a fulfilling sense of purpose in life are critical
+                            components of well-being that exist independently of one's bank balance.</span>
                     </p>
                     <p>
-                        <span class="hl-phrase" data-phrase="Conclusion & Synthesis" data-note="Reiterates that wealth prevents misery but relationships and health cultivate true happiness.">In conclusion, while money is a crucial foundation that prevents hardship and provides essential security, it is not the most important determinant of happiness. Deep social relationships, good health, and personal fulfillment ultimately matter far more in leading a joyful life.</span>
+                        <span class="hl-phrase" data-phrase="Conclusion & Synthesis"
+                            data-note="Reiterates that wealth prevents misery but relationships and health cultivate true happiness.">In
+                            conclusion, while money is a crucial foundation that prevents hardship and provides
+                            essential security, it is not the most important determinant of happiness. Deep social
+                            relationships, good health, and personal fulfillment ultimately matter far more in leading a
+                            joyful life.</span>
                     </p>
                 </div>
                 <div slot="annotations">
-                    <div class="card" style="background:#ffffff; border-top:4px solid var(--col-writing); padding:18px 22px;">
-                        <h4 style="color:var(--col-writing); font-size:calc(19px * var(--font-scale, 1)); font-weight:800; margin-bottom:8px;">🌟 Band 7+ Key Strengths</h4>
-                        <ul style="padding-left:18px; font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">
-                            <li><strong>Balanced Nuance:</strong> Explicitly addresses "to what extent" by establishing the threshold between basic survival and emotional well-being.</li>
-                            <li><strong>Cohesion &amp; Signposting:</strong> Natural transition phrases (<em>"On the one hand", "On the other hand", "Furthermore", "In conclusion"</em>).</li>
-                            <li><strong>Grammatical Range:</strong> Accurate use of relative clauses (<em>"families who are unable to afford...", "activities which can enhance..."</em>).</li>
+                    <div class="card"
+                        style="background:#ffffff; border-top:4px solid var(--col-writing); padding:18px 22px;">
+                        <h4
+                            style="color:var(--col-writing); font-size:calc(19px * var(--font-scale, 1)); font-weight:800; margin-bottom:8px;">
+                            🌟 Band 7+ Key Strengths</h4>
+                        <ul
+                            style="padding-left:18px; font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">
+                            <li><strong>Balanced Nuance:</strong> Explicitly addresses "to what extent" by establishing
+                                the threshold between basic survival and emotional well-being.</li>
+                            <li><strong>Cohesion &amp; Signposting:</strong> Natural transition phrases (<em>"On the one
+                                    hand", "On the other hand", "Furthermore", "In conclusion"</em>).</li>
+                            <li><strong>Grammatical Range:</strong> Accurate use of relative clauses (<em>"families who
+                                    are unable to afford...", "activities which can enhance..."</em>).</li>
                         </ul>
                     </div>
                 </div>
             </slide-card>
 
             <!-- SLIDE 30: Section 2b Divider -->
-            <slide-card template="section-divider" skill="title" badge="Section 2b" title="2b Feelings: Looking Good" subtitle="Clothes and identity, matching information to paragraphs, YES/NO/NOT GIVEN, opinion essay planning, and spelling mastery.">
+            <slide-card template="section-divider" skill="title" badge="Section 2b" title="2b Feelings: Looking Good"
+                subtitle="Clothes and identity, matching information to paragraphs, YES/NO/NOT GIVEN, opinion essay planning, and spelling mastery.">
                 <div slot="content">
-                    <span class="word-chip" style="font-size: calc(18px * var(--font-scale, 1)); padding: 8px 18px;">👗 Fashion &amp; Identity</span>
-                    <span class="word-chip" style="font-size: calc(18px * var(--font-scale, 1)); padding: 8px 18px;">🎯 Matching Information (A–F)</span>
-                    <span class="word-chip" style="font-size: calc(18px * var(--font-scale, 1)); padding: 8px 18px;">⚖️ YES / NO / NOT GIVEN</span>
-                    <span class="word-chip" style="font-size: calc(18px * var(--font-scale, 1)); padding: 8px 18px;">✍️ Appearance Opinion Essay</span>
+                    <span class="word-chip" style="font-size: calc(18px * var(--font-scale, 1)); padding: 8px 18px;">👗
+                        Fashion &amp; Identity</span>
+                    <span class="word-chip" style="font-size: calc(18px * var(--font-scale, 1)); padding: 8px 18px;">🎯
+                        Matching Information (A–F)</span>
+                    <span class="word-chip" style="font-size: calc(18px * var(--font-scale, 1)); padding: 8px 18px;">⚖️
+                        YES / NO / NOT GIVEN</span>
+                    <span class="word-chip" style="font-size: calc(18px * var(--font-scale, 1)); padding: 8px 18px;">✍️
+                        Appearance Opinion Essay</span>
                 </div>
             </slide-card>
 
             <!-- SLIDE 32: Reading 2b Lead-in - Before You Read & Fashion Motivations (Ex 1) -->
-            <slide-card template="exercise-grid" skill="read" title="Reading 2b Lead-in: Before You Read &amp; Fashion Motivations (Ex 1)" instruction="Examine psychological drivers behind shopping, clothing choices, and personal fashion.">
+            <slide-card template="exercise-grid" skill="read"
+                title="Reading 2b Lead-in: Before You Read &amp; Fashion Motivations (Ex 1)"
+                instruction="Examine psychological drivers behind shopping, clothing choices, and personal fashion.">
                 <div slot="grid" style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
                     <div>
-                        <h3 style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">🛍️ Why Do People Like Shopping?</h3>
+                        <h3 style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">🛍️ Why
+                            Do People Like Shopping?</h3>
                         <div class="discuss-card">
                             <div class="discuss-num" style="background:var(--col-reading);">1</div>
-                            <div class="discuss-text"><strong>Dopamine &amp; Reward:</strong> The psychological rush of hunting for deals and acquiring new possessions.</div>
+                            <div class="discuss-text"><strong>Dopamine &amp; Reward:</strong> The psychological rush of
+                                hunting for deals and acquiring new possessions.</div>
                         </div>
                         <div class="discuss-card">
                             <div class="discuss-num" style="background:var(--col-reading);">2</div>
-                            <div class="discuss-text"><strong>Social Activity:</strong> Spending quality leisure time browsing retail spaces with friends.</div>
+                            <div class="discuss-text"><strong>Social Activity:</strong> Spending quality leisure time
+                                browsing retail spaces with friends.</div>
                         </div>
                         <div class="discuss-card">
                             <div class="discuss-num" style="background:var(--col-reading);">3</div>
-                            <div class="discuss-text"><strong>Retail Therapy:</strong> Alleviating stress or celebrating personal milestones through purchases.</div>
+                            <div class="discuss-text"><strong>Retail Therapy:</strong> Alleviating stress or celebrating
+                                personal milestones through purchases.</div>
                         </div>
                     </div>
                     <div>
-                        <h3 style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">👗 Why Do People Like Fashion?</h3>
+                        <h3 style="font-size:22px; font-weight:700; color:var(--text-dark); margin-bottom:14px;">👗 Why
+                            Do People Like Fashion?</h3>
                         <div class="discuss-card">
                             <div class="discuss-num" style="background:var(--col-vocab);">1</div>
-                            <div class="discuss-text"><strong>Identity &amp; Self-Expression:</strong> Non-verbally communicating personal values, mood, and creativity.</div>
+                            <div class="discuss-text"><strong>Identity &amp; Self-Expression:</strong> Non-verbally
+                                communicating personal values, mood, and creativity.</div>
                         </div>
                         <div class="discuss-card">
                             <div class="discuss-num" style="background:var(--col-vocab);">2</div>
-                            <div class="discuss-text"><strong>Group Belonging:</strong> Signaling membership in specific subcultures or professional communities.</div>
+                            <div class="discuss-text"><strong>Group Belonging:</strong> Signaling membership in specific
+                                subcultures or professional communities.</div>
                         </div>
                         <div class="discuss-card">
                             <div class="discuss-num" style="background:var(--col-vocab);">3</div>
-                            <div class="discuss-text"><strong>Enclothed Cognition:</strong> Dressing well psychologically boosts confidence, authority, and cognitive performance.</div>
+                            <div class="discuss-text"><strong>Enclothed Cognition:</strong> Dressing well
+                                psychologically boosts confidence, authority, and cognitive performance.</div>
                         </div>
                     </div>
                 </div>
             </slide-card>
 
             <!-- SLIDE 33: Reading 2b Strategy - Dual Task Architecture & Scanning Techniques (Ex 3) -->
-            <slide-card template="summary-checklist" skill="read" title="Reading 2b Strategy: Dual Task Architecture &amp; Scanning (Ex 3)" subtitle="Master simultaneous non-sequential Matching Information and chronological YES/NO/NOT GIVEN.">
+            <slide-card template="summary-checklist" skill="read"
+                title="Reading 2b Strategy: Dual Task Architecture &amp; Scanning (Ex 3)"
+                subtitle="Master simultaneous non-sequential Matching Information and chronological YES/NO/NOT GIVEN.">
                 <div slot="grid">
-                    <div class="card" style="border-left:6px solid var(--col-reading); padding:26px 30px; border-radius:14px;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-reading); margin-bottom:14px;">🎯 Questions 1–6: Matching Information</div>
-                        <ul style="padding-left:22px; font-size:calc(18px * var(--font-scale, 1)); line-height:1.8; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:12px;">
+                    <div class="card"
+                        style="border-left:6px solid var(--col-reading); padding:26px 30px; border-radius:14px;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-reading); margin-bottom:14px;">
+                            🎯 Questions 1–6: Matching Information</div>
+                        <ul
+                            style="padding-left:22px; font-size:calc(18px * var(--font-scale, 1)); line-height:1.8; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:12px;">
                             <li><strong>Not in order:</strong> Information can appear in any paragraph across A–F.</li>
-                            <li><strong>Scan for conceptual synonyms:</strong> Look for researchers' names (<em>Adam &amp; Galinsky, Vohs, Slepian</em>) and study methodology.</li>
+                            <li><strong>Scan for conceptual synonyms:</strong> Look for researchers' names (<em>Adam
+                                    &amp; Galinsky, Vohs, Slepian</em>) and study methodology.</li>
                         </ul>
                     </div>
 
-                    <div class="card" style="border-left:6px solid var(--col-grammar); padding:26px 30px; border-radius:14px;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:14px;">⚖️ Questions 7–12: YES / NO / NOT GIVEN</div>
-                        <ul style="padding-left:22px; font-size:calc(18px * var(--font-scale, 1)); line-height:1.8; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:12px;">
-                            <li><strong>Follows text order:</strong> Questions progress sequentially through the latter paragraphs.</li>
-                            <li><strong>Testable Claims:</strong> Verify whether the author clearly agrees (YES), contradicts (NO), or makes no mention (NOT GIVEN).</li>
+                    <div class="card"
+                        style="border-left:6px solid var(--col-grammar); padding:26px 30px; border-radius:14px;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:14px;">
+                            ⚖️ Questions 7–12: YES / NO / NOT GIVEN</div>
+                        <ul
+                            style="padding-left:22px; font-size:calc(18px * var(--font-scale, 1)); line-height:1.8; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:12px;">
+                            <li><strong>Follows text order:</strong> Questions progress sequentially through the latter
+                                paragraphs.</li>
+                            <li><strong>Testable Claims:</strong> Verify whether the author clearly agrees (YES),
+                                contradicts (NO), or makes no mention (NOT GIVEN).</li>
                         </ul>
                     </div>
                 </div>
             </slide-card>
 
             <!-- SLIDE 32: Reading 2b Split-View Reading - Clothes and Identity (Questions 1–12) -->
-            <slide-card template="reading-split" skill="read" data-bind="reading2b" badge="Reading 2b • Clothes &amp; Identity" title="Clothes and Identity: We Are What We Wear • Matching Info &amp; YES/NO/NOT GIVEN"></slide-card>
+            <slide-card template="reading-split" skill="read" data-bind="reading2b"
+                badge="Reading 2b • Clothes &amp; Identity"
+                title="Clothes and Identity: We Are What We Wear • Matching Info &amp; YES/NO/NOT GIVEN"></slide-card>
 
             <!-- SLIDES 33–44: Reading 2b Dedicated Walkthroughs (Questions 1–12) -->
             <slide-card template="walkthrough" skill="read" data-bind="reading2b.walkthroughs.0"></slide-card>
@@ -612,54 +1001,104 @@
             <slide-card template="walkthrough" skill="read" data-bind="reading2b.walkthroughs.11"></slide-card>
 
             <!-- SLIDE 45: Writing 2b Strategy - Prompt Analysis & Planning (Ex 2a–6b) -->
-            <slide-card template="summary-checklist" skill="write" title="Writing 2b Strategy: Prompt Analysis &amp; Planning (Ex 2a–6b)" subtitle="Prompt: Both men and women care more about their appearance today than they did in the past.">
+            <slide-card template="summary-checklist" skill="write"
+                title="Writing 2b Strategy: Prompt Analysis &amp; Planning (Ex 2a–6b)"
+                subtitle="Prompt: Both men and women care more about their appearance today than they did in the past.">
                 <div slot="grid">
-                    <div class="card" style="border-left:6px solid var(--col-writing); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:2px;">📋 4-Paragraph Plan (Ex 6a)</div>
-                        
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
-                            <div style="font-size:calc(17.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:2px;">Introduction</div>
-                            <div style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark);">Paraphrase prompt + clear opinion: female concern stayed high, whereas male concern sharply increased.</div>
+                    <div class="card"
+                        style="border-left:6px solid var(--col-writing); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:2px;">
+                            📋 4-Paragraph Plan (Ex 6a)</div>
+
+                        <div
+                            style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(17.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:2px;">
+                                Introduction</div>
+                            <div
+                                style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark);">
+                                Paraphrase prompt + clear opinion: female concern stayed high, whereas male concern
+                                sharply increased.</div>
                         </div>
 
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
-                            <div style="font-size:calc(17.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:2px;">Body Paragraphs 1 &amp; 2</div>
-                            <div style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark);"><strong>Body 1:</strong> Male grooming &amp; skincare boom.<br><strong>Body 2:</strong> Media, marketing &amp; male celebrity pressure.</div>
+                        <div
+                            style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(17.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:2px;">
+                                Body Paragraphs 1 &amp; 2</div>
+                            <div
+                                style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark);">
+                                <strong>Body 1:</strong> Male grooming &amp; skincare boom.<br><strong>Body 2:</strong>
+                                Media, marketing &amp; male celebrity pressure.
+                            </div>
                         </div>
 
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
-                            <div style="font-size:calc(17.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:2px;">Conclusion</div>
-                            <div style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark);">Restate opinion and synthesize key reasons into a unified closing judgment.</div>
+                        <div
+                            style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(17.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:2px;">
+                                Conclusion</div>
+                            <div
+                                style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark);">
+                                Restate opinion and synthesize key reasons into a unified closing judgment.</div>
                         </div>
                     </div>
 
-                    <div class="card" style="border-left:6px solid var(--col-grammar); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:2px;">💡 Applying the Idea Techniques (Ex 4)</div>
-                        
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
-                            <div style="font-size:calc(17.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:2px;">Cubing (Comparison)</div>
-                            <div style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark);">Compare historical shaving-only habits with modern multi-step male skincare routines.</div>
+                    <div class="card"
+                        style="border-left:6px solid var(--col-grammar); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:2px;">
+                            💡 Applying the Idea Techniques (Ex 4)</div>
+
+                        <div
+                            style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(17.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:2px;">
+                                Cubing (Comparison)</div>
+                            <div
+                                style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark);">
+                                Compare historical shaving-only habits with modern multi-step male skincare routines.
+                            </div>
                         </div>
 
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
-                            <div style="font-size:calc(17.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:2px;">Perspectives (Generations)</div>
-                            <div style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark);">Contrast grandparents' generation with today's image-conscious young professionals.</div>
+                        <div
+                            style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(17.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:2px;">
+                                Perspectives (Generations)</div>
+                            <div
+                                style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark);">
+                                Contrast grandparents' generation with today's image-conscious young professionals.
+                            </div>
                         </div>
 
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
-                            <div style="font-size:calc(17.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:2px;">Examples (Cultural Icons)</div>
-                            <div style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark);">Cristiano Ronaldo, male grooming influencers, dedicated male aisles in department stores.</div>
+                        <div
+                            style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 16px; border-radius:10px;">
+                            <div
+                                style="font-size:calc(17.5px * var(--font-scale, 1)); font-weight:800; color:#0f172a; margin-bottom:2px;">
+                                Examples (Cultural Icons)</div>
+                            <div
+                                style="font-size:calc(16.5px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark);">
+                                Cristiano Ronaldo, male grooming influencers, dedicated male aisles in department
+                                stores.</div>
                         </div>
                     </div>
                 </div>
             </slide-card>
 
             <!-- SLIDE 46: Writing 2b Language Focus - Opinion, Reason & Example Phrases (Ex 7a & 7b) -->
-            <slide-card template="summary-checklist" skill="write" title="Writing 2b: Opinions, Reasons &amp; Examples Phraseology (Ex 7a &amp; 7b)" subtitle="Integrate formal discourse markers to structure Band 7+ opinion essays.">
+            <slide-card template="summary-checklist" skill="write"
+                title="Writing 2b: Opinions, Reasons &amp; Examples Phraseology (Ex 7a &amp; 7b)"
+                subtitle="Integrate formal discourse markers to structure Band 7+ opinion essays.">
                 <div slot="grid">
-                    <div class="card" style="border-left:6px solid var(--col-writing); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:2px;">💬 Stating Opinions &amp; Reasons</div>
-                        <ul style="padding-left:22px; font-size:calc(18.5px * var(--font-scale, 1)); line-height:1.85; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:14px;">
+                    <div class="card"
+                        style="border-left:6px solid var(--col-writing); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:2px;">
+                            💬 Stating Opinions &amp; Reasons</div>
+                        <ul
+                            style="padding-left:22px; font-size:calc(18.5px * var(--font-scale, 1)); line-height:1.85; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:14px;">
                             <li><em>"I believe that..."</em> / <em>"I am of the opinion that..."</em></li>
                             <li><em>"I would suggest that..."</em> / <em>"In my view..."</em></li>
                             <li><em>"One reason for this is that..."</em></li>
@@ -667,9 +1106,13 @@
                         </ul>
                     </div>
 
-                    <div class="card" style="border-left:6px solid var(--col-grammar); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:2px;">📌 Giving Concrete Examples</div>
-                        <ul style="padding-left:22px; font-size:calc(18.5px * var(--font-scale, 1)); line-height:1.85; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:14px;">
+                    <div class="card"
+                        style="border-left:6px solid var(--col-grammar); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:2px;">
+                            📌 Giving Concrete Examples</div>
+                        <ul
+                            style="padding-left:22px; font-size:calc(18.5px * var(--font-scale, 1)); line-height:1.85; color:var(--text-dark); margin:0; display:flex; flex-direction:column; gap:14px;">
                             <li><em>"For instance, they have plastic surgery."</em></li>
                             <li><em>"One example is the fashion industry, which..."</em></li>
                             <li><em>"For example, it is common to see stars like..."</em></li>
@@ -679,40 +1122,71 @@
             </slide-card>
 
             <!-- SLIDE 47: Writing 2b Spelling Mastery - Error Classification Table (Ex 8a & 8b) -->
-            <slide-card template="summary-checklist" skill="write" title="Writing 2b: Student Spelling Error Classification (Ex 8a &amp; 8b)" subtitle="Identify and classify the 6 spelling errors from the student text into 5 rule categories.">
+            <slide-card template="summary-checklist" skill="write"
+                title="Writing 2b: Student Spelling Error Classification (Ex 8a &amp; 8b)"
+                subtitle="Identify and classify the 6 spelling errors from the student text into 5 rule categories.">
                 <div slot="grid">
-                    <div class="card" style="border-left:6px solid var(--col-writing); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:4px;">🔍 Student Error Extract (Ex 8a)</div>
-                        <div style="background:#fff1f2; border:1px solid #fecdd3; padding:16px 20px; border-radius:10px; font-size:calc(18px * var(--font-scale, 1)); line-height:1.85; color:#881337;">
-                            "In my <span style="text-decoration:underline; font-weight:800;">veiw</span> (1), men's attitudes to appearance have changed, <span style="text-decoration:underline; font-weight:800;">wich</span> (2) puts pressure on others. Stars on the front of a <span style="text-decoration:underline; font-weight:800;">magazzine</span> (3) spend money on <span style="text-decoration:underline; font-weight:800;">there</span> (4) hair. <span style="text-decoration:underline; font-weight:800;">Ordinery</span> (5) men feel they must look as good."
+                    <div class="card"
+                        style="border-left:6px solid var(--col-writing); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; gap:16px; justify-content:flex-start;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:4px;">
+                            🔍 Student Error Extract (Ex 8a)</div>
+                        <div
+                            style="background:#fff1f2; border:1px solid #fecdd3; padding:16px 20px; border-radius:10px; font-size:calc(18px * var(--font-scale, 1)); line-height:1.85; color:#881337;">
+                            "In my <span style="text-decoration:underline; font-weight:800;">veiw</span> (1), men's
+                            attitudes to appearance have changed, <span
+                                style="text-decoration:underline; font-weight:800;">wich</span> (2) puts pressure on
+                            others. Stars on the front of a <span
+                                style="text-decoration:underline; font-weight:800;">magazzine</span> (3) spend money on
+                            <span style="text-decoration:underline; font-weight:800;">there</span> (4) hair. <span
+                                style="text-decoration:underline; font-weight:800;">Ordinery</span> (5) men feel they
+                            must look as good."
                         </div>
                     </div>
 
-                    <div class="card" style="border-left:6px solid var(--col-grammar); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; gap:12px; justify-content:flex-start;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:4px;">📋 Error Classification Table (Ex 8b)</div>
-                        <table style="width:100%; border-collapse:collapse; font-size:calc(17.5px * var(--font-scale, 1)); line-height:1.8;">
+                    <div class="card"
+                        style="border-left:6px solid var(--col-grammar); padding:26px 30px; border-radius:14px; display:flex; flex-direction:column; gap:12px; justify-content:flex-start;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-grammar); margin-bottom:4px;">
+                            📋 Error Classification Table (Ex 8b)</div>
+                        <table
+                            style="width:100%; border-collapse:collapse; font-size:calc(17.5px * var(--font-scale, 1)); line-height:1.8;">
                             <tr style="border-bottom:1px solid #cbd5e1;">
-                                <td style="padding:8px 6px; color:#dc2626; font-weight:700;">veiw &rarr; <strong>view</strong></td>
+                                <td style="padding:8px 6px; color:#dc2626; font-weight:700;">veiw &rarr;
+                                    <strong>view</strong>
+                                </td>
                                 <td style="padding:8px 8px; color:var(--text-muted);">Wrong order of double vowels</td>
                             </tr>
                             <tr style="border-bottom:1px solid #cbd5e1;">
-                                <td style="padding:8px 6px; color:#dc2626; font-weight:700;">wich &rarr; <strong>which</strong></td>
+                                <td style="padding:8px 6px; color:#dc2626; font-weight:700;">wich &rarr;
+                                    <strong>which</strong>
+                                </td>
                                 <td style="padding:8px 8px; color:var(--text-muted);">Missing letter (silent 'h')</td>
                             </tr>
                             <tr style="border-bottom:1px solid #cbd5e1;">
-                                <td style="padding:8px 6px; color:#dc2626; font-weight:700;">magazzine &rarr; <strong>magazine</strong></td>
+                                <td style="padding:8px 6px; color:#dc2626; font-weight:700;">magazzine &rarr;
+                                    <strong>magazine</strong>
+                                </td>
                                 <td style="padding:8px 8px; color:var(--text-muted);">Extra letter (double 'z')</td>
                             </tr>
                             <tr style="border-bottom:1px solid #cbd5e1;">
-                                <td style="padding:8px 6px; color:#dc2626; font-weight:700;">there &rarr; <strong>their</strong></td>
+                                <td style="padding:8px 6px; color:#dc2626; font-weight:700;">there &rarr;
+                                    <strong>their</strong>
+                                </td>
                                 <td style="padding:8px 8px; color:var(--text-muted);">Confusion with similar word</td>
                             </tr>
                             <tr>
-                                <td style="padding:8px 6px; color:#dc2626; font-weight:700;">Ordinery &rarr; <strong>ordinary</strong></td>
-                                <td style="padding:8px 8px; color:var(--text-muted);">Wrong letter ('e' instead of 'a')</td>
+                                <td style="padding:8px 6px; color:#dc2626; font-weight:700;">Ordinery &rarr;
+                                    <strong>ordinary</strong>
+                                </td>
+                                <td style="padding:8px 8px; color:var(--text-muted);">Wrong letter ('e' instead of 'a')
+                                </td>
                             </tr>
                         </table>
-                        <button class="btn-action" style="background:#4f46e5; color:white; width:100%; justify-content:center; margin-top:8px;" data-grammar-ref="../references/grammar_sources/expert_6/module_2b_parts_of_speech.html" data-grammar-title="Module 2b: Parts of Speech &amp; Word Formation Handbook">
+                        <button class="btn-action"
+                            style="background:#4f46e5; color:white; width:100%; justify-content:center; margin-top:8px;"
+                            data-grammar-ref="../references/grammar_sources/expert_6/module_2b_parts_of_speech.html"
+                            data-grammar-title="Module 2b: Parts of Speech &amp; Word Formation Handbook">
                             📖 Open Parts of Speech &amp; Suffixes Handbook
                         </button>
                     </div>
@@ -720,60 +1194,114 @@
             </slide-card>
 
             <!-- SLIDE 48: Writing 2b Model Essay: Band 7+ Appearance Opinion Essay -->
-            <slide-card template="writing-model" skill="write" title="Writing 2b (Task 2): Band 7+ Appearance Opinion Essay" subtitle="Men and Women Appearance Attitudes Model Answer.">
+            <slide-card template="writing-model" skill="write"
+                title="Writing 2b (Task 2): Band 7+ Appearance Opinion Essay"
+                subtitle="Men and Women Appearance Attitudes Model Answer.">
                 <div slot="prompt">
-                    <div style="font-size: calc(17.5px * var(--font-scale, 1)); line-height: 1.55; margin-bottom: 12px;">
-                        <strong>Task 2 Prompt:</strong> <em>Both men and women care more about their appearance today than they did in the past. To what extent do you agree or disagree with this statement?</em>
+                    <div
+                        style="font-size: calc(17.5px * var(--font-scale, 1)); line-height: 1.55; margin-bottom: 12px;">
+                        <strong>Task 2 Prompt:</strong> <em>Both men and women care more about their appearance today
+                            than they did in the past. To what extent do you agree or disagree with this statement?</em>
                     </div>
-                    <div class="card" style="background:#ffffff; border-top:4px solid var(--col-writing); padding:16px 20px;">
-                        <h4 style="color:var(--col-writing); font-size:calc(18px * var(--font-scale, 1)); font-weight:800; margin-bottom:6px;">📌 Thesis Stance</h4>
-                        <p style="font-size:calc(16px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark); margin:0;">Disagrees with the premise of both changing equally: argues female concern stayed high while male concern sharply increased.</p>
+                    <div class="card"
+                        style="background:#ffffff; border-top:4px solid var(--col-writing); padding:16px 20px;">
+                        <h4
+                            style="color:var(--col-writing); font-size:calc(18px * var(--font-scale, 1)); font-weight:800; margin-bottom:6px;">
+                            📌 Thesis Stance</h4>
+                        <p
+                            style="font-size:calc(16px * var(--font-scale, 1)); line-height:1.6; color:var(--text-dark); margin:0;">
+                            Disagrees with the premise of both changing equally: argues female concern stayed high while
+                            male concern sharply increased.</p>
                     </div>
                 </div>
                 <div slot="essay">
                     <p>
-                        <span class="hl-phrase" data-phrase="Introduction & Stance" data-note="Historical context plus clear thesis stating women remained high while men experienced major growth.">For centuries, people have taken care of the way they dress. However, traditionally it has been women who are more concerned with their appearance than men. This essay will argue that women’s attitudes to appearance have not changed in recent decades, whereas men have become more concerned with how they look.</span>
+                        <span class="hl-phrase" data-phrase="Introduction & Stance"
+                            data-note="Historical context plus clear thesis stating women remained high while men experienced major growth.">For
+                            centuries, people have taken care of the way they dress. However, traditionally it has been
+                            women who are more concerned with their appearance than men. This essay will argue that
+                            women’s attitudes to appearance have not changed in recent decades, whereas men have become
+                            more concerned with how they look.</span>
                     </p>
                     <p>
-                        <span class="hl-phrase" data-phrase="Body 1: Skincare & Products" data-note="Contrasts past shaving-only habits with modern male grooming and skincare industries.">One reason for this is the growing importance of skin care. In the past, only women cared about their skin. They were the ones who put on cream each day to keep their faces looking young and wrinkle-free. Men used shaving products but nothing more. Today, they feel the pressure to have soft and young-looking skin too, and so there are now skin-care products especially for men, which are very popular among the younger generation.</span>
+                        <span class="hl-phrase" data-phrase="Body 1: Skincare & Products"
+                            data-note="Contrasts past shaving-only habits with modern male grooming and skincare industries.">One
+                            reason for this is the growing importance of skin care. In the past, only women cared about
+                            their skin. They were the ones who put on cream each day to keep their faces looking young
+                            and wrinkle-free. Men used shaving products but nothing more. Today, they feel the pressure
+                            to have soft and young-looking skin too, and so there are now skin-care products especially
+                            for men, which are very popular among the younger generation.</span>
                     </p>
                     <p>
-                        <span class="hl-phrase" data-phrase="Body 2: Male Celebrity Culture" data-note="Contrasts traditional intellect-based fame with modern male visual standards.">Another reason for men caring more about their appearance is the role of the male celebrity. In the past, female celebrities were often famous because of their looks, but male celebrities were people who were clever or skilled. Their appearance was less important than their actions, but today it is often the opposite. Men see male celebrities and feel that they should try to look as good.</span>
+                        <span class="hl-phrase" data-phrase="Body 2: Male Celebrity Culture"
+                            data-note="Contrasts traditional intellect-based fame with modern male visual standards.">Another
+                            reason for men caring more about their appearance is the role of the male celebrity. In the
+                            past, female celebrities were often famous because of their looks, but male celebrities were
+                            people who were clever or skilled. Their appearance was less important than their actions,
+                            but today it is often the opposite. Men see male celebrities and feel that they should try
+                            to look as good.</span>
                     </p>
                     <p>
-                        <span class="hl-phrase" data-phrase="Conclusion & Paraphrased Stance" data-note="Synthesizes arguments into a balanced conclusion stating appearance is now equally prioritized.">In conclusion, society has always felt that women should look attractive and, while body image is an issue today, this has not necessarily changed. Men, however, are required to pay much more attention to their appearance these days so they have good skin and look as good as celebrity role models. Appearance is now equally important for both men and women.</span>
+                        <span class="hl-phrase" data-phrase="Conclusion & Paraphrased Stance"
+                            data-note="Synthesizes arguments into a balanced conclusion stating appearance is now equally prioritized.">In
+                            conclusion, society has always felt that women should look attractive and, while body image
+                            is an issue today, this has not necessarily changed. Men, however, are required to pay much
+                            more attention to their appearance these days so they have good skin and look as good as
+                            celebrity role models. Appearance is now equally important for both men and women.</span>
                     </p>
                 </div>
                 <div slot="annotations">
-                    <div class="card" style="background:#ffffff; border-top:4px solid var(--col-writing); padding:18px 22px;">
-                        <h4 style="color:var(--col-writing); font-size:calc(19px * var(--font-scale, 1)); font-weight:800; margin-bottom:8px;">🌟 Band 7+ Key Strengths</h4>
-                        <ul style="padding-left:18px; font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">
-                            <li><strong>Sophisticated Nuance:</strong> Distinguishes between female continuity and male transformation.</li>
-                            <li><strong>Parallel Comparison:</strong> Systematically compares past norms with modern commercial realities.</li>
-                            <li><strong>Zero Spelling Errors:</strong> Accurate homophones and academic suffixes throughout.</li>
+                    <div class="card"
+                        style="background:#ffffff; border-top:4px solid var(--col-writing); padding:18px 22px;">
+                        <h4
+                            style="color:var(--col-writing); font-size:calc(19px * var(--font-scale, 1)); font-weight:800; margin-bottom:8px;">
+                            🌟 Band 7+ Key Strengths</h4>
+                        <ul
+                            style="padding-left:18px; font-size:calc(17px * var(--font-scale, 1)); line-height:1.65; color:var(--text-dark);">
+                            <li><strong>Sophisticated Nuance:</strong> Distinguishes between female continuity and male
+                                transformation.</li>
+                            <li><strong>Parallel Comparison:</strong> Systematically compares past norms with modern
+                                commercial realities.</li>
+                            <li><strong>Zero Spelling Errors:</strong> Accurate homophones and academic suffixes
+                                throughout.</li>
                         </ul>
                     </div>
                 </div>
             </slide-card>
 
             <!-- SLIDE 49: Module 02 Mastery & Exam Checklist -->
-            <slide-card template="summary-checklist" skill="review" title="Module 02 Mastery &amp; Exam Checklist" subtitle="Review core test strategies and linguistic competencies mastered across Module 2.">
+            <slide-card template="summary-checklist" skill="review" title="Module 02 Mastery &amp; Exam Checklist"
+                subtitle="Review core test strategies and linguistic competencies mastered across Module 2.">
                 <div slot="grid">
-                    <div class="card" style="border-left:6px solid var(--col-reading); padding:28px 32px; border-radius:14px;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-reading); margin-bottom:14px;">📖 Reading Competencies</div>
-                        <ul style="padding-left:22px; font-size:calc(19px * var(--font-scale, 1)); line-height:1.85; display:flex; flex-direction:column; gap:12px;">
-                            <li><strong>YES/NO/NOT GIVEN:</strong> Distinguishing explicit contradictions from absent claims.</li>
-                            <li><strong>Matching Information:</strong> Non-sequential detail scanning across paragraphs A–F.</li>
-                            <li><strong>Reference Tracking:</strong> Tracing cohesion pronouns (*these, former, latter*).</li>
+                    <div class="card"
+                        style="border-left:6px solid var(--col-reading); padding:28px 32px; border-radius:14px;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-reading); margin-bottom:14px;">
+                            📖 Reading Competencies</div>
+                        <ul
+                            style="padding-left:22px; font-size:calc(19px * var(--font-scale, 1)); line-height:1.85; display:flex; flex-direction:column; gap:12px;">
+                            <li><strong>YES/NO/NOT GIVEN:</strong> Distinguishing explicit contradictions from absent
+                                claims.</li>
+                            <li><strong>Matching Information:</strong> Non-sequential detail scanning across paragraphs
+                                A–F.</li>
+                            <li><strong>Reference Tracking:</strong> Tracing cohesion pronouns (*these, former,
+                                latter*).</li>
                         </ul>
                     </div>
 
-                    <div class="card" style="border-left:6px solid var(--col-writing); padding:28px 32px; border-radius:14px;">
-                        <div style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:14px;">✍️ Grammar &amp; Writing Range</div>
-                        <ul style="padding-left:22px; font-size:calc(19px * var(--font-scale, 1)); line-height:1.85; display:flex; flex-direction:column; gap:12px;">
-                            <li><strong>Defining Relative Clauses:</strong> Flawless subject/object pronoun usage and omissions.</li>
-                            <li><strong>6 Idea Generation Techniques:</strong> Cubing, Perspectives, Examples, Flip Problem, Vocabulary.</li>
-                            <li><strong>Task 2 Opinion Structure:</strong> 4-paragraph essays with clear stances and Band 7+ signposting.</li>
+                    <div class="card"
+                        style="border-left:6px solid var(--col-writing); padding:28px 32px; border-radius:14px;">
+                        <div
+                            style="font-size:calc(22px * var(--font-scale, 1)); font-weight:800; color:var(--col-writing); margin-bottom:14px;">
+                            ✍️ Grammar &amp; Writing Range</div>
+                        <ul
+                            style="padding-left:22px; font-size:calc(19px * var(--font-scale, 1)); line-height:1.85; display:flex; flex-direction:column; gap:12px;">
+                            <li><strong>Defining Relative Clauses:</strong> Flawless subject/object pronoun usage and
+                                omissions.</li>
+                            <li><strong>6 Idea Generation Techniques:</strong> Cubing, Perspectives, Examples, Flip
+                                Problem, Vocabulary.</li>
+                            <li><strong>Task 2 Opinion Structure:</strong> 4-paragraph essays with clear stances and
+                                Band 7+ signposting.</li>
                     </div>
                 </div>
             </slide-card>

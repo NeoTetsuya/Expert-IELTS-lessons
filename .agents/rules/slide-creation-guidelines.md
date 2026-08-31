@@ -10,9 +10,9 @@ When creating, updating, or maintaining IELTS HTML presentation decks (`expert 5
 3. **Chart Persistence on ALL Writing Task 1 Slides**:
    - For all Task 1 exercises (data selection, comparative sentences, linking phrases, error correction, and model answers), **display the interactive chart on the left of EVERY exercise slide**.
    - Use `template="writing-model"` with `slot="prompt"` containing the chart container and unique DOM ID.
-4. **Universal Grammar Reference Integration**:
-   - On Grammar Masterclass and Practice slides, attach the modal trigger button:
-     `<button class="deck-btn grammar-ref-btn" data-grammar-ref="../references/grammar_sources/expert_{level}/module_{X}.html">📖 Open Grammar Reference Handbook</button>`.
+4. **Universal Grammar Reference Integration & Handbook Links**:
+   - On Grammar Masterclass and Practice slides, attach the modal trigger button or handbook link pointing to the live GitHub Pages site: `https://neotetsuya.github.io/Expert-IELTS/` with the correct relative path (e.g. `https://neotetsuya.github.io/Expert-IELTS/expert%206/module_2a_relative_clauses.html` or `../references/grammar_sources/expert_{level}/module_{X}.html` when local).
+   - When creating or linking a Grammar Handbook, ensure the online link format `https://neotetsuya.github.io/Expert-IELTS/[expert level]/[module_file.html]` is accurately provided with the correct path.
 5. **Strict 1-Question-Per-Slide Reading Walkthroughs**:
    - Every reading question MUST have its own dedicated walkthrough slide (`template="walkthrough"`) with verbatim paragraph excerpt, highlighted evidence (`mark.evidence`), synonym pairing (`.syn-pair-1`, `.syn-pair-2`), and explanation.
    - **Multi-Select / Feature Questions**: When questions are multi-select (e.g. *Questions 8–10: Choose THREE letters A–G*), **split each question into a separate slide** (Q8 on Slide A, Q9 on Slide B, Q10 on Slide C) rather than grouping them together.
