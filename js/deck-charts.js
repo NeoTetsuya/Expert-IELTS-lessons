@@ -423,7 +423,7 @@ class DeckCharts {
                         <path d="M ${cx},${cy} L ${endX.toFixed(2)},${endY.toFixed(2)} A ${R},${R} 0 ${1 - largeArc},1 ${cx},${cy - R} Z" fill="${pie.secondaryColor || '#ea580c'}" stroke="#ffffff" stroke-width="2.5" />
                         <!-- Labels -->
                         <text x="${pie.primaryTextX || 100}" y="${pie.primaryTextY || 115}" fill="#ffffff" font-size="22" font-weight="800" text-anchor="middle">${pie.primaryPct}%</text>
-                        <text x="${pie.secondaryTextX || 76}" y="${pie.secondaryTextY || 28}" fill="${pie.secondaryColor || '#ea580c'}" font-size="15" font-weight="800" text-anchor="middle">${pie.secondaryPct}%</text>
+                        <text x="${pie.secondaryTextX || 83}" y="${pie.secondaryTextY || 48}" fill="#ffffff" font-size="15" font-weight="800" text-anchor="middle">${pie.secondaryPct}%</text>
                     </svg>
                     <div style="display:flex; gap:16px; margin-top:8px; font-size:14px; font-weight:700;">
                         <span style="color:${pie.primaryColor || '#0284c7'};">■ ${pie.primaryLabel}: ${pie.primaryPct}%</span>

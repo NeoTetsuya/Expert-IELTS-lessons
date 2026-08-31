@@ -52,8 +52,8 @@ window.module3Data = {
                     secondaryColor: "#ea580c",
                     primaryTextX: 100,
                     primaryTextY: 115,
-                    secondaryTextX: 76,
-                    secondaryTextY: 28
+                    secondaryTextX: 83,
+                    secondaryTextY: 48
                 },
                 {
                     title: "Number of schools",
