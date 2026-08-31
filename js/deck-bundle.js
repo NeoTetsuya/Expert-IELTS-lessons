@@ -726,20 +726,58 @@
                             </div>
                         `;
                     }
-                    if (data.questions && Array.isArray(data.questions)) {
-                        html += `<div style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-bottom:10px;">📋 Questions 1–6: YES / NO / NOT GIVEN</div>`;
-                        html += data.questions.map(q => `
-                            <div class="q-card" data-q="${q.qNum}" ${q.evId ? `data-ev="${q.evId}"` : ''} style="background:#ffffff; border:1px solid #cbd5e1; border-radius:10px; padding:12px 16px; margin-bottom:10px;">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                                    <strong style="font-size:18px;">${q.text}</strong>
-                                    ${q.evId ? `<button class="syn-btn" data-ev="${q.evId}" onclick="deckEngine.toggleSynonymExplanation('${q.qNum}', '${q.evId}')" style="padding:2px 8px; font-size:13px;" title="Highlight Evidence">💡 Evidence</button>` : ''}
+                    if (data.headings && Array.isArray(data.headings)) {
+                        const headingsListHtml = data.headings.map(h => `
+                            <div style="font-size:18px; line-height:1.55; color:#0f172a;">
+                                <strong style="color:var(--col-reading); font-family:var(--font-mono); width:36px; display:inline-block;">${h.roman}.</strong> ${h.text}
+                            </div>
+                        `).join('');
+                        html += `
+                            <div class="card" style="background:#ffffff; border:1.5px solid #cbd5e1; border-left:6px solid var(--col-reading); padding:16px 20px; margin-bottom:14px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+                                <div style="font-size:17px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--col-reading); margin-bottom:10px;">📋 List of Headings</div>
+                                <div style="display:flex; flex-direction:column; gap:6px;">
+                                    ${headingsListHtml}
                                 </div>
-                                <select class="select-input" data-ans="${q.ans}" style="width:100%; font-weight:700;">
-                                    <option value="">Select...</option>
-                                    <option value="YES">YES</option>
-                                    <option value="NO">NO</option>
-                                    <option value="NOT GIVEN">NOT GIVEN</option>
-                                </select>
+                            </div>
+                        `;
+                    }
+                    if (data.questions && Array.isArray(data.questions)) {
+                        const isHeadings = !!data.headings;
+                        const headingTitle = isHeadings ? '📋 Matching Headings' : '📋 Questions: YES / NO / NOT GIVEN';
+                        html += `<div style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-bottom:10px;">${headingTitle}</div>`;
+                        html += data.questions.map(q => {
+                            let selectOptions = '<option value="">Select...</option>';
+                            if (isHeadings) {
+                                selectOptions += data.headings.map(h => `<option value="${h.roman}">${h.roman}. ${h.text}</option>`).join('');
+                                if (q.ans && !data.headings.some(h => h.roman === q.ans)) {
+                                    selectOptions += `<option value="${q.ans}">${q.ans}</option>`;
+                                }
+                            } else if (['YES', 'NO', 'NOT GIVEN'].includes(q.ans)) {
+                                selectOptions += `<option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option>`;
+                            } else {
+                                selectOptions += `<option value="${q.ans}">${q.ans}</option>`;
+                            }
+                            return `
+                                <div class="q-card" data-q="${q.qNum}" ${q.evId ? `data-ev="${q.evId}"` : ''} style="background:#ffffff; border:1px solid #cbd5e1; border-radius:10px; padding:12px 16px; margin-bottom:10px;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                        <strong style="font-size:18px;">${q.text}</strong>
+                                        ${q.evId ? `<button class="syn-btn" data-ev="${q.evId}" onclick="deckEngine.toggleSynonymExplanation('${q.qNum}', '${q.evId}')" style="padding:2px 8px; font-size:13px;" title="Highlight Evidence">💡 Evidence</button>` : ''}
+                                    </div>
+                                    <select class="select-input" data-ans="${q.ans}" style="width:100%; font-weight:700;">
+                                        ${selectOptions}
+                                    </select>
+                                </div>
+                            `;
+                        }).join('');
+                    }
+                    if (data.completionQuestions && Array.isArray(data.completionQuestions)) {
+                        html += `<div style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-top:14px; margin-bottom:10px;">📋 Sentence Completion (ONE WORD ONLY)</div>`;
+                        html += data.completionQuestions.map(q => `
+                            <div class="q-card" data-q="${q.qNum}" ${q.evId ? `data-ev="${q.evId}"` : ''} style="background:#ffffff; border:1px solid #cbd5e1; border-radius:10px; padding:12px 16px; margin-bottom:10px; font-size:18px; line-height:1.7;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                    <div>${q.text}</div>
+                                    ${q.evId ? `<button class="syn-btn" data-ev="${q.evId}" onclick="deckEngine.toggleSynonymExplanation('${q.qNum}', '${q.evId}')" style="padding:2px 8px; font-size:13px; margin-left:8px;" title="Highlight Evidence">💡 Evidence</button>` : ''}
+                                </div>
                             </div>
                         `).join('');
                     }
