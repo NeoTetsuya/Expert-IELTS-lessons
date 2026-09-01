@@ -5617,7 +5617,7 @@ class ReadingGrounder {
         return null;
     }
 
-    static showVocabPopover(el, dictData = null) {
+    static async showVocabPopover(el, dictData = null) {
         // Remove previous active glows across slide
         document.querySelectorAll('.vocab-word.active-vocab, .vocab-term.active-vocab').forEach(v => {
             v.classList.remove('active-vocab');
@@ -5626,13 +5626,14 @@ class ReadingGrounder {
         // Activate the clicked element softly with dashed/solid underline and soft tint
         el.classList.add('active-vocab');
 
-        const cleanWord = el.dataset.word || (dictData ? dictData.word : el.textContent.trim().replace(/[.,/#!$%^&*;:{}=\-_`~()"]/g, ""));
-        const pos = el.dataset.pos || (dictData ? dictData.pos : 'IELTS KEYWORD');
-        const ipa = el.dataset.ipa || (dictData ? dictData.ipa : '');
-        const def = el.dataset.def || (dictData ? dictData.def : 'Key academic term targeted in the reading passage & questions.');
-        const colloc = el.dataset.colloc || (dictData ? dictData.colloc : '');
+        const rawText = el.dataset.word || (dictData ? dictData.word : el.textContent.trim().replace(/[.,/#!$%^&*;:{}=\-_`~()"]/g, ""));
+        const cleanWord = rawText.trim();
+        let pos = el.dataset.pos || (dictData ? dictData.pos : '');
+        let ipa = el.dataset.ipa || (dictData ? dictData.ipa : '');
+        let def = el.dataset.def || (dictData ? dictData.def : '');
+        let colloc = el.dataset.colloc || (dictData ? dictData.colloc : '');
 
-        // Auto-play native speech pronunciation in Google Female UK voice
+        // Auto-play speech pronunciation
         this.speakWord(cleanWord);
 
         // Get or create popover element
@@ -5644,45 +5645,103 @@ class ReadingGrounder {
             document.body.appendChild(popover);
         }
 
-        popover.innerHTML = `
-            <div class="vp-header">
-                <div class="vp-title-group">
-                    <span class="vp-word">${cleanWord}</span>
-                    <div style="display: flex; gap: 6px; align-items: center; margin-top: 2px;">
-                        ${pos ? `<span class="vp-pos">${pos}</span>` : ''}
-                        ${ipa ? `<span class="vp-ipa">${ipa}</span>` : ''}
+        const positionPopover = () => {
+            popover.style.display = 'block';
+            const rect = el.getBoundingClientRect();
+            const popRect = popover.getBoundingClientRect();
+
+            let top = rect.bottom + 8;
+            let left = rect.left + (rect.width / 2) - (popRect.width / 2);
+
+            // Prevent overflowing viewport
+            if (top + popRect.height > window.innerHeight - 20) {
+                top = Math.max(10, rect.top - popRect.height - 8);
+            }
+            if (left < 10) left = 10;
+            if (left + popRect.width > window.innerWidth - 10) {
+                left = window.innerWidth - popRect.width - 10;
+            }
+
+            popover.style.top = `${top}px`;
+            popover.style.left = `${left}px`;
+        };
+
+        const renderPopover = (wordTitle, partOfSpeech, phonetic, definition, collocation) => {
+            popover.innerHTML = `
+                <div class="vp-header">
+                    <div class="vp-title-group">
+                        <span class="vp-word">${wordTitle}</span>
+                        <div style="display: flex; gap: 6px; align-items: center; margin-top: 2px;">
+                            ${partOfSpeech ? `<span class="vp-pos">${partOfSpeech}</span>` : ''}
+                            ${phonetic ? `<span class="vp-ipa">${phonetic}</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="vp-actions">
+                        <button class="vp-audio-btn" title="Listen to pronunciation" onclick="ReadingGrounder.speakWord('${wordTitle.replace(/'/g, "\\'")}')">🔊 Listen</button>
+                        <button class="vp-close-btn" title="Close" onclick="ReadingGrounder.hideVocabPopover()">✕</button>
                     </div>
                 </div>
-                <div class="vp-actions">
-                    <button class="vp-audio-btn" title="Listen to pronunciation" onclick="ReadingGrounder.speakWord('${cleanWord.replace(/'/g, "\\'")}')">🔊 Listen</button>
-                    <button class="vp-close-btn" title="Close" onclick="ReadingGrounder.hideVocabPopover()">✕</button>
+                <div class="vp-body">
+                    <div class="vp-def">${definition}</div>
+                    ${collocation ? `<div class="vp-colloc"><strong>Target Linkage:</strong> <em>${collocation}</em></div>` : ''}
                 </div>
-            </div>
-            <div class="vp-body">
-                <div class="vp-def">${def}</div>
-                ${colloc ? `<div class="vp-colloc"><strong>Target Linkage:</strong> <em>${colloc}</em></div>` : ''}
-            </div>
-        `;
+            `;
+            positionPopover();
+        };
 
-        // Position popover relative to clicked element
-        popover.style.display = 'block';
-        const rect = el.getBoundingClientRect();
-        const popRect = popover.getBoundingClientRect();
-
-        let top = rect.bottom + 8;
-        let left = rect.left + (rect.width / 2) - (popRect.width / 2);
-
-        // Prevent overflowing viewport
-        if (top + popRect.height > window.innerHeight - 20) {
-            top = Math.max(10, rect.top - popRect.height - 8);
-        }
-        if (left < 10) left = 10;
-        if (left + popRect.width > window.innerWidth - 10) {
-            left = window.innerWidth - popRect.width - 10;
+        // If local definition exists, render immediately
+        if (def && def !== 'Key academic term targeted in the reading passage & questions.') {
+            renderPopover(cleanWord, pos || 'IELTS VOCABULARY', ipa, def, colloc);
+            return;
         }
 
-        popover.style.top = `${top}px`;
-        popover.style.left = `${left}px`;
+        // Check local cache
+        const cacheKey = `ielts_dict_${cleanWord.toLowerCase()}`;
+        try {
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                const parsed = JSON.parse(cached);
+                renderPopover(cleanWord, parsed.pos || 'IELTS VOCABULARY', parsed.ipa || ipa, parsed.def, parsed.colloc || colloc);
+                return;
+            }
+        } catch (e) {}
+
+        // Render placeholder while fetching
+        renderPopover(cleanWord, pos || 'LOOKING UP...', ipa, '<div style="color: #64748b; font-style: italic;">Fetching definition &amp; phonetics...</div>', colloc);
+
+        // Fetch live from Free Dictionary API
+        try {
+            const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleanWord.toLowerCase())}`);
+            if (response.ok) {
+                const data = await response.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    const first = data[0];
+                    const phoneticText = first.phonetic || (first.phonetics?.find(p => p.text)?.text) || ipa;
+                    const meaning = first.meanings?.[0];
+                    const partOfSpeech = meaning?.partOfSpeech || pos || 'noun';
+                    const definitionText = meaning?.definitions?.[0]?.definition || 'Academic reading term.';
+                    const exampleText = meaning?.definitions?.[0]?.example ? `Example: "${meaning.definitions[0].example}"` : colloc;
+
+                    try {
+                        localStorage.setItem(cacheKey, JSON.stringify({
+                            pos: partOfSpeech,
+                            ipa: phoneticText,
+                            def: definitionText,
+                            colloc: exampleText
+                        }));
+                    } catch (err) {}
+
+                    if (popover && el.classList.contains('active-vocab')) {
+                        renderPopover(cleanWord, partOfSpeech.toUpperCase(), phoneticText, definitionText, exampleText);
+                    }
+                    return;
+                }
+            }
+        } catch (fetchErr) {
+            console.warn('Online dictionary lookup unavailable:', fetchErr);
+        }
+
+        renderPopover(cleanWord, pos || 'IELTS ACADEMIC TERM', ipa, def || 'Key academic vocabulary term in the passage.', colloc);
     }
 
     static hideVocabPopover() {
