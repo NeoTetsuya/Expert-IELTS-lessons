@@ -314,39 +314,30 @@ Wrap key academic vocabulary in `<span class="vocab-word">` with metadata attrib
 
 ---
 
-## 7. Direct Sentence Color Coding Standards
+## 7. Direct Sentence Color Coding Standards & Typography
 
-Always use the standard dual-layer synonym styling:
+Always use the standard dual-layer synonym styling across question stems and passage excerpts:
 
-| Tag Class | Role | Visual Color | Hex / HSL | Purpose |
+| Tag Class | Role | Visual Color | Tokens & Styling | Purpose |
 | :--- | :--- | :--- | :--- | :--- |
-| **`syn-pair-1`** | **Anchor Concept** | 🟢 **Green** | `#bbf7d0` bg / `#15803d` text | Subject noun, actor, main topic. Used to scan and locate paragraph. |
-| **`syn-pair-2`** | **Qualifying Claim** | 🟣 **Purple** | `#e9d5ff` bg / `#6b21a8` text | Scope, degree, condition, timeframe. Used to test truth value / match. |
-| **`syn-pair-3`** | **Contrast / Distractor** | 🟠 **Orange** | `#fed7aa` bg / `#9a3412` text | Rebuttal, exception, or trap word. |
+| **`.syn-pair-1`** | **Anchor Concept / Target Match** | 🟢 **Emerald Green** | `background: #86efac !important;`<br>`color: #064e3b !important;`<br>`border-bottom: 3px solid #16a34a !important;`<br>`font-weight: 800; border-radius: 6px;` | Subject noun, actor, main topic keyword in both question and passage. |
+| **`.syn-pair-2`** | **Qualifying Claim / Paraphrase Location** | 🟣 **Amethyst Purple** | `background: #d8b4fe !important;`<br>`color: #3b0764 !important;`<br>`border-bottom: 3px solid #9333ea !important;`<br>`font-weight: 800; border-radius: 6px;` | Scope, degree, condition, or matching action clue in passage. |
+| **`.syn-pair-3`** | **Contrast / Distractor / Trap** | 🔵 **Sky Blue** | `background: #7dd3fc !important;`<br>`color: #082f49 !important;`<br>`border-bottom: 3px solid #0284c7 !important;`<br>`font-weight: 800; border-radius: 6px;` | Rebuttal, exception, or trap word. |
+| **`mark.evidence`** | **Passage Sentence Context** | 🟡 **Soft Amber Tint** | `background: rgba(254, 240, 138, 0.35) !important;`<br>`border-bottom: 2.5px dashed #ca8a04 !important;` | Translucent sentence wash. Never use solid yellow to avoid masking green/purple keywords. |
 
-### CSS Definition (from `presentation-base.css`)
+### Walkthrough Typography Standards
+To guarantee optimal readability on large displays and classroom projectors:
+- **Passage Excerpt Text (`.walkthrough-container .card p`)**: **`26px`** (`line-height: 1.85`).
+- **Question Stem Text (`.walkthrough-container .q-card span`)**: **`25px`** (`font-weight: 700`).
+- **Option Box Chips (`.box-chip`)**: **`20px`** (`padding: 10px 18px`).
+- **Select Dropdown (`.select-input`)**: **`21px`** (`min-width: 280px`).
 
-```css
-.syn-pair-1.active-syn {
-    background: #bbf7d0 !important;
-    color: #14532d !important;
-    font-weight: 600;
-    border-radius: 3px;
-    padding: 1px 4px;
-}
-
-.syn-pair-2.active-syn {
-    background: #e9d5ff !important;
-    color: #581c87 !important;
-    font-weight: 600;
-    border-radius: 3px;
-    padding: 1px 4px;
-}
-```
+### DOM Isolation & Vocabulary Scanner Safety
+`ReadingGrounder.autoTagVocabWords()` automatically skips any text node inside `.syn-pair-1, .syn-pair-2, .syn-pair-3` and `.q-card`. Never inject nested `<span class="vocab-word">` tags inside synonym spans.
 
 ---
 
-## 6. Interactive Controls & JavaScript Action Rows
+## 8. Interactive Controls & JavaScript Action Rows
 
 Every interactive slide **must** have an `.action-row` at the bottom of the content container:
 
@@ -362,8 +353,9 @@ Every interactive slide **must** have an `.action-row` at the bottom of the cont
 ### For Stage 2 (Model Walkthrough Slides) & Stage 3 (Full Exercise Slides):
 ```html
 <div class="action-row" style="margin-top: 14px;">
-    <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answers</button>
-    <button class="btn-action" onclick="revealAnswers(this)">Reveal Keys</button>
+    <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answer</button>
+    <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+    <button class="btn-action" onclick="revealAnswers(this)">Show Evidence / Highlights</button>
     <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
 </div>
 ```
