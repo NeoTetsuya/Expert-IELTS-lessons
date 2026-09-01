@@ -515,6 +515,369 @@ class ReadingGrounder {
                 ipa: '/ˌsaɪ.kəˈlɒdʒ.ɪ.kəl əʊˈbiː.sə.ti/',
                 def: 'A state of mental overload from consuming sensational, unwholesome digital information.',
                 colloc: 'concept of psychological obesity'
+            },
+
+            // Extended Module 4 Vocabulary: Health, Biology & Natural World
+            'aspect': {
+                word: 'aspect',
+                pos: 'noun',
+                ipa: '/ˈæs.pekt/',
+                def: 'A particular part, feature, or characteristic of a situation or topic.',
+                colloc: 'important aspect / positive aspect'
+            },
+            'measure': {
+                word: 'measure',
+                pos: 'verb',
+                ipa: '/ˈmeʒ.ər/',
+                def: 'To ascertain the size, amount, or degree of something using instruments.',
+                colloc: 'measure heart rate / measure progress'
+            },
+            'curious': {
+                word: 'curious',
+                pos: 'adj.',
+                ipa: '/ˈkjʊə.ri.əs/',
+                def: 'Eager to know or learn something new.',
+                colloc: 'curious about health / stay curious'
+            },
+            'aware': {
+                word: 'aware',
+                pos: 'adj.',
+                ipa: '/əˈweə/',
+                def: 'Having knowledge or perception of a situation or fact.',
+                colloc: 'aware of the fact / raise awareness'
+            },
+            'awareness': {
+                word: 'awareness',
+                pos: 'noun',
+                ipa: '/əˈweə.nəs/',
+                def: 'Knowledge or perception of a situation, issue, or reality.',
+                colloc: 'raise awareness / public awareness'
+            },
+            'lifestyle': {
+                word: 'lifestyle',
+                pos: 'noun',
+                ipa: '/ˈlaɪf.staɪl/',
+                def: 'The way in which a person or group lives and behaves daily.',
+                colloc: 'healthy lifestyle / sedentary lifestyle'
+            },
+            'effective': {
+                word: 'effective',
+                pos: 'adj.',
+                ipa: '/ɪˈfek.tɪv/',
+                def: 'Successful in producing a desired, intended, or decisive result.',
+                colloc: 'more effective / highly effective'
+            },
+            'ineffective': {
+                word: 'ineffective',
+                pos: 'adj.',
+                ipa: '/ˌɪn.ɪˈfek.tɪv/',
+                def: 'Not producing any significant or desired outcome.',
+                colloc: 'ineffective method / proved ineffective'
+            },
+            'reflecting': {
+                word: 'reflecting',
+                pos: 'verb / noun',
+                ipa: '/rɪˈflek.tɪŋ/',
+                def: 'Thinking deeply or carefully about past actions and experiences.',
+                colloc: 'reflecting on feelings / personal reflection'
+            },
+            'life-saving': {
+                word: 'life-saving',
+                pos: 'adj.',
+                ipa: '/ˈlaɪfˌseɪ.vɪŋ/',
+                def: 'Capable of preventing someone from dying or curing critical illness.',
+                colloc: 'life-saving medicines / life-saving treatment'
+            },
+            'quinine': {
+                word: 'quinine',
+                pos: 'noun',
+                ipa: '/ˈkwɪn.iːn/',
+                def: 'A bitter medication derived from cinchona bark used to treat malaria.',
+                colloc: 'natural quinine / malaria treatment'
+            },
+            'aspirin': {
+                word: 'aspirin',
+                pos: 'noun',
+                ipa: '/ˈæs.prɪn/',
+                def: 'A common synthetic drug used to relieve pain, fever, and inflammation, originally from willow bark.',
+                colloc: 'take aspirin / daily aspirin'
+            },
+            'medicinal': {
+                word: 'medicinal',
+                pos: 'adj.',
+                ipa: '/məˈdɪs.ɪ.nəl/',
+                def: 'Having healing or curative medical properties.',
+                colloc: 'medicinal plants / medicinal powers'
+            },
+            'fungus': {
+                word: 'fungus',
+                pos: 'noun',
+                ipa: '/ˈfʌŋ.ɡəs/',
+                def: 'A spore-producing organism (e.g. mushrooms, molds, yeasts) without leaves or flowers.',
+                colloc: 'type of fungus / kill bacteria'
+            },
+            'bacteria': {
+                word: 'bacteria',
+                pos: 'noun (pl.)',
+                ipa: '/bækˈtɪə.ri.ə/',
+                def: 'Microscopic single-celled organisms that can cause disease or aid biological processes.',
+                colloc: 'kill bacteria / harmful bacteria'
+            },
+            'potential': {
+                word: 'potential',
+                pos: 'adj. / noun',
+                ipa: '/pəˈten.ʃəl/',
+                def: 'Having or showing the capacity to develop into something in the future.',
+                colloc: 'potential cures / potential source'
+            },
+            'coral reefs': {
+                word: 'coral reefs',
+                pos: 'noun phrase',
+                ipa: '/ˈkɒr.əl riːfs/',
+                def: 'Underwater marine ecosystems characterized by reef-building corals.',
+                colloc: 'fragile coral reefs / warming temperatures'
+            },
+            'vanish': {
+                word: 'vanish',
+                pos: 'verb',
+                ipa: '/ˈvæn.ɪʃ/',
+                def: 'To disappear suddenly and completely from sight or existence.',
+                colloc: 'vanish at an alarming rate'
+            },
+            'alarming': {
+                word: 'alarming',
+                pos: 'adj.',
+                ipa: '/əˈlɑː.mɪŋ/',
+                def: 'Worrying, disturbing, or causing acute concern.',
+                colloc: 'alarming rate / alarming loss'
+            },
+            'mammals': {
+                word: 'mammals',
+                pos: 'noun',
+                ipa: '/ˈmæm.əlz/',
+                def: 'Warm-blooded vertebrate animals distinguished by the possession of fur and milk secretion.',
+                colloc: 'large mammals / marine mammals'
+            },
+            'captopril': {
+                word: 'captopril',
+                pos: 'noun',
+                ipa: '/ˈkæp.tə.prɪl/',
+                def: 'A groundbreaking blood pressure drug derived from the venom of the Brazilian pit viper snake.',
+                colloc: 'blood pressure medicine captopril'
+            },
+            'antibiotics': {
+                word: 'antibiotics',
+                pos: 'noun',
+                ipa: '/ˌæn.ti.baɪˈɒt.ɪks/',
+                def: 'Medicines that inhibit the growth of or destroy microorganisms and bacterial infections.',
+                colloc: 'overuse of antibiotics / miracle drug'
+            },
+            'miracle': {
+                word: 'miracle',
+                pos: 'noun',
+                ipa: '/ˈmɪr.ə.kəl/',
+                def: 'An extraordinary, welcome, and remarkable event or achievement.',
+                colloc: 'miracle drug / miraculous recovery'
+            },
+            'species': {
+                word: 'species',
+                pos: 'noun',
+                ipa: '/ˈspiː.ʃiːz/',
+                def: 'A group of living organisms consisting of similar individuals capable of exchanging genes.',
+                colloc: 'endangered species / plant and animal species'
+            },
+            'habitat': {
+                word: 'habitat',
+                pos: 'noun',
+                ipa: '/ˈhæb.ɪ.tæt/',
+                def: 'The natural home or environment of an animal, plant, or organism.',
+                colloc: 'natural habitat / habitat destruction'
+            },
+            'life cycle': {
+                word: 'life cycle',
+                pos: 'noun phrase',
+                ipa: '/ˈlaɪf ˌsaɪ.kəl/',
+                def: 'The series of changes in the life of an organism including reproduction.',
+                colloc: 'life cycle of animals'
+            },
+
+            // Extended Module 5 Vocabulary: Transport & Environment
+            'delays': {
+                word: 'delays',
+                pos: 'noun',
+                ipa: '/dɪˈleɪz/',
+                def: 'Periods of time by which something is late or postponed.',
+                colloc: 'long delays at border crossings'
+            },
+            'grassland': {
+                word: 'grassland',
+                pos: 'noun',
+                ipa: '/ˈɡrɑːs.lænd/',
+                def: 'A large, open area of country covered with grass, especially used for grazing.',
+                colloc: 'miles of grassland'
+            },
+            'holidaymakers': {
+                word: 'holidaymakers',
+                pos: 'noun',
+                ipa: '/ˈhɒl.ə.deɪˌmeɪ.kəz/',
+                def: 'People on vacation or holiday travelling away from home.',
+                colloc: 'exciting for holidaymakers'
+            },
+            'desert': {
+                word: 'desert',
+                pos: 'noun',
+                ipa: '/ˈdez.ət/',
+                def: 'A dry, barren area of land, especially one covered with sand, with little vegetation.',
+                colloc: 'enormous desert / arid climate'
+            },
+            'cultures': {
+                word: 'cultures',
+                pos: 'noun',
+                ipa: '/ˈkʌl.tʃəz/',
+                def: 'The ideas, customs, and social behavior of particular nations or groups of people.',
+                colloc: 'people and cultures / diverse cultures'
+            },
+            'relief': {
+                word: 'relief',
+                pos: 'noun',
+                ipa: '/rɪˈliːf/',
+                def: 'A feeling of reassurance and relaxation following release from anxiety or distress.',
+                colloc: 'main emotion is relief / sigh of relief'
+            },
+            'visual pollution': {
+                word: 'visual pollution',
+                pos: 'noun phrase',
+                ipa: '/ˈvɪʒ.u.əl pəˈluː.ʃən/',
+                def: 'Aesthetic degradation of visual landscapes caused by man-made clutter and billboards.',
+                colloc: 'problem of visual pollution'
+            },
+            'haze': {
+                word: 'haze',
+                pos: 'noun',
+                ipa: '/heɪz/',
+                def: 'A slight obscuration of the lower atmosphere, typically caused by fine suspended particles.',
+                colloc: 'brown haze / dense haze'
+            },
+            'wind turbines': {
+                word: 'wind turbines',
+                pos: 'noun phrase',
+                ipa: '/wɪnd ˈtɜː.baɪnz/',
+                def: 'Tall structures with blades that rotate in the wind to generate clean electricity.',
+                colloc: 'wind turbines and power lines'
+            },
+            'billboards': {
+                word: 'billboards',
+                pos: 'noun',
+                ipa: '/ˈbɪl.bɔːdz/',
+                def: 'Large outdoor advertising boards alongside highways or high-traffic roads.',
+                colloc: 'advertising billboards / roadside billboards'
+            },
+            'graffiti': {
+                word: 'graffiti',
+                pos: 'noun',
+                ipa: '/ɡrəˈfiː.ti/',
+                def: 'Writing or drawings scribbled, scratched, or sprayed illicitly on a wall or surface.',
+                colloc: 'spray-painted graffiti'
+            },
+            'depressed': {
+                word: 'depressed',
+                pos: 'adj.',
+                ipa: '/dɪˈprest/',
+                def: 'In a state of general unhappiness or despondency; suffering from depression.',
+                colloc: 'sad or depressed / feeling low'
+            },
+            'stress levels': {
+                word: 'stress levels',
+                pos: 'noun phrase',
+                ipa: '/stres ˈlev.əlz/',
+                def: 'The degree of mental or emotional strain experienced by an individual.',
+                colloc: 'affects stress levels / reduce stress'
+            },
+            'unique character': {
+                word: 'unique character',
+                pos: 'noun phrase',
+                ipa: '/juːˈniːk ˈkær.ək.tər/',
+                def: 'Distinctive, one-of-a-kind quality or atmosphere belonging to a place.',
+                colloc: 'preserve unique character'
+            },
+            'identical': {
+                word: 'identical',
+                pos: 'adj.',
+                ipa: '/aɪˈden.tɪ.kəl/',
+                def: 'Similar in every detail; exactly alike.',
+                colloc: 'identical restaurants / look identical'
+            },
+
+            // Extended Module 6 & 7 Vocabulary
+            'population': {
+                word: 'population',
+                pos: 'noun',
+                ipa: '/ˌpɒp.jəˈleɪ.ʃən/',
+                def: 'All the inhabitants of a particular town, area, or country.',
+                colloc: 'world population / feed a population'
+            },
+            'laboratory': {
+                word: 'laboratory',
+                pos: 'noun',
+                ipa: '/ləˈbɒr.ə.tri/',
+                def: 'A room or building equipped for scientific experiments, research, or testing.',
+                colloc: 'work in a laboratory / lab environment'
+            },
+            'proteins': {
+                word: 'proteins',
+                pos: 'noun',
+                ipa: '/ˈprəʊ.tiːnz/',
+                def: 'Essential nutrients composed of amino acids required for body structure and tissue repair.',
+                colloc: 'plant proteins / protein sources'
+            },
+            'genuine': {
+                word: 'genuine',
+                pos: 'adj.',
+                ipa: '/ˈdʒen.ju.ɪn/',
+                def: 'Truly what something is said to be; authentic and real.',
+                colloc: 'genuine meat products / genuine article'
+            },
+            'institutions': {
+                word: 'institutions',
+                pos: 'noun',
+                ipa: '/ˌɪn.stɪˈtjuː.ʃənz/',
+                def: 'Organizations founded for religious, educational, professional, or social purposes.',
+                colloc: 'health institutions / educational institutions'
+            },
+            'persuasive': {
+                word: 'persuasive',
+                pos: 'adj.',
+                ipa: '/pəˈsweɪ.sɪv/',
+                def: 'Good at convincing someone to do or believe something through reasoning.',
+                colloc: 'persuasive marketing / persuasive arguments'
+            },
+            'proportion': {
+                word: 'proportion',
+                pos: 'noun',
+                ipa: '/prəˈpɔː.ʃən/',
+                def: 'A part, share, or number considered in comparative relation to a whole.',
+                colloc: 'large proportion / percentage share'
+            },
+            'masterpiece': {
+                word: 'masterpiece',
+                pos: 'noun',
+                ipa: '/ˈmɑː.stə.piːs/',
+                def: 'A work of outstanding artistry, skill, or workmanship.',
+                colloc: 'artistic masterpiece / museum masterpiece'
+            },
+            'contemporary': {
+                word: 'contemporary',
+                pos: 'adj.',
+                ipa: '/kənˈtem.pər.ər.i/',
+                def: 'Living or occurring at the present time; modern and current.',
+                colloc: 'contemporary art / contemporary society'
+            },
+            'conservation': {
+                word: 'conservation',
+                pos: 'noun',
+                ipa: '/ˌkɒn.səˈveɪ.ʃən/',
+                def: 'Preservation, protection, or restoration of the natural environment and historical heritage.',
+                colloc: 'wildlife conservation / conservation project'
             }
         };
     }
