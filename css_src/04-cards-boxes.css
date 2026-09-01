@@ -2,50 +2,55 @@
 .card {
     background: var(--card-bg, #ffffff);
     border-radius: var(--card-radius, 12px);
-    padding: 22px 26px;
+    padding: 24px 30px;
     border: var(--card-border, 1.5px solid var(--border-soft, rgba(0,0,0,0.08)));
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     box-shadow: var(--card-shadow, 0 2px 8px rgba(0,0,0,0.04));
-    font-size: calc(20px * var(--font-scale, 1));
-    line-height: 1.7;
+    font-size: calc(22px * var(--font-scale, 1));
+    line-height: 1.75;
     color: var(--text-body, #1e293b);
+}
+
+.card p, .card li, .card span:not(.skill-badge):not(.model-tag):not(.cp-pill-counter):not(.section-module-tag) {
+    font-size: calc(21px * var(--font-scale, 1));
+    line-height: 1.75;
 }
 
 .card-sm {
     background: var(--card-bg, #ffffff);
     border-radius: 8px;
-    padding: 15px 20px;
+    padding: 18px 24px;
     border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
-    margin-bottom: 10px;
-    font-size: calc(19px * var(--font-scale, 1));
-    line-height: 1.65;
+    margin-bottom: 12px;
+    font-size: calc(21px * var(--font-scale, 1));
+    line-height: 1.7;
 }
 
 /* Discussion Question Cards */
 .discuss-card {
     background: var(--card-bg, #ffffff);
     border-radius: var(--card-radius, 14px);
-    padding: 20px 24px;
+    padding: 22px 28px;
     border: var(--card-border, 1.5px solid var(--border-soft, rgba(0,0,0,0.08)));
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     display: flex !important;
     flex-direction: row !important;
     align-items: flex-start !important;
-    gap: 18px !important;
+    gap: 20px !important;
     box-shadow: var(--card-shadow, 0 4px 12px rgba(0,0,0,0.03));
 }
 
 .discuss-num {
-    width: 44px !important;
-    height: 44px !important;
-    min-width: 44px !important;
-    max-width: 44px !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    max-width: 48px !important;
     border-radius: 50% !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     font-family: var(--font-display, 'Space Grotesk', sans-serif);
-    font-size: calc(22px * var(--font-scale, 1));
+    font-size: calc(24px * var(--font-scale, 1));
     font-weight: 800;
     color: #ffffff !important;
     flex-shrink: 0 !important;
@@ -54,9 +59,9 @@
 }
 
 .discuss-text {
-    font-size: calc(20px * var(--font-scale, 1));
+    font-size: calc(22px * var(--font-scale, 1));
     color: var(--text-body, #1e293b);
-    line-height: 1.65;
+    line-height: 1.75;
     flex: 1 1 auto !important;
     min-width: 0;
 }

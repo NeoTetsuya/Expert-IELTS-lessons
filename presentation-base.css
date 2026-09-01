@@ -446,50 +446,55 @@ html, body {
 .card {
     background: var(--card-bg, #ffffff);
     border-radius: var(--card-radius, 12px);
-    padding: 22px 26px;
+    padding: 24px 30px;
     border: var(--card-border, 1.5px solid var(--border-soft, rgba(0,0,0,0.08)));
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     box-shadow: var(--card-shadow, 0 2px 8px rgba(0,0,0,0.04));
-    font-size: calc(20px * var(--font-scale, 1));
-    line-height: 1.7;
+    font-size: calc(22px * var(--font-scale, 1));
+    line-height: 1.75;
     color: var(--text-body, #1e293b);
+}
+
+.card p, .card li, .card span:not(.skill-badge):not(.model-tag):not(.cp-pill-counter):not(.section-module-tag) {
+    font-size: calc(21px * var(--font-scale, 1));
+    line-height: 1.75;
 }
 
 .card-sm {
     background: var(--card-bg, #ffffff);
     border-radius: 8px;
-    padding: 15px 20px;
+    padding: 18px 24px;
     border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
-    margin-bottom: 10px;
-    font-size: calc(19px * var(--font-scale, 1));
-    line-height: 1.65;
+    margin-bottom: 12px;
+    font-size: calc(21px * var(--font-scale, 1));
+    line-height: 1.7;
 }
 
 /* Discussion Question Cards */
 .discuss-card {
     background: var(--card-bg, #ffffff);
     border-radius: var(--card-radius, 14px);
-    padding: 20px 24px;
+    padding: 22px 28px;
     border: var(--card-border, 1.5px solid var(--border-soft, rgba(0,0,0,0.08)));
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     display: flex !important;
     flex-direction: row !important;
     align-items: flex-start !important;
-    gap: 18px !important;
+    gap: 20px !important;
     box-shadow: var(--card-shadow, 0 4px 12px rgba(0,0,0,0.03));
 }
 
 .discuss-num {
-    width: 44px !important;
-    height: 44px !important;
-    min-width: 44px !important;
-    max-width: 44px !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    max-width: 48px !important;
     border-radius: 50% !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     font-family: var(--font-display, 'Space Grotesk', sans-serif);
-    font-size: calc(22px * var(--font-scale, 1));
+    font-size: calc(24px * var(--font-scale, 1));
     font-weight: 800;
     color: #ffffff !important;
     flex-shrink: 0 !important;
@@ -498,9 +503,9 @@ html, body {
 }
 
 .discuss-text {
-    font-size: calc(20px * var(--font-scale, 1));
+    font-size: calc(22px * var(--font-scale, 1));
     color: var(--text-body, #1e293b);
-    line-height: 1.65;
+    line-height: 1.75;
     flex: 1 1 auto !important;
     min-width: 0;
 }
@@ -1776,34 +1781,36 @@ span.vocab-term.active-vocab,
 .essay-card {
     background: #ffffff;
     border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
-    border-radius: 12px;
-    padding: 24px 28px;
+    border-radius: 14px;
+    padding: 26px 32px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    line-height: 1.85;
-    font-size: calc(17.5px * var(--font-scale, 1));
+    gap: 16px;
+    line-height: 1.9;
+    font-size: calc(22px * var(--font-scale, 1));
     color: var(--text-body, #1e293b);
 }
 .essay-card::-webkit-scrollbar { width: 6px; }
 .essay-card::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
 .essay-p {
-    padding: 10px 14px;
-    border-radius: 6px;
+    padding: 12px 18px;
+    border-radius: 8px;
     background: #f8fafc;
     border-left: 4px solid var(--col-writing, #059669);
+    font-size: calc(22px * var(--font-scale, 1));
+    line-height: 1.85;
 }
 
 .essay-label {
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: calc(12px * var(--font-scale, 1));
+    font-size: calc(14px * var(--font-scale, 1));
     font-weight: 700;
-    padding: 2px 8px;
+    padding: 3px 10px;
     border-radius: 4px;
     display: inline-block;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
 /* Sub-Tab Navigation Bar */
@@ -1817,7 +1824,7 @@ span.vocab-term.active-vocab,
     border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
     padding: 6px 14px;
     border-radius: 6px;
-    font-size: calc(14.5px * var(--font-scale, 1));
+    font-size: calc(16px * var(--font-scale, 1));
     font-weight: 600;
     color: var(--text-muted, #64748b);
     cursor: pointer;
@@ -1844,20 +1851,20 @@ span.vocab-term.active-vocab,
 .model-breakdown-card {
     background: #ffffff;
     border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-bottom: 12px;
-    font-size: calc(18px * var(--font-scale, 1));
-    line-height: 1.75;
+    border-radius: 12px;
+    padding: 22px 28px;
+    margin-bottom: 16px;
+    font-size: calc(22px * var(--font-scale, 1));
+    line-height: 1.8;
 }
 .model-tag {
     font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: calc(13px * var(--font-scale, 1));
+    font-size: calc(14px * var(--font-scale, 1));
     font-weight: 700;
-    padding: 3px 9px;
+    padding: 4px 10px;
     border-radius: 4px;
     display: inline-block;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 .tag-intro {
     background: rgba(79, 70, 229, 0.12);
@@ -1875,16 +1882,58 @@ span.vocab-term.active-vocab,
 /* Grammar & Concept Rule Cards */
 .rule-card {
     background: white;
-    border-radius: 12px;
-    padding: 20px 24px;
+    border-radius: 14px;
+    padding: 24px 30px;
     border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
-    border-top: 5px solid var(--col-grammar, #d97706);
+    border-top: 6px solid var(--col-grammar, #d97706);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    font-size: calc(17.5px * var(--font-scale, 1));
-    line-height: 1.7;
+    font-size: calc(22px * var(--font-scale, 1));
+    line-height: 1.8;
+}
+
+.rule-card ul, .rule-card li {
+    font-size: calc(21px * var(--font-scale, 1));
+    line-height: 1.8;
+}
+
+/* Template Slots Readability Boosters */
+[slot="rules"] .rule-card {
+    font-size: calc(22px * var(--font-scale, 1));
+    padding: 24px 30px;
+    margin-bottom: 16px;
+}
+[slot="rules"] .rule-card ul, [slot="rules"] .rule-card li {
+    font-size: calc(21px * var(--font-scale, 1));
+    line-height: 1.8;
+}
+[slot="annotations"] .card {
+    font-size: calc(22px * var(--font-scale, 1));
+    padding: 22px 28px;
+}
+[slot="annotations"] .card p, [slot="annotations"] .card li {
+    font-size: calc(21px * var(--font-scale, 1));
+    line-height: 1.8;
+}
+[slot="prompt"] > div {
+    font-size: calc(22px * var(--font-scale, 1)) !important;
+    line-height: 1.75 !important;
+    padding: 18px 24px !important;
+}
+[slot="guide"] .card {
+    font-size: calc(22px * var(--font-scale, 1));
+    padding: 24px 28px;
+}
+[slot="guide"] .card p, [slot="guide"] .card div {
+    font-size: calc(20px * var(--font-scale, 1));
+    line-height: 1.75;
+}
+table td, table th {
+    font-size: calc(21px * var(--font-scale, 1));
+    line-height: 1.75;
+    padding: 8px 12px;
 }
 
 /* Section Divider Slides */
