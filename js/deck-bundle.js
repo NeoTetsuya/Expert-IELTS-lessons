@@ -738,17 +738,17 @@
                 const inputContainer = section.querySelector('[data-slot="input-area"]');
                 if (inputContainer) {
                     if (data.boxOptions && Array.isArray(data.boxOptions)) {
-                        const boxHtml = data.boxOptions.map(opt => `<span class="box-chip" style="background:#ffffff; border:1px solid #cbd5e1; padding:4px 10px; border-radius:6px; font-weight:700; font-size:15px;"><strong>${opt.letter}.</strong> ${opt.text}</span>`).join('');
+                        const boxHtml = data.boxOptions.map(opt => `<span class="box-chip" style="background:#ffffff; border:1.5px solid #cbd5e1; padding:6px 14px; border-radius:8px; font-weight:700; font-size:18px; color:var(--text-dark);"><strong>${opt.letter}.</strong> ${opt.text}</span>`).join('');
                         const optionsHtml = data.boxOptions.map(opt => `<option value="${opt.letter}">${opt.letter} (${opt.text})</option>`).join('');
                         inputContainer.innerHTML = `
-                            <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-                                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:#eff6ff; padding:10px 14px; border-radius:8px; border:1px solid #bfdbfe;">
-                                    <span style="font-size:14px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-right:4px;">📦 Option Box:</span>
+                            <div style="display:flex; flex-direction:column; gap:14px; width:100%;">
+                                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:#eff6ff; padding:12px 18px; border-radius:10px; border:1.5px solid #bfdbfe;">
+                                    <span style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-right:4px;">📦 Option Box:</span>
                                     ${boxHtml}
                                 </div>
-                                <div style="display:flex; align-items:center; gap:12px;">
-                                    <span style="font-weight:700; font-size:17px; color:var(--text-dark);">Your Choice:</span>
-                                    <select class="select-input" data-ans="${ansVal}" style="min-width:240px; font-weight:700; font-size:16px; padding:6px 12px;">
+                                <div style="display:flex; align-items:center; gap:14px; margin-top:4px;">
+                                    <span style="font-weight:700; font-size:18px; color:var(--text-dark);">Your Choice:</span>
+                                    <select class="select-input" data-ans="${ansVal}" style="min-width:280px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
                                         <option value="">Select option...</option>
                                         ${optionsHtml}
                                     </select>
@@ -757,9 +757,9 @@
                         `;
                     } else if (ansVal === 'YES' || ansVal === 'NO' || ansVal === 'NOT GIVEN') {
                         inputContainer.innerHTML = `
-                            <div style="display:flex; align-items:center; gap:12px;">
-                                <span style="font-weight:700; font-size:17px; color:var(--text-dark);">Your Choice:</span>
-                                <select class="select-input" data-ans="${ansVal}" style="min-width:180px; font-weight:700; font-size:16px; padding:6px 12px;">
+                            <div style="display:flex; align-items:center; gap:14px;">
+                                <span style="font-weight:700; font-size:18px; color:var(--text-dark);">Your Choice:</span>
+                                <select class="select-input" data-ans="${ansVal}" style="min-width:200px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
                                     <option value="">Select...</option>
                                     <option value="YES">YES</option>
                                     <option value="NO">NO</option>
@@ -770,11 +770,11 @@
                     } else {
                         const wb = data.wordBank || (window.module3Data && window.module3Data.reading3a && window.module3Data.reading3a.wordBank);
                         if (wb && Array.isArray(wb)) {
-                            const chipsHtml = wb.map(w => `<span class="word-chip" data-word="${w}">${w}</span>`).join('');
+                            const chipsHtml = wb.map(w => `<span class="word-chip" data-word="${w}" style="font-size:18px; font-weight:700; padding:6px 14px;">${w}</span>`).join('');
                             inputContainer.innerHTML = `
-                                <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-                                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:#f8fafc; padding:10px 14px; border-radius:8px; border:1px solid #cbd5e1;">
-                                        <span style="font-size:14px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-right:4px;">📦 Word Bank:</span>
+                                <div style="display:flex; flex-direction:column; gap:14px; width:100%;">
+                                    <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:#f8fafc; padding:12px 18px; border-radius:10px; border:1.5px solid #cbd5e1;">
+                                        <span style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-right:4px;">📦 Word Bank:</span>
                                         ${chipsHtml}
                                     </div>
                                     <div style="display:flex; align-items:center; gap:12px;">
