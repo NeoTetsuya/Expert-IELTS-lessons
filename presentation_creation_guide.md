@@ -506,7 +506,7 @@ When building HTML presentations from course markdown documents (`md files/`):
 ### H. Universal Grammar Reference Integration
 - On all Grammar Masterclass and Practice slides, integrate the **Grammar Reference Modal trigger**:
   ```html
-  <button class="deck-btn grammar-ref-btn" data-grammar-ref="../references/grammar_sources/expert_6/module_3a_comparative_forms.html" style="background:linear-gradient(135deg, #f43f5e 0%, #e11d48 100%); color:#ffffff; font-weight:700; border:none; padding:8px 16px; border-radius:8px; display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:15px; box-shadow: 0 4px 12px rgba(244,63,94,0.3);">
+  <button class="deck-btn grammar-ref-btn" data-grammar-ref="https://neotetsuya.github.io/Expert-IELTS/expert%206/module_3a_comparative_forms.html" style="background:linear-gradient(135deg, #f43f5e 0%, #e11d48 100%); color:#ffffff; font-weight:700; border:none; padding:8px 16px; border-radius:8px; display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:15px; box-shadow: 0 4px 12px rgba(244,63,94,0.3);">
       📖 Open Comparative Forms Handbook
   </button>
   ```
@@ -829,7 +829,7 @@ To ensure optimal pedagogic clarity, zero UI clipping, and consistency across al
             <strong>Unless = If ... not:</strong><br>
             • <em>"Communities don't work well <strong>unless</strong> they have a central point."</em>
         </div>
-        <button class="deck-btn grammar-ref-btn" data-grammar-ref="../references/grammar_sources/expert_5/module_07.html">📖 Open Zero Conditional Grammar Handbook</button>
+        <button class="deck-btn grammar-ref-btn" data-grammar-ref="https://neotetsuya.github.io/Expert-IELTS/expert%205/module_7_conditionals.html">📖 Open Zero Conditional Grammar Handbook</button>
     </div>
 </slide-card>
 ```
