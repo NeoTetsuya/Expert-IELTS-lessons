@@ -784,9 +784,12 @@ class DeckEngine {
     }
 
     toggleAllHighlights(target) {
-        const slide = target ? (target.closest('.slide') || target.closest('.page-content') || target.closest('.notebook')) : document.querySelector('.slide.active');
+        const slide = (target && typeof target.closest === 'function') 
+            ? (target.closest('.slide') || target.closest('.page-content') || target.closest('.notebook') || document.querySelector('.slide.active'))
+            : document.querySelector('.slide.active');
         if (!slide) return;
         const syns = slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word');
+        if (syns.length === 0) return;
         const isAnyActive = Array.from(syns).some(s => s.classList.contains('active-syn') || s.classList.contains('active-vocab'));
         syns.forEach(s => {
             if (isAnyActive) {
@@ -799,19 +802,21 @@ class DeckEngine {
                 }
             }
         });
-        slide.querySelectorAll('.q-card').forEach(c => {
-            if (isAnyActive) c.classList.remove('revealed');
-            else c.classList.add('revealed');
+        slide.querySelectorAll('.q-card, .strategy-card').forEach(c => {
+            if (isAnyActive) c.classList.remove('revealed', 'active-syn');
+            else c.classList.add('revealed', 'active-syn');
         });
     }
 
     resetStrategySlide(target) {
-        const slide = target ? (target.closest('.slide') || target.closest('.page-content') || target.closest('.notebook')) : document.querySelector('.slide.active');
+        const slide = (target && typeof target.closest === 'function') 
+            ? (target.closest('.slide') || target.closest('.page-content') || target.closest('.notebook') || document.querySelector('.slide.active'))
+            : document.querySelector('.slide.active');
         if (!slide) return;
         slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word, .vocab-term').forEach(s => {
             s.classList.remove('active-syn', 'active-vocab');
         });
-        slide.querySelectorAll('.q-card').forEach(c => c.classList.remove('revealed'));
+        slide.querySelectorAll('.q-card, .strategy-card').forEach(c => c.classList.remove('revealed', 'active-syn'));
     }
 
     toggleVocabHighlight(target) {
