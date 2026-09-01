@@ -1,0 +1,83 @@
+/* ==========================================================================
+   UNIVERSAL CHOICE & TFNG PILL COMPONENT STYLES
+   ========================================================================== */
+
+.choice-group,
+.tfng-group,
+.ynng-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    user-select: none;
+}
+
+/* Base Choice Button Pill */
+.choice-btn,
+.tfng-btn,
+.option-btn {
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    color: #334155;
+    font-size: calc(16.5px * var(--font-scale, 1));
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 9999px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.choice-btn:hover,
+.tfng-btn:hover,
+.option-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    border-color: var(--col-reading, #155e75);
+    color: var(--col-reading, #155e75);
+}
+
+/* Selected State */
+.choice-btn.selected,
+.tfng-btn.selected,
+.option-btn.selected {
+    background: var(--col-reading, #155e75);
+    border-color: var(--col-reading, #155e75);
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(21, 94, 117, 0.25);
+    transform: translateY(-1px);
+}
+
+/* Validation Feedback */
+.choice-btn.selected.correct,
+.tfng-btn.selected.correct,
+.option-btn.selected.correct {
+    background: #16a34a !important;
+    border-color: #16a34a !important;
+    color: #ffffff !important;
+}
+
+.choice-btn.selected.wrong,
+.tfng-btn.selected.wrong,
+.option-btn.selected.wrong {
+    background: #dc2626 !important;
+    border-color: #dc2626 !important;
+    color: #ffffff !important;
+}
+
+/* Dark Theme Support */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .choice-btn,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .tfng-btn,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .option-btn {
+    background: rgba(30, 41, 59, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #f8fafc !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .choice-btn.selected,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .tfng-btn.selected,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .option-btn.selected {
+    background: #0284c7 !important;
+    border-color: #38bdf8 !important;
+    color: #ffffff !important;
+}

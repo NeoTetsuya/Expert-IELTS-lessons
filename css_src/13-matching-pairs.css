@@ -1,0 +1,120 @@
+/* ==========================================================================
+   UNIVERSAL MATCHING PAIRS COMPONENT STYLES
+   ========================================================================== */
+
+.matching-pairs-exercise {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    width: 100%;
+    user-select: none;
+}
+
+.match-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.match-col-header {
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted, #64748b);
+    padding-bottom: 4px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+/* Matching Items */
+.match-left-item,
+.match-right-item {
+    background: #ffffff;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: calc(18.5px * var(--font-scale, 1));
+    font-weight: 600;
+    color: var(--text-dark, #0f172a);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.match-left-item:hover,
+.match-right-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: var(--col-reading, #155e75);
+}
+
+.match-left-item.active-match-select {
+    outline: 2.5px solid var(--col-reading, #155e75);
+    outline-offset: 2px;
+    background: rgba(21, 94, 117, 0.08);
+    border-color: var(--col-reading, #155e75);
+    animation: matchPulse 1.4s infinite alternate;
+}
+
+@keyframes matchPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.03); }
+}
+
+.match-left-item.drag-over,
+.match-right-item.drag-over {
+    background: rgba(21, 94, 117, 0.12);
+    border-color: var(--col-reading, #155e75);
+    transform: scale(1.02);
+}
+
+/* Pair Badges */
+.match-pair-badge {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    flex-shrink: 0;
+}
+
+/* Evaluation States */
+.match-left-item.correct,
+.match-right-item.correct {
+    background: #dcfce7 !important;
+    border-color: #22c55e !important;
+    color: #15803d !important;
+}
+
+.match-left-item.wrong,
+.match-right-item.wrong {
+    background: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    color: #b91c1c !important;
+}
+
+/* Dark Theme Support */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .match-left-item,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .match-right-item {
+    background: rgba(30, 41, 59, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #f8fafc !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .match-left-item.correct,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .match-right-item.correct {
+    background: rgba(16, 185, 129, 0.25) !important;
+    border-color: #34d399 !important;
+    color: #ecfdf5 !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .match-left-item.wrong,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .match-right-item.wrong {
+    background: rgba(239, 68, 68, 0.25) !important;
+    border-color: #f87171 !important;
+    color: #fef2f2 !important;
+}

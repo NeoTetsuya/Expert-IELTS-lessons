@@ -1,0 +1,117 @@
+/* ==========================================================================
+   UNIVERSAL SENTENCE SCRAMBLE COMPONENT STYLES
+   ========================================================================== */
+
+.sentence-scramble {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    user-select: none;
+}
+
+/* 1. Target Sentence Construction Line */
+.scramble-target-line {
+    min-height: 64px;
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 10px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.scramble-target-line:empty::before {
+    content: "Drag words here or click them to form the sentence...";
+    color: #94a3b8;
+    font-size: calc(17px * var(--font-scale, 1));
+    font-style: italic;
+}
+
+.scramble-target-line.drag-over {
+    background: rgba(16, 185, 129, 0.08);
+    border-color: var(--col-grammar, #059669);
+    transform: scale(1.01);
+}
+
+.scramble-target-line.correct {
+    border-color: #22c55e !important;
+    background: rgba(34, 197, 94, 0.08) !important;
+}
+
+.scramble-target-line.wrong {
+    border-color: #ef4444 !important;
+    background: rgba(239, 68, 68, 0.08) !important;
+}
+
+/* 2. Scrambled Word Pool */
+.scramble-pool {
+    background: #ffffff;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 58px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+/* 3. Scramble Chips */
+.scramble-chip {
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    color: #0f172a;
+    font-size: calc(18px * var(--font-scale, 1));
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: grab;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.scramble-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-color: var(--col-grammar, #059669);
+}
+
+.scramble-chip:active,
+.scramble-chip.dragging {
+    cursor: grabbing;
+    opacity: 0.6;
+    transform: scale(0.96);
+}
+
+.scramble-chip.correct {
+    background: #dcfce7 !important;
+    border-color: #22c55e !important;
+    color: #15803d !important;
+}
+
+.scramble-chip.wrong {
+    background: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    color: #b91c1c !important;
+}
+
+/* Dark Theme Support */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .scramble-target-line {
+    background: rgba(15, 23, 42, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .scramble-pool {
+    background: rgba(30, 41, 59, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .scramble-chip {
+    background: rgba(30, 41, 59, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: #f8fafc !important;
+}

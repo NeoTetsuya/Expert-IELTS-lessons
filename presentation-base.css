@@ -3153,6 +3153,127 @@ table td, table th {
 
 
 /* ==========================================================================
+   UNIVERSAL MATCHING PAIRS COMPONENT STYLES
+   ========================================================================== */
+
+.matching-pairs-exercise {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    width: 100%;
+    user-select: none;
+}
+
+.match-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.match-col-header {
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted, #64748b);
+    padding-bottom: 4px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+/* Matching Items */
+.match-left-item,
+.match-right-item {
+    background: #ffffff;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: calc(18.5px * var(--font-scale, 1));
+    font-weight: 600;
+    color: var(--text-dark, #0f172a);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.match-left-item:hover,
+.match-right-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: var(--col-reading, #155e75);
+}
+
+.match-left-item.active-match-select {
+    outline: 2.5px solid var(--col-reading, #155e75);
+    outline-offset: 2px;
+    background: rgba(21, 94, 117, 0.08);
+    border-color: var(--col-reading, #155e75);
+    animation: matchPulse 1.4s infinite alternate;
+}
+
+@keyframes matchPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.03); }
+}
+
+.match-left-item.drag-over,
+.match-right-item.drag-over {
+    background: rgba(21, 94, 117, 0.12);
+    border-color: var(--col-reading, #155e75);
+    transform: scale(1.02);
+}
+
+/* Pair Badges */
+.match-pair-badge {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    flex-shrink: 0;
+}
+
+/* Evaluation States */
+.match-left-item.correct,
+.match-right-item.correct {
+    background: #dcfce7 !important;
+    border-color: #22c55e !important;
+    color: #15803d !important;
+}
+
+.match-left-item.wrong,
+.match-right-item.wrong {
+    background: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    color: #b91c1c !important;
+}
+
+/* Dark Theme Support */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .match-left-item,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .match-right-item {
+    background: rgba(30, 41, 59, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #f8fafc !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .match-left-item.correct,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .match-right-item.correct {
+    background: rgba(16, 185, 129, 0.25) !important;
+    border-color: #34d399 !important;
+    color: #ecfdf5 !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .match-left-item.wrong,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .match-right-item.wrong {
+    background: rgba(239, 68, 68, 0.25) !important;
+    border-color: #f87171 !important;
+    color: #fef2f2 !important;
+}
+
+/* ==========================================================================
    13. SONNER TOAST NOTIFICATION STACK (css_src/13-sonner-toasts.css)
    ========================================================================== */
 
@@ -3331,6 +3452,90 @@ table td, table th {
 }
 
 /* ==========================================================================
+   UNIVERSAL CHOICE & TFNG PILL COMPONENT STYLES
+   ========================================================================== */
+
+.choice-group,
+.tfng-group,
+.ynng-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    user-select: none;
+}
+
+/* Base Choice Button Pill */
+.choice-btn,
+.tfng-btn,
+.option-btn {
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    color: #334155;
+    font-size: calc(16.5px * var(--font-scale, 1));
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 9999px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.choice-btn:hover,
+.tfng-btn:hover,
+.option-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    border-color: var(--col-reading, #155e75);
+    color: var(--col-reading, #155e75);
+}
+
+/* Selected State */
+.choice-btn.selected,
+.tfng-btn.selected,
+.option-btn.selected {
+    background: var(--col-reading, #155e75);
+    border-color: var(--col-reading, #155e75);
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(21, 94, 117, 0.25);
+    transform: translateY(-1px);
+}
+
+/* Validation Feedback */
+.choice-btn.selected.correct,
+.tfng-btn.selected.correct,
+.option-btn.selected.correct {
+    background: #16a34a !important;
+    border-color: #16a34a !important;
+    color: #ffffff !important;
+}
+
+.choice-btn.selected.wrong,
+.tfng-btn.selected.wrong,
+.option-btn.selected.wrong {
+    background: #dc2626 !important;
+    border-color: #dc2626 !important;
+    color: #ffffff !important;
+}
+
+/* Dark Theme Support */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .choice-btn,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .tfng-btn,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .option-btn {
+    background: rgba(30, 41, 59, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #f8fafc !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .choice-btn.selected,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .tfng-btn.selected,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .option-btn.selected {
+    background: #0284c7 !important;
+    border-color: #38bdf8 !important;
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
    14. NUMBER FLOW ANIMATED DIGIT ENGINE (css_src/14-number-flow.css)
    ========================================================================== */
 
@@ -3371,4 +3576,122 @@ table td, table th {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* ==========================================================================
+   UNIVERSAL SENTENCE SCRAMBLE COMPONENT STYLES
+   ========================================================================== */
+
+.sentence-scramble {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    user-select: none;
+}
+
+/* 1. Target Sentence Construction Line */
+.scramble-target-line {
+    min-height: 64px;
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 10px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.scramble-target-line:empty::before {
+    content: "Drag words here or click them to form the sentence...";
+    color: #94a3b8;
+    font-size: calc(17px * var(--font-scale, 1));
+    font-style: italic;
+}
+
+.scramble-target-line.drag-over {
+    background: rgba(16, 185, 129, 0.08);
+    border-color: var(--col-grammar, #059669);
+    transform: scale(1.01);
+}
+
+.scramble-target-line.correct {
+    border-color: #22c55e !important;
+    background: rgba(34, 197, 94, 0.08) !important;
+}
+
+.scramble-target-line.wrong {
+    border-color: #ef4444 !important;
+    background: rgba(239, 68, 68, 0.08) !important;
+}
+
+/* 2. Scrambled Word Pool */
+.scramble-pool {
+    background: #ffffff;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 58px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+/* 3. Scramble Chips */
+.scramble-chip {
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    color: #0f172a;
+    font-size: calc(18px * var(--font-scale, 1));
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: grab;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.scramble-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-color: var(--col-grammar, #059669);
+}
+
+.scramble-chip:active,
+.scramble-chip.dragging {
+    cursor: grabbing;
+    opacity: 0.6;
+    transform: scale(0.96);
+}
+
+.scramble-chip.correct {
+    background: #dcfce7 !important;
+    border-color: #22c55e !important;
+    color: #15803d !important;
+}
+
+.scramble-chip.wrong {
+    background: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    color: #b91c1c !important;
+}
+
+/* Dark Theme Support */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .scramble-target-line {
+    background: rgba(15, 23, 42, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .scramble-pool {
+    background: rgba(30, 41, 59, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .scramble-chip {
+    background: rgba(30, 41, 59, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: #f8fafc !important;
 }

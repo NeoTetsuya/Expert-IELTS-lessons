@@ -1782,6 +1782,30 @@ class DeckEngine {
             }
         }
 
+        // Check matching pairs exercises
+        if (window.matchingPairsEngine) {
+            const matchResult = window.matchingPairsEngine.checkAnswers(container);
+            if (matchResult.total > 0) {
+                this.showToastNotification(`✅ ${matchResult.correct} / ${matchResult.total} matched correctly`);
+            }
+        }
+
+        // Check choice / TFNG pills
+        if (window.choiceSelectorEngine) {
+            const choiceResult = window.choiceSelectorEngine.checkAnswers(container);
+            if (choiceResult.total > 0) {
+                this.showToastNotification(`✅ ${choiceResult.correct} / ${choiceResult.total} choices correct`);
+            }
+        }
+
+        // Check sentence scramble exercises
+        if (window.sentenceScrambleEngine) {
+            const scrambleResult = window.sentenceScrambleEngine.checkAnswers(container);
+            if (scrambleResult.total > 0) {
+                this.showToastNotification(`✅ ${scrambleResult.correct} / ${scrambleResult.total} sentences correct`);
+            }
+        }
+
         // Show score toast for standard inputs
         const allInputs = container.querySelectorAll('.blank-input[data-ans], .select-input[data-ans]');
         if (allInputs.length > 0) {
@@ -1805,6 +1829,15 @@ class DeckEngine {
 
         if (window.categorySorter) {
             window.categorySorter.revealKeys(container);
+        }
+        if (window.matchingPairsEngine) {
+            window.matchingPairsEngine.revealKeys(container);
+        }
+        if (window.choiceSelectorEngine) {
+            window.choiceSelectorEngine.revealKeys(container);
+        }
+        if (window.sentenceScrambleEngine) {
+            window.sentenceScrambleEngine.revealKeys(container);
         }
 
         container.querySelectorAll('.blank-input').forEach(input => {
@@ -1864,6 +1897,15 @@ class DeckEngine {
 
         if (window.categorySorter) {
             window.categorySorter.resetTask(container);
+        }
+        if (window.matchingPairsEngine) {
+            window.matchingPairsEngine.resetTask(container);
+        }
+        if (window.choiceSelectorEngine) {
+            window.choiceSelectorEngine.resetTask(container);
+        }
+        if (window.sentenceScrambleEngine) {
+            window.sentenceScrambleEngine.resetTask(container);
         }
 
         container.querySelectorAll('.blank-input, .select-input').forEach(input => {
@@ -10540,6 +10582,721 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Export singleton
     window.dragGapfillEngine = new DragGapfillEngine();
+})();
+
+
+/* ==================== MODULE: matching-pairs.js ==================== */
+/**
+ * =========================================================================
+ * UNIVERSAL MATCHING PAIRS ENGINE
+ * Course Presentations Architecture — Expert IELTS Masterclass
+ * Connects left-column items (words, headings, causes) with right-column items
+ * Supports both Click-to-Match and Drag-and-Drop pairing with Presenter Sync
+ * =========================================================================
+ */
+
+(function () {
+    'use strict';
+
+    class MatchingPairsEngine {
+        constructor() {
+            this.activeLeftItem = null;
+            this.colorPalette = [
+                { bg: '#dcfce7', border: '#16a34a', text: '#15803d', darkBg: 'rgba(22, 163, 74, 0.25)', darkText: '#86efac' },
+                { bg: '#e0e7ff', border: '#4f46e5', text: '#3730a3', darkBg: 'rgba(79, 70, 229, 0.25)', darkText: '#c7d2fe' },
+                { bg: '#fef3c7', border: '#d97706', text: '#92400e', darkBg: 'rgba(217, 119, 6, 0.25)', darkText: '#fde68a' },
+                { bg: '#fce7f3', border: '#db2777', text: '#9d174d', darkBg: 'rgba(219, 39, 119, 0.25)', darkText: '#fbcfe8' },
+                { bg: '#ccfbf1', border: '#0d9488', text: '#115e59', darkBg: 'rgba(13, 148, 136, 0.25)', darkText: '#99f6e4' },
+                { bg: '#ffedd5', border: '#ea580c', text: '#9a3412', darkBg: 'rgba(234, 88, 12, 0.25)', darkText: '#fed7aa' },
+                { bg: '#f3e8ff', border: '#9333ea', text: '#6b21a8', darkBg: 'rgba(147, 51, 234, 0.25)', darkText: '#e9d5ff' },
+                { bg: '#e0f2fe', border: '#0284c7', text: '#075985', darkBg: 'rgba(2, 132, 199, 0.25)', darkText: '#bae6fd' }
+            ];
+            this.init();
+        }
+
+        init() {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => this.bindAll());
+            } else {
+                this.bindAll();
+            }
+
+            if (window.presenterSyncEngine) {
+                window.presenterSyncEngine.on('MATCH_PAIR_ACTION', (data) => {
+                    this.applyRemoteMatch(data);
+                });
+            }
+
+            document.addEventListener('deck:slide-change', () => this.bindAll());
+            document.addEventListener('DOMContentLoaded', () => {
+                const observer = new MutationObserver(() => this.bindAll());
+                observer.observe(document.body, { childList: true, subtree: true });
+            });
+        }
+
+        bindAll() {
+            document.querySelectorAll('.matching-pairs-exercise, .match-exercise').forEach(container => {
+                this.setupExercise(container);
+            });
+        }
+
+        setupExercise(container) {
+            if (container._matchInitialized) return;
+            container._matchInitialized = true;
+
+            const leftItems = container.querySelectorAll('.match-left-item, [data-match-left]');
+            const rightItems = container.querySelectorAll('.match-right-item, [data-match-right]');
+
+            leftItems.forEach((leftEl, idx) => {
+                if (!leftEl.id) leftEl.id = `match-l-${Date.now()}-${idx}`;
+                leftEl.setAttribute('draggable', 'true');
+
+                leftEl.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.handleLeftClick(leftEl, container);
+                });
+
+                leftEl.addEventListener('dragstart', (e) => {
+                    leftEl.classList.add('dragging');
+                    e.dataTransfer.setData('text/plain', leftEl.id);
+                    e.dataTransfer.effectAllowed = 'link';
+                });
+
+                leftEl.addEventListener('dragend', () => {
+                    leftEl.classList.remove('dragging');
+                    container.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+                });
+            });
+
+            rightItems.forEach((rightEl, idx) => {
+                if (!rightEl.id) rightEl.id = `match-r-${Date.now()}-${idx}`;
+
+                rightEl.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.handleRightClick(rightEl, container);
+                });
+
+                rightEl.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    rightEl.classList.add('drag-over');
+                });
+
+                rightEl.addEventListener('dragleave', (e) => {
+                    if (!rightEl.contains(e.relatedTarget)) {
+                        rightEl.classList.remove('drag-over');
+                    }
+                });
+
+                rightEl.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    rightEl.classList.remove('drag-over');
+                    const leftId = e.dataTransfer.getData('text/plain');
+                    const leftEl = document.getElementById(leftId);
+                    if (leftEl && container.contains(leftEl)) {
+                        this.pairItems(leftEl, rightEl, container, true);
+                    }
+                });
+            });
+        }
+
+        handleLeftClick(leftEl, container) {
+            if (leftEl._pairedWith) {
+                // Clicking an already paired left item breaks its connection
+                this.unpair(leftEl, leftEl._pairedWith, container, true);
+                return;
+            }
+
+            if (this.activeLeftItem === leftEl) {
+                this.clearActiveSelection();
+            } else {
+                this.clearActiveSelection();
+                this.activeLeftItem = leftEl;
+                leftEl.classList.add('active-match-select');
+            }
+        }
+
+        handleRightClick(rightEl, container) {
+            if (this.activeLeftItem && container.contains(this.activeLeftItem)) {
+                this.pairItems(this.activeLeftItem, rightEl, container, true);
+                this.clearActiveSelection();
+            } else if (rightEl._pairedWith) {
+                // Clicking an already paired right item breaks connection
+                this.unpair(rightEl._pairedWith, rightEl, container, true);
+            }
+        }
+
+        clearActiveSelection() {
+            if (this.activeLeftItem) {
+                this.activeLeftItem.classList.remove('active-match-select');
+                this.activeLeftItem = null;
+            }
+        }
+
+        pairItems(leftEl, rightEl, container, broadcast = true) {
+            if (!leftEl || !rightEl) return;
+
+            // If either was already paired with something else, break prior pairing first
+            if (leftEl._pairedWith) this.unpair(leftEl, leftEl._pairedWith, container, false);
+            if (rightEl._pairedWith) this.unpair(rightEl._pairedWith, rightEl, container, false);
+
+            const pairIndex = (container._pairCount || 0) % this.colorPalette.length;
+            container._pairCount = (container._pairCount || 0) + 1;
+            const color = this.colorPalette[pairIndex];
+
+            leftEl._pairedWith = rightEl;
+            rightEl._pairedWith = leftEl;
+            leftEl._pairColor = color;
+            rightEl._pairColor = color;
+
+            leftEl.classList.add('is-paired');
+            rightEl.classList.add('is-paired');
+            leftEl.style.borderColor = color.border;
+            rightEl.style.borderColor = color.border;
+
+            // Badge indicator
+            this.setPairBadge(leftEl, pairIndex + 1, color);
+            this.setPairBadge(rightEl, pairIndex + 1, color);
+
+            if (broadcast && window.presenterSyncEngine) {
+                window.presenterSyncEngine.emit('MATCH_PAIR_ACTION', {
+                    action: 'pair',
+                    leftId: leftEl.id,
+                    rightId: rightEl.id,
+                    containerId: container.id || null
+                });
+            }
+        }
+
+        setPairBadge(el, num, color) {
+            let badge = el.querySelector('.match-pair-badge');
+            if (!badge) {
+                badge = document.createElement('span');
+                badge.className = 'match-pair-badge';
+                el.prepend(badge);
+            }
+            badge.textContent = `Pair ${num}`;
+            badge.style.backgroundColor = color.border;
+            badge.style.color = '#ffffff';
+        }
+
+        unpair(leftEl, rightEl, container, broadcast = true) {
+            if (leftEl) {
+                leftEl._pairedWith = null;
+                leftEl.classList.remove('is-paired', 'correct', 'wrong');
+                leftEl.style.borderColor = '';
+                const b = leftEl.querySelector('.match-pair-badge');
+                if (b) b.remove();
+            }
+            if (rightEl) {
+                rightEl._pairedWith = null;
+                rightEl.classList.remove('is-paired', 'correct', 'wrong');
+                rightEl.style.borderColor = '';
+                const b = rightEl.querySelector('.match-pair-badge');
+                if (b) b.remove();
+            }
+
+            if (broadcast && window.presenterSyncEngine) {
+                window.presenterSyncEngine.emit('MATCH_PAIR_ACTION', {
+                    action: 'unpair',
+                    leftId: leftEl?.id || null,
+                    rightId: rightEl?.id || null,
+                    containerId: container.id || null
+                });
+            }
+        }
+
+        applyRemoteMatch(data) {
+            if (!data) return;
+            const container = data.containerId ? document.getElementById(data.containerId) : document.querySelector('.slide.active') || document;
+            if (!container) return;
+
+            const leftEl = document.getElementById(data.leftId);
+            const rightEl = document.getElementById(data.rightId);
+
+            if (data.action === 'pair' && leftEl && rightEl) {
+                this.pairItems(leftEl, rightEl, container, false);
+            } else if (data.action === 'unpair') {
+                this.unpair(leftEl, rightEl, container, false);
+            }
+        }
+
+        checkAnswers(container) {
+            const exercises = container.querySelectorAll('.matching-pairs-exercise, .match-exercise');
+            if (exercises.length === 0) return { total: 0, correct: 0 };
+
+            let total = 0;
+            let correct = 0;
+
+            exercises.forEach(ex => {
+                const leftItems = ex.querySelectorAll('.match-left-item, [data-match-left]');
+                leftItems.forEach(left => {
+                    total++;
+                    const expectedMatch = (left.dataset.matchLeft || left.dataset.ans || '').trim().toLowerCase();
+                    const pairedRight = left._pairedWith;
+
+                    left.classList.remove('correct', 'wrong');
+                    if (pairedRight) pairedRight.classList.remove('correct', 'wrong');
+
+                    if (pairedRight) {
+                        const rightVal = (pairedRight.dataset.matchRight || pairedRight.dataset.key || pairedRight.innerText || '').trim().toLowerCase();
+                        if (expectedMatch && (rightVal === expectedMatch || expectedMatch.includes(rightVal))) {
+                            left.classList.add('correct');
+                            pairedRight.classList.add('correct');
+                            correct++;
+                        } else {
+                            left.classList.add('wrong');
+                            pairedRight.classList.add('wrong');
+                        }
+                    } else {
+                        left.classList.add('wrong');
+                    }
+                });
+            });
+
+            return { total, correct };
+        }
+
+        revealKeys(container) {
+            const exercises = container.querySelectorAll('.matching-pairs-exercise, .match-exercise');
+            exercises.forEach(ex => {
+                const leftItems = ex.querySelectorAll('.match-left-item, [data-match-left]');
+                const rightItems = ex.querySelectorAll('.match-right-item, [data-match-right]');
+
+                leftItems.forEach(left => {
+                    const expectedMatch = (left.dataset.matchLeft || left.dataset.ans || '').trim().toLowerCase();
+                    for (const right of rightItems) {
+                        const rightVal = (right.dataset.matchRight || right.dataset.key || right.innerText || '').trim().toLowerCase();
+                        if (expectedMatch && (rightVal === expectedMatch || expectedMatch.includes(rightVal))) {
+                            this.pairItems(left, right, ex, false);
+                            left.classList.add('correct');
+                            right.classList.add('correct');
+                            break;
+                        }
+                    }
+                });
+            });
+            this.clearActiveSelection();
+        }
+
+        resetTask(container) {
+            const exercises = container.querySelectorAll('.matching-pairs-exercise, .match-exercise');
+            exercises.forEach(ex => {
+                ex._pairCount = 0;
+                ex.querySelectorAll('.match-left-item, .match-right-item, [data-match-left], [data-match-right]').forEach(el => {
+                    el._pairedWith = null;
+                    el.classList.remove('is-paired', 'correct', 'wrong', 'active-match-select');
+                    el.style.borderColor = '';
+                    const b = el.querySelector('.match-pair-badge');
+                    if (b) b.remove();
+                });
+            });
+            this.clearActiveSelection();
+        }
+    }
+
+    // Export singleton
+    window.matchingPairsEngine = new MatchingPairsEngine();
+})();
+
+
+/* ==================== MODULE: choice-selector.js ==================== */
+/**
+ * =========================================================================
+ * UNIVERSAL CHOICE & TFNG PILL SELECTOR ENGINE
+ * Course Presentations Architecture — Expert IELTS Masterclass
+ * Interactive True/False/Not Given, Yes/No/Not Given & Multiple Choice pills
+ * =========================================================================
+ */
+
+(function () {
+    'use strict';
+
+    class ChoiceSelectorEngine {
+        constructor() {
+            this.init();
+        }
+
+        init() {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => this.bindAll());
+            } else {
+                this.bindAll();
+            }
+
+            if (window.presenterSyncEngine) {
+                window.presenterSyncEngine.on('CHOICE_SELECT_ACTION', (data) => {
+                    this.applyRemoteSelect(data);
+                });
+            }
+
+            document.addEventListener('deck:slide-change', () => this.bindAll());
+            document.addEventListener('DOMContentLoaded', () => {
+                const observer = new MutationObserver(() => this.bindAll());
+                observer.observe(document.body, { childList: true, subtree: true });
+            });
+        }
+
+        bindAll() {
+            document.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options').forEach(group => {
+                this.setupGroup(group);
+            });
+        }
+
+        setupGroup(group) {
+            if (group._choiceInitialized) return;
+            group._choiceInitialized = true;
+
+            const isMulti = group.hasAttribute('data-multi') || group.classList.contains('multi-select');
+            const buttons = group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, [data-choice]');
+
+            buttons.forEach((btn, idx) => {
+                if (!btn.id) btn.id = `choice-btn-${Date.now()}-${idx}-${Math.random().toString(36).substr(2, 3)}`;
+
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.selectButton(btn, group, isMulti, true);
+                });
+            });
+        }
+
+        selectButton(btn, group, isMulti, broadcast = true) {
+            if (!isMulti) {
+                group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, [data-choice]').forEach(b => {
+                    if (b !== btn) {
+                        b.classList.remove('selected', 'correct', 'wrong');
+                    }
+                });
+                btn.classList.toggle('selected');
+            } else {
+                btn.classList.toggle('selected');
+            }
+            btn.classList.remove('correct', 'wrong');
+
+            if (broadcast && window.presenterSyncEngine) {
+                window.presenterSyncEngine.emit('CHOICE_SELECT_ACTION', {
+                    btnId: btn.id,
+                    groupId: group.id || null,
+                    isSelected: btn.classList.contains('selected')
+                });
+            }
+        }
+
+        applyRemoteSelect(data) {
+            if (!data || !data.btnId) return;
+            const btn = document.getElementById(data.btnId);
+            if (!btn) return;
+            const group = btn.closest('.choice-group, .tfng-group, .ynng-group, .mcq-options');
+            if (!group) return;
+
+            const isMulti = group.hasAttribute('data-multi') || group.classList.contains('multi-select');
+            if (!isMulti) {
+                group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, [data-choice]').forEach(b => {
+                    b.classList.remove('selected');
+                });
+            }
+            if (data.isSelected) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
+        }
+
+        checkAnswers(container) {
+            const groups = container.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options');
+            if (groups.length === 0) return { total: 0, correct: 0 };
+
+            let total = 0;
+            let correct = 0;
+
+            groups.forEach(group => {
+                const targetAns = (group.dataset.ans || group.getAttribute('data-ans') || '').trim().toLowerCase();
+                if (!targetAns) return;
+
+                total++;
+                const validAnswers = targetAns.split('|').map(a => a.trim());
+                const selectedBtns = group.querySelectorAll('.selected');
+                const selectedVals = Array.from(selectedBtns).map(b => (b.dataset.choice || b.innerText || '').trim().toLowerCase());
+
+                let isGroupCorrect = selectedVals.length > 0 && selectedVals.every(v => validAnswers.includes(v)) && selectedVals.length === validAnswers.length;
+
+                selectedBtns.forEach(btn => {
+                    const val = (btn.dataset.choice || btn.innerText || '').trim().toLowerCase();
+                    btn.classList.remove('correct', 'wrong');
+                    if (validAnswers.includes(val)) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('wrong');
+                    }
+                });
+
+                if (isGroupCorrect) {
+                    correct++;
+                }
+            });
+
+            return { total, correct };
+        }
+
+        revealKeys(container) {
+            const groups = container.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options');
+            groups.forEach(group => {
+                const targetAns = (group.dataset.ans || group.getAttribute('data-ans') || '').trim().toLowerCase();
+                if (!targetAns) return;
+
+                const validAnswers = targetAns.split('|').map(a => a.trim());
+                group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, [data-choice]').forEach(btn => {
+                    const val = (btn.dataset.choice || btn.innerText || '').trim().toLowerCase();
+                    btn.classList.remove('selected', 'wrong');
+                    if (validAnswers.includes(val)) {
+                        btn.classList.add('selected', 'correct');
+                    }
+                });
+            });
+        }
+
+        resetTask(container) {
+            const groups = container.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options');
+            groups.forEach(group => {
+                group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, [data-choice]').forEach(btn => {
+                    btn.classList.remove('selected', 'correct', 'wrong');
+                });
+            });
+        }
+    }
+
+    // Export singleton
+    window.choiceSelectorEngine = new ChoiceSelectorEngine();
+})();
+
+
+/* ==================== MODULE: sentence-scramble.js ==================== */
+/**
+ * =========================================================================
+ * UNIVERSAL SENTENCE SCRAMBLE & CLAUSE REORDERING ENGINE
+ * Course Presentations Architecture — Expert IELTS Masterclass
+ * Interactive sentence unscramble, syntax ordering, and clause sequencing
+ * =========================================================================
+ */
+
+(function () {
+    'use strict';
+
+    class SentenceScrambleEngine {
+        constructor() {
+            this.selectedChip = null;
+            this.init();
+        }
+
+        init() {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => this.bindAll());
+            } else {
+                this.bindAll();
+            }
+
+            if (window.presenterSyncEngine) {
+                window.presenterSyncEngine.on('SCRAMBLE_MOVE_ACTION', (data) => {
+                    this.applyRemoteMove(data);
+                });
+            }
+
+            document.addEventListener('deck:slide-change', () => this.bindAll());
+            document.addEventListener('DOMContentLoaded', () => {
+                const observer = new MutationObserver(() => this.bindAll());
+                observer.observe(document.body, { childList: true, subtree: true });
+            });
+        }
+
+        bindAll() {
+            document.querySelectorAll('.sentence-scramble, .syntax-reorder').forEach(container => {
+                this.setupExercise(container);
+            });
+        }
+
+        setupExercise(container) {
+            if (container._scrambleInitialized) return;
+            container._scrambleInitialized = true;
+
+            const pool = container.querySelector('.scramble-pool');
+            const targetLine = container.querySelector('.scramble-target-line');
+            const chips = container.querySelectorAll('.scramble-chip');
+
+            chips.forEach((chip, idx) => {
+                if (!chip.id) chip.id = `scramble-chip-${Date.now()}-${idx}`;
+                chip._homePool = pool;
+                chip.setAttribute('draggable', 'true');
+
+                chip.addEventListener('dragstart', (e) => {
+                    chip.classList.add('dragging');
+                    e.dataTransfer.setData('text/plain', chip.id);
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+
+                chip.addEventListener('dragend', () => {
+                    chip.classList.remove('dragging');
+                    container.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+                });
+
+                chip.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.handleChipClick(chip, container);
+                });
+            });
+
+            if (pool) this.setupDropZone(pool, container, true);
+            if (targetLine) this.setupDropZone(targetLine, container, false);
+        }
+
+        setupDropZone(zone, container, isPool) {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.classList.add('drag-over');
+            });
+
+            zone.addEventListener('dragleave', (e) => {
+                if (!zone.contains(e.relatedTarget)) {
+                    zone.classList.remove('drag-over');
+                }
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+                const chipId = e.dataTransfer.getData('text/plain');
+                const chip = document.getElementById(chipId);
+                if (chip && container.contains(chip)) {
+                    this.moveChip(chip, zone, container, true);
+                }
+            });
+
+            zone.addEventListener('click', () => {
+                if (this.selectedChip && container.contains(this.selectedChip)) {
+                    this.moveChip(this.selectedChip, zone, container, true);
+                    this.clearSelection();
+                }
+            });
+        }
+
+        handleChipClick(chip, container) {
+            const parent = chip.parentElement;
+            const isInsidePool = parent.classList.contains('scramble-pool');
+
+            if (!isInsidePool) {
+                // If in target line, clicking returns it to pool
+                const pool = chip._homePool || container.querySelector('.scramble-pool');
+                if (pool) this.moveChip(chip, pool, container, true);
+            } else {
+                // If in pool, clicking moves it into target line
+                const targetLine = container.querySelector('.scramble-target-line');
+                if (targetLine) this.moveChip(chip, targetLine, container, true);
+            }
+        }
+
+        moveChip(chip, targetZone, container, broadcast = true) {
+            if (!chip || !targetZone) return;
+            chip.classList.remove('correct', 'wrong');
+            targetZone.appendChild(chip);
+
+            if (broadcast && window.presenterSyncEngine) {
+                window.presenterSyncEngine.emit('SCRAMBLE_MOVE_ACTION', {
+                    chipId: chip.id,
+                    isPool: targetZone.classList.contains('scramble-pool'),
+                    containerId: container.id || null
+                });
+            }
+        }
+
+        applyRemoteMove(data) {
+            if (!data || !data.chipId) return;
+            const chip = document.getElementById(data.chipId);
+            if (!chip) return;
+            const container = chip.closest('.sentence-scramble, .syntax-reorder');
+            if (!container) return;
+
+            const targetZone = data.isPool
+                ? container.querySelector('.scramble-pool')
+                : container.querySelector('.scramble-target-line');
+
+            if (targetZone) this.moveChip(chip, targetZone, container, false);
+        }
+
+        clearSelection() {
+            if (this.selectedChip) {
+                this.selectedChip.classList.remove('selected-chip');
+                this.selectedChip = null;
+            }
+        }
+
+        checkAnswers(container) {
+            const exercises = container.querySelectorAll('.sentence-scramble, .syntax-reorder');
+            if (exercises.length === 0) return { total: 0, correct: 0 };
+
+            let total = 0;
+            let correct = 0;
+
+            exercises.forEach(ex => {
+                const targetLine = ex.querySelector('.scramble-target-line');
+                const targetAns = (ex.dataset.ans || ex.getAttribute('data-ans') || '').trim().toLowerCase();
+                if (!targetLine || !targetAns) return;
+
+                total++;
+                const placedChips = targetLine.querySelectorAll('.scramble-chip');
+                const placedText = Array.from(placedChips).map(c => c.innerText.trim()).join(' ').toLowerCase();
+
+                targetLine.classList.remove('correct', 'wrong');
+                if (placedText === targetAns) {
+                    targetLine.classList.add('correct');
+                    placedChips.forEach(c => c.classList.add('correct'));
+                    correct++;
+                } else {
+                    targetLine.classList.add('wrong');
+                    placedChips.forEach(c => c.classList.add('wrong'));
+                }
+            });
+
+            return { total, correct };
+        }
+
+        revealKeys(container) {
+            const exercises = container.querySelectorAll('.sentence-scramble, .syntax-reorder');
+            exercises.forEach(ex => {
+                const targetLine = ex.querySelector('.scramble-target-line');
+                const targetAns = (ex.dataset.ans || ex.getAttribute('data-ans') || '').trim();
+                if (!targetLine || !targetAns) return;
+
+                const words = targetAns.split(' ');
+                const allChips = Array.from(ex.querySelectorAll('.scramble-chip'));
+
+                words.forEach(word => {
+                    const matchIdx = allChips.findIndex(c => c.innerText.trim().toLowerCase() === word.toLowerCase() && c.parentElement !== targetLine);
+                    if (matchIdx !== -1) {
+                        const chip = allChips.splice(matchIdx, 1)[0];
+                        targetLine.appendChild(chip);
+                        chip.classList.add('correct');
+                    }
+                });
+                targetLine.classList.add('correct');
+            });
+        }
+
+        resetTask(container) {
+            const exercises = container.querySelectorAll('.sentence-scramble, .syntax-reorder');
+            exercises.forEach(ex => {
+                const pool = ex.querySelector('.scramble-pool');
+                const targetLine = ex.querySelector('.scramble-target-line');
+                if (pool && targetLine) {
+                    targetLine.querySelectorAll('.scramble-chip').forEach(chip => {
+                        chip.classList.remove('correct', 'wrong');
+                        pool.appendChild(chip);
+                    });
+                    targetLine.classList.remove('correct', 'wrong');
+                }
+            });
+        }
+    }
+
+    // Export singleton
+    window.sentenceScrambleEngine = new SentenceScrambleEngine();
 })();
 
 

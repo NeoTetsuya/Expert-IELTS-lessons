@@ -442,6 +442,30 @@ class DeckEngine {
             }
         }
 
+        // Check matching pairs exercises
+        if (window.matchingPairsEngine) {
+            const matchResult = window.matchingPairsEngine.checkAnswers(container);
+            if (matchResult.total > 0) {
+                this.showToastNotification(`✅ ${matchResult.correct} / ${matchResult.total} matched correctly`);
+            }
+        }
+
+        // Check choice / TFNG pills
+        if (window.choiceSelectorEngine) {
+            const choiceResult = window.choiceSelectorEngine.checkAnswers(container);
+            if (choiceResult.total > 0) {
+                this.showToastNotification(`✅ ${choiceResult.correct} / ${choiceResult.total} choices correct`);
+            }
+        }
+
+        // Check sentence scramble exercises
+        if (window.sentenceScrambleEngine) {
+            const scrambleResult = window.sentenceScrambleEngine.checkAnswers(container);
+            if (scrambleResult.total > 0) {
+                this.showToastNotification(`✅ ${scrambleResult.correct} / ${scrambleResult.total} sentences correct`);
+            }
+        }
+
         // Show score toast for standard inputs
         const allInputs = container.querySelectorAll('.blank-input[data-ans], .select-input[data-ans]');
         if (allInputs.length > 0) {
@@ -465,6 +489,15 @@ class DeckEngine {
 
         if (window.categorySorter) {
             window.categorySorter.revealKeys(container);
+        }
+        if (window.matchingPairsEngine) {
+            window.matchingPairsEngine.revealKeys(container);
+        }
+        if (window.choiceSelectorEngine) {
+            window.choiceSelectorEngine.revealKeys(container);
+        }
+        if (window.sentenceScrambleEngine) {
+            window.sentenceScrambleEngine.revealKeys(container);
         }
 
         container.querySelectorAll('.blank-input').forEach(input => {
@@ -524,6 +557,15 @@ class DeckEngine {
 
         if (window.categorySorter) {
             window.categorySorter.resetTask(container);
+        }
+        if (window.matchingPairsEngine) {
+            window.matchingPairsEngine.resetTask(container);
+        }
+        if (window.choiceSelectorEngine) {
+            window.choiceSelectorEngine.resetTask(container);
+        }
+        if (window.sentenceScrambleEngine) {
+            window.sentenceScrambleEngine.resetTask(container);
         }
 
         container.querySelectorAll('.blank-input, .select-input').forEach(input => {
