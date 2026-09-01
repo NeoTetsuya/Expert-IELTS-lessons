@@ -434,7 +434,15 @@ class DeckEngine {
         slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
         slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
 
-        // Show score toast
+        // Check category sorter exercises
+        if (window.categorySorter) {
+            const catResult = window.categorySorter.checkAnswers(container);
+            if (catResult.total > 0) {
+                this.showToastNotification(`✅ ${catResult.correct} / ${catResult.total} categorized correctly`);
+            }
+        }
+
+        // Show score toast for standard inputs
         const allInputs = container.querySelectorAll('.blank-input[data-ans], .select-input[data-ans]');
         if (allInputs.length > 0) {
             const correctCount = container.querySelectorAll('.blank-input.correct, .select-input.correct').length;
@@ -454,6 +462,10 @@ class DeckEngine {
         const rawContainerId = typeof container === 'string' ? container : (container?.id || null);
         container = this._resolveContainer(container);
         if (!container) return;
+
+        if (window.categorySorter) {
+            window.categorySorter.revealKeys(container);
+        }
 
         container.querySelectorAll('.blank-input').forEach(input => {
             if (input.dataset.ans) {
@@ -506,6 +518,10 @@ class DeckEngine {
         const rawContainerId = typeof container === 'string' ? container : (container?.id || null);
         container = this._resolveContainer(container);
         if (!container) return;
+
+        if (window.categorySorter) {
+            window.categorySorter.resetTask(container);
+        }
 
         container.querySelectorAll('.blank-input, .select-input').forEach(input => {
             input.value = '';

@@ -1,0 +1,255 @@
+/* ==========================================================================
+   CATEGORY SORTER COMPONENT (Universal Drag & Drop / Tap-to-Place)
+   High-legibility typography, tactile animations, theme-shield compatible.
+   ========================================================================== */
+
+.category-sorter {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    user-select: none;
+}
+
+/* 1. Word Bank Pool Card */
+.category-bank-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px 22px;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    border-left: 6px solid var(--col-vocab, #059669);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.category-bank-title {
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--col-vocab, #059669);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.category-chip-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 48px;
+    padding: 6px 4px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.category-chip-pool.drag-over {
+    background: rgba(5, 150, 105, 0.08);
+    outline: 2px dashed var(--col-vocab, #059669);
+}
+
+/* 2. Draggable Chips */
+.category-chip {
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    color: #0f172a;
+    font-size: calc(18.5px * var(--font-scale, 1));
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: 9999px;
+    cursor: grab;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.15s ease,
+                border-color 0.15s ease,
+                background-color 0.15s ease;
+}
+
+.category-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-color: var(--col-vocab, #059669);
+}
+
+.category-chip:active, .category-chip.dragging {
+    cursor: grabbing;
+    opacity: 0.65;
+    transform: scale(0.96) rotate(-1.5deg);
+}
+
+.category-chip.selected-chip {
+    outline: 2.5px solid var(--col-vocab, #059669);
+    outline-offset: 2px;
+    border-color: var(--col-vocab, #059669);
+    background: rgba(5, 150, 105, 0.08);
+    animation: chipPulse 1.4s infinite alternate;
+}
+
+@keyframes chipPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+/* Validation Feedback on Chips */
+.category-chip.correct {
+    background: #dcfce7 !important;
+    border-color: #22c55e !important;
+    color: #15803d !important;
+}
+
+.category-chip.correct::after {
+    content: "✓";
+    font-weight: 900;
+    color: #16a34a;
+    margin-left: 2px;
+}
+
+.category-chip.wrong {
+    background: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    color: #b91c1c !important;
+}
+
+.category-chip.wrong::after {
+    content: "✗";
+    font-weight: 900;
+    color: #dc2626;
+    margin-left: 2px;
+}
+
+.category-chip.unplaced {
+    border-color: #f59e0b !important;
+    background: #fef3c7 !important;
+    color: #92400e !important;
+}
+
+/* 3. Category Table & Drop Zones */
+.category-table-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    overflow-x: auto;
+}
+
+.category-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    font-size: calc(18px * var(--font-scale, 1));
+}
+
+.category-table thead th {
+    padding: 6px 12px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted, #64748b);
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.category-table tbody tr {
+    background: #f8fafc;
+    border-radius: 10px;
+    transition: background-color 0.15s ease;
+}
+
+.category-table tbody td {
+    padding: 10px 14px;
+    vertical-align: middle;
+}
+
+.category-table tbody td.cat-label {
+    font-weight: 800;
+    font-size: calc(18.5px * var(--font-scale, 1));
+    color: var(--text-dark, #0f172a);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-left: 4px solid var(--col-vocab, #059669);
+    white-space: nowrap;
+}
+
+.category-table tbody td.cat-extra {
+    font-size: calc(16.5px * var(--font-scale, 1));
+    color: var(--text-muted, #64748b);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.category-drop-zone {
+    min-height: 48px;
+    background: #ffffff;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 6px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.category-drop-zone:empty::before {
+    content: attr(data-placeholder);
+    color: #94a3b8;
+    font-size: calc(15px * var(--font-scale, 1));
+    font-style: italic;
+}
+
+.category-drop-zone.drag-over {
+    background: rgba(5, 150, 105, 0.08);
+    border: 2px dashed var(--col-vocab, #059669);
+    transform: scale(1.01);
+}
+
+/* ==========================================================================
+   DARK THEME COMPATIBILITY FOR CATEGORY SORTER
+   ========================================================================== */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .category-bank-card,
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .category-table-card {
+    background: rgba(30, 41, 59, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #f8fafc !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .category-table tbody tr {
+    background: rgba(15, 23, 42, 0.6) !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .category-table tbody td.cat-label {
+    color: #f8fafc !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .category-table tbody td.cat-extra {
+    color: #94a3b8 !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .category-drop-zone {
+    background: rgba(15, 23, 42, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .category-chip {
+    background: rgba(30, 41, 59, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: #f8fafc !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .category-chip.correct {
+    background: rgba(16, 185, 129, 0.28) !important;
+    border-color: #34d399 !important;
+    color: #ecfdf5 !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .category-chip.wrong {
+    background: rgba(239, 68, 68, 0.28) !important;
+    border-color: #f87171 !important;
+    color: #fef2f2 !important;
+}

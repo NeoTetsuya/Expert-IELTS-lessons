@@ -358,41 +358,85 @@
             </slide-card>
 
             <!-- SLIDE 18: Vocabulary 4b - Animal Kingdom Classification (Ex 1a & 1b) -->
-            <slide-card template="exercise-grid" skill="vocab" title="Vocabulary 4b: Animal Kingdom Classification (Ex 1a &amp; 1b)" instruction="Classify the animals into biological categories and identify wild vs. domestic species.">
+            <slide-card template="exercise-grid" skill="vocab" title="Vocabulary 4b: Animal Kingdom Classification (Ex 1a &amp; 1b)" instruction="Drag words or click to place them into the correct biological category.">
                 <div slot="grid" style="display:flex; flex-direction:column; gap:16px; width:100%;">
-                    <div class="card" style="background:#ffffff; border-left:5px solid var(--col-vocab); padding:16px 22px;">
-                        <div style="font-size:16px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--col-vocab); margin-bottom:8px;">📦 Word Bank (Ex 1a)</div>
-                        <div style="display:flex; flex-wrap:wrap; gap:10px; font-size:18px;">
-                            <span class="box-chip">alligator</span>
-                            <span class="box-chip">ant</span>
-                            <span class="box-chip">butterfly</span>
-                            <span class="box-chip">eagle</span>
-                            <span class="box-chip">gorilla</span>
-                            <span class="box-chip">lizard</span>
-                            <span class="box-chip">lobster</span>
-                            <span class="box-chip">octopus</span>
-                            <span class="box-chip">owl</span>
-                            <span class="box-chip">sheep</span>
+                    <div class="category-sorter" data-exercise="vocab-4b-1a">
+                        <!-- Word Bank Pool -->
+                        <div class="category-bank-card">
+                            <div class="category-bank-title">📦 Word Bank (Drag or click words to categorize)</div>
+                            <div class="category-chip-pool" id="vocab4bPool">
+                                <div class="category-chip" data-word="alligator" data-category="reptiles">alligator</div>
+                                <div class="category-chip" data-word="ant" data-category="insects">ant</div>
+                                <div class="category-chip" data-word="butterfly" data-category="insects">butterfly</div>
+                                <div class="category-chip" data-word="eagle" data-category="birds">eagle</div>
+                                <div class="category-chip" data-word="gorilla" data-category="mammals">gorilla</div>
+                                <div class="category-chip" data-word="lizard" data-category="reptiles">lizard</div>
+                                <div class="category-chip" data-word="lobster" data-category="sea-creatures">lobster</div>
+                                <div class="category-chip" data-word="octopus" data-category="sea-creatures">octopus</div>
+                                <div class="category-chip" data-word="owl" data-category="birds">owl</div>
+                                <div class="category-chip" data-word="sheep" data-category="mammals">sheep</div>
+                            </div>
                         </div>
-                    </div>
-                    <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:16px;">
-                        <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab); background:#ffffff;">
-                            <div style="font-weight:800; font-size:18px; color:var(--col-vocab); margin-bottom:8px;">🐾 Classification Categories</div>
-                            <table style="width:100%; border-collapse:collapse; font-size:18px; line-height:1.7;">
-                                <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:6px 10px; font-weight:700; width:140px;">Reptiles:</td><td>alligator, lizard <em>(+ crocodile, snake)</em></td></tr>
-                                <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:6px 10px; font-weight:700;">Mammals:</td><td>gorilla, sheep <em>(+ tiger, bear)</em></td></tr>
-                                <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:6px 10px; font-weight:700;">Insects:</td><td>ant, butterfly <em>(+ mosquito, fly)</em></td></tr>
-                                <tr style="border-bottom:1px solid #e2e8f0;"><td style="padding:6px 10px; font-weight:700;">Sea creatures:</td><td>lobster, octopus <em>(+ shark, whale)</em></td></tr>
-                                <tr><td style="padding:6px 10px; font-weight:700;">Birds:</td><td>eagle, owl <em>(+ penguin, hawk)</em></td></tr>
-                            </table>
-                        </div>
-                        <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab); background:#ffffff;">
-                            <div style="font-weight:800; font-size:18px; color:var(--col-vocab); margin-bottom:8px;">🌿 Domestic vs. Wild / Endangered (Ex 1b)</div>
-                            <ul style="padding-left:18px; font-size:17.5px; line-height:1.7; color:var(--text-dark); margin:0;">
-                                <li><strong>Domestic:</strong> <em>sheep</em> (farm livestock), <em>lizards</em> (pets).</li>
-                                <li><strong>Wild Species:</strong> gorillas, eagles, owls, octopuses, alligators.</li>
-                                <li><strong>Endangered Alert:</strong> Gorillas and certain species of alligator, owl, and butterfly face severe habitat loss.</li>
-                            </ul>
+
+                        <!-- Main Sorting Table & Analysis Grid -->
+                        <div style="display:grid; grid-template-columns:1.35fr 0.95fr; gap:16px;">
+                            <div class="category-table-card">
+                                <table class="category-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:160px;">Category</th>
+                                            <th>Target Category Drop Zone</th>
+                                            <th style="width:180px;">Added Examples</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="cat-label">🦎 Reptiles</td>
+                                            <td>
+                                                <div class="category-drop-zone" data-category="reptiles" data-placeholder="Drop or click reptile words here..."></div>
+                                            </td>
+                                            <td class="cat-extra"><em>crocodile, snake</em></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cat-label">🐘 Mammals</td>
+                                            <td>
+                                                <div class="category-drop-zone" data-category="mammals" data-placeholder="Drop or click mammal words here..."></div>
+                                            </td>
+                                            <td class="cat-extra"><em>tiger, bear</em></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cat-label">🐜 Insects</td>
+                                            <td>
+                                                <div class="category-drop-zone" data-category="insects" data-placeholder="Drop or click insect words here..."></div>
+                                            </td>
+                                            <td class="cat-extra"><em>mosquito, fly</em></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cat-label">🐙 Sea creatures</td>
+                                            <td>
+                                                <div class="category-drop-zone" data-category="sea-creatures" data-placeholder="Drop or click sea creature words here..."></div>
+                                            </td>
+                                            <td class="cat-extra"><em>shark, whale</em></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cat-label">🦅 Birds</td>
+                                            <td>
+                                                <div class="category-drop-zone" data-category="birds" data-placeholder="Drop or click bird words here..."></div>
+                                            </td>
+                                            <td class="cat-extra"><em>penguin, hawk</em></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="card" style="padding:18px 22px; border-left:5px solid var(--col-vocab); background:#ffffff; display:flex; flex-direction:column; justify-content:center;">
+                                <div style="font-weight:800; font-size:18.5px; color:var(--col-vocab); margin-bottom:10px;">🌿 Domestic vs. Wild / Endangered (Ex 1b)</div>
+                                <ul style="padding-left:18px; font-size:17.5px; line-height:1.7; color:var(--text-dark); margin:0;">
+                                    <li><strong>Domestic:</strong> <em>sheep</em> (farm livestock), <em>lizards</em> (often kept as pets).</li>
+                                    <li><strong>Wild Species:</strong> gorillas, eagles, owls, octopuses, alligators.</li>
+                                    <li><strong>Endangered Status:</strong> Gorillas and certain species of alligator, owl, and butterfly face severe habitat loss.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

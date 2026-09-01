@@ -56,6 +56,7 @@ if (!cssOnly) {
         'deck-charts.js',
         'grammar-reference.js',
         'presentation-tools.js',
+        'category-sorter.js',
         'presenter-sync.js',
         'presenter-drawing.js',
         'presenter-view.js',
