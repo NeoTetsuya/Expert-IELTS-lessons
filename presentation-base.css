@@ -1467,34 +1467,40 @@ span.vocab-term {
     display: inline;
 }
 
+.syn-pair-1.active-syn,
 span.syn-pair-1.active-syn {
     background: #bbf7d0 !important;
     color: #14532d !important;
-    font-weight: 700;
+    font-weight: 700 !important;
     border-bottom: 2.5px solid #16a34a !important;
-    padding: 2px 6px;
-    border-radius: 4px;
-    box-shadow: 0 0 12px rgba(22, 163, 74, 0.4);
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 0 12px rgba(22, 163, 74, 0.4) !important;
+    display: inline !important;
 }
 
+.syn-pair-2.active-syn,
 span.syn-pair-2.active-syn {
     background: #e9d5ff !important;
     color: #581c87 !important;
-    font-weight: 700;
+    font-weight: 700 !important;
     border-bottom: 2.5px solid #9333ea !important;
-    padding: 2px 6px;
-    border-radius: 4px;
-    box-shadow: 0 0 12px rgba(147, 51, 234, 0.4);
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 0 12px rgba(147, 51, 234, 0.4) !important;
+    display: inline !important;
 }
 
+.syn-pair-3.active-syn,
 span.syn-pair-3.active-syn {
     background: #bae6fd !important;
     color: #0369a1 !important;
-    font-weight: 700;
+    font-weight: 700 !important;
     border-bottom: 2.5px solid #0284c7 !important;
-    padding: 2px 6px;
-    border-radius: 4px;
-    box-shadow: 0 0 12px rgba(2, 132, 199, 0.4);
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 0 12px rgba(2, 132, 199, 0.4) !important;
+    display: inline !important;
 }
 
 /* Vocabulary Highlighting: Underline line + subtle color change, interactive on hover/click */
