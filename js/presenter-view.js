@@ -452,15 +452,16 @@ class PresenterViewUI {
                             <button class="cp-pill-btn" id="btnCpPrev" title="Previous Slide (Left Arrow / PageUp)">‹</button>
                             <span class="cp-pill-counter" id="cpSlideCounter">1 / 1</span>
                             <button class="cp-pill-btn" id="btnCpNext" title="Next Slide (Right Arrow / Space / PageDown)">›</button>
+                            <button class="cp-pill-btn" id="btnCpToggleFilmstrip" title="Toggle Thumbnail Filmstrip (F)">🎞️</button>
                             <button class="cp-pill-btn" id="btnCpZoom" title="Toggle Aspect Ratio (Shift+A)">📐</button>
                         </div>
 
-                        <!-- Fullscreen Toggle -->
-                        <button class="cp-fullscreen-btn" id="btnCpFullscreen" title="Toggle Fullscreen (F)">⤢</button>
+                        <!-- Fullscreen / Expand Slide Toggle -->
+                        <button class="cp-fullscreen-btn" id="btnCpFullscreen" title="Maximize Stage Preview (Double-click splitter)">⤢</button>
                     </div>
 
                     <!-- Bottom Horizontal Filmstrip Carousel -->
-                    <div class="cp-filmstrip-section">
+                    <div class="cp-filmstrip-section" id="cpFilmstripSection">
                         <button class="cp-filmstrip-scroll-btn left" id="btnFilmstripLeft" title="Scroll left">‹</button>
                         <div class="cp-filmstrip-track" id="cpFilmstripTrack">
                             <!-- Populated with all slide thumbnails -->
@@ -1091,6 +1092,8 @@ class PresenterViewUI {
         const btnZoom = document.getElementById('btnCpZoom');
         const btnFullscreen = document.getElementById('btnCpFullscreen');
 
+        const btnToggleFilmstrip = document.getElementById('btnCpToggleFilmstrip');
+
         if (btnFirst) {
             btnFirst.onclick = () => window.deckEngine && window.deckEngine.showSlide(0);
         }
@@ -1099,6 +1102,16 @@ class PresenterViewUI {
         }
         if (btnNext) {
             btnNext.onclick = () => window.deckEngine && window.deckEngine.nextSlide();
+        }
+        if (btnToggleFilmstrip) {
+            btnToggleFilmstrip.onclick = () => {
+                const fs = document.getElementById('cpFilmstripSection');
+                if (fs) {
+                    fs.classList.toggle('collapsed');
+                    btnToggleFilmstrip.classList.toggle('active', !fs.classList.contains('collapsed'));
+                    setTimeout(() => this.updatePresenterSlideView(), 60);
+                }
+            };
         }
         if (btnZoom) {
             btnZoom.onclick = () => {
@@ -1110,11 +1123,33 @@ class PresenterViewUI {
             };
         }
         if (btnFullscreen) {
-            btnFullscreen.onclick = () => {
-                if (!document.fullscreenElement) {
-                    document.documentElement.requestFullscreen().catch(() => {});
-                } else {
-                    document.exitFullscreen().catch(() => {});
+            btnFullscreen.onclick = (e) => {
+                if (e.shiftKey) {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen().catch(() => {});
+                    } else {
+                        document.exitFullscreen().catch(() => {});
+                    }
+                    return;
+                }
+                const stageCol = document.getElementById('cpStageCol');
+                const notesCol = document.getElementById('cpNotesCol');
+                if (stageCol && notesCol) {
+                    const isExpanded = stageCol.classList.toggle('expanded');
+                    if (isExpanded) {
+                        stageCol.style.flex = '1 0 100%';
+                        notesCol.style.flex = '0 0 0%';
+                        notesCol.style.display = 'none';
+                        btnFullscreen.innerHTML = '⛶';
+                        btnFullscreen.title = 'Restore Notes Column';
+                    } else {
+                        stageCol.style.flex = '0 0 70%';
+                        notesCol.style.flex = '0 0 30%';
+                        notesCol.style.display = 'flex';
+                        btnFullscreen.innerHTML = '⤢';
+                        btnFullscreen.title = 'Maximize Stage Preview';
+                    }
+                    setTimeout(() => this.updatePresenterSlideView(), 60);
                 }
             };
         }
@@ -1750,14 +1785,15 @@ class PresenterViewUI {
         const targetW = is43 ? 1440 : 1920;
         const targetH = 1080;
 
-        const availW = Math.max(100, parentW - 48);
-        const availH = Math.max(100, parentH - 72);
+        // Tight margins so the slide expands and fills the viewport maximally
+        const availW = Math.max(100, parentW - 16);
+        const availH = Math.max(100, parentH - 36);
 
         const scale = Math.min(availW / targetW, availH / targetH);
         const scaledW = targetW * scale;
         const scaledH = targetH * scale;
         const offsetX = Math.max(0, (parentW - scaledW) / 2);
-        const offsetY = Math.max(0, (parentH - scaledH) / 2 - 12);
+        const offsetY = Math.max(0, (parentH - 24 - scaledH) / 2);
 
         scaler.style.width = `${targetW}px`;
         scaler.style.height = `${targetH}px`;
@@ -2250,13 +2286,14 @@ class PresenterViewUI {
 
             /* LEFT STAGE COLUMN */
             .cp-stage-col {
-                flex: 0 0 65%;
+                flex: 0 0 70%;
                 display: flex;
                 flex-direction: column;
                 background: #0f1015;
                 border-right: 1px solid rgba(255, 255, 255, 0.08);
                 overflow: hidden;
                 position: relative;
+                transition: flex 0.18s ease;
             }
             .cp-stage-viewport {
                 flex: 1;
@@ -2388,6 +2425,7 @@ class PresenterViewUI {
                 font-size: 14px;
                 cursor: pointer;
                 z-index: 200;
+                transition: all 0.15s ease;
             }
             .cp-fullscreen-btn:hover {
                 background: rgba(255, 255, 255, 0.2);
@@ -2396,14 +2434,22 @@ class PresenterViewUI {
 
             /* BOTTOM FILMSTRIP */
             .cp-filmstrip-section {
-                height: 104px;
+                height: 94px;
                 background: #14151b;
                 border-top: 1px solid rgba(255, 255, 255, 0.08);
                 display: flex;
                 align-items: center;
-                padding: 8px 12px;
+                padding: 6px 12px;
                 position: relative;
                 flex-shrink: 0;
+                transition: height 0.2s ease, opacity 0.2s ease;
+            }
+            .cp-filmstrip-section.collapsed {
+                height: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+                border-top: none !important;
+                opacity: 0 !important;
             }
             .cp-filmstrip-scroll-btn {
                 background: rgba(255, 255, 255, 0.06);
@@ -2517,11 +2563,12 @@ class PresenterViewUI {
 
             /* RIGHT NOTES & TOOLKIT COLUMN */
             .cp-notes-col {
-                flex: 0 0 35%;
+                flex: 0 0 30%;
                 display: flex;
                 flex-direction: column;
                 background: #14151b;
                 overflow: hidden;
+                transition: flex 0.18s ease;
             }
             .cp-notes-tabs {
                 height: 44px;
