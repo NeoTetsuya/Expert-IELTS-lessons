@@ -496,6 +496,9 @@ class DeckEngine {
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
         }
+        if (window.dragGapfillEngine) {
+            window.dragGapfillEngine.syncBankChips(container);
+        }
 
         if (broadcast && window.presenterSyncEngine) {
             window.presenterSyncEngine.emit('EXERCISE_ACTION', {
@@ -530,6 +533,10 @@ class DeckEngine {
                 DeckComponents.autoResizeBlank(input);
             }
         });
+
+        if (window.dragGapfillEngine) {
+            window.dragGapfillEngine.syncBankChips(container);
+        }
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
         const slideContext = container.closest('.slide') || document.querySelector('.slide.active') || document;

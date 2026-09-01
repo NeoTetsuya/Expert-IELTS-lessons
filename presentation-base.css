@@ -2840,6 +2840,84 @@ table td, table th {
 
 
 
+/* ==========================================================================
+   UNIVERSAL DRAG & DROP GAP-FILL & WORD BANK STYLES
+   ========================================================================== */
+
+/* Interactive Gap Word Chips */
+.interactive-gap-chip {
+    cursor: grab !important;
+    user-select: none;
+    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.15s ease,
+                border-color 0.15s ease,
+                opacity 0.2s ease,
+                background-color 0.15s ease;
+}
+
+.interactive-gap-chip:hover:not(.chip-used) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    border-color: var(--col-vocab, #059669) !important;
+}
+
+.interactive-gap-chip:active:not(.chip-used),
+.interactive-gap-chip.dragging {
+    cursor: grabbing !important;
+    opacity: 0.65;
+    transform: scale(0.96) rotate(-1.5deg);
+}
+
+.interactive-gap-chip.selected-chip {
+    outline: 2.5px solid var(--col-vocab, #059669);
+    outline-offset: 2px;
+    border-color: var(--col-vocab, #059669) !important;
+    background: rgba(5, 150, 105, 0.1) !important;
+    animation: gapChipPulse 1.4s infinite alternate;
+}
+
+@keyframes gapChipPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.06); }
+}
+
+.interactive-gap-chip.chip-used {
+    opacity: 0.38;
+    background: #e2e8f0 !important;
+    border-color: #cbd5e1 !important;
+    color: #64748b !important;
+    cursor: pointer;
+    text-decoration: line-through;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* Gap Drop Targets (Inputs & Custom Gaps) */
+.gap-drop-target {
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+    cursor: pointer;
+}
+
+.gap-drop-target.drag-over {
+    background: rgba(5, 150, 105, 0.12) !important;
+    border-color: var(--col-vocab, #059669) !important;
+    transform: scale(1.04);
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.25) !important;
+}
+
+/* Dark Theme Support */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .interactive-gap-chip.chip-used {
+    background: rgba(30, 41, 59, 0.4) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #64748b !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .gap-drop-target.drag-over {
+    background: rgba(16, 185, 129, 0.22) !important;
+    border-color: #34d399 !important;
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.35) !important;
+}
+
 /* =========================================================================
    12. INTERACTIVE IELTS CHARTS & DATA VISUALIZATIONS (TASK 1)
    ========================================================================= */

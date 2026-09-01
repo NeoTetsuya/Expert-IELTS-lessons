@@ -57,6 +57,7 @@ if (!cssOnly) {
         'grammar-reference.js',
         'presentation-tools.js',
         'category-sorter.js',
+        'drag-gapfill.js',
         'presenter-sync.js',
         'presenter-drawing.js',
         'presenter-view.js',
