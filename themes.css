@@ -5,131 +5,201 @@
 
 /* ==================== THEME MODULE: 00-theme-shield.css ==================== */
 /* ==========================================================================
-   GLOBAL DARK THEME CONTRAST & LEGIBILITY SHIELD
-   Universal High-Legibility Protection across ALL dark themes:
-   bold-signal, academic-editorial, electric, voltage, vellum, broadside,
-   8-bit-orbit, midnight-ocean, obsidian-gold, cyber-slate, dark-editorial
+   UNIVERSAL THEME CONTRAST & LEGIBILITY SHIELD
+   Guarantees 100% text contrast and readability across ALL 27 theme presets
+   (Light/Paper, Editorial, Brutalist, Retro, and Cyberpunk Dark).
    ========================================================================== */
 
-/* Universal Dark Theme Selector List */
-:root[data-theme="bold-signal"],
-:root[data-theme="academic-editorial"],
-:root[data-theme="dark-editorial"],
-:root[data-theme="electric"],
-:root[data-theme="voltage"],
-:root[data-theme="vellum"],
-:root[data-theme="broadside"],
-:root[data-theme="8-bit-orbit"],
-:root[data-theme="midnight-ocean"],
-:root[data-theme="obsidian-gold"],
-:root[data-theme="cyber-slate"],
-:root[data-theme="dark"],
-.dark-theme,
-[data-theme="bold-signal"],
-[data-theme="academic-editorial"],
-[data-theme="dark-editorial"],
-[data-theme="electric"],
-[data-theme="voltage"],
-[data-theme="vellum"],
-[data-theme="broadside"],
-[data-theme="8-bit-orbit"],
-[data-theme="midnight-ocean"],
-[data-theme="obsidian-gold"],
-[data-theme="cyber-slate"],
-[data-theme="dark"] {
+/* ==========================================================================
+   PART 1: LIGHT THEMES LEGIBILITY & CONTRAST
+   Applies to: academic, bold-signal, vintage, botanical, block-frame, coral,
+   soft-editorial, cartesian, bauhaus-bold, swiss-ikb, kraft-paper, monochrome,
+   pin-and-paper, retro-windows, stencil-tablet, biennale-yellow, sakura-chroma,
+   cobalt-grid, grove, emerald-editorial, editorial-tri-tone
+   ========================================================================== */
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) {
+    --text-dark: #0f172a;
+    --text-body: #1e293b;
+    --text-muted: #64748b;
+}
+
+/* Light Theme Base Containers & Typography */
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .notebook {
+    color: #0f172a;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) :is(.reading-pane, .question-pane, .strategy-card, .walkthrough-container, .discuss-card, .rule-card, .model-breakdown-card, .word-bank-card) {
+    color: #0f172a;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) :is(.reading-pane p, .question-pane p, .walkthrough-container p, .sentence-text, .discuss-text) {
+    color: #0f172a;
+}
+
+/* Light Theme Option Box & Box Chips */
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .box-chip {
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .box-chip strong {
+    color: var(--col-reading, #2563eb) !important;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) :is(.blank-input, .select-input) {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1.5px solid #cbd5e1 !important;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .select-input option {
+    background: #ffffff !important;
+    color: #0f172a !important;
+}
+
+
+/* ==========================================================================
+   PART 2: DARK THEMES LEGIBILITY & CONTRAST
+   Applies to: electric, voltage, vellum, broadside, 8-bit-orbit, dark
+   ========================================================================== */
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) {
     --text-dark: #f8fafc;
     --text-body: #e2e8f0;
     --text-muted: #94a3b8;
 }
 
-/* Base Container & Card Typography in Dark Themes */
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) .notebook {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .notebook {
     color: #f8fafc !important;
 }
 
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) :is(.card, .rule-card, .q-card, .discuss-card, .reading-pane, .question-pane, .walkthrough-container, .model-breakdown-card, .word-bank-card) {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(.card, .rule-card, .q-card, .discuss-card, .reading-pane, .question-pane, .walkthrough-container, .model-breakdown-card, .word-bank-card) {
     color: #f8fafc !important;
 }
 
-/* Walkthrough Containers & Passages */
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) :is([data-slot="passage-text"], [data-slot="question-text"], .sentence-text, .walkthrough-container p, .walkthrough-container span, .discuss-text, .card p, .card span) {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([data-slot="passage-text"], [data-slot="question-text"], .sentence-text, .walkthrough-container p, .discuss-text) {
     color: #f8fafc !important;
 }
 
-/* Form Controls in Dark Themes */
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) :is(.blank-input, .select-input) {
+/* Dark Theme Form Controls */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(.blank-input, .select-input) {
     background: rgba(15, 23, 42, 0.88) !important;
     color: #f8fafc !important;
     border: 1.5px solid rgba(255, 255, 255, 0.28) !important;
 }
 
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) .select-input option {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .select-input option {
     background: #0f172a !important;
     color: #f8fafc !important;
 }
 
+/* Dark Theme Option Box Container & Chips */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background:#eff6ff"], [style*="background: #eff6ff"], [style*="background:#f8fafc"], [style*="background: #f8fafc"]) {
+    background: rgba(15, 23, 42, 0.85) !important;
+    border: 1.5px solid rgba(56, 189, 248, 0.3) !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .box-chip {
+    background: rgba(30, 41, 59, 0.9) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+    color: #f8fafc !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .box-chip strong {
+    color: #38bdf8 !important;
+}
+
+/* Dark Theme Strategy Guide Pastel Boxes (Adaptive Tinted Contrast) */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background: #e0f2fe"], [style*="background:#e0f2fe"]) {
+    background: rgba(2, 132, 199, 0.22) !important;
+    border-color: rgba(56, 189, 248, 0.4) !important;
+    color: #e0f2fe !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background: #e0f2fe"], [style*="background:#e0f2fe"]) strong {
+    color: #38bdf8 !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background: #fef9c3"], [style*="background:#fef9c3"]) {
+    background: rgba(202, 138, 4, 0.22) !important;
+    border-color: rgba(250, 204, 21, 0.4) !important;
+    color: #fef08a !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background: #fef9c3"], [style*="background:#fef9c3"]) strong {
+    color: #facc15 !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background: #f3e8ff"], [style*="background:#f3e8ff"]) {
+    background: rgba(147, 51, 234, 0.22) !important;
+    border-color: rgba(192, 132, 252, 0.4) !important;
+    color: #f3e8ff !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background: #f3e8ff"], [style*="background:#f3e8ff"]) strong {
+    color: #c084fc !important;
+}
+
 /* Syn-btn & Evidence Button in Dark Themes */
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) .syn-btn {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .syn-btn {
     background: rgba(30, 41, 59, 0.85) !important;
     color: #f8fafc !important;
     border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
 }
 
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) .syn-btn:hover {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .syn-btn:hover {
     background: var(--col-reading, #2563eb) !important;
     color: #ffffff !important;
     border-color: var(--col-reading, #2563eb) !important;
 }
 
 /* Word Chips in Dark Themes */
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) :is(.word-chip, .vocab-chip) {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(.word-chip, .vocab-chip) {
     background: rgba(30, 41, 59, 0.85) !important;
     color: #f8fafc !important;
     border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
 }
 
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) :is(.word-chip:hover, .vocab-chip:hover) {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(.word-chip:hover, .vocab-chip:hover) {
     background: var(--col-reading, #38bdf8) !important;
     color: #0f172a !important;
     border-color: var(--col-reading, #38bdf8) !important;
 }
 
-/* Force child elements with inline color:#0f172a or #1a1a1a to adopt crisp light text */
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) :is([style*="color:#0f172a"], [style*="color: #0f172a"], [style*="color:#1a1a1a"], [style*="color: #1a1a1a"], [style*="color:#1e293b"], [style*="color: #1e293b"]) {
-    color: #f8fafc !important;
-}
-
 /* Evidence highlights & synonyms contrast in dark themes */
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) mark.evidence {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) mark.evidence {
     color: #f8fafc !important;
 }
 
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) mark.evidence.highlighted {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) mark.evidence.highlighted {
     background: rgba(254, 240, 138, 0.22) !important;
     color: #fef08a !important;
     border-bottom: 2px solid #facc15 !important;
 }
 
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) span.syn-pair-1.active-syn {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) span.syn-pair-1.active-syn {
     background: rgba(74, 222, 128, 0.22) !important;
     color: #86efac !important;
     border-bottom: 2.5px solid #4ade80 !important;
 }
 
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) span.syn-pair-2.active-syn {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) span.syn-pair-2.active-syn {
     background: rgba(192, 132, 252, 0.22) !important;
     color: #d8b4fe !important;
     border-bottom: 2.5px solid #c084fc !important;
 }
 
 /* Secondary Action Buttons in dark themes */
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) .btn-action:not(.btn-primary) {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .btn-action:not(.btn-primary) {
     background: rgba(255, 255, 255, 0.08) !important;
     border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
     color: #f8fafc !important;
 }
 
-:is([data-theme="bold-signal"], [data-theme="academic-editorial"], [data-theme="dark-editorial"], [data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="midnight-ocean"], [data-theme="obsidian-gold"], [data-theme="cyber-slate"], [data-theme="dark"], .dark-theme) .btn-action:not(.btn-primary):hover {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .btn-action:not(.btn-primary):hover {
     background: rgba(255, 255, 255, 0.18) !important;
     color: #ffffff !important;
     border-color: rgba(255, 255, 255, 0.4) !important;
