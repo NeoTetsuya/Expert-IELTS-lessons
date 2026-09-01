@@ -11,9 +11,9 @@
     color: var(--text-body, #1e293b);
 }
 
-.card p, .card li, .card span:not(.skill-badge):not(.model-tag):not(.cp-pill-counter):not(.section-module-tag) {
-    font-size: calc(21px * var(--font-scale, 1));
-    line-height: 1.75;
+.card p, .card li {
+    font-size: calc(18px * var(--font-scale, 1));
+    line-height: 1.7;
 }
 
 .card-sm {
