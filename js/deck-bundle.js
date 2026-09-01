@@ -10150,6 +10150,7 @@ window.addEventListener('DOMContentLoaded', () => {
  * UNIVERSAL DRAG-AND-DROP GAP-FILL & WORD BANK ENGINE
  * Course Presentations Architecture — Expert IELTS Masterclass
  * Enables drag & drop and tap-to-place word chips into all sentence blanks
+ * Supports slash-separated variants (e.g., "beach / beaches" -> "beaches")
  * =========================================================================
  */
 
@@ -10175,6 +10176,13 @@ window.addEventListener('DOMContentLoaded', () => {
                     this.applyRemoteGapFill(data);
                 });
             }
+
+            // Re-bind on slide navigation
+            document.addEventListener('deck:slide-change', () => this.bindAll());
+            document.addEventListener('DOMContentLoaded', () => {
+                const observer = new MutationObserver(() => this.bindAll());
+                observer.observe(document.body, { childList: true, subtree: true });
+            });
         }
 
         bindAll() {
@@ -10182,6 +10190,17 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.slide, .slide-card, .category-sorter, .exercise-container, .gap-fill-container').forEach(container => {
                 this.setupContainer(container);
             });
+        }
+
+        getChipVariants(chip) {
+            const rawText = (chip.dataset.word || chip.innerText || '').trim().toLowerCase();
+            if (rawText.includes('/')) {
+                return rawText.split('/').map(s => s.trim()).filter(Boolean);
+            }
+            if (rawText.includes('|')) {
+                return rawText.split('|').map(s => s.trim()).filter(Boolean);
+            }
+            return [rawText];
         }
 
         setupContainer(container) {
@@ -10244,17 +10263,19 @@ window.addEventListener('DOMContentLoaded', () => {
                 input.addEventListener('drop', (e) => {
                     e.preventDefault();
                     input.classList.remove('drag-over');
-                    const text = e.dataTransfer.getData('text/plain');
+                    const rawText = e.dataTransfer.getData('text/plain');
                     const chipId = e.dataTransfer.getData('chip-id');
-                    if (text) {
-                        this.fillInput(input, text, chipId, container, true);
+                    if (rawText) {
+                        const word = this.resolveBestWord(rawText, input);
+                        this.fillInput(input, word, chipId, container, true);
                     }
                 });
 
                 // Click input to place selected chip or clear existing value
                 input.addEventListener('click', () => {
                     if (this.selectedChip && container.contains(this.selectedChip)) {
-                        const word = this.selectedChip.innerText.trim();
+                        const rawText = this.selectedChip.innerText.trim();
+                        const word = this.resolveBestWord(rawText, input);
                         this.fillInput(input, word, this.selectedChip.id, container, true);
                         this.clearSelection();
                     } else if (input.value && input.value.trim() !== '') {
@@ -10271,15 +10292,41 @@ window.addEventListener('DOMContentLoaded', () => {
                     }
                 });
             });
+
+            // Initial sync
+            this.syncBankChips(container);
+        }
+
+        resolveBestWord(rawText, input) {
+            let candidates = [rawText.trim()];
+            if (rawText.includes('/')) {
+                candidates = rawText.split('/').map(s => s.trim()).filter(Boolean);
+            } else if (rawText.includes('|')) {
+                candidates = rawText.split('|').map(s => s.trim()).filter(Boolean);
+            }
+
+            if (candidates.length === 1) return candidates[0];
+
+            if (input && input.dataset.ans) {
+                const targetAnswers = input.dataset.ans.toLowerCase().split('|').map(a => a.trim());
+                for (const c of candidates) {
+                    if (targetAnswers.includes(c.toLowerCase())) {
+                        return c;
+                    }
+                }
+            }
+
+            return candidates[0];
         }
 
         handleChipClick(chip, container) {
             if (chip.classList.contains('chip-used')) {
-                // If chip is used, find the input that has this value and clear it
-                const chipWord = chip.innerText.trim().toLowerCase();
+                // If chip is used, find the input that has one of its variants and clear it
+                const variants = this.getChipVariants(chip);
                 const inputs = container.querySelectorAll('.blank-input, .drag-gap');
                 for (const input of inputs) {
-                    if (input.value && input.value.trim().toLowerCase() === chipWord) {
+                    const val = (input.value || '').trim().toLowerCase();
+                    if (val && variants.includes(val)) {
                         this.clearInput(input, container, true);
                         break;
                     }
@@ -10306,7 +10353,6 @@ window.addEventListener('DOMContentLoaded', () => {
         fillInput(input, word, chipId, container, broadcast = true) {
             if (!input || !word) return;
 
-            // If input already had a value, free up its previous word
             input.value = word;
             input.classList.remove('wrong', 'incorrect');
 
@@ -10361,11 +10407,26 @@ window.addEventListener('DOMContentLoaded', () => {
                 .map(inp => (inp.value || '').trim().toLowerCase())
                 .filter(v => v.length > 0);
 
+            // Track how many times each filled value was used to handle duplicate words
+            const usedCounts = {};
+            filledValues.forEach(v => {
+                usedCounts[v] = (usedCounts[v] || 0) + 1;
+            });
+
             // Mark matching chips as used
             chips.forEach(chip => {
-                const chipWord = chip.innerText.trim().toLowerCase();
-                const countUsed = filledValues.filter(v => v === chipWord || chipWord.includes(v)).length;
-                if (countUsed > 0) {
+                const variants = this.getChipVariants(chip);
+                let isUsed = false;
+
+                for (const v of variants) {
+                    if (usedCounts[v] && usedCounts[v] > 0) {
+                        isUsed = true;
+                        usedCounts[v]--;
+                        break;
+                    }
+                }
+
+                if (isUsed) {
                     chip.classList.add('chip-used');
                     chip.classList.remove('selected-chip');
                 } else {
