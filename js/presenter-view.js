@@ -185,11 +185,26 @@ class PresenterViewUI {
             if (window.penAnnotation) window.penAnnotation.clear(false);
         });
 
-        // Remote Highlighter Clear / Undo
+        // Remote Highlighter Sync
+        this.sync.on('HIGHLIGHTER_STATE', (data) => {
+            if (window.teacherHighlighter && typeof data.active === 'boolean') {
+                if (window.teacherHighlighter.isActive !== data.active) {
+                    window.teacherHighlighter.toggle(false);
+                }
+                if (typeof data.colorIndex === 'number') {
+                    window.teacherHighlighter.setColor(data.colorIndex, false);
+                }
+            }
+        });
+        this.sync.on('HIGHLIGHTER_COLOR', (data) => {
+            if (window.teacherHighlighter && typeof data.colorIndex === 'number') {
+                window.teacherHighlighter.setColor(data.colorIndex, false);
+            }
+        });
         this.sync.on('HIGHLIGHTER_CLEAR', () => {
             if (window.teacherHighlighter) window.teacherHighlighter.clear(false);
         });
-        this.sync.on('HIGHLIGHTER_UNDO', () => {
+        this.sync.on('HIGHLIGHTER_UNDO', (data) => {
             if (window.teacherHighlighter) window.teacherHighlighter.undo(false);
         });
         this.sync.on('HIGHLIGHTER_ADD', (data) => {
@@ -830,6 +845,63 @@ class PresenterViewUI {
             }
         });
 
+        // Sync Tool States from Audience Window
+        this.sync.on('HIGHLIGHTER_STATE', (data) => {
+            if (typeof data.active === 'boolean') {
+                this.highlighterActive = data.active;
+                this.activeToolMode = data.active ? 'highlighter' : 'none';
+                document.getElementById('btnCpHighlighter')?.classList.toggle('active', data.active);
+                document.querySelectorAll('.cp-mode-btn').forEach(b => {
+                    b.classList.toggle('active', b.dataset.mode === (data.active ? 'highlighter' : 'none'));
+                });
+                const hlPal = document.getElementById('cpHighlighterPalette');
+                if (hlPal) hlPal.style.display = data.active ? 'block' : 'none';
+            }
+        });
+
+        this.sync.on('HIGHLIGHTER_COLOR', (data) => {
+            if (typeof data.colorIndex === 'number') {
+                this.highlighterColorIndex = data.colorIndex;
+                document.querySelectorAll('.cp-swatch.hl').forEach((swatch, idx) => {
+                    swatch.classList.toggle('active', idx === data.colorIndex);
+                });
+            }
+        });
+
+        this.sync.on('LASER_STATE', (data) => {
+            if (typeof data.active === 'boolean') {
+                this.laserActive = data.active;
+                this.activeToolMode = data.active ? 'laser' : 'none';
+                document.getElementById('btnCpLaser')?.classList.toggle('active', data.active);
+                document.querySelectorAll('.cp-mode-btn').forEach(b => {
+                    b.classList.toggle('active', b.dataset.mode === (data.active ? 'laser' : 'none'));
+                });
+                const canvas = document.getElementById('presenterDrawCanvas');
+                if (canvas) {
+                    canvas.style.pointerEvents = data.active ? 'auto' : 'none';
+                    canvas.style.cursor = data.active ? 'none' : 'default';
+                }
+            }
+        });
+
+        this.sync.on('PEN_STATE', (data) => {
+            if (typeof data.active === 'boolean') {
+                this.penActive = data.active;
+                this.activeToolMode = data.active ? 'pen' : 'none';
+                document.getElementById('btnCpPen')?.classList.toggle('active', data.active);
+                document.querySelectorAll('.cp-mode-btn').forEach(b => {
+                    b.classList.toggle('active', b.dataset.mode === (data.active ? 'pen' : 'none'));
+                });
+                const penPal = document.getElementById('cpPenPalette');
+                if (penPal) penPal.style.display = data.active ? 'block' : 'none';
+                const canvas = document.getElementById('presenterDrawCanvas');
+                if (canvas) {
+                    canvas.style.pointerEvents = data.active ? 'auto' : 'none';
+                    canvas.style.cursor = data.active ? 'crosshair' : 'default';
+                }
+            }
+        });
+
         // Sync Highlighter Add / Remove
         this.sync.on('HIGHLIGHTER_ADD', (data) => {
             if (window.teacherHighlighter) window.teacherHighlighter.applyRemoteHighlight(data);
@@ -1269,15 +1341,16 @@ class PresenterViewUI {
 
         // Toggle TeacherHighlighter engine state
         if (this.highlighterActive && window.teacherHighlighter && !window.teacherHighlighter.isActive) {
-            window.teacherHighlighter.toggle(false);
-            window.teacherHighlighter.setColor(this.highlighterColorIndex);
+            window.teacherHighlighter.toggle(true);
+            window.teacherHighlighter.setColor(this.highlighterColorIndex, true);
         } else if (!this.highlighterActive && window.teacherHighlighter && window.teacherHighlighter.isActive) {
-            window.teacherHighlighter.toggle(false);
+            window.teacherHighlighter.toggle(true);
         }
 
         // Sync with Audience Screen
         this.sync.emit('LASER_STATE', { active: this.laserActive });
         this.sync.emit('PEN_STATE', { active: this.penActive });
+        this.sync.emit('HIGHLIGHTER_STATE', { active: this.highlighterActive, colorIndex: this.highlighterColorIndex });
     }
 
     triggerStepReveal() {

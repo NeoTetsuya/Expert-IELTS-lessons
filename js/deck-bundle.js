@@ -3294,27 +3294,62 @@ class TeacherHighlighter {
     setupSyncListeners() {
         if (!window.presenterSyncEngine) return;
 
+        window.presenterSyncEngine.on('HIGHLIGHTER_STATE', (data) => {
+            if (data && typeof data.active === 'boolean' && this.isActive !== data.active) {
+                this.toggle(false);
+            }
+            if (data && typeof data.colorIndex === 'number') {
+                this.setColor(data.colorIndex, false);
+            }
+        });
+
+        window.presenterSyncEngine.on('HIGHLIGHTER_COLOR', (data) => {
+            if (data && typeof data.colorIndex === 'number') {
+                this.setColor(data.colorIndex, false);
+            }
+        });
+
         window.presenterSyncEngine.on('HIGHLIGHTER_ADD', (data) => {
-            if (data && data.targetText) {
+            if (data && (data.chunks || data.targetText)) {
                 this.applyRemoteHighlight(data);
             }
         });
 
         window.presenterSyncEngine.on('HIGHLIGHTER_REMOVE', (data) => {
             if (data && data.text) {
-                document.querySelectorAll('.teacher-text-highlight').forEach(mark => {
-                    if (mark.textContent === data.text && mark.parentNode) {
-                        const textNode = document.createTextNode(mark.textContent);
-                        const parent = mark.parentNode;
-                        parent.replaceChild(textNode, mark);
-                        parent.normalize();
-                    }
+                const targetSlide = (window.deckEngine && window.deckEngine.slides && window.deckEngine.slides[data.slideIndex]) || document.querySelector('.slide.active');
+                const previewClone = document.querySelector('.slide.preview-clone');
+                [targetSlide, previewClone, document].filter(Boolean).forEach(root => {
+                    root.querySelectorAll('.teacher-text-highlight').forEach(mark => {
+                        if (mark.textContent === data.text && mark.parentNode) {
+                            const textNode = document.createTextNode(mark.textContent);
+                            const parent = mark.parentNode;
+                            parent.replaceChild(textNode, mark);
+                            try { parent.normalize(); } catch(e) {}
+                        }
+                    });
                 });
             }
         });
 
-        window.presenterSyncEngine.on('HIGHLIGHTER_UNDO', () => {
-            this.undo(false);
+        window.presenterSyncEngine.on('HIGHLIGHTER_UNDO', (data) => {
+            if (this.history.length > 0) {
+                const lastBatch = this.history.pop();
+                lastBatch.forEach(mark => this.removeHighlight(mark, false));
+            } else if (data && Array.isArray(data.removedTexts)) {
+                const targetSlide = (window.deckEngine && window.deckEngine.slides && window.deckEngine.slides[data.slideIndex]) || document.querySelector('.slide.active');
+                const previewClone = document.querySelector('.slide.preview-clone');
+                [targetSlide, previewClone, document].filter(Boolean).forEach(root => {
+                    root.querySelectorAll('.teacher-text-highlight').forEach(mark => {
+                        if (data.removedTexts.includes(mark.textContent) && mark.parentNode) {
+                            const textNode = document.createTextNode(mark.textContent);
+                            const parent = mark.parentNode;
+                            parent.replaceChild(textNode, mark);
+                            try { parent.normalize(); } catch(e) {}
+                        }
+                    });
+                });
+            }
         });
 
         window.presenterSyncEngine.on('HIGHLIGHTER_CLEAR', () => {
@@ -3323,7 +3358,7 @@ class TeacherHighlighter {
     }
 
     applyRemoteHighlight(data) {
-        const activeSlide = (window.deckEngine && window.deckEngine.slides[data.slideIndex]) || document.querySelector('.slide.active');
+        const activeSlide = (window.deckEngine && window.deckEngine.slides && window.deckEngine.slides[data.slideIndex]) || document.querySelector('.slide.active');
         const previewClone = document.querySelector('.slide.preview-clone');
         const roots = [activeSlide, previewClone].filter(Boolean);
 
@@ -3333,58 +3368,69 @@ class TeacherHighlighter {
             border: data.border || '#ca8a04'
         };
 
+        const targetChunks = (Array.isArray(data.chunks) && data.chunks.length > 0)
+            ? data.chunks
+            : (data.targetText ? [data.targetText] : []);
+
         const createdMarks = [];
 
         roots.forEach(root => {
-            const treeWalker = document.createTreeWalker(
-                root,
-                NodeFilter.SHOW_TEXT,
-                {
-                    acceptNode: (node) => {
-                        if (!node.nodeValue || !node.nodeValue.includes(data.targetText)) return NodeFilter.FILTER_REJECT;
-                        if (node.parentElement && node.parentElement.closest('.presentation-tools-hud, .tool-modal, .presenter-notes-drawer')) {
-                            return NodeFilter.FILTER_REJECT;
+            targetChunks.forEach(chunk => {
+                if (!chunk || !chunk.trim()) return;
+
+                const treeWalker = document.createTreeWalker(
+                    root,
+                    NodeFilter.SHOW_TEXT,
+                    {
+                        acceptNode: (node) => {
+                            if (!node.nodeValue || !node.nodeValue.includes(chunk)) return NodeFilter.FILTER_REJECT;
+                            if (node.parentElement && node.parentElement.closest('.presentation-tools-hud, .tool-modal, .presenter-notes-drawer, .canva-presenter-cockpit, .highlighter-palette')) {
+                                return NodeFilter.FILTER_REJECT;
+                            }
+                            if (node.parentElement && node.parentElement.classList.contains('teacher-text-highlight')) {
+                                return NodeFilter.FILTER_REJECT;
+                            }
+                            return NodeFilter.FILTER_ACCEPT;
                         }
-                        return NodeFilter.FILTER_ACCEPT;
                     }
-                }
-            );
+                );
 
-            let textNode = treeWalker.nextNode();
-            while (textNode) {
-                const text = textNode.nodeValue;
-                const idx = text.indexOf(data.targetText);
-                if (idx !== -1) {
-                    const beforeText = text.substring(0, idx);
-                    const afterText = text.substring(idx + data.targetText.length);
+                let textNode = treeWalker.nextNode();
+                while (textNode) {
+                    const text = textNode.nodeValue;
+                    const idx = text.indexOf(chunk);
+                    if (idx !== -1) {
+                        const beforeText = text.substring(0, idx);
+                        const afterText = text.substring(idx + chunk.length);
 
-                    const mark = document.createElement('mark');
-                    mark.className = 'teacher-text-highlight';
-                    mark.dataset.colorName = colorObj.name;
-                    mark.style.backgroundColor = colorObj.bg;
-                    mark.style.borderColor = colorObj.border;
-                    mark.textContent = data.targetText;
-                    mark.title = 'Click to unhighlight';
+                        const mark = document.createElement('mark');
+                        mark.className = 'teacher-text-highlight';
+                        mark.dataset.colorName = colorObj.name;
+                        mark.style.backgroundColor = colorObj.bg;
+                        mark.style.borderColor = colorObj.border;
+                        mark.textContent = chunk;
+                        mark.title = 'Click to unhighlight';
 
-                    mark.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        this.removeHighlight(mark, true);
-                    });
+                        mark.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            this.removeHighlight(mark, true);
+                        });
 
-                    const parent = textNode.parentNode;
-                    if (parent) {
-                        const fragment = document.createDocumentFragment();
-                        if (beforeText) fragment.appendChild(document.createTextNode(beforeText));
-                        fragment.appendChild(mark);
-                        if (afterText) fragment.appendChild(document.createTextNode(afterText));
+                        const parent = textNode.parentNode;
+                        if (parent) {
+                            const fragment = document.createDocumentFragment();
+                            if (beforeText) fragment.appendChild(document.createTextNode(beforeText));
+                            fragment.appendChild(mark);
+                            if (afterText) fragment.appendChild(document.createTextNode(afterText));
 
-                        parent.replaceChild(fragment, textNode);
-                        createdMarks.push(mark);
+                            parent.replaceChild(fragment, textNode);
+                            createdMarks.push(mark);
+                        }
+                        break;
                     }
-                    break;
+                    textNode = treeWalker.nextNode();
                 }
-                textNode = treeWalker.nextNode();
-            }
+            });
         });
 
         if (createdMarks.length > 0) {
@@ -3441,15 +3487,22 @@ class TeacherHighlighter {
         const cpBtn = document.getElementById('btnCpHighlighter');
         if (cpBtn) cpBtn.classList.toggle('active', this.isActive);
 
+        const modeBtn = document.getElementById('modeBtnHighlighter');
+        if (modeBtn) modeBtn.classList.toggle('active', this.isActive);
+
         const palette = document.getElementById('highlighterPalette');
         if (palette) palette.style.display = this.isActive ? 'flex' : 'none';
 
         if (this.isActive && window.deckEngine) {
             window.deckEngine.showToastNotification(`🖍️ Text Highlighter: ${this.colors[this.currentColorIndex].name} (Select text to highlight)`);
         }
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('HIGHLIGHTER_STATE', { active: this.isActive, colorIndex: this.currentColorIndex });
+        }
     }
 
-    setColor(index) {
+    setColor(index, broadcast = true) {
         if (index >= 0 && index < this.colors.length) {
             this.currentColorIndex = index;
             document.querySelectorAll('.highlighter-color-btn').forEach((btn, i) => {
@@ -3457,6 +3510,9 @@ class TeacherHighlighter {
             });
             if (window.deckEngine) {
                 window.deckEngine.showToastNotification(`🖍️ Color: ${this.colors[index].name}`);
+            }
+            if (broadcast && window.presenterSyncEngine) {
+                window.presenterSyncEngine.emit('HIGHLIGHTER_COLOR', { colorIndex: index });
             }
         }
     }
@@ -3505,6 +3561,7 @@ class TeacherHighlighter {
         }
 
         const createdMarks = [];
+        const chunks = [];
 
         textNodes.forEach(textNode => {
             const isStart = (textNode === range.startContainer);
@@ -3517,6 +3574,8 @@ class TeacherHighlighter {
             const text = textNode.nodeValue;
             const targetText = text.substring(startOffset, endOffset);
             if (!targetText.trim()) return;
+
+            chunks.push(targetText);
 
             const beforeText = text.substring(0, startOffset);
             const afterText = text.substring(endOffset);
@@ -3557,6 +3616,7 @@ class TeacherHighlighter {
             window.presenterSyncEngine.emit('HIGHLIGHTER_ADD', {
                 slideIndex,
                 targetText: selectedText,
+                chunks: chunks,
                 colorName: colorObj.name,
                 bg: colorObj.bg,
                 border: colorObj.border
@@ -3567,26 +3627,38 @@ class TeacherHighlighter {
     removeHighlight(mark, broadcast = true) {
         if (!mark || !mark.parentNode) return;
         const text = mark.textContent;
-        const textNode = document.createTextNode(text);
+        const colorName = mark.dataset.colorName;
         const parent = mark.parentNode;
+        const textNode = document.createTextNode(text);
         parent.replaceChild(textNode, mark);
-        parent.normalize(); // Merges adjacent text nodes smoothly
+        try { parent.normalize(); } catch(e) {}
 
         if (broadcast && window.presenterSyncEngine) {
-            window.presenterSyncEngine.emit('HIGHLIGHTER_REMOVE', { text });
+            const slideIndex = window.deckEngine ? window.deckEngine.currentSlide : 0;
+            window.presenterSyncEngine.emit('HIGHLIGHTER_REMOVE', { text, colorName, slideIndex });
         }
     }
 
     undo(broadcast = true) {
+        let removedTexts = [];
         if (this.history.length > 0) {
             const lastBatch = this.history.pop();
-            lastBatch.forEach(mark => this.removeHighlight(mark, false));
+            lastBatch.forEach(mark => {
+                if (mark && mark.parentNode) {
+                    removedTexts.push(mark.textContent);
+                    const textNode = document.createTextNode(mark.textContent);
+                    const parent = mark.parentNode;
+                    parent.replaceChild(textNode, mark);
+                    try { parent.normalize(); } catch(e) {}
+                }
+            });
             if (window.deckEngine) {
                 window.deckEngine.showToastNotification('↩️ Undid highlight');
             }
         }
         if (broadcast && window.presenterSyncEngine) {
-            window.presenterSyncEngine.emit('HIGHLIGHTER_UNDO', {});
+            const slideIndex = window.deckEngine ? window.deckEngine.currentSlide : 0;
+            window.presenterSyncEngine.emit('HIGHLIGHTER_UNDO', { slideIndex, removedTexts });
         }
     }
 
@@ -10330,11 +10402,26 @@ class PresenterViewUI {
             if (window.penAnnotation) window.penAnnotation.clear(false);
         });
 
-        // Remote Highlighter Clear / Undo
+        // Remote Highlighter Sync
+        this.sync.on('HIGHLIGHTER_STATE', (data) => {
+            if (window.teacherHighlighter && typeof data.active === 'boolean') {
+                if (window.teacherHighlighter.isActive !== data.active) {
+                    window.teacherHighlighter.toggle(false);
+                }
+                if (typeof data.colorIndex === 'number') {
+                    window.teacherHighlighter.setColor(data.colorIndex, false);
+                }
+            }
+        });
+        this.sync.on('HIGHLIGHTER_COLOR', (data) => {
+            if (window.teacherHighlighter && typeof data.colorIndex === 'number') {
+                window.teacherHighlighter.setColor(data.colorIndex, false);
+            }
+        });
         this.sync.on('HIGHLIGHTER_CLEAR', () => {
             if (window.teacherHighlighter) window.teacherHighlighter.clear(false);
         });
-        this.sync.on('HIGHLIGHTER_UNDO', () => {
+        this.sync.on('HIGHLIGHTER_UNDO', (data) => {
             if (window.teacherHighlighter) window.teacherHighlighter.undo(false);
         });
         this.sync.on('HIGHLIGHTER_ADD', (data) => {
@@ -10975,6 +11062,63 @@ class PresenterViewUI {
             }
         });
 
+        // Sync Tool States from Audience Window
+        this.sync.on('HIGHLIGHTER_STATE', (data) => {
+            if (typeof data.active === 'boolean') {
+                this.highlighterActive = data.active;
+                this.activeToolMode = data.active ? 'highlighter' : 'none';
+                document.getElementById('btnCpHighlighter')?.classList.toggle('active', data.active);
+                document.querySelectorAll('.cp-mode-btn').forEach(b => {
+                    b.classList.toggle('active', b.dataset.mode === (data.active ? 'highlighter' : 'none'));
+                });
+                const hlPal = document.getElementById('cpHighlighterPalette');
+                if (hlPal) hlPal.style.display = data.active ? 'block' : 'none';
+            }
+        });
+
+        this.sync.on('HIGHLIGHTER_COLOR', (data) => {
+            if (typeof data.colorIndex === 'number') {
+                this.highlighterColorIndex = data.colorIndex;
+                document.querySelectorAll('.cp-swatch.hl').forEach((swatch, idx) => {
+                    swatch.classList.toggle('active', idx === data.colorIndex);
+                });
+            }
+        });
+
+        this.sync.on('LASER_STATE', (data) => {
+            if (typeof data.active === 'boolean') {
+                this.laserActive = data.active;
+                this.activeToolMode = data.active ? 'laser' : 'none';
+                document.getElementById('btnCpLaser')?.classList.toggle('active', data.active);
+                document.querySelectorAll('.cp-mode-btn').forEach(b => {
+                    b.classList.toggle('active', b.dataset.mode === (data.active ? 'laser' : 'none'));
+                });
+                const canvas = document.getElementById('presenterDrawCanvas');
+                if (canvas) {
+                    canvas.style.pointerEvents = data.active ? 'auto' : 'none';
+                    canvas.style.cursor = data.active ? 'none' : 'default';
+                }
+            }
+        });
+
+        this.sync.on('PEN_STATE', (data) => {
+            if (typeof data.active === 'boolean') {
+                this.penActive = data.active;
+                this.activeToolMode = data.active ? 'pen' : 'none';
+                document.getElementById('btnCpPen')?.classList.toggle('active', data.active);
+                document.querySelectorAll('.cp-mode-btn').forEach(b => {
+                    b.classList.toggle('active', b.dataset.mode === (data.active ? 'pen' : 'none'));
+                });
+                const penPal = document.getElementById('cpPenPalette');
+                if (penPal) penPal.style.display = data.active ? 'block' : 'none';
+                const canvas = document.getElementById('presenterDrawCanvas');
+                if (canvas) {
+                    canvas.style.pointerEvents = data.active ? 'auto' : 'none';
+                    canvas.style.cursor = data.active ? 'crosshair' : 'default';
+                }
+            }
+        });
+
         // Sync Highlighter Add / Remove
         this.sync.on('HIGHLIGHTER_ADD', (data) => {
             if (window.teacherHighlighter) window.teacherHighlighter.applyRemoteHighlight(data);
@@ -11414,15 +11558,16 @@ class PresenterViewUI {
 
         // Toggle TeacherHighlighter engine state
         if (this.highlighterActive && window.teacherHighlighter && !window.teacherHighlighter.isActive) {
-            window.teacherHighlighter.toggle(false);
-            window.teacherHighlighter.setColor(this.highlighterColorIndex);
+            window.teacherHighlighter.toggle(true);
+            window.teacherHighlighter.setColor(this.highlighterColorIndex, true);
         } else if (!this.highlighterActive && window.teacherHighlighter && window.teacherHighlighter.isActive) {
-            window.teacherHighlighter.toggle(false);
+            window.teacherHighlighter.toggle(true);
         }
 
         // Sync with Audience Screen
         this.sync.emit('LASER_STATE', { active: this.laserActive });
         this.sync.emit('PEN_STATE', { active: this.penActive });
+        this.sync.emit('HIGHLIGHTER_STATE', { active: this.highlighterActive, colorIndex: this.highlighterColorIndex });
     }
 
     triggerStepReveal() {
