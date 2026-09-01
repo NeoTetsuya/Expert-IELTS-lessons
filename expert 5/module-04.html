@@ -485,46 +485,31 @@
             </slide-card>
 
             <!-- SLIDE 20: Vocabulary 4b - Geographical Features (Ex 3b) -->
-            <slide-card template="exercise-grid" skill="vocab" title="Vocabulary 4b: Geographical Features (Ex 3b)" instruction="Drag words from the box or click to complete the geographical descriptions.">
-                <div slot="grid" style="display:flex; flex-direction:column; gap:14px; width:100%;">
-                    <div class="card category-bank-card" style="background:#ffffff; border-left:5px solid var(--col-vocab); padding:14px 20px;">
-                        <div class="category-bank-title" style="font-size:16px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--col-vocab); margin-bottom:8px;">📦 Word Bank (Drag or click words to place)</div>
-                        <div style="display:flex; flex-wrap:wrap; gap:10px; font-size:18px;">
-                            <span class="box-chip interactive-gap-chip">island</span>
-                            <span class="box-chip interactive-gap-chip">Ocean</span>
-                            <span class="box-chip interactive-gap-chip">coast</span>
-                            <span class="box-chip interactive-gap-chip">beaches</span>
-                            <span class="box-chip interactive-gap-chip">mountains</span>
-                            <span class="box-chip interactive-gap-chip">hills</span>
-                            <span class="box-chip interactive-gap-chip">rainforest</span>
-                            <span class="box-chip interactive-gap-chip">river</span>
-                            <span class="box-chip interactive-gap-chip">waterfall</span>
-                            <span class="box-chip interactive-gap-chip">sea</span>
-                            <span class="box-chip interactive-gap-chip">desert</span>
-                            <span class="box-chip interactive-gap-chip">forests</span>
-                            <span class="box-chip interactive-gap-chip">lake</span>
-                            <span class="box-chip interactive-gap-chip">wood</span>
-                        </div>
+            <slide-card template="exercise-grid" skill="vocab" title="Vocabulary 4b: Geographical Features (Ex 3b)" instruction="Choose the correct geographical words from the dropdown menus to complete the descriptions.">
+                <div slot="grid" style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:18px; line-height:1.75;">
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab); background:#ffffff;">
+                        <div style="font-size:14px; font-weight:800; text-transform:uppercase; color:var(--col-vocab); margin-bottom:6px;">📍 1. Options: beach / coast / ocean / island</div>
+                        My country is an <select class="select-input" data-ans="island" style="width:115px;"><option value="">Select...</option><option value="island">island</option><option value="beach">beach</option><option value="coast">coast</option><option value="ocean">ocean</option></select> in the Indian <select class="select-input" data-ans="Ocean" style="width:115px;"><option value="">Select...</option><option value="Ocean">Ocean</option><option value="Sea">Sea</option><option value="Coast">Coast</option><option value="Island">Island</option></select>. It has a long <select class="select-input" data-ans="coast" style="width:110px;"><option value="">Select...</option><option value="coast">coast</option><option value="beach">beach</option><option value="island">island</option><option value="ocean">ocean</option></select> with many beautiful <select class="select-input" data-ans="beaches" style="width:120px;"><option value="">Select...</option><option value="beaches">beaches</option><option value="coasts">coasts</option><option value="islands">islands</option><option value="oceans">oceans</option></select>.
                     </div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; font-size:18px; line-height:1.65;">
-                        <div class="card" style="padding:14px 18px; border-left:4px solid var(--col-vocab); background:#ffffff;">
-                            <strong>1.</strong> My country is an <input type="text" class="blank-input" data-ans="island" style="width:100px;"> in the Indian <input type="text" class="blank-input" data-ans="Ocean" style="width:100px;">. It has a long <input type="text" class="blank-input" data-ans="coast" style="width:90px;"> with many beautiful <input type="text" class="blank-input" data-ans="beaches" style="width:110px;">.
-                        </div>
-                        <div class="card" style="padding:14px 18px; border-left:4px solid var(--col-vocab); background:#ffffff;">
-                            <strong>2.</strong> The area where I live is quite flat, there aren't any <input type="text" class="blank-input" data-ans="mountains" style="width:130px;"> — just a few <input type="text" class="blank-input" data-ans="hills" style="width:90px;"> which aren't very high.
-                        </div>
-                        <div class="card" style="padding:14px 18px; border-left:4px solid var(--col-vocab); background:#ffffff;">
-                            <strong>3.</strong> Many tourists visit the <input type="text" class="blank-input" data-ans="rainforest" style="width:130px;"> to see wildlife. The best way to get there is a boat trip up the <input type="text" class="blank-input" data-ans="river" style="width:90px;">.
-                        </div>
-                        <div class="card" style="padding:14px 18px; border-left:4px solid var(--col-vocab); background:#ffffff;">
-                            <strong>4.</strong> An important natural attraction is a <input type="text" class="blank-input" data-ans="waterfall" style="width:120px;"> which is over 200m high and empties into the <input type="text" class="blank-input" data-ans="sea" style="width:80px;">.
-                        </div>
-                        <div class="card" style="padding:14px 18px; border-left:4px solid var(--col-vocab); background:#ffffff;">
-                            <strong>5.</strong> Much of my country is <input type="text" class="blank-input" data-ans="desert" style="width:100px;"> and it is very dry. You rarely see trees, and we do not have any <input type="text" class="blank-input" data-ans="forests" style="width:110px;">.
-                        </div>
-                        <div class="card" style="padding:14px 18px; border-left:4px solid var(--col-vocab); background:#ffffff;">
-                            <strong>6.</strong> A popular tourist attraction is a beautiful <input type="text" class="blank-input" data-ans="lake" style="width:90px;"> where you can do water sports, next to a <input type="text" class="blank-input" data-ans="wood" style="width:90px;"> where people camp.
-                        </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab); background:#ffffff;">
+                        <div style="font-size:14px; font-weight:800; text-transform:uppercase; color:var(--col-vocab); margin-bottom:6px;">📍 2. Options: hill / mountain</div>
+                        The area where I live is quite flat, there aren't any <select class="select-input" data-ans="mountains" style="width:140px;"><option value="">Select...</option><option value="mountains">mountains</option><option value="hills">hills</option></select> — just a few <select class="select-input" data-ans="hills" style="width:115px;"><option value="">Select...</option><option value="hills">hills</option><option value="mountains">mountains</option></select> which aren't very high.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab); background:#ffffff;">
+                        <div style="font-size:14px; font-weight:800; text-transform:uppercase; color:var(--col-vocab); margin-bottom:6px;">📍 3. Options: rainforest / river</div>
+                        Many tourists visit the <select class="select-input" data-ans="rainforest" style="width:140px;"><option value="">Select...</option><option value="rainforest">rainforest</option><option value="river">river</option></select> to see wildlife. The best way to get there is a boat trip up the <select class="select-input" data-ans="river" style="width:110px;"><option value="">Select...</option><option value="river">river</option><option value="rainforest">rainforest</option></select>.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab); background:#ffffff;">
+                        <div style="font-size:14px; font-weight:800; text-transform:uppercase; color:var(--col-vocab); margin-bottom:6px;">📍 4. Options: sea / waterfall</div>
+                        An important natural attraction is a <select class="select-input" data-ans="waterfall" style="width:130px;"><option value="">Select...</option><option value="waterfall">waterfall</option><option value="sea">sea</option></select> which is over 200m high and empties into the <select class="select-input" data-ans="sea" style="width:100px;"><option value="">Select...</option><option value="sea">sea</option><option value="waterfall">waterfall</option></select>.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab); background:#ffffff;">
+                        <div style="font-size:14px; font-weight:800; text-transform:uppercase; color:var(--col-vocab); margin-bottom:6px;">📍 5. Options: desert / forest</div>
+                        Much of my country is <select class="select-input" data-ans="desert" style="width:120px;"><option value="">Select...</option><option value="desert">desert</option><option value="forest">forest</option></select> and it is very dry. You rarely see trees, and we do not have any <select class="select-input" data-ans="forests" style="width:125px;"><option value="">Select...</option><option value="forests">forests</option><option value="deserts">deserts</option></select>.
+                    </div>
+                    <div class="card" style="padding:16px 20px; border-left:5px solid var(--col-vocab); background:#ffffff;">
+                        <div style="font-size:14px; font-weight:800; text-transform:uppercase; color:var(--col-vocab); margin-bottom:6px;">📍 6. Options: wood / lake</div>
+                        A popular tourist attraction is a beautiful <select class="select-input" data-ans="lake" style="width:110px;"><option value="">Select...</option><option value="lake">lake</option><option value="wood">wood</option></select> where you can do water sports, next to a <select class="select-input" data-ans="wood" style="width:110px;"><option value="">Select...</option><option value="wood">wood</option><option value="lake">lake</option></select> where people camp.
                     </div>
                 </div>
             </slide-card>

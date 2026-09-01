@@ -1,11 +1,20 @@
-/* ==========================================================================
-   UNIVERSAL DRAG & DROP GAP-FILL & WORD BANK STYLES
-   ========================================================================== */
-
-/* Interactive Gap Word Chips */
+/* Interactive Gap Word Chips & Unified Word Bank Chips */
+.box-chip,
+.word-chip,
 .interactive-gap-chip {
     cursor: grab !important;
     user-select: none;
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    color: #0f172a;
+    font-size: calc(18px * var(--font-scale, 1));
+    font-weight: 700;
+    padding: 7px 18px;
+    border-radius: 9999px !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
     transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 0.15s ease,
                 border-color 0.15s ease,
@@ -13,12 +22,18 @@
                 background-color 0.15s ease;
 }
 
+.box-chip:hover:not(.chip-used),
+.word-chip:hover:not(.chip-used),
 .interactive-gap-chip:hover:not(.chip-used) {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
     border-color: var(--col-vocab, #059669) !important;
 }
 
+.box-chip:active:not(.chip-used),
+.box-chip.dragging,
+.word-chip:active:not(.chip-used),
+.word-chip.dragging,
 .interactive-gap-chip:active:not(.chip-used),
 .interactive-gap-chip.dragging {
     cursor: grabbing !important;
