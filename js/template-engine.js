@@ -533,6 +533,74 @@
         </div>
     </section>
 </template>
+
+<!-- 17. CATEGORY SORTING DRAG & DROP TEMPLATE -->
+<template id="tmpl-category-sort">
+    <section class="slide" data-skill="vocab">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-vocab);" data-slot="skill-stripe"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-vocab); font-size: 14px; padding: 4px 12px;" data-slot="badge">Vocabulary • Category Sorting</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p style="font-size: 20px; color: var(--text-muted); margin-bottom: 12px;" data-slot="instruction">Drag words or click to place them into the correct category.</p>
+
+                    <div class="category-sorter" style="flex: 1; min-height: 0;" data-slot="sorter">
+                        <div data-slot="wordbank"></div>
+                        <div data-slot="table"></div>
+                        <div data-slot="grid"></div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answers</button>
+                        <button class="btn-action" onclick="revealAnswers(this)">Reveal Keys</button>
+                        <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 18. DRAG-AND-DROP GAP-FILL TEMPLATE -->
+<template id="tmpl-drag-gapfill">
+    <section class="slide" data-skill="vocab">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-vocab);" data-slot="skill-stripe"></div>
+                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
+                    <div class="slide-header">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-vocab); font-size: 14px; padding: 4px 12px;" data-slot="badge">Vocabulary • Word Bank Practice</span>
+                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p style="font-size: 20px; color: var(--text-muted); margin-bottom: 12px;" data-slot="instruction">Drag words from the bank or click to fill the blanks.</p>
+
+                    <div style="flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 14px;" data-slot="content">
+                        <div data-slot="wordbank"></div>
+                        <div data-slot="sentences"></div>
+                        <div data-slot="grid"></div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answers</button>
+                        <button class="btn-action" onclick="revealAnswers(this)">Reveal Keys</button>
+                        <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
 `;
 
     class TemplateEngine {
@@ -836,13 +904,22 @@
                 case 'grammar':
                     return section.querySelector('[data-slot="rules"], [data-slot="content"], [data-slot="left-col"], .two-col > div:first-child');
 
+                case 'wordbank':
+                case 'bank':
+                case 'chips':
+                    return section.querySelector('[data-slot="wordbank"], .category-bank-card, .category-chip-pool, [data-slot="content"], [data-slot="grid"]');
+
+                case 'sorter':
+                case 'category-sorter':
+                    return section.querySelector('[data-slot="sorter"], .category-sorter, [data-slot="content"], [data-slot="grid"]');
+
+                case 'table':
                 case 'contrast-card':
                 case 'contrast':
                 case 'card':
-                case 'table':
                 case 'error-box':
                 case 'right-table':
-                    return section.querySelector('[data-slot="contrast-card"], [data-slot="right-table"], [data-slot="rules-col"], [data-slot="guide"], [data-slot="questions"], .two-col > div:last-child');
+                    return section.querySelector('[data-slot="table"], [data-slot="contrast-card"], [data-slot="right-table"], [data-slot="rules-col"], [data-slot="guide"], [data-slot="questions"], .two-col > div:last-child');
 
                 case 'grid':
                 case 'exercises':
