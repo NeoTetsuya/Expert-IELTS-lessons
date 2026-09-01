@@ -91,50 +91,51 @@
     </section>
 </template>
 
-<!-- 3. UP-TO-DOWN (STACKED) 1-QUESTION WALKTHROUGH TEMPLATE (26px Passage / 25px Question) -->
+<!-- 3. UP-TO-DOWN (STACKED) 1-QUESTION WALKTHROUGH TEMPLATE -->
 <template id="tmpl-walkthrough">
     <section class="slide" data-skill="read">
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-reading);"></div>
-                <div class="page-content" style="display: flex; flex-direction: column; justify-content: space-between; padding: 28px 48px 24px;">
-                    <div class="slide-header" style="margin-bottom: 4px;">
+                <div class="page-content" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px 44px 20px;">
+                    <div class="slide-header" style="margin-bottom: 2px;">
                         <div class="slide-title-group">
-                            <span class="skill-badge" style="background: var(--col-reading); font-size: 14px; padding: 4px 12px;" data-slot="badge">Reading Strategy • Walkthrough</span>
-                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                            <span class="skill-badge" style="background: var(--col-reading); font-size: 13px; padding: 3px 10px;" data-slot="badge">Reading Strategy • Walkthrough</span>
+                            <h2 class="slide-title" style="font-size: 26px;" data-slot="title"></h2>
                         </div>
-                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                        <div class="slide-number" style="font-size: 18px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
-                    <p class="slide-subtitle" style="font-size: 20px; color: var(--text-muted); margin-bottom: 6px;" data-slot="subtitle">
+                    <p class="slide-subtitle" style="font-size: 16px; color: var(--text-muted); margin-bottom: 4px;" data-slot="subtitle">
                         Compare the dedicated passage excerpt with the question below to evaluate your answer.
                     </p>
 
                     <!-- Centered Walkthrough Container -->
-                    <div class="walkthrough-container" style="max-width: 1550px; width: 96%; margin: auto; display: flex; flex-direction: column; gap: 18px; justify-content: center; flex: 1; min-height: 0;">
+                    <div class="walkthrough-container" style="max-width: 1550px; width: 98%; margin: auto; display: flex; flex-direction: column; gap: 14px; justify-content: center; flex: 1; min-height: 0;">
                         <!-- Top Box: Dedicated Passage Excerpt -->
-                        <div class="card" style="border-left: 7px solid var(--col-reading); border-radius: 14px; padding: 24px 32px;">
-                            <div style="font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--col-reading); margin-bottom: 10px;" data-slot="passage-header">
+                        <div class="card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 18px 26px;">
+                            <div style="font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--col-reading); margin-bottom: 8px;" data-slot="passage-header">
                                 📖 Relevant Passage Excerpt
                             </div>
-                            <p style="font-size: 26px; line-height: 1.85; margin-bottom: 0; color: inherit;" data-slot="passage-text"></p>
+                            <p style="font-size: 18.5px; line-height: 1.7; margin-bottom: 0; color: var(--text-dark);" data-slot="passage-text"></p>
                         </div>
 
                         <!-- Bottom Box: Interactive Question Card -->
-                        <div class="q-card" style="border-left: 7px solid var(--col-reading); border-radius: 14px; padding: 24px 32px;" data-slot="question-card">
+                        <div class="q-card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 18px 26px;" data-slot="question-card">
                             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
-                                <span style="font-weight: 700; font-size: 25px; line-height: 1.65; color: inherit;" data-slot="question-text"></span>
-                                <button class="syn-btn" style="flex-shrink: 0; font-size: 16px; padding: 8px 18px; font-weight: 700;" data-slot="evidence-btn">💡 Evidence</button>
+                                <span style="font-weight: 700; font-size: 18.5px; line-height: 1.6; color: var(--text-dark);" data-slot="question-text"></span>
+                                <button class="syn-btn" style="flex-shrink: 0; font-size: 14px; padding: 6px 14px; font-weight: 700;" data-slot="evidence-btn">💡 Evidence</button>
                             </div>
 
-                            <div style="margin-top: 16px; display: flex; align-items: center; gap: 16px;" data-slot="input-area"></div>
+                            <div style="margin-top: 14px; display: flex; align-items: center; gap: 14px;" data-slot="input-area"></div>
 
-                            <div class="item-explanation" style="font-size: 21px; line-height: 1.75; margin-top: 16px; padding: 16px 22px; border-radius: 8px;" data-slot="explanation"></div>
+                            <div class="item-explanation" style="font-size: 16px; line-height: 1.65; margin-top: 12px; padding: 14px 18px; border-radius: 8px;" data-slot="explanation"></div>
                         </div>
                     </div>
 
-                    <div class="action-row" style="margin-top: 10px;">
+                    <div class="action-row" style="margin-top: 6px;">
                         <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answer</button>
+                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="revealAnswers(this)">Show Evidence / Highlights</button>
                         <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
                     </div>
@@ -746,8 +747,8 @@
                                     ${boxHtml}
                                 </div>
                                 <div style="display:flex; align-items:center; gap:12px;">
-                                    <span style="font-weight:700; font-size:19px;">Your Choice:</span>
-                                    <select class="select-input" data-ans="${ansVal}" style="width:230px; font-weight:700;">
+                                    <span style="font-weight:700; font-size:17px; color:var(--text-dark);">Your Choice:</span>
+                                    <select class="select-input" data-ans="${ansVal}" style="min-width:240px; font-weight:700; font-size:16px; padding:6px 12px;">
                                         <option value="">Select option...</option>
                                         ${optionsHtml}
                                     </select>
@@ -757,8 +758,8 @@
                     } else if (ansVal === 'YES' || ansVal === 'NO' || ansVal === 'NOT GIVEN') {
                         inputContainer.innerHTML = `
                             <div style="display:flex; align-items:center; gap:12px;">
-                                <span style="font-weight:700; font-size:19px;">Your Choice:</span>
-                                <select class="select-input" data-ans="${ansVal}" style="width:180px; font-weight:700;">
+                                <span style="font-weight:700; font-size:17px; color:var(--text-dark);">Your Choice:</span>
+                                <select class="select-input" data-ans="${ansVal}" style="min-width:180px; font-weight:700; font-size:16px; padding:6px 12px;">
                                     <option value="">Select...</option>
                                     <option value="YES">YES</option>
                                     <option value="NO">NO</option>
