@@ -319,21 +319,24 @@
 }
 
 .strategy-target,
+.strategy-card .strategy-target,
 .strategy-card .target-meaning {
-    display: none;
+    display: none !important;
     font-size: calc(16.5px * var(--font-scale, 1));
     margin-top: 8px;
     padding-top: 6px;
     border-top: 1px dashed rgba(0, 0, 0, 0.12);
     color: var(--text-dark, #0f172a);
-    animation: fadeIn 0.25s ease;
 }
 
 .strategy-card.revealed .strategy-target,
 .strategy-card.revealed .target-meaning,
+.strategy-card.active-syn .strategy-target,
+.strategy-card.active-syn .target-meaning,
 .strategy-card:has(.active-syn) .strategy-target,
 .strategy-card:has(.active-syn) .target-meaning {
     display: block !important;
+    animation: fadeIn 0.25s ease;
 }
 
 
