@@ -566,8 +566,28 @@ class DeckEngine {
                 activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
             } else {
                 synSpans.forEach(s => s.classList.add('active-syn'));
+                activeSlideEl.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
                 activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
                 activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+
+                // Also populate answer in interactive dropdown/input if unselected
+                activeSlideEl.querySelectorAll('.select-input').forEach(sel => {
+                    if (sel.dataset.ans && !sel.value) {
+                        sel.value = sel.dataset.ans.split('|')[0].trim();
+                        sel.classList.add('correct');
+                        sel.classList.remove('wrong', 'incorrect');
+                    }
+                });
+                activeSlideEl.querySelectorAll('.blank-input').forEach(input => {
+                    if (input.dataset.ans && !input.value) {
+                        input.value = input.dataset.ans.split('|')[0];
+                        input.classList.add('correct');
+                        input.classList.remove('wrong', 'incorrect');
+                        if (window.DeckComponents?.autoResizeBlank) {
+                            DeckComponents.autoResizeBlank(input);
+                        }
+                    }
+                });
             }
         }
 

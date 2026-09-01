@@ -8,7 +8,8 @@
 
 class PresenterSyncEngine {
     constructor() {
-        this.channelName = 'ielts_presentation_sync_channel';
+        this.lessonKey = this.getLessonKey();
+        this.channelName = 'ielts_sync_' + this.lessonKey;
         this.instanceId = 'deck_' + Math.random().toString(36).substring(2, 9) + '_' + Date.now();
         this.listeners = new Map();
         this.isConnected = false;
@@ -17,6 +18,17 @@ class PresenterSyncEngine {
         this.processedMessageIds = new Set();
 
         this.initChannel();
+    }
+
+    getLessonKey() {
+        try {
+            const path = window.location.pathname || '';
+            const parts = path.replace(/\\/g, '/').split('/').filter(Boolean);
+            const lastTwo = parts.slice(-2).join('_');
+            return lastTwo.replace(/[^a-zA-Z0-9_-]/g, '_') || 'global_deck';
+        } catch (e) {
+            return 'global_deck';
+        }
     }
 
     initChannel() {
@@ -36,7 +48,7 @@ class PresenterSyncEngine {
         // Periodic heartbeat & peer discovery
         setInterval(() => {
             const isPresenter = window.presenterViewUI ? window.presenterViewUI.isPresenter : false;
-            this.emit('HEARTBEAT', { senderId: this.instanceId, isPresenter });
+            this.emit('HEARTBEAT', { senderId: this.instanceId, isPresenter, lessonKey: this.lessonKey });
 
             // Check peer liveness (no message in 8s = waiting)
             if (this.lastPeerHeartbeat > 0 && Date.now() - this.lastPeerHeartbeat > 8000) {
@@ -65,6 +77,7 @@ class PresenterSyncEngine {
             type,
             payload,
             senderId: this.instanceId,
+            lessonKey: this.lessonKey,
             timestamp: Date.now(),
             nonce: Math.random()
         };
@@ -91,6 +104,7 @@ class PresenterSyncEngine {
 
     handleIncomingMessage(message) {
         if (!message || message.senderId === this.instanceId) return;
+        if (message.lessonKey && message.lessonKey !== this.lessonKey) return;
 
         // Deduplicate messages across BroadcastChannel and Storage events
         const msgId = `${message.senderId}_${message.timestamp}_${message.type}_${message.nonce || 0}`;

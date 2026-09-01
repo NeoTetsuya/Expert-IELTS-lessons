@@ -786,15 +786,31 @@ class PresenterViewUI {
             }
         });
 
+        // Sync Step Reveal
+        this.sync.on('STEP_REVEAL_CMD', () => {
+            if (window.stepRevealEngine) {
+                window.stepRevealEngine.revealNextOnActiveSlide(false);
+                const target = window.deckEngine ? window.deckEngine.slides[window.deckEngine.currentSlide] : document.querySelector('.slide.active');
+                const scaler = document.getElementById('cpCurrentSlideScaler');
+                if (scaler && target) this.syncFormValues(target, scaler);
+            }
+        });
+
         // Sync Evidence Focus / Clear
         this.sync.on('EVIDENCE_FOCUS', (data) => {
             if (window.readingHighlighter && data && (data.qKey || data.evId)) {
                 window.readingHighlighter.focusEvidence(data.qKey, data.evId, false);
+                const target = window.deckEngine ? window.deckEngine.slides[window.deckEngine.currentSlide] : document.querySelector('.slide.active');
+                const scaler = document.getElementById('cpCurrentSlideScaler');
+                if (scaler && target) this.syncFormValues(target, scaler);
             }
         });
         this.sync.on('EVIDENCE_CLEAR', (data) => {
             if (window.readingHighlighter) {
                 window.readingHighlighter.clearAll(data?.containerId, false);
+                const target = window.deckEngine ? window.deckEngine.slides[window.deckEngine.currentSlide] : document.querySelector('.slide.active');
+                const scaler = document.getElementById('cpCurrentSlideScaler');
+                if (scaler && target) this.syncFormValues(target, scaler);
             }
         });
 
@@ -807,7 +823,7 @@ class PresenterViewUI {
             if (data.action === 'check') {
                 window.deckEngine.checkAnswers(target, false);
             } else if (data.action === 'reveal') {
-                window.deckEngine.revealKeys(target, false);
+                window.deckEngine.revealAnswers(target, false);
             } else if (data.action === 'reset') {
                 window.deckEngine.resetTask(target, false);
             } else if (data.action === 'toggleOptCard' && typeof data.cardIndex === 'number') {
@@ -816,7 +832,8 @@ class PresenterViewUI {
             } else if (data.action === 'toggleExplanations') {
                 window.deckEngine.toggleExplanations(target, false);
             }
-            this.updatePresenterSlideView();
+            const scaler = document.getElementById('cpCurrentSlideScaler');
+            if (scaler) this.syncFormValues(target, scaler);
         });
 
         // Sync Input & Select
@@ -1597,8 +1614,8 @@ class PresenterViewUI {
         });
 
         // Also sync item-explanations, marks, synonym pairs, and opt-cards
-        const srcCards = srcElement.querySelectorAll('.q-card, .opt-card, .word-chip, .item-explanation, mark.evidence, .syn-pair-1, .syn-pair-2, .syn-pair-3');
-        const destCards = destElement.querySelectorAll('.q-card, .opt-card, .word-chip, .item-explanation, mark.evidence, .syn-pair-1, .syn-pair-2, .syn-pair-3');
+        const srcCards = srcElement.querySelectorAll('.q-card, .opt-card, .word-chip, .item-explanation, mark.evidence, .syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word, .vocab-term');
+        const destCards = destElement.querySelectorAll('.q-card, .opt-card, .word-chip, .item-explanation, mark.evidence, .syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word, .vocab-term');
         srcCards.forEach((src, idx) => {
             const dest = destCards[idx];
             if (dest) {
@@ -1706,10 +1723,7 @@ class PresenterViewUI {
                     } else if (window.deckEngine) {
                         window.deckEngine.toggleSynonymExplanation(dataQ, dataEv, true);
                     }
-                    if (card) {
-                        const exp = card.querySelector('.item-explanation');
-                        if (exp) exp.classList.toggle('show');
-                    }
+                    this.syncFormValues(currentSlide, scaler);
                 }
                 return;
             }
@@ -1720,7 +1734,7 @@ class PresenterViewUI {
                 e.preventDefault();
                 e.stopPropagation();
                 window.vocabBank.handleChipClick(wordChip, currentSlide);
-                setTimeout(() => this.updatePresenterSlideView(), 60);
+                this.syncFormValues(currentSlide, scaler);
                 return;
             }
 
@@ -1748,24 +1762,25 @@ class PresenterViewUI {
                     e.preventDefault();
                     e.stopPropagation();
                     this.triggerStepReveal();
+                    this.syncFormValues(currentSlide, scaler);
                     return;
                 } else if (btnText.includes('check')) {
                     e.preventDefault();
                     e.stopPropagation();
                     if (window.deckEngine) window.deckEngine.checkAnswers(currentSlide, true);
-                    this.updatePresenterSlideView();
+                    this.syncFormValues(currentSlide, scaler);
                     return;
                 } else if (btnText.includes('reveal') || btnText.includes('show evidence') || btnText.includes('show highlight')) {
                     e.preventDefault();
                     e.stopPropagation();
-                    if (window.deckEngine) window.deckEngine.revealKeys(currentSlide, true);
-                    this.updatePresenterSlideView();
+                    if (window.deckEngine) window.deckEngine.revealAnswers(currentSlide, true);
+                    this.syncFormValues(currentSlide, scaler);
                     return;
                 } else if (btnText.includes('reset')) {
                     e.preventDefault();
                     e.stopPropagation();
                     if (window.deckEngine) window.deckEngine.resetTask(currentSlide, true);
-                    this.updatePresenterSlideView();
+                    this.syncFormValues(currentSlide, scaler);
                     return;
                 }
             }
@@ -1786,14 +1801,14 @@ class PresenterViewUI {
         const targetH = 1080;
 
         // Tight margins so the slide expands and fills the viewport maximally
-        const availW = Math.max(100, parentW - 16);
-        const availH = Math.max(100, parentH - 36);
+        const availW = Math.max(100, parentW - 8);
+        const availH = Math.max(100, parentH - 12);
 
         const scale = Math.min(availW / targetW, availH / targetH);
         const scaledW = targetW * scale;
         const scaledH = targetH * scale;
         const offsetX = Math.max(0, (parentW - scaledW) / 2);
-        const offsetY = Math.max(0, (parentH - 24 - scaledH) / 2);
+        const offsetY = Math.max(0, (parentH - scaledH) / 2);
 
         scaler.style.width = `${targetW}px`;
         scaler.style.height = `${targetH}px`;

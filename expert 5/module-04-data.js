@@ -77,8 +77,8 @@ window.module4Data = {
                 badge: "Reading 4a Walkthrough • Q1",
                 para: "Para 2",
                 header: "📖 Passage Excerpt (Paragraph 2)",
-                excerpt: `<span class="para-tag">[Para 2]</span> <mark class="evidence" id="ev-wt-4a-1" data-q="wt-4a-1">"<span class="syn-pair-1" data-q="wt-4a-1">Sports scientists recognise that deciding to use a fitness tracker or app is good</span> because it means <span class="syn-pair-2" data-q="wt-4a-1">a person is curious about health and keen to improve their habits</span>."</mark>`,
-                question: `1. Sports scientists approve of the decision to use fitness apps because <span class="syn-pair-2" data-q="wt-4a-1">[ 1 ]</span>.`,
+                excerpt: `<span class="para-tag">[Para 2]</span> "<span class="syn-pair-1" data-q="wt-4a-1">Sports scientists recognise that deciding to use a fitness tracker or app is good</span> because it means <span class="syn-pair-2" data-q="wt-4a-1">a person is curious about health and keen to improve their habits</span>."`,
+                question: `1. Sports scientists <span class="syn-pair-1" data-q="wt-4a-1">approve of the decision to use fitness apps</span> because <span class="syn-pair-2" data-q="wt-4a-1">[ 1 ]</span>.`,
                 ans: "D",
                 boxOptions: [
                     { letter: "A", text: "they can give an unrealistic impression..." }, { letter: "B", text: "people become very attached..." },
@@ -94,8 +94,8 @@ window.module4Data = {
                 badge: "Reading 4a Walkthrough • Q2",
                 para: "Para 2",
                 header: "📖 Passage Excerpt (Paragraph 2)",
-                excerpt: `<span class="para-tag">[Para 2]</span> <mark class="evidence" id="ev-wt-4a-2" data-q="wt-4a-2">"...many of those after-dinner walkers have added that <span class="syn-pair-1" data-q="wt-4a-2">when their devices broke and they no longer knew how many steps they had taken</span>, <span class="syn-pair-2" data-q="wt-4a-2">there seemed little point in heading out for that walk</span>."</mark>`,
-                question: `2. People have reported that when their fitness apps stop working <span class="syn-pair-2" data-q="wt-4a-2">[ 2 ]</span>.`,
+                excerpt: `<span class="para-tag">[Para 2]</span> "...many of those after-dinner walkers have added that <span class="syn-pair-1" data-q="wt-4a-2">when their devices broke and they no longer knew how many steps they had taken</span>, <span class="syn-pair-2" data-q="wt-4a-2">there seemed little point in heading out for that walk</span>."`,
+                question: `2. People have reported that <span class="syn-pair-1" data-q="wt-4a-2">when their fitness apps stop working</span> <span class="syn-pair-2" data-q="wt-4a-2">[ 2 ]</span>.`,
                 ans: "F",
                 boxOptions: [
                     { letter: "A", text: "they can give an unrealistic impression..." }, { letter: "B", text: "people become very attached..." },
@@ -111,7 +111,7 @@ window.module4Data = {
                 badge: "Reading 4a Walkthrough • Q3",
                 para: "Para 3",
                 header: "📖 Passage Excerpt (Paragraph 3)",
-                excerpt: `<span class="para-tag">[Para 3]</span> <mark class="evidence" id="ev-wt-4a-3" data-q="wt-4a-3">"They may record that someone worked out for two hours... but not that they then spent the rest of the day eating pizza... <span class="syn-pair-1" data-q="wt-4a-3">fitness apps can help people to deceive themselves</span> about <span class="syn-pair-2" data-q="wt-4a-3">how healthy their lifestyle is</span>."</mark>`,
+                excerpt: `<span class="para-tag">[Para 3]</span> "They may record that someone worked out for two hours... but not that they then spent the rest of the day eating pizza... <span class="syn-pair-1" data-q="wt-4a-3">fitness apps can help people to deceive themselves</span> about <span class="syn-pair-2" data-q="wt-4a-3">how healthy their lifestyle is</span>."`,
                 question: `3. It is not sensible to rely too much on fitness apps because <span class="syn-pair-1" data-q="wt-4a-3">[ 3 ]</span>.`,
                 ans: "A",
                 boxOptions: [
@@ -128,8 +128,8 @@ window.module4Data = {
                 badge: "Reading 4a Walkthrough • Q4",
                 para: "Para 4",
                 header: "📖 Passage Excerpt (Paragraph 4)",
-                excerpt: `<span class="para-tag">[Para 4]</span> <mark class="evidence" id="ev-wt-4a-4" data-q="wt-4a-4">"<span class="syn-pair-1" data-q="wt-4a-4">What sports psychologists recommend users of electronic fitness devices to do</span> is <span class="syn-pair-2" data-q="wt-4a-4">raise their awareness of how their body looks</span>."</mark>`,
-                question: `4. Sports psychologists recommend that <span class="syn-pair-2" data-q="wt-4a-4">[ 4 ]</span>.`,
+                excerpt: `<span class="para-tag">[Para 4]</span> "<span class="syn-pair-1" data-q="wt-4a-4">What sports psychologists recommend users of electronic fitness devices to do</span> is <span class="syn-pair-2" data-q="wt-4a-4">raise their awareness of how their body looks</span>."`,
+                question: `4. Sports psychologists <span class="syn-pair-1" data-q="wt-4a-4">recommend</span> that <span class="syn-pair-2" data-q="wt-4a-4">[ 4 ]</span>.`,
                 ans: "C",
                 boxOptions: [
                     { letter: "A", text: "they can give an unrealistic impression..." }, { letter: "B", text: "people become very attached..." },
@@ -145,8 +145,8 @@ window.module4Data = {
                 badge: "Reading 4a Walkthrough • Q5",
                 para: "Para 4",
                 header: "📖 Passage Excerpt (Paragraph 4 & 5)",
-                excerpt: `<span class="para-tag">[Para 4]</span> <mark class="evidence" id="ev-wt-4a-5" data-q="wt-4a-5">"And <span class="syn-pair-1" data-q="wt-4a-5">if people want to lose weight</span>, they may find it <span class="syn-pair-2" data-q="wt-4a-5">more effective to take a regular look at themselves in the mirror... Keeping a fitness diary helps people to eat well</span>..."</mark>`,
-                question: `5. Writing a fitness diary is helpful when <span class="syn-pair-1" data-q="wt-4a-5">[ 5 ]</span>.`,
+                excerpt: `<span class="para-tag">[Para 4]</span> "And <span class="syn-pair-2" data-q="wt-4a-5">if people want to lose weight</span>, they may find it more effective to take a regular look at themselves in the mirror... <span class="syn-pair-1" data-q="wt-4a-5">Keeping a fitness diary helps</span> people to eat well..."`,
+                question: `5. <span class="syn-pair-1" data-q="wt-4a-5">Writing a fitness diary is helpful</span> when <span class="syn-pair-2" data-q="wt-4a-5">[ 5 ]</span>.`,
                 ans: "E",
                 boxOptions: [
                     { letter: "A", text: "they can give an unrealistic impression..." }, { letter: "B", text: "people become very attached..." },

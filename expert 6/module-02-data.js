@@ -53,7 +53,7 @@ window.module2Data = {
                 badge: "Reading 2a Strategy • Walkthrough (Sentence B)",
                 para: "Sentence B",
                 header: "📖 Extract Excerpt: Sentence B (Paragraph B)",
-                excerpt: `<span class="para-tag">[Sentence B]</span> "<mark class="evidence" id="ev-wt-p1" data-q="wt-p1"><span class="syn-pair-1" data-q="wt-p1">Extraordinary experiences</span> are <span class="syn-pair-2" data-q="wt-p1">pleasurable in the moment</span> but can leave us socially <span class="syn-pair-2" data-q="wt-p1">worse off in the long run</span></mark>," says psychological scientist and study author Gus Cooney of Harvard University.`,
+                excerpt: `<span class="para-tag">[Sentence B]</span> "<span class="syn-pair-1" data-q="wt-p1">Extraordinary experiences</span> are <span class="syn-pair-2" data-q="wt-p1">pleasurable in the moment</span> but can leave us socially <span class="syn-pair-2" data-q="wt-p1">worse off in the long run</span>," says psychological scientist and study author Gus Cooney of Harvard University.`,
                 question: `1. <span class="syn-pair-1" data-q="wt-p1">Sharing experiences</span> provides us with <span class="syn-pair-2" data-q="wt-p1">immediate and long-term satisfaction</span>.`,
                 boxOptions: [
                     { letter: "A", text: "Sentence A (Para A: Love to reminisce & tell others)" },
@@ -70,7 +70,7 @@ window.module2Data = {
                 badge: "Reading 2a Strategy • Walkthrough (Sentence D)",
                 para: "Sentence D",
                 header: "📖 Extract Excerpt: Sentence D (Paragraph D)",
-                excerpt: `<span class="para-tag">[Sentence D]</span> "...to be extraordinary is to be different than other people, and <mark class="evidence" id="ev-wt-p2" data-q="wt-p2"><span class="syn-pair-1" data-q="wt-p2">social interaction</span> is <span class="syn-pair-2" data-q="wt-p2">grounded in similarities</span></mark>."`,
+                excerpt: `<span class="para-tag">[Sentence D]</span> "...to be extraordinary is to be different than other people, and <span class="syn-pair-1" data-q="wt-p2">social interaction</span> is <span class="syn-pair-2" data-q="wt-p2">grounded in similarities</span>."`,
                 question: `2. <span class="syn-pair-1" data-q="wt-p2">Social communication</span> is based on things we have <span class="syn-pair-2" data-q="wt-p2">in common</span>.`,
                 boxOptions: [
                     { letter: "A", text: "Sentence A (Para A: Love to reminisce & tell others)" },
@@ -87,7 +87,7 @@ window.module2Data = {
                 badge: "Reading 2a Strategy • Walkthrough (Sentence A)",
                 para: "Sentence A",
                 header: "📖 Extract Excerpt: Sentence A (Paragraph A)",
-                excerpt: `<span class="para-tag">[Sentence A]</span> "<mark class="evidence" id="ev-wt-p3" data-q="wt-p3">We <span class="syn-pair-1" data-q="wt-p3">love to reminisce and tell others</span> about our <span class="syn-pair-2" data-q="wt-p3">extraordinary experiences</span></mark> – that time we climbed Mount Kilimanjaro, got to taste that rare food or ran into a celebrity on the street – but new research suggests this may not be such a wise idea."`,
+                excerpt: `<span class="para-tag">[Sentence A]</span> "We <span class="syn-pair-1" data-q="wt-p3">love to reminisce and tell others</span> about our <span class="syn-pair-2" data-q="wt-p3">extraordinary experiences</span> – that time we climbed Mount Kilimanjaro, got to taste that rare food or ran into a celebrity on the street – but new research suggests this may not be such a wise idea."`,
                 question: `3. People <span class="syn-pair-1" data-q="wt-p3">want to share</span> their <span class="syn-pair-2" data-q="wt-p3">unusual experiences</span> with each other.`,
                 boxOptions: [
                     { letter: "A", text: "Sentence A (Para A: Love to reminisce & tell others)" },
@@ -104,7 +104,7 @@ window.module2Data = {
                 badge: "Reading 2a Strategy • Walkthrough (Sentence C)",
                 para: "Sentence C",
                 header: "📖 Extract Excerpt: Sentence C (Paragraph C)",
-                excerpt: `<span class="para-tag">[Sentence C]</span> "<mark class="evidence" id="ev-wt-p4" data-q="wt-p4">The participants in our study <span class="syn-pair-1" data-q="wt-p4">mistakenly thought</span> that having an <span class="syn-pair-1" data-q="wt-p4">extraordinary experience</span> would <span class="syn-pair-2" data-q="wt-p4">make them the star of the conversation</span></mark>. But they were wrong..."`,
+                excerpt: `<span class="para-tag">[Sentence C]</span> "The participants in our study <span class="syn-pair-1" data-q="wt-p4">mistakenly thought</span> that having an <span class="syn-pair-1" data-q="wt-p4">extraordinary experience</span> would <span class="syn-pair-2" data-q="wt-p4">make them the star of the conversation</span>. But they were wrong..."`,
                 question: `4. Before the research, people <span class="syn-pair-1" data-q="wt-p4">believed extraordinary experiences</span> bring <span class="syn-pair-2" data-q="wt-p4">mostly benefits</span>.`,
                 boxOptions: [
                     { letter: "A", text: "Sentence A (Para A: Love to reminisce & tell others)" },

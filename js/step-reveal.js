@@ -150,6 +150,8 @@ class StepRevealEngine {
     revealSingleCard(card) {
         if (!card) return;
 
+        const parentSlide = card.closest('.slide') || document.querySelector('.slide.active');
+
         // Reveal blank inputs inside card
         card.querySelectorAll('.blank-input').forEach(input => {
             if (input.dataset.ans) {
@@ -180,6 +182,19 @@ class StepRevealEngine {
             v.classList.add('active-vocab');
         });
 
+        // Also activate corresponding synonyms in passage
+        if (parentSlide) {
+            const qId = card.dataset.q;
+            if (qId) {
+                parentSlide.querySelectorAll(`[data-q="${qId}"].syn-pair-1, [data-q="${qId}"].syn-pair-2, [data-q="${qId}"].syn-pair-3, .syn-pair-1[data-q="${qId}"], .syn-pair-2[data-q="${qId}"]`).forEach(s => s.classList.add('active-syn'));
+                parentSlide.querySelectorAll(`mark.evidence[data-q="${qId}"], mark.evidence#ev-${qId}`).forEach(m => m.classList.add('highlighted'));
+            }
+            // For single-question walkthroughs, activate all slide synonyms
+            if (parentSlide.querySelector('.walkthrough-container')) {
+                parentSlide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+            }
+        }
+
         card.classList.add('revealed');
 
         // Show explanation box if exists
@@ -188,12 +203,12 @@ class StepRevealEngine {
             exp.classList.add('show');
         }
 
-        // Auto-trigger evidence highlight in passage only if in reading split question-pane
+        // Auto-trigger evidence highlight in passage if in reading split question-pane
         if (!card.classList.contains('strategy-card')) {
             const qId = card.dataset.q;
             const synBtn = card.querySelector('.syn-btn');
             const evId = synBtn ? synBtn.dataset.ev : (qId ? `ev-${qId}` : null);
-            if (qId && window.readingHighlighter && card.closest('.question-pane')) {
+            if (qId && window.readingHighlighter) {
                 window.readingHighlighter.showEvidence(qId, evId);
             }
         }
@@ -225,13 +240,13 @@ class StepRevealEngine {
         }
     }
 
-    revealNextOnActiveSlide() {
+    revealNextOnActiveSlide(broadcast = true) {
         const activeSlide = document.querySelector('.slide.active');
         if (!activeSlide) return;
-        this.revealNextInContainer(activeSlide);
+        this.revealNextInContainer(activeSlide, broadcast);
     }
 
-    revealNextInContainer(container) {
+    revealNextInContainer(container, broadcast = true) {
         if (!container) return;
         const unrevealedUnits = this.getUnrevealedItems(container);
         if (unrevealedUnits.length === 0) return;
@@ -247,6 +262,10 @@ class StepRevealEngine {
             nextUnit.el.classList.add('selected', 'correct-opt');
             nextUnit.el.classList.remove('wrong-opt');
             nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('STEP_REVEAL_CMD', {});
         }
     }
 
