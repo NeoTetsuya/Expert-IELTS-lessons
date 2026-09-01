@@ -3970,25 +3970,27 @@ class StepRevealEngine {
             }
         });
 
-        // 2. On Strategy slides, allow clicking a strategy card to toggle its keyword highlighting without revealing answers/explanations
+        // 2. On Strategy slides, allow clicking a strategy card to toggle its keyword highlighting and target reveal
         document.querySelectorAll('.strategy-card').forEach(card => {
             if (card.dataset.strategyBound) return;
             card.dataset.strategyBound = 'true';
             card.addEventListener('click', (e) => {
                 if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
                 const syns = card.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word');
-                const isAnyActive = Array.from(syns).some(s => s.classList.contains('active-syn') || s.classList.contains('active-vocab'));
-                syns.forEach(s => {
-                    if (isAnyActive) {
-                        s.classList.remove('active-syn', 'active-vocab');
-                    } else {
+                const isAnyActive = card.classList.contains('revealed') || Array.from(syns).some(s => s.classList.contains('active-syn') || s.classList.contains('active-vocab'));
+                if (isAnyActive) {
+                    card.classList.remove('revealed');
+                    syns.forEach(s => s.classList.remove('active-syn', 'active-vocab'));
+                } else {
+                    card.classList.add('revealed');
+                    syns.forEach(s => {
                         if (s.classList.contains('vocab-word')) {
                             s.classList.add('active-vocab');
                         } else {
                             s.classList.add('active-syn');
                         }
-                    }
-                });
+                    });
+                }
             });
         });
 
@@ -4196,7 +4198,7 @@ window.stepReveal = function(btn) {
     if (!window.stepRevealEngine) {
         window.stepRevealEngine = new StepRevealEngine(window.deckEngine);
     }
-    const container = btn ? (btn.closest('.question-pane') || btn.closest('.slide') || btn.closest('.page-content') || btn.closest('.notebook')) : document.querySelector('.slide.active');
+    const container = btn ? (btn.closest('.slide') || btn.closest('.question-pane') || btn.closest('.page-content') || btn.closest('.notebook') || document.querySelector('.slide.active')) : document.querySelector('.slide.active');
     window.stepRevealEngine.revealNextInContainer(container || document.querySelector('.slide.active'));
 };
 
