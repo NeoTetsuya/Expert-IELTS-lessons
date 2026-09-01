@@ -13,8 +13,12 @@ class ProgressTracker {
     }
 
     init() {
-        // Defer restore to guarantee it runs after hydrateBlanksAndInputs clears values
-        setTimeout(() => this.restoreResponses(), 0);
+        // Restore after DeckComponents signals that all inputs have been hydrated/cleared.
+        // This is safer than setTimeout(0) which may race with hydrateBlanksAndInputs.
+        document.addEventListener('DeckComponents:hydrated',
+            () => this.restoreResponses(), { once: true });
+        // Fallback: if the event already fired before this tracker was created, restore after 150ms
+        setTimeout(() => { if (!this._restored) this.restoreResponses(); }, 150);
         this.bindAutoSave();
         this.renderReviewDashboard();
     }
@@ -43,6 +47,7 @@ class ProgressTracker {
     }
 
     restoreResponses() {
+        this._restored = true;
         const saved = sessionStorage.getItem(this.storageKey);
         if (!saved) return;
         try {
@@ -117,7 +122,6 @@ class ProgressTracker {
 }
 
 // Global auto-instantiation
-let progressTracker;
 window.addEventListener('DOMContentLoaded', () => {
-    progressTracker = new ProgressTracker();
+    window.progressTracker = new ProgressTracker();
 });

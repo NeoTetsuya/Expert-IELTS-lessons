@@ -184,7 +184,6 @@ class StepRevealEngine {
         const exp = card.querySelector('.item-explanation');
         if (exp) {
             exp.classList.add('show');
-            exp.style.display = 'block';
         }
 
         // Auto-trigger evidence highlight in passage only if in reading split question-pane
@@ -220,7 +219,6 @@ class StepRevealEngine {
             const exp = parent.querySelector('.item-explanation');
             if (exp) {
                 exp.classList.add('show');
-                exp.style.display = 'block';
             }
         }
     }

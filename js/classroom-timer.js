@@ -54,7 +54,7 @@ class ClassroomTimer {
                 }
                 .timer-modal-close:hover { color: #ffffff; }
                 .timer-display {
-                    font-family: 'JetBrains Mono', monospace, monospace;
+                    font-family: 'JetBrains Mono', monospace;
                     font-size: 38px;
                     font-weight: 800;
                     text-align: center;
@@ -367,9 +367,7 @@ class ClassroomTimer {
 }
 
 // Global auto-instantiation
-let classroomTimer;
 window.addEventListener('DOMContentLoaded', () => {
-    classroomTimer = new ClassroomTimer();
-    window.classroomTimer = classroomTimer;
+    window.classroomTimer = new ClassroomTimer();
 });
 

@@ -15,6 +15,8 @@ class DeckComponents {
         this.hydrateSynonymButtons();
         this.hydrateBlanksAndInputs();
         this.bindAutoExpandBlanks();
+        // Signal that all inputs are hydrated — ProgressTracker can now safely restore saved state
+        document.dispatchEvent(new CustomEvent('DeckComponents:hydrated'));
     }
 
     /**

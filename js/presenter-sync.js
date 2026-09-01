@@ -77,10 +77,12 @@ class PresenterSyncEngine {
             }
         }
 
-        // Also write to localStorage to support cross-process and cross-window sync
-        try {
-            localStorage.setItem(this.channelName, JSON.stringify(message));
-        } catch (e) {}
+        // Write to localStorage only when a remote peer is active (reduces unnecessary I/O)
+        if (this.hasRemotePeer || !this.channel) {
+            try {
+                localStorage.setItem(this.channelName, JSON.stringify(message));
+            } catch (e) {}
+        }
     }
 
     handleIncomingMessage(message) {
@@ -91,8 +93,10 @@ class PresenterSyncEngine {
         if (this.processedMessageIds.has(msgId)) return;
         this.processedMessageIds.add(msgId);
         if (this.processedMessageIds.size > 200) {
-            const first = this.processedMessageIds.values().next().value;
-            this.processedMessageIds.delete(first);
+            const iter = this.processedMessageIds.values();
+            for (let i = 0; i < 50; i++) {
+                this.processedMessageIds.delete(iter.next().value);
+            }
         }
 
         this.hasRemotePeer = true;

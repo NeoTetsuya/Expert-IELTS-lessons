@@ -397,8 +397,8 @@ class ReadingHighlighter {
             // Hook slide changes to automatically reset spotlight index
             const origShowSlide = DeckEngine.prototype.showSlide;
             if (origShowSlide) {
-                DeckEngine.prototype.showSlide = function (index, direction) {
-                    origShowSlide.call(this, index, direction);
+                DeckEngine.prototype.showSlide = function (index, broadcast) {
+                    origShowSlide.call(this, index, broadcast);
                     self.activeEvidenceId = null;
                     self.currentEvidenceIndex = -1;
                 };

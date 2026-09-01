@@ -5,8 +5,8 @@
   "main": "index.html",
   "scripts": {
     "build": "node build-bundle.js",
-    "build:bundle": "node build-bundle.js",
-    "build:css": "node build-bundle.js",
+    "build:js": "node build-bundle.js --js-only",
+    "build:css": "node build-bundle.js --css-only",
     "watch:css": "node scripts/watch-css.js",
     "update-index": "node scripts/update-index.js"
   },

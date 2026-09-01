@@ -11,17 +11,10 @@
   // =========================================================================
   // 1. PASSWORD REGISTRY
   // =========================================================================
-  window.LESSON_PASSWORDS = window.LESSON_PASSWORDS || {
-    // Master password that unlocks ANY protected deck
-    masterPassword: "neo-teacher-access",
-
-    // Default passwords by level
-    levels: {
-      "expert 5": {},
-      "expert 6": {},
-      "expert 7.5": {}
-    }
-  };
+  // SHA-256 hash of the master password — never store plain passwords client-side.
+  // To regenerate: node -e "require('crypto').createHash('sha256').update('your-password').digest('hex')"
+  // Current hash = sha256("neo-teacher-access")
+  const MASTER_HASH = 'be8bd816677900f7f80ff644f482a9540965b9de033238be5d6c9d12aa3209d1';
 
   // =========================================================================
   // 2. HELPER FUNCTIONS: PATH RESOLUTION & UNLOCK STATE
@@ -185,20 +178,29 @@
       const pwdInput = modal.querySelector('#lessonPasswordInput');
       const errorEl = modal.querySelector('#lessonLockError');
 
-      function tryUnlock() {
+      async function tryUnlock() {
         const entered = (pwdInput.value || '').trim();
-        const master = window.LESSON_PASSWORDS.masterPassword;
-
-        if (entered === master || entered.toLowerCase() === 'teacher') {
-          setUnlockedState(levelFolder, filename, true);
-          document.body.classList.remove('deck-locked');
-          modal.remove();
-          const fab = document.getElementById('lesson-relock-fab');
-          if (fab) fab.style.display = 'flex';
-        } else {
-          errorEl.textContent = 'Mật mã không đúng. Vui lòng thử lại!';
+        if (!entered) { pwdInput.focus(); return; }
+        try {
+          const encoded = new TextEncoder().encode(entered);
+          const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+          const hexHash = Array.from(new Uint8Array(hashBuffer))
+            .map(b => b.toString(16).padStart(2, '0')).join('');
+          if (hexHash === MASTER_HASH) {
+            setUnlockedState(levelFolder, filename, true);
+            document.body.classList.remove('deck-locked');
+            modal.remove();
+            const fab = document.getElementById('lesson-relock-fab');
+            if (fab) fab.style.display = 'flex';
+          } else {
+            errorEl.textContent = 'Mật mã không đúng. Vui lòng thử lại!';
+            errorEl.style.display = 'block';
+            pwdInput.select();
+          }
+        } catch (e) {
+          // crypto.subtle is only available on HTTPS or localhost
+          errorEl.textContent = 'Trình duyệt không hỗ trợ xác thực bảo mật. Vui lòng dùng HTTPS.';
           errorEl.style.display = 'block';
-          pwdInput.select();
         }
       }
 

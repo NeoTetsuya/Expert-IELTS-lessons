@@ -1295,6 +1295,22 @@ class DeckEngine {
         });
     }
 
+    /**
+     * Resolves a container argument to a concrete HTMLElement.
+     * Accepts: null (→ active slide), string ID, button element, or any HTMLElement.
+     */
+    _resolveContainer(container) {
+        if (!container) return document.querySelector('.slide.active');
+        if (typeof container === 'string') return document.getElementById(container);
+        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
+            return container.closest('.question-pane') ||
+                   container.closest('.slide') ||
+                   container.closest('.notebook') ||
+                   container;
+        }
+        return container;
+    }
+
     getSlideFromHash() {
         const hash = window.location.hash;
         if (!hash) return -1;
@@ -1509,6 +1525,7 @@ class DeckEngine {
 
         // Measure and optimize in animation frames
         requestAnimationFrame(() => {
+            // ── Batch 1: Reset prior state (writes) ──────────────────────────────
             slide.style.removeProperty('--font-scale');
             slide.style.removeProperty('--line-height-auto');
             slide.classList.remove('slide-spacious');
@@ -1516,30 +1533,25 @@ class DeckEngine {
             pageContent.style.removeProperty('transform-origin');
             pageContent.style.removeProperty('height');
 
-            // Force reflow and measure active dimensions
+            // ── Batch 2: Read layout (single reflow) ─────────────────────────────
             const availableHeight = notebook.clientHeight - 36;
             const scrollH = pageContent.scrollHeight;
 
+            // ── Batch 3: Write computed values (no further reads) ─────────────────
             if (scrollH > availableHeight + 8) {
-                // OVERFLOW: Scale down gracefully to prevent clipping
+                // OVERFLOW: scale down gracefully to prevent clipping
                 const fitRatio = Math.max(0.68, (availableHeight - 12) / scrollH);
-                requestAnimationFrame(() => {
-                    pageContent.style.transform = `scale(${fitRatio.toFixed(3)})`;
-                    pageContent.style.transformOrigin = 'top center';
-                    pageContent.style.height = `${(availableHeight / fitRatio).toFixed(1)}px`;
-                });
+                pageContent.style.transform = `scale(${fitRatio.toFixed(3)})`;
+                pageContent.style.transformOrigin = 'top center';
+                pageContent.style.height = `${(availableHeight / fitRatio).toFixed(1)}px`;
             } else if (scrollH < availableHeight * 0.78) {
-                // UNDERFLOW / SPARE BLANK SPACE:
-                // Auto-expand font size, line-height, card padding, and vertical distribution
+                // UNDERFLOW: expand font + spacing to fill spare space
                 const heightRatio = availableHeight / Math.max(1, scrollH);
                 const autoFontScale = Math.min(1.28, Math.max(1.0, 1 + (heightRatio - 1) * 0.32));
                 const autoLineHeight = Math.min(2.0, Math.max(1.65, 1.65 + (heightRatio - 1) * 0.28));
-
-                requestAnimationFrame(() => {
-                    slide.style.setProperty('--font-scale', (this.fontScale * autoFontScale).toFixed(2));
-                    slide.style.setProperty('--line-height-auto', autoLineHeight.toFixed(2));
-                    slide.classList.add('slide-spacious');
-                });
+                slide.style.setProperty('--font-scale', (this.fontScale * autoFontScale).toFixed(2));
+                slide.style.setProperty('--line-height-auto', autoLineHeight.toFixed(2));
+                slide.classList.add('slide-spacious');
             }
         });
     }
@@ -1632,11 +1644,7 @@ class DeckEngine {
     }
 
     checkAnswers(container, broadcast = true) {
-        if (!container) container = document.querySelector('.slide.active');
-        if (typeof container === 'string') container = document.getElementById(container);
-        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
-            container = container.closest('.question-pane') || container.closest('.slide') || container.closest('.notebook') || container;
-        }
+        container = this._resolveContainer(container);
         if (!container) return;
 
         // Normalization helper (normalizes curly quotes, apostrophes, and spacing)
@@ -1697,11 +1705,7 @@ class DeckEngine {
     }
 
     revealKeys(container, broadcast = true) {
-        if (!container) container = document.querySelector('.slide.active');
-        if (typeof container === 'string') container = document.getElementById(container);
-        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
-            container = container.closest('.question-pane') || container.closest('.slide') || container.closest('.notebook') || container;
-        }
+        container = this._resolveContainer(container);
         if (!container) return;
 
         container.querySelectorAll('.blank-input').forEach(input => {
@@ -1749,11 +1753,7 @@ class DeckEngine {
     }
 
     resetTask(container, broadcast = true) {
-        if (!container) container = document.querySelector('.slide.active');
-        if (typeof container === 'string') container = document.getElementById(container);
-        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
-            container = container.closest('.question-pane') || container.closest('.slide') || container.closest('.notebook') || container;
-        }
+        container = this._resolveContainer(container);
         if (!container) return;
 
         container.querySelectorAll('.blank-input, .select-input').forEach(input => {
@@ -2076,6 +2076,8 @@ class DeckComponents {
         this.hydrateSynonymButtons();
         this.hydrateBlanksAndInputs();
         this.bindAutoExpandBlanks();
+        // Signal that all inputs are hydrated — ProgressTracker can now safely restore saved state
+        document.dispatchEvent(new CustomEvent('DeckComponents:hydrated'));
     }
 
     /**
@@ -3877,7 +3879,6 @@ class StepRevealEngine {
         const exp = card.querySelector('.item-explanation');
         if (exp) {
             exp.classList.add('show');
-            exp.style.display = 'block';
         }
 
         // Auto-trigger evidence highlight in passage only if in reading split question-pane
@@ -3913,7 +3914,6 @@ class StepRevealEngine {
             const exp = parent.querySelector('.item-explanation');
             if (exp) {
                 exp.classList.add('show');
-                exp.style.display = 'block';
             }
         }
     }
@@ -5841,8 +5841,8 @@ class ReadingHighlighter {
             // Hook slide changes to automatically reset spotlight index
             const origShowSlide = DeckEngine.prototype.showSlide;
             if (origShowSlide) {
-                DeckEngine.prototype.showSlide = function (index, direction) {
-                    origShowSlide.call(this, index, direction);
+                DeckEngine.prototype.showSlide = function (index, broadcast) {
+                    origShowSlide.call(this, index, broadcast);
                     self.activeEvidenceId = null;
                     self.currentEvidenceIndex = -1;
                 };
@@ -6492,8 +6492,12 @@ class ProgressTracker {
     }
 
     init() {
-        // Defer restore to guarantee it runs after hydrateBlanksAndInputs clears values
-        setTimeout(() => this.restoreResponses(), 0);
+        // Restore after DeckComponents signals that all inputs have been hydrated/cleared.
+        // This is safer than setTimeout(0) which may race with hydrateBlanksAndInputs.
+        document.addEventListener('DeckComponents:hydrated',
+            () => this.restoreResponses(), { once: true });
+        // Fallback: if the event already fired before this tracker was created, restore after 150ms
+        setTimeout(() => { if (!this._restored) this.restoreResponses(); }, 150);
         this.bindAutoSave();
         this.renderReviewDashboard();
     }
@@ -6522,6 +6526,7 @@ class ProgressTracker {
     }
 
     restoreResponses() {
+        this._restored = true;
         const saved = sessionStorage.getItem(this.storageKey);
         if (!saved) return;
         try {
@@ -6596,9 +6601,8 @@ class ProgressTracker {
 }
 
 // Global auto-instantiation
-let progressTracker;
 window.addEventListener('DOMContentLoaded', () => {
-    progressTracker = new ProgressTracker();
+    window.progressTracker = new ProgressTracker();
 });
 
 
@@ -6807,13 +6811,28 @@ class SlideNavigator {
             };
             const badgeBg = skillColors[skill] || '#475569';
 
-            card.innerHTML = `
-                <div class="slide-nav-card-top">
-                    <span class="slide-nav-num">Slide ${idx + 1}</span>
-                    <span class="slide-nav-badge" style="background:${badgeBg}; color:#fff;">${skill}</span>
-                </div>
-                <div class="slide-nav-title">${titleText}</div>
-            `;
+            // Use innerHTML only for trusted static structure; textContent for slide-sourced data
+            const cardTop = document.createElement('div');
+            cardTop.className = 'slide-nav-card-top';
+
+            const numSpan = document.createElement('span');
+            numSpan.className = 'slide-nav-num';
+            numSpan.textContent = `Slide ${idx + 1}`;
+
+            const badgeSpan = document.createElement('span');
+            badgeSpan.className = 'slide-nav-badge';
+            badgeSpan.style.cssText = `background:${badgeBg}; color:#fff;`;
+            badgeSpan.textContent = skill;
+
+            cardTop.appendChild(numSpan);
+            cardTop.appendChild(badgeSpan);
+
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'slide-nav-title';
+            titleDiv.textContent = titleText;
+
+            card.appendChild(cardTop);
+            card.appendChild(titleDiv);
             grid.appendChild(card);
         });
     }
@@ -6859,9 +6878,8 @@ class SlideNavigator {
 }
 
 // Global auto-instantiation
-let slideNavigator;
 window.addEventListener('DOMContentLoaded', () => {
-    slideNavigator = new SlideNavigator();
+    window.slideNavigator = new SlideNavigator();
 });
 
 
@@ -7552,7 +7570,7 @@ class ClassroomTimer {
                 }
                 .timer-modal-close:hover { color: #ffffff; }
                 .timer-display {
-                    font-family: 'JetBrains Mono', monospace, monospace;
+                    font-family: 'JetBrains Mono', monospace;
                     font-size: 38px;
                     font-weight: 800;
                     text-align: center;
@@ -7865,10 +7883,8 @@ class ClassroomTimer {
 }
 
 // Global auto-instantiation
-let classroomTimer;
 window.addEventListener('DOMContentLoaded', () => {
-    classroomTimer = new ClassroomTimer();
-    window.classroomTimer = classroomTimer;
+    window.classroomTimer = new ClassroomTimer();
 });
 
 
@@ -8240,7 +8256,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             // 1. Educator Presenter Tools
             items.push(
-                { group: 'Presenter Tools', icon: '⏱️', title: 'Classroom Timer', shortcut: 'T', action: () => window.classroomTimer && window.classroomTimer.toggle() },
+                { group: 'Presenter Tools', icon: '⏱️', title: 'Classroom Timer', shortcut: 'T', action: () => window.classroomTimer && window.classroomTimer.toggleModal() },
                 { group: 'Presenter Tools', icon: '✨', title: 'Vocabulary & Key Highlights', shortcut: 'V', action: () => window.toggleVocabHighlight && window.toggleVocabHighlight() },
                 { group: 'Presenter Tools', icon: '🔦', title: 'Presentation Spotlight', shortcut: 'S', action: () => window.presentationSpotlight && window.presentationSpotlight.toggle() },
                 { group: 'Presenter Tools', icon: '🔴', title: 'Laser Pointer', shortcut: 'L', action: () => window.laserPointer && window.laserPointer.toggle() },
@@ -8251,7 +8267,7 @@ window.addEventListener('DOMContentLoaded', () => {
             );
 
             // 2. Slide Navigation Cards
-            const slides = document.querySelectorAll('.deck-stage > slide-card, .deck-stage > .slide, .deck-stage > section');
+            const slides = window.deckEngine ? Array.from(window.deckEngine.slides) : Array.from(document.querySelectorAll('.slide'));
             slides.forEach((slide, idx) => {
                 const title = slide.getAttribute('title') || slide.querySelector('h1, h2, h3')?.textContent || `Slide ${idx + 1}`;
                 const subtitle = slide.getAttribute('subtitle') || slide.getAttribute('badge') || '';
@@ -8272,10 +8288,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     title: `Slide ${idx + 1}: ${title}`,
                     subtitle: subtitle,
                     action: () => {
-                        if (window.deckEngine && typeof window.deckEngine.goToSlide === 'function') {
-                            window.deckEngine.goToSlide(idx);
-                        } else if (window.slideNavigator && typeof window.slideNavigator.goToSlide === 'function') {
-                            window.slideNavigator.goToSlide(idx);
+                        if (window.deckEngine) {
+                            window.deckEngine.jumpToSlide(idx);
                         }
                     }
                 });
@@ -9726,10 +9740,8 @@ class PresentationTools {
 }
 
 // Global auto-instantiation
-let presentationTools;
 window.addEventListener('DOMContentLoaded', () => {
-    presentationTools = new PresentationTools(window.deckEngine);
-    window.presentationTools = presentationTools;
+    window.presentationTools = new PresentationTools(window.deckEngine);
 });
 
 
@@ -9813,10 +9825,12 @@ class PresenterSyncEngine {
             }
         }
 
-        // Also write to localStorage to support cross-process and cross-window sync
-        try {
-            localStorage.setItem(this.channelName, JSON.stringify(message));
-        } catch (e) {}
+        // Write to localStorage only when a remote peer is active (reduces unnecessary I/O)
+        if (this.hasRemotePeer || !this.channel) {
+            try {
+                localStorage.setItem(this.channelName, JSON.stringify(message));
+            } catch (e) {}
+        }
     }
 
     handleIncomingMessage(message) {
@@ -9827,8 +9841,10 @@ class PresenterSyncEngine {
         if (this.processedMessageIds.has(msgId)) return;
         this.processedMessageIds.add(msgId);
         if (this.processedMessageIds.size > 200) {
-            const first = this.processedMessageIds.values().next().value;
-            this.processedMessageIds.delete(first);
+            const iter = this.processedMessageIds.values();
+            for (let i = 0; i < 50; i++) {
+                this.processedMessageIds.delete(iter.next().value);
+            }
         }
 
         this.hasRemotePeer = true;
@@ -12981,17 +12997,10 @@ window.presenterViewUI = new PresenterViewUI(window.presenterSyncEngine);
   // =========================================================================
   // 1. PASSWORD REGISTRY
   // =========================================================================
-  window.LESSON_PASSWORDS = window.LESSON_PASSWORDS || {
-    // Master password that unlocks ANY protected deck
-    masterPassword: "neo-teacher-access",
-
-    // Default passwords by level
-    levels: {
-      "expert 5": {},
-      "expert 6": {},
-      "expert 7.5": {}
-    }
-  };
+  // SHA-256 hash of the master password — never store plain passwords client-side.
+  // To regenerate: node -e "require('crypto').createHash('sha256').update('your-password').digest('hex')"
+  // Current hash = sha256("neo-teacher-access")
+  const MASTER_HASH = 'be8bd816677900f7f80ff644f482a9540965b9de033238be5d6c9d12aa3209d1';
 
   // =========================================================================
   // 2. HELPER FUNCTIONS: PATH RESOLUTION & UNLOCK STATE
@@ -13155,20 +13164,29 @@ window.presenterViewUI = new PresenterViewUI(window.presenterSyncEngine);
       const pwdInput = modal.querySelector('#lessonPasswordInput');
       const errorEl = modal.querySelector('#lessonLockError');
 
-      function tryUnlock() {
+      async function tryUnlock() {
         const entered = (pwdInput.value || '').trim();
-        const master = window.LESSON_PASSWORDS.masterPassword;
-
-        if (entered === master || entered.toLowerCase() === 'teacher') {
-          setUnlockedState(levelFolder, filename, true);
-          document.body.classList.remove('deck-locked');
-          modal.remove();
-          const fab = document.getElementById('lesson-relock-fab');
-          if (fab) fab.style.display = 'flex';
-        } else {
-          errorEl.textContent = 'Mật mã không đúng. Vui lòng thử lại!';
+        if (!entered) { pwdInput.focus(); return; }
+        try {
+          const encoded = new TextEncoder().encode(entered);
+          const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+          const hexHash = Array.from(new Uint8Array(hashBuffer))
+            .map(b => b.toString(16).padStart(2, '0')).join('');
+          if (hexHash === MASTER_HASH) {
+            setUnlockedState(levelFolder, filename, true);
+            document.body.classList.remove('deck-locked');
+            modal.remove();
+            const fab = document.getElementById('lesson-relock-fab');
+            if (fab) fab.style.display = 'flex';
+          } else {
+            errorEl.textContent = 'Mật mã không đúng. Vui lòng thử lại!';
+            errorEl.style.display = 'block';
+            pwdInput.select();
+          }
+        } catch (e) {
+          // crypto.subtle is only available on HTTPS or localhost
+          errorEl.textContent = 'Trình duyệt không hỗ trợ xác thực bảo mật. Vui lòng dùng HTTPS.';
           errorEl.style.display = 'block';
-          pwdInput.select();
         }
       }
 

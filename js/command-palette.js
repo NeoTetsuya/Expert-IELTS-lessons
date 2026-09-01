@@ -105,7 +105,7 @@
 
             // 1. Educator Presenter Tools
             items.push(
-                { group: 'Presenter Tools', icon: '⏱️', title: 'Classroom Timer', shortcut: 'T', action: () => window.classroomTimer && window.classroomTimer.toggle() },
+                { group: 'Presenter Tools', icon: '⏱️', title: 'Classroom Timer', shortcut: 'T', action: () => window.classroomTimer && window.classroomTimer.toggleModal() },
                 { group: 'Presenter Tools', icon: '✨', title: 'Vocabulary & Key Highlights', shortcut: 'V', action: () => window.toggleVocabHighlight && window.toggleVocabHighlight() },
                 { group: 'Presenter Tools', icon: '🔦', title: 'Presentation Spotlight', shortcut: 'S', action: () => window.presentationSpotlight && window.presentationSpotlight.toggle() },
                 { group: 'Presenter Tools', icon: '🔴', title: 'Laser Pointer', shortcut: 'L', action: () => window.laserPointer && window.laserPointer.toggle() },
@@ -116,7 +116,7 @@
             );
 
             // 2. Slide Navigation Cards
-            const slides = document.querySelectorAll('.deck-stage > slide-card, .deck-stage > .slide, .deck-stage > section');
+            const slides = window.deckEngine ? Array.from(window.deckEngine.slides) : Array.from(document.querySelectorAll('.slide'));
             slides.forEach((slide, idx) => {
                 const title = slide.getAttribute('title') || slide.querySelector('h1, h2, h3')?.textContent || `Slide ${idx + 1}`;
                 const subtitle = slide.getAttribute('subtitle') || slide.getAttribute('badge') || '';
@@ -137,10 +137,8 @@
                     title: `Slide ${idx + 1}: ${title}`,
                     subtitle: subtitle,
                     action: () => {
-                        if (window.deckEngine && typeof window.deckEngine.goToSlide === 'function') {
-                            window.deckEngine.goToSlide(idx);
-                        } else if (window.slideNavigator && typeof window.slideNavigator.goToSlide === 'function') {
-                            window.slideNavigator.goToSlide(idx);
+                        if (window.deckEngine) {
+                            window.deckEngine.jumpToSlide(idx);
                         }
                     }
                 });

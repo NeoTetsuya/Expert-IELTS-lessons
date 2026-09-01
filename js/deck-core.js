@@ -38,6 +38,22 @@ class DeckEngine {
         });
     }
 
+    /**
+     * Resolves a container argument to a concrete HTMLElement.
+     * Accepts: null (→ active slide), string ID, button element, or any HTMLElement.
+     */
+    _resolveContainer(container) {
+        if (!container) return document.querySelector('.slide.active');
+        if (typeof container === 'string') return document.getElementById(container);
+        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
+            return container.closest('.question-pane') ||
+                   container.closest('.slide') ||
+                   container.closest('.notebook') ||
+                   container;
+        }
+        return container;
+    }
+
     getSlideFromHash() {
         const hash = window.location.hash;
         if (!hash) return -1;
@@ -252,6 +268,7 @@ class DeckEngine {
 
         // Measure and optimize in animation frames
         requestAnimationFrame(() => {
+            // ── Batch 1: Reset prior state (writes) ──────────────────────────────
             slide.style.removeProperty('--font-scale');
             slide.style.removeProperty('--line-height-auto');
             slide.classList.remove('slide-spacious');
@@ -259,30 +276,25 @@ class DeckEngine {
             pageContent.style.removeProperty('transform-origin');
             pageContent.style.removeProperty('height');
 
-            // Force reflow and measure active dimensions
+            // ── Batch 2: Read layout (single reflow) ─────────────────────────────
             const availableHeight = notebook.clientHeight - 36;
             const scrollH = pageContent.scrollHeight;
 
+            // ── Batch 3: Write computed values (no further reads) ─────────────────
             if (scrollH > availableHeight + 8) {
-                // OVERFLOW: Scale down gracefully to prevent clipping
+                // OVERFLOW: scale down gracefully to prevent clipping
                 const fitRatio = Math.max(0.68, (availableHeight - 12) / scrollH);
-                requestAnimationFrame(() => {
-                    pageContent.style.transform = `scale(${fitRatio.toFixed(3)})`;
-                    pageContent.style.transformOrigin = 'top center';
-                    pageContent.style.height = `${(availableHeight / fitRatio).toFixed(1)}px`;
-                });
+                pageContent.style.transform = `scale(${fitRatio.toFixed(3)})`;
+                pageContent.style.transformOrigin = 'top center';
+                pageContent.style.height = `${(availableHeight / fitRatio).toFixed(1)}px`;
             } else if (scrollH < availableHeight * 0.78) {
-                // UNDERFLOW / SPARE BLANK SPACE:
-                // Auto-expand font size, line-height, card padding, and vertical distribution
+                // UNDERFLOW: expand font + spacing to fill spare space
                 const heightRatio = availableHeight / Math.max(1, scrollH);
                 const autoFontScale = Math.min(1.28, Math.max(1.0, 1 + (heightRatio - 1) * 0.32));
                 const autoLineHeight = Math.min(2.0, Math.max(1.65, 1.65 + (heightRatio - 1) * 0.28));
-
-                requestAnimationFrame(() => {
-                    slide.style.setProperty('--font-scale', (this.fontScale * autoFontScale).toFixed(2));
-                    slide.style.setProperty('--line-height-auto', autoLineHeight.toFixed(2));
-                    slide.classList.add('slide-spacious');
-                });
+                slide.style.setProperty('--font-scale', (this.fontScale * autoFontScale).toFixed(2));
+                slide.style.setProperty('--line-height-auto', autoLineHeight.toFixed(2));
+                slide.classList.add('slide-spacious');
             }
         });
     }
@@ -375,11 +387,7 @@ class DeckEngine {
     }
 
     checkAnswers(container, broadcast = true) {
-        if (!container) container = document.querySelector('.slide.active');
-        if (typeof container === 'string') container = document.getElementById(container);
-        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
-            container = container.closest('.question-pane') || container.closest('.slide') || container.closest('.notebook') || container;
-        }
+        container = this._resolveContainer(container);
         if (!container) return;
 
         // Normalization helper (normalizes curly quotes, apostrophes, and spacing)
@@ -440,11 +448,7 @@ class DeckEngine {
     }
 
     revealKeys(container, broadcast = true) {
-        if (!container) container = document.querySelector('.slide.active');
-        if (typeof container === 'string') container = document.getElementById(container);
-        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
-            container = container.closest('.question-pane') || container.closest('.slide') || container.closest('.notebook') || container;
-        }
+        container = this._resolveContainer(container);
         if (!container) return;
 
         container.querySelectorAll('.blank-input').forEach(input => {
@@ -492,11 +496,7 @@ class DeckEngine {
     }
 
     resetTask(container, broadcast = true) {
-        if (!container) container = document.querySelector('.slide.active');
-        if (typeof container === 'string') container = document.getElementById(container);
-        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
-            container = container.closest('.question-pane') || container.closest('.slide') || container.closest('.notebook') || container;
-        }
+        container = this._resolveContainer(container);
         if (!container) return;
 
         container.querySelectorAll('.blank-input, .select-input').forEach(input => {

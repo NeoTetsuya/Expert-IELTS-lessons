@@ -202,13 +202,28 @@ class SlideNavigator {
             };
             const badgeBg = skillColors[skill] || '#475569';
 
-            card.innerHTML = `
-                <div class="slide-nav-card-top">
-                    <span class="slide-nav-num">Slide ${idx + 1}</span>
-                    <span class="slide-nav-badge" style="background:${badgeBg}; color:#fff;">${skill}</span>
-                </div>
-                <div class="slide-nav-title">${titleText}</div>
-            `;
+            // Use innerHTML only for trusted static structure; textContent for slide-sourced data
+            const cardTop = document.createElement('div');
+            cardTop.className = 'slide-nav-card-top';
+
+            const numSpan = document.createElement('span');
+            numSpan.className = 'slide-nav-num';
+            numSpan.textContent = `Slide ${idx + 1}`;
+
+            const badgeSpan = document.createElement('span');
+            badgeSpan.className = 'slide-nav-badge';
+            badgeSpan.style.cssText = `background:${badgeBg}; color:#fff;`;
+            badgeSpan.textContent = skill;
+
+            cardTop.appendChild(numSpan);
+            cardTop.appendChild(badgeSpan);
+
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'slide-nav-title';
+            titleDiv.textContent = titleText;
+
+            card.appendChild(cardTop);
+            card.appendChild(titleDiv);
             grid.appendChild(card);
         });
     }
@@ -254,7 +269,6 @@ class SlideNavigator {
 }
 
 // Global auto-instantiation
-let slideNavigator;
 window.addEventListener('DOMContentLoaded', () => {
-    slideNavigator = new SlideNavigator();
+    window.slideNavigator = new SlideNavigator();
 });

@@ -458,8 +458,6 @@ class PresentationTools {
 }
 
 // Global auto-instantiation
-let presentationTools;
 window.addEventListener('DOMContentLoaded', () => {
-    presentationTools = new PresentationTools(window.deckEngine);
-    window.presentationTools = presentationTools;
+    window.presentationTools = new PresentationTools(window.deckEngine);
 });
