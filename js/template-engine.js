@@ -90,8 +90,8 @@
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-reading);"></div>
-                <div class="page-content" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px 44px 20px;">
-                    <div class="slide-header" style="margin-bottom: 2px;">
+                <div class="page-content" style="display: flex; flex-direction: column; gap: 12px; padding: 24px 44px 20px; height: 100%; box-sizing: border-box;">
+                    <div class="slide-header" style="margin-bottom: 0;">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-reading); font-size: 13px; padding: 3px 10px;" data-slot="badge">Reading Strategy • Walkthrough</span>
                             <h2 class="slide-title" style="font-size: 26px;" data-slot="title"></h2>
@@ -99,34 +99,34 @@
                         <div class="slide-number" style="font-size: 18px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
-                    <p class="slide-subtitle" style="font-size: 16px; color: var(--text-muted); margin-bottom: 4px;" data-slot="subtitle">
+                    <p class="slide-subtitle" style="font-size: 16px; color: var(--text-muted); margin-bottom: 2px;" data-slot="subtitle">
                         Compare the dedicated passage excerpt with the question below to evaluate your answer.
                     </p>
 
                     <!-- Centered Walkthrough Container -->
-                    <div class="walkthrough-container" style="max-width: 1550px; width: 98%; margin: auto; display: flex; flex-direction: column; gap: 14px; justify-content: center; flex: 1; min-height: 0;">
+                    <div class="walkthrough-container" style="max-width: 1550px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; flex: 1; justify-content: flex-start; min-height: 0;">
                         <!-- Top Box: Dedicated Passage Excerpt -->
-                        <div class="card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 22px 28px;">
-                            <div style="font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--col-reading); margin-bottom: 8px;" data-slot="passage-header">
+                        <div class="card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 20px 28px;">
+                            <div style="font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--col-reading); margin-bottom: 6px;" data-slot="passage-header">
                                 📖 Relevant Passage Excerpt
                             </div>
-                            <p style="font-size: 26px; line-height: 1.85; margin-bottom: 0; color: var(--text-dark);" data-slot="passage-text"></p>
+                            <p style="font-size: 26px; line-height: 1.8; margin-bottom: 0; color: var(--text-dark);" data-slot="passage-text"></p>
                         </div>
 
                         <!-- Bottom Box: Interactive Question Card -->
-                        <div class="q-card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 22px 28px;" data-slot="question-card">
+                        <div class="q-card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 20px 28px;" data-slot="question-card">
                             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
                                 <span style="font-weight: 700; font-size: 26px; line-height: 1.7; color: var(--text-dark);" data-slot="question-text"></span>
                                 <button class="syn-btn" style="flex-shrink: 0; font-size: 15px; padding: 8px 16px; font-weight: 700;" data-slot="evidence-btn">💡 Evidence</button>
                             </div>
 
-                            <div style="margin-top: 14px; display: flex; align-items: center; gap: 14px;" data-slot="input-area"></div>
+                            <div style="margin-top: 12px; display: flex; align-items: center; gap: 14px;" data-slot="input-area"></div>
 
-                            <div class="item-explanation" style="font-size: 24px; line-height: 1.75; margin-top: 12px; padding: 16px 22px; border-radius: 8px;" data-slot="explanation"></div>
+                            <div class="item-explanation" style="font-size: 24px; line-height: 1.75; margin-top: 12px; padding: 14px 22px; border-radius: 8px;" data-slot="explanation"></div>
                         </div>
                     </div>
 
-                    <div class="action-row" style="margin-top: 6px;">
+                    <div class="action-row" style="margin-top: auto; padding-top: 6px;">
                         <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answer</button>
                         <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="revealAnswers(this)">Show Evidence / Highlights</button>

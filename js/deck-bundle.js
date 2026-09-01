@@ -97,8 +97,8 @@
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-reading);"></div>
-                <div class="page-content" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px 44px 20px;">
-                    <div class="slide-header" style="margin-bottom: 2px;">
+                <div class="page-content" style="display: flex; flex-direction: column; gap: 12px; padding: 24px 44px 20px; height: 100%; box-sizing: border-box;">
+                    <div class="slide-header" style="margin-bottom: 0;">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-reading); font-size: 13px; padding: 3px 10px;" data-slot="badge">Reading Strategy • Walkthrough</span>
                             <h2 class="slide-title" style="font-size: 26px;" data-slot="title"></h2>
@@ -106,34 +106,34 @@
                         <div class="slide-number" style="font-size: 18px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
-                    <p class="slide-subtitle" style="font-size: 16px; color: var(--text-muted); margin-bottom: 4px;" data-slot="subtitle">
+                    <p class="slide-subtitle" style="font-size: 16px; color: var(--text-muted); margin-bottom: 2px;" data-slot="subtitle">
                         Compare the dedicated passage excerpt with the question below to evaluate your answer.
                     </p>
 
                     <!-- Centered Walkthrough Container -->
-                    <div class="walkthrough-container" style="max-width: 1550px; width: 98%; margin: auto; display: flex; flex-direction: column; gap: 14px; justify-content: center; flex: 1; min-height: 0;">
+                    <div class="walkthrough-container" style="max-width: 1550px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; flex: 1; justify-content: flex-start; min-height: 0;">
                         <!-- Top Box: Dedicated Passage Excerpt -->
-                        <div class="card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 22px 28px;">
-                            <div style="font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--col-reading); margin-bottom: 8px;" data-slot="passage-header">
+                        <div class="card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 20px 28px;">
+                            <div style="font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--col-reading); margin-bottom: 6px;" data-slot="passage-header">
                                 📖 Relevant Passage Excerpt
                             </div>
-                            <p style="font-size: 26px; line-height: 1.85; margin-bottom: 0; color: var(--text-dark);" data-slot="passage-text"></p>
+                            <p style="font-size: 26px; line-height: 1.8; margin-bottom: 0; color: var(--text-dark);" data-slot="passage-text"></p>
                         </div>
 
                         <!-- Bottom Box: Interactive Question Card -->
-                        <div class="q-card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 22px 28px;" data-slot="question-card">
+                        <div class="q-card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 20px 28px;" data-slot="question-card">
                             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
                                 <span style="font-weight: 700; font-size: 26px; line-height: 1.7; color: var(--text-dark);" data-slot="question-text"></span>
                                 <button class="syn-btn" style="flex-shrink: 0; font-size: 15px; padding: 8px 16px; font-weight: 700;" data-slot="evidence-btn">💡 Evidence</button>
                             </div>
 
-                            <div style="margin-top: 14px; display: flex; align-items: center; gap: 14px;" data-slot="input-area"></div>
+                            <div style="margin-top: 12px; display: flex; align-items: center; gap: 14px;" data-slot="input-area"></div>
 
-                            <div class="item-explanation" style="font-size: 24px; line-height: 1.75; margin-top: 12px; padding: 16px 22px; border-radius: 8px;" data-slot="explanation"></div>
+                            <div class="item-explanation" style="font-size: 24px; line-height: 1.75; margin-top: 12px; padding: 14px 22px; border-radius: 8px;" data-slot="explanation"></div>
                         </div>
                     </div>
 
-                    <div class="action-row" style="margin-top: 6px;">
+                    <div class="action-row" style="margin-top: auto; padding-top: 6px;">
                         <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answer</button>
                         <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="revealAnswers(this)">Show Evidence / Highlights</button>
@@ -1396,8 +1396,10 @@ class DeckEngine {
     _resolveContainer(container) {
         if (!container) return document.querySelector('.slide.active');
         if (typeof container === 'string') return document.getElementById(container);
-        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
+        if (container instanceof HTMLElement) {
+            if (container.classList.contains('slide')) return container;
             return container.closest('.question-pane') ||
+                   container.closest('.walkthrough-container') ||
                    container.closest('.slide') ||
                    container.closest('.notebook') ||
                    container;
@@ -1786,6 +1788,10 @@ class DeckEngine {
             activeSlideEl.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
             activeSlideEl.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
             activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+            activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+        }
+        if (window.readingHighlighter) {
+            window.readingHighlighter.highlightAll(rawContainerId || container.id || null, false);
         }
 
         // Check category sorter exercises
@@ -1881,6 +1887,10 @@ class DeckEngine {
             activeSlideEl.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
             activeSlideEl.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
             activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+            activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+        }
+        if (window.readingHighlighter) {
+            window.readingHighlighter.highlightAll(rawContainerId || container.id || null, false);
         }
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
@@ -1903,52 +1913,7 @@ class DeckEngine {
     // All delegate to the canonical checkAnswers/revealKeys/resetTask
     // ─────────────────────────────────────────────────────────────
     revealAnswers(container, broadcast = true) {
-        const rawContainerId = typeof container === 'string' ? container : (container?.id || null);
-        container = this._resolveContainer(container);
-        if (!container) return;
-
-        const activeSlideEl = (container && container.closest('.slide')) || (this.slides && this.slides[this.currentSlide]) || document.querySelector('.slide.active') || container;
-        if (activeSlideEl) {
-            const synSpans = activeSlideEl.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3');
-            const isAnyActive = Array.from(synSpans).some(s => s.classList.contains('active-syn'));
-            if (isAnyActive) {
-                synSpans.forEach(s => s.classList.remove('active-syn'));
-                activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted'));
-                activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
-            } else {
-                synSpans.forEach(s => s.classList.add('active-syn'));
-                activeSlideEl.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
-                activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
-                activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-
-                // Also populate answer in interactive dropdown/input if unselected
-                activeSlideEl.querySelectorAll('.select-input').forEach(sel => {
-                    if (sel.dataset.ans && !sel.value) {
-                        sel.value = sel.dataset.ans.split('|')[0].trim();
-                        sel.classList.add('correct');
-                        sel.classList.remove('wrong', 'incorrect');
-                    }
-                });
-                activeSlideEl.querySelectorAll('.blank-input').forEach(input => {
-                    if (input.dataset.ans && !input.value) {
-                        input.value = input.dataset.ans.split('|')[0];
-                        input.classList.add('correct');
-                        input.classList.remove('wrong', 'incorrect');
-                        if (window.DeckComponents?.autoResizeBlank) {
-                            DeckComponents.autoResizeBlank(input);
-                        }
-                    }
-                });
-            }
-        }
-
-        if (broadcast && window.presenterSyncEngine) {
-            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
-                action: 'reveal',
-                containerId: rawContainerId || container.id || null,
-                slideIndex: this.currentSlide
-            });
-        }
+        return this.revealKeys(container, broadcast);
     }
 
     resetTask(container, broadcast = true) {
@@ -1987,6 +1952,9 @@ class DeckEngine {
         slideContext.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
         slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
         slideContext.querySelectorAll('.card, .q-card').forEach(c => c.classList.remove('revealed'));
+        if (window.readingHighlighter) {
+            window.readingHighlighter.clearAll(rawContainerId || container.id || null, false);
+        }
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
         }
@@ -6585,6 +6553,11 @@ class ReadingHighlighter {
             v.classList.add('active-vocab');
         });
 
+        // Activate all synonym buttons
+        slide.querySelectorAll('.syn-btn').forEach(btn => {
+            btn.classList.add('active-syn');
+        });
+
         // Ensure reading pane is not dimmed in "Show All" mode
         slide.querySelectorAll('.reading-pane').forEach(pane => {
             pane.classList.remove('spotlight-mode');
@@ -6598,6 +6571,7 @@ class ReadingHighlighter {
             scaler.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
             scaler.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
             scaler.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+            scaler.querySelectorAll('.syn-btn').forEach(btn => btn.classList.add('active-syn'));
             scaler.querySelectorAll('.reading-pane').forEach(p => p.classList.remove('spotlight-mode'));
         }
 
@@ -6613,16 +6587,10 @@ class ReadingHighlighter {
     }
 
     /**
-     * Clears all evidence highlights, synonym badges, spotlight dimming, and explanations in the slide
+     * Clears all highlights and spotlight styles from current slide
      */
     clearAll(containerId, broadcast = true) {
         const slide = this.getSlideForContainer(containerId);
-        if (!slide) return;
-
-        slide.querySelectorAll('mark.evidence').forEach(mark => {
-            mark.classList.remove('highlighted', 'glow-pulse');
-        });
-
         slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(span => {
             span.classList.remove('active-syn');
         });
@@ -6790,9 +6758,13 @@ class ReadingHighlighter {
     getSlideForContainer(containerId) {
         if (containerId) {
             const el = document.getElementById(containerId);
-            if (el) return el.closest('.slide') || document.querySelector('.slide.active');
+            if (el) return el.closest('.slide') || (window.deckEngine?.slides?.[window.deckEngine.currentSlide]) || document.querySelector('.slide.active');
         }
-        return document.querySelector('.slide.active');
+        if (window.deckEngine && window.deckEngine.slides && typeof window.deckEngine.currentSlide === 'number') {
+            const activeSlide = window.deckEngine.slides[window.deckEngine.currentSlide];
+            if (activeSlide) return activeSlide;
+        }
+        return document.querySelector('.slide.active') || document.querySelector('.slide');
     }
 
     /**

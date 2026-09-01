@@ -45,8 +45,10 @@ class DeckEngine {
     _resolveContainer(container) {
         if (!container) return document.querySelector('.slide.active');
         if (typeof container === 'string') return document.getElementById(container);
-        if (container instanceof HTMLElement && container.tagName === 'BUTTON') {
+        if (container instanceof HTMLElement) {
+            if (container.classList.contains('slide')) return container;
             return container.closest('.question-pane') ||
+                   container.closest('.walkthrough-container') ||
                    container.closest('.slide') ||
                    container.closest('.notebook') ||
                    container;
@@ -435,6 +437,10 @@ class DeckEngine {
             activeSlideEl.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
             activeSlideEl.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
             activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+            activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+        }
+        if (window.readingHighlighter) {
+            window.readingHighlighter.highlightAll(rawContainerId || container.id || null, false);
         }
 
         // Check category sorter exercises
@@ -530,6 +536,10 @@ class DeckEngine {
             activeSlideEl.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
             activeSlideEl.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
             activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+            activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+        }
+        if (window.readingHighlighter) {
+            window.readingHighlighter.highlightAll(rawContainerId || container.id || null, false);
         }
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
@@ -552,52 +562,7 @@ class DeckEngine {
     // All delegate to the canonical checkAnswers/revealKeys/resetTask
     // ─────────────────────────────────────────────────────────────
     revealAnswers(container, broadcast = true) {
-        const rawContainerId = typeof container === 'string' ? container : (container?.id || null);
-        container = this._resolveContainer(container);
-        if (!container) return;
-
-        const activeSlideEl = (container && container.closest('.slide')) || (this.slides && this.slides[this.currentSlide]) || document.querySelector('.slide.active') || container;
-        if (activeSlideEl) {
-            const synSpans = activeSlideEl.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3');
-            const isAnyActive = Array.from(synSpans).some(s => s.classList.contains('active-syn'));
-            if (isAnyActive) {
-                synSpans.forEach(s => s.classList.remove('active-syn'));
-                activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted'));
-                activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
-            } else {
-                synSpans.forEach(s => s.classList.add('active-syn'));
-                activeSlideEl.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
-                activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
-                activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-
-                // Also populate answer in interactive dropdown/input if unselected
-                activeSlideEl.querySelectorAll('.select-input').forEach(sel => {
-                    if (sel.dataset.ans && !sel.value) {
-                        sel.value = sel.dataset.ans.split('|')[0].trim();
-                        sel.classList.add('correct');
-                        sel.classList.remove('wrong', 'incorrect');
-                    }
-                });
-                activeSlideEl.querySelectorAll('.blank-input').forEach(input => {
-                    if (input.dataset.ans && !input.value) {
-                        input.value = input.dataset.ans.split('|')[0];
-                        input.classList.add('correct');
-                        input.classList.remove('wrong', 'incorrect');
-                        if (window.DeckComponents?.autoResizeBlank) {
-                            DeckComponents.autoResizeBlank(input);
-                        }
-                    }
-                });
-            }
-        }
-
-        if (broadcast && window.presenterSyncEngine) {
-            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
-                action: 'reveal',
-                containerId: rawContainerId || container.id || null,
-                slideIndex: this.currentSlide
-            });
-        }
+        return this.revealKeys(container, broadcast);
     }
 
     resetTask(container, broadcast = true) {
@@ -636,6 +601,9 @@ class DeckEngine {
         slideContext.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
         slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
         slideContext.querySelectorAll('.card, .q-card').forEach(c => c.classList.remove('revealed'));
+        if (window.readingHighlighter) {
+            window.readingHighlighter.clearAll(rawContainerId || container.id || null, false);
+        }
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
         }

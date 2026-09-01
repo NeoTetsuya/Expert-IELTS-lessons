@@ -60,6 +60,11 @@ class ReadingHighlighter {
             v.classList.add('active-vocab');
         });
 
+        // Activate all synonym buttons
+        slide.querySelectorAll('.syn-btn').forEach(btn => {
+            btn.classList.add('active-syn');
+        });
+
         // Ensure reading pane is not dimmed in "Show All" mode
         slide.querySelectorAll('.reading-pane').forEach(pane => {
             pane.classList.remove('spotlight-mode');
@@ -73,6 +78,7 @@ class ReadingHighlighter {
             scaler.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
             scaler.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
             scaler.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+            scaler.querySelectorAll('.syn-btn').forEach(btn => btn.classList.add('active-syn'));
             scaler.querySelectorAll('.reading-pane').forEach(p => p.classList.remove('spotlight-mode'));
         }
 
@@ -88,16 +94,10 @@ class ReadingHighlighter {
     }
 
     /**
-     * Clears all evidence highlights, synonym badges, spotlight dimming, and explanations in the slide
+     * Clears all highlights and spotlight styles from current slide
      */
     clearAll(containerId, broadcast = true) {
         const slide = this.getSlideForContainer(containerId);
-        if (!slide) return;
-
-        slide.querySelectorAll('mark.evidence').forEach(mark => {
-            mark.classList.remove('highlighted', 'glow-pulse');
-        });
-
         slide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(span => {
             span.classList.remove('active-syn');
         });
@@ -265,9 +265,13 @@ class ReadingHighlighter {
     getSlideForContainer(containerId) {
         if (containerId) {
             const el = document.getElementById(containerId);
-            if (el) return el.closest('.slide') || document.querySelector('.slide.active');
+            if (el) return el.closest('.slide') || (window.deckEngine?.slides?.[window.deckEngine.currentSlide]) || document.querySelector('.slide.active');
         }
-        return document.querySelector('.slide.active');
+        if (window.deckEngine && window.deckEngine.slides && typeof window.deckEngine.currentSlide === 'number') {
+            const activeSlide = window.deckEngine.slides[window.deckEngine.currentSlide];
+            if (activeSlide) return activeSlide;
+        }
+        return document.querySelector('.slide.active') || document.querySelector('.slide');
     }
 
     /**
