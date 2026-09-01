@@ -27,13 +27,13 @@ window.module6Data = {
                 <mark class="evidence" id="ev-6a-1">
                     With this in mind, business people and <span class="syn-pair-1" data-q="6a-1">governments</span> are <span class="syn-pair-2" data-q="6a-1">investing</span> in a range of unusual new ways of producing food.
                 </mark> 
-                Some companies, for example, are using technology to develop new artificial food products. One such business is Modern Meadow, which develops meat that does not involve killing animals. What that actually means is that scientists are working in the company's 
+                Some companies, for example, are using technology to develop new <span class="vocab-word" data-word="artificial" data-ipa="/ˌɑː.tɪˈfɪʃ.əl/" data-pos="adj." data-def="Made or produced by humans rather than occurring naturally." data-colloc="artificial food">artificial</span> food products. One such business is Modern Meadow, which develops meat that does not involve killing animals. What that actually means is that scientists are working in the company's 
                 <mark class="evidence" id="ev-6a-2">
                     <span class="syn-pair-1" data-q="6a-2">lab</span> to find ways to create something that looks and tastes like meat.
                 </mark> 
                 Another company called Beyond Meat already has such products in shops in the US. Its range includes 'burgers', 'chicken' strips and 'beef' for stews. Although they are actually made out of plant 
                 <mark class="evidence" id="ev-6a-3">
-                    <span class="syn-pair-1" data-q="6a-3">proteins</span>, these products are almost impossible to distinguish from meat
+                    <span class="syn-pair-1" data-q="6a-3">proteins</span>, these products are almost impossible to <span class="vocab-word" data-word="distinguish" data-ipa="/dɪˈstɪŋ.ɡwɪʃ/" data-pos="verb" data-def="To recognize or tell the difference between things." data-colloc="distinguish from meat">distinguish</span> from meat
                 </mark> 
                 and shoppers find them on the same supermarket shelves as the genuine meat products. Another company, Hampton Creek, sells products that are made with 
                 <mark class="evidence" id="ev-6a-4">
@@ -45,14 +45,14 @@ window.module6Data = {
                 </mark>
             </p>
 
-            <p><span class="para-tag">[Paragraph 3]</span> A more extreme approach to dealing with the problem of getting enough food to feed the world involves drinking a special drink and not eating any food at all. Every day a businessman called Rob Rhinehart drinks three glasses of a thick, brownish liquid, which he says has all the nutrients the body needs. He has put his drink on sale and it is doing surprisingly well. Rhinehart says that this type of product will not only help to deal with food 
+            <p><span class="para-tag">[Paragraph 3]</span> A more extreme approach to dealing with the problem of getting enough food to feed the world involves drinking a special drink and not eating any food at all. Every day a businessman called Rob Rhinehart drinks three glasses of a thick, brownish liquid, which he says has all the <span class="vocab-word" data-word="nutrients" data-ipa="/ˈnjuː.tri.ənts/" data-pos="noun" data-def="Substances that provide essential nourishment." data-colloc="essential nutrients">nutrients</span> the body needs. He has put his drink on sale and it is doing surprisingly well. Rhinehart says that this type of product will not only help to deal with food 
                 <mark class="evidence" id="ev-6a-6">
                     <span class="syn-pair-1" data-q="6a-6">shortages</span> but will also provide people with more time.
                 </mark> 
                 'There's no need to waste time cooking. I drink a litre of my liquid every day and don't even need to stop what I'm doing.'
             </p>
 
-            <p><span class="para-tag">[Paragraph 4]</span> However, the high-tech solutions that Rhinehart, Modern Meadows and others are suggesting worry many people. Food writer Joanna Blythman, for example, does not like the idea of eating things that we do not know enough about. She even worries about foods that are already familiar to us. Packets of salad leaves, for example, can be weeks old but still look fresh because of the chemicals on them. These chemicals are not always named on the label because they are not food. So consumers have no idea what they are eating. Blythman says, 'There are many examples of products we once thought were safe and then later discovered they weren't.' She prefers to cook her family meals using locally produced natural food that people have eaten for centuries. 'It's tried and tested, and we know it's healthy.'</p>
+            <p><span class="para-tag">[Paragraph 4]</span> However, the high-tech solutions that Rhinehart, Modern Meadows and others are suggesting worry many people. Food writer Joanna Blythman, for example, does not like the idea of eating things that we do not know enough about. She even worries about foods that are already familiar to us. Packets of salad leaves, for example, can be weeks old but still look fresh because of the chemicals on them. These chemicals are not always named on the label because they are not food. So <span class="vocab-word" data-word="consumers" data-ipa="/kənˈsjuː.məz/" data-pos="noun" data-def="People who purchase and use goods and services." data-colloc="everyday consumers">consumers</span> have no idea what they are eating. Blythman says, 'There are many examples of products we once thought were safe and then later discovered they weren't.' She prefers to cook her family meals using locally produced natural food that people have eaten for centuries. 'It's tried and tested, and we know it's healthy.'</p>
 
             <p><span class="para-tag">[Paragraph 5]</span> It is easy to understand this point of view, but it is still very important to find some way to solve the problem of feeding the world. The answer must be to make sure we check very carefully the quality and safety of the high-tech solutions that scientists are developing.</p>
         `,
@@ -66,9 +66,9 @@ window.module6Data = {
         title: "WOMM: Advantages and Disadvantages",
         passage: `
             <h3>WOMM: advantages and disadvantages</h3>
-            <p><span class="para-tag">[Paragraph 1]</span> A business can make the best product in the world but if no one knows about it, they cannot sell it. To tell customers about their products and to persuade them to buy them, all businesses need marketing. One of the most powerful forms of marketing is WOMM: word-of-mouth marketing. This is when people tell their family and friends about a product and the growth of social media means it has become even more effective.</p>
+            <p><span class="para-tag">[Paragraph 1]</span> A business can make the best product in the world but if no one knows about it, they cannot sell it. To tell customers about their products and to persuade them to buy them, all businesses need <span class="vocab-word" data-word="marketing" data-ipa="/ˈmɑː.kɪ.tɪŋ/" data-pos="noun" data-def="The activity of promoting and selling products or services." data-colloc="word-of-mouth marketing">marketing</span>. One of the most powerful forms of marketing is WOMM: word-of-mouth marketing. This is when people tell their family and friends about a product and the growth of social media means it has become even more effective.</p>
 
-            <p><span class="para-tag">[Paragraph 2]</span> Word-of-mouth marketing has both advantages and disadvantages for businesses. Firstly, a main advantage is that 
+            <p><span class="para-tag">[Paragraph 2]</span> Word-of-mouth marketing has both <span class="vocab-word" data-word="advantages" data-ipa="/ədˈvɑːn.tɪ.dʒɪz/" data-pos="noun" data-def="Favorable conditions or benefits." data-colloc="main advantages">advantages</span> and <span class="vocab-word" data-word="disadvantages" data-ipa="/ˌdɪs.ədˈvɑːn.tɪ.dʒɪz/" data-pos="noun" data-def="Unfavorable factors or drawbacks." data-colloc="potential disadvantages">disadvantages</span> for businesses. Firstly, a main advantage is that 
                 <mark class="evidence" id="ev-6b-1">
                     it <span class="syn-pair-1" data-q="6b-1">costs the business nothing</span>... without getting or expecting any payment.
                 </mark> 
