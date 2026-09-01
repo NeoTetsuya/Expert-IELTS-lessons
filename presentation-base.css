@@ -1980,21 +1980,27 @@ span.vocab-term.active-vocab,
 
 /* Template Slots Readability Boosters */
 [slot="rules"] .rule-card {
-    font-size: calc(22px * var(--font-scale, 1));
+    font-size: calc(21px * var(--font-scale, 1));
     padding: 24px 30px;
     margin-bottom: 16px;
+    line-height: 1.85;
 }
 [slot="rules"] .rule-card ul, [slot="rules"] .rule-card li {
+    font-size: calc(20.5px * var(--font-scale, 1));
+    line-height: 1.85;
+}
+[slot="contrast-card"] .card {
     font-size: calc(21px * var(--font-scale, 1));
-    line-height: 1.8;
+    padding: 24px 30px;
+    line-height: 1.85;
 }
 [slot="annotations"] .card {
     font-size: calc(22px * var(--font-scale, 1));
-    padding: 22px 28px;
+    padding: 24px 30px;
 }
 [slot="annotations"] .card p, [slot="annotations"] .card li {
     font-size: calc(21px * var(--font-scale, 1));
-    line-height: 1.8;
+    line-height: 1.85;
 }
 [slot="prompt"] > div {
     font-size: calc(22px * var(--font-scale, 1)) !important;
