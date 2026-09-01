@@ -430,9 +430,13 @@ class DeckEngine {
         });
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        const slideContext = container.closest('.slide') || document.querySelector('.slide.active') || container;
-        slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-        slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+        const slideContext = container.closest('.slide') || container.closest('section') || document.querySelector('.slide.active') || container;
+        if (slideContext) {
+            slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+            slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+        }
+        document.querySelectorAll('.slide.active .syn-pair-1, .slide.active .syn-pair-2, .slide.active .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+        document.querySelectorAll('.slide.active mark.evidence').forEach(m => m.classList.add('highlighted'));
 
         // Check category sorter exercises
         if (window.categorySorter) {
@@ -522,10 +526,14 @@ class DeckEngine {
         });
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        const slideContext = container.closest('.slide') || document.querySelector('.slide.active') || container;
-        slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-        slideContext.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
-        slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+        const slideContext = container.closest('.slide') || container.closest('section') || document.querySelector('.slide.active') || container;
+        if (slideContext) {
+            slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+            slideContext.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
+            slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+        }
+        document.querySelectorAll('.slide.active .syn-pair-1, .slide.active .syn-pair-2, .slide.active .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+        document.querySelectorAll('.slide.active mark.evidence').forEach(m => m.classList.add('highlighted'));
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
         }
