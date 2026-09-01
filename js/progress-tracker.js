@@ -8,7 +8,11 @@
 
 class ProgressTracker {
     constructor() {
-        this.storageKey = `deck_progress_${window.location.pathname.split('/').pop()}`;
+        // Include the last two path segments to prevent collisions between same-named files in different level folders
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
+        const pathKey = pathParts.slice(-2).join('__').replace(/[^a-z0-9._-]/gi, '_') || 'default';
+        this.storageKey = `deck_progress_${pathKey}`;
+        this._lastStats = null;
         this.init();
     }
 
@@ -24,7 +28,7 @@ class ProgressTracker {
     }
 
     /**
-     * Auto-saves all inputs and selects when modified
+     * Auto-saves all inputs, selects, and opt-cards when modified
      */
     bindAutoSave() {
         let saveTimeout = null;
@@ -34,6 +38,11 @@ class ProgressTracker {
         };
         document.addEventListener('change', debouncedSave);
         document.addEventListener('input', debouncedSave);
+        document.addEventListener('click', (e) => {
+            if (e.target && e.target.closest('.opt-card')) {
+                debouncedSave();
+            }
+        });
     }
 
     saveResponses() {
@@ -42,8 +51,21 @@ class ProgressTracker {
             const id = input.id || `input_${index}`;
             state[id] = input.value;
         });
+
+        // Persist opt-card selected state too (so calculateStats stays consistent after restore)
+        document.querySelectorAll('.opt-card').forEach((card, index) => {
+            const id = card.id || `optcard_${index}`;
+            state[id] = card.classList.contains('selected') ? '1' : '0';
+        });
+
         sessionStorage.setItem(this.storageKey, JSON.stringify(state));
-        this.renderReviewDashboard();
+
+        // Only update dashboard if score changed (avoids DOM thrash on every keystroke)
+        const stats = this.calculateStats();
+        if (!this._lastStats || stats.correct !== this._lastStats.correct || stats.total !== this._lastStats.total) {
+            this._lastStats = stats;
+            this.renderReviewDashboard(stats);
+        }
     }
 
     restoreResponses() {
@@ -56,6 +78,15 @@ class ProgressTracker {
                 const id = input.id || `input_${index}`;
                 if (state[id] !== undefined) {
                     input.value = state[id];
+                }
+            });
+
+            document.querySelectorAll('.opt-card').forEach((card, index) => {
+                const id = card.id || `optcard_${index}`;
+                if (state[id] === '1') {
+                    card.classList.add('selected');
+                } else if (state[id] === '0') {
+                    card.classList.remove('selected');
                 }
             });
         } catch (e) {}
@@ -90,7 +121,7 @@ class ProgressTracker {
     /**
      * Renders a live score card on the review slide if present
      */
-    renderReviewDashboard() {
+    renderReviewDashboard(stats) {
         const reviewSlide = document.querySelector('.slide[data-skill="review"]');
         if (!reviewSlide) return;
 
@@ -100,13 +131,13 @@ class ProgressTracker {
             dashboard.id = 'moduleScoreWidget';
             dashboard.className = 'card score-dashboard-card';
             
-            const insertTarget = reviewSlide.querySelector('.col, .page-content');
+            const insertTarget = reviewSlide.querySelector('[data-slot="grid"], .two-col, .page-content');
             if (insertTarget) {
                 insertTarget.appendChild(dashboard);
             }
         }
 
-        const stats = this.calculateStats();
+        stats = stats || this.calculateStats();
         dashboard.innerHTML = `
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div>

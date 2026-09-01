@@ -172,7 +172,7 @@
 </template>
 
 <!-- 5. PRE-READING STRATEGY & KEYWORD DECONSTRUCTION TEMPLATE -->
-<template id="tmpl-strategy">
+<template id="tmpl-keyword-strategy">
     <section class="slide" data-skill="read">
         <div class="slide-inner">
             <div class="notebook">
@@ -567,15 +567,12 @@
                 return current;
             }
 
-            // Search through moduleData or any window.module*Data
-            let candidateDatasets = [window.moduleData, window.module4Data, window.module3Data, window.module2Data, window.module1Data, window.module5Data, window.module6Data, window.module7Data, window.module8Data, window.module9Data, window.module10Data].filter(Boolean);
-            
-            // If still empty, scan window keys starting with "module"
-            if (candidateDatasets.length === 0) {
-                for (const k in window) {
-                    if (k.startsWith('module') && window[k] && typeof window[k] === 'object') {
-                        candidateDatasets.push(window[k]);
-                    }
+            // Scan all window.module*Data keys dynamically (no hardcoded limit)
+            const candidateDatasets = [];
+            if (window.moduleData) candidateDatasets.push(window.moduleData);
+            for (const k in window) {
+                if (k !== 'moduleData' && /^module\d*Data$/i.test(k) && window[k] && typeof window[k] === 'object') {
+                    candidateDatasets.push(window[k]);
                 }
             }
 
@@ -612,11 +609,11 @@
             }
             if (data.badge || data.moduleNum) {
                 const b = section.querySelector('[data-slot="badge"], .skill-badge, .title-module-badge');
-                if (b) b.innerHTML = data.badge || `Module ${data.moduleNum}`;
+                if (b) b.textContent = data.badge || `Module ${data.moduleNum}`;
             }
             if (data.instruction) {
                 const inst = section.querySelector('[data-slot="instruction"], .slide-subtitle');
-                if (inst) inst.innerHTML = data.instruction;
+                if (inst) inst.textContent = data.instruction;
             }
 
             // Title slide specific: tags & roadmap
@@ -954,6 +951,7 @@
             // 1. Template-specific smart badges
             if (tmpl === 'walkthrough') return 'Reading Strategy • Model Walkthrough';
             if (tmpl === 'strategy') return 'Reading Strategy • Pre-Reading';
+            if (tmpl === 'keyword-strategy') return 'Reading Strategy • Keyword Deconstruction';
             if (tmpl === 'reading-split' || tmpl === 'split-view') return 'IELTS Reading • Split-View';
             if (tmpl === 'reading-flowchart') return 'Reading • Flow Chart Completion';
             if (tmpl === 'flowchart') return 'IELTS Reading • Flow Chart';
@@ -1216,18 +1214,26 @@
                 }
             });
 
-            // PASS 3: Ensure all inline font-size styles dynamically scale with --font-scale
-            allSlides.forEach(slide => {
-                slide.querySelectorAll('*[style*="font-size"]').forEach(el => {
-                    const styleStr = el.getAttribute('style');
-                    if (styleStr && styleStr.includes('font-size') && !styleStr.includes('--font-scale')) {
-                        const updated = styleStr.replace(/font-size\s*:\s*([0-9.]+)px/gi, (match, p1) => {
-                            return `font-size: calc(${p1}px * var(--font-scale, 1))`;
-                        });
-                        el.setAttribute('style', updated);
-                    }
+            // PASS 3: Font-scale injection (deferred to avoid startup jank on large decks)
+            const applyFontScaleInline = () => {
+                allSlides.forEach(slide => {
+                    slide.querySelectorAll('*[style*="font-size"]').forEach(el => {
+                        const styleStr = el.getAttribute('style');
+                        if (styleStr && styleStr.includes('font-size') && !styleStr.includes('--font-scale')) {
+                            const updated = styleStr.replace(/font-size\s*:\s*([0-9.]+)px/gi, (match, p1) => {
+                                return `font-size: calc(${p1}px * var(--font-scale, 1))`;
+                            });
+                            el.setAttribute('style', updated);
+                        }
+                    });
                 });
-            });
+            };
+
+            if (typeof window.requestIdleCallback === 'function') {
+                window.requestIdleCallback(applyFontScaleInline, { timeout: 1000 });
+            } else {
+                setTimeout(applyFontScaleInline, 0);
+            }
 
             // If no slide is marked active, activate the first slide
             if (!hasActiveSlide && allSlides.length > 0) {

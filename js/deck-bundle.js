@@ -179,7 +179,7 @@
 </template>
 
 <!-- 5. PRE-READING STRATEGY & KEYWORD DECONSTRUCTION TEMPLATE -->
-<template id="tmpl-strategy">
+<template id="tmpl-keyword-strategy">
     <section class="slide" data-skill="read">
         <div class="slide-inner">
             <div class="notebook">
@@ -574,15 +574,12 @@
                 return current;
             }
 
-            // Search through moduleData or any window.module*Data
-            let candidateDatasets = [window.moduleData, window.module4Data, window.module3Data, window.module2Data, window.module1Data, window.module5Data, window.module6Data, window.module7Data, window.module8Data, window.module9Data, window.module10Data].filter(Boolean);
-            
-            // If still empty, scan window keys starting with "module"
-            if (candidateDatasets.length === 0) {
-                for (const k in window) {
-                    if (k.startsWith('module') && window[k] && typeof window[k] === 'object') {
-                        candidateDatasets.push(window[k]);
-                    }
+            // Scan all window.module*Data keys dynamically (no hardcoded limit)
+            const candidateDatasets = [];
+            if (window.moduleData) candidateDatasets.push(window.moduleData);
+            for (const k in window) {
+                if (k !== 'moduleData' && /^module\d*Data$/i.test(k) && window[k] && typeof window[k] === 'object') {
+                    candidateDatasets.push(window[k]);
                 }
             }
 
@@ -619,11 +616,11 @@
             }
             if (data.badge || data.moduleNum) {
                 const b = section.querySelector('[data-slot="badge"], .skill-badge, .title-module-badge');
-                if (b) b.innerHTML = data.badge || `Module ${data.moduleNum}`;
+                if (b) b.textContent = data.badge || `Module ${data.moduleNum}`;
             }
             if (data.instruction) {
                 const inst = section.querySelector('[data-slot="instruction"], .slide-subtitle');
-                if (inst) inst.innerHTML = data.instruction;
+                if (inst) inst.textContent = data.instruction;
             }
 
             // Title slide specific: tags & roadmap
@@ -961,6 +958,7 @@
             // 1. Template-specific smart badges
             if (tmpl === 'walkthrough') return 'Reading Strategy • Model Walkthrough';
             if (tmpl === 'strategy') return 'Reading Strategy • Pre-Reading';
+            if (tmpl === 'keyword-strategy') return 'Reading Strategy • Keyword Deconstruction';
             if (tmpl === 'reading-split' || tmpl === 'split-view') return 'IELTS Reading • Split-View';
             if (tmpl === 'reading-flowchart') return 'Reading • Flow Chart Completion';
             if (tmpl === 'flowchart') return 'IELTS Reading • Flow Chart';
@@ -1223,18 +1221,26 @@
                 }
             });
 
-            // PASS 3: Ensure all inline font-size styles dynamically scale with --font-scale
-            allSlides.forEach(slide => {
-                slide.querySelectorAll('*[style*="font-size"]').forEach(el => {
-                    const styleStr = el.getAttribute('style');
-                    if (styleStr && styleStr.includes('font-size') && !styleStr.includes('--font-scale')) {
-                        const updated = styleStr.replace(/font-size\s*:\s*([0-9.]+)px/gi, (match, p1) => {
-                            return `font-size: calc(${p1}px * var(--font-scale, 1))`;
-                        });
-                        el.setAttribute('style', updated);
-                    }
+            // PASS 3: Font-scale injection (deferred to avoid startup jank on large decks)
+            const applyFontScaleInline = () => {
+                allSlides.forEach(slide => {
+                    slide.querySelectorAll('*[style*="font-size"]').forEach(el => {
+                        const styleStr = el.getAttribute('style');
+                        if (styleStr && styleStr.includes('font-size') && !styleStr.includes('--font-scale')) {
+                            const updated = styleStr.replace(/font-size\s*:\s*([0-9.]+)px/gi, (match, p1) => {
+                                return `font-size: calc(${p1}px * var(--font-scale, 1))`;
+                            });
+                            el.setAttribute('style', updated);
+                        }
+                    });
                 });
-            });
+            };
+
+            if (typeof window.requestIdleCallback === 'function') {
+                window.requestIdleCallback(applyFontScaleInline, { timeout: 1000 });
+            } else {
+                setTimeout(applyFontScaleInline, 0);
+            }
 
             // If no slide is marked active, activate the first slide
             if (!hasActiveSlide && allSlides.length > 0) {
@@ -1262,7 +1268,7 @@
  */
 class DeckEngine {
     constructor() {
-        this.slides = document.querySelectorAll('.slide');
+        this.slides = Array.from(document.querySelectorAll('.slide'));
         this.currentSlide = 0;
         this.stage = document.getElementById('deckStage');
         this.counter = document.getElementById('slideCounter');
@@ -1309,6 +1315,18 @@ class DeckEngine {
                    container;
         }
         return container;
+    }
+
+    /**
+     * Normalizes an answer string: lowercases, trims, converts curly quotes/apostrophes.
+     * Used for answer checking across all exercise types.
+     */
+    static normalizeStr(str) {
+        if (!str) return '';
+        return str.trim().toLowerCase()
+            .replace(/[\u2018\u2019\u0060\u00B4]/g, "'")
+            .replace(/[\u201C\u201D]/g, '"')
+            .replace(/\s+/g, ' ');
     }
 
     getSlideFromHash() {
@@ -1602,19 +1620,17 @@ class DeckEngine {
 
     applyFontScale() {
         document.documentElement.style.setProperty('--font-scale', this.fontScale);
-        const indicator = document.getElementById('fontIndicator');
-        if (indicator) {
-            indicator.textContent = `Font Size: ${Math.round(this.fontScale * 100)}%`;
-            indicator.classList.add('show');
-            clearTimeout(this.fontToastTimer);
-            this.fontToastTimer = setTimeout(() => {
-                indicator.classList.remove('show');
-            }, 1400);
-        }
+        this.showToastNotification(`Font Size: ${Math.round(this.fontScale * 100)}%`);
     }
 
     setupSyncListeners() {
-        if (!window.presenterSyncEngine) return;
+        if (!window.presenterSyncEngine) {
+            // Retry once after a tick — sync engine loads after DeckEngine in module order
+            setTimeout(() => this.setupSyncListeners(), 50);
+            return;
+        }
+        if (this._syncListenersBound) return;
+        this._syncListenersBound = true;
 
         window.presenterSyncEngine.on('EXERCISE_ACTION', (data) => {
             if (!data) return;
@@ -1644,17 +1660,11 @@ class DeckEngine {
     }
 
     checkAnswers(container, broadcast = true) {
+        const rawContainerId = typeof container === 'string' ? container : (container?.id || null);
         container = this._resolveContainer(container);
         if (!container) return;
 
-        // Normalization helper (normalizes curly quotes, apostrophes, and spacing)
-        const normalizeStr = (str) => {
-            if (!str) return '';
-            return str.trim().toLowerCase()
-                .replace(/[\u2018\u2019\u0060\u00B4]/g, "'")
-                .replace(/[\u201C\u201D]/g, '"')
-                .replace(/\s+/g, ' ');
-        };
+        const normalizeStr = DeckEngine.normalizeStr;
 
         // Check blank inputs
         container.querySelectorAll('.blank-input').forEach(input => {
@@ -1695,16 +1705,16 @@ class DeckEngine {
         }
 
         if (broadcast && window.presenterSyncEngine) {
-            const containerId = (typeof container === 'string' ? container : container?.id || null);
             window.presenterSyncEngine.emit('EXERCISE_ACTION', {
                 action: 'check',
-                containerId,
+                containerId: rawContainerId || container.id || null,
                 slideIndex: this.currentSlide
             });
         }
     }
 
     revealKeys(container, broadcast = true) {
+        const rawContainerId = typeof container === 'string' ? container : (container?.id || null);
         container = this._resolveContainer(container);
         if (!container) return;
 
@@ -1739,20 +1749,24 @@ class DeckEngine {
         }
 
         if (broadcast && window.presenterSyncEngine) {
-            const containerId = (typeof container === 'string' ? container : container?.id || null);
             window.presenterSyncEngine.emit('EXERCISE_ACTION', {
                 action: 'reveal',
-                containerId,
+                containerId: rawContainerId || container.id || null,
                 slideIndex: this.currentSlide
             });
         }
     }
 
+    // ─────────────────────────────────────────────────────────────
+    // Alias methods for backward-compatible template onclick="" calls
+    // All delegate to the canonical checkAnswers/revealKeys/resetTask
+    // ─────────────────────────────────────────────────────────────
     revealAnswers(container, broadcast = true) {
         this.revealKeys(container, broadcast);
     }
 
     resetTask(container, broadcast = true) {
+        const rawContainerId = typeof container === 'string' ? container : (container?.id || null);
         container = this._resolveContainer(container);
         if (!container) return;
 
@@ -1775,10 +1789,9 @@ class DeckEngine {
         }
 
         if (broadcast && window.presenterSyncEngine) {
-            const containerId = (typeof container === 'string' ? container : container?.id || null);
             window.presenterSyncEngine.emit('EXERCISE_ACTION', {
                 action: 'reset',
-                containerId,
+                containerId: rawContainerId || container.id || null,
                 slideIndex: this.currentSlide
             });
         }
@@ -2047,6 +2060,7 @@ window.resetStrategySlide = (target) => (window.deckEngine ? window.deckEngine.r
 window.switchHighLineTab = (tab) => (window.deckEngine ? window.deckEngine.switchHighLineTab(tab) : null);
 window.jumpToSlide = (idx) => (window.deckEngine ? window.deckEngine.jumpToSlide(idx) : null);
 window.jumpToSkill = (skill) => (window.deckEngine ? window.deckEngine.jumpToSkill(skill) : null);
+window.normalizeAnswerStr = DeckEngine.normalizeStr;
 
 window.addEventListener('DOMContentLoaded', () => {
     if (!window.deckEngine) {
@@ -2290,7 +2304,7 @@ class DeckComponents {
     static hydrateExerciseActions() {
         document.querySelectorAll('.exercise-actions, [data-exercise-actions]').forEach(el => {
             const targetId = el.dataset.target || el.closest('[id]')?.id;
-            const type = el.dataset.type || 'selects'; // 'selects' | 'blanks' | 'multi'
+            const type = el.dataset.type || 'blanks'; // 'blanks' | 'selects' | 'multi'
 
             if (!targetId) return;
 
@@ -2339,14 +2353,6 @@ window.addEventListener('DOMContentLoaded', () => {
     DeckComponents.init();
 });
 
-// Hook tab update into showSlide
-if (window.DeckEngine) {
-    const originalShowSlide = DeckEngine.prototype.showSlide;
-    DeckEngine.prototype.showSlide = function(index, broadcast = true) {
-        originalShowSlide.call(this, index, broadcast);
-        DeckComponents.updateActiveTab();
-    };
-}
 
 
 /* ==================== MODULE: deck-theme-engine.js ==================== */
@@ -6487,7 +6493,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 class ProgressTracker {
     constructor() {
-        this.storageKey = `deck_progress_${window.location.pathname.split('/').pop()}`;
+        // Include the last two path segments to prevent collisions between same-named files in different level folders
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
+        const pathKey = pathParts.slice(-2).join('__').replace(/[^a-z0-9._-]/gi, '_') || 'default';
+        this.storageKey = `deck_progress_${pathKey}`;
+        this._lastStats = null;
         this.init();
     }
 
@@ -6503,7 +6513,7 @@ class ProgressTracker {
     }
 
     /**
-     * Auto-saves all inputs and selects when modified
+     * Auto-saves all inputs, selects, and opt-cards when modified
      */
     bindAutoSave() {
         let saveTimeout = null;
@@ -6513,6 +6523,11 @@ class ProgressTracker {
         };
         document.addEventListener('change', debouncedSave);
         document.addEventListener('input', debouncedSave);
+        document.addEventListener('click', (e) => {
+            if (e.target && e.target.closest('.opt-card')) {
+                debouncedSave();
+            }
+        });
     }
 
     saveResponses() {
@@ -6521,8 +6536,21 @@ class ProgressTracker {
             const id = input.id || `input_${index}`;
             state[id] = input.value;
         });
+
+        // Persist opt-card selected state too (so calculateStats stays consistent after restore)
+        document.querySelectorAll('.opt-card').forEach((card, index) => {
+            const id = card.id || `optcard_${index}`;
+            state[id] = card.classList.contains('selected') ? '1' : '0';
+        });
+
         sessionStorage.setItem(this.storageKey, JSON.stringify(state));
-        this.renderReviewDashboard();
+
+        // Only update dashboard if score changed (avoids DOM thrash on every keystroke)
+        const stats = this.calculateStats();
+        if (!this._lastStats || stats.correct !== this._lastStats.correct || stats.total !== this._lastStats.total) {
+            this._lastStats = stats;
+            this.renderReviewDashboard(stats);
+        }
     }
 
     restoreResponses() {
@@ -6535,6 +6563,15 @@ class ProgressTracker {
                 const id = input.id || `input_${index}`;
                 if (state[id] !== undefined) {
                     input.value = state[id];
+                }
+            });
+
+            document.querySelectorAll('.opt-card').forEach((card, index) => {
+                const id = card.id || `optcard_${index}`;
+                if (state[id] === '1') {
+                    card.classList.add('selected');
+                } else if (state[id] === '0') {
+                    card.classList.remove('selected');
                 }
             });
         } catch (e) {}
@@ -6569,7 +6606,7 @@ class ProgressTracker {
     /**
      * Renders a live score card on the review slide if present
      */
-    renderReviewDashboard() {
+    renderReviewDashboard(stats) {
         const reviewSlide = document.querySelector('.slide[data-skill="review"]');
         if (!reviewSlide) return;
 
@@ -6579,13 +6616,13 @@ class ProgressTracker {
             dashboard.id = 'moduleScoreWidget';
             dashboard.className = 'card score-dashboard-card';
             
-            const insertTarget = reviewSlide.querySelector('.col, .page-content');
+            const insertTarget = reviewSlide.querySelector('[data-slot="grid"], .two-col, .page-content');
             if (insertTarget) {
                 insertTarget.appendChild(dashboard);
             }
         }
 
-        const stats = this.calculateStats();
+        stats = stats || this.calculateStats();
         dashboard.innerHTML = `
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div>
@@ -9808,7 +9845,7 @@ class PresenterSyncEngine {
         this.isConnected = true;
     }
 
-    send(type, payload = {}) {
+    emit(type, payload = {}) {
         const message = {
             type,
             payload,
@@ -9831,6 +9868,10 @@ class PresenterSyncEngine {
                 localStorage.setItem(this.channelName, JSON.stringify(message));
             } catch (e) {}
         }
+    }
+
+    send(type, payload = {}) {
+        this.emit(type, payload);
     }
 
     handleIncomingMessage(message) {
@@ -9880,10 +9921,6 @@ class PresenterSyncEngine {
         if (!this.listeners.has(type)) return;
         const list = this.listeners.get(type).filter(h => h !== handler);
         this.listeners.set(type, list);
-    }
-
-    emit(type, payload) {
-        this.send(type, payload);
     }
 
     notifyStatusChange(connected) {

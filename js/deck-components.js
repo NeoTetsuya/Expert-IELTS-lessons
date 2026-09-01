@@ -229,7 +229,7 @@ class DeckComponents {
     static hydrateExerciseActions() {
         document.querySelectorAll('.exercise-actions, [data-exercise-actions]').forEach(el => {
             const targetId = el.dataset.target || el.closest('[id]')?.id;
-            const type = el.dataset.type || 'selects'; // 'selects' | 'blanks' | 'multi'
+            const type = el.dataset.type || 'blanks'; // 'blanks' | 'selects' | 'multi'
 
             if (!targetId) return;
 
@@ -278,11 +278,3 @@ window.addEventListener('DOMContentLoaded', () => {
     DeckComponents.init();
 });
 
-// Hook tab update into showSlide
-if (window.DeckEngine) {
-    const originalShowSlide = DeckEngine.prototype.showSlide;
-    DeckEngine.prototype.showSlide = function(index, broadcast = true) {
-        originalShowSlide.call(this, index, broadcast);
-        DeckComponents.updateActiveTab();
-    };
-}

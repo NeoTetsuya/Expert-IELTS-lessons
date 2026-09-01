@@ -5,7 +5,7 @@
  */
 class DeckEngine {
     constructor() {
-        this.slides = document.querySelectorAll('.slide');
+        this.slides = Array.from(document.querySelectorAll('.slide'));
         this.currentSlide = 0;
         this.stage = document.getElementById('deckStage');
         this.counter = document.getElementById('slideCounter');
@@ -52,6 +52,18 @@ class DeckEngine {
                    container;
         }
         return container;
+    }
+
+    /**
+     * Normalizes an answer string: lowercases, trims, converts curly quotes/apostrophes.
+     * Used for answer checking across all exercise types.
+     */
+    static normalizeStr(str) {
+        if (!str) return '';
+        return str.trim().toLowerCase()
+            .replace(/[\u2018\u2019\u0060\u00B4]/g, "'")
+            .replace(/[\u201C\u201D]/g, '"')
+            .replace(/\s+/g, ' ');
     }
 
     getSlideFromHash() {
@@ -345,19 +357,17 @@ class DeckEngine {
 
     applyFontScale() {
         document.documentElement.style.setProperty('--font-scale', this.fontScale);
-        const indicator = document.getElementById('fontIndicator');
-        if (indicator) {
-            indicator.textContent = `Font Size: ${Math.round(this.fontScale * 100)}%`;
-            indicator.classList.add('show');
-            clearTimeout(this.fontToastTimer);
-            this.fontToastTimer = setTimeout(() => {
-                indicator.classList.remove('show');
-            }, 1400);
-        }
+        this.showToastNotification(`Font Size: ${Math.round(this.fontScale * 100)}%`);
     }
 
     setupSyncListeners() {
-        if (!window.presenterSyncEngine) return;
+        if (!window.presenterSyncEngine) {
+            // Retry once after a tick — sync engine loads after DeckEngine in module order
+            setTimeout(() => this.setupSyncListeners(), 50);
+            return;
+        }
+        if (this._syncListenersBound) return;
+        this._syncListenersBound = true;
 
         window.presenterSyncEngine.on('EXERCISE_ACTION', (data) => {
             if (!data) return;
@@ -387,17 +397,11 @@ class DeckEngine {
     }
 
     checkAnswers(container, broadcast = true) {
+        const rawContainerId = typeof container === 'string' ? container : (container?.id || null);
         container = this._resolveContainer(container);
         if (!container) return;
 
-        // Normalization helper (normalizes curly quotes, apostrophes, and spacing)
-        const normalizeStr = (str) => {
-            if (!str) return '';
-            return str.trim().toLowerCase()
-                .replace(/[\u2018\u2019\u0060\u00B4]/g, "'")
-                .replace(/[\u201C\u201D]/g, '"')
-                .replace(/\s+/g, ' ');
-        };
+        const normalizeStr = DeckEngine.normalizeStr;
 
         // Check blank inputs
         container.querySelectorAll('.blank-input').forEach(input => {
@@ -438,16 +442,16 @@ class DeckEngine {
         }
 
         if (broadcast && window.presenterSyncEngine) {
-            const containerId = (typeof container === 'string' ? container : container?.id || null);
             window.presenterSyncEngine.emit('EXERCISE_ACTION', {
                 action: 'check',
-                containerId,
+                containerId: rawContainerId || container.id || null,
                 slideIndex: this.currentSlide
             });
         }
     }
 
     revealKeys(container, broadcast = true) {
+        const rawContainerId = typeof container === 'string' ? container : (container?.id || null);
         container = this._resolveContainer(container);
         if (!container) return;
 
@@ -482,20 +486,24 @@ class DeckEngine {
         }
 
         if (broadcast && window.presenterSyncEngine) {
-            const containerId = (typeof container === 'string' ? container : container?.id || null);
             window.presenterSyncEngine.emit('EXERCISE_ACTION', {
                 action: 'reveal',
-                containerId,
+                containerId: rawContainerId || container.id || null,
                 slideIndex: this.currentSlide
             });
         }
     }
 
+    // ─────────────────────────────────────────────────────────────
+    // Alias methods for backward-compatible template onclick="" calls
+    // All delegate to the canonical checkAnswers/revealKeys/resetTask
+    // ─────────────────────────────────────────────────────────────
     revealAnswers(container, broadcast = true) {
         this.revealKeys(container, broadcast);
     }
 
     resetTask(container, broadcast = true) {
+        const rawContainerId = typeof container === 'string' ? container : (container?.id || null);
         container = this._resolveContainer(container);
         if (!container) return;
 
@@ -518,10 +526,9 @@ class DeckEngine {
         }
 
         if (broadcast && window.presenterSyncEngine) {
-            const containerId = (typeof container === 'string' ? container : container?.id || null);
             window.presenterSyncEngine.emit('EXERCISE_ACTION', {
                 action: 'reset',
-                containerId,
+                containerId: rawContainerId || container.id || null,
                 slideIndex: this.currentSlide
             });
         }
@@ -790,6 +797,7 @@ window.resetStrategySlide = (target) => (window.deckEngine ? window.deckEngine.r
 window.switchHighLineTab = (tab) => (window.deckEngine ? window.deckEngine.switchHighLineTab(tab) : null);
 window.jumpToSlide = (idx) => (window.deckEngine ? window.deckEngine.jumpToSlide(idx) : null);
 window.jumpToSkill = (skill) => (window.deckEngine ? window.deckEngine.jumpToSkill(skill) : null);
+window.normalizeAnswerStr = DeckEngine.normalizeStr;
 
 window.addEventListener('DOMContentLoaded', () => {
     if (!window.deckEngine) {

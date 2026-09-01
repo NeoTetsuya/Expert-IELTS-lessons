@@ -60,7 +60,7 @@ class PresenterSyncEngine {
         this.isConnected = true;
     }
 
-    send(type, payload = {}) {
+    emit(type, payload = {}) {
         const message = {
             type,
             payload,
@@ -83,6 +83,10 @@ class PresenterSyncEngine {
                 localStorage.setItem(this.channelName, JSON.stringify(message));
             } catch (e) {}
         }
+    }
+
+    send(type, payload = {}) {
+        this.emit(type, payload);
     }
 
     handleIncomingMessage(message) {
@@ -132,10 +136,6 @@ class PresenterSyncEngine {
         if (!this.listeners.has(type)) return;
         const list = this.listeners.get(type).filter(h => h !== handler);
         this.listeners.set(type, list);
-    }
-
-    emit(type, payload) {
-        this.send(type, payload);
     }
 
     notifyStatusChange(connected) {
