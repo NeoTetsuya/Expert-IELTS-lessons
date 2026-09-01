@@ -1781,13 +1781,12 @@ class DeckEngine {
         });
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        const slideContext = container.closest('.slide') || container.closest('section') || document.querySelector('.slide.active') || container;
-        if (slideContext) {
-            slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-            slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+        const activeSlideEl = (container && container.closest('.slide')) || (this.slides && this.slides[this.currentSlide]) || document.querySelector('.slide.active') || container;
+        if (activeSlideEl) {
+            activeSlideEl.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+            activeSlideEl.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
+            activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
         }
-        document.querySelectorAll('.slide.active .syn-pair-1, .slide.active .syn-pair-2, .slide.active .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-        document.querySelectorAll('.slide.active mark.evidence').forEach(m => m.classList.add('highlighted'));
 
         // Check category sorter exercises
         if (window.categorySorter) {
@@ -1877,14 +1876,12 @@ class DeckEngine {
         });
 
         container.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
-        const slideContext = container.closest('.slide') || container.closest('section') || document.querySelector('.slide.active') || container;
-        if (slideContext) {
-            slideContext.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-            slideContext.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
-            slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+        const activeSlideEl = (container && container.closest('.slide')) || (this.slides && this.slides[this.currentSlide]) || document.querySelector('.slide.active') || container;
+        if (activeSlideEl) {
+            activeSlideEl.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
+            activeSlideEl.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
+            activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
         }
-        document.querySelectorAll('.slide.active .syn-pair-1, .slide.active .syn-pair-2, .slide.active .syn-pair-3').forEach(s => s.classList.add('active-syn'));
-        document.querySelectorAll('.slide.active mark.evidence').forEach(m => m.classList.add('highlighted'));
         if (window.vocabBank) {
             window.vocabBank.updateChipStates(container);
         }
@@ -1906,7 +1903,32 @@ class DeckEngine {
     // All delegate to the canonical checkAnswers/revealKeys/resetTask
     // ─────────────────────────────────────────────────────────────
     revealAnswers(container, broadcast = true) {
-        this.revealKeys(container, broadcast);
+        const rawContainerId = typeof container === 'string' ? container : (container?.id || null);
+        container = this._resolveContainer(container);
+        if (!container) return;
+
+        const activeSlideEl = (container && container.closest('.slide')) || (this.slides && this.slides[this.currentSlide]) || document.querySelector('.slide.active') || container;
+        if (activeSlideEl) {
+            const synSpans = activeSlideEl.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3');
+            const isAnyActive = Array.from(synSpans).some(s => s.classList.contains('active-syn'));
+            if (isAnyActive) {
+                synSpans.forEach(s => s.classList.remove('active-syn'));
+                activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted'));
+                activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.remove('show'));
+            } else {
+                synSpans.forEach(s => s.classList.add('active-syn'));
+                activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
+                activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+            }
+        }
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('EXERCISE_ACTION', {
+                action: 'reveal',
+                containerId: rawContainerId || container.id || null,
+                slideIndex: this.currentSlide
+            });
+        }
     }
 
     resetTask(container, broadcast = true) {
@@ -6619,11 +6641,13 @@ class ReadingHighlighter {
             });
         }
 
-        const synSpans = qKey ? Array.from(document.querySelectorAll(`[data-q="${qKey}"], .syn-pair-1[data-q="${qKey}"], .syn-pair-2[data-q="${qKey}"], .syn-pair-3[data-q="${qKey}"]`)) : [];
-        const isCurrentlyActive = (allEvTargets.length > 0 && allEvTargets.some(t => t.classList.contains('highlighted')) && this.activeEvidenceId === (evId || qKey)) ||
-                                  (synSpans.length > 0 && synSpans.every(s => s.classList.contains('active-syn')) && this.activeEvidenceId === qKey);
-
+        let synSpans = qKey ? Array.from(document.querySelectorAll(`[data-q="${qKey}"], .syn-pair-1[data-q="${qKey}"], .syn-pair-2[data-q="${qKey}"], .syn-pair-3[data-q="${qKey}"]`)) : [];
         const currentSlide = document.querySelector('.slide.active') || document.body;
+        if (synSpans.length === 0 && currentSlide) {
+            synSpans = Array.from(currentSlide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3'));
+        }
+        const isCurrentlyActive = (allEvTargets.length > 0 && allEvTargets.some(t => t.classList.contains('highlighted')) && this.activeEvidenceId === (evId || qKey)) ||
+                                  (synSpans.length > 0 && synSpans.every(s => s.classList.contains('active-syn')) && (this.activeEvidenceId === (evId || qKey) || !evId));
 
         if (!isCurrentlyActive) {
             // First clear prior active highlights on the slide

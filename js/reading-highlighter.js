@@ -155,11 +155,13 @@ class ReadingHighlighter {
             });
         }
 
-        const synSpans = qKey ? Array.from(document.querySelectorAll(`[data-q="${qKey}"], .syn-pair-1[data-q="${qKey}"], .syn-pair-2[data-q="${qKey}"], .syn-pair-3[data-q="${qKey}"]`)) : [];
-        const isCurrentlyActive = (allEvTargets.length > 0 && allEvTargets.some(t => t.classList.contains('highlighted')) && this.activeEvidenceId === (evId || qKey)) ||
-                                  (synSpans.length > 0 && synSpans.every(s => s.classList.contains('active-syn')) && this.activeEvidenceId === qKey);
-
+        let synSpans = qKey ? Array.from(document.querySelectorAll(`[data-q="${qKey}"], .syn-pair-1[data-q="${qKey}"], .syn-pair-2[data-q="${qKey}"], .syn-pair-3[data-q="${qKey}"]`)) : [];
         const currentSlide = document.querySelector('.slide.active') || document.body;
+        if (synSpans.length === 0 && currentSlide) {
+            synSpans = Array.from(currentSlide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3'));
+        }
+        const isCurrentlyActive = (allEvTargets.length > 0 && allEvTargets.some(t => t.classList.contains('highlighted')) && this.activeEvidenceId === (evId || qKey)) ||
+                                  (synSpans.length > 0 && synSpans.every(s => s.classList.contains('active-syn')) && (this.activeEvidenceId === (evId || qKey) || !evId));
 
         if (!isCurrentlyActive) {
             // First clear prior active highlights on the slide
