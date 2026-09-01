@@ -24,6 +24,7 @@ class ReadingGrounder {
      */
     static get dictionary() {
         return {
+            // Module 2 & General Academic
             'sharing experiences': {
                 word: 'sharing experiences',
                 pos: 'phrase',
@@ -163,6 +164,357 @@ class ReadingGrounder {
                 ipa: '/bɪˈlɒŋ.ɪŋ/',
                 def: 'A sense of being accepted, connected, and part of a social group.',
                 colloc: 'signal group belonging ↔ dress in a similar way'
+            },
+
+            // Module 4: Health, Trackers & Remedies from Nature
+            'consume': {
+                word: 'consume',
+                pos: 'verb',
+                ipa: '/kənˈsjuːm/',
+                def: 'To eat, drink, or use up a resource.',
+                colloc: 'consume calories / energy'
+            },
+            'impact': {
+                word: 'impact',
+                pos: 'noun',
+                ipa: '/ˈɪm.pækt/',
+                def: 'A powerful effect or influence that something has on a situation.',
+                colloc: 'positive impact / environmental impact'
+            },
+            'motivated': {
+                word: 'motivated',
+                pos: 'adj.',
+                ipa: '/ˈməʊ.tɪ.veɪ.tɪd/',
+                def: 'Very enthusiastic and determined to achieve something.',
+                colloc: 'motivated to exercise / stay active'
+            },
+            'consequently': {
+                word: 'consequently',
+                pos: 'adv.',
+                ipa: '/ˈkɒn.sɪ.kwənt.li/',
+                def: 'As a result or effect of an earlier action or circumstance.',
+                colloc: 'consequently agree / conclude'
+            },
+            'deceive': {
+                word: 'deceive',
+                pos: 'verb',
+                ipa: '/dɪˈsiːv/',
+                def: 'To persuade someone that something false is the truth.',
+                colloc: 'deceive themselves / mislead'
+            },
+            'psychologists': {
+                word: 'psychologists',
+                pos: 'noun',
+                ipa: '/saɪˈkɒl.ə.dʒɪsts/',
+                def: 'Specialists who study the human mind, emotions, and behavior.',
+                colloc: 'sports psychologists / researchers'
+            },
+            'metabolises': {
+                word: 'metabolises',
+                pos: 'verb',
+                ipa: '/məˈtæb.əl.aɪz.ɪz/',
+                def: 'Chemically processes and breaks down food substances for energy.',
+                colloc: 'metabolises calories from sugar'
+            },
+            'artificial': {
+                word: 'artificial',
+                pos: 'adj.',
+                ipa: '/ˌɑː.tɪˈfɪʃ.əl/',
+                def: 'Made or produced by human beings rather than occurring naturally.',
+                colloc: 'artificial targets / artificial food'
+            },
+            'biodiversity': {
+                word: 'biodiversity',
+                pos: 'noun',
+                ipa: '/ˌbaɪ.əʊ.daɪˈvɜː.sə.ti/',
+                def: 'The variety of plant and animal life in a particular habitat or the world.',
+                colloc: 'rich biodiversity / preserve biodiversity'
+            },
+            'extinction': {
+                word: 'extinction',
+                pos: 'noun',
+                ipa: '/ɪkˈstɪŋk.ʃən/',
+                def: 'The state or situation when a species no longer exists.',
+                colloc: 'threatened with extinction / mass extinction'
+            },
+            'dependence': {
+                word: 'dependence',
+                pos: 'noun',
+                ipa: '/dɪˈpen.dəns/',
+                def: 'The state of relying on or needing someone or something.',
+                colloc: 'dependence on nature / heavy dependence'
+            },
+            'substances': {
+                word: 'substances',
+                pos: 'noun',
+                ipa: '/ˈsʌb.stəns.ɪz/',
+                def: 'Particular kinds of matter with uniform properties and chemical structure.',
+                colloc: 'natural substances / chemical substances'
+            },
+            'ecosystems': {
+                word: 'ecosystems',
+                pos: 'noun',
+                ipa: '/ˈiː.kəʊˌsɪs.təmz/',
+                def: 'Biological communities of interacting organisms and their physical environment.',
+                colloc: 'fragile ecosystems / marine ecosystems'
+            },
+            'inevitable': {
+                word: 'inevitable',
+                pos: 'adj.',
+                ipa: '/ɪnˈev.ɪ.tə.bəl/',
+                def: 'Certain to happen; unavoidable.',
+                colloc: 'inevitable result / inevitable outcome'
+            },
+            'invertebrates': {
+                word: 'invertebrates',
+                pos: 'noun',
+                ipa: '/ɪnˈvɜː.tɪ.brəts/',
+                def: 'Animals without a backbone, such as insects, spiders, and molluscs.',
+                colloc: 'marine invertebrates / small invertebrates'
+            },
+            'poisonous': {
+                word: 'poisonous',
+                pos: 'adj.',
+                ipa: '/ˈpɔɪ.zən.əs/',
+                def: 'Causing illness or death if touched or swallowed; toxic.',
+                colloc: 'poisonous snake / poisonous plants'
+            },
+            'preservation': {
+                word: 'preservation',
+                pos: 'noun',
+                ipa: '/ˌprez.əˈveɪ.ʃən/',
+                def: 'The act of keeping something safe from harm, loss, or decay.',
+                colloc: 'environmental preservation / habitat preservation'
+            },
+
+            // Module 5: Transport, Environment & Visual Pollution
+            'journey': {
+                word: 'journey',
+                pos: 'noun',
+                ipa: '/ˈdʒɜː.ni/',
+                def: 'An act of travelling from one place to another.',
+                colloc: 'long-distance journey / arduous journey'
+            },
+            'landscapes': {
+                word: 'landscapes',
+                pos: 'noun',
+                ipa: '/ˈlænd.skeɪps/',
+                def: 'All the visible features of an area of countryside or land.',
+                colloc: 'varied landscapes / dramatic landscapes'
+            },
+            'environment': {
+                word: 'environment',
+                pos: 'noun',
+                ipa: '/ɪnˈvaɪ.rən.mənt/',
+                def: 'The surroundings or conditions in which a person, animal, or plant lives.',
+                colloc: 'natural environment / physical environment'
+            },
+            'impressed': {
+                word: 'impressed',
+                pos: 'adj.',
+                ipa: '/ɪmˈprest/',
+                def: 'Feeling admiration and respect for someone or something.',
+                colloc: 'impressed him most / deeply impressed'
+            },
+            'visibility': {
+                word: 'visibility',
+                pos: 'noun',
+                ipa: '/ˌvɪz.əˈbɪl.ə.ti/',
+                def: 'The distance one can clearly see as determined by light and weather.',
+                colloc: 'limited visibility / reduced visibility'
+            },
+            'industry': {
+                word: 'industry',
+                pos: 'noun',
+                ipa: '/ˈɪn.də.stri/',
+                def: 'Economic activity concerned with the processing of raw materials and manufacture.',
+                colloc: 'transport and industry / manufacturing industry'
+            },
+            'subjective': {
+                word: 'subjective',
+                pos: 'adj.',
+                ipa: '/səbˈdʒek.tɪv/',
+                def: 'Based on or influenced by personal feelings, tastes, or opinions rather than facts.',
+                colloc: 'subjective types / subjective viewpoint'
+            },
+            'consequence': {
+                word: 'consequence',
+                pos: 'noun',
+                ipa: '/ˈkɒn.sɪ.kwəns/',
+                def: 'A result or effect of an action or condition.',
+                colloc: 'negative consequence / direct consequence'
+            },
+            'drought': {
+                word: 'drought',
+                pos: 'noun',
+                ipa: '/draʊt/',
+                def: 'A prolonged period of abnormally low rainfall, leading to a shortage of water.',
+                colloc: 'severe drought / prolonged drought'
+            },
+            'blizzard': {
+                word: 'blizzard',
+                pos: 'noun',
+                ipa: '/ˈblɪz.əd/',
+                def: 'A severe snowstorm with high winds and low visibility.',
+                colloc: 'winter blizzard / violent blizzard'
+            },
+            'hurricane': {
+                word: 'hurricane',
+                pos: 'noun',
+                ipa: '/ˈhʌr.ɪ.kən/',
+                def: 'A storm with a violent wind, in particular a tropical cyclone in the Caribbean.',
+                colloc: 'tropical hurricane / Category 5 hurricane'
+            },
+            'toxic waste': {
+                word: 'toxic waste',
+                pos: 'noun phrase',
+                ipa: '/ˈtɒk.sɪk weɪst/',
+                def: 'Hazardous chemical byproduct from industry that harms living organisms.',
+                colloc: 'dispose of toxic waste'
+            },
+            'global warming': {
+                word: 'global warming',
+                pos: 'noun phrase',
+                ipa: '/ˈɡləʊ.bəl ˈwɔː.mɪŋ/',
+                def: 'A gradual increase in the overall temperature of the earth\'s atmosphere.',
+                colloc: 'combat global warming'
+            },
+            'greenhouse effect': {
+                word: 'greenhouse effect',
+                pos: 'noun phrase',
+                ipa: '/ˈɡriːn.haʊs ɪˌfekt/',
+                def: 'The trapping of the sun\'s warmth in a planet\'s lower atmosphere by greenhouse gases.',
+                colloc: 'contribute to the greenhouse effect'
+            },
+
+            // Module 6: Food, Innovation & Marketing
+            'distinguish': {
+                word: 'distinguish',
+                pos: 'verb',
+                ipa: '/dɪˈstɪŋ.ɡwɪʃ/',
+                def: 'To recognize or treat someone or something as different; tell apart.',
+                colloc: 'distinguish from meat / distinguish between'
+            },
+            'nutrients': {
+                word: 'nutrients',
+                pos: 'noun',
+                ipa: '/ˈnjuː.tri.ənts/',
+                def: 'Substances that provide nourishment essential for the maintenance of life and growth.',
+                colloc: 'essential nutrients / absorb nutrients'
+            },
+            'shortages': {
+                word: 'shortages',
+                pos: 'noun',
+                ipa: '/ˈʃɔː.tɪ.dʒɪz/',
+                def: 'States or situations in which something needed cannot be obtained in sufficient amounts.',
+                colloc: 'food shortages / water shortages'
+            },
+            'consumers': {
+                word: 'consumers',
+                pos: 'noun',
+                ipa: '/kənˈsjuː.məz/',
+                def: 'Persons who purchase goods and services for personal use.',
+                colloc: 'everyday consumers / consumer rights'
+            },
+            'marketing': {
+                word: 'marketing',
+                pos: 'noun',
+                ipa: '/ˈmɑː.kɪ.tɪŋ/',
+                def: 'The activity or business of promoting and selling products or services.',
+                colloc: 'word-of-mouth marketing / digital marketing'
+            },
+            'advantages': {
+                word: 'advantages',
+                pos: 'noun',
+                ipa: '/ədˈvɑːn.tɪ.dʒɪz/',
+                def: 'Conditions or circumstances that put someone in a favorable or superior position.',
+                colloc: 'main advantages / clear advantages'
+            },
+            'disadvantages': {
+                word: 'disadvantages',
+                pos: 'noun',
+                ipa: '/ˌdɪs.ədˈvɑːn.tɪ.dʒɪz/',
+                def: 'Unfavorable circumstances or conditions that reduce the chances of success.',
+                colloc: 'drawbacks and disadvantages'
+            },
+
+            // Module 7 & Expert 6: Science, Culture & Psychology
+            'triumph': {
+                word: 'triumph',
+                pos: 'verb / noun',
+                ipa: '/ˈtraɪ.əmf/',
+                def: 'To achieve a great victory, success, or outcome.',
+                colloc: 'triumph in mathematics / celebrate triumph'
+            },
+            'control group': {
+                word: 'control group',
+                pos: 'noun phrase',
+                ipa: '/kənˈtrəʊl ɡruːp/',
+                def: 'A benchmark group in an experiment that does not receive the test treatment.',
+                colloc: 'scientific control group'
+            },
+            'analysis': {
+                word: 'analysis',
+                pos: 'noun',
+                ipa: '/əˈnæl.ə.sɪs/',
+                def: 'Detailed examination of the elements or structure of something.',
+                colloc: 'statistical analysis / data analysis'
+            },
+            'discipline': {
+                word: 'discipline',
+                pos: 'noun',
+                ipa: '/ˈdɪs.ə.plɪn/',
+                def: 'The practice of training people to obey rules or a code of behavior.',
+                colloc: 'classroom discipline / strict discipline'
+            },
+            'admitted': {
+                word: 'admitted',
+                pos: 'verb',
+                ipa: '/ədˈmɪt.ɪd/',
+                def: 'Confessed or acknowledged the truth of something reluctantly.',
+                colloc: 'admitted that they behaved worse'
+            },
+            'free-thinking': {
+                word: 'free-thinking',
+                pos: 'noun / adj.',
+                ipa: '/ˈfriːˌθɪŋ.kɪŋ/',
+                def: 'Forming one\'s own opinions independently without dogma or rigid convention.',
+                colloc: 'opportunity for free-thinking'
+            },
+            'obsession': {
+                word: 'obsession',
+                pos: 'noun',
+                ipa: '/əbˈseʃ.ən/',
+                def: 'An idea or thought that continually preoccupies or intrudes on a person\'s mind.',
+                colloc: 'obsession with testing / examinations'
+            },
+            'manipulative': {
+                word: 'manipulative',
+                pos: 'adj.',
+                ipa: '/məˈnɪp.jə.lə.tɪv/',
+                def: 'Exercising unscrupulous control or influence over a person or situation.',
+                colloc: 'manipulative tendencies / behavior'
+            },
+            'demean': {
+                word: 'demean',
+                pos: 'verb',
+                ipa: '/dɪˈmiːn/',
+                def: 'Cause someone to lose dignity and the respect of others.',
+                colloc: 'demean and embarrass peers'
+            },
+            'retained': {
+                word: 'retained',
+                pos: 'verb',
+                ipa: '/rɪˈteɪnd/',
+                def: 'Kept in mind or remembered over time.',
+                colloc: 'retained less content / information'
+            },
+            'psychological obesity': {
+                word: 'psychological obesity',
+                pos: 'noun phrase',
+                ipa: '/ˌsaɪ.kəˈlɒdʒ.ɪ.kəl əʊˈbiː.sə.ti/',
+                def: 'A state of mental overload from consuming sensational, unwholesome digital information.',
+                colloc: 'concept of psychological obesity'
             }
         };
     }
