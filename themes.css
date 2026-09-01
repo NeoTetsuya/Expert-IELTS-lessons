@@ -33,8 +33,39 @@
     color: #0f172a;
 }
 
-:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) :is(.reading-pane p, .question-pane p, .walkthrough-container p, .sentence-text, .discuss-text, .card p, .card span) {
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) :is(.reading-pane p, .question-pane p, .walkthrough-container p, .sentence-text, .discuss-text, .card p, .card span:not([class*="syn-pair"]):not(.active-syn):not(.active-vocab)) {
     color: #0f172a;
+}
+
+/* Light Theme Active Highlights */
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) span.syn-pair-1.active-syn {
+    background: #bbf7d0 !important;
+    color: #14532d !important;
+    font-weight: 700 !important;
+    border-bottom: 2.5px solid #16a34a !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 0 12px rgba(22, 163, 74, 0.4) !important;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) span.syn-pair-2.active-syn {
+    background: #e9d5ff !important;
+    color: #581c87 !important;
+    font-weight: 700 !important;
+    border-bottom: 2.5px solid #9333ea !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 0 12px rgba(147, 51, 234, 0.4) !important;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) span.syn-pair-3.active-syn {
+    background: #bae6fd !important;
+    color: #0369a1 !important;
+    font-weight: 700 !important;
+    border-bottom: 2.5px solid #0284c7 !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 0 12px rgba(2, 132, 199, 0.4) !important;
 }
 
 /* Light Theme Option Box & Box Chips */
