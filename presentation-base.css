@@ -958,10 +958,43 @@ html, body {
 }
 .walkthrough-container .passage-card p,
 .walkthrough-container .card p,
-.walkthrough-container .card span:not(.para-tag) {
+.walkthrough-container .card span:not(.para-tag):not([class*="syn-pair"]):not(.active-syn) {
     font-size: calc(26px * var(--font-scale, 1)) !important;
     line-height: 1.85 !important;
     color: var(--text-dark, #0f172a);
+}
+.walkthrough-container span.syn-pair-1,
+.walkthrough-container span.syn-pair-2,
+.walkthrough-container span.syn-pair-3 {
+    font-size: calc(26px * var(--font-scale, 1)) !important;
+    line-height: 1.85 !important;
+}
+.walkthrough-container span.syn-pair-1.active-syn,
+mark.evidence span.syn-pair-1.active-syn {
+    background: #bbf7d0 !important;
+    color: #14532d !important;
+    font-weight: 700 !important;
+    border-bottom: 2.5px solid #16a34a !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+}
+.walkthrough-container span.syn-pair-2.active-syn,
+mark.evidence span.syn-pair-2.active-syn {
+    background: #e9d5ff !important;
+    color: #581c87 !important;
+    font-weight: 700 !important;
+    border-bottom: 2.5px solid #9333ea !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+}
+.walkthrough-container span.syn-pair-3.active-syn,
+mark.evidence span.syn-pair-3.active-syn {
+    background: #bae6fd !important;
+    color: #0369a1 !important;
+    font-weight: 700 !important;
+    border-bottom: 2.5px solid #0284c7 !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
 }
 .walkthrough-container .q-card {
     padding: 24px 32px !important;

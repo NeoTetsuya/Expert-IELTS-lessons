@@ -724,13 +724,23 @@
                 const qText = section.querySelector('[data-slot="question-text"]') || section.querySelector('[data-slot="question-card"]');
                 if (qText) qText.innerHTML = data.question || data.questionText;
             }
-            if (data.qNum) {
+            let qKey = data.qKey || data.dataQ;
+            if (!qKey && data.excerpt) {
+                const match = data.excerpt.match(/data-q="([^"]+)"/);
+                if (match) qKey = match[1];
+            }
+            if (!qKey && data.qNum) {
+                qKey = `wt-${data.qNum}`;
+            }
+
+            if (qKey) {
                 const qCard = section.querySelector('.q-card, [data-slot="question-card"]');
-                if (qCard) qCard.setAttribute('data-q', `wt-${data.qNum}`);
+                if (qCard) qCard.setAttribute('data-q', qKey);
                 const evBtn = section.querySelector('.syn-btn, [data-slot="evidence-btn"]');
                 if (evBtn) {
-                    evBtn.setAttribute('data-q', `wt-${data.qNum}`);
+                    evBtn.setAttribute('data-q', qKey);
                     if (data.evId) evBtn.setAttribute('data-ev', data.evId);
+                    else evBtn.setAttribute('data-ev', `ev-${qKey}`);
                 }
             }
             if (data.ans || data.inputAns) {
