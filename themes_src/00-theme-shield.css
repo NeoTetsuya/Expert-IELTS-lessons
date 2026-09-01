@@ -23,11 +23,11 @@
     color: #0f172a;
 }
 
-:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) :is(.reading-pane, .question-pane, .strategy-card, .walkthrough-container, .discuss-card, .rule-card, .model-breakdown-card, .word-bank-card) {
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) :is(.reading-pane, .question-pane, .strategy-card, .walkthrough-container, .discuss-card, .rule-card, .model-breakdown-card, .word-bank-card, .card) {
     color: #0f172a;
 }
 
-:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) :is(.reading-pane p, .question-pane p, .walkthrough-container p, .sentence-text, .discuss-text) {
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) :is(.reading-pane p, .question-pane p, .walkthrough-container p, .sentence-text, .discuss-text, .card p, .card span) {
     color: #0f172a;
 }
 
@@ -106,35 +106,182 @@
     color: #38bdf8 !important;
 }
 
-/* Dark Theme Strategy Guide Pastel Boxes (Adaptive Tinted Contrast) */
-:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background: #e0f2fe"], [style*="background:#e0f2fe"]) {
-    background: rgba(2, 132, 199, 0.22) !important;
-    border-color: rgba(56, 189, 248, 0.4) !important;
+/* ==========================================================================
+   DARK THEME ADAPTIVE PASTEL TINTS (Guarantees crisp AAA text contrast)
+   ========================================================================== */
+
+/* 1. GREEN PASTEL TINTS (Identify Connectors, Vocab, Accuracy) */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #dcfce7"], [style*="background:#dcfce7"],
+    [style*="background: #d1fae5"], [style*="background:#d1fae5"],
+    [style*="background: #ecfdf5"], [style*="background:#ecfdf5"],
+    [style*="background: #bbf7d0"], [style*="background:#bbf7d0"],
+    [style*="background: #f0fdf4"], [style*="background:#f0fdf4"],
+    [style*="background: #e6f4ea"], [style*="background:#e6f4ea"],
+    [style*="background: #e8f5e9"], [style*="background:#e8f5e9"]
+) {
+    background: rgba(16, 185, 129, 0.18) !important;
+    border-color: rgba(52, 211, 153, 0.45) !important;
+    color: #ecfdf5 !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #dcfce7"], [style*="background:#dcfce7"],
+    [style*="background: #d1fae5"], [style*="background:#d1fae5"],
+    [style*="background: #ecfdf5"], [style*="background:#ecfdf5"],
+    [style*="background: #bbf7d0"], [style*="background:#bbf7d0"],
+    [style*="background: #f0fdf4"], [style*="background:#f0fdf4"],
+    [style*="background: #e6f4ea"], [style*="background:#e6f4ea"],
+    [style*="background: #e8f5e9"], [style*="background:#e8f5e9"]
+) strong {
+    color: #34d399 !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #dcfce7"], [style*="background:#dcfce7"],
+    [style*="background: #d1fae5"], [style*="background:#d1fae5"],
+    [style*="background: #ecfdf5"], [style*="background:#ecfdf5"],
+    [style*="background: #bbf7d0"], [style*="background:#bbf7d0"],
+    [style*="background: #f0fdf4"], [style*="background:#f0fdf4"],
+    [style*="background: #e6f4ea"], [style*="background:#e6f4ea"],
+    [style*="background: #e8f5e9"], [style*="background:#e8f5e9"]
+) :is(em, span, p) {
+    color: #ecfdf5 !important;
+}
+
+/* 2. BLUE & CYAN PASTEL TINTS (Information Types, Strategy Steps) */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #e0f2fe"], [style*="background:#e0f2fe"],
+    [style*="background: #eff6ff"], [style*="background:#eff6ff"],
+    [style*="background: #bae6fd"], [style*="background:#bae6fd"],
+    [style*="background: #f0f9ff"], [style*="background:#f0f9ff"],
+    [style*="background: #e1f5fe"], [style*="background:#e1f5fe"],
+    [style*="background: #e0f7fa"], [style*="background:#e0f7fa"]
+) {
+    background: rgba(2, 132, 199, 0.18) !important;
+    border-color: rgba(56, 189, 248, 0.45) !important;
     color: #e0f2fe !important;
 }
 
-:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background: #e0f2fe"], [style*="background:#e0f2fe"]) strong {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #e0f2fe"], [style*="background:#e0f2fe"],
+    [style*="background: #eff6ff"], [style*="background:#eff6ff"],
+    [style*="background: #bae6fd"], [style*="background:#bae6fd"],
+    [style*="background: #f0f9ff"], [style*="background:#f0f9ff"],
+    [style*="background: #e1f5fe"], [style*="background:#e1f5fe"],
+    [style*="background: #e0f7fa"], [style*="background:#e0f7fa"]
+) strong {
     color: #38bdf8 !important;
 }
 
-:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background: #fef9c3"], [style*="background:#fef9c3"]) {
-    background: rgba(202, 138, 4, 0.22) !important;
-    border-color: rgba(250, 204, 21, 0.4) !important;
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #e0f2fe"], [style*="background:#e0f2fe"],
+    [style*="background: #eff6ff"], [style*="background:#eff6ff"],
+    [style*="background: #bae6fd"], [style*="background:#bae6fd"],
+    [style*="background: #f0f9ff"], [style*="background:#f0f9ff"],
+    [style*="background: #e1f5fe"], [style*="background:#e1f5fe"],
+    [style*="background: #e0f7fa"], [style*="background:#e0f7fa"]
+) :is(em, span, p) {
+    color: #e0f2fe !important;
+}
+
+/* 3. YELLOW & AMBER PASTEL TINTS (Rules, Grammar Checks, Scan Ideas) */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #fef9c3"], [style*="background:#fef9c3"],
+    [style*="background: #fef08a"], [style*="background:#fef08a"],
+    [style*="background: #fef3c7"], [style*="background:#fef3c7"],
+    [style*="background: #fffbeb"], [style*="background:#fffbeb"],
+    [style*="background: #fff7ed"], [style*="background:#fff7ed"],
+    [style*="background: #ffedd5"], [style*="background:#ffedd5"],
+    [style*="background: #fefce8"], [style*="background:#fefce8"]
+) {
+    background: rgba(202, 138, 4, 0.18) !important;
+    border-color: rgba(250, 204, 21, 0.45) !important;
     color: #fef08a !important;
 }
 
-:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background: #fef9c3"], [style*="background:#fef9c3"]) strong {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #fef9c3"], [style*="background:#fef9c3"],
+    [style*="background: #fef08a"], [style*="background:#fef08a"],
+    [style*="background: #fef3c7"], [style*="background:#fef3c7"],
+    [style*="background: #fffbeb"], [style*="background:#fffbeb"],
+    [style*="background: #fff7ed"], [style*="background:#fff7ed"],
+    [style*="background: #ffedd5"], [style*="background:#ffedd5"],
+    [style*="background: #fefce8"], [style*="background:#fefce8"]
+) strong {
     color: #facc15 !important;
 }
 
-:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background: #f3e8ff"], [style*="background:#f3e8ff"]) {
-    background: rgba(147, 51, 234, 0.22) !important;
-    border-color: rgba(192, 132, 252, 0.4) !important;
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #fef9c3"], [style*="background:#fef9c3"],
+    [style*="background: #fef08a"], [style*="background:#fef08a"],
+    [style*="background: #fef3c7"], [style*="background:#fef3c7"],
+    [style*="background: #fffbeb"], [style*="background:#fffbeb"],
+    [style*="background: #fff7ed"], [style*="background:#fff7ed"],
+    [style*="background: #ffedd5"], [style*="background:#ffedd5"],
+    [style*="background: #fefce8"], [style*="background:#fefce8"]
+) :is(em, span, p) {
+    color: #fef08a !important;
+}
+
+/* 4. PURPLE & PINK PASTEL TINTS (Prediction, Information Type, Modals) */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #f3e8ff"], [style*="background:#f3e8ff"],
+    [style*="background: #ede9fe"], [style*="background:#ede9fe"],
+    [style*="background: #fae8ff"], [style*="background:#fae8ff"],
+    [style*="background: #ffe4e6"], [style*="background:#ffe4e6"],
+    [style*="background: #fce7f3"], [style*="background:#fce7f3"],
+    [style*="background: #fdf2f8"], [style*="background:#fdf2f8"],
+    [style*="background: #f5f3ff"], [style*="background:#f5f3ff"]
+) {
+    background: rgba(147, 51, 234, 0.18) !important;
+    border-color: rgba(192, 132, 252, 0.45) !important;
     color: #f3e8ff !important;
 }
 
-:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is([style*="background: #f3e8ff"], [style*="background:#f3e8ff"]) strong {
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #f3e8ff"], [style*="background:#f3e8ff"],
+    [style*="background: #ede9fe"], [style*="background:#ede9fe"],
+    [style*="background: #fae8ff"], [style*="background:#fae8ff"],
+    [style*="background: #ffe4e6"], [style*="background:#ffe4e6"],
+    [style*="background: #fce7f3"], [style*="background:#fce7f3"],
+    [style*="background: #fdf2f8"], [style*="background:#fdf2f8"],
+    [style*="background: #f5f3ff"], [style*="background:#f5f3ff"]
+) strong {
     color: #c084fc !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #f3e8ff"], [style*="background:#f3e8ff"],
+    [style*="background: #ede9fe"], [style*="background:#ede9fe"],
+    [style*="background: #fae8ff"], [style*="background:#fae8ff"],
+    [style*="background: #ffe4e6"], [style*="background:#ffe4e6"],
+    [style*="background: #fce7f3"], [style*="background:#fce7f3"],
+    [style*="background: #fdf2f8"], [style*="background:#fdf2f8"],
+    [style*="background: #f5f3ff"], [style*="background:#f5f3ff"]
+) :is(em, span, p) {
+    color: #f3e8ff !important;
+}
+
+/* 5. HARDCODED WHITE & LIGHT CARDS INSIDE DARK THEMES */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #ffffff"], [style*="background:#ffffff"],
+    [style*="background: #faf6ef"], [style*="background:#faf6ef"],
+    [style*="background: #fff9f0"], [style*="background:#fff9f0"],
+    [style*="background: #fbf9f4"], [style*="background:#fbf9f4"]
+):not(.notebook) {
+    background: rgba(30, 41, 59, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.16) !important;
+    color: #f8fafc !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(
+    [style*="background: #ffffff"], [style*="background:#ffffff"],
+    [style*="background: #faf6ef"], [style*="background:#faf6ef"],
+    [style*="background: #fff9f0"], [style*="background:#fff9f0"],
+    [style*="background: #fbf9f4"], [style*="background:#fbf9f4"]
+):not(.notebook) :is(p, span, em, strong, li, div, h3, h4) {
+    color: #f8fafc !important;
 }
 
 /* Syn-btn & Evidence Button in Dark Themes */
