@@ -104,29 +104,29 @@
                     </p>
 
                     <!-- Centered Walkthrough Container -->
-                    <div class="walkthrough-container" style="max-width: 1550px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; flex: 1; justify-content: flex-start; min-height: 0;">
+                    <div class="walkthrough-container" style="max-width: 1550px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; flex: 1; justify-content: flex-start; min-height: 0;">
                         <!-- Top Box: Dedicated Passage Excerpt -->
-                        <div class="card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 20px 28px;">
-                            <div style="font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--col-reading); margin-bottom: 6px;" data-slot="passage-header">
+                        <div class="card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 16px 24px;">
+                            <div style="font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--col-reading); margin-bottom: 4px;" data-slot="passage-header">
                                 📖 Relevant Passage Excerpt
                             </div>
-                            <p style="font-size: 26px; line-height: 1.8; margin-bottom: 0; color: var(--text-dark);" data-slot="passage-text"></p>
+                            <p style="font-size: 21.5px; line-height: 1.65; margin-bottom: 0; color: var(--text-dark);" data-slot="passage-text"></p>
                         </div>
 
                         <!-- Bottom Box: Interactive Question Card -->
-                        <div class="q-card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 20px 28px;" data-slot="question-card">
+                        <div class="q-card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 16px 24px;" data-slot="question-card">
                             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
-                                <span style="font-weight: 700; font-size: 26px; line-height: 1.7; color: var(--text-dark);" data-slot="question-text"></span>
-                                <button class="syn-btn" style="flex-shrink: 0; font-size: 15px; padding: 8px 16px; font-weight: 700;" data-slot="evidence-btn">💡 Evidence</button>
+                                <span style="font-weight: 700; font-size: 21.5px; line-height: 1.6; color: var(--text-dark);" data-slot="question-text"></span>
+                                <button class="syn-btn" style="flex-shrink: 0; font-size: 14px; padding: 6px 14px; font-weight: 700;" data-slot="evidence-btn">💡 Evidence</button>
                             </div>
 
-                            <div style="margin-top: 12px; display: flex; align-items: center; gap: 14px;" data-slot="input-area"></div>
+                            <div style="margin-top: 10px; display: flex; align-items: center; gap: 14px;" data-slot="input-area"></div>
 
-                            <div class="item-explanation" style="font-size: 24px; line-height: 1.75; margin-top: 12px; padding: 14px 22px; border-radius: 8px;" data-slot="explanation"></div>
+                            <div class="item-explanation" style="font-size: 19px; line-height: 1.6; margin-top: 8px; padding: 12px 18px; border-radius: 8px;" data-slot="explanation"></div>
                         </div>
                     </div>
 
-                    <div class="action-row" style="margin-top: auto; padding-top: 6px;">
+                    <div class="action-row" style="margin-top: auto; padding-top: 4px;">
                         <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answer</button>
                         <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="revealAnswers(this)">Show Evidence / Highlights</button>
@@ -300,26 +300,74 @@
     </section>
 </template>
 
-<!-- 9. VOCABULARY CARDS TEMPLATE -->
+<!-- 9. VOCABULARY HUB & LEXICON INSPECTOR TEMPLATE -->
 <template id="tmpl-vocab-cards">
     <section class="slide" data-skill="vocab">
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-vocab);"></div>
-                <div class="page-content" style="padding: 28px 48px 24px; display: flex; flex-direction: column;">
-                    <div class="slide-header">
+                <div class="page-content" style="padding: 26px 44px 20px; display: flex; flex-direction: column;">
+                    <div class="slide-header" style="margin-bottom: 4px;">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-vocab); font-size: 14px; padding: 4px 12px;" data-slot="badge">Academic Lexicon</span>
-                            <h2 class="slide-title" style="font-size: 32px;" data-slot="title"></h2>
+                            <h2 class="slide-title" style="font-size: 30px;" data-slot="title">Academic Lexicon &amp; Collocations Hub</h2>
                         </div>
-                        <div class="slide-number" style="font-size: 20px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                        <div class="slide-number" style="font-size: 18px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
                     </div>
 
-                    <p style="font-size: 20px; color: var(--text-muted); margin-bottom: 14px;" data-slot="subtitle">
-                        Click the 🔊 audio button on any card to hear the official Google Female UK pronunciation.
+                    <p class="slide-subtitle" style="font-size: 17px; color: var(--text-muted); margin-bottom: 10px;" data-slot="subtitle">
+                        Click on any term card to inspect definitions, phonetic transcriptions, and high-scoring IELTS collocations.
                     </p>
 
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; flex: 1; min-height: 0; overflow-y: auto;" data-slot="cards"></div>
+                    <div class="two-col" style="flex: 1; min-height: 0; gap: 20px; display: flex;">
+                        <!-- Left Col: Word Cards Grid -->
+                        <div class="vocab-hub-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; flex: 1.05; overflow-y: auto; align-content: start;" data-slot="cards"></div>
+                        
+                        <!-- Right Col: Live Term Inspector Pane -->
+                        <div class="vocab-inspector-pane" style="flex: 0.95; overflow-y: auto;" data-slot="inspector"></div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 8px;">
+                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+                        <button class="btn-action" onclick="window.vocabBank?.speak(document.querySelector('.slide.active .insp-word')?.textContent || '')">🔊 Pronounce Active</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<!-- 9b. VOCABULARY GRID TEMPLATE ALIAS -->
+<template id="tmpl-vocab-grid">
+    <section class="slide" data-skill="vocab">
+        <div class="slide-inner">
+            <div class="notebook">
+                <div class="skill-stripe" style="background: var(--col-vocab);"></div>
+                <div class="page-content" style="padding: 26px 44px 20px; display: flex; flex-direction: column;">
+                    <div class="slide-header" style="margin-bottom: 4px;">
+                        <div class="slide-title-group">
+                            <span class="skill-badge" style="background: var(--col-vocab); font-size: 14px; padding: 4px 12px;" data-slot="badge">Academic Lexicon</span>
+                            <h2 class="slide-title" style="font-size: 30px;" data-slot="title">Academic Lexicon &amp; Collocations Hub</h2>
+                        </div>
+                        <div class="slide-number" style="font-size: 18px; font-weight: 700;" data-slot="slide-number">00 / 00</div>
+                    </div>
+
+                    <p class="slide-subtitle" style="font-size: 17px; color: var(--text-muted); margin-bottom: 10px;" data-slot="subtitle">
+                        Click on any term card to inspect definitions, phonetic transcriptions, and high-scoring IELTS collocations.
+                    </p>
+
+                    <div class="two-col" style="flex: 1; min-height: 0; gap: 20px; display: flex;">
+                        <!-- Left Col: Word Cards Grid -->
+                        <div class="vocab-hub-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; flex: 1.05; overflow-y: auto; align-content: start;" data-slot="cards"></div>
+                        
+                        <!-- Right Col: Live Term Inspector Pane -->
+                        <div class="vocab-inspector-pane" style="flex: 0.95; overflow-y: auto;" data-slot="inspector"></div>
+                    </div>
+
+                    <div class="action-row" style="margin-top: 8px;">
+                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+                        <button class="btn-action" onclick="window.vocabBank?.speak(document.querySelector('.slide.active .insp-word')?.textContent || '')">🔊 Pronounce Active</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -893,6 +941,79 @@
                         html += data.summaryBox;
                     }
                     qPane.innerHTML = html;
+                }
+            }
+
+            // Vocabulary Hub / Cards Template Hydration
+            if (data.words && Array.isArray(data.words)) {
+                const vocabCardsContainer = section.querySelector('[data-slot="cards"], .vocab-hub-grid');
+                const inspectorContainer = section.querySelector('[data-slot="inspector"], .vocab-inspector-pane');
+
+                if (vocabCardsContainer) {
+                    vocabCardsContainer.innerHTML = data.words.map((w, idx) => `
+                        <div class="card vocab-term-card ${idx === 0 ? 'selected' : ''}" 
+                             data-word="${w.word}" 
+                             data-ipa="${w.ipa || ''}" 
+                             data-pos="${w.pos || ''}" 
+                             data-cefr="${w.cefr || 'B2'}"
+                             data-def="${(w.def || '').replace(/"/g, '&quot;')}" 
+                             data-colloc="${(w.colloc || '').replace(/"/g, '&quot;')}" 
+                             data-example="${(w.example || '').replace(/"/g, '&quot;')}"
+                             data-context="${(w.context || '').replace(/"/g, '&quot;')}"
+                             style="cursor: pointer; padding: 12px 16px; border-radius: 12px; border: 1.5px solid ${idx === 0 ? 'var(--col-vocab, #059669)' : '#cbd5e1'}; background: ${idx === 0 ? '#ecfdf5' : '#ffffff'}; transition: all 0.2s ease; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <strong style="font-size: 19px; color: var(--text-dark);">${w.word}</strong>
+                                    <span style="background: rgba(5, 150, 105, 0.12); color: var(--col-vocab, #059669); font-size: 12.5px; font-weight: 800; padding: 2px 6px; border-radius: 4px;">${w.pos || 'term'}</span>
+                                    ${w.cefr ? `<span style="background: #e0e7ff; color: #4338ca; font-size: 11.5px; font-weight: 800; padding: 2px 5px; border-radius: 4px;">${w.cefr}</span>` : ''}
+                                </div>
+                                <span style="font-family: var(--font-mono, monospace); font-size: 14.5px; color: var(--text-muted);">${w.ipa || ''}</span>
+                            </div>
+                            <button class="pronounce-btn" data-speak="${w.word}" style="background: transparent; border: none; font-size: 19px; cursor: pointer; padding: 4px; border-radius: 6px;" title="Listen Pronunciation">🔊</button>
+                        </div>
+                    `).join('');
+                }
+
+                if (inspectorContainer && data.words.length > 0) {
+                    const first = data.words[0];
+                    inspectorContainer.innerHTML = `
+                        <div class="card vocab-inspector-card" style="background: #ffffff; border: 2px solid var(--col-vocab, #059669); border-radius: 14px; padding: 20px 24px; box-shadow: 0 4px 16px rgba(5, 150, 105, 0.08); display: flex; flex-direction: column; gap: 12px; height: 100%; box-sizing: border-box;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 10px;">
+                                <div>
+                                    <h3 class="insp-word" style="font-size: 30px; font-weight: 800; color: var(--col-vocab, #059669); margin: 0;">${first.word}</h3>
+                                    <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                                        <span class="insp-ipa" style="font-family: var(--font-mono, monospace); font-size: 17px; color: var(--text-muted); font-weight: 600;">${first.ipa || ''}</span>
+                                        <span class="insp-pos" style="background: #d1fae5; color: #065f46; font-size: 13px; font-weight: 800; padding: 2px 7px; border-radius: 4px;">${first.pos || ''}</span>
+                                        <span class="insp-cefr" style="background: #e0e7ff; color: #3730a3; font-size: 12.5px; font-weight: 800; padding: 2px 7px; border-radius: 4px;">${first.cefr || 'B2'}</span>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 6px;">
+                                    <button class="btn-action pronounce-btn" data-speak="${first.word}" data-lang="en-GB" style="padding: 5px 9px; font-size: 13.5px; font-weight: 700;" title="Listen UK">🇬🇧 UK</button>
+                                    <button class="btn-action pronounce-btn" data-speak="${first.word}" data-lang="en-US" style="padding: 5px 9px; font-size: 13.5px; font-weight: 700;" title="Listen US">🇺🇸 US</button>
+                                    <button class="btn-action pronounce-btn" data-speak="${first.word}" data-lang="en-AU" style="padding: 5px 9px; font-size: 13.5px; font-weight: 700;" title="Listen AU">🇦🇺 AU</button>
+                                </div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 17.5px; line-height: 1.6; overflow-y: auto;">
+                                <div>
+                                    <strong style="color: #059669; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">📖 Definition:</strong>
+                                    <span class="insp-def" style="color: #1e293b;">${first.def || ''}</span>
+                                </div>
+                                <div style="background: #f8fafc; border-left: 4px solid var(--col-vocab, #059669); padding: 10px 14px; border-radius: 6px;">
+                                    <strong style="display: block; font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.05em; color: #059669; margin-bottom: 2px;">🔗 High-Scoring Collocations:</strong>
+                                    <span class="insp-colloc" style="font-weight: 700; color: #0f172a;">${first.colloc || ''}</span>
+                                </div>
+                                <div>
+                                    <strong style="color: #64748b; display: block; font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">🎯 IELTS Band 7.5+ Example:</strong>
+                                    <span class="insp-example" style="font-style: italic; color: #334155;">"${first.example || ''}"</span>
+                                </div>
+                                ${first.context ? `
+                                <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 8px 12px; border-radius: 6px; font-size: 15.5px;">
+                                    <strong style="color: #1d4ed8; font-size: 12.5px; text-transform: uppercase;">Passage Context:</strong>
+                                    <div class="insp-context" style="color: #1e3a8a; margin-top: 2px;">${first.context}</div>
+                                </div>` : ''}
+                            </div>
+                        </div>
+                    `;
                 }
             }
         }

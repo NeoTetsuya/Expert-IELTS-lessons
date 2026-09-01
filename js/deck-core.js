@@ -271,46 +271,15 @@ class DeckEngine {
      */
     autoFitSlide(slide) {
         if (!slide) return;
-        const notebook = slide.querySelector('.notebook, .title-notebook');
         const pageContent = slide.querySelector('.page-content, .title-notebook');
-        if (!notebook || !pageContent) return;
-
-        // Skip section divider and title slides which have fixed layouts
-        if (slide.dataset.skill === 'title' || slide.dataset.skill === 'section' || slide.querySelector('.section-slide')) {
-            return;
-        }
-
-        // Measure and optimize in animation frames
-        requestAnimationFrame(() => {
-            // ── Batch 1: Reset prior state (writes) ──────────────────────────────
-            slide.style.removeProperty('--font-scale');
-            slide.style.removeProperty('--line-height-auto');
-            slide.classList.remove('slide-spacious');
+        if (pageContent) {
             pageContent.style.removeProperty('transform');
             pageContent.style.removeProperty('transform-origin');
             pageContent.style.removeProperty('height');
-
-            // ── Batch 2: Read layout (single reflow) ─────────────────────────────
-            const availableHeight = notebook.clientHeight - 36;
-            const scrollH = pageContent.scrollHeight;
-
-            // ── Batch 3: Write computed values (no further reads) ─────────────────
-            if (scrollH > availableHeight + 8) {
-                // OVERFLOW: scale down gracefully to prevent clipping
-                const fitRatio = Math.max(0.68, (availableHeight - 12) / scrollH);
-                pageContent.style.transform = `scale(${fitRatio.toFixed(3)})`;
-                pageContent.style.transformOrigin = 'top center';
-                pageContent.style.height = `${(availableHeight / fitRatio).toFixed(1)}px`;
-            } else if (scrollH < availableHeight * 0.78) {
-                // UNDERFLOW: expand font + spacing to fill spare space
-                const heightRatio = availableHeight / Math.max(1, scrollH);
-                const autoFontScale = Math.min(1.28, Math.max(1.0, 1 + (heightRatio - 1) * 0.32));
-                const autoLineHeight = Math.min(2.0, Math.max(1.65, 1.65 + (heightRatio - 1) * 0.28));
-                slide.style.setProperty('--font-scale', (this.fontScale * autoFontScale).toFixed(2));
-                slide.style.setProperty('--line-height-auto', autoLineHeight.toFixed(2));
-                slide.classList.add('slide-spacious');
-            }
-        });
+        }
+        slide.style.removeProperty('--font-scale');
+        slide.style.removeProperty('--line-height-auto');
+        slide.classList.remove('slide-spacious');
     }
 
     nextSlide() {

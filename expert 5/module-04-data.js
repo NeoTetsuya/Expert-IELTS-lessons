@@ -318,8 +318,136 @@ window.module4Data = {
                 explanation: `<div class="syn-key-box" style="margin-top:0;"><span class="syn-tag green">Anchor Match:</span> <em>"medical schools teach their students very little"</em>.</div><div class="syn-key-box"><span class="syn-tag purple">Solution Key:</span> The situation improves if <strong>D (medical students learn more about the development of treatments)</strong>.</div>`
             }
         ]
+    },
+    vocabulary: {
+        title: "Module 4: Academic Lexicon &amp; Collocations Hub",
+        badge: "Vocabulary 4 • Academic Lexicon",
+        subtitle: "Click on any academic term to inspect pronunciation, definitions, and high-scoring IELTS collocations.",
+        words: [
+            {
+                word: "consume",
+                ipa: "/kənˈsjuːm/",
+                pos: "verb",
+                cefr: "B2",
+                def: "To eat, drink, or use up a resource or fuel.",
+                colloc: "consume calories • consume energy • consume resources",
+                example: "Fitness apps calculate the number of calories users consume throughout the day.",
+                context: "Passage 4a: '...and to work out how many calories they consume.'"
+            },
+            {
+                word: "motivated",
+                ipa: "/ˈməʊ.tɪ.veɪ.tɪd/",
+                pos: "adj.",
+                cefr: "B2",
+                def: "Very enthusiastic and determined to achieve a particular goal.",
+                colloc: "highly motivated • stay motivated • motivated by results",
+                example: "Many users report feeling more motivated to maintain an active routine with fitness trackers.",
+                context: "Passage 4a: '...fitness devices have motivated them to get off the sofa.'"
+            },
+            {
+                word: "consequently",
+                ipa: "/ˈkɒn.sɪ.kwənt.li/",
+                pos: "adv.",
+                cefr: "B2",
+                def: "As a result; therefore.",
+                colloc: "consequently reduce • consequently lead to • consequently agree",
+                example: "People relied entirely on gadgets; consequently, when devices broke, they stopped exercising.",
+                context: "Passage 4a: 'Consequently, sports scientists agree that people need to be aware...'"
+            },
+            {
+                word: "metabolise",
+                ipa: "/məˈtæb.əl.aɪz/",
+                pos: "verb",
+                cefr: "C1",
+                def: "To change food into energy and new biological tissue by chemical processes.",
+                colloc: "metabolise calories • metabolise sugar • metabolise nutrients",
+                example: "The human body metabolises simple carbohydrates much faster than complex proteins.",
+                context: "Passage 4a: '...because the body metabolises calories from sugar differently than those from fat.'"
+            },
+            {
+                word: "artificial",
+                ipa: "/ˌɑː.tɪˈfɪʃ.əl/",
+                pos: "adj.",
+                cefr: "B2",
+                def: "Created or produced by human beings rather than occurring naturally.",
+                colloc: "artificial targets • artificial ingredients • artificial light",
+                example: "Relying on artificial targets from apps can distract people from natural bodily signals.",
+                context: "Passage 4a: '...not for the sake of meeting the app's artificial targets.'"
+            },
+            {
+                word: "ecosystem",
+                ipa: "/ˈiː.kəʊˌsɪs.təm/",
+                pos: "noun",
+                cefr: "B2",
+                def: "A biological community of interacting organisms and their physical environment.",
+                colloc: "fragile ecosystem • rainforest ecosystem • marine ecosystem",
+                example: "Deforestation destroys delicate ecosystems and drives rare medicinal species to extinction.",
+                context: "Passage 4b: 'Destroying different ecosystems means that many potential cures will disappear.'"
+            },
+            {
+                word: "inevitable",
+                ipa: "/ɪnˈev.ɪ.tə.bəl/",
+                pos: "adj.",
+                cefr: "C1",
+                def: "Certain to happen; unavoidable.",
+                colloc: "inevitable result • inevitable consequence • virtually inevitable",
+                example: "The inevitable outcome of habitat loss is the permanent extinction of valuable flora and fauna.",
+                context: "Passage 4b: 'The inevitable result is that many species with important medicinal powers will become extinct.'"
+            },
+            {
+                word: "medicinal",
+                ipa: "/məˈdɪs.ɪ.nəl/",
+                pos: "adj.",
+                cefr: "B2",
+                def: "Having healing properties or used to treat illness.",
+                colloc: "medicinal properties • medicinal plants • medicinal power",
+                example: "Rainforest plants possess extraordinary medicinal qualities utilized in modern pharmaceuticals.",
+                context: "Passage 4b: '...many species with important medicinal powers will become extinct.'"
+            },
+            {
+                word: "invertebrate",
+                ipa: "/ɪnˈvɜː.tɪ.brət/",
+                pos: "noun",
+                cefr: "C1",
+                def: "An animal lacking a backbone, such as an arthropod, mollusc, or annelid.",
+                colloc: "marine invertebrates • terrestrial invertebrates • invertebrate species",
+                example: "Many crucial biomedical compounds originate from obscure invertebrates and fungi.",
+                context: "Passage 4b: '...plants, fungi and invertebrates.'"
+            },
+            {
+                word: "remedy",
+                ipa: "/ˈrem.ə.di/",
+                pos: "noun",
+                cefr: "B2",
+                def: "A medicine, treatment, or therapy for a disease, injury, or ailment.",
+                colloc: "natural remedy • herbal remedy • effective remedy",
+                example: "Traditional healers have long used natural herbal remedies to alleviate pain and fever.",
+                context: "Section 4b: 'Remedies from Nature.'"
+            },
+            {
+                word: "pharmaceutical",
+                ipa: "/ˌfɑː.məˈsjuː.tɪ.kəl/",
+                pos: "adj.",
+                cefr: "B2",
+                def: "Relating to medicinal drugs, or their preparation, use, or sale.",
+                colloc: "pharmaceutical industry • pharmaceutical companies • pharmaceutical research",
+                example: "Major pharmaceutical laboratories continue to screen wild flora for breakthrough antibiotics.",
+                context: "Writing 4b: 'Medical development and modern pharmaceutical discoveries.'"
+            },
+            {
+                word: "therapeutic",
+                ipa: "/ˌθer.əˈpjuː.tɪk/",
+                pos: "adj.",
+                cefr: "C1",
+                def: "Relating to the healing of disease or having a good effect on body and mind.",
+                colloc: "therapeutic effect • therapeutic benefits • therapeutic properties",
+                example: "Spending time immersed in nature provides well-documented therapeutic benefits.",
+                context: "Module 4 Mastery: 'Well-being, therapy and natural remedies.'"
+            }
+        ]
     }
 };
 
 window.moduleData = window.module4Data;
+
 

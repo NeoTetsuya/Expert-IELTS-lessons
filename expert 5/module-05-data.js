@@ -273,7 +273,135 @@ window.module5Data = {
                 explanation: `<div class="syn-key-box" style="margin-top:0;"><span class="syn-tag green">Anchor Match:</span> <em>"different ways of viewing the same thing"</em> ↔ <em>"businessman (beautiful) vs traveller (visual pollution)"</em>.</div><div class="syn-key-box"><span class="syn-tag purple">Location:</span> <strong>Paragraph D</strong>.</div>`
             }
         ]
+    },
+    vocabulary: {
+        title: "Module 5: Academic Lexicon &amp; Collocations Hub",
+        badge: "Vocabulary 5 • Academic Lexicon",
+        subtitle: "Click on any academic term to inspect pronunciation, definitions, and high-scoring IELTS collocations.",
+        words: [
+            {
+                word: "extraordinary",
+                ipa: "/ɪkˈstrɔː.dɪn.ər.i/",
+                pos: "adj.",
+                cefr: "C1",
+                def: "Very unusual, remarkable, special, or far beyond what is ordinary.",
+                colloc: "extraordinary cyclist • extraordinary achievement • extraordinary journey",
+                example: "Mark Beaumont is an extraordinary cyclist who has completed remarkable round-the-world journeys.",
+                context: "Para A: 'An extraordinary cyclist, Mark Beaumont, has completed a number of amazing long-distance trips.'"
+            },
+            {
+                word: "landscape",
+                ipa: "/ˈlænd.skeɪp/",
+                pos: "noun",
+                cefr: "B2",
+                def: "All the visible features of an area of countryside or land.",
+                colloc: "varied landscapes • rugged landscape • natural landscape",
+                example: "On all his cycling journeys, Mark was deeply fascinated by the changing landscapes.",
+                context: "Para C: 'On all his journeys Mark has been interested by the landscapes he has seen.'"
+            },
+            {
+                word: "remote",
+                ipa: "/rɪˈməʊt/",
+                pos: "adj.",
+                cefr: "B2",
+                def: "Situated far from the main centres of population; distant.",
+                colloc: "remote area • remote wilderness • remote location",
+                example: "Cycling through remote regions requires thorough planning and resilience.",
+                context: "Para D: 'To be totally alone in that remote environment was one of his favourite times.'"
+            },
+            {
+                word: "environment",
+                ipa: "/ɪnˈvaɪ.rən.mənt/",
+                pos: "noun",
+                cefr: "B2",
+                def: "The surroundings or conditions in which a person, animal, or plant lives or operates.",
+                colloc: "hostile environment • natural environment • fragile environment",
+                example: "Extreme desert environments test both physical endurance and mental fortitude.",
+                context: "Para D: '...to be totally alone in that environment.'"
+            },
+            {
+                word: "impressed",
+                ipa: "/ɪmˈprest/",
+                pos: "adj.",
+                cefr: "B2",
+                def: "Feeling admiration and respect for someone or something.",
+                colloc: "deeply impressed • impressed by hospitality • immensely impressed",
+                example: "Mark was most impressed by the boundless kindness of the local people he encountered.",
+                context: "Para F: 'The kindness of the people Mark met was what impressed him most.'"
+            },
+            {
+                word: "pollution",
+                ipa: "/pəˈluː.ʃən/",
+                pos: "noun",
+                cefr: "B1",
+                def: "The presence in or introduction into the environment of a substance or thing that has harmful or poisonous effects.",
+                colloc: "visual pollution • air pollution • industrial pollution",
+                example: "Visual pollution from excessive billboards can spoil natural beauty and distract drivers.",
+                context: "Passage 5b: 'There are two types of visual pollution in the modern world.'"
+            },
+            {
+                word: "deliberate",
+                ipa: "/dɪˈlɪb.ər.ət/",
+                pos: "adj.",
+                cefr: "B2",
+                def: "Done consciously and intentionally; carefully thought out.",
+                colloc: "deliberate attempt • deliberate strategy • deliberate decision",
+                example: "Camouflaging cell towers as trees is a deliberate effort to minimize visual disturbance.",
+                context: "Passage 5b: 'An example of a deliberate way of hiding something unattractive.'"
+            },
+            {
+                word: "unattractive",
+                ipa: "/ˌʌn.əˈtræk.tɪv/",
+                pos: "adj.",
+                cefr: "B2",
+                def: "Not pleasing or appealing to look at; unsightly.",
+                colloc: "unattractive structure • visually unattractive • aesthetically unattractive",
+                example: "Industrial structures are often considered unattractive when placed near residential hills.",
+                context: "Passage 5b: '...hiding something unattractive.'"
+            },
+            {
+                word: "visibility",
+                ipa: "/ˌvɪz.əˈbɪl.ə.ti/",
+                pos: "noun",
+                cefr: "B2",
+                def: "The state of being able to see or be seen, or the distance one can see as determined by light and weather.",
+                colloc: "poor visibility • reduced visibility • zero visibility",
+                example: "Heavy smog and forest fire haze severely reduce visibility across major transport routes.",
+                context: "Passage 5b: 'One is when visibility is limited by haze...'"
+            },
+            {
+                word: "distract",
+                ipa: "/dɪˈstrækt/",
+                pos: "verb",
+                cefr: "B2",
+                def: "To prevent someone from giving full attention to something.",
+                colloc: "distract drivers • easily distracted • distract attention",
+                example: "Flashing digital advertisements can distract drivers and increase the risk of road accidents.",
+                context: "Passage 5b: '...stopped drivers from focusing on the road.'"
+            },
+            {
+                word: "perspective",
+                ipa: "/pəˈspek.tɪv/",
+                pos: "noun",
+                cefr: "C1",
+                def: "A particular attitude towards or way of regarding something; a point of view.",
+                colloc: "different perspectives • broader perspective • cultural perspective",
+                example: "What is perceived as economic progress from one perspective may look like pollution from another.",
+                context: "Passage 5b: 'To the businessman, a billboard in a good location may be beautiful...'"
+            },
+            {
+                word: "conservation",
+                ipa: "/ˌkɒn.səˈveɪ.ʃən/",
+                pos: "noun",
+                cefr: "B2",
+                def: "The protection of plants and animals, natural areas, and interesting and important structures and buildings.",
+                colloc: "wildlife conservation • environmental conservation • conservation effort",
+                example: "Tourism revenue can be channeled directly into wildlife conservation programs.",
+                context: "Module 5 Review: 'Environmental conservation and sustainable travel.'"
+            }
+        ]
     }
 };
 
 window.moduleData = window.module5Data;
+

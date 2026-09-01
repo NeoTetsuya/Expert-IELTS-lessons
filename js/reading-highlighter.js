@@ -140,40 +140,65 @@ class ReadingHighlighter {
      */
     focusEvidence(qKey, evId, broadcast = true) {
         if (!evId && qKey) {
-            evId = `ev-${qKey}`;
+            evId = String(qKey).startsWith('ev-') ? String(qKey) : `ev-${qKey}`;
         }
+        if (!qKey && evId) {
+            qKey = String(evId).replace(/^ev-/, '');
+        }
+
+        const qStr = qKey ? String(qKey) : '';
+        const evStr = evId ? String(evId) : '';
+        const bareQ = qStr.replace(/^[a-zA-Z_\-]+/, ''); // e.g. 'q1' -> '1', 'wt-3a-1' -> '1'
+
+        // Candidate search keys for flexible authoring
+        const qCandidates = Array.from(new Set([qStr, bareQ, `q${bareQ}`, evStr.replace(/^ev-/, '')].filter(Boolean)));
+        const evCandidates = Array.from(new Set([evStr, `ev-${qStr}`, `ev-${bareQ}`, `ev-q${bareQ}`].filter(Boolean)));
 
         const allEvTargets = [];
-        if (evId) {
-            document.querySelectorAll(`[id="${evId}"], mark.evidence[data-ev="${evId}"], mark.evidence#${evId}`).forEach(el => {
+        evCandidates.forEach(cand => {
+            document.querySelectorAll(`[id="${cand}"], mark.evidence[data-ev="${cand}"], mark.evidence#${cand}`).forEach(el => {
                 if (!allEvTargets.includes(el)) allEvTargets.push(el);
             });
-        }
-        if (qKey) {
-            document.querySelectorAll(`[id="ev-${qKey}"], mark.evidence[data-q="${qKey}"], mark.evidence#ev-${qKey}`).forEach(el => {
+        });
+        qCandidates.forEach(cand => {
+            document.querySelectorAll(`[id="ev-${cand}"], mark.evidence[data-q="${cand}"], mark.evidence#ev-${cand}`).forEach(el => {
                 if (!allEvTargets.includes(el)) allEvTargets.push(el);
             });
-        }
+        });
 
-        let synSpans = qKey ? Array.from(document.querySelectorAll(`[data-q="${qKey}"], .syn-pair-1[data-q="${qKey}"], .syn-pair-2[data-q="${qKey}"], .syn-pair-3[data-q="${qKey}"]`)) : [];
+        // Synonym spans in both passage and questions
+        let synSpans = [];
+        qCandidates.forEach(cand => {
+            document.querySelectorAll(`[data-q="${cand}"], .syn-pair-1[data-q="${cand}"], .syn-pair-2[data-q="${cand}"], .syn-pair-3[data-q="${cand}"]`).forEach(el => {
+                if (!synSpans.includes(el)) synSpans.push(el);
+            });
+        });
+
         const currentSlide = document.querySelector('.slide.active') || document.body;
-        if (synSpans.length === 0 && currentSlide) {
+        if (synSpans.length === 0 && currentSlide && allEvTargets.length === 0) {
             synSpans = Array.from(currentSlide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3'));
         }
-        const isCurrentlyActive = (allEvTargets.length > 0 && allEvTargets.some(t => t.classList.contains('highlighted')) && this.activeEvidenceId === (evId || qKey)) ||
-                                  (synSpans.length > 0 && synSpans.every(s => s.classList.contains('active-syn')) && (this.activeEvidenceId === (evId || qKey) || !evId));
+
+        const isCurrentlyActive = (allEvTargets.length > 0 && allEvTargets.some(t => t.classList.contains('highlighted')) && this.activeEvidenceId === (evStr || qStr)) ||
+                                  (synSpans.length > 0 && synSpans.every(s => s.classList.contains('active-syn')) && (this.activeEvidenceId === (evStr || qStr) || !evStr));
+
+        const targetContainers = [currentSlide];
+        const scaler = document.getElementById('cpCurrentSlideScaler');
+        if (scaler && !targetContainers.includes(scaler)) targetContainers.push(scaler);
 
         if (!isCurrentlyActive) {
-            // First clear prior active highlights on the slide
-            currentSlide.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
-            currentSlide.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
-            currentSlide.querySelectorAll('.reading-pane').forEach(p => p.querySelectorAll('.spotlight-target').forEach(pt => pt.classList.remove('spotlight-target')));
+            // First clear prior active highlights on the slide and presenter scaler
+            targetContainers.forEach(container => {
+                container.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
+                container.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.remove('active-syn'));
+                container.querySelectorAll('.reading-pane').forEach(p => p.querySelectorAll('.spotlight-target').forEach(pt => pt.classList.remove('spotlight-target')));
+            });
 
             allEvTargets.forEach(target => {
                 target.classList.add('highlighted', 'glow-pulse');
                 target.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
 
-                const parentPara = target.closest('p, div.para-block');
+                const parentPara = target.closest('p, div.para-block, tr, li');
                 if (parentPara) {
                     parentPara.classList.add('spotlight-target');
                 }
@@ -189,7 +214,7 @@ class ReadingHighlighter {
                 s.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
             });
 
-            this.activeEvidenceId = evId || qKey;
+            this.activeEvidenceId = evStr || qStr;
 
             // Smooth scroll into view inside reading pane
             allEvTargets.forEach(evTarget => {
@@ -217,7 +242,7 @@ class ReadingHighlighter {
             allEvTargets.forEach(target => {
                 target.classList.remove('highlighted', 'glow-pulse');
                 target.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
-                const parentPara = target.closest('p, div.para-block');
+                const parentPara = target.closest('p, div.para-block, tr, li');
                 if (parentPara) parentPara.classList.remove('spotlight-target');
             });
             synSpans.forEach(s => {
@@ -225,31 +250,33 @@ class ReadingHighlighter {
                 s.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
             });
 
-            currentSlide.querySelectorAll('.reading-pane').forEach(p => p.classList.remove('spotlight-mode'));
+            targetContainers.forEach(container => {
+                container.querySelectorAll('.reading-pane').forEach(p => p.classList.remove('spotlight-mode'));
+            });
             this.activeEvidenceId = null;
         }
 
-        // Toggle corresponding item-explanation in question cards and flowchart cards
-        if (qKey || evId) {
-            const selector = [
-                qKey ? `.q-card[data-q="${qKey}"]` : null,
-                qKey ? `.flowchart-step-card[data-q="${qKey}"]` : null,
-                evId ? `.q-card[data-ev="${evId}"]` : null,
-                evId ? `.flowchart-step-card[data-ev="${evId}"]` : null
-            ].filter(Boolean).join(', ');
+        // Toggle corresponding item-explanation in question cards, option cards, and flowchart cards
+        const cardSelectors = [];
+        qCandidates.forEach(cand => {
+            cardSelectors.push(`.q-card[data-q="${cand}"]`, `.flowchart-step-card[data-q="${cand}"]`, `.opt-card[data-q="${cand}"]`);
+        });
+        evCandidates.forEach(cand => {
+            cardSelectors.push(`.q-card[data-ev="${cand}"]`, `.flowchart-step-card[data-ev="${cand}"]`, `.opt-card[data-ev="${cand}"]`);
+        });
 
-            if (selector) {
-                document.querySelectorAll(selector).forEach(card => {
-                    const exp = card.querySelector('.item-explanation');
-                    if (exp) exp.classList.toggle('show', !isCurrentlyActive);
-                });
-            }
+        const fullSelector = Array.from(new Set(cardSelectors)).join(', ');
+        if (fullSelector) {
+            document.querySelectorAll(fullSelector).forEach(card => {
+                const exp = card.querySelector('.item-explanation');
+                if (exp) exp.classList.toggle('show', !isCurrentlyActive);
+            });
         }
 
         if (broadcast && window.presenterSyncEngine) {
             window.presenterSyncEngine.emit('EVIDENCE_FOCUS', {
-                qKey,
-                evId,
+                qKey: qStr,
+                evId: evStr,
                 active: !isCurrentlyActive
             });
         }
@@ -281,16 +308,12 @@ class ReadingHighlighter {
         document.addEventListener('click', (e) => {
             const btn = e.target.closest('.syn-btn');
             if (btn) {
-                const card = btn.closest('.q-card, .flowchart-step-card');
+                const card = btn.closest('.q-card, .flowchart-step-card, .opt-card');
                 const dataQ = btn.dataset.q || card?.dataset?.q || (btn.dataset.ev ? btn.dataset.ev.replace(/^ev-/, '') : null);
                 const dataEv = btn.dataset.ev || (dataQ ? `ev-${dataQ}` : null);
                 if (dataQ || dataEv) {
                     e.preventDefault();
                     this.focusEvidence(dataQ, dataEv, true);
-                    if (card) {
-                        const exp = card.querySelector('.item-explanation');
-                        if (exp) exp.classList.toggle('show');
-                    }
                 }
             }
         });
@@ -306,7 +329,7 @@ class ReadingHighlighter {
         document.addEventListener('keydown', (e) => {
             // Ignore when typing inside input, textarea, or select elements
             const activeTag = document.activeElement ? document.activeElement.tagName : '';
-            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(activeTag) || document.activeElement.isContentEditable) {
+            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(activeTag) || document.activeElement?.isContentEditable) {
                 return;
             }
 
@@ -465,8 +488,16 @@ class ReadingHighlighter {
     document.head.appendChild(style);
 })();
 
-// Global auto-instantiation
-let readingHighlighter;
-window.addEventListener('DOMContentLoaded', () => {
-    readingHighlighter = new ReadingHighlighter();
-});
+// Global auto-instantiation and window export
+window.ReadingHighlighter = ReadingHighlighter;
+if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', () => {
+        if (!window.readingHighlighter) {
+            window.readingHighlighter = new ReadingHighlighter();
+        }
+    });
+} else {
+    if (!window.readingHighlighter) {
+        window.readingHighlighter = new ReadingHighlighter();
+    }
+}

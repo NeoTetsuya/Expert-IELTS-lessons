@@ -63,6 +63,7 @@ if (!cssOnly) {
         'sentence-scramble.js',
         'presenter-sync.js',
         'presenter-drawing.js',
+        'presenter-view-templates.js',
         'presenter-view.js',
         'lesson-protection.js'
     ];

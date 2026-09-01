@@ -26,7 +26,15 @@ class VocabBank {
         this.bindWordChips();
         this.bindBlankInputs();
         this.bindAudioPronunciation();
+        this.bindVocabInspector();
         this.injectAccentSelectorStyles();
+
+        if (window.presenterSyncEngine) {
+            window.presenterSyncEngine.on('VOCAB_INSPECT', (data) => {
+                const activeSlide = document.querySelector('.slide.active');
+                this.selectVocabTerm(data, activeSlide, false);
+            });
+        }
     }
 
     /**
@@ -167,6 +175,72 @@ class VocabBank {
         }
     }
 
+    bindVocabInspector() {
+        document.addEventListener('click', (e) => {
+            const card = e.target.closest('.vocab-term-card');
+            if (!card) return;
+            if (e.target.closest('.pronounce-btn')) return; // let speak handle it
+
+            const slide = card.closest('.slide') || document.querySelector('.slide.active');
+            if (!slide) return;
+
+            const word = card.dataset.word;
+            const ipa = card.dataset.ipa || '';
+            const pos = card.dataset.pos || '';
+            const cefr = card.dataset.cefr || 'B2';
+            const def = card.dataset.def || '';
+            const colloc = card.dataset.colloc || '';
+            const example = card.dataset.example || '';
+            const context = card.dataset.context || '';
+
+            this.selectVocabTerm({ word, ipa, pos, cefr, def, colloc, example, context }, slide, true);
+        });
+    }
+
+    selectVocabTerm(data, slide, broadcast = true) {
+        if (!data || !data.word) return;
+        const targetSlides = [slide, document.getElementById('cpCurrentSlideScaler')].filter(Boolean);
+
+        targetSlides.forEach(s => {
+            s.querySelectorAll('.vocab-term-card').forEach(c => {
+                const isMatch = (c.dataset.word || '').toLowerCase() === data.word.toLowerCase();
+                c.classList.toggle('selected', isMatch);
+                c.style.borderColor = isMatch ? 'var(--col-vocab, #059669)' : '#cbd5e1';
+                c.style.background = isMatch ? '#ecfdf5' : '#ffffff';
+            });
+
+            const inspWord = s.querySelector('.insp-word');
+            const inspIpa = s.querySelector('.insp-ipa');
+            const inspPos = s.querySelector('.insp-pos');
+            const inspCefr = s.querySelector('.insp-cefr');
+            const inspDef = s.querySelector('.insp-def');
+            const inspColloc = s.querySelector('.insp-colloc');
+            const inspExample = s.querySelector('.insp-example');
+            const inspContext = s.querySelector('.insp-context');
+
+            if (inspWord) inspWord.textContent = data.word;
+            if (inspIpa) inspIpa.textContent = data.ipa || '';
+            if (inspPos) inspPos.textContent = data.pos || '';
+            if (inspCefr) inspCefr.textContent = data.cefr || 'B2';
+            if (inspDef) inspDef.textContent = data.def || '';
+            if (inspColloc) inspColloc.textContent = data.colloc || '';
+            if (inspExample) inspExample.textContent = `"${data.example || ''}"`;
+            if (inspContext) {
+                inspContext.innerHTML = data.context || '';
+                const ctxBox = inspContext.closest('div');
+                if (ctxBox) ctxBox.style.display = data.context ? 'block' : 'none';
+            }
+
+            s.querySelectorAll('.vocab-inspector-card .pronounce-btn').forEach(btn => {
+                btn.dataset.speak = data.word;
+            });
+        });
+
+        if (broadcast && window.presenterSyncEngine) {
+            window.presenterSyncEngine.emit('VOCAB_INSPECT', data);
+        }
+    }
+
     injectAccentSelectorStyles() {
         if (document.getElementById('vocabBankStyles')) return;
         const style = document.createElement('style');
@@ -200,6 +274,14 @@ class VocabBank {
                 background: #f1f5f9;
                 cursor: default;
                 transform: none;
+            }
+            .vocab-term-card:hover {
+                border-color: var(--col-vocab, #059669) !important;
+                background: #f0fdf4 !important;
+                transform: translateY(-1px);
+            }
+            .vocab-term-card:active {
+                transform: scale(0.98);
             }
         `;
         document.head.appendChild(style);
