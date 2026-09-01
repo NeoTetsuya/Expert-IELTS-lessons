@@ -6394,7 +6394,7 @@ class ReadingGrounder {
                         if (['script', 'style', 'button', 'select', 'textarea', 'input', 'kbd'].includes(tag)) {
                             return NodeFilter.FILTER_REJECT;
                         }
-                        if (parent.closest('.vocab-word, .vocab-term, .vocab-popover, #presentationToolsHUD')) {
+                        if (parent.closest('.vocab-word, .vocab-term, .vocab-popover, #presentationToolsHUD, .syn-pair-1, .syn-pair-2, .syn-pair-3, .q-card, [data-slot="question-card"], .action-row')) {
                             return NodeFilter.FILTER_REJECT;
                         }
                         return NodeFilter.FILTER_ACCEPT;
