@@ -6,12 +6,10 @@ desktop.ini
 .vscode/
 .idea/
 
-# Markdown Source Files (Ignore all .md except documentation guides)
+# Markdown Source Files (Ignore all .md except README.md)
 *.md
 !README.md
 !readme.md
-!presentation_creation_guide.md
-!reading_passages_and_questions_guide.md
 md files/
 md_files/
 
