@@ -46,16 +46,22 @@ HTML presentations/
 ├── reading explanations - walkthrough/ # Standalone deep-dive IELTS reading question walkthrough masterclasses
 │   ├── expert 5/
 │   │   ├── module-4a-reading-question-walkthrough.html
-│   │   ├── module-4b-reading-question-walkthrough.html
-│   │   ├── module-5a-reading-question-walkthrough.html
-│   │   ├── module-5b-reading-question-walkthrough.html
-│   │   ├── module-6a-reading-question-walkthrough.html
-│   │   └── module-6b-reading-question-walkthrough.html
+│   │   └── ...
+│   └── expert 6/
+│       ├── module-1a-reading-question-walkthrough.html
+│       └── ...
+├── grammar exercises/             # Standalone interactive Grammar & Language Development practice pages
+│   └── expert 6/
+│       ├── module_1_language_development.html
+│       ├── module_2_language_development.html
+│       └── module_3_language_development.html
 ├── expert 5/
 │   ├── module-04.html
 │   └── ...
 ├── expert 6/
+│   ├── module-01.html
 │   ├── module-02.html
+│   ├── module-03.html
 │   └── ...
 └── index.html                         # Master Course Hub & Launch Dashboard (course decks only)
 ```
@@ -552,20 +558,46 @@ When building HTML presentations from course markdown documents (`md files/`):
 
 ---
 
-### J. Strict Markdown Scope & Curriculum Boundary
+### J. Standalone Grammar & Language Development Exercises Integration
+- For all Grammar Masterclass (`tmpl-grammar-masterclass`), Gap-Fill Practice (`tmpl-gap-fill-passage`), Exercise Grid (`tmpl-exercise-grid`), or Grammar Summary slides, link the corresponding standalone **Grammar & Language Development Practice Page**:
+  ```html
+  <!-- Declarative Slide-Card Syntax -->
+  <slide-card template="grammar-masterclass" skill="grammar" 
+              title="Grammar 1a: Present Simple vs. Present Continuous (Ex 1b)"
+              grammar-url="../grammar%20exercises/expert%206/module_1_language_development.html" 
+              grammar-title="Module 1: Language Development - Present Tenses">
+  </slide-card>
+  ```
+- Alternatively, declare it in the module dataset (`module-XX-data.js`):
+  ```javascript
+  grammar1a: {
+      grammarUrl: "../grammar%20exercises/expert%206/module_1_language_development.html",
+      grammarTitle: "Module 1: Language Development - Present Tenses",
+      ...
+  }
+  ```
+- **Automatic Button Generation**: `TemplateEngine` automatically appends a dedicated purple-accented **`📝 Grammar Exercises`** button to the slide's `.action-row`. If the template has no action row, one is automatically created and attached.
+- **Pedagogical Benefits**:
+  - **Embedded Modal Viewer**: Click opens the complete interactive practice application over the slide via `GrammarReferenceEngine` with dynamic badge (`📝 Grammar Practice`).
+  - **Instant Expansion**: Includes Fullscreen toggle (`⛶`), Open in New Tab (`↗`), and quick dismiss with <kbd>Esc</kbd>.
+  - **Hub Cleanliness**: Standalone grammar exercise pages reside in `grammar exercises/` and are strictly **excluded from `index.html`** (keeping the master hub focused on course presentations).
+
+---
+
+### K. Strict Markdown Scope & Curriculum Boundary
 - **Zero Extraneous Material**: Keep ONLY content appearing in the source markdown file (`md files/e6/m{X} content.md`).
 - **No Unrequested Speaking**: If the markdown file does not have a speaking section, do NOT generate speaking slides.
 - **No Phantom Modules**: Never include vocabulary or grammar topics not specified in the master markdown document.
 
 ---
 
-### K. Unicode Typography Standard (No LaTeX Math Syntax)
+### L. Unicode Typography Standard (No LaTeX Math Syntax)
 - In slide texts and data annotations, **never write LaTeX math symbols** like `$\rightarrow$` or `$\times$`.
 - Always use clean Unicode glyphs: `➔` or `→`, `×`, `÷`, `±`, `%`, `°`.
 
 ---
 
-### L. Mandatory Module Review & Mastery Checklist Slide
+### M. Mandatory Module Review & Mastery Checklist Slide
 - Every single course module **must conclude with a dedicated Review Checklist slide**:
   ```html
   <slide-card template="summary-checklist" skill="review" title="Module XX Mastery &amp; Exam Checklist" subtitle="Review core test strategies and linguistic competencies mastered across Module XX.">
@@ -584,7 +616,7 @@ When building HTML presentations from course markdown documents (`md files/`):
 
 ---
 
-### M. Tag Balancing & Verification Protocol
+### N. Tag Balancing & Verification Protocol
 - Every `<slide-card>` MUST have a matching `</slide-card>` and MUST NOT be nested.
 - Always execute the verification command before finalizing:
   ```bash
@@ -594,7 +626,7 @@ When building HTML presentations from course markdown documents (`md files/`):
 
 ---
 
-### N. Standard Template Slot Directory
+### O. Standard Template Slot Directory
 
 | Template ID | Primary Slots | Fallback Aliases | Description |
 | :--- | :--- | :--- | :--- |
@@ -876,7 +908,9 @@ To ensure optimal pedagogic clarity, zero UI clipping, and consistency across al
 #### 3. Grammar Masterclass Template Standard (`template="grammar-masterclass"`):
 - Use `template="grammar-masterclass"` (never `grammar-rule`):
 ```html
-<slide-card template="grammar-masterclass" skill="grammar" title="Grammar 7a Masterclass: The Zero Conditional" subtitle="Master real conditions, general truths, habitual actions and clause punctuation.">
+<slide-card template="grammar-masterclass" skill="grammar" title="Grammar 7a Masterclass: The Zero Conditional" subtitle="Master real conditions, general truths, habitual actions and clause punctuation."
+            grammar-url="../grammar%20exercises/expert%206/module_1_language_development.html"
+            grammar-title="Module 1: Language Development - Present Tenses">
     <div slot="rules">
         <div class="rule-card">
             <div style="font-size:20px; font-weight:800; color:var(--col-grammar); margin-bottom:6px;">1. Structure &amp; General Truths</div>

@@ -265,6 +265,19 @@ reading4a: {
 - **Embedded Modal Viewer**: Handled by `ReadingWalkthroughEngine` with Fullscreen (`⛶`), Open in New Tab (`↗`), and <kbd>Esc</kbd> keyboard dismiss.
 - **Hub Isolation**: Standalone walkthroughs reside in `reading explanations - walkthrough/` and must never be added to `index.html`.
 
+### Rule 12: Standalone Grammar & Language Development Exercises Integration
+Always link standalone grammar exercises to grammar masterclasses and practice slides:
+```html
+<slide-card template="grammar-masterclass" skill="grammar"
+            title="Grammar 1a: Present Simple vs. Present Continuous (Ex 1b)"
+            grammar-url="../grammar%20exercises/expert%206/module_1_language_development.html"
+            grammar-title="Module 1: Language Development - Present Tenses">
+</slide-card>
+```
+- **Automatic Action Row Button**: `TemplateEngine` automatically injects a `📝 Grammar Exercises` button with course grammar purple branding (`linear-gradient(135deg, #6d28d9, #7c3aed)`) into `.action-row`.
+- **Embedded Modal Viewer**: Handled by `GrammarReferenceEngine` with dynamic badge (`📝 Grammar Practice`), Fullscreen (`⛶`), Open in New Tab (`↗`), and <kbd>Esc</kbd> keyboard dismiss.
+- **Hub Isolation**: Standalone grammar exercise pages reside in `grammar exercises/` and must never be added to `index.html`.
+
 ---
 
 ## 5. Reusable `<slide-card>` Samples
@@ -434,7 +447,9 @@ reading4a: {
 ### Sample F: Grammar Masterclass
 ```html
 <slide-card template="grammar-masterclass" skill="grammar"
-    title="Relative Clauses: Defining vs. Non-Defining">
+    title="Relative Clauses: Defining vs. Non-Defining"
+    grammar-url="../grammar%20exercises/expert%206/module_2_language_development.html"
+    grammar-title="Module 2: Language Development - Relative Clauses">
     <div slot="rules">
         <div class="card" style="border-top: 4px solid var(--col-grammar); padding: 18px;">
             <h4 style="font-size: 18px; color: var(--col-grammar); margin-bottom: 8px;">
