@@ -120,6 +120,8 @@ window.module2Data = {
 
     // Reading 2a Passage 1 Split-View & Dedicated Walkthroughs (Ex 6a & 6b, Ex 7a & 7b)
     reading2a_passage1: {
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%206/module-2a-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 2a: Should You Throw Out Your Bucket List? — Deep Question Walkthrough",
         passage: `
             <h3>TRYING TO SHARE OUR 'EPIC' MOMENTS MAY LEAVE US FEELING LEFT OUT</h3>
             <p><span class="para-tag">Para A</span> We love to reminisce and tell others about our extraordinary experiences – that time we climbed Mount Kilimanjaro, got to taste that rare food or ran into a celebrity on the street – but new research suggests this may not be such a wise idea. In fact, the findings, published in the latest edition of a psychology journal, suggest that sharing these extraordinary experiences are not as beneficial as we might think and can actually come at a social cost.</p>
@@ -206,6 +208,8 @@ window.module2Data = {
         ]
     },
     reading2a_part2: {
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%206/module-2a-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 2a: Should You Throw Out Your Bucket List? — Deep Question Walkthrough",
         passage: `
             <h3>SCIENCE: SHOULD YOU THROW OUT YOUR BUCKET LIST?</h3>
             <p><span class="para-tag">Para 1</span> There are two main reasons why you might not agree with Cooney, Gilbert and Wilson’s research conclusions, and <mark class="evidence" id="ev-2a-q1" data-q="2a-q1"><span class="syn-pair-1" data-q="2a-q1">these do not include the fact that sixty-eight people is not a very high number to include in a study</span></mark>. Firstly, <mark class="evidence" id="ev-2a-q2" data-q="2a-q2"><span class="syn-pair-1" data-q="2a-q2">the video of a street magician is not the same as an incredible life experience</span></mark>. The research uses cost-benefit analysis, i.e. the benefit of watching the video minus the cost of not being included socially. But it is unlikely that a street performer, even an amazing one, produces results similar to the feeling of an extraordinary experience. So, when the cost of not being included is taken away from the benefit of watching the video, of course the result will be more negative.</p>
@@ -293,6 +297,8 @@ window.module2Data = {
 
     // Reading 2b: Clothes and Identity: We Are What We Wear
     reading2b: {
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%206/module-2b-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 2b: Clothes and Identity — Deep Question Walkthrough",
         passage: `
             <h3>CLOTHES AND IDENTITY: WE ARE WHAT WE WEAR</h3>
             <p><span class="para-tag">Para A</span> <strong>We all communicate through fashion.</strong> Our clothes, accessories, hairstyles and make-up are all things we use to promote ourselves to others. Fashion is about meanings and symbols that give us immediate visual communication. <mark class="evidence" id="ev-2b-7" data-q="2b-7"><span class="syn-pair-1" data-q="2b-7">But I would suggest it is also about decision-making, performance and fitting into society</span></mark>.</p>

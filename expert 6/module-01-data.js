@@ -65,6 +65,8 @@ window.module1Data = {
 
     // Reading 1a: That's Not a Ghost in Your Picture
     reading1a: {
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%206/module-1a-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 1a: Ghost Photography — Deep Question Walkthrough",
         passage: `
             <h3>THAT’S NOT A GHOST IN YOUR PICTURE, IT’S JUST THE WAY YOUR DIGITAL CAMERA WORKS.</h3>
             <p><span class="para-tag">Para A</span> <strong>There has been a clear relationship between technological development over the years and a fascination with ‘ghost’ photography.</strong> Images of unexplained circles of light, ghostly mists and human-shaped images fill social media pages on the internet. The explanation is simple: few people realise how digital cameras work. The fact that an image only ‘appeared’ in the photo, but not real life, is not a sign of its ghostly origins. In fact, it is a perfectly normal part of digital photography. Scientists call them ‘photographic artefacts’, because they show things that only exist because it is a photograph. Put simply, contrary to popular belief, <mark class="evidence" id="ev-1a-a" data-q="1a-a"><span class="syn-pair-1" data-q="1a-a">things in photos look different from real life</span></mark>.</p>
@@ -176,6 +178,8 @@ window.module1Data = {
 
     // Reading 1b: Why reading online may be slowing your brain down
     reading1b: {
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%206/module-1b-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 1b: Reading Online & Brain Cognition — Deep Question Walkthrough",
         passage: `
             <h3>WHY READING ONLINE MAY BE SLOWING YOUR BRAIN DOWN</h3>
             <p><span class="para-tag">Para A</span> <strong>If the person reading this article were reading online, I would need to keep things brief. A lot of you would have left already.</strong> <mark class="evidence" id="ev-1b-7" data-q="1b-7"><span class="syn-pair-1" data-q="1b-7">For every 150 ‘readers’ who open an article on the internet, one in three of them will leave within seconds</span></mark>. Of the 100 who stay, only 95 will be able to concentrate and look beyond the photograph and headline at the top. Even fewer will get to even the middle of the article. Put simply, only a very small number of people actually read articles on the web.</p>

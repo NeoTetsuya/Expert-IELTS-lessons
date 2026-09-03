@@ -117,6 +117,8 @@ window.module3Data = {
 
     // Reading 3a: A Chinese Approach to Learning (Full Exact Passage from module-3-content-v2.md)
     reading3a: {
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%206/module-3a-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 3a: Education Systems — Deep Question Walkthrough",
         wordBank: ["admitted", "behaved", "control group", "denied", "educated", "experiences", "imagination", "success", "instructors", "time"],
         passage: `
             <h3>A CHINESE APPROACH TO LEARNING</h3>
@@ -204,6 +206,8 @@ window.module3Data = {
 
     // Reading 3a Part 2: Exercise 4 (Summary Completion with a Box - Gaps 1 to 5)
     reading3aEx4: {
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%206/module-3a-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 3a: Education Systems — Deep Question Walkthrough",
         passage: `
             <h3>A CHINESE APPROACH TO LEARNING (PARAS E–G)</h3>
             <p><span class="para-tag">Para E</span> <strong>All of this suggests that an <span class="vocab-word" data-word="obsession" data-def="An idea or thought that continually preoccupies or intrudes on a person's mind." data-ipa="/əbˈseʃ.ən/" data-pos="noun">obsession</span> with testing does not exist in the UK, which would be untrue.</strong> The purpose of the experiment was to see if British students would benefit from the Chinese approach. However, <mark class="evidence" id="ev-3a-ex4-1" data-q="3a-ex4-1"><span class="syn-pair-1" data-q="3a-ex4-1">the message that the test result is the only thing that matters</span></mark> may not be getting through to students. One young person commented that <mark class="evidence" id="ev-3a-ex4-2" data-q="3a-ex4-2">‘Their teaching methods did get results but we didn’t always feel we were learning much. <span class="syn-pair-1" data-q="3a-ex4-2">They get results because we are in school for so long</span>.’</mark></p>
@@ -331,6 +335,8 @@ window.module3Data = {
 
     // Reading 3b: The Dark Side of Emotional Intelligence (Full Exact Passage from module-3-content-v2.md)
     reading3b: {
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%206/module-3b-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 3b: Emotional Intelligence — Deep Question Walkthrough",
         passage: `
             <h3>THE DARK SIDE OF EMOTIONAL INTELLIGENCE</h3>
             <p><span class="para-tag">Para A</span> <strong>Since the 1995 publication of Daniel Goleman’s bestseller, <em>Emotional Intelligence</em>, the idea has been used by government leaders and educators as the solution to a wide range of problems.</strong> <mark class="evidence" id="ev-3b-1" data-q="3b-1"><span class="syn-pair-1" data-q="3b-1">If we can encourage emotional intelligence among school children, leaders and doctors, we’ll have more caring educational institutions, workplaces and better healthcare</span></mark>. <mark class="evidence" id="ev-3b-2" data-q="3b-2">As a result, emotional intelligence is now taught widely in secondary schools, business schools and medical schools.</mark></p>

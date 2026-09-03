@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Reading Masterclass | Reading Online & Brain Cognition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        violetTheme: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                            950: '#2e1065'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(124, 58, 237, 0.25); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(124, 58, 237, 0.5); }
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff, #faf5ff);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #7c3aed, #a855f7, #c084fc);
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+        .keyword-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #ede9fe;
+            color: #5b21b6;
+            border: 1px solid #ddd6fe;
+        }
+        .passage-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        .answer-badge {
+            animation: pulseSubtle 3s infinite;
+        }
+        @keyframes pulseSubtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-violet-100 selection:text-violet-900">
+
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-violetTheme-700 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-violet-900/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-violetTheme-700 bg-violetTheme-50 px-2 py-0.5 rounded-full border border-violetTheme-200">IELTS Reading Analysis</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích chuyên sâu 10 câu hỏi (Headings & Sentence Completion)</span>
+                        </div>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">Why reading online may be slowing your brain down</h1>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-violet-100 text-violet-800 px-2.5 py-1 rounded-lg">Câu 1/10</span>
+                </div>
+            </div>
+
+            <!-- Global View Switcher -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+                <button id="tab-presentation" onclick="switchView('presentation')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-violetTheme-700 text-white shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                    </svg>
+                    <span>Slide Từng Câu</span>
+                </button>
+                <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    <span>Xem Tất Cả (List)</span>
+                </button>
+                <button id="tab-headings" onclick="switchView('headings')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                    <span>Kho Tiêu Đề (i–x)</span>
+                </button>
+                <button id="tab-synonyms" onclick="switchView('synonyms')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    <span>Ma Trận Paraphrase</span>
+                </button>
+                <button id="tab-vocab" onclick="switchView('vocab')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span>Từ Vựng Trọng Tâm</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
+        <section id="view-presentation" class="space-y-6 block">
+            
+            <!-- Quick Question Selector Chips -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Matching Headings (Q1–Q6)</span>
+                    </div>
+                    <div class="text-xs text-slate-400 flex items-center gap-2">
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2" id="question-nav-chips">
+                    <!-- Dynamic question buttons inserted by JS -->
+                </div>
+            </div>
+
+            <!-- Slide Main Card -->
+            <div id="slide-card-container" class="relative">
+                <!-- Dynamically rendered slide content -->
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span>Câu Trước</span>
+                </button>
+
+                <div class="flex items-center gap-3">
+                    <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 10</span>
+                </div>
+
+                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violetTheme-700 hover:bg-violetTheme-800 text-white font-semibold shadow-md shadow-violet-900/10 active:scale-95 transition-all">
+                    <span>Câu Kế Tiếp</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- VIEW 2: ALL QUESTIONS CONTINUOUS LIST -->
+        <section id="view-all" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 10 Câu Hỏi</h2>
+                    <p class="text-sm text-slate-500">Xem đầy đủ bằng chứng bài đọc, đáp án chuẩn, ma trận paraphrase và phân tích logic tiếng Việt.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="filterAllQuestions('all')" class="filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-violetTheme-700 text-white">Tất Cả (1–10)</button>
+                    <button onclick="filterAllQuestions('headings')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Headings (1–6)</button>
+                    <button onclick="filterAllQuestions('sentence')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Sentence Completion (7–10)</button>
+                </div>
+            </div>
+
+            <div id="all-questions-container" class="space-y-6">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- VIEW 3: HEADINGS REPOSITORY (i–x) -->
+        <section id="view-headings" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-violet-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-violetTheme-700">List of Headings & Distractor Analysis</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Tiêu Đề Tham Khảo (Headings i – x)</h2>
+                        <p class="text-sm text-slate-600 mt-1">Phân tích chi tiết 10 tiêu đề trong đề thi: 6 tiêu đề ĐÚNG (Paragraphs B–G), 1 ví dụ mẫu (Paragraph A), và 3 tiêu đề BẪY NHIỄU (Distractors) kèm lý do lựa chọn hoặc loại trừ.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6" id="headings-grid-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: SYNONYMS & PARAPHRASE MATRIX -->
+        <section id="view-synonyms" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-violet-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-violetTheme-700">Paraphrase & Semantic Alignment</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Ma Trận Từ Đồng Nghĩa & Diễn Đạt Tương Đương</h2>
+                        <p class="text-sm text-slate-600 mt-1">Đối chiếu chi tiết giữa câu từ trong tiêu đề / câu hỏi với văn bản thực tế trong bài đọc.</p>
+                    </div>
+                    <div class="bg-violet-50 border border-violet-200 rounded-xl px-4 py-2.5 text-center">
+                        <span class="text-xs text-violetTheme-700 font-semibold block uppercase">Tổng hợp</span>
+                        <span class="text-xl font-extrabold text-violetTheme-900">10 Cặp Paraphrase Cốt Lõi</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600">
+                                <th class="py-3 px-4 w-16 text-center">Câu</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Đề Thi / Tiêu Đề</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Bài Đọc (Passage)</th>
+                                <th class="py-3 px-4 w-32 text-center">Đáp Án</th>
+                                <th class="py-3 px-4">Ý Nghĩa & Phân Tích Logic Tiếng Việt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="synonyms-table-body" class="divide-y divide-slate-100 text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: VOCABULARY HUB -->
+        <section id="view-vocab" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-violet-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-violetTheme-700">Cognitive Neuroscience & Media Lexicon</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Từ Vựng Trọng Tâm & Phát Âm Chuẩn</h2>
+                        <p class="text-sm text-slate-600 mt-1">Từ vựng học thuật chủ đề tâm lý nhận thức, thần kinh học, biến đổi thói quen đọc và truyền thông kỹ thuật số kèm phiên âm IPA và audio phát âm.</p>
+                    </div>
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="vocab-search-input" onkeyup="searchVocab(this.value)" placeholder="Tìm kiếm từ vựng hoặc nghĩa..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-violet-600 focus:ring-1 focus:ring-violet-600 bg-slate-50/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="vocab-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+    const headingsPool = [
+        {
+            key: 'i',
+            text: 'Sharing half-understood ideas',
+            isUsed: true,
+            usedFor: 'Question 2 (Paragraph C)',
+            reason: 'Đáp án chuẩn xác cho Paragraph C: Mọi người bình luận và chia sẻ liên kết các bài viết khi chưa đọc xong, làm lan truyền những ý niệm hiểu nửa vời và thông tin sai lệch (misinformation).'
+        },
+        {
+            key: 'ii',
+            text: 'An old situation that’s now more intense',
+            isUsed: true,
+            usedFor: 'Question 4 (Paragraph E)',
+            reason: 'Đáp án chuẩn xác cho Paragraph E: Mọi người từ xưa đến nay vẫn luôn bỏ dở sách hoặc phim ("nothing new / people have always started novels and not finished them"), nhưng ngày nay lượng thông tin tràn ngập dữ dội hơn bao giờ hết ("different from anything that came before").'
+        },
+        {
+            key: 'iii',
+            text: 'Too much knowledge can be bad',
+            isUsed: false,
+            usedFor: null,
+            reason: 'BẪY NHIỄU: Bài đọc nói về việc có quá nhiều lựa chọn thông tin (too much choice / information), chứ không hề nói "có quá nhiều tri thức/hiểu biết là điều tồi tệ".'
+        },
+        {
+            key: 'iv',
+            text: 'Statistics showing how people read',
+            isUsed: true,
+            usedFor: 'Paragraph A (Example in test)',
+            reason: 'Ví dụ mẫu trong đề bài cho Đoạn A: Cung cấp số liệu thống kê cụ thể (150 người mở bài thì 1/3 rời đi sau vài giây, 100 người ở lại thì chỉ 95 người nhìn quá phần tiêu đề).'
+        },
+        {
+            key: 'v',
+            text: 'Pleasure in unhealthy content',
+            isUsed: true,
+            usedFor: 'Question 5 (Paragraph F)',
+            reason: 'Đáp án chuẩn xác cho Paragraph F: Não bộ tìm kiếm sự khoái cảm trong những nội dung độc hại/gây sốc giống như cơ thể thèm đường và mỡ (gossip, sự bẽ mặt của người khác), được chuyên gia gọi là "béo phì tâm lý" (psychological obesity).'
+        },
+        {
+            key: 'vi',
+            text: 'Longer-lasting memories from books',
+            isUsed: true,
+            usedFor: 'Question 1 (Paragraph B)',
+            reason: 'Đáp án chuẩn xác cho Paragraph B: Nghiên cứu của A.V. Kak chứng minh người đọc sách/bản in trên giấy ghi nhớ thông tin tốt hơn và lâu quên hơn so với người đọc trên mạng ("less likely to forget / remember more information from paper").'
+        },
+        {
+            key: 'vii',
+            text: 'Increased capacity for critical thought',
+            isUsed: false,
+            usedFor: null,
+            reason: 'BẪY NHIỄU (Ngược nghĩa): Đọc trên mạng làm suy giảm khả năng tư duy phản biện (losing deeper levels of thinking / deleting bits associated with careful thought), chứ không hề làm gia tăng (increased).'
+        },
+        {
+            key: 'viii',
+            text: 'Living in a world of your own',
+            isUsed: true,
+            usedFor: 'Question 6 (Paragraph G)',
+            reason: 'Đáp án chuẩn xác cho Paragraph G: Các trang tin online chỉ đề xuất nội dung cá nhân hóa theo sở thích cũ ("The Daily Me"), khiến con người sống khép kín trong thế giới của riêng mình mà không biết gì về thế giới bên ngoài.'
+        },
+        {
+            key: 'ix',
+            text: 'Only reading the reviews',
+            isUsed: false,
+            usedFor: null,
+            reason: 'BẪY NHIỄU: Đoạn C nói về việc người đọc để lại bình luận (comments) hoặc đề xuất (recommendation) mà không đọc hết bài, chứ không nói họ chỉ đọc các bài đánh giá (reviews).'
+        },
+        {
+            key: 'x',
+            text: 'A biological response to habits',
+            isUsed: true,
+            usedFor: 'Question 3 (Paragraph D)',
+            reason: 'Đáp án chuẩn xác cho Paragraph D: Cơ chế sinh học của não bộ biến đổi và tái cấu trúc (re-wiring) theo thói quen: khi con người lười suy nghĩ lâu, não sẽ tự động cắt bỏ những kết nối phục vụ tư duy sâu sắc.'
+        }
+    ];
+
+    const questionsData = [
+        {
+            id: 1,
+            qNum: "Question 1",
+            group: "headings",
+            targetParagraph: "Paragraph B",
+            type: "Matching Headings",
+            wordLimit: "Chọn số La Mã (i–x)",
+            contextHeader: "Khả năng ghi nhớ thông tin sâu sắc và lâu dài từ sách in trên giấy",
+            correctKey: "vi",
+            correctText: "Longer-lasting memories from books",
+            passageSnippet: "<mark class='bg-violet-100 text-violet-950 font-bold px-1 rounded'>A. V. Kak found in one study that people were able to remember more information from an article that they read on paper, than a similar group who read the same article online... getting the physical text out of the library means you’re less likely to forget</mark>.",
+            paragraphRef: "Đoạn B (Paragraph B)",
+            paraphrases: [
+                { qPart: "Longer-lasting memories", pPart: "remember more information / less likely to forget", meaning: "ghi nhớ được nhiều thông tin hơn / ít có nguy cơ bị quên hơn (ký ức lưu giữ lâu hơn)" },
+                { qPart: "from books", pPart: "read on paper / physical text out of the library", meaning: "đọc trên giấy / văn bản vật lý truyền thống mượn từ thư viện" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Đoạn B phân tích việc mất khả năng tập trung sâu khi đọc online và so sánh hiệu quả ghi nhớ giữa việc đọc trên giấy và đọc trên mạng.",
+                stepByStep: [
+                    "<strong>Định vị nghiên cứu trọng tâm:</strong> Nghiên cứu của A. V. Kak chỉ ra: <em>'people were able to <strong>remember more information</strong> from an article that they read on paper, than a similar group who read the same article online'</em>.",
+                    "<strong>Câu kết luận khẳng định:</strong> <em>'getting the physical text out of the library means you’re <strong>less likely to forget</strong>'</em> (lấy tài liệu vật lý từ thư viện giúp bạn khó bị lãng quên hơn).",
+                    "<strong>Khớp nghĩa Heading:</strong> Khó quên và nhớ nhiều hơn chính là <em>'Longer-lasting memories'</em>, và tài liệu giấy/thư viện đại diện cho <em>'books'</em>.",
+                    "<strong>Kết luận:</strong> Tiêu đề thích hợp nhất cho Paragraph B là <strong>vi</strong>."
+                ],
+                traps: "Tránh nhầm với Heading vii vì đoạn B cảnh báo chúng ta đang mất dần khả năng tư duy sâu sắc ('deeper levels of thinking may be something we are losing'), hoàn toàn trái ngược với 'increased capacity'."
+            },
+            vocabHighlights: ["dispiriting", "misinformation", "re-wiring"]
+        },
+        {
+            id: 2,
+            qNum: "Question 2",
+            group: "headings",
+            targetParagraph: "Paragraph C",
+            type: "Matching Headings",
+            wordLimit: "Chọn số La Mã (i–x)",
+            contextHeader: "Hiện tượng chia sẻ liên kết và bình luận khi chưa đọc hết bài viết",
+            correctKey: "i",
+            correctText: "Sharing half-understood ideas",
+            passageSnippet: "<mark class='bg-violet-100 text-violet-950 font-bold px-1 rounded'>Even more dispiriting is the way these poor understandings are being passed on to others. Evidence suggests that people are creating links to articles they have not fully read, and even adding comments before getting to the end... Commenting without reading everything only creates more and more misinformation</mark>.",
+            paragraphRef: "Đoạn C (Paragraph C)",
+            paraphrases: [
+                { qPart: "Sharing", pPart: "passed on to others / creating links to articles / adding comments", meaning: "lan truyền sang người khác / tạo liên kết chia sẻ / để lại bình luận trên mạng" },
+                { qPart: "half-understood ideas", pPart: "poor understandings / have not fully read / without reading everything", meaning: "những hiểu biết nghèo nàn, chưa trọn vẹn do không đọc đến cuối bài" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Đoạn C bàn luận về thực trạng đáng buồn khi người dùng mạng chia sẻ và bình luận những nội dung mà bản thân họ thậm chí còn chưa đọc xong.",
+                stepByStep: [
+                    "<strong>Định vị câu chủ đề:</strong> Đoạn mở đầu bằng: <em>'these poor understandings are being <strong>passed on to others</strong>'</em> (những hiểu biết thiếu sót này đang được truyền tiếp cho người khác).",
+                    "<strong>Minh chứng hành vi:</strong> Mọi người bấm link chia sẻ và để lại comment trước khi đọc đến cuối bài (<em>'have not fully read, and even adding comments before getting to the end'</em>).",
+                    "<strong>Khớp nghĩa Heading:</strong> Hành vi truyền bá (<em>'passed on'</em> = <em>'Sharing'</em>) những hiểu biết chắp vá, chưa đọc hết (<em>'poor understandings / not fully read'</em> = <em>'half-understood ideas'</em>).",
+                    "<strong>Kết luận:</strong> Tiêu đề chính xác cho Paragraph C là <strong>i</strong>."
+                ],
+                traps: "Heading ix ('Only reading the reviews') là cái bẫy vì đoạn C có nhắc đến từ 'recommendation' và 'comments', nhưng không hề nói người đọc chỉ xem các bài review của người khác."
+            },
+            vocabHighlights: ["dispiriting", "misinformation", "fascinating"]
+        },
+        {
+            id: 3,
+            qNum: "Question 3",
+            group: "headings",
+            targetParagraph: "Paragraph D",
+            type: "Matching Headings",
+            wordLimit: "Chọn số La Mã (i–x)",
+            contextHeader: "Phản ứng tái cấu trúc sinh học của mạng lưới nơ-ron não bộ theo thói quen lướt web",
+            correctKey: "x",
+            correctText: "A biological response to habits",
+            passageSnippet: "<mark class='bg-violet-100 text-violet-950 font-bold px-1 rounded'>In fact, the brain is constantly changing and re-organizing itself, losing the connections that it does not need. As people spend less time thinking for longer periods of time, their brains react by re-wiring, deleting the bits associated with careful thought</mark>, making it much harder in the future to think hard about issues.",
+            paragraphRef: "Đoạn D (Paragraph D)",
+            paraphrases: [
+                { qPart: "A biological response", pPart: "the brain is constantly changing and re-organizing itself / brains react by re-wiring", meaning: "phản ứng mang tính sinh học thần kinh: não bộ liên tục biến đổi, tự sắp xếp lại và đấu nối lại nơ-ron" },
+                { qPart: "to habits", pPart: "As people spend less time thinking for longer periods of time", meaning: "đối với thói quen lười suy nghĩ lâu, thiếu tập trung kéo dài của con người" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Đoạn D giải thích cơ chế dẻo dai của não bộ (neuroplasticity) theo góc nhìn của nhà khoa học Michael Merzenich: não thay đổi cấu trúc dựa trên cách chúng ta sử dụng nó.",
+                stepByStep: [
+                    "<strong>Khẳng định sự thay đổi sinh học:</strong> Não bộ không cố định mà liên tục thay đổi và tự tổ chức lại (<em>'constantly changing and re-organizing itself'</em>).",
+                    "<strong>Phản ứng với thói quen:</strong> Khi con người hình thành thói quen ít suy nghĩ sâu (<em>'spend less time thinking'</em>), não phản ứng bằng cách đấu nối lại (<em>'react by re-wiring'</em>) và xóa bỏ các liên kết tư duy cẩn trọng.",
+                    "<strong>Khớp nghĩa Heading:</strong> <em>'A biological response'</em> = <em>'brains react by re-wiring'</em>; <em>'to habits'</em> = <em>'as people spend less time thinking...'</em>.",
+                    "<strong>Kết luận:</strong> Tiêu đề thích hợp nhất cho Paragraph D là <strong>x</strong>."
+                ],
+                traps: "Không chọn Heading vii ('Increased capacity') vì đoạn D nêu rõ việc này làm não xóa bỏ khả năng suy nghĩ cẩn thận ('deleting the bits associated with careful thought', making it harder to think hard)."
+            },
+            vocabHighlights: ["re-wiring", "psychological obesity", "respectable"]
+        },
+        {
+            id: 4,
+            qNum: "Question 4",
+            group: "headings",
+            targetParagraph: "Paragraph E",
+            type: "Matching Headings",
+            wordLimit: "Chọn số La Mã (i–x)",
+            contextHeader: "Hiện tượng bỏ dở từ xưa nay trở nên trầm trọng hơn do lượng thông tin bùng nổ",
+            correctKey: "ii",
+            correctText: "An old situation that’s now more intense",
+            passageSnippet: "<mark class='bg-violet-100 text-violet-950 font-bold px-1 rounded'>Many have argued that this is nothing new. People have always started novels and not finished them. Even films... are sometimes unable to keep our attention to the end. However, Alvin Toffler argued that the amount of free information that is thrown at us every day is different from anything that came before</mark>. We now have so much choice that many people refuse to waste their time...",
+            paragraphRef: "Đoạn E (Paragraph E)",
+            paraphrases: [
+                { qPart: "An old situation", pPart: "this is nothing new / People have always started novels and not finished them", meaning: "tình trạng đã có từ xưa, không có gì mới: từ trước tới nay người ta vẫn hay đọc dở cuốn tiểu thuyết" },
+                { qPart: "now more intense", pPart: "the amount of free information thrown at us every day is different from anything that came before / so much choice", meaning: "hiện nay trở nên dữ dội, dồn dập hơn: lượng thông tin miễn phí đổ ập vào mỗi ngày chưa từng có trong lịch sử" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Đoạn E đưa ra góc nhìn đối chiếu lịch sử: Việc mất tập trung bỏ dở giữa chừng không phải chuyện mới (old situation), nhưng khối lượng thông tin hiện nay khiến vấn đề gay gắt hơn bội phần (now more intense).",
+                stepByStep: [
+                    "<strong>Yếu tố 'chuyện xưa không mới':</strong> Tác giả mở đầu: <em>'this is nothing new. People have always started novels and not finished them'</em> (đây chẳng phải điều mới, người ta từ xưa vẫn luôn bỏ dở tiểu thuyết).",
+                    "<strong>Yếu tố 'ngày nay khốc liệt hơn':</strong> Tác giả dùng liên từ chuyển ý: <em>'However... the amount of free information that is thrown at us every day is <strong>different from anything that came before</strong>'</em>.",
+                    "<strong>Khớp nghĩa Heading:</strong> <em>'An old situation'</em> tương ứng với việc bỏ dở từ xưa; <em>'now more intense'</em> tương ứng với sự bùng nổ thông tin chưa từng có tiền lệ.",
+                    "<strong>Kết luận:</strong> Tiêu đề chính xác cho Paragraph E là <strong>ii</strong>."
+                ],
+                traps: "Heading iii ('Too much knowledge can be bad') là cái bẫy thường gặp. Đoạn này nói về 'so much choice' và 'amount of free information', không nói về việc có nhiều tri thức (knowledge) là có hại."
+            },
+            vocabHighlights: ["fascinating", "re-wiring", "dispiriting"]
+        },
+        {
+            id: 5,
+            qNum: "Question 5",
+            group: "headings",
+            targetParagraph: "Paragraph F",
+            type: "Matching Headings",
+            wordLimit: "Chọn số La Mã (i–x)",
+            contextHeader: "Xu hướng khoái cảm và sự thèm muốn những nội dung giật gân, độc hại",
+            correctKey: "v",
+            correctText: "Pleasure in unhealthy content",
+            passageSnippet: "<mark class='bg-violet-100 text-violet-950 font-bold px-1 rounded'>Unfortunately, just as our bodies are programmed to want to eat fats and sugars, things which we know are not good for us, our brains prefer to read things that are shocking, such as gossiping, describing the embarrassment of others or just looking at attractive people... Some experts have referred to this as ‘psychological obesity’</mark>.",
+            paragraphRef: "Đoạn F (Paragraph F)",
+            paraphrases: [
+                { qPart: "Pleasure / want to read", pPart: "brains prefer to read / want to eat fats and sugars", meaning: "sự ưa thích, thèm muốn, tìm kiếm cảm giác thỏa mãn" },
+                { qPart: "unhealthy content", pPart: "not good for us / shocking, gossiping, embarrassment of others / psychological obesity", meaning: "nội dung không lành mạnh: tin giật gân, ngồi lê đôi mách, sự bẽ mặt của người khác, béo phì tâm lý" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Đoạn F so sánh sự nghiện đọc tin giật gân, vô bổ trên mạng với việc cơ thể thèm ăn đồ ngọt và dầu mỡ độc hại, dẫn tới hiện tượng 'béo phì tâm lý'.",
+                stepByStep: [
+                    "<strong>Hình ảnh ẩn dụ thức ăn độc hại:</strong> Não bộ thích đọc tin tức tương tự như cơ thể thèm ăn đường và chất béo: <em>'things which we know are not good for us'</em> (những thứ ta biết rõ là không tốt cho mình).",
+                    "<strong>Nội dung độc hại cụ thể:</strong> Tin giật gân, đàm tiếu, nỗi xấu hổ của người khác: <em>'prefer to read things that are shocking, such as gossiping, describing the embarrassment of others'</em>.",
+                    "<strong>Khớp nghĩa Heading:</strong> <em>'Pleasure'</em> = <em>'brains prefer / want'</em>; <em>'unhealthy content'</em> = <em>'not good for us / gossiping / psychological obesity'</em>.",
+                    "<strong>Kết luận:</strong> Tiêu đề hoàn hảo cho Paragraph F là <strong>v</strong>."
+                ],
+                traps: "Thí sinh không được nhầm 'unhealthy content' với sức khỏe thể chất thông thường; bài dùng ẩn dụ 'fats and sugars' để làm nổi bật 'psychological obesity'."
+            },
+            vocabHighlights: ["psychological obesity", "respectable", "misinformation"]
+        },
+        {
+            id: 6,
+            qNum: "Question 6",
+            group: "headings",
+            targetParagraph: "Paragraph G",
+            type: "Matching Headings",
+            wordLimit: "Chọn số La Mã (i–x)",
+            contextHeader: "Sự giam mình trong thế giới riêng do thuật toán đề xuất nội dung cá nhân hóa",
+            correctKey: "viii",
+            correctText: "Living in a world of your own",
+            passageSnippet: "<mark class='bg-violet-100 text-violet-950 font-bold px-1 rounded'>Online news sites only recommend articles on things we have shown an interest in before. In other words, what Nicholas Negroponte called the ‘The Daily Me’, bringing personalized content, also means that you miss being introduced to new concepts. With modern online news providers, you could exist quite happily never knowing what is happening outside of your personal interests</mark>.",
+            paragraphRef: "Đoạn G (Paragraph G)",
+            paraphrases: [
+                { qPart: "Living in a world of your own", pPart: "‘The Daily Me’ / personalized content / exist quite happily never knowing what is happening outside of your personal interests", meaning: "sống khép kín trong ốc đảo cá nhân của riêng mình, không bao giờ biết đến thế giới rộng lớn bên ngoài sở thích hạn hẹp" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Đoạn G chỉ trích các trang tin tức kỹ thuật số chỉ gợi ý các bài viết đúng sở thích cũ ('The Daily Me'), khiến người đọc bị cô lập trong bong bóng thông tin cá nhân.",
+                stepByStep: [
+                    "<strong>Đối chiếu báo chí truyền thống:</strong> Báo uy tín đặt tin tức chiến tranh, đói nghèo lên trang nhất để người đọc mở rộng tầm mắt.",
+                    "<strong>Cơ chế báo mạng:</strong> Chỉ gợi ý những gì ta từng quan tâm: <em>'Online news sites only recommend articles on things we have shown an interest in before... The Daily Me'</em>.",
+                    "<strong>Hệ quả:</strong> Con người có thể sống hạnh phúc mà không hề hay biết chuyện gì đang xảy ra bên ngoài thế giới sở thích cá nhân: <em>'exist quite happily never knowing what is happening outside of your personal interests'</em>.",
+                    "<strong>Khớp nghĩa Heading:</strong> Trạng thái tồn tại khép kín không biết bên ngoài chính là <em>'Living in a world of your own'</em>.",
+                    "<strong>Kết luận:</strong> Tiêu đề thích hợp nhất cho Paragraph G là <strong>viii</strong>."
+                ],
+                traps: "Heading iii ('Too much knowledge') không phù hợp vì đoạn G nhấn mạnh việc con người 'thiếu kiến thức mới' (miss being introduced to new concepts), chứ không phải có quá nhiều kiến thức."
+            },
+            vocabHighlights: ["respectable", "fascinating", "re-wiring"]
+        },
+        {
+            id: 7,
+            qNum: "Question 7",
+            group: "sentence",
+            targetParagraph: "Paragraph A",
+            type: "Sentence Completion",
+            wordLimit: "ONE WORD ONLY",
+            contextHeader: "Thời gian dừng lại cực ngắn của khoảng một phần ba độc giả mạng",
+            statementPrefix: "Around a third of internet surfers stay on a page for",
+            statementSuffix: ".",
+            completedSentence: "Around a third of internet surfers stay on a page for <span class='text-violetTheme-700 font-bold underline'>seconds</span>.",
+            correctAnswer: "seconds",
+            passageSnippet: "For every 150 ‘readers’ who open an article on the internet, <mark class='bg-violet-100 text-violet-950 font-bold px-1 rounded'>one in three of them will leave within seconds</mark>. Of the 100 who stay, only 95 will be able to concentrate...",
+            paragraphRef: "Đoạn A (Paragraph A)",
+            paraphrases: [
+                { qPart: "Around a third", pPart: "one in three of them", meaning: "khoảng một phần ba (1/3 số người)" },
+                { qPart: "stay on a page for [ 7 ]", pPart: "leave within seconds", meaning: "rời đi trong vòng vài giây (tức chỉ ở lại trang web trong vài giây ngắn ngủi)" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần tìm một danh từ chỉ thời gian sau giới từ 'for' để diễn tả quãng thời gian mà khoảng 1/3 người lướt web dừng lại trên một trang.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'Around a third' (khoảng một phần ba), 'internet surfers', 'stay on a page for'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn A):</strong> Tác giả viết: <em>'For every 150 ‘readers’ who open an article on the internet, <strong>one in three</strong> [= around a third] of them will <strong>leave within seconds</strong>'</em>.",
+                    "<strong>Suy luận logic:</strong> Nếu 1/3 số người mở bài rời đi trong vòng vài giây ('leave within seconds'), điều đó đồng nghĩa với việc họ chỉ ở lại trang web trong khoảng thời gian là vài giây ('stay on a page for <strong>seconds</strong>').",
+                    "<strong>Kết luận:</strong> Từ cần điền là danh từ số nhiều <strong>seconds</strong> (đáp ứng đúng ONE WORD ONLY)."
+                ],
+                traps: "Thí sinh phải giữ nguyên dạng số nhiều 'seconds' như trong văn bản gốc. Không điền 'within seconds' vì đề thi đã có sẵn giới từ 'for' và giới hạn là ONE WORD ONLY."
+            },
+            vocabHighlights: ["dispiriting", "misinformation"]
+        },
+        {
+            id: 8,
+            qNum: "Question 8",
+            group: "sentence",
+            targetParagraph: "Paragraph C",
+            type: "Sentence Completion",
+            wordLimit: "ONE WORD ONLY",
+            contextHeader: "Số lượng người viết phản hồi vượt trội so với số người đọc hết bài",
+            statementPrefix: "According to Josh Schartz, the number of people who leave",
+            statementSuffix: "is greater than the number who finish reading.",
+            completedSentence: "According to Josh Schartz, the number of people who leave <span class='text-violetTheme-700 font-bold underline'>comments</span> is greater than the number who finish reading.",
+            correctAnswer: "comments",
+            passageSnippet: "Josh Schartz, a data expert, studies the reading styles of people online... However, his research suggests that <mark class='bg-violet-100 text-violet-950 font-bold px-1 rounded'>the overall number of comments and the number of people who scrolled down to the end of the article did not match. This suggests that there is a very loose relationship between reading to the end and commenting</mark>. Commenting without reading everything only creates more and more misinformation.",
+            paragraphRef: "Đoạn C (Paragraph C)",
+            paraphrases: [
+                { qPart: "leave [ 8 ]", pPart: "adding comments / number of comments / commenting", meaning: "để lại bình luận / viết nhận xét bên dưới bài viết" },
+                { qPart: "finish reading", pPart: "scrolled down to the end of the article / reading to the end", meaning: "cuộn xuống cuối trang / đọc trọn vẹn đến hết bài" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần tìm một danh từ đi sau cụm 'leave...' (để lại cái gì) mà số lượng người thực hiện hành động này lại đông hơn số người đọc hết bài.",
+                stepByStep: [
+                    "<strong>Định vị tên riêng & từ khóa:</strong> 'Josh Schartz', 'number of people who leave...', 'greater than', 'finish reading'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn C):</strong> Nghiên cứu của Josh Schartz chỉ ra: số lượng bình luận và số người cuộn xuống cuối bài không khớp nhau (<em>'number of comments and the number of people who scrolled down to the end... did not match'</em>). Người ta bình luận mà không đọc hết (<em>'commenting without reading everything'</em>).",
+                    "<strong>Khớp nghĩa ngữ pháp:</strong> Động từ 'leave' kết hợp tự nhiên với <strong>comments</strong> ('leave comments' = để lại bình luận).",
+                    "<strong>Kết luận:</strong> Từ cần điền là danh từ số nhiều <strong>comments</strong>."
+                ],
+                traps: "Không điền 'links' vì bài đọc dùng cụm 'adding comments' và 'number of comments' tương phản trực tiếp với 'scrolled down to the end'."
+            },
+            vocabHighlights: ["misinformation", "dispiriting"]
+        },
+        {
+            id: 9,
+            qNum: "Question 9",
+            group: "sentence",
+            targetParagraph: "Paragraph D",
+            type: "Sentence Completion",
+            wordLimit: "ONE WORD ONLY",
+            contextHeader: "Khám phá não bộ vẫn không ngừng biến đổi sau giai đoạn thời thơ ấu",
+            statementPrefix: "Michael Merzenich found that brains still changed after the period of",
+            statementSuffix: "came to an end.",
+            completedSentence: "Michael Merzenich found that brains still changed after the period of <span class='text-violetTheme-700 font-bold underline'>childhood</span> came to an end.",
+            correctAnswer: "childhood",
+            passageSnippet: "<mark class='bg-violet-100 text-violet-950 font-bold px-1 rounded'>Michael Merzenich has long argued against the argument that the brain is formed in the early years of childhood, then remains stable. Many believed that, once damaged, parts of the brain would never recover again. In fact, the brain is constantly changing and re-organizing itself</mark>...",
+            paragraphRef: "Đoạn D (Paragraph D)",
+            paraphrases: [
+                { qPart: "period of [ 9 ] came to an end", pPart: "early years of childhood, then remains stable", meaning: "giai đoạn thời thơ ấu kết thúc / sau những năm đầu đời" },
+                { qPart: "brains still changed", pPart: "the brain is constantly changing and re-organizing itself", meaning: "não bộ trên thực tế vẫn không ngừng biến đổi và tự tái cấu trúc" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần tìm một danh từ chỉ thời kỳ/giai đoạn phát triển của đời người sau cụm 'period of [ 9 ]'.",
+                stepByStep: [
+                    "<strong>Định vị tên riêng & từ khóa:</strong> 'Michael Merzenich', 'brains still changed', 'period of... came to an end'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn D):</strong> Tác giả viết: <em>'Michael Merzenich has long argued against the argument that the brain is formed in the early years of <strong>childhood</strong>, then remains stable... In fact, the brain is constantly changing'</em>.",
+                    "<strong>Phân tích lập luận:</strong> Quan niệm cũ cho rằng não chỉ hình thành trong những năm đầu thời thơ ấu (<em>'early years of childhood'</em>) rồi cố định. Nhưng Merzenich chứng minh sau thời kỳ thơ ấu, não vẫn tiếp tục thay đổi không ngừng.",
+                    "<strong>Kết luận:</strong> Từ cần điền là danh từ <strong>childhood</strong> (thời thơ ấu)."
+                ],
+                traps: "Không điền 'early years' vì câu hỏi đã có sẵn cụm 'period of' (thời kỳ), danh từ cốt lõi duy nhất là 'childhood'."
+            },
+            vocabHighlights: ["re-wiring", "psychological obesity"]
+        },
+        {
+            id: 10,
+            qNum: "Question 10",
+            group: "sentence",
+            targetParagraph: "Paragraph F & G",
+            type: "Sentence Completion",
+            wordLimit: "ONE WORD ONLY",
+            contextHeader: "Bản chất của chứng 'béo phì tâm lý' là xu hướng thèm đọc những nội dung gây sốc",
+            statementPrefix: "‘Psychological obesity’ is the natural preference for shocking",
+            statementSuffix: "in articles.",
+            completedSentence: "‘Psychological obesity’ is the natural preference for shocking <span class='text-violetTheme-700 font-bold underline'>content</span> in articles.",
+            correctAnswer: "content",
+            passageSnippet: "The problem is even worse when you consider the kind of things we read online... our brains prefer to read things that are shocking, such as gossiping, describing the embarrassment of others or just looking at attractive people... Some experts have referred to this as ‘psychological obesity’... <mark class='bg-violet-100 text-violet-950 font-bold px-1 rounded'>Editors of respectable newspapers are aware that this kind of content is popular</mark>...",
+            paragraphRef: "Đoạn F & G (Paragraphs F & G)",
+            paraphrases: [
+                { qPart: "natural preference for", pPart: "brains prefer to read / programmed to want", meaning: "sở thích tự nhiên của não bộ / xu hướng thèm muốn được lập trình sẵn" },
+                { qPart: "shocking content in articles", pPart: "things that are shocking / this kind of content is popular", meaning: "nội dung giật gân, gây sốc trong các bài viết báo chí" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần tìm một danh từ đứng sau tính từ 'shocking' (gây sốc) để miêu tả thứ mà chứng 'béo phì tâm lý' thể hiện sự yêu thích tự nhiên.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'Psychological obesity', 'natural preference for', 'shocking... in articles'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn F & G):</strong> Đoạn F giải thích não ta thích đọc những thứ gây sốc (<em>'prefer to read things that are shocking'</em>) và chuyên gia gọi đó là 'psychological obesity'. Ngay đầu đoạn G tiếp nối: <em>'Editors of respectable newspapers are aware that <strong>this kind of content</strong> is popular'</em>.",
+                    "<strong>Khớp nghĩa:</strong> Thứ giật gân được đọc trong các bài báo chính là nội dung (<strong>content</strong>).",
+                    "<strong>Kết luận:</strong> Từ cần điền là danh từ <strong>content</strong>."
+                ],
+                traps: "Tránh điền các từ liệt kê cụ thể như 'gossiping' hay 'embarrassment' vì câu hỏi dùng cấu trúc tổng quát 'shocking [ 10 ] in articles', đòi hỏi danh từ bao quát 'content'."
+            },
+            vocabHighlights: ["psychological obesity", "respectable", "fascinating"]
+        }
+    ];
+
+    const vocabData = {
+        'dispiriting': { ipa: '/dɪˈspɪr.ɪ.tɪŋ/', type: 'adjective', vi: 'Làm nản lòng, gây thất vọng, mất tinh thần', eg: 'It is deeply dispiriting to witness internet users circulating links to analytical essays they haven’t even skimmed.' },
+        'misinformation': { ipa: '/ˌmɪs.ɪn.fəˈmeɪ.ʃən/', type: 'noun (uncountable)', vi: 'Thông tin sai lệch (do hiểu sai hoặc lan truyền thiếu kiểm chứng)', eg: 'Rushing to comment on provocative headlines without reading the full article inevitably breeds rampant online misinformation.' },
+        're-wiring': { ipa: '/riːˈwaɪə.rɪŋ/', type: 'noun / v-ing', vi: 'Sự đấu nối lại nơ-ron (quá trình tái tổ chức mạng lưới thần kinh của não bộ)', eg: 'Chronic digital multitasking triggers structural synaptic re-wiring, steadily diminishing our capacity for deep contemplative thought.' },
+        'fascinating': { ipa: '/ˈfæs.ɪ.neɪ.tɪŋ/', type: 'adjective', vi: 'Hấp dẫn, lôi cuốn, quyến rũ kỳ lạ', eg: 'With boundless digital alternatives available, prospective readers instinctively discard materials that fail to be instantly fascinating.' },
+        'psychological obesity': { ipa: '/ˌsaɪ.kəlˈɒdʒ.ɪ.kəl əʊˈbiː.sə.ti/', type: 'noun phrase', vi: 'Béo phì tâm lý (hội chứng nghiện tiêu thụ thông tin rác, giật gân)', eg: 'Unchecked consumption of celebrity scandals and superficial clickbait generates severe psychological obesity in modern media consumers.' },
+        'respectable': { ipa: '/rɪˈspek.tə.bəl/', type: 'adjective', vi: 'Đáng kính, uy tín, có phẩm cách chuẩn mực', eg: 'Editors of respectable broadsheet periodicals prioritize consequential global geopolitics above ephemeral sensationalism.' },
+        'neuroplasticity': { ipa: '/ˌnjʊə.rəʊ.plæsˈtɪs.ə.ti/', type: 'noun', vi: 'Độ mềm dẻo của hệ thần kinh (khả năng tự biến đổi cấu trúc não theo hành vi)', eg: 'Modern neuroscience underscores neuroplasticity, proving the adult cerebral cortex dynamically adapts to daily cognitive habits.' },
+        'superficial browsing': { ipa: '/ˌsuː.pəˈfɪʃ.əl ˈbraʊ.zɪŋ/', type: 'noun phrase', vi: 'Hành vi lướt đọc hời hợt, không suy ngẫm', eg: 'Constant superficial browsing conditions the optical apparatus to hunt for headlines while bypassing nuanced textual analysis.' },
+        'critical thought': { ipa: '/ˈkrɪt.ɪ.kəl θɔːt/', type: 'noun phrase', vi: 'Tư duy phản biện và suy xét thấu đáo', eg: 'Immersive reading of physical literature fosters the neural architecture required for sustained critical thought.' },
+        'personalized content': { ipa: '/ˈpɜː.sən.əl.aɪzd ˈkɒn.tent/', type: 'noun phrase', vi: 'Nội dung được cá nhân hóa theo thuật toán', eg: 'Algorithmic delivery of personalized content encloses digital audiences inside echo chambers that prevent exposure to divergent views.' },
+        'attention span': { ipa: '/əˈten.ʃən spæn/', type: 'noun phrase', vi: 'Khoảng thời gian tập trung chú ý', eg: 'Rapid-fire short-form notifications have drastically truncated the typical human attention span across all age demographics.' },
+        'cognitive decline': { ipa: '/ˈkɒɡ.nə.tɪv dɪˈklaɪn/', type: 'noun phrase', vi: 'Sự suy giảm chức năng nhận thức', eg: 'Abandoning rigorous linear reading practices accelerates subtle forms of early-onset functional cognitive decline.' }
+    };
+    </script>
+
+    <script>
+    let currentQuestionIndex = 0; // 0 to 9
+
+    function initApp() {
+        renderNavChips();
+        renderCurrentSlide();
+        renderAllQuestionsList();
+        renderHeadingsGrid();
+        renderSynonymsTable();
+        renderVocabGrid();
+        setupKeyboardNavigation();
+    }
+
+    function renderNavChips() {
+        const container = document.getElementById('question-nav-chips');
+        container.innerHTML = '';
+        questionsData.forEach((q, idx) => {
+            const btn = document.createElement('button');
+            const isActive = idx === currentQuestionIndex;
+            btn.className = `px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                isActive 
+                ? 'bg-violetTheme-700 text-white shadow-sm ring-2 ring-violetTheme-600 ring-offset-1' 
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`;
+            
+            if (q.group === 'headings') {
+                btn.innerHTML = `Q${q.id}: ${q.targetParagraph} ➔ [ ${q.correctKey} ]`;
+            } else {
+                btn.innerHTML = `Q${q.id}: [ ${q.correctAnswer} ]`;
+            }
+
+            btn.onclick = () => {
+                currentQuestionIndex = idx;
+                renderNavChips();
+                renderCurrentSlide();
+            };
+            container.appendChild(btn);
+        });
+
+        const curQ = questionsData[currentQuestionIndex];
+        const typeBadge = document.getElementById('quick-type-badge');
+        if (typeBadge) {
+            typeBadge.textContent = curQ.group === 'headings' ? `Matching Headings (Q1–Q6)` : `Sentence Completion (Q7–Q10)`;
+        }
+
+        const mob = document.getElementById('mobile-curr-indicator');
+        if (mob) {
+            mob.textContent = `Câu ${currentQuestionIndex + 1}/10 (${curQ.group === 'headings' ? curQ.correctKey : curQ.correctAnswer})`;
+        }
+    }
+
+    function navigateQuestion(delta) {
+        const next = currentQuestionIndex + delta;
+        if (next >= 0 && next < questionsData.length) {
+            currentQuestionIndex = next;
+            renderNavChips();
+            renderCurrentSlide();
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+    }
+
+    function renderCurrentSlide() {
+        const q = questionsData[currentQuestionIndex];
+        const container = document.getElementById('slide-card-container');
+        const counter = document.getElementById('slide-counter-badge');
+        if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        if (btnPrev) {
+            btnPrev.disabled = currentQuestionIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+        }
+        if (btnNext) {
+            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+        }
+
+        let promptHtml = '';
+        let answerBannerHtml = '';
+        let speechText = '';
+
+        if (q.group === 'headings') {
+            speechText = q.correctText;
+            promptHtml = `
+                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nhiệm Vụ Khớp Tiêu Đề</span>
+                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">Tìm tiêu đề (Heading) tóm lược chuẩn xác nhất ý chính của <span class="text-violetTheme-700 underline font-extrabold">${q.targetParagraph}</span></p>
+                </div>
+            `;
+            answerBannerHtml = `
+                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-violet-50/80 via-purple-50/50 to-white border border-violet-200">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-violetTheme-700">Tiêu Đề Khớp Chính Xác</span>
+                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
+                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm bg-violetTheme-700 text-white answer-badge">
+                                Đáp án: [ ${q.correctKey} ]
+                            </span>
+                            <span class="text-base sm:text-lg font-bold text-slate-800">
+                                "${q.correctText}"
+                            </span>
+                        </div>
+                    </div>
+
+                    <button onclick="playSpeech('${speechText.replace(/'/g, "\\'")}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-violet-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Phát âm tiêu đề</span>
+                    </button>
+                </div>
+            `;
+        } else {
+            speechText = q.correctAnswer;
+            promptHtml = `
+                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nội Dung Câu Hỏi Chứa Chỗ Trống</span>
+                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">${q.statementPrefix} <span class="text-violetTheme-700 font-mono font-extrabold underline">[ ${q.id} ]</span> ${q.statementSuffix}</p>
+                </div>
+            `;
+            answerBannerHtml = `
+                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-violet-50/80 via-purple-50/50 to-white border border-violet-200">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-violetTheme-700">Từ Điền Chính Xác</span>
+                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
+                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm bg-violetTheme-700 text-white answer-badge">
+                                Đáp án: ${q.correctAnswer}
+                            </span>
+                        </div>
+                    </div>
+
+                    <button onclick="playSpeech('${speechText}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-violet-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Phát âm đáp án</span>
+                    </button>
+                </div>
+
+                <div class="mt-4 p-4 rounded-xl bg-slate-900 text-white text-sm sm:text-base leading-relaxed">
+                    <span class="text-xs text-violet-400 font-bold uppercase tracking-wider block mb-1">Câu hoàn chỉnh:</span>
+                    <p class="font-medium">${q.completedSentence}</p>
+                </div>
+            `;
+        }
+
+        container.innerHTML = `
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+                
+                <!-- Slide Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-2xl bg-violet-100 text-violetTheme-800 flex items-center justify-center font-extrabold text-base border border-violet-200">
+                            ${q.id}
+                        </span>
+                        <div>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-violetTheme-700">${q.type}</span>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">${q.qNum}: ${q.contextHeader}</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                            Yêu cầu: ${q.wordLimit}
+                        </span>
+                        <span class="text-xs font-semibold px-3 py-1 bg-violet-50 text-violetTheme-700 rounded-full border border-violet-200">
+                            ${q.paragraphRef}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Prompt Box -->
+                ${promptHtml}
+
+                <!-- Answer Reveal Banner -->
+                ${answerBannerHtml}
+
+                <!-- Evidence in Reading Passage -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-violetTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Manh Mối Bằng Chứng (${q.paragraphRef})</h4>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-violet-50/40 border border-violet-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
+                        "${q.passageSnippet}"
+                    </div>
+                </div>
+
+                <!-- Paraphrase & Synonym Mapping Table -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Paraphrase</h4>
+                    </div>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
+                                <tr>
+                                    <th class="py-2.5 px-4 w-1/3">Tiêu đề / Câu hỏi đề thi (${q.qNum})</th>
+                                    <th class="py-2.5 px-4 w-1/3">Văn bản bài đọc (${q.paragraphRef})</th>
+                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 bg-white">
+                                ${q.paraphrases.map(p => `
+                                    <tr>
+                                        <td class="py-3 px-4 font-semibold text-violet-800 bg-violet-50/30">${p.qPart}</td>
+                                        <td class="py-3 px-4 font-semibold text-amber-800 bg-amber-50/20">${p.pPart}</td>
+                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Vietnamese In-Depth Explanation & Logic -->
+                <div class="mt-6 bg-violet-50/40 border border-violet-200/80 rounded-2xl p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-violetTheme-600"></span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-violetTheme-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
+                    </div>
+
+                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
+
+                    <div class="space-y-2 mb-4">
+                        ${q.vietnameseAnalysis.stepByStep.map(step => `
+                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="text-violetTheme-600 mt-1 font-bold">▸</span>
+                                <div>${step}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${q.vietnameseAnalysis.traps ? `
+                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
+                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
+                            <span>${q.vietnameseAnalysis.traps}</span>
+                        </div>
+                    ` : ''}
+                </div>
+
+                <!-- Highlighted Vocabulary in this question -->
+                <div class="mt-6 pt-5 border-t border-slate-100">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
+                    <div class="flex flex-wrap gap-3">
+                        ${q.vocabHighlights.map(v => {
+                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
+                            return `
+                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-violet-400 transition-colors">
+                                    <button onclick="playSpeech('${v}')" class="text-violetTheme-700 hover:text-violetTheme-900" title="Nghe phát âm chuẩn UK">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                    <div>
+                                        <span class="font-bold text-sm text-slate-900">${v}</span>
+                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
+                                        <span class="text-xs text-violetTheme-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+            </div>
+        `;
+    }
+
+    function renderAllQuestionsList(filter = 'all') {
+        const container = document.getElementById('all-questions-container');
+        container.innerHTML = '';
+
+        const filtered = questionsData.filter(q => {
+            if (filter === 'all') return true;
+            return q.group === filter;
+        });
+
+        filtered.forEach(q => {
+            const card = document.createElement('div');
+            card.className = "gradient-border bg-white rounded-2xl p-6 shadow-sm";
+
+            let ansText = '';
+            if (q.group === 'headings') {
+                ansText = `ĐÁP ÁN: [ ${q.correctKey} ] — "${q.correctText}"`;
+            } else {
+                ansText = `ĐÁP ÁN: [ ${q.correctAnswer.toUpperCase()} ]`;
+            }
+
+            card.innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-violetTheme-700 text-white font-bold text-xs flex items-center justify-center">
+                            ${q.id}
+                        </span>
+                        <h3 class="font-bold text-slate-900">${q.qNum} - <span class="text-slate-500 font-medium">${q.contextHeader}</span></h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-mono font-bold px-3 py-1 rounded-md border bg-violet-100 text-violet-800 border-violet-300">
+                            ${ansText}
+                        </span>
+                        <span class="text-xs text-slate-400">${q.paragraphRef}</span>
+                    </div>
+                </div>
+
+                ${q.group === 'sentence' ? `
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 mb-3 text-sm">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nội dung câu hỏi:</span>
+                        <p class="font-bold text-slate-800">${q.statementPrefix} [ ${q.id} ] ${q.statementSuffix}</p>
+                    </div>
+                ` : `
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 mb-3 text-sm">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Tiêu đề được chọn:</span>
+                        <p class="font-bold text-violetTheme-900">Heading ${q.correctKey}: "${q.correctText}"</p>
+                    </div>
+                `}
+
+                <div class="bg-violet-50/60 p-3.5 rounded-xl border border-violet-200/80 mb-4 text-xs sm:text-sm italic text-slate-700">
+                    <strong>Manh mối bài đọc (${q.paragraphRef}):</strong> "${q.passageSnippet}"
+                </div>
+
+                <div class="mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <div class="flex flex-wrap gap-2">
+                        ${q.paraphrases.map(p => `
+                            <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
+                                <span class="text-violet-700 font-bold">${p.qPart}</span> ➔ <span class="text-amber-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="bg-violet-50/40 border border-violet-200 p-4 rounded-xl text-xs sm:text-sm text-slate-700">
+                    <p class="font-bold text-violet-900 mb-1.5">Giải thích logic Tiếng Việt:</p>
+                    <p class="mb-2">${q.vietnameseAnalysis.logic}</p>
+                    <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
+                        ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function filterAllQuestions(type) {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+            b.className = 'filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200';
+        });
+        if (event && event.target) {
+            event.target.className = 'filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-violetTheme-700 text-white';
+        }
+        renderAllQuestionsList(type);
+    }
+
+    function renderHeadingsGrid() {
+        const container = document.getElementById('headings-grid-container');
+        container.innerHTML = '';
+
+        headingsPool.forEach(item => {
+            const card = document.createElement('div');
+            const isUsed = item.isUsed;
+            card.className = `p-5 rounded-2xl border transition-all flex flex-col justify-between ${
+                isUsed 
+                ? 'bg-white border-violet-200 shadow-2xs hover:border-violet-400' 
+                : 'bg-slate-50/80 border-slate-200 opacity-80'
+            }`;
+
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="w-8 h-8 rounded-xl font-black text-sm flex items-center justify-center ${
+                            isUsed ? 'bg-violetTheme-700 text-white' : 'bg-slate-200 text-slate-600'
+                        }">
+                            ${item.key}
+                        </span>
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
+                            isUsed 
+                            ? 'bg-violet-100 text-violet-800 border border-violet-300' 
+                            : 'bg-amber-100 text-amber-800 border border-amber-300'
+                        }">
+                            ${isUsed ? `${item.usedFor}` : 'Bẫy nhiễu (Distractor)'}
+                        </span>
+                    </div>
+
+                    <h4 class="font-bold text-base text-slate-900 mb-2 leading-snug">"${item.text}"</h4>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 text-xs text-slate-600 mt-2">
+                    <span class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">
+                        ${isUsed ? 'Lý do lựa chọn:' : 'Lý do loại trừ:'}
+                    </span>
+                    <p class="${isUsed ? 'text-violet-900 font-medium' : 'text-slate-500 italic'}">${item.reason}</p>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderSynonymsTable() {
+        const tbody = document.getElementById('synonyms-table-body');
+        tbody.innerHTML = '';
+
+        questionsData.forEach(q => {
+            q.paraphrases.forEach((p, pIndex) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center font-bold text-slate-700">
+                        ${pIndex === 0 ? `<span class="bg-violet-100 text-violet-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="keyword-chip">${p.qPart}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="passage-chip">${p.pPart}</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="text-xs font-bold uppercase px-2.5 py-1 bg-violetTheme-700 text-white rounded shadow-2xs">
+                            ${q.group === 'headings' ? `${q.targetParagraph} ➔ [ ${q.correctKey} ]` : `${q.correctAnswer}`}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
+                        ${p.meaning}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    }
+
+    function renderVocabGrid(filterWord = '') {
+        const container = document.getElementById('vocab-grid-container');
+        container.innerHTML = '';
+
+        const words = Object.keys(vocabData).filter(w => {
+            if (!filterWord) return true;
+            const query = filterWord.toLowerCase();
+            return w.toLowerCase().includes(query) || vocabData[w].vi.toLowerCase().includes(query);
+        });
+
+        if (words.length === 0) {
+            container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">Không tìm thấy từ vựng phù hợp.</div>`;
+            return;
+        }
+
+        words.forEach(w => {
+            const item = vocabData[w];
+            const card = document.createElement('div');
+            card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-violet-400 transition-all flex flex-col justify-between";
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h4 class="text-lg font-bold text-slate-900">${w}</h4>
+                        <button onclick="playSpeech('${w}')" class="w-8 h-8 rounded-full bg-violet-50 text-violet-700 hover:bg-violet-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs" title="Nghe phát âm chuẩn UK">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${item.ipa}</span>
+                        <span class="text-xs italic text-violet-700 font-semibold">${item.type}</span>
+                    </div>
+                    <p class="text-sm font-semibold text-violet-900 mb-3">${item.vi}</p>
+                </div>
+                <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-lg">
+                    "${item.eg}"
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function searchVocab(val) {
+        renderVocabGrid(val);
+    }
+
+    function playSpeech(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.88;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function switchView(viewName) {
+        const views = ['presentation', 'all', 'headings', 'synonyms', 'vocab'];
+        views.forEach(v => {
+            const sec = document.getElementById(`view-${v}`);
+            const tabBtn = document.getElementById(`tab-${v}`);
+            if (sec) sec.classList.add('hidden');
+            if (tabBtn) {
+                tabBtn.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+            }
+        });
+
+        const activeSec = document.getElementById(`view-${viewName}`);
+        const activeTab = document.getElementById(`tab-${viewName}`);
+        if (activeSec) activeSec.classList.remove('hidden');
+        if (activeTab) {
+            activeTab.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-violetTheme-700 text-white shadow-sm';
+        }
+    }
+
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            const presView = document.getElementById('view-presentation');
+            if (presView && !presView.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    navigateQuestion(1);
+                } else if (e.key === 'ArrowLeft') {
+                    navigateQuestion(-1);
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

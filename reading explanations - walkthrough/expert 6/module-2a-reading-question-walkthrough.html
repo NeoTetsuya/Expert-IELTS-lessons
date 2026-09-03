@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Reading Masterclass | Should You Throw Out Your Bucket List?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        amberTheme: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                            950: '#451a03'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(217, 119, 6, 0.25); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(217, 119, 6, 0.5); }
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff, #fffdfa);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #d97706, #f59e0b, #fbbf24);
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+        .keyword-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        .passage-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #ede9fe;
+            color: #5b21b6;
+            border: 1px solid #ddd6fe;
+        }
+        .answer-badge {
+            animation: pulseSubtle 3s infinite;
+        }
+        @keyframes pulseSubtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-amber-100 selection:text-amber-900">
+
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-amberTheme-700 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-amber-900/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-amberTheme-700 bg-amberTheme-50 px-2 py-0.5 rounded-full border border-amberTheme-200">IELTS Reading Analysis</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích chuyên sâu 6 câu Yes / No / Not Given</span>
+                        </div>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">Should You Throw Out Your Bucket List?</h1>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-lg">Câu 1/6</span>
+                </div>
+            </div>
+
+            <!-- Global View Switcher -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+                <button id="tab-presentation" onclick="switchView('presentation')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-amberTheme-700 text-white shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                    </svg>
+                    <span>Slide Từng Câu</span>
+                </button>
+                <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    <span>Xem Tất Cả (List)</span>
+                </button>
+                <button id="tab-matrix" onclick="switchView('matrix')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                    <span>Ma Trận YES / NO / NG</span>
+                </button>
+                <button id="tab-synonyms" onclick="switchView('synonyms')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    <span>Ma Trận Paraphrase</span>
+                </button>
+                <button id="tab-vocab" onclick="switchView('vocab')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span>Từ Vựng Trọng Tâm</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
+        <section id="view-presentation" class="space-y-6 block">
+            
+            <!-- Quick Question Selector Chips -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Questions 1–6: YES / NO / NOT GIVEN</span>
+                    </div>
+                    <div class="text-xs text-slate-400 flex items-center gap-2">
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2" id="question-nav-chips">
+                    <!-- Dynamic question buttons inserted by JS -->
+                </div>
+            </div>
+
+            <!-- Slide Main Card -->
+            <div id="slide-card-container" class="relative">
+                <!-- Dynamically rendered slide content -->
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span>Câu Trước</span>
+                </button>
+
+                <div class="flex items-center gap-3">
+                    <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 6</span>
+                </div>
+
+                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amberTheme-700 hover:bg-amberTheme-800 text-white font-semibold shadow-md shadow-amber-900/10 active:scale-95 transition-all">
+                    <span>Câu Kế Tiếp</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- VIEW 2: ALL QUESTIONS CONTINUOUS LIST -->
+        <section id="view-all" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 6 Câu Yes / No / Not Given</h2>
+                    <p class="text-sm text-slate-500">Xem toàn bộ câu hỏi, đáp án chuẩn xác, trích dẫn bằng chứng, ma trận đối chiếu từ vựng và phân tích logic tiếng Việt.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="filterAllQuestions('all')" class="filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-amberTheme-700 text-white">Tất Cả (1–6)</button>
+                    <button onclick="filterAllQuestions('YES')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">YES (Q1, Q3)</button>
+                    <button onclick="filterAllQuestions('NO')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">NO (Q2, Q5)</button>
+                    <button onclick="filterAllQuestions('NOT GIVEN')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">NOT GIVEN (Q4, Q6)</button>
+                </div>
+            </div>
+
+            <div id="all-questions-container" class="space-y-6">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- VIEW 3: YES / NO / NOT GIVEN MATRIX -->
+        <section id="view-matrix" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-amberTheme-700">Writer's View vs. Research Claims</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Chiến Lược Phân Biệt YES / NO / NOT GIVEN</h2>
+                        <p class="text-sm text-slate-600 mt-1">Phân tích ranh giới giữa quan điểm của tác giả (The Writer) phản biện lại nghiên cứu của Cooney, Gilbert và Wilson.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <!-- YES Card -->
+                    <div class="p-5 rounded-2xl border border-emerald-200 bg-emerald-50/40 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-black text-xs">YES (Câu 1, 3)</span>
+                            <h3 class="font-bold text-emerald-950 text-sm">Trùng Khớp Tuyệt Đối Với Quan Điểm Tác Giả</h3>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Thông tin trong câu hỏi diễn đạt lại (paraphrase) chính xác nhận định hoặc thừa nhận trực tiếp của tác giả trong bài viết.
+                        </p>
+                        <div class="text-xs bg-white p-3 rounded-xl border border-emerald-100 space-y-1.5">
+                            <div><strong>Q1:</strong> Tác giả thừa nhận số lượng 68 người là không nhiều (<em>"the fact that 68 people is not a very high number"</em>).</div>
+                            <div><strong>Q3:</strong> Tác giả khẳng định ai cũng có trải nghiệm thường nhật để chia sẻ (<em>"lots of everyday experiences to talk about"</em>).</div>
+                        </div>
+                    </div>
+
+                    <!-- NO Card -->
+                    <div class="p-5 rounded-2xl border border-rose-200 bg-rose-50/40 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-rose-600 text-white font-black text-xs">NO (Câu 2, 5)</span>
+                            <h3 class="font-bold text-rose-950 text-sm">Mâu Thuẫn Trực Tiếp Với Quan Điểm Tác Giả</h3>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Câu hỏi đưa ra một khẳng định trái ngược 180 độ hoặc phủ định điều mà tác giả lập luận trong bài.
+                        </p>
+                        <div class="text-xs bg-white p-3 rounded-xl border border-rose-100 space-y-1.5">
+                            <div><strong>Q2:</strong> Đề bảo nghiên cứu phản ánh đời thực, nhưng tác giả nhấn mạnh xem video ảo thuật đường phố <strong>không hề giống</strong> trải nghiệm đời thực.</div>
+                            <div><strong>Q5:</strong> Đề bảo người làm việc thú vị sẽ không thể kết nối với bạn bè, nhưng tác giả chứng minh họ hoàn toàn kết nối được nhờ bạn bè cùng chí hướng hoặc chủ đề đời thường.</div>
+                        </div>
+                    </div>
+
+                    <!-- NOT GIVEN Card -->
+                    <div class="p-5 rounded-2xl border border-amber-200 bg-amber-50/40 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-amber-500 text-white font-black text-xs">NOT GIVEN (Câu 4, 6)</span>
+                            <h3 class="font-bold text-amber-950 text-sm">Hoàn Toàn Không Được Đề Cập / Không Thể Suy Ra</h3>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Có thể chứa một số từ khóa tương tự nhưng quan hệ hay nhận định then chốt không hề được tác giả xác nhận hay phủ nhận.
+                        </p>
+                        <div class="text-xs bg-white p-3 rounded-xl border border-amber-100 space-y-1.5">
+                            <div><strong>Q4:</strong> Bài chỉ nói bạn bè cảm thấy xa cách (<em>distant</em>), hoàn toàn <strong>không nói họ cảm thấy ghen tị (jealous)</strong>.</div>
+                            <div><strong>Q6:</strong> Tác giả khuyên suy ngẫm ý nghĩa mục tiêu (<em>meaningful goals</em>), nhưng <strong>không hề khuyên sắp xếp theo thứ tự ưu tiên (order of importance)</strong>.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: SYNONYMS & PARAPHRASE MATRIX -->
+        <section id="view-synonyms" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-amberTheme-700">Paraphrase & Semantic Alignment</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Ma Trận Từ Đồng Nghĩa & Diễn Đạt Tương Đương</h2>
+                        <p class="text-sm text-slate-600 mt-1">Đối chiếu chi tiết giữa câu hỏi trong đề thi với văn bản thực tế trong bài đọc của từng câu.</p>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-2.5 text-center">
+                        <span class="text-xs text-amberTheme-700 font-semibold block uppercase">Tổng hợp</span>
+                        <span class="text-xl font-extrabold text-amberTheme-900">6 Cặp Paraphrase Cốt Lõi</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600">
+                                <th class="py-3 px-4 w-16 text-center">Câu</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Đề Thi (Question)</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Bài Đọc (Passage)</th>
+                                <th class="py-3 px-4 w-28 text-center">Đáp Án</th>
+                                <th class="py-3 px-4">Ý Nghĩa & Phân Tích Logic Tiếng Việt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="synonyms-table-body" class="divide-y divide-slate-100 text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: VOCABULARY HUB -->
+        <section id="view-vocab" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-amberTheme-700">Psychology & Social Dynamics Lexicon</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Từ Vựng Trọng Tâm & Phát Âm Chuẩn</h2>
+                        <p class="text-sm text-slate-600 mt-1">Từ vựng học thuật chủ đề tâm lý xã hội học, nghiên cứu hành vi, trải nghiệm phi thường và các mối quan hệ kèm phiên âm IPA và audio phát âm.</p>
+                    </div>
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="vocab-search-input" onkeyup="searchVocab(this.value)" placeholder="Tìm kiếm từ vựng hoặc nghĩa..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-amber-600 focus:ring-1 focus:ring-amber-600 bg-slate-50/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="vocab-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+    const questionsData = [
+        {
+            id: 1,
+            qNum: "Question 1",
+            type: "Yes / No / Not Given",
+            wordLimit: "YES / NO / NOT GIVEN",
+            contextHeader: "Quy mô mẫu nghiên cứu của Cooney, Gilbert và Wilson",
+            statementText: "There were too few participants for effective research.",
+            correctAnswer: "YES",
+            passageSnippet: "<mark class='bg-amber-100 text-amber-950 font-bold px-1 rounded'>There are two main reasons why you might not agree with Cooney, Gilbert and Wilson’s research conclusions, and these do not include the fact that sixty-eight people is not a very high number to include in a study</mark>.",
+            paragraphRef: "Đoạn 1 (Paragraph 1)",
+            paraphrases: [
+                { qPart: "too few participants", pPart: "sixty-eight people is not a very high number to include in a study", meaning: "68 người không phải là một con số lớn để đưa vào một nghiên cứu (số lượng người tham gia quá ít)" },
+                { qPart: "the fact that", pPart: "these do not include the fact that...", meaning: "tác giả thừa nhận rõ đây là một sự thật hiển nhiên (fact)" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi nêu nhận định: 'Có quá ít người tham gia để tạo nên một nghiên cứu hiệu quả'. Cần tìm xem tác giả có đồng tình với việc số lượng 68 người là quá ít hay không.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'participants', 'few', 'effective research', 'sixty-eight people'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 1):</strong> Tác giả viết: <em>'...and these do not include <strong>the fact that sixty-eight people is not a very high number to include in a study</strong>'</em>.",
+                    "<strong>Phân tích logic ngữ pháp:</strong> Cụm từ <em>'the fact that...'</em> (sự thật là...) chứng minh tác giả hoàn toàn công nhận rằng 68 người tham gia là con số không hề cao (<em>'not a very high number'</em> = <em>'too few participants'</em>), chỉ là tác giả muốn nhấn mạnh 2 lý do khác quan trọng hơn.",
+                    "<strong>Kết luận:</strong> Quan điểm của tác giả hoàn toàn đồng tình với phát biểu trong đề bài ➔ <strong>YES</strong>."
+                ],
+                traps: "Thí sinh có thể đọc lướt thấy từ 'do not include' rồi vội vàng chọn NO. Tuy nhiên 'these do not include' có nghĩa là '2 lý do chính mà tác giả sắp phân tích không bao gồm sự thật về số lượng người' — bản thân số lượng người quá ít vẫn được tác giả khẳng định là một sự thật (the fact)."
+            },
+            vocabHighlights: ["cost-benefit analysis", "extraordinary", "reflect"]
+        },
+        {
+            id: 2,
+            qNum: "Question 2",
+            type: "Yes / No / Not Given",
+            wordLimit: "YES / NO / NOT GIVEN",
+            contextHeader: "Mức độ phản ánh thực tế của thí nghiệm xem video ảo thuật",
+            statementText: "The study reflected what happens in the real world.",
+            correctAnswer: "NO",
+            passageSnippet: "<mark class='bg-amber-100 text-amber-950 font-bold px-1 rounded'>Firstly, the video of a street magician is not the same as an incredible life experience... But it is unlikely that a street performer, even an amazing one, produces results similar to the feeling of an extraordinary experience</mark>... Secondly, one wonders why the researchers assume that people who do extraordinary things only spend time with boring people... In reality...",
+            paragraphRef: "Đoạn 1 & 2 (Paragraphs 1 & 2)",
+            paraphrases: [
+                { qPart: "The study reflected what happens in the real world", pPart: "the video of a street magician is not the same as an incredible life experience / In reality...", meaning: "Mâu thuẫn trực tiếp: nghiên cứu cho xem video ảo thuật đường phố không hề giống trải nghiệm đời thực, và ngoài đời thực (In reality) bạn bè cũng có trải nghiệm tuyệt vời." }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi cho rằng nghiên cứu đã phản ánh đúng những gì xảy ra trong thế giới thực tế ('reflected what happens in the real world').",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'study reflected', 'real world', 'real life'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 1 & 2):</strong>",
+                    "1. Ở đoạn 1, tác giả phản bác: Việc xem video ảo thuật đường phố <strong>không hề giống</strong> với một trải nghiệm phi thường ngoài đời thực (<em>'is not the same as an incredible life experience... unlikely... produces results similar'</em>).",
+                    "2. Ở đoạn 2, tác giả chỉ trích giả định phi thực tế của nhóm nghiên cứu và đối lập bằng từ: <strong>'In reality'</strong> (Trong thực tế ngoài đời thì hoàn toàn khác, bạn bè đều có những câu chuyện thú vị hoặc những điều thường nhật để nói).",
+                    "<strong>Kết luận:</strong> Nhận định của câu hỏi trái ngược hoàn toàn với lập luận của tác giả (Tác giả cho rằng nghiên cứu KHÔNG phản ánh đúng đời thực) ➔ <strong>NO</strong>."
+                ],
+                traps: "Chú ý cặp đối lập kinh điển trong IELTS: Giả định của nghiên cứu (assume) bị phản bác bởi thực tế đời sống ('In reality...')."
+            },
+            vocabHighlights: ["extraordinary", "bucket list", "ambitions"]
+        },
+        {
+            id: 3,
+            qNum: "Question 3",
+            type: "Yes / No / Not Given",
+            wordLimit: "YES / NO / NOT GIVEN",
+            contextHeader: "Khả năng chia sẻ những trải nghiệm thường nhật với bạn bè",
+            statementText: "We have all experienced situations we can share with friends.",
+            correctAnswer: "YES",
+            passageSnippet: "<mark class='bg-amber-100 text-amber-950 font-bold px-1 rounded'>Of course people will always have lots of everyday experiences to talk about too. After all, when you return from an inspiring trip, you still have to do the laundry and call your parents</mark>.",
+            paragraphRef: "Đoạn 2 (Paragraph 2)",
+            paraphrases: [
+                { qPart: "We have all experienced situations", pPart: "people will always have lots of everyday experiences / do the laundry and call your parents", meaning: "con người chúng ta luôn có rất nhiều trải nghiệm đời thường hàng ngày (giặt giũ, gọi điện cho bố mẹ)" },
+                { qPart: "we can share with friends", pPart: "to talk about too", meaning: "để trò chuyện, tâm sự, chia sẻ cùng nhau" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi khẳng định: 'Tất cả chúng ta đều đã trải qua những tình huống/trải nghiệm mà chúng ta có thể chia sẻ cùng bạn bè'.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'experienced situations', 'share with friends', 'talk about'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Tác giả viết rõ: <em>'Of course <strong>people will always have lots of everyday experiences to talk about too</strong>. After all, when you return from an inspiring trip, you still have to do the laundry and call your parents.'</em>",
+                    "<strong>Phân tích ngữ nghĩa:</strong> Tác giả khẳng định con người luôn luôn có nhiều trải nghiệm đời thường (<em>'lots of everyday experiences'</em> = <em>'situations we have all experienced'</em>) để trò chuyện cùng nhau (<em>'to talk about'</em> = <em>'we can share with friends'</em>).",
+                    "<strong>Kết luận:</strong> Trùng khớp hoàn toàn với quan điểm của tác giả ➔ <strong>YES</strong>."
+                ],
+                traps: "Từ 'everyday experiences' (trải nghiệm thường nhật như giặt quần áo, gọi điện thoại) chính là sự cụ thể hóa của 'situations we can share'."
+            },
+            vocabHighlights: ["bucket list", "ambitions", "reflect"]
+        },
+        {
+            id: 4,
+            qNum: "Question 4",
+            type: "Yes / No / Not Given",
+            wordLimit: "YES / NO / NOT GIVEN",
+            contextHeader: "Tâm lý ghen tị khi nghe những câu chuyện phi thường",
+            statementText: "People tend to become jealous when they hear amazing stories.",
+            correctAnswer: "NOT GIVEN",
+            passageSnippet: "Secondly, one wonders why the researchers assume that people who do extraordinary things only spend time with boring people who have no bucket list themselves? In reality, if you explore the Costa Rican rainforest, maybe your friend goes sailing... All of these can be considered great topics of conversation. Of course people will always have lots of everyday experiences to talk about too...",
+            paragraphRef: "Đoạn 2 & 4 (Paragraphs 2 & 4)",
+            paraphrases: [
+                { qPart: "jealous (ghen tị, đố kỵ)", pPart: "feel distant from your friends (cảm thấy xa cách)", meaning: "Trong bài chỉ nói đến việc cảm thấy xa cách hoặc không theo kịp mục tiêu của nhau, hoàn toàn KHÔNG hề nhắc đến cảm xúc 'ghen tị' (jealousy)." }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi nhận định: 'Mọi người có xu hướng trở nên ghen tị khi nghe những câu chuyện tuyệt vời'.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'jealous', 'tend to become', 'hear amazing stories'.",
+                    "<strong>Đối chiếu bài đọc:</strong> Bài đọc bàn về việc người có trải nghiệm phi thường bị 'cô lập xã hội' (not being included socially) hoặc cảm thấy xa cách với bạn bè (<em>'feel distant from your friends'</em>) nếu bạn bè không cùng chí hướng.",
+                    "<strong>Đánh giá sự xuất hiện của thông tin:</strong> Tác giả HOÀN TOÀN KHÔNG đề cập hay phân tích gì về cảm xúc ghen tị (<em>'jealous / jealousy'</em>) của người nghe.",
+                    "<strong>Kết luận:</strong> Thông tin không có trong bài ➔ <strong>NOT GIVEN</strong>."
+                ],
+                traps: "Bẫy suy diễn cá nhân: Thí sinh thường nghĩ 'kể chuyện đi chơi hay ho thì bạn bè sẽ ghen tị chứ sao'. Nhưng bài thi IELTS yêu cầu bám sát văn bản, nếu tác giả không hề nhắc tới từ hay ý 'jealous' thì chắc chắn là NOT GIVEN."
+            },
+            vocabHighlights: ["cost-benefit analysis", "extraordinary", "ambitions"]
+        },
+        {
+            id: 5,
+            qNum: "Question 5",
+            type: "Yes / No / Not Given",
+            wordLimit: "YES / NO / NOT GIVEN",
+            contextHeader: "Khả năng kết nối bạn bè của người tham gia hoạt động thú vị",
+            statementText: "Those who do interesting activities fail to connect with friends.",
+            correctAnswer: "NO",
+            passageSnippet: "In reality, if you explore the Costa Rican rainforest, maybe your friend goes sailing, gets an amazing professional qualification, or watches his child graduate from college. <mark class='bg-amber-100 text-amber-950 font-bold px-1 rounded'>All of these can be considered great topics of conversation. Of course people will always have lots of everyday experiences to talk about too</mark>... Another possible conclusion could be that if you want to do fantastic things and not be lonely, you should choose friends who have similar ambitions.",
+            paragraphRef: "Đoạn 2 & 3 (Paragraphs 2 & 3)",
+            paraphrases: [
+                { qPart: "fail to connect with friends", pPart: "great topics of conversation / everyday experiences to talk about / not be lonely", meaning: "Mâu thuẫn: Bài khẳng định họ có vô vàn chủ đề tuyệt vời để trò chuyện và hoàn toàn không bị cô đơn nếu chọn bạn cùng chí hướng." }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi khẳng định: 'Những người tham gia các hoạt động thú vị sẽ thất bại trong việc kết nối với bạn bè' (fail to connect with friends).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'interesting activities', 'fail to connect with friends'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2 & 3):</strong> Nghiên cứu của Cooney cho rằng người có trải nghiệm phi thường bị tách biệt, NHƯNG quan điểm của tác giả bài viết lại phản bác mạnh mẽ điều này:",
+                    "1. Trong thực tế, bạn bè cũng có những thành tựu và trải nghiệm thú vị khác, và tất cả đều là <strong>chủ đề trò chuyện tuyệt vời</strong> (<em>'great topics of conversation'</em>).",
+                    "2. Họ luôn có <strong>vô số trải nghiệm đời thường để gắn kết</strong> (<em>'lots of everyday experiences to talk about'</em>).",
+                    "3. Bạn có thể làm những điều tuyệt vời mà <strong>hoàn toàn không bị cô đơn</strong> (<em>'not be lonely'</em>) bằng cách chọn bạn có cùng chí hướng.",
+                    "<strong>Kết luận:</strong> Tác giả chứng minh họ hoàn toàn kết nối được chứ KHÔNG 'fail to connect'. Nhận định mâu thuẫn trực tiếp với tác giả ➔ <strong>NO</strong>."
+                ],
+                traps: "Phải phân biệt rạch ròi: Nghiên cứu của Cooney đưa ra kết luận tiêu cực, nhưng đề thi hỏi 'views of the WRITER' (quan điểm của TÁC GIẢ), và tác giả viết cả bài này để phản bác nghiên cứu đó."
+            },
+            vocabHighlights: ["bucket list", "ambitions", "reflect"]
+        },
+        {
+            id: 6,
+            qNum: "Question 6",
+            type: "Yes / No / Not Given",
+            wordLimit: "YES / NO / NOT GIVEN",
+            contextHeader: "Lời khuyên về việc sắp xếp mục tiêu theo thứ tự ưu tiên",
+            statementText: "You should organise your aims in their order of importance.",
+            correctAnswer: "NOT GIVEN",
+            passageSnippet: "<mark class='bg-amber-100 text-amber-950 font-bold px-1 rounded'>It certainly cannot hurt to reflect on the warning of the research. If doing great things makes you feel distant from your friends then, yes, you should probably think about how meaningful your goals are. However, if old friends cannot keep up with you or relate to your life goals, then you need to decide how much that should stop you from following your dreams</mark>.",
+            paragraphRef: "Đoạn 4 (Paragraph 4)",
+            paraphrases: [
+                { qPart: "organise your aims in their order of importance (sắp xếp mục tiêu theo thứ tự quan trọng)", pPart: "think about how meaningful your goals are (suy ngẫm xem mục tiêu có ý nghĩa ra sao)", meaning: "Tác giả chỉ khuyên cân nhắc độ ý nghĩa của mục tiêu, không hề nhắc đến việc 'sắp xếp theo thứ tự ưu tiên'." }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi nhận định: 'Bạn nên sắp xếp các mục tiêu của mình theo thứ tự mức độ quan trọng'.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'organise your aims', 'order of importance', 'goals'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> Tác giả khuyên bạn nên suy nghĩ xem mục tiêu của mình có ý nghĩa như thế nào (<em>'think about how meaningful your goals are'</em>) và tự quyết định xem liệu bạn bè cũ có nên ngăn cản bạn theo đuổi ước mơ hay không (<em>'following your dreams'</em>).",
+                    "<strong>Kiểm chứng thông tin:</strong> Tác giả KHÔNG HỀ đưa ra lời khuyên nào về việc lập danh sách hay sắp xếp các mục tiêu theo thứ tự từ quan trọng nhất đến ít quan trọng nhất (<em>'order of importance'</em>).",
+                    "<strong>Kết luận:</strong> Thông tin không xuất hiện trong bài ➔ <strong>NOT GIVEN</strong>."
+                ],
+                traps: "Thí sinh dễ nhầm 'think about how meaningful your goals are' (nghĩ về ý nghĩa mục tiêu) thành việc 'xếp hạng theo mức độ quan trọng'. Hai ý niệm này hoàn toàn khác nhau."
+            },
+            vocabHighlights: ["reflect", "cost-benefit analysis", "ambitions"]
+        }
+    ];
+
+    const vocabData = {
+        'cost-benefit analysis': { 
+            ipa: '/ˌkɒst ˈben.ɪ.fɪt əˈnæl.ə.sɪs/', 
+            type: 'noun phrase', 
+            vi: 'Phân tích chi phí - lợi ích (cân nhắc giữa cái được và cái mất)', 
+            eg: 'The researchers applied a rigid cost-benefit analysis to calculate the psychological trade-offs of social sharing.' 
+        },
+        'extraordinary': { 
+            ipa: '/ɪkˈstrɔː.dɪn.ər.i/', 
+            type: 'adjective', 
+            vi: 'Phi thường, xuất chúng, vượt xa những điều bình thường', 
+            eg: 'Undertaking extraordinary adventures often isolates individuals from peers who lack similar aspirations.' 
+        },
+        'bucket list': { 
+            ipa: '/ˈbʌk.ɪt lɪst/', 
+            type: 'noun phrase', 
+            vi: 'Danh sách những điều mong muốn thực hiện trước khi qua đời', 
+            eg: 'Backpacking through the Costa Rican rainforest had been at the top of her personal bucket list for decades.' 
+        },
+        'ambitions': { 
+            ipa: '/æmˈbɪʃ.ənz/', 
+            type: 'noun (plural)', 
+            vi: 'Hoài bão, khát vọng, mục tiêu lớn trong cuộc đời', 
+            eg: 'Surrounding yourself with lifelong companions who harbor similar ambitions minimizes social friction.' 
+        },
+        'reflect': { 
+            ipa: '/rɪˈflekt/', 
+            type: 'verb', 
+            vi: 'Suy ngẫm thấu đáo, nhìn nhận lại bản thân', 
+            eg: 'It is advantageous to reflect on whether chasing extreme milestones alienates you from existing friends.' 
+        },
+        'social exclusion': { 
+            ipa: '/ˌsəʊ.ʃəl ɪkˈskluː.ʒən/', 
+            type: 'noun phrase', 
+            vi: 'Sự cô lập, tẩy chay hoặc không được hòa nhập xã hội', 
+            eg: 'Participants who watched exceptional videos inadvertently suffered mild forms of temporary social exclusion.' 
+        },
+        'everyday experiences': { 
+            ipa: '/ˈev.ri.deɪ ɪkˈspɪə.ri.ən.sɪz/', 
+            type: 'noun phrase', 
+            vi: 'Những trải nghiệm thường nhật, bình dị trong cuộc sống', 
+            eg: 'Shared mundane chores and everyday experiences frequently serve as the glue that preserves enduring friendships.' 
+        },
+        'meaningful goals': { 
+            ipa: '/ˈmiː.nɪŋ.fəl ɡəʊlz/', 
+            type: 'noun phrase', 
+            vi: 'Những mục tiêu thực sự có ý nghĩa và giá trị nhân bản', 
+            eg: 'Before pursuing glamorous travel feats, evaluate whether they constitute truly meaningful goals.' 
+        },
+        'relate to': { 
+            ipa: '/rɪˈleɪt tuː/', 
+            type: 'phrasal verb', 
+            vi: 'Đồng cảm, thấu hiểu, kết nối được với tâm tư của người khác', 
+            eg: 'Longtime childhood companions may struggle to relate to the specialized challenges of high-achieving professionals.' 
+        },
+        'inspiring': { 
+            ipa: '/ɪnˈspaɪə.rɪŋ/', 
+            type: 'adjective', 
+            vi: 'Truyền cảm hứng, khích lệ tinh thần', 
+            eg: 'Returning from an inspiring mountaineering summit does not absolve one from routine household duties.' 
+        },
+        'distant': { 
+            ipa: '/ˈdɪs.tənt/', 
+            type: 'adjective', 
+            vi: 'Xa cách, lạnh nhạt trong mối quan hệ tình cảm', 
+            eg: 'Overemphasizing exotic personal exploits can inadvertently cause lifelong acquaintances to feel distant.' 
+        },
+        'professional qualification': { 
+            ipa: '/prəˈfeʃ.ən.əl ˌkwɒl.ɪ.fɪˈkeɪ.ʃən/', 
+            type: 'noun phrase', 
+            vi: 'Bằng cấp, chứng chỉ chuyên môn nghề nghiệp', 
+            eg: 'Earning an advanced professional qualification provides just as compelling a narrative as international travel.' 
+        }
+    };
+    </script>
+
+    <script>
+    let currentQuestionIndex = 0; // 0 to 5
+
+    function initApp() {
+        renderNavChips();
+        renderCurrentSlide();
+        renderAllQuestionsList();
+        renderSynonymsTable();
+        renderVocabGrid();
+        setupKeyboardNavigation();
+    }
+
+    function renderNavChips() {
+        const container = document.getElementById('question-nav-chips');
+        container.innerHTML = '';
+        questionsData.forEach((q, idx) => {
+            const btn = document.createElement('button');
+            const isActive = idx === currentQuestionIndex;
+            
+            let badgeBg = 'bg-slate-100 text-slate-700 hover:bg-slate-200';
+            if (isActive) {
+                badgeBg = 'bg-amberTheme-700 text-white shadow-sm ring-2 ring-amberTheme-600 ring-offset-1';
+            }
+
+            btn.className = `px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${badgeBg}`;
+            btn.innerHTML = `Q${q.id}: [ ${q.correctAnswer} ]`;
+            btn.onclick = () => {
+                currentQuestionIndex = idx;
+                renderNavChips();
+                renderCurrentSlide();
+            };
+            container.appendChild(btn);
+        });
+
+        const mob = document.getElementById('mobile-curr-indicator');
+        if (mob) {
+            mob.textContent = `Câu ${currentQuestionIndex + 1}/6 (${questionsData[currentQuestionIndex].correctAnswer})`;
+        }
+    }
+
+    function navigateQuestion(delta) {
+        const next = currentQuestionIndex + delta;
+        if (next >= 0 && next < questionsData.length) {
+            currentQuestionIndex = next;
+            renderNavChips();
+            renderCurrentSlide();
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+    }
+
+    function renderCurrentSlide() {
+        const q = questionsData[currentQuestionIndex];
+        const container = document.getElementById('slide-card-container');
+        const counter = document.getElementById('slide-counter-badge');
+        if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        if (btnPrev) {
+            btnPrev.disabled = currentQuestionIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+        }
+        if (btnNext) {
+            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+        }
+
+        let ansBadgeColor = 'bg-emerald-600 text-white';
+        if (q.correctAnswer === 'NO') ansBadgeColor = 'bg-rose-600 text-white';
+        if (q.correctAnswer === 'NOT GIVEN') ansBadgeColor = 'bg-amber-500 text-white';
+
+        container.innerHTML = `
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+                
+                <!-- Slide Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-2xl bg-amber-100 text-amberTheme-800 flex items-center justify-center font-extrabold text-base border border-amber-200">
+                            ${q.id}
+                        </span>
+                        <div>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-amberTheme-700">${q.type}</span>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">${q.qNum}: ${q.contextHeader}</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                            Yêu cầu: ${q.wordLimit}
+                        </span>
+                        <span class="text-xs font-semibold px-3 py-1 bg-amber-50 text-amberTheme-700 rounded-full border border-amber-200">
+                            ${q.paragraphRef}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Statement Prompt Box -->
+                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nhận Định Trong Đề Bài (Statement)</span>
+                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">"${q.statementText}"</p>
+                </div>
+
+                <!-- Answer Reveal Banner -->
+                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-amber-50/80 via-orange-50/50 to-white border border-amber-200">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-amberTheme-700">Đáp Án Chuẩn Xác</span>
+                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
+                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm ${ansBadgeColor} answer-badge">
+                                Đáp án: ${q.correctAnswer}
+                            </span>
+                        </div>
+                    </div>
+
+                    <button onclick="playSpeech('${q.statementText.replace(/'/g, "\\'")}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Phát âm nhận định</span>
+                    </button>
+                </div>
+
+                <!-- Evidence in Reading Passage -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amberTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Bằng Chứng (${q.paragraphRef})</h4>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-amber-50/40 border border-amber-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
+                        "${q.passageSnippet}"
+                    </div>
+                </div>
+
+                <!-- Paraphrase & Synonym Mapping Table -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Paraphrase</h4>
+                    </div>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
+                                <tr>
+                                    <th class="py-2.5 px-4 w-1/3">Nhận định trong đề (Question ${q.id})</th>
+                                    <th class="py-2.5 px-4 w-1/3">Văn bản bài đọc (${q.paragraphRef})</th>
+                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 bg-white">
+                                ${q.paraphrases.map(p => `
+                                    <tr>
+                                        <td class="py-3 px-4 font-semibold text-amber-800 bg-amber-50/30">${p.qPart}</td>
+                                        <td class="py-3 px-4 font-semibold text-purple-800 bg-purple-50/20">${p.pPart}</td>
+                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Vietnamese In-Depth Explanation & Logic -->
+                <div class="mt-6 bg-amber-50/40 border border-amber-200/80 rounded-2xl p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amberTheme-600"></span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-amberTheme-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
+                    </div>
+
+                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
+
+                    <div class="space-y-2 mb-4">
+                        ${q.vietnameseAnalysis.stepByStep.map(step => `
+                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="text-amberTheme-600 mt-1 font-bold">▸</span>
+                                <div>${step}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${q.vietnameseAnalysis.traps ? `
+                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
+                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
+                            <span>${q.vietnameseAnalysis.traps}</span>
+                        </div>
+                    ` : ''}
+                </div>
+
+                <!-- Highlighted Vocabulary in this question -->
+                <div class="mt-6 pt-5 border-t border-slate-100">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
+                    <div class="flex flex-wrap gap-3">
+                        ${q.vocabHighlights.map(v => {
+                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
+                            return `
+                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-amber-400 transition-colors">
+                                    <button onclick="playSpeech('${v}')" class="text-amberTheme-700 hover:text-amberTheme-900" title="Nghe phát âm chuẩn UK">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                    <div>
+                                        <span class="font-bold text-sm text-slate-900">${v}</span>
+                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
+                                        <span class="text-xs text-amberTheme-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+            </div>
+        `;
+    }
+
+    function renderAllQuestionsList(filter = 'all') {
+        const container = document.getElementById('all-questions-container');
+        container.innerHTML = '';
+
+        const filtered = questionsData.filter(q => {
+            if (filter === 'all') return true;
+            return q.correctAnswer === filter;
+        });
+
+        filtered.forEach(q => {
+            const card = document.createElement('div');
+            card.className = "gradient-border bg-white rounded-2xl p-6 shadow-sm";
+
+            let ansColor = "bg-emerald-100 text-emerald-800 border-emerald-300";
+            if (q.correctAnswer === 'NO') ansColor = "bg-rose-100 text-rose-800 border-rose-300";
+            if (q.correctAnswer === 'NOT GIVEN') ansColor = "bg-amber-100 text-amber-800 border-amber-300";
+
+            card.innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-amberTheme-700 text-white font-bold text-xs flex items-center justify-center">
+                            ${q.id}
+                        </span>
+                        <h3 class="font-bold text-slate-900">${q.qNum} - <span class="text-slate-500 font-medium">${q.contextHeader}</span></h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-mono font-bold px-3 py-1 rounded-md border ${ansColor}">
+                            ĐÁP ÁN: ${q.correctAnswer}
+                        </span>
+                        <span class="text-xs text-slate-400">${q.paragraphRef}</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 mb-3 text-sm">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nhận định trong đề:</span>
+                    <p class="font-bold text-slate-800">"${q.statementText}"</p>
+                </div>
+
+                <div class="bg-amber-50/60 p-3.5 rounded-xl border border-amber-200/80 mb-4 text-xs sm:text-sm italic text-slate-700">
+                    <strong>Manh mối bài đọc (${q.paragraphRef}):</strong> "${q.passageSnippet}"
+                </div>
+
+                <div class="mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <div class="flex flex-wrap gap-2">
+                        ${q.paraphrases.map(p => `
+                            <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
+                                <span class="text-amber-700 font-bold">${p.qPart}</span> ➔ <span class="text-purple-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="bg-amber-50/40 border border-amber-200 p-4 rounded-xl text-xs sm:text-sm text-slate-700">
+                    <p class="font-bold text-amber-900 mb-1.5">Giải thích logic Tiếng Việt:</p>
+                    <p class="mb-2">${q.vietnameseAnalysis.logic}</p>
+                    <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
+                        ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function filterAllQuestions(type) {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+            b.className = 'filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200';
+        });
+        if (event && event.target) {
+            event.target.className = 'filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-amberTheme-700 text-white';
+        }
+        renderAllQuestionsList(type);
+    }
+
+    function renderSynonymsTable() {
+        const tbody = document.getElementById('synonyms-table-body');
+        tbody.innerHTML = '';
+
+        questionsData.forEach(q => {
+            q.paraphrases.forEach((p, pIndex) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center font-bold text-slate-700">
+                        ${pIndex === 0 ? `<span class="bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="keyword-chip">${p.qPart}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="passage-chip">${p.pPart}</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="text-xs font-bold uppercase px-2.5 py-1 bg-amberTheme-700 text-white rounded shadow-2xs">
+                            ${q.correctAnswer}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
+                        ${p.meaning}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    }
+
+    function renderVocabGrid(filterWord = '') {
+        const container = document.getElementById('vocab-grid-container');
+        container.innerHTML = '';
+
+        const words = Object.keys(vocabData).filter(w => {
+            if (!filterWord) return true;
+            const query = filterWord.toLowerCase();
+            return w.toLowerCase().includes(query) || vocabData[w].vi.toLowerCase().includes(query);
+        });
+
+        if (words.length === 0) {
+            container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">Không tìm thấy từ vựng phù hợp.</div>`;
+            return;
+        }
+
+        words.forEach(w => {
+            const item = vocabData[w];
+            const card = document.createElement('div');
+            card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-amber-400 transition-all flex flex-col justify-between";
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h4 class="text-lg font-bold text-slate-900">${w}</h4>
+                        <button onclick="playSpeech('${w}')" class="w-8 h-8 rounded-full bg-amber-50 text-amber-700 hover:bg-amber-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs" title="Nghe phát âm chuẩn UK">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${item.ipa}</span>
+                        <span class="text-xs italic text-amber-700 font-semibold">${item.type}</span>
+                    </div>
+                    <p class="text-sm font-semibold text-amber-900 mb-3">${item.vi}</p>
+                </div>
+                <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-lg">
+                    "${item.eg}"
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function searchVocab(val) {
+        renderVocabGrid(val);
+    }
+
+    function playSpeech(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.88;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function switchView(viewName) {
+        const views = ['presentation', 'all', 'matrix', 'synonyms', 'vocab'];
+        views.forEach(v => {
+            const sec = document.getElementById(`view-${v}`);
+            const tabBtn = document.getElementById(`tab-${v}`);
+            if (sec) sec.classList.add('hidden');
+            if (tabBtn) {
+                tabBtn.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+            }
+        });
+
+        const activeSec = document.getElementById(`view-${viewName}`);
+        const activeTab = document.getElementById(`tab-${viewName}`);
+        if (activeSec) activeSec.classList.remove('hidden');
+        if (activeTab) {
+            activeTab.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-amberTheme-700 text-white shadow-sm';
+        }
+    }
+
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            const presView = document.getElementById('view-presentation');
+            if (presView && !presView.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    navigateQuestion(1);
+                } else if (e.key === 'ArrowLeft') {
+                    navigateQuestion(-1);
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
