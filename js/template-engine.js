@@ -652,6 +652,385 @@
 </template>
 `;
 
+
+    // =========================================================================
+    // IELTS READING QUESTION TYPE REGISTRY & REUSABLE COMPONENT ENGINE
+    // Complete Taxonomy for all 15 Official IELTS Academic Reading Question Types
+    // =========================================================================
+    const IELTS_READING_QUESTION_TYPES = {
+        'multiple-choice': {
+            id: 'multiple-choice',
+            aliases: ['mcq', 'multiple_choice', 'single-choice'],
+            name: 'Multiple Choice (Single Answer)',
+            category: 'selection',
+            defaultRubric: 'Choose the correct letter, A, B, C or D.',
+            defaultStrategy: 'Locate keywords from the stem, eliminate distractors, and confirm paraphrase match.',
+            renderInput: (q, context) => {
+                const options = q.options || (context && context.options) || [];
+                const ans = q.ans || '';
+                const optsHtml = options.map(opt => {
+                    if (typeof opt === 'object' && opt.letter) {
+                        return `<option value="${opt.letter}">${opt.letter}: ${opt.text}</option>`;
+                    }
+                    return `<option value="${opt}">${opt}</option>`;
+                }).join('');
+                return `
+                    <select class="select-input" data-ans="${ans}" style="width:100%; max-width:680px; min-width:280px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
+                        <option value="">-- Select Answer --</option>
+                        ${optsHtml}
+                    </select>
+                `;
+            }
+        },
+        'multiple-choice-multi': {
+            id: 'multiple-choice-multi',
+            aliases: ['mcq-multi', 'multiple-choice-multiple', 'multi-select'],
+            name: 'Multiple Choice (Multiple Answers)',
+            category: 'selection',
+            defaultRubric: 'Choose the correct letters from the options below.',
+            defaultStrategy: 'Scan the passage for each option and select all confirmed claims.',
+            renderInput: (q, context) => {
+                const options = q.options || (context && context.options) || [];
+                const ans = q.ans || '';
+                const optsHtml = options.map(opt => {
+                    const letter = typeof opt === 'object' ? opt.letter : opt;
+                    const text = typeof opt === 'object' ? opt.text : opt;
+                    return `
+                        <label class="multi-choice-label" style="display:flex; align-items:center; gap:8px; font-size:17px; cursor:pointer;">
+                            <input type="checkbox" class="checkbox-input" value="${letter}" data-ans-part="${ans}">
+                            <span><strong>${letter}:</strong> ${text}</span>
+                        </label>
+                    `;
+                }).join('');
+                return `<div class="multi-choice-group" data-ans="${ans}" style="display:flex; flex-direction:column; gap:8px;">${optsHtml}</div>`;
+            }
+        },
+        'tfng': {
+            id: 'tfng',
+            aliases: ['true-false-not-given', 'true_false', 't-f-ng'],
+            name: 'Identifying Information (True / False / Not Given)',
+            category: 'selection',
+            defaultRubric: 'Do the following statements agree with the information given in the reading passage? Write TRUE, FALSE or NOT GIVEN.',
+            defaultStrategy: 'TRUE = agrees with the text. FALSE = directly contradicts the text. NOT GIVEN = the text neither agrees nor disagrees.',
+            renderInput: (q) => {
+                const ans = q.ans || '';
+                return `
+                    <select class="select-input" data-ans="${ans}" style="min-width:200px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
+                        <option value="">-- Select Answer --</option>
+                        <option value="TRUE">TRUE</option>
+                        <option value="FALSE">FALSE</option>
+                        <option value="NOT GIVEN">NOT GIVEN</option>
+                    </select>
+                `;
+            }
+        },
+        'ynng': {
+            id: 'ynng',
+            aliases: ['yes-no-not-given', 'yes_no', 'y-n-ng'],
+            name: 'Identifying Views / Claims (Yes / No / Not Given)',
+            category: 'selection',
+            defaultRubric: 'Do the following statements agree with the views/claims of the writer? Write YES, NO or NOT GIVEN.',
+            defaultStrategy: "YES = matches writer's opinion. NO = contradicts writer's opinion. NOT GIVEN = writer does not state an opinion.",
+            renderInput: (q) => {
+                const ans = q.ans || '';
+                return `
+                    <select class="select-input" data-ans="${ans}" style="min-width:200px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
+                        <option value="">-- Select Answer --</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                        <option value="NOT GIVEN">NOT GIVEN</option>
+                    </select>
+                `;
+            }
+        },
+        'matching-headings': {
+            id: 'matching-headings',
+            aliases: ['headings', 'matching_headings', 'paragraph-headings'],
+            name: 'Matching Headings',
+            category: 'selection',
+            defaultRubric: 'Choose the correct heading for each paragraph from the list of headings below.',
+            defaultStrategy: 'Read the opening and closing sentences of each paragraph to synthesize the core purpose before choosing.',
+            renderInput: (q, context) => {
+                const headings = q.headings || (context && context.headings) || [];
+                const ans = q.ans || '';
+                const optsHtml = headings.map(h => `<option value="${h.roman}">${h.roman}. ${h.text}</option>`).join('');
+                return `
+                    <select class="select-input" data-ans="${ans}" style="width:100%; min-width:280px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
+                        <option value="">-- Select Heading --</option>
+                        ${optsHtml}
+                    </select>
+                `;
+            }
+        },
+        'matching-features': {
+            id: 'matching-features',
+            aliases: ['features', 'matching_features', 'categorization'],
+            name: 'Matching Features / Categories',
+            category: 'selection',
+            defaultRubric: 'Match each statement with the correct group or person. Write the correct letter, A–D.',
+            defaultStrategy: 'Scan the text for each proper noun / category, read around all mentions, then match the claims.',
+            renderInput: (q, context) => {
+                const options = q.options || (context && context.options) || [];
+                const ans = q.ans || '';
+                const optsHtml = options.map(opt => {
+                    if (typeof opt === 'object' && opt.letter) {
+                        return `<option value="${opt.letter}">${opt.letter}: ${opt.text}</option>`;
+                    }
+                    return `<option value="${opt}">${opt}</option>`;
+                }).join('');
+                return `
+                    <select class="select-input" data-ans="${ans}" style="width:100%; max-width:680px; min-width:280px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
+                        <option value="">-- Select Feature --</option>
+                        ${optsHtml}
+                    </select>
+                `;
+            }
+        },
+        'matching-information': {
+            id: 'matching-information',
+            aliases: ['which-paragraph', 'matching_information', 'paragraph-matching'],
+            name: 'Matching Information to Paragraphs',
+            category: 'selection',
+            defaultRubric: 'Which paragraph contains the following information? Write the correct letter, A–G.',
+            defaultStrategy: 'Identify whether the question asks for a reason, example, description, or comparison.',
+            renderInput: (q) => {
+                const ans = q.ans || '';
+                const paras = ['Paragraph A', 'Paragraph B', 'Paragraph C', 'Paragraph D', 'Paragraph E', 'Paragraph F', 'Paragraph G', 'Paragraph H'];
+                const optsHtml = paras.map(p => `<option value="${p}">${p}</option>`).join('');
+                return `
+                    <select class="select-input" data-ans="${ans}" style="min-width:220px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
+                        <option value="">-- Select Paragraph --</option>
+                        ${optsHtml}
+                    </select>
+                `;
+            }
+        },
+        'matching-sentence-endings': {
+            id: 'matching-sentence-endings',
+            aliases: ['sentence-endings', 'matching_sentence_endings'],
+            name: 'Matching Sentence Endings',
+            category: 'selection',
+            defaultRubric: 'Complete each sentence with the correct ending, A–G, below.',
+            defaultStrategy: 'Check grammatical compatibility and scan for parallel ideas in the text.',
+            renderInput: (q, context) => {
+                const options = q.options || (context && context.options) || [];
+                const ans = q.ans || '';
+                const optsHtml = options.map(opt => {
+                    if (typeof opt === 'object' && opt.letter) {
+                        return `<option value="${opt.letter}">${opt.letter}: ${opt.text}</option>`;
+                    }
+                    return `<option value="${opt}">${opt}</option>`;
+                }).join('');
+                return `
+                    <select class="select-input" data-ans="${ans}" style="width:100%; max-width:680px; min-width:300px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
+                        <option value="">-- Select Ending --</option>
+                        ${optsHtml}
+                    </select>
+                `;
+            }
+        },
+        'summary-box': {
+            id: 'summary-box',
+            aliases: ['summary-completion-box', 'box-completion'],
+            name: 'Summary Completion (with a Box)',
+            category: 'selection',
+            defaultRubric: 'Complete the summary using the list of words/phrases, A–I, below.',
+            defaultStrategy: 'Identify the required part of speech for each blank, then match synonyms from the box.',
+            renderInput: (q, context) => {
+                const boxOptions = q.boxOptions || (context && context.boxOptions) || [];
+                const ans = q.ans || '';
+                const boxHtml = boxOptions.map(opt => `<span class="box-chip" style="background:#ffffff; border:1.5px solid #cbd5e1; padding:6px 14px; border-radius:8px; font-weight:700; font-size:18px; color:var(--text-dark);"><strong>${opt.letter}.</strong> ${opt.text}</span>`).join('');
+                const optsHtml = boxOptions.map(opt => `<option value="${opt.letter}">${opt.letter} (${opt.text})</option>`).join('');
+                return `
+                    <div style="display:flex; flex-direction:column; gap:14px; width:100%;">
+                        ${boxOptions.length ? `
+                        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:#eff6ff; padding:12px 18px; border-radius:10px; border:1.5px solid #bfdbfe;">
+                            <span style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-right:4px;">📦 Option Box:</span>
+                            ${boxHtml}
+                        </div>` : ''}
+                        <div style="display:flex; align-items:center; gap:14px; margin-top:4px;">
+                            <span style="font-weight:700; font-size:18px; color:var(--text-dark);">Your Choice:</span>
+                            <select class="select-input" data-ans="${ans}" style="min-width:280px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
+                                <option value="">Select option...</option>
+                                ${optsHtml}
+                            </select>
+                        </div>
+                    </div>
+                `;
+            }
+        },
+        'sentence-completion': {
+            id: 'sentence-completion',
+            aliases: ['gap-fill', 'sentence_completion'],
+            name: 'Sentence Completion',
+            category: 'completion',
+            defaultRubric: 'Complete the sentences below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
+            defaultStrategy: 'Predict the grammatical category of the missing word and extract exact words from the passage without changing forms.',
+            renderInput: (q) => {
+                const ans = q.ans || '';
+                const width = (q.width || 230) + 'px';
+                return `<input type="text" class="blank-input" data-ans="${ans}" placeholder="Type answer..." style="width:${width}; font-weight:700; font-size:18px; padding:8px 14px; border-radius:8px;">`;
+            }
+        },
+        'summary-completion': {
+            id: 'summary-completion',
+            aliases: ['summary', 'summary_completion'],
+            name: 'Summary Completion (from Text)',
+            category: 'completion',
+            defaultRubric: 'Complete the summary below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
+            defaultStrategy: 'Locate the section of the text summarized, track parallel sentence structures, and extract exact words.',
+            renderInput: (q, context) => {
+                const wb = q.wordBank || (context && context.wordBank);
+                const ans = q.ans || '';
+                if (wb && Array.isArray(wb) && wb.length) {
+                    const chipsHtml = wb.map(w => `<span class="word-chip" data-word="${w}" style="font-size:18px; font-weight:700; padding:6px 14px;">${w}</span>`).join('');
+                    return `
+                        <div style="display:flex; flex-direction:column; gap:14px; width:100%;">
+                            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:#f8fafc; padding:12px 18px; border-radius:10px; border:1.5px solid #cbd5e1;">
+                                <span style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-right:4px;">📦 Word Bank:</span>
+                                ${chipsHtml}
+                            </div>
+                            <div style="display:flex; align-items:center; gap:14px; margin-top:4px;">
+                                <span style="font-weight:700; font-size:18px; color:var(--text-dark);">Your Choice:</span>
+                                <input type="text" class="blank-input" data-ans="${ans}" placeholder="Type answer..." style="width:230px; font-weight:700; font-size:18px; padding:8px 14px; border-radius:8px;">
+                            </div>
+                        </div>
+                    `;
+                }
+                return `<input type="text" class="blank-input" data-ans="${ans}" placeholder="Type answer..." style="width:230px; font-weight:700; font-size:18px; padding:8px 14px; border-radius:8px;">`;
+            }
+        },
+        'notes-completion': {
+            id: 'notes-completion',
+            aliases: ['notes', 'notes_completion'],
+            name: 'Notes Completion',
+            category: 'completion',
+            defaultRubric: 'Complete the notes below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
+            defaultStrategy: 'Use headings and bullet structure to navigate through the text chronologically.',
+            renderInput: (q) => {
+                const ans = q.ans || '';
+                return `<input type="text" class="blank-input" data-ans="${ans}" placeholder="Type answer..." style="width:230px; font-weight:700; font-size:18px; padding:8px 14px; border-radius:8px;">`;
+            }
+        },
+        'table-completion': {
+            id: 'table-completion',
+            aliases: ['table', 'table_completion'],
+            name: 'Table Completion',
+            category: 'completion',
+            defaultRubric: 'Complete the table below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
+            defaultStrategy: 'Read table headers horizontally and vertically to pinpoint the exact intersections in the text.',
+            renderInput: (q) => {
+                const ans = q.ans || '';
+                return `<input type="text" class="blank-input" data-ans="${ans}" placeholder="Type answer..." style="width:200px; font-weight:700; font-size:18px; padding:8px 14px; border-radius:8px;">`;
+            }
+        },
+        'flowchart-completion': {
+            id: 'flowchart-completion',
+            aliases: ['flowchart', 'flow-chart', 'flowchart_completion'],
+            name: 'Flow-chart Completion',
+            category: 'completion',
+            defaultRubric: 'Complete the flow-chart below. Choose ONE WORD ONLY from the passage for each answer.',
+            defaultStrategy: 'Follow sequence words (first, then, next, subsequently) to track process steps.',
+            renderInput: (q) => {
+                const ans = q.ans || '';
+                return `<input type="text" class="blank-input" data-ans="${ans}" placeholder="Type answer..." style="width:220px; font-weight:700; font-size:18px; padding:8px 14px; border-radius:8px;">`;
+            }
+        },
+        'short-answer': {
+            id: 'short-answer',
+            aliases: ['short_answer', 'short-answer-questions'],
+            name: 'Short-Answer Questions',
+            category: 'completion',
+            defaultRubric: 'Answer the questions below. Choose NO MORE THAN THREE WORDS AND/OR A NUMBER from the passage.',
+            defaultStrategy: 'Locate the question word (What, Which, Who, Where) and extract the exact factual entity.',
+            renderInput: (q) => {
+                const ans = q.ans || '';
+                return `<input type="text" class="blank-input" data-ans="${ans}" placeholder="Type answer..." style="width:240px; font-weight:700; font-size:18px; padding:8px 14px; border-radius:8px;">`;
+            }
+        },
+        'diagram-labelling': {
+            id: 'diagram-labelling',
+            aliases: ['diagram', 'diagram_labelling', 'map-labelling'],
+            name: 'Diagram / Label Completion',
+            category: 'completion',
+            defaultRubric: 'Label the diagram below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
+            defaultStrategy: 'Study spatial relationships and directional markers (above, below, adjacent, internally).',
+            renderInput: (q) => {
+                const ans = q.ans || '';
+                return `<input type="text" class="blank-input" data-ans="${ans}" placeholder="Type answer..." style="width:220px; font-weight:700; font-size:18px; padding:8px 14px; border-radius:8px;">`;
+            }
+        }
+    };
+
+    class ReadingQuestionRegistry {
+        static get(typeOrAlias) {
+            if (!typeOrAlias) return null;
+            const key = String(typeOrAlias).toLowerCase().trim();
+            if (IELTS_READING_QUESTION_TYPES[key]) {
+                return IELTS_READING_QUESTION_TYPES[key];
+            }
+            for (const id in IELTS_READING_QUESTION_TYPES) {
+                const def = IELTS_READING_QUESTION_TYPES[id];
+                if (def.aliases && def.aliases.includes(key)) {
+                    return def;
+                }
+            }
+            return null;
+        }
+
+        static resolve(q, context = {}) {
+            // 1. Explicit question type declaration
+            if (q && q.type) {
+                const match = this.get(q.type);
+                if (match) return match;
+            }
+            if (context && context.type) {
+                const match = this.get(context.type);
+                if (match) return match;
+            }
+
+            // 2. Intelligent heuristics for backwards-compatibility
+            if (q && (q.boxOptions || (context && context.boxOptions))) {
+                return IELTS_READING_QUESTION_TYPES['summary-box'];
+            }
+            if (q && (q.headings || (context && context.headings))) {
+                return IELTS_READING_QUESTION_TYPES['matching-headings'];
+            }
+            if (q && q.ans) {
+                const a = String(q.ans).trim().toUpperCase();
+                if ((a === 'YES' || a === 'NO' || a === 'NOT GIVEN') && !q.options) {
+                    if (q.isTF || (context && context.isTF)) {
+                        return IELTS_READING_QUESTION_TYPES['tfng'];
+                    }
+                    return IELTS_READING_QUESTION_TYPES['ynng'];
+                }
+                if (a === 'TRUE' || a === 'FALSE') {
+                    return IELTS_READING_QUESTION_TYPES['tfng'];
+                }
+                if (a.startsWith('PARAGRAPH')) {
+                    return IELTS_READING_QUESTION_TYPES['matching-information'];
+                }
+            }
+            if (q && q.options && Array.isArray(q.options)) {
+                if (context && context.isFeatures) {
+                    return IELTS_READING_QUESTION_TYPES['matching-features'];
+                }
+                return IELTS_READING_QUESTION_TYPES['multiple-choice'];
+            }
+            if (context && context.wordBank) {
+                return IELTS_READING_QUESTION_TYPES['summary-completion'];
+            }
+
+            // Default to sentence completion
+            return IELTS_READING_QUESTION_TYPES['sentence-completion'];
+        }
+
+        static renderInput(q, context = {}) {
+            const handler = this.resolve(q, context);
+            return handler.renderInput(q, context);
+        }
+    }
+
     class TemplateEngine {
         static init() {
             // 1. Inject built-in templates synchronously into DOM if not present
@@ -785,64 +1164,9 @@
                 }
             }
             if (data.ans || data.inputAns) {
-                const ansVal = data.ans || data.inputAns;
                 const inputContainer = section.querySelector('[data-slot="input-area"]');
                 if (inputContainer) {
-                    if (data.boxOptions && Array.isArray(data.boxOptions)) {
-                        const boxHtml = data.boxOptions.map(opt => `<span class="box-chip" style="background:#ffffff; border:1.5px solid #cbd5e1; padding:6px 14px; border-radius:8px; font-weight:700; font-size:18px; color:var(--text-dark);"><strong>${opt.letter}.</strong> ${opt.text}</span>`).join('');
-                        const optionsHtml = data.boxOptions.map(opt => `<option value="${opt.letter}">${opt.letter} (${opt.text})</option>`).join('');
-                        inputContainer.innerHTML = `
-                            <div style="display:flex; flex-direction:column; gap:14px; width:100%;">
-                                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:#eff6ff; padding:12px 18px; border-radius:10px; border:1.5px solid #bfdbfe;">
-                                    <span style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-right:4px;">📦 Option Box:</span>
-                                    ${boxHtml}
-                                </div>
-                                <div style="display:flex; align-items:center; gap:14px; margin-top:4px;">
-                                    <span style="font-weight:700; font-size:18px; color:var(--text-dark);">Your Choice:</span>
-                                    <select class="select-input" data-ans="${ansVal}" style="min-width:280px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
-                                        <option value="">Select option...</option>
-                                        ${optionsHtml}
-                                    </select>
-                                </div>
-                            </div>
-                        `;
-                    } else if (ansVal === 'YES' || ansVal === 'NO' || ansVal === 'NOT GIVEN') {
-                        inputContainer.innerHTML = `
-                            <div style="display:flex; align-items:center; gap:14px;">
-                                <span style="font-weight:700; font-size:18px; color:var(--text-dark);">Your Choice:</span>
-                                <select class="select-input" data-ans="${ansVal}" style="min-width:200px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
-                                    <option value="">Select...</option>
-                                    <option value="YES">YES</option>
-                                    <option value="NO">NO</option>
-                                    <option value="NOT GIVEN">NOT GIVEN</option>
-                                </select>
-                            </div>
-                        `;
-                    } else {
-                        const wb = data.wordBank || (window.module3Data && window.module3Data.reading3a && window.module3Data.reading3a.wordBank);
-                        if (wb && Array.isArray(wb)) {
-                            const chipsHtml = wb.map(w => `<span class="word-chip" data-word="${w}" style="font-size:18px; font-weight:700; padding:6px 14px;">${w}</span>`).join('');
-                            inputContainer.innerHTML = `
-                                <div style="display:flex; flex-direction:column; gap:14px; width:100%;">
-                                    <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:#f8fafc; padding:12px 18px; border-radius:10px; border:1.5px solid #cbd5e1;">
-                                        <span style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-right:4px;">📦 Word Bank:</span>
-                                        ${chipsHtml}
-                                    </div>
-                                    <div style="display:flex; align-items:center; gap:12px;">
-                                        <span style="font-weight:700; font-size:19px;">Your Choice:</span>
-                                        <input type="text" class="blank-input" data-ans="${ansVal}" placeholder="Type or click word..." style="width:230px; font-weight:700;">
-                                    </div>
-                                </div>
-                            `;
-                        } else {
-                            inputContainer.innerHTML = `
-                                <div style="display:flex; align-items:center; gap:12px;">
-                                    <span style="font-weight:700; font-size:19px;">Your Choice:</span>
-                                    <input type="text" class="blank-input" data-ans="${ansVal}" placeholder="Type answer..." style="width:230px; font-weight:700;">
-                                </div>
-                            `;
-                        }
-                    }
+                    inputContainer.innerHTML = ReadingQuestionRegistry.renderInput(data, data);
                 }
             }
             if (data.explanation) {
@@ -892,36 +1216,18 @@
                         `;
                     }
                     if (data.questions && Array.isArray(data.questions)) {
-                        const isHeadings = !!data.headings;
                         const slideBadge = (el ? el.getAttribute('badge') : null) || data.badge || '';
                         const headingTitle = data.headingTitle || (slideBadge ? `📋 ${slideBadge.split('•')[1]?.trim() || slideBadge}` : '📋 Questions');
                         html += `<div style="font-size:16px; font-weight:800; text-transform:uppercase; color:var(--col-reading); margin-bottom:10px;">${headingTitle}</div>`;
                         html += data.questions.map(q => {
-                            let selectOptions = '<option value="">Select...</option>';
-                            if (isHeadings) {
-                                selectOptions += data.headings.map(h => `<option value="${h.roman}">${h.roman}. ${h.text}</option>`).join('');
-                                if (q.ans && !data.headings.some(h => h.roman === q.ans)) {
-                                    selectOptions += `<option value="${q.ans}">${q.ans}</option>`;
-                                }
-                            } else if (q.options && Array.isArray(q.options)) {
-                                selectOptions += q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
-                            } else if (['YES', 'NO', 'NOT GIVEN'].includes(q.ans)) {
-                                selectOptions += `<option value="YES">YES</option><option value="NO">NO</option><option value="NOT GIVEN">NOT GIVEN</option>`;
-                            } else if (q.ans && q.ans.startsWith('Paragraph')) {
-                                const paras = ['Paragraph A', 'Paragraph B', 'Paragraph C', 'Paragraph D', 'Paragraph E', 'Paragraph F', 'Paragraph G'];
-                                selectOptions += paras.map(p => `<option value="${p}">${p}</option>`).join('');
-                            } else {
-                                selectOptions += `<option value="${q.ans}">${q.ans}</option>`;
-                            }
+                            const inputHtml = ReadingQuestionRegistry.renderInput(q, data);
                             return `
-                                <div class="q-card" data-q="${q.qNum}" ${q.evId ? `data-ev="${q.evId}"` : ''} style="background:#ffffff; border:1px solid #cbd5e1; border-radius:10px; padding:12px 16px; margin-bottom:10px;">
+                                <div class="q-card" data-q="${q.qNum || q.num || ''}" ${q.evId ? `data-ev="${q.evId}"` : ''} style="background:#ffffff; border:1px solid #cbd5e1; border-radius:10px; padding:12px 16px; margin-bottom:10px;">
                                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
                                         <strong style="font-size:18px;">${q.text}</strong>
-                                        ${q.evId ? `<button class="syn-btn" data-ev="${q.evId}" onclick="deckEngine.toggleSynonymExplanation('${q.qNum}', '${q.evId}')" style="padding:2px 8px; font-size:13px;" title="Highlight Evidence">💡 Evidence</button>` : ''}
+                                        ${q.evId ? `<button class="syn-btn" data-ev="${q.evId}" onclick="deckEngine.toggleSynonymExplanation('${q.qNum || q.num || ''}', '${q.evId}')" style="padding:2px 8px; font-size:13px;" title="Highlight Evidence">💡 Evidence</button>` : ''}
                                     </div>
-                                    <select class="select-input" data-ans="${q.ans}" style="width:100%; font-weight:700;">
-                                        ${selectOptions}
-                                    </select>
+                                    ${inputHtml}
                                 </div>
                             `;
                         }).join('');
@@ -1282,11 +1588,13 @@
                 // Section-divider specific enhancements
                 const numEl = section.querySelector('[data-slot="num"], .section-number');
                 if (numEl) {
-                    const explicitNum = el.getAttribute('num') || el.getAttribute('data-num');
+                    const numSlot = el.querySelector('[slot="num"]');
+                    const explicitNum = el.getAttribute('num') || el.getAttribute('data-num') || (numSlot ? numSlot.textContent.trim() : '');
                     if (explicitNum) {
                         numEl.innerHTML = explicitNum;
                     } else {
-                        const badgeVal = el.getAttribute('badge') || '';
+                        const badgeSlot = el.querySelector('[slot="badge"]');
+                        const badgeVal = el.getAttribute('badge') || (badgeSlot ? badgeSlot.textContent.trim() : '') || '';
                         const match = badgeVal.match(/(\d+[a-z]?)/i);
                         if (match) numEl.innerHTML = match[1].toLowerCase();
                     }
@@ -1455,6 +1763,16 @@
             }
         }
     }
+
+    // Expose IELTS Question Types and Registry
+    TemplateEngine.IELTSQuestionTypes = IELTS_READING_QUESTION_TYPES;
+    TemplateEngine.ReadingQuestionRegistry = ReadingQuestionRegistry;
+    TemplateEngine.getQuestionType = (t) => ReadingQuestionRegistry.get(t);
+    TemplateEngine.resolveQuestionType = (q, ctx) => ReadingQuestionRegistry.resolve(q, ctx);
+    TemplateEngine.renderReadingInput = (q, ctx) => ReadingQuestionRegistry.renderInput(q, ctx);
+
+    window.IELTSQuestionTypes = IELTS_READING_QUESTION_TYPES;
+    window.ReadingQuestionRegistry = ReadingQuestionRegistry;
 
     // Execute immediately and synchronously before deck-engine starts
     window.TemplateEngine = TemplateEngine;

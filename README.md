@@ -11,6 +11,7 @@ Interactive, animation-rich, 16:9 HTML slide presentations designed for IELTS Ac
 ├── presentation_creation_guide.md # Comprehensive guide for creating new modules
 ├── reading_passages_and_questions_guide.md
 ├── js/                            # Universal modular presentation engine
+│   ├── template-engine.js         # Declarative slide-card expander & IELTS reading question registry
 │   ├── deck-engine.js             # Master bundle & loader
 │   ├── deck-core.js               # Stage scaling, slide lifecycle & nav
 │   ├── deck-components.js         # Auto-hydrates vertical tabs & HUD
@@ -41,7 +42,10 @@ Interactive, animation-rich, 16:9 HTML slide presentations designed for IELTS Ac
 │   ├── module-09.html             # Module 9: Media — The News & Technology
 │   └── module-10.html             # Module 10: Communicating — Being Understood & Understanding Others
 ├── expert 6/                      # Expert IELTS Level 6 Course Modules
-└── expert 7.5/                    # Expert IELTS Level 7.5 Course Modules
+│   ├── module-01.html             # Module 1: Communication
+│   ├── module-02.html             # Module 2: Feelings & Expression
+│   └── module-03.html             # Module 3: Work & Study
+├── expert 7.5/                    # Expert IELTS Level 7.5 Course Modules
 ```
 
 ---
