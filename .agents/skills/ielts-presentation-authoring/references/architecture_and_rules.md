@@ -47,6 +47,8 @@ graph TB
         PRINT["print-optimizer.js"]
         CHARTS["deck-charts.js"]
         WRITE["writing-annotator.js"]
+        WT["reading-walkthrough.js (embedded walkthrough modal viewer)"]
+        GRAMMAR_REF["grammar-reference.js (handbook modal viewer)"]
         PSYNC["presenter-sync.js (BroadcastChannel hub)"]
         PDRAW["presenter-drawing.js (canvas & laser studio)"]
         PVIEW["presenter-view.js (cockpit UI & filmstrip)"]
@@ -241,6 +243,28 @@ All reading passages must tag paragraphs:
 </span>
 ```
 
+### Rule 11: Standalone Reading Walkthrough Masterclass Integration
+Always link standalone reading walkthrough masterclasses to both Split-View (`template="reading-split"`) and Walkthrough slides (`template="walkthrough"`):
+```html
+<slide-card template="reading-split" skill="read" data-bind="reading4a"
+            badge="Reading 4a • Matching Sentence Endings" title="Monitoring Fitness"
+            walkthrough-url="../reading%20explanations%20-%20walkthrough/expert%205/module-4a-reading-question-walkthrough.html"
+            walkthrough-title="Module 4a: Monitoring Fitness — Deep Question Walkthrough">
+</slide-card>
+```
+Or declare in `module-XX-data.js`:
+```javascript
+reading4a: {
+    walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%205/module-4a-reading-question-walkthrough.html",
+    walkthroughTitle: "Module 4a: Monitoring Fitness — Deep Question Walkthrough",
+    passage: `...`,
+    questions: [...]
+}
+```
+- **Automatic Action Row Button**: `TemplateEngine` automatically injects a `🚀 Question Walkthrough` button into the `.action-row`.
+- **Embedded Modal Viewer**: Handled by `ReadingWalkthroughEngine` with Fullscreen (`⛶`), Open in New Tab (`↗`), and <kbd>Esc</kbd> keyboard dismiss.
+- **Hub Isolation**: Standalone walkthroughs reside in `reading explanations - walkthrough/` and must never be added to `index.html`.
+
 ---
 
 ## 5. Reusable `<slide-card>` Samples
@@ -322,7 +346,9 @@ All reading passages must tag paragraphs:
 ### Sample D: Full Split-View Reading Exercise
 ```html
 <slide-card template="reading-split" skill="read"
-    title="Reading: Climate Change — Matching Information (Qs 1–6)">
+    title="Reading: Climate Change — Matching Information (Qs 1–6)"
+    walkthrough-url="../reading%20explanations%20-%20walkthrough/expert%205/module-5a-reading-question-walkthrough.html"
+    walkthrough-title="Module 5a: Climate Change — Deep Question Walkthrough">
     <div slot="passage">
         <h3 style="font-family: var(--font-display); font-size: 20px; margin-bottom: 12px; color: var(--col-reading);">
             "The Carbon Footprint" — Environmental Impact Analysis
@@ -370,7 +396,9 @@ All reading passages must tag paragraphs:
 ### Sample E: 1-Question Walkthrough
 ```html
 <slide-card template="walkthrough" skill="read"
-    title="Walkthrough: Question 1 &amp; Paragraph [A]">
+    title="Walkthrough: Question 1 &amp; Paragraph [A]"
+    walkthrough-url="../reading%20explanations%20-%20walkthrough/expert%205/module-5a-reading-question-walkthrough.html"
+    walkthrough-title="Module 5a: Climate Change — Deep Question Walkthrough">
     <div slot="passage-header">📖 Passage Excerpt: Paragraph [A]</div>
     <div slot="passage-text" data-q="wt-q1" data-ev="ev-wt-q1">
         <span class="para-tag">[A]</span>

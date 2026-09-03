@@ -10,14 +10,18 @@ Interactive, animation-rich, 16:9 HTML slide presentations designed for IELTS Ac
 ├── presentation-base.css          # Universal stylesheet for all presentations
 ├── presentation_creation_guide.md # Comprehensive guide for creating new modules
 ├── reading_passages_and_questions_guide.md
+├── reading explanations - walkthrough/ # Standalone deep-dive IELTS reading question walkthrough masterclasses
 ├── js/                            # Universal modular presentation engine
 │   ├── template-engine.js         # Declarative slide-card expander & IELTS reading question registry
 │   ├── deck-engine.js             # Master bundle & loader
+│   ├── deck-bundle.js             # High-performance consolidated bundle
 │   ├── deck-core.js               # Stage scaling, slide lifecycle & nav
 │   ├── deck-components.js         # Auto-hydrates vertical tabs & HUD
 │   ├── deck-theme-engine.js       # Dynamic theme presets & styling
 │   ├── reading-highlighter.js     # Evidence & synonym synchronization
 │   ├── reading-grounder.js        # Synonym tags & hover sync
+│   ├── reading-walkthrough.js     # Embedded modal viewer for deep reading walkthroughs
+│   ├── grammar-reference.js       # Grammar handbook popup viewer
 │   ├── vocab-bank.js              # Click-to-fill chips & pronunciation
 │   ├── essay-analyzer.js          # Cohesion & linking word highlighting
 │   ├── progress-tracker.js        # Session persistence & score dashboard
