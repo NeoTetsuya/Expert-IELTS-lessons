@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 2: Language Development - Relative Clauses</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fdf4ff',
+              100: '#fae8ff',
+              500: '#d946ef',
+              600: '#c026d3',
+              700: '#a21caf',
+              800: '#86198f',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth animated transitions */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(192, 38, 211, 0.25);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/80 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-fuchsia-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-fuchsia-600 via-purple-600 to-indigo-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-fuchsia-500/25 ring-2 ring-white">
+          M2
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-fuchsia-100 text-fuchsia-800 tracking-wide uppercase">Unit 2: Feelings</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 29</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-fuchsia-600">Building Complex Sentences (Relative Clauses)</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-fuchsia-600">0 / 26</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-fuchsia-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-fuchsia-600 text-white shadow-md shadow-fuchsia-600/25">
+          1. Pronoun Rules (1a & 1b)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Speaking Part 1 (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Combining Sentences on Stress
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Academic Essay Studio
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 174
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+    
+    <!-- ========================================================================= -->
+    <!-- TAB 1: EXERCISE 1 (1a & 1b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-fuchsia-600 to-indigo-700 text-white p-6 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1a & 1b</span>
+            <span class="text-fuchsia-200 text-xs font-medium">Expert Grammar Page 174</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Building Complex Sentences with Relative Pronouns</h2>
+          <p class="text-fuchsia-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Use relative pronouns (<code class="bg-white/20 px-2 py-0.5 rounded text-white font-bold">that (x2)</code>, <code class="bg-white/20 px-2 py-0.5 rounded text-white font-bold">when</code>, <code class="bg-white/20 px-2 py-0.5 rounded text-white font-bold">where</code>, <code class="bg-white/20 px-2 py-0.5 rounded text-white font-bold">which</code>, <code class="bg-white/20 px-2 py-0.5 rounded text-white font-bold">who</code>) to connect ideas smoothly.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1a()" class="px-5 py-2.5 bg-white hover:bg-fuchsia-50 text-fuchsia-800 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 1a</span>
+          </button>
+          <button onclick="revealEx1a()" class="px-4 py-2.5 bg-fuchsia-800/60 hover:bg-fuchsia-800 text-white border border-fuchsia-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Bank of Pronouns Pills -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Available Pronoun Bank:</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3.5 py-1.5 rounded-xl bg-fuchsia-50 border-2 border-fuchsia-200 text-fuchsia-800 font-black text-sm">that (x2)</span>
+          <span class="px-3.5 py-1.5 rounded-xl bg-fuchsia-50 border-2 border-fuchsia-200 text-fuchsia-800 font-black text-sm">when</span>
+          <span class="px-3.5 py-1.5 rounded-xl bg-fuchsia-50 border-2 border-fuchsia-200 text-fuchsia-800 font-black text-sm">where</span>
+          <span class="px-3.5 py-1.5 rounded-xl bg-fuchsia-50 border-2 border-fuchsia-200 text-fuchsia-800 font-black text-sm">which</span>
+          <span class="px-3.5 py-1.5 rounded-xl bg-fuchsia-50 border-2 border-fuchsia-200 text-fuchsia-800 font-black text-sm">who</span>
+        </div>
+      </div>
+
+      <!-- 1a Interactive Question Rows -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-fuchsia-100 text-fuchsia-700 text-sm font-black flex items-center justify-center">1a</span>
+            Select or type the correct pronoun to complete sentences 1–6:
+          </h3>
+          <span class="text-xs font-semibold text-slate-500">Instant validation</span>
+        </div>
+
+        <div class="grid gap-3.5">
+          <!-- Item 1 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex1a-1" data-answer="which,that">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              It is the machine
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectPronounPill(this, 'which')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">which</button>
+                <button type="button" onclick="selectPronounPill(this, 'that')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">that</button>
+                <button type="button" onclick="selectPronounPill(this, 'where')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">where</button>
+                <button type="button" onclick="selectPronounPill(this, 'who')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">who</button>
+              </span>
+              lets you take money out of the bank.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex1a-2" data-answer="when">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              Most things do seem easier
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectPronounPill(this, 'where')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">where</button>
+                <button type="button" onclick="selectPronounPill(this, 'when')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">when</button>
+                <button type="button" onclick="selectPronounPill(this, 'which')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">which</button>
+                <button type="button" onclick="selectPronounPill(this, 'that')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">that</button>
+              </span>
+              you're happier and less stressed.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex1a-3" data-answer="which,that">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              This morning I noticed the plum trees
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectPronounPill(this, 'who')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">who</button>
+                <button type="button" onclick="selectPronounPill(this, 'which')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">which</button>
+                <button type="button" onclick="selectPronounPill(this, 'that')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">that</button>
+                <button type="button" onclick="selectPronounPill(this, 'where')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">where</button>
+              </span>
+              are starting to bloom.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex1a-4" data-answer="that,who">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              Look carefully at the smile of someone
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectPronounPill(this, 'that')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">that</button>
+                <button type="button" onclick="selectPronounPill(this, 'who')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">who</button>
+                <button type="button" onclick="selectPronounPill(this, 'where')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">where</button>
+                <button type="button" onclick="selectPronounPill(this, 'which')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">which</button>
+              </span>
+              you're close to.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex1a-5" data-answer="where">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              Visit websites
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectPronounPill(this, 'when')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">when</button>
+                <button type="button" onclick="selectPronounPill(this, 'who')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">who</button>
+                <button type="button" onclick="selectPronounPill(this, 'where')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">where</button>
+                <button type="button" onclick="selectPronounPill(this, 'that')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">that</button>
+              </span>
+              you can see amazing photos of nature.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex1a-6" data-answer="who,that">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              People
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectPronounPill(this, 'who')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">who</button>
+                <button type="button" onclick="selectPronounPill(this, 'that')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">that</button>
+                <button type="button" onclick="selectPronounPill(this, 'where')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">where</button>
+                <button type="button" onclick="selectPronounPill(this, 'which')" class="pill-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-fuchsia-500">which</button>
+              </span>
+              hear about the research might start to make an effort.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1b Interactive Deep Dive (Subject vs Object & Omission) -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center gap-3 pb-3 border-b border-slate-100">
+          <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 text-sm font-black flex items-center justify-center">1b</span>
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900">
+            Grammar Analysis: Understanding Subject vs. Object Relative Clauses
+          </h3>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-5">
+          <!-- Question 1 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+            <div class="font-black text-sm text-slate-800">
+              Q1. When does <em>which</em>, <em>that</em> or <em>who</em> refer to the <span class="text-fuchsia-700 underline">object</span> of the sentence?
+            </div>
+            <p class="text-xs text-slate-500">Select the correct grammatical rule:</p>
+            <div class="space-y-2" id="ex1b-q1-choices">
+              <button onclick="checkEx1bRule(1, this, true)" class="w-full text-left p-3 rounded-xl border border-slate-300 bg-white hover:border-fuchsia-500 text-sm font-medium transition">
+                A) When it is followed by another subject + verb (e.g. <em>someone that <u>you</u>'re close to</em>).
+              </button>
+              <button onclick="checkEx1bRule(1, this, false)" class="w-full text-left p-3 rounded-xl border border-slate-300 bg-white hover:border-fuchsia-500 text-sm font-medium transition">
+                B) When it is directly followed by the main verb of the relative clause.
+              </button>
+            </div>
+            <div id="ex1b-q1-feedback" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+          </div>
+
+          <!-- Question 2 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+            <div class="font-black text-sm text-slate-800">
+              Q2. In which sentence from 1a can you <span class="text-fuchsia-700 underline">leave out</span> <em>which</em>, <em>that</em> or <em>who</em>? Why?
+            </div>
+            <p class="text-xs text-slate-500">Select the sentence and reason:</p>
+            <div class="space-y-2" id="ex1b-q2-choices">
+              <button onclick="checkEx1bRule(2, this, true)" class="w-full text-left p-3 rounded-xl border border-slate-300 bg-white hover:border-fuchsia-500 text-sm font-medium transition">
+                A) <strong>Sentence 4:</strong> <em>"Look carefully at the smile of someone [who/that] you're close to."</em> Because the pronoun is the object of the clause.
+              </button>
+              <button onclick="checkEx1bRule(2, this, false)" class="w-full text-left p-3 rounded-xl border border-slate-300 bg-white hover:border-fuchsia-500 text-sm font-medium transition">
+                B) <strong>Sentence 1:</strong> <em>"It is the machine lets you take money out."</em> Because machine is an object.
+              </button>
+            </div>
+            <div id="ex1b-q2-feedback" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: EXERCISE 2 (Speaking Part 1 Prompts & Partner Notes) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-6 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-purple-200 text-xs font-medium">IELTS Speaking Part 1</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Personal Preferences with Relative Clauses</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Answer the IELTS Part 1 speaking questions using complex sentences. Write your personal response, practice aloud, then summarize your partner's profile.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="loadSamplePromptsEx2()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-800 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Load Model Answers</span>
+          </button>
+          <button onclick="saveEx2Answers()" class="px-4 py-2.5 bg-purple-800/60 hover:bg-purple-800 text-white border border-purple-400/40 text-sm font-bold rounded-2xl transition">
+            Save Notes
+          </button>
+        </div>
+      </div>
+
+      <!-- 2a Speaking Cards Grid -->
+      <div class="grid md:grid-cols-2 gap-4">
+        <!-- Q1 -->
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-purple-600">Question 1</span>
+            <button onclick="speakText('What kind of people do you enjoy spending time with?')" class="text-xs text-slate-500 hover:text-purple-600 font-bold flex items-center gap-1">
+              🔊 Listen
+            </button>
+          </div>
+          <p class="font-extrabold text-slate-900 text-base">What kind of people do you enjoy spending time with?</p>
+          <div class="flex items-center gap-2 text-sm font-bold text-fuchsia-700">
+            <span>Prompt:</span> <span>I like people who / that...</span>
+          </div>
+          <input type="text" id="ex2-q1" placeholder="e.g. who have a positive attitude and who inspire me to grow." class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" />
+        </div>
+
+        <!-- Q2 -->
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-purple-600">Question 2</span>
+            <button onclick="speakText('What time of day do you like the most?')" class="text-xs text-slate-500 hover:text-purple-600 font-bold flex items-center gap-1">
+              🔊 Listen
+            </button>
+          </div>
+          <p class="font-extrabold text-slate-900 text-base">What time of day do you like the most?</p>
+          <div class="flex items-center gap-2 text-sm font-bold text-fuchsia-700">
+            <span>Prompt:</span> <span>I like the time of day when...</span>
+          </div>
+          <input type="text" id="ex2-q2" placeholder="e.g. when the sun sets and the city begins to quiet down." class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" />
+        </div>
+
+        <!-- Q3 -->
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-purple-600">Question 3</span>
+            <button onclick="speakText('What kind of activities do you enjoy doing in your free time?')" class="text-xs text-slate-500 hover:text-purple-600 font-bold flex items-center gap-1">
+              🔊 Listen
+            </button>
+          </div>
+          <p class="font-extrabold text-slate-900 text-base">What kind of activities do you enjoy doing in your free time?</p>
+          <div class="flex items-center gap-2 text-sm font-bold text-fuchsia-700">
+            <span>Prompt:</span> <span>I enjoy activities which / that / where...</span>
+          </div>
+          <input type="text" id="ex2-q3" placeholder="e.g. that keep me physically active and allow me to disconnect from screens." class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" />
+        </div>
+
+        <!-- Q4 -->
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-purple-600">Question 4</span>
+            <button onclick="speakText('What kind of activities do you dislike doing?')" class="text-xs text-slate-500 hover:text-purple-600 font-bold flex items-center gap-1">
+              🔊 Listen
+            </button>
+          </div>
+          <p class="font-extrabold text-slate-900 text-base">What kind of activities do you dislike doing?</p>
+          <div class="flex items-center gap-2 text-sm font-bold text-fuchsia-700">
+            <span>Prompt:</span> <span>I don't like activities which / that...</span>
+          </div>
+          <input type="text" id="ex2-q4" placeholder="e.g. which involve waiting in long queues or doing repetitive paperwork." class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" />
+        </div>
+
+        <!-- Q5 -->
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-purple-600">Question 5</span>
+            <button onclick="speakText('What kind of places do you enjoy visiting?')" class="text-xs text-slate-500 hover:text-purple-600 font-bold flex items-center gap-1">
+              🔊 Listen
+            </button>
+          </div>
+          <p class="font-extrabold text-slate-900 text-base">What kind of places do you enjoy visiting?</p>
+          <div class="flex items-center gap-2 text-sm font-bold text-fuchsia-700">
+            <span>Prompt:</span> <span>I like places where...</span>
+          </div>
+          <input type="text" id="ex2-q5" placeholder="e.g. where there is lush nature and I can go on peaceful hikes." class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" />
+        </div>
+
+        <!-- Q6 -->
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-purple-600">Question 6</span>
+            <button onclick="speakText('What is an enjoyable day for you?')" class="text-xs text-slate-500 hover:text-purple-600 font-bold flex items-center gap-1">
+              🔊 Listen
+            </button>
+          </div>
+          <p class="font-extrabold text-slate-900 text-base">What is an enjoyable day for you?</p>
+          <div class="flex items-center gap-2 text-sm font-bold text-fuchsia-700">
+            <span>Prompt:</span> <span>I like days when...</span>
+          </div>
+          <input type="text" id="ex2-q6" placeholder="e.g. when I accomplish all my goals and have time to unwind with family." class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" />
+        </div>
+
+        <!-- Q7 -->
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-purple-600">Question 7</span>
+            <button onclick="speakText('What kind of films do you like?')" class="text-xs text-slate-500 hover:text-purple-600 font-bold flex items-center gap-1">
+              🔊 Listen
+            </button>
+          </div>
+          <p class="font-extrabold text-slate-900 text-base">What kind of films do you like?</p>
+          <div class="flex items-center gap-2 text-sm font-bold text-fuchsia-700">
+            <span>Prompt:</span> <span>I like films which / that...</span>
+          </div>
+          <input type="text" id="ex2-q7" placeholder="e.g. that keep me in suspense and deliver unexpected plot twists." class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" />
+        </div>
+
+        <!-- Q8 -->
+        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-purple-600">Question 8</span>
+            <button onclick="speakText('What kind of food do you dislike?')" class="text-xs text-slate-500 hover:text-purple-600 font-bold flex items-center gap-1">
+              🔊 Listen
+            </button>
+          </div>
+          <p class="font-extrabold text-slate-900 text-base">What kind of food do you dislike?</p>
+          <div class="flex items-center gap-2 text-sm font-bold text-fuchsia-700">
+            <span>Prompt:</span> <span>I don't like food that / which...</span>
+          </div>
+          <input type="text" id="ex2-q8" placeholder="e.g. which is overly greasy, excessively salty, or highly processed." class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" />
+        </div>
+      </div>
+
+      <!-- 2b Partner Reporting Area -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 text-sm font-black flex items-center justify-center">2b</span>
+            Report on your partner's preferences (Third-Person Singular practice):
+          </h3>
+          <button onclick="generatePartnerSummary()" class="text-xs font-black text-purple-700 bg-purple-100 px-3.5 py-1.5 rounded-xl hover:bg-purple-200 transition">
+            Auto-Generate Speech Draft
+          </button>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          In IELTS Speaking Part 1 & Part 3, talking about others requires accurate subject-verb agreement (e.g. <em>"My partner likes people who <u>are</u>..."</em> or <em>"She enjoys places where she <u>can</u>..."</em>).
+        </p>
+        <textarea id="ex2b-summary" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-purple-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. My partner likes people who are genuinely honest. In their free time, they prefer places where they can unwind in peace..."></textarea>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: EXERCISE 3 (Combining Sentences about Stress) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-teal-600 to-emerald-700 text-white p-6 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a & 3b</span>
+            <span class="text-teal-200 text-xs font-medium">Complex Sentence Synthesizer</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Connecting Sentences About Stress</h2>
+          <p class="text-teal-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Combine two short sentences into a single, cohesive academic sentence using the relative pronoun in brackets.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3b()" class="px-5 py-2.5 bg-white hover:bg-teal-50 text-teal-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check All Sentences</span>
+          </button>
+          <button onclick="revealEx3b()" class="px-4 py-2.5 bg-teal-800/60 hover:bg-teal-800 text-white border border-teal-400/40 text-sm font-bold rounded-2xl transition">
+            Show Answers
+          </button>
+        </div>
+      </div>
+
+      <!-- 3a Discussion Prompt Callout -->
+      <div class="p-5 bg-teal-50 rounded-3xl border-2 border-teal-200 flex items-start gap-4 text-teal-950">
+        <div class="w-10 h-10 rounded-2xl bg-teal-500 text-white font-black text-xl flex items-center justify-center shrink-0">
+          🧠
+        </div>
+        <div class="space-y-1">
+          <div class="text-xs font-black uppercase tracking-wider text-teal-800">3a Pre-task Brainstorm</div>
+          <p class="text-base font-bold text-teal-950">
+            What can cause a person to feel stressed?
+          </p>
+          <p class="text-xs text-teal-800 leading-relaxed">
+            Major causes include high workplace demands, tight exam deadlines, loud noisy environments, negative media reports, and difficult interpersonal conflicts.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3b Interactive Combiner Cards (Items 1 - 10) -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900">
+            3b Join the sentences using the pronoun in brackets:
+          </h3>
+          <span id="ex3-score-label" class="text-xs font-black text-teal-800 bg-teal-100 px-3 py-1 rounded-xl">Score: 0/9</span>
+        </div>
+
+        <!-- Example 1 -->
+        <div class="p-4 rounded-2xl bg-slate-50 border-2 border-teal-200 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-teal-700">1. Example Given in Coursebook (which):</span>
+            <span class="text-xs font-bold text-slate-400">Model Pattern</span>
+          </div>
+          <p class="text-sm text-slate-600"><em>Original:</em> Things can make us feel stressed. They are irritating. <strong>(which)</strong></p>
+          <p class="text-base font-bold text-teal-950">
+            ➔ Things <span class="text-teal-700 underline font-black">which are irritating</span> can make us feel stressed.
+          </p>
+        </div>
+
+        <div class="space-y-4" id="ex3-items-container">
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-combiner-q="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">2. Target Pronoun: <span class="text-teal-700 font-extrabold">(when)</span></span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-semibold text-slate-700">People feel stressed. They have a lot of work to do.</p>
+            <input type="text" class="combiner-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type combined sentence here..." data-accepted="people feel stressed when they have a lot of work to do,when people have a lot of work to do they feel stressed" />
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-combiner-q="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">3. Target Pronoun: <span class="text-teal-700 font-extrabold">(where)</span></span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-semibold text-slate-700">Places can be stressful. There are a lot of people there.</p>
+            <input type="text" class="combiner-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type combined sentence here..." data-accepted="places where there are a lot of people can be stressful,places can be stressful where there are a lot of people" />
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-combiner-q="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">4. Target Pronoun: <span class="text-teal-700 font-extrabold">(who)</span></span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-semibold text-slate-700">Some people have higher stress levels. They spend time in a noisy environment.</p>
+            <input type="text" class="combiner-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type combined sentence here..." data-accepted="some people who spend time in a noisy environment have higher stress levels,people who spend time in a noisy environment have higher stress levels" />
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-combiner-q="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">5. Target Pronoun: <span class="text-teal-700 font-extrabold">(which)</span></span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-semibold text-slate-700">Activities cause stress. They are very difficult.</p>
+            <input type="text" class="combiner-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type combined sentence here..." data-accepted="activities which are very difficult cause stress,activities that are very difficult cause stress" />
+          </div>
+
+          <!-- 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-combiner-q="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">6. Target Pronoun: <span class="text-teal-700 font-extrabold">(who)</span></span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-semibold text-slate-700">Employers ask their employees to work too hard. They cause stress.</p>
+            <input type="text" class="combiner-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type combined sentence here..." data-accepted="employers who ask their employees to work too hard cause stress,employers that ask their employees to work too hard cause stress" />
+          </div>
+
+          <!-- 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-combiner-q="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">7. Target Pronoun: <span class="text-teal-700 font-extrabold">(which)</span></span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-semibold text-slate-700">News increases stress levels. The news is not good.</p>
+            <input type="text" class="combiner-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type combined sentence here..." data-accepted="news which is not good increases stress levels,news that is not good increases stress levels" />
+          </div>
+
+          <!-- 8 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-combiner-q="8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">8. Target Pronoun: <span class="text-teal-700 font-extrabold">(who)</span></span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-semibold text-slate-700">Meditation can work for people. They experience stress.</p>
+            <input type="text" class="combiner-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type combined sentence here..." data-accepted="meditation can work for people who experience stress,meditation can work for people that experience stress" />
+          </div>
+
+          <!-- 9 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-combiner-q="9">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">9. Target Pronoun: <span class="text-teal-700 font-extrabold">(which)</span></span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-semibold text-slate-700">Stress can be good for us. We see the stress as positive.</p>
+            <input type="text" class="combiner-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type combined sentence here..." data-accepted="stress which we see as positive can be good for us,stress that we see as positive can be good for us" />
+          </div>
+
+          <!-- 10 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-combiner-q="10">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-slate-500">10. Target Pronoun: <span class="text-teal-700 font-extrabold">(when)</span></span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-semibold text-slate-700">Stress tends to have a negative effect. We think it is negative.</p>
+            <input type="text" class="combiner-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type combined sentence here..." data-accepted="stress tends to have a negative effect when we think it is negative,when we think it is negative stress tends to have a negative effect" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: EXERCISE 4 (Academic Essay Studio: Positive & Negative Stress) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-amber-500 to-orange-600 text-white p-6 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a, 4b & 4c</span>
+            <span class="text-amber-100 text-xs font-medium">Academic Writing Task 2</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Writing Academic Paragraphs with Relative Clauses</h2>
+          <p class="text-amber-50 text-sm mt-1 max-w-2xl leading-relaxed">
+            Short, choppy sentences sound informal. Combining ideas with relative clauses elevates your IELTS Grammatical Range and Accuracy score (Band 7.0+).
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="toggleParagraphComparison()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Toggle Academic Model</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4a Effects of Stress Brainstorming Cards -->
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="p-5 rounded-3xl bg-emerald-50 border-2 border-emerald-200">
+          <h4 class="font-black text-emerald-950 text-base flex items-center gap-2 mb-2">
+            <span class="w-7 h-7 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-sm font-bold">✓</span>
+            Positive Effects of Stress (Eustress):
+          </h4>
+          <ul class="text-sm text-emerald-900 space-y-1.5 list-disc list-inside font-medium">
+            <li>Enhances cognitive focus and acute alertness under pressure.</li>
+            <li>Releases neurochemicals that temporarily heighten memory recall.</li>
+            <li>Provides energy spikes needed to meet critical professional deadlines.</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-3xl bg-rose-50 border-2 border-rose-200">
+          <h4 class="font-black text-rose-950 text-base flex items-center gap-2 mb-2">
+            <span class="w-7 h-7 rounded-xl bg-rose-600 text-white flex items-center justify-center text-sm font-bold">✗</span>
+            Negative Effects of Chronic Stress (Distress):
+          </h4>
+          <ul class="text-sm text-rose-900 space-y-1.5 list-disc list-inside font-medium">
+            <li>Elevated cortisol resulting in persistent fatigue and sleep disruption.</li>
+            <li>Reduced immune resistance, migraines, and high blood pressure.</li>
+            <li>Mental burnout and irritability when pressures become sustained.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4b Original vs Academic Comparison Panel -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">4b</span>
+            Comparative Essay Analysis (Positive Effects of Stress)
+          </h3>
+          <span class="text-xs font-semibold text-slate-400">Cohesion & Flow</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Original Choppy Paragraph -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-rose-600">Original (8 short sentences):</span>
+              <span class="text-xs bg-rose-100 text-rose-800 font-bold px-2 py-0.5 rounded">Choppy</span>
+            </div>
+            <p class="text-sm sm:text-base leading-relaxed text-slate-700 font-normal">
+              "Stress is a common emotion. It can have both a positive and negative effect on a person. It can help you achieve success. For example, it gives you motivation and energy. You need them to complete tasks well. In addition, stress can help your memory. When you are stressed, the brain releases chemicals. They help you to focus better. A person is probably happier in general. He or she is focused and successful."
+            </p>
+          </div>
+
+          <!-- Academic Rewritten Paragraph with Highlighted Relative Clauses -->
+          <div class="p-5 rounded-2xl bg-amber-50/80 border-2 border-amber-300 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-amber-800">Academic Rewritten Version:</span>
+              <span class="text-xs bg-amber-200 text-amber-900 font-black px-2 py-0.5 rounded">Band 7.5+ Style</span>
+            </div>
+            <p class="text-sm sm:text-base leading-relaxed text-slate-900 font-medium">
+              "Stress is a common emotion <mark class="bg-amber-200/90 text-amber-950 font-bold px-1 rounded">which can have both a positive and negative effect</mark> on a person by helping them achieve success. For example, it provides motivation and energy <mark class="bg-amber-200/90 text-amber-950 font-bold px-1 rounded">that are needed to complete tasks well</mark>. In addition, stress can improve memory because, under pressure, the brain produces neurochemicals <mark class="bg-amber-200/90 text-amber-950 font-bold px-1 rounded">which help individuals focus better</mark>. Consequently, a person <mark class="bg-amber-200/90 text-amber-950 font-bold px-1 rounded">who is focused and successful</mark> is generally happier."
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4c Interactive Essay Composer (Negative Effects of Stress) -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">4c</span>
+            Write a second essay paragraph describing the negative effects of stress:
+          </h3>
+          <button onclick="insertSample4c()" class="text-xs font-black text-amber-800 bg-amber-100 px-3.5 py-1.5 rounded-xl hover:bg-amber-200 transition">
+            Load Model Paragraph
+          </button>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-600">
+          Use relative pronouns (<em>who, which, that, where, when</em>) to connect causes, physical symptoms, and societal consequences.
+        </p>
+        <textarea id="ex4c-essay-input" rows="5" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-base font-medium focus:border-amber-500 focus:outline-none bg-slate-50 text-slate-900 leading-relaxed" placeholder="On the other hand, prolonged stress which continues for months can cause severe physical and psychological strain. Employees who are overwhelmed by intense workloads often suffer from..."></textarea>
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <span id="ex4c-wordcount">Word count: 0 words</span>
+          <span>Tip: Aim for 60–90 words with at least 2 relative clauses.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: EXPERT GRAMMAR REFERENCE (Page 174) -->
+    <!-- ========================================================================= -->
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-fuchsia-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 174 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Defining Relative Clauses</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Defining relative clauses provide essential information that identifies exactly which person, thing, place, or time we are referring to. No commas are used!
+        </p>
+      </div>
+
+      <!-- Quick Pronoun Map Cards -->
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs sm:text-sm">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+          <span class="font-black text-fuchsia-700 text-base block">who / that</span>
+          <span class="text-slate-900 font-bold">For people</span>
+          <p class="text-slate-500 text-xs mt-1"><em>"People who hear about the research make an effort."</em></p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+          <span class="font-black text-fuchsia-700 text-base block">which / that</span>
+          <span class="text-slate-900 font-bold">For things & objects</span>
+          <p class="text-slate-500 text-xs mt-1"><em>"It is the machine that lets you take money out."</em></p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+          <span class="font-black text-fuchsia-700 text-base block">where</span>
+          <span class="text-slate-900 font-bold">For places</span>
+          <p class="text-slate-500 text-xs mt-1"><em>"Visit websites where you can see photos."</em></p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+          <span class="font-black text-fuchsia-700 text-base block">when</span>
+          <span class="text-slate-900 font-bold">For times & moments</span>
+          <p class="text-slate-500 text-xs mt-1"><em>"Things seem easier when you're happier."</em></p>
+        </div>
+      </div>
+
+      <!-- In-depth Grammatical Rules Grid -->
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Card 1: Subject vs Object -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-fuchsia-100 text-fuchsia-800 font-black text-base flex items-center justify-center">
+              SO
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Subject vs. Object Pronouns</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Syntactic Role</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-black text-slate-900">1. As the SUBJECT of the relative clause:</div>
+              <p class="text-slate-600 font-medium">The relative pronoun is followed directly by a verb. It <strong>cannot</strong> be omitted.</p>
+              <p class="text-fuchsia-800 font-bold text-xs mt-1">✓ The plum trees <u>which are starting</u> to bloom.</p>
+              <p class="text-rose-600 text-xs">✗ NOT: <s>The plum trees are starting to bloom.</s> (incomplete sentence without conjunction)</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-black text-slate-900">2. As the OBJECT of the relative clause:</div>
+              <p class="text-slate-600 font-medium">The relative pronoun is followed by a subject + verb. It <strong>can be omitted</strong> in informal English.</p>
+              <p class="text-fuchsia-800 font-bold text-xs mt-1">✓ The smile of someone <u>(who) you are</u> close to.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Prepositions in Relative Clauses -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-800 font-black text-base flex items-center justify-center">
+              PR
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Prepositions & Formal Academic Style</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Positioning Rules</p>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-black text-slate-900">1. Informal / Spoken English (Preposition at the end):</div>
+              <p class="text-slate-600 font-medium">Prepositions usually sit at the end of the clause after the verb.</p>
+              <p class="text-indigo-800 font-bold text-xs mt-1">✓ "...someone that you're close <u>to</u>."</p>
+              <p class="text-indigo-800 font-bold text-xs">✓ "...the people I work <u>with</u>."</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-black text-slate-900">2. Formal Academic English (Preposition before pronoun):</div>
+              <p class="text-slate-600 font-medium">In formal Task 2 writing, prepositions precede <em>whom</em> (for people) or <em>which</em> (for things). Note: <em>that</em> cannot follow a preposition directly.</p>
+              <p class="text-indigo-800 font-bold text-xs mt-1">✓ "...someone <u>to whom</u> you are close."</p>
+              <p class="text-indigo-800 font-bold text-xs">✓ "...the environment <u>in which</u> they operate."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 19
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 2a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 2: Feelings • Page 29 • Expert Grammar Page 174
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State storage for scores
+    const state = {
+      score: {
+        ex1a: 0,
+        ex1b: 0,
+        ex3b: 0,
+        ex4c: 0
+      }
+    };
+
+    // Synthesized Web Audio Beeps
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(280, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(160, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Web Speech API
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-fuchsia-600', 'text-white', 'shadow-md', 'shadow-fuchsia-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-fuchsia-600', 'text-white', 'shadow-md', 'shadow-fuchsia-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Pill Selector for Exercise 1a
+    function selectPronounPill(button, val) {
+      const parent = button.closest('.inline-flex');
+      parent.querySelectorAll('.pill-btn').forEach(b => {
+        b.classList.remove('bg-fuchsia-600', 'text-white', 'border-fuchsia-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      button.classList.add('bg-fuchsia-600', 'text-white', 'border-fuchsia-600');
+      button.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      button.dataset.selected = "true";
+    }
+
+    // Check Exercise 1a
+    function checkEx1a() {
+      let correctCount = 0;
+      const questions = document.querySelectorAll('[data-q^="ex1a-"]');
+
+      questions.forEach(q => {
+        const allowedAnswers = q.getAttribute('data-answer').split(',').map(s => s.trim());
+        const selectedBtn = q.querySelector('.pill-btn[data-selected="true"]');
+        const badge = q.querySelector('.feedback-badge');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select option</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toLowerCase();
+        if (allowedAnswers.includes(userVal)) {
+          correctCount++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-fuchsia-600', 'border-fuchsia-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600', 'text-white');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowedAnswers.join(' / ')})</span>`;
+          selectedBtn.classList.remove('bg-fuchsia-600', 'border-fuchsia-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500', 'text-white');
+        }
+      });
+
+      state.score.ex1a = correctCount;
+      updateTotalScore();
+      playBeep(correctCount >= 4);
+    }
+
+    function revealEx1a() {
+      const keys = {
+        'ex1a-1': 'that',
+        'ex1a-2': 'when',
+        'ex1a-3': 'which',
+        'ex1a-4': 'who',
+        'ex1a-5': 'where',
+        'ex1a-6': 'who'
+      };
+
+      for (let k in keys) {
+        const row = document.querySelector(`[data-q="${k}"]`);
+        if (row) {
+          const target = keys[k];
+          row.querySelectorAll('.pill-btn').forEach(b => {
+            if (b.textContent.trim().toLowerCase() === target) {
+              b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+              b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+              b.dataset.selected = "true";
+            } else {
+              b.classList.remove('bg-fuchsia-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+              b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+              delete b.dataset.selected;
+            }
+          });
+          row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+        }
+      }
+      state.score.ex1a = 6;
+      updateTotalScore();
+    }
+
+    // Exercise 1b Analysis Checker
+    function checkEx1bRule(qNum, btn, isCorrect) {
+      const fb = document.getElementById(`ex1b-q${qNum}-feedback`);
+      fb.classList.remove('hidden');
+
+      const container = document.getElementById(`ex1b-q${qNum}-choices`);
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-500', 'bg-rose-50');
+      });
+
+      if (isCorrect) {
+        btn.classList.add('border-emerald-500', 'bg-emerald-50');
+        fb.className = "p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-950 border border-emerald-300";
+        if (qNum === 1) {
+          fb.innerHTML = "✓ <strong>Correct!</strong> When followed by a subject + verb, the relative pronoun is acting as an object. For example, in <em>'someone (that) <u>you</u> are close to'</em>, 'you' is the subject of 'are'.";
+        } else {
+          fb.innerHTML = "✓ <strong>Exactly right!</strong> Sentence 4 is the only one where the relative pronoun is an object. Therefore, it can naturally be omitted: <em>'Look carefully at the smile of someone you're close to.'</em>";
+        }
+        playBeep(true);
+      } else {
+        btn.classList.add('border-rose-500', 'bg-rose-50');
+        fb.className = "p-3 rounded-xl text-xs font-bold bg-rose-100 text-rose-950 border border-rose-300";
+        fb.innerHTML = "✗ <strong>Not quite.</strong> Review Expert Grammar Page 174: A pronoun acts as an object only when there is another subject in the clause. In subject clauses, the pronoun cannot be omitted.";
+        playBeep(false);
+      }
+
+      state.score.ex1b = 2;
+      updateTotalScore();
+    }
+
+    // Exercise 2 Helper Functions
+    function loadSamplePromptsEx2() {
+      document.getElementById('ex2-q1').value = "who have a sharp sense of humor and with whom I can hold intellectual conversations.";
+      document.getElementById('ex2-q2').value = "when early dawn arrives, because the environment is serene and peaceful.";
+      document.getElementById('ex2-q3').value = "that allow me to unleash my creativity, such as digital painting and writing.";
+      document.getElementById('ex2-q4').value = "which require sitting idly in dense traffic congestion.";
+      document.getElementById('ex2-q5').value = "where historical architecture merges seamlessly with contemporary culture.";
+      document.getElementById('ex2-q6').value = "when I am able to finish a strenuous workout and spend hours reading.";
+      document.getElementById('ex2-q7').value = "which feature intricate, thought-provoking mysteries and philosophical dilemmas.";
+      document.getElementById('ex2-q8').value = "that is excessively sugary or overly processed.";
+      playBeep(true);
+    }
+
+    function saveEx2Answers() {
+      const data = {
+        q1: document.getElementById('ex2-q1').value,
+        q2: document.getElementById('ex2-q2').value,
+        q3: document.getElementById('ex2-q3').value,
+        q4: document.getElementById('ex2-q4').value,
+        q5: document.getElementById('ex2-q5').value,
+        q6: document.getElementById('ex2-q6').value,
+        q7: document.getElementById('ex2-q7').value,
+        q8: document.getElementById('ex2-q8').value,
+        summary: document.getElementById('ex2b-summary').value
+      };
+      localStorage.setItem('m2_grammar_ex2', JSON.stringify(data));
+      alert("✓ Speaking notes and partner summary saved!");
+      playBeep(true);
+    }
+
+    function generatePartnerSummary() {
+      const q1 = document.getElementById('ex2-q1').value || "who are optimistic and inspiring";
+      const q5 = document.getElementById('ex2-q5').value || "where they can connect with quiet nature";
+      document.getElementById('ex2b-summary').value = `My partner told me that they genuinely like people ${q1}. In addition, they strongly prefer visiting destinations ${q5}.`;
+      playBeep(true);
+    }
+
+    // Clean string helper for flexible matching
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // Check Exercise 3b Combiner Sentences
+    function checkEx3b() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex3-items-container [data-combiner-q]');
+
+      rows.forEach(row => {
+        const input = row.querySelector('.combiner-input');
+        const badge = row.querySelector('.feedback-badge');
+        const userClean = cleanStr(input.value);
+        const accepted = input.getAttribute('data-accepted').split(',').map(cleanStr);
+
+        if (userClean.length === 0) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Enter answer</span>';
+          return;
+        }
+
+        if (accepted.some(acc => userClean.includes(acc) || acc.includes(userClean))) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          input.classList.remove('border-rose-400', 'bg-rose-50');
+          input.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck clause</span>';
+          input.classList.remove('border-emerald-500', 'bg-emerald-50');
+          input.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3b = correct;
+      document.getElementById('ex3-score-label').textContent = `Score: ${correct}/9`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx3b() {
+      const keys = [
+        "People feel stressed when they have a lot of work to do.",
+        "Places where there are a lot of people can be stressful.",
+        "Some people who spend time in a noisy environment have higher stress levels.",
+        "Activities which are very difficult cause stress.",
+        "Employers who ask their employees to work too hard cause stress.",
+        "News which is not good increases stress levels.",
+        "Meditation can work for people who experience stress.",
+        "Stress which we see as positive can be good for us.",
+        "Stress tends to have a negative effect when we think it is negative."
+      ];
+
+      const rows = document.querySelectorAll('#ex3-items-container [data-combiner-q]');
+      rows.forEach((r, idx) => {
+        const inp = r.querySelector('.combiner-input');
+        const badge = r.querySelector('.feedback-badge');
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Answer</span>';
+      });
+
+      state.score.ex3b = 9;
+      document.getElementById('ex3-score-label').textContent = `Score: 9/9`;
+      updateTotalScore();
+    }
+
+    // Exercise 4 Helpers
+    function toggleParagraphComparison() {
+      const activeTab = document.querySelector('#tab-ex4');
+      activeTab.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function insertSample4c() {
+      const sample = "On the other hand, prolonged stress which is left unmanaged can have debilitating consequences for an individual's well-being. People who face persistent pressure in environments where resources are scarce often experience severe burnout. Furthermore, chronic stress triggers psychological conditions that undermine immune functions, leading to long-term health complications.";
+      const ta = document.getElementById('ex4c-essay-input');
+      ta.value = sample;
+      updateWordCount();
+      state.score.ex4c = 9;
+      updateTotalScore();
+      playBeep(true);
+    }
+
+    function updateWordCount() {
+      const text = document.getElementById('ex4c-essay-input').value.trim();
+      const words = text ? text.split(/\s+/).length : 0;
+      document.getElementById('ex4c-wordcount').textContent = `Word count: ${words} words`;
+    }
+
+    document.getElementById('ex4c-essay-input').addEventListener('input', updateWordCount);
+
+    // Global Score Updating
+    function updateTotalScore() {
+      const total = state.score.ex1a + state.score.ex1b + state.score.ex3b + state.score.ex4c;
+      // Max score: 6 + 2 + 9 + 9 = 26
+      const percent = Math.min(100, Math.round((total / 26) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / 26`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 22) {
+        bar.classList.replace('bg-fuchsia-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-fuchsia-600');
+      }
+    }
+
+    // Reset All Answers
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Clear 1a pills
+      document.querySelectorAll('.pill-btn').forEach(b => {
+        b.classList.remove('bg-fuchsia-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-fuchsia-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Clear Ex 3 inputs
+      document.querySelectorAll('.combiner-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Reset scores
+      state.score = { ex1a: 0, ex1b: 0, ex3b: 0, ex4c: 0 };
+      updateTotalScore();
+      document.getElementById('ex3-score-label').textContent = 'Score: 0/9';
+    });
+
+    // Auto-restore saved Ex 2 data
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved = JSON.parse(localStorage.getItem('m2_grammar_ex2'));
+        if (saved) {
+          if (saved.q1) document.getElementById('ex2-q1').value = saved.q1;
+          if (saved.q2) document.getElementById('ex2-q2').value = saved.q2;
+          if (saved.q3) document.getElementById('ex2-q3').value = saved.q3;
+          if (saved.q4) document.getElementById('ex2-q4').value = saved.q4;
+          if (saved.q5) document.getElementById('ex2-q5').value = saved.q5;
+          if (saved.q6) document.getElementById('ex2-q6').value = saved.q6;
+          if (saved.q7) document.getElementById('ex2-q7').value = saved.q7;
+          if (saved.q8) document.getElementById('ex2-q8').value = saved.q8;
+          if (saved.summary) document.getElementById('ex2b-summary').value = saved.summary;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

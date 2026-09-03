@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 3: Language Development - Comparative Forms</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth animated transitions */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .interactive-card {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .interactive-card:hover {
+      transform: translateY(-2px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-600 via-blue-600 to-cyan-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-indigo-500/25 ring-2 ring-white">
+          M3
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 tracking-wide uppercase">Unit 3: Work and Study</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 45</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-indigo-600">Comparative & Superlative Forms</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Total Score</span>
+            <span id="global-score-pill" class="text-base font-black text-indigo-600">0 / 34</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-indigo-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-indigo-600 text-white shadow-md shadow-indigo-600/25">
+          1. Form & Category (1a & 1b)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Sentence Rewriting (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. History Text (3a & 3b)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. A Level Chart Data (4a & 4b)
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 175
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: EXERCISE 1 (1a & 1b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1a & 1b</span>
+            <span class="text-indigo-200 text-xs font-medium">Expert Grammar Page 175</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Comparative Forms: Modifiers & Part of Speech</h2>
+          <p class="text-indigo-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Form accurate comparative structures with adjectives, adverbs, and quantifiers. Notice how modifiers like <em>much</em>, <em>far</em>, and <em>as ... as</em> change the comparison.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1a()" class="px-5 py-2.5 bg-white hover:bg-indigo-50 text-indigo-800 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 1a</span>
+          </button>
+          <button onclick="revealEx1a()" class="px-4 py-2.5 bg-indigo-800/60 hover:bg-indigo-800 text-white border border-indigo-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 1a Interactive Question Rows -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 text-sm font-black flex items-center justify-center">1a</span>
+            Complete the sentences with the comparative form of the words in brackets:
+          </h3>
+          <span id="ex1a-score-pill" class="text-xs font-bold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="grid gap-3.5">
+          <!-- Item 1 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a="1" data-answer="more accurately">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              Computers are able to identify routine illness much
+              <input type="text" class="ex1a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-44 text-center focus:border-indigo-600 focus:outline-none" placeholder="(accurately)" />
+              than a human.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a="2" data-answer="easier">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              Computer experts are working to make it
+              <input type="text" class="ex1a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-32 text-center focus:border-indigo-600 focus:outline-none" placeholder="(easy)" />
+              for normal people to program computers.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a="3" data-answer="more common,less common">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              Certain university subjects are likely to become
+              <input type="text" class="ex1a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-40 text-center focus:border-indigo-600 focus:outline-none" placeholder="(common)" />
+              than they used to be.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a="4" data-answer="more popular">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              Creative writing courses have been getting
+              <input type="text" class="ex1a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-40 text-center focus:border-indigo-600 focus:outline-none" placeholder="(popular)" />
+              in recent years.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a="5" data-answer="more carefully">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              People are going to have to think
+              <input type="text" class="ex1a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-44 text-center focus:border-indigo-600 focus:outline-none" placeholder="(carefully)" />
+              about studying at university.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a="6" data-answer="as much">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              They won't be able to spend
+              <input type="text" class="ex1a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-36 text-center focus:border-indigo-600 focus:outline-none" placeholder="(much)" />
+              money on a creative writing course as they did in the past.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a="7" data-answer="fewer">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">7.</span>
+              Universities will need to offer
+              <input type="text" class="ex1a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-32 text-center focus:border-indigo-600 focus:outline-none" placeholder="(few)" />
+              fact-based courses in future.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a="8" data-answer="more creatively">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">8.</span>
+              Architecture students will be trained to think
+              <input type="text" class="ex1a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-44 text-center focus:border-indigo-600 focus:outline-none" placeholder="(creatively)" />
+              in future.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1b Interactive Part of Speech Sorter -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 text-sm font-black flex items-center justify-center">1b</span>
+              Grammar Classification: Which of the comparatives in 1a are:
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Classify each item number (1–8) into its grammatical category:</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="checkEx1b()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+              Check 1b
+            </button>
+            <button onclick="revealEx1b()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">
+              Show Key
+            </button>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5">
+          <!-- A: Adjectives -->
+          <div class="p-5 rounded-2xl bg-indigo-50/70 border-2 border-indigo-200 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-sm uppercase tracking-wider text-indigo-900 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-indigo-600 text-white text-xs flex items-center justify-center font-bold">A</span>
+                Adjectives
+              </span>
+              <span class="text-xs text-indigo-700 font-bold">3 items</span>
+            </div>
+            <p class="text-xs text-indigo-800">Describe nouns or states of being (e.g. <em>easier</em>, <em>more popular</em>).</p>
+            <div class="space-y-2" id="box-adj">
+              <!-- Item Chips -->
+              <div class="flex flex-wrap gap-2 text-xs font-bold" data-target="adj">
+                <button type="button" onclick="toggle1bChoice(this, 'adj')" data-num="1" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">1 (more accurately)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adj')" data-num="2" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">2 (easier)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adj')" data-num="3" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">3 (more common)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adj')" data-num="4" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">4 (more popular)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adj')" data-num="5" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">5 (more carefully)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adj')" data-num="6" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">6 (as much)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adj')" data-num="7" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">7 (fewer)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adj')" data-num="8" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">8 (more creatively)</button>
+              </div>
+            </div>
+            <div id="fb-adj" class="text-xs font-bold"></div>
+          </div>
+
+          <!-- B: Adverbs -->
+          <div class="p-5 rounded-2xl bg-cyan-50/70 border-2 border-cyan-200 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-sm uppercase tracking-wider text-cyan-900 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-cyan-600 text-white text-xs flex items-center justify-center font-bold">B</span>
+                Adverbs
+              </span>
+              <span class="text-xs text-cyan-700 font-bold">3 items</span>
+            </div>
+            <p class="text-xs text-cyan-800">Modify verbs (manner/how an action is performed, e.g. <em>think carefully</em>).</p>
+            <div class="space-y-2" id="box-adv">
+              <div class="flex flex-wrap gap-2 text-xs font-bold" data-target="adv">
+                <button type="button" onclick="toggle1bChoice(this, 'adv')" data-num="1" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">1 (more accurately)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adv')" data-num="2" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">2 (easier)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adv')" data-num="3" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">3 (more common)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adv')" data-num="4" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">4 (more popular)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adv')" data-num="5" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">5 (more carefully)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adv')" data-num="6" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">6 (as much)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adv')" data-num="7" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">7 (fewer)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'adv')" data-num="8" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">8 (more creatively)</button>
+              </div>
+            </div>
+            <div id="fb-adv" class="text-xs font-bold"></div>
+          </div>
+
+          <!-- C: Quantifiers -->
+          <div class="p-5 rounded-2xl bg-amber-50/70 border-2 border-amber-200 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-sm uppercase tracking-wider text-amber-900 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-amber-600 text-white text-xs flex items-center justify-center font-bold">C</span>
+                Quantifiers
+              </span>
+              <span class="text-xs text-amber-700 font-bold">2 items</span>
+            </div>
+            <p class="text-xs text-amber-800">Indicate amounts or numbers of nouns (e.g. <em>fewer</em>, <em>as much</em>).</p>
+            <div class="space-y-2" id="box-quant">
+              <div class="flex flex-wrap gap-2 text-xs font-bold" data-target="quant">
+                <button type="button" onclick="toggle1bChoice(this, 'quant')" data-num="1" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">1 (more accurately)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'quant')" data-num="2" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">2 (easier)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'quant')" data-num="3" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">3 (more common)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'quant')" data-num="4" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">4 (more popular)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'quant')" data-num="5" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">5 (more carefully)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'quant')" data-num="6" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">6 (as much)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'quant')" data-num="7" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">7 (fewer)</button>
+                <button type="button" onclick="toggle1bChoice(this, 'quant')" data-num="8" class="px-3 py-1.5 rounded-xl border border-slate-300 bg-white text-slate-700">8 (more creatively)</button>
+              </div>
+            </div>
+            <div id="fb-quant" class="text-xs font-bold"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: EXERCISE 2 (Sentence Rewriting) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-blue-200 text-xs font-medium">Equative vs Comparative Transformation</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Sentence Rewriting: Expressing Equal & Unequal Values</h2>
+          <p class="text-blue-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Rewrite the sentences so that the second sentence has a similar meaning to the first, using <em>as ... as</em>, <em>less</em>, or comparative adjectives/quantifiers.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2a()" class="px-5 py-2.5 bg-white hover:bg-blue-50 text-blue-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check All</span>
+          </button>
+          <button onclick="revealEx2a()" class="px-4 py-2.5 bg-blue-800/60 hover:bg-blue-800 text-white border border-blue-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 2a Rewriting Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 text-sm font-black flex items-center justify-center">2a</span>
+            Rewrite the sentences to keep the same meaning:
+          </h3>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-blue-700 bg-blue-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="space-y-4" id="ex2a-container">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-rewrite-q="1">
+            <div class="text-xs font-extrabold text-slate-400 uppercase">Sentence 1</div>
+            <p class="text-sm font-semibold text-slate-700">There were fewer subjects at school in the past.</p>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>There weren't</span>
+              <input type="text" class="rewrite-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-sm w-48 sm:w-56 focus:border-blue-600 focus:outline-none" placeholder="type phrase..." data-ans="as many subjects,so many subjects" />
+              <span>at school in the past.</span>
+              <span class="feedback-badge text-xs font-bold ml-auto"></span>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-rewrite-q="2">
+            <div class="text-xs font-extrabold text-slate-400 uppercase">Sentence 2</div>
+            <p class="text-sm font-semibold text-slate-700">History was less practical than it is today.</p>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>History wasn't</span>
+              <input type="text" class="rewrite-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-sm w-44 sm:w-52 focus:border-blue-600 focus:outline-none" placeholder="type phrase..." data-ans="as practical,so practical" />
+              <span>as it is today.</span>
+              <span class="feedback-badge text-xs font-bold ml-auto"></span>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-rewrite-q="3">
+            <div class="text-xs font-extrabold text-slate-400 uppercase">Sentence 3</div>
+            <p class="text-sm font-semibold text-slate-700">Students were encouraged to think less creatively.</p>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Students weren't encouraged to think</span>
+              <input type="text" class="rewrite-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-sm w-48 sm:w-64 focus:border-blue-600 focus:outline-none" placeholder="type phrase..." data-ans="as creatively,so creatively,as creatively as they are today,as creatively as now" />
+              <span class="feedback-badge text-xs font-bold ml-auto"></span>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-rewrite-q="4">
+            <div class="text-xs font-extrabold text-slate-400 uppercase">Sentence 4</div>
+            <p class="text-sm font-semibold text-slate-700">Memorising facts isn't as important today as it was then.</p>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Memorising facts is</span>
+              <input type="text" class="rewrite-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-sm w-40 sm:w-48 focus:border-blue-600 focus:outline-none" placeholder="type phrase..." data-ans="less important" />
+              <span>today than it was then.</span>
+              <span class="feedback-badge text-xs font-bold ml-auto"></span>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-rewrite-q="5">
+            <div class="text-xs font-extrabold text-slate-400 uppercase">Sentence 5</div>
+            <p class="text-sm font-semibold text-slate-700">Sports were more highly valued in the past.</p>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Sports are not</span>
+              <input type="text" class="rewrite-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-sm w-48 sm:w-56 focus:border-blue-600 focus:outline-none" placeholder="type phrase..." data-ans="as highly valued,so highly valued" />
+              <span>these days.</span>
+              <span class="feedback-badge text-xs font-bold ml-auto"></span>
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-rewrite-q="6">
+            <div class="text-xs font-extrabold text-slate-400 uppercase">Sentence 6</div>
+            <p class="text-sm font-semibold text-slate-700">Students were more respectful of their teachers before.</p>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Students are</span>
+              <input type="text" class="rewrite-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-sm w-56 sm:w-64 focus:border-blue-600 focus:outline-none" placeholder="type phrase..." data-ans="less respectful of their teachers,not as respectful of their teachers,less respectful" />
+              <span>these days.</span>
+              <span class="feedback-badge text-xs font-bold ml-auto"></span>
+            </div>
+          </div>
+
+          <!-- 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-rewrite-q="7">
+            <div class="text-xs font-extrabold text-slate-400 uppercase">Sentence 7</div>
+            <p class="text-sm font-semibold text-slate-700">Technology was less dominant than it is today.</p>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Technology wasn't</span>
+              <input type="text" class="rewrite-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-sm w-48 sm:w-56 focus:border-blue-600 focus:outline-none" placeholder="type phrase..." data-ans="as dominant as,so dominant as" />
+              <span>it is today.</span>
+              <span class="feedback-badge text-xs font-bold ml-auto"></span>
+            </div>
+          </div>
+
+          <!-- 8 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-rewrite-q="8">
+            <div class="text-xs font-extrabold text-slate-400 uppercase">Sentence 8</div>
+            <p class="text-sm font-semibold text-slate-700">Students weren't under as much pressure then as they are today.</p>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Students are under</span>
+              <input type="text" class="rewrite-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-sm w-44 sm:w-52 focus:border-blue-600 focus:outline-none" placeholder="type phrase..." data-ans="more pressure" />
+              <span>today than in the past.</span>
+              <span class="feedback-badge text-xs font-bold ml-auto"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2b Pair Discussion Prompt -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 text-sm font-black flex items-center justify-center">2b</span>
+            Pair Discussion: How has schooling changed over the last twenty-five years?
+          </h3>
+          <button onclick="loadSampleDiscussion2b()" class="text-xs font-black text-blue-700 bg-blue-100 px-3 py-1.5 rounded-xl hover:bg-blue-200 transition">
+            Load Model Ideas
+          </button>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          Use comparative forms with modifiers (<em>far more interactive</em>, <em>much less rote-learning</em>, <em>not as teacher-centered as</em>) to answer in full sentences.
+        </p>
+        <textarea id="ex2b-notes" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-blue-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="Type your ideas or speaking notes here... e.g. Classrooms are far more digitalized now than they were twenty-five years ago..."></textarea>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: EXERCISE 3 (History Doesn't Have to be Dull) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a & 3b</span>
+            <span class="text-emerald-200 text-xs font-medium">Contextual Grammar in Reading</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">History Doesn't Have to Be Dull</h2>
+          <p class="text-emerald-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill the gaps with the comparative or superlative form of the words in brackets. Consider whether the sentence compares two items or singles out an extreme.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3a()" class="px-5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Passage</span>
+          </button>
+          <button onclick="revealEx3a()" class="px-4 py-2.5 bg-emerald-800/60 hover:bg-emerald-800 text-white border border-emerald-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 3a Reading Article Container with In-line Gaps -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">3a</span>
+            Complete the text with a comparative or superlative form:
+          </h3>
+          <span id="ex3a-score-pill" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">Score: 0/10</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.6rem] sm:leading-[3rem] space-y-6 font-normal">
+          <p>
+            In the 1990s, few subjects had a reputation for being
+            <span class="font-bold text-slate-400 mr-1">1</span>
+            <input type="text" data-ex3-gap="1" data-ans="duller than,as dull as" class="ex3-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-40 text-center bg-slate-50 focus:bg-white focus:border-emerald-600 transition" placeholder="(dull)" />
+            history. Because of the poor way that history was taught, children were
+            <span class="font-bold text-slate-400 mr-1">2</span>
+            <input type="text" data-ex3-gap="2" data-ans="less aware" class="ex3-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-emerald-600 transition" placeholder="(aware)" />
+            of the differences in time periods than they are today. The names of the
+            <span class="font-bold text-slate-400 mr-1">3</span>
+            <input type="text" data-ex3-gap="3" data-ans="most important" class="ex3-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-emerald-600 transition" placeholder="(important)" />
+            leaders and the dates of wars are much
+            <span class="font-bold text-slate-400 mr-1">4</span>
+            <input type="text" data-ex3-gap="4" data-ans="less interesting" class="ex3-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-emerald-600 transition" placeholder="(interesting)" />
+            to children than stories about daily life.
+          </p>
+
+          <p>
+            The <em>Horrible Histories</em> books changed all of that. What were toilets like in the past? What were the
+            <span class="font-bold text-slate-400 mr-1">5</span>
+            <input type="text" data-ex3-gap="5" data-ans="most disgusting" class="ex3-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-emerald-600 transition" placeholder="(disgusting)" />
+            jobs in history? Did you know woolly mammoths were still walking the planet when one of the
+            <span class="font-bold text-slate-400 mr-1">6</span>
+            <input type="text" data-ex3-gap="6" data-ans="most ancient,most ancient," class="ex3-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-40 text-center bg-slate-50 focus:bg-white focus:border-emerald-600 transition" placeholder="(ancient)" />
+            structures in the world, the pyramids, were built? These facts fascinate children. A lot of the past also feels very modern. Few current fans of Batman or Superman realise that those characters are
+            <span class="font-bold text-slate-400 mr-1">7</span>
+            <input type="text" data-ex3-gap="7" data-ans="older than,as old as" class="ex3-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-emerald-600 transition" placeholder="(old)" />
+            today's pensioners.
+          </p>
+
+          <p>
+            There's an important lesson among the fun. Understanding the past might make children
+            <span class="font-bold text-slate-400 mr-1">8</span>
+            <input type="text" data-ex3-gap="8" data-ans="more grateful" class="ex3-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-emerald-600 transition" placeholder="(grateful)" />
+            for modern comforts, and history should always be an opportunity to learn from past mistakes. We want future generations to be
+            <span class="font-bold text-slate-400 mr-1">9</span>
+            <input type="text" data-ex3-gap="9" data-ans="less likely" class="ex3-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-emerald-600 transition" placeholder="(likely)" />
+            to repeat our errors in future. If future leaders have a
+            <span class="font-bold text-slate-400 mr-1">10</span>
+            <input type="text" data-ex3-gap="10" data-ans="better" class="ex3-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-emerald-600 transition" placeholder="(good)" />
+            understanding of the past, we all benefit.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3b History Comparison Prompt -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">3b</span>
+            Speaking Practice: Compare how history was taught when you were at school to now.
+          </h3>
+          <button onclick="speakText('When I was at school, history was far more focused on rote memorisation of dates. Nowadays, it is significantly more interactive and inquiry-based.')" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-xl hover:bg-emerald-100 transition flex items-center gap-1">
+            🔊 Listen to Sample
+          </button>
+        </div>
+        <textarea id="ex3b-notes" rows="2" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-emerald-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. When I was younger, our history classes were much less engaging because we only memorised monarchs and battles. In contrast, students today have far more digital documentaries and project-based investigations..."></textarea>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: EXERCISE 4 (Thames Valley School A Level Chart) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-amber-500 via-orange-600 to-rose-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a & 4b</span>
+            <span class="text-amber-100 text-xs font-medium">IELTS Academic Writing Task 1 Style</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">A Level Choices Data Analysis</h2>
+          <p class="text-amber-50 text-sm mt-1 max-w-2xl leading-relaxed">
+            Interpret data trends from the table below and complete the analytical summary using proportional and comparative phrases.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4a()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Summary</span>
+          </button>
+          <button onclick="revealEx4a()" class="px-4 py-2.5 bg-amber-800/60 hover:bg-amber-800 text-white border border-amber-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Table & Word Bank Side-by-Side -->
+      <div class="grid lg:grid-cols-12 gap-6">
+        
+        <!-- Table Column (5 cols) -->
+        <div class="lg:col-span-5 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <h4 class="font-extrabold text-slate-900 text-base">Thames Valley School A level choices</h4>
+            <span class="text-xs bg-slate-100 text-slate-600 font-bold px-2.5 py-1 rounded-lg">Entrants</span>
+          </div>
+
+          <div class="overflow-hidden rounded-2xl border border-slate-200">
+            <table class="w-full text-sm text-left">
+              <thead class="bg-slate-50 text-xs font-black uppercase text-slate-500 border-b border-slate-200">
+                <tr>
+                  <th class="px-4 py-3">Subject</th>
+                  <th class="px-3 py-3 text-center">Last year</th>
+                  <th class="px-3 py-3 text-center">This year</th>
+                  <th class="px-3 py-3 text-right">Trend</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium text-slate-800">
+                <tr class="hover:bg-slate-50/80">
+                  <td class="px-4 py-2.5 font-bold">Biology</td>
+                  <td class="px-3 py-2.5 text-center text-slate-600">30</td>
+                  <td class="px-3 py-2.5 text-center font-bold text-rose-600">20</td>
+                  <td class="px-3 py-2.5 text-right text-xs text-rose-600 font-bold">↓ -10</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80">
+                  <td class="px-4 py-2.5 font-bold">Chemistry</td>
+                  <td class="px-3 py-2.5 text-center text-slate-600">40</td>
+                  <td class="px-3 py-2.5 text-center font-bold text-slate-900">40</td>
+                  <td class="px-3 py-2.5 text-right text-xs text-slate-400 font-bold">= 0</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80 bg-amber-50/40">
+                  <td class="px-4 py-2.5 font-bold">English</td>
+                  <td class="px-3 py-2.5 text-center text-slate-600">55</td>
+                  <td class="px-3 py-2.5 text-center font-black text-amber-600">60</td>
+                  <td class="px-3 py-2.5 text-right text-xs text-emerald-600 font-bold">↑ +5</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80">
+                  <td class="px-4 py-2.5 font-bold">Geography</td>
+                  <td class="px-3 py-2.5 text-center text-slate-600">30</td>
+                  <td class="px-3 py-2.5 text-center font-bold text-rose-600">15</td>
+                  <td class="px-3 py-2.5 text-right text-xs text-rose-600 font-bold">↓ -15</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80">
+                  <td class="px-4 py-2.5 font-bold">History</td>
+                  <td class="px-3 py-2.5 text-center text-slate-600">15</td>
+                  <td class="px-3 py-2.5 text-center font-bold text-slate-900">15</td>
+                  <td class="px-3 py-2.5 text-right text-xs text-slate-400 font-bold">= 0</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80 bg-amber-50/40">
+                  <td class="px-4 py-2.5 font-bold">Maths</td>
+                  <td class="px-3 py-2.5 text-center text-slate-600">58</td>
+                  <td class="px-3 py-2.5 text-center font-black text-amber-600">60</td>
+                  <td class="px-3 py-2.5 text-right text-xs text-emerald-600 font-bold">↑ +2</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80">
+                  <td class="px-4 py-2.5 font-bold">Modern languages</td>
+                  <td class="px-3 py-2.5 text-center text-slate-600">20</td>
+                  <td class="px-3 py-2.5 text-center font-bold text-emerald-600">30</td>
+                  <td class="px-3 py-2.5 text-right text-xs text-emerald-600 font-bold">↑ +10</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Phrases Word Bank Column (7 cols) -->
+        <div class="lg:col-span-7 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-slate-500">Available Analytical Phrases:</span>
+            <span class="text-xs text-slate-400">Click any phrase to copy/use</span>
+          </div>
+          <div class="flex flex-wrap gap-2" id="phrase-bank">
+            <button type="button" onclick="insertPhrase(this)" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs sm:text-sm hover:border-amber-500 transition">as popular as</button>
+            <button type="button" onclick="insertPhrase(this)" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs sm:text-sm hover:border-amber-500 transition">half as many</button>
+            <button type="button" onclick="insertPhrase(this)" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs sm:text-sm hover:border-amber-500 transition">most common</button>
+            <button type="button" onclick="insertPhrase(this)" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs sm:text-sm hover:border-amber-500 transition">much lower</button>
+            <button type="button" onclick="insertPhrase(this)" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs sm:text-sm hover:border-amber-500 transition">slightly higher than</button>
+            <button type="button" onclick="insertPhrase(this)" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs sm:text-sm hover:border-amber-500 transition">the same as</button>
+            <button type="button" onclick="insertPhrase(this)" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs sm:text-sm hover:border-amber-500 transition">second most popular</button>
+            <button type="button" onclick="insertPhrase(this)" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs sm:text-sm hover:border-amber-500 transition">twice as many</button>
+          </div>
+          <p class="text-xs text-slate-400">Tip: You can either click a tag then focus an input, or type directly.</p>
+        </div>
+      </div>
+
+      <!-- Summary Text with Interactive Gap Fields -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">4a</span>
+            Complete the summary report using the phrases above:
+          </h3>
+          <span id="ex4a-score-pill" class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.6rem] sm:leading-[3rem] font-normal space-y-4">
+          <p>
+            The number of students choosing the core facilitating subjects has increased this year. With 60 students each, the
+            <span class="font-bold text-slate-400 mr-1">1</span>
+            <input type="text" data-ex4-gap="1" data-ans="most common" class="ex4-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="phrase 1..." />
+            choices were maths and English. In fact, they had
+            <span class="font-bold text-slate-400 mr-1">2</span>
+            <input type="text" data-ex4-gap="2" data-ans="twice as many" class="ex4-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="phrase 2..." />
+            students taking those exams as modern languages.
+          </p>
+
+          <p>
+            The numbers for maths and English this year were
+            <span class="font-bold text-slate-400 mr-1">3</span>
+            <input type="text" data-ex4-gap="3" data-ans="slightly higher than" class="ex4-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-52 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="phrase 3..." />
+            the year before. Chemistry was the
+            <span class="font-bold text-slate-400 mr-1">4</span>
+            <input type="text" data-ex4-gap="4" data-ans="second most popular" class="ex4-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-56 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="phrase 4..." />
+            subject, with 40 entrants this year, exactly
+            <span class="font-bold text-slate-400 mr-1">5</span>
+            <input type="text" data-ex4-gap="5" data-ans="the same as" class="ex4-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="phrase 5..." />
+            the previous year.
+          </p>
+
+          <p>
+            In the past, around
+            <span class="font-bold text-slate-400 mr-1">6</span>
+            <input type="text" data-ex4-gap="6" data-ans="half as many" class="ex4-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="phrase 6..." />
+            students chose history, rather than geography, but this year, the numbers for geography were
+            <span class="font-bold text-slate-400 mr-1">7</span>
+            <input type="text" data-ex4-gap="7" data-ans="much lower" class="ex4-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="phrase 7..." />
+            . This means that history is now just
+            <span class="font-bold text-slate-400 mr-1">8</span>
+            <input type="text" data-ex4-gap="8" data-ans="as popular as" class="ex4-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="phrase 8..." />
+            geography, with 15 students taking each subject.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4b Oral Chart Description Trainer -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">4b</span>
+            Cover-and-Describe Speaking Challenge (IELTS Writing Task 1 Oral Presentation)
+          </h3>
+          <button onclick="toggleSummaryCover()" id="toggle-cover-btn" class="text-xs font-black text-amber-900 bg-amber-100 px-3 py-1.5 rounded-xl hover:bg-amber-200 transition">
+            Cover Summary Text
+          </button>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-600">
+          Practice describing the main trends in the table without looking at the text. Look for: highest figures, subjects that remained constant, and subjects that halved or doubled.
+        </p>
+        <div id="cover-overlay" class="hidden p-5 rounded-2xl bg-amber-500/10 border-2 border-amber-300 text-amber-950 text-sm font-bold text-center">
+          🙈 Summary text is covered! Look at the table above and take turns presenting the comparisons aloud.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: EXPERT GRAMMAR REFERENCE (Page 175) -->
+    <!-- ========================================================================= -->
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-indigo-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 175 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Comparative and Superlative Forms</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Master the rules governing comparative adjectives, adverbs, modifiers of degree, and proportional quantifiers for IELTS Academic.
+        </p>
+      </div>
+
+      <!-- Quick Rule Matrix -->
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs sm:text-sm">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+          <span class="font-black text-indigo-700 text-base block">One-Syllable</span>
+          <span class="text-slate-900 font-bold">-er / -est</span>
+          <p class="text-slate-500 text-xs mt-1"><em>dull ➔ duller ➔ dullest</em><br><em>old ➔ older ➔ oldest</em></p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+          <span class="font-black text-indigo-700 text-base block">Ending in -y</span>
+          <span class="text-slate-900 font-bold">-ier / -iest</span>
+          <p class="text-slate-500 text-xs mt-1"><em>easy ➔ easier ➔ easiest</em><br><em>early ➔ earlier ➔ earliest</em></p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+          <span class="font-black text-indigo-700 text-base block">Multi-Syllable</span>
+          <span class="text-slate-900 font-bold">more / most</span>
+          <p class="text-slate-500 text-xs mt-1"><em>popular ➔ more popular</em><br><em>accurately ➔ more accurately</em></p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-1">
+          <span class="font-black text-indigo-700 text-base block">Irregulars</span>
+          <span class="text-slate-900 font-bold">good / bad / far</span>
+          <p class="text-slate-500 text-xs mt-1"><em>good ➔ better ➔ best</em><br><em>bad ➔ worse ➔ worst</em></p>
+        </div>
+      </div>
+
+      <!-- In-Depth Grammar Cards -->
+      <div class="grid md:grid-cols-2 gap-6">
+        
+        <!-- Modifiers of Difference -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-800 font-black text-base flex items-center justify-center">
+              MD
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Modifying Comparatives</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Expressing Degree</p>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-black text-slate-900">1. Large differences:</div>
+              <p class="text-slate-600 font-medium">Use <strong>much</strong>, <strong>far</strong>, <strong>a lot</strong>, <strong>significantly</strong>, <strong>considerably</strong>.</p>
+              <p class="text-indigo-800 font-bold text-xs mt-1">✓ "...identify routine illness <u>much more accurately</u>."</p>
+              <p class="text-indigo-800 font-bold text-xs">✓ "History was <u>far less engaging</u>."</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-black text-slate-900">2. Small differences:</div>
+              <p class="text-slate-600 font-medium">Use <strong>slightly</strong>, <strong>a little</strong>, <strong>a bit</strong>, <strong>marginally</strong>.</p>
+              <p class="text-indigo-800 font-bold text-xs mt-1">✓ "...numbers were <u>slightly higher than</u> the year before."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proportions and Equatives -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 font-black text-base flex items-center justify-center">
+              PR
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Quantities & Proportions</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Multipliers & Negation</p>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-black text-slate-900">1. Equal & Negative Comparisons:</div>
+              <p class="text-slate-600 font-medium"><strong>as ... as</strong> (equal) vs <strong>not as/so ... as</strong> (less than).</p>
+              <p class="text-amber-800 font-bold text-xs mt-1">✓ "History is now just <u>as popular as</u> geography."</p>
+              <p class="text-amber-800 font-bold text-xs">✓ "There weren't <u>as many subjects</u> in the past."</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-black text-slate-900">2. Numerical Proportions:</div>
+              <p class="text-slate-600 font-medium">Use <strong>twice as many/much as</strong>, <strong>three times as many as</strong>, <strong>half as many/much as</strong>.</p>
+              <p class="text-amber-800 font-bold text-xs mt-1">✓ "They had <u>twice as many</u> students taking those exams."</p>
+              <p class="text-amber-800 font-bold text-xs">✓ "In the past, around <u>half as many</u> students chose history."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 29
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 3a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 3: Work and study • Page 45 • Expert Grammar Page 175
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State management for scores
+    const state = {
+      score: {
+        ex1a: 0,
+        ex1b: 0,
+        ex2a: 0,
+        ex3a: 0,
+        ex4a: 0
+      }
+    };
+
+    // Synthesized Web Audio API sound effects
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.15); // C6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Text to Speech
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Clean string helper
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // Exercise 1a Check
+    function checkEx1a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('[data-ex1a]');
+
+      rows.forEach(row => {
+        const input = row.querySelector('.ex1a-input');
+        const badge = row.querySelector('.feedback-badge');
+        const allowed = row.getAttribute('data-answer').split(',').map(cleanStr);
+        const userVal = cleanStr(input.value);
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Enter form</span>';
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          input.classList.remove('border-rose-400', 'bg-rose-50');
+          input.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed.join(' / ')})</span>`;
+          input.classList.remove('border-emerald-500', 'bg-emerald-50');
+          input.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex1a = correct;
+      document.getElementById('ex1a-score-pill').textContent = `Score: ${correct}/8`;
+      updateTotalScore();
+      playBeep(correct >= 5);
+    }
+
+    function revealEx1a() {
+      const answers = [
+        "more accurately",
+        "easier",
+        "more common",
+        "more popular",
+        "more carefully",
+        "as much",
+        "fewer",
+        "more creatively"
+      ];
+
+      const rows = document.querySelectorAll('[data-ex1a]');
+      rows.forEach((row, i) => {
+        const inp = row.querySelector('.ex1a-input');
+        const badge = row.querySelector('.feedback-badge');
+        inp.value = answers[i];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex1a = 8;
+      document.getElementById('ex1a-score-pill').textContent = `Score: 8/8`;
+      updateTotalScore();
+    }
+
+    // Exercise 1b Classification Sorter Logic
+    function toggle1bChoice(btn, category) {
+      btn.classList.toggle('selected');
+      if (btn.classList.contains('selected')) {
+        btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+        if (category === 'adj') {
+          btn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
+        } else if (category === 'adv') {
+          btn.classList.add('bg-cyan-600', 'text-white', 'border-cyan-600');
+        } else {
+          btn.classList.add('bg-amber-600', 'text-white', 'border-amber-600');
+        }
+      } else {
+        btn.classList.remove('bg-indigo-600', 'bg-cyan-600', 'bg-amber-600', 'text-white', 'border-indigo-600', 'border-cyan-600', 'border-amber-600');
+        btn.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+      }
+    }
+
+    function checkEx1b() {
+      // Correct targets:
+      // Adjectives: 2 (easier), 3 (more common), 4 (more popular)
+      // Adverbs: 1 (more accurately), 5 (more carefully), 8 (more creatively)
+      // Quantifiers: 6 (as much), 7 (fewer)
+      const adjSelected = Array.from(document.querySelectorAll('[data-target="adj"] button.selected')).map(b => b.getAttribute('data-num'));
+      const advSelected = Array.from(document.querySelectorAll('[data-target="adv"] button.selected')).map(b => b.getAttribute('data-num'));
+      const quantSelected = Array.from(document.querySelectorAll('[data-target="quant"] button.selected')).map(b => b.getAttribute('data-num'));
+
+      const isAdjOk = adjSelected.length === 3 && ['2', '3', '4'].every(n => adjSelected.includes(n));
+      const isAdvOk = advSelected.length === 3 && ['1', '5', '8'].every(n => advSelected.includes(n));
+      const isQuantOk = quantSelected.length === 2 && ['6', '7'].every(n => quantSelected.includes(n));
+
+      document.getElementById('fb-adj').innerHTML = isAdjOk ?
+        '<span class="text-emerald-700">✓ Correct (2, 3, 4)</span>' : '<span class="text-rose-600">✗ Should be: 2, 3, 4</span>';
+      document.getElementById('fb-adv').innerHTML = isAdvOk ?
+        '<span class="text-emerald-700">✓ Correct (1, 5, 8)</span>' : '<span class="text-rose-600">✗ Should be: 1, 5, 8</span>';
+      document.getElementById('fb-quant').innerHTML = isQuantOk ?
+        '<span class="text-emerald-700">✓ Correct (6, 7)</span>' : '<span class="text-rose-600">✗ Should be: 6, 7</span>';
+
+      let score = 0;
+      if (isAdjOk) score++;
+      if (isAdvOk) score++;
+      if (isQuantOk) score++;
+
+      state.score.ex1b = score;
+      updateTotalScore();
+      playBeep(score >= 2);
+    }
+
+    function revealEx1b() {
+      const keys = {
+        adj: ['2', '3', '4'],
+        adv: ['1', '5', '8'],
+        quant: ['6', '7']
+      };
+
+      ['adj', 'adv', 'quant'].forEach(cat => {
+        const container = document.querySelector(`[data-target="${cat}"]`);
+        container.querySelectorAll('button').forEach(btn => {
+          const num = btn.getAttribute('data-num');
+          btn.classList.remove('bg-indigo-600', 'bg-cyan-600', 'bg-amber-600', 'text-white', 'border-indigo-600', 'border-cyan-600', 'border-amber-600', 'bg-white', 'text-slate-700', 'border-slate-300');
+          if (keys[cat].includes(num)) {
+            btn.classList.add('selected', 'text-white');
+            if (cat === 'adj') btn.classList.add('bg-indigo-600', 'border-indigo-600');
+            if (cat === 'adv') btn.classList.add('bg-cyan-600', 'border-cyan-600');
+            if (cat === 'quant') btn.classList.add('bg-amber-600', 'border-amber-600');
+          } else {
+            btn.classList.remove('selected');
+            btn.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+          }
+        });
+      });
+
+      document.getElementById('fb-adj').innerHTML = '<span class="text-emerald-700">✓ 2, 3, 4</span>';
+      document.getElementById('fb-adv').innerHTML = '<span class="text-emerald-700">✓ 1, 5, 8</span>';
+      document.getElementById('fb-quant').innerHTML = '<span class="text-emerald-700">✓ 6, 7</span>';
+
+      state.score.ex1b = 3;
+      updateTotalScore();
+    }
+
+    // Exercise 2a Check
+    function checkEx2a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex2a-container [data-rewrite-q]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.rewrite-input');
+        const badge = row.querySelector('.feedback-badge');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Enter phrase</span>';
+          return;
+        }
+
+        if (allowed.some(acc => userVal === acc || acc.includes(userVal))) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex2a = correct;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correct}/8`;
+      updateTotalScore();
+      playBeep(correct >= 5);
+    }
+
+    function revealEx2a() {
+      const keys = [
+        "as many subjects",
+        "as practical",
+        "as creatively",
+        "less important",
+        "as highly valued",
+        "less respectful of their teachers",
+        "as dominant as",
+        "more pressure"
+      ];
+
+      const rows = document.querySelectorAll('#ex2a-container [data-rewrite-q]');
+      rows.forEach((row, i) => {
+        const inp = row.querySelector('.rewrite-input');
+        const badge = row.querySelector('.feedback-badge');
+        inp.value = keys[i];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex2a = 8;
+      document.getElementById('ex2a-score-pill').textContent = `Score: 8/8`;
+      updateTotalScore();
+    }
+
+    function loadSampleDiscussion2b() {
+      document.getElementById('ex2b-notes').value = "Over the past 25 years, schooling has become far more interactive and student-centered. In the past, students weren't encouraged to question teachers as openly as they do today. Furthermore, modern classrooms are significantly more reliant on digital technology, whereas previously, memorising static textbook facts was considered much more essential.";
+      playBeep(true);
+    }
+
+    // Exercise 3a Check
+    function checkEx3a() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex3-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.some(acc => userVal === acc)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3a = correct;
+      document.getElementById('ex3a-score-pill').textContent = `Score: ${correct}/10`;
+      updateTotalScore();
+      playBeep(correct >= 7);
+    }
+
+    function revealEx3a() {
+      const keys = [
+        "as dull as",        // 1 (or duller than)
+        "less aware",        // 2
+        "most important",    // 3
+        "less interesting",  // 4
+        "most disgusting",   // 5
+        "most ancient",      // 6
+        "as old as",         // 7 (or older than)
+        "more grateful",     // 8
+        "less likely",       // 9
+        "better"             // 10
+      ];
+
+      const inputs = document.querySelectorAll('.ex3-input');
+      inputs.forEach((inp, idx) => {
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+      });
+
+      state.score.ex3a = 10;
+      document.getElementById('ex3a-score-pill').textContent = `Score: 10/10`;
+      updateTotalScore();
+    }
+
+    // Exercise 4 Phrase Insertion Helper
+    let lastFocusedInput = null;
+    document.querySelectorAll('.ex4-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastFocusedInput = inp;
+      });
+    });
+
+    function insertPhrase(btn) {
+      const phrase = btn.textContent.trim();
+      if (lastFocusedInput) {
+        lastFocusedInput.value = phrase;
+        lastFocusedInput.focus();
+      } else {
+        // Find first empty input
+        const emptyInp = Array.from(document.querySelectorAll('.ex4-input')).find(i => !i.value.trim());
+        if (emptyInp) {
+          emptyInp.value = phrase;
+          emptyInp.focus();
+        }
+      }
+    }
+
+    // Exercise 4a Check
+    function checkEx4a() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex4-input');
+
+      inputs.forEach(inp => {
+        const allowed = cleanStr(inp.getAttribute('data-ans'));
+        const userVal = cleanStr(inp.value);
+
+        if (userVal === allowed) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex4a = correct;
+      document.getElementById('ex4a-score-pill').textContent = `Score: ${correct}/8`;
+      updateTotalScore();
+      playBeep(correct >= 5);
+    }
+
+    function revealEx4a() {
+      const keys = [
+        "most common",           // 1
+        "twice as many",         // 2
+        "slightly higher than",  // 3
+        "second most popular",   // 4
+        "the same as",           // 5
+        "half as many",          // 6
+        "much lower",            // 7
+        "as popular as"          // 8
+      ];
+
+      const inputs = document.querySelectorAll('.ex4-input');
+      inputs.forEach((inp, idx) => {
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+      });
+
+      state.score.ex4a = 8;
+      document.getElementById('ex4a-score-pill').textContent = `Score: 8/8`;
+      updateTotalScore();
+    }
+
+    function toggleSummaryCover() {
+      const cover = document.getElementById('cover-overlay');
+      const btn = document.getElementById('toggle-cover-btn');
+      cover.classList.toggle('hidden');
+      if (cover.classList.contains('hidden')) {
+        btn.textContent = "Cover Summary Text";
+      } else {
+        btn.textContent = "Uncover Summary Text";
+      }
+    }
+
+    // Global Score Updating
+    function updateTotalScore() {
+      const total = state.score.ex1a + state.score.ex1b + state.score.ex2a + state.score.ex3a + state.score.ex4a;
+      // Max score: 8 + 3 + 8 + 10 + 8 = 37 (normalized to 34 or exact 37)
+      const maxScore = 37;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 30) {
+        bar.classList.replace('bg-indigo-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-indigo-600');
+      }
+    }
+
+    // Reset All Answers
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Clear 1a
+      document.querySelectorAll('.ex1a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 1b
+      document.querySelectorAll('[data-target] button').forEach(b => {
+        b.classList.remove('selected', 'bg-indigo-600', 'bg-cyan-600', 'bg-amber-600', 'text-white', 'border-indigo-600', 'border-cyan-600', 'border-amber-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+      });
+      document.getElementById('fb-adj').innerHTML = '';
+      document.getElementById('fb-adv').innerHTML = '';
+      document.getElementById('fb-quant').innerHTML = '';
+
+      // Clear 2a
+      document.querySelectorAll('.rewrite-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 3a
+      document.querySelectorAll('.ex3-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 4a
+      document.querySelectorAll('.ex4-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset scores
+      state.score = { ex1a: 0, ex1b: 0, ex2a: 0, ex3a: 0, ex4a: 0 };
+      updateTotalScore();
+      document.getElementById('ex1a-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 0/10';
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 0/8';
+    });
+  </script>
+</body>
+</html>

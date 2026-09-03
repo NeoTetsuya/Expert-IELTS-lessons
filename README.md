@@ -11,6 +11,7 @@ Interactive, animation-rich, 16:9 HTML slide presentations designed for IELTS Ac
 ├── presentation_creation_guide.md # Comprehensive guide for creating new modules
 ├── reading_passages_and_questions_guide.md
 ├── reading explanations - walkthrough/ # Standalone deep-dive IELTS reading question walkthrough masterclasses
+├── grammar exercises/             # Standalone interactive Grammar & Language Development practice pages
 ├── js/                            # Universal modular presentation engine
 │   ├── template-engine.js         # Declarative slide-card expander & IELTS reading question registry
 │   ├── deck-engine.js             # Master bundle & loader

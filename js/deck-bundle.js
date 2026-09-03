@@ -233,6 +233,8 @@
                         <div style="display: flex; flex-direction: column; gap: 14px; flex: 1.1; overflow-y: auto;" data-slot="rules"></div>
                         <div style="display: flex; flex-direction: column; gap: 14px; flex: 0.9; overflow-y: auto;" data-slot="contrast-card"></div>
                     </div>
+
+                    <div class="action-row" style="margin-top: 10px;"></div>
                 </div>
             </div>
         </div>
@@ -1272,6 +1274,28 @@
                 }
             }
 
+            // Grammar Exercise Button Hydration
+            const gUrl = data.grammarUrl || (el ? (el.getAttribute('grammar-url') || el.getAttribute('data-grammar-ref')) : null);
+            const gTitle = data.grammarTitle || (el ? (el.getAttribute('grammar-title') || el.getAttribute('title')) : null) || 'Grammar Practice Exercises';
+            if (gUrl) {
+                let actionRow = section.querySelector('.action-row');
+                if (!actionRow) {
+                    actionRow = document.createElement('div');
+                    actionRow.className = 'action-row';
+                    actionRow.style.marginTop = '10px';
+                    const pageContent = section.querySelector('.page-content');
+                    if (pageContent) pageContent.appendChild(actionRow);
+                }
+                if (actionRow && !actionRow.querySelector('.grammar-exercise-trigger-btn')) {
+                    const gBtn = document.createElement('button');
+                    gBtn.className = 'btn-action grammar-exercise-trigger-btn';
+                    gBtn.setAttribute('data-grammar-ref', gUrl);
+                    gBtn.setAttribute('data-grammar-title', gTitle);
+                    gBtn.innerHTML = `📝 Grammar Exercises`;
+                    actionRow.appendChild(gBtn);
+                }
+            }
+
             // Vocabulary Hub / Cards Template Hydration
             if (data.words && Array.isArray(data.words)) {
                 const vocabCardsContainer = section.querySelector('[data-slot="cards"], .vocab-hub-grid');
@@ -1710,6 +1734,28 @@
                         wtBtn.setAttribute('data-walkthrough-title', slideWtTitle);
                         wtBtn.innerHTML = `🚀 Question Walkthrough`;
                         actionRow.appendChild(wtBtn);
+                    }
+                }
+
+                // Grammar Exercise attribute support
+                const slideGUrl = el.getAttribute('grammar-url') || el.getAttribute('data-grammar-ref');
+                if (slideGUrl) {
+                    const slideGTitle = el.getAttribute('grammar-title') || el.getAttribute('title') || 'Grammar Practice Exercises';
+                    let actionRow = section.querySelector('.action-row');
+                    if (!actionRow) {
+                        actionRow = document.createElement('div');
+                        actionRow.className = 'action-row';
+                        actionRow.style.marginTop = '10px';
+                        const pageContent = section.querySelector('.page-content');
+                        if (pageContent) pageContent.appendChild(actionRow);
+                    }
+                    if (actionRow && !actionRow.querySelector('.grammar-exercise-trigger-btn')) {
+                        const gBtn = document.createElement('button');
+                        gBtn.className = 'btn-action grammar-exercise-trigger-btn';
+                        gBtn.setAttribute('data-grammar-ref', slideGUrl);
+                        gBtn.setAttribute('data-grammar-title', slideGTitle);
+                        gBtn.innerHTML = `📝 Grammar Exercises`;
+                        actionRow.appendChild(gBtn);
                     }
                 }
 
@@ -10644,7 +10690,7 @@ class GrammarReferenceEngine {
             <div class="grammar-ref-dialog">
                 <div class="grammar-ref-header">
                     <div class="grammar-ref-title-group">
-                        <span class="grammar-ref-badge">📘 Grammar Handbook</span>
+                        <span class="grammar-ref-badge" id="grammarRefBadge">📘 Grammar Handbook</span>
                         <h3 class="grammar-ref-title" id="grammarRefTitle">Grammar Reference</h3>
                     </div>
                     <div class="grammar-ref-actions">
@@ -10839,6 +10885,33 @@ class GrammarReferenceEngine {
                 from { opacity: 0; transform: scale(0.96); }
                 to { opacity: 1; transform: scale(1); }
             }
+
+            /* Dedicated grammar exercise button style */
+            .grammar-exercise-trigger-btn {
+                background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 100%);
+                color: #ffffff !important;
+                font-weight: 700 !important;
+                border: 1px solid rgba(255, 255, 255, 0.25) !important;
+                padding: 7px 16px !important;
+                border-radius: 8px !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 7px !important;
+                cursor: pointer !important;
+                font-size: 14.5px !important;
+                box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35) !important;
+                transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                text-decoration: none !important;
+                white-space: nowrap !important;
+            }
+            .grammar-exercise-trigger-btn:hover {
+                transform: translateY(-1.5px) !important;
+                box-shadow: 0 6px 18px rgba(124, 58, 237, 0.45) !important;
+                background: linear-gradient(135deg, #5b21b6 0%, #6d28d9 100%) !important;
+            }
+            .grammar-exercise-trigger-btn:active {
+                transform: scale(0.97) !important;
+            }
         `;
         document.head.appendChild(style);
     }
@@ -10850,17 +10923,19 @@ class GrammarReferenceEngine {
                 e.preventDefault();
                 const url = trigger.getAttribute('data-grammar-ref');
                 const title = trigger.getAttribute('data-grammar-title') || 'Grammar Reference Handbook';
-                this.open(url, title);
+                const badge = trigger.getAttribute('data-grammar-badge');
+                this.open(url, title, badge);
             }
         });
     }
 
-    open(url, title) {
+    open(url, title, badge) {
         this.injectModal();
 
         const modal = document.getElementById('grammarReferenceModal');
         const frame = document.getElementById('grammarRefFrame');
         const titleElem = document.getElementById('grammarRefTitle');
+        const badgeElem = document.getElementById('grammarRefBadge');
         const linkElem = document.getElementById('grammarRefExternalLink');
         const loadingElem = document.getElementById('grammarRefLoading');
 
@@ -10870,6 +10945,9 @@ class GrammarReferenceEngine {
         this.currentTitle = title || this.currentTitle;
 
         titleElem.textContent = this.currentTitle;
+        if (badgeElem) {
+            badgeElem.textContent = badge || (this.currentTitle.includes('Exercise') || this.currentTitle.includes('Development') ? '📝 Grammar Practice' : '📘 Grammar Handbook');
+        }
         linkElem.href = this.currentUrl;
 
         loadingElem.style.display = 'flex';

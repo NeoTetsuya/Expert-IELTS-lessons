@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 1: Language Development - Present Tenses</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              800: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth animated transitions */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Inline pill toggle buttons */
+    .toggle-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .toggle-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .toggle-choice-btn:active {
+      transform: translateY(1px);
+    }
+    /* High contrast input styling */
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.25);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/80 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-sky-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-sky-600 via-indigo-600 to-sky-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-sky-500/25 ring-2 ring-white">
+          M1
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 tracking-wide uppercase">Unit 1: Communication</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 13</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-sky-600">Present Tenses</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-sky-600">0 / 32</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-sky-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-sky-600 text-white shadow-md shadow-sky-600/25">
+          1. Phone Plans & Statives
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. True For You
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Online Moods Article
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Mobile Essay & Debate
+        </button>
+        <button data-tab="tab-ex5" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          5. IELTS Speaking Part 1
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 173
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+    
+    <!-- ========================================================================= -->
+    <!-- TAB 1: EXERCISE 1 (1a & 1b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-sky-600 to-indigo-700 text-white p-6 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1a & 1b</span>
+            <span class="text-sky-200 text-xs font-medium">Expert Grammar Page 173</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Present Simple vs. Present Continuous</h2>
+          <p class="text-sky-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Choose the correct verb aspect based on whether the action is a regular routine, currently happening, temporary, or an emotional/mental state.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkExercise1()" class="px-5 py-2.5 bg-white hover:bg-sky-50 text-sky-800 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 1a</span>
+          </button>
+          <button onclick="revealExercise1()" class="px-4 py-2.5 bg-sky-800/60 hover:bg-sky-800 text-white border border-sky-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 1a Card -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-sky-100 text-sky-700 text-sm font-black flex items-center justify-center">1a</span>
+            Choose the correct option in italics to complete the sentences:
+          </h3>
+          <span class="text-xs font-semibold text-slate-500">Tap your choice directly</span>
+        </div>
+
+        <div class="grid gap-3.5">
+          <!-- Item 1 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex1a-1" data-answer="am looking">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectOption(this, 'look')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-xs">look</button>
+                <button type="button" onclick="selectOption(this, 'am looking')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-xs">am looking</button>
+              </span>
+              for a new phone plan.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex1a-2" data-answer="does that include">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              What
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectOption(this, 'is that including')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-xs">is that including</button>
+                <button type="button" onclick="selectOption(this, 'does that include')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-xs">does that include</button>
+              </span>
+              ?
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex1a-3" data-answer="are offering">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              We
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectOption(this, 'offer')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-xs">offer</button>
+                <button type="button" onclick="selectOption(this, 'are offering')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-xs">are offering</button>
+              </span>
+              it at that price for a short period.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex1a-4" data-answer="do you want">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              How much data
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectOption(this, 'are you wanting')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-xs">are you wanting</button>
+                <button type="button" onclick="selectOption(this, 'do you want')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-xs">do you want</button>
+              </span>
+              ?
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex1a-5" data-answer="Do you use">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              <span class="inline-flex gap-1.5 mr-1.5 align-middle">
+                <button type="button" onclick="selectOption(this, 'Are you using')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-xs">Are you using</button>
+                <button type="button" onclick="selectOption(this, 'Do you use')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-xs">Do you use</button>
+              </span>
+              your phone for games regularly?
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex1a-6" data-answer="need">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              All you
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectOption(this, 'are needing')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-xs">are needing</button>
+                <button type="button" onclick="selectOption(this, 'need')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-xs">need</button>
+              </span>
+              to do is sign here.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1b Stative Verbs Deep Dive -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 text-sm font-black flex items-center justify-center">1b</span>
+              Which of the verbs in 1a are <span class="text-indigo-600 underline decoration-indigo-300 underline-offset-4">not normally used</span> in the continuous form?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Tap each stative verb to select it (there are 3 correct verbs):</p>
+          </div>
+          <button onclick="checkStativeVerbs()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+            Validate 1b
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3" id="stative-chips">
+          <!-- Interactive cards for verbs -->
+          <button type="button" onclick="toggleStativeChip(this, 'look')" class="stative-btn p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-800 font-extrabold text-base hover:border-indigo-400 text-center transition">
+            look
+          </button>
+          <button type="button" onclick="toggleStativeChip(this, 'include')" class="stative-btn p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-800 font-extrabold text-base hover:border-indigo-400 text-center transition">
+            include
+          </button>
+          <button type="button" onclick="toggleStativeChip(this, 'offer')" class="stative-btn p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-800 font-extrabold text-base hover:border-indigo-400 text-center transition">
+            offer
+          </button>
+          <button type="button" onclick="toggleStativeChip(this, 'want')" class="stative-btn p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-800 font-extrabold text-base hover:border-indigo-400 text-center transition">
+            want
+          </button>
+          <button type="button" onclick="toggleStativeChip(this, 'use')" class="stative-btn p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-800 font-extrabold text-base hover:border-indigo-400 text-center transition">
+            use
+          </button>
+          <button type="button" onclick="toggleStativeChip(this, 'need')" class="stative-btn p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-800 font-extrabold text-base hover:border-indigo-400 text-center transition">
+            need
+          </button>
+        </div>
+
+        <div id="stative-feedback" class="hidden p-4 rounded-2xl text-sm font-medium"></div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: EXERCISE 2 (True For You) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-6 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2</span>
+            <span class="text-emerald-200 text-xs font-medium">Personalized Production</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Make Sentences True for You</h2>
+          <p class="text-emerald-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill in the correct forms in brackets so they reflect your current life stage, habits, and study/work environment.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="savePersonalSentences()" class="px-5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-800 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
+            <span>Save Profile</span>
+          </button>
+          <button onclick="loadSampleAnswersEx2()" class="px-4 py-2.5 bg-emerald-800/60 hover:bg-emerald-800 text-white border border-emerald-400/40 text-sm font-bold rounded-2xl transition">
+            Load Samples
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+        
+        <!-- Example 1 -->
+        <div class="p-5 rounded-2xl bg-emerald-50 border-2 border-emerald-200/80 flex items-start gap-4">
+          <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white font-black text-sm flex items-center justify-center shrink-0 mt-0.5">
+            1
+          </div>
+          <div class="space-y-1">
+            <div class="text-xs font-black uppercase tracking-wider text-emerald-700">Example given in coursebook:</div>
+            <p class="text-lg font-bold text-slate-900">
+              <span class="underline decoration-emerald-500 decoration-2">I'm studying</span> (study) for my IELTS exam at the moment.
+            </p>
+            <p class="text-xs text-emerald-800/80">Grammar note: "at the moment" triggers the Present Continuous for an ongoing temporary action.</p>
+          </div>
+        </div>
+
+        <!-- Inputs 2 - 6 -->
+        <div class="space-y-4">
+          <!-- 2 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-700 text-xs font-black flex items-center justify-center">2</span>
+                Complete with <span class="text-emerald-700 font-extrabold">(work)</span> right now:
+              </label>
+              <span class="text-xs font-semibold text-slate-400">Present Continuous</span>
+            </div>
+            <input type="text" id="ex2-input-2" placeholder="e.g. 'm working as a software developer / am not working right now" class="exercise-input w-full px-4 py-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-base focus:outline-none focus:border-emerald-500 transition" />
+          </div>
+
+          <!-- 3 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-700 text-xs font-black flex items-center justify-center">3</span>
+                I usually <span class="text-emerald-700 font-extrabold">(work as / study)</span>:
+              </label>
+              <span class="text-xs font-semibold text-slate-400">Present Simple (Habit)</span>
+            </div>
+            <input type="text" id="ex2-input-3" placeholder="e.g. study civil engineering at university / work as an architect" class="exercise-input w-full px-4 py-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-base focus:outline-none focus:border-emerald-500 transition" />
+          </div>
+
+          <!-- 4 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-700 text-xs font-black flex items-center justify-center">4</span>
+                The thing that I <span class="text-emerald-700 font-extrabold">(enjoy)</span> the most about my course/job is:
+              </label>
+              <span class="text-xs font-semibold text-slate-400">Stative Preference</span>
+            </div>
+            <input type="text" id="ex2-input-4" placeholder="e.g. enjoy the most is collaborating on international projects" class="exercise-input w-full px-4 py-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-base focus:outline-none focus:border-emerald-500 transition" />
+          </div>
+
+          <!-- 5 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-700 text-xs font-black flex items-center justify-center">5</span>
+                The people I <span class="text-emerald-700 font-extrabold">(work / study)</span> with are:
+              </label>
+              <span class="text-xs font-semibold text-slate-400">Regular Interaction</span>
+            </div>
+            <input type="text" id="ex2-input-5" placeholder="e.g. work with are extremely dedicated, friendly, and supportive" class="exercise-input w-full px-4 py-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-base focus:outline-none focus:border-emerald-500 transition" />
+          </div>
+
+          <!-- 6 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-700 text-xs font-black flex items-center justify-center">6</span>
+                In my free time, I usually:
+              </label>
+              <span class="text-xs font-semibold text-slate-400">Habitual Action</span>
+            </div>
+            <input type="text" id="ex2-input-6" placeholder="e.g. listen to English podcasts, go swimming, and catch up with friends" class="exercise-input w-full px-4 py-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-base focus:outline-none focus:border-emerald-500 transition" />
+          </div>
+        </div>
+
+        <div id="ex2-save-status" class="hidden p-4 rounded-2xl bg-emerald-100 text-emerald-900 text-sm font-bold flex items-center justify-between">
+          <span>✓ Profile saved to this session! You can use these notes during Exercise 5 Speaking Practice.</span>
+          <button onclick="document.getElementById('ex2-save-status').classList.add('hidden')" class="text-xs underline font-black">Dismiss</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: EXERCISE 3 (Online Moods Article) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-violet-600 to-purple-700 text-white p-6 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3</span>
+            <span class="text-violet-200 text-xs font-medium">Contextual Reading & Agreement</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">The Study of Online Moods</h2>
+          <p class="text-violet-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Click directly on the interactive words inside the text to toggle the correct form. Watch out for singular/plural subjects!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkExercise3()" class="px-5 py-2.5 bg-white hover:bg-violet-50 text-violet-800 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Article</span>
+          </button>
+          <button onclick="revealExercise3()" class="px-4 py-2.5 bg-violet-800/60 hover:bg-violet-800 text-white border border-violet-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 3a Question Callout -->
+      <div class="p-5 bg-amber-50 rounded-3xl border-2 border-amber-200 flex items-start gap-4 text-amber-950">
+        <div class="w-10 h-10 rounded-2xl bg-amber-400 text-white font-black text-xl flex items-center justify-center shrink-0">
+          💡
+        </div>
+        <div class="space-y-1">
+          <div class="text-xs font-black uppercase tracking-wider text-amber-800">3a Pre-reading Discussion</div>
+          <p class="text-base font-bold text-amber-950">
+            What do you think a <span class="underline decoration-amber-500 decoration-2">mood</span> is?
+          </p>
+          <p class="text-xs text-amber-800 leading-relaxed">
+            <strong>Key concept:</strong> A mood is a temporary emotional state (e.g., cheerful, gloomy, nervous, relaxed). Online algorithms track our keystrokes, response speeds, and search terms to determine our mood for targeted marketing!
+          </p>
+        </div>
+      </div>
+
+      <!-- 3b Interactive In-Line Reading Pane -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900">
+            3b Choose the correct options in italics to complete the article:
+          </h3>
+          <span id="ex3-score-label" class="text-xs font-black text-violet-700 bg-violet-100 px-3 py-1 rounded-xl">Score: 0/11</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.6rem] sm:leading-[3rem] font-normal space-y-6">
+          <p>
+            The study of online moods
+            <!-- 1 is / are -->
+            <span class="inline-flex gap-1 align-baseline mx-1 bg-slate-100 p-1 rounded-xl border border-slate-300" data-article-q="1" data-ans="is">
+              <button type="button" onclick="selectArticleOption(this, 'is')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">is</button>
+              <button type="button" onclick="selectArticleOption(this, 'are')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">are</button>
+            </span>
+            a large field of research. Every time you type a word, little signs of your mood
+            <!-- 2 shows / show -->
+            <span class="inline-flex gap-1 align-baseline mx-1 bg-slate-100 p-1 rounded-xl border border-slate-300" data-article-q="2" data-ans="show">
+              <button type="button" onclick="selectArticleOption(this, 'shows')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">shows</button>
+              <button type="button" onclick="selectArticleOption(this, 'show')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">show</button>
+            </span>
+            themselves. For example, type a lot of mistakes late at night, and the computer rightly or wrongly
+            <!-- 3 thinks / think -->
+            <span class="inline-flex gap-1 align-baseline mx-1 bg-slate-100 p-1 rounded-xl border border-slate-300" data-article-q="3" data-ans="thinks">
+              <button type="button" onclick="selectArticleOption(this, 'thinks')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">thinks</button>
+              <button type="button" onclick="selectArticleOption(this, 'think')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">think</button>
+            </span>
+            you
+            <!-- 4 is / are -->
+            <span class="inline-flex gap-1 align-baseline mx-1 bg-slate-100 p-1 rounded-xl border border-slate-300" data-article-q="4" data-ans="are">
+              <button type="button" onclick="selectArticleOption(this, 'is')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">is</button>
+              <button type="button" onclick="selectArticleOption(this, 'are')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">are</button>
+            </span>
+            tired and less concerned about details, so you may be in the mood to spend some money!
+          </p>
+
+          <p>
+            Anything you have recently viewed online
+            <!-- 5 appears / appear -->
+            <span class="inline-flex gap-1 align-baseline mx-1 bg-slate-100 p-1 rounded-xl border border-slate-300" data-article-q="5" data-ans="appears">
+              <button type="button" onclick="selectArticleOption(this, 'appears')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">appears</button>
+              <button type="button" onclick="selectArticleOption(this, 'appear')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">appear</button>
+            </span>
+            on your screen in adverts, knowing this is the moment you'll probably weaken. Changes in your status from 'single' to 'dating'
+            <!-- 6 send / sends -->
+            <span class="inline-flex gap-1 align-baseline mx-1 bg-slate-100 p-1 rounded-xl border border-slate-300" data-article-q="6" data-ans="send">
+              <button type="button" onclick="selectArticleOption(this, 'send')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">send</button>
+              <button type="button" onclick="selectArticleOption(this, 'sends')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">sends</button>
+            </span>
+            the kind of information restaurant and clothing companies love to hear, while clicking 'upset stomach' late into the night
+            <!-- 7 produces / produce -->
+            <span class="inline-flex gap-1 align-baseline mx-1 bg-slate-100 p-1 rounded-xl border border-slate-300" data-article-q="7" data-ans="produces">
+              <button type="button" onclick="selectArticleOption(this, 'produces')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">produces</button>
+              <button type="button" onclick="selectArticleOption(this, 'produce')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">produce</button>
+            </span>
+            a very different set of adverts on your screen.
+          </p>
+
+          <p>
+            But moods also tell social researchers a lot about public opinion and
+            <!-- 8 predicts / predict -->
+            <span class="inline-flex gap-1 align-baseline mx-1 bg-slate-100 p-1 rounded-xl border border-slate-300" data-article-q="8" data-ans="predict">
+              <button type="button" onclick="selectArticleOption(this, 'predicts')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">predicts</button>
+              <button type="button" onclick="selectArticleOption(this, 'predict')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">predict</button>
+            </span>
+            how we might act in future. One recent study of 200 different moods
+            <!-- 9 shows / show -->
+            <span class="inline-flex gap-1 align-baseline mx-1 bg-slate-100 p-1 rounded-xl border border-slate-300" data-article-q="9" data-ans="shows">
+              <button type="button" onclick="selectArticleOption(this, 'shows')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">shows</button>
+              <button type="button" onclick="selectArticleOption(this, 'show')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">show</button>
+            </span>
+            that bad moods online appear more often than good moods. It could just be that when people
+            <!-- 10 is / are -->
+            <span class="inline-flex gap-1 align-baseline mx-1 bg-slate-100 p-1 rounded-xl border border-slate-300" data-article-q="10" data-ans="are">
+              <button type="button" onclick="selectArticleOption(this, 'is')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">is</button>
+              <button type="button" onclick="selectArticleOption(this, 'are')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">are</button>
+            </span>
+            feeling down, they need to talk to others more. Healthcare services and the government
+            <!-- 11 hopes / hope -->
+            <span class="inline-flex gap-1 align-baseline mx-1 bg-slate-100 p-1 rounded-xl border border-slate-300" data-article-q="11" data-ans="hope">
+              <button type="button" onclick="selectArticleOption(this, 'hopes')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">hopes</button>
+              <button type="button" onclick="selectArticleOption(this, 'hope')" class="article-btn px-3 py-0.5 rounded-lg text-sm font-bold bg-white text-slate-700 hover:text-violet-700 shadow-2xs">hope</button>
+            </span>
+            information like this may help them make better decisions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: EXERCISE 4 (Mobile Phones Essay & Discussion) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-amber-500 to-orange-600 text-white p-6 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4</span>
+            <span class="text-amber-100 text-xs font-medium">Academic Essay Analysis</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Mobile Phones & Society</h2>
+          <p class="text-amber-50 text-sm mt-1 max-w-2xl leading-relaxed">
+            Match the essay prompt, practice filling verb gaps with correct aspect/spelling, and review balanced arguments for IELTS Task 2.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkExercise4b()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Verbs</span>
+          </button>
+          <button onclick="revealExercise4b()" class="px-4 py-2.5 bg-amber-800/60 hover:bg-amber-800 text-white border border-amber-300/40 text-sm font-bold rounded-2xl transition">
+            Show Answers
+          </button>
+        </div>
+      </div>
+
+      <!-- 4a Essay Prompt Selection with High Visibility Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">4a</span>
+          Read the essay below. What essay question does the paragraph answer?
+        </h3>
+
+        <div class="grid sm:grid-cols-2 gap-4" id="ex4a-options">
+          <label class="cursor-pointer p-5 rounded-2xl border-2 border-slate-200 hover:border-amber-500 bg-slate-50 flex items-start gap-4 transition-all">
+            <input type="radio" name="ex4a" value="1" onchange="checkEx4a(this)" class="mt-1 w-5 h-5 text-amber-600 focus:ring-amber-500" />
+            <div>
+              <span class="text-xs font-black uppercase text-amber-700 tracking-wider">Question Option 1</span>
+              <p class="text-base font-bold text-slate-900 mt-1">Mobile phones have benefitted society. Discuss.</p>
+              <p class="text-xs text-slate-500 mt-1">Covers multiple societal areas: communication, daily tasks, travel, and public safety.</p>
+            </div>
+          </label>
+
+          <label class="cursor-pointer p-5 rounded-2xl border-2 border-slate-200 hover:border-amber-500 bg-slate-50 flex items-start gap-4 transition-all">
+            <input type="radio" name="ex4a" value="2" onchange="checkEx4a(this)" class="mt-1 w-5 h-5 text-amber-600 focus:ring-amber-500" />
+            <div>
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Question Option 2</span>
+              <p class="text-base font-bold text-slate-900 mt-1">To what extent have mobile phones changed the way people shop?</p>
+              <p class="text-xs text-slate-500 mt-1">Focused primarily on retail, commerce, and consumer buying habits.</p>
+            </div>
+          </label>
+        </div>
+        <div id="ex4a-feedback" class="hidden p-4 rounded-2xl text-sm font-bold"></div>
+      </div>
+
+      <!-- 4b High-Visibility Essay Text with Clear Gaps -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm leading-relaxed text-slate-900 space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">4b</span>
+            Complete the essay with the correct form of the words in brackets:
+          </h3>
+          <span id="ex4b-score-label" class="text-xs font-black text-amber-700 bg-amber-100 px-3 py-1 rounded-xl">Score: 0/9</span>
+        </div>
+
+        <div class="space-y-6 text-base sm:text-lg leading-[2.6rem] sm:leading-[2.8rem]">
+          <p>
+            These days, times <span class="font-black text-slate-400">1</span>
+            <span class="font-extrabold text-sky-700 bg-sky-100 px-3 py-1 rounded-xl border border-sky-300">are changing</span> (change) fast, and more and more people
+            <span class="font-black text-slate-400">2</span>
+            <span class="inline-block mx-1">
+              <input type="text" data-ex4-ans="are using,use" class="ex4-input exercise-input px-3.5 py-1.5 border-2 border-slate-300 font-bold rounded-xl text-base w-40 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(use)" />
+            </span>
+            the internet for daily tasks. The majority of people in my country never
+            <span class="font-black text-slate-400">3</span>
+            <span class="inline-block mx-1">
+              <input type="text" data-ex4-ans="visit" class="ex4-input exercise-input px-3.5 py-1.5 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(visit)" />
+            </span>
+            the travel agent's to book a holiday. They
+            <span class="font-black text-slate-400">4</span>
+            <span class="inline-block mx-1">
+              <input type="text" data-ex4-ans="use" class="ex4-input exercise-input px-3.5 py-1.5 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(use)" />
+            </span>
+            their smart phones to check things like cinema times. Nobody
+            <span class="font-black text-slate-400">5</span>
+            <span class="inline-block mx-1">
+              <input type="text" data-ex4-ans="prints" class="ex4-input exercise-input px-3.5 py-1.5 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(print)" />
+            </span>
+            their photos anymore, people
+            <span class="font-black text-slate-400">6</span>
+            <span class="inline-block mx-1">
+              <input type="text" data-ex4-ans="do not phone,don't phone" class="ex4-input exercise-input px-3.5 py-1.5 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(not phone)" />
+            </span>
+            to book tickets to a sporting event or the theatre. We
+            <span class="font-black text-slate-400">7</span>
+            <span class="inline-block mx-1">
+              <input type="text" data-ex4-ans="are turning" class="ex4-input exercise-input px-3.5 py-1.5 border-2 border-slate-300 font-bold rounded-xl text-base w-40 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(turn)" />
+            </span>
+            to technology more and more.
+          </p>
+
+          <p>
+            But this
+            <span class="font-black text-slate-400">8</span>
+            <span class="inline-block mx-1">
+              <input type="text" data-ex4-ans="does not come,doesn't come" class="ex4-input exercise-input px-3.5 py-1.5 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(not come)" />
+            </span>
+            without problems. Many people
+            <span class="font-black text-slate-400">9</span>
+            <span class="inline-block mx-1">
+              <input type="text" data-ex4-ans="rate" class="ex4-input exercise-input px-3.5 py-1.5 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(rate)" />
+            </span>
+            'losing their phone' as their biggest fear, and currently, governments
+            <span class="font-black text-slate-400">10</span>
+            <span class="inline-block mx-1">
+              <input type="text" data-ex4-ans="are not doing,aren't doing" class="ex4-input exercise-input px-3.5 py-1.5 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(not do)" />
+            </span>
+            enough to keep us safe online.
+          </p>
+        </div>
+
+        <div class="p-4 bg-amber-50/70 border border-amber-200 rounded-2xl text-xs text-amber-900 font-medium">
+          💡 <strong>Tip for 4b:</strong> You can type contractions (e.g. <code>don't phone</code>, <code>aren't doing</code>) or full forms (e.g. <code>do not phone</code>, <code>are not doing</code>).
+        </div>
+      </div>
+
+      <!-- 4c Pair Discussion Card -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+          <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">4c</span>
+          Discussion: Do you think that mobile phones have benefitted society? Why / Why not?
+        </h3>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="p-5 rounded-2xl bg-emerald-50 border-2 border-emerald-200">
+            <h4 class="font-black text-emerald-950 text-sm flex items-center gap-2 mb-2">
+              <span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs">✓</span>
+              Arguments FOR (Positive societal impacts):
+            </h4>
+            <ul class="text-sm text-emerald-900 space-y-2 list-disc list-inside">
+              <li>Immediate worldwide communication across borders and time zones.</li>
+              <li>Quick access to emergency assistance, maps, navigation, and medical records.</li>
+              <li>Financial inclusion via mobile banking and contactless cashless transactions.</li>
+            </ul>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-rose-50 border-2 border-rose-200">
+            <h4 class="font-black text-rose-950 text-sm flex items-center gap-2 mb-2">
+              <span class="w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center text-xs">✗</span>
+              Arguments AGAINST (Drawbacks & modern challenges):
+            </h4>
+            <ul class="text-sm text-rose-900 space-y-2 list-disc list-inside">
+              <li>Digital addiction, sleep disruption, and reduced physical socialization.</li>
+              <li>Cybersecurity threats, personal data selling, and online fraud.</li>
+              <li>Nomophobia (extreme fear of being without a mobile device).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-2">Your Personal IELTS Speaking / Writing Notes:</label>
+          <textarea id="ex4c-notes" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-base font-medium focus:border-amber-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="Summarize your personal stance here..."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: EXERCISE 5 (Part 1 Speaking) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex5" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-rose-600 to-pink-600 text-white p-6 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 5</span>
+            <span class="text-rose-100 text-xs font-medium">IELTS Part 1 Speaking Mastery</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Speaking Questions & Model Responses</h2>
+          <p class="text-rose-50 text-sm mt-1 max-w-2xl leading-relaxed">
+            Analyze the grammatical tenses used in examiner questions and choose natural responses. Practice answering aloud with the built-in timer.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkExercise5b()" class="px-5 py-2.5 bg-white hover:bg-rose-50 text-rose-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 5b Responses</span>
+          </button>
+          <button onclick="revealExercise5b()" class="px-4 py-2.5 bg-rose-800/60 hover:bg-rose-800 text-white border border-rose-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 5a Question tense analysis -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">5a</span>
+              Look at the Part 1 speaking questions (1–4). What tense are they?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Click any question to listen and view the tense explanation:</p>
+          </div>
+          <button onclick="toggleTenseHints()" class="text-xs font-black text-rose-600 bg-rose-50 px-3 py-1.5 rounded-xl border border-rose-200 hover:bg-rose-100 transition">
+            Toggle All Indicators
+          </button>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <!-- Q1 -->
+          <div class="p-5 rounded-2xl border-2 border-slate-200 bg-slate-50 space-y-2.5 hover:border-rose-300 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Question 1</span>
+              <button onclick="speakText('Are you working or studying at the moment?')" class="text-xs font-bold text-slate-500 hover:text-rose-600 flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-base font-extrabold text-slate-900">"Are you working or studying at the moment?"</p>
+            <div class="flex items-center justify-between pt-2 border-t border-slate-200">
+              <span class="text-xs font-bold text-slate-500">Grammar Tense:</span>
+              <span class="text-xs font-black px-3 py-1 rounded-lg bg-sky-100 text-sky-800 border border-sky-300">Present Continuous</span>
+            </div>
+            <p class="tense-hint text-xs text-slate-600 bg-white p-2.5 rounded-xl border border-slate-200 hidden">
+              <strong>Why?</strong> "At the moment" refers to current ongoing life activity, not a permanent habit.
+            </p>
+          </div>
+
+          <!-- Q2 -->
+          <div class="p-5 rounded-2xl border-2 border-slate-200 bg-slate-50 space-y-2.5 hover:border-rose-300 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Question 2</span>
+              <button onclick="speakText('What do you like best about your course?')" class="text-xs font-bold text-slate-500 hover:text-rose-600 flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-base font-extrabold text-slate-900">"What do you like best about your course?"</p>
+            <div class="flex items-center justify-between pt-2 border-t border-slate-200">
+              <span class="text-xs font-bold text-slate-500">Grammar Tense:</span>
+              <span class="text-xs font-black px-3 py-1 rounded-lg bg-emerald-100 text-emerald-800 border border-emerald-300">Present Simple</span>
+            </div>
+            <p class="tense-hint text-xs text-slate-600 bg-white p-2.5 rounded-xl border border-slate-200 hidden">
+              <strong>Why?</strong> "Like" is a stative verb expressing a permanent preference or opinion.
+            </p>
+          </div>
+
+          <!-- Q3 -->
+          <div class="p-5 rounded-2xl border-2 border-slate-200 bg-slate-50 space-y-2.5 hover:border-rose-300 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Question 3</span>
+              <button onclick="speakText('Is there anything you dislike about your course?')" class="text-xs font-bold text-slate-500 hover:text-rose-600 flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-base font-extrabold text-slate-900">"Is there anything you DISLIKE about your course?"</p>
+            <div class="flex items-center justify-between pt-2 border-t border-slate-200">
+              <span class="text-xs font-bold text-slate-500">Grammar Tense:</span>
+              <span class="text-xs font-black px-3 py-1 rounded-lg bg-emerald-100 text-emerald-800 border border-emerald-300">Present Simple</span>
+            </div>
+            <p class="tense-hint text-xs text-slate-600 bg-white p-2.5 rounded-xl border border-slate-200 hidden">
+              <strong>Why?</strong> "Dislike" describes an emotional attitude; it is virtually never used in continuous aspect.
+            </p>
+          </div>
+
+          <!-- Q4 -->
+          <div class="p-5 rounded-2xl border-2 border-slate-200 bg-slate-50 space-y-2.5 hover:border-rose-300 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Question 4</span>
+              <button onclick="speakText('What are you planning to do when you finish your course?')" class="text-xs font-bold text-slate-500 hover:text-rose-600 flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-base font-extrabold text-slate-900">"What are you planning to do when you finish your course?"</p>
+            <div class="flex items-center justify-between pt-2 border-t border-slate-200">
+              <span class="text-xs font-bold text-slate-500">Grammar Tense:</span>
+              <span class="text-xs font-black px-3 py-1 rounded-lg bg-sky-100 text-sky-800 border border-sky-300">Present Continuous</span>
+            </div>
+            <p class="tense-hint text-xs text-slate-600 bg-white p-2.5 rounded-xl border border-slate-200 hidden">
+              <strong>Why?</strong> Asking about plans that are currently taking shape for future execution.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5b Choose the correct option in italics -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="border-b border-slate-100 pb-3">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">5b</span>
+            Choose the correct option in italics to complete the responses:
+          </h3>
+        </div>
+
+        <div class="grid gap-3.5">
+          <!-- 1 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex5b-1" data-answer="'m studying">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectOption(this, 'study')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-xs">study</button>
+                <button type="button" onclick="selectOption(this, '\'m studying')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-xs">'m studying</button>
+              </span>
+              English at the moment.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex5b-2" data-answer="want">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectOption(this, 'want')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-xs">want</button>
+                <button type="button" onclick="selectOption(this, '\'m wanting')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-xs">'m wanting</button>
+              </span>
+              to take the IELTS exam soon.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 3 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex5b-3" data-answer="really like">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectOption(this, 'really like')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-xs">really like</button>
+                <button type="button" onclick="selectOption(this, '\'m really liking')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-xs">'m really liking</button>
+              </span>
+              studying with people from other countries.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 4 (two gaps) -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex5b-4" data-answer="don't like|need">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-sub="1">
+                <button type="button" onclick="selectMultiInRow(this, 'don\'t like')" class="option-btn px-3 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-xs">don't like</button>
+                <button type="button" onclick="selectMultiInRow(this, '\'m not liking')" class="option-btn px-3 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-xs">'m not liking</button>
+              </span>
+              the amount of vocabulary that we
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-sub="2">
+                <button type="button" onclick="selectMultiInRow(this, 'need')" class="option-btn px-3 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-xs">need</button>
+                <button type="button" onclick="selectMultiInRow(this, 'are needing')" class="option-btn px-3 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-xs">are needing</button>
+              </span>
+              to learn.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 5 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-q="ex5b-5" data-answer="'m planning,plan">
+            <div class="text-base sm:text-lg text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectOption(this, 'plan')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-xs">plan</button>
+                <button type="button" onclick="selectOption(this, '\'m planning')" class="option-btn px-4 py-1.5 rounded-xl text-sm sm:text-base font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-xs">'m planning</button>
+              </span>
+              to apply to university in Australia.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5c Interactive Examiner Simulation -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">5c</span>
+            Interactive Speaking Partner Simulation
+          </h3>
+          <span class="text-xs font-black uppercase tracking-wider text-rose-700 bg-rose-100 px-3 py-1 rounded-xl">Examiner Mode</span>
+        </div>
+        <p class="text-sm text-slate-600">Select any question below to rehearse with audio prompts, 30s countdown, and native-speaker model answers:</p>
+
+        <div class="grid sm:grid-cols-2 gap-4" id="speaking-cards">
+          <!-- Card 1 -->
+          <button onclick="openSpeakingCard(1)" class="text-left p-5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/40 transition group">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-rose-600 tracking-wider">Question 1</span>
+              <span class="text-slate-400 group-hover:text-rose-600 font-bold">Start ➔</span>
+            </div>
+            <p class="text-base font-bold text-slate-900 mt-2">Are you working or studying at the moment?</p>
+          </button>
+
+          <!-- Card 2 -->
+          <button onclick="openSpeakingCard(2)" class="text-left p-5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/40 transition group">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-rose-600 tracking-wider">Question 2</span>
+              <span class="text-slate-400 group-hover:text-rose-600 font-bold">Start ➔</span>
+            </div>
+            <p class="text-base font-bold text-slate-900 mt-2">What do you like best about your course?</p>
+          </button>
+
+          <!-- Card 3 -->
+          <button onclick="openSpeakingCard(3)" class="text-left p-5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/40 transition group">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-rose-600 tracking-wider">Question 3</span>
+              <span class="text-slate-400 group-hover:text-rose-600 font-bold">Start ➔</span>
+            </div>
+            <p class="text-base font-bold text-slate-900 mt-2">Is there anything you DISLIKE about your course?</p>
+          </button>
+
+          <!-- Card 4 -->
+          <button onclick="openSpeakingCard(4)" class="text-left p-5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/40 transition group">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-rose-600 tracking-wider">Question 4</span>
+              <span class="text-slate-400 group-hover:text-rose-600 font-bold">Start ➔</span>
+            </div>
+            <p class="text-base font-bold text-slate-900 mt-2">What are you planning to do when you finish?</p>
+          </button>
+        </div>
+
+        <!-- Speaking Examiner Modal Drawer -->
+        <div id="speaking-modal" class="hidden p-6 rounded-3xl bg-slate-900 text-white space-y-5 border border-slate-800 shadow-xl">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div class="flex items-center gap-2">
+              <span id="modal-q-badge" class="text-xs font-black uppercase tracking-wider text-rose-400">Examiner Question</span>
+              <button onclick="speakCurrentModalQ()" class="text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-lg">
+                🔊 Pronounce
+              </button>
+            </div>
+            <button onclick="closeSpeakingCard()" class="text-slate-400 hover:text-white text-base font-bold">✕ Close</button>
+          </div>
+          <h4 id="modal-q-text" class="text-xl font-black text-white"></h4>
+          
+          <div class="p-4 rounded-2xl bg-white/10 backdrop-blur border border-white/10 space-y-2">
+            <div class="flex items-center justify-between text-xs text-slate-300">
+              <span class="font-bold text-amber-300">Band 8.0+ Model Answer:</span>
+              <button onclick="speakCurrentModalAnswer()" class="text-xs font-bold text-emerald-400 hover:underline">
+                🔊 Listen to Model
+              </button>
+            </div>
+            <p id="modal-q-sample" class="text-base leading-relaxed text-slate-100 font-medium"></p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+            <span class="text-xs text-slate-400">Aim to speak continuously for 20–30 seconds.</span>
+            <button onclick="startVoiceTimer()" id="timer-btn" class="w-full sm:w-auto px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-extrabold text-sm transition shadow-md">
+              ⏱ Start 30s Recording Timer
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: EXPERT GRAMMAR REFERENCE (Page 173) -->
+    <!-- ========================================================================= -->
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-sky-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 173 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Present Tenses: Simple vs Continuous</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Master the formal rules governing state verbs, habitual routines, temporary situations, and ongoing trends for the IELTS test.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Present Simple Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 font-black text-base flex items-center justify-center">
+              PS
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Present Simple</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Regular Habits & Permanent Facts</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Regular habits, routines & schedules:</div>
+              <p class="text-slate-600 font-medium"><em>"Do you use your phone for games regularly?"</em></p>
+              <p class="text-slate-600 font-medium"><em>"The majority never visits the travel agent's."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Permanent situations & general truths:</div>
+              <p class="text-slate-600 font-medium"><em>"The study of online moods is a large field."</em></p>
+              <p class="text-slate-600 font-medium"><em>"Bad moods online appear more frequently."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Stative verbs (feelings, thoughts, possession):</div>
+              <p class="text-slate-600 font-medium"><em>"What does that include?"</em> (NOT <s>is that including</s>)</p>
+              <p class="text-slate-600 font-medium"><em>"All you need to do is sign here."</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Present Continuous Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-800 font-black text-base flex items-center justify-center">
+              PC
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Present Continuous</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Happening Now, Temporary & Trends</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Actions happening now / around now:</div>
+              <p class="text-slate-600 font-medium"><em>"I am looking for a new phone plan."</em></p>
+              <p class="text-slate-600 font-medium"><em>"I'm studying for my IELTS exam at the moment."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Temporary situations for a limited period:</div>
+              <p class="text-slate-600 font-medium"><em>"We are offering it at that price for a short period."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Trends & evolving social changes:</div>
+              <p class="text-slate-600 font-medium"><em>"Times are changing fast."</em></p>
+              <p class="text-slate-600 font-medium"><em>"More people are turning to technology."</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- State Verbs Reference Grid -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+          <span>⚡</span> Common Stative Verbs Reference (Rarely used in Continuous form)
+        </h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-slate-900 block mb-1">Thoughts & Opinions</span>
+            <p class="text-slate-600 font-medium">think, believe, know, understand, remember, agree, realize, suppose</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-slate-900 block mb-1">Feelings & Preferences</span>
+            <p class="text-slate-600 font-medium">like, love, hate, dislike, want, need, prefer, wish, hope</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-slate-900 block mb-1">Perception & Senses</span>
+            <p class="text-slate-600 font-medium">appear, seem, sound, taste, smell, look (=seem), hear, recognize</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-slate-900 block mb-1">Possession & Measure</span>
+            <p class="text-slate-600 font-medium">include, belong, contain, own, have (=possess), cost, weigh, exist</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 9
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 1a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 1: Communication • Page 13 • Expert Grammar Page 173
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State storage
+    const state = {
+      score: {
+        ex1a: 0,
+        ex1b: 0,
+        ex3: 0,
+        ex4b: 0,
+        ex5b: 0
+      }
+    };
+
+    // Web Audio synthesizer for crisp feedback sounds
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.15); // C6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Text to Speech for questions & model answers
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-sky-600', 'text-white', 'shadow-md', 'shadow-sky-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-sky-600', 'text-white', 'shadow-md', 'shadow-sky-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Option Selector for Ex 1a & Ex 5b (Pill Selection)
+    function selectOption(button, value) {
+      const parent = button.closest('.inline-flex');
+      parent.querySelectorAll('.option-btn').forEach(b => {
+        b.classList.remove('bg-sky-600', 'bg-rose-600', 'bg-emerald-600', 'text-white', 'border-sky-600', 'border-rose-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      const isRose = button.closest('#tab-ex5');
+      if (isRose) {
+        button.classList.add('bg-rose-600', 'text-white', 'border-rose-600');
+      } else {
+        button.classList.add('bg-sky-600', 'text-white', 'border-sky-600');
+      }
+      button.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      button.dataset.selected = "true";
+    }
+
+    function selectMultiInRow(button, value) {
+      const container = button.closest('[data-sub]');
+      container.querySelectorAll('.option-btn').forEach(b => {
+        b.classList.remove('bg-rose-600', 'text-white', 'border-rose-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+      button.classList.add('bg-rose-600', 'text-white', 'border-rose-600');
+      button.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      button.dataset.selected = "true";
+    }
+
+    // EXERCISE 1a CHECK
+    function checkExercise1() {
+      let correctCount = 0;
+      const questions = document.querySelectorAll('[data-q^="ex1a-"]');
+      
+      questions.forEach(q => {
+        const expected = q.getAttribute('data-answer');
+        const selectedBtn = q.querySelector('.option-btn[data-selected="true"]');
+        const fb = q.querySelector('.feedback-badge');
+        
+        if (!selectedBtn) {
+          fb.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Choose option</span>';
+          return;
+        }
+
+        const userText = selectedBtn.textContent.trim();
+        if (userText === expected) {
+          correctCount++;
+          fb.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-sky-600', 'border-sky-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600', 'text-white');
+        } else {
+          fb.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Need: <em>${expected}</em></span>`;
+          selectedBtn.classList.remove('bg-sky-600', 'border-sky-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500', 'text-white');
+        }
+      });
+
+      state.score.ex1a = correctCount;
+      updateTotalScore();
+      playBeep(correctCount >= 4);
+    }
+
+    function revealExercise1() {
+      const questions = document.querySelectorAll('[data-q^="ex1a-"]');
+      questions.forEach(q => {
+        const expected = q.getAttribute('data-answer');
+        const btns = q.querySelectorAll('.option-btn');
+        const fb = q.querySelector('.feedback-badge');
+        btns.forEach(b => {
+          if (b.textContent.trim() === expected) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-sky-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        fb.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Answer</span>';
+      });
+      state.score.ex1a = 6;
+      updateTotalScore();
+    }
+
+    // EXERCISE 1b (Stative Verbs)
+    function toggleStativeChip(btn, verb) {
+      btn.classList.toggle('selected');
+      if (btn.classList.contains('selected')) {
+        btn.classList.remove('bg-slate-50', 'text-slate-800', 'border-slate-200');
+        btn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
+      } else {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
+        btn.classList.add('bg-slate-50', 'text-slate-800', 'border-slate-200');
+      }
+    }
+
+    function checkStativeVerbs() {
+      const targetStatives = ['include', 'want', 'need'];
+      const btns = document.querySelectorAll('.stative-btn.selected');
+      const selectedVerbs = Array.from(btns).map(b => b.textContent.trim());
+      const fb = document.getElementById('stative-feedback');
+      fb.classList.remove('hidden');
+
+      const isCorrect = selectedVerbs.length === 3 && targetStatives.every(v => selectedVerbs.includes(v));
+      if (isCorrect) {
+        fb.className = "p-4 rounded-2xl text-sm bg-emerald-100 text-emerald-900 border-2 border-emerald-300 font-bold";
+        fb.innerHTML = `✓ <strong>Spot on!</strong> <em>include</em> (possession/definition), <em>want</em> (desire), and <em>need</em> (necessity) describe states, not physical actions, so they are not normally used in continuous form.`;
+        state.score.ex1b = 1;
+        playBeep(true);
+      } else {
+        fb.className = "p-4 rounded-2xl text-sm bg-rose-100 text-rose-900 border-2 border-rose-300 font-bold";
+        fb.innerHTML = `✗ <strong>Try again!</strong> Re-check the 6 sentences in 1a. Which three verbs describe thoughts, states, or needs? (Correct verbs: <em>include</em>, <em>want</em>, <em>need</em>).`;
+        state.score.ex1b = 0;
+        playBeep(false);
+      }
+      updateTotalScore();
+    }
+
+    // EXERCISE 3 (Inline Article Pill Chooser)
+    function selectArticleOption(btn, val) {
+      const container = btn.closest('[data-article-q]');
+      container.querySelectorAll('.article-btn').forEach(b => {
+        b.classList.remove('bg-violet-600', 'bg-emerald-600', 'bg-rose-600', 'text-white');
+        b.classList.add('bg-white', 'text-slate-700');
+        delete b.dataset.selected;
+      });
+      btn.classList.remove('bg-white', 'text-slate-700');
+      btn.classList.add('bg-violet-600', 'text-white');
+      btn.dataset.selected = "true";
+    }
+
+    function checkExercise3() {
+      let correct = 0;
+      const questions = document.querySelectorAll('[data-article-q]');
+
+      questions.forEach(q => {
+        const expected = q.getAttribute('data-ans');
+        const selected = q.querySelector('.article-btn[data-selected="true"]');
+
+        if (selected && selected.textContent.trim() === expected) {
+          correct++;
+          selected.classList.remove('bg-violet-600');
+          selected.classList.add('bg-emerald-600');
+          q.classList.remove('border-rose-400', 'bg-rose-50');
+          q.classList.add('border-emerald-400', 'bg-emerald-50');
+        } else {
+          if (selected) {
+            selected.classList.remove('bg-violet-600');
+            selected.classList.add('bg-rose-600');
+          }
+          q.classList.remove('border-emerald-400', 'bg-emerald-50');
+          q.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3 = correct;
+      document.getElementById('ex3-score-label').textContent = `Score: ${correct}/${questions.length}`;
+      updateTotalScore();
+      playBeep(correct >= 8);
+    }
+
+    function revealExercise3() {
+      const questions = document.querySelectorAll('[data-article-q]');
+      questions.forEach(q => {
+        const expected = q.getAttribute('data-ans');
+        const btns = q.querySelectorAll('.article-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim() === expected) {
+            b.classList.remove('bg-white', 'text-slate-700');
+            b.classList.add('bg-emerald-600', 'text-white');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-violet-600', 'bg-rose-600', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700');
+            delete b.dataset.selected;
+          }
+        });
+        q.classList.remove('border-rose-400', 'bg-rose-50');
+        q.classList.add('border-emerald-400', 'bg-emerald-50');
+      });
+      state.score.ex3 = 11;
+      document.getElementById('ex3-score-label').textContent = `Score: 11/11`;
+      updateTotalScore();
+    }
+
+    // EXERCISE 4a CHECK
+    function checkEx4a(input) {
+      const fb = document.getElementById('ex4a-feedback');
+      fb.classList.remove('hidden');
+      if (input.value === "1") {
+        fb.className = "p-4 rounded-2xl text-sm bg-emerald-100 text-emerald-950 border-2 border-emerald-300 mt-2 font-bold";
+        fb.innerHTML = "✓ <strong>Correct!</strong> The paragraph discusses broad societal benefits (daily tasks, online cinema bookings, travel) as well as emerging downsides (fear of losing phones, government cybersecurity), answering: <em>'Mobile phones have benefitted society. Discuss.'</em>";
+        playBeep(true);
+      } else {
+        fb.className = "p-4 rounded-2xl text-sm bg-rose-100 text-rose-950 border-2 border-rose-300 mt-2 font-bold";
+        fb.innerHTML = "✗ <strong>Not quite.</strong> While booking holidays and cinema tickets are mentioned, the passage discusses a broad spectrum of life, communication, photo printing, and cybersecurity fears.";
+        playBeep(false);
+      }
+    }
+
+    // EXERCISE 4b CHECK (Gap-fill)
+    function checkExercise4b() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex4-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ex4-ans').toLowerCase().split(',').map(s => s.trim());
+        const userVal = inp.value.trim().toLowerCase();
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50', 'text-rose-900');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-950');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50', 'text-emerald-950');
+          inp.classList.add('border-rose-400', 'bg-rose-50', 'text-rose-900');
+        }
+      });
+
+      state.score.ex4b = correct;
+      document.getElementById('ex4b-score-label').textContent = `Score: ${correct}/${inputs.length}`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealExercise4b() {
+      const keys = [
+        "are using",   // 2
+        "visit",        // 3
+        "use",          // 4
+        "prints",       // 5
+        "don't phone",  // 6
+        "are turning",  // 7
+        "doesn't come", // 8
+        "rate",         // 9
+        "aren't doing"  // 10
+      ];
+      const inputs = document.querySelectorAll('.ex4-input');
+      inputs.forEach((inp, idx) => {
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50', 'text-rose-900');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-950');
+      });
+      state.score.ex4b = inputs.length;
+      document.getElementById('ex4b-score-label').textContent = `Score: ${inputs.length}/${inputs.length}`;
+      updateTotalScore();
+    }
+
+    // EXERCISE 5b CHECK
+    function checkExercise5b() {
+      let correct = 0;
+      const questions = document.querySelectorAll('[data-q^="ex5b-"]');
+
+      questions.forEach(q => {
+        const qId = q.getAttribute('data-q');
+        const expected = q.getAttribute('data-answer');
+        const fb = q.querySelector('.feedback-badge');
+
+        if (qId === 'ex5b-4') {
+          const sub1 = q.querySelector('[data-sub="1"] .option-btn[data-selected="true"]');
+          const sub2 = q.querySelector('[data-sub="2"] .option-btn[data-selected="true"]');
+          const v1 = sub1 ? sub1.textContent.trim() : '';
+          const v2 = sub2 ? sub2.textContent.trim() : '';
+
+          if (v1 === "don't like" && v2 === "need") {
+            correct++;
+            fb.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          } else {
+            fb.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (don\'t like / need)</span>';
+          }
+        } else {
+          const selectedBtn = q.querySelector('.option-btn[data-selected="true"]');
+          if (!selectedBtn) {
+            fb.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Choose</span>';
+            return;
+          }
+          const userVal = selectedBtn.textContent.trim();
+          const expectedList = expected.split(',');
+          if (expectedList.includes(userVal)) {
+            correct++;
+            fb.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+            selectedBtn.classList.remove('bg-rose-600');
+            selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600', 'text-white');
+          } else {
+            fb.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+            selectedBtn.classList.remove('bg-rose-600');
+            selectedBtn.classList.add('bg-rose-500', 'border-rose-500', 'text-white');
+          }
+        }
+      });
+
+      state.score.ex5b = correct;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealExercise5b() {
+      const keys = {
+        'ex5b-1': "'m studying",
+        'ex5b-2': "want",
+        'ex5b-3': "really like",
+        'ex5b-5': "'m planning"
+      };
+
+      for (let k in keys) {
+        const row = document.querySelector(`[data-q="${k}"]`);
+        if (row) {
+          const btns = row.querySelectorAll('.option-btn');
+          btns.forEach(b => {
+            if (b.textContent.trim() === keys[k]) {
+              b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+              b.dataset.selected = "true";
+            } else {
+              b.classList.remove('bg-rose-600', 'text-white');
+              b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+              delete b.dataset.selected;
+            }
+          });
+          row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model</span>';
+        }
+      }
+
+      const row4 = document.querySelector('[data-q="ex5b-4"]');
+      const b1 = row4.querySelectorAll('[data-sub="1"] .option-btn');
+      b1.forEach(b => {
+        if (b.textContent.trim() === "don't like") {
+          b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+          b.dataset.selected = "true";
+        } else {
+          b.classList.remove('bg-rose-600', 'text-white');
+          b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+          delete b.dataset.selected;
+        }
+      });
+      const b2 = row4.querySelectorAll('[data-sub="2"] .option-btn');
+      b2.forEach(b => {
+        if (b.textContent.trim() === "need") {
+          b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+          b.dataset.selected = "true";
+        } else {
+          b.classList.remove('bg-rose-600', 'text-white');
+          b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+          delete b.dataset.selected;
+        }
+      });
+      row4.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model</span>';
+
+      state.score.ex5b = 5;
+      updateTotalScore();
+    }
+
+    function toggleTenseHints() {
+      const hints = document.querySelectorAll('.tense-hint');
+      hints.forEach(h => h.classList.toggle('hidden'));
+    }
+
+    // Speaking simulation cards data
+    const speakingData = {
+      1: {
+        title: "Question 1",
+        question: "Are you working or studying at the moment?",
+        sample: "At the moment, I'm studying English full-time because I'm preparing to take the IELTS exam in a couple of months. Alongside that, I'm also doing some part-time freelance tutoring online."
+      },
+      2: {
+        title: "Question 2",
+        question: "What do you like best about your course?",
+        sample: "I really like the fact that our instructors encourage lots of active peer discussions. It's fascinating to exchange ideas with students from diverse cultures, and it definitely improves my spoken fluency."
+      },
+      3: {
+        title: "Question 3",
+        question: "Is there anything you DISLIKE about your course?",
+        sample: "Well, to be honest, I don't like the immense amount of academic vocabulary and collocations that we need to memorize each week, as it requires hours of revision late in the evening."
+      },
+      4: {
+        title: "Question 4",
+        question: "What are you planning to do when you finish your course?",
+        sample: "Once I finish this preparation program, I'm planning to apply to university in Australia to complete a Master's degree in International Management, which will open exciting career doors."
+      }
+    };
+
+    let currentSpeakingNum = 1;
+    function openSpeakingCard(num) {
+      currentSpeakingNum = num;
+      const item = speakingData[num];
+      document.getElementById('modal-q-badge').textContent = `IELTS Examiner Part 1 • Question ${num}`;
+      document.getElementById('modal-q-text').textContent = `"${item.question}"`;
+      document.getElementById('modal-q-sample').textContent = item.sample;
+      document.getElementById('speaking-modal').classList.remove('hidden');
+      speakText(item.question);
+    }
+
+    function closeSpeakingCard() {
+      document.getElementById('speaking-modal').classList.add('hidden');
+      clearInterval(timerInterval);
+    }
+
+    function speakCurrentModalQ() {
+      speakText(speakingData[currentSpeakingNum].question);
+    }
+
+    function speakCurrentModalAnswer() {
+      speakText(speakingData[currentSpeakingNum].sample);
+    }
+
+    let timerInterval = null;
+    function startVoiceTimer() {
+      const btn = document.getElementById('timer-btn');
+      let seconds = 30;
+      clearInterval(timerInterval);
+      btn.textContent = `⏱ 30s (Speak Aloud Now)`;
+      btn.classList.remove('bg-rose-600', 'bg-emerald-600');
+      btn.classList.add('bg-amber-600');
+
+      timerInterval = setInterval(() => {
+        seconds--;
+        if (seconds > 0) {
+          btn.textContent = `⏱ ${seconds}s (Speak Aloud Now)`;
+        } else {
+          clearInterval(timerInterval);
+          btn.textContent = `✓ 30s Completed! Well Done!`;
+          btn.classList.remove('bg-amber-600');
+          btn.classList.add('bg-emerald-600');
+          playBeep(true);
+        }
+      }, 1000);
+    }
+
+    // Exercise 2 Storage
+    function savePersonalSentences() {
+      const s2 = document.getElementById('ex2-input-2').value;
+      const s3 = document.getElementById('ex2-input-3').value;
+      const s4 = document.getElementById('ex2-input-4').value;
+      const s5 = document.getElementById('ex2-input-5').value;
+      const s6 = document.getElementById('ex2-input-6').value;
+
+      localStorage.setItem('m1_grammar_ex2', JSON.stringify({ s2, s3, s4, s5, s6 }));
+      const status = document.getElementById('ex2-save-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    function loadSampleAnswersEx2() {
+      document.getElementById('ex2-input-2').value = "am working remotely for an international marketing company";
+      document.getElementById('ex2-input-3').value = "study business analytics and modern marketing systems";
+      document.getElementById('ex2-input-4').value = "enjoy communicating directly with team members across different continents";
+      document.getElementById('ex2-input-5').value = "are very collaborative and continuously share fresh insights";
+      document.getElementById('ex2-input-6').value = "cycle around the city park and listen to technological audiobooks";
+      playBeep(true);
+    }
+
+    // Update Global Score & Progress Bar
+    function updateTotalScore() {
+      const total = state.score.ex1a + state.score.ex1b + state.score.ex3 + state.score.ex4b + state.score.ex5b;
+      // Total points: 6 + 1 + 11 + 9 + 5 = 32
+      const percent = Math.min(100, Math.round((total / 32) * 100));
+      
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+      
+      pill.textContent = `${total} / 32`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 28) {
+        bar.classList.replace('bg-sky-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-sky-600');
+      }
+    }
+
+    // Global Reset
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Clear Option buttons
+      document.querySelectorAll('.option-btn').forEach(b => {
+        b.classList.remove('bg-sky-600', 'bg-rose-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-sky-600', 'border-rose-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear Badges
+      document.querySelectorAll('.feedback-badge').forEach(f => f.innerHTML = '');
+
+      // Clear Statives
+      document.querySelectorAll('.stative-btn').forEach(b => {
+        b.classList.remove('selected', 'bg-indigo-600', 'text-white', 'border-indigo-600');
+        b.classList.add('bg-slate-50', 'text-slate-800', 'border-slate-200');
+      });
+      const sf = document.getElementById('stative-feedback');
+      sf.classList.add('hidden');
+      sf.innerHTML = '';
+
+      // Clear Article buttons
+      document.querySelectorAll('.article-btn').forEach(b => {
+        b.classList.remove('bg-violet-600', 'bg-emerald-600', 'bg-rose-600', 'text-white');
+        b.classList.add('bg-white', 'text-slate-700');
+        delete b.dataset.selected;
+      });
+      document.querySelectorAll('[data-article-q]').forEach(q => {
+        q.classList.remove('border-emerald-400', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear Essay inputs
+      document.querySelectorAll('.ex4-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'text-emerald-950', 'border-rose-400', 'bg-rose-50', 'text-rose-900');
+      });
+
+      // Clear 4a
+      document.querySelectorAll('input[name="ex4a"]').forEach(r => r.checked = false);
+      document.getElementById('ex4a-feedback').classList.add('hidden');
+
+      // Reset scores
+      state.score = { ex1a: 0, ex1b: 0, ex3: 0, ex4b: 0, ex5b: 0 };
+      updateTotalScore();
+      document.getElementById('ex3-score-label').textContent = 'Score: 0/11';
+      document.getElementById('ex4b-score-label').textContent = 'Score: 0/9';
+    });
+
+    // Auto-restore saved Ex 2 data
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved = JSON.parse(localStorage.getItem('m1_grammar_ex2'));
+        if (saved) {
+          if (saved.s2) document.getElementById('ex2-input-2').value = saved.s2;
+          if (saved.s3) document.getElementById('ex2-input-3').value = saved.s3;
+          if (saved.s4) document.getElementById('ex2-input-4').value = saved.s4;
+          if (saved.s5) document.getElementById('ex2-input-5').value = saved.s5;
+          if (saved.s6) document.getElementById('ex2-input-6').value = saved.s6;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>
