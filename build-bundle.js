@@ -55,6 +55,7 @@ if (!cssOnly) {
         'command-palette.js',
         'deck-charts.js',
         'grammar-reference.js',
+        'reading-walkthrough.js',
         'presentation-tools.js',
         'category-sorter.js',
         'drag-gapfill.js',

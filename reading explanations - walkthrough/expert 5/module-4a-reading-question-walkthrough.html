@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Reading Masterclass | Monitoring Fitness</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        indigoTheme: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                            950: '#1e1b4b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(79, 70, 229, 0.25); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(79, 70, 229, 0.5); }
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #4f46e5, #6366f1, #818cf8);
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+        .keyword-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #e0e7ff;
+            color: #3730a3;
+            border: 1px solid #c7d2fe;
+        }
+        .passage-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        .answer-badge {
+            animation: pulseSubtle 3s infinite;
+        }
+        @keyframes pulseSubtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-indigo-100 selection:text-indigo-900">
+
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigoTheme-700 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-indigo-900/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700 bg-indigoTheme-50 px-2 py-0.5 rounded-full border border-indigoTheme-200">IELTS Reading Analysis</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích chuyên sâu 5 câu Matching Sentence Endings</span>
+                        </div>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">Monitoring Fitness (Theo Dõi Thể Chất)</h1>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-lg">Câu 1/5</span>
+                </div>
+            </div>
+
+            <!-- Global View Switcher -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+                <button id="tab-presentation" onclick="switchView('presentation')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-indigoTheme-700 text-white shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                    </svg>
+                    <span>Slide Từng Câu</span>
+                </button>
+                <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    <span>Xem Tất Cả (List)</span>
+                </button>
+                <button id="tab-options" onclick="switchView('options')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                    <span>Kho Lựa Chọn (A–G)</span>
+                </button>
+                <button id="tab-synonyms" onclick="switchView('synonyms')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    <span>Ma Trận Paraphrase</span>
+                </button>
+                <button id="tab-vocab" onclick="switchView('vocab')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span>Từ Vựng Trọng Tâm</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
+        <section id="view-presentation" class="space-y-6 block">
+            
+            <!-- Quick Question Selector Chips -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Matching Sentence Endings (Q1-5)</span>
+                    </div>
+                    <div class="text-xs text-slate-400 flex items-center gap-2">
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2" id="question-nav-chips">
+                    <!-- Dynamic question buttons inserted by JS -->
+                </div>
+            </div>
+
+            <!-- Slide Main Card -->
+            <div id="slide-card-container" class="relative">
+                <!-- Dynamically rendered slide content -->
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span>Câu Trước</span>
+                </button>
+
+                <div class="flex items-center gap-3">
+                    <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 5</span>
+                </div>
+
+                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigoTheme-700 hover:bg-indigoTheme-800 text-white font-semibold shadow-md shadow-indigo-900/10 active:scale-95 transition-all">
+                    <span>Câu Kế Tiếp</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- VIEW 2: ALL QUESTIONS CONTINUOUS LIST -->
+        <section id="view-all" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 5 Câu Matching Sentence Endings</h2>
+                    <p class="text-sm text-slate-500">Xem toàn bộ câu nối, bằng chứng bài đọc, ma trận từ đồng nghĩa và phân tích logic tiếng Việt</p>
+                </div>
+                <div class="bg-indigo-50 border border-indigo-200 rounded-xl px-4 py-2 text-center">
+                    <span class="text-xs text-indigoTheme-700 font-bold uppercase">Phần Thi</span>
+                    <span class="text-sm font-extrabold text-indigoTheme-900 block">Dạng Bài Matching Câu 1 – 5</span>
+                </div>
+            </div>
+
+            <div id="all-questions-container" class="space-y-6">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+        <!-- VIEW 3: OPTIONS REPOSITORY (A–G) -->
+        <section id="view-options" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700">Matching Sentence Endings Pool</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Lựa Chọn Vế Nối Cuối Câu (Options A – G)</h2>
+                        <p class="text-sm text-slate-600 mt-1">Chi tiết 7 vế lựa chọn, phân loại vế ĐÚNG (Used) và vế BẪY/GÂY NHIỄU (Distractors) kèm lý do loại trừ cụ thể.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6" id="options-grid-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: SYNONYMS & PARAPHRASE MATRIX -->
+        <section id="view-synonyms" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700">Paraphrase & Semantic Alignment</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Ma Trận Từ Đồng Nghĩa & Diễn Đạt Tương Đương</h2>
+                        <p class="text-sm text-slate-600 mt-1">Đối chiếu chi tiết giữa câu hỏi trong đề thi với văn bản thực tế trong bài đọc.</p>
+                    </div>
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-xl px-4 py-2.5 text-center">
+                        <span class="text-xs text-indigoTheme-700 font-semibold block uppercase">Tổng hợp</span>
+                        <span class="text-xl font-extrabold text-indigoTheme-900">5 Cặp Paraphrase Cốt Lõi</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600">
+                                <th class="py-3 px-4 w-16 text-center">Câu</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Đề & Vế Nối</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Bài Đọc (Passage)</th>
+                                <th class="py-3 px-4 w-28 text-center">Đáp Án</th>
+                                <th class="py-3 px-4">Ý Nghĩa & Phân Tích Logic Tiếng Việt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="synonyms-table-body" class="divide-y divide-slate-100 text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: VOCABULARY HUB -->
+        <section id="view-vocab" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700">Health Technology & Physiology Lexicon</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Từ Vựng Trọng Tâm & Phát Âm Chuẩn</h2>
+                        <p class="text-sm text-slate-600 mt-1">Từ vựng học thuật chủ đề thiết bị công nghệ theo dõi sức khỏe, tâm lý học thể thao và chuyển hóa kèm phiên âm IPA và audio phát âm.</p>
+                    </div>
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="vocab-search-input" onkeyup="searchVocab(this.value)" placeholder="Tìm kiếm từ vựng hoặc nghĩa..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600 bg-slate-50/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="vocab-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <script>
+    const optionsPool = [
+        { key: 'A', text: 'they can give an unrealistic impression of a person’s level of fitness.', isUsed: true, usedFor: 'Câu 3', reason: 'Đáp án chính xác cho câu 3: Ứng dụng chỉ đo vài thông số rời rạc (bước chân, nhịp tim) nên dễ khiến người dùng tự lừa dối mình về mức độ khỏe mạnh thật sự.' },
+        { key: 'B', text: 'people become very attached to their electronic devices.', isUsed: false, usedFor: null, reason: 'BẪY NHIỄU: Mặc dù người dùng có thói quen dựa dẫm vào thiết bị, bài đọc không dùng luận điểm này để nối với bất kỳ mở đầu câu nào.' },
+        { key: 'C', text: 'anyone interested in becoming fitter should pay more attention to their appearance.', isUsed: true, usedFor: 'Câu 4', reason: 'Đáp án chính xác cho câu 4: Các chuyên gia tâm lý thể thao khuyên người tập nên chú ý nhiều hơn đến diện mạo cơ thể (nhìn gương, bọng mắt).' },
+        { key: 'D', text: 'it shows that the user wishes to develop better fitness practices.', isUsed: true, usedFor: 'Câu 1', reason: 'Đáp án chính xác cho câu 1: Giới khoa học thể thao tán thành việc dùng app vì nó chứng tỏ người dùng tha thiết muốn cải thiện thói quen sức khỏe.' },
+        { key: 'E', text: 'someone wants to lose weight.', isUsed: true, usedFor: 'Câu 5', reason: 'Đáp án chính xác cho câu 5: Ghi nhật ký thể dục và lắng nghe cơ thể đặc biệt hữu ích khi một người có mục tiêu cụ thể là giảm cân.' },
+        { key: 'F', text: 'they lose the motivation to be active.', isUsed: true, usedFor: 'Câu 2', reason: 'Đáp án chính xác cho câu 2: Khi thiết bị hỏng, nhiều người cảm thấy không còn lý do gì để ra ngoài đi dạo nữa (mất động lực vận động).' },
+        { key: 'G', text: 'they won’t help you achieve your goals.', isUsed: false, usedFor: null, reason: 'BẪY NHIỄU (Quá tuyệt đối): Bài đọc nói app kích thích mọi người rời ghế sofa đi dạo sau bữa tối, chứ không hề khẳng định app hoàn toàn không giúp đạt mục tiêu.' }
+    ];
+
+    const questionsData = [
+        {
+            id: 1,
+            qNum: "Question 1",
+            type: "Matching Sentence Endings",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Lý do giới khoa học thể thao tán thành quyết định dùng app",
+            sentenceBeginning: "Sports scientists approve of the decision to use fitness apps because …",
+            correctOptionKey: "D",
+            optionText: "it shows that the user wishes to develop better fitness practices.",
+            fullSentenceCompleted: "Sports scientists approve of the decision to use fitness apps because it shows that the user wishes to develop better fitness practices.",
+            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>Sports scientists recognise that deciding to use a fitness tracker or app is good because it means a person is curious about health and keen to improve their habits</mark>. If the attractive design of a device or app encourages an interest in keeping fit, its impact is clearly positive.",
+            paragraphRef: "Đoạn 3 (Paragraph 3)",
+            paraphrases: [
+                { qPart: "Sports scientists approve of the decision to use fitness apps", pPart: "Sports scientists recognise that deciding to use a fitness tracker or app is good", meaning: "các nhà khoa học thể thao công nhận và tán thành việc dùng app/vòng theo dõi là điều tốt" },
+                { qPart: "it shows that the user wishes to develop better fitness practices", pPart: "it means a person is curious about health and keen to improve their habits", meaning: "điều đó thể hiện người dùng có ý thức tò mò về sức khỏe và khao khát rèn luyện những thói quen tốt hơn" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Vế đầu câu hỏi: 'Sports scientists approve of the decision to use fitness apps because...' (Các nhà khoa học thể thao tán thành quyết định dùng ứng dụng tập thể dục bởi vì...). Cần tìm nguyên nhân khiến giới chuyên gia đánh giá cao hành động này.",
+                stepByStep: [
+                    "<strong>Định vị đối tượng & hành động:</strong> 'Sports scientists approve', 'fitness apps', 'because'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 3):</strong> Câu mở đoạn ghi rõ: <em>'Sports scientists recognise that deciding to use a fitness tracker or app is good because <strong>it means a person is curious about health and keen to improve their habits</strong>'</em>.",
+                    "<strong>Khớp nghĩa paraphrase:</strong> Cụm <em>'keen to improve their habits'</em> (tha thiết cải thiện thói quen) được diễn đạt tương đương hoàn hảo bằng <em>'wishes to develop better fitness practices'</em>.",
+                    "<strong>Kết luận:</strong> Nối chuẩn xác với vế <strong>D</strong>."
+                ],
+                traps: "Tránh nhầm với Option G (they won’t help you achieve your goals) vì đoạn 3 khẳng định app có tác động tích cực ban đầu: thúc đẩy người dùng rời sofa đi dạo."
+            },
+            vocabHighlights: ["fitness tracker", "sedentary"]
+        },
+        {
+            id: 2,
+            qNum: "Question 2",
+            type: "Matching Sentence Endings",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Phản ứng tiêu cực bất ngờ khi thiết bị theo dõi bị hỏng hóc",
+            sentenceBeginning: "People have reported that when their fitness apps stop working …",
+            correctOptionKey: "F",
+            optionText: "they lose the motivation to be active.",
+            fullSentenceCompleted: "People have reported that when their fitness apps stop working they lose the motivation to be active.",
+            passageSnippet: "Unfortunately, however, many of those after-dinner walkers have added that <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>when their devices broke and they no longer knew how many steps they had taken, there seemed little point in heading out for that walk</mark>. Consequently, sports scientists agree that people need to be aware of the fact that apps alone are not enough.",
+            paragraphRef: "Đoạn 4 (Paragraph 4)",
+            paraphrases: [
+                { qPart: "when their fitness apps stop working", pPart: "when their devices broke and they no longer knew how many steps they had taken", meaning: "khi thiết bị hỏng / ngừng hoạt động và không đếm được bước chân" },
+                { qPart: "they lose the motivation to be active", pPart: "there seemed little point in heading out for that walk", meaning: "họ cảm thấy dường như chẳng còn lý do/ý nghĩa gì để ra ngoài đi dạo (đánh mất động lực vận động)" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Vế đầu: 'People have reported that when their fitness apps stop working...' (Nhiều người đã báo cáo rằng khi ứng dụng/thiết bị thể dục ngừng hoạt động...). Cần tìm hệ quả tâm lý xảy ra đối với hành vi của họ.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'stop working', 'reported'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> Bài đọc viết: <em>'...many of those after-dinner walkers have added that when their <strong>devices broke</strong>... <strong>there seemed little point in heading out for that walk</strong>'</em>.",
+                    "<strong>Suy luận ngữ nghĩa:</strong> Cụm <em>'there seemed little point in heading out'</em> (dường như chẳng còn lý do gì để bước chân ra ngoài) chính là biểu hiện trực tiếp của việc đánh mất động lực vận động (<em>'lose the motivation to be active'</em>).",
+                    "<strong>Kết luận:</strong> Nối chính xác với vế <strong>F</strong>."
+                ],
+                traps: "Option B (people become very attached to their electronic devices) là một thực tế trong đời sống nhưng không trả lời trực tiếp cho việc 'khi thiết bị hỏng thì người dùng làm gì / cảm thấy thế nào'."
+            },
+            vocabHighlights: ["sedentary", "artificial targets"]
+        },
+        {
+            id: 3,
+            qNum: "Question 3",
+            type: "Matching Sentence Endings",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Mặt trái của việc dựa dẫm quá mức vào các chỉ số máy móc",
+            sentenceBeginning: "It is not sensible to rely too much on fitness apps because …",
+            correctOptionKey: "A",
+            optionText: "they can give an unrealistic impression of a person’s level of fitness.",
+            fullSentenceCompleted: "It is not sensible to rely too much on fitness apps because they can give an unrealistic impression of a person’s level of fitness.",
+            passageSnippet: "One of the problems with fitness trackers is that they usually measure very limited pieces of information... and this does not give a clear overall picture of a person’s health. They may record that someone worked out for two hours on a rowing machine, but not that they then spent the rest of the day eating pizza and watching DVDs. <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>In other words, fitness apps can help people to deceive themselves about how healthy their lifestyle is</mark>.",
+            paragraphRef: "Đoạn 5 (Paragraph 5)",
+            paraphrases: [
+                { qPart: "It is not sensible to rely too much on fitness apps", pPart: "measure very limited pieces of info / not give a clear overall picture / problem with trackers", meaning: "không khôn ngoan khi quá dựa dẫm vào app vì dữ liệu quá hạn chế, không phản ánh tổng thể" },
+                { qPart: "give an unrealistic impression of a person's level of fitness", pPart: "deceive themselves about how healthy their lifestyle is", meaning: "tự đánh lừa bản thân / mang lại ấn tượng phi thực tế, sai lệch về thể trạng thật sự" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Vế đầu: 'It is not sensible to rely too much on fitness apps because...' (Thật không khôn ngoan nếu dựa dẫm quá nhiều vào ứng dụng theo dõi vì...). Cần tìm lý do giải thích tại sao sự phụ thuộc này lại tiềm ẩn rủi ro.",
+                stepByStep: [
+                    "<strong>Định vị luận điểm phê phán:</strong> 'not sensible', 'rely too much', 'problem'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 5):</strong> Tác giả phân tích: App chỉ đo vài thông số hẹp (chèo thuyền 2 tiếng nhưng giấu đi việc cả ngày còn lại nằm ăn pizza). Do đó: <em>'fitness apps can help people to <strong>deceive themselves about how healthy their lifestyle is</strong>'</em>.",
+                    "<strong>Cặp paraphrase trọng điểm:</strong> <em>'deceive themselves'</em> (tự dối lòng) tương đương tuyệt đối với việc nhận được một <em>'unrealistic impression'</em> (cảm nhận phi thực tế / ngộ nhận sai lệch) về mức độ thể lực của mình.",
+                    "<strong>Kết luận:</strong> Nối với vế <strong>A</strong>."
+                ],
+                traps: "Option G (they won't help you achieve your goals) là bẫy cực mạnh. Tác giả chỉ cảnh báo về sự ngộ nhận, chứ không khẳng định app 100% không giúp ích gì."
+            },
+            vocabHighlights: ["unrealistic impression", "deceive"]
+        },
+        {
+            id: 4,
+            qNum: "Question 4",
+            type: "Matching Sentence Endings",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Lời khuyên từ các nhà tâm lý học thể thao: Quan sát diện mạo cơ thể",
+            sentenceBeginning: "Sports psychologists recommend that …",
+            correctOptionKey: "C",
+            optionText: "anyone interested in becoming fitter should pay more attention to their appearance.",
+            fullSentenceCompleted: "Sports psychologists recommend that anyone interested in becoming fitter should pay more attention to their appearance.",
+            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>What sports psychologists recommend users of electronic fitness devices to do is raise their awareness of how their body looks</mark>. No one actually needs an app to tell them that they have had a bad night’s sleep; the bags under their eyes can do that just as well.",
+            paragraphRef: "Đoạn 6 (Paragraph 6)",
+            paraphrases: [
+                { qPart: "Sports psychologists recommend that", pPart: "What sports psychologists recommend users... to do is", meaning: "điều mà các chuyên gia tâm lý học thể thao khuyến nghị người dùng nên làm là" },
+                { qPart: "pay more attention to their appearance", pPart: "raise their awareness of how their body looks / bags under eyes / look in the mirror", meaning: "nâng cao nhận thức về hình thể bên ngoài / chú ý nhiều hơn đến diện mạo cơ thể" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Vế đầu: 'Sports psychologists recommend that...' (Các nhà tâm lý học thể thao khuyên rằng...). Cần tìm giải pháp/lời khuyên cụ thể từ nhóm chuyên gia này.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'Sports psychologists recommend'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 6):</strong> Đầu đoạn 6 nêu rõ: <em>'What sports psychologists recommend users of electronic fitness devices to do is <strong>raise their awareness of how their body looks</strong>'</em>.",
+                    "<strong>Dẫn chứng minh họa:</strong> Chẳng hạn như nhìn quầng thâm bọng mắt ('bags under their eyes') để biết thiếu ngủ hoặc nhìn vào gương để tự đánh giá.",
+                    "<strong>Khớp nghĩa paraphrase:</strong> <em>'how their body looks'</em> = <em>'their appearance'</em> (vẻ bề ngoài, diện mạo hình thể). Do đó, họ khuyên người tập nên chú ý nhiều hơn đến diện mạo của mình.",
+                    "<strong>Kết luận:</strong> Nối chính xác với vế <strong>C</strong>."
+                ],
+                traps: "Chú ý tránh nhầm lẫn giữa lời khuyên của 'Sports psychologists' (Đoạn 6: chú ý diện mạo) với nhận định của 'Sports scientists' (Đoạn 3: tán thành việc dùng app để rèn thói quen)."
+            },
+            vocabHighlights: ["circadian rhythm", "self-deception"]
+        },
+        {
+            id: 5,
+            qNum: "Question 5",
+            type: "Matching Sentence Endings",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Trường hợp áp dụng nhật ký thể dục và lắng nghe phản hồi sinh học",
+            sentenceBeginning: "Writing a fitness diary is helpful when …",
+            correctOptionKey: "E",
+            optionText: "someone wants to lose weight.",
+            fullSentenceCompleted: "Writing a fitness diary is helpful when someone wants to lose weight.",
+            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>And if people want to lose weight, they may find it more effective to take a regular look at themselves in the mirror rather than try to motivate themselves to diet by checking everything they eat against a calorie counting app</mark>... Keeping a fitness diary is also useful. In it, people should record what they ate and what their mood was two or three hours later.",
+            paragraphRef: "Đoạn 6 & 7 (Paragraphs 6 & 7)",
+            paraphrases: [
+                { qPart: "Writing a fitness diary is helpful", pPart: "Keeping a fitness diary is also useful / more effective", meaning: "việc duy trì/viết nhật ký thể dục là một phương pháp hữu ích và hiệu quả" },
+                { qPart: "when someone wants to lose weight", pPart: "And if people want to lose weight", meaning: "khi một người có mục đích cụ thể là giảm bớt trọng lượng cơ thể" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Vế đầu: 'Writing a fitness diary is helpful when...' (Việc viết nhật ký tập luyện là hữu ích khi...). Cần tìm điều kiện hoặc hoàn cảnh cụ thể mà việc viết nhật ký phát huy tác dụng tốt nhất.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'fitness diary', 'helpful', 'useful', 'when'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 6 & 7):</strong> Ở cuối đoạn 6 tác giả bàn về mục tiêu giảm cân: <em>'And <strong>if people want to lose weight</strong>, they may find it more effective to take a regular look at themselves in the mirror...'</em>.",
+                    "<strong>Nối tiếp sang đoạn 7:</strong> <em>'Keeping a fitness diary is also useful'</em> (ghi lại đồ ăn và cảm xúc tâm trạng sau 2-3 tiếng). Phương pháp này giúp vượt qua cám dỗ ăn uống vô độ hiệu quả hơn việc đếm calo cơ học bằng máy tính.",
+                    "<strong>Kết luận:</strong> Điều kiện tương ứng là khi ai đó muốn giảm cân (<em>'someone wants to lose weight'</em>) ➔ Nối với vế <strong>E</strong>."
+                ],
+                traps: "Cảnh báo bẫy: Thí sinh dễ bị phân tâm bởi việc đếm calo (calorie counting) nhưng bài đọc khẳng định đếm calo bằng app là không hiệu quả ('ineffective') đối với việc giảm cân do cơ thể chuyển hóa đường và chất béo khác nhau."
+            },
+            vocabHighlights: ["metabolise", "calorie counting", "artificial targets"]
+        }
+    ];
+
+    const vocabData = {
+        'metabolise': { ipa: '/məˈtæb.əl.aɪz/', type: 'v', vi: 'Chuyển hóa (thức ăn, chất dinh dưỡng thành năng lượng)', eg: 'The human body metabolises calories from refined sugar far more rapidly than those from unsaturated fats.' },
+        'fitness tracker': { ipa: '/ˈfɪt.nəs ˌtræk.ər/', type: 'n phrase', vi: 'Thiết bị đeo thông minh theo dõi vận động thể chất', eg: 'Wearable fitness trackers monitor daily step counts, elevation gained, and resting heart rate.' },
+        'unrealistic impression': { ipa: '/ˌʌn.rɪəˈlɪs.tɪk ɪmˈpreʃ.ən/', type: 'n phrase', vi: 'Ấn tượng phi thực tế, sự ảo tưởng sai lệch', eg: 'Relying exclusively on electronic devices can yield an unrealistic impression of genuine physical conditioning.' },
+        'artificial targets': { ipa: '/ˌɑː.tɪˈfɪʃ.əl ˈtɑː.ɡɪts/', type: 'n phrase', vi: 'Mục tiêu nhân tạo (chỉ số máy móc thiết lập)', eg: 'Users often exhaust themselves pursuing the app’s artificial targets rather than listening to physical fatigue.' },
+        'deceive': { ipa: '/dɪˈsiːv/', type: 'v', vi: 'Lừa dối, đánh lừa (tự lừa dối bản thân)', eg: 'Displaying isolated positive metrics allows individuals to deceive themselves about sedentary daily routines.' },
+        'calorie counting': { ipa: '/ˈkæl.ər.i ˌkaʊn.tɪŋ/', type: 'n phrase', vi: 'Hoạt động đếm calo kiểm soát khẩu phần ăn', eg: 'Obsessive calorie counting frequently overlooks the nutritional micronutrient density of organic foods.' },
+        'circadian rhythm': { ipa: '/sɜːˈkeɪ.di.ən ˈrɪð.əm/', type: 'n phrase', vi: 'Nhịp sinh học ngày đêm (đồng hồ sinh học)', eg: 'Late-night blue light emission from screen devices severely disrupts natural circadian rhythms.' },
+        'self-deception': { ipa: '/ˌself.dɪˈsep.ʃən/', type: 'n', vi: 'Sự tự dối lòng, tự huyễn hoặc', eg: 'Engaging in brief workouts followed by prolonged binge-watching is a classic form of behavioral self-deception.' },
+        'sedentary': { ipa: '/ˈsed.ən.tər.i/', type: 'adj', vi: 'Ít vận động, ngồi nhiều một chỗ', eg: 'A sedentary desk-bound occupation cannot be completely offset by a thirty-minute evening jog.' },
+        'heart rate': { ipa: '/ˈhɑːt ˌreɪt/', type: 'n phrase', vi: 'Nhịp tim (số lần tim co bóp mỗi phút)', eg: 'Cardiovascular endurance is gauged by how rapidly one’s heart rate recovers post-exercise.' },
+        'sleep pattern': { ipa: '/sliːp ˈpæt.ən/', type: 'n phrase', vi: 'Chu kỳ, nhịp điệu giấc ngủ', eg: 'Irregular sleep patterns adversely impair cognitive retention and metabolic glucose synthesis.' },
+        'physiological': { ipa: '/ˌfɪz.i.əˈlɒdʒ.ɪ.kəl/', type: 'adj', vi: 'Thuộc về sinh lý học cơ thể', eg: 'Subjective exhaustion is a vital physiological signal designed to protect muscular tissue from injury.' }
+    };
+    </script>
+    <script>
+    let currentQuestionIndex = 0; // 0 to 4
+
+    function initApp() {
+        renderNavChips();
+        renderCurrentSlide();
+        renderAllQuestionsList();
+        renderOptionsGrid();
+        renderSynonymsTable();
+        renderVocabGrid();
+        setupKeyboardNavigation();
+    }
+
+    function renderNavChips() {
+        const container = document.getElementById('question-nav-chips');
+        container.innerHTML = '';
+        questionsData.forEach((q, idx) => {
+            const btn = document.createElement('button');
+            const isActive = idx === currentQuestionIndex;
+            btn.className = `px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                isActive 
+                ? 'bg-indigoTheme-700 text-white shadow-sm ring-2 ring-indigoTheme-600 ring-offset-1' 
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`;
+            btn.innerHTML = `Q${q.id}: ${q.correctOptionKey}`;
+            btn.onclick = () => {
+                currentQuestionIndex = idx;
+                renderNavChips();
+                renderCurrentSlide();
+            };
+            container.appendChild(btn);
+        });
+
+        const mob = document.getElementById('mobile-curr-indicator');
+        if (mob) mob.textContent = `Câu ${currentQuestionIndex + 1}/5 (Nối với ${questionsData[currentQuestionIndex].correctOptionKey})`;
+    }
+
+    function navigateQuestion(delta) {
+        const next = currentQuestionIndex + delta;
+        if (next >= 0 && next < questionsData.length) {
+            currentQuestionIndex = next;
+            renderNavChips();
+            renderCurrentSlide();
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+    }
+    function renderCurrentSlide() {
+        const q = questionsData[currentQuestionIndex];
+        const container = document.getElementById('slide-card-container');
+        const counter = document.getElementById('slide-counter-badge');
+        if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        if (btnPrev) {
+            btnPrev.disabled = currentQuestionIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+        }
+        if (btnNext) {
+            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+        }
+
+        container.innerHTML = `
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+                
+                <!-- Slide Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigoTheme-800 flex items-center justify-center font-extrabold text-base border border-indigo-200">
+                            ${q.id}
+                        </span>
+                        <div>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700">${q.type}</span>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">${q.qNum}: ${q.contextHeader}</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                            Yêu cầu: Chọn vế từ A–G
+                        </span>
+                        <span class="text-xs font-semibold px-3 py-1 bg-indigo-50 text-indigoTheme-700 rounded-full border border-indigo-200">
+                            ${q.paragraphRef}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Sentence Beginning Prompt -->
+                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Vế Đầu Câu Hỏi Trong Đề Bài</span>
+                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">${q.sentenceBeginning}</p>
+                </div>
+
+                <!-- Answer Reveal Banner -->
+                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-indigo-50/80 via-blue-50/50 to-white border border-indigo-200">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-indigoTheme-700">Vế Nối Hoàn Chỉnh Chính Xác</span>
+                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
+                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm bg-indigoTheme-700 text-white answer-badge">
+                                Đáp án: ${q.correctOptionKey}
+                            </span>
+                            <span class="text-sm sm:text-base font-bold text-slate-800">
+                                "${q.optionText}"
+                            </span>
+                        </div>
+                    </div>
+
+                    <button onclick="playSpeech('${q.fullSentenceCompleted.replace(/'/g, "\\'")}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Phát âm cả câu</span>
+                    </button>
+                </div>
+
+                <!-- Completed Sentence Preview -->
+                <div class="mt-4 p-4 rounded-xl bg-slate-900 text-white text-sm sm:text-base leading-relaxed">
+                    <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider block mb-1">Câu hoàn chỉnh:</span>
+                    <p class="font-medium">"${q.sentenceBeginning} <span class="text-indigo-400 font-bold underline decoration-2">${q.optionText}</span>"</p>
+                </div>
+
+                <!-- Evidence in Reading Passage -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigoTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Bằng Chứng (Passage Evidence)</h4>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-indigo-50/40 border border-indigo-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
+                        "${q.passageSnippet}"
+                    </div>
+                </div>
+
+                <!-- Paraphrase & Synonym Mapping Table -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Paraphrase</h4>
+                    </div>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
+                                <tr>
+                                    <th class="py-2.5 px-4 w-1/3">Đề bài & Vế Nối (${q.correctOptionKey})</th>
+                                    <th class="py-2.5 px-4 w-1/3">Bài đọc (Passage)</th>
+                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 bg-white">
+                                ${q.paraphrases.map(p => `
+                                    <tr>
+                                        <td class="py-3 px-4 font-semibold text-indigo-700 bg-indigo-50/30">${p.qPart}</td>
+                                        <td class="py-3 px-4 font-semibold text-amber-800 bg-amber-50/20">${p.pPart}</td>
+                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Vietnamese In-Depth Explanation & Logic -->
+                <div class="mt-6 bg-indigo-50/40 border border-indigo-200/80 rounded-2xl p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-indigoTheme-600"></span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-indigoTheme-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
+                    </div>
+
+                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
+
+                    <div class="space-y-2 mb-4">
+                        ${q.vietnameseAnalysis.stepByStep.map(step => `
+                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="text-indigoTheme-600 mt-1 font-bold">▸</span>
+                                <div>${step}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${q.vietnameseAnalysis.traps ? `
+                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
+                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
+                            <span>${q.vietnameseAnalysis.traps}</span>
+                        </div>
+                    ` : ''}
+                </div>
+
+                <!-- Highlighted Vocabulary in this question -->
+                <div class="mt-6 pt-5 border-t border-slate-100">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
+                    <div class="flex flex-wrap gap-3">
+                        ${q.vocabHighlights.map(v => {
+                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
+                            return `
+                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-indigo-400 transition-colors">
+                                    <button onclick="playSpeech('${v}')" class="text-indigoTheme-700 hover:text-indigoTheme-900" title="Nghe phát âm chuẩn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                    <div>
+                                        <span class="font-bold text-sm text-slate-900">${v}</span>
+                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
+                                        <span class="text-xs text-indigoTheme-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+            </div>
+        `;
+    }
+    function renderAllQuestionsList() {
+        const container = document.getElementById('all-questions-container');
+        container.innerHTML = '';
+
+        questionsData.forEach(q => {
+            const card = document.createElement('div');
+            card.className = "gradient-border bg-white rounded-2xl p-6 shadow-sm";
+
+            card.innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-indigoTheme-700 text-white font-bold text-xs flex items-center justify-center">
+                            ${q.id}
+                        </span>
+                        <h3 class="font-bold text-slate-900">${q.qNum} - <span class="text-slate-500 font-medium">${q.contextHeader}</span></h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-mono font-bold px-3 py-1 rounded-md border bg-indigo-100 text-indigo-800 border-indigo-300">
+                            ĐÁP ÁN: ${q.correctOptionKey}
+                        </span>
+                        <span class="text-xs text-slate-400">${q.paragraphRef}</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 mb-3 text-sm">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Vế đầu câu hỏi:</span>
+                    <p class="font-bold text-slate-800">${q.sentenceBeginning}</p>
+                </div>
+
+                <div class="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-200/80 mb-4 text-xs sm:text-sm">
+                    <strong class="text-indigo-900">Vế nối (${q.correctOptionKey}):</strong> 
+                    <span class="text-slate-800 font-semibold">${q.optionText}</span>
+                </div>
+
+                <div class="bg-sky-50/50 p-3.5 rounded-xl border border-sky-200/80 mb-4 text-xs sm:text-sm italic text-slate-700">
+                    <strong>Manh mối bài đọc:</strong> "${q.passageSnippet}"
+                </div>
+
+                <div class="mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <div class="flex flex-wrap gap-2">
+                        ${q.paraphrases.map(p => `
+                            <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
+                                <span class="text-indigo-700 font-bold">${p.qPart}</span> ➔ <span class="text-amber-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="bg-indigo-50/40 border border-indigo-200 p-4 rounded-xl text-xs sm:text-sm text-slate-700">
+                    <p class="font-bold text-indigo-900 mb-1.5">Giải thích logic Tiếng Việt:</p>
+                    <p class="mb-2">${q.vietnameseAnalysis.logic}</p>
+                    <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
+                        ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderOptionsGrid() {
+        const container = document.getElementById('options-grid-container');
+        container.innerHTML = '';
+
+        optionsPool.forEach(opt => {
+            const card = document.createElement('div');
+            const isUsed = opt.isUsed;
+            card.className = `p-5 rounded-2xl border transition-all flex flex-col justify-between ${
+                isUsed 
+                ? 'bg-white border-indigo-200 shadow-2xs' 
+                : 'bg-slate-50/80 border-slate-200 opacity-80'
+            }`;
+
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="w-8 h-8 rounded-xl font-black text-sm flex items-center justify-center ${
+                            isUsed ? 'bg-indigoTheme-700 text-white' : 'bg-slate-200 text-slate-600'
+                        }">
+                            ${opt.key}
+                        </span>
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
+                            isUsed 
+                            ? 'bg-indigo-100 text-indigo-800 border border-indigo-300' 
+                            : 'bg-amber-100 text-amber-800 border border-amber-300'
+                        }">
+                            ${isUsed ? `Đáp án ${opt.usedFor}` : 'Bẫy nhiễu (Distractor)'}
+                        </span>
+                    </div>
+
+                    <p class="font-bold text-sm text-slate-900 mb-3 leading-snug">"${opt.text}"</p>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 text-xs text-slate-600">
+                    <span class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">
+                        ${isUsed ? 'Tại sao chọn:' : 'Tại sao loại:'}
+                    </span>
+                    <p class="${isUsed ? 'text-indigo-900' : 'text-slate-500 italic'}">${opt.reason}</p>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+    function renderSynonymsTable() {
+        const tbody = document.getElementById('synonyms-table-body');
+        tbody.innerHTML = '';
+
+        questionsData.forEach(q => {
+            q.paraphrases.forEach((p, pIndex) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center font-bold text-slate-700">
+                        ${pIndex === 0 ? `<span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="keyword-chip">${p.qPart}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="passage-chip">${p.pPart}</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="text-xs font-bold uppercase px-2 py-1 bg-indigoTheme-700 text-white rounded shadow-2xs">
+                            ${q.correctOptionKey}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
+                        ${p.meaning}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    }
+
+    function renderVocabGrid(filterWord = '') {
+        const container = document.getElementById('vocab-grid-container');
+        container.innerHTML = '';
+
+        const words = Object.keys(vocabData).filter(w => {
+            if (!filterWord) return true;
+            const query = filterWord.toLowerCase();
+            return w.toLowerCase().includes(query) || vocabData[w].vi.toLowerCase().includes(query);
+        });
+
+        if (words.length === 0) {
+            container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">Không tìm thấy từ vựng phù hợp.</div>`;
+            return;
+        }
+
+        words.forEach(w => {
+            const item = vocabData[w];
+            const card = document.createElement('div');
+            card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-indigo-400 transition-all flex flex-col justify-between";
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h4 class="text-lg font-bold text-slate-900">${w}</h4>
+                        <button onclick="playSpeech('${w}')" class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs" title="Nghe phát âm chuẩn UK">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${item.ipa}</span>
+                        <span class="text-xs italic text-indigo-700 font-semibold">${item.type}</span>
+                    </div>
+                    <p class="text-sm font-semibold text-indigo-900 mb-3">${item.vi}</p>
+                </div>
+                <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-lg">
+                    "${item.eg}"
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function searchVocab(val) {
+        renderVocabGrid(val);
+    }
+    function playSpeech(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.88;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function switchView(viewName) {
+        const views = ['presentation', 'all', 'options', 'synonyms', 'vocab'];
+        views.forEach(v => {
+            const sec = document.getElementById(`view-${v}`);
+            const tabBtn = document.getElementById(`tab-${v}`);
+            if (sec) sec.classList.add('hidden');
+            if (tabBtn) {
+                tabBtn.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+            }
+        });
+
+        const activeSec = document.getElementById(`view-${viewName}`);
+        const activeTab = document.getElementById(`tab-${viewName}`);
+        if (activeSec) activeSec.classList.remove('hidden');
+        if (activeTab) {
+            activeTab.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-indigoTheme-700 text-white shadow-sm';
+        }
+    }
+
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            const presView = document.getElementById('view-presentation');
+            if (presView && !presView.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    navigateQuestion(1);
+                } else if (e.key === 'ArrowLeft') {
+                    navigateQuestion(-1);
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

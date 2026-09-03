@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Reading Masterclass | The Future of Food?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        emeraldTheme: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(5, 150, 105, 0.25); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(5, 150, 105, 0.5); }
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #059669, #10b981, #34d399);
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+        .keyword-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        .passage-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        .answer-badge {
+            animation: pulseSubtle 3s infinite;
+        }
+        @keyframes pulseSubtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900">
+
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emeraldTheme-700 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-emerald-900/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-emeraldTheme-700 bg-emeraldTheme-50 px-2 py-0.5 rounded-full border border-emeraldTheme-200">IELTS Reading Analysis</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích chuyên sâu 6 câu Summary Completion</span>
+                        </div>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">The Future of Food? (Tương Lai Của Thực Phẩm)</h1>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-lg">Câu 1/6</span>
+                </div>
+            </div>
+
+            <!-- Global View Switcher -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+                <button id="tab-presentation" onclick="switchView('presentation')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-emeraldTheme-700 text-white shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                    </svg>
+                    <span>Slide Từng Câu</span>
+                </button>
+                <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    <span>Xem Tất Cả (List)</span>
+                </button>
+                <button id="tab-map" onclick="switchView('map')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                    <span>Bản Đồ Đoạn Văn (1–5)</span>
+                </button>
+                <button id="tab-synonyms" onclick="switchView('synonyms')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    <span>Ma Trận Paraphrase</span>
+                </button>
+                <button id="tab-vocab" onclick="switchView('vocab')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span>Từ Vựng Trọng Tâm</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
+        <section id="view-presentation" class="space-y-6 block">
+            
+            <!-- Quick Question Selector Chips -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Summary Completion (Q1–Q6)</span>
+                    </div>
+                    <div class="text-xs text-slate-400 flex items-center gap-2">
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2" id="question-nav-chips">
+                    <!-- Dynamic question buttons inserted by JS -->
+                </div>
+            </div>
+
+            <!-- Slide Main Card -->
+            <div id="slide-card-container" class="relative">
+                <!-- Dynamically rendered slide content -->
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span>Câu Trước</span>
+                </button>
+
+                <div class="flex items-center gap-3">
+                    <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 6</span>
+                </div>
+
+                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emeraldTheme-700 hover:bg-emeraldTheme-800 text-white font-semibold shadow-md shadow-emerald-900/10 active:scale-95 transition-all">
+                    <span>Câu Kế Tiếp</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- VIEW 2: ALL QUESTIONS CONTINUOUS LIST -->
+        <section id="view-all" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 6 Câu Summary Completion</h2>
+                    <p class="text-sm text-slate-500">Xem toàn bộ câu tóm tắt, từ điền chính xác, bằng chứng bài đọc, ma trận từ đồng nghĩa và phân tích logic tiếng Việt</p>
+                </div>
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2 text-center">
+                    <span class="text-xs text-emeraldTheme-700 font-bold uppercase">Quy Tắc Điền</span>
+                    <span class="text-sm font-extrabold text-emeraldTheme-900 block">NO MORE THAN TWO WORDS</span>
+                </div>
+            </div>
+
+            <div id="all-questions-container" class="space-y-6">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- VIEW 3: PARAGRAPH MAP (1–5) -->
+        <section id="view-map" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-emeraldTheme-700">Text Structural Architecture</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Sơ Đồ Bố Cục & Trọng Tâm 5 Đoạn Văn (Paragraphs 1 – 5)</h2>
+                        <p class="text-sm text-slate-600 mt-1">Tổng quan nội dung từng đoạn văn trong bài đọc. Lưu ý: Đoạn 2 tập trung phần lớn các phát minh thực phẩm nhân tạo (Q1–Q5), Đoạn 3 chứa sản phẩm đồ uống dinh dưỡng (Q6).</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6" id="paragraphs-grid-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: SYNONYMS & PARAPHRASE MATRIX -->
+        <section id="view-synonyms" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-emeraldTheme-700">Paraphrase & Semantic Alignment</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Ma Trận Từ Đồng Nghĩa & Diễn Đạt Tương Đương</h2>
+                        <p class="text-sm text-slate-600 mt-1">Đối chiếu chi tiết giữa câu hỏi trong đề thi với văn bản thực tế trong bài đọc của từng câu.</p>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2.5 text-center">
+                        <span class="text-xs text-emeraldTheme-700 font-semibold block uppercase">Tổng hợp</span>
+                        <span class="text-xl font-extrabold text-emeraldTheme-900">6 Cặp Paraphrase Cốt Lõi</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600">
+                                <th class="py-3 px-4 w-16 text-center">Câu</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Bản Tóm Tắt (Summary)</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Bài Đọc (Passage)</th>
+                                <th class="py-3 px-4 w-32 text-center">Từ Cần Điền</th>
+                                <th class="py-3 px-4">Ý Nghĩa & Phân Tích Logic Tiếng Việt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="synonyms-table-body" class="divide-y divide-slate-100 text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: VOCABULARY HUB -->
+        <section id="view-vocab" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-emeraldTheme-700">Food Tech & Sustainability Lexicon</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Từ Vựng Trọng Tâm & Phát Âm Chuẩn</h2>
+                        <p class="text-sm text-slate-600 mt-1">Từ vựng học thuật chủ đề công nghệ thực phẩm, đạm thực vật, an toàn dinh dưỡng và nông nghiệp bền vững kèm phiên âm IPA và audio phát âm.</p>
+                    </div>
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="vocab-search-input" onkeyup="searchVocab(this.value)" placeholder="Tìm kiếm từ vựng hoặc nghĩa..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 bg-slate-50/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="vocab-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+    const paragraphsOverview = [
+        { 
+            pKey: '1', 
+            title: 'Dự báo bùng nổ dân số & Thách thức an ninh lương thực', 
+            summary: 'Dân số toàn cầu dự kiến chạm mốc 9 tỷ người sau 25 năm nữa (tăng hơn 25%). Bắt buộc phải thay đổi tận gốc hệ thống sản xuất lương thực để đủ nuôi sống nhân loại.',
+            isAnswerFor: null, 
+            containsAns: false 
+        },
+        { 
+            pKey: '2', 
+            title: 'Làn sóng đầu tư công nghệ cao: Thịt nhân tạo, đạm thực vật & trứng từ đậu', 
+            summary: 'Giới kinh doanh và các chính phủ rót vốn: Modern Meadow nuôi cấy thịt trong phòng thí nghiệm; Beyond Meat làm thịt từ đạm thực vật; Hampton Creek sản xuất trứng nhân tạo bán cho trường đại học và bệnh viện.',
+            isAnswerFor: 'Câu 1, 2, 3, 4 & 5 (Q1–Q5)', 
+            containsAns: true 
+        },
+        { 
+            pKey: '3', 
+            title: 'Giải pháp đồ uống dinh dưỡng tổng hợp của Rob Rhinehart', 
+            summary: 'Doanh nhân Rob Rhinehart tạo ra thức uống lỏng chứa đầy đủ dưỡng chất, giúp người dùng tiết kiệm thời gian nấu nướng và đóng góp giải quyết nạn thiếu hụt lương thực toàn cầu.',
+            isAnswerFor: 'Câu 6 (Q6)', 
+            containsAns: true 
+        },
+        { 
+            pKey: '4', 
+            title: 'Quan điểm phản biện về an toàn thực phẩm từ Joanna Blythman', 
+            summary: 'Nhà văn ẩm thực Joanna Blythman lo ngại về các chất hóa học bảo quản rau quả không rõ nguồn gốc và ủng hộ việc ăn thực phẩm tự nhiên truyền thống tại địa phương đã qua kiểm chứng.',
+            isAnswerFor: null, 
+            containsAns: false 
+        },
+        { 
+            pKey: '5', 
+            title: 'Kết luận: Kiểm soát chất lượng & Thử nghiệm an toàn nghiêm ngặt', 
+            summary: 'Thực phẩm công nghệ cao là lời giải tất yếu cho bài toán lương thực 9 tỷ dân, nhưng điều kiện tiên quyết là phải kiểm tra khắt khe chất lượng và mức độ an toàn trước khi phổ biến.',
+            isAnswerFor: null, 
+            containsAns: false 
+        }
+    ];
+
+    const questionsData = [
+        {
+            id: 1,
+            qNum: "Question 1",
+            type: "Summary Completion",
+            wordLimit: "NO MORE THAN TWO WORDS",
+            contextHeader: "Chủ thể cùng các doanh nghiệp rót vốn phát triển thực phẩm nhân tạo",
+            summarySentence: "Both companies and [ 1 ] are putting money into developing high-tech ways of producing artificial foods.",
+            completedSentence: "Both companies and <span class='text-emerald-700 font-bold underline'>governments</span> are putting money into developing high-tech ways of producing artificial foods.",
+            correctAnswer: "governments",
+            passageSnippet: "With this in mind, business people and <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>governments are investing in a range of unusual new ways of producing food</mark>. Some companies, for example, are using technology to develop new artificial food products.",
+            paragraphRef: "Đoạn 2 (Paragraph 2)",
+            paraphrases: [
+                { qPart: "Both companies and [ 1 ]", pPart: "business people and governments", meaning: "cả giới doanh nghiệp / công ty và các chính phủ" },
+                { qPart: "putting money into", pPart: "are investing in", meaning: "đầu tư tiền bạc / rót vốn vào lĩnh vực nào đó" },
+                { qPart: "high-tech ways of producing artificial foods", pPart: "unusual new ways of producing food / technology to develop new artificial food products", meaning: "các phương thức công nghệ mới lạ để sản xuất thực phẩm nhân tạo" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần tìm một danh từ song hành với 'companies' (Both companies and [ 1 ]...) để chỉ chủ thể cùng tham gia rót vốn vào công nghệ sản xuất thực phẩm nhân tạo.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'Both companies and...', 'putting money into', 'producing artificial foods'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Đầu đoạn 2 tác giả viết: <em>'With this in mind, <strong>business people</strong> [= companies] and <strong>governments are investing in</strong> [= putting money into] a range of unusual new ways of producing food.'</em>",
+                    "<strong>Xác định đối tượng:</strong> Chủ thể đi cùng với các nhà kinh doanh (business people) chính là <strong>governments</strong> (chính phủ các nước).",
+                    "<strong>Kết luận:</strong> Từ cần điền là danh từ số nhiều <strong>governments</strong> (đáp ứng đúng giới hạn NO MORE THAN TWO WORDS)."
+                ],
+                traps: "Phải giữ nguyên dạng số nhiều 'governments' như văn bản gốc, không tự ý đổi thành dạng số ít 'government'."
+            },
+            vocabHighlights: ["artificial food", "institutions", "distinguish"]
+        },
+        {
+            id: 2,
+            qNum: "Question 2",
+            type: "Summary Completion",
+            wordLimit: "NO MORE THAN TWO WORDS",
+            contextHeader: "Địa điểm nuôi cấy thịt nhân tạo không giết mổ động vật",
+            summarySentence: "One such business says that its aim is to create meat in a [ 2 ] without hurting animals.",
+            completedSentence: "One such business says that its aim is to create meat in a <span class='text-emerald-700 font-bold underline'>lab</span> (hoặc <span class='text-emerald-700 font-bold underline'>laboratory</span>) without hurting animals.",
+            correctAnswer: "lab / laboratory",
+            passageSnippet: "One such business is Modern Meadow, which <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>develops meat that does not involve killing animals. What that actually means is that scientists are working in the company’s lab to find ways to create something that looks and tastes like meat</mark>.",
+            paragraphRef: "Đoạn 2 (Paragraph 2)",
+            paraphrases: [
+                { qPart: "create meat in a [ 2 ]", pPart: "working in the company’s lab to find ways to create something that looks and tastes like meat", meaning: "nghiên cứu trong phòng thí nghiệm để chế tạo ra thứ trông và có vị như thịt" },
+                { qPart: "without hurting animals", pPart: "does not involve killing animals", meaning: "không cần giết hại / làm tổn thương các loài động vật" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ số ít (sau mạo từ 'a') chỉ nơi chốn/môi trường nghiên cứu mà tại đó thịt nhân tạo được tạo ra.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'aim is to create meat', 'in a [ 2 ]', 'without hurting animals'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Tác giả giới thiệu công ty Modern Meadow: phát triển thịt không cần giết mổ động vật (<em>'does not involve killing animals'</em>). Cụ thể: <em>'scientists are working in the company’s <strong>lab</strong> to find ways to create something that looks and tastes like meat'</em>.",
+                    "<strong>Nhận diện môi trường sản xuất:</strong> Các nhà khoa học làm việc trực tiếp trong phòng thí nghiệm (<strong>lab</strong> / <strong>laboratory</strong>).",
+                    "<strong>Kết luận:</strong> Từ cần điền là danh từ <strong>lab</strong> (hoặc <strong>laboratory</strong>)."
+                ],
+                traps: "Không điền kèm 'company's lab' vì mạo từ 'a' trong câu hỏi ('in a [ 2 ]') đòi hỏi trực tiếp danh từ phòng thí nghiệm ('a lab')."
+            },
+            vocabHighlights: ["plant proteins", "nutrients", "locally produced"]
+        },
+        {
+            id: 3,
+            qNum: "Question 3",
+            type: "Summary Completion",
+            wordLimit: "NO MORE THAN TWO WORDS",
+            contextHeader: "Nguyên liệu thực vật chế tạo các sản phẩm thay thế thịt",
+            summarySentence: "Another is already selling products that resemble meat but are actually made from [ 3 ] from plants.",
+            completedSentence: "Another is already selling products that resemble meat but are actually made from <span class='text-emerald-700 font-bold underline'>plant proteins</span> (hoặc <span class='text-emerald-700 font-bold underline'>proteins</span>) from plants.",
+            correctAnswer: "plant proteins / proteins",
+            passageSnippet: "Another company called Beyond Meat already has such products in shops in the US... <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>Although they are actually made out of plant proteins, these products are almost impossible to distinguish from meat</mark> and shoppers find them on the same supermarket shelves as the genuine meat products.",
+            paragraphRef: "Đoạn 2 (Paragraph 2)",
+            paraphrases: [
+                { qPart: "resemble meat", pPart: "almost impossible to distinguish from meat", meaning: "giống thịt đến mức gần như không thể phân biệt được" },
+                { qPart: "made from [ 3 ] from plants", pPart: "made out of plant proteins", meaning: "được chiết xuất / sản xuất từ chất đạm (protein) thực vật" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần tìm danh từ chỉ thành phần dinh dưỡng lấy từ thực vật để sản xuất ra các loại burger, dải thịt gà nhân tạo.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'selling products that resemble meat', 'made from [ 3 ] from plants'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Đọc về thương hiệu Beyond Meat: <em>'Although they are actually <strong>made out of plant proteins</strong>, these products are almost impossible to distinguish from meat...'</em>",
+                    "<strong>Khớp nghĩa ngữ pháp:</strong> 'made out of' = 'made from'. Đề thi đã có sẵn 'from plants', do đó đáp án có thể chấp nhận cả <strong>proteins</strong> hoặc cả cụm <strong>plant proteins</strong> (2 từ, hợp lệ quy tắc NO MORE THAN TWO WORDS).",
+                    "<strong>Kết luận:</strong> Điền <strong>plant proteins</strong> hoặc <strong>proteins</strong>."
+                ],
+                traps: "Không nhầm sang 'beans' hay 'stews' vì đó là các món ăn cụ thể, không phải thành phần cấu tạo nên cấu trúc sợi của thịt nhân tạo."
+            },
+            vocabHighlights: ["plant proteins", "distinguish", "artificial food"]
+        },
+        {
+            id: 4,
+            qNum: "Question 4",
+            type: "Summary Completion",
+            wordLimit: "NO MORE THAN TWO WORDS",
+            contextHeader: "Loại thực phẩm nhân tạo chế tạo từ đậu của công ty Hampton Creek",
+            summarySentence: "A third company produces food using artificial [ 4 ].",
+            completedSentence: "A third company produces food using artificial <span class='text-emerald-700 font-bold underline'>eggs</span> (hoặc <span class='text-emerald-700 font-bold underline'>man-made eggs</span>).",
+            correctAnswer: "eggs / man-made eggs",
+            passageSnippet: "<mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>Another company, Hampton Creek, sells products that are made with man-made eggs</mark>. The main ingredient is a type of pea.",
+            paragraphRef: "Đoạn 2 (Paragraph 2)",
+            paraphrases: [
+                { qPart: "artificial [ 4 ]", pPart: "man-made eggs", meaning: "trứng nhân tạo (do con người bào chế từ thực vật)" },
+                { qPart: "produces food using", pPart: "sells products that are made with", meaning: "sản xuất / bán các mặt hàng chế biến bằng" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Sau tính từ 'artificial' (nhân tạo) cần một danh từ chỉ loại thực phẩm mà công ty thứ ba (Hampton Creek) đã chế tạo thành công.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'third company', 'produces food using artificial...'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Sau Modern Meadow (thứ 1) và Beyond Meat (thứ 2), công ty thứ ba là Hampton Creek: <em>'sells products that are made with <strong>man-made eggs</strong>. The main ingredient is a type of pea.'</em>",
+                    "<strong>Cặp paraphrase kinh điển:</strong> 'artificial' tương đương tuyệt đối với 'man-made' (do con người làm ra). Thứ được làm ra là <strong>eggs</strong>.",
+                    "<strong>Kết luận:</strong> Từ cần điền là danh từ số nhiều <strong>eggs</strong> (hoặc cả cụm <strong>man-made eggs</strong>)."
+                ],
+                traps: "Tránh điền 'pea' vì pea (đậu) là nguyên liệu tự nhiên ('main ingredient is a type of pea'), không phải thứ nhân tạo ('artificial')."
+            },
+            vocabHighlights: ["tried and tested", "distinguish", "food shortages"]
+        },
+        {
+            id: 5,
+            qNum: "Question 5",
+            type: "Summary Completion",
+            wordLimit: "NO MORE THAN TWO WORDS",
+            contextHeader: "Các tổ chức y tế và giáo dục tại Mỹ tiêu thụ sản phẩm",
+            summarySentence: "This company’s products are already selling to educational and health [ 5 ] in the USA.",
+            completedSentence: "This company’s products are already selling to educational and health <span class='text-emerald-700 font-bold underline'>institutions</span> in the USA.",
+            correctAnswer: "institutions",
+            passageSnippet: "<mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>Hampton Creek is already selling its foods to US hospitals, retirement homes, universities and other institutions</mark>.",
+            paragraphRef: "Đoạn 2 (Paragraph 2)",
+            paraphrases: [
+                { qPart: "educational and health [ 5 ]", pPart: "US hospitals [health], retirement homes, universities [educational] and other institutions", meaning: "các tổ chức, cơ quan công quyền trong lĩnh vực giáo dục và chăm sóc sức khỏe" },
+                { qPart: "already selling to", pPart: "already selling its foods to", meaning: "đã và đang cung cấp / bán các dòng thực phẩm cho" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ số nhiều mang nghĩa bao quát cho các cơ sở giáo dục (universities) và y tế (hospitals).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'already selling to', 'educational and health...', 'in the USA'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Cuối đoạn 2 viết rõ: <em>'Hampton Creek is already selling its foods to US hospitals [= health], retirement homes, universities [= educational] and <strong>other institutions</strong>.'</em>",
+                    "<strong>Khái quát hóa từ vựng:</strong> Các danh từ riêng 'universities' và 'hospitals' trong văn bản được đề bài quy về tính từ 'educational and health'. Danh từ chung bao quát còn lại ở cuối chuỗi liệt kê là <strong>institutions</strong> (các viện, cơ quan, tổ chức).",
+                    "<strong>Kết luận:</strong> Từ cần điền chính xác tuyệt đối là <strong>institutions</strong>."
+                ],
+                traps: "Không điền 'universities' hay 'hospitals' vì đề bài đã biến chúng thành cụm tính từ bổ nghĩa ('educational and health')."
+            },
+            vocabHighlights: ["institutions", "locally produced", "nutrients"]
+        },
+        {
+            id: 6,
+            qNum: "Question 6",
+            type: "Summary Completion",
+            wordLimit: "NO MORE THAN TWO WORDS",
+            contextHeader: "Khủng hoảng lương thực được giải quyết bởi sản phẩm đồ uống đặc biệt",
+            summarySentence: "There is also a business which has put an unusual drink on the market to help consumers save time and tackle food [ 6 ].",
+            completedSentence: "There is also a business which has put an unusual drink on the market to help consumers save time and tackle food <span class='text-emerald-700 font-bold underline'>shortages</span> (hoặc <span class='text-emerald-700 font-bold underline'>food shortages</span>).",
+            correctAnswer: "shortages / food shortages",
+            passageSnippet: "He has put his drink on sale and it is doing surprisingly well. <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>Rhinehart says that this type of product will not only help to deal with food shortages but will also provide people with more time</mark>. ‘There’s no need to waste time cooking...’",
+            paragraphRef: "Đoạn 3 (Paragraph 3)",
+            paraphrases: [
+                { qPart: "tackle food [ 6 ]", pPart: "deal with food shortages", meaning: "giải quyết / đối phó với tình trạng thiếu hụt lương thực" },
+                { qPart: "save time", pPart: "provide people with more time / no need to waste time cooking", meaning: "tiết kiệm thời gian / không cần mất công nấu nướng" },
+                { qPart: "put an unusual drink on the market", pPart: "drinks a special drink... put his drink on sale", meaning: "tung sản phẩm đồ uống đặc biệt ra thị trường buôn bán" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Sau cụm 'tackle food...' cần một danh từ chỉ vấn đề khó khăn liên quan đến thực phẩm mà thức uống này giúp giải quyết.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'unusual drink', 'save time', 'tackle food...'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 3):</strong> Nói về đồ uống dạng lỏng giàu dinh dưỡng của Rob Rhinehart: <em>'Rhinehart says that this type of product will not only <strong>help to deal with food shortages</strong> [= tackle food shortages] but will also <strong>provide people with more time</strong> [= save time].'</em>",
+                    "<strong>Cặp paraphrase đồng nghĩa:</strong> Động từ 'tackle' tương đương với 'deal with' (giải quyết, xử lý). Vấn đề cần giải quyết là <strong>food shortages</strong> (nạn thiếu lương thực).",
+                    "<strong>Kết luận:</strong> Từ cần điền là danh từ <strong>shortages</strong> (hoặc cả cụm <strong>food shortages</strong>)."
+                ],
+                traps: "Chú ý giới hạn từ: Điền 1 từ 'shortages' là tối ưu và an toàn nhất vì từ 'food' đã có sẵn trong câu hỏi ('tackle food [ 6 ]')."
+            },
+            vocabHighlights: ["food shortages", "nutrients", "tried and tested"]
+        }
+    ];
+
+    const vocabData = {
+        'artificial food': { ipa: '/ˌɑː.tɪˈfɪʃ.əl fuːd/', type: 'n phrase', vi: 'Thực phẩm nhân tạo / tổng hợp trong phòng thí nghiệm', eg: 'Rising global demographics have catalyzed massive private equity investments in artificial food.' },
+        'plant proteins': { ipa: '/plɑːnt ˈprəʊ.tiːnz/', type: 'n phrase', vi: 'Chất đạm / protein có nguồn gốc thực vật', eg: 'Extracted plant proteins can now replicate the fibrous muscle texture of natural bovine beef.' },
+        'food shortages': { ipa: '/fuːd ˈʃɔː.tɪ.dʒɪz/', type: 'n phrase', vi: 'Tình trạng khan hiếm / thiếu hụt lương thực', eg: 'Severe climate anomalies threaten to trigger catastrophic food shortages across vulnerable regions.' },
+        'distinguish': { ipa: '/dɪˈstɪŋ.ɡwɪʃ/', type: 'verb', vi: 'Phân biệt, nhận ra sự khác biệt', eg: 'Sensory test panellists found it almost impossible to distinguish synthetic cutlets from genuine poultry.' },
+        'tried and tested': { ipa: '/traɪd ænd ˈtes.tɪd/', type: 'adj phrase', vi: 'Đã qua thử nghiệm và kiểm chứng độ an toàn', eg: 'Traditional culinary techniques represent tried and tested methods that minimize digestive toxicity.' },
+        'locally produced': { ipa: '/ˈləʊ.kəl.i prəˈdʒuːst/', type: 'adj phrase', vi: 'Được nuôi trồng và sản xuất tại địa phương', eg: 'Procuring locally produced seasonal produce significantly curtails agricultural supply-chain carbon footprints.' },
+        'nutrients': { ipa: '/ˈnjuː.tri.ənts/', type: 'noun', vi: 'Chất dinh dưỡng vi lượng và đa lượng', eg: 'Engineered meal-replacement beverages provide all fundamental micronutrients essential for human survival.' },
+        'institutions': { ipa: '/ˌɪn.stɪˈtʃuː.ʃənz/', type: 'noun', vi: 'Các cơ quan, viện, tổ chức công quyền (trường học, bệnh viện)', eg: 'Procurement directors at major healthcare institutions are incorporating plant-based culinary contracts.' },
+        'sustainable agriculture': { ipa: '/səˌsteɪ.nə.bəl ˈæɡ.rɪ.kʌl.tʃər/', type: 'n phrase', vi: 'Nông nghiệp bền vững (bảo tồn sinh thái lâu dài)', eg: 'Transitioning to sustainable agriculture is imperative to curb irreversible topsoil depletion.' },
+        'lab-grown meat': { ipa: '/læb ɡrəʊn miːt/', type: 'n phrase', vi: 'Thịt nuôi cấy từ tế bào trong phòng thí nghiệm', eg: 'Lab-grown meat completely eliminates the ethical imperative of industrial livestock slaughter.' },
+        'synthetic': { ipa: '/sɪnˈθet.ɪk/', type: 'adj', vi: 'Nhân tạo, tổng hợp từ phản ứng hóa học/sinh học', eg: 'Stringent oversight is demanded to ensure synthetic lipid additives pose zero mutagenic risks.' },
+        'food deficit': { ipa: '/fuːd ˈdef.ɪ.sɪt/', type: 'n phrase', vi: 'Sự thiếu hụt cung cấp lương thực', eg: 'Technological innovations strive to eradicate chronic regional food deficits before the mid-century mark.' }
+    };
+    </script>
+
+    <script>
+    let currentQuestionIndex = 0; // 0 to 5
+
+    function initApp() {
+        renderNavChips();
+        renderCurrentSlide();
+        renderAllQuestionsList();
+        renderParagraphsMap();
+        renderSynonymsTable();
+        renderVocabGrid();
+        setupKeyboardNavigation();
+    }
+
+    function renderNavChips() {
+        const container = document.getElementById('question-nav-chips');
+        container.innerHTML = '';
+        questionsData.forEach((q, idx) => {
+            const btn = document.createElement('button');
+            const isActive = idx === currentQuestionIndex;
+            btn.className = `px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                isActive 
+                ? 'bg-emeraldTheme-700 text-white shadow-sm ring-2 ring-emeraldTheme-600 ring-offset-1' 
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`;
+            btn.innerHTML = `Q${q.id}: ${q.correctAnswer.split('/')[0].trim()}`;
+            btn.onclick = () => {
+                currentQuestionIndex = idx;
+                renderNavChips();
+                renderCurrentSlide();
+            };
+            container.appendChild(btn);
+        });
+
+        const mob = document.getElementById('mobile-curr-indicator');
+        if (mob) mob.textContent = `Câu ${currentQuestionIndex + 1}/6 (Điền: ${questionsData[currentQuestionIndex].correctAnswer.split('/')[0].trim()})`;
+    }
+
+    function navigateQuestion(delta) {
+        const next = currentQuestionIndex + delta;
+        if (next >= 0 && next < questionsData.length) {
+            currentQuestionIndex = next;
+            renderNavChips();
+            renderCurrentSlide();
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+    }
+
+    function renderCurrentSlide() {
+        const q = questionsData[currentQuestionIndex];
+        const container = document.getElementById('slide-card-container');
+        const counter = document.getElementById('slide-counter-badge');
+        if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        if (btnPrev) {
+            btnPrev.disabled = currentQuestionIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+        }
+        if (btnNext) {
+            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+        }
+
+        container.innerHTML = `
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+                
+                <!-- Slide Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-2xl bg-emerald-100 text-emeraldTheme-800 flex items-center justify-center font-extrabold text-base border border-emerald-200">
+                            ${q.id}
+                        </span>
+                        <div>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-emeraldTheme-700">${q.type}</span>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">${q.qNum}: ${q.contextHeader}</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                            Yêu cầu: ${q.wordLimit}
+                        </span>
+                        <span class="text-xs font-semibold px-3 py-1 bg-emerald-50 text-emeraldTheme-700 rounded-full border border-emerald-200">
+                            ${q.paragraphRef}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Sentence Prompt Box -->
+                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nội Dung Câu Tóm Tắt Chứa Chỗ Trống</span>
+                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">${q.summarySentence}</p>
+                </div>
+
+                <!-- Answer Reveal Banner -->
+                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-emerald-50/80 via-teal-50/50 to-white border border-emerald-200">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-emeraldTheme-700">Từ Cần Điền Chính Xác</span>
+                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
+                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm bg-emeraldTheme-700 text-white answer-badge">
+                                Đáp án: ${q.correctAnswer}
+                            </span>
+                        </div>
+                    </div>
+
+                    <button onclick="playSpeech('${q.correctAnswer.replace(/[^a-zA-Z ]/g, '')}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Phát âm đáp án</span>
+                    </button>
+                </div>
+
+                <!-- Completed Summary Sentence Preview -->
+                <div class="mt-4 p-4 rounded-xl bg-slate-900 text-white text-sm sm:text-base leading-relaxed">
+                    <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider block mb-1">Câu hoàn chỉnh:</span>
+                    <p class="font-medium">${q.completedSentence}</p>
+                </div>
+
+                <!-- Evidence in Reading Passage -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emeraldTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Manh Mối Bằng Chứng (${q.paragraphRef})</h4>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-emerald-50/40 border border-emerald-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
+                        "${q.passageSnippet}"
+                    </div>
+                </div>
+
+                <!-- Paraphrase & Synonym Mapping Table -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Paraphrase</h4>
+                    </div>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
+                                <tr>
+                                    <th class="py-2.5 px-4 w-1/3">Bản tóm tắt (Question ${q.id})</th>
+                                    <th class="py-2.5 px-4 w-1/3">Văn bản bài đọc (${q.paragraphRef})</th>
+                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 bg-white">
+                                ${q.paraphrases.map(p => `
+                                    <tr>
+                                        <td class="py-3 px-4 font-semibold text-emerald-800 bg-emerald-50/30">${p.qPart}</td>
+                                        <td class="py-3 px-4 font-semibold text-amber-800 bg-amber-50/20">${p.pPart}</td>
+                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Vietnamese In-Depth Explanation & Logic -->
+                <div class="mt-6 bg-emerald-50/40 border border-emerald-200/80 rounded-2xl p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emeraldTheme-600"></span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-emeraldTheme-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
+                    </div>
+
+                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
+
+                    <div class="space-y-2 mb-4">
+                        ${q.vietnameseAnalysis.stepByStep.map(step => `
+                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="text-emeraldTheme-600 mt-1 font-bold">▸</span>
+                                <div>${step}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${q.vietnameseAnalysis.traps ? `
+                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
+                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
+                            <span>${q.vietnameseAnalysis.traps}</span>
+                        </div>
+                    ` : ''}
+                </div>
+
+                <!-- Highlighted Vocabulary in this question -->
+                <div class="mt-6 pt-5 border-t border-slate-100">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
+                    <div class="flex flex-wrap gap-3">
+                        ${q.vocabHighlights.map(v => {
+                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
+                            return `
+                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-emerald-400 transition-colors">
+                                    <button onclick="playSpeech('${v}')" class="text-emeraldTheme-700 hover:text-emeraldTheme-900" title="Nghe phát âm chuẩn UK">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                    <div>
+                                        <span class="font-bold text-sm text-slate-900">${v}</span>
+                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
+                                        <span class="text-xs text-emeraldTheme-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+            </div>
+        `;
+    }
+
+    function renderAllQuestionsList() {
+        const container = document.getElementById('all-questions-container');
+        container.innerHTML = '';
+
+        questionsData.forEach(q => {
+            const card = document.createElement('div');
+            card.className = "gradient-border bg-white rounded-2xl p-6 shadow-sm";
+
+            card.innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-emeraldTheme-700 text-white font-bold text-xs flex items-center justify-center">
+                            ${q.id}
+                        </span>
+                        <h3 class="font-bold text-slate-900">${q.qNum} - <span class="text-slate-500 font-medium">${q.contextHeader}</span></h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-mono font-bold px-3 py-1 rounded-md border bg-emerald-100 text-emerald-800 border-emerald-300">
+                            ĐÁP ÁN: ${q.correctAnswer.toUpperCase()}
+                        </span>
+                        <span class="text-xs text-slate-400">${q.paragraphRef}</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 mb-3 text-sm">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nội dung câu tóm tắt:</span>
+                    <p class="font-bold text-slate-800">${q.summarySentence}</p>
+                </div>
+
+                <div class="bg-emerald-50/60 p-3.5 rounded-xl border border-emerald-200/80 mb-4 text-xs sm:text-sm italic text-slate-700">
+                    <strong>Manh mối bài đọc (${q.paragraphRef}):</strong> "${q.passageSnippet}"
+                </div>
+
+                <div class="mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <div class="flex flex-wrap gap-2">
+                        ${q.paraphrases.map(p => `
+                            <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
+                                <span class="text-emerald-700 font-bold">${p.qPart}</span> ➔ <span class="text-amber-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="bg-emerald-50/40 border border-emerald-200 p-4 rounded-xl text-xs sm:text-sm text-slate-700">
+                    <p class="font-bold text-emerald-900 mb-1.5">Giải thích logic Tiếng Việt:</p>
+                    <p class="mb-2">${q.vietnameseAnalysis.logic}</p>
+                    <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
+                        ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderParagraphsMap() {
+        const container = document.getElementById('paragraphs-grid-container');
+        container.innerHTML = '';
+
+        paragraphsOverview.forEach(p => {
+            const card = document.createElement('div');
+            card.className = `p-5 rounded-2xl border transition-all flex flex-col justify-between ${
+                p.containsAns 
+                ? 'bg-white border-emerald-200 shadow-2xs hover:border-emerald-400' 
+                : 'bg-slate-50/80 border-slate-200 opacity-80'
+            }`;
+
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="w-8 h-8 rounded-xl font-black text-sm flex items-center justify-center ${
+                            p.containsAns ? 'bg-emeraldTheme-700 text-white' : 'bg-slate-200 text-slate-600'
+                        }">
+                            P${p.pKey}
+                        </span>
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
+                            p.containsAns 
+                            ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' 
+                            : 'bg-slate-200 text-slate-600 border border-slate-300'
+                        }">
+                            ${p.containsAns ? `Chứa đáp án ${p.isAnswerFor}` : 'Bối cảnh / Luận điểm phản biện'}
+                        </span>
+                    </div>
+
+                    <h4 class="font-bold text-sm text-slate-900 mb-2 leading-snug">${p.title}</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">${p.summary}</p>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 mt-3">
+                    <span class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">
+                        Vai trò trong đề thi:
+                    </span>
+                    <p class="${p.containsAns ? 'text-emerald-900 font-semibold' : 'text-slate-500 italic'}">
+                        ${p.containsAns ? `Giải quyết chính xác ${p.isAnswerFor}` : 'Cung cấp bối cảnh dân số hoặc phản biện từ tác giả (không chứa câu hỏi Q1–Q6)'}
+                    </p>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderSynonymsTable() {
+        const tbody = document.getElementById('synonyms-table-body');
+        tbody.innerHTML = '';
+
+        questionsData.forEach(q => {
+            q.paraphrases.forEach((p, pIndex) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center font-bold text-slate-700">
+                        ${pIndex === 0 ? `<span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="keyword-chip">${p.qPart}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="passage-chip">${p.pPart}</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="text-xs font-bold uppercase px-2 py-1 bg-emeraldTheme-700 text-white rounded shadow-2xs">
+                            ${q.correctAnswer}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
+                        ${p.meaning}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    }
+
+    function renderVocabGrid(filterWord = '') {
+        const container = document.getElementById('vocab-grid-container');
+        container.innerHTML = '';
+
+        const words = Object.keys(vocabData).filter(w => {
+            if (!filterWord) return true;
+            const query = filterWord.toLowerCase();
+            return w.toLowerCase().includes(query) || vocabData[w].vi.toLowerCase().includes(query);
+        });
+
+        if (words.length === 0) {
+            container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">Không tìm thấy từ vựng phù hợp.</div>`;
+            return;
+        }
+
+        words.forEach(w => {
+            const item = vocabData[w];
+            const card = document.createElement('div');
+            card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-emerald-400 transition-all flex flex-col justify-between";
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h4 class="text-lg font-bold text-slate-900">${w}</h4>
+                        <button onclick="playSpeech('${w}')" class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs" title="Nghe phát âm chuẩn UK">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${item.ipa}</span>
+                        <span class="text-xs italic text-emerald-700 font-semibold">${item.type}</span>
+                    </div>
+                    <p class="text-sm font-semibold text-emerald-900 mb-3">${item.vi}</p>
+                </div>
+                <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-lg">
+                    "${item.eg}"
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function searchVocab(val) {
+        renderVocabGrid(val);
+    }
+
+    function playSpeech(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.88;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function switchView(viewName) {
+        const views = ['presentation', 'all', 'map', 'synonyms', 'vocab'];
+        views.forEach(v => {
+            const sec = document.getElementById(`view-${v}`);
+            const tabBtn = document.getElementById(`tab-${v}`);
+            if (sec) sec.classList.add('hidden');
+            if (tabBtn) {
+                tabBtn.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+            }
+        });
+
+        const activeSec = document.getElementById(`view-${viewName}`);
+        const activeTab = document.getElementById(`tab-${viewName}`);
+        if (activeSec) activeSec.classList.remove('hidden');
+        if (activeTab) {
+            activeTab.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-emeraldTheme-700 text-white shadow-sm';
+        }
+    }
+
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            const presView = document.getElementById('view-presentation');
+            if (presView && !presView.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    navigateQuestion(1);
+                } else if (e.key === 'ArrowLeft') {
+                    navigateQuestion(-1);
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

@@ -1250,6 +1250,21 @@
                 }
             }
 
+            // Reading Walkthrough Masterclass Button Hydration
+            const wtUrl = data.walkthroughUrl || data.walkthrough || (el ? (el.getAttribute('walkthrough-url') || el.getAttribute('data-walkthrough-ref')) : null);
+            const wtTitle = data.walkthroughTitle || (el ? (el.getAttribute('walkthrough-title') || el.getAttribute('title')) : null) || 'Reading Question Walkthrough Masterclass';
+            if (wtUrl) {
+                const actionRow = section.querySelector('.action-row');
+                if (actionRow && !actionRow.querySelector('.reading-walkthrough-trigger-btn')) {
+                    const wtBtn = document.createElement('button');
+                    wtBtn.className = 'btn-action reading-walkthrough-trigger-btn';
+                    wtBtn.setAttribute('data-walkthrough-ref', wtUrl);
+                    wtBtn.setAttribute('data-walkthrough-title', wtTitle);
+                    wtBtn.innerHTML = `🚀 Question Walkthrough`;
+                    actionRow.appendChild(wtBtn);
+                }
+            }
+
             // Vocabulary Hub / Cards Template Hydration
             if (data.words && Array.isArray(data.words)) {
                 const vocabCardsContainer = section.querySelector('[data-slot="cards"], .vocab-hub-grid');
@@ -1674,6 +1689,21 @@
                 if (slotChildren.length === 0 && el.innerHTML.trim() !== '') {
                     const defaultSlot = section.querySelector('[data-slot="content"], [data-slot="grid"], .two-col, [data-slot="rules"], [data-slot="passage"], [data-slot="flowchart"], .page-content');
                     if (defaultSlot) defaultSlot.innerHTML = el.innerHTML;
+                }
+
+                // Reading Walkthrough Masterclass attribute support
+                const slideWtUrl = el.getAttribute('walkthrough-url') || el.getAttribute('data-walkthrough-ref');
+                if (slideWtUrl) {
+                    const slideWtTitle = el.getAttribute('walkthrough-title') || el.getAttribute('title') || 'Reading Question Walkthrough Masterclass';
+                    const actionRow = section.querySelector('.action-row');
+                    if (actionRow && !actionRow.querySelector('.reading-walkthrough-trigger-btn')) {
+                        const wtBtn = document.createElement('button');
+                        wtBtn.className = 'btn-action reading-walkthrough-trigger-btn';
+                        wtBtn.setAttribute('data-walkthrough-ref', slideWtUrl);
+                        wtBtn.setAttribute('data-walkthrough-title', slideWtTitle);
+                        wtBtn.innerHTML = `🚀 Question Walkthrough`;
+                        actionRow.appendChild(wtBtn);
+                    }
                 }
 
                 // Replace <slide-card> with fully expanded <section class="slide">

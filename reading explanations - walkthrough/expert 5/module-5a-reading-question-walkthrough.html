@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Reading Masterclass | A Different Way to See the World</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        skyTheme: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                            950: '#082f49'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(2, 132, 199, 0.25); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(2, 132, 199, 0.5); }
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #0284c7, #0ea5e9, #38bdf8);
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+        .keyword-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+        }
+        .passage-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        .answer-badge {
+            animation: pulseSubtle 3s infinite;
+        }
+        @keyframes pulseSubtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-sky-100 selection:text-sky-900">
+
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-skyTheme-700 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-sky-900/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-skyTheme-700 bg-skyTheme-50 px-2 py-0.5 rounded-full border border-skyTheme-200">IELTS Reading Analysis</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích chuyên sâu 6 câu Matching Information</span>
+                        </div>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">A Different Way to See the World</h1>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-sky-100 text-sky-800 px-2.5 py-1 rounded-lg">Câu 1/6</span>
+                </div>
+            </div>
+
+            <!-- Global View Switcher -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+                <button id="tab-presentation" onclick="switchView('presentation')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-skyTheme-700 text-white shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                    </svg>
+                    <span>Slide Từng Câu</span>
+                </button>
+                <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    <span>Xem Tất Cả (List)</span>
+                </button>
+                <button id="tab-map" onclick="switchView('map')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                    <span>Bản Đồ Đoạn Văn (A–G)</span>
+                </button>
+                <button id="tab-synonyms" onclick="switchView('synonyms')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    <span>Ma Trận Paraphrase</span>
+                </button>
+                <button id="tab-vocab" onclick="switchView('vocab')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span>Từ Vựng Trọng Tâm</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
+        <section id="view-presentation" class="space-y-6 block">
+            
+            <!-- Quick Question Selector Chips -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Matching Information (Q1–Q6)</span>
+                    </div>
+                    <div class="text-xs text-slate-400 flex items-center gap-2">
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2" id="question-nav-chips">
+                    <!-- Dynamic question buttons inserted by JS -->
+                </div>
+            </div>
+
+            <!-- Slide Main Card -->
+            <div id="slide-card-container" class="relative">
+                <!-- Dynamically rendered slide content -->
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span>Câu Trước</span>
+                </button>
+
+                <div class="flex items-center gap-3">
+                    <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 6</span>
+                </div>
+
+                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-skyTheme-700 hover:bg-skyTheme-800 text-white font-semibold shadow-md shadow-sky-900/10 active:scale-95 transition-all">
+                    <span>Câu Kế Tiếp</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- VIEW 2: ALL QUESTIONS CONTINUOUS LIST -->
+        <section id="view-all" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 6 Câu Matching Information</h2>
+                    <p class="text-sm text-slate-500">Xem toàn bộ phát biểu, đoạn văn chứa thông tin, bằng chứng trích dẫn, ma trận từ đồng nghĩa và phân tích logic tiếng Việt</p>
+                </div>
+                <div class="bg-sky-50 border border-sky-200 rounded-xl px-4 py-2 text-center">
+                    <span class="text-xs text-skyTheme-700 font-bold uppercase">Dạng Bài</span>
+                    <span class="text-sm font-extrabold text-skyTheme-900 block">Which paragraph contains...? (Q1 – 6)</span>
+                </div>
+            </div>
+
+            <div id="all-questions-container" class="space-y-6">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- VIEW 3: PARAGRAPH MAP (A–G) -->
+        <section id="view-map" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-skyTheme-700">Structural Text Architecture</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Sơ Đồ Bố Cục & Nội Dung 7 Đoạn Văn (A – G)</h2>
+                        <p class="text-sm text-slate-600 mt-1">Tổng quan ý chính từng đoạn văn trong bài đọc, nhận diện các đoạn chứa đáp án câu hỏi và các đoạn gây nhiễu.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6" id="paragraphs-grid-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: SYNONYMS & PARAPHRASE MATRIX -->
+        <section id="view-synonyms" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-skyTheme-700">Paraphrase & Semantic Alignment</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Ma Trận Từ Đồng Nghĩa & Diễn Đạt Tương Đương</h2>
+                        <p class="text-sm text-slate-600 mt-1">Đối chiếu chi tiết giữa câu hỏi trong đề thi với văn bản thực tế trong bài đọc của từng câu.</p>
+                    </div>
+                    <div class="bg-sky-50 border border-sky-200 rounded-xl px-4 py-2.5 text-center">
+                        <span class="text-xs text-skyTheme-700 font-semibold block uppercase">Tổng hợp</span>
+                        <span class="text-xl font-extrabold text-skyTheme-900">6 Cặp Paraphrase Cốt Lõi</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600">
+                                <th class="py-3 px-4 w-16 text-center">Câu</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Câu hỏi (Question)</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Bài Đọc (Passage)</th>
+                                <th class="py-3 px-4 w-28 text-center">Đáp Án</th>
+                                <th class="py-3 px-4">Ý Nghĩa & Phân Tích Logic Tiếng Việt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="synonyms-table-body" class="divide-y divide-slate-100 text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: VOCABULARY HUB -->
+        <section id="view-vocab" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-skyTheme-700">Expedition & Physical Geography Lexicon</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Từ Vựng Trọng Tâm & Phát Âm Chuẩn</h2>
+                        <p class="text-sm text-slate-600 mt-1">Từ vựng học thuật chủ đề thám hiểm đường dài, địa lý cảnh quan, hậu cần xe đạp và văn hóa xã hội kèm phiên âm IPA và audio phát âm.</p>
+                    </div>
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="vocab-search-input" onkeyup="searchVocab(this.value)" placeholder="Tìm kiếm từ vựng hoặc nghĩa..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-sky-600 focus:ring-1 focus:ring-sky-600 bg-slate-50/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="vocab-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+    const paragraphsOverview = [
+        { 
+            pKey: 'A', 
+            title: 'Quy mô và cự ly các chuyến đi phi thường', 
+            summary: 'Giới thiệu vận động viên Mark Beaumont và các chuyến đi xe đạp siêu dài: 18.296 dặm quanh thế giới (2008), 13.080 dặm xuyên châu Mỹ (2010), 6.762 dặm từ Cairo đến Cape Town (2015).',
+            isAnswerFor: 'Câu 3 (Q3)', 
+            containsAns: true 
+        },
+        { 
+            pKey: 'B', 
+            title: 'Kỷ lục xuyên Châu Phi và những trở ngại làm chậm tiến độ', 
+            summary: 'Phá kỷ lục thế giới xuyên châu Phi sớm hơn 17 ngày (đạp 160 dặm/ngày); liệt kê các khó khăn gây chậm trễ: thủ tục cửa khẩu, kẹt xe, đường hư hỏng và thời tiết.',
+            isAnswerFor: 'Câu 5 (Q5)', 
+            containsAns: true 
+        },
+        { 
+            pKey: 'C', 
+            title: 'Cảnh quan thực tế khác xa kỳ vọng & sự buồn chán ở Patagonia', 
+            summary: 'Cảnh quan khác với tưởng tượng: du khách nghĩ Patagonia là núi hồ thơ mộng như trên tờ quảng cáo, nhưng thực tế là hàng dặm đồng cỏ đơn điệu gây chán ngắt suốt nhiều ngày.',
+            isAnswerFor: 'Câu 1 (Q1)', 
+            containsAns: true 
+        },
+        { 
+            pKey: 'D', 
+            title: 'Khoảnh khắc lạnh giá khắc nghiệt ở sa mạc Texas / Deep South', 
+            summary: 'Thức dậy trước bình minh, phải cạo gạt lớp băng đá đóng dày trên lều giữa đêm tối, đạp xe cô độc giữa sa mạc bao la tĩnh lặng chỉ có tiếng thú gọi.',
+            isAnswerFor: 'Câu 4 (Q4)', 
+            containsAns: true 
+        },
+        { 
+            pKey: 'E', 
+            title: 'Sự khác biệt trong thái độ của các nền văn hóa đối với xe đạp', 
+            summary: 'Phương Tây (châu Âu, Bắc Mỹ, Úc) coi xe đạp là thể thao giữ dáng và giải trí; các vùng nghèo coi xe đạp là phương tiện đi lại thiết yếu đáng mơ ước thay vì đi bộ.',
+            isAnswerFor: 'Câu 6 (Q6)', 
+            containsAns: true 
+        },
+        { 
+            pKey: 'F', 
+            title: 'Triết lý khám phá thế giới & sự tử tế của con người', 
+            summary: 'Xe đạp là cách tốt nhất để ngắm nhìn thế giới, quan sát con người và văn hóa biến đổi; ấn tượng sâu sắc trước lòng hiếu khách của người dân nghèo sẵn lòng cho tá túc.',
+            isAnswerFor: null, 
+            containsAns: false 
+        },
+        { 
+            pKey: 'G', 
+            title: 'Cảm xúc nhẹ nhõm sau chuyến đi & chi phí tài chính khổng lồ', 
+            summary: 'Cảm xúc chính sau mỗi dự án là nhẹ nhõm vì các chuyến đi đòi hỏi nỗ lực, thời gian và chi phí tiền bạc khổng lồ; sau đó mới có thời gian chiêm nghiệm và lên kế hoạch tiếp theo.',
+            isAnswerFor: 'Câu 2 (Q2)', 
+            containsAns: true 
+        }
+    ];
+
+    const questionsData = [
+        {
+            id: 1,
+            qNum: "Question 1",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Ví dụ về một địa danh nơi Mark cảm thấy buồn chán",
+            statementText: "an example of a place where Mark felt bored",
+            correctParagraph: "Paragraph C",
+            correctLetter: "C",
+            passageSnippet: "'When people think about Patagonia, for instance, they imagine the beautiful mountains and lakes you see in holiday brochures; but when I cycled there, I realised that large parts of it are just miles and miles of grassland. <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>What is romantic and exciting for most holidaymakers can become very boring when you see nothing else for several days</mark>.'",
+            paragraphRef: "Đoạn C (Paragraph C)",
+            paraphrases: [
+                { qPart: "an example of a place", pPart: "When people think about Patagonia, for instance", meaning: "chẳng hạn như vùng Patagonia (ví dụ về một địa danh cụ thể)" },
+                { qPart: "felt bored", pPart: "can become very boring when you see nothing else for several days", meaning: "cảm thấy buồn chán khi chỉ nhìn thấy mỗi đồng cỏ suốt nhiều ngày liền" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'an example of a place where Mark felt bored' (một ví dụ về một địa điểm nơi Mark cảm thấy nhàm chán). Cần tìm tên một địa danh cụ thể kết hợp với trạng thái tâm lý chán ngấy/buồn tẻ.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'example of a place', 'bored'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn C):</strong> Mark nêu ví dụ: <em>'When people think about <strong>Patagonia</strong>, for instance...'</em> (ví dụ về vùng Patagonia).",
+                    "<strong>Dẫn chứng tâm trạng:</strong> Du khách tưởng nơi này đẹp như tờ rơi quảng cáo (<em>'holiday brochures'</em>), nhưng khi đạp xe thực tế thì chỉ toàn đồng cỏ bạt ngàn: <em>'can become <strong>very boring</strong> when you see nothing else for several days'</em>.",
+                    "<strong>Khớp nối hoàn hảo:</strong> Patagonia chính là <em>'an example of a place'</em> và cảnh đồng cỏ đơn điệu khiến anh cảm thấy <em>'bored'</em> (<em>'very boring'</em>).",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph C</strong>."
+                ],
+                traps: "Đoạn F có câu 'It's never boring when you're cycling' (Đạp xe không bao giờ chán). Thí sinh đọc lướt thấy chữ 'boring' ở đoạn F rất dễ bị lừa, nhưng đoạn F khẳng định đạp xe nói chung không chán, chứ không nêu ví dụ về một nơi cụ thể khiến anh thấy chán như đoạn C."
+            },
+            vocabHighlights: ["holiday brochures", "grassland", "monotonous"]
+        },
+        {
+            id: 2,
+            qNum: "Question 2",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Bình luận về sự tốn kém và chi phí tài chính khi tổ chức chuyến đi",
+            statementText: "a comment on the expense of organising a cycle trip",
+            correctParagraph: "Paragraph G",
+            correctLetter: "G",
+            passageSnippet: "He says that, <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>because the projects involve huge effort, time and costs, his main emotion is relief that he has completed the trip successfully</mark>. 'It is not until later that you have time to think about what the journey meant...'",
+            paragraphRef: "Đoạn G (Paragraph G)",
+            paraphrases: [
+                { qPart: "a comment on the expense", pPart: "because the projects involve huge effort, time and costs", meaning: "bình luận về chi phí khổng lồ (expense = costs / huge costs)" },
+                { qPart: "organising a cycle trip", pPart: "the projects / completed the trip successfully", meaning: "tổ chức và thực hiện thành công các dự án đạp xe thám hiểm" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'a comment on the expense of organising a cycle trip' (một lời bình luận về chi phí/sự tốn kém của việc tổ chức một chuyến đi xe đạp).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'comment', 'expense' (chi phí, tiền bạc), 'organising a cycle trip'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn G):</strong> Khi được hỏi về cảm xúc lúc kết thúc chuyến đi, Mark chia sẻ: <em>'because the projects involve huge effort, time and <strong>costs</strong>, his main emotion is relief...'</em>.",
+                    "<strong>Phân tích paraphrase:</strong> Danh từ <em>'expense'</em> (sự tốn kém, chi phí chi trả) được diễn đạt tương đương hoàn toàn bằng <em>'costs'</em> (khoản chi phí tiền bạc lớn - huge costs).",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph G</strong>."
+                ],
+                traps: "Đoạn E có nhắc đến 'money' ('wish they had enough money to buy a bike'), nhưng đó là tiền mua xe của người dân nghèo, không phải 'expense of organising a cycle trip' (chi phí tổ chức chuyến thám hiểm của Mark)."
+            },
+            vocabHighlights: ["relief", "expedition", "involve huge costs"]
+        },
+        {
+            id: 3,
+            qNum: "Question 3",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Mô tả quy mô và cự ly quãng đường mà Mark đã đi",
+            statementText: "a description of the extent of Mark’s travels",
+            correctParagraph: "Paragraph A",
+            correctLetter: "A",
+            passageSnippet: "An extraordinary cyclist, Mark Beaumont, has completed a number of amazing long distance trips on his bike. <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>In 2008, for example, he rode for 18,296 miles around the world. Two years later he made a 13,080 mile journey through the Americas. In 2015 he cycled 6,762 miles from Cairo to Cape Town</mark>.",
+            paragraphRef: "Đoạn A (Paragraph A)",
+            paraphrases: [
+                { qPart: "description of the extent", pPart: "18,296 miles around the world / 13,080 mile journey / 6,762 miles", meaning: "mô tả cự ly, độ dài quãng đường, quy mô phạm vi hành trình (extent)" },
+                { qPart: "Mark’s travels", pPart: "long distance trips on his bike / through the Americas / Cairo to Cape Town", meaning: "các chuyến đi / hành trình di chuyển đường dài của Mark" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'a description of the extent of Mark’s travels' (một mô tả về quy mô / phạm vi / độ dài quãng đường trong các chuyến đi của Mark).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'description', 'extent' (phạm vi, cự ly, độ dài), 'travels'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn A):</strong> Tác giả liệt kê chi tiết các con số cự ly khổng lồ: <em>'18,296 miles around the world'</em> (18.296 dặm vòng quanh thế giới), <em>'13,080 mile journey through the Americas'</em> (13.080 dặm qua châu Mỹ) và <em>'6,762 miles from Cairo to Cape Town'</em> (6.762 dặm xuyên châu Phi).",
+                    "<strong>Nhận diện ngữ nghĩa:</strong> Việc liệt kê các số đo dặm và lộ trình xuyên lục địa chính là miêu tả quy mô hành trình (<em>'description of the extent'</em>).",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph A</strong>."
+                ],
+                traps: "Đoạn B có nêu con số '160 miles a day' và 'breaking the record by 17 days', nhưng đó là tốc độ chạy mỗi ngày và kỷ lục thời gian, không phải là bức tranh tổng quan về quy mô toàn bộ các chuyến đi như đoạn A."
+            },
+            vocabHighlights: ["long distance trips", "extent", "extraordinary"]
+        },
+        {
+            id: 4,
+            qNum: "Question 4",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Đề cập đến thời tiết lạnh giá khắc nghiệt mà anh trải qua",
+            statementText: "a reference to how cold the weather was",
+            correctParagraph: "Paragraph D",
+            correctLetter: "D",
+            passageSnippet: "Of all the landscapes he has seen, Mark has particularly enjoyed some of the wild parts of Texas and the Deep South of the USA. 'I remember waking before daylight. <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>I had to remove the ice from my tent when it was still dark</mark>. Then I set out on roads with absolutely no one else around. I was in the middle of this enormous desert...'",
+            paragraphRef: "Đoạn D (Paragraph D)",
+            paraphrases: [
+                { qPart: "reference to how cold the weather was", pPart: "had to remove the ice from my tent when it was still dark", meaning: "nhắc đến thời tiết lạnh đến mức đóng băng tuyết trên lều giữa đêm tối" },
+                { qPart: "cold weather", pPart: "ice / freezing desert conditions", meaning: "băng đá đóng trên lều biểu thị nhiệt độ buốt giá dưới 0 độ C" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'a reference to how cold the weather was' (một chi tiết nhắc đến việc thời tiết lạnh giá như thế nào).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'reference', 'cold', 'weather'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn D):</strong> Mark kể lại trải nghiệm ở vùng hoang dã Texas và miền Nam nước Mỹ: <em>'I had to <strong>remove the ice from my tent</strong> when it was still dark'</em> (Tôi đã phải cạo bỏ lớp băng đá đóng trên lều của mình khi trời vẫn còn tối đen).",
+                    "<strong>Phân tích suy luận:</strong> Chi tiết băng đóng trên lều (<em>'ice on my tent'</em>) là bằng chứng trực quan cụ thể nhất chứng minh thời tiết đêm sa mạc vô cùng lạnh giá.",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph D</strong>."
+                ],
+                traps: "Đoạn B có nhắc đến từ 'weather' ('the weather also affected how fast he could go'), nhưng ở đoạn B chỉ nói thời tiết ảnh hưởng tốc độ chung chung chứ không hề đề cập đến việc lạnh buốt ra sao ('how cold the weather was')."
+            },
+            vocabHighlights: ["freezing temperature", "daylight", "enormous desert"]
+        },
+        {
+            id: 5,
+            qNum: "Question 5",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Những nguyên nhân khiến việc di chuyển tiến độ gặp khó khăn",
+            statementText: "some reasons why making progress can be difficult",
+            correctParagraph: "Paragraph B",
+            correctLetter: "B",
+            passageSnippet: "He explains that it was certainly not easy to keep up this speed. There were, for example, <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>long delays at border crossings and queues of traffic often stopped him from travelling fast. Broken roads caused problems and the weather also affected how fast he could go</mark>.",
+            paragraphRef: "Đoạn B (Paragraph B)",
+            paraphrases: [
+                { qPart: "making progress can be difficult", pPart: "not easy to keep up this speed / stopped him from travelling fast / caused problems", meaning: "không dễ duy trì tốc độ / bị ngăn cản việc đi nhanh / gây ra trở ngại cho tiến độ" },
+                { qPart: "reasons", pPart: "long delays at border crossings, queues of traffic, broken roads, weather", meaning: "các nguyên nhân cụ thể: chờ đợi cửa khẩu, kẹt xe, đường hư hỏng, thời tiết xấu" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'some reasons why making progress can be difficult' (một vài nguyên nhân lý giải tại sao việc duy trì tốc độ / tiến độ di chuyển lại khó khăn).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'reasons', 'making progress', 'difficult'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn B):</strong> Tác giả nêu Mark phải duy trì 160 dặm/ngày và giải thích việc này không hề dễ dàng (<em>'certainly not easy to keep up this speed'</em>).",
+                    "<strong>Các lý do được liệt kê gồm:</strong>",
+                    "1. Chậm trễ ở cửa khẩu biên giới (<em>'long delays at border crossings'</em>).",
+                    "2. Ùn tắc giao thông (<em>'queues of traffic'</em>).",
+                    "3. Đường sá hư hại ổ gà (<em>'broken roads'</em>).",
+                    "4. Thời tiết bất lợi (<em>'weather affected how fast he could go'</em>).",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph B</strong>."
+                ],
+                traps: "Đoạn C có nói về việc đạp xe qua đồng cỏ Patagonia rất nhàm chán, nhưng đó là cảm giác tâm lý chán ngấy chứ không phải các nguyên nhân khách quan làm chậm bước tiến của chuyến đi."
+            },
+            vocabHighlights: ["border crossing", "queues of traffic", "broken roads"]
+        },
+        {
+            id: 6,
+            qNum: "Question 6",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Các ví dụ về thái độ khác nhau đối với chiếc xe đạp",
+            statementText: "examples of different attitudes towards the bicycle",
+            correctParagraph: "Paragraph E",
+            correctLetter: "E",
+            passageSnippet: "<mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>In Europe, North America and Australia, cycling is a sport which people do mainly to keep fit and have fun. But in many places Mark visited, a bicycle is something rather different. It is a type of transport that many people dream of getting one day. People who are used to walking everywhere wish they had enough money to buy a bike in order to get from A to B much more quickly and easily</mark>.",
+            paragraphRef: "Đoạn E (Paragraph E)",
+            paraphrases: [
+                { qPart: "examples of different attitudes", pPart: "sport to keep fit and have fun VS type of transport that many dream of getting", meaning: "hai thái độ đối lập: thể thao rèn luyện sức khỏe/vui chơi vs phương tiện giao thông thiết yếu đáng mơ ước" },
+                { qPart: "towards the bicycle", pPart: "view cycling / a bicycle is something rather different", meaning: "cách nhìn nhận, thái độ đối với xe đạp và việc đạp xe" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'examples of different attitudes towards the bicycle' (những ví dụ về các thái độ/quan điểm khác nhau đối với chiếc xe đạp).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'examples', 'different attitudes', 'bicycle'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn E):</strong> Câu mở đoạn ghi: <em>'His travels have also taught Mark about how differently people around the world <strong>view cycling</strong>'</em> (mọi người nhìn nhận việc đạp xe khác nhau thế nào).",
+                    "<strong>Hai thái độ tương phản cụ thể:</strong>",
+                    "• Người phương Tây (châu Âu, Bắc Mỹ, Úc): coi xe đạp là <strong>môn thể thao để giữ vóc dáng và giải trí</strong> (<em>'sport... to keep fit and have fun'</em>).",
+                    "• Người dân ở các nước nghèo: coi xe đạp là <strong>phương tiện giao thông đáng mơ ước</strong> (<em>'type of transport that many people dream of getting'</em>) để thay thế việc phải đi bộ hàng ngày.",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph E</strong>."
+                ],
+                traps: "Đoạn F nói về thái độ của chính Mark đối với xe đạp ('cycling is by far the best way to see the world'), nhưng câu hỏi dùng số nhiều 'different attitudes' (những thái độ khác nhau của nhiều nhóm người) vốn được mô tả ở đoạn E."
+            },
+            vocabHighlights: ["attitudes", "means of transport", "keep fit"]
+        }
+    ];
+
+    const vocabData = {
+        'expedition': { ipa: '/ˌek.spəˈdɪʃ.ən/', type: 'n', vi: 'Cuộc thám hiểm, chuyến hành trình thám hiểm gian truân', eg: 'Mark Beaumont has completed several solo endurance cycling expeditions across entire continents.' },
+        'break a record': { ipa: '/breɪk ə ˈrek.ɔːd/', type: 'verb phrase', vi: 'Phá vỡ kỷ lục (thời gian, tốc độ)', eg: 'He broke the world record for cycling across Africa by an astonishing margin of 17 days.' },
+        'border crossing': { ipa: '/ˈbɔː.dər ˌkrɒs.ɪŋ/', type: 'n phrase', vi: 'Cửa khẩu biên giới, thủ tục qua biên giới', eg: 'Unforeseen delays at remote border crossings severely compromised his daily mileage target.' },
+        'holiday brochures': { ipa: '/ˈhɒl.ə.deɪ ˌbrəʊ.ʃəz/', type: 'n phrase', vi: 'Tờ rơi / sách ảnh quảng cáo du lịch', eg: 'Commercial holiday brochures portray an idealized landscape that rarely matches overland reality.' },
+        'grassland': { ipa: '/ˈɡrɑːs.lænd/', type: 'n', vi: 'Đồng cỏ thảo nguyên rộng lớn', eg: 'Riding through thousands of miles of monotonous grassland proved psychologically exhausting.' },
+        'freezing temperature': { ipa: '/ˈfriː.zɪŋ ˈtem.prə.tʃər/', type: 'n phrase', vi: 'Nhiệt độ đóng băng, giá rét buốt', eg: 'Sub-zero freezing temperatures forced him to scrape thick frost from his tent canopy at dawn.' },
+        'means of transport': { ipa: '/miːnz əv ˈtræn.spɔːt/', type: 'n phrase', vi: 'Phương tiện giao thông / đi lại', eg: 'In developing nations, a bicycle serves as an invaluable means of transport rather than mere sports gear.' },
+        'relief': { ipa: '/rɪˈliːf/', type: 'n', vi: 'Cảm giác nhẹ nhõm, trút bỏ được gánh nặng', eg: 'Upon crossing the final finish line, his overwhelming immediate emotion was profound relief.' },
+        'monotonous': { ipa: '/məˈnɒt.ən.əs/', type: 'adj', vi: 'Đơn điệu, tẻ nhạt, lặp đi lặp lại', eg: 'Endless flat plains created a monotonous visual environment that induced acute mental fatigue.' },
+        'extraordinary': { ipa: '/ɪkˈstrɔː.dɪn.ər.i/', type: 'adj', vi: 'Phi thường, xuất sắc lạ thường', eg: 'Completing an 18,000-mile solo circumnavigation by bicycle is an extraordinary athletic feat.' },
+        'queues of traffic': { ipa: '/kjuːz əv ˈtræf.ɪk/', type: 'n phrase', vi: 'Những hàng dài xe cộ ùn tắc giao thông', eg: 'Dense queues of traffic in metropolitan choke points forced him to dismount and push his bicycle.' },
+        'involve huge costs': { ipa: '/ɪnˈvɒlv hjuːdʒ kɒsts/', type: 'verb phrase', vi: 'Đòi hỏi / tiêu tốn chi phí tài chính khổng lồ', eg: 'Organizing intercontinental cycling logistics inevitably involves huge costs and sponsor coordination.' }
+    };
+    </script>
+
+    <script>
+    let currentQuestionIndex = 0; // 0 to 5
+
+    function initApp() {
+        renderNavChips();
+        renderCurrentSlide();
+        renderAllQuestionsList();
+        renderParagraphsMap();
+        renderSynonymsTable();
+        renderVocabGrid();
+        setupKeyboardNavigation();
+    }
+
+    function renderNavChips() {
+        const container = document.getElementById('question-nav-chips');
+        container.innerHTML = '';
+        questionsData.forEach((q, idx) => {
+            const btn = document.createElement('button');
+            const isActive = idx === currentQuestionIndex;
+            btn.className = `px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                isActive 
+                ? 'bg-skyTheme-700 text-white shadow-sm ring-2 ring-skyTheme-600 ring-offset-1' 
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`;
+            btn.innerHTML = `Q${q.id}: Đoạn ${q.correctLetter}`;
+            btn.onclick = () => {
+                currentQuestionIndex = idx;
+                renderNavChips();
+                renderCurrentSlide();
+            };
+            container.appendChild(btn);
+        });
+
+        const mob = document.getElementById('mobile-curr-indicator');
+        if (mob) mob.textContent = `Câu ${currentQuestionIndex + 1}/6 (Đoạn ${questionsData[currentQuestionIndex].correctLetter})`;
+    }
+
+    function navigateQuestion(delta) {
+        const next = currentQuestionIndex + delta;
+        if (next >= 0 && next < questionsData.length) {
+            currentQuestionIndex = next;
+            renderNavChips();
+            renderCurrentSlide();
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+    }
+
+    function renderCurrentSlide() {
+        const q = questionsData[currentQuestionIndex];
+        const container = document.getElementById('slide-card-container');
+        const counter = document.getElementById('slide-counter-badge');
+        if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        if (btnPrev) {
+            btnPrev.disabled = currentQuestionIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+        }
+        if (btnNext) {
+            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+        }
+
+        container.innerHTML = `
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+                
+                <!-- Slide Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-2xl bg-sky-100 text-skyTheme-800 flex items-center justify-center font-extrabold text-base border border-sky-200">
+                            ${q.id}
+                        </span>
+                        <div>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-skyTheme-700">${q.type}</span>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">${q.qNum}: ${q.contextHeader}</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                            Yêu cầu: Chọn đoạn A–G
+                        </span>
+                        <span class="text-xs font-semibold px-3 py-1 bg-sky-50 text-skyTheme-700 rounded-full border border-sky-200">
+                            ${q.paragraphRef}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Statement Prompt Box -->
+                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nội Dung Phát Biểu Cần Tìm Trong Bài</span>
+                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">"${q.statementText}"</p>
+                </div>
+
+                <!-- Answer Reveal Banner -->
+                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-sky-50/80 via-blue-50/50 to-white border border-sky-200">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-skyTheme-700">Đoạn Văn Chứa Thông Tin</span>
+                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
+                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm bg-skyTheme-700 text-white answer-badge">
+                                Đáp án: ${q.correctParagraph}
+                            </span>
+                            <span class="text-sm sm:text-base font-bold text-slate-800">
+                                (Ký tự điền: <span class="text-sky-700 font-mono text-xl">${q.correctLetter}</span>)
+                            </span>
+                        </div>
+                    </div>
+
+                    <button onclick="playSpeech('${q.statementText.replace(/'/g, "\\'")}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Phát âm câu hỏi</span>
+                    </button>
+                </div>
+
+                <!-- Evidence in Reading Passage -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-skyTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Manh Mối Bằng Chứng (${q.paragraphRef})</h4>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-sky-50/40 border border-sky-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
+                        "${q.passageSnippet}"
+                    </div>
+                </div>
+
+                <!-- Paraphrase & Synonym Mapping Table -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Paraphrase</h4>
+                    </div>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
+                                <tr>
+                                    <th class="py-2.5 px-4 w-1/3">Câu hỏi trong đề (Question ${q.id})</th>
+                                    <th class="py-2.5 px-4 w-1/3">Văn bản bài đọc (${q.correctParagraph})</th>
+                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 bg-white">
+                                ${q.paraphrases.map(p => `
+                                    <tr>
+                                        <td class="py-3 px-4 font-semibold text-sky-700 bg-sky-50/30">${p.qPart}</td>
+                                        <td class="py-3 px-4 font-semibold text-amber-800 bg-amber-50/20">${p.pPart}</td>
+                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Vietnamese In-Depth Explanation & Logic -->
+                <div class="mt-6 bg-sky-50/40 border border-sky-200/80 rounded-2xl p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-skyTheme-600"></span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-skyTheme-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
+                    </div>
+
+                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
+
+                    <div class="space-y-2 mb-4">
+                        ${q.vietnameseAnalysis.stepByStep.map(step => `
+                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="text-skyTheme-600 mt-1 font-bold">▸</span>
+                                <div>${step}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${q.vietnameseAnalysis.traps ? `
+                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
+                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
+                            <span>${q.vietnameseAnalysis.traps}</span>
+                        </div>
+                    ` : ''}
+                </div>
+
+                <!-- Highlighted Vocabulary in this question -->
+                <div class="mt-6 pt-5 border-t border-slate-100">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
+                    <div class="flex flex-wrap gap-3">
+                        ${q.vocabHighlights.map(v => {
+                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
+                            return `
+                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-sky-400 transition-colors">
+                                    <button onclick="playSpeech('${v}')" class="text-skyTheme-700 hover:text-skyTheme-900" title="Nghe phát âm chuẩn UK">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                    <div>
+                                        <span class="font-bold text-sm text-slate-900">${v}</span>
+                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
+                                        <span class="text-xs text-skyTheme-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+            </div>
+        `;
+    }
+
+    function renderAllQuestionsList() {
+        const container = document.getElementById('all-questions-container');
+        container.innerHTML = '';
+
+        questionsData.forEach(q => {
+            const card = document.createElement('div');
+            card.className = "gradient-border bg-white rounded-2xl p-6 shadow-sm";
+
+            card.innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-skyTheme-700 text-white font-bold text-xs flex items-center justify-center">
+                            ${q.id}
+                        </span>
+                        <h3 class="font-bold text-slate-900">${q.qNum} - <span class="text-slate-500 font-medium">${q.contextHeader}</span></h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-mono font-bold px-3 py-1 rounded-md border bg-sky-100 text-sky-800 border-sky-300">
+                            ĐÁP ÁN: ${q.correctParagraph}
+                        </span>
+                        <span class="text-xs text-slate-400">${q.paragraphRef}</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 mb-3 text-sm">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nội dung câu hỏi:</span>
+                    <p class="font-bold text-slate-800">"${q.statementText}"</p>
+                </div>
+
+                <div class="bg-sky-50/60 p-3.5 rounded-xl border border-sky-200/80 mb-4 text-xs sm:text-sm italic text-slate-700">
+                    <strong>Manh mối bài đọc (${q.paragraphRef}):</strong> "${q.passageSnippet}"
+                </div>
+
+                <div class="mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <div class="flex flex-wrap gap-2">
+                        ${q.paraphrases.map(p => `
+                            <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
+                                <span class="text-sky-700 font-bold">${p.qPart}</span> ➔ <span class="text-amber-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="bg-sky-50/40 border border-sky-200 p-4 rounded-xl text-xs sm:text-sm text-slate-700">
+                    <p class="font-bold text-sky-900 mb-1.5">Giải thích logic Tiếng Việt:</p>
+                    <p class="mb-2">${q.vietnameseAnalysis.logic}</p>
+                    <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
+                        ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderParagraphsMap() {
+        const container = document.getElementById('paragraphs-grid-container');
+        container.innerHTML = '';
+
+        paragraphsOverview.forEach(p => {
+            const card = document.createElement('div');
+            card.className = `p-5 rounded-2xl border transition-all flex flex-col justify-between ${
+                p.containsAns 
+                ? 'bg-white border-sky-200 shadow-2xs hover:border-sky-400' 
+                : 'bg-slate-50/80 border-slate-200 opacity-80'
+            }`;
+
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="w-8 h-8 rounded-xl font-black text-sm flex items-center justify-center ${
+                            p.containsAns ? 'bg-skyTheme-700 text-white' : 'bg-slate-200 text-slate-600'
+                        }">
+                            ${p.pKey}
+                        </span>
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
+                            p.containsAns 
+                            ? 'bg-sky-100 text-sky-800 border border-sky-300' 
+                            : 'bg-slate-200 text-slate-600 border border-slate-300'
+                        }">
+                            ${p.containsAns ? `Chứa đáp án ${p.isAnswerFor}` : 'Đoạn thông tin chung'}
+                        </span>
+                    </div>
+
+                    <h4 class="font-bold text-sm text-slate-900 mb-2 leading-snug">${p.title}</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">${p.summary}</p>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 mt-3">
+                    <span class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">
+                        Vai trò trong bài thi:
+                    </span>
+                    <p class="${p.containsAns ? 'text-sky-900 font-semibold' : 'text-slate-500 italic'}">
+                        ${p.containsAns ? `Giải quyết chính xác ${p.isAnswerFor}` : 'Cung cấp góc nhìn triết lý & lòng tốt con người (không chứa thông tin câu hỏi 1–6)'}
+                    </p>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderSynonymsTable() {
+        const tbody = document.getElementById('synonyms-table-body');
+        tbody.innerHTML = '';
+
+        questionsData.forEach(q => {
+            q.paraphrases.forEach((p, pIndex) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center font-bold text-slate-700">
+                        ${pIndex === 0 ? `<span class="bg-sky-100 text-sky-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="keyword-chip">${p.qPart}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="passage-chip">${p.pPart}</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="text-xs font-bold uppercase px-2 py-1 bg-skyTheme-700 text-white rounded shadow-2xs">
+                            Đoạn ${q.correctLetter}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
+                        ${p.meaning}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    }
+
+    function renderVocabGrid(filterWord = '') {
+        const container = document.getElementById('vocab-grid-container');
+        container.innerHTML = '';
+
+        const words = Object.keys(vocabData).filter(w => {
+            if (!filterWord) return true;
+            const query = filterWord.toLowerCase();
+            return w.toLowerCase().includes(query) || vocabData[w].vi.toLowerCase().includes(query);
+        });
+
+        if (words.length === 0) {
+            container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">Không tìm thấy từ vựng phù hợp.</div>`;
+            return;
+        }
+
+        words.forEach(w => {
+            const item = vocabData[w];
+            const card = document.createElement('div');
+            card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-sky-400 transition-all flex flex-col justify-between";
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h4 class="text-lg font-bold text-slate-900">${w}</h4>
+                        <button onclick="playSpeech('${w}')" class="w-8 h-8 rounded-full bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs" title="Nghe phát âm chuẩn UK">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${item.ipa}</span>
+                        <span class="text-xs italic text-sky-700 font-semibold">${item.type}</span>
+                    </div>
+                    <p class="text-sm font-semibold text-sky-900 mb-3">${item.vi}</p>
+                </div>
+                <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-lg">
+                    "${item.eg}"
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function searchVocab(val) {
+        renderVocabGrid(val);
+    }
+
+    function playSpeech(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.88;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function switchView(viewName) {
+        const views = ['presentation', 'all', 'map', 'synonyms', 'vocab'];
+        views.forEach(v => {
+            const sec = document.getElementById(`view-${v}`);
+            const tabBtn = document.getElementById(`tab-${v}`);
+            if (sec) sec.classList.add('hidden');
+            if (tabBtn) {
+                tabBtn.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+            }
+        });
+
+        const activeSec = document.getElementById(`view-${viewName}`);
+        const activeTab = document.getElementById(`tab-${viewName}`);
+        if (activeSec) activeSec.classList.remove('hidden');
+        if (activeTab) {
+            activeTab.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-skyTheme-700 text-white shadow-sm';
+        }
+    }
+
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            const presView = document.getElementById('view-presentation');
+            if (presView && !presView.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    navigateQuestion(1);
+                } else if (e.key === 'ArrowLeft') {
+                    navigateQuestion(-1);
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

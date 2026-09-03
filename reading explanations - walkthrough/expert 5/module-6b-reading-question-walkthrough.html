@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Reading Masterclass | Word-of-Mouth Marketing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        tealTheme: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                            950: '#042f2e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(13, 148, 136, 0.25); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(13, 148, 136, 0.5); }
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #0d9488, #14b8a6, #2dd4bf);
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+        .keyword-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #ccfbf1;
+            color: #0f766e;
+            border: 1px solid #99f6e4;
+        }
+        .passage-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        .answer-badge {
+            animation: pulseSubtle 3s infinite;
+        }
+        @keyframes pulseSubtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-teal-100 selection:text-teal-900">
+
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-tealTheme-700 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-teal-900/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-tealTheme-700 bg-tealTheme-50 px-2 py-0.5 rounded-full border border-tealTheme-200">IELTS Reading Analysis</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích chuyên sâu 8 câu Summary with Word Bank</span>
+                        </div>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">Word-of-Mouth Marketing (WOMM)</h1>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-teal-100 text-teal-800 px-2.5 py-1 rounded-lg">Câu 1/8</span>
+                </div>
+            </div>
+
+            <!-- Global View Switcher -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+                <button id="tab-presentation" onclick="switchView('presentation')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-tealTheme-700 text-white shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                    </svg>
+                    <span>Slide Từng Câu</span>
+                </button>
+                <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    <span>Xem Tất Cả (List)</span>
+                </button>
+                <button id="tab-wordbank" onclick="switchView('wordbank')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    <span>Hộp Từ Vựng (A–L)</span>
+                </button>
+                <button id="tab-synonyms" onclick="switchView('synonyms')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    <span>Ma Trận Paraphrase</span>
+                </button>
+                <button id="tab-vocab" onclick="switchView('vocab')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span>Từ Vựng Trọng Tâm</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
+        <section id="view-presentation" class="space-y-6 block">
+            
+            <!-- Quick Question Selector Chips -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Summary with Word Bank (Q1–Q8)</span>
+                    </div>
+                    <div class="text-xs text-slate-400 flex items-center gap-2">
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2" id="question-nav-chips">
+                    <!-- Dynamic question buttons inserted by JS -->
+                </div>
+            </div>
+
+            <!-- Slide Main Card -->
+            <div id="slide-card-container" class="relative">
+                <!-- Dynamically rendered slide content -->
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span>Câu Trước</span>
+                </button>
+
+                <div class="flex items-center gap-3">
+                    <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 8</span>
+                </div>
+
+                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-tealTheme-700 hover:bg-tealTheme-800 text-white font-semibold shadow-md shadow-teal-900/10 active:scale-95 transition-all">
+                    <span>Câu Kế Tiếp</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- VIEW 2: ALL QUESTIONS CONTINUOUS LIST -->
+        <section id="view-all" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 8 Câu Summary Completion with Word Bank</h2>
+                    <p class="text-sm text-slate-500">Xem toàn bộ đoạn tóm tắt, từ điền tương ứng từ Word Bank, bằng chứng đoạn trích, ma trận paraphrase và giải thích logic tiếng Việt.</p>
+                </div>
+                <div class="bg-teal-50 border border-teal-200 rounded-xl px-4 py-2 text-center">
+                    <span class="text-xs text-tealTheme-700 font-bold uppercase">Hình Thức Điền</span>
+                    <span class="text-sm font-extrabold text-tealTheme-900 block">CHỌN TỪ TRONG HỘP TỪ VỰNG (A–L)</span>
+                </div>
+            </div>
+
+            <div id="all-questions-container" class="space-y-6">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- VIEW 3: WORD BANK (A–L) -->
+        <section id="view-wordbank" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-teal-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-tealTheme-700">Vocabulary Pool & Distractor Analysis</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Từ Vựng Tham Khảo (Word Bank A – L)</h2>
+                        <p class="text-sm text-slate-600 mt-1">Phân tích chi tiết 10 từ trong Word Bank: 8 từ ĐÚNG và 2 từ BẪY GÂY NHIỄU (Distractors) kèm lý do lựa chọn hoặc loại trừ.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6" id="wordbank-grid-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: SYNONYMS & PARAPHRASE MATRIX -->
+        <section id="view-synonyms" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-teal-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-tealTheme-700">Paraphrase & Semantic Alignment</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Ma Trận Từ Đồng Nghĩa & Diễn Đạt Tương Đương</h2>
+                        <p class="text-sm text-slate-600 mt-1">Đối chiếu chi tiết giữa câu hỏi trong bản tóm tắt với văn bản thực tế trong bài đọc của từng câu.</p>
+                    </div>
+                    <div class="bg-teal-50 border border-teal-200 rounded-xl px-4 py-2.5 text-center">
+                        <span class="text-xs text-tealTheme-700 font-semibold block uppercase">Tổng hợp</span>
+                        <span class="text-xl font-extrabold text-tealTheme-900">8 Cặp Paraphrase Trọng Tâm</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600">
+                                <th class="py-3 px-4 w-16 text-center">Câu</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Tóm Tắt (Summary)</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Bài Đọc (Passage)</th>
+                                <th class="py-3 px-4 w-32 text-center">Ký Tự & Từ Điền</th>
+                                <th class="py-3 px-4">Ý Nghĩa & Phân Tích Logic Tiếng Việt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="synonyms-table-body" class="divide-y divide-slate-100 text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: VOCABULARY HUB -->
+        <section id="view-vocab" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-teal-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-tealTheme-700">Marketing & Consumer Behavior Lexicon</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Từ Vựng Trọng Tâm & Phát Âm Chuẩn</h2>
+                        <p class="text-sm text-slate-600 mt-1">Từ vựng học thuật chủ đề marketing truyền miệng, hành vi người tiêu dùng, bằng chứng xã hội và quảng cáo kèm phiên âm IPA và audio phát âm.</p>
+                    </div>
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="vocab-search-input" onkeyup="searchVocab(this.value)" placeholder="Tìm kiếm từ vựng hoặc nghĩa..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600 bg-slate-50/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="vocab-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+    const wordBankPool = [
+        { key: 'A', text: 'problem', isUsed: true, usedFor: 'Câu 8', reason: 'Đáp án chuẩn xác câu 8: Khách hàng nói điều tiêu cực làm nản lòng người mua mới, gây ra một rắc rối / vấn đề lớn (problem) cho doanh nghiệp.' },
+        { key: 'B', text: 'value', isUsed: true, usedFor: 'Câu 3', reason: 'Đáp án chuẩn xác câu 3: Đặc điểm không tốn phí mang lại giá trị to lớn (value / especially useful) cho các doanh nghiệp địa phương có ngân sách nhỏ.' },
+        { key: 'C', text: 'companies', isUsed: false, usedFor: null, reason: 'BẪY NHIỄU: Bài đọc có nhắc đến companies (doanh nghiệp), nhưng về mặt ngữ pháp và ngữ nghĩa ở các vị trí trống không cần danh từ này.' },
+        { key: 'D', text: 'dislike', isUsed: true, usedFor: 'Câu 7', reason: 'Đáp án chuẩn xác câu 7: Khách hàng chia sẻ cảm nhận không tốt / sự ác cảm (dislike / negative things) về món hàng.' },
+        { key: 'E', text: 'sales', isUsed: true, usedFor: 'Câu 5', reason: 'Đáp án chuẩn xác câu 5: Lời khuyên của bạn bè mang lại ảnh hưởng thực chất, dễ dẫn tới việc chốt đơn mua hàng và tạo ra doanh số (sales).' },
+        { key: 'F', text: 'dangers', isUsed: false, usedFor: null, reason: 'BẪY NHIỄU: "dangers" mang nghĩa quá nặng nề (mối nguy hiểm tính mạng/đe dọa), trong khi bài chỉ nói về "problems" hoặc "negative things".' },
+        { key: 'G', text: 'faith', isUsed: true, usedFor: 'Câu 4', reason: 'Đáp án chuẩn xác câu 4: Người tiêu dùng đặt nhiều niềm tin / sự tin cậy (faith / trust) vào bạn bè hơn là xem quảng cáo.' },
+        { key: 'I', text: 'buyers', isUsed: true, usedFor: 'Câu 2', reason: 'Đáp án chuẩn xác câu 2: Bản chất của WOMM là những người đã mua sản phẩm / người tiêu dùng (buyers / people) tự nguyện truyền tai nhau.' },
+        { key: 'K', text: 'influence', isUsed: true, usedFor: 'Câu 6', reason: 'Đáp án chuẩn xác câu 6: Điểm trừ lớn nhất là doanh nghiệp không thể kiểm soát hay chi phối (have no influence / cannot manage or control).' },
+        { key: 'L', text: 'money', isUsed: true, usedFor: 'Câu 1', reason: 'Đáp án chuẩn xác câu 1: Ưu điểm hàng đầu là không tốn kém tiền bạc (no money / costs the business nothing).' }
+    ];
+
+    const questionsData = [
+        {
+            id: 1,
+            qNum: "Question 1",
+            type: "Summary Completion with Word Bank",
+            wordLimit: "Chọn ký tự từ A đến L",
+            contextHeader: "Ưu điểm tài chính của hình thức marketing truyền miệng",
+            summarySentence: "A big advantage of word-of-mouth marketing is that no [ 1 ] is involved.",
+            completedSentence: "A big advantage of word-of-mouth marketing is that no <span class='text-teal-700 font-bold underline'>money</span> (Option L) is involved.",
+            correctLetter: "L",
+            correctWord: "money",
+            passageSnippet: "Firstly, a main advantage is that <mark class='bg-teal-200 text-teal-950 font-bold px-1 rounded'>it costs the business nothing. If a customer likes a product or service, he or she just tells their friends and family about it without getting or expecting any payment</mark>.",
+            paragraphRef: "Đoạn 2 (Paragraph 2)",
+            paraphrases: [
+                { qPart: "no [ 1 ] is involved", pPart: "costs the business nothing / without getting or expecting any payment", meaning: "hoàn toàn không tiêu tốn tiền bạc / không đòi hỏi bất kỳ khoản thù lao nào" },
+                { qPart: "A big advantage", pPart: "a main advantage", meaning: "lợi thế lớn nhất / ưu điểm chính" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ đi sau từ hạn định 'no' (no [ 1 ] is involved) để chỉ thứ không bị tiêu tốn trong hình thức marketing này.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'big advantage', 'no [ 1 ] is involved'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Tác giả viết: <em>'Firstly, <strong>a main advantage</strong> is that <strong>it costs the business nothing</strong>... without getting or expecting any payment.'</em>",
+                    "<strong>Suy luận ngữ nghĩa:</strong> Không tốn xu nào (<em>'costs nothing'</em>) và không có bất kỳ khoản thanh toán nào (<em>'without any payment'</em>) đồng nghĩa với việc không tiêu tốn tiền bạc (<em>'no <strong>money</strong> is involved'</em>).",
+                    "<strong>Kết luận:</strong> Chọn từ <strong>money</strong> (tương ứng với ký tự <strong>L</strong> trong Word Bank)."
+                ],
+                traps: "Tránh chọn 'value' hay 'companies' vì 'no value' mang nghĩa tiêu cực (không có giá trị), hoàn toàn ngược với mạch câu ca ngợi ưu điểm."
+            },
+            vocabHighlights: ["advertising budget", "consumer trust"]
+        },
+        {
+            id: 2,
+            qNum: "Question 2",
+            type: "Summary Completion with Word Bank",
+            wordLimit: "Chọn ký tự từ A đến L",
+            contextHeader: "Chủ thể thực hiện việc chia sẻ thông tin sản phẩm",
+            summarySentence: "It is simply a matter of [ 2 ] passing on information.",
+            completedSentence: "It is simply a matter of <span class='text-teal-700 font-bold underline'>buyers</span> (Option I) passing on information.",
+            correctLetter: "I",
+            correctWord: "buyers",
+            passageSnippet: "One of the most powerful forms of marketing is WOMM: word-of-mouth marketing. <mark class='bg-teal-200 text-teal-950 font-bold px-1 rounded'>This is when people tell their family and friends about a product</mark> – and the growth of social media means it has become even more effective.",
+            paragraphRef: "Đoạn 1 (Paragraph 1)",
+            paraphrases: [
+                { qPart: "[ 2 ] passing on information", pPart: "people tell their family and friends about a product", meaning: "những người đã mua hàng / người tiêu dùng chia sẻ, truyền tai thông tin sản phẩm" },
+                { qPart: "simply a matter of", pPart: "This is when...", meaning: "đơn giản là bản chất của việc..." }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ chỉ người ở dạng số nhiều thực hiện hành động 'passing on information' (truyền tải thông tin).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'passing on information', 'matter of...'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 1 & 2):</strong> Bản chất của WOMM là <em>'when people tell their family and friends about a product'</em> và <em>'If a customer likes a product or service, he or she just tells...'</em>.",
+                    "<strong>Khớp nghĩa Word Bank:</strong> Những người trực tiếp trải nghiệm và nói về sản phẩm chính là khách mua hàng (<strong>buyers</strong>).",
+                    "<strong>Kết luận:</strong> Chọn từ <strong>buyers</strong> (tương ứng với ký tự <strong>I</strong> trong Word Bank)."
+                ],
+                traps: "Không chọn 'companies' vì các công ty không phải chủ thể tự nhiên 'truyền miệng' khách quan; bản chất của WOMM phải đến từ người tiêu dùng (buyers)."
+            },
+            vocabHighlights: ["peer recommendation", "social proof"]
+        },
+        {
+            id: 3,
+            qNum: "Question 3",
+            type: "Summary Completion with Word Bank",
+            wordLimit: "Chọn ký tự từ A đến L",
+            contextHeader: "Lợi ích đặc biệt đối với các hộ kinh doanh và doanh nghiệp nhỏ",
+            summarySentence: "This feature has particular [ 3 ] for small businesses.",
+            completedSentence: "This feature has particular <span class='text-teal-700 font-bold underline'>value</span> (Option B) for small businesses.",
+            correctLetter: "B",
+            correctWord: "value",
+            passageSnippet: "So, <mark class='bg-teal-200 text-teal-950 font-bold px-1 rounded'>word-of-mouth marketing has always been especially useful for small and local businesses, which may have small advertising budgets</mark>.",
+            paragraphRef: "Đoạn 2 (Paragraph 2)",
+            paraphrases: [
+                { qPart: "has particular [ 3 ]", pPart: "has always been especially useful", meaning: "có giá trị đặc biệt / đặc biệt hữu ích và thiết thực" },
+                { qPart: "small businesses", pPart: "small and local businesses with small advertising budgets", meaning: "các cơ sở kinh doanh vừa và nhỏ có ngân sách quảng cáo eo hẹp" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ sau tính từ 'particular' để tạo thành cụm 'has particular [ 3 ] for...' (mang lại giá trị / lợi ích đặc biệt cho ai đó).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'particular', 'small businesses'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Tác giả viết: <em>'...word-of-mouth marketing has always been <strong>especially useful</strong> for small and local businesses...'</em>.",
+                    "<strong>Cặp từ đồng nghĩa:</strong> Cụm tính từ <em>'especially useful'</em> (đặc biệt hữu ích) được danh từ hóa thành <em>'has particular <strong>value</strong>'</em> (mang lại giá trị đặc biệt).",
+                    "<strong>Kết luận:</strong> Chọn từ <strong>value</strong> (tương ứng với ký tự <strong>B</strong> trong Word Bank)."
+                ],
+                traps: "Tránh nhầm với 'sales' vì câu này đang bàn về thuộc tính/giá trị chung của kênh marketing, chứ chưa nói đến việc kích hoạt trực tiếp doanh số."
+            },
+            vocabHighlights: ["advertising budget", "brand credibility"]
+        },
+        {
+            id: 4,
+            qNum: "Question 4",
+            type: "Summary Completion with Word Bank",
+            wordLimit: "Chọn ký tự từ A đến L",
+            contextHeader: "Mức độ tin cậy vượt trội của lời khuyên từ bạn bè so với quảng cáo",
+            summarySentence: "People have more [ 4 ] in friends than adverts.",
+            completedSentence: "People have more <span class='text-teal-700 font-bold underline'>faith</span> (Option G) in friends than adverts.",
+            correctLetter: "G",
+            correctWord: "faith",
+            passageSnippet: "<mark class='bg-teal-200 text-teal-950 font-bold px-1 rounded'>People trust a friend’s recommendation more than an advertisement</mark>.",
+            paragraphRef: "Đoạn 3 (Paragraph 3)",
+            paraphrases: [
+                { qPart: "have more [ 4 ] in friends", pPart: "trust a friend’s recommendation more", meaning: "đặt nhiều niềm tin / sự tin tưởng vào người bạn hơn" },
+                { qPart: "than adverts", pPart: "more than an advertisement", meaning: "nhiều hơn so với việc xem một mẩu quảng cáo thương mại" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ kết hợp với giới từ 'in' (have faith in someone/something: đặt niềm tin vào ai/cái gì).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'have more... in friends', 'than adverts'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 3):</strong> Đầu đoạn 3 ghi rõ: <em>'People <strong>trust</strong> a friend’s recommendation more than an advertisement'</em>.",
+                    "<strong>Chuyển đổi từ loại & đồng nghĩa:</strong> Động từ <em>'trust'</em> (tin tưởng) tương đương tuyệt đối với danh từ <em>'faith'</em> (niềm tin), đi kèm giới từ chuẩn xác <em>'have faith in'</em>.",
+                    "<strong>Kết luận:</strong> Chọn từ <strong>faith</strong> (tương ứng với ký tự <strong>G</strong> trong Word Bank)."
+                ],
+                traps: "Không có từ 'trust' trong Word Bank. Thí sinh cần nhận ra 'faith' chính là từ thay thế chuẩn xác nhất cho 'trust'."
+            },
+            vocabHighlights: ["peer recommendation", "consumer trust"]
+        },
+        {
+            id: 5,
+            qNum: "Question 5",
+            type: "Summary Completion with Word Bank",
+            wordLimit: "Chọn ký tự từ A đến L",
+            contextHeader: "Khả năng thúc đẩy chuyển đổi thành hành vi mua hàng thực tế",
+            summarySentence: "It is often more likely to lead to [ 5 ].",
+            completedSentence: "It is often more likely to lead to <span class='text-teal-700 font-bold underline'>sales</span> (Option E).",
+            correctLetter: "E",
+            correctWord: "sales",
+            passageSnippet: "Magazine and television advertising is based on the idea of reaching a lot of customers and hoping that some of them will buy the product. In contrast, although one happy customer can only tell their friends about a positive experience with a business, <mark class='bg-teal-200 text-teal-950 font-bold px-1 rounded'>a personal recommendation from a friend has more influence than a professional advertisement</mark>.",
+            paragraphRef: "Đoạn 3 (Paragraph 3)",
+            paraphrases: [
+                { qPart: "more likely to lead to [ 5 ]", pPart: "buy the product / personal recommendation has more influence than an advertisement", meaning: "dễ dẫn đến việc khách thực sự quyết định mua hàng (tạo ra doanh thu / doanh số bán hàng)" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ sau cụm 'lead to' (dẫn tới kết quả gì) liên quan đến mục đích cuối cùng của kinh doanh và quảng cáo.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'more likely to lead to...'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 3):</strong> Quảng cáo truyền thống tiếp cận nhiều người và hy vọng một số người sẽ mua (<em>'buy the product'</em>). Trong khi đó, lời giới thiệu của bạn bè có sức thuyết phục mạnh hơn hẳn.",
+                    "<strong>Khái quát hóa ngữ nghĩa:</strong> Hành vi mua hàng (<em>'buy the product'</em>) được tổng kết trong thuật ngữ kinh doanh là <strong>sales</strong> (doanh số / việc bán được hàng).",
+                    "<strong>Kết luận:</strong> Chọn từ <strong>sales</strong> (tương ứng với ký tự <strong>E</strong> trong Word Bank)."
+                ],
+                traps: "Tránh nhầm với 'companies' hoặc 'value' vì sau 'lead to' trong ngữ cảnh chuyển đổi marketing cần danh từ chỉ kết quả kinh doanh cụ thể."
+            },
+            vocabHighlights: ["brand credibility", "social proof"]
+        },
+        {
+            id: 6,
+            qNum: "Question 6",
+            type: "Summary Completion with Word Bank",
+            wordLimit: "Chọn ký tự từ A đến L",
+            contextHeader: "Sự bất lực của doanh nghiệp trong việc kiểm soát nội dung lan truyền",
+            summarySentence: "Disadvantages are that firms have no [ 6 ] over what is said…",
+            completedSentence: "Disadvantages are that firms have no <span class='text-teal-700 font-bold underline'>influence</span> (Option K) over what is said…",
+            correctLetter: "K",
+            correctWord: "influence",
+            passageSnippet: "However, there are, of course, problems with word-of-mouth advertising and the main one is that <mark class='bg-teal-200 text-teal-950 font-bold px-1 rounded'>companies cannot manage it. For example, they cannot increase it nor can they control what people say</mark>.",
+            paragraphRef: "Đoạn 4 (Paragraph 4)",
+            paraphrases: [
+                { qPart: "firms have no [ 6 ] over", pPart: "companies cannot manage it / cannot control what people say", meaning: "các công ty không thể quản lý hay kiểm soát (không có quyền hạn hay tầm ảnh hưởng chi phối)" },
+                { qPart: "what is said", pPart: "what people say", meaning: "những điều mà mọi người bàn tán, nhận xét" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ đi cùng cấu trúc 'have no [ 6 ] over...' (không có quyền kiểm soát / không có tầm ảnh hưởng lên cái gì).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'Disadvantages', 'firms have no... over what is said'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> Tác giả nêu vấn đề chính: <em>'companies cannot manage it... nor can they <strong>control</strong> what people say'</em>.",
+                    "<strong>Khớp nghĩa Word Bank:</strong> Việc 'cannot control / cannot manage' được diễn đạt tương đương bằng cụm 'have no <strong>influence</strong> over' (hoàn toàn không có tầm ảnh hưởng hay chi phối được).",
+                    "<strong>Kết luận:</strong> Chọn từ <strong>influence</strong> (tương ứng với ký tự <strong>K</strong> trong Word Bank)."
+                ],
+                traps: "Không có từ 'control' trong Word Bank. Từ đồng nghĩa chính xác nhất về khả năng tác động chính là 'influence'."
+            },
+            vocabHighlights: ["word-of-mouth marketing", "discourage"]
+        },
+        {
+            id: 7,
+            qNum: "Question 7",
+            type: "Summary Completion with Word Bank",
+            wordLimit: "Chọn ký tự từ A đến L",
+            contextHeader: "Khách hàng lan truyền những trải nghiệm và cảm xúc không tốt",
+            summarySentence: "…and buyers may share their [ 7 ] of an item,…",
+            completedSentence: "…and buyers may share their <span class='text-teal-700 font-bold underline'>dislike</span> (Option D) of an item,…",
+            correctLetter: "D",
+            correctWord: "dislike",
+            passageSnippet: "<mark class='bg-teal-200 text-teal-950 font-bold px-1 rounded'>Customers may say negative things about the products</mark> and this can discourage people from buying them.",
+            paragraphRef: "Đoạn 4 (Paragraph 4)",
+            paraphrases: [
+                { qPart: "share their [ 7 ] of an item", pPart: "say negative things about the products", meaning: "bày tỏ thái độ không hài lòng / nói những điều tiêu cực chê bai sản phẩm" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ chỉ cảm xúc hoặc thái độ tiêu cực sau tính từ sở hữu 'their' (share their [ 7 ] of an item).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'share their...', 'of an item'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> Câu tiếp theo cảnh báo: <em>'Customers may <strong>say negative things</strong> about the products...'</em>.",
+                    "<strong>Khớp nghĩa Word Bank:</strong> Việc 'say negative things' (nói điều tiêu cực) thể hiện sự chê bai, không thích món đồ đó ➔ Danh từ tương đương là <strong>dislike</strong> (sự ác cảm / không thích).",
+                    "<strong>Kết luận:</strong> Chọn từ <strong>dislike</strong> (tương ứng với ký tự <strong>D</strong> trong Word Bank)."
+                ],
+                traps: "Tránh chọn 'dangers' vì 'dangers of an item' nói về mối nguy hiểm vật lý gây hại, trong khi bài chỉ nói về ý kiến chê bai tiêu cực của khách hàng ('dislike')."
+            },
+            vocabHighlights: ["discourage", "viral impact"]
+        },
+        {
+            id: 8,
+            qNum: "Question 8",
+            type: "Summary Completion with Word Bank",
+            wordLimit: "Chọn ký tự từ A đến L",
+            contextHeader: "Hậu quả tiêu cực gây khó khăn nghiêm trọng cho doanh nghiệp",
+            summarySentence: "…creating a major [ 8 ] for business.",
+            completedSentence: "…creating a major <span class='text-teal-700 font-bold underline'>problem</span> (Option A) for business.",
+            correctLetter: "A",
+            correctWord: "problem",
+            passageSnippet: "Customers may say negative things about the products and <mark class='bg-teal-200 text-teal-950 font-bold px-1 rounded'>this can discourage people from buying them</mark>.",
+            paragraphRef: "Đoạn 4 (Paragraph 4)",
+            paraphrases: [
+                { qPart: "creating a major [ 8 ] for business", pPart: "discourage people from buying them / problems with word-of-mouth", meaning: "làm nản lòng người mua, tạo ra trở ngại / vấn đề lớn cho hoạt động kinh doanh" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ đếm được số ít sau cụm 'a major [ 8 ]' để chỉ hệ quả tiêu cực cho doanh nghiệp.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'creating a major...', 'for business'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> Đoạn 4 mở đầu bằng <em>'there are, of course, <strong>problems</strong> with word-of-mouth advertising...'</em> và kết luận rằng việc khách chê bai <em>'can discourage people from buying them'</em>.",
+                    "<strong>Khái quát hóa kết luận:</strong> Việc mất khách do bị chê bai tạo ra một trở ngại / rắc rối lớn (<strong>a major problem</strong>) cho doanh nghiệp.",
+                    "<strong>Kết luận:</strong> Chọn từ <strong>problem</strong> (tương ứng với ký tự <strong>A</strong> trong Word Bank)."
+                ],
+                traps: "Không chọn 'dangers' vì mạo từ 'a' đi trước đòi hỏi danh từ số ít (dangers là số nhiều), do đó chỉ có 'problem' là phù hợp cả về ngữ pháp lẫn ngữ nghĩa."
+            },
+            vocabHighlights: ["brand credibility", "discourage"]
+        }
+    ];
+
+    const vocabData = {
+        'word-of-mouth marketing': { ipa: '/wɜːd əv ˈmaʊθ ˈmɑː.kɪ.tɪŋ/', type: 'n phrase', vi: 'Marketing truyền miệng (tiếp thị bằng lời giới thiệu tự nhiên)', eg: 'Organic word-of-mouth marketing remains substantially more credible than paid television campaigns.' },
+        'peer recommendation': { ipa: '/pɪər ˌrek.ə.menˈdeɪ.ʃən/', type: 'n phrase', vi: 'Lời khuyên / giới thiệu từ bạn bè đồng trang lứa', eg: 'Consumer purchase intent rises sharply when guided by trusted peer recommendations.' },
+        'advertising budget': { ipa: '/ˈæd.və.taɪ.zɪŋ ˈbʌdʒ.ɪt/', type: 'n phrase', vi: 'Ngân sách dành cho quảng cáo, tiếp thị', eg: 'Independent local merchants lack the lavish advertising budgets of global corporate franchises.' },
+        'social proof': { ipa: '/ˈsəʊ.ʃəl pruːf/', type: 'n phrase', vi: 'Bằng chứng xã hội (tâm lý số đông tin vào đánh giá của người khác)', eg: 'Unsolicited user testimonials on TikTok provide compelling social proof that drives viral conversions.' },
+        'brand credibility': { ipa: '/brænd ˌkred.əˈbɪl.ə.ti/', type: 'n phrase', vi: 'Độ uy tín và mức độ đáng tin cậy của thương hiệu', eg: 'A barrage of negative online customer complaints can permanently erode brand credibility.' },
+        'discourage': { ipa: '/dɪˈskʌr.ɪdʒ/', type: 'verb', vi: 'Làm nản lòng, ngăn cản ý định mua hàng', eg: 'Unflattering reviews regarding product longevity easily discourage prospective purchasers.' },
+        'viral impact': { ipa: '/ˈvaɪə.rəl ˈɪm.pækt/', type: 'n phrase', vi: 'Sức lan truyền bùng nổ trên mạng xã hội', eg: 'A brief unboxing video achieved unexpected viral impact across multiple digital channels.' },
+        'consumer trust': { ipa: '/kənˈsjuː.mər trʌst/', type: 'n phrase', vi: 'Niềm tin và sự an tâm của khách hàng', eg: 'Nurturing genuine consumer trust requires rigorous transparency and superior post-sales service.' },
+        'commercial advertising': { ipa: '/kəˈmɜː.ʃəl ˈæd.və.taɪ.zɪŋ/', type: 'n phrase', vi: 'Hoạt động quảng cáo thương mại có trả phí', eg: 'Consumers are growing increasingly sceptical of polished commercial advertising messages.' },
+        'purchasing decision': { ipa: '/ˈpɜː.tʃəs.ɪŋ dɪˈsɪʒ.ən/', type: 'n phrase', vi: 'Quyết định chốt đơn / mua sắm của khách hàng', eg: 'Peer evaluations frequently serve as the ultimate tipping point in finalizing a purchasing decision.' },
+        'organic reach': { ipa: '/ɔːˈɡæn.ɪk riːtʃ/', type: 'n phrase', vi: 'Lượng tiếp cận tự nhiên không mất tiền quảng cáo', eg: 'High-quality customer satisfaction naturally generates expansive organic reach online.' },
+        'unsolicited review': { ipa: '/ˌʌn.səˈlɪs.ɪ.tɪd rɪˈvjuː/', type: 'n phrase', vi: 'Đánh giá tự nguyện (không được thuê mướn hay trả tiền)', eg: 'Independent buyers frequently post unsolicited reviews detailing product flaws.' }
+    };
+    </script>
+
+    <script>
+    let currentQuestionIndex = 0; // 0 to 7
+
+    function initApp() {
+        renderNavChips();
+        renderCurrentSlide();
+        renderAllQuestionsList();
+        renderWordBankGrid();
+        renderSynonymsTable();
+        renderVocabGrid();
+        setupKeyboardNavigation();
+    }
+
+    function renderNavChips() {
+        const container = document.getElementById('question-nav-chips');
+        container.innerHTML = '';
+        questionsData.forEach((q, idx) => {
+            const btn = document.createElement('button');
+            const isActive = idx === currentQuestionIndex;
+            btn.className = `px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                isActive 
+                ? 'bg-tealTheme-700 text-white shadow-sm ring-2 ring-tealTheme-600 ring-offset-1' 
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`;
+            btn.innerHTML = `Q${q.id}: ${q.correctLetter} (${q.correctWord})`;
+            btn.onclick = () => {
+                currentQuestionIndex = idx;
+                renderNavChips();
+                renderCurrentSlide();
+            };
+            container.appendChild(btn);
+        });
+
+        const mob = document.getElementById('mobile-curr-indicator');
+        if (mob) mob.textContent = `Câu ${currentQuestionIndex + 1}/8 (Chọn: ${questionsData[currentQuestionIndex].correctLetter} - ${questionsData[currentQuestionIndex].correctWord})`;
+    }
+
+    function navigateQuestion(delta) {
+        const next = currentQuestionIndex + delta;
+        if (next >= 0 && next < questionsData.length) {
+            currentQuestionIndex = next;
+            renderNavChips();
+            renderCurrentSlide();
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+    }
+
+    function renderCurrentSlide() {
+        const q = questionsData[currentQuestionIndex];
+        const container = document.getElementById('slide-card-container');
+        const counter = document.getElementById('slide-counter-badge');
+        if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        if (btnPrev) {
+            btnPrev.disabled = currentQuestionIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+        }
+        if (btnNext) {
+            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+        }
+
+        container.innerHTML = `
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+                
+                <!-- Slide Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-2xl bg-teal-100 text-tealTheme-800 flex items-center justify-center font-extrabold text-base border border-teal-200">
+                            ${q.id}
+                        </span>
+                        <div>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-tealTheme-700">${q.type}</span>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">${q.qNum}: ${q.contextHeader}</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                            Yêu cầu: Chọn ký tự A–L
+                        </span>
+                        <span class="text-xs font-semibold px-3 py-1 bg-teal-50 text-tealTheme-700 rounded-full border border-teal-200">
+                            ${q.paragraphRef}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Sentence Prompt Box -->
+                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nội Dung Câu Tóm Tắt Chứa Chỗ Trống</span>
+                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">${q.summarySentence}</p>
+                </div>
+
+                <!-- Answer Reveal Banner -->
+                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-teal-50/80 via-emerald-50/50 to-white border border-teal-200">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-tealTheme-700">Đáp Án Từ Hộp Từ Vựng (Word Bank)</span>
+                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
+                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm bg-tealTheme-700 text-white answer-badge">
+                                Đáp án: [ ${q.correctLetter} ] — ${q.correctWord}
+                            </span>
+                        </div>
+                    </div>
+
+                    <button onclick="playSpeech('${q.correctWord}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-teal-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Phát âm từ điền</span>
+                    </button>
+                </div>
+
+                <!-- Completed Summary Sentence Preview -->
+                <div class="mt-4 p-4 rounded-xl bg-slate-900 text-white text-sm sm:text-base leading-relaxed">
+                    <span class="text-xs text-teal-400 font-bold uppercase tracking-wider block mb-1">Câu tóm tắt hoàn chỉnh:</span>
+                    <p class="font-medium">${q.completedSentence}</p>
+                </div>
+
+                <!-- Evidence in Reading Passage -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-tealTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Manh Mối Bằng Chứng (${q.paragraphRef})</h4>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-teal-50/40 border border-teal-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
+                        "${q.passageSnippet}"
+                    </div>
+                </div>
+
+                <!-- Paraphrase & Synonym Mapping Table -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Paraphrase</h4>
+                    </div>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
+                                <tr>
+                                    <th class="py-2.5 px-4 w-1/3">Bản tóm tắt (Question ${q.id})</th>
+                                    <th class="py-2.5 px-4 w-1/3">Văn bản bài đọc (${q.paragraphRef})</th>
+                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 bg-white">
+                                ${q.paraphrases.map(p => `
+                                    <tr>
+                                        <td class="py-3 px-4 font-semibold text-teal-800 bg-teal-50/30">${p.qPart}</td>
+                                        <td class="py-3 px-4 font-semibold text-amber-800 bg-amber-50/20">${p.pPart}</td>
+                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Vietnamese In-Depth Explanation & Logic -->
+                <div class="mt-6 bg-teal-50/40 border border-teal-200/80 rounded-2xl p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-tealTheme-600"></span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-tealTheme-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
+                    </div>
+
+                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
+
+                    <div class="space-y-2 mb-4">
+                        ${q.vietnameseAnalysis.stepByStep.map(step => `
+                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="text-tealTheme-600 mt-1 font-bold">▸</span>
+                                <div>${step}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${q.vietnameseAnalysis.traps ? `
+                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
+                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
+                            <span>${q.vietnameseAnalysis.traps}</span>
+                        </div>
+                    ` : ''}
+                </div>
+
+                <!-- Highlighted Vocabulary in this question -->
+                <div class="mt-6 pt-5 border-t border-slate-100">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
+                    <div class="flex flex-wrap gap-3">
+                        ${q.vocabHighlights.map(v => {
+                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
+                            return `
+                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-teal-400 transition-colors">
+                                    <button onclick="playSpeech('${v}')" class="text-tealTheme-700 hover:text-tealTheme-900" title="Nghe phát âm chuẩn UK">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                    <div>
+                                        <span class="font-bold text-sm text-slate-900">${v}</span>
+                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
+                                        <span class="text-xs text-tealTheme-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+            </div>
+        `;
+    }
+
+    function renderAllQuestionsList() {
+        const container = document.getElementById('all-questions-container');
+        container.innerHTML = '';
+
+        questionsData.forEach(q => {
+            const card = document.createElement('div');
+            card.className = "gradient-border bg-white rounded-2xl p-6 shadow-sm";
+
+            card.innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-tealTheme-700 text-white font-bold text-xs flex items-center justify-center">
+                            ${q.id}
+                        </span>
+                        <h3 class="font-bold text-slate-900">${q.qNum} - <span class="text-slate-500 font-medium">${q.contextHeader}</span></h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-mono font-bold px-3 py-1 rounded-md border bg-teal-100 text-teal-800 border-teal-300">
+                            ĐÁP ÁN: [ ${q.correctLetter} ] — ${q.correctWord.toUpperCase()}
+                        </span>
+                        <span class="text-xs text-slate-400">${q.paragraphRef}</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 mb-3 text-sm">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nội dung câu tóm tắt:</span>
+                    <p class="font-bold text-slate-800">${q.summarySentence}</p>
+                </div>
+
+                <div class="bg-teal-50/60 p-3.5 rounded-xl border border-teal-200/80 mb-4 text-xs sm:text-sm italic text-slate-700">
+                    <strong>Manh mối bài đọc (${q.paragraphRef}):</strong> "${q.passageSnippet}"
+                </div>
+
+                <div class="mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <div class="flex flex-wrap gap-2">
+                        ${q.paraphrases.map(p => `
+                            <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
+                                <span class="text-teal-700 font-bold">${p.qPart}</span> ➔ <span class="text-amber-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="bg-teal-50/40 border border-teal-200 p-4 rounded-xl text-xs sm:text-sm text-slate-700">
+                    <p class="font-bold text-teal-900 mb-1.5">Giải thích logic Tiếng Việt:</p>
+                    <p class="mb-2">${q.vietnameseAnalysis.logic}</p>
+                    <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
+                        ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderWordBankGrid() {
+        const container = document.getElementById('wordbank-grid-container');
+        container.innerHTML = '';
+
+        wordBankPool.forEach(item => {
+            const card = document.createElement('div');
+            const isUsed = item.isUsed;
+            card.className = `p-5 rounded-2xl border transition-all flex flex-col justify-between ${
+                isUsed 
+                ? 'bg-white border-teal-200 shadow-2xs hover:border-teal-400' 
+                : 'bg-slate-50/80 border-slate-200 opacity-80'
+            }`;
+
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="w-8 h-8 rounded-xl font-black text-sm flex items-center justify-center ${
+                            isUsed ? 'bg-tealTheme-700 text-white' : 'bg-slate-200 text-slate-600'
+                        }">
+                            ${item.key}
+                        </span>
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
+                            isUsed 
+                            ? 'bg-teal-100 text-teal-800 border border-teal-300' 
+                            : 'bg-amber-100 text-amber-800 border border-amber-300'
+                        }">
+                            ${isUsed ? `Đáp án ${item.usedFor}` : 'Bẫy nhiễu (Distractor)'}
+                        </span>
+                    </div>
+
+                    <h4 class="font-bold text-base text-slate-900 mb-2 capitalize leading-snug">${item.text}</h4>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 text-xs text-slate-600 mt-2">
+                    <span class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">
+                        ${isUsed ? 'Lý do chọn:' : 'Lý do loại trừ:'}
+                    </span>
+                    <p class="${isUsed ? 'text-teal-900 font-medium' : 'text-slate-500 italic'}">${item.reason}</p>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderSynonymsTable() {
+        const tbody = document.getElementById('synonyms-table-body');
+        tbody.innerHTML = '';
+
+        questionsData.forEach(q => {
+            q.paraphrases.forEach((p, pIndex) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center font-bold text-slate-700">
+                        ${pIndex === 0 ? `<span class="bg-teal-100 text-teal-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="keyword-chip">${p.qPart}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="passage-chip">${p.pPart}</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="text-xs font-bold uppercase px-2.5 py-1 bg-tealTheme-700 text-white rounded shadow-2xs">
+                            ${q.correctLetter} — ${q.correctWord}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
+                        ${p.meaning}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    }
+
+    function renderVocabGrid(filterWord = '') {
+        const container = document.getElementById('vocab-grid-container');
+        container.innerHTML = '';
+
+        const words = Object.keys(vocabData).filter(w => {
+            if (!filterWord) return true;
+            const query = filterWord.toLowerCase();
+            return w.toLowerCase().includes(query) || vocabData[w].vi.toLowerCase().includes(query);
+        });
+
+        if (words.length === 0) {
+            container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">Không tìm thấy từ vựng phù hợp.</div>`;
+            return;
+        }
+
+        words.forEach(w => {
+            const item = vocabData[w];
+            const card = document.createElement('div');
+            card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-teal-400 transition-all flex flex-col justify-between";
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h4 class="text-lg font-bold text-slate-900">${w}</h4>
+                        <button onclick="playSpeech('${w}')" class="w-8 h-8 rounded-full bg-teal-50 text-teal-700 hover:bg-teal-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs" title="Nghe phát âm chuẩn UK">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${item.ipa}</span>
+                        <span class="text-xs italic text-teal-700 font-semibold">${item.type}</span>
+                    </div>
+                    <p class="text-sm font-semibold text-teal-900 mb-3">${item.vi}</p>
+                </div>
+                <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-lg">
+                    "${item.eg}"
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function searchVocab(val) {
+        renderVocabGrid(val);
+    }
+
+    function playSpeech(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.88;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function switchView(viewName) {
+        const views = ['presentation', 'all', 'wordbank', 'synonyms', 'vocab'];
+        views.forEach(v => {
+            const sec = document.getElementById(`view-${v}`);
+            const tabBtn = document.getElementById(`tab-${v}`);
+            if (sec) sec.classList.add('hidden');
+            if (tabBtn) {
+                tabBtn.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+            }
+        });
+
+        const activeSec = document.getElementById(`view-${viewName}`);
+        const activeTab = document.getElementById(`tab-${viewName}`);
+        if (activeSec) activeSec.classList.remove('hidden');
+        if (activeTab) {
+            activeTab.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-tealTheme-700 text-white shadow-sm';
+        }
+    }
+
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            const presView = document.getElementById('view-presentation');
+            if (presView && !presView.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    navigateQuestion(1);
+                } else if (e.key === 'ArrowLeft') {
+                    navigateQuestion(-1);
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

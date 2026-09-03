@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Reading Masterclass | Remedies from Nature</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        emeraldTheme: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(5, 150, 105, 0.25); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(5, 150, 105, 0.5); }
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #059669, #10b981, #34d399);
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+        .keyword-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+        .passage-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        .answer-badge {
+            animation: pulseSubtle 3s infinite;
+        }
+        @keyframes pulseSubtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900">
+
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-emerald-900/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">IELTS Reading Analysis</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích chuyên sâu 6 câu Matching Sentence Endings</span>
+                        </div>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">Remedies from Nature (Dược Phẩm Tự Nhiên)</h1>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-lg">Câu 1/6</span>
+                </div>
+            </div>
+
+            <!-- Global View Switcher -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+                <button id="tab-presentation" onclick="switchView('presentation')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-emerald-700 text-white shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                    </svg>
+                    <span>Slide Từng Câu</span>
+                </button>
+                <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    <span>Xem Tất Cả (List)</span>
+                </button>
+                <button id="tab-options" onclick="switchView('options')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                    <span>Kho Lựa Chọn (A–I)</span>
+                </button>
+                <button id="tab-synonyms" onclick="switchView('synonyms')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    <span>Ma Trận Paraphrase</span>
+                </button>
+                <button id="tab-vocab" onclick="switchView('vocab')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span>Từ Vựng Trọng Tâm</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
+        <section id="view-presentation" class="space-y-6 block">
+            
+            <!-- Quick Question Selector Chips -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Matching Sentence Endings (Q1-6)</span>
+                    </div>
+                    <div class="text-xs text-slate-400 flex items-center gap-2">
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2" id="question-nav-chips">
+                    <!-- Dynamic question buttons inserted by JS -->
+                </div>
+            </div>
+
+            <!-- Slide Main Card -->
+            <div id="slide-card-container" class="relative">
+                <!-- Dynamically rendered slide content -->
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span>Câu Trước</span>
+                </button>
+
+                <div class="flex items-center gap-3">
+                    <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 6</span>
+                </div>
+
+                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-semibold shadow-md shadow-emerald-900/10 active:scale-95 transition-all">
+                    <span>Câu Kế Tiếp</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- VIEW 2: ALL QUESTIONS CONTINUOUS LIST -->
+        <section id="view-all" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 6 Câu Matching Sentence Endings</h2>
+                    <p class="text-sm text-slate-500">Xem toàn bộ câu nối, bằng chứng bài đọc, ma trận từ đồng nghĩa và phân tích logic tiếng Việt</p>
+                </div>
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2 text-center">
+                    <span class="text-xs text-emerald-700 font-bold uppercase">Phần Thi</span>
+                    <span class="text-sm font-extrabold text-emerald-900 block">Dạng Bài Matching Câu 1 – 6</span>
+                </div>
+            </div>
+
+            <div id="all-questions-container" class="space-y-6">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- VIEW 3: OPTIONS REPOSITORY (A–I) -->
+        <section id="view-options" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-emerald-700">Matching Sentence Endings Pool</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Lựa Chọn Vế Nối Cuối Câu (Options A – I)</h2>
+                        <p class="text-sm text-slate-600 mt-1">Chi tiết 9 vế lựa chọn, phân loại vế ĐÚNG (Used) và vế BẪY/GÂY NHIỄU (Distractors) kèm lý do loại trừ.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6" id="options-grid-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: SYNONYMS & PARAPHRASE MATRIX -->
+        <section id="view-synonyms" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-emerald-700">Paraphrase & Semantic Alignment</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Ma Trận Từ Đồng Nghĩa & Diễn Đạt Tương Đương</h2>
+                        <p class="text-sm text-slate-600 mt-1">Đối chiếu chi tiết giữa câu hỏi trong đề thi với văn bản thực tế trong bài đọc.</p>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2.5 text-center">
+                        <span class="text-xs text-emerald-700 font-semibold block uppercase">Tổng hợp</span>
+                        <span class="text-xl font-extrabold text-emerald-900">6 Cặp Paraphrase Trọng Điểm</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600">
+                                <th class="py-3 px-4 w-16 text-center">Câu</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Đề & Vế Nối</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Bài Đọc (Passage)</th>
+                                <th class="py-3 px-4 w-28 text-center">Đáp Án</th>
+                                <th class="py-3 px-4">Ý Nghĩa & Phân Tích Logic Tiếng Việt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="synonyms-table-body" class="divide-y divide-slate-100 text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: VOCABULARY HUB -->
+        <section id="view-vocab" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-emerald-700">Pharmacology & Ecology Lexicon</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Từ Vựng Trọng Tâm & Phát Âm Chuẩn</h2>
+                        <p class="text-sm text-slate-600 mt-1">Từ vựng học thuật chủ đề y sinh học, dược liệu tự nhiên và bảo tồn sinh thái kèm phiên âm IPA và audio phát âm.</p>
+                    </div>
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="vocab-search-input" onkeyup="searchVocab(this.value)" placeholder="Tìm kiếm từ vựng hoặc nghĩa..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 bg-slate-50/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="vocab-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+    const optionsPool = [
+        { key: 'A', text: 'many potential cures will disappear forever.', isUsed: true, usedFor: 'Câu 4', reason: 'Đáp án chính xác cho câu 4: Phá hủy rừng khiến các loài tuyệt chủng đồng nghĩa với việc các bài thuốc tiềm năng biến mất vĩnh viễn.' },
+        { key: 'B', text: 'some of the most medically valuable species do not seem very attractive.', isUsed: true, usedFor: 'Câu 5', reason: 'Đáp án chính xác cho câu 5: Các loài có dược tính cao là nấm, loài có độc hoặc siêu nhỏ (không đẹp mắt như thú lớn).' },
+        { key: 'C', text: 'natural medicines can be more effective than modern drugs.', isUsed: false, usedFor: null, reason: 'BẪY NHIỄU: Bài đọc không hề so sánh hiệu quả hơn kém giữa thuốc tự nhiên và thuốc tân dược.' },
+        { key: 'D', text: 'medical students learn more about the development of treatments.', isUsed: true, usedFor: 'Câu 6', reason: 'Đáp án chính xác cho câu 6: Sinh viên trường y cần được dạy nhiều hơn về nguồn gốc tự nhiên của thuốc.' },
+        { key: 'E', text: 'people discovered how powerful natural substances can be.', isUsed: true, usedFor: 'Câu 1', reason: 'Đáp án chính xác cho câu 1: Con người dùng cây thuốc hơn 60.000 năm trước và nấm diệt khuẩn 5.000 năm trước.' },
+        { key: 'F', text: 'researching new treatments takes considerable time.', isUsed: false, usedFor: null, reason: 'BẪY NHIỄU: Bài đọc có nói mới nghiên cứu <1% các loài, nhưng không khẳng định việc nghiên cứu mất nhiều thời gian.' },
+        { key: 'G', text: 'many possible medicines from the natural world are still unknown.', isUsed: true, usedFor: 'Câu 3', reason: 'Đáp án chính xác cho câu 3: Mới kiểm tra <1% các loài nên vô số bài thuốc tự nhiên vẫn chưa được khám phá.' },
+        { key: 'H', text: 'medical knowledge is not growing quickly enough to fight new diseases.', isUsed: false, usedFor: null, reason: 'BẪY NHIỄU: Bài đọc không bàn luận về tốc độ phát triển tri thức y khoa đối phó bệnh dịch mới.' },
+        { key: 'I', text: 'modern medicine still makes so much use of nature.', isUsed: true, usedFor: 'Câu 2', reason: 'Đáp án chính xác cho câu 2: Hơn 50% dược phẩm hiện đại vẫn sử dụng hoặc sao chép từ tự nhiên.' }
+    ];
+
+    const questionsData = [
+        {
+            id: 1,
+            qNum: "Question 1",
+            type: "Matching Sentence Endings",
+            wordLimit: "Chọn ký tự từ A đến I",
+            contextHeader: "Khám phá lịch sử cổ xưa về sức mạnh của dược chất tự nhiên",
+            sentenceBeginning: "It is many thousands of years since …",
+            correctOptionKey: "E",
+            optionText: "people discovered how powerful natural substances can be.",
+            fullSentenceCompleted: "It is many thousands of years since people discovered how powerful natural substances can be.",
+            passageSnippet: "People have used plants and animals as sources of medicine for thousands of years. For example, medicinal plants that people used <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>over 60,000 years ago</mark> were found in an Iraqi cave site. A fur strap found on the arm of a <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>5,000 year-old Ice Man</mark> from the Alps contained a type of fungus which is able to kill bacteria.",
+            paragraphRef: "Đoạn 2 (Paragraph 2)",
+            paraphrases: [
+                { qPart: "It is many thousands of years since", pPart: "for thousands of years / over 60,000 years ago / 5,000 year-old", meaning: "Đã từ hàng ngàn năm trước (mốc thời gian xa xưa)" },
+                { qPart: "people discovered how powerful natural substances can be", pPart: "medicinal plants used over 60,000 yrs ago / fungus able to kill bacteria", meaning: "con người nhận ra sức mạnh và dược tính của các chất tự nhiên (cây cỏ trị bệnh, nấm diệt khuẩn)" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Vế đầu câu hỏi: 'It is many thousands of years since...' (Đã từ hàng ngàn năm trước kể từ khi...). Cần tìm một sự kiện bắt đầu diễn ra từ hàng thiên niên kỷ trước.",
+                stepByStep: [
+                    "<strong>Định vị mốc thời gian:</strong> 'many thousands of years'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Tác giả viết: <em>'People have used plants and animals as sources of medicine for thousands of years'</em>, kèm 2 dẫn chứng khảo cổ: cây thuốc ở Iraq được dùng từ <strong>hơn 60.000 năm trước</strong> và nấm diệt khuẩn trên người Người Băng từ <strong>5.000 năm trước</strong>.",
+                    "<strong>Khớp nối logic:</strong> Hai dẫn chứng cụ thể này chứng minh con người đã nhận ra dược tính tự nhiên có thể chữa bệnh và tiêu diệt vi khuẩn từ thời tiền sử.",
+                    "<strong>Kết luận:</strong> Nối với vế <strong>E</strong> (<em>people discovered how powerful natural substances can be</em>)."
+                ],
+                traps: "Tránh nhầm với Option F (takes considerable time) hay Option C vì đề bài đang hỏi mốc thời gian lịch sử ('It is many thousands of years since...')."
+            },
+            vocabHighlights: ["biodiversity", "fungus", "bacteria"]
+        },
+        {
+            id: 2,
+            qNum: "Question 2",
+            type: "Matching Sentence Endings",
+            wordLimit: "Chọn ký tự từ A đến I",
+            contextHeader: "Mức độ phụ thuộc đáng kinh ngạc của y học hiện đại vào tự nhiên",
+            sentenceBeginning: "People are often very surprised to learn that …",
+            correctOptionKey: "I",
+            optionText: "modern medicine still makes so much use of nature.",
+            fullSentenceCompleted: "People are often very surprised to learn that modern medicine still makes so much use of nature.",
+            passageSnippet: "<mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>Most people are amazed to discover that our dependence on nature for health has not reduced.</mark> Over the past quarter century, <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>more than half of all the products that drug companies have developed actually use, or copy, substances from the natural world</mark>.",
+            paragraphRef: "Đoạn 3 (Paragraph 3)",
+            paraphrases: [
+                { qPart: "very surprised to learn", pPart: "amazed to discover", meaning: "vô cùng ngạc nhiên / kinh ngạc khi nhận ra" },
+                { qPart: "modern medicine still makes so much use of nature", pPart: "dependence on nature has not reduced / more than half of products drug companies developed use, or copy, substances from nature", meaning: "y học hiện đại vẫn tận dụng và dựa dẫm rất nhiều vào thế giới tự nhiên" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Vế đầu nêu trạng thái tâm lý: 'People are often very surprised to learn that...' (Mọi người thường rất ngạc nhiên khi biết rằng...).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'surprised to learn', 'discover'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 3):</strong> Câu mở đoạn ghi: <em>'Most people are <strong>amazed to discover</strong> that our dependence on nature for health has not reduced'</em> (Hầu hết mọi người kinh ngạc khi phát hiện sự phụ thuộc vào tự nhiên không hề thuyên giảm).",
+                    "<strong>Dữ kiện cụ thể:</strong> Hơn một nửa (50%+) các sản phẩm do các hãng dược hiện đại phát triển vẫn dùng hoặc mô phỏng các chất từ tự nhiên.",
+                    "<strong>Kết luận:</strong> Sự ngạc nhiên đến từ việc y học ngày nay vẫn dùng quá nhiều nguồn tự nhiên ➔ Chọn vế <strong>I</strong>."
+                ],
+                traps: "Option C (natural medicines can be more effective than modern drugs) là bẫy phổ biến do thí sinh tự suy diễn rằng tự nhiên tốt hơn thuốc tân dược. Bài đọc chỉ nói về tỷ lệ sử dụng chứ không so sánh hiệu năng."
+            },
+            vocabHighlights: ["dependence", "pharmaceutical", "synthesise"]
+        },
+        {
+            id: 3,
+            qNum: "Question 3",
+            type: "Matching Sentence Endings",
+            wordLimit: "Chọn ký tự từ A đến I",
+            contextHeader: "Kho tàng dược liệu tự nhiên khổng lồ chưa được khám phá",
+            sentenceBeginning: "Scientists estimate that …",
+            correctOptionKey: "G",
+            optionText: "many possible medicines from the natural world are still unknown.",
+            fullSentenceCompleted: "Scientists estimate that many possible medicines from the natural world are still unknown.",
+            passageSnippet: "However, <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>scientists generally believe that researchers have fully examined less than one percent of all species</mark> in order to discover their possible uses in medical treatments. <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>They believe that nature still holds many valuable cures for research to discover</mark>.",
+            paragraphRef: "Đoạn 4 (Paragraph 4)",
+            paraphrases: [
+                { qPart: "Scientists estimate that", pPart: "scientists generally believe that", meaning: "các nhà khoa học ước tính / nhìn chung tin rằng" },
+                { qPart: "many possible medicines from nature are still unknown", pPart: "fully examined less than 1% / nature still holds many valuable cures for research to discover", meaning: "rất nhiều bài thuốc tiềm năng vẫn chưa được biết đến (do mới khám phá chưa tới 1%)" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Vế đầu: 'Scientists estimate that...' (Các nhà khoa học ước lượng rằng...). Cần tìm nhận định định lượng hoặc đánh giá của giới khoa học.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'Scientists estimate', 'believe'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> <em>'scientists generally believe that researchers have fully examined <strong>less than one percent</strong> of all species...'</em> và <em>'nature still holds many valuable cures for research to discover'</em>.",
+                    "<strong>Khớp nghĩa paraphrase:</strong> Mới nghiên cứu chưa đầy 1% đồng nghĩa với việc hơn 99% còn lại chưa được khám phá ➔ 'many possible medicines... are still unknown'.",
+                    "<strong>Kết luận:</strong> Nối với vế <strong>G</strong>."
+                ],
+                traps: "Option F (researching takes considerable time) có vẻ hợp lý trong đời thực nhưng không phải là nội dung các nhà khoa học ước tính trong đoạn này."
+            },
+            vocabHighlights: ["biodiversity", "tropical rainforests", "cures"]
+        },
+        {
+            id: 4,
+            qNum: "Question 4",
+            type: "Matching Sentence Endings",
+            wordLimit: "Chọn ký tự từ A đến I",
+            contextHeader: "Hệ quả tất yếu của nạn tàn phá hệ sinh thái tự nhiên",
+            sentenceBeginning: "Destroying different ecosystems means that …",
+            correctOptionKey: "A",
+            optionText: "many potential cures will disappear forever.",
+            fullSentenceCompleted: "Destroying different ecosystems means that many potential cures will disappear forever.",
+            passageSnippet: "Meanwhile, agriculture and various major development projects are making the world’s rainforests <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>vanish at an alarming rate</mark> – the world is losing more than 320 km2 every day. The inevitable result is that <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>many species with important medicinal powers will become extinct</mark>.",
+            paragraphRef: "Đoạn 5 (Paragraph 5)",
+            paraphrases: [
+                { qPart: "Destroying different ecosystems", pPart: "rainforests vanish at an alarming rate / losing more than 320 km2 every day", meaning: "tàn phá các hệ sinh thái (rừng mưa biến mất với tốc độ báo động)" },
+                { qPart: "many potential cures will disappear forever", pPart: "many species with important medicinal powers will become extinct", meaning: "nhiều bài thuốc tiềm năng sẽ biến mất vĩnh viễn do các loài dược liệu bị tuyệt chủng" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Vế đầu chỉ nguyên nhân: 'Destroying different ecosystems means that...' (Phá hủy các hệ sinh thái đồng nghĩa với việc...). Cần tìm kết quả tất yếu xảy ra.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'Destroying ecosystems', 'means that'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 5):</strong> Tác giả nhắc đến việc mất rừng (>320 km²/ngày) và rạn san hô bị đe dọa: <em>'The inevitable result is that <strong>many species with important medicinal powers will become extinct</strong>'</em>.",
+                    "<strong>Khớp nghĩa tương đương:</strong> Khi các loài có dược tính chữa bệnh bị tuyệt chủng ('become extinct'), những phương thuốc tiềm năng mà chúng sở hữu cũng biến mất vĩnh viễn ('disappear forever').",
+                    "<strong>Kết luận:</strong> Nối với vế <strong>A</strong>."
+                ],
+                traps: "Option H (medical knowledge is not growing quickly enough) không phải là hệ quả trực tiếp của việc tàn phá rừng."
+            },
+            vocabHighlights: ["medicinal powers", "vanish at an alarming rate", "extinct"]
+        },
+        {
+            id: 5,
+            qNum: "Question 5",
+            type: "Matching Sentence Endings",
+            wordLimit: "Chọn ký tự từ A đến I",
+            contextHeader: "Trở ngại trong bảo tồn: Loài dược liệu quý thường không bắt mắt",
+            sentenceBeginning: "What is making the problem worse is the fact that …",
+            correctOptionKey: "B",
+            optionText: "some of the most medically valuable species do not seem very attractive.",
+            fullSentenceCompleted: "What is making the problem worse is the fact that some of the most medically valuable species do not seem very attractive.",
+            passageSnippet: "<mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>Another problem is that most of nature’s medicines do not come from big and beautiful mammals</mark>, such as tigers and elephants. Instead, they come from the least popular of the world’s ecosystems: plants, fungi and invertebrates. Some particularly valuable species are often <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>either poisonous or so small that we cannot see them without a microscope</mark>. This makes campaigning for their preservation much more difficult.",
+            paragraphRef: "Đoạn 6 (Paragraph 6)",
+            paraphrases: [
+                { qPart: "What is making the problem worse", pPart: "Another problem / makes campaigning for their preservation much more difficult", meaning: "điều khiến vấn đề tồi tệ hơn, gây khó khăn cho nỗ lực bảo tồn" },
+                { qPart: "medically valuable species do not seem very attractive", pPart: "do not come from big and beautiful mammals / least popular / poisonous or microscopic", meaning: "những loài có giá trị y học không hề hấp dẫn/đẹp đẽ (nấm, sinh vật có độc, vi sinh vật)" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Vế đầu: 'What is making the problem worse is the fact that...' (Điều khiến vấn đề trở nên nghiêm trọng hơn là sự thật rằng...).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'making the problem worse', 'Another problem'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 6):</strong> Tác giả nêu một trở ngại lớn: thuốc không đến từ các loài thú lớn đẹp đẽ (<em>'not come from big and beautiful mammals'</em>) mà từ nấm (fungi), động vật không xương sống (invertebrates), có độc hoặc siêu nhỏ dưới kính hiển vi.",
+                    "<strong>Phân tích lý do:</strong> Chính vì chúng xấu xí, có độc hoặc không hấp dẫn ('do not seem very attractive') nên chiến dịch vận động công chúng bảo tồn gặp muôn vàn khó khăn.",
+                    "<strong>Kết luận:</strong> Nối chính xác với vế <strong>B</strong>."
+                ],
+                traps: "Chú ý cặp đối lập: 'big and beautiful' đối nghịch hoàn toàn với các loài thực tế mang lại thuốc trị bệnh."
+            },
+            vocabHighlights: ["invertebrates", "preservation", "poisonous"]
+        },
+        {
+            id: 6,
+            qNum: "Question 6",
+            type: "Matching Sentence Endings",
+            wordLimit: "Chọn ký tự từ A đến I",
+            contextHeader: "Giải pháp từ giáo dục: Nâng cao hiểu biết sinh viên y khoa",
+            sentenceBeginning: "The writer thinks the situation will improve if …",
+            correctOptionKey: "D",
+            optionText: "medical students learn more about the development of treatments.",
+            fullSentenceCompleted: "The writer thinks the situation will improve if medical students learn more about the development of treatments.",
+            passageSnippet: "<mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>An additional problem is the fact that medical schools teach their students very little about the discovery of new treatments.</mark> Few young doctors, for example, know that the blood pressure medicine captopril... comes from the poison of a Brazilian snake. Antibiotics... are a miracle drug but doctors use far too many of them. This is partly because they do not realise the dangers involved or <mark class='bg-emerald-200 text-emerald-950 font-bold px-1 rounded'>how closely connected these drugs are with the natural world</mark>.",
+            paragraphRef: "Đoạn 7 (Paragraph 7)",
+            paraphrases: [
+                { qPart: "The writer thinks the situation will improve if", pPart: "An additional problem is... medical schools teach very little / partly because they do not realise", meaning: "tác giả phê phán các trường y dạy quá ít, hàm ý tình hình sẽ cải thiện nếu vấn đề này được khắc phục" },
+                { qPart: "medical students learn more about the development of treatments", pPart: "teach their students about the discovery of new treatments / know drugs come from nature", meaning: "sinh viên ngành y được học nhiều hơn về quá trình tìm ra và phát triển các liệu pháp điều trị" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Vế đầu: 'The writer thinks the situation will improve if...' (Tác giả nghĩ rằng tình hình sẽ được cải thiện nếu...). Cần tìm giải pháp được tác giả đề xuất/hàm ý.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'medical schools', 'students', 'situation will improve'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 7):</strong> Tác giả phàn nàn rằng các trường y hiện nay dạy cho sinh viên quá ít về việc khám phá thuốc mới (<em>'medical schools teach their students very little about the discovery of new treatments'</em>), dẫn đến việc các bác sĩ lạm dụng kháng sinh do không hiểu mối liên hệ mật thiết giữa thuốc và thiên nhiên.",
+                    "<strong>Suy luận giải pháp:</strong> Để tình hình tốt lên, điều kiện tiên quyết là sinh viên y khoa phải được học sâu hơn về cách phát triển thuốc từ tự nhiên.",
+                    "<strong>Kết luận:</strong> Nối với vế <strong>D</strong>."
+                ],
+                traps: "Option H (medical knowledge is not growing quickly enough) là bẫy vì đề bài nói về việc dạy cho sinh viên (education) chứ không phải tốc độ nghiên cứu toàn ngành."
+            },
+            vocabHighlights: ["captopril", "antibiotics", "discovery"]
+        }
+    ];
+
+    const vocabData = {
+        'biodiversity': { ipa: '/ˌbaɪ.əʊ.daɪˈvɜː.sə.ti/', type: 'n', vi: 'Đa dạng sinh học (sự phong phú chủng loài)', eg: 'The Amazon rainforest is home to over half of the planet’s terrestrial biodiversity.' },
+        'medicinal powers': { ipa: '/məˈdɪs.ɪ.nəl ˈpaʊ.əz/', type: 'n phrase', vi: 'Đặc tính / dược tính chữa bệnh', eg: 'Indigenous communities identified wild plants with potent medicinal powers thousands of years ago.' },
+        'invertebrates': { ipa: '/ɪnˈvɜː.tɪ.brəts/', type: 'n', vi: 'Động vật không xương sống (côn trùng, giun, thân mềm)', eg: 'Marine invertebrates produce defensive chemical compounds that serve as precursors for cancer drugs.' },
+        'fungus': { ipa: '/ˈfʌŋ.ɡəs/', type: 'n (pl. fungi)', vi: 'Nấm / giới nấm (nguồn tạo kháng sinh)', eg: 'Penicillin was famously discovered from a strain of Penicillium fungus.' },
+        'captopril': { ipa: '/ˈkæp.tə.prɪl/', type: 'n', vi: 'Thuốc hạ huyết áp Captopril (từ nọc rắn Brazil)', eg: 'Captopril, an ACE inhibitor, was synthesised following research into Brazilian viper venom.' },
+        'antibiotics': { ipa: '/ˌæn.ti.baɪˈɒt.ɪks/', type: 'n', vi: 'Thuốc kháng sinh diệt khuẩn', eg: 'Overuse of antibiotics in clinical practice accelerates bacterial resistance.' },
+        'vanish at an alarming rate': { ipa: '/ˈvæn.ɪʃ æt ən əˈlɑː.mɪŋ reɪt/', type: 'verb phrase', vi: 'Biến mất với tốc độ đáng báo động', eg: 'Tropical habitats vanish at an alarming rate due to commercial agricultural expansion.' },
+        'preservation': { ipa: '/ˌprez.əˈveɪ.ʃən/', type: 'n', vi: 'Sự bảo tồn, gìn giữ môi trường', eg: 'Campaigning for the preservation of obscure insects is far more difficult than protecting charismatic mammals.' },
+        'dependence': { ipa: '/dɪˈpen.dəns/', type: 'n', vi: 'Sự phụ thuộc, dựa dẫm vào', eg: 'Our fundamental dependence on ecological systems for pharmaceutical discovery remains undiminished.' },
+        'pharmaceutical': { ipa: '/ˌfɑː.məˈsjuː.tɪ.kəl/', type: 'adj, n', vi: 'Thuộc về dược phẩm, công ty dược', eg: 'Major pharmaceutical firms screen thousands of natural extracts for antimicrobial properties.' },
+        'synthesise': { ipa: '/ˈsɪn.θə.saɪz/', type: 'v', vi: 'Tổng hợp hóa học (mô phỏng phân tử tự nhiên)', eg: 'Chemists often synthesise laboratory copies of bioactive natural compounds.' },
+        'coral reefs': { ipa: '/ˈkɒr.əl riːfs/', type: 'n phrase', vi: 'Rạn san hô nhiệt đới', eg: 'Warming ocean temperatures pose a catastrophic threat to coral reef biomes.' }
+    };
+    </script>
+
+    <script>
+    let currentQuestionIndex = 0; // 0 to 5
+
+    function initApp() {
+        renderNavChips();
+        renderCurrentSlide();
+        renderAllQuestionsList();
+        renderOptionsGrid();
+        renderSynonymsTable();
+        renderVocabGrid();
+        setupKeyboardNavigation();
+    }
+
+    function renderNavChips() {
+        const container = document.getElementById('question-nav-chips');
+        container.innerHTML = '';
+        questionsData.forEach((q, idx) => {
+            const btn = document.createElement('button');
+            const isActive = idx === currentQuestionIndex;
+            btn.className = `px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                isActive 
+                ? 'bg-emerald-700 text-white shadow-sm ring-2 ring-emerald-600 ring-offset-1' 
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`;
+            btn.innerHTML = `Q${q.id}: ${q.correctOptionKey}`;
+            btn.onclick = () => {
+                currentQuestionIndex = idx;
+                renderNavChips();
+                renderCurrentSlide();
+            };
+            container.appendChild(btn);
+        });
+
+        const mob = document.getElementById('mobile-curr-indicator');
+        if (mob) mob.textContent = `Câu ${currentQuestionIndex + 1}/6 (Nối với ${questionsData[currentQuestionIndex].correctOptionKey})`;
+    }
+
+    function navigateQuestion(delta) {
+        const next = currentQuestionIndex + delta;
+        if (next >= 0 && next < questionsData.length) {
+            currentQuestionIndex = next;
+            renderNavChips();
+            renderCurrentSlide();
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+    }
+
+    function renderCurrentSlide() {
+        const q = questionsData[currentQuestionIndex];
+        const container = document.getElementById('slide-card-container');
+        const counter = document.getElementById('slide-counter-badge');
+        if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        if (btnPrev) {
+            btnPrev.disabled = currentQuestionIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+        }
+        if (btnNext) {
+            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+        }
+
+        container.innerHTML = `
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+                
+                <!-- Slide Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-extrabold text-base border border-emerald-200">
+                            ${q.id}
+                        </span>
+                        <div>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-emerald-700">${q.type}</span>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">${q.qNum}: ${q.contextHeader}</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                            Yêu cầu: Chọn vế từ A–I
+                        </span>
+                        <span class="text-xs font-semibold px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200">
+                            ${q.paragraphRef}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Sentence Beginning Prompt -->
+                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Vế Đầu Câu Hỏi Trong Đề Bài</span>
+                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">${q.sentenceBeginning}</p>
+                </div>
+
+                <!-- Answer Reveal Banner -->
+                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-emerald-50/80 via-teal-50/50 to-white border border-emerald-200">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-700">Vế Nối Hoàn Chỉnh Chính Xác</span>
+                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
+                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm bg-emerald-700 text-white answer-badge">
+                                Đáp án: ${q.correctOptionKey}
+                            </span>
+                            <span class="text-sm sm:text-base font-bold text-slate-800">
+                                "${q.optionText}"
+                            </span>
+                        </div>
+                    </div>
+
+                    <button onclick="playSpeech('${q.fullSentenceCompleted.replace(/'/g, "\\'")}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Phát âm cả câu</span>
+                    </button>
+                </div>
+
+                <!-- Completed Sentence Preview -->
+                <div class="mt-4 p-4 rounded-xl bg-slate-900 text-white text-sm sm:text-base leading-relaxed">
+                    <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider block mb-1">Câu hoàn chỉnh:</span>
+                    <p class="font-medium">"${q.sentenceBeginning} <span class="text-emerald-400 font-bold underline decoration-2">${q.optionText}</span>"</p>
+                </div>
+
+                <!-- Evidence in Reading Passage -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Bằng Chứng (Passage Evidence)</h4>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-emerald-50/40 border border-emerald-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
+                        "${q.passageSnippet}"
+                    </div>
+                </div>
+
+                <!-- Paraphrase & Synonym Mapping Table -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Paraphrase</h4>
+                    </div>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
+                                <tr>
+                                    <th class="py-2.5 px-4 w-1/3">Đề bài & Vế Nối (${q.correctOptionKey})</th>
+                                    <th class="py-2.5 px-4 w-1/3">Bài đọc (Passage)</th>
+                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 bg-white">
+                                ${q.paraphrases.map(p => `
+                                    <tr>
+                                        <td class="py-3 px-4 font-semibold text-blue-700 bg-blue-50/20">${p.qPart}</td>
+                                        <td class="py-3 px-4 font-semibold text-amber-800 bg-amber-50/20">${p.pPart}</td>
+                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Vietnamese In-Depth Explanation & Logic -->
+                <div class="mt-6 bg-emerald-50/40 border border-emerald-200/80 rounded-2xl p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-emerald-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
+                    </div>
+
+                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
+
+                    <div class="space-y-2 mb-4">
+                        ${q.vietnameseAnalysis.stepByStep.map(step => `
+                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="text-emerald-600 mt-1 font-bold">▸</span>
+                                <div>${step}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${q.vietnameseAnalysis.traps ? `
+                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
+                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
+                            <span>${q.vietnameseAnalysis.traps}</span>
+                        </div>
+                    ` : ''}
+                </div>
+
+                <!-- Highlighted Vocabulary in this question -->
+                <div class="mt-6 pt-5 border-t border-slate-100">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
+                    <div class="flex flex-wrap gap-3">
+                        ${q.vocabHighlights.map(v => {
+                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
+                            return `
+                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-emerald-400 transition-colors">
+                                    <button onclick="playSpeech('${v}')" class="text-emerald-700 hover:text-emerald-900" title="Nghe phát âm chuẩn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                    <div>
+                                        <span class="font-bold text-sm text-slate-900">${v}</span>
+                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
+                                        <span class="text-xs text-emerald-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+            </div>
+        `;
+    }
+
+    function renderAllQuestionsList() {
+        const container = document.getElementById('all-questions-container');
+        container.innerHTML = '';
+
+        questionsData.forEach(q => {
+            const card = document.createElement('div');
+            card.className = "gradient-border bg-white rounded-2xl p-6 shadow-sm";
+
+            card.innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-emerald-700 text-white font-bold text-xs flex items-center justify-center">
+                            ${q.id}
+                        </span>
+                        <h3 class="font-bold text-slate-900">${q.qNum} - <span class="text-slate-500 font-medium">${q.contextHeader}</span></h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-mono font-bold px-3 py-1 rounded-md border bg-emerald-100 text-emerald-800 border-emerald-300">
+                            ĐÁP ÁN: ${q.correctOptionKey}
+                        </span>
+                        <span class="text-xs text-slate-400">${q.paragraphRef}</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 mb-3 text-sm">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Vế đầu câu hỏi:</span>
+                    <p class="font-bold text-slate-800">${q.sentenceBeginning}</p>
+                </div>
+
+                <div class="bg-emerald-50/70 p-3.5 rounded-xl border border-emerald-200/80 mb-4 text-xs sm:text-sm">
+                    <strong class="text-emerald-900">Vế nối (${q.correctOptionKey}):</strong> 
+                    <span class="text-slate-800 font-semibold">${q.optionText}</span>
+                </div>
+
+                <div class="bg-sky-50/50 p-3.5 rounded-xl border border-sky-200/80 mb-4 text-xs sm:text-sm italic text-slate-700">
+                    <strong>Manh mối bài đọc:</strong> "${q.passageSnippet}"
+                </div>
+
+                <div class="mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <div class="flex flex-wrap gap-2">
+                        ${q.paraphrases.map(p => `
+                            <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
+                                <span class="text-blue-700 font-bold">${p.qPart}</span> ➔ <span class="text-amber-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="bg-emerald-50/40 border border-emerald-200 p-4 rounded-xl text-xs sm:text-sm text-slate-700">
+                    <p class="font-bold text-emerald-900 mb-1.5">Giải thích logic Tiếng Việt:</p>
+                    <p class="mb-2">${q.vietnameseAnalysis.logic}</p>
+                    <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
+                        ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderOptionsGrid() {
+        const container = document.getElementById('options-grid-container');
+        container.innerHTML = '';
+
+        optionsPool.forEach(opt => {
+            const card = document.createElement('div');
+            const isUsed = opt.isUsed;
+            card.className = `p-5 rounded-2xl border transition-all flex flex-col justify-between ${
+                isUsed 
+                ? 'bg-white border-emerald-200 shadow-2xs' 
+                : 'bg-slate-50/80 border-slate-200 opacity-80'
+            }`;
+
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="w-8 h-8 rounded-xl font-black text-sm flex items-center justify-center ${
+                            isUsed ? 'bg-emerald-700 text-white' : 'bg-slate-200 text-slate-600'
+                        }">
+                            ${opt.key}
+                        </span>
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
+                            isUsed 
+                            ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' 
+                            : 'bg-amber-100 text-amber-800 border border-amber-300'
+                        }">
+                            ${isUsed ? `Đáp án ${opt.usedFor}` : 'Bẫy nhiễu (Distractor)'}
+                        </span>
+                    </div>
+
+                    <p class="font-bold text-sm text-slate-900 mb-3 leading-snug">"${opt.text}"</p>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 text-xs text-slate-600">
+                    <span class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">
+                        ${isUsed ? 'Tại sao chọn:' : 'Tại sao loại:'}
+                    </span>
+                    <p class="${isUsed ? 'text-emerald-900' : 'text-slate-500 italic'}">${opt.reason}</p>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderSynonymsTable() {
+        const tbody = document.getElementById('synonyms-table-body');
+        tbody.innerHTML = '';
+
+        questionsData.forEach(q => {
+            q.paraphrases.forEach((p, pIndex) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center font-bold text-slate-700">
+                        ${pIndex === 0 ? `<span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="keyword-chip">${p.qPart}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="passage-chip">${p.pPart}</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="text-xs font-bold uppercase px-2 py-1 bg-emerald-700 text-white rounded shadow-2xs">
+                            ${q.correctOptionKey}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
+                        ${p.meaning}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    }
+
+    function renderVocabGrid(filterWord = '') {
+        const container = document.getElementById('vocab-grid-container');
+        container.innerHTML = '';
+
+        const words = Object.keys(vocabData).filter(w => {
+            if (!filterWord) return true;
+            const query = filterWord.toLowerCase();
+            return w.toLowerCase().includes(query) || vocabData[w].vi.toLowerCase().includes(query);
+        });
+
+        if (words.length === 0) {
+            container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">Không tìm thấy từ vựng phù hợp.</div>`;
+            return;
+        }
+
+        words.forEach(w => {
+            const item = vocabData[w];
+            const card = document.createElement('div');
+            card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-emerald-400 transition-all flex flex-col justify-between";
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h4 class="text-lg font-bold text-slate-900">${w}</h4>
+                        <button onclick="playSpeech('${w}')" class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs" title="Nghe phát âm chuẩn UK">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${item.ipa}</span>
+                        <span class="text-xs italic text-emerald-700 font-semibold">${item.type}</span>
+                    </div>
+                    <p class="text-sm font-semibold text-emerald-900 mb-3">${item.vi}</p>
+                </div>
+                <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-lg">
+                    "${item.eg}"
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function searchVocab(val) {
+        renderVocabGrid(val);
+    }
+
+    function playSpeech(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.88;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function switchView(viewName) {
+        const views = ['presentation', 'all', 'options', 'synonyms', 'vocab'];
+        views.forEach(v => {
+            const sec = document.getElementById(`view-${v}`);
+            const tabBtn = document.getElementById(`tab-${v}`);
+            if (sec) sec.classList.add('hidden');
+            if (tabBtn) {
+                tabBtn.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+            }
+        });
+
+        const activeSec = document.getElementById(`view-${viewName}`);
+        const activeTab = document.getElementById(`tab-${viewName}`);
+        if (activeSec) activeSec.classList.remove('hidden');
+        if (activeTab) {
+            activeTab.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-emerald-700 text-white shadow-sm';
+        }
+    }
+
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            const presView = document.getElementById('view-presentation');
+            if (presView && !presView.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    navigateQuestion(1);
+                } else if (e.key === 'ArrowLeft') {
+                    navigateQuestion(-1);
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

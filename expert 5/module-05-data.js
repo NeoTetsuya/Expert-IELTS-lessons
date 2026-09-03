@@ -56,6 +56,8 @@ window.module5Data = {
 
     // Reading 5a: A different way to see the world (Mark Beaumont)
     reading5a: {
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%205/module-5a-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 5a: A Different Way to See the World — Deep Question Walkthrough",
         passage: `
             <h3>A DIFFERENT WAY TO SEE THE WORLD</h3>
             <p class="reading-lead"><em>Mark Beaumont found that many countries look different from a bicycle. Our reporter writes about Mark's experience of cycling round the world.</em></p>
@@ -155,6 +157,8 @@ window.module5Data = {
 
     // Reading 5b: The problem of visual pollution
     reading5b: {
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%205/module-5b-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 5b: The Problem of Visual Pollution — Deep Question Walkthrough",
         passage: `
             <h3>THE PROBLEM OF VISUAL POLLUTION</h3>
             <p><span class="para-tag">Para A</span> <mark class="evidence" id="ev-5b-4" data-q="5b-4"><span class="syn-pair-1" data-q="5b-4">Visual pollution means that people cannot enjoy what they see</span>. <span class="syn-pair-2" data-q="5b-4">There are two types of visual pollution in the modern world: one is when <span class="vocab-word" data-word="visibility" data-ipa="/ˌvɪz.əˈbɪl.ə.ti/" data-pos="noun" data-def="The distance one can clearly see." data-colloc="visibility is limited">visibility</span> is limited by haze; another is visual untidiness, when buildings and signs spoil the view</span></mark>.</p>

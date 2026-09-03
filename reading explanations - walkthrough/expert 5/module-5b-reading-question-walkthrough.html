@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Reading Masterclass | The Problem of Visual Pollution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        tealTheme: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                            950: '#042f2e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(13, 148, 136, 0.25); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(13, 148, 136, 0.5); }
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #0d9488, #14b8a6, #2dd4bf);
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+        .keyword-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #ccfbf1;
+            color: #0f766e;
+            border: 1px solid #99f6e4;
+        }
+        .passage-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        .answer-badge {
+            animation: pulseSubtle 3s infinite;
+        }
+        @keyframes pulseSubtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-teal-100 selection:text-teal-900">
+
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-tealTheme-700 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-teal-900/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-tealTheme-700 bg-tealTheme-50 px-2 py-0.5 rounded-full border border-tealTheme-200">IELTS Reading Analysis</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích chuyên sâu 8 câu Matching Information</span>
+                        </div>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">The Problem of Visual Pollution</h1>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-teal-100 text-teal-800 px-2.5 py-1 rounded-lg">Câu 1/8</span>
+                </div>
+            </div>
+
+            <!-- Global View Switcher -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+                <button id="tab-presentation" onclick="switchView('presentation')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-tealTheme-700 text-white shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                    </svg>
+                    <span>Slide Từng Câu</span>
+                </button>
+                <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    <span>Xem Tất Cả (List)</span>
+                </button>
+                <button id="tab-map" onclick="switchView('map')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                    <span>Bản Đồ Đoạn Văn (A–G)</span>
+                </button>
+                <button id="tab-synonyms" onclick="switchView('synonyms')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    <span>Ma Trận Paraphrase</span>
+                </button>
+                <button id="tab-vocab" onclick="switchView('vocab')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span>Từ Vựng Trọng Tâm</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
+        <section id="view-presentation" class="space-y-6 block">
+            
+            <!-- Quick Question Selector Chips -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Matching Information (Q1–Q8)</span>
+                    </div>
+                    <div class="text-xs text-slate-400 flex items-center gap-2">
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2" id="question-nav-chips">
+                    <!-- Dynamic question buttons inserted by JS -->
+                </div>
+            </div>
+
+            <!-- Slide Main Card -->
+            <div id="slide-card-container" class="relative">
+                <!-- Dynamically rendered slide content -->
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span>Câu Trước</span>
+                </button>
+
+                <div class="flex items-center gap-3">
+                    <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 8</span>
+                </div>
+
+                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-tealTheme-700 hover:bg-tealTheme-800 text-white font-semibold shadow-md shadow-teal-900/10 active:scale-95 transition-all">
+                    <span>Câu Kế Tiếp</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- VIEW 2: ALL QUESTIONS CONTINUOUS LIST -->
+        <section id="view-all" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 8 Câu Matching Information</h2>
+                    <p class="text-sm text-slate-500">Xem toàn bộ phát biểu, đoạn văn chứa thông tin, bằng chứng trích dẫn, ma trận từ đồng nghĩa và phân tích logic tiếng Việt</p>
+                </div>
+                <div class="bg-teal-50 border border-teal-200 rounded-xl px-4 py-2 text-center">
+                    <span class="text-xs text-tealTheme-700 font-bold uppercase">Dạng Bài</span>
+                    <span class="text-sm font-extrabold text-tealTheme-900 block">Which paragraph contains...? (Q1 – 8)</span>
+                </div>
+            </div>
+
+            <div id="all-questions-container" class="space-y-6">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- VIEW 3: PARAGRAPH MAP (A–G) -->
+        <section id="view-map" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-teal-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-tealTheme-700">Structural Text Architecture</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Sơ Đồ Bố Cục & Nội Dung 7 Đoạn Văn (A – G)</h2>
+                        <p class="text-sm text-slate-600 mt-1">Tổng quan nội dung từng đoạn văn trong bài đọc. Lưu ý: Đoạn C và Đoạn E chứa 2 đáp án; Đoạn B là đoạn gây nhiễu không chứa đáp án.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6" id="paragraphs-grid-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: SYNONYMS & PARAPHRASE MATRIX -->
+        <section id="view-synonyms" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-teal-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-tealTheme-700">Paraphrase & Semantic Alignment</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Ma Trận Từ Đồng Nghĩa & Diễn Đạt Tương Đương</h2>
+                        <p class="text-sm text-slate-600 mt-1">Đối chiếu chi tiết giữa câu hỏi trong đề thi với văn bản thực tế trong bài đọc của từng câu.</p>
+                    </div>
+                    <div class="bg-teal-50 border border-teal-200 rounded-xl px-4 py-2.5 text-center">
+                        <span class="text-xs text-tealTheme-700 font-semibold block uppercase">Tổng hợp</span>
+                        <span class="text-xl font-extrabold text-tealTheme-900">8 Cặp Paraphrase Cốt Lõi</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600">
+                                <th class="py-3 px-4 w-16 text-center">Câu</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Câu hỏi (Question)</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Bài Đọc (Passage)</th>
+                                <th class="py-3 px-4 w-28 text-center">Đáp Án</th>
+                                <th class="py-3 px-4">Ý Nghĩa & Phân Tích Logic Tiếng Việt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="synonyms-table-body" class="divide-y divide-slate-100 text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: VOCABULARY HUB -->
+        <section id="view-vocab" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-teal-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-tealTheme-700">Urban Ecology & Atmospheric Lexicon</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Từ Vựng Trọng Tâm & Phát Âm Chuẩn</h2>
+                        <p class="text-sm text-slate-600 mt-1">Từ vựng học thuật chủ đề ô nhiễm thị giác, quang học khí quyển, quy hoạch đô thị và tâm lý học môi trường kèm phiên âm IPA và audio phát âm.</p>
+                    </div>
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="vocab-search-input" onkeyup="searchVocab(this.value)" placeholder="Tìm kiếm từ vựng hoặc nghĩa..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600 bg-slate-50/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="vocab-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <script>
+    const paragraphsOverview = [
+        { 
+            pKey: 'A', 
+            title: 'Định nghĩa ô nhiễm thị giác & 2 dạng thức chính', 
+            summary: 'Khái niệm ô nhiễm thị giác và 2 dạng thức: giảm tầm nhìn do mù sương khói bụi (haze) và sự bừa bộn thị giác do các công trình, biển hiệu làm hỏng cảnh quan thiên nhiên.',
+            isAnswerFor: 'Câu 4 (Q4)', 
+            containsAns: true 
+        },
+        { 
+            pKey: 'B', 
+            title: 'Khói bụi làm giảm tầm nhìn ở thành thị & công viên quốc gia', 
+            summary: 'Khí thải ô nhiễm từ xe cộ và nhà máy tạo sương mù nâu che mờ thành phố lẫn nông thôn; số liệu đo đạc tại vườn quốc gia Hoa Kỳ: giảm tầm nhìn từ 320 km xuống còn 48 km.',
+            isAnswerFor: null, 
+            containsAns: false 
+        },
+        { 
+            pKey: 'C', 
+            title: 'Cháy rừng Đông Nam Á: Thiệt hại kinh tế tỷ đô & cháy âm ỉ nhiều năm', 
+            summary: 'Cháy rừng do các chủ dự án châm ngòi tại Sumatra/Borneo gây khói bụi lan rộng nhiều quốc gia, tiêu tốn hàng tỷ USD y tế, sụt giảm du lịch và nguy cơ cháy âm ỉ kéo dài nhiều năm.',
+            isAnswerFor: 'Câu 5 & Câu 7 (Q5, Q7)', 
+            containsAns: true 
+        },
+        { 
+            pKey: 'D', 
+            title: 'Tính chủ quan & hai góc nhìn trái ngược về cùng một vật thể', 
+            summary: 'Mỗi người có cảm xúc khác nhau về các vật thể: đối với doanh nhân, biển quảng cáo ở vị trí đẹp là tuyệt vời; đối với du khách muốn ngắm cảnh đồi núi thì đó là ô nhiễm thị giác.',
+            isAnswerFor: 'Câu 8 (Q8)', 
+            containsAns: true 
+        },
+        { 
+            pKey: 'E', 
+            title: 'Biển quảng cáo gây mất tập trung lái xe & ngụy trang tháp viễn thông', 
+            summary: 'Biển quảng cáo ven đường cao tốc bị phản đối vì làm tài xế xao nhãng quan sát đường đi; sáng kiến ngụy trang tháp phát sóng di động giống như cây xanh để giảm tác động thị giác.',
+            isAnswerFor: 'Câu 3 & Câu 6 (Q3, Q6)', 
+            containsAns: true 
+        },
+        { 
+            pKey: 'F', 
+            title: 'Tác động nguy hiểm tới sức khỏe thể chất & tâm lý con người', 
+            summary: 'Ô nhiễm không khí gây bệnh đường hô hấp; sống với tầm nhìn khó chịu xấu xí từ cửa sổ làm tăng 40% nguy cơ trầm cảm/buồn bã và gia tăng nồng độ căng thẳng (stress).',
+            isAnswerFor: 'Câu 2 (Q2)', 
+            containsAns: true 
+        },
+        { 
+            pKey: 'G', 
+            title: 'Mất mát bản sắc độc đáo của các đô thị & sự bất khả đảo ngược', 
+            summary: 'Sự xuất hiện rập khuôn của nhà hàng thức ăn nhanh, cây xăng, biển hiệu khiến mọi đô thị trông giống hệt nhau; đây là một hậu quả tiêu cực mà có lẽ đã quá muộn để cứu vãn.',
+            isAnswerFor: 'Câu 1 (Q1)', 
+            containsAns: true 
+        }
+    ];
+
+    const questionsData = [
+        {
+            id: 1,
+            qNum: "Question 1",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Nhắc đến một vấn đề có thể không còn khả năng giải quyết",
+            statementText: "a reference to a problem that may no longer be possible to solve",
+            correctParagraph: "Paragraph G",
+            correctLetter: "G",
+            passageSnippet: "Moreover, another consequence of visual pollution is that it destroys the individual differences that make the world so special. In the past every town, city and suburb had its own unique character. Now they are starting to look the same all over the world... Although this has a negative effect on the quality of life, <mark class='bg-teal-100 text-teal-950 font-bold px-1 rounded'>it is probably already too late to change the situation</mark>.",
+            paragraphRef: "Đoạn G (Paragraph G)",
+            paraphrases: [
+                { qPart: "no longer be possible to solve", pPart: "probably already too late to change the situation", meaning: "có lẽ đã quá muộn để thay đổi/đảo ngược tình thế (bất khả thi để giải quyết)" },
+                { qPart: "a problem", pPart: "destroys individual differences / negative effect on quality of life", meaning: "vấn đề: phá hủy nét bản sắc độc đáo của đô thị, làm giảm chất lượng sống" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'a reference to a problem that may no longer be possible to solve' (nhắc đến một vấn đề có thể không còn khả năng giải quyết / cứu vãn được nữa).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'problem', 'no longer possible to solve', 'change'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn G):</strong> Tác giả phân tích sự biến mất của nét đặc trưng riêng biệt ở các đô thị khắp thế giới do các công trình thương mại rập khuôn (thức ăn nhanh, cây xăng, biển hiệu).",
+                    "<strong>Dẫn chứng kết luận:</strong> Tác giả khẳng định: <em>'Although this has a negative effect on the quality of life, <strong>it is probably already too late to change the situation</strong>'</em>.",
+                    "<strong>Khớp nghĩa paraphrase:</strong> Cụm <em>'already too late to change the situation'</em> (đã quá muộn để thay đổi tình hình) chính là cách diễn đạt đồng nghĩa hoàn hảo của <em>'may no longer be possible to solve'</em>.",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph G</strong>."
+                ],
+                traps: "Đoạn C có nhắc đến 'fires will continue to burn for years' (cháy âm ỉ nhiều năm). Đây là vấn đề kéo dài về thời gian (dành cho Q5), không phải là sự bất lực/không thể giải quyết được nữa như đoạn G ('too late to change')."
+            },
+            vocabHighlights: ["unique character", "visual pollution", "subjective"]
+        },
+        {
+            id: 2,
+            qNum: "Question 2",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Các ví dụ về ô nhiễm thị giác gây tác động tới sức khỏe",
+            statementText: "examples of visual pollution having an impact on health",
+            correctParagraph: "Paragraph F",
+            correctLetter: "F",
+            passageSnippet: "<mark class='bg-teal-100 text-teal-950 font-bold px-1 rounded'>The dangerous effects of air pollution are obvious, with more and more people suffering from breathing problems. However, research suggests that the other types of visual pollution can also have dangerous effects. One research study found that people who have an unpleasant view from their window are 40 percent more likely to feel sad or depressed. And there are several studies which show that physical environment affects stress levels</mark>.",
+            paragraphRef: "Đoạn F (Paragraph F)",
+            paraphrases: [
+                { qPart: "impact on health", pPart: "suffering from breathing problems / feel sad or depressed / affects stress levels", meaning: "tác động tới sức khỏe: bệnh hô hấp, tăng 40% nguy cơ trầm cảm, ảnh hưởng nồng độ căng thẳng" },
+                { qPart: "examples of visual pollution", pPart: "air pollution (haze) / unpleasant view from their window / physical environment", meaning: "các dạng ô nhiễm thị giác: sương mù khói bụi, tầm nhìn xấu xí từ cửa sổ" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'examples of visual pollution having an impact on health' (những ví dụ về việc ô nhiễm thị giác tác động đến sức khỏe).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'examples', 'visual pollution', 'impact on health'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn F):</strong> Tác giả liệt kê cả tác động thể chất lẫn tâm thần:",
+                    "1. Ô nhiễm khói mù gây ra <strong>bệnh đường hô hấp</strong> (<em>'breathing problems'</em>).",
+                    "2. Tầm nhìn xấu xí từ cửa sổ làm tăng <strong>40% nguy cơ buồn bã hoặc trầm cảm</strong> (<em>'40 percent more likely to feel sad or depressed'</em>).",
+                    "3. Môi trường vật chất xấu làm tăng <strong>mức độ căng thẳng thần kinh</strong> (<em>'affects stress levels'</em>).",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph F</strong>."
+                ],
+                traps: "Đoạn C có nhắc đến 'cost billions of dollars in health care' (tốn hàng tỷ đô cho chăm sóc sức khỏe), nhưng đó là con số tài chính/kinh tế (trả lời cho Q7), không phải là ví dụ cụ thể về các ảnh hưởng bệnh tật lên con người như đoạn F."
+            },
+            vocabHighlights: ["depression", "stress levels", "visibility"]
+        },
+        {
+            id: 3,
+            qNum: "Question 3",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Ví dụ về cách thức có chủ đích nhằm che giấu một thứ xấu xí",
+            statementText: "an example of a deliberate way of hiding something unattractive",
+            correctParagraph: "Paragraph E",
+            correctLetter: "E",
+            passageSnippet: "More modern examples of visual pollution are mobile phone towers and spray-painted graffiti. <mark class='bg-teal-100 text-teal-950 font-bold px-1 rounded'>Some mobile phone towers have been made to look like trees or plants, which has reduced the visual impact</mark>, but attempts to ban the sale of spray paint to young people have not had much effect.",
+            paragraphRef: "Đoạn E (Paragraph E)",
+            paraphrases: [
+                { qPart: "deliberate way of hiding", pPart: "have been made to look like trees or plants", meaning: "cố tình làm cho giống như cây xanh hoặc thực vật (ngụy trang có chủ đích)" },
+                { qPart: "something unattractive", pPart: "mobile phone towers / reduced the visual impact", meaning: "vật thể thô kệch, mất mỹ quan: các tháp phát sóng điện thoại di động" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'an example of a deliberate way of hiding something unattractive' (một ví dụ về cách thức có chủ đích để che giấu một thứ xấu xí, không bắt mắt).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'deliberate' (có chủ đích), 'hiding' (che giấu/ngụy trang), 'something unattractive' (thứ xấu xí).",
+                    "<strong>Đối chiếu bài đọc (Đoạn E):</strong> Tác giả nêu ví dụ về tháp viễn thông (<em>'mobile phone towers'</em>) – một thứ xấu xí gây ô nhiễm thị giác.",
+                    "<strong>Phân tích giải pháp:</strong> <em>'Some mobile phone towers have been <strong>made to look like trees or plants</strong>, which has reduced the visual impact'</em> (Một số tháp được chế tạo để trông giống như cây cối, giúp giảm bớt tác động tiêu cực về thị giác).",
+                    "<strong>Khớp nghĩa:</strong> Việc 'made to look like trees' chính là hành động ngụy trang/che giấu có chủ đích (<em>'deliberate way of hiding'</em>).",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph E</strong>."
+                ],
+                traps: "Đoạn D có nói người đi du lịch không muốn thấy biển quảng cáo chắn đồi núi, nhưng đó là sự bực mình vì bị che mất cảnh đẹp, chứ không phải giải pháp 'chủ động che giấu' như đoạn E."
+            },
+            vocabHighlights: ["advertising hoarding", "subjective", "visual pollution"]
+        },
+        {
+            id: 4,
+            qNum: "Question 4",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Các định nghĩa về những loại ô nhiễm thị giác khác nhau",
+            statementText: "definitions of different kinds of visual pollution",
+            correctParagraph: "Paragraph A",
+            correctLetter: "A",
+            passageSnippet: "<mark class='bg-teal-100 text-teal-950 font-bold px-1 rounded'>Visual pollution means that people cannot enjoy what they see. There are two types of visual pollution in the modern world: one is when visibility is limited by haze; another is visual untidiness, when buildings and signs spoil the view</mark>.",
+            paragraphRef: "Đoạn A (Paragraph A)",
+            paraphrases: [
+                { qPart: "definitions of different kinds", pPart: "two types of visual pollution in the modern world: one is... another is...", meaning: "hai loại ô nhiễm thị giác trong thế giới hiện đại: một là... loại khác là..." },
+                { qPart: "visual pollution", pPart: "means that people cannot enjoy what they see", meaning: "định nghĩa: ô nhiễm thị giác nghĩa là con người không thể tận hưởng những gì họ nhìn thấy" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'definitions of different kinds of visual pollution' (những định nghĩa về các loại ô nhiễm thị giác khác nhau).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'definitions', 'different kinds', 'visual pollution'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn A):</strong> Ngay mở đầu bài đọc, tác giả định nghĩa: <em>'Visual pollution means that people cannot enjoy what they see'</em>.",
+                    "<strong>Phân loại cụ thể:</strong> Tác giả chia thành 2 loại rõ rệt (<em>'two types'</em>):",
+                    "1. Khi tầm nhìn bị giới hạn bởi khói mù bụi mịn (<em>'when visibility is limited by haze'</em>).",
+                    "2. Sự lộn xộn, bừa bãi thị giác khi các công trình và biển báo phá hỏng cảnh quan (<em>'visual untidiness, when buildings and signs spoil the view'</em>).",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph A</strong>."
+                ],
+                traps: "Đoạn D có liệt kê các vật thể như tua bin gió, cột điện, biển quảng cáo, nhưng đó là liệt kê vật thể gây tranh cãi về mặt cảm xúc, không phải là đoạn nêu 'định nghĩa các loại' như đoạn A."
+            },
+            vocabHighlights: ["haze", "visibility", "visual pollution"]
+        },
+        {
+            id: 5,
+            qNum: "Question 5",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Ví dụ về một vấn đề môi trường có thể kéo dài trong thời gian dài",
+            statementText: "an example of a problem that may last for a long time",
+            correctParagraph: "Paragraph C",
+            correctLetter: "C",
+            passageSnippet: "Developers started many of these fires – often illegally – because they wanted to use the land for building or farming. <mark class='bg-teal-100 text-teal-950 font-bold px-1 rounded'>It is possible that some of the fires will continue to burn for years</mark>.",
+            paragraphRef: "Đoạn C (Paragraph C)",
+            paraphrases: [
+                { qPart: "last for a long time", pPart: "continue to burn for years", meaning: "tiếp tục âm ỉ cháy trong suốt nhiều năm trời (kéo dài trong thời gian rất lâu)" },
+                { qPart: "a problem", pPart: "forest fires / smoke from fires / haze", meaning: "vấn nạn cháy rừng và khói mù bao phủ khu vực" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'an example of a problem that may last for a long time' (một ví dụ về một vấn đề có thể kéo dài trong suốt một thời gian dài).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'example of a problem', 'last for a long time'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn C):</strong> Tác giả đề cập đến hiểm họa cháy rừng khổng lồ ở Sumatra và Borneo do các nhà phát triển đất đai châm ngòi.",
+                    "<strong>Manh mối thời gian:</strong> Tác giả viết: <em>'It is possible that some of the fires will <strong>continue to burn for years</strong>'</em> (rất có thể một số đám cháy sẽ tiếp tục cháy trong nhiều năm).",
+                    "<strong>Khớp nghĩa paraphrase:</strong> Cụm từ <em>'continue to burn for years'</em> (cháy nhiều năm liền) chính là minh chứng cụ thể cho việc kéo dài lâu dài (<em>'last for a long time'</em>).",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph C</strong>."
+                ],
+                traps: "Chú ý phân biệt giữa Q5 ('last for a long time' - kéo dài nhiều năm ở Đoạn C) và Q1 ('too late to change' - không thể cứu vãn được nữa ở Đoạn G)."
+            },
+            vocabHighlights: ["haze", "stress levels", "depression"]
+        },
+        {
+            id: 6,
+            qNum: "Question 6",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Nhắc đến việc ô nhiễm thị giác có thể gây ra tai nạn giao thông",
+            statementText: "a reference to the fact that visual pollution can cause accidents",
+            correctParagraph: "Paragraph E",
+            correctLetter: "E",
+            passageSnippet: "When more people started to drive in the mid-20th century, businesses put large advertising hoardings next to busy roads. However, in the 1960s, many people began to complain about them, <mark class='bg-teal-100 text-teal-950 font-bold px-1 rounded'>saying they were ugly and stopped drivers from focusing on the road</mark>.",
+            paragraphRef: "Đoạn E (Paragraph E)",
+            paraphrases: [
+                { qPart: "can cause accidents", pPart: "stopped drivers from focusing on the road", meaning: "làm tài xế mất tập trung khi lái xe trên đường (nguyên nhân gây tai nạn giao thông)" },
+                { qPart: "visual pollution", pPart: "large advertising hoardings next to busy roads", meaning: "những tấm biển quảng cáo cỡ lớn đặt sát những tuyến đường đông đúc" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'a reference to the fact that visual pollution can cause accidents' (nhắc đến sự thật rằng ô nhiễm thị giác có thể gây ra tai nạn).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'visual pollution', 'cause accidents' (gây tai nạn), 'roads / drivers'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn E):</strong> Vào giữa thế kỷ 20, các doanh nghiệp dựng biển quảng cáo lớn bên đường đông đúc: <em>'many people began to complain about them, saying they were ugly and <strong>stopped drivers from focusing on the road</strong>'</em>.",
+                    "<strong>Phân tích suy luận logic:</strong> Việc biển quảng cáo làm tài xế mất tập trung nhìn đường (<em>'stopped drivers from focusing on the road'</em>) chính là nguy cơ trực tiếp dẫn đến tai nạn giao thông.",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph E</strong>."
+                ],
+                traps: "Bài đọc không dùng từ 'accidents' một cách lộ liễu mà dùng kỹ thuật Paraphrase gián tiếp: 'stopped drivers from focusing on the road' (ngăn cản tài xế tập trung lái xe)."
+            },
+            vocabHighlights: ["advertising hoarding", "visibility", "unique character"]
+        },
+        {
+            id: 7,
+            qNum: "Question 7",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Nhắc đến tác động của ô nhiễm thị giác đối với nền kinh tế",
+            statementText: "a reference to the impact of visual pollution on the economy",
+            correctParagraph: "Paragraph C",
+            correctLetter: "C",
+            passageSnippet: "<mark class='bg-teal-100 text-teal-950 font-bold px-1 rounded'>In Southeast Asia, haze from enormous forest fires cost billions of dollars in health care. These fires have also stopped many tourists from visiting the area in the last decade</mark>.",
+            paragraphRef: "Đoạn C (Paragraph C)",
+            paraphrases: [
+                { qPart: "impact on the economy", pPart: "cost billions of dollars in health care / stopped many tourists from visiting", meaning: "tiêu tốn hàng tỷ đô la chi phí y tế / làm sụt giảm nguồn thu từ khách du lịch" },
+                { qPart: "visual pollution", pPart: "haze from enormous forest fires", meaning: "mù sương khói bụi từ các đám cháy rừng lớn (dạng ô nhiễm thị giác)" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'a reference to the impact of visual pollution on the economy' (nhắc đến tác động/thiệt hại của ô nhiễm thị giác đối với nền kinh tế).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'impact', 'economy' (kinh tế, tiền bạc, chi phí).",
+                    "<strong>Đối chiếu bài đọc (Đoạn C):</strong> Tác giả nêu các thiệt hại tài chính khổng lồ:",
+                    "1. Làm tiêu tốn <strong>hàng tỷ đô la chi phí y tế</strong> (<em>'cost billions of dollars in health care'</em>).",
+                    "2. Làm <strong>sụt giảm ngành du lịch</strong> do khách hủy chuyến trong suốt 10 năm qua (<em>'stopped many tourists from visiting the area in the last decade'</em>).",
+                    "<strong>Khớp nghĩa:</strong> Chi phí y tế hàng tỷ USD cùng thất thu ngành du lịch chính là tổn thất kinh tế trực tiếp (<em>'impact on the economy'</em>).",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph C</strong>."
+                ],
+                traps: "Thí sinh dễ nhầm 'cost billions in health care' sang ảnh hưởng sức khỏe (Q2). Nhưng con số tiền tỷ (billions of dollars) và du lịch (tourists) đại diện cho thiệt hại kinh tế (Economy)."
+            },
+            vocabHighlights: ["haze", "visual pollution", "subjective"]
+        },
+        {
+            id: 8,
+            qNum: "Question 8",
+            type: "Matching Information",
+            wordLimit: "Chọn ký tự từ A đến G",
+            contextHeader: "Ví dụ về những cách nhìn nhận khác nhau đối với cùng một sự vật",
+            statementText: "an example of different ways of viewing the same thing",
+            correctParagraph: "Paragraph D",
+            correctLetter: "D",
+            passageSnippet: "Scientists can measure haze, but people have different opinions about other forms of visual pollution... <mark class='bg-teal-100 text-teal-950 font-bold px-1 rounded'>To the businessman, a billboard in a good location may be beautiful. But to the traveller who would like to see the hills or the pretty village behind that billboard, it is visual pollution</mark>.",
+            paragraphRef: "Đoạn D (Paragraph D)",
+            paraphrases: [
+                { qPart: "different ways of viewing", pPart: "To the businessman... beautiful. But to the traveller... it is visual pollution", meaning: "doanh nhân thấy đẹp đẽ sinh lời, còn người đi du lịch lại thấy là rác thị giác chướng mắt" },
+                { qPart: "the same thing", pPart: "a billboard in a good location", meaning: "cùng một sự vật: tấm biển quảng cáo đặt ở vị trí đắc địa" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'an example of different ways of viewing the same thing' (một ví dụ về những cách nhìn nhận/đánh giá khác nhau đối với cùng một sự vật).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'different ways of viewing' (cách nhìn khác nhau), 'the same thing' (cùng một vật).",
+                    "<strong>Đối chiếu bài đọc (Đoạn D):</strong> Tác giả bàn về tính chủ quan của ô nhiễm thị giác và đưa ra sự đối chiếu:",
+                    "• <strong>Đối với doanh nhân</strong> (<em>'To the businessman'</em>): tấm biển quảng cáo ở vị trí đẹp có thể là <strong>tuyệt đẹp</strong> (<em>'may be beautiful'</em>).",
+                    "• <strong>Đối với du khách</strong> (<em>'But to the traveller'</em>) muốn ngắm đồi núi làng quê phía sau: đó lại là <strong>sự ô nhiễm thị giác</strong> (<em>'it is visual pollution'</em>).",
+                    "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph D</strong>."
+                ],
+                traps: "Đoạn G có nói về các thị trấn bị đồng bộ hóa nhìn giống nhau ('look the same'), nhưng đó là sự mất bản sắc đô thị chứ không phải hai góc nhìn trái ngược nhau của hai nhóm người về cùng một vật thể."
+            },
+            vocabHighlights: ["advertising hoarding", "subjective", "unique character"]
+        }
+    ];
+
+    const vocabData = {
+        'visual pollution': { ipa: '/ˈvɪʒ.u.əl pəˈluː.ʃən/', type: 'n phrase', vi: 'Ô nhiễm thị giác (cảnh quan xấu xí, lộn xộn phá vỡ mỹ quan)', eg: 'Unregulated billboards, tangled overhead cables, and graffiti contribute significantly to urban visual pollution.' },
+        'visibility': { ipa: '/ˌvɪz.əˈbɪl.ə.ti/', type: 'n', vi: 'Tầm nhìn xa, độ trong của khí quyển', eg: 'Dense smog and industrial particulate emissions severely compromised vehicular visibility on the highway.' },
+        'haze': { ipa: '/heɪz/', type: 'n', vi: 'Mù quang hóa, sương khói bụi mịn lơ lửng', eg: 'A persistent toxic brown haze hovered over the metropolitan valley throughout the dry summer months.' },
+        'advertising hoarding': { ipa: '/ˈæd.və.taɪ.zɪŋ ˌhɔː.dɪŋ/', type: 'n phrase', vi: 'Biển quảng cáo tấm lớn ngoài trời (billboard)', eg: 'Erecting colossal advertising hoardings along scenic coastal routes drew fierce objections from conservationists.' },
+        'subjective': { ipa: '/səbˈdʒek.tɪv/', type: 'adj', vi: 'Mang tính chủ quan (dựa trên cảm tính cá nhân)', eg: 'Aesthetic appreciation of modern public architecture remains inherently subjective and contentious.' },
+        'depression': { ipa: '/dɪˈpreʃ.ən/', type: 'n', vi: 'Bệnh trầm cảm, tâm trạng u uất', eg: 'Clinical research indicates that prolonged confinement to bleak urban vistas noticeably increases the risk of depression.' },
+        'stress levels': { ipa: '/stres ˈlev.əlz/', type: 'n phrase', vi: 'Mức độ căng thẳng thần kinh', eg: 'Regular immersion in tranquil natural greenery plays an indispensable role in lowering cortisol stress levels.' },
+        'unique character': { ipa: '/juːˈniːk ˈkær.ək.tər/', type: 'n phrase', vi: 'Bản sắc độc đáo riêng biệt (của đô thị, kiến trúc)', eg: 'Rapid corporate franchise proliferation has systematically stripped ancient market towns of their unique character.' },
+        'spoil the view': { ipa: '/spɔɪl ðə vjuː/', type: 'verb phrase', vi: 'Làm hỏng / phá hoại cảnh quan tươi đẹp', eg: 'Gigantic concrete structures and intrusive signage spoil the natural view of the mountain ranges.' },
+        'road hazards': { ipa: '/rəʊd ˈhæz.ədz/', type: 'n phrase', vi: 'Những mối nguy cơ gây tai nạn giao thông', eg: 'Flashing digital roadside displays constitute severe road hazards by diverting driver attention from traffic.' },
+        'economic toll': { ipa: '/ˌiː.kəˈnɒm.ɪk təʊl/', type: 'n phrase', vi: 'Thiệt hại / tổn thất về mặt kinh tế', eg: 'Annual forest fires exact a devastating economic toll on the regional tourism and commercial aviation sectors.' },
+        'camouflaged': { ipa: '/ˈkæm.ə.flɑːʒd/', type: 'adj', vi: 'Được ngụy trang khéo léo để che giấu', eg: 'Cellular network transmitters were artfully camouflaged as tall pine trees to blend seamlessly into the forest canopy.' }
+    };
+    </script>
+    <script>
+    let currentQuestionIndex = 0; // 0 to 7
+
+    function initApp() {
+        renderNavChips();
+        renderCurrentSlide();
+        renderAllQuestionsList();
+        renderParagraphsMap();
+        renderSynonymsTable();
+        renderVocabGrid();
+        setupKeyboardNavigation();
+    }
+
+    function renderNavChips() {
+        const container = document.getElementById('question-nav-chips');
+        container.innerHTML = '';
+        questionsData.forEach((q, idx) => {
+            const btn = document.createElement('button');
+            const isActive = idx === currentQuestionIndex;
+            btn.className = `px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                isActive 
+                ? 'bg-tealTheme-700 text-white shadow-sm ring-2 ring-tealTheme-600 ring-offset-1' 
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`;
+            btn.innerHTML = `Q${q.id}: Đoạn ${q.correctLetter}`;
+            btn.onclick = () => {
+                currentQuestionIndex = idx;
+                renderNavChips();
+                renderCurrentSlide();
+            };
+            container.appendChild(btn);
+        });
+
+        const mob = document.getElementById('mobile-curr-indicator');
+        if (mob) mob.textContent = `Câu ${currentQuestionIndex + 1}/8 (Đoạn ${questionsData[currentQuestionIndex].correctLetter})`;
+    }
+
+    function navigateQuestion(delta) {
+        const next = currentQuestionIndex + delta;
+        if (next >= 0 && next < questionsData.length) {
+            currentQuestionIndex = next;
+            renderNavChips();
+            renderCurrentSlide();
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+    }
+
+    function renderCurrentSlide() {
+        const q = questionsData[currentQuestionIndex];
+        const container = document.getElementById('slide-card-container');
+        const counter = document.getElementById('slide-counter-badge');
+        if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        if (btnPrev) {
+            btnPrev.disabled = currentQuestionIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+        }
+        if (btnNext) {
+            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+        }
+
+        container.innerHTML = `
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+                
+                <!-- Slide Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-2xl bg-teal-100 text-tealTheme-800 flex items-center justify-center font-extrabold text-base border border-teal-200">
+                            ${q.id}
+                        </span>
+                        <div>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-tealTheme-700">${q.type}</span>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">${q.qNum}: ${q.contextHeader}</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                            Yêu cầu: Chọn đoạn A–G
+                        </span>
+                        <span class="text-xs font-semibold px-3 py-1 bg-teal-50 text-tealTheme-700 rounded-full border border-teal-200">
+                            ${q.paragraphRef}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Statement Prompt Box -->
+                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nội Dung Phát Biểu Cần Tìm Trong Bài</span>
+                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">"${q.statementText}"</p>
+                </div>
+
+                <!-- Answer Reveal Banner -->
+                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-teal-50/80 via-emerald-50/50 to-white border border-teal-200">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-tealTheme-700">Đoạn Văn Chứa Thông Tin</span>
+                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
+                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm bg-tealTheme-700 text-white answer-badge">
+                                Đáp án: ${q.correctParagraph}
+                            </span>
+                            <span class="text-sm sm:text-base font-bold text-slate-800">
+                                (Ký tự điền: <span class="text-teal-700 font-mono text-xl">${q.correctLetter}</span>)
+                            </span>
+                        </div>
+                    </div>
+
+                    <button onclick="playSpeech('${q.statementText.replace(/'/g, "\\'")}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-teal-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Phát âm câu hỏi</span>
+                    </button>
+                </div>
+
+                <!-- Evidence in Reading Passage -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-tealTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Manh Mối Bằng Chứng (${q.paragraphRef})</h4>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-teal-50/40 border border-teal-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
+                        "${q.passageSnippet}"
+                    </div>
+                </div>
+
+                <!-- Paraphrase & Synonym Mapping Table -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Paraphrase</h4>
+                    </div>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
+                                <tr>
+                                    <th class="py-2.5 px-4 w-1/3">Câu hỏi trong đề (Question ${q.id})</th>
+                                    <th class="py-2.5 px-4 w-1/3">Văn bản bài đọc (${q.correctParagraph})</th>
+                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 bg-white">
+                                ${q.paraphrases.map(p => `
+                                    <tr>
+                                        <td class="py-3 px-4 font-semibold text-teal-700 bg-teal-50/30">${p.qPart}</td>
+                                        <td class="py-3 px-4 font-semibold text-amber-800 bg-amber-50/20">${p.pPart}</td>
+                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Vietnamese In-Depth Explanation & Logic -->
+                <div class="mt-6 bg-teal-50/40 border border-teal-200/80 rounded-2xl p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-tealTheme-600"></span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-tealTheme-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
+                    </div>
+
+                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
+
+                    <div class="space-y-2 mb-4">
+                        ${q.vietnameseAnalysis.stepByStep.map(step => `
+                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="text-tealTheme-600 mt-1 font-bold">▸</span>
+                                <div>${step}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${q.vietnameseAnalysis.traps ? `
+                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
+                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
+                            <span>${q.vietnameseAnalysis.traps}</span>
+                        </div>
+                    ` : ''}
+                </div>
+
+                <!-- Highlighted Vocabulary in this question -->
+                <div class="mt-6 pt-5 border-t border-slate-100">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
+                    <div class="flex flex-wrap gap-3">
+                        ${q.vocabHighlights.map(v => {
+                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
+                            return `
+                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-teal-400 transition-colors">
+                                    <button onclick="playSpeech('${v}')" class="text-tealTheme-700 hover:text-tealTheme-900" title="Nghe phát âm chuẩn UK">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                    <div>
+                                        <span class="font-bold text-sm text-slate-900">${v}</span>
+                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
+                                        <span class="text-xs text-tealTheme-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+            </div>
+        `;
+    }
+
+    function renderAllQuestionsList() {
+        const container = document.getElementById('all-questions-container');
+        container.innerHTML = '';
+
+        questionsData.forEach(q => {
+            const card = document.createElement('div');
+            card.className = "gradient-border bg-white rounded-2xl p-6 shadow-sm";
+
+            card.innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-tealTheme-700 text-white font-bold text-xs flex items-center justify-center">
+                            ${q.id}
+                        </span>
+                        <h3 class="font-bold text-slate-900">${q.qNum} - <span class="text-slate-500 font-medium">${q.contextHeader}</span></h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-mono font-bold px-3 py-1 rounded-md border bg-teal-100 text-teal-800 border-teal-300">
+                            ĐÁP ÁN: ${q.correctParagraph}
+                        </span>
+                        <span class="text-xs text-slate-400">${q.paragraphRef}</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 mb-3 text-sm">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nội dung câu hỏi:</span>
+                    <p class="font-bold text-slate-800">"${q.statementText}"</p>
+                </div>
+
+                <div class="bg-teal-50/60 p-3.5 rounded-xl border border-teal-200/80 mb-4 text-xs sm:text-sm italic text-slate-700">
+                    <strong>Manh mối bài đọc (${q.paragraphRef}):</strong> "${q.passageSnippet}"
+                </div>
+
+                <div class="mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <div class="flex flex-wrap gap-2">
+                        ${q.paraphrases.map(p => `
+                            <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
+                                <span class="text-teal-700 font-bold">${p.qPart}</span> ➔ <span class="text-amber-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="bg-teal-50/40 border border-teal-200 p-4 rounded-xl text-xs sm:text-sm text-slate-700">
+                    <p class="font-bold text-teal-900 mb-1.5">Giải thích logic Tiếng Việt:</p>
+                    <p class="mb-2">${q.vietnameseAnalysis.logic}</p>
+                    <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
+                        ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderParagraphsMap() {
+        const container = document.getElementById('paragraphs-grid-container');
+        container.innerHTML = '';
+
+        paragraphsOverview.forEach(p => {
+            const card = document.createElement('div');
+            card.className = `p-5 rounded-2xl border transition-all flex flex-col justify-between ${
+                p.containsAns 
+                ? 'bg-white border-teal-200 shadow-2xs hover:border-teal-400' 
+                : 'bg-slate-50/80 border-slate-200 opacity-80'
+            }`;
+
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="w-8 h-8 rounded-xl font-black text-sm flex items-center justify-center ${
+                            p.containsAns ? 'bg-tealTheme-700 text-white' : 'bg-slate-200 text-slate-600'
+                        }">
+                            ${p.pKey}
+                        </span>
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
+                            p.containsAns 
+                            ? 'bg-teal-100 text-teal-800 border border-teal-300' 
+                            : 'bg-slate-200 text-slate-600 border border-slate-300'
+                        }">
+                            ${p.containsAns ? `Chứa đáp án ${p.isAnswerFor}` : 'Đoạn thông tin bổ trợ'}
+                        </span>
+                    </div>
+
+                    <h4 class="font-bold text-sm text-slate-900 mb-2 leading-snug">${p.title}</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">${p.summary}</p>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 mt-3">
+                    <span class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">
+                        Vai trò trong đề thi:
+                    </span>
+                    <p class="${p.containsAns ? 'text-teal-900 font-semibold' : 'text-slate-500 italic'}">
+                        ${p.containsAns ? `Giải quyết chính xác ${p.isAnswerFor}` : 'Cung cấp số liệu đo đạc tầm nhìn tại Vườn quốc gia Mỹ (không chứa đáp án Q1–Q8)'}
+                    </p>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderSynonymsTable() {
+        const tbody = document.getElementById('synonyms-table-body');
+        tbody.innerHTML = '';
+
+        questionsData.forEach(q => {
+            q.paraphrases.forEach((p, pIndex) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center font-bold text-slate-700">
+                        ${pIndex === 0 ? `<span class="bg-teal-100 text-teal-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="keyword-chip">${p.qPart}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="passage-chip">${p.pPart}</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="text-xs font-bold uppercase px-2 py-1 bg-tealTheme-700 text-white rounded shadow-2xs">
+                            Đoạn ${q.correctLetter}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
+                        ${p.meaning}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    }
+
+    function renderVocabGrid(filterWord = '') {
+        const container = document.getElementById('vocab-grid-container');
+        container.innerHTML = '';
+
+        const words = Object.keys(vocabData).filter(w => {
+            if (!filterWord) return true;
+            const query = filterWord.toLowerCase();
+            return w.toLowerCase().includes(query) || vocabData[w].vi.toLowerCase().includes(query);
+        });
+
+        if (words.length === 0) {
+            container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">Không tìm thấy từ vựng phù hợp.</div>`;
+            return;
+        }
+
+        words.forEach(w => {
+            const item = vocabData[w];
+            const card = document.createElement('div');
+            card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-teal-400 transition-all flex flex-col justify-between";
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h4 class="text-lg font-bold text-slate-900">${w}</h4>
+                        <button onclick="playSpeech('${w}')" class="w-8 h-8 rounded-full bg-teal-50 text-teal-700 hover:bg-teal-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs" title="Nghe phát âm chuẩn UK">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${item.ipa}</span>
+                        <span class="text-xs italic text-teal-700 font-semibold">${item.type}</span>
+                    </div>
+                    <p class="text-sm font-semibold text-teal-900 mb-3">${item.vi}</p>
+                </div>
+                <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-lg">
+                    "${item.eg}"
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function searchVocab(val) {
+        renderVocabGrid(val);
+    }
+
+    function playSpeech(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.88;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function switchView(viewName) {
+        const views = ['presentation', 'all', 'map', 'synonyms', 'vocab'];
+        views.forEach(v => {
+            const sec = document.getElementById(`view-${v}`);
+            const tabBtn = document.getElementById(`tab-${v}`);
+            if (sec) sec.classList.add('hidden');
+            if (tabBtn) {
+                tabBtn.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+            }
+        });
+
+        const activeSec = document.getElementById(`view-${viewName}`);
+        const activeTab = document.getElementById(`tab-${viewName}`);
+        if (activeSec) activeSec.classList.remove('hidden');
+        if (activeTab) {
+            activeTab.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-tealTheme-700 text-white shadow-sm';
+        }
+    }
+
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            const presView = document.getElementById('view-presentation');
+            if (presView && !presView.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    navigateQuestion(1);
+                } else if (e.key === 'ArrowLeft') {
+                    navigateQuestion(-1);
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

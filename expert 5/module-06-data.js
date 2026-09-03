@@ -19,6 +19,8 @@ window.module6Data = {
     // Reading 6a: The future of food?
     reading6a: {
         title: "The Future of Food?",
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%205/module-6a-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 6a: The Future of Food? — Deep Question Walkthrough",
         passage: `
             <h3>The future of food?</h3>
             <p><span class="para-tag">[Paragraph 1]</span> Studies suggest that, over the next 25 years or so, the population of the world will grow by more than 25 percent. This means that there will be 9 billion people on earth by then. We must, therefore, change the systems we use to produce food or it will not be possible to feed a population of this size.</p>
@@ -64,6 +66,8 @@ window.module6Data = {
     // Reading 6b: WOMM: advantages and disadvantages
     reading6b: {
         title: "WOMM: Advantages and Disadvantages",
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%205/module-6b-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 6b: Word-of-Mouth Marketing (WOMM) — Deep Question Walkthrough",
         passage: `
             <h3>WOMM: advantages and disadvantages</h3>
             <p><span class="para-tag">[Paragraph 1]</span> A business can make the best product in the world but if no one knows about it, they cannot sell it. To tell customers about their products and to persuade them to buy them, all businesses need <span class="vocab-word" data-word="marketing" data-ipa="/ˈmɑː.kɪ.tɪŋ/" data-pos="noun" data-def="The activity of promoting and selling products or services." data-colloc="word-of-mouth marketing">marketing</span>. One of the most powerful forms of marketing is WOMM: word-of-mouth marketing. This is when people tell their family and friends about a product and the growth of social media means it has become even more effective.</p>

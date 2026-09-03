@@ -30,6 +30,8 @@ window.module4Data = {
 
     // Reading 4a: Monitoring Fitness (Full Exact Passage from m4 content.md)
     reading4a: {
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%205/module-4a-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 4a: Monitoring Fitness — Deep Question Walkthrough",
         passage: `
             <h3>MONITORING FITNESS</h3>
             <p class="reading-lead"><em>Do fitness apps really work? Are they helpful? Or do they drown out the conversation people should be having with their bodies?</em></p>
@@ -161,6 +163,8 @@ window.module4Data = {
 
     // Reading 4b: Remedies from Nature (Full Exact Passage from m4 content.md)
     reading4b: {
+        walkthroughUrl: "../reading%20explanations%20-%20walkthrough/expert%205/module-4b-reading-question-walkthrough.html",
+        walkthroughTitle: "Module 4b: Remedies from Nature — Deep Question Walkthrough",
         passage: `
             <h3>REMEDIES FROM NATURE</h3>
             <p class="reading-lead"><em>In all the discussions about saving the world's <span class="vocab-word" data-word="biodiversity" data-ipa="/ˌbaɪ.əʊ.daɪˈvɜː.sə.ti/" data-pos="noun" data-def="The variety of plant and animal life in a particular habitat or the world." data-colloc="rich biodiversity">biodiversity</span> from <span class="vocab-word" data-word="extinction" data-ipa="/ɪkˈstɪŋk.ʃən/" data-pos="noun" data-def="The state or situation when a species no longer exists." data-colloc="threatened with extinction">extinction</span>, people often forget one point: the world's species provide people with a large number of life-saving medicines.</em></p>
