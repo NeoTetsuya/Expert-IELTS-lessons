@@ -94,11 +94,14 @@ class StepRevealEngine {
         const qCards = Array.from(container.querySelectorAll('.q-card, .strategy-card'));
         qCards.forEach(card => {
             const inputs = Array.from(card.querySelectorAll('.blank-input, .select-input'));
+            const choiceGroups = Array.from(card.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options'));
             const synSpans = Array.from(card.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word, .vocab-term'));
             
             let isUnsolved = false;
             if (inputs.length > 0) {
                 isUnsolved = inputs.some(inp => !inp.classList.contains('correct'));
+            } else if (choiceGroups.length > 0) {
+                isUnsolved = choiceGroups.some(g => !g.querySelector('.selected.correct'));
             } else if (synSpans.length > 0) {
                 isUnsolved = !card.classList.contains('revealed') && synSpans.some(s => !s.classList.contains('active-syn') && !s.classList.contains('active-vocab'));
             } else {
@@ -171,6 +174,21 @@ class StepRevealEngine {
                 sel.value = sel.dataset.ans;
                 sel.classList.add('correct');
                 sel.classList.remove('wrong', 'incorrect');
+            }
+        });
+
+        // Reveal choice / TFNG buttons inside card
+        card.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options').forEach(group => {
+            const targetAns = (group.dataset.ans || group.getAttribute('data-ans') || '').trim().toLowerCase();
+            if (targetAns) {
+                const validAnswers = targetAns.split('|').map(a => a.trim());
+                group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, [data-choice]').forEach(btn => {
+                    const val = (btn.dataset.choice || btn.innerText || '').trim().toLowerCase();
+                    btn.classList.remove('selected', 'wrong');
+                    if (validAnswers.includes(val)) {
+                        btn.classList.add('selected', 'correct');
+                    }
+                });
             }
         });
 

@@ -516,6 +516,9 @@ class DeckEngine {
         if (window.dragGapfillEngine) {
             window.dragGapfillEngine.syncBankChips(container);
         }
+        if (window.choiceSelectorEngine) {
+            window.choiceSelectorEngine.revealKeys(container);
+        }
 
         if (broadcast && window.presenterSyncEngine) {
             window.presenterSyncEngine.emit('EXERCISE_ACTION', {

@@ -670,6 +670,19 @@
             renderInput: (q, context) => {
                 const options = q.options || (context && context.options) || [];
                 const ans = q.ans || '';
+                if (q.useCards || (context && context.useCards)) {
+                    const optsHtml = options.map(opt => {
+                        const letter = (typeof opt === 'object' && opt.letter) ? opt.letter : (typeof opt === 'string' && opt.length > 2 && opt[1] === '.') ? opt[0] : opt;
+                        const text = (typeof opt === 'object' && opt.text) ? opt.text : (typeof opt === 'string' && opt.length > 3 && opt[1] === '.') ? opt.slice(2).trim() : opt;
+                        return `
+                            <div class="mcq-card-option choice-btn" data-choice="${letter}">
+                                <span class="mcq-letter-chip">${letter}</span>
+                                <span class="mcq-option-text">${text}</span>
+                            </div>
+                        `;
+                    }).join('');
+                    return `<div class="mcq-options-container choice-group" data-ans="${ans}">${optsHtml}</div>`;
+                }
                 const optsHtml = options.map(opt => {
                     if (typeof opt === 'object' && opt.letter) {
                         return `<option value="${opt.letter}">${opt.letter}: ${opt.text}</option>`;
@@ -698,8 +711,8 @@
                     const letter = typeof opt === 'object' ? opt.letter : opt;
                     const text = typeof opt === 'object' ? opt.text : opt;
                     return `
-                        <label class="multi-choice-label" style="display:flex; align-items:center; gap:8px; font-size:17px; cursor:pointer;">
-                            <input type="checkbox" class="checkbox-input" value="${letter}" data-ans-part="${ans}">
+                        <label class="multi-choice-label" style="display:flex; align-items:center; gap:10px; font-size:17.5px; cursor:pointer; padding:6px 12px; border-radius:8px; border:1px solid #e2e8f0; background:#ffffff; transition:all 140ms ease-out;">
+                            <input type="checkbox" class="checkbox-input" value="${letter}" data-ans-part="${ans}" style="width:18px; height:18px; accent-color:var(--col-reading, #2563eb); cursor:pointer;">
                             <span><strong>${letter}:</strong> ${text}</span>
                         </label>
                     `;
@@ -716,13 +729,22 @@
             defaultStrategy: 'TRUE = agrees with the text. FALSE = directly contradicts the text. NOT GIVEN = the text neither agrees nor disagrees.',
             renderInput: (q) => {
                 const ans = q.ans || '';
+                if (q.useSelect) {
+                    return `
+                        <select class="select-input" data-ans="${ans}" style="min-width:200px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
+                            <option value="">-- Select Answer --</option>
+                            <option value="TRUE">TRUE</option>
+                            <option value="FALSE">FALSE</option>
+                            <option value="NOT GIVEN">NOT GIVEN</option>
+                        </select>
+                    `;
+                }
                 return `
-                    <select class="select-input" data-ans="${ans}" style="min-width:200px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
-                        <option value="">-- Select Answer --</option>
-                        <option value="TRUE">TRUE</option>
-                        <option value="FALSE">FALSE</option>
-                        <option value="NOT GIVEN">NOT GIVEN</option>
-                    </select>
+                    <div class="tfng-group" data-ans="${ans}">
+                        <button type="button" class="tfng-btn" data-choice="TRUE">TRUE</button>
+                        <button type="button" class="tfng-btn" data-choice="FALSE">FALSE</button>
+                        <button type="button" class="tfng-btn" data-choice="NOT GIVEN">NOT GIVEN</button>
+                    </div>
                 `;
             }
         },
@@ -735,13 +757,22 @@
             defaultStrategy: "YES = matches writer's opinion. NO = contradicts writer's opinion. NOT GIVEN = writer does not state an opinion.",
             renderInput: (q) => {
                 const ans = q.ans || '';
+                if (q.useSelect) {
+                    return `
+                        <select class="select-input" data-ans="${ans}" style="min-width:200px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
+                            <option value="">-- Select Answer --</option>
+                            <option value="YES">YES</option>
+                            <option value="NO">NO</option>
+                            <option value="NOT GIVEN">NOT GIVEN</option>
+                        </select>
+                    `;
+                }
                 return `
-                    <select class="select-input" data-ans="${ans}" style="min-width:200px; font-weight:700; font-size:18px; padding:8px 16px; border-radius:8px;">
-                        <option value="">-- Select Answer --</option>
-                        <option value="YES">YES</option>
-                        <option value="NO">NO</option>
-                        <option value="NOT GIVEN">NOT GIVEN</option>
-                    </select>
+                    <div class="ynng-group choice-group" data-ans="${ans}">
+                        <button type="button" class="choice-btn" data-choice="YES">YES</button>
+                        <button type="button" class="choice-btn" data-choice="NO">NO</button>
+                        <button type="button" class="choice-btn" data-choice="NOT GIVEN">NOT GIVEN</button>
+                    </div>
                 `;
             }
         },
@@ -1204,14 +1235,14 @@
                     }
                     if (data.headings && Array.isArray(data.headings)) {
                         const headingsListHtml = data.headings.map(h => `
-                            <div style="font-size:18px; line-height:1.55; color:#0f172a;">
-                                <strong style="color:var(--col-reading); font-family:var(--font-mono); width:36px; display:inline-block;">${h.roman}.</strong> ${h.text}
+                            <div class="heading-item-row" style="font-size:18px; line-height:1.55; color:#0f172a;">
+                                <span class="roman-pill">${h.roman}</span> <span>${h.text}</span>
                             </div>
                         `).join('');
                         html += `
-                            <div class="card" style="background:#ffffff; border:1.5px solid #cbd5e1; border-left:6px solid var(--col-reading); padding:16px 20px; margin-bottom:14px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+                            <div class="card headings-card" style="background:#ffffff; border:1.5px solid #cbd5e1; border-left:6px solid var(--col-reading); padding:16px 20px; margin-bottom:14px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
                                 <div style="font-size:17px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--col-reading); margin-bottom:10px;">📋 List of Headings</div>
-                                <div style="display:flex; flex-direction:column; gap:6px;">
+                                <div style="display:flex; flex-direction:column; gap:4px;">
                                     ${headingsListHtml}
                                 </div>
                             </div>

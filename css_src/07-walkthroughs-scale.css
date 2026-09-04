@@ -85,10 +85,23 @@ mark.evidence span.syn-pair-3.active-syn {
     border-radius: 8px !important;
 }
 .walkthrough-container .item-explanation {
-    font-size: calc(24px * var(--font-scale, 1)) !important;
+    font-size: calc(22px * var(--font-scale, 1)) !important;
     line-height: 1.75 !important;
     padding: 18px 24px !important;
     border-radius: 10px !important;
+}
+
+.walkthrough-container .tfng-group,
+.walkthrough-container .ynng-group,
+.walkthrough-container .choice-group {
+    gap: 12px !important;
+}
+
+.walkthrough-container .tfng-btn,
+.walkthrough-container .ynng-btn,
+.walkthrough-container .choice-btn {
+    font-size: calc(21px * var(--font-scale, 1)) !important;
+    padding: 10px 24px !important;
 }
 
 /* Universal Inputs & Dropdowns */
