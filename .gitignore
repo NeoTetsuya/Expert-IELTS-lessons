@@ -32,3 +32,12 @@ beautiful-html-templates-main/
 
 # Local Grammar Sources Reference Files
 references/grammar_sources/
+
+# Auto-push scripts
+auto-push.bat
+auto-push.js
+push.bat
+push_to_github.bat
+scripts/auto-push.js
+scripts/auto-push.bat
+

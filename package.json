@@ -8,7 +8,8 @@
     "build:js": "node build-bundle.js --js-only",
     "build:css": "node build-bundle.js --css-only",
     "watch:css": "node scripts/watch-css.js",
-    "update-index": "node scripts/update-index.js"
+    "update-index": "node scripts/update-index.js",
+    "push": "node scripts/auto-push.js"
   },
   "keywords": [
     "ielts",
