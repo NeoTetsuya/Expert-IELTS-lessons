@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 7: Language Development - Zero Conditional</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            city: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth tab switching and pill buttons */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+    }
+    /* Scrollbar aesthetics */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-600 via-blue-600 to-sky-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-indigo-500/25 ring-2 ring-white">
+          M7
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 tracking-wide uppercase">Unit 7: City life</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 106</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-indigo-600">Zero Conditional</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Total Score</span>
+            <span id="global-score-pill" class="text-base font-black text-indigo-600">0 / 37</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-indigo-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-indigo-600 text-white shadow-md shadow-indigo-600/25">
+          1. Concept Analysis (1)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Sentence Matching (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Verb Forms & Commas (3)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. If vs. Unless (4)
+        </button>
+        <button data-tab="tab-ex5" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          5. Sentence Creation (5a & 5b)
+        </button>
+        <button data-tab="tab-ex6" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          6. Questions & Speaking (6a & 6b)
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 188
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: CONCEPT ANALYSIS (Exercise 1) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-indigo-700 via-blue-700 to-sky-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1</span>
+            <span class="text-indigo-200 text-xs font-medium">Expert Grammar Page 188</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Zero Conditional: Structure & Universal Truths</h2>
+          <p class="text-indigo-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Analyze the structure of general conditional statements. Discover clause roles (condition vs. result), punctuation rules with commas, and interchangeable connectors.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1()" class="px-5 py-2.5 bg-white hover:bg-indigo-50 text-indigo-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Answers</span>
+          </button>
+          <button onclick="revealEx1()" class="px-4 py-2.5 bg-indigo-900/60 hover:bg-indigo-900 text-white border border-indigo-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Anchor Sentence Card -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-800 text-sm font-black flex items-center justify-center">1</span>
+            Read this zero conditional sentence and answer the questions:
+          </h3>
+          <span id="ex1-score-pill" class="text-xs font-bold text-indigo-800 bg-indigo-50 px-3 py-1 rounded-xl">Score: 0/4</span>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-indigo-50/70 border-2 border-indigo-200 text-center">
+          <p class="text-lg sm:text-xl font-black text-indigo-950">
+            "<span class="underline decoration-indigo-500 decoration-2">If people live in a small community</span>, <span class="underline decoration-sky-500 decoration-2">they generally feel safer</span>."
+          </p>
+          <p class="text-xs text-indigo-700 font-semibold mt-2">Condition Clause (If-clause) + Result / Main Clause</p>
+        </div>
+
+        <!-- 4 Question Breakdown -->
+        <div class="grid md:grid-cols-2 gap-4" id="ex1-questions">
+          <!-- Question 1 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex1-q="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-indigo-700 tracking-wider">Question 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-bold text-slate-800">How many parts are there in the sentence? What separates the two parts?</p>
+            <select class="ex1-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-slate-800 focus:border-indigo-600 focus:outline-none" data-ans="two-comma">
+              <option value="">Select answer...</option>
+              <option value="one-semicolon">One part, separated by a semicolon</option>
+              <option value="two-comma">Two parts (clauses), separated by a comma</option>
+              <option value="three-period">Three parts, separated by periods</option>
+            </select>
+          </div>
+
+          <!-- Question 2 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex1-q="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-indigo-700 tracking-wider">Question 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-bold text-slate-800">Which part of the sentence shows a condition? Which shows a result?</p>
+            <select class="ex1-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-slate-800 focus:border-indigo-600 focus:outline-none" data-ans="if-condition">
+              <option value="">Select answer...</option>
+              <option value="if-condition">'If people live in a small community' is condition; 'they generally feel safer' is result</option>
+              <option value="if-result">'If people live in a small community' is result; 'they generally feel safer' is condition</option>
+              <option value="both-condition">Both parts are conditions with no result</option>
+            </select>
+          </div>
+
+          <!-- Question 3 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex1-q="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-indigo-700 tracking-wider">Question 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-bold text-slate-800">Can you change the order of the two parts? What happens to the punctuation?</p>
+            <select class="ex1-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-slate-800 focus:border-indigo-600 focus:outline-none" data-ans="yes-no-comma">
+              <option value="">Select answer...</option>
+              <option value="no-order">No, the order cannot ever change in English</option>
+              <option value="yes-no-comma">Yes: "People generally feel safer if they live in a small community." (No comma needed)</option>
+              <option value="yes-keep-comma">Yes, but you must keep the comma after safer</option>
+            </select>
+          </div>
+
+          <!-- Question 4 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex1-q="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-indigo-700 tracking-wider">Question 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-sm font-bold text-slate-800">Can you think of another word you can use instead of <em>if</em>?</p>
+            <select class="ex1-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-slate-800 focus:border-indigo-600 focus:outline-none" data-ans="when">
+              <option value="">Select answer...</option>
+              <option value="when">when (or whenever)</option>
+              <option value="because">because</option>
+              <option value="although">although</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: SENTENCE MATCHING & DISCUSSION (Exercise 2a & 2b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-cyan-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-blue-200 text-xs font-medium">Clause Combination & Agreement Discussion</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Matching Sentence Beginnings and Endings</h2>
+          <p class="text-blue-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Match beginnings 1–6 with endings A–F to form logical zero conditional statements about urban and community life. Then select statements to discuss.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2a()" class="px-5 py-2.5 bg-white hover:bg-blue-50 text-blue-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 2a</span>
+          </button>
+          <button onclick="revealEx2a()" class="px-4 py-2.5 bg-blue-900/60 hover:bg-blue-900 text-white border border-blue-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Endings A-F Reference Box -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">A-F</span>
+            Sentence Endings Bank
+          </h3>
+          <span class="text-xs text-slate-400">Match to 1–6 below</span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs sm:text-sm">
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-blue-700 text-sm block mb-1">A</span>
+            <p class="text-slate-700 font-medium">when you go to bed.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-blue-700 text-sm block mb-1">B</span>
+            <p class="text-slate-700 font-medium">you need to be clean and tidy.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-blue-700 text-sm block mb-1">C</span>
+            <p class="text-slate-700 font-medium">you should try to help them.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-blue-700 text-sm block mb-1">D</span>
+            <p class="text-slate-700 font-medium">when you move to a new town.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-blue-700 text-sm block mb-1">E</span>
+            <p class="text-slate-700 font-medium">if there is high unemployment and poverty.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-blue-700 text-sm block mb-1">F</span>
+            <p class="text-slate-700 font-medium">you have more facilities than in a small town or village.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 2a Matching rows -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">2a</span>
+            Match the sentence beginnings (1–6) with the endings (A–F):
+          </h3>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-blue-800 bg-blue-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-3" id="ex2a-container">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex2a-item="1" data-ans="F">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              If you live in a busy city,
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex2a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-blue-950 focus:border-blue-600 focus:outline-none">
+                <option value="">Choose ending...</option>
+                <option value="A">A (when you go to bed)</option>
+                <option value="B">B (you need to be clean and tidy)</option>
+                <option value="C">C (you should try to help them)</option>
+                <option value="D">D (when you move to a new town)</option>
+                <option value="E">E (if there is high unemployment...)</option>
+                <option value="F">F (you have more facilities...)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex2a-item="2" data-ans="A">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              You should check your doors and windows are locked
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex2a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-blue-950 focus:border-blue-600 focus:outline-none">
+                <option value="">Choose ending...</option>
+                <option value="A">A (when you go to bed)</option>
+                <option value="B">B (you need to be clean and tidy)</option>
+                <option value="C">C (you should try to help them)</option>
+                <option value="D">D (when you move to a new town)</option>
+                <option value="E">E (if there is high unemployment...)</option>
+                <option value="F">F (you have more facilities...)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex2a-item="3" data-ans="B">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              When you share a house with others,
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex2a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-blue-950 focus:border-blue-600 focus:outline-none">
+                <option value="">Choose ending...</option>
+                <option value="A">A (when you go to bed)</option>
+                <option value="B">B (you need to be clean and tidy)</option>
+                <option value="C">C (you should try to help them)</option>
+                <option value="D">D (when you move to a new town)</option>
+                <option value="E">E (if there is high unemployment...)</option>
+                <option value="F">F (you have more facilities...)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex2a-item="4" data-ans="C">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              If you have elderly neighbours,
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex2a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-blue-950 focus:border-blue-600 focus:outline-none">
+                <option value="">Choose ending...</option>
+                <option value="A">A (when you go to bed)</option>
+                <option value="B">B (you need to be clean and tidy)</option>
+                <option value="C">C (you should try to help them)</option>
+                <option value="D">D (when you move to a new town)</option>
+                <option value="E">E (if there is high unemployment...)</option>
+                <option value="F">F (you have more facilities...)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex2a-item="5" data-ans="E">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              Crime generally increases
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex2a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-blue-950 focus:border-blue-600 focus:outline-none">
+                <option value="">Choose ending...</option>
+                <option value="A">A (when you go to bed)</option>
+                <option value="B">B (you need to be clean and tidy)</option>
+                <option value="C">C (you should try to help them)</option>
+                <option value="D">D (when you move to a new town)</option>
+                <option value="E">E (if there is high unemployment...)</option>
+                <option value="F">F (you have more facilities...)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex2a-item="6" data-ans="D">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              Joining a social club is a good way to make friends
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex2a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-blue-950 focus:border-blue-600 focus:outline-none">
+                <option value="">Choose ending...</option>
+                <option value="A">A (when you go to bed)</option>
+                <option value="B">B (you need to be clean and tidy)</option>
+                <option value="C">C (you should try to help them)</option>
+                <option value="D">D (when you move to a new town)</option>
+                <option value="E">E (if there is high unemployment...)</option>
+                <option value="F">F (you have more facilities...)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 2b Pair Discussion Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">2b</span>
+              Work in pairs. Choose two statements from Exercise 2a and discuss. Do you agree?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Select statements you want to reflect on and write your opinion:</p>
+          </div>
+          <button onclick="saveEx2bNotes()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+            Save My Discussion
+          </button>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3" id="ex2b-selection-grid">
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-1" class="w-5 h-5 text-blue-600 rounded-lg focus:ring-blue-500" />
+            <span class="text-sm font-bold text-slate-800">1. Living in a city gives more facilities.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-3" class="w-5 h-5 text-blue-600 rounded-lg focus:ring-blue-500" />
+            <span class="text-sm font-bold text-slate-800">3. Sharing a house requires being tidy.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-4" class="w-5 h-5 text-blue-600 rounded-lg focus:ring-blue-500" />
+            <span class="text-sm font-bold text-slate-800">4. We should help elderly neighbours.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-5" class="w-5 h-5 text-blue-600 rounded-lg focus:ring-blue-500" />
+            <span class="text-sm font-bold text-slate-800">5. Crime rises with poverty/unemployment.</span>
+          </label>
+        </div>
+
+        <div>
+          <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-2">My Pairwork Discussion Notes:</label>
+          <textarea id="ex2b-notes-input" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-blue-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. I agree with statement 1 because big cities provide 24/7 transport, hospitals, and entertainment. Regarding statement 4, checking in on elderly neighbours creates genuine community solidarity..."></textarea>
+        </div>
+        <div id="ex2b-status" class="hidden p-3 rounded-xl bg-blue-100 text-blue-900 text-xs font-bold">
+          ✓ Your discussion notes have been saved locally.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: VERB FORMS & COMMAS (Exercise 3) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3</span>
+            <span class="text-indigo-200 text-xs font-medium">Present Simple Accuracy & Punctuation</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Zero Conditional: Verb Forms & Commas</h2>
+          <p class="text-indigo-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Both clauses in a zero conditional sentence use the <strong>present simple</strong>. Notice where commas are required: when the <em>if / when</em> clause comes first, insert a comma before the main clause!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3()" class="px-5 py-2.5 bg-white hover:bg-indigo-50 text-indigo-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Verbs</span>
+          </button>
+          <button onclick="revealEx3()" class="px-4 py-2.5 bg-indigo-900/60 hover:bg-indigo-900 text-white border border-indigo-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 3 Interactive Sentences with Commas -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-800 text-sm font-black flex items-center justify-center">3</span>
+            Complete the zero conditional sentences with the correct form of the verbs in brackets. Add commas where necessary:
+          </h3>
+          <span id="ex3-score-pill" class="text-xs font-bold text-indigo-800 bg-indigo-50 px-3 py-1 rounded-xl">Score: 0/14</span>
+        </div>
+
+        <div class="space-y-4" id="ex3-container">
+          <!-- Item 1 (Example in book) -->
+          <div class="p-4 rounded-2xl bg-indigo-50/50 border border-indigo-200">
+            <span class="text-xs font-black uppercase text-indigo-700 tracking-wider">1. Example</span>
+            <p class="text-base text-slate-800 font-medium mt-1">
+              When people <strong>visit</strong> villages<mark class="bg-amber-200 font-black px-1 rounded mx-0.5">,</mark> they usually <strong>like</strong> the peace and quiet.
+            </p>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 2 (work / offer)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Cities
+              <input type="text" data-ex3-gap="2a" data-ans="work" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(work)" />
+              well as communities if they
+              <input type="text" data-ex3-gap="2b" data-ans="offer" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(offer)" />
+              good public facilities.
+            </p>
+            <p class="text-xs text-slate-400">Comma rule: If-clause is second &rarr; no comma needed.</p>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 3 (live / have)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              If you
+              <input type="text" data-ex3-gap="3a" data-ans="live" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(live)" />
+              in a big city<input type="text" data-ex3-gap="3c" data-ans="," class="ex3-input exercise-input mx-1 px-2 py-1 rounded-lg border-2 border-amber-300 font-black text-amber-900 bg-amber-50 text-base w-10 text-center focus:border-amber-600 focus:outline-none" placeholder="," title="Insert comma if needed" />
+              you often
+              <input type="text" data-ex3-gap="3b" data-ans="have" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(have)" />
+              very limited personal space.
+            </p>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 4 (buy / come)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              When you
+              <input type="text" data-ex3-gap="4a" data-ans="buy" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(buy)" />
+              a house in the countryside<input type="text" data-ex3-gap="4c" data-ans="," class="ex3-input exercise-input mx-1 px-2 py-1 rounded-lg border-2 border-amber-300 font-black text-amber-900 bg-amber-50 text-base w-10 text-center focus:border-amber-600 focus:outline-none" placeholder="," title="Insert comma if needed" />
+              it usually
+              <input type="text" data-ex3-gap="4b" data-ans="comes" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(come)" />
+              with a nice garden.
+            </p>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 5 (have / use)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              When a city
+              <input type="text" data-ex3-gap="5a" data-ans="has" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(have)" />
+              a central square<input type="text" data-ex3-gap="5c" data-ans="," class="ex3-input exercise-input mx-1 px-2 py-1 rounded-lg border-2 border-amber-300 font-black text-amber-900 bg-amber-50 text-base w-10 text-center focus:border-amber-600 focus:outline-none" placeholder="," title="Insert comma if needed" />
+              people
+              <input type="text" data-ex3-gap="5b" data-ans="use" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(use)" />
+              it for all sorts of purposes.
+            </p>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 6 (want / be)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              If you
+              <input type="text" data-ex3-gap="6a" data-ans="want" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(want)" />
+              to be part of a community<input type="text" data-ex3-gap="6c" data-ans="," class="ex3-input exercise-input mx-1 px-2 py-1 rounded-lg border-2 border-amber-300 font-black text-amber-900 bg-amber-50 text-base w-10 text-center focus:border-amber-600 focus:outline-none" placeholder="," title="Insert comma if needed" />
+              it
+              <input type="text" data-ex3-gap="6b" data-ans="is" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(be)" />
+              a good idea to join local clubs.
+            </p>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 7 (take up / live)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Travelling often
+              <input type="text" data-ex3-gap="7a" data-ans="takes up" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-32 text-center focus:border-indigo-600 focus:outline-none" placeholder="(take up)" />
+              a lot of your time when you
+              <input type="text" data-ex3-gap="7b" data-ans="live" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(live)" />
+              in a city.
+            </p>
+            <p class="text-xs text-slate-400">When-clause comes second &rarr; no comma needed.</p>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 8 (be / be)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              There
+              <input type="text" data-ex3-gap="8a" data-ans="is" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(be)" />
+              generally less crime when there
+              <input type="text" data-ex3-gap="8b" data-ans="is" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white text-base w-28 text-center focus:border-indigo-600 focus:outline-none" placeholder="(be)" />
+              a sense of community.
+            </p>
+            <p class="text-xs text-slate-400">When-clause comes second &rarr; no comma needed.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: IF VS UNLESS (Exercise 4) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-sky-600 via-teal-600 to-emerald-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4</span>
+            <span class="text-sky-200 text-xs font-medium">Conditionals with 'If' & 'Unless' (If not)</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Choosing Between If and Unless</h2>
+          <p class="text-sky-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Remember: <strong>unless</strong> means <em>if... not</em> or <em>except if</em>. We do not use a negative verb after unless. Select the correct conjunction for each sentence.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4()" class="px-5 py-2.5 bg-white hover:bg-sky-50 text-sky-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check If/Unless</span>
+          </button>
+          <button onclick="revealEx4()" class="px-4 py-2.5 bg-sky-900/60 hover:bg-sky-900 text-white border border-sky-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 4 Question Rows with Pill Selection -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-sky-100 text-sky-800 text-sm font-black flex items-center justify-center">4</span>
+            Complete the sentences with <em>if</em> or <em>unless</em>:
+          </h3>
+          <span id="ex4-score-pill" class="text-xs font-bold text-sky-800 bg-sky-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="grid gap-3.5" id="ex4-container">
+          <!-- Item 1 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4-q="1" data-ans="if">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              Crime rises
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">if</button>
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">unless</button>
+              </span>
+              people lose their jobs.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4-q="2" data-ans="unless">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              Communities don't work well
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">if</button>
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">unless</button>
+              </span>
+              they have a central point.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4-q="3" data-ans="If">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">If</button>
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">Unless</button>
+              </span>
+              people feel part of a community, they look after their property.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4-q="4" data-ans="unless">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              Young people often move away from an area
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">if</button>
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">unless</button>
+              </span>
+              there are plenty of job opportunities.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4-q="5" data-ans="unless">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              A community is not successful
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">if</button>
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">unless</button>
+              </span>
+              it has a group of leaders.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4-q="6" data-ans="if">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              A town is very attractive
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">if</button>
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">unless</button>
+              </span>
+              it has good schools and other facilities.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: SENTENCE FORMATION & PERSONAL TRUTH (Exercise 5a & 5b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex5" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-emerald-600 via-teal-700 to-indigo-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 5a & 5b</span>
+            <span class="text-emerald-200 text-xs font-medium">Sentence Synthesis & Personal Reflection</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Making Zero Conditional Sentences</h2>
+          <p class="text-emerald-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Unpack the prompts into grammatically correct sentences. Add commas where the condition clause comes first. Then test which statements are true for your life.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx5a()" class="px-5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 5a</span>
+          </button>
+          <button onclick="revealEx5a()" class="px-4 py-2.5 bg-emerald-900/60 hover:bg-emerald-900 text-white border border-emerald-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 5a Interactive Sentence Builders -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">5a</span>
+            Make zero conditional sentences. Add commas where necessary:
+          </h3>
+          <span id="ex5a-score-pill" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex5a-container">
+          <!-- Item 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex5a-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 1: I / not carry / much money on me / unless / I / really / have to</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex5a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type complete sentence here..." data-accepted="i dont carry much money on me unless i really have to,i do not carry much money on me unless i really have to" />
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex5a-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 2: I / not feel / safe in the streets at night / if / I / be / on my own</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex5a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type complete sentence here..." data-accepted="i dont feel safe in the streets at night if im on my own,i do not feel safe in the streets at night if i am on my own,i dont feel safe in the streets at night if i am on my own,i do not feel safe in the streets at night if im on my own" />
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex5a-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 3: when / I / see / my neighbours / I / always / stop / for a chat</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex5a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type complete sentence here (include comma)..." data-accepted="when i see my neighbours i always stop for a chat,when i see my neighbors i always stop for a chat" />
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex5a-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 4: I / always / lock / my doors / when / I / be / at home</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex5a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type complete sentence here..." data-accepted="i always lock my doors when im at home,i always lock my doors when i am at home" />
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex5a-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 5: children in my town / play / in the street / even when / it / get / dark</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex5a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type complete sentence here..." data-accepted="children in my town play in the street even when it gets dark" />
+          </div>
+
+          <!-- Item 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex5a-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 6: if / I / be / part of a community / it / make / me / feel safer</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex5a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type complete sentence here (include comma)..." data-accepted="if im part of a community it makes me feel safer,if i am part of a community it makes me feel safer" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 5b Pairwork Checklist & Experience Reflection -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">5b</span>
+              Work in pairs. Are any of the sentences in Exercise 5a true for you?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Select the sentences that describe your everyday habits and surroundings:</p>
+          </div>
+          <button onclick="saveEx5bNotes()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+            Save Habits
+          </button>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3" id="ex5b-checklist">
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-emerald-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-1" class="w-5 h-5 text-emerald-600 rounded-lg focus:ring-emerald-500" />
+            <span class="text-sm font-bold text-slate-800">1. I don't carry much cash unless I really have to.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-emerald-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-2" class="w-5 h-5 text-emerald-600 rounded-lg focus:ring-emerald-500" />
+            <span class="text-sm font-bold text-slate-800">2. I don't feel safe in streets at night on my own.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-emerald-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-3" class="w-5 h-5 text-emerald-600 rounded-lg focus:ring-emerald-500" />
+            <span class="text-sm font-bold text-slate-800">3. When I see my neighbours, I stop for a chat.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-emerald-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-4" class="w-5 h-5 text-emerald-600 rounded-lg focus:ring-emerald-500" />
+            <span class="text-sm font-bold text-slate-800">4. I always lock my doors when I am at home.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-emerald-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-5" class="w-5 h-5 text-emerald-600 rounded-lg focus:ring-emerald-500" />
+            <span class="text-sm font-bold text-slate-800">5. Children play in the street even when it gets dark.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-emerald-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-6" class="w-5 h-5 text-emerald-600 rounded-lg focus:ring-emerald-500" />
+            <span class="text-sm font-bold text-slate-800">6. Being part of a community makes me feel safer.</span>
+          </label>
+        </div>
+
+        <div>
+          <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-2">My Everyday Community Reflections:</label>
+          <textarea id="ex5b-reflection-text" rows="2" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-emerald-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. Sentence 1 is completely true for me because I use mobile banking for almost all payments. Sentence 4 is also true because security is important in my apartment building..."></textarea>
+        </div>
+        <div id="ex5b-status" class="hidden p-3 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-bold">
+          ✓ Your responses have been saved to local session.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: QUESTIONS & SPEAKING (Exercise 6a & 6b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex6" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 6a & 6b</span>
+            <span class="text-violet-200 text-xs font-medium">Question Forms & Audio Pronunciation Rehearsal</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Zero Conditional Questions & Pairwork</h2>
+          <p class="text-violet-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Form questions using present simple auxiliary verbs (<em>do / does</em>) in the main clause. Then practice conversational speaking with native voice audio!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx6a()" class="px-5 py-2.5 bg-white hover:bg-violet-50 text-violet-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 6a</span>
+          </button>
+          <button onclick="revealEx6a()" class="px-4 py-2.5 bg-violet-900/60 hover:bg-violet-900 text-white border border-violet-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 6a Question Input Form -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-violet-100 text-violet-800 text-sm font-black flex items-center justify-center">6a</span>
+            Complete the questions with the correct form of the verbs in brackets:
+          </h3>
+          <span id="ex6a-score-pill" class="text-xs font-bold text-violet-800 bg-violet-50 px-3 py-1 rounded-xl">Score: 0/12</span>
+        </div>
+
+        <div class="space-y-4" id="ex6a-container">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex6a-row="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 1: (you/wake up) & (not have to)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>What time</span>
+              <input type="text" data-ex6a-gap="1a" data-ans="do you wake up" class="ex6a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-violet-900 bg-white text-base w-44 text-center focus:border-violet-600 focus:outline-none" placeholder="(you/wake up)" />
+              <span>if you</span>
+              <input type="text" data-ex6a-gap="1b" data-ans="don't have to,do not have to" class="ex6a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-violet-900 bg-white text-base w-44 text-center focus:border-violet-600 focus:outline-none" placeholder="(not have to)" />
+              <span>work or study?</span>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex6a-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 2: (you/entertain) & (be)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>How</span>
+              <input type="text" data-ex6a-gap="2a" data-ans="do you entertain" class="ex6a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-violet-900 bg-white text-base w-48 text-center focus:border-violet-600 focus:outline-none" placeholder="(you/entertain)" />
+              <span>yourself if you</span>
+              <input type="text" data-ex6a-gap="2b" data-ans="are" class="ex6a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-violet-900 bg-white text-base w-24 text-center focus:border-violet-600 focus:outline-none" placeholder="(be)" />
+              <span>on a long journey?</span>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex6a-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 3: (you/do) & (have)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>What</span>
+              <input type="text" data-ex6a-gap="3a" data-ans="do you do" class="ex6a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-violet-900 bg-white text-base w-36 text-center focus:border-violet-600 focus:outline-none" placeholder="(you/do)" />
+              <span>if you</span>
+              <input type="text" data-ex6a-gap="3b" data-ans="have" class="ex6a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-violet-900 bg-white text-base w-24 text-center focus:border-violet-600 focus:outline-none" placeholder="(have)" />
+              <span>difficulty sleeping?</span>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex6a-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 4: (be) & (your boss or teacher / do)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>If you</span>
+              <input type="text" data-ex6a-gap="4a" data-ans="are" class="ex6a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-violet-900 bg-white text-base w-24 text-center focus:border-violet-600 focus:outline-none" placeholder="(be)" />
+              <span>late, what</span>
+              <input type="text" data-ex6a-gap="4b" data-ans="does your boss or teacher do" class="ex6a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-violet-900 bg-white text-base w-72 text-center focus:border-violet-600 focus:outline-none" placeholder="(your boss or teacher / do)" />
+              <span>?</span>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex6a-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 5: (you/need) & (you/usually/talk)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>When</span>
+              <input type="text" data-ex6a-gap="5a" data-ans="you need" class="ex6a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-violet-900 bg-white text-base w-32 text-center focus:border-violet-600 focus:outline-none" placeholder="(you/need)" />
+              <span>advice, who</span>
+              <input type="text" data-ex6a-gap="5b" data-ans="do you usually talk" class="ex6a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-violet-900 bg-white text-base w-52 text-center focus:border-violet-600 focus:outline-none" placeholder="(you/usually/talk)" />
+              <span>to?</span>
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex6a-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 6: (you/get) & (you/ask)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>If</span>
+              <input type="text" data-ex6a-gap="6a" data-ans="you get" class="ex6a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-violet-900 bg-white text-base w-28 text-center focus:border-violet-600 focus:outline-none" placeholder="(you/get)" />
+              <span>lost in a strange place,</span>
+              <input type="text" data-ex6a-gap="6b" data-ans="do you ask" class="ex6a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-violet-900 bg-white text-base w-36 text-center focus:border-violet-600 focus:outline-none" placeholder="(you/ask)" />
+              <span>someone for help?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 6b Interactive Speaking Simulation Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-violet-100 text-violet-800 text-sm font-black flex items-center justify-center">6b</span>
+            Work in pairs. Take turns to ask and answer the questions in Exercise 6a:
+          </h3>
+          <span class="text-xs font-black uppercase tracking-wider text-violet-700 bg-violet-100 px-3 py-1 rounded-xl">Pronunciation Audio</span>
+        </div>
+        <p class="text-sm text-slate-600">Click any card below to hear natural English pronunciation, review a sample answer, and practice speaking aloud:</p>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4" id="speaking-cards-grid">
+          <!-- Card 1 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-violet-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-violet-700 uppercase">Q1: Sleep Routine</span>
+              <button onclick="speakText('What time do you wake up if you do not have to work or study?')" class="text-xs text-slate-500 hover:text-violet-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"What time do you wake up if you don't have to work or study?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "If I don't have to work, I usually wake up around 9 a.m. because I love sleeping in on weekends!"
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-violet-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-violet-700 uppercase">Q2: Long Journeys</span>
+              <button onclick="speakText('How do you entertain yourself if you are on a long journey?')" class="text-xs text-slate-500 hover:text-violet-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"How do you entertain yourself if you are on a long journey?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "If I'm travelling on a train or plane, I listen to podcasts or read a gripping mystery novel."
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-violet-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-violet-700 uppercase">Q3: Sleeplessness</span>
+              <button onclick="speakText('What do you do if you have difficulty sleeping?')" class="text-xs text-slate-500 hover:text-violet-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"What do you do if you have difficulty sleeping?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "When I can't sleep, I drink warm chamomile tea and avoid looking at my smartphone screen."
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-violet-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-violet-700 uppercase">Q4: Being Late</span>
+              <button onclick="speakText('If you are late, what does your boss or teacher do?')" class="text-xs text-slate-500 hover:text-violet-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"If you are late, what does your boss or teacher do?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "If I am late, my manager expects a quick message explaining the transport delay."
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-violet-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-violet-700 uppercase">Q5: Seeking Advice</span>
+              <button onclick="speakText('When you need advice, who do you usually talk to?')" class="text-xs text-slate-500 hover:text-violet-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"When you need advice, who do you usually talk to?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "When I need genuine life advice, I talk to my older sister because she gives practical, honest feedback."
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-violet-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-violet-700 uppercase">Q6: Getting Lost</span>
+              <button onclick="speakText('If you get lost in a strange place, do you ask someone for help?')" class="text-xs text-slate-500 hover:text-violet-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"If you get lost in a strange place, do you ask someone for help?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "Yes, I immediately find a shopkeeper or local pedestrian and ask for directions politely."
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 7: EXPERT GRAMMAR REFERENCE (Page 188) -->
+    <!-- ========================================================================= -->
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-indigo-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 188 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Zero Conditional: Form, Meaning & Usage</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          The zero conditional talks about situations that are generally, universally, or scientifically true, habitual routines, and permanent real-world facts.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Form and Structure Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-800 font-black text-base flex items-center justify-center">
+              0C
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Grammar Form</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Present Simple in both clauses</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Basic Structure:</div>
+              <p class="text-slate-700 font-medium"><strong>If / When + present simple, present simple.</strong></p>
+              <p class="text-slate-600 font-medium"><em>"If you live in a big city, you have limited space."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Inverted Clause Order (No Comma):</div>
+              <p class="text-slate-700 font-medium"><strong>Main clause + if / when + condition clause.</strong></p>
+              <p class="text-slate-600 font-medium"><em>"People feel safer if they live in a close community."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Modal Verbs & Imperatives in the Main Clause:</div>
+              <p class="text-slate-600 font-medium">We can also use modal verbs (<em>can, should, must</em>) or an imperative:</p>
+              <p class="text-slate-600 font-medium"><em>"If you have elderly neighbours, you <strong>should try</strong> to help them."</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Meaning and Connectors Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-800 font-black text-base flex items-center justify-center">
+              IF/UN
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Connectors: If, When, Unless</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Real conditions & Exceptions</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. If vs. When:</div>
+              <p class="text-slate-600 font-medium"><em>If</em> and <em>when</em> often mean the same in zero conditional generalisations.</p>
+              <p class="text-slate-600 font-medium"><em>"<strong>When / If</strong> people visit villages, they like the peace."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Unless (= If not / except if):</div>
+              <p class="text-slate-600 font-medium"><em>Unless</em> introduces an exception condition. Followed by affirmative verb:</p>
+              <p class="text-slate-600 font-medium"><em>"Communities don't work well <strong>unless</strong> they have a central point."</em> (= if they don't have a central point)</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. General Truth vs. Future Specific (First Conditional):</div>
+              <p class="text-slate-600 font-medium">Zero conditional describes <strong>what always happens</strong>, not a specific future prediction (which uses <em>will</em>).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Summary Table -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-3">
+        <h3 class="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+          <span>📌</span> Summary of Punctuation & Connectors
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm text-slate-700">
+            <thead class="bg-slate-50 text-slate-900 font-bold border-b border-slate-200">
+              <tr>
+                <th class="p-3">Clause Order</th>
+                <th class="p-3">Punctuation</th>
+                <th class="p-3">Example</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="p-3 font-semibold text-indigo-700">Condition first</td>
+                <td class="p-3"><strong>Comma required</strong> after if-clause</td>
+                <td class="p-3"><em>If you live in a city<strong>,</strong> personal space is limited.</em></td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-indigo-700">Result first</td>
+                <td class="p-3"><strong>No comma</strong> between clauses</td>
+                <td class="p-3"><em>Personal space is limited if you live in a city.</em></td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-indigo-700">Unless clause</td>
+                <td class="p-3">Same comma rule as <em>if</em></td>
+                <td class="p-3"><em>I don't carry cash unless I really have to.</em></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 68
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 7a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 7: City life • Page 106 • Expert Grammar Page 188
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State management for individual exercises
+    const state = {
+      score: {
+        ex1: 0,
+        ex2a: 0,
+        ex3: 0,
+        ex4: 0,
+        ex5a: 0,
+        ex6a: 0
+      }
+    };
+
+    // Web Audio Synthesizer for instant feedback sounds
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(170, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Web Speech API for British English pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user string input
+    function cleanStr(s) {
+      return (s || '').toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // EXERCISE 1 CHECK & REVEAL
+    function checkEx1() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex1-questions [data-ex1-q]');
+
+      rows.forEach(row => {
+        const sel = row.querySelector('.ex1-select');
+        const expected = sel.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!sel.value) {
+          badge.innerHTML = '';
+          sel.classList.remove('border-rose-400', 'border-emerald-500');
+          return;
+        }
+
+        if (sel.value === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-emerald-500');
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck</span>';
+          sel.classList.remove('border-emerald-500');
+          sel.classList.add('border-rose-400');
+        }
+      });
+
+      state.score.ex1 = correct;
+      document.getElementById('ex1-score-pill').textContent = `Score: ${correct}/4`;
+      updateTotalScore();
+      playBeep(correct >= 3);
+    }
+
+    function revealEx1() {
+      const keys = {
+        '1': 'two-comma',
+        '2': 'if-condition',
+        '3': 'yes-no-comma',
+        '4': 'when'
+      };
+
+      for (let q in keys) {
+        const row = document.querySelector(`[data-ex1-q="${q}"]`);
+        const sel = row.querySelector('.ex1-select');
+        const badge = row.querySelector('.feedback-badge');
+        sel.value = keys[q];
+        sel.classList.remove('border-rose-400');
+        sel.classList.add('border-emerald-500');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex1 = 4;
+      document.getElementById('ex1-score-pill').textContent = 'Score: 4/4';
+      updateTotalScore();
+    }
+
+    // EXERCISE 2a CHECK & REVEAL
+    function checkEx2a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex2a-container [data-ex2a-item]');
+
+      rows.forEach(row => {
+        const sel = row.querySelector('.ex2a-select');
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!sel.value) {
+          badge.innerHTML = '';
+          sel.classList.remove('border-rose-400', 'border-emerald-500');
+          return;
+        }
+
+        if (sel.value === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-emerald-500');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Need: ${expected}</span>`;
+          sel.classList.remove('border-emerald-500');
+          sel.classList.add('border-rose-400');
+        }
+      });
+
+      state.score.ex2a = correct;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx2a() {
+      const keys = ['F', 'A', 'B', 'C', 'E', 'D'];
+      const rows = document.querySelectorAll('#ex2a-container [data-ex2a-item]');
+      rows.forEach((row, i) => {
+        const sel = row.querySelector('.ex2a-select');
+        const badge = row.querySelector('.feedback-badge');
+        sel.value = keys[i];
+        sel.classList.remove('border-rose-400');
+        sel.classList.add('border-emerald-500');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex2a = 6;
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    function saveEx2bNotes() {
+      const checked = [];
+      [1, 3, 4, 5].forEach(i => {
+        if (document.getElementById(`ex2b-chk-${i}`).checked) checked.push(i);
+      });
+      const notes = document.getElementById('ex2b-notes-input').value;
+      localStorage.setItem('m7_grammar_ex2b', JSON.stringify({ checked, notes }));
+      document.getElementById('ex2b-status').classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // EXERCISE 3 CHECK & REVEAL
+    function checkEx3() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex3-input');
+
+      inputs.forEach(inp => {
+        const expected = (inp.getAttribute('data-ans') || '').trim();
+        const userVal = (inp.value || '').trim().toLowerCase();
+
+        if (expected === ',') {
+          // comma field
+          if (userVal === ',') {
+            correct++;
+            inp.classList.remove('border-rose-400', 'bg-rose-50');
+            inp.classList.add('border-emerald-500', 'bg-emerald-50');
+          } else {
+            inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+            inp.classList.add('border-rose-400', 'bg-rose-50');
+          }
+        } else {
+          // verb field
+          if (cleanStr(userVal) === cleanStr(expected)) {
+            correct++;
+            inp.classList.remove('border-rose-400', 'bg-rose-50');
+            inp.classList.add('border-emerald-500', 'bg-emerald-50');
+          } else {
+            inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+            inp.classList.add('border-rose-400', 'bg-rose-50');
+          }
+        }
+      });
+
+      // Update badge on each row
+      document.querySelectorAll('[data-ex3-row]').forEach(row => {
+        const rowInputs = Array.from(row.querySelectorAll('.ex3-input'));
+        const rowBadge = row.querySelector('.feedback-badge');
+        const allCorrect = rowInputs.every(i => i.classList.contains('border-emerald-500'));
+        if (allCorrect) {
+          rowBadge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+        } else {
+          rowBadge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck</span>';
+        }
+      });
+
+      state.score.ex3 = correct;
+      document.getElementById('ex3-score-pill').textContent = `Score: ${correct}/${inputs.length}`;
+      updateTotalScore();
+      playBeep(correct >= 10);
+    }
+
+    function revealEx3() {
+      const answers = {
+        '2a': 'work', '2b': 'offer',
+        '3a': 'live', '3c': ',', '3b': 'have',
+        '4a': 'buy', '4c': ',', '4b': 'comes',
+        '5a': 'has', '5c': ',', '5b': 'use',
+        '6a': 'want', '6c': ',', '6b': 'is',
+        '7a': 'takes up', '7b': 'live',
+        '8a': 'is', '8b': 'is'
+      };
+
+      for (let gap in answers) {
+        const inp = document.querySelector(`[data-ex3-gap="${gap}"]`);
+        if (inp) {
+          inp.value = answers[gap];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        }
+      }
+
+      document.querySelectorAll('[data-ex3-row] .feedback-badge').forEach(b => {
+        b.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex3 = 14;
+      document.getElementById('ex3-score-pill').textContent = 'Score: 14/14';
+      updateTotalScore();
+    }
+
+    // EXERCISE 4 PILL SELECTION & CHECK
+    function selectEx4Pill(btn) {
+      const parent = btn.closest('.inline-flex');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-sky-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-sky-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-sky-600', 'text-white', 'border-sky-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx4() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex4-container [data-ex4-q]');
+
+      rows.forEach(row => {
+        const expected = row.getAttribute('data-ans').toLowerCase();
+        const badge = row.querySelector('.feedback-badge');
+        const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select option</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toLowerCase();
+        if (userVal === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-sky-600', 'border-sky-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${row.getAttribute('data-ans')})</span>`;
+          selectedBtn.classList.remove('bg-sky-600', 'border-sky-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex4 = correct;
+      document.getElementById('ex4-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx4() {
+      const answers = {
+        '1': 'if',
+        '2': 'unless',
+        '3': 'If',
+        '4': 'unless',
+        '5': 'unless',
+        '6': 'if'
+      };
+
+      for (let q in answers) {
+        const row = document.querySelector(`[data-ex4-q="${q}"]`);
+        const btns = row.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim().toLowerCase() === answers[q].toLowerCase()) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-sky-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex4 = 6;
+      document.getElementById('ex4-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    // EXERCISE 5a CHECK & REVEAL
+    function checkEx5a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex5a-container [data-ex5a-item]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex5a-input');
+        const badge = row.querySelector('.feedback-badge');
+        const accepted = inp.getAttribute('data-accepted').split(',').map(cleanStr);
+        const userClean = cleanStr(inp.value);
+
+        if (!userClean) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Type sentence</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (accepted.some(ans => userClean === ans || userClean.includes(ans) || ans.includes(userClean))) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck grammar</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex5a = correct;
+      document.getElementById('ex5a-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx5a() {
+      const keys = [
+        "I don't carry much money on me unless I really have to.",
+        "I don't feel safe in the streets at night if I am on my own.",
+        "When I see my neighbours, I always stop for a chat.",
+        "I always lock my doors when I am at home.",
+        "Children in my town play in the street even when it gets dark.",
+        "If I am part of a community, it makes me feel safer."
+      ];
+
+      const rows = document.querySelectorAll('#ex5a-container [data-ex5a-item]');
+      rows.forEach((row, i) => {
+        const inp = row.querySelector('.ex5a-input');
+        const badge = row.querySelector('.feedback-badge');
+        inp.value = keys[i];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex5a = 6;
+      document.getElementById('ex5a-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    function saveEx5bNotes() {
+      const checked = [];
+      for (let i = 1; i <= 6; i++) {
+        if (document.getElementById(`ex5b-chk-${i}`).checked) checked.push(i);
+      }
+      const reflection = document.getElementById('ex5b-reflection-text').value;
+      localStorage.setItem('m7_grammar_ex5b', JSON.stringify({ checked, reflection }));
+      document.getElementById('ex5b-status').classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // EXERCISE 6a CHECK & REVEAL
+    function checkEx6a() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex6a-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      // Update row badges
+      document.querySelectorAll('[data-ex6a-row]').forEach(row => {
+        const rowInputs = Array.from(row.querySelectorAll('.ex6a-input'));
+        const rowBadge = row.querySelector('.feedback-badge');
+        const allCorrect = rowInputs.every(i => i.classList.contains('border-emerald-500'));
+        if (allCorrect) {
+          rowBadge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+        } else {
+          rowBadge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck</span>';
+        }
+      });
+
+      state.score.ex6a = correct;
+      document.getElementById('ex6a-score-pill').textContent = `Score: ${correct}/${inputs.length}`;
+      updateTotalScore();
+      playBeep(correct >= 8);
+    }
+
+    function revealEx6a() {
+      const keys = {
+        '1a': 'do you wake up',
+        '1b': "don't have to",
+        '2a': 'do you entertain',
+        '2b': 'are',
+        '3a': 'do you do',
+        '3b': 'have',
+        '4a': 'are',
+        '4b': 'does your boss or teacher do',
+        '5a': 'you need',
+        '5b': 'do you usually talk',
+        '6a': 'you get',
+        '6b': 'do you ask'
+      };
+
+      for (let gap in keys) {
+        const inp = document.querySelector(`[data-ex6a-gap="${gap}"]`);
+        if (inp) {
+          inp.value = keys[gap];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        }
+      }
+
+      document.querySelectorAll('[data-ex6a-row] .feedback-badge').forEach(b => {
+        b.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex6a = 12;
+      document.getElementById('ex6a-score-pill').textContent = 'Score: 12/12';
+      updateTotalScore();
+    }
+
+    // Global Score Updating
+    function updateTotalScore() {
+      const total = state.score.ex1 + state.score.ex2a + state.score.ex3 + state.score.ex4 + state.score.ex5a + state.score.ex6a;
+      const maxScore = 37; // 4 + 6 + 14 + 6 + 6 + 1 = normalized ~ 37 points
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 28) {
+        bar.classList.replace('bg-indigo-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-indigo-600');
+      }
+    }
+
+    // Reset All Fields Button
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Clear 1
+      document.querySelectorAll('.ex1-select').forEach(s => {
+        s.value = '';
+        s.classList.remove('border-emerald-500', 'border-rose-400');
+      });
+
+      // Clear 2a
+      document.querySelectorAll('.ex2a-select').forEach(s => {
+        s.value = '';
+        s.classList.remove('border-emerald-500', 'border-rose-400');
+      });
+
+      // Clear 3
+      document.querySelectorAll('.ex3-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 4
+      document.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-sky-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-sky-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear 5a
+      document.querySelectorAll('.ex5a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 6a
+      document.querySelectorAll('.ex6a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear all feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset scores
+      state.score = { ex1: 0, ex2a: 0, ex3: 0, ex4: 0, ex5a: 0, ex6a: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1-score-pill').textContent = 'Score: 0/4';
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex3-score-pill').textContent = 'Score: 0/14';
+      document.getElementById('ex4-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex5a-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex6a-score-pill').textContent = 'Score: 0/12';
+    });
+
+    // Auto-restore saved preferences from localStorage
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved2b = JSON.parse(localStorage.getItem('m7_grammar_ex2b'));
+        if (saved2b) {
+          if (saved2b.checked && Array.isArray(saved2b.checked)) {
+            saved2b.checked.forEach(n => {
+              const el = document.getElementById(`ex2b-chk-${n}`);
+              if (el) el.checked = true;
+            });
+          }
+          if (saved2b.notes) document.getElementById('ex2b-notes-input').value = saved2b.notes;
+        }
+
+        const saved5b = JSON.parse(localStorage.getItem('m7_grammar_ex5b'));
+        if (saved5b) {
+          if (saved5b.checked && Array.isArray(saved5b.checked)) {
+            saved5b.checked.forEach(n => {
+              const el = document.getElementById(`ex5b-chk-${n}`);
+              if (el) el.checked = true;
+            });
+          }
+          if (saved5b.reflection) document.getElementById('ex5b-reflection-text').value = saved5b.reflection;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

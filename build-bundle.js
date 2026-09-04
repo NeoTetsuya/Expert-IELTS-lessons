@@ -56,6 +56,7 @@ if (!cssOnly) {
         'deck-charts.js',
         'grammar-reference.js',
         'reading-walkthrough.js',
+        'vocab-reference.js',
         'presentation-tools.js',
         'category-sorter.js',
         'drag-gapfill.js',

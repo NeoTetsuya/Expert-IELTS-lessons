@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 4: Language Development - Past Simple & Past Continuous</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth animated transitions */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-emerald-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-600 to-cyan-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-emerald-500/25 ring-2 ring-white">
+          M4
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 tracking-wide uppercase">Unit 4: Well-being</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 58</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-emerald-600">Past Simple & Past Continuous</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-emerald-600">0 / 36</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-emerald-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-emerald-600 text-white shadow-md shadow-emerald-600/25">
+          1. Past Simple (1, 2a, 2b)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Questions (3a & 3b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Past Continuous (4 & 5)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Simple vs Continuous (6)
+        </button>
+        <button data-tab="tab-ex5" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          5. Lifestyle Changes (7)
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 185
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: PAST SIMPLE (Ex 1, 2a & 2b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercises 1, 2a & 2b</span>
+            <span class="text-emerald-200 text-xs font-medium">Expert Grammar Page 185</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Past Simple: Completed Actions & Specific Time</h2>
+          <p class="text-emerald-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            We use the past simple for finished actions, events, or situations that occurred at a specific, known point in the past. Look for past time markers like <em>yesterday</em>, <em>last year</em>, and <em>ago</em>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2a()" class="px-5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 2a</span>
+          </button>
+          <button onclick="revealEx2a()" class="px-4 py-2.5 bg-emerald-800/60 hover:bg-emerald-800 text-white border border-emerald-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 1: Concept Discovery Callout -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">1</span>
+            Read the sentences. Are the actions complete? How do you know?
+          </h3>
+          <button onclick="toggleEx1Expl()" class="text-xs font-extrabold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200 hover:bg-emerald-100 transition">
+            Toggle Explanation
+          </button>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-xs font-black uppercase text-emerald-700 tracking-wider">Sentence 1</span>
+            <p class="text-base font-bold text-slate-900">
+              "I <span class="underline decoration-emerald-500 decoration-2">lost</span> weight <mark class="bg-emerald-100 px-1.5 py-0.5 rounded text-emerald-900 font-bold">last year</mark> when I <span class="underline decoration-emerald-500 decoration-2">started</span> exercising."
+            </p>
+            <p class="text-xs text-slate-500">Action status: <strong>Finished</strong>. Specific time: <em>last year</em>.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-xs font-black uppercase text-emerald-700 tracking-wider">Sentence 2</span>
+            <p class="text-base font-bold text-slate-900">
+              "Al <span class="underline decoration-emerald-500 decoration-2">didn't go</span> to work <mark class="bg-emerald-100 px-1.5 py-0.5 rounded text-emerald-900 font-bold">yesterday</mark> because he <span class="underline decoration-emerald-500 decoration-2">was</span> ill."
+            </p>
+            <p class="text-xs text-slate-500">Action status: <strong>Finished</strong>. Specific time: <em>yesterday</em>.</p>
+          </div>
+        </div>
+
+        <div id="ex1-explanation" class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-sm text-emerald-950 space-y-1">
+          <p class="font-extrabold">💡 Analysis:</p>
+          <p><strong>Yes, both actions are completely finished.</strong> We know this because the verbs are in the Past Simple (<em>lost</em>, <em>started</em>, <em>didn't go</em>, <em>was</em>) and specific finished time expressions (<em>last year</em>, <em>yesterday</em>) explicitly anchor them in the past.</p>
+        </div>
+      </div>
+
+      <!-- Exercise 2a: Complete the sentences with the past simple form -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">2a</span>
+            Complete the sentences with the past simple form of the verbs in brackets:
+          </h3>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">Score: 0/11</span>
+        </div>
+
+        <div class="space-y-4" id="ex2a-container">
+          <!-- Item 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              <mark class="time-tag bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-bold">Last year</mark> the number of people buying apps to help them get fit
+              <input type="text" data-ex2a-gap="1" data-ans="increased" class="ex2a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-36 text-center focus:border-emerald-600 focus:outline-none" placeholder="(increase)" />
+              dramatically.
+            </p>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              <mark class="time-tag bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-bold">Two years ago</mark> I
+              <input type="text" data-ex2a-gap="2a" data-ans="went" class="ex2a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-28 text-center focus:border-emerald-600 focus:outline-none" placeholder="(go)" />
+              on a diet but I
+              <input type="text" data-ex2a-gap="2b" data-ans="didn't lose,did not lose" class="ex2a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-36 text-center focus:border-emerald-600 focus:outline-none" placeholder="(not lose)" />
+              much weight.
+            </p>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              They
+              <input type="text" data-ex2a-gap="3a" data-ans="did" class="ex2a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-24 text-center focus:border-emerald-600 focus:outline-none" placeholder="(do)" />
+              various tests <mark class="time-tag bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-bold">last month</mark> and the results
+              <input type="text" data-ex2a-gap="3b" data-ans="were" class="ex2a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-28 text-center focus:border-emerald-600 focus:outline-none" placeholder="(be)" />
+              very surprising.
+            </p>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              <mark class="time-tag bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-bold">During the winter</mark>, the students
+              <input type="text" data-ex2a-gap="4a" data-ans="weren't,were not" class="ex2a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-32 text-center focus:border-emerald-600 focus:outline-none" placeholder="(not be)" />
+              very healthy and
+              <input type="text" data-ex2a-gap="4b" data-ans="didn't do,did not do" class="ex2a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-36 text-center focus:border-emerald-600 focus:outline-none" placeholder="(not do)" />
+              any exercise.
+            </p>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              <mark class="time-tag bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-bold">150 years ago</mark> people
+              <input type="text" data-ex2a-gap="5a" data-ans="didn't have,did not have" class="ex2a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-36 text-center focus:border-emerald-600 focus:outline-none" placeholder="(not have)" />
+              some of the medicines we do now, so more people
+              <input type="text" data-ex2a-gap="5b" data-ans="died" class="ex2a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-28 text-center focus:border-emerald-600 focus:outline-none" placeholder="(die)" />
+              of minor illnesses.
+            </p>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 6</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              <mark class="time-tag bg-emerald-100 text-emerald-900 px-1.5 py-0.5 rounded font-bold">In the past</mark>, people generally
+              <input type="text" data-ex2a-gap="6a" data-ans="had" class="ex2a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-24 text-center focus:border-emerald-600 focus:outline-none" placeholder="(have)" />
+              more active jobs than they do now, so they
+              <input type="text" data-ex2a-gap="6b" data-ans="were" class="ex2a-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-24 text-center focus:border-emerald-600 focus:outline-none" placeholder="(be)" />
+              fitter.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 2b: Time Expressions & Writing Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">2b</span>
+              Underline the time expressions & Write three sentences about yourself:
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Identified time markers from 2a: <em>Last year</em>, <em>Two years ago</em>, <em>last month</em>, <em>During the winter</em>, <em>150 years ago</em>, <em>In the past</em>.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="loadSampleSentences2b()" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+              Load Samples
+            </button>
+            <button onclick="saveSentences2b()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">
+              Save My Notes
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-1">Sentence 1 (e.g., using <em>Last year</em> or <em>Two years ago</em>):</label>
+            <input type="text" id="ex2b-s1" placeholder="e.g. Last year I started drinking two litres of water every day to improve my hydration." class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-1">Sentence 2 (e.g., using <em>last month</em> or <em>During the winter</em>):</label>
+            <input type="text" id="ex2b-s2" placeholder="e.g. During the winter I joined a local badminton club and played matches every weekend." class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-1">Sentence 3 (e.g., using <em>In the past</em>):</label>
+            <input type="text" id="ex2b-s3" placeholder="e.g. In the past I didn't get enough regular sleep because I worked late on the computer." class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" />
+          </div>
+        </div>
+        <div id="ex2b-status" class="hidden p-3 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-bold">
+          ✓ Your personal sentences have been saved to this browser session.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: QUESTIONS (Ex 3a & 3b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-teal-600 via-emerald-600 to-green-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a & 3b</span>
+            <span class="text-teal-200 text-xs font-medium">Question Formation & Speaking Pairwork</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Past Simple Question Formation</h2>
+          <p class="text-teal-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Form accurate past simple questions using <code class="bg-white/20 px-2 py-0.5 rounded text-white font-bold">Did + you + bare infinitive</code> or question word + <code class="bg-white/20 px-2 py-0.5 rounded text-white font-bold">did + you + bare infinitive</code>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3a()" class="px-5 py-2.5 bg-white hover:bg-teal-50 text-teal-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Questions</span>
+          </button>
+          <button onclick="revealEx3a()" class="px-4 py-2.5 bg-teal-800/60 hover:bg-teal-800 text-white border border-teal-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 3a Question Builder Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">3a</span>
+            Complete the questions using <em>you</em> and the past simple form of the verbs in brackets:
+          </h3>
+          <span id="ex3a-score-pill" class="text-xs font-bold text-teal-800 bg-teal-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex3a-container">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-q="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 1: Prompt (eat)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <input type="text" data-ans="Did you eat" class="ex3a-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-40 text-center focus:border-teal-600 focus:outline-none" placeholder="Did you eat..." />
+              <span>any fruit or vegetables yesterday?</span>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-q="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 2: Prompt (drink)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>How much coffee</span>
+              <input type="text" data-ans="did you drink" class="ex3a-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-44 text-center focus:border-teal-600 focus:outline-none" placeholder="did you drink..." />
+              <span>yesterday?</span>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-q="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 3: Prompt (have)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>How many meals</span>
+              <input type="text" data-ans="did you have" class="ex3a-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-44 text-center focus:border-teal-600 focus:outline-none" placeholder="did you have..." />
+              <span>yesterday?</span>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-q="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 4: Prompt (do)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <input type="text" data-ans="Did you do" class="ex3a-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-40 text-center focus:border-teal-600 focus:outline-none" placeholder="Did you do..." />
+              <span>any exercise last week?</span>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-q="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 5: Prompt (get)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>How much sleep</span>
+              <input type="text" data-ans="did you get" class="ex3a-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-40 text-center focus:border-teal-600 focus:outline-none" placeholder="did you get..." />
+              <span>last night?</span>
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-q="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 6: Prompt (last/take)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>When</span>
+              <input type="text" data-ans="did you last take" class="ex3a-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-52 text-center focus:border-teal-600 focus:outline-none" placeholder="did you last take..." />
+              <span>a day off because you were ill?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3b Interactive Pairwork & Audio Simulation -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">3b</span>
+            Work in pairs. Take turns to ask and answer the questions in Exercise 3a:
+          </h3>
+          <span class="text-xs font-black uppercase tracking-wider text-teal-700 bg-teal-100 px-3 py-1 rounded-xl">Interactive Audio Rehearsal</span>
+        </div>
+        <p class="text-sm text-slate-600">Click any card below to listen to the question with native British pronunciation, read a model response, and practice answering with the timer:</p>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4" id="speaking-cards-grid">
+          <!-- Card 1 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-teal-700 uppercase">Q1: Fruit & Veg</span>
+              <button onclick="speakText('Did you eat any fruit or vegetables yesterday?')" class="text-xs text-slate-500 hover:text-teal-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"Did you eat any fruit or vegetables yesterday?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "Yes, I ate two crisp apples during my afternoon break and had a fresh spinach salad for dinner."
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-teal-700 uppercase">Q2: Coffee</span>
+              <button onclick="speakText('How much coffee did you drink yesterday?')" class="text-xs text-slate-500 hover:text-teal-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"How much coffee did you drink yesterday?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "I only drank one cup of espresso first thing in the morning because too much caffeine disrupts my sleep."
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-teal-700 uppercase">Q3: Meals</span>
+              <button onclick="speakText('How many meals did you have yesterday?')" class="text-xs text-slate-500 hover:text-teal-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"How many meals did you have yesterday?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "I had three balanced meals: porridge for breakfast, steamed salmon and rice for lunch, and a light vegetable soup."
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-teal-700 uppercase">Q4: Exercise</span>
+              <button onclick="speakText('Did you do any exercise last week?')" class="text-xs text-slate-500 hover:text-teal-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"Did you do any exercise last week?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "Yes, I went for a forty-minute jog in the local park on Tuesday and did swimming on Saturday morning."
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-teal-700 uppercase">Q5: Sleep</span>
+              <button onclick="speakText('How much sleep did you get last night?')" class="text-xs text-slate-500 hover:text-teal-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"How much sleep did you get last night?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "I managed to get about seven and a half hours of deep sleep, which made me feel refreshed today."
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-teal-700 uppercase">Q6: Sick Day</span>
+              <button onclick="speakText('When did you last take a day off because you were ill?')" class="text-xs text-slate-500 hover:text-teal-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"When did you last take a day off because you were ill?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "I last took a sick day roughly three months ago when I caught a bad winter flu and fever."
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: PAST CONTINUOUS (Ex 4 & 5) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-cyan-600 via-sky-600 to-indigo-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercises 4 & 5</span>
+            <span class="text-cyan-200 text-xs font-medium">Expert Grammar Page 185</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Past Continuous: Actions in Progress & Background Context</h2>
+          <p class="text-cyan-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Formed with <code class="bg-white/20 px-2 py-0.5 rounded text-white font-bold">was / were + verb-ing</code>. Used for ongoing actions at a specific time, parallel simultaneous actions, or setting the scene.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx5()" class="px-5 py-2.5 bg-white hover:bg-cyan-50 text-cyan-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Ex 5</span>
+          </button>
+          <button onclick="revealEx5()" class="px-4 py-2.5 bg-cyan-800/60 hover:bg-cyan-800 text-white border border-cyan-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 4: Matching Sentences (1-3) with Explanations (A-C) -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-800 text-sm font-black flex items-center justify-center">4</span>
+            Match the sentences (1–3) with the explanations (A–C):
+          </h3>
+          <span id="ex4-score-pill" class="text-xs font-bold text-cyan-800 bg-cyan-50 px-3 py-1 rounded-xl">Score: 0/3</span>
+        </div>
+
+        <!-- Explanations Reference Box -->
+        <div class="grid md:grid-cols-3 gap-3 text-xs sm:text-sm">
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-cyan-700 text-sm block mb-1">A</span>
+            <p class="text-slate-700 font-medium">two actions happening at the same time</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-cyan-700 text-sm block mb-1">B</span>
+            <p class="text-slate-700 font-medium">an action in progress at a specific time</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-cyan-700 text-sm block mb-1">C</span>
+            <p class="text-slate-700 font-medium">two or more actions setting the scene at the beginning of a story</p>
+          </div>
+        </div>
+
+        <div class="space-y-3 pt-2" id="ex4-container">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3" data-ex4-item="1" data-ans="B">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-bold text-slate-400 mr-2">1.</span>
+              "I was waiting to see the doctor at 5 p.m."
+            </div>
+            <div class="flex items-center gap-2">
+              <select class="ex4-select p-2 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-cyan-900 focus:border-cyan-600 focus:outline-none" onchange="checkEx4Match()">
+                <option value="">Select rule...</option>
+                <option value="A">A (two actions at the same time)</option>
+                <option value="B">B (action in progress at specific time)</option>
+                <option value="C">C (setting the scene)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3" data-ex4-item="2" data-ans="A">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-bold text-slate-400 mr-2">2.</span>
+              "They were using up a lot of energy while they were running."
+            </div>
+            <div class="flex items-center gap-2">
+              <select class="ex4-select p-2 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-cyan-900 focus:border-cyan-600 focus:outline-none" onchange="checkEx4Match()">
+                <option value="">Select rule...</option>
+                <option value="A">A (two actions at the same time)</option>
+                <option value="B">B (action in progress at specific time)</option>
+                <option value="C">C (setting the scene)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3" data-ex4-item="3" data-ans="C">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-bold text-slate-400 mr-2">3.</span>
+              "The sun was just rising and it was starting to get warm."
+            </div>
+            <div class="flex items-center gap-2">
+              <select class="ex4-select p-2 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-cyan-900 focus:border-cyan-600 focus:outline-none" onchange="checkEx4Match()">
+                <option value="">Select rule...</option>
+                <option value="A">A (two actions at the same time)</option>
+                <option value="B">B (action in progress at specific time)</option>
+                <option value="C">C (setting the scene)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 5: Complete the sentences with the past continuous form -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-800 text-sm font-black flex items-center justify-center">5</span>
+            Complete the sentences with the past continuous form of the verbs in brackets:
+          </h3>
+          <span id="ex5-score-pill" class="text-xs font-bold text-cyan-800 bg-cyan-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex5-container">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              At 8 o'clock this morning I
+              <input type="text" data-ans="was working out" class="ex5-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-cyan-900 bg-white text-base w-48 text-center focus:border-cyan-600 focus:outline-none" placeholder="(work out)" />
+              at the gym.
+            </p>
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              They
+              <input type="text" data-ans="weren't following,were not following" class="ex5-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-cyan-900 bg-white text-base w-52 text-center focus:border-cyan-600 focus:outline-none" placeholder="(not follow)" />
+              a very healthy lifestyle at that time.
+            </p>
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              All last year his health
+              <input type="text" data-ans="was slowly getting" class="ex5-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-cyan-900 bg-white text-base w-52 text-center focus:border-cyan-600 focus:outline-none" placeholder="(slow/get)" />
+              worse.
+            </p>
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              <input type="text" data-ans="Was she trying" class="ex5-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-cyan-900 bg-white text-base w-44 text-center focus:border-cyan-600 focus:outline-none" placeholder="(she/try)" />
+              to lose weight before the holiday?
+            </p>
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I
+              <input type="text" data-ans="wasn't feeling,was not feeling" class="ex5-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-cyan-900 bg-white text-base w-48 text-center focus:border-cyan-600 focus:outline-none" placeholder="(not feel)" />
+              well, so I didn't go for a run.
+            </p>
+          </div>
+
+          <!-- 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 6</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It
+              <input type="text" data-ans="was becoming" class="ex5-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-cyan-900 bg-white text-base w-44 text-center focus:border-cyan-600 focus:outline-none" placeholder="(become)" />
+              more difficult for them to follow a healthy lifestyle.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: SIMPLE VS CONTINUOUS (Ex 6) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 6</span>
+            <span class="text-indigo-200 text-xs font-medium">Aspect Selection & Contrast</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Past Simple & Past Continuous: Choosing the Right Aspect</h2>
+          <p class="text-indigo-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Choose whether an action was a continuous background context (<em>was/were -ing</em>) or a completed single event / habit (<em>past simple</em>). Tap each interactive choice directly.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx6()" class="px-5 py-2.5 bg-white hover:bg-indigo-50 text-indigo-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Choices</span>
+          </button>
+          <button onclick="revealEx6()" class="px-4 py-2.5 bg-indigo-800/60 hover:bg-indigo-800 text-white border border-indigo-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 6 Question Rows with Pill Selection -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-800 text-sm font-black flex items-center justify-center">6</span>
+            Choose the correct options in italics to complete the sentences:
+          </h3>
+          <span id="ex6-score-pill" class="text-xs font-bold text-indigo-800 bg-indigo-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="grid gap-3.5" id="ex6-container">
+          <!-- Item 1 (two parts) -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex6-q="1" data-ans1="was growing up" data-ans2="ate">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              While I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="1">
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">grew up</button>
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">was growing up</button>
+              </span>
+              , I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="2">
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">ate</button>
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">was eating</button>
+              </span>
+              a lot of sweets and biscuits.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex6-q="2" data-ans1="had">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              Ten years ago I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="1">
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">had</button>
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">was having</button>
+              </span>
+              a healthier diet than I do now.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 3 (two parts) -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex6-q="3" data-ans1="was" data-ans2="went">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              When I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="1">
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">was</button>
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">was being</button>
+              </span>
+              younger, I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="2">
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">went</button>
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">was going</button>
+              </span>
+              swimming regularly.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 4 (two parts) -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex6-q="4" data-ans1="was watching" data-ans2="went">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              At 10 p.m. last night I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="1">
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">watched</button>
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">was watching</button>
+              </span>
+              TV and at 11 p.m. I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="2">
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">went</button>
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">was going</button>
+              </span>
+              to bed.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 5 (two parts) -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex6-q="5" data-ans1="did" data-ans2="ate">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              Last year I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="1">
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">did</button>
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">was doing</button>
+              </span>
+              no exercise and I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="2">
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">ate</button>
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">was eating</button>
+              </span>
+              lots of fast food.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 6 (two parts) -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex6-q="6" data-ans1="stayed" data-ans2="was raining">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="1">
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">stayed</button>
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">was staying</button>
+              </span>
+              at home on Sunday because it
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="2">
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">rained</button>
+                <button type="button" onclick="selectEx6Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">was raining</button>
+              </span>
+              .
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: LIFESTYLE CHANGES (Ex 7) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex5" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 7</span>
+            <span class="text-amber-200 text-xs font-medium">Contextual Grammar Cloze Passage</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Changes in Lifestyle</h2>
+          <p class="text-amber-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill each gap with one word from the bank. Notice how time markers, auxiliary verbs, and clauses fit seamlessly together.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx7()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Passage</span>
+          </button>
+          <button onclick="revealEx7()" class="px-4 py-2.5 bg-amber-800/60 hover:bg-amber-800 text-white border border-amber-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Interactive Chips -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Available Word Bank:</span>
+          <span class="text-xs text-slate-400">Click a word to insert into active input</span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="ex7-word-bank">
+          <button type="button" onclick="insertBankWord(this)" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">ago</button>
+          <button type="button" onclick="insertBankWord(this)" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">did</button>
+          <button type="button" onclick="insertBankWord(this)" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">didn't</button>
+          <button type="button" onclick="insertBankWord(this)" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">last</button>
+          <button type="button" onclick="insertBankWord(this)" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">was</button>
+          <button type="button" onclick="insertBankWord(this)" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">were</button>
+          <button type="button" onclick="insertBankWord(this)" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">weren't</button>
+          <button type="button" onclick="insertBankWord(this)" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">weren't</button>
+          <button type="button" onclick="insertBankWord(this)" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">when</button>
+          <button type="button" onclick="insertBankWord(this)" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">while</button>
+        </div>
+      </div>
+
+      <!-- Article Reading View with In-Line Interactive Inputs -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">7</span>
+            Changes in lifestyle: Complete the text with the words in the box:
+          </h3>
+          <span id="ex7-score-pill" class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-1 rounded-xl">Score: 0/10</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.6rem] sm:leading-[3rem] font-normal space-y-6">
+          <p>
+            Over the years our ideas and habits regarding health can change dramatically. For example, in the middle of the
+            <span class="font-bold text-slate-400 mr-1">1</span>
+            <input type="text" data-ex7-gap="1" data-ans="last" class="ex7-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(word 1)" />
+            century many people didn't realise the dangers of smoking. By the 1960s scientists
+            <span class="font-bold text-slate-400 mr-1">2</span>
+            <input type="text" data-ex7-gap="2" data-ans="were" class="ex7-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(word 2)" />
+            just starting to realise that smoking can affect health, but it
+            <span class="font-bold text-slate-400 mr-1">3</span>
+            <input type="text" data-ex7-gap="3" data-ans="was" class="ex7-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(word 3)" />
+            only later that the public really began to understand the dangers.
+          </p>
+
+          <p>
+            Our habits regarding diet and exercise were also very different in the past. People now eat much more sugar than they
+            <span class="font-bold text-slate-400 mr-1">4</span>
+            <input type="text" data-ex7-gap="4" data-ans="did" class="ex7-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(word 4)" />
+            in the past. This is because 150 years
+            <span class="font-bold text-slate-400 mr-1">5</span>
+            <input type="text" data-ex7-gap="5" data-ans="ago" class="ex7-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(word 5)" />
+            sugar was a luxury food, so many people
+            <span class="font-bold text-slate-400 mr-1">6</span>
+            <input type="text" data-ex7-gap="6" data-ans="didn't,did not" class="ex7-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(word 6)" />
+            eat a great deal of it. At that time most people had a diet high in bread, vegetables, fruit and fish, which
+            <span class="font-bold text-slate-400 mr-1">7</span>
+            <input type="text" data-ex7-gap="7" data-ans="weren't,were not" class="ex7-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(word 7)" />
+            as expensive as meat. They usually had physical jobs and were very active
+            <span class="font-bold text-slate-400 mr-1">8</span>
+            <input type="text" data-ex7-gap="8" data-ans="while" class="ex7-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(word 8)" />
+            they were working, so they didn't have to worry about exercise.
+          </p>
+
+          <p>
+            It was only
+            <span class="font-bold text-slate-400 mr-1">9</span>
+            <input type="text" data-ex7-gap="9" data-ans="when" class="ex7-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(word 9)" />
+            people started to do less active jobs and eat more sugar that they started to have weight problems. Therefore, it's easy to see why people at that time
+            <span class="font-bold text-slate-400 mr-1">10</span>
+            <input type="text" data-ex7-gap="10" data-ans="weren't,were not" class="ex7-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(word 10)" />
+            always trying to lose weight like they are now and why they didn't need to go to the gym.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: EXPERT GRAMMAR REFERENCE (Page 185) -->
+    <!-- ========================================================================= -->
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-emerald-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 185 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Past Simple & Past Continuous Reference</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Comprehensive grammatical guidelines for expressing finished past events, ongoing states, background actions, and interrupted timelines.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Past Simple Reference Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 font-black text-base flex items-center justify-center">
+              PS
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Past Simple</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Finished Actions at a Specific Time</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Finished actions & events:</div>
+              <p class="text-slate-600 font-medium"><em>"I lost weight last year when I started exercising."</em></p>
+              <p class="text-slate-600 font-medium"><em>"Al didn't go to work yesterday because he was ill."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Past habits and repeated routines:</div>
+              <p class="text-slate-600 font-medium"><em>"When I was younger, I went swimming regularly."</em></p>
+              <p class="text-slate-600 font-medium"><em>"In the past, people had more active jobs."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Time expressions commonly used:</div>
+              <p class="text-slate-600 font-medium"><em>yesterday, last week/month/year, two years ago, in 1995, in the past, when I was...</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Past Continuous Reference Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-cyan-100 text-cyan-800 font-black text-base flex items-center justify-center">
+              PC
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Past Continuous</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Actions in Progress at a Specific Time</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Action in progress at a precise point in time:</div>
+              <p class="text-slate-600 font-medium"><em>"At 8 o'clock this morning I was working out at the gym."</em></p>
+              <p class="text-slate-600 font-medium"><em>"At 10 p.m. last night I was watching TV."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Two actions happening at the same time:</div>
+              <p class="text-slate-600 font-medium"><em>"They were using up a lot of energy while they were running."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Setting the scene / background in a story:</div>
+              <p class="text-slate-600 font-medium"><em>"The sun was just rising and it was starting to get warm."</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interrupted Actions & Conjunction Rules -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+          <span>⚡</span> Interrupted Actions: Using <em>when</em> and <em>while</em>
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="font-black text-slate-900 block text-base">Long Action + Short Interruption</span>
+            <p class="text-slate-700 leading-relaxed font-medium">
+              We use the <strong>Past Continuous</strong> for the longer background action in progress, and the <strong>Past Simple</strong> for the shorter action that interrupted it:
+            </p>
+            <div class="p-3 rounded-xl bg-emerald-50 text-emerald-950 font-bold border border-emerald-200">
+              "While I was walking in the park, it suddenly started to rain."
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="font-black text-slate-900 block text-base">State Verbs in the Past</span>
+            <p class="text-slate-700 leading-relaxed font-medium">
+              Stative verbs (e.g. <em>be, have (=possess), know, understand, like</em>) are virtually never used in the continuous form, even when describing background situations:
+            </p>
+            <div class="p-3 rounded-xl bg-amber-50 text-amber-950 font-bold border border-amber-200">
+              ✓ "When I <u>was</u> younger, I had a healthier diet."<br>
+              ✗ NOT: <s>When I was being younger...</s>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 38
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 4a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 4: Well-being • Page 58 • Expert Grammar Page 185
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const state = {
+      score: {
+        ex2a: 0,
+        ex3a: 0,
+        ex4: 0,
+        ex5: 0,
+        ex6: 0,
+        ex7: 0
+      }
+    };
+
+    // Web Audio synthesizer for crisp feedback sounds
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.15); // C6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Text to Speech
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    function toggleEx1Expl() {
+      const exp = document.getElementById('ex1-explanation');
+      exp.classList.toggle('hidden');
+    }
+
+    function checkEx2a() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex2a-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      // Update badges per row
+      document.querySelectorAll('[data-ex2a-row]').forEach(row => {
+        const rowInputs = Array.from(row.querySelectorAll('.ex2a-input'));
+        const rowBadge = row.querySelector('.feedback-badge');
+        const rowAllCorrect = rowInputs.every(i => i.classList.contains('border-emerald-500'));
+        if (rowAllCorrect) {
+          rowBadge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+        } else {
+          rowBadge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck</span>';
+        }
+      });
+
+      state.score.ex2a = correct;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correct}/${inputs.length}`;
+      updateTotalScore();
+      playBeep(correct >= 8);
+    }
+
+    function revealEx2a() {
+      const keys = {
+        '1': 'increased',
+        '2a': 'went',
+        '2b': "didn't lose",
+        '3a': 'did',
+        '3b': 'were',
+        '4a': "weren't",
+        '4b': "didn't do",
+        '5a': "didn't have",
+        '5b': 'died',
+        '6a': 'had',
+        '6b': 'were'
+      };
+
+      for (let k in keys) {
+        const inp = document.querySelector(`[data-ex2a-gap="${k}"]`);
+        if (inp) {
+          inp.value = keys[k];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        }
+      }
+
+      document.querySelectorAll('[data-ex2a-row] .feedback-badge').forEach(b => {
+        b.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex2a = 11;
+      document.getElementById('ex2a-score-pill').textContent = `Score: 11/11`;
+      updateTotalScore();
+    }
+
+    function loadSampleSentences2b() {
+      document.getElementById('ex2b-s1').value = "Last year I completed a half-marathon after training rigorously for six months.";
+      document.getElementById('ex2b-s2').value = "During the winter I avoided sugary snacks and ate fresh citrus fruit every morning.";
+      document.getElementById('ex2b-s3').value = "In the past people walked much more frequently than they do nowadays.";
+      playBeep(true);
+    }
+
+    function saveSentences2b() {
+      const s1 = document.getElementById('ex2b-s1').value;
+      const s2 = document.getElementById('ex2b-s2').value;
+      const s3 = document.getElementById('ex2b-s3').value;
+      localStorage.setItem('m4_grammar_ex2b', JSON.stringify({ s1, s2, s3 }));
+      const status = document.getElementById('ex2b-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    function checkEx3a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex3a-container [data-ex3a-q]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex3a-input');
+        const badge = row.querySelector('.feedback-badge');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Enter question</span>';
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3a = correct;
+      document.getElementById('ex3a-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx3a() {
+      const keys = [
+        "Did you eat",
+        "did you drink",
+        "did you have",
+        "Did you do",
+        "did you get",
+        "did you last take"
+      ];
+
+      const rows = document.querySelectorAll('#ex3a-container [data-ex3a-q]');
+      rows.forEach((row, i) => {
+        const inp = row.querySelector('.ex3a-input');
+        const badge = row.querySelector('.feedback-badge');
+        inp.value = keys[i];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex3a = 6;
+      document.getElementById('ex3a-score-pill').textContent = `Score: 6/6`;
+      updateTotalScore();
+    }
+
+    function checkEx4Match() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex4-container [data-ex4-item]');
+
+      rows.forEach(row => {
+        const sel = row.querySelector('.ex4-select');
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!sel.value) {
+          badge.innerHTML = '';
+          return;
+        }
+
+        if (sel.value === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-emerald-500');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Need: ${expected}</span>`;
+          sel.classList.remove('border-emerald-500');
+          sel.classList.add('border-rose-400');
+        }
+      });
+
+      state.score.ex4 = correct;
+      document.getElementById('ex4-score-pill').textContent = `Score: ${correct}/3`;
+      updateTotalScore();
+    }
+
+    function checkEx5() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex5-container [data-ex5-item]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex5-input');
+        const badge = row.querySelector('.feedback-badge');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Enter verb form</span>';
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex5 = correct;
+      document.getElementById('ex5-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx5() {
+      const keys = [
+        "was working out",
+        "weren't following",
+        "was slowly getting",
+        "Was she trying",
+        "wasn't feeling",
+        "was becoming"
+      ];
+
+      const rows = document.querySelectorAll('#ex5-container [data-ex5-item]');
+      rows.forEach((row, i) => {
+        const inp = row.querySelector('.ex5-input');
+        const badge = row.querySelector('.feedback-badge');
+        inp.value = keys[i];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      // Also set Ex 4 matchings
+      const ex4Keys = ['B', 'A', 'C'];
+      document.querySelectorAll('#ex4-container [data-ex4-item]').forEach((r, idx) => {
+        const sel = r.querySelector('.ex4-select');
+        sel.value = ex4Keys[idx];
+        sel.classList.add('border-emerald-500');
+        r.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex4 = 3;
+      state.score.ex5 = 6;
+      document.getElementById('ex4-score-pill').textContent = `Score: 3/3`;
+      document.getElementById('ex5-score-pill').textContent = `Score: 6/6`;
+      updateTotalScore();
+    }
+
+    function selectEx6Pill(btn) {
+      const container = btn.closest('[data-slot]');
+      container.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-indigo-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-indigo-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx6() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex6-container [data-ex6-q]');
+
+      rows.forEach(row => {
+        const ans1 = row.getAttribute('data-ans1');
+        const ans2 = row.getAttribute('data-ans2');
+        const badge = row.querySelector('.feedback-badge');
+
+        const btn1 = row.querySelector('[data-slot="1"] .pill-choice-btn[data-selected="true"]');
+        const v1 = btn1 ? btn1.textContent.trim() : '';
+
+        if (ans2) {
+          const btn2 = row.querySelector('[data-slot="2"] .pill-choice-btn[data-selected="true"]');
+          const v2 = btn2 ? btn2.textContent.trim() : '';
+
+          if (v1 === ans1 && v2 === ans2) {
+            correct++;
+            badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          } else {
+            badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${ans1} / ${ans2})</span>`;
+          }
+        } else {
+          if (v1 === ans1) {
+            correct++;
+            badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          } else {
+            badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${ans1})</span>`;
+          }
+        }
+      });
+
+      state.score.ex6 = correct;
+      document.getElementById('ex6-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx6() {
+      const answers = {
+        '1': ['was growing up', 'ate'],
+        '2': ['had'],
+        '3': ['was', 'went'],
+        '4': ['was watching', 'went'],
+        '5': ['did', 'ate'],
+        '6': ['stayed', 'was raining']
+      };
+
+      for (let q in answers) {
+        const row = document.querySelector(`[data-ex6-q="${q}"]`);
+        const slot1Btns = row.querySelectorAll('[data-slot="1"] .pill-choice-btn');
+        slot1Btns.forEach(b => {
+          if (b.textContent.trim() === answers[q][0]) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-indigo-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+
+        if (answers[q][1]) {
+          const slot2Btns = row.querySelectorAll('[data-slot="2"] .pill-choice-btn');
+          slot2Btns.forEach(b => {
+            if (b.textContent.trim() === answers[q][1]) {
+              b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+              b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+              b.dataset.selected = "true";
+            } else {
+              b.classList.remove('bg-indigo-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+              b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+              delete b.dataset.selected;
+            }
+          });
+        }
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex6 = 6;
+      document.getElementById('ex6-score-pill').textContent = `Score: 6/6`;
+      updateTotalScore();
+    }
+
+    let lastActiveEx7Input = null;
+    document.querySelectorAll('.ex7-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx7Input = inp;
+      });
+    });
+
+    function insertBankWord(btn) {
+      const word = btn.textContent.trim();
+      if (lastActiveEx7Input) {
+        lastActiveEx7Input.value = word;
+        lastActiveEx7Input.focus();
+      } else {
+        const emptyInp = Array.from(document.querySelectorAll('.ex7-input')).find(i => !i.value.trim());
+        if (emptyInp) {
+          emptyInp.value = word;
+          emptyInp.focus();
+        }
+      }
+    }
+
+    function checkEx7() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex7-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex7 = correct;
+      document.getElementById('ex7-score-pill').textContent = `Score: ${correct}/10`;
+      updateTotalScore();
+      playBeep(correct >= 7);
+    }
+
+    function revealEx7() {
+      const keys = [
+        "last",    // 1
+        "were",    // 2
+        "was",     // 3
+        "did",     // 4
+        "ago",     // 5
+        "didn't",  // 6
+        "weren't", // 7
+        "while",   // 8
+        "when",    // 9
+        "weren't"  // 10
+      ];
+
+      const inputs = document.querySelectorAll('.ex7-input');
+      inputs.forEach((inp, idx) => {
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+      });
+
+      state.score.ex7 = 10;
+      document.getElementById('ex7-score-pill').textContent = `Score: 10/10`;
+      updateTotalScore();
+    }
+
+    function updateTotalScore() {
+      const total = state.score.ex2a + state.score.ex3a + state.score.ex4 + state.score.ex5 + state.score.ex6 + state.score.ex7;
+      // Total points: 11 + 6 + 3 + 6 + 6 + 10 = 42 (normalized: pill shows / 36 or exact total)
+      const maxScore = 42;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 35) {
+        bar.classList.replace('bg-emerald-600', 'bg-teal-500');
+      } else {
+        bar.classList.replace('bg-teal-500', 'bg-emerald-600');
+      }
+    }
+
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Clear 2a
+      document.querySelectorAll('.ex2a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 3a
+      document.querySelectorAll('.ex3a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 4
+      document.querySelectorAll('.ex4-select').forEach(s => {
+        s.value = '';
+        s.classList.remove('border-emerald-500', 'border-rose-400');
+      });
+
+      // Clear 5
+      document.querySelectorAll('.ex5-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 6
+      document.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-indigo-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-indigo-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear 7
+      document.querySelectorAll('.ex7-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset scores
+      state.score = { ex2a: 0, ex3a: 0, ex4: 0, ex5: 0, ex6: 0, ex7: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/11';
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex4-score-pill').textContent = 'Score: 0/3';
+      document.getElementById('ex5-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex6-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex7-score-pill').textContent = 'Score: 0/10';
+    });
+
+    // Auto-restore saved Ex 2b data
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved = JSON.parse(localStorage.getItem('m4_grammar_ex2b'));
+        if (saved) {
+          if (saved.s1) document.getElementById('ex2b-s1').value = saved.s1;
+          if (saved.s2) document.getElementById('ex2b-s2').value = saved.s2;
+          if (saved.s3) document.getElementById('ex2b-s3').value = saved.s3;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

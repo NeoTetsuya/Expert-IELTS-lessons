@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 8: Language Development - Present Perfect</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            sport: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              200: '#fecdd3',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              800: '#9f1239',
+              900: '#881337',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth tab switching and pill buttons */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.25);
+    }
+    /* Scrollbar aesthetics */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-rose-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-rose-600 via-red-600 to-amber-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-rose-500/25 ring-2 ring-white">
+          M8
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 tracking-wide uppercase">Unit 8: Activity</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 122</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-rose-600">Present Perfect</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Total Score</span>
+            <span id="global-score-pill" class="text-base font-black text-rose-600">0 / 42</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-rose-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-rose-600 text-white shadow-md shadow-rose-600/25">
+          1. Meaning & Function (1)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Participles Table (2)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Verb Forms (3)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. For vs. Since (4)
+        </button>
+        <button data-tab="tab-ex5" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          5. Adverbs & Time (5a & 5b)
+        </button>
+        <button data-tab="tab-ex6" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          6. Fact File: Frisbee (6)
+        </button>
+        <button data-tab="tab-ex7" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          7. Personal Activities (7)
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 189
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: FUNCTION & MEANING (Exercise 1) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-rose-600 via-red-600 to-amber-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1</span>
+            <span class="text-rose-200 text-xs font-medium">Expert Grammar Page 189</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Present Perfect: Three Core Uses</h2>
+          <p class="text-rose-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Determine what each present perfect sentence expresses: <strong>A (an experience or achievement)</strong>, <strong>B (a continuing state from the past to the present)</strong>, or <strong>C (an action at an indefinite past time)</strong>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1()" class="px-5 py-2.5 bg-white hover:bg-rose-50 text-rose-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Choices</span>
+          </button>
+          <button onclick="revealEx1()" class="px-4 py-2.5 bg-rose-950/60 hover:bg-rose-950 text-white border border-rose-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Explanations Reference Box -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">A–C</span>
+            The Three Major Functions of the Present Perfect
+          </h3>
+          <span class="text-xs text-slate-400">Match 1–3 to one category</span>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-2xl bg-rose-50/70 border-2 border-rose-200">
+            <span class="font-black text-rose-800 text-sm block mb-1">A: Experience or achievement</span>
+            <p class="text-slate-700 font-medium leading-relaxed">
+              Focuses on life accomplishments up to the present moment without specifying when.
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-amber-50/70 border-2 border-amber-200">
+            <span class="font-black text-amber-800 text-sm block mb-1">B: Continuing state or situation</span>
+            <p class="text-slate-700 font-medium leading-relaxed">
+              Started in the past and is still ongoing right now (often with <em>for</em> or <em>since</em>).
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-orange-50/70 border-2 border-orange-200">
+            <span class="font-black text-orange-800 text-sm block mb-1">C: Action at an indefinite past time</span>
+            <p class="text-slate-700 font-medium leading-relaxed">
+              Occurred at an unspecified time in the past, with present relevance or evidence.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 1 Matching Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">1</span>
+            Match the sentences (1–3) with what they express (A–C):
+          </h3>
+          <span id="ex1-score-pill" class="text-xs font-bold text-rose-800 bg-rose-50 px-3 py-1 rounded-xl">Score: 0/3</span>
+        </div>
+
+        <div class="space-y-3.5" id="ex1-container">
+          <!-- Item 1 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="1" data-ans="B">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              "He <span class="text-rose-700 font-black">has been</span> a professional football player for five years."
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">A</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">B</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">C</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="2" data-ans="C">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              "Research <span class="text-rose-700 font-black">has shown</span> that sport can have a positive influence on behaviour."
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">A</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">B</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">C</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="3" data-ans="A">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              "She <span class="text-rose-700 font-black">has played</span> in many international matches."
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">A</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">B</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">C</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: PARTICIPLES TABLE (Exercise 2) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-orange-600 via-rose-600 to-pink-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2</span>
+            <span class="text-rose-200 text-xs font-medium">Irregular & Regular Past Participles</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Completing the Past Participle Table</h2>
+          <p class="text-rose-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Write the past participle form for each common sporting and everyday verb. Check your spelling carefully!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2()" class="px-5 py-2.5 bg-white hover:bg-rose-50 text-rose-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Participles</span>
+          </button>
+          <button onclick="revealEx2()" class="px-4 py-2.5 bg-rose-950/60 hover:bg-rose-950 text-white border border-rose-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Participle Table Grid -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-orange-100 text-orange-800 text-sm font-black flex items-center justify-center">2</span>
+            Complete the table with the past participles:
+          </h3>
+          <span id="ex2-score-pill" class="text-xs font-bold text-orange-800 bg-orange-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse" id="ex2-table">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-slate-600 text-xs font-black uppercase tracking-wider">
+                <th class="p-3.5">#</th>
+                <th class="p-3.5">Infinitive</th>
+                <th class="p-3.5">Past Participle</th>
+                <th class="p-3.5 text-right">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-sm font-medium">
+              <!-- be -->
+              <tr data-ex2-row="1">
+                <td class="p-3.5 text-slate-400 font-bold">1</td>
+                <td class="p-3.5 font-bold text-slate-900">be</td>
+                <td class="p-3.5">
+                  <input type="text" data-ex2-gap="1" data-ans="been" class="ex2-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="Past participle" />
+                </td>
+                <td class="p-3.5 text-right feedback-badge"></td>
+              </tr>
+              <!-- have -->
+              <tr data-ex2-row="2">
+                <td class="p-3.5 text-slate-400 font-bold">2</td>
+                <td class="p-3.5 font-bold text-slate-900">have</td>
+                <td class="p-3.5">
+                  <input type="text" data-ex2-gap="2" data-ans="had" class="ex2-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="Past participle" />
+                </td>
+                <td class="p-3.5 text-right feedback-badge"></td>
+              </tr>
+              <!-- go -->
+              <tr data-ex2-row="3">
+                <td class="p-3.5 text-slate-400 font-bold">3</td>
+                <td class="p-3.5 font-bold text-slate-900">go</td>
+                <td class="p-3.5">
+                  <input type="text" data-ex2-gap="3" data-ans="gone,been,gone / been" class="ex2-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="Past participle" />
+                </td>
+                <td class="p-3.5 text-right feedback-badge"></td>
+              </tr>
+              <!-- try -->
+              <tr data-ex2-row="4">
+                <td class="p-3.5 text-slate-400 font-bold">4</td>
+                <td class="p-3.5 font-bold text-slate-900">try</td>
+                <td class="p-3.5">
+                  <input type="text" data-ex2-gap="4" data-ans="tried" class="ex2-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="Past participle" />
+                </td>
+                <td class="p-3.5 text-right feedback-badge"></td>
+              </tr>
+              <!-- win -->
+              <tr data-ex2-row="5">
+                <td class="p-3.5 text-slate-400 font-bold">5</td>
+                <td class="p-3.5 font-bold text-slate-900">win</td>
+                <td class="p-3.5">
+                  <input type="text" data-ex2-gap="5" data-ans="won" class="ex2-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="Past participle" />
+                </td>
+                <td class="p-3.5 text-right feedback-badge"></td>
+              </tr>
+              <!-- buy -->
+              <tr data-ex2-row="6">
+                <td class="p-3.5 text-slate-400 font-bold">6</td>
+                <td class="p-3.5 font-bold text-slate-900">buy</td>
+                <td class="p-3.5">
+                  <input type="text" data-ex2-gap="6" data-ans="bought" class="ex2-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="Past participle" />
+                </td>
+                <td class="p-3.5 text-right feedback-badge"></td>
+              </tr>
+              <!-- choose -->
+              <tr data-ex2-row="7">
+                <td class="p-3.5 text-slate-400 font-bold">7</td>
+                <td class="p-3.5 font-bold text-slate-900">choose</td>
+                <td class="p-3.5">
+                  <input type="text" data-ex2-gap="7" data-ans="chosen" class="ex2-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="Past participle" />
+                </td>
+                <td class="p-3.5 text-right feedback-badge"></td>
+              </tr>
+              <!-- train -->
+              <tr data-ex2-row="8">
+                <td class="p-3.5 text-slate-400 font-bold">8</td>
+                <td class="p-3.5 font-bold text-slate-900">train</td>
+                <td class="p-3.5">
+                  <input type="text" data-ex2-gap="8" data-ans="trained" class="ex2-input exercise-input px-3.5 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="Past participle" />
+                </td>
+                <td class="p-3.5 text-right feedback-badge"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: VERB FORMS (Exercise 3) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3</span>
+            <span class="text-rose-200 text-xs font-medium">Affirmative, Negative, Questions & Ever/Never</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Present Perfect Verb Sentences</h2>
+          <p class="text-rose-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill in each blank with the correct present perfect form (<em>have / has + past participle</em>). Check negative contractions and question word orders!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3()" class="px-5 py-2.5 bg-white hover:bg-rose-50 text-rose-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Sentences</span>
+          </button>
+          <button onclick="revealEx3()" class="px-4 py-2.5 bg-rose-950/60 hover:bg-rose-950 text-white border border-rose-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 3 Sentence Form Fields -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">3</span>
+            Complete the sentences with the present perfect form of the verbs in brackets:
+          </h3>
+          <span id="ex3-score-pill" class="text-xs font-bold text-rose-800 bg-rose-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="space-y-4" id="ex3-container">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 1: Prompt (be)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I
+              <input type="text" data-ex3-gap="1" data-ans="'ve been,have been" class="ex3-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-40 text-center focus:border-rose-600 focus:outline-none" placeholder="(be)" />
+              a member of the cricket club for quite a long time now.
+            </p>
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 2: Prompt (you / ever / see)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              <input type="text" data-ex3-gap="2" data-ans="Have you ever seen,have you ever seen" class="ex3-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-56 text-center focus:border-rose-600 focus:outline-none" placeholder="(you / ever / see)" />
+              a live rugby match?
+            </p>
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 3: Prompt (choose)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              He
+              <input type="text" data-ex3-gap="3" data-ans="has chosen,'s chosen" class="ex3-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-44 text-center focus:border-rose-600 focus:outline-none" placeholder="(choose)" />
+              the team but not the captain.
+            </p>
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 4: Prompt (not have)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              They lost the game because they
+              <input type="text" data-ex3-gap="4" data-ans="haven't had,have not had" class="ex3-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="(not have)" />
+              time to practise recently.
+            </p>
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 5: Prompt (you / buy)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              <input type="text" data-ex3-gap="5" data-ans="Have you bought,have you bought" class="ex3-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-52 text-center focus:border-rose-600 focus:outline-none" placeholder="(you / buy)" />
+              the tickets for the match on Saturday?
+            </p>
+          </div>
+
+          <!-- 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 6: Prompt (not be)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              She
+              <input type="text" data-ex3-gap="6" data-ans="hasn't been,has not been" class="ex3-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="(not be)" />
+              to the gym at all this year.
+            </p>
+          </div>
+
+          <!-- 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 7: Prompt (win)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              They
+              <input type="text" data-ex3-gap="7" data-ans="have won,'ve won" class="ex3-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-40 text-center focus:border-rose-600 focus:outline-none" placeholder="(win)" />
+              most of their games this season.
+            </p>
+          </div>
+
+          <!-- 8 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 8: Prompt (never / swim)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              We
+              <input type="text" data-ex3-gap="8" data-ans="have never swum,'ve never swum,have never swam,'ve never swam" class="ex3-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-52 text-center focus:border-rose-600 focus:outline-none" placeholder="(never / swim)" />
+              in a lake before.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: FOR VS SINCE (Exercise 4) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4</span>
+            <span class="text-amber-200 text-xs font-medium">Duration (for) vs. Starting Point (since)</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Distinguishing "for" and "since"</h2>
+          <p class="text-amber-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Use <strong>for</strong> with a period / duration of time (e.g., <em>for three years, for a long time</em>). Use <strong>since</strong> with a specific point in time or starting event (e.g., <em>since March, since we won</em>).
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check For/Since</span>
+          </button>
+          <button onclick="revealEx4()" class="px-4 py-2.5 bg-amber-950/60 hover:bg-amber-950 text-white border border-amber-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Rule Reminder Card -->
+      <div class="grid sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
+          <span class="font-black text-amber-700 uppercase tracking-wider block mb-1">⏱️ FOR + Period of Time</span>
+          <p class="text-slate-600 font-medium"><em>for over five years, for the last three years, for a long time, for two weeks, for an hour</em></p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
+          <span class="font-black text-rose-700 uppercase tracking-wider block mb-1">📍 SINCE + Fixed Point / Event</span>
+          <p class="text-slate-600 font-medium"><em>since March, since the beginning of term, since we won the championships, since Tuesday</em></p>
+        </div>
+      </div>
+
+      <!-- Exercise 4 Question Rows with Pill Selection -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">4</span>
+            Complete the sentences with <em>for</em> or <em>since</em>:
+          </h3>
+          <span id="ex4-score-pill" class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="grid gap-3.5" id="ex4-container">
+          <!-- Item 1 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4-q="1" data-ans="since">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              Our national team has lost every match
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">for</button>
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">since</button>
+              </span>
+              March.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4-q="2" data-ans="since">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              We've only played two matches
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">for</button>
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">since</button>
+              </span>
+              the beginning of term.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4-q="3" data-ans="for">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              The football manager has been at the club
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">for</button>
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">since</button>
+              </span>
+              over five years.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4-q="4" data-ans="for">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              I have practised twice a week
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">for</button>
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">since</button>
+              </span>
+              the last three years.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4-q="5" data-ans="since">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              I think ice hockey has become more popular
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">for</button>
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">since</button>
+              </span>
+              we won the world championships.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4-q="6" data-ans="for">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              We haven't had a good Olympic team
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">for</button>
+                <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">since</button>
+              </span>
+              a long time now.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: ADVERBS & TIME (Exercise 5a & 5b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex5" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-rose-700 via-pink-700 to-purple-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 5a & 5b</span>
+            <span class="text-rose-200 text-xs font-medium">recently, ever, never, yet, already, just, lately</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Choosing Time Adverbs with Present Perfect</h2>
+          <p class="text-rose-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Select the correct adverb in italics. Then discover which statements are true for your own life in the reflection studio.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx5a()" class="px-5 py-2.5 bg-white hover:bg-rose-50 text-rose-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 5a</span>
+          </button>
+          <button onclick="revealEx5a()" class="px-4 py-2.5 bg-rose-950/60 hover:bg-rose-950 text-white border border-rose-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 5a Interactive Question Rows -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">5a</span>
+            Choose the correct options in italics to complete the sentences:
+          </h3>
+          <span id="ex5a-score-pill" class="text-xs font-bold text-rose-800 bg-rose-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="grid gap-3.5" id="ex5a-container">
+          <!-- Item 1 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex5a-q="1" data-ans="recently">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              I haven't been swimming
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">recently</button>
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">ever</button>
+              </span>
+              .
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex5a-q="2" data-ans="never">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              I've
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">never</button>
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">ever</button>
+              </span>
+              played badminton before.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex5a-q="3" data-ans="never">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              I've
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">never</button>
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">yet</button>
+              </span>
+              been captain of a sports team.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex5a-q="4" data-ans="yet">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              I haven't done any exercise today
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">yet</button>
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">just</button>
+              </span>
+              .
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex5a-q="5" data-ans="already">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              I have
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">already</button>
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">lately</button>
+              </span>
+              been to the gym this week.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex5a-q="6" data-ans="just">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              I have
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">just</button>
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">always</button>
+              </span>
+              started a new sport.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex5a-q="7" data-ans="ever">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">7.</span>
+              I don't think I've
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">ever</button>
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">yet</button>
+              </span>
+              been to a professional football match.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex5a-q="8" data-ans="lately">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">8.</span>
+              I think I've been more active
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">before</button>
+                <button type="button" onclick="selectEx5aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-500 shadow-2xs">lately</button>
+              </span>
+              .
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5b Reflection Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">5b</span>
+              Work in pairs. Are any of the sentences in Exercise 5a true for you?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Tick the statements that are true in your personal lifestyle:</p>
+          </div>
+          <button onclick="saveEx5bNotes()" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+            Save Habits
+          </button>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3" id="ex5b-checklist">
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-1" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">1. I haven't been swimming recently.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-2" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">2. I've never played badminton before.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-3" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">3. I've never been captain of a sports team.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-4" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">4. I haven't done any exercise today yet.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-5" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">5. I have already been to the gym this week.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-6" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">6. I have just started a new sport.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-7" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">7. I've never been to a professional football match.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex5b-chk-8" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">8. I think I've been more active lately.</span>
+          </label>
+        </div>
+
+        <div>
+          <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-2">My Pairwork Discussion Notes:</label>
+          <textarea id="ex5b-notes-input" rows="2" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-rose-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. Sentence 4 is definitely true for me today because I spent the whole morning working at my desk. However, I have already planned a 30-minute jog this evening..."></textarea>
+        </div>
+        <div id="ex5b-status" class="hidden p-3 rounded-xl bg-rose-100 text-rose-900 text-xs font-bold">
+          ✓ Your personal activity notes have been saved locally.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: FACT FILE - ULTIMATE FRISBEE (Exercise 6) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex6" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-emerald-600 via-teal-700 to-cyan-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 6</span>
+            <span class="text-teal-200 text-xs font-medium">Olympic Fact File Reading & Analysis</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Is Ultimate Frisbee the Newest Olympic Sport?</h2>
+          <p class="text-teal-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Complete gaps 1–6 with the present perfect form of the verbs in brackets. Then choose the correct option in italics in A–C.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx6()" class="px-5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Fact File</span>
+          </button>
+          <button onclick="revealEx6()" class="px-4 py-2.5 bg-emerald-950/60 hover:bg-emerald-950 text-white border border-emerald-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Fact File Article Card -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">6</span>
+            Ultimate Frisbee Fact File (6 verb gaps + 3 inline choices):
+          </h3>
+          <span id="ex6-score-pill" class="text-xs font-bold text-teal-800 bg-teal-50 px-3 py-1 rounded-xl">Score: 0/9</span>
+        </div>
+
+        <div class="space-y-5 text-slate-800 text-base sm:text-lg leading-relaxed font-normal">
+          
+          <!-- Bullet 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex6-row="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-teal-700 tracking-wider">• Bullet 1: Prompt (recently / recognise)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p>
+              The Olympic Committee
+              <input type="text" data-ex6-gap="1" data-ans="has recently recognised,has recently recognized" class="ex6-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-60 text-center focus:border-teal-600 focus:outline-none" placeholder="(recently / recognise)" />
+              Ultimate Frisbee, as well as a range of other flying disc sports.
+            </p>
+          </div>
+
+          <!-- Bullet 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex6-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-teal-700 tracking-wider">• Bullet 2: Prompt (not become) & Choice A (already / yet)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p>
+              The game
+              <input type="text" data-ex6-gap="2" data-ans="hasn't become,has not become" class="ex6-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-48 text-center focus:border-teal-600 focus:outline-none" placeholder="(not become)" />
+              an official Olympic sport
+              <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex6-choice="A" data-ans="yet">
+                <button type="button" onclick="selectEx6ChoicePill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-teal-500 shadow-2xs">already</button>
+                <button type="button" onclick="selectEx6ChoicePill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-teal-500 shadow-2xs">yet</button>
+              </span>
+              but it may be at some point in the future.
+            </p>
+          </div>
+
+          <!-- Bullet 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex6-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-teal-700 tracking-wider">• Bullet 3: Prompt (decide)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p>
+              The Olympic Committee wants to attract younger audiences and that's why they
+              <input type="text" data-ex6-gap="3" data-ans="have decided,'ve decided" class="ex6-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-44 text-center focus:border-teal-600 focus:outline-none" placeholder="(decide)" />
+              to consider Ultimate Frisbee for future Olympic Games.
+            </p>
+          </div>
+
+          <!-- Bullet 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-xs font-black uppercase text-slate-400 tracking-wider">• Bullet 4: Key Rule Feature</span>
+            <p class="text-slate-700 font-medium">
+              It is unusual because the game relies on the players to keep to the rules without a referee.
+            </p>
+          </div>
+
+          <!-- Bullet 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex6-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-teal-700 tracking-wider">• Bullet 5: Prompt (play), Choice B (for / since) & Prompt (always / be)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p>
+              People in the USA
+              <input type="text" data-ex6-gap="4" data-ans="have played,'ve played" class="ex6-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-36 text-center focus:border-teal-600 focus:outline-none" placeholder="(play)" />
+              this game
+              <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex6-choice="B" data-ans="since">
+                <button type="button" onclick="selectEx6ChoicePill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-teal-500 shadow-2xs">for</button>
+                <button type="button" onclick="selectEx6ChoicePill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-teal-500 shadow-2xs">since</button>
+              </span>
+              the 1960s. It
+              <input type="text" data-ex6-gap="5" data-ans="has always been,'s always been" class="ex6-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-48 text-center focus:border-teal-600 focus:outline-none" placeholder="(always / be)" />
+              very popular there.
+            </p>
+          </div>
+
+          <!-- Bullet 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex6-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-teal-700 tracking-wider">• Bullet 6: Choice C (Since / Already) & Prompt (grow)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p>
+              <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex6-choice="C" data-ans="Since">
+                <button type="button" onclick="selectEx6ChoicePill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-teal-500 shadow-2xs">Since</button>
+                <button type="button" onclick="selectEx6ChoicePill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-teal-500 shadow-2xs">Already</button>
+              </span>
+              the Olympic Committee accepted the sport in 2015, its popularity
+              <input type="text" data-ex6-gap="6" data-ans="has grown,'s grown" class="ex6-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-36 text-center focus:border-teal-600 focus:outline-none" placeholder="(grow)" />
+              in many other countries.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 7: PERSONAL SENTENCES & SPEAKING (Exercise 7) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex7" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 7</span>
+            <span class="text-cyan-200 text-xs font-medium">Personalized Production & Speaking Rehearsal</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Write Six Sentences About Yourself</h2>
+          <p class="text-cyan-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Write six true sentences about your activities using the present perfect and the time expressions in the box. Then practice speaking with native audio models!
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="loadSampleEx7()" class="px-4 py-2.5 bg-white hover:bg-cyan-50 text-cyan-900 text-xs sm:text-sm font-extrabold rounded-2xl shadow transition">
+            Load Samples
+          </button>
+          <button onclick="saveEx7()" class="px-4 py-2.5 bg-cyan-950/60 hover:bg-cyan-950 text-white border border-cyan-300/40 text-xs sm:text-sm font-bold rounded-2xl transition">
+            Save Sentences
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Tag Cloud -->
+      <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase text-slate-500 tracking-wider">Time Expressions Bank:</span>
+          <span class="text-xs text-slate-400">Click a phrase tag to insert it</span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="ex7-tag-bank">
+          <button type="button" onclick="insertTag('for over a year')" class="px-3 py-1.5 rounded-xl bg-cyan-50 border-2 border-cyan-200 text-cyan-900 font-bold text-xs hover:border-cyan-500 transition">+ for over a year</button>
+          <button type="button" onclick="insertTag('for two weeks')" class="px-3 py-1.5 rounded-xl bg-cyan-50 border-2 border-cyan-200 text-cyan-900 font-bold text-xs hover:border-cyan-500 transition">+ for two weeks</button>
+          <button type="button" onclick="insertTag('recently')" class="px-3 py-1.5 rounded-xl bg-cyan-50 border-2 border-cyan-200 text-cyan-900 font-bold text-xs hover:border-cyan-500 transition">+ recently</button>
+          <button type="button" onclick="insertTag('since the beginning of the year')" class="px-3 py-1.5 rounded-xl bg-cyan-50 border-2 border-cyan-200 text-cyan-900 font-bold text-xs hover:border-cyan-500 transition">+ since the beginning of the year</button>
+          <button type="button" onclick="insertTag('since Tuesday')" class="px-3 py-1.5 rounded-xl bg-cyan-50 border-2 border-cyan-200 text-cyan-900 font-bold text-xs hover:border-cyan-500 transition">+ since Tuesday</button>
+          <button type="button" onclick="insertTag('yet')" class="px-3 py-1.5 rounded-xl bg-cyan-50 border-2 border-cyan-200 text-cyan-900 font-bold text-xs hover:border-cyan-500 transition">+ yet</button>
+        </div>
+      </div>
+
+      <!-- Interactive 6 Sentence Inputs -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-800 text-sm font-black flex items-center justify-center">7</span>
+            My Present Perfect Sentences:
+          </h3>
+          <span class="text-xs text-slate-400">Persistent storage</span>
+        </div>
+
+        <div class="space-y-4" id="ex7-inputs-container">
+          <!-- S1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-cyan-700 tracking-wider">1. for over a year</span>
+              <button onclick="speakText(document.getElementById('ex7-s1').value || 'I have played tennis for over a year.')" class="text-xs text-slate-500 hover:text-cyan-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <input type="text" id="ex7-s1" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I have been a member of a swimming club for over a year." />
+          </div>
+
+          <!-- S2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-cyan-700 tracking-wider">2. for two weeks</span>
+              <button onclick="speakText(document.getElementById('ex7-s2').value || 'I have followed a new training routine for two weeks.')" class="text-xs text-slate-500 hover:text-cyan-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <input type="text" id="ex7-s2" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I haven't missed a single morning workout for two weeks." />
+          </div>
+
+          <!-- S3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-cyan-700 tracking-wider">3. recently</span>
+              <button onclick="speakText(document.getElementById('ex7-s3').value || 'I have bought a new pair of running shoes recently.')" class="text-xs text-slate-500 hover:text-cyan-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <input type="text" id="ex7-s3" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I have started cycling to university recently." />
+          </div>
+
+          <!-- S4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-cyan-700 tracking-wider">4. since the beginning of the year</span>
+              <button onclick="speakText(document.getElementById('ex7-s4').value || 'I have run over 100 kilometres since the beginning of the year.')" class="text-xs text-slate-500 hover:text-cyan-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <input type="text" id="ex7-s4" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. Our volleyball team has won every friendly game since the beginning of the year." />
+          </div>
+
+          <!-- S5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-cyan-700 tracking-wider">5. since Tuesday</span>
+              <button onclick="speakText(document.getElementById('ex7-s5').value || 'I have not had time to exercise since Tuesday.')" class="text-xs text-slate-500 hover:text-cyan-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <input type="text" id="ex7-s5" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I have had a sore ankle since Tuesday, so I am resting." />
+          </div>
+
+          <!-- S6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-cyan-700 tracking-wider">6. yet</span>
+              <button onclick="speakText(document.getElementById('ex7-s6').value || 'I have not tried Ultimate Frisbee yet.')" class="text-xs text-slate-500 hover:text-cyan-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <input type="text" id="ex7-s6" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I haven't bought tickets for the championship finals yet." />
+          </div>
+        </div>
+
+        <div id="ex7-status" class="hidden p-3.5 rounded-xl bg-cyan-100 text-cyan-950 text-xs font-bold flex items-center justify-between">
+          <span>✓ Your personal present perfect sentences have been saved to local browser storage.</span>
+          <span class="text-cyan-700 font-semibold text-[11px]">Ready for speaking practice</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 8: EXPERT GRAMMAR REFERENCE (Page 189) -->
+    <!-- ========================================================================= -->
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 to-rose-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-rose-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 189 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Present Perfect Simple: Form, Meaning & Adverbs</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Comprehensive reference on connecting the past to the present: accomplishments, indefinite past actions, continuing states, and contrast with the Past Simple.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Form and Structure Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-800 font-black text-base flex items-center justify-center">
+              FORM
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Grammar Form</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">have / has + past participle</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Affirmative (+)</div>
+              <p class="text-slate-700 font-medium">Subject + <strong>have / has + past participle</strong></p>
+              <p class="text-slate-600 font-medium"><em>"She <strong>has played</strong> in many international matches."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Negative (-)</div>
+              <p class="text-slate-700 font-medium">Subject + <strong>haven't / hasn't + past participle</strong></p>
+              <p class="text-slate-600 font-medium"><em>"We <strong>haven't had</strong> time to practise recently."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Questions (?)</div>
+              <p class="text-slate-700 font-medium">(Question word) + <strong>Have / Has + subject + past participle?</strong></p>
+              <p class="text-slate-600 font-medium"><em>"<strong>Have you ever seen</strong> a live rugby match?"</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Meaning and Adverbs Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 font-black text-base flex items-center justify-center">
+              USE
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Key Uses & Time Expressions</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Connecting Past to Present</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Continuing States (for & since):</div>
+              <p class="text-slate-600 font-medium"><strong>for</strong> + duration (<em>for five years</em>) | <strong>since</strong> + starting point (<em>since 2015, since March</em>).</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Life Experiences (ever & never):</div>
+              <p class="text-slate-600 font-medium"><em>"Have you <strong>ever</strong> played badminton?"</em> | <em>"I've <strong>never</strong> swum in a lake."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Recent Events (just, already, yet, recently, lately):</div>
+              <p class="text-slate-600 font-medium"><em>"I have <strong>just</strong> started."</em> | <em>"I have <strong>already</strong> been."</em> | <em>"I haven't done any exercise <strong>yet</strong>."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">4. Present Perfect vs. Past Simple:</div>
+              <p class="text-slate-600 font-medium">Use <strong>Past Simple</strong> when the time is finished or specified (<em>yesterday, in 2010</em>). Use <strong>Present Perfect</strong> when the time period is unfinished (<em>this week, today, in my life</em>).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 78
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 8a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 8: Activity • Page 122 • Expert Grammar Page 189
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State management for individual exercises
+    const state = {
+      score: {
+        ex1: 0,
+        ex2: 0,
+        ex3: 0,
+        ex4: 0,
+        ex5a: 0,
+        ex6: 0
+      }
+    };
+
+    // Web Audio Synthesizer for instant feedback sounds
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(170, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Web Speech API for British English pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-rose-600', 'text-white', 'shadow-md', 'shadow-rose-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-rose-600', 'text-white', 'shadow-md', 'shadow-rose-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user string input
+    function cleanStr(s) {
+      return (s || '').toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()'?]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // EXERCISE 1 PILL SELECTION & CHECK
+    function selectEx1Pill(btn) {
+      const parent = btn.closest('.inline-flex');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-rose-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-rose-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-rose-600', 'text-white', 'border-rose-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx1() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex1-container [data-ex1-q]');
+
+      rows.forEach(row => {
+        const expected = row.getAttribute('data-ans'); // "A", "B", or "C"
+        const badge = row.querySelector('.feedback-badge');
+        const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select option</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toUpperCase();
+        if (userVal === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-rose-600', 'border-rose-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Need: ${expected}</span>`;
+          selectedBtn.classList.remove('bg-rose-600', 'border-rose-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex1 = correct;
+      document.getElementById('ex1-score-pill').textContent = `Score: ${correct}/3`;
+      updateTotalScore();
+      playBeep(correct >= 2);
+    }
+
+    function revealEx1() {
+      const answers = {
+        '1': 'B',
+        '2': 'C',
+        '3': 'A'
+      };
+
+      for (let q in answers) {
+        const row = document.querySelector(`[data-ex1-q="${q}"]`);
+        const btns = row.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim().toUpperCase() === answers[q]) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'bg-rose-600');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-rose-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex1 = 3;
+      document.getElementById('ex1-score-pill').textContent = 'Score: 3/3';
+      updateTotalScore();
+    }
+
+    // EXERCISE 2 TABLE CHECK & REVEAL
+    function checkEx2() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex2-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+        const row = inp.closest('tr');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (allowed.some(ans => userVal === ans || userVal.replace(/\s/g, '') === ans.replace(/\s/g, ''))) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-bold">✓ Correct</span>';
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300 text-xs font-bold">✗ Recheck</span>';
+        }
+      });
+
+      state.score.ex2 = correct;
+      document.getElementById('ex2-score-pill').textContent = `Score: ${correct}/${inputs.length}`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx2() {
+      const keys = {
+        '1': 'been',
+        '2': 'had',
+        '3': 'gone / been',
+        '4': 'tried',
+        '5': 'won',
+        '6': 'bought',
+        '7': 'chosen',
+        '8': 'trained'
+      };
+
+      for (let gap in keys) {
+        const inp = document.querySelector(`[data-ex2-gap="${gap}"]`);
+        if (inp) {
+          inp.value = keys[gap];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        }
+      }
+
+      document.querySelectorAll('#ex2-table .feedback-badge').forEach(b => {
+        b.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-bold">Model Key</span>';
+      });
+
+      state.score.ex2 = 8;
+      document.getElementById('ex2-score-pill').textContent = 'Score: 8/8';
+      updateTotalScore();
+    }
+
+    // EXERCISE 3 CHECK & REVEAL
+    function checkEx3() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex3-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.some(ans => userVal === ans || userVal.replace(/\s/g, '') === ans.replace(/\s/g, ''))) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      // Update badges per row
+      document.querySelectorAll('[data-ex3-row]').forEach(row => {
+        const rowInput = row.querySelector('.ex3-input');
+        const badge = row.querySelector('.feedback-badge');
+        if (rowInput.classList.contains('border-emerald-500')) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck</span>';
+        }
+      });
+
+      state.score.ex3 = correct;
+      document.getElementById('ex3-score-pill').textContent = `Score: ${correct}/${inputs.length}`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx3() {
+      const keys = {
+        '1': "have been",
+        '2': "Have you ever seen",
+        '3': "has chosen",
+        '4': "haven't had",
+        '5': "Have you bought",
+        '6': "hasn't been",
+        '7': "have won",
+        '8': "have never swum"
+      };
+
+      for (let gap in keys) {
+        const inp = document.querySelector(`[data-ex3-gap="${gap}"]`);
+        if (inp) {
+          inp.value = keys[gap];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        }
+      }
+
+      document.querySelectorAll('[data-ex3-row] .feedback-badge').forEach(b => {
+        b.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex3 = 8;
+      document.getElementById('ex3-score-pill').textContent = 'Score: 8/8';
+      updateTotalScore();
+    }
+
+    // EXERCISE 4 PILL SELECTION & CHECK
+    function selectEx4Pill(btn) {
+      const parent = btn.closest('.inline-flex');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-amber-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-amber-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-amber-600', 'text-white', 'border-amber-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx4() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex4-container [data-ex4-q]');
+
+      rows.forEach(row => {
+        const expected = row.getAttribute('data-ans').toLowerCase();
+        const badge = row.querySelector('.feedback-badge');
+        const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select option</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toLowerCase();
+        if (userVal === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-amber-600', 'border-amber-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${row.getAttribute('data-ans')})</span>`;
+          selectedBtn.classList.remove('bg-amber-600', 'border-amber-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex4 = correct;
+      document.getElementById('ex4-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx4() {
+      const answers = {
+        '1': 'since',
+        '2': 'since',
+        '3': 'for',
+        '4': 'for',
+        '5': 'since',
+        '6': 'for'
+      };
+
+      for (let q in answers) {
+        const row = document.querySelector(`[data-ex4-q="${q}"]`);
+        const btns = row.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim().toLowerCase() === answers[q].toLowerCase()) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-amber-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex4 = 6;
+      document.getElementById('ex4-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    // EXERCISE 5a PILL SELECTION & CHECK
+    function selectEx5aPill(btn) {
+      const parent = btn.closest('.inline-flex');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-rose-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-rose-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-rose-600', 'text-white', 'border-rose-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx5a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex5a-container [data-ex5a-q]');
+
+      rows.forEach(row => {
+        const expected = row.getAttribute('data-ans').toLowerCase();
+        const badge = row.querySelector('.feedback-badge');
+        const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select option</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toLowerCase();
+        if (userVal === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-rose-600', 'border-rose-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${row.getAttribute('data-ans')})</span>`;
+          selectedBtn.classList.remove('bg-rose-600', 'border-rose-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex5a = correct;
+      document.getElementById('ex5a-score-pill').textContent = `Score: ${correct}/8`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx5a() {
+      const answers = {
+        '1': 'recently',
+        '2': 'never',
+        '3': 'never',
+        '4': 'yet',
+        '5': 'already',
+        '6': 'just',
+        '7': 'ever',
+        '8': 'lately'
+      };
+
+      for (let q in answers) {
+        const row = document.querySelector(`[data-ex5a-q="${q}"]`);
+        const btns = row.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim().toLowerCase() === answers[q].toLowerCase()) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-rose-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex5a = 8;
+      document.getElementById('ex5a-score-pill').textContent = 'Score: 8/8';
+      updateTotalScore();
+    }
+
+    function saveEx5bNotes() {
+      const checked = [];
+      for (let i = 1; i <= 8; i++) {
+        if (document.getElementById(`ex5b-chk-${i}`).checked) checked.push(i);
+      }
+      const notes = document.getElementById('ex5b-notes-input').value;
+      localStorage.setItem('m8_grammar_ex5b', JSON.stringify({ checked, notes }));
+      document.getElementById('ex5b-status').classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // EXERCISE 6 FACT FILE CHECK & REVEAL
+    function selectEx6ChoicePill(btn) {
+      const parent = btn.closest('[data-ex6-choice]');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-teal-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-teal-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-teal-600', 'text-white', 'border-teal-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx6() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex6-input');
+
+      // Check verb gap inputs
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.some(ans => userVal === ans || userVal.replace(/\s/g, '') === ans.replace(/\s/g, ''))) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      // Check inline choice pills (A, B, C)
+      const choices = document.querySelectorAll('[data-ex6-choice]');
+      choices.forEach(ch => {
+        const expected = ch.getAttribute('data-ans').toLowerCase();
+        const selectedBtn = ch.querySelector('.pill-choice-btn[data-selected="true"]');
+        if (selectedBtn && selectedBtn.textContent.trim().toLowerCase() === expected) {
+          correct++;
+          selectedBtn.classList.remove('bg-teal-600', 'border-teal-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else if (selectedBtn) {
+          selectedBtn.classList.remove('bg-teal-600', 'border-teal-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      // Update feedback badge on rows
+      document.querySelectorAll('[data-ex6-row]').forEach(row => {
+        const rowInputs = Array.from(row.querySelectorAll('.ex6-input'));
+        const rowBadges = row.querySelector('.feedback-badge');
+        const allCorrect = rowInputs.every(i => i.classList.contains('border-emerald-500'));
+        if (allCorrect) {
+          rowBadges.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+        } else {
+          rowBadges.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck</span>';
+        }
+      });
+
+      state.score.ex6 = correct;
+      document.getElementById('ex6-score-pill').textContent = `Score: ${correct}/9`;
+      updateTotalScore();
+      playBeep(correct >= 7);
+    }
+
+    function revealEx6() {
+      const verbKeys = {
+        '1': 'has recently recognised',
+        '2': "hasn't become",
+        '3': 'have decided',
+        '4': 'have played',
+        '5': 'has always been',
+        '6': 'has grown'
+      };
+
+      for (let gap in verbKeys) {
+        const inp = document.querySelector(`[data-ex6-gap="${gap}"]`);
+        if (inp) {
+          inp.value = verbKeys[gap];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        }
+      }
+
+      const choiceKeys = {
+        'A': 'yet',
+        'B': 'since',
+        'C': 'Since'
+      };
+
+      for (let ch in choiceKeys) {
+        const parent = document.querySelector(`[data-ex6-choice="${ch}"]`);
+        parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+          if (b.textContent.trim().toLowerCase() === choiceKeys[ch].toLowerCase()) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-teal-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+      }
+
+      document.querySelectorAll('[data-ex6-row] .feedback-badge').forEach(b => {
+        b.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex6 = 9;
+      document.getElementById('ex6-score-pill').textContent = 'Score: 9/9';
+      updateTotalScore();
+    }
+
+    // EXERCISE 7 PERSONAL SENTENCES
+    function insertTag(tag) {
+      const inputs = [
+        document.getElementById('ex7-s1'),
+        document.getElementById('ex7-s2'),
+        document.getElementById('ex7-s3'),
+        document.getElementById('ex7-s4'),
+        document.getElementById('ex7-s5'),
+        document.getElementById('ex7-s6')
+      ];
+      const empty = inputs.find(i => !i.value.trim());
+      if (empty) {
+        empty.value = `I have ... ${tag}.`;
+        empty.focus();
+      } else {
+        inputs[0].value += ` ${tag}`;
+        inputs[0].focus();
+      }
+    }
+
+    function loadSampleEx7() {
+      document.getElementById('ex7-s1').value = "I have trained at the local tennis club for over a year.";
+      document.getElementById('ex7-s2').value = "I have followed an intensive stretching routine for two weeks.";
+      document.getElementById('ex7-s3').value = "I have bought new badminton equipment recently.";
+      document.getElementById('ex7-s4').value = "Our basketball squad has won all matches since the beginning of the year.";
+      document.getElementById('ex7-s5').value = "I haven't been able to go jogging since Tuesday because of heavy rain.";
+      document.getElementById('ex7-s6').value = "I haven't tried playing Ultimate Frisbee yet, but I'd love to.";
+      playBeep(true);
+    }
+
+    function saveEx7() {
+      const sentences = {
+        s1: document.getElementById('ex7-s1').value,
+        s2: document.getElementById('ex7-s2').value,
+        s3: document.getElementById('ex7-s3').value,
+        s4: document.getElementById('ex7-s4').value,
+        s5: document.getElementById('ex7-s5').value,
+        s6: document.getElementById('ex7-s6').value
+      };
+      localStorage.setItem('m8_grammar_ex7', JSON.stringify(sentences));
+      document.getElementById('ex7-status').classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // Global Score Updating
+    function updateTotalScore() {
+      const total = state.score.ex1 + state.score.ex2 + state.score.ex3 + state.score.ex4 + state.score.ex5a + state.score.ex6;
+      const maxScore = 42; // 3 + 8 + 8 + 6 + 8 + 9 = 42
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 32) {
+        bar.classList.replace('bg-rose-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-rose-600');
+      }
+    }
+
+    // Reset All Fields Button
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Clear Ex 1
+      document.querySelectorAll('#ex1-container .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-rose-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-rose-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear Ex 2
+      document.querySelectorAll('.ex2-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear Ex 3
+      document.querySelectorAll('.ex3-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear Ex 4
+      document.querySelectorAll('#ex4-container .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-amber-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-amber-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear Ex 5a
+      document.querySelectorAll('#ex5a-container .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-rose-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-rose-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear Ex 6
+      document.querySelectorAll('.ex6-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+      document.querySelectorAll('[data-ex6-choice] .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-teal-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-teal-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset scores
+      state.score = { ex1: 0, ex2: 0, ex3: 0, ex4: 0, ex5a: 0, ex6: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1-score-pill').textContent = 'Score: 0/3';
+      document.getElementById('ex2-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex3-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex4-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex5a-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex6-score-pill').textContent = 'Score: 0/9';
+    });
+
+    // Auto-restore saved Ex 5b & Ex 7 data on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved5b = JSON.parse(localStorage.getItem('m8_grammar_ex5b'));
+        if (saved5b) {
+          if (saved5b.checked && Array.isArray(saved5b.checked)) {
+            saved5b.checked.forEach(n => {
+              const el = document.getElementById(`ex5b-chk-${n}`);
+              if (el) el.checked = true;
+            });
+          }
+          if (saved5b.notes) document.getElementById('ex5b-notes-input').value = saved5b.notes;
+        }
+
+        const saved7 = JSON.parse(localStorage.getItem('m8_grammar_ex7'));
+        if (saved7) {
+          for (let k in saved7) {
+            const el = document.getElementById(`ex7-${k}`);
+            if (el) el.value = saved7[k];
+          }
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

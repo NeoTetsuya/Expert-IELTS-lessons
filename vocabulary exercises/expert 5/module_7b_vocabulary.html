@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 7b Vocabulary: City Life - Public Buildings & Public Services</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            urban: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              200: '#ddd6fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              800: '#5b21b6',
+              900: '#4c1d95',
+            },
+            civic: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+            },
+            metro: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
+    }
+    .building-chip {
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .building-chip:hover {
+      transform: translateY(-1px);
+    }
+    .building-chip:active {
+      transform: scale(0.97);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-purple-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-blue-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-purple-500/25 ring-2 ring-white">
+          7b
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 tracking-wide uppercase">Unit 7: City Life</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 113</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Vocabulary: <span class="text-purple-600">Public Buildings & Public Services</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Scoreboard & Reset Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-purple-600">0 / 48</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-purple-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1ab" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-purple-600 text-white shadow-md shadow-purple-600/25">
+          1. Compound Nouns & Definitions (1a & 1b)
+        </button>
+        <button data-tab="tab-ex1cd" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Categorizing Buildings (1c & 1d)
+        </button>
+        <button data-tab="tab-ex1ef" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Sentences & Discussion (1e & 1f)
+        </button>
+        <button data-tab="tab-ex23" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Public Services & Debate (2, 3a & 3b)
+        </button>
+        <button data-tab="tab-lexicon" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📚 Vocabulary Lexicon & Audio
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: COMPOUND NOUNS & DEFINITIONS (Exercise 1a & 1b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1ab" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1a & 1b</span>
+            <span class="text-purple-200 text-xs font-medium">Page 113 • Public Buildings Compound Nouns</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Compound Nouns for City Buildings</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            In <strong>1a</strong>, combine the base words (1–8) with the nouns in the box (<em>centre, hall, home, station</em>). In <strong>1b</strong>, match six of these buildings with their precise real-world descriptions.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1ab()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 1a & 1b</span>
+          </button>
+          <button onclick="revealEx1ab()" class="px-4 py-2.5 bg-purple-800/60 hover:bg-purple-800 text-white border border-purple-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 1a Compound Noun Maker Box -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">1a</span>
+            Match words 1–8 with words from the box to make compound nouns:
+          </h3>
+          <span id="ex1a-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <!-- Suffix Bank Reference -->
+        <div class="p-4 rounded-2xl bg-purple-50 border border-purple-200 flex flex-wrap items-center justify-between gap-3">
+          <div class="text-xs font-black uppercase tracking-wider text-purple-900">Word Box Options:</div>
+          <div class="flex flex-wrap gap-2 text-xs sm:text-sm font-bold">
+            <span class="px-3 py-1 bg-white rounded-xl border border-purple-300 text-purple-900 shadow-2xs">centre</span>
+            <span class="px-3 py-1 bg-white rounded-xl border border-purple-300 text-purple-900 shadow-2xs">hall</span>
+            <span class="px-3 py-1 bg-white rounded-xl border border-purple-300 text-purple-900 shadow-2xs">home</span>
+            <span class="px-3 py-1 bg-white rounded-xl border border-purple-300 text-purple-900 shadow-2xs">station</span>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" id="ex1a-container">
+          
+          <!-- 1: tourist information centre -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex1a-item="1" data-ans="centre">
+            <div>
+              <span class="text-xs font-extrabold text-slate-400">1</span>
+              <div class="text-sm font-bold text-slate-900 mt-0.5">tourist information</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select noun...</option>
+                <option value="centre">centre</option>
+                <option value="hall">hall</option>
+                <option value="home">home</option>
+                <option value="station">station</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 2: retirement home -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex1a-item="2" data-ans="home">
+            <div>
+              <span class="text-xs font-extrabold text-slate-400">2</span>
+              <div class="text-sm font-bold text-slate-900 mt-0.5">retirement</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select noun...</option>
+                <option value="centre">centre</option>
+                <option value="hall">hall</option>
+                <option value="home">home</option>
+                <option value="station">station</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 3: town hall -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex1a-item="3" data-ans="hall">
+            <div>
+              <span class="text-xs font-extrabold text-slate-400">3</span>
+              <div class="text-sm font-bold text-slate-900 mt-0.5">town</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select noun...</option>
+                <option value="centre">centre</option>
+                <option value="hall">hall</option>
+                <option value="home">home</option>
+                <option value="station">station</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 4: fire station -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex1a-item="4" data-ans="station">
+            <div>
+              <span class="text-xs font-extrabold text-slate-400">4</span>
+              <div class="text-sm font-bold text-slate-900 mt-0.5">fire</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select noun...</option>
+                <option value="centre">centre</option>
+                <option value="hall">hall</option>
+                <option value="home">home</option>
+                <option value="station">station</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 5: community centre -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex1a-item="5" data-ans="centre">
+            <div>
+              <span class="text-xs font-extrabold text-slate-400">5</span>
+              <div class="text-sm font-bold text-slate-900 mt-0.5">community</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select noun...</option>
+                <option value="centre">centre</option>
+                <option value="hall">hall</option>
+                <option value="home">home</option>
+                <option value="station">station</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 6: health centre -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex1a-item="6" data-ans="centre">
+            <div>
+              <span class="text-xs font-extrabold text-slate-400">6</span>
+              <div class="text-sm font-bold text-slate-900 mt-0.5">health</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select noun...</option>
+                <option value="centre">centre</option>
+                <option value="hall">hall</option>
+                <option value="home">home</option>
+                <option value="station">station</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 7: concert hall -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex1a-item="7" data-ans="hall">
+            <div>
+              <span class="text-xs font-extrabold text-slate-400">7</span>
+              <div class="text-sm font-bold text-slate-900 mt-0.5">concert</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select noun...</option>
+                <option value="centre">centre</option>
+                <option value="hall">hall</option>
+                <option value="home">home</option>
+                <option value="station">station</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 8: leisure centre -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex1a-item="8" data-ans="centre">
+            <div>
+              <span class="text-xs font-extrabold text-slate-400">8</span>
+              <div class="text-sm font-bold text-slate-900 mt-0.5">leisure</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select noun...</option>
+                <option value="centre">centre</option>
+                <option value="hall">hall</option>
+                <option value="home">home</option>
+                <option value="station">station</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 1b Match Six Buildings with Descriptions -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">1b</span>
+            Match six buildings from Exercise 1a with their descriptions:
+          </h3>
+          <span id="ex1b-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex1b-container">
+          
+          <!-- Description 1: health centre -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1b-item="1" data-ans="health centre">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              A building where doctors and other medical professionals see their patients
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1b-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select building...</option>
+                <option value="tourist information centre">tourist information centre</option>
+                <option value="retirement home">retirement home</option>
+                <option value="town hall">town hall</option>
+                <option value="fire station">fire station</option>
+                <option value="community centre">community centre</option>
+                <option value="health centre">health centre</option>
+                <option value="concert hall">concert hall</option>
+                <option value="leisure centre">leisure centre</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Description 2: retirement home -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1b-item="2" data-ans="retirement home">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              A building where old people live and where somebody looks after them
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1b-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select building...</option>
+                <option value="tourist information centre">tourist information centre</option>
+                <option value="retirement home">retirement home</option>
+                <option value="town hall">town hall</option>
+                <option value="fire station">fire station</option>
+                <option value="community centre">community centre</option>
+                <option value="health centre">health centre</option>
+                <option value="concert hall">concert hall</option>
+                <option value="leisure centre">leisure centre</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Description 3: community centre -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1b-item="3" data-ans="community centre">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              A place where people meet for social events and classes
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1b-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select building...</option>
+                <option value="tourist information centre">tourist information centre</option>
+                <option value="retirement home">retirement home</option>
+                <option value="town hall">town hall</option>
+                <option value="fire station">fire station</option>
+                <option value="community centre">community centre</option>
+                <option value="health centre">health centre</option>
+                <option value="concert hall">concert hall</option>
+                <option value="leisure centre">leisure centre</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Description 4: town hall -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1b-item="4" data-ans="town hall">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              A building containing government offices
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1b-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select building...</option>
+                <option value="tourist information centre">tourist information centre</option>
+                <option value="retirement home">retirement home</option>
+                <option value="town hall">town hall</option>
+                <option value="fire station">fire station</option>
+                <option value="community centre">community centre</option>
+                <option value="health centre">health centre</option>
+                <option value="concert hall">concert hall</option>
+                <option value="leisure centre">leisure centre</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Description 5: leisure centre -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1b-item="5" data-ans="leisure centre">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              A place where people do sports activities and exercise classes
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1b-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select building...</option>
+                <option value="tourist information centre">tourist information centre</option>
+                <option value="retirement home">retirement home</option>
+                <option value="town hall">town hall</option>
+                <option value="fire station">fire station</option>
+                <option value="community centre">community centre</option>
+                <option value="health centre">health centre</option>
+                <option value="concert hall">concert hall</option>
+                <option value="leisure centre">leisure centre</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Description 6: concert hall -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1b-item="6" data-ans="concert hall">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              A building where people go to hear music
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1b-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-purple-950 focus:border-purple-600 focus:outline-none">
+                <option value="">Select building...</option>
+                <option value="tourist information centre">tourist information centre</option>
+                <option value="retirement home">retirement home</option>
+                <option value="town hall">town hall</option>
+                <option value="fire station">fire station</option>
+                <option value="community centre">community centre</option>
+                <option value="health centre">health centre</option>
+                <option value="concert hall">concert hall</option>
+                <option value="leisure centre">leisure centre</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: CATEGORIZING BUILDINGS (Exercise 1c & 1d) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1cd" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1c & 1d</span>
+            <span class="text-indigo-200 text-xs font-medium">Urban Taxonomy & Functional Roles</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Classifying Public Buildings into 3 Functional Pillars</h2>
+          <p class="text-indigo-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Organise the 17 city buildings into: <strong>Accommodation</strong>, <strong>Attractions & entertainment</strong>, and <strong>Public services</strong>. Click an unassigned building chip to quickly place it into your target column!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1cd()" class="px-5 py-2.5 bg-white hover:bg-indigo-50 text-indigo-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Categories</span>
+          </button>
+          <button onclick="revealEx1cd()" class="px-4 py-2.5 bg-indigo-800/60 hover:bg-indigo-800 text-white border border-indigo-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Unassigned Word Bank Pool -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
+          <div>
+            <h3 class="font-black text-slate-900 text-base">Unassigned Buildings Pool:</h3>
+            <p class="text-xs text-slate-500">Tap a chip to select it, then tap your chosen category column below to place it.</p>
+          </div>
+          <span id="pool-count-badge" class="text-xs font-bold text-indigo-800 bg-indigo-50 px-3 py-1 rounded-xl">17 Available</span>
+        </div>
+
+        <div class="flex flex-wrap gap-2 min-h-[60px] p-3 bg-slate-50 rounded-2xl border border-dashed border-slate-300" id="buildings-pool">
+          <!-- From 1a -->
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="tourist information centre" data-cat="attractions">ℹ️ tourist information centre</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="retirement home" data-cat="accommodation">🏡 retirement home</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="town hall" data-cat="services">🏛️ town hall</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="fire station" data-cat="services">🚒 fire station</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="community centre" data-cat="services">👥 community centre</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="health centre" data-cat="services">🏥 health centre</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="concert hall" data-cat="attractions">🎵 concert hall</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="leisure centre" data-cat="attractions">🏊 leisure centre</span>
+          <!-- From 1d -->
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="bed and breakfast" data-cat="accommodation">🍳 bed and breakfast</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="cinema" data-cat="attractions">🎬 cinema</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="guesthouse" data-cat="accommodation">🛌 guesthouse</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="hospital" data-cat="services">🚑 hospital</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="hostel" data-cat="accommodation">🎒 hostel</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="library" data-cat="services">📚 library</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="museum" data-cat="attractions">🖼️ museum</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="prison" data-cat="services">🔒 prison</span>
+          <span class="building-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-building="theatre" data-cat="attractions">🎭 theatre</span>
+        </div>
+      </div>
+
+      <!-- 3 Functional Pillars Matrix Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="categories-matrix">
+        
+        <!-- Column 1: Accommodation -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between" onclick="targetCategoryDrop('accommodation')">
+          <div>
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+              <span class="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-sm font-black">🛏️</span>
+                Accommodation
+              </span>
+              <span class="text-xs font-bold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-xl count-tag">0 / 4</span>
+            </div>
+            <p class="text-xs text-slate-400 mb-2">Places where citizens or travelers sleep/stay:</p>
+            <div class="category-zone min-h-[160px] p-2.5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-wrap content-start gap-1.5" data-zone="accommodation">
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Attractions & Entertainment -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between" onclick="targetCategoryDrop('attractions')">
+          <div>
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+              <span class="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center text-sm font-black">🎡</span>
+                Attractions & entertainment
+              </span>
+              <span class="text-xs font-bold text-purple-800 bg-purple-50 px-2.5 py-1 rounded-xl count-tag">0 / 6</span>
+            </div>
+            <p class="text-xs text-slate-400 mb-2">Venues for culture, sports, arts, and leisure:</p>
+            <div class="category-zone min-h-[160px] p-2.5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-wrap content-start gap-1.5" data-zone="attractions">
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: Public Services -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between" onclick="targetCategoryDrop('services')">
+          <div>
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+              <span class="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center text-sm font-black">🏛️</span>
+                Public services
+              </span>
+              <span class="text-xs font-bold text-blue-800 bg-blue-50 px-2.5 py-1 rounded-xl count-tag">0 / 7</span>
+            </div>
+            <p class="text-xs text-slate-400 mb-2">Municipal administration, health, law & emergency:</p>
+            <div class="category-zone min-h-[160px] p-2.5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-wrap content-start gap-1.5" data-zone="services">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: SENTENCES & DISCUSSION (Exercise 1e & 1f) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1ef" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1e & 1f</span>
+            <span class="text-teal-200 text-xs font-medium">Contextual Mastery & Community Audit</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Public Buildings in Action & Civic Audit</h2>
+          <p class="text-teal-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill in the blanks with the correct public buildings from Exercise 1c. Then audit your local neighbourhood in <strong>1f</strong> to evaluate which public buildings are essential for a thriving society.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1e()" class="px-5 py-2.5 bg-white hover:bg-teal-50 text-teal-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 1e</span>
+          </button>
+          <button onclick="revealEx1e()" class="px-4 py-2.5 bg-teal-800/60 hover:bg-teal-800 text-white border border-teal-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 1e Sentences Container -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">1e</span>
+            Complete the sentences with buildings from the table in Exercise 1c:
+          </h3>
+          <span id="ex1e-score-pill" class="text-xs font-bold text-teal-800 bg-teal-50 px-3 py-1 rounded-xl">Score: 0/9</span>
+        </div>
+
+        <div class="space-y-4" id="ex1e-container">
+          
+          <!-- Sentence 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1e-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I've got tickets to see my favourite band at our local
+              <input type="text" data-ans="concert hall" class="ex1e-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-44 text-center focus:border-teal-600 focus:outline-none" placeholder="[building]" />
+              next month.
+            </p>
+          </div>
+
+          <!-- Sentence 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1e-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I don't often borrow books from the
+              <input type="text" data-ans="library" class="ex1e-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-32 text-center focus:border-teal-600 focus:outline-none" placeholder="[building]" />
+              but I sometimes study there.
+            </p>
+          </div>
+
+          <!-- Sentence 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1e-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I do voluntary work at a local
+              <input type="text" data-ans="retirement home" class="ex1e-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-44 text-center focus:border-teal-600 focus:outline-none" placeholder="[building]" />
+              . I enjoy talking to the old people there.
+            </p>
+          </div>
+
+          <!-- Sentence 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1e-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              When I go travelling, I usually stay in a youth
+              <input type="text" data-ans="hostel" class="ex1e-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-32 text-center focus:border-teal-600 focus:outline-none" placeholder="[building]" />
+              because it's so much cheaper than a hotel.
+            </p>
+          </div>
+
+          <!-- Sentence 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1e-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              The local council have a meeting at the
+              <input type="text" data-ans="town hall" class="ex1e-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-36 text-center focus:border-teal-600 focus:outline-none" placeholder="[building]" />
+              every two weeks.
+            </p>
+          </div>
+
+          <!-- Sentence 6 (two inputs) -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1e-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 6 (Two Options)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I prefer staying in a
+              <input type="text" data-gap="6a" class="ex1e-input-6 exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-44 text-center focus:border-teal-600 focus:outline-none" placeholder="[option 1]" />
+              or a
+              <input type="text" data-gap="6b" class="ex1e-input-6 exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-44 text-center focus:border-teal-600 focus:outline-none" placeholder="[option 2]" />
+              because you usually get better service than in a hotel.
+            </p>
+          </div>
+
+          <!-- Sentence 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1e-item="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 7</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              My
+              <input type="text" data-ans="health centre" class="ex1e-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-44 text-center focus:border-teal-600 focus:outline-none" placeholder="[building]" />
+              is always really busy and it's sometimes difficult to see a doctor.
+            </p>
+          </div>
+
+          <!-- Sentence 8 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1e-item="8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 8</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I'm going to start an art class at the
+              <input type="text" data-ans="community centre" class="ex1e-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-48 text-center focus:border-teal-600 focus:outline-none" placeholder="[building]" />
+              .
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 1f Civic Audit Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">1f</span>
+              Work in groups: City Infrastructure Audit:
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Which public buildings exist in your hometown? Which are essential for every community?</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="loadSampleEx1f()" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+              Load Sample Audit
+            </button>
+            <button onclick="saveEx1fNotes()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">
+              Save My Notes
+            </button>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-1">1. Buildings present in my hometown & frequency of use:</label>
+            <textarea id="ex1f-audit" rows="3" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" placeholder="e.g. In my city, we have several hospitals, a modern library which I visit weekly, a sports leisure centre, and a historic town hall..."></textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-1">2. Which buildings are ABSOLUTELY ESSENTIAL for every community?</label>
+            <textarea id="ex1f-essential" rows="3" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" placeholder="e.g. A health centre and fire station are top priorities for emergency safety. A community centre is also vital for youth integration and elderly care..."></textarea>
+          </div>
+        </div>
+        <div id="ex1f-status" class="hidden p-3 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-bold">
+          ✓ Your community audit reflections have been saved locally.
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: PUBLIC SERVICES & DEBATE (Exercise 2, 3a & 3b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex23" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2, 3a & 3b</span>
+            <span class="text-blue-200 text-xs font-medium">Municipal Services & Policy Debate</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Public Services: Defining & Debating Civic Priorities</h2>
+          <p class="text-blue-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            In <strong>2</strong>, identify what defines a *public service*. In <strong>3a</strong>, complete sentences on government spending. Then in <strong>3b</strong>, vote and express your stances on social welfare!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx23()" class="px-5 py-2.5 bg-white hover:bg-blue-50 text-blue-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 2 & 3a</span>
+          </button>
+          <button onclick="revealEx23()" class="px-4 py-2.5 bg-blue-800/60 hover:bg-blue-800 text-white border border-blue-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 2: Concept Definition -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">2</span>
+            Choose the correct definition of <em>public service</em>:
+          </h3>
+          <span id="ex2-score-pill" class="text-xs font-bold text-blue-800 bg-blue-50 px-3 py-1 rounded-xl">Score: 0/1</span>
+        </div>
+
+        <div class="grid gap-3" id="ex2-definition-options">
+          <button type="button" onclick="selectEx2Def(this, 'A')" class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 flex items-start gap-3.5 text-left transition w-full">
+            <span class="w-6 h-6 rounded-full border-2 border-slate-400 flex items-center justify-center text-xs font-black shrink-0 opt-indicator">A</span>
+            <span class="text-sm font-semibold text-slate-800">A service which members of the public manage</span>
+          </button>
+          <button type="button" onclick="selectEx2Def(this, 'B')" class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 flex items-start gap-3.5 text-left transition w-full">
+            <span class="w-6 h-6 rounded-full border-2 border-slate-400 flex items-center justify-center text-xs font-black shrink-0 opt-indicator">B</span>
+            <span class="text-sm font-semibold text-slate-800">A service which a local company offers to the residents, which they pay for</span>
+          </button>
+          <button type="button" onclick="selectEx2Def(this, 'C')" class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 flex items-start gap-3.5 text-left transition w-full" data-correct="true">
+            <span class="w-6 h-6 rounded-full border-2 border-slate-400 flex items-center justify-center text-xs font-black shrink-0 opt-indicator">C</span>
+            <span class="text-sm font-bold text-slate-900">A service that the government or local council provides for its citizens</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 3a: Gap Filling with Services Box -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">3a</span>
+            Complete the sentences with the words in the box:
+          </h3>
+          <span id="ex3a-score-pill" class="text-xs font-bold text-blue-800 bg-blue-50 px-3 py-1 rounded-xl">Score: 0/7</span>
+        </div>
+
+        <!-- 3a Word Bank -->
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Available Public Services Terms:</span>
+          <div class="flex flex-wrap gap-2" id="ex3a-word-bank">
+            <button type="button" onclick="insertEx3aTerm('education')" class="px-3 py-1.5 rounded-xl bg-white border-2 border-blue-200 text-blue-950 font-bold text-xs hover:border-blue-500 transition">education</button>
+            <button type="button" onclick="insertEx3aTerm('environmental protection')" class="px-3 py-1.5 rounded-xl bg-white border-2 border-blue-200 text-blue-950 font-bold text-xs hover:border-blue-500 transition">environmental protection</button>
+            <button type="button" onclick="insertEx3aTerm('health care')" class="px-3 py-1.5 rounded-xl bg-white border-2 border-blue-200 text-blue-950 font-bold text-xs hover:border-blue-500 transition">health care</button>
+            <button type="button" onclick="insertEx3aTerm('police and fire services')" class="px-3 py-1.5 rounded-xl bg-white border-2 border-blue-200 text-blue-950 font-bold text-xs hover:border-blue-500 transition">police and fire services</button>
+            <button type="button" onclick="insertEx3aTerm('public housing')" class="px-3 py-1.5 rounded-xl bg-white border-2 border-blue-200 text-blue-950 font-bold text-xs hover:border-blue-500 transition">public housing</button>
+            <button type="button" onclick="insertEx3aTerm('public spaces')" class="px-3 py-1.5 rounded-xl bg-white border-2 border-blue-200 text-blue-950 font-bold text-xs hover:border-blue-500 transition">public spaces</button>
+            <button type="button" onclick="insertEx3aTerm('public transport')" class="px-3 py-1.5 rounded-xl bg-white border-2 border-blue-200 text-blue-950 font-bold text-xs hover:border-blue-500 transition">public transport</button>
+          </div>
+        </div>
+
+        <div class="space-y-4" id="ex3a-container">
+          
+          <!-- Item 1: education -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Personally, I think spending money on children's
+              <input type="text" data-ans="education" class="ex3a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-36 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 1]" />
+              is more important than any other public service.
+            </p>
+          </div>
+
+          <!-- Item 2: police and fire services -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              The
+              <input type="text" data-ans="police and fire services" class="ex3a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-56 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 2]" />
+              should be very well-paid because they do a very dangerous job.
+            </p>
+          </div>
+
+          <!-- Item 3: public transport -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Local councils should provide cheap
+              <input type="text" data-ans="public transport" class="ex3a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-44 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 3]" />
+              to stop people from using private cars.
+            </p>
+          </div>
+
+          <!-- Item 4: public spaces -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I think all cities should have
+              <input type="text" data-ans="public spaces" class="ex3a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-40 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 4]" />
+              where people can meet on important occasions.
+            </p>
+          </div>
+
+          <!-- Item 5: public housing -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It's a good idea to build
+              <input type="text" data-ans="public housing" class="ex3a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-40 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 5]" />
+              for people who cannot afford to buy or rent their own home.
+            </p>
+          </div>
+
+          <!-- Item 6: health care -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 6</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It's impossible for governments to provide free
+              <input type="text" data-ans="health care,healthcare" class="ex3a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-36 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 6]" />
+              for its citizens because hospitals and medicines are very expensive.
+            </p>
+          </div>
+
+          <!-- Item 7: environmental protection -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-item="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 7</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Councils spend too much money on preventing pollution and other
+              <input type="text" data-ans="environmental protection" class="ex3a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-60 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 7]" />
+              services.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 3b: Civic Debate & Policy Stance Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">3b</span>
+            Work in pairs. Do you agree or disagree with the sentences in Exercise 3a?
+          </h3>
+          <span class="text-xs font-black uppercase tracking-wider text-blue-800 bg-blue-100 px-3 py-1 rounded-xl">Civic Debate Studio</span>
+        </div>
+        <p class="text-sm text-slate-600">Listen to model arguments for key policy dilemmas and record your group's stance:</p>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="debate-cards-grid">
+          
+          <!-- Debate 1 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Policy 1: Children's Education</span>
+              <button onclick="speakText('Personally, I think spending money on children education is more important than any other public service.')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Education is the most vital service."</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>I agree:</strong> Investing in education lays the foundation for future innovation, lowers crime rates, and builds economic prosperity.
+            </div>
+          </div>
+
+          <!-- Debate 2 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Policy 3: Cheap Public Transport</span>
+              <button onclick="speakText('Local councils should provide cheap public transport to stop people from using private cars.')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Subsidize cheap public transit."</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>I agree:</strong> Affordable trains and buses reduce traffic congestion, eliminate smog, and enable low-income workers to commute.
+            </div>
+          </div>
+
+          <!-- Debate 3 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Policy 5: Public Housing</span>
+              <button onclick="speakText('It is a good idea to build public housing for people who cannot afford to buy or rent their own home.')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Build public housing projects."</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>I agree:</strong> Housing is a human right; having stable shelter prevents homelessness and helps families thrive.
+            </div>
+          </div>
+
+          <!-- Debate 4 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Policy 6: Free Health Care</span>
+              <button onclick="speakText('It is impossible for governments to provide free health care for its citizens because hospitals and medicines are very expensive.')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Is free healthcare impossible?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>I disagree:</strong> Many developed nations provide universal healthcare funded by progressive taxation without going bankrupt.
+            </div>
+          </div>
+
+          <!-- Debate 5 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Policy 7: Environmental Spending</span>
+              <button onclick="speakText('Councils spend too much money on preventing pollution and other environmental protection services.')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Too much spent on environment?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>I disagree:</strong> Environmental protection preserves clean air, prevents climate disasters, and saves money in medical costs long-term.
+            </div>
+          </div>
+
+          <!-- Debate 6 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Policy 2: Emergency Salaries</span>
+              <button onclick="speakText('The police and fire services should be very well-paid because they do a very dangerous job.')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"High pay for police and firefighters."</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>I agree:</strong> Emergency responders risk their lives daily and deserve high financial compensation and mental health support.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: VOCABULARY LEXICON & AUDIO GUIDE -->
+    <!-- ========================================================================= -->
+    <section id="tab-lexicon" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 to-purple-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-purple-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Unit 7b Glossary</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 113 Reference & Pronunciation Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Comprehensive Public Buildings & Services Lexicon</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Full reference definitions, phonetic transcriptions, grammatical collocations, and one-click British English pronunciation.
+        </p>
+      </div>
+
+      <!-- Flashcards Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <!-- town hall -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">town hall</h4>
+            <button onclick="speakText('town hall')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-50 text-purple-800 font-bold hover:bg-purple-100 transition">🔊 /ˌtaʊn ˈhɔːl/</button>
+          </div>
+          <span class="text-xs font-bold text-purple-600 uppercase">compound noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A large building containing local government offices and council meeting rooms.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>council meeting at the town hall</em></div>
+        </div>
+
+        <!-- retirement home -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">retirement home</h4>
+            <button onclick="speakText('retirement home')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-50 text-purple-800 font-bold hover:bg-purple-100 transition">🔊 /rɪˈtaɪə.mənt ˌhəʊm/</button>
+          </div>
+          <span class="text-xs font-bold text-purple-600 uppercase">compound noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A residential institution providing accommodation and nursing care for elderly citizens.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>volunteer at a retirement home</em></div>
+        </div>
+
+        <!-- community centre -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">community centre</h4>
+            <button onclick="speakText('community centre')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-50 text-purple-800 font-bold hover:bg-purple-100 transition">🔊 /kəˈmjuː.nə.ti ˌsen.tər/</button>
+          </div>
+          <span class="text-xs font-bold text-purple-600 uppercase">compound noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A building where members of a neighbourhood gather for social events, classes, and recreation.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>start an art class at the community centre</em></div>
+        </div>
+
+        <!-- leisure centre -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">leisure centre</h4>
+            <button onclick="speakText('leisure centre')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-50 text-purple-800 font-bold hover:bg-purple-100 transition">🔊 /ˈleʒ.ə ˌsen.tər/</button>
+          </div>
+          <span class="text-xs font-bold text-purple-600 uppercase">compound noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A municipal complex featuring swimming pools, gym equipment, sports halls, and workout classes.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>work out at the local leisure centre</em></div>
+        </div>
+
+        <!-- concert hall -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">concert hall</h4>
+            <button onclick="speakText('concert hall')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-50 text-purple-800 font-bold hover:bg-purple-100 transition">🔊 /ˈkɒn.sət ˌhɔːl/</button>
+          </div>
+          <span class="text-xs font-bold text-purple-600 uppercase">compound noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A large public building designed specifically for the performance of live music concerts.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>perform live at the city concert hall</em></div>
+        </div>
+
+        <!-- public housing -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">public housing</h4>
+            <button onclick="speakText('public housing')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-50 text-purple-800 font-bold hover:bg-purple-100 transition">🔊 /ˌpʌb.lɪk ˈhaʊ.zɪŋ/</button>
+          </div>
+          <span class="text-xs font-bold text-purple-600 uppercase">noun [U]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">Affordable residential accommodation funded, built, and managed by the government for low-income citizens.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>build affordable public housing</em></div>
+        </div>
+
+        <!-- environmental protection -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">environmental protection</h4>
+            <button onclick="speakText('environmental protection')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-50 text-purple-800 font-bold hover:bg-purple-100 transition">🔊 /ɪnˌvaɪ.rənˈmen.təl prəˌtek.ʃən/</button>
+          </div>
+          <span class="text-xs font-bold text-purple-600 uppercase">compound noun [U]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">Public policies and actions dedicated to preventing pollution and conserving nature.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>budget for environmental protection</em></div>
+        </div>
+
+        <!-- tourist information centre -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">tourist information centre</h4>
+            <button onclick="speakText('tourist information centre')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-50 text-purple-800 font-bold hover:bg-purple-100 transition">🔊 /ˈtʊə.rɪst ˌɪn.fəˈmeɪ.ʃən ˌsen.tər/</button>
+          </div>
+          <span class="text-xs font-bold text-purple-600 uppercase">compound noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">An office offering travel guides, maps, event tickets, and advice to visitors in a city.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>pick up a map at the tourist information centre</em></div>
+        </div>
+
+        <!-- guesthouse vs bed and breakfast -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">guesthouse & B&B</h4>
+            <button onclick="speakText('guesthouse and bed and breakfast')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-50 text-purple-800 font-bold hover:bg-purple-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-purple-600 uppercase">accommodation nouns</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">Smaller, cozier lodgings offering personal host hospitality and included morning meals.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>stay in a family-run guesthouse</em></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Vocabulary page 73
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 7b Vocabulary
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 7: City life • 7b Vocabulary • Page 113
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State management for scores
+    const state = {
+      score: {
+        ex1a: 0,
+        ex1b: 0,
+        ex1cd: 0,
+        ex1e: 0,
+        ex2: 0,
+        ex3a: 0
+      }
+    };
+
+    // Web Audio Synthesizer for feedback chimes
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.15); // C6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Text to Speech Pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.92;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-purple-600', 'text-white', 'shadow-md', 'shadow-purple-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-purple-600', 'text-white', 'shadow-md', 'shadow-purple-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // =========================================================================
+    // EXERCISE 1a & 1b LOGIC
+    // =========================================================================
+    function checkEx1ab() {
+      // 1a check
+      let correct1a = 0;
+      document.querySelectorAll('#ex1a-container [data-ex1a-item]').forEach(row => {
+        const sel = row.querySelector('.ex1a-select');
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!sel.value) {
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select</span>';
+          sel.classList.remove('border-purple-600', 'border-rose-400');
+          return;
+        }
+
+        if (sel.value.toLowerCase() === expected.toLowerCase()) {
+          correct1a++;
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-purple-600');
+        } else {
+          badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          sel.classList.remove('border-purple-600');
+          sel.classList.add('border-rose-400');
+        }
+      });
+      state.score.ex1a = correct1a;
+      document.getElementById('ex1a-score-pill').textContent = `Score: ${correct1a}/8`;
+
+      // 1b check
+      let correct1b = 0;
+      document.querySelectorAll('#ex1b-container [data-ex1b-item]').forEach(row => {
+        const sel = row.querySelector('.ex1b-select');
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!sel.value) {
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select</span>';
+          sel.classList.remove('border-purple-600', 'border-rose-400');
+          return;
+        }
+
+        if (sel.value.toLowerCase() === expected.toLowerCase()) {
+          correct1b++;
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-purple-600');
+        } else {
+          badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          sel.classList.remove('border-purple-600');
+          sel.classList.add('border-rose-400');
+        }
+      });
+      state.score.ex1b = correct1b;
+      document.getElementById('ex1b-score-pill').textContent = `Score: ${correct1b}/6`;
+
+      updateTotalScore();
+      playBeep(correct1a >= 6 && correct1b >= 5);
+    }
+
+    function revealEx1ab() {
+      // 1a answers
+      const ans1a = ['centre', 'home', 'hall', 'station', 'centre', 'centre', 'hall', 'centre'];
+      document.querySelectorAll('#ex1a-container [data-ex1a-item]').forEach((row, i) => {
+        const sel = row.querySelector('.ex1a-select');
+        sel.value = ans1a[i];
+        sel.classList.remove('border-rose-400');
+        sel.classList.add('border-purple-600');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+      state.score.ex1a = 8;
+      document.getElementById('ex1a-score-pill').textContent = 'Score: 8/8';
+
+      // 1b answers
+      const ans1b = [
+        'health centre',
+        'retirement home',
+        'community centre',
+        'town hall',
+        'leisure centre',
+        'concert hall'
+      ];
+      document.querySelectorAll('#ex1b-container [data-ex1b-item]').forEach((row, i) => {
+        const sel = row.querySelector('.ex1b-select');
+        sel.value = ans1b[i];
+        sel.classList.remove('border-rose-400');
+        sel.classList.add('border-purple-600');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+      state.score.ex1b = 6;
+      document.getElementById('ex1b-score-pill').textContent = 'Score: 6/6';
+
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 1c & 1d LOGIC (Chip Sorting Matrix)
+    // =========================================================================
+    let selectedChip = null;
+
+    function initChips() {
+      document.querySelectorAll('.building-chip').forEach(chip => {
+        chip.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (chip.classList.contains('ring-2')) {
+            chip.classList.remove('ring-2', 'ring-purple-600');
+            selectedChip = null;
+          } else {
+            document.querySelectorAll('.building-chip').forEach(c => c.classList.remove('ring-2', 'ring-purple-600'));
+            chip.classList.add('ring-2', 'ring-purple-600');
+            selectedChip = chip;
+            speakText(chip.getAttribute('data-building'));
+          }
+        });
+      });
+    }
+
+    function targetCategoryDrop(categoryKey) {
+      if (selectedChip) {
+        const targetZone = document.querySelector(`.category-zone[data-zone="${categoryKey}"]`);
+        if (targetZone) {
+          targetZone.appendChild(selectedChip);
+          selectedChip.classList.remove('ring-2', 'ring-purple-600');
+          selectedChip = null;
+          updateMatrixCounts();
+        }
+      }
+    }
+
+    function updateMatrixCounts() {
+      const pool = document.getElementById('buildings-pool');
+      const poolCount = pool.querySelectorAll('.building-chip').length;
+      document.getElementById('pool-count-badge').textContent = `${poolCount} Available`;
+
+      const limits = {
+        'accommodation': 4,
+        'attractions': 6,
+        'services': 7
+      };
+
+      for (let k in limits) {
+        const zone = document.querySelector(`.category-zone[data-zone="${k}"]`);
+        const count = zone.querySelectorAll('.building-chip').length;
+        const tag = zone.closest('.bg-white').querySelector('.count-tag');
+        if (tag) tag.textContent = `${count} / ${limits[k]}`;
+      }
+    }
+
+    function checkEx1cd() {
+      let correct = 0;
+      let totalAssigned = 0;
+
+      document.querySelectorAll('.category-zone').forEach(zone => {
+        const zoneCat = zone.getAttribute('data-zone');
+        const chips = zone.querySelectorAll('.building-chip');
+
+        chips.forEach(chip => {
+          totalAssigned++;
+          const expected = chip.getAttribute('data-cat');
+          if (zoneCat === expected) {
+            correct++;
+            chip.classList.remove('border-rose-400', 'bg-rose-50');
+            chip.classList.add('border-emerald-500', 'bg-emerald-50');
+          } else {
+            chip.classList.remove('border-emerald-500', 'bg-emerald-50');
+            chip.classList.add('border-rose-400', 'bg-rose-50');
+          }
+        });
+      });
+
+      state.score.ex1cd = correct;
+      updateTotalScore();
+      playBeep(correct >= 13);
+    }
+
+    function revealEx1cd() {
+      const chips = document.querySelectorAll('.building-chip');
+      chips.forEach(chip => {
+        const correctCat = chip.getAttribute('data-cat');
+        const zone = document.querySelector(`.category-zone[data-zone="${correctCat}"]`);
+        if (zone) {
+          zone.appendChild(chip);
+          chip.classList.remove('border-rose-400', 'bg-rose-50', 'ring-2', 'ring-purple-600');
+          chip.classList.add('border-emerald-500', 'bg-emerald-50');
+        }
+      });
+      selectedChip = null;
+      updateMatrixCounts();
+      state.score.ex1cd = 17;
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 1e & 1f LOGIC
+    // =========================================================================
+    function checkEx1e() {
+      let correct = 0;
+      // Normal single inputs 1-5, 7, 8
+      const singleRows = [1, 2, 3, 4, 5, 7, 8];
+      singleRows.forEach(num => {
+        const row = document.querySelector(`[data-ex1e-item="${num}"]`);
+        const inp = row.querySelector('.ex1e-input');
+        const expected = cleanStr(inp.getAttribute('data-ans'));
+        const userVal = cleanStr(inp.value);
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Fill gap</span>';
+          inp.classList.remove('border-teal-500', 'bg-teal-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (userVal === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-teal-500', 'bg-teal-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          inp.classList.remove('border-teal-500', 'bg-teal-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      // Item 6 has two alternative inputs: 'bed and breakfast' & 'guesthouse' (any order)
+      const row6 = document.querySelector(`[data-ex1e-item="6"]`);
+      const in6a = row6.querySelector('[data-gap="6a"]');
+      const in6b = row6.querySelector('[data-gap="6b"]');
+      const v6a = cleanStr(in6a.value);
+      const v6b = cleanStr(in6b.value);
+      const badge6 = row6.querySelector('.feedback-badge');
+
+      const is6aValid = (v6a === 'bed and breakfast' || v6a === 'guesthouse');
+      const is6bValid = (v6b === 'bed and breakfast' || v6b === 'guesthouse');
+      const distinct6 = v6a !== v6b && v6a && v6b;
+
+      if (is6aValid && is6bValid && distinct6) {
+        correct += 2;
+        badge6.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Both Correct</span>';
+        in6a.classList.remove('border-rose-400', 'bg-rose-50');
+        in6a.classList.add('border-teal-500', 'bg-teal-50');
+        in6b.classList.remove('border-rose-400', 'bg-rose-50');
+        in6b.classList.add('border-teal-500', 'bg-teal-50');
+      } else {
+        badge6.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (bed and breakfast / guesthouse)</span>';
+        in6a.classList.add('border-rose-400');
+        in6b.classList.add('border-rose-400');
+      }
+
+      state.score.ex1e = correct;
+      document.getElementById('ex1e-score-pill').textContent = `Score: ${correct}/9`;
+      updateTotalScore();
+      playBeep(correct >= 7);
+    }
+
+    function revealEx1e() {
+      const keys = {
+        '1': 'concert hall',
+        '2': 'library',
+        '3': 'retirement home',
+        '4': 'hostel',
+        '5': 'town hall',
+        '7': 'health centre',
+        '8': 'community centre'
+      };
+
+      for (let k in keys) {
+        const row = document.querySelector(`[data-ex1e-item="${k}"]`);
+        const inp = row.querySelector('.ex1e-input');
+        inp.value = keys[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-teal-500', 'bg-teal-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      const row6 = document.querySelector(`[data-ex1e-item="6"]`);
+      const in6a = row6.querySelector('[data-gap="6a"]');
+      const in6b = row6.querySelector('[data-gap="6b"]');
+      in6a.value = 'bed and breakfast';
+      in6b.value = 'guesthouse';
+      in6a.classList.remove('border-rose-400', 'bg-rose-50');
+      in6a.classList.add('border-teal-500', 'bg-teal-50');
+      in6b.classList.remove('border-rose-400', 'bg-rose-50');
+      in6b.classList.add('border-teal-500', 'bg-teal-50');
+      row6.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+
+      state.score.ex1e = 9;
+      document.getElementById('ex1e-score-pill').textContent = 'Score: 9/9';
+      updateTotalScore();
+    }
+
+    function loadSampleEx1f() {
+      document.getElementById('ex1f-audit').value = "In my hometown, we have a public library, two major hospitals, three leisure centres with Olympic pools, and a lively concert hall. I use the library every weekend for quiet research.";
+      document.getElementById('ex1f-essential').value = "I believe health centres, fire stations, and retirement homes are fundamental. Without immediate medical care, fire protection, and elderly support, a community cannot function safely.";
+      playBeep(true);
+    }
+
+    function saveEx1fNotes() {
+      const audit = document.getElementById('ex1f-audit').value;
+      const essential = document.getElementById('ex1f-essential').value;
+      localStorage.setItem('m7b_vocab_ex1f', JSON.stringify({ audit, essential }));
+      const status = document.getElementById('ex1f-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // =========================================================================
+    // EXERCISE 2 & 3a LOGIC
+    // =========================================================================
+    let userEx2DefChoice = null;
+
+    function selectEx2Def(btn, choiceLetter) {
+      document.querySelectorAll('#ex2-definition-options button').forEach(b => {
+        b.classList.remove('border-blue-600', 'bg-blue-50', 'border-emerald-500', 'bg-emerald-50', 'border-rose-500', 'bg-rose-50');
+        b.classList.add('border-slate-200', 'bg-slate-50');
+      });
+      btn.classList.remove('border-slate-200', 'bg-slate-50');
+      btn.classList.add('border-blue-600', 'bg-blue-50');
+      userEx2DefChoice = choiceLetter;
+    }
+
+    let lastActiveEx3aInput = null;
+    document.querySelectorAll('.ex3a-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx3aInput = inp;
+      });
+    });
+
+    function insertEx3aTerm(term) {
+      if (lastActiveEx3aInput) {
+        lastActiveEx3aInput.value = term;
+        lastActiveEx3aInput.focus();
+      } else {
+        const empty = Array.from(document.querySelectorAll('.ex3a-input')).find(i => !i.value.trim());
+        if (empty) {
+          empty.value = term;
+          empty.focus();
+        }
+      }
+    }
+
+    function checkEx23() {
+      // Check 2
+      let correct2 = 0;
+      if (userEx2DefChoice === 'C') {
+        correct2 = 1;
+        document.querySelector('#ex2-definition-options [data-correct="true"]').classList.replace('border-blue-600', 'border-emerald-500');
+        document.querySelector('#ex2-definition-options [data-correct="true"]').classList.replace('bg-blue-50', 'bg-emerald-50');
+      } else if (userEx2DefChoice) {
+        const wrongBtn = Array.from(document.querySelectorAll('#ex2-definition-options button')).find(b => b.textContent.includes(userEx2DefChoice));
+        if (wrongBtn) {
+          wrongBtn.classList.replace('border-blue-600', 'border-rose-500');
+          wrongBtn.classList.replace('bg-blue-50', 'bg-rose-50');
+        }
+      }
+      state.score.ex2 = correct2;
+      document.getElementById('ex2-score-pill').textContent = `Score: ${correct2}/1`;
+
+      // Check 3a
+      let correct3a = 0;
+      document.querySelectorAll('#ex3a-container [data-ex3a-item]').forEach(row => {
+        const inp = row.querySelector('.ex3a-input');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Fill term</span>';
+          inp.classList.remove('border-blue-500', 'bg-blue-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct3a++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-blue-500', 'bg-blue-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-blue-500', 'bg-blue-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3a = correct3a;
+      document.getElementById('ex3a-score-pill').textContent = `Score: ${correct3a}/7`;
+      updateTotalScore();
+      playBeep(correct2 === 1 && correct3a >= 5);
+    }
+
+    function revealEx23() {
+      // Reveal 2
+      document.querySelectorAll('#ex2-definition-options button').forEach(b => {
+        b.classList.remove('border-blue-600', 'border-rose-500', 'bg-rose-50');
+        b.classList.add('border-slate-200', 'bg-slate-50');
+      });
+      const correctDef = document.querySelector('#ex2-definition-options [data-correct="true"]');
+      correctDef.classList.remove('border-slate-200', 'bg-slate-50');
+      correctDef.classList.add('border-emerald-500', 'bg-emerald-50');
+      userEx2DefChoice = 'C';
+      state.score.ex2 = 1;
+      document.getElementById('ex2-score-pill').textContent = 'Score: 1/1';
+
+      // Reveal 3a
+      const answers3a = {
+        '1': 'education',
+        '2': 'police and fire services',
+        '3': 'public transport',
+        '4': 'public spaces',
+        '5': 'public housing',
+        '6': 'health care',
+        '7': 'environmental protection'
+      };
+
+      for (let k in answers3a) {
+        const row = document.querySelector(`[data-ex3a-item="${k}"]`);
+        const inp = row.querySelector('.ex3a-input');
+        inp.value = answers3a[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-blue-500', 'bg-blue-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex3a = 7;
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 7/7';
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // GLOBAL PROGRESS & RESET HANDLERS
+    // =========================================================================
+    function updateTotalScore() {
+      const total = state.score.ex1a + state.score.ex1b + state.score.ex1cd + state.score.ex1e + state.score.ex2 + state.score.ex3a;
+      // Points distribution: 1a (8) + 1b (6) + 1cd (17) + 1e (9) + 2 (1) + 3a (7) = 48 total points
+      const maxScore = 48;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 40) {
+        bar.classList.replace('bg-purple-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-purple-600');
+      }
+    }
+
+    // Reset All Answers
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // 1. Reset 1a & 1b selects
+      document.querySelectorAll('.ex1a-select, .ex1b-select').forEach(s => {
+        s.value = '';
+        s.classList.remove('border-purple-600', 'border-rose-400');
+      });
+
+      // 2. Reset 1c & 1d chips back to pool
+      const pool = document.getElementById('buildings-pool');
+      document.querySelectorAll('.category-zone .building-chip').forEach(c => {
+        c.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50', 'ring-2', 'ring-purple-600');
+        pool.appendChild(c);
+      });
+      selectedChip = null;
+      updateMatrixCounts();
+
+      // 3. Reset 1e inputs
+      document.querySelectorAll('.ex1e-input, .ex1e-input-6').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-teal-500', 'bg-teal-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 4. Reset 2 definition buttons
+      document.querySelectorAll('#ex2-definition-options button').forEach(b => {
+        b.classList.remove('border-blue-600', 'bg-blue-50', 'border-emerald-500', 'bg-emerald-50', 'border-rose-500', 'bg-rose-50');
+        b.classList.add('border-slate-200', 'bg-slate-50');
+      });
+      userEx2DefChoice = null;
+
+      // 5. Reset 3a inputs
+      document.querySelectorAll('.ex3a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-blue-500', 'bg-blue-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear all feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset state scores
+      state.score = { ex1a: 0, ex1b: 0, ex1cd: 0, ex1e: 0, ex2: 0, ex3a: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1a-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex1b-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex1e-score-pill').textContent = 'Score: 0/9';
+      document.getElementById('ex2-score-pill').textContent = 'Score: 0/1';
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 0/7';
+    });
+
+    // Auto-restore saved 1f data & setup chips on DOM load
+    window.addEventListener('DOMContentLoaded', () => {
+      initChips();
+      updateMatrixCounts();
+      try {
+        const saved1f = JSON.parse(localStorage.getItem('m7b_vocab_ex1f'));
+        if (saved1f) {
+          if (saved1f.audit) document.getElementById('ex1f-audit').value = saved1f.audit;
+          if (saved1f.essential) document.getElementById('ex1f-essential').value = saved1f.essential;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

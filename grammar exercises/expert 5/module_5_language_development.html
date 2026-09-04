@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 5: Language Development - -ing Forms and Infinitives</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth animated transitions */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.25);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-teal-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-teal-600 via-emerald-600 to-cyan-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-teal-500/25 ring-2 ring-white">
+          M5
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-800 tracking-wide uppercase">Unit 5: The world around us</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 74</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-teal-600">-ing Forms & Infinitives</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Total Score</span>
+            <span id="global-score-pill" class="text-base font-black text-teal-600">0 / 35</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-teal-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-teal-600 text-white shadow-md shadow-teal-600/25">
+          1. Rule Matching (1)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. -ing Forms (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Infinitives (3)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Questions & Speaking (4a & 4b)
+        </button>
+        <button data-tab="tab-ex5" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          5. Travel Differences (5 & 6)
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 187
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: RULE MATCHING (Exercise 1) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1</span>
+            <span class="text-teal-200 text-xs font-medium">Expert Grammar Page 187</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">-ing Forms & Infinitives: Matching Rules to Context</h2>
+          <p class="text-teal-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Match the bold verbs in sentences 1–7 with explanations A–G. Notice how prepositions, adjectives, modal verbs, and grammatical subjects trigger specific verb patterns.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1()" class="px-5 py-2.5 bg-white hover:bg-teal-50 text-teal-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Rules</span>
+          </button>
+          <button onclick="revealEx1()" class="px-4 py-2.5 bg-teal-800/60 hover:bg-teal-800 text-white border border-teal-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Explanations A-G Reference Cards Grid -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">A-G</span>
+            Explanations Reference Guide
+          </h3>
+          <span class="text-xs text-slate-400">Rules applied in Ex 1</span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs sm:text-sm">
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-teal-700 text-sm block mb-1">A</span>
+            <p class="text-slate-700 font-medium">Use the <strong>-ing form</strong> after prepositions.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-teal-700 text-sm block mb-1">B</span>
+            <p class="text-slate-700 font-medium">Use the <strong>infinitive with to</strong> to express purpose.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-teal-700 text-sm block mb-1">C</span>
+            <p class="text-slate-700 font-medium">Use the <strong>infinitive without to</strong> after certain verbs (e.g. <em>make / let</em>).</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-teal-700 text-sm block mb-1">D</span>
+            <p class="text-slate-700 font-medium">Use the <strong>-ing form</strong> after certain verbs (e.g. <em>like / enjoy</em>).</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-teal-700 text-sm block mb-1">E</span>
+            <p class="text-slate-700 font-medium">Use the <strong>infinitive with to</strong> after certain verbs (e.g. <em>decide</em>).</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-teal-700 text-sm block mb-1">F</span>
+            <p class="text-slate-700 font-medium">Use the <strong>-ing form</strong> as a noun or subject of a sentence.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 sm:col-span-2 lg:col-span-3">
+            <span class="font-black text-teal-700 text-sm block mb-1">G</span>
+            <p class="text-slate-700 font-medium">Use the <strong>infinitive with to</strong> after certain adjectives (e.g. <em>difficult, easy</em>).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 1 Interactive Question Matching Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">1</span>
+            Match the sentences (1–7) with the explanations (A–G):
+          </h3>
+          <span id="ex1-score-pill" class="text-xs font-bold text-teal-800 bg-teal-50 px-3 py-1 rounded-xl">Score: 0/7</span>
+        </div>
+
+        <div class="space-y-3" id="ex1-container">
+          <!-- Item 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="1" data-ans="D">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              "I like <span class="text-teal-700 font-black underline decoration-teal-400 decoration-2">going</span> somewhere where I can relax on a beach."
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-teal-950 focus:border-teal-600 focus:outline-none" onchange="checkEx1Quick()">
+                <option value="">Choose explanation...</option>
+                <option value="A">A (after prepositions)</option>
+                <option value="B">B (purpose with to)</option>
+                <option value="C">C (without to after certain verbs)</option>
+                <option value="D">D (-ing after certain verbs)</option>
+                <option value="E">E (with to after certain verbs)</option>
+                <option value="F">F (as a noun/subject)</option>
+                <option value="G">G (with to after adjectives)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="2" data-ans="G">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              "I find it difficult <span class="text-teal-700 font-black underline decoration-teal-400 decoration-2">to sleep</span> on a plane."
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-teal-950 focus:border-teal-600 focus:outline-none" onchange="checkEx1Quick()">
+                <option value="">Choose explanation...</option>
+                <option value="A">A (after prepositions)</option>
+                <option value="B">B (purpose with to)</option>
+                <option value="C">C (without to after certain verbs)</option>
+                <option value="D">D (-ing after certain verbs)</option>
+                <option value="E">E (with to after certain verbs)</option>
+                <option value="F">F (as a noun/subject)</option>
+                <option value="G">G (with to after adjectives)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="3" data-ans="E">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              "Last year we decided <span class="text-teal-700 font-black underline decoration-teal-400 decoration-2">to go</span> on a walking holiday in the mountains."
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-teal-950 focus:border-teal-600 focus:outline-none" onchange="checkEx1Quick()">
+                <option value="">Choose explanation...</option>
+                <option value="A">A (after prepositions)</option>
+                <option value="B">B (purpose with to)</option>
+                <option value="C">C (without to after certain verbs)</option>
+                <option value="D">D (-ing after certain verbs)</option>
+                <option value="E">E (with to after certain verbs)</option>
+                <option value="F">F (as a noun/subject)</option>
+                <option value="G">G (with to after adjectives)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="4" data-ans="F">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              "I think <span class="text-teal-700 font-black underline decoration-teal-400 decoration-2">travelling</span> by train is more comfortable than flying."
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-teal-950 focus:border-teal-600 focus:outline-none" onchange="checkEx1Quick()">
+                <option value="">Choose explanation...</option>
+                <option value="A">A (after prepositions)</option>
+                <option value="B">B (purpose with to)</option>
+                <option value="C">C (without to after certain verbs)</option>
+                <option value="D">D (-ing after certain verbs)</option>
+                <option value="E">E (with to after certain verbs)</option>
+                <option value="F">F (as a noun/subject)</option>
+                <option value="G">G (with to after adjectives)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="5" data-ans="C">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              "When I was young, my parents always made me <span class="text-teal-700 font-black underline decoration-teal-400 decoration-2">go</span> camping with them."
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-teal-950 focus:border-teal-600 focus:outline-none" onchange="checkEx1Quick()">
+                <option value="">Choose explanation...</option>
+                <option value="A">A (after prepositions)</option>
+                <option value="B">B (purpose with to)</option>
+                <option value="C">C (without to after certain verbs)</option>
+                <option value="D">D (-ing after certain verbs)</option>
+                <option value="E">E (with to after certain verbs)</option>
+                <option value="F">F (as a noun/subject)</option>
+                <option value="G">G (with to after adjectives)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="6" data-ans="B">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              "Last year I went to Egypt <span class="text-teal-700 font-black underline decoration-teal-400 decoration-2">to see</span> the pyramids."
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-teal-950 focus:border-teal-600 focus:outline-none" onchange="checkEx1Quick()">
+                <option value="">Choose explanation...</option>
+                <option value="A">A (after prepositions)</option>
+                <option value="B">B (purpose with to)</option>
+                <option value="C">C (without to after certain verbs)</option>
+                <option value="D">D (-ing after certain verbs)</option>
+                <option value="E">E (with to after certain verbs)</option>
+                <option value="F">F (as a noun/subject)</option>
+                <option value="G">G (with to after adjectives)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="7" data-ans="A">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">7.</span>
+              "I always feel sad after <span class="text-teal-700 font-black underline decoration-teal-400 decoration-2">returning</span> from holiday."
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-teal-950 focus:border-teal-600 focus:outline-none" onchange="checkEx1Quick()">
+                <option value="">Choose explanation...</option>
+                <option value="A">A (after prepositions)</option>
+                <option value="B">B (purpose with to)</option>
+                <option value="C">C (without to after certain verbs)</option>
+                <option value="D">D (-ing after certain verbs)</option>
+                <option value="E">E (with to after certain verbs)</option>
+                <option value="F">F (as a noun/subject)</option>
+                <option value="G">G (with to after adjectives)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: -ING FORMS (Exercise 2a & 2b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-emerald-200 text-xs font-medium">Sentence Formation & Personal Discussion</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Writing Sentences Using -ing Forms</h2>
+          <p class="text-emerald-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Unpack the prompt words into grammatically correct sentences with <em>-ing</em> forms (gerund subjects, verb complements, or after prepositions). Then tick the statements you agree with!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2a()" class="px-5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 2a</span>
+          </button>
+          <button onclick="revealEx2a()" class="px-4 py-2.5 bg-emerald-800/60 hover:bg-emerald-800 text-white border border-emerald-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 2a Interactive Sentence Builders -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">2a</span>
+            Write complete sentences using -ing forms:
+          </h3>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex2a-container">
+          <!-- Item 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 1: walk / around a town / is / the best way to find interesting places</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type complete sentence here..." data-accepted="walking around a town is the best way to find interesting places" />
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 2: I can't stand / fly / because there's so little space</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type complete sentence here..." data-accepted="i cant stand flying because theres so little space,i cannot stand flying because theres so little space,i cant stand flying because there is so little space" />
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 3: I hate / visit / hot countries</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type complete sentence here..." data-accepted="i hate visiting hot countries" />
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 4: I don't enjoy / visit / tourist attractions in my own country</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type complete sentence here..." data-accepted="i dont enjoy visiting tourist attractions in my own country,i do not enjoy visiting tourist attractions in my own country" />
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 5: travel / alone / can be very hard</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type complete sentence here..." data-accepted="travelling alone can be very hard,traveling alone can be very hard" />
+          </div>
+
+          <!-- Item 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 6: I'm good at / learn / new languages when I travel</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type complete sentence here..." data-accepted="im good at learning new languages when i travel,i am good at learning new languages when i travel" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 2b Personal Opinion Checklist & Pairwork Notes -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">2b</span>
+              Tick the sentences in Exercise 2a that you agree with & discuss:
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Select the statements that reflect your personal travel attitude:</p>
+          </div>
+          <button onclick="saveEx2bNotes()" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+            Save My Preferences
+          </button>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3" id="ex2b-checklist">
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-1" class="w-5 h-5 text-teal-600 rounded-lg focus:ring-teal-500" />
+            <span class="text-sm font-bold text-slate-800">1. Walking around is the best way to discover places.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-2" class="w-5 h-5 text-teal-600 rounded-lg focus:ring-teal-500" />
+            <span class="text-sm font-bold text-slate-800">2. I can't stand flying because of cramped space.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-3" class="w-5 h-5 text-teal-600 rounded-lg focus:ring-teal-500" />
+            <span class="text-sm font-bold text-slate-800">3. I hate visiting hot countries.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-4" class="w-5 h-5 text-teal-600 rounded-lg focus:ring-teal-500" />
+            <span class="text-sm font-bold text-slate-800">4. I don't enjoy tourist attractions in my home country.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-5" class="w-5 h-5 text-teal-600 rounded-lg focus:ring-teal-500" />
+            <span class="text-sm font-bold text-slate-800">5. Travelling alone can be very hard.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-teal-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-6" class="w-5 h-5 text-teal-600 rounded-lg focus:ring-teal-500" />
+            <span class="text-sm font-bold text-slate-800">6. I'm good at learning local languages when travelling.</span>
+          </label>
+        </div>
+
+        <div>
+          <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-2">My Travel Philosophy Notes (for speaking with partner):</label>
+          <textarea id="ex2b-discussion-text" rows="2" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-teal-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. I agree with sentence 1 because exploring on foot helps me discover hidden alleys and cafes. However, I disagree with sentence 2 because modern long-haul flights can be quite restful..."></textarea>
+        </div>
+        <div id="ex2b-status" class="hidden p-3 rounded-xl bg-teal-100 text-teal-900 text-xs font-bold">
+          ✓ Your travel preferences and notes have been saved to this session.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: INFINITIVES (Exercise 3) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3</span>
+            <span class="text-cyan-200 text-xs font-medium">To-Infinitive vs. Bare Infinitive</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Infinitive Structures: Purpose, Modals & Objects</h2>
+          <p class="text-cyan-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Choose whether each sentence requires an infinitive with <em>to</em> (purpose, adjectives, verb + object) or a bare infinitive without <em>to</em> (after modal verbs or <em>make / let</em>).
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3()" class="px-5 py-2.5 bg-white hover:bg-cyan-50 text-cyan-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Choices</span>
+          </button>
+          <button onclick="revealEx3()" class="px-4 py-2.5 bg-cyan-800/60 hover:bg-cyan-800 text-white border border-cyan-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 3 Question Rows with Pill Selection -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-800 text-sm font-black flex items-center justify-center">3</span>
+            Choose the correct options in italics to complete the sentences:
+          </h3>
+          <span id="ex3-score-pill" class="text-xs font-bold text-cyan-800 bg-cyan-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="grid gap-3.5" id="ex3-container">
+          <!-- Item 1 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3-q="1" data-ans="to let">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              Some countries refuse
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-cyan-500 shadow-2xs">let</button>
+                <button type="button" onclick="selectEx3Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-cyan-500 shadow-2xs">to let</button>
+              </span>
+              you in without a visa.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3-q="2" data-ans="to decide">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              It can be difficult
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-cyan-500 shadow-2xs">decide</button>
+                <button type="button" onclick="selectEx3Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-cyan-500 shadow-2xs">to decide</button>
+              </span>
+              where to go on holiday.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3-q="3" data-ans="to book">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              I usually call a travel agent
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-cyan-500 shadow-2xs">book</button>
+                <button type="button" onclick="selectEx3Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-cyan-500 shadow-2xs">to book</button>
+              </span>
+              my holiday rather than doing it online.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3-q="4" data-ans="visit">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              We might
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-cyan-500 shadow-2xs">visit</button>
+                <button type="button" onclick="selectEx3Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-cyan-500 shadow-2xs">to visit</button>
+              </span>
+              the museums or art galleries.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3-q="5" data-ans="walk">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              They let us
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-cyan-500 shadow-2xs">walk</button>
+                <button type="button" onclick="selectEx3Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-cyan-500 shadow-2xs">to walk</button>
+              </span>
+              round the site for a couple of hours.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3-q="6" data-ans="to go">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              My family prefers me
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-cyan-500 shadow-2xs">go</button>
+                <button type="button" onclick="selectEx3Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-cyan-500 shadow-2xs">to go</button>
+              </span>
+              on holiday with them.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: QUESTIONS & SPEAKING (Exercise 4a & 4b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a & 4b</span>
+            <span class="text-blue-200 text-xs font-medium">Question Formation & Audio Rehearsal</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Holiday Questions: Verb Form Accuracy</h2>
+          <p class="text-blue-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Complete the questions using <em>-ing</em> or <em>to-infinitive</em>. Then practice asking and answering each question aloud with native audio models and a countdown timer.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4a()" class="px-5 py-2.5 bg-white hover:bg-blue-50 text-blue-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Questions</span>
+          </button>
+          <button onclick="revealEx4a()" class="px-4 py-2.5 bg-blue-800/60 hover:bg-blue-800 text-white border border-blue-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 4a Question Form Fields -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">4a</span>
+            Complete the questions with the correct form of the verbs in brackets:
+          </h3>
+          <span id="ex4a-score-pill" class="text-xs font-bold text-blue-800 bg-blue-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex4a-container">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-row="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 1: Prompt (sail)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Can you imagine</span>
+              <input type="text" data-ans="sailing" class="ex4a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-base w-36 text-center focus:border-blue-600 focus:outline-none" placeholder="(sail)" />
+              <span>round the world on a yacht?</span>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 2: Prompt (do)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>What would you choose</span>
+              <input type="text" data-ans="to do" class="ex4a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-base w-32 text-center focus:border-blue-600 focus:outline-none" placeholder="(do)" />
+              <span>on holiday – riding or walking? Why?</span>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 3: Prompt (find)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Are you good at</span>
+              <input type="text" data-ans="finding" class="ex4a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-base w-36 text-center focus:border-blue-600 focus:outline-none" placeholder="(find)" />
+              <span>your way round in a new place?</span>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 4: Prompt (decide)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Do you think it's a good idea to read guidebooks</span>
+              <input type="text" data-ans="to decide" class="ex4a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-base w-36 text-center focus:border-blue-600 focus:outline-none" placeholder="(decide)" />
+              <span>what to do?</span>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 5: Prompt (speak)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Do you think</span>
+              <input type="text" data-ans="speaking" class="ex4a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-base w-36 text-center focus:border-blue-600 focus:outline-none" placeholder="(speak)" />
+              <span>the local language is necessary?</span>
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 6: Prompt (save)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Do you find it hard</span>
+              <input type="text" data-ans="to save" class="ex4a-input exercise-input px-3.5 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-900 bg-white text-base w-32 text-center focus:border-blue-600 focus:outline-none" placeholder="(save)" />
+              <span>money for holidays?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4b Interactive Audio Rehearsal & Speaking Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">4b</span>
+            Work in pairs. Take turns to ask and answer the questions in Exercise 4a:
+          </h3>
+          <span class="text-xs font-black uppercase tracking-wider text-blue-700 bg-blue-100 px-3 py-1 rounded-xl">Interactive Audio Cards</span>
+        </div>
+        <p class="text-sm text-slate-600">Click any card below to hear natural British pronunciation, review a model answer, and practice answering aloud:</p>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4" id="speaking-cards-grid">
+          <!-- Card 1 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Q1: Sailing</span>
+              <button onclick="speakText('Can you imagine sailing round the world on a yacht?')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"Can you imagine sailing round the world on a yacht?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "I think sailing around the world would be thrilling, but I might get seasick after a couple of weeks at sea!"
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Q2: Activities</span>
+              <button onclick="speakText('What would you choose to do on holiday - riding or walking? Why?')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"What would you choose to do on holiday – riding or walking? Why?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "I'd definitely choose walking because it allows me to stop anytime, take photos, and absorb local scenery."
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Q3: Navigation</span>
+              <button onclick="speakText('Are you good at finding your way round in a new place?')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"Are you good at finding your way round in a new place?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "Generally yes, because I have a decent sense of direction and I always download offline maps on my phone."
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Q4: Guidebooks</span>
+              <button onclick="speakText('Do you think it is a good idea to read guidebooks to decide what to do?')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"Do you think it's a good idea to read guidebooks to decide what to do?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "Guidebooks are useful for highlights, but asking local residents usually reveals much better hidden spots."
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Q5: Languages</span>
+              <button onclick="speakText('Do you think speaking the local language is necessary?')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"Do you think speaking the local language is necessary?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "Fluency isn't strictly necessary, but knowing polite greetings and numbers shows deep respect for the culture."
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Q6: Saving Money</span>
+              <button onclick="speakText('Do you find it hard to save money for holidays?')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"Do you find it hard to save money for holidays?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "It can be difficult with rising living costs, but setting aside a small automatic monthly transfer helps a lot."
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: TRAVEL DIFFERENCES & NOTES (Exercise 5 & 6) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex5" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 5 & 6</span>
+            <span class="text-amber-200 text-xs font-medium">Contextual Cloze & Holiday Reflections</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Travel Differences Across Life Stages</h2>
+          <p class="text-amber-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill in the correct form of the verbs in brackets throughout the travel industry article. Then formulate your personal holiday preferences in the interactive notes studio.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx5()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Passage</span>
+          </button>
+          <button onclick="revealEx5()" class="px-4 py-2.5 bg-amber-800/60 hover:bg-amber-800 text-white border border-amber-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Article Reading View with In-line Interactive Inputs -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">5</span>
+            Complete the text with the correct form of the verbs in brackets:
+          </h3>
+          <span id="ex5-score-pill" class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-1 rounded-xl">Score: 0/10</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.6rem] sm:leading-[3rem] font-normal space-y-6">
+          <p>
+            The travel industry groups people by their different stages in life and each group has different demands. For example,
+            <span class="font-bold text-slate-400 mr-1">1</span>
+            <input type="text" data-ex5-gap="1" data-ans="travelling,traveling" class="ex5-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(travel)" />
+            with young children can be difficult, so this type of family often want
+            <span class="font-bold text-slate-400 mr-1">2</span>
+            <input type="text" data-ex5-gap="2" data-ans="to stay" class="ex5-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(stay)" />
+            closer to home. They also generally prefer
+            <span class="font-bold text-slate-400 mr-1">3</span>
+            <input type="text" data-ex5-gap="3" data-ans="staying,to stay" class="ex5-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(stay)" />
+            in accommodation that has many facilities like swimming pools and play areas.
+          </p>
+
+          <p>
+            It can be difficult
+            <span class="font-bold text-slate-400 mr-1">4</span>
+            <input type="text" data-ex5-gap="4" data-ans="to entertain" class="ex5-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-40 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(entertain)" />
+            young children, so kids clubs that look after and provide activities for children are very popular with parents. Families with teenage children are also looking for activities that can
+            <span class="font-bold text-slate-400 mr-1">5</span>
+            <input type="text" data-ex5-gap="5" data-ans="keep" class="ex5-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(keep)" />
+            their kids busy, and swimming pools and water sports are popular with this age group.
+          </p>
+
+          <p>
+            Young adults, particularly students, often can't afford
+            <span class="font-bold text-slate-400 mr-1">6</span>
+            <input type="text" data-ex5-gap="6" data-ans="to stay" class="ex5-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(stay)" />
+            in luxurious accommodation but they are generally quite adventurous and enjoy
+            <span class="font-bold text-slate-400 mr-1">7</span>
+            <input type="text" data-ex5-gap="7" data-ans="visiting" class="ex5-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(visit)" />
+            more remote and unusual places. Older people often have more time
+            <span class="font-bold text-slate-400 mr-1">8</span>
+            <input type="text" data-ex5-gap="8" data-ans="to spend" class="ex5-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(spend)" />
+            travelling and are becoming more adventurous nowadays. Instead of
+            <span class="font-bold text-slate-400 mr-1">9</span>
+            <input type="text" data-ex5-gap="9" data-ans="lying" class="ex5-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(lie)" />
+            on a beach, they are now choosing
+            <span class="font-bold text-slate-400 mr-1">10</span>
+            <input type="text" data-ex5-gap="10" data-ans="to visit" class="ex5-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(visit)" />
+            faraway places and go on more active holidays. People who work in tourism have to be able to cater to all these different demands and understand why they are important to the customers.
+          </p>
+        </div>
+      </div>
+
+      <!-- Exercise 6 Interactive Verbs/Phrases Holiday Notes Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">6</span>
+              Make notes about your holidays using some of these verbs / phrases:
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Tap any phrase tag to insert it into your notes, then write your custom reflection:</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="loadSampleEx6()" class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+              Load Samples
+            </button>
+            <button onclick="saveEx6Notes()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">
+              Save Notes
+            </button>
+          </div>
+        </div>
+
+        <!-- Target phrases chips -->
+        <div class="flex flex-wrap gap-2" id="ex6-phrase-chips">
+          <button type="button" onclick="insertEx6Phrase('enjoy ')" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs hover:border-amber-500 transition">+ enjoy (-ing)</button>
+          <button type="button" onclick="insertEx6Phrase('don\'t mind ')" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs hover:border-amber-500 transition">+ don't mind (-ing)</button>
+          <button type="button" onclick="insertEx6Phrase('hate ')" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs hover:border-amber-500 transition">+ hate (-ing)</button>
+          <button type="button" onclick="insertEx6Phrase('can\'t afford ')" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs hover:border-amber-500 transition">+ can't afford (to...)</button>
+          <button type="button" onclick="insertEx6Phrase('insist on ')" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs hover:border-amber-500 transition">+ insist on (-ing)</button>
+          <button type="button" onclick="insertEx6Phrase('would rather ')" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs hover:border-amber-500 transition">+ would rather (bare inf)</button>
+          <button type="button" onclick="insertEx6Phrase('hope ')" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs hover:border-amber-500 transition">+ hope (to...)</button>
+          <button type="button" onclick="insertEx6Phrase('find it difficult ')" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs hover:border-amber-500 transition">+ find it difficult (to...)</button>
+          <button type="button" onclick="insertEx6Phrase('prefer ')" class="px-3 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-xs hover:border-amber-500 transition">+ prefer (-ing / to...)</button>
+        </div>
+
+        <div class="space-y-3">
+          <textarea id="ex6-notes-input" rows="4" class="exercise-input w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-amber-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="Type your personal sentences here using the prompts above..."></textarea>
+          <div id="ex6-status" class="hidden p-3 rounded-xl bg-amber-100 text-amber-900 text-xs font-bold">
+            ✓ Your holiday notes have been saved to local storage for future reference.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: EXPERT GRAMMAR REFERENCE (Page 187) -->
+    <!-- ========================================================================= -->
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 to-teal-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-teal-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 187 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">-ing Forms and Infinitives</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Comprehensive guide to using gerunds, full infinitives with <em>to</em>, bare infinitives, and verbs with shifting or dual patterns.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- -ing Forms Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 font-black text-base flex items-center justify-center">
+              -ING
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">-ing Forms (Gerunds)</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Nouns, Prepositions & Verb Complements</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. As the subject or object of a sentence:</div>
+              <p class="text-slate-600 font-medium"><em>"<strong>Travelling</strong> by train is more comfortable than flying."</em></p>
+              <p class="text-slate-600 font-medium"><em>"<strong>Walking</strong> around a town is the best way to explore."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. After prepositions:</div>
+              <p class="text-slate-600 font-medium"><em>"I always feel sad after <strong>returning</strong> from holiday."</em></p>
+              <p class="text-slate-600 font-medium"><em>"I'm good at <strong>learning</strong> new languages."</em></p>
+              <p class="text-slate-600 font-medium"><em>"Instead of <strong>lying</strong> on a beach..."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. After certain verbs:</div>
+              <p class="text-slate-600 font-medium"><em>admit, avoid, can't help, can't stand, consider, deny, dislike, enjoy, fancy, finish, imagine, insist on, look forward to, mind, miss, practise, risk, suggest.</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Infinitives with To Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-teal-100 text-teal-800 font-black text-base flex items-center justify-center">
+              +TO
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Infinitives with <em>to</em></h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Purpose, Adjectives & Specific Verbs</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. To express purpose:</div>
+              <p class="text-slate-600 font-medium"><em>"Last year I went to Egypt <strong>to see</strong> the pyramids."</em></p>
+              <p class="text-slate-600 font-medium"><em>"I usually call a travel agent <strong>to book</strong> my holiday."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. After adjectives:</div>
+              <p class="text-slate-600 font-medium"><em>"I find it difficult <strong>to sleep</strong> on a plane."</em></p>
+              <p class="text-slate-600 font-medium"><em>"It can be difficult <strong>to decide</strong> where to go."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. After certain verbs:</div>
+              <p class="text-slate-600 font-medium"><em>afford, agree, appear, arrange, choose, decide, expect, fail, help, hope, learn, manage, offer, plan, promise, refuse, seem, want, would like / prefer.</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bare Infinitives & Special Cases Card -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+          <span>⚡</span> Bare Infinitives (without <em>to</em>) & Verbs with Dual Patterns
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="font-black text-slate-900 block text-base">Infinitive without <em>to</em> (Bare Infinitive)</span>
+            <ul class="text-slate-700 leading-relaxed font-medium list-disc list-inside space-y-1.5">
+              <li>After modal auxiliary verbs: <em>can, could, might, must, should, will, would</em> (e.g. <em>"We might <u>visit</u> the museums."</em>).</li>
+              <li>After <em>make</em> and <em>let</em> + object: <em>"My parents made me <u>go</u> camping."</em> / <em>"They let us <u>walk</u> round."</em></li>
+              <li>After <em>would rather</em>: <em>"I would rather <u>travel</u> by train."</em></li>
+            </ul>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="font-black text-slate-900 block text-base">Verbs with Little or No Meaning Change</span>
+            <p class="text-slate-700 leading-relaxed font-medium">
+              Verbs like <em>begin, continue, start, like, love, prefer, hate</em> can take either an <em>-ing</em> form or a <em>to-infinitive</em> with virtually no difference in meaning:
+            </p>
+            <div class="p-3 rounded-xl bg-teal-50 text-teal-950 font-bold border border-teal-200 space-y-1">
+              <p>✓ "They generally prefer <strong>staying</strong> / <strong>to stay</strong> in hotels."</p>
+              <p>✓ "I started <strong>learning</strong> / <strong>to learn</strong> Spanish."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 48
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 5a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 5: The world around us • Page 74 • Expert Grammar Page 187
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State management for scores
+    const state = {
+      score: {
+        ex1: 0,
+        ex2a: 0,
+        ex3: 0,
+        ex4a: 0,
+        ex5: 0
+      }
+    };
+
+    // Web Audio synthesizer for crisp feedback beeps
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(170, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Web Speech API for text-to-speech pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-teal-600', 'text-white', 'shadow-md', 'shadow-teal-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-teal-600', 'text-white', 'shadow-md', 'shadow-teal-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // EXERCISE 1 CHECK & REVEAL
+    function checkEx1Quick() {
+      checkEx1(false);
+    }
+
+    function checkEx1(playSound = true) {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex1-container [data-ex1-item]');
+
+      rows.forEach(row => {
+        const sel = row.querySelector('.ex1-select');
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!sel.value) {
+          badge.innerHTML = '';
+          sel.classList.remove('border-rose-400', 'border-emerald-500');
+          return;
+        }
+
+        if (sel.value === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-emerald-500');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Need: ${expected}</span>`;
+          sel.classList.remove('border-emerald-500');
+          sel.classList.add('border-rose-400');
+        }
+      });
+
+      state.score.ex1 = correct;
+      document.getElementById('ex1-score-pill').textContent = `Score: ${correct}/7`;
+      updateTotalScore();
+      if (playSound && correct > 0) {
+        playBeep(correct >= 5);
+      }
+    }
+
+    function revealEx1() {
+      const keys = ['D', 'G', 'E', 'F', 'C', 'B', 'A'];
+      const rows = document.querySelectorAll('#ex1-container [data-ex1-item]');
+      rows.forEach((row, i) => {
+        const sel = row.querySelector('.ex1-select');
+        const badge = row.querySelector('.feedback-badge');
+        sel.value = keys[i];
+        sel.classList.remove('border-rose-400');
+        sel.classList.add('border-emerald-500');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex1 = 7;
+      document.getElementById('ex1-score-pill').textContent = 'Score: 7/7';
+      updateTotalScore();
+    }
+
+    // EXERCISE 2a CHECK & REVEAL
+    function checkEx2a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex2a-container [data-ex2a-item]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex2a-input');
+        const badge = row.querySelector('.feedback-badge');
+        const accepted = inp.getAttribute('data-accepted').split(',').map(cleanStr);
+        const userClean = cleanStr(inp.value);
+
+        if (!userClean) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Type sentence</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (accepted.some(ans => userClean === ans || userClean.includes(ans) || ans.includes(userClean))) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck grammar</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex2a = correct;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx2a() {
+      const keys = [
+        "Walking around a town is the best way to find interesting places.",
+        "I can't stand flying because there's so little space.",
+        "I hate visiting hot countries.",
+        "I don't enjoy visiting tourist attractions in my own country.",
+        "Travelling alone can be very hard.",
+        "I'm good at learning new languages when I travel."
+      ];
+
+      const rows = document.querySelectorAll('#ex2a-container [data-ex2a-item]');
+      rows.forEach((row, i) => {
+        const inp = row.querySelector('.ex2a-input');
+        const badge = row.querySelector('.feedback-badge');
+        inp.value = keys[i];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex2a = 6;
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    function saveEx2bNotes() {
+      const checked = [];
+      for (let i = 1; i <= 6; i++) {
+        if (document.getElementById(`ex2b-chk-${i}`).checked) {
+          checked.push(i);
+        }
+      }
+      const text = document.getElementById('ex2b-discussion-text').value;
+      localStorage.setItem('m5_grammar_ex2b', JSON.stringify({ checked, text }));
+      const status = document.getElementById('ex2b-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // EXERCISE 3 PILL SELECTION & CHECK
+    function selectEx3Pill(btn) {
+      const parent = btn.closest('.inline-flex');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-cyan-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-cyan-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-cyan-600', 'text-white', 'border-cyan-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx3() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex3-container [data-ex3-q]');
+
+      rows.forEach(row => {
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+        const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select option</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim();
+        if (userVal === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-cyan-600', 'border-cyan-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          selectedBtn.classList.remove('bg-cyan-600', 'border-cyan-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex3 = correct;
+      document.getElementById('ex3-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx3() {
+      const answers = {
+        '1': 'to let',
+        '2': 'to decide',
+        '3': 'to book',
+        '4': 'visit',
+        '5': 'walk',
+        '6': 'to go'
+      };
+
+      for (let q in answers) {
+        const row = document.querySelector(`[data-ex3-q="${q}"]`);
+        const btns = row.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim() === answers[q]) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-cyan-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex3 = 6;
+      document.getElementById('ex3-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    // EXERCISE 4a CHECK & REVEAL
+    function checkEx4a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex4a-container [data-ex4a-row]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex4a-input');
+        const badge = row.querySelector('.feedback-badge');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Enter verb form</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex4a = correct;
+      document.getElementById('ex4a-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx4a() {
+      const keys = [
+        "sailing",
+        "to do",
+        "finding",
+        "to decide",
+        "speaking",
+        "to save"
+      ];
+
+      const rows = document.querySelectorAll('#ex4a-container [data-ex4a-row]');
+      rows.forEach((row, i) => {
+        const inp = row.querySelector('.ex4a-input');
+        const badge = row.querySelector('.feedback-badge');
+        inp.value = keys[i];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex4a = 6;
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    // EXERCISE 5 CHECK & REVEAL
+    function checkEx5() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex5-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex5 = correct;
+      document.getElementById('ex5-score-pill').textContent = `Score: ${correct}/10`;
+      updateTotalScore();
+      playBeep(correct >= 7);
+    }
+
+    function revealEx5() {
+      const keys = [
+        "travelling",   // 1
+        "to stay",      // 2
+        "staying",      // 3
+        "to entertain", // 4
+        "keep",         // 5
+        "to stay",      // 6
+        "visiting",     // 7
+        "to spend",     // 8
+        "lying",        // 9
+        "to visit"      // 10
+      ];
+
+      const inputs = document.querySelectorAll('.ex5-input');
+      inputs.forEach((inp, idx) => {
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+      });
+
+      state.score.ex5 = 10;
+      document.getElementById('ex5-score-pill').textContent = 'Score: 10/10';
+      updateTotalScore();
+    }
+
+    // Exercise 6 phrase helper
+    function insertEx6Phrase(phrase) {
+      const ta = document.getElementById('ex6-notes-input');
+      ta.value += (ta.value.length > 0 && !ta.value.endsWith(' ') ? ' ' : '') + phrase;
+      ta.focus();
+    }
+
+    function loadSampleEx6() {
+      document.getElementById('ex6-notes-input').value = 
+        "1. I really enjoy travelling to historical cities where I can walk around.\n" +
+        "2. I don't mind staying in simple hostels, but I can't afford to stay in luxury hotels.\n" +
+        "3. My parents insist on planning every day in advance, but I would rather explore spontaneously.\n" +
+        "4. I find it difficult to pack light, but I hope to visit New Zealand next winter.";
+      playBeep(true);
+    }
+
+    function saveEx6Notes() {
+      const text = document.getElementById('ex6-notes-input').value;
+      localStorage.setItem('m5_grammar_ex6', text);
+      const status = document.getElementById('ex6-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // Global Score Updating
+    function updateTotalScore() {
+      const total = state.score.ex1 + state.score.ex2a + state.score.ex3 + state.score.ex4a + state.score.ex5;
+      const maxScore = 35; // 7 + 6 + 6 + 6 + 10 = 35
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 28) {
+        bar.classList.replace('bg-teal-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-teal-600');
+      }
+    }
+
+    // Reset All Answers
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Clear 1
+      document.querySelectorAll('.ex1-select').forEach(s => {
+        s.value = '';
+        s.classList.remove('border-emerald-500', 'border-rose-400');
+      });
+
+      // Clear 2a
+      document.querySelectorAll('.ex2a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 3
+      document.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-cyan-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-cyan-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear 4a
+      document.querySelectorAll('.ex4a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 5
+      document.querySelectorAll('.ex5-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset scores
+      state.score = { ex1: 0, ex2a: 0, ex3: 0, ex4a: 0, ex5: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1-score-pill').textContent = 'Score: 0/7';
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex3-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex5-score-pill').textContent = 'Score: 0/10';
+    });
+
+    // Auto-restore saved preferences
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved2b = JSON.parse(localStorage.getItem('m5_grammar_ex2b'));
+        if (saved2b) {
+          if (saved2b.checked && Array.isArray(saved2b.checked)) {
+            saved2b.checked.forEach(n => {
+              const el = document.getElementById(`ex2b-chk-${n}`);
+              if (el) el.checked = true;
+            });
+          }
+          if (saved2b.text) document.getElementById('ex2b-discussion-text').value = saved2b.text;
+        }
+
+        const saved6 = localStorage.getItem('m5_grammar_ex6');
+        if (saved6) {
+          document.getElementById('ex6-notes-input').value = saved6;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

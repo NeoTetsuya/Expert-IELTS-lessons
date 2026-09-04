@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 10b Vocabulary: Intercultural Communication, Attitudes & Word Formation</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            comm: {
+              50: '#fdf2f8',
+              100: '#fce7f3',
+              200: '#fbcfe8',
+              500: '#ec4899',
+              600: '#db2777',
+              700: '#be185d',
+              800: '#9d174d',
+              900: '#831843',
+            },
+            culture: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              200: '#ddd6fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              800: '#5b21b6',
+              900: '#4c1d95',
+            },
+            dialogue: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.25);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-pink-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-pink-600 via-purple-600 to-indigo-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-pink-500/25 ring-2 ring-white">
+          10b
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-pink-100 text-pink-800 tracking-wide uppercase">Unit 10: Communicating</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 161</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Vocabulary: <span class="text-pink-600">Intercultural Communication & Attitudes</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-pink-600">0 / 47</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-pink-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex12" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-pink-600 text-white shadow-md shadow-pink-600/25">
+          1. Intercultural Communication (1 & 2)
+        </button>
+        <button data-tab="tab-ex3ab" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Personal Attitudes (3a & 3b)
+        </button>
+        <button data-tab="tab-ex3cd" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Word Formation: Adjectives & Opposites (3c & 3d)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Multi-cultural Understanding (4)
+        </button>
+        <button data-tab="tab-lexicon" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📚 Vocabulary Lexicon & Audio
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: INTERCULTURAL COMMUNICATION (Exercises 1 & 2) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex12" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-pink-600 via-rose-600 to-purple-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercises 1 & 2</span>
+            <span class="text-pink-200 text-xs font-medium">Page 161 • Intercultural Communication</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Cultural Concepts & Communicative Collocations</h2>
+          <p class="text-pink-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            In <strong>Exercise 1</strong>, distinguish contrasting social concepts (<em>values / beliefs</em>, <em>way of life / tradition</em>, <em>cultures / customs</em>, <em>manners / behaviour</em>). In <strong>Exercise 2</strong>, complete essential verb collocations with <em>build, get, make, show, stay</em>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx12()" class="px-5 py-2.5 bg-white hover:bg-pink-50 text-pink-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 1 & 2</span>
+          </button>
+          <button onclick="revealEx12()" class="px-4 py-2.5 bg-pink-800/60 hover:bg-pink-800 text-white border border-pink-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 1: Pairs of Sentences with Confusable Cultural Nouns -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-pink-100 text-pink-800 text-sm font-black flex items-center justify-center">1</span>
+            Complete the pairs of sentences with the correct word in bold:
+          </h3>
+          <span id="ex1-score-pill" class="text-xs font-bold text-pink-800 bg-pink-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="space-y-4" id="ex1-container">
+          
+          <!-- Pair 1: values / beliefs -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex1-pair="1">
+            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
+              <span class="text-xs font-black text-pink-700 uppercase tracking-wider">Pair 1: values / beliefs</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <!-- 1A -->
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span class="font-bold text-slate-400">A.</span>
+              <span>It can be difficult for people to get on if they have very different political</span>
+              <input type="text" data-gap="1a" data-ans="beliefs" class="ex1-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-pink-950 bg-white text-base w-36 text-center focus:border-pink-600 focus:outline-none" placeholder="word..." />
+              <span>.</span>
+            </div>
+            <!-- 1B -->
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span class="font-bold text-slate-400">B.</span>
+              <span>I think there has been a fall in the moral</span>
+              <input type="text" data-gap="1b" data-ans="values" class="ex1-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-pink-950 bg-white text-base w-36 text-center focus:border-pink-600 focus:outline-none" placeholder="word..." />
+              <span>of many young people.</span>
+            </div>
+          </div>
+
+          <!-- Pair 2: way of life / tradition -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex1-pair="2">
+            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
+              <span class="text-xs font-black text-pink-700 uppercase tracking-wider">Pair 2: way of life / tradition</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <!-- 2A -->
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span class="font-bold text-slate-400">A.</span>
+              <span>Things that are unusual in one country are just a normal</span>
+              <input type="text" data-gap="2a" data-ans="way of life" class="ex1-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-pink-950 bg-white text-base w-40 text-center focus:border-pink-600 focus:outline-none" placeholder="phrase..." />
+              <span>in another.</span>
+            </div>
+            <!-- 2B -->
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span class="font-bold text-slate-400">B.</span>
+              <span>If you have a family</span>
+              <input type="text" data-gap="2b" data-ans="tradition" class="ex1-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-pink-950 bg-white text-base w-36 text-center focus:border-pink-600 focus:outline-none" placeholder="word..." />
+              <span>, you should try to pass it on to the next generation.</span>
+            </div>
+          </div>
+
+          <!-- Pair 3: cultures / customs -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex1-pair="3">
+            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
+              <span class="text-xs font-black text-pink-700 uppercase tracking-wider">Pair 3: cultures / customs</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <!-- 3A -->
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span class="font-bold text-slate-400">A.</span>
+              <span>It's important to find out about local</span>
+              <input type="text" data-gap="3a" data-ans="customs" class="ex1-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-pink-950 bg-white text-base w-36 text-center focus:border-pink-600 focus:outline-none" placeholder="word..." />
+              <span>before visiting another country.</span>
+            </div>
+            <!-- 3B -->
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span class="font-bold text-slate-400">B.</span>
+              <span>Learning about different countries and</span>
+              <input type="text" data-gap="3b" data-ans="cultures" class="ex1-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-pink-950 bg-white text-base w-36 text-center focus:border-pink-600 focus:outline-none" placeholder="word..." />
+              <span>should be compulsory in all schools.</span>
+            </div>
+          </div>
+
+          <!-- Pair 4: manners / behaviour -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex1-pair="4">
+            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
+              <span class="text-xs font-black text-pink-700 uppercase tracking-wider">Pair 4: manners / behaviour</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <!-- 4A -->
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span class="font-bold text-slate-400">A.</span>
+              <span>People who use a mobile at the dinner table have no</span>
+              <input type="text" data-gap="4a" data-ans="manners" class="ex1-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-pink-950 bg-white text-base w-36 text-center focus:border-pink-600 focus:outline-none" placeholder="word..." />
+              <span>.</span>
+            </div>
+            <!-- 4B -->
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span class="font-bold text-slate-400">B.</span>
+              <span>Parents should reward their children for good</span>
+              <input type="text" data-gap="4b" data-ans="behaviour,behavior" class="ex1-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-pink-950 bg-white text-base w-36 text-center focus:border-pink-600 focus:outline-none" placeholder="word..." />
+              <span>.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 2: Collocations with verbs (build, get, make, show, stay) -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">2</span>
+            Complete the sentences with the verbs in the box:
+          </h3>
+          <span id="ex2-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <!-- Word Bank for Exercise 2 -->
+        <div class="p-4 rounded-2xl bg-purple-50 border border-purple-200 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase tracking-wider text-purple-900">Verbs in the Box:</span>
+            <span class="text-xs text-purple-700 font-semibold">Click a verb to insert into the active field</span>
+          </div>
+          <div class="flex flex-wrap gap-2.5" id="ex2-verb-bank">
+            <button type="button" onclick="insertEx2Verb('build')" class="px-3.5 py-1.5 rounded-xl bg-white border-2 border-purple-300 text-purple-950 font-bold text-sm hover:border-purple-600 transition shadow-2xs">build</button>
+            <button type="button" onclick="insertEx2Verb('get')" class="px-3.5 py-1.5 rounded-xl bg-white border-2 border-purple-300 text-purple-950 font-bold text-sm hover:border-purple-600 transition shadow-2xs">get</button>
+            <button type="button" onclick="insertEx2Verb('make')" class="px-3.5 py-1.5 rounded-xl bg-white border-2 border-purple-300 text-purple-950 font-bold text-sm hover:border-purple-600 transition shadow-2xs">make</button>
+            <button type="button" onclick="insertEx2Verb('show')" class="px-3.5 py-1.5 rounded-xl bg-white border-2 border-purple-300 text-purple-950 font-bold text-sm hover:border-purple-600 transition shadow-2xs">show</button>
+            <button type="button" onclick="insertEx2Verb('stay')" class="px-3.5 py-1.5 rounded-xl bg-white border-2 border-purple-300 text-purple-950 font-bold text-sm hover:border-purple-600 transition shadow-2xs">stay</button>
+          </div>
+        </div>
+
+        <div class="space-y-4" id="ex2-container">
+          
+          <!-- Item 1: make sense of -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex2-item="1">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              I can never
+              <input type="text" data-ans="make" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-28 text-center focus:border-purple-600 focus:outline-none" placeholder="verb..." />
+              sense of other languages.
+            </div>
+            <span class="feedback-badge text-xs font-bold shrink-0"></span>
+          </div>
+
+          <!-- Item 2: get to know -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex2-item="2">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              I think it's great to
+              <input type="text" data-ans="get" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-28 text-center focus:border-purple-600 focus:outline-none" placeholder="verb..." />
+              to know people from other countries.
+            </div>
+            <span class="feedback-badge text-xs font-bold shrink-0"></span>
+          </div>
+
+          <!-- Item 3: get used to -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex2-item="3">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              It's hard to
+              <input type="text" data-ans="get" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-28 text-center focus:border-purple-600 focus:outline-none" placeholder="verb..." />
+              used to a new way of life.
+            </div>
+            <span class="feedback-badge text-xs font-bold shrink-0"></span>
+          </div>
+
+          <!-- Item 4: show respect for -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex2-item="4">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              It's important to
+              <input type="text" data-ans="show" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-28 text-center focus:border-purple-600 focus:outline-none" placeholder="verb..." />
+              respect for other cultures.
+            </div>
+            <span class="feedback-badge text-xs font-bold shrink-0"></span>
+          </div>
+
+          <!-- Item 5: build relationships -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex2-item="5">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              If people can
+              <input type="text" data-ans="build" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-28 text-center focus:border-purple-600 focus:outline-none" placeholder="verb..." />
+              relationships with people in other countries, it's good for business.
+            </div>
+            <span class="feedback-badge text-xs font-bold shrink-0"></span>
+          </div>
+
+          <!-- Item 6: stay in touch with -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex2-item="6">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              Nowadays it's very easy to
+              <input type="text" data-ans="stay" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-28 text-center focus:border-purple-600 focus:outline-none" placeholder="verb..." />
+              in touch with people all round the world.
+            </div>
+            <span class="feedback-badge text-xs font-bold shrink-0"></span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: ATTITUDES (Exercises 3a & 3b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3ab" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a & 3b</span>
+            <span class="text-purple-200 text-xs font-medium">Page 161 • Character & Personal Attitudes</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Attitudes & Social Behaviour</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            In <strong>3a</strong>, choose the correct adjective in italics (<em>flexible, tolerant, open-minded, patient, polite, honest, sensitive</em>). In <strong>3b</strong>, reflect and record real-life experiences where you exhibited these attitudes!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3a()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Attitudes</span>
+          </button>
+          <button onclick="revealEx3a()" class="px-4 py-2.5 bg-purple-800/60 hover:bg-purple-800 text-white border border-purple-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 3a Interactive Pill Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">3a</span>
+            Choose the correct options in italics to complete the sentences:
+          </h3>
+          <span id="ex3a-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/7</span>
+        </div>
+
+        <div class="grid gap-3.5" id="ex3a-container">
+          
+          <!-- 1: flexible / polite -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="1" data-ans="flexible">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              People who are
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">flexible</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">polite</button>
+              </span>
+              find it easier to manage change in their lives.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 2: tolerant / honest -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="2" data-ans="tolerant">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              People should be
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">tolerant</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">honest</button>
+              </span>
+              about other ways of doing things.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 3: open-minded / loyal -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="3" data-ans="open-minded">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              They are very
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">open-minded</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">loyal</button>
+              </span>
+              people, always willing to accept new ideas.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 4: loyal / patient -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="4" data-ans="patient">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              Some things can take a long time, so it's necessary to be
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">loyal</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">patient</button>
+              </span>
+              .
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 5: polite / honest -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="5" data-ans="polite">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              I think it's very important to be
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">polite</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">honest</button>
+              </span>
+              when you are travelling in other countries.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 6: honest / friendly -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="6" data-ans="honest">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              It's usually better to be
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">honest</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">friendly</button>
+              </span>
+              and say if you don't understand something.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 7: sensitive / tolerant -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="7" data-ans="sensitive">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">7.</span>
+              People who are
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">sensitive</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">tolerant</button>
+              </span>
+              usually think about how the other person is feeling.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 3b: Personal Behavior Stories & Pairwork Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">3b</span>
+              Work in pairs. Choose four words from Exercise 3a and share personal examples:
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Review model stories and record examples of when you demonstrated these attributes:</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="loadSampleEx3b()" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+              Load Sample Stories
+            </button>
+            <button onclick="saveEx3bNotes()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">
+              Save My Notes
+            </button>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <!-- Card 1: Flexible -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-purple-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-purple-700 uppercase">1. Flexible</span>
+              <button onclick="speakText('Being flexible when travel plans change unexpectedly.')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Adapting to sudden changes"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Example:</strong> "When our flight was cancelled last summer, instead of getting upset, I quickly booked a scenic overnight train."
+            </div>
+          </div>
+
+          <!-- Card 2: Patient -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-purple-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-purple-700 uppercase">2. Patient</span>
+              <button onclick="speakText('Being patient while learning a difficult new skill or waiting in long queues.')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Staying calm over time"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Example:</strong> "I remained completely calm and supportive while helping my younger cousin learn to speak English step by step."
+            </div>
+          </div>
+
+          <!-- Card 3: Sensitive -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-purple-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-purple-700 uppercase">3. Sensitive</span>
+              <button onclick="speakText('Being sensitive to other people feelings and cultural taboos.')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Empathy for feelings"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Example:</strong> "When a colleague was quiet and stressed, I listened to them without interrupting and avoided sensitive topics."
+            </div>
+          </div>
+
+          <!-- Card 4: Tolerant -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-purple-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-purple-700 uppercase">4. Tolerant</span>
+              <button onclick="speakText('Being tolerant of unfamiliar cultural traditions and eating habits.')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Accepting differences"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Example:</strong> "Living in a student hall with international roommates taught me to respect diverse cooking styles and religious customs."
+            </div>
+          </div>
+
+        </div>
+
+        <div>
+          <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-2">My Discussion Reflections (When I behaved in these ways):</label>
+          <textarea id="ex3b-discussion-text" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-purple-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. Last month when working on a university group project, I had to be extremely patient and open-minded because everyone had contrasting perspectives..."></textarea>
+        </div>
+        <div id="ex3b-status" class="hidden p-3 rounded-xl bg-purple-100 text-purple-900 text-xs font-bold">
+          ✓ Your personal attitude reflections have been saved locally.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: WORD FORMATION (Exercises 3c & 3d) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3cd" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-dialogue-600 via-teal-600 to-indigo-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3c & 3d</span>
+            <span class="text-teal-200 text-xs font-medium">Page 161 • Morphological Derivations & Negative Prefixes</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Word Formation: Nouns, Adjectives & Negative Prefixes</h2>
+          <p class="text-teal-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Complete the table with corresponding nouns, positive adjectives, and negative adjectives using prefixes <strong>in-</strong>, <strong>im-</strong>, <strong>dis-</strong>, or <strong>un-</strong>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3cd()" class="px-5 py-2.5 bg-white hover:bg-teal-50 text-teal-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Table</span>
+          </button>
+          <button onclick="revealEx3cd()" class="px-4 py-2.5 bg-teal-800/60 hover:bg-teal-800 text-white border border-teal-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Prefix Rules Callout Banner -->
+      <div class="p-4 rounded-2xl bg-teal-50 border border-teal-200 text-xs text-teal-950 flex flex-wrap items-center justify-between gap-3">
+        <div class="font-extrabold flex items-center gap-1.5 text-sm">
+          <span>💡</span> Negative Prefix Rules Guide:
+        </div>
+        <div class="flex flex-wrap gap-3 font-semibold">
+          <span class="bg-white px-2.5 py-1 rounded-lg border border-teal-300"><strong>in-</strong>: flexible &rarr; <em>inflexible</em>, sensitive &rarr; <em>insensitive</em></span>
+          <span class="bg-white px-2.5 py-1 rounded-lg border border-teal-300"><strong>im-</strong> (before p/m): patient &rarr; <em>impatient</em>, polite &rarr; <em>impolite</em></span>
+          <span class="bg-white px-2.5 py-1 rounded-lg border border-teal-300"><strong>dis-</strong>: honest &rarr; <em>dishonest</em>, loyal &rarr; <em>disloyal</em></span>
+          <span class="bg-white px-2.5 py-1 rounded-lg border border-teal-300"><strong>un-</strong>: friendly &rarr; <em>unfriendly</em></span>
+        </div>
+      </div>
+
+      <!-- Word Formation Table Container -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">3c/d</span>
+            Complete the columns of the table with nouns, positive adjectives, and negative adjectives:
+          </h3>
+          <span id="ex3cd-score-pill" class="text-xs font-bold text-teal-800 bg-teal-50 px-3 py-1 rounded-xl">Score: 0/14</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse" id="ex3cd-table">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-50 text-xs font-black uppercase tracking-wider text-slate-500">
+                <th class="p-3.5 rounded-l-xl w-1/3">Noun</th>
+                <th class="p-3.5 w-1/3">Positive Adjective</th>
+                <th class="p-3.5 rounded-r-xl w-1/3">Negative Adjective (in-, im-, dis-, un-)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-sm font-bold text-slate-800">
+              
+              <!-- Row 1: flexibility | flexible | inflexible (Given in book) -->
+              <tr class="bg-slate-50/50">
+                <td class="p-3.5 text-slate-500">flexibility <span class="text-xs text-slate-400 font-normal">(given)</span></td>
+                <td class="p-3.5 text-slate-500">flexible <span class="text-xs text-slate-400 font-normal">(given)</span></td>
+                <td class="p-3.5 text-slate-500">inflexible <span class="text-xs text-slate-400 font-normal">(given)</span></td>
+              </tr>
+
+              <!-- Row 2: tolerance | tolerant | intolerant -->
+              <tr>
+                <td class="p-3.5">
+                  <input type="text" data-gap="noun-2" data-ans="tolerance" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="noun..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+                <td class="p-3.5 text-pink-700 font-extrabold">tolerant <span class="text-xs text-slate-400 font-normal">(given)</span></td>
+                <td class="p-3.5">
+                  <input type="text" data-gap="neg-2" data-ans="intolerant" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="negative adj..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+              </tr>
+
+              <!-- Row 3: patience | patient | impatient -->
+              <tr>
+                <td class="p-3.5 text-pink-700 font-extrabold">patience <span class="text-xs text-slate-400 font-normal">(given)</span></td>
+                <td class="p-3.5">
+                  <input type="text" data-gap="pos-3" data-ans="patient" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="positive adj..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+                <td class="p-3.5">
+                  <input type="text" data-gap="neg-3" data-ans="impatient" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="negative adj..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+              </tr>
+
+              <!-- Row 4: politeness | polite | impolite -->
+              <tr>
+                <td class="p-3.5">
+                  <input type="text" data-gap="noun-4" data-ans="politeness" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="noun..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+                <td class="p-3.5 text-pink-700 font-extrabold">polite <span class="text-xs text-slate-400 font-normal">(given)</span></td>
+                <td class="p-3.5">
+                  <input type="text" data-gap="neg-4" data-ans="impolite" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="negative adj..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+              </tr>
+
+              <!-- Row 5: honesty | honest | dishonest -->
+              <tr>
+                <td class="p-3.5 text-pink-700 font-extrabold">honesty <span class="text-xs text-slate-400 font-normal">(given)</span></td>
+                <td class="p-3.5">
+                  <input type="text" data-gap="pos-5" data-ans="honest" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="positive adj..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+                <td class="p-3.5">
+                  <input type="text" data-gap="neg-5" data-ans="dishonest" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="negative adj..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+              </tr>
+
+              <!-- Row 6: friendliness | friendly | unfriendly -->
+              <tr>
+                <td class="p-3.5">
+                  <input type="text" data-gap="noun-6" data-ans="friendliness" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="noun..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+                <td class="p-3.5 text-pink-700 font-extrabold">friendly <span class="text-xs text-slate-400 font-normal">(given)</span></td>
+                <td class="p-3.5">
+                  <input type="text" data-gap="neg-6" data-ans="unfriendly" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="negative adj..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+              </tr>
+
+              <!-- Row 7: sensitivity | sensitive | insensitive -->
+              <tr>
+                <td class="p-3.5 text-pink-700 font-extrabold">sensitivity <span class="text-xs text-slate-400 font-normal">(given)</span></td>
+                <td class="p-3.5">
+                  <input type="text" data-gap="pos-7" data-ans="sensitive" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="positive adj..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+                <td class="p-3.5">
+                  <input type="text" data-gap="neg-7" data-ans="insensitive" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="negative adj..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+              </tr>
+
+              <!-- Row 8: loyalty | loyal | disloyal -->
+              <tr>
+                <td class="p-3.5">
+                  <input type="text" data-gap="noun-8" data-ans="loyalty" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="noun..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+                <td class="p-3.5 text-pink-700 font-extrabold">loyal <span class="text-xs text-slate-400 font-normal">(given)</span></td>
+                <td class="p-3.5">
+                  <input type="text" data-gap="neg-8" data-ans="disloyal" class="ex3cd-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="negative adj..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: MULTI-CULTURAL UNDERSTANDING (Exercise 4) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-pink-600 via-purple-700 to-indigo-800 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4</span>
+            <span class="text-pink-200 text-xs font-medium">Page 161 • Comprehensive Reading Cloze</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Multi-cultural Understanding</h2>
+          <p class="text-pink-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Choose the correct option in italics for gaps 1–12. Pay attention to grammatical parts of speech (nouns vs. adjectives) and context clues that determine positive vs. negative prefixes!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4()" class="px-5 py-2.5 bg-white hover:bg-pink-50 text-pink-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Reading</span>
+          </button>
+          <button onclick="revealEx4()" class="px-4 py-2.5 bg-pink-800/60 hover:bg-pink-800 text-white border border-pink-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Article Card with In-line Dual Choice Pills -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-pink-100 text-pink-800 text-sm font-black flex items-center justify-center">4</span>
+            Choose the correct options in italics to complete the text:
+          </h3>
+          <span id="ex4-score-pill" class="text-xs font-bold text-pink-800 bg-pink-50 px-3 py-1 rounded-xl">Score: 0/12</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.8rem] sm:leading-[3.2rem] font-normal space-y-6" id="ex4-article">
+          <div class="text-center font-black text-xl text-pink-950 border-b border-slate-100 pb-3">Multi-cultural understanding</div>
+
+          <p>
+            In the 21st century we live in a world of fast and easy communication, which means it is becoming more common to live, work or study with people from different
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex4-gap="1" data-ans="cultures">
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">customs</button>
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">cultures</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            . This experience can be beneficial because it can make us less
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex4-gap="2" data-ans="intolerant">
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">tolerant</button>
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">intolerant</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            and allow us to develop more
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex4-gap="3" data-ans="sensitivity">
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">sensitivity</button>
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">honesty</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            towards people whose beliefs and
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex4-gap="4" data-ans="values">
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">values</button>
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">manners</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            may be very different to ours.
+          </p>
+
+          <p>
+            However, it would be
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex4-gap="5" data-ans="dishonest">
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">honest</button>
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">dishonest</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            to say that these differences are not sometimes challenging. Even if your neighbours or colleagues are very
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex4-gap="6" data-ans="polite">
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">loyal</button>
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">polite</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            and friendly, communicating every day with people who do not speak your language can test your
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex4-gap="7" data-ans="patience">
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">patient</button>
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">patience</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            .
+          </p>
+
+          <p>
+            So when someone moves to a different country, it is important to adapt to the customs and
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex4-gap="8" data-ans="traditions">
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">traditions</button>
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">cultures</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            of the new home. Although this may make them feel
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex4-gap="9" data-ans="disloyal">
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">disloyal</button>
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">dishonest</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            to their home country, being
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex4-gap="10" data-ans="flexible">
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">flexible</button>
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">inflexible</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            will help them settle in more quickly.
+          </p>
+
+          <p>
+            In a similar way, it is important to remember that it can take new arrivals some time to
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex4-gap="11" data-ans="get">
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">stay</button>
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">get</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            used to their new environment. Living and working in a multi-cultural environment can really help
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex4-gap="12" data-ans="build">
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">build</button>
+              <button type="button" onclick="selectEx4Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-pink-500 shadow-2xs">make</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            relationships and understanding between different cultures.
+          </p>
+        </div>
+
+        <!-- Linguistic Notes Callout -->
+        <div class="p-4 rounded-2xl bg-pink-50 border border-pink-200 text-xs text-pink-950 space-y-1.5">
+          <div class="font-extrabold flex items-center gap-1.5 text-sm">
+            <span>💡</span> Key Collocation & Grammatical Explanations:
+          </div>
+          <p>• <strong>less intolerant:</strong> A double negative meaning "more open and accepting" of cultural differences.</p>
+          <p>• <strong>test your patience:</strong> <em>Patience</em> (noun) is required after the possessive pronoun <em>your</em> (not the adjective <em>patient</em>).</p>
+          <p>• <strong>feel disloyal to:</strong> Expresses feeling unfaithful or betraying one's original culture/nation.</p>
+          <p>• <strong>get used to:</strong> Idiomatic collocation meaning to become accustomed to a new lifestyle or environment.</p>
+          <p>• <strong>build relationships:</strong> Standard business and social collocation (not <s>make relationships</s>).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: VOCABULARY LEXICON & AUDIO GUIDE -->
+    <!-- ========================================================================= -->
+    <section id="tab-lexicon" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 via-purple-950 to-pink-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-pink-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Unit 10b Glossary</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 161 Reference & Pronunciation Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Comprehensive Intercultural Communication Lexicon</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Full reference definitions, phonetic transcriptions, grammatical collocations, and one-click British English pronunciation.
+        </p>
+      </div>
+
+      <!-- Flashcards Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <!-- values vs beliefs -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">values vs. beliefs</h4>
+            <button onclick="speakText('values and beliefs')" class="text-xs px-2.5 py-1 rounded-lg bg-pink-50 text-pink-800 font-bold hover:bg-pink-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-pink-600 uppercase">noun contrast</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium"><strong>Values:</strong> moral principles and standards of good behaviour. <strong>Beliefs:</strong> convictions or political/religious doctrines held to be true.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>moral values / political beliefs</em></div>
+        </div>
+
+        <!-- customs vs cultures -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">customs vs. cultures</h4>
+            <button onclick="speakText('customs and cultures')" class="text-xs px-2.5 py-1 rounded-lg bg-pink-50 text-pink-800 font-bold hover:bg-pink-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-pink-600 uppercase">noun contrast</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium"><strong>Customs:</strong> accepted social habits or rituals. <strong>Cultures:</strong> whole societal systems of arts, beliefs, institutions, and lifeways.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>local customs / different cultures</em></div>
+        </div>
+
+        <!-- manners vs behaviour -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">manners vs. behaviour</h4>
+            <button onclick="speakText('manners and behaviour')" class="text-xs px-2.5 py-1 rounded-lg bg-pink-50 text-pink-800 font-bold hover:bg-pink-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-pink-600 uppercase">noun contrast</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium"><strong>Manners:</strong> polite etiquette in social interactions. <strong>Behaviour:</strong> general conduct and actions shown to others.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>have no manners / reward good behaviour</em></div>
+        </div>
+
+        <!-- flexible / flexibility -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">flexible / inflexible</h4>
+            <button onclick="speakText('flexible and inflexible')" class="text-xs px-2.5 py-1 rounded-lg bg-pink-50 text-pink-800 font-bold hover:bg-pink-100 transition">🔊 /ˈflek.sə.bəl/</button>
+          </div>
+          <span class="text-xs font-bold text-pink-600 uppercase">adjective [noun: flexibility]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">Able to adapt or be adapted to different situations, changes, or unforeseen requirements.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Opposite:</strong> <em>inflexible (prefix in-)</em></div>
+        </div>
+
+        <!-- tolerant / tolerance -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">tolerant / intolerant</h4>
+            <button onclick="speakText('tolerant and intolerant')" class="text-xs px-2.5 py-1 rounded-lg bg-pink-50 text-pink-800 font-bold hover:bg-pink-100 transition">🔊 /ˈtɒl.ər.ənt/</button>
+          </div>
+          <span class="text-xs font-bold text-pink-600 uppercase">adjective [noun: tolerance]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">Willing to accept beliefs or behaviour that are different from one's own without prejudice.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Opposite:</strong> <em>intolerant (prefix in-)</em></div>
+        </div>
+
+        <!-- patient / patience -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">patient / impatient</h4>
+            <button onclick="speakText('patient and impatient')" class="text-xs px-2.5 py-1 rounded-lg bg-pink-50 text-pink-800 font-bold hover:bg-pink-100 transition">🔊 /ˈpeɪ.ʃənt/</button>
+          </div>
+          <span class="text-xs font-bold text-pink-600 uppercase">adjective [noun: patience]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">Able to wait calmly or endure difficulties and delays without becoming annoyed or upset.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Opposite:</strong> <em>impatient (prefix im-)</em></div>
+        </div>
+
+        <!-- polite / politeness -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">polite / impolite</h4>
+            <button onclick="speakText('polite and impolite')" class="text-xs px-2.5 py-1 rounded-lg bg-pink-50 text-pink-800 font-bold hover:bg-pink-100 transition">🔊 /pəˈlaɪt/</button>
+          </div>
+          <span class="text-xs font-bold text-pink-600 uppercase">adjective [noun: politeness]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">Having or showing respectful, considerate, and courteous behaviour towards other people.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Opposite:</strong> <em>impolite (prefix im-)</em></div>
+        </div>
+
+        <!-- honest / honesty -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">honest / dishonest</h4>
+            <button onclick="speakText('honest and dishonest')" class="text-xs px-2.5 py-1 rounded-lg bg-pink-50 text-pink-800 font-bold hover:bg-pink-100 transition">🔊 /ˈɒn.ɪst/</button>
+          </div>
+          <span class="text-xs font-bold text-pink-600 uppercase">adjective [noun: honesty]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">Telling the truth and never cheating, stealing, or deceiving others.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Opposite:</strong> <em>dishonest (prefix dis-)</em></div>
+        </div>
+
+        <!-- loyal / loyalty -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">loyal / disloyal</h4>
+            <button onclick="speakText('loyal and disloyal')" class="text-xs px-2.5 py-1 rounded-lg bg-pink-50 text-pink-800 font-bold hover:bg-pink-100 transition">🔊 /ˈlɔɪ.əl/</button>
+          </div>
+          <span class="text-xs font-bold text-pink-600 uppercase">adjective [noun: loyalty]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">Giving or showing firm and constant support, faithfulness, and allegiance.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Opposite:</strong> <em>disloyal (prefix dis-)</em></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Vocabulary page 103
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 10b Vocabulary
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 10: Communicating • 10b Vocabulary • Page 161
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic & Interactive State Scripts -->
+  <script>
+    // State management for scores
+    const state = {
+      score: {
+        ex1: 0,
+        ex2: 0,
+        ex3a: 0,
+        ex3cd: 0,
+        ex4: 0
+      }
+    };
+
+    // Web Audio Synthesizer for feedback chimes
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.15); // C6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Text to Speech Pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.92;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-pink-600', 'text-white', 'shadow-md', 'shadow-pink-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-pink-600', 'text-white', 'shadow-md', 'shadow-pink-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // =========================================================================
+    // EXERCISE 1 & 2 LOGIC
+    // =========================================================================
+    let lastActiveEx2Input = null;
+    document.querySelectorAll('.ex2-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx2Input = inp;
+      });
+    });
+
+    function insertEx2Verb(verb) {
+      if (lastActiveEx2Input) {
+        lastActiveEx2Input.value = verb;
+        lastActiveEx2Input.focus();
+      } else {
+        const empty = Array.from(document.querySelectorAll('.ex2-input')).find(i => !i.value.trim());
+        if (empty) {
+          empty.value = verb;
+          empty.focus();
+        }
+      }
+    }
+
+    function checkEx12() {
+      // 1. Check Exercise 1
+      let correct1 = 0;
+      const inputs1 = document.querySelectorAll('.ex1-input');
+
+      inputs1.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.includes(userVal)) {
+          correct1++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-pink-500', 'bg-pink-50');
+        } else {
+          inp.classList.remove('border-pink-500', 'bg-pink-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      // Update Exercise 1 pair badges
+      document.querySelectorAll('[data-ex1-pair]').forEach(pair => {
+        const pairInputs = Array.from(pair.querySelectorAll('.ex1-input'));
+        const badge = pair.querySelector('.feedback-badge');
+        const allCorrect = pairInputs.every(i => i.classList.contains('border-pink-500'));
+        if (allCorrect) {
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Pair Correct</span>';
+        } else {
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck</span>';
+        }
+      });
+
+      state.score.ex1 = correct1;
+      document.getElementById('ex1-score-pill').textContent = `Score: ${correct1}/8`;
+
+      // 2. Check Exercise 2
+      let correct2 = 0;
+      document.querySelectorAll('#ex2-container [data-ex2-item]').forEach(row => {
+        const inp = row.querySelector('.ex2-input');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Fill verb</span>';
+          inp.classList.remove('border-purple-500', 'bg-purple-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct2++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-purple-500', 'bg-purple-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-purple-500', 'bg-purple-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex2 = correct2;
+      document.getElementById('ex2-score-pill').textContent = `Score: ${correct2}/6`;
+
+      updateTotalScore();
+      playBeep(correct1 >= 6 && correct2 >= 4);
+    }
+
+    function revealEx12() {
+      // Reveal 1
+      const answers1 = {
+        '1a': 'beliefs',
+        '1b': 'values',
+        '2a': 'way of life',
+        '2b': 'tradition',
+        '3a': 'customs',
+        '3b': 'cultures',
+        '4a': 'manners',
+        '4b': 'behaviour'
+      };
+
+      for (let k in answers1) {
+        const inp = document.querySelector(`[data-gap="${k}"]`);
+        if (inp) {
+          inp.value = answers1[k];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-pink-500', 'bg-pink-50');
+        }
+      }
+      document.querySelectorAll('[data-ex1-pair] .feedback-badge').forEach(b => {
+        b.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+      state.score.ex1 = 8;
+      document.getElementById('ex1-score-pill').textContent = 'Score: 8/8';
+
+      // Reveal 2
+      const answers2 = ['make', 'get', 'get', 'show', 'build', 'stay'];
+      document.querySelectorAll('#ex2-container [data-ex2-item]').forEach((row, i) => {
+        const inp = row.querySelector('.ex2-input');
+        inp.value = answers2[i];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-purple-500', 'bg-purple-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+      state.score.ex2 = 6;
+      document.getElementById('ex2-score-pill').textContent = 'Score: 6/6';
+
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 3a & 3b LOGIC
+    // =========================================================================
+    function selectEx3aPill(btn) {
+      const container = btn.closest('.inline-flex');
+      container.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-purple-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-purple-600', 'text-white', 'border-purple-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx3a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex3a-container [data-ex3a-q]');
+
+      rows.forEach(row => {
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+        const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Choose adjective</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toLowerCase();
+        if (userVal === expected.toLowerCase()) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-purple-600', 'border-purple-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          selectedBtn.classList.remove('bg-purple-600', 'border-purple-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex3a = correct;
+      document.getElementById('ex3a-score-pill').textContent = `Score: ${correct}/7`;
+      updateTotalScore();
+      playBeep(correct >= 5);
+    }
+
+    function revealEx3a() {
+      const answers = {
+        '1': 'flexible',
+        '2': 'tolerant',
+        '3': 'open-minded',
+        '4': 'patient',
+        '5': 'polite',
+        '6': 'honest',
+        '7': 'sensitive'
+      };
+
+      for (let q in answers) {
+        const row = document.querySelector(`[data-ex3a-q="${q}"]`);
+        const btns = row.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim().toLowerCase() === answers[q].toLowerCase()) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex3a = 7;
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 7/7';
+      updateTotalScore();
+    }
+
+    function loadSampleEx3b() {
+      document.getElementById('ex3b-discussion-text').value = 
+        "1. Flexible: When my study timetable changed last semester, I adapted immediately by rescheduling my part-time shifts.\n" +
+        "2. Patient: I spent three hours calmly showing my grandmother how to use video calls on her new tablet.\n" +
+        "3. Sensitive: I noticed my classmate was feeling isolated in group work and invited them to partner with me.\n" +
+        "4. Tolerant: I lived with roommates who had different cultural schedules and respected their dietary choices.";
+      playBeep(true);
+    }
+
+    function saveEx3bNotes() {
+      const text = document.getElementById('ex3b-discussion-text').value;
+      localStorage.setItem('m10b_vocab_ex3b', JSON.stringify({ text }));
+      const status = document.getElementById('ex3b-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // =========================================================================
+    // EXERCISE 3c & 3d LOGIC (Word Formation Table)
+    // =========================================================================
+    function checkEx3cd() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex3cd-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+        const badge = inp.nextElementSibling;
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-teal-500', 'bg-teal-50');
+        } else {
+          badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-teal-500', 'bg-teal-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3cd = correct;
+      document.getElementById('ex3cd-score-pill').textContent = `Score: ${correct}/14`;
+      updateTotalScore();
+      playBeep(correct >= 11);
+    }
+
+    function revealEx3cd() {
+      const answers = {
+        'noun-2': 'tolerance',
+        'neg-2': 'intolerant',
+        'pos-3': 'patient',
+        'neg-3': 'impatient',
+        'noun-4': 'politeness',
+        'neg-4': 'impolite',
+        'pos-5': 'honest',
+        'neg-5': 'dishonest',
+        'noun-6': 'friendliness',
+        'neg-6': 'unfriendly',
+        'pos-7': 'sensitive',
+        'neg-7': 'insensitive',
+        'noun-8': 'loyalty',
+        'neg-8': 'disloyal'
+      };
+
+      for (let k in answers) {
+        const inp = document.querySelector(`[data-gap="${k}"]`);
+        if (inp) {
+          inp.value = answers[k];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-teal-500', 'bg-teal-50');
+          inp.nextElementSibling.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓</span>';
+        }
+      }
+
+      state.score.ex3cd = 14;
+      document.getElementById('ex3cd-score-pill').textContent = 'Score: 14/14';
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 4 LOGIC (Multi-cultural Understanding Text)
+    // =========================================================================
+    function selectEx4Pill(btn) {
+      const parent = btn.closest('[data-ex4-gap]');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-pink-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-pink-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-pink-600', 'text-white', 'border-pink-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx4() {
+      let correct = 0;
+      const gaps = document.querySelectorAll('#ex4-article [data-ex4-gap]');
+
+      gaps.forEach(gap => {
+        const expected = gap.getAttribute('data-ans');
+        const badge = gap.nextElementSibling;
+        const selectedBtn = gap.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toLowerCase();
+        if (userVal === expected.toLowerCase()) {
+          correct++;
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓</span>';
+          selectedBtn.classList.remove('bg-pink-600', 'border-pink-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          selectedBtn.classList.remove('bg-pink-600', 'border-pink-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex4 = correct;
+      document.getElementById('ex4-score-pill').textContent = `Score: ${correct}/12`;
+      updateTotalScore();
+      playBeep(correct >= 9);
+    }
+
+    function revealEx4() {
+      const answers = {
+        '1': 'cultures',
+        '2': 'intolerant',
+        '3': 'sensitivity',
+        '4': 'values',
+        '5': 'dishonest',
+        '6': 'polite',
+        '7': 'patience',
+        '8': 'traditions',
+        '9': 'disloyal',
+        '10': 'flexible',
+        '11': 'get',
+        '12': 'build'
+      };
+
+      for (let g in answers) {
+        const gap = document.querySelector(`[data-ex4-gap="${g}"]`);
+        const badge = gap.nextElementSibling;
+        const btns = gap.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim().toLowerCase() === answers[g].toLowerCase()) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-pink-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex4 = 12;
+      document.getElementById('ex4-score-pill').textContent = 'Score: 12/12';
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // GLOBAL PROGRESS & RESET HANDLERS
+    // =========================================================================
+    function updateTotalScore() {
+      const total = state.score.ex1 + state.score.ex2 + state.score.ex3a + state.score.ex3cd + state.score.ex4;
+      // Points distribution: 1 (8) + 2 (6) + 3a (7) + 3c/d (14) + 4 (12) = 47 total points
+      const maxScore = 47;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 38) {
+        bar.classList.replace('bg-pink-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-pink-600');
+      }
+    }
+
+    // Reset All Answers
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // 1. Reset Ex 1 inputs
+      document.querySelectorAll('.ex1-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-pink-500', 'bg-pink-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 2. Reset Ex 2 inputs
+      document.querySelectorAll('.ex2-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-purple-500', 'bg-purple-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 3. Reset Ex 3a pills
+      document.querySelectorAll('#ex3a-container .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-purple-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // 4. Reset Ex 3c & 3d inputs
+      document.querySelectorAll('.ex3cd-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-teal-500', 'bg-teal-50', 'border-rose-400', 'bg-rose-50');
+        if (i.nextElementSibling) i.nextElementSibling.innerHTML = '';
+      });
+
+      // 5. Reset Ex 4 pills
+      document.querySelectorAll('#ex4-article .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-pink-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-pink-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear all feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset state scores
+      state.score = { ex1: 0, ex2: 0, ex3a: 0, ex3cd: 0, ex4: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex2-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 0/7';
+      document.getElementById('ex3cd-score-pill').textContent = 'Score: 0/14';
+      document.getElementById('ex4-score-pill').textContent = 'Score: 0/12';
+    });
+
+    // Auto-restore saved discussion notes on DOM load
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved3b = JSON.parse(localStorage.getItem('m10b_vocab_ex3b'));
+        if (saved3b && saved3b.text) {
+          document.getElementById('ex3b-discussion-text').value = saved3b.text;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

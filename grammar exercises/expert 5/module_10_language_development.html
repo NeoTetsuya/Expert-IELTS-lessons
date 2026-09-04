@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 10: Language Development - Relative Clauses</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            comm: {
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+              800: '#6b21a8',
+              900: '#581c87',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth tab switching and pill buttons */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.25);
+    }
+    .omissible-tag {
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .omissible-tag:hover {
+      transform: scale(1.05);
+    }
+    /* Scrollbar aesthetics */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-purple-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-700 via-violet-600 to-indigo-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-purple-500/25 ring-2 ring-white">
+          M10
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 tracking-wide uppercase">Unit 10: Communicating</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 154</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-purple-600">Relative Clauses</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Total Score</span>
+            <span id="global-score-pill" class="text-base font-black text-purple-600">0 / 41</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-purple-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-purple-600 text-white shadow-md shadow-purple-600/25">
+          1. Pronoun Concept (1)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Gap Fill & 'that' (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Joining Sentences (3)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Public Speaking (4a & 4b)
+        </button>
+        <button data-tab="tab-ex5" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          5. Extra Words (5)
+        </button>
+        <button data-tab="tab-ex6" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          6. Discussion Studio (6)
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 191
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: PRONOUN IDENTIFICATION (Exercise 1) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-purple-700 via-indigo-700 to-violet-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1</span>
+            <span class="text-purple-200 text-xs font-medium">Expert Grammar Page 191</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Relative Pronouns: People, Places, Things & Possession</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Read sentences A–D below and look at the parts in bold. Match each sentence (A–D) with what it identifies or describes: a person, a place, a thing, or possession.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Answers</span>
+          </button>
+          <button onclick="revealEx1()" class="px-4 py-2.5 bg-purple-950/60 hover:bg-purple-950 text-white border border-purple-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Sentences A-D Showcase Box -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">A–D</span>
+            Target Sentences
+          </h3>
+          <span class="text-xs text-slate-400">Read sentences carefully</span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 text-sm">
+          <div class="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 space-y-1">
+            <span class="font-black text-purple-700 text-sm block">A. Thing / Object</span>
+            <p class="text-slate-800 font-medium">"Email is the main form of communication <strong class="text-purple-700 underline decoration-purple-400">which is used in business settings</strong>."</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 space-y-1">
+            <span class="font-black text-purple-700 text-sm block">B. Person / People</span>
+            <p class="text-slate-800 font-medium">"Having a conversation with someone <strong class="text-purple-700 underline decoration-purple-400">who is much older than you</strong> is different from speaking to someone your age."</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 space-y-1">
+            <span class="font-black text-purple-700 text-sm block">C. Place</span>
+            <p class="text-slate-800 font-medium">"I prefer to work in places <strong class="text-purple-700 underline decoration-purple-400">where I can get access to the internet</strong>."</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 space-y-1">
+            <span class="font-black text-purple-700 text-sm block">D. Possession</span>
+            <p class="text-slate-800 font-medium">"Students <strong class="text-purple-700 underline decoration-purple-400">whose phones ring during class</strong> will be asked to leave."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 1 Interactive Rows -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">1</span>
+            Which sentence identifies or gives more information about:
+          </h3>
+          <span id="ex1-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/4</span>
+        </div>
+
+        <div class="space-y-3.5" id="ex1-container">
+          <!-- Item 1 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="1" data-ans="B">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              A person / people:
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">A</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">B</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">C</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">D</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="2" data-ans="C">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              A place:
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">A</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">B</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">C</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">D</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="3" data-ans="A">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              A thing:
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">A</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">B</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">C</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">D</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="4" data-ans="D">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              Possession:
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">A</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">B</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">C</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">D</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: GAP FILL & 'THAT' (Exercise 2a & 2b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-purple-200 text-xs font-medium">who • which • where • whose • that</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Relative Pronoun Selection & 'That' Substitutability</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill in the gaps with <strong>who</strong>, <strong>which</strong>, <strong>where</strong>, or <strong>whose</strong>. Then, tick the checkbox on each sentence where the relative pronoun can also be replaced with <strong>that</strong>!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check All 2a & 2b</span>
+          </button>
+          <button onclick="revealEx2()" class="px-4 py-2.5 bg-purple-950/60 hover:bg-purple-950 text-white border border-purple-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Rule Reminder for that -->
+      <div class="bg-white rounded-2xl p-4 border border-purple-200 flex items-start gap-3 shadow-xs">
+        <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 font-black flex items-center justify-center shrink-0 text-sm">💡</div>
+        <div class="text-xs sm:text-sm text-slate-700 space-y-0.5">
+          <span class="font-bold text-slate-900">Grammar Reminder (Exercise 2b):</span>
+          <p>In defining relative clauses, <strong>that</strong> can replace <strong>who</strong> (for people) and <strong>which</strong> (for things). It <em>cannot</em> replace <strong>where</strong> (for places) or <strong>whose</strong> (for possession).</p>
+        </div>
+      </div>
+
+      <!-- Exercise 2 Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">2</span>
+            Complete sentences 1–8 and tick where 'that' can replace the pronoun:
+          </h3>
+          <span id="ex2-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/16</span>
+        </div>
+
+        <div class="space-y-4" id="ex2-container">
+          <!-- Item 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex2-row="1" data-can-that="true">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 1</span>
+              <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-bold text-purple-900 bg-purple-50 px-3 py-1 rounded-xl border border-purple-200 hover:bg-purple-100 transition">
+                <input type="checkbox" class="ex2b-chk rounded text-purple-600 focus:ring-purple-500" />
+                <span>Can be replaced with <em>that</em></span>
+              </label>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I have a new messaging app
+              <input type="text" data-ex2-gap="1" data-ans="which" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-900 bg-white text-base w-32 text-center focus:border-purple-600 focus:outline-none" placeholder="pronoun" />
+              I can use without an internet connection or phone signal.
+            </p>
+            <div class="feedback-badge text-xs font-bold"></div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex2-row="2" data-can-that="true">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 2</span>
+              <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-bold text-purple-900 bg-purple-50 px-3 py-1 rounded-xl border border-purple-200 hover:bg-purple-100 transition">
+                <input type="checkbox" class="ex2b-chk rounded text-purple-600 focus:ring-purple-500" />
+                <span>Can be replaced with <em>that</em></span>
+              </label>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I think people
+              <input type="text" data-ex2-gap="2" data-ans="who" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-900 bg-white text-base w-28 text-center focus:border-purple-600 focus:outline-none" placeholder="pronoun" />
+              don't use smartphones to communicate are behind the times.
+            </p>
+            <div class="feedback-badge text-xs font-bold"></div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex2-row="3" data-can-that="false">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 3</span>
+              <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-bold text-purple-900 bg-purple-50 px-3 py-1 rounded-xl border border-purple-200 hover:bg-purple-100 transition">
+                <input type="checkbox" class="ex2b-chk rounded text-purple-600 focus:ring-purple-500" />
+                <span>Can be replaced with <em>that</em></span>
+              </label>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              There are a number of places near here
+              <input type="text" data-ex2-gap="3" data-ans="where" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-900 bg-white text-base w-32 text-center focus:border-purple-600 focus:outline-none" placeholder="pronoun" />
+              we can sit quietly and talk.
+            </p>
+            <div class="feedback-badge text-xs font-bold"></div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex2-row="4" data-can-that="true">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 4</span>
+              <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-bold text-purple-900 bg-purple-50 px-3 py-1 rounded-xl border border-purple-200 hover:bg-purple-100 transition">
+                <input type="checkbox" class="ex2b-chk rounded text-purple-600 focus:ring-purple-500" />
+                <span>Can be replaced with <em>that</em></span>
+              </label>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              My father is the only person I know
+              <input type="text" data-ex2-gap="4" data-ans="who" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-900 bg-white text-base w-28 text-center focus:border-purple-600 focus:outline-none" placeholder="pronoun" />
+              still writes letters regularly.
+            </p>
+            <div class="feedback-badge text-xs font-bold"></div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex2-row="5" data-can-that="false">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 5</span>
+              <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-bold text-purple-900 bg-purple-50 px-3 py-1 rounded-xl border border-purple-200 hover:bg-purple-100 transition">
+                <input type="checkbox" class="ex2b-chk rounded text-purple-600 focus:ring-purple-500" />
+                <span>Can be replaced with <em>that</em></span>
+              </label>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I'm receiving messages from someone
+              <input type="text" data-ex2-gap="5" data-ans="whose" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-900 bg-white text-base w-32 text-center focus:border-purple-600 focus:outline-none" placeholder="pronoun" />
+              email address is very similar to mine.
+            </p>
+            <div class="feedback-badge text-xs font-bold"></div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex2-row="6" data-can-that="false">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 6</span>
+              <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-bold text-purple-900 bg-purple-50 px-3 py-1 rounded-xl border border-purple-200 hover:bg-purple-100 transition">
+                <input type="checkbox" class="ex2b-chk rounded text-purple-600 focus:ring-purple-500" />
+                <span>Can be replaced with <em>that</em></span>
+              </label>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I'd like to spend some time living in a country
+              <input type="text" data-ex2-gap="6" data-ans="where" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-900 bg-white text-base w-32 text-center focus:border-purple-600 focus:outline-none" placeholder="pronoun" />
+              I can learn another language.
+            </p>
+            <div class="feedback-badge text-xs font-bold"></div>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex2-row="7" data-can-that="false">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 7</span>
+              <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-bold text-purple-900 bg-purple-50 px-3 py-1 rounded-xl border border-purple-200 hover:bg-purple-100 transition">
+                <input type="checkbox" class="ex2b-chk rounded text-purple-600 focus:ring-purple-500" />
+                <span>Can be replaced with <em>that</em></span>
+              </label>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              This is the only mobile telephone network
+              <input type="text" data-ex2-gap="7" data-ans="whose" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-900 bg-white text-base w-32 text-center focus:border-purple-600 focus:outline-none" placeholder="pronoun" />
+              signal is strong in my area.
+            </p>
+            <div class="feedback-badge text-xs font-bold"></div>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex2-row="8" data-can-that="true">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 8</span>
+              <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-bold text-purple-900 bg-purple-50 px-3 py-1 rounded-xl border border-purple-200 hover:bg-purple-100 transition">
+                <input type="checkbox" class="ex2b-chk rounded text-purple-600 focus:ring-purple-500" />
+                <span>Can be replaced with <em>that</em></span>
+              </label>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I've spent all morning reading the emails
+              <input type="text" data-ex2-gap="8" data-ans="which" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-900 bg-white text-base w-32 text-center focus:border-purple-600 focus:outline-none" placeholder="pronoun" />
+              I received while I was away.
+            </p>
+            <div class="feedback-badge text-xs font-bold"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: JOINING SENTENCES (Exercise 3) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3</span>
+            <span class="text-purple-200 text-xs font-medium">Sentence Synthesis</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Joining Sentences with Relative Clauses</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Combine each pair of sentences into a single sentence using an appropriate relative pronoun (<em>who, which, that, where, whose</em>). Avoid repeating object pronouns!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Combinations</span>
+          </button>
+          <button onclick="revealEx3()" class="px-4 py-2.5 bg-purple-950/60 hover:bg-purple-950 text-white border border-purple-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 3 Sentence Form Fields -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">3</span>
+            Join the sentences using relative clauses:
+          </h3>
+          <span id="ex3-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex3-container">
+          <!-- Item 1 (Model Example) -->
+          <div class="p-4 rounded-2xl bg-purple-50/60 border border-purple-200 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-800 tracking-wider">1. Example</span>
+              <span class="text-xs font-bold text-purple-700 bg-white px-2 py-0.5 rounded-md border border-purple-300">Model Answer</span>
+            </div>
+            <p class="text-xs text-slate-600">Prompt: Members receive important updates. They join our mailing list.</p>
+            <p class="text-sm font-bold text-purple-950">&rarr; <em>Members who join our mailing list receive important updates.</em></p>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">2. My inbox is full of emails. I've never read them.</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. My inbox is full of emails which/that I've never read." data-accepted="my inbox is full of emails which ive never read,my inbox is full of emails that ive never read,my inbox is full of emails ive never read,my inbox is full of emails which i have never read,my inbox is full of emails that i have never read,my inbox is full of emails i have never read" />
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">3. I think there should be more public places. You can get free wi-fi there.</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I think there should be more public places where you can get free wi-fi." data-accepted="i think there should be more public places where you can get free wifi,i think there should be more public places where you can get free wi-fi" />
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">4. People use their phones at the dinner table. I don't like them.</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I don't like people who use their phones at the dinner table." data-accepted="i dont like people who use their phones at the dinner table,i do not like people who use their phones at the dinner table,i dont like people that use their phones at the dinner table,i do not like people that use their phones at the dinner table" />
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">5. There are one or two authors. I always read their books.</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. There are one or two authors whose books I always read." data-accepted="there are one or two authors whose books i always read" />
+          </div>
+
+          <!-- Item 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">6. Letter writing is an important skill. People no longer develop it.</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. Letter writing is an important skill which/that people no longer develop." data-accepted="letter writing is an important skill which people no longer develop,letter writing is an important skill that people no longer develop,letter writing is an important skill people no longer develop" />
+          </div>
+
+          <!-- Item 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-row="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">7. There's a psychology professor at my university. His lectures are really interesting.</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. There's a psychology professor at my university whose lectures are really interesting." data-accepted="theres a psychology professor at my university whose lectures are really interesting,there is a psychology professor at my university whose lectures are really interesting" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: PUBLIC SPEAKING TEXT (Exercise 4a & 4b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-purple-700 via-violet-700 to-indigo-800 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a & 4b</span>
+            <span class="text-purple-200 text-xs font-medium">Text Analysis • Relative Pronoun Omission</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Public Speaking: Subject vs. Object Relative Pronouns</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            When a relative pronoun is the <strong>object</strong> of the verb in a defining relative clause, it can be omitted. Click on the 4 relative pronouns below that can be omitted!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Omissions</span>
+          </button>
+          <button onclick="revealEx4()" class="px-4 py-2.5 bg-purple-950/60 hover:bg-purple-950 text-white border border-purple-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Reference Box on Omitting Pronouns -->
+      <div class="grid sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1">
+          <span class="font-black text-emerald-700 uppercase tracking-wider block">✓ CAN be omitted (Object Pronouns):</span>
+          <p class="text-slate-600 font-medium">When the relative pronoun is followed by a subject noun or pronoun: <em>"something (which) politicians do"</em>, <em>"the product (which) you sell"</em>.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1">
+          <span class="font-black text-rose-700 uppercase tracking-wider block">✗ CANNOT be omitted (Subject / Whose):</span>
+          <p class="text-slate-600 font-medium">When the relative pronoun is the subject followed immediately by a verb: <em>"a skill which <u>is</u> difficult"</em>, <em>"people who <u>find</u>..."</em>, or <em>whose</em>.</p>
+        </div>
+      </div>
+
+      <!-- Interactive Article Display -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">4a</span>
+            Click on the pronouns below that CAN be omitted (4 target items):
+          </h3>
+          <span id="ex4-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/4</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.6rem] sm:leading-[3rem] font-normal space-y-6 select-none" id="ex4-article">
+          <p>
+            Making a speech is something
+            <button type="button" onclick="toggleOmissionTag(this)" data-can-omit="true" class="omissible-tag px-2.5 py-0.5 rounded-lg border-2 border-purple-300 font-bold text-purple-900 bg-purple-50 hover:border-purple-600">which</button>
+            politicians do all the time and the ability to deliver a successful speech can make all the difference to a politician's career. However, it is a skill
+            <button type="button" onclick="toggleOmissionTag(this)" data-can-omit="false" class="omissible-tag px-2.5 py-0.5 rounded-lg border-2 border-slate-300 font-bold text-slate-800 bg-white hover:border-purple-600">which</button>
+            is difficult to teach and there are many people
+            <button type="button" onclick="toggleOmissionTag(this)" data-can-omit="false" class="omissible-tag px-2.5 py-0.5 rounded-lg border-2 border-slate-300 font-bold text-slate-800 bg-white hover:border-purple-600">who</button>
+            find public speaking a terrifying experience. But making a speech or giving a presentation is something
+            <button type="button" onclick="toggleOmissionTag(this)" data-can-omit="true" class="omissible-tag px-2.5 py-0.5 rounded-lg border-2 border-purple-300 font-bold text-purple-900 bg-purple-50 hover:border-purple-600">which</button>
+            most of us will have to perform at some point in our lives. And although there are very few people
+            <button type="button" onclick="toggleOmissionTag(this)" data-can-omit="false" class="omissible-tag px-2.5 py-0.5 rounded-lg border-2 border-slate-300 font-bold text-slate-800 bg-white hover:border-purple-600">who</button>
+            are natural public speakers, there are a few things
+            <button type="button" onclick="toggleOmissionTag(this)" data-can-omit="true" class="omissible-tag px-2.5 py-0.5 rounded-lg border-2 border-purple-300 font-bold text-purple-900 bg-purple-50 hover:border-purple-600">which</button>
+            the nervous speech-maker can do to make the experience easier.
+          </p>
+
+          <p>
+            Probably the most important thing to remember is that the speech should have a clear message or aim. This could be as simple as congratulating the couple
+            <button type="button" onclick="toggleOmissionTag(this)" data-can-omit="false" class="omissible-tag px-2.5 py-0.5 rounded-lg border-2 border-slate-300 font-bold text-slate-800 bg-white hover:border-purple-600">who</button>
+            have just got married or persuading clients to buy the product
+            <button type="button" onclick="toggleOmissionTag(this)" data-can-omit="true" class="omissible-tag px-2.5 py-0.5 rounded-lg border-2 border-purple-300 font-bold text-purple-900 bg-purple-50 hover:border-purple-600">which</button>
+            you are trying to sell. Everything you say should aim to get the main message across.
+          </p>
+
+          <p>
+            The next point to remember is to practise the speech, preferably in front of a small audience
+            <button type="button" onclick="toggleOmissionTag(this)" data-can-omit="false" class="omissible-tag px-2.5 py-0.5 rounded-lg border-2 border-slate-300 font-bold text-slate-800 bg-white hover:border-purple-600">whose</button>
+            feedback can help improve the performance. Another useful method is the use of body language
+            <button type="button" onclick="toggleOmissionTag(this)" data-can-omit="false" class="omissible-tag px-2.5 py-0.5 rounded-lg border-2 border-slate-300 font-bold text-slate-800 bg-white hover:border-purple-600">which</button>
+            will make the speaker look confident, for example by standing straight and making direct contact with the audience. Finally, if the speaker feels anxious on the day, there are a number of relaxation techniques
+            <button type="button" onclick="toggleOmissionTag(this)" data-can-omit="false" class="omissible-tag px-2.5 py-0.5 rounded-lg border-2 border-slate-300 font-bold text-slate-800 bg-white hover:border-purple-600">which</button>
+            can help reduce the anxiety.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-purple-50 border border-purple-200 text-xs sm:text-sm text-purple-950 space-y-1">
+          <span class="font-extrabold text-sm block">💡 Exercise 4b Insight:</span>
+          <p>In all the clauses above with <strong>who</strong> or <strong>which</strong>, the pronoun can be replaced with <strong>that</strong> because they are defining relative clauses. Only <em>whose</em> (possession) cannot be replaced with <em>that</em>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: REMOVE EXTRA WORDS (Exercise 5) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex5" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-purple-700 via-indigo-700 to-violet-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 5</span>
+            <span class="text-purple-200 text-xs font-medium">Common Errors & Redundant Pronouns</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Circle One Extra Word in Each Sentence</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Do not repeat subject or object pronouns that are already represented by the relative pronoun. Click the redundant word in each sentence below.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx5()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Extra Words</span>
+          </button>
+          <button onclick="revealEx5()" class="px-4 py-2.5 bg-purple-950/60 hover:bg-purple-950 text-white border border-purple-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 5 Interactive Sentence Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">5</span>
+            Click on the ONE extra word in each sentence:
+          </h3>
+          <span id="ex5-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex5-container">
+          <!-- Item 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5-item="1" data-extra="they">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-700 tracking-wider">Item 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap gap-1.5 items-center word-selectable">
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">I</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">have</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">a</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">couple</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">of</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">friends</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">who</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100 font-bold text-purple-700" onclick="selectWord(this)">they</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">are</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">doing</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">a</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">degree</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">in</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">languages</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">and</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">communication.</span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5-item="2" data-extra="it">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-700 tracking-wider">Item 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap gap-1.5 items-center word-selectable">
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">He</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">has</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">an</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">accent</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">I</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">find</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">difficult</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">to</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">understand</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100 font-bold text-purple-700" onclick="selectWord(this)">it.</span>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5-item="3" data-extra="it">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-700 tracking-wider">Item 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap gap-1.5 items-center word-selectable">
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">I've</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">sent</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">you</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">the</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">information</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">you</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">asked</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">for</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100 font-bold text-purple-700" onclick="selectWord(this)">it.</span>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5-item="4" data-extra="their">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-700 tracking-wider">Item 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap gap-1.5 items-center word-selectable">
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">There</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">are</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">a</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">number</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">of</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">phone</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">companies</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">whose</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100 font-bold text-purple-700" onclick="selectWord(this)">their</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">sales</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">have</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">increased</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">recently.</span>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5-item="5" data-extra="she">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-700 tracking-wider">Item 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap gap-1.5 items-center word-selectable">
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">There's</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">a</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">woman</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">in</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">my</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">street</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">who</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100 font-bold text-purple-700" onclick="selectWord(this)">she</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">speaks</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">five</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">different</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">languages.</span>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5-item="6" data-extra="her">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-700 tracking-wider">Item 6</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-base text-slate-900 font-medium leading-relaxed flex flex-wrap gap-1.5 items-center word-selectable">
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">One</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">of</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">the</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">students</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">who</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">I</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">live</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">with</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100 font-bold text-purple-700" onclick="selectWord(this)">her</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">spends</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">hours</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">on</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">her</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">phone</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">every</span>
+              <span class="word-chip px-2 py-0.5 rounded cursor-pointer hover:bg-purple-100" onclick="selectWord(this)">evening.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: PERSONAL STATEMENTS & DISCUSSION (Exercise 6) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex6" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-purple-700 via-violet-700 to-indigo-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 6</span>
+            <span class="text-purple-200 text-xs font-medium">Personalized Production & Rehearsal</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Finish the Sentences with Relative Clauses</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Complete the sentences to make them true for you using relative clauses. Then rehearse speaking aloud with native British speech models!
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="loadSampleEx6()" class="px-4 py-2.5 bg-white hover:bg-purple-50 text-purple-900 text-xs sm:text-sm font-extrabold rounded-2xl shadow transition">
+            Load Models
+          </button>
+          <button onclick="saveEx6()" class="px-4 py-2.5 bg-purple-950/60 hover:bg-purple-950 text-white border border-purple-300/40 text-xs sm:text-sm font-bold rounded-2xl transition">
+            Save Notes
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive 6 Sentence Inputs -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">6</span>
+            My Personal Sentences:
+          </h3>
+          <span class="text-xs text-slate-400">Persistent local storage</span>
+        </div>
+
+        <div class="space-y-4" id="ex6-inputs-container">
+          <!-- S1 (Model) -->
+          <div class="p-4 rounded-2xl bg-purple-50/50 border border-purple-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-700 tracking-wider">1. Example Sentence</span>
+              <button onclick="speakText('I usually socialise with people who have similar interests to mine.')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-bold text-slate-800">"I usually socialise with people <span class="text-purple-700">who have similar interests to mine</span>."</p>
+          </div>
+
+          <!-- S2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-700 tracking-wider">2. I prefer to study in a place... (where...)</span>
+              <button onclick="speakText(document.getElementById('ex6-s2').value || 'I prefer to study in a place where it is quiet and there are comfortable chairs.')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <input type="text" id="ex6-s2" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. where there are no distractions and high-speed wi-fi." />
+          </div>
+
+          <!-- S3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-700 tracking-wider">3. I think the most difficult languages to learn are those... (which / that...)</span>
+              <button onclick="speakText(document.getElementById('ex6-s3').value || 'I think the most difficult languages to learn are those which have a completely different writing system.')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <input type="text" id="ex6-s3" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. which use complex tonal sounds and non-Latin alphabets." />
+          </div>
+
+          <!-- S4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-700 tracking-wider">4. I am the kind of person... (who / that...)</span>
+              <button onclick="speakText(document.getElementById('ex6-s4').value || 'I am the kind of person who enjoys learning new communication technologies.')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <input type="text" id="ex6-s4" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. who prefers calling on the phone rather than texting endlessly." />
+          </div>
+
+          <!-- S5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-700 tracking-wider">5. I usually read books... (which / that / whose...)</span>
+              <button onclick="speakText(document.getElementById('ex6-s5').value || 'I usually read books that challenge my perspective on global communication.')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <input type="text" id="ex6-s5" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. that offer practical insights into human psychology." />
+          </div>
+
+          <!-- S6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-purple-700 tracking-wider">6. In the future we will use communication methods... (which / that...)</span>
+              <button onclick="speakText(document.getElementById('ex6-s6').value || 'In the future we will use communication methods which rely on real-time neural translation.')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <input type="text" id="ex6-s6" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. which allow holographic interactions across continents." />
+          </div>
+        </div>
+
+        <div id="ex6-status" class="hidden p-3.5 rounded-xl bg-purple-100 text-purple-950 text-xs font-bold flex items-center justify-between">
+          <span>✓ Your personal relative clause sentences have been saved to local browser storage.</span>
+          <span class="text-purple-700 font-semibold text-[11px]">Ready for speaking practice</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 7: EXPERT GRAMMAR REFERENCE (Page 191) -->
+    <!-- ========================================================================= -->
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 via-purple-950 to-indigo-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-purple-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 191 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Relative Clauses: Defining & Non-defining</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          The definitive guide to relative pronouns (<em>who, which, that, where, whose</em>), pronoun omission rules, and avoiding pronoun repetition.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Defining Relative Clauses Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-800 font-black text-base flex items-center justify-center">
+              RC
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Relative Pronouns in Defining Clauses</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Essential identifying information</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. People (who / that):</div>
+              <p class="text-slate-700 font-medium"><em>"Having a conversation with someone <strong>who / that</strong> is older than you..."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Things (which / that):</div>
+              <p class="text-slate-700 font-medium"><em>"Email is the main form of communication <strong>which / that</strong> is used in business."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Places (where) & Possession (whose):</div>
+              <p class="text-slate-700 font-medium"><em>"I prefer to work in places <strong>where</strong> I can get internet access."</em></p>
+              <p class="text-slate-700 font-medium"><em>"Students <strong>whose</strong> phones ring during class will be asked to leave."</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Omitting Pronouns & Common Errors Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-800 font-black text-base flex items-center justify-center">
+              RULE
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Omission & Avoiding Repetition</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Key Exam Focus Points</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Omitting the Relative Pronoun:</div>
+              <p class="text-slate-700 font-medium">When the relative pronoun is the <strong>object</strong> of the clause, it can be left out:</p>
+              <p class="text-slate-600 font-medium"><em>"The emails <strong>(which)</strong> I received while I was away."</em></p>
+              <p class="text-xs text-purple-700 font-semibold">(If followed immediately by a verb, it is the subject and CANNOT be omitted!)</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Avoiding Redundant Pronouns:</div>
+              <p class="text-slate-700 font-medium">Never repeat the subject or object pronoun in the relative clause:</p>
+              <p class="text-slate-600 font-medium">✗ <s>"He has an accent I find difficult to understand <u>it</u>."</s></p>
+              <p class="text-emerald-700 font-bold">✓ "He has an accent I find difficult to understand."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Summary Table -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-3">
+        <h3 class="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+          <span>⚡</span> Summary of Relative Pronoun Usage
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm text-slate-700 border-collapse">
+            <thead class="bg-slate-50 text-slate-900 font-bold border-b border-slate-200">
+              <tr>
+                <th class="p-3">Pronoun</th>
+                <th class="p-3">Refers to</th>
+                <th class="p-3">Can be replaced by 'that'?</th>
+                <th class="p-3">Can be omitted?</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="p-3 font-semibold text-purple-700">who</td>
+                <td class="p-3">people</td>
+                <td class="p-3 font-bold text-emerald-700">Yes (in defining clauses)</td>
+                <td class="p-3">Yes (when it is the object)</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-purple-700">which</td>
+                <td class="p-3">things / animals</td>
+                <td class="p-3 font-bold text-emerald-700">Yes (in defining clauses)</td>
+                <td class="p-3">Yes (when it is the object)</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-purple-700">where</td>
+                <td class="p-3">places</td>
+                <td class="p-3 font-bold text-rose-600">No</td>
+                <td class="p-3 text-rose-600">No</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-purple-700">whose</td>
+                <td class="p-3">possession (people or things)</td>
+                <td class="p-3 font-bold text-rose-600">No</td>
+                <td class="p-3 text-rose-600">No</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 98
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 10a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 10: Communicating • Page 154 • Expert Grammar Page 191
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const state = {
+      score: {
+        ex1: 0,
+        ex2: 0,
+        ex3: 0,
+        ex4: 0,
+        ex5: 0
+      }
+    };
+
+    // Web Audio Synthesizer for instant feedback sounds
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(170, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Web Speech API for natural British pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-purple-600', 'text-white', 'shadow-md', 'shadow-purple-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-purple-600', 'text-white', 'shadow-md', 'shadow-purple-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Clean user string helper
+    function cleanStr(s) {
+      return (s || '').toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()'?]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // EXERCISE 1
+    function selectEx1Pill(btn) {
+      const parent = btn.closest('.inline-flex');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-purple-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-purple-600', 'text-white', 'border-purple-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx1() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex1-container [data-ex1-q]');
+
+      rows.forEach(row => {
+        const expected = row.getAttribute('data-ans'); // "B", "C", "A", or "D"
+        const badge = row.querySelector('.feedback-badge');
+        const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select option</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toUpperCase();
+        if (userVal === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-purple-600', 'border-purple-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Need: ${expected}</span>`;
+          selectedBtn.classList.remove('bg-purple-600', 'border-purple-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex1 = correct;
+      document.getElementById('ex1-score-pill').textContent = `Score: ${correct}/4`;
+      updateTotalScore();
+      playBeep(correct >= 3);
+    }
+
+    function revealEx1() {
+      const answers = {
+        '1': 'B',
+        '2': 'C',
+        '3': 'A',
+        '4': 'D'
+      };
+
+      for (let q in answers) {
+        const row = document.querySelector(`[data-ex1-q="${q}"]`);
+        const btns = row.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim().toUpperCase() === answers[q]) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'bg-purple-600');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex1 = 4;
+      document.getElementById('ex1-score-pill').textContent = 'Score: 4/4';
+      updateTotalScore();
+    }
+
+    // EXERCISE 2
+    function checkEx2() {
+      let correctPronouns = 0;
+      let correctThatTicks = 0;
+      const rows = document.querySelectorAll('#ex2-container [data-ex2-row]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex2-input');
+        const chk = row.querySelector('.ex2b-chk');
+        const badge = row.querySelector('.feedback-badge');
+
+        const expectedPronoun = inp.getAttribute('data-ans').toLowerCase();
+        const userPronoun = cleanStr(inp.value);
+        const canThat = row.getAttribute('data-can-that') === 'true';
+
+        let pOk = false;
+        let tOk = false;
+
+        // Check pronoun
+        if (userPronoun === expectedPronoun) {
+          pOk = true;
+          correctPronouns++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+
+        // Check that checkbox
+        if (chk.checked === canThat) {
+          tOk = true;
+          correctThatTicks++;
+        }
+
+        if (pOk && tOk) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Pronoun & \'that\' correct</span>';
+        } else if (pOk) {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">✓ Pronoun ok | Check 'that' tick (${canThat ? 'can use that' : 'cannot use that'})</span>`;
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Need: ${expectedPronoun}</span>`;
+        }
+      });
+
+      const totalEx2 = correctPronouns + correctThatTicks;
+      state.score.ex2 = totalEx2;
+      document.getElementById('ex2-score-pill').textContent = `Score: ${totalEx2}/16`;
+      updateTotalScore();
+      playBeep(totalEx2 >= 12);
+    }
+
+    function revealEx2() {
+      const keys = {
+        '1': { p: 'which', that: true },
+        '2': { p: 'who', that: true },
+        '3': { p: 'where', that: false },
+        '4': { p: 'who', that: true },
+        '5': { p: 'whose', that: false },
+        '6': { p: 'where', that: false },
+        '7': { p: 'whose', that: false },
+        '8': { p: 'which', that: true }
+      };
+
+      for (let r in keys) {
+        const row = document.querySelector(`[data-ex2-row="${r}"]`);
+        const inp = row.querySelector('.ex2-input');
+        const chk = row.querySelector('.ex2b-chk');
+        inp.value = keys[r].p;
+        chk.checked = keys[r].that;
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex2 = 16;
+      document.getElementById('ex2-score-pill').textContent = 'Score: 16/16';
+      updateTotalScore();
+    }
+
+    // EXERCISE 3
+    function checkEx3() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex3-container [data-ex3-row]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex3-input');
+        const badge = row.querySelector('.feedback-badge');
+        const accepted = inp.getAttribute('data-accepted').split(',').map(cleanStr);
+        const userClean = cleanStr(inp.value);
+
+        if (!userClean) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Type sentence</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (accepted.some(ans => userClean === ans || userClean.replace(/\s/g, '') === ans.replace(/\s/g, ''))) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck relative clause</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3 = correct;
+      document.getElementById('ex3-score-pill').textContent = `Score: ${correct}/${rows.length}`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx3() {
+      const keys = {
+        '2': "My inbox is full of emails which I've never read.",
+        '3': "I think there should be more public places where you can get free wi-fi.",
+        '4': "I don't like people who use their phones at the dinner table.",
+        '5': "There are one or two authors whose books I always read.",
+        '6': "Letter writing is an important skill which people no longer develop.",
+        '7': "There's a psychology professor at my university whose lectures are really interesting."
+      };
+
+      for (let r in keys) {
+        const row = document.querySelector(`[data-ex3-row="${r}"]`);
+        if (row) {
+          const inp = row.querySelector('.ex3-input');
+          const badge = row.querySelector('.feedback-badge');
+          inp.value = keys[r];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+        }
+      }
+
+      state.score.ex3 = 6;
+      document.getElementById('ex3-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    // EXERCISE 4
+    function toggleOmissionTag(btn) {
+      if (btn.dataset.selected === "true") {
+        delete btn.dataset.selected;
+        btn.classList.remove('bg-purple-600', 'text-white', 'border-purple-600', 'bg-emerald-600', 'bg-rose-500');
+        if (btn.getAttribute('data-can-omit') === 'true') {
+          btn.classList.add('bg-purple-50', 'text-purple-900', 'border-purple-300');
+        } else {
+          btn.classList.add('bg-white', 'text-slate-800', 'border-slate-300');
+        }
+      } else {
+        btn.dataset.selected = "true";
+        btn.classList.remove('bg-purple-50', 'bg-white', 'border-purple-300', 'border-slate-300');
+        btn.classList.add('bg-purple-600', 'text-white', 'border-purple-600');
+      }
+    }
+
+    function checkEx4() {
+      const tags = document.querySelectorAll('.omissible-tag');
+      let correct = 0;
+      let targetCount = 4; // exactly 4 object relative pronouns can be omitted
+
+      tags.forEach(tag => {
+        const canOmit = tag.getAttribute('data-can-omit') === 'true';
+        const isSelected = tag.dataset.selected === 'true';
+
+        if (canOmit && isSelected) {
+          correct++;
+          tag.classList.remove('bg-purple-600', 'border-purple-600');
+          tag.classList.add('bg-emerald-600', 'border-emerald-600', 'text-white');
+        } else if (!canOmit && isSelected) {
+          tag.classList.remove('bg-purple-600', 'border-purple-600');
+          tag.classList.add('bg-rose-500', 'border-rose-500', 'text-white');
+        } else {
+          tag.classList.remove('bg-emerald-600', 'bg-rose-500');
+        }
+      });
+
+      state.score.ex4 = correct;
+      document.getElementById('ex4-score-pill').textContent = `Score: ${correct}/${targetCount}`;
+      updateTotalScore();
+      playBeep(correct >= 3);
+    }
+
+    function revealEx4() {
+      const tags = document.querySelectorAll('.omissible-tag');
+      tags.forEach(tag => {
+        const canOmit = tag.getAttribute('data-can-omit') === 'true';
+        if (canOmit) {
+          tag.dataset.selected = "true";
+          tag.classList.remove('bg-purple-50', 'bg-white', 'border-purple-300', 'border-slate-300', 'bg-rose-500', 'bg-purple-600');
+          tag.classList.add('bg-emerald-600', 'border-emerald-600', 'text-white');
+        } else {
+          delete tag.dataset.selected;
+          tag.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+          tag.classList.add('bg-white', 'text-slate-800', 'border-slate-300');
+        }
+      });
+
+      state.score.ex4 = 4;
+      document.getElementById('ex4-score-pill').textContent = 'Score: 4/4';
+      updateTotalScore();
+    }
+
+    // EXERCISE 5
+    function selectWord(chip) {
+      const row = chip.closest('[data-ex5-item]');
+      row.querySelectorAll('.word-chip').forEach(c => {
+        c.classList.remove('bg-purple-600', 'text-white', 'bg-emerald-600', 'bg-rose-500');
+        delete c.dataset.chosen;
+      });
+      chip.dataset.chosen = "true";
+      chip.classList.add('bg-purple-600', 'text-white');
+    }
+
+    function checkEx5() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex5-container [data-ex5-item]');
+
+      rows.forEach(row => {
+        const expectedWord = row.getAttribute('data-extra').toLowerCase();
+        const badge = row.querySelector('.feedback-badge');
+        const chosen = row.querySelector('.word-chip[data-chosen="true"]');
+
+        if (!chosen) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Click extra word</span>';
+          return;
+        }
+
+        const userWord = cleanStr(chosen.textContent);
+        if (userWord === expectedWord) {
+          correct++;
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct ('${expectedWord}' removed)</span>`;
+          chosen.classList.remove('bg-purple-600');
+          chosen.classList.add('bg-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Redundant word is: '${expectedWord}'</span>`;
+          chosen.classList.remove('bg-purple-600');
+          chosen.classList.add('bg-rose-500');
+        }
+      });
+
+      state.score.ex5 = correct;
+      document.getElementById('ex5-score-pill').textContent = `Score: ${correct}/${rows.length}`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx5() {
+      const rows = document.querySelectorAll('#ex5-container [data-ex5-item]');
+      rows.forEach(row => {
+        const expectedWord = row.getAttribute('data-extra').toLowerCase();
+        const chips = row.querySelectorAll('.word-chip');
+        chips.forEach(c => {
+          if (cleanStr(c.textContent) === expectedWord) {
+            c.dataset.chosen = "true";
+            c.classList.remove('bg-purple-600', 'bg-rose-500');
+            c.classList.add('bg-emerald-600', 'text-white');
+          } else {
+            delete c.dataset.chosen;
+            c.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key ('${expectedWord}')</span>`;
+      });
+
+      state.score.ex5 = 6;
+      document.getElementById('ex5-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    // EXERCISE 6
+    function loadSampleEx6() {
+      document.getElementById('ex6-s2').value = "I prefer to study in a quiet library where there is high-speed internet and no noise.";
+      document.getElementById('ex6-s3').value = "I think the most difficult languages to learn are those that have a non-Latin alphabet and tonal pronunciation.";
+      document.getElementById('ex6-s4').value = "I am the kind of person who likes organizing study groups and communicating regularly.";
+      document.getElementById('ex6-s5').value = "I usually read books which explain fascinating discoveries in technology and linguistics.";
+      document.getElementById('ex6-s6').value = "In the future we will use communication methods that project real-time three-dimensional holographic avatars.";
+      playBeep(true);
+    }
+
+    function saveEx6() {
+      const answers = {
+        s2: document.getElementById('ex6-s2').value,
+        s3: document.getElementById('ex6-s3').value,
+        s4: document.getElementById('ex6-s4').value,
+        s5: document.getElementById('ex6-s5').value,
+        s6: document.getElementById('ex6-s6').value
+      };
+      localStorage.setItem('m10_grammar_ex6', JSON.stringify(answers));
+      document.getElementById('ex6-status').classList.remove('hidden');
+      playBeep(true);
+    }
+
+    function updateTotalScore() {
+      const total = state.score.ex1 + state.score.ex2 + state.score.ex3 + state.score.ex4 + state.score.ex5;
+      const maxScore = 36; // 4 + 16 + 6 + 4 + 6 = 36 points total
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 28) {
+        bar.classList.replace('bg-purple-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-purple-600');
+      }
+    }
+
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Reset Ex 1
+      document.querySelectorAll('#ex1-container .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-purple-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Reset Ex 2
+      document.querySelectorAll('.ex2-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+      document.querySelectorAll('.ex2b-chk').forEach(c => c.checked = false);
+
+      // Reset Ex 3
+      document.querySelectorAll('.ex3-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Reset Ex 4
+      document.querySelectorAll('.omissible-tag').forEach(t => {
+        delete t.dataset.selected;
+        t.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+        if (t.getAttribute('data-can-omit') === 'true') {
+          t.classList.add('bg-purple-50', 'text-purple-900', 'border-purple-300');
+        } else {
+          t.classList.add('bg-white', 'text-slate-800', 'border-slate-300');
+        }
+      });
+
+      // Reset Ex 5
+      document.querySelectorAll('.word-chip').forEach(c => {
+        delete c.dataset.chosen;
+        c.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+      });
+
+      // Reset feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset scores
+      state.score = { ex1: 0, ex2: 0, ex3: 0, ex4: 0, ex5: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1-score-pill').textContent = 'Score: 0/4';
+      document.getElementById('ex2-score-pill').textContent = 'Score: 0/16';
+      document.getElementById('ex3-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex4-score-pill').textContent = 'Score: 0/4';
+      document.getElementById('ex5-score-pill').textContent = 'Score: 0/6';
+    });
+
+    // Auto-restore saved Ex 6 data on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved6 = JSON.parse(localStorage.getItem('m10_grammar_ex6'));
+        if (saved6) {
+          for (let k in saved6) {
+            const el = document.getElementById(`ex6-${k}`);
+            if (el) el.value = saved6[k];
+          }
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

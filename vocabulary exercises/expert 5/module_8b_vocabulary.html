@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 8b Vocabulary: Activity - Sporting Events, Business & Collocations</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            sport: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              200: '#fed7aa',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+              800: '#9a3412',
+              900: '#7c2d12',
+            },
+            trophy: {
+              50: '#fefce8',
+              100: '#fef9c3',
+              500: '#eab308',
+              600: '#ca8a04',
+              700: '#a16207',
+            },
+            arena: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              500: '#64748b',
+              600: '#475569',
+              700: '#334155',
+              800: '#1e293b',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.25);
+    }
+    .matrix-chip {
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .matrix-chip:hover {
+      transform: translateY(-1px);
+    }
+    .matrix-chip:active {
+      transform: scale(0.97);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-orange-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-500 to-red-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-orange-500/25 ring-2 ring-white">
+          8b
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 tracking-wide uppercase">Unit 8: Activity</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 129</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Vocabulary: <span class="text-orange-600">Sporting Events, Business & Collocations</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-orange-600">0 / 44</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-orange-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-orange-600 text-white shadow-md shadow-orange-600/25">
+          1. Sporting Events (1)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Sports & Business (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Compound Nouns (3)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Verbs & Collocations (4a & 4b)
+        </button>
+        <button data-tab="tab-ex5" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          5. Rules & Records (5a & 5b)
+        </button>
+        <button data-tab="tab-lexicon" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📚 Vocabulary Lexicon & Audio
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: SPORTING EVENTS (Exercise 1) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-orange-600 via-amber-600 to-red-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1</span>
+            <span class="text-orange-200 text-xs font-medium">Page 129 • Types of Sporting Events</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Sporting Events & Competition Formats</h2>
+          <p class="text-orange-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Match the 6 key sporting event terms (1–6) with their exact definitions (A–F). Click on the listen button next to each event to practice British English pronunciation!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1()" class="px-5 py-2.5 bg-white hover:bg-orange-50 text-orange-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Events</span>
+          </button>
+          <button onclick="revealEx1()" class="px-4 py-2.5 bg-orange-800/60 hover:bg-orange-800 text-white border border-orange-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Definitions A-F Reference Box -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Definitions Legend (A–F):</span>
+          <span class="text-xs text-slate-400">Match these options with the event names below</span>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs sm:text-sm">
+          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-orange-100 text-orange-800 font-black text-xs flex items-center justify-center shrink-0">A</span>
+            <span class="text-slate-700 font-medium">a competition where people run very long distances</span>
+          </div>
+          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-orange-100 text-orange-800 font-black text-xs flex items-center justify-center shrink-0">B</span>
+            <span class="text-slate-700 font-medium">one of the two games in a competition, whose winners compete in the last part</span>
+          </div>
+          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-orange-100 text-orange-800 font-black text-xs flex items-center justify-center shrink-0">C</span>
+            <span class="text-slate-700 font-medium">a competition to find which player, team, etc. is the best at a sport</span>
+          </div>
+          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-orange-100 text-orange-800 font-black text-xs flex items-center justify-center shrink-0">D</span>
+            <span class="text-slate-700 font-medium">the last and most important game in a competition</span>
+          </div>
+          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-orange-100 text-orange-800 font-black text-xs flex items-center justify-center shrink-0">E</span>
+            <span class="text-slate-700 font-medium">a game between two teams or people</span>
+          </div>
+          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-orange-100 text-orange-800 font-black text-xs flex items-center justify-center shrink-0">F</span>
+            <span class="text-slate-700 font-medium">a competition where people try to run, drive, etc. fastest and finish first</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 1 Matching Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-orange-100 text-orange-800 text-sm font-black flex items-center justify-center">1</span>
+            Match the words (1–6) with their meanings (A–F):
+          </h3>
+          <span id="ex1-score-pill" class="text-xs font-bold text-orange-800 bg-orange-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="ex1-container">
+          
+          <!-- 1: championship -> C -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1-item="1" data-ans="C">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">1</span>
+              <button onclick="speakText('championship')" class="text-xs text-slate-400 hover:text-orange-600 transition" title="Listen">🔊 Listen</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">championship</div>
+              <p class="text-xs text-slate-500 mt-0.5">overall competitive tournament</p>
+            </div>
+            <div>
+              <select class="ex1-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-orange-950 focus:border-orange-600 focus:outline-none">
+                <option value="">Select definition...</option>
+                <option value="A">A. run very long distances</option>
+                <option value="B">B. one of the two games before last part</option>
+                <option value="C">C. find which player/team is the best</option>
+                <option value="D">D. last and most important game</option>
+                <option value="E">E. game between two teams or people</option>
+                <option value="F">F. run/drive fastest and finish first</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 2: marathon -> A -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1-item="2" data-ans="A">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">2</span>
+              <button onclick="speakText('marathon')" class="text-xs text-slate-400 hover:text-orange-600 transition" title="Listen">🔊 Listen</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">marathon</div>
+              <p class="text-xs text-slate-500 mt-0.5">endurance running event (42.195 km)</p>
+            </div>
+            <div>
+              <select class="ex1-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-orange-950 focus:border-orange-600 focus:outline-none">
+                <option value="">Select definition...</option>
+                <option value="A">A. run very long distances</option>
+                <option value="B">B. one of the two games before last part</option>
+                <option value="C">C. find which player/team is the best</option>
+                <option value="D">D. last and most important game</option>
+                <option value="E">E. game between two teams or people</option>
+                <option value="F">F. run/drive fastest and finish first</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 3: race -> F -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1-item="3" data-ans="F">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">3</span>
+              <button onclick="speakText('race')" class="text-xs text-slate-400 hover:text-orange-600 transition" title="Listen">🔊 Listen</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">race</div>
+              <p class="text-xs text-slate-500 mt-0.5">speed competition against time/others</p>
+            </div>
+            <div>
+              <select class="ex1-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-orange-950 focus:border-orange-600 focus:outline-none">
+                <option value="">Select definition...</option>
+                <option value="A">A. run very long distances</option>
+                <option value="B">B. one of the two games before last part</option>
+                <option value="C">C. find which player/team is the best</option>
+                <option value="D">D. last and most important game</option>
+                <option value="E">E. game between two teams or people</option>
+                <option value="F">F. run/drive fastest and finish first</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 4: match -> E -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1-item="4" data-ans="E">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">4</span>
+              <button onclick="speakText('match')" class="text-xs text-slate-400 hover:text-orange-600 transition" title="Listen">🔊 Listen</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">match</div>
+              <p class="text-xs text-slate-500 mt-0.5">game between two sides</p>
+            </div>
+            <div>
+              <select class="ex1-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-orange-950 focus:border-orange-600 focus:outline-none">
+                <option value="">Select definition...</option>
+                <option value="A">A. run very long distances</option>
+                <option value="B">B. one of the two games before last part</option>
+                <option value="C">C. find which player/team is the best</option>
+                <option value="D">D. last and most important game</option>
+                <option value="E">E. game between two teams or people</option>
+                <option value="F">F. run/drive fastest and finish first</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 5: semi-final -> B -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1-item="5" data-ans="B">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">5</span>
+              <button onclick="speakText('semi-final')" class="text-xs text-slate-400 hover:text-orange-600 transition" title="Listen">🔊 Listen</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">semi-final</div>
+              <p class="text-xs text-slate-500 mt-0.5">penultimate round match</p>
+            </div>
+            <div>
+              <select class="ex1-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-orange-950 focus:border-orange-600 focus:outline-none">
+                <option value="">Select definition...</option>
+                <option value="A">A. run very long distances</option>
+                <option value="B">B. one of the two games before last part</option>
+                <option value="C">C. find which player/team is the best</option>
+                <option value="D">D. last and most important game</option>
+                <option value="E">E. game between two teams or people</option>
+                <option value="F">F. run/drive fastest and finish first</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 6: final -> D -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1-item="6" data-ans="D">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">6</span>
+              <button onclick="speakText('final')" class="text-xs text-slate-400 hover:text-orange-600 transition" title="Listen">🔊 Listen</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">final</div>
+              <p class="text-xs text-slate-500 mt-0.5">championship-deciding match</p>
+            </div>
+            <div>
+              <select class="ex1-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-orange-950 focus:border-orange-600 focus:outline-none">
+                <option value="">Select definition...</option>
+                <option value="A">A. run very long distances</option>
+                <option value="B">B. one of the two games before last part</option>
+                <option value="C">C. find which player/team is the best</option>
+                <option value="D">D. last and most important game</option>
+                <option value="E">E. game between two teams or people</option>
+                <option value="F">F. run/drive fastest and finish first</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: SPORTS AND BUSINESS (Exercise 2a & 2b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-amber-200 text-xs font-medium">Page 129 • Sports Industry Verbs</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Sports & Business: Commercial & Athletic Verbs</h2>
+          <p class="text-amber-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Replace the words in bold with the verbs from the box in their correct grammatical form (<em>compete, host, sign, sponsor, support, train</em>). Then debate the commercialization of modern sport!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2a()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Verbs</span>
+          </button>
+          <button onclick="revealEx2a()" class="px-4 py-2.5 bg-amber-800/60 hover:bg-amber-800 text-white border border-amber-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Box for Exercise 2a -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Verbs in the Box:</span>
+          <span class="text-xs text-slate-400">Click a verb to insert into the active field</span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="ex2a-word-bank">
+          <button type="button" onclick="insertEx2aWord('host')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 font-black text-sm hover:border-amber-500 transition">host</button>
+          <button type="button" onclick="insertEx2aWord('competes')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 font-black text-sm hover:border-amber-500 transition">competes</button>
+          <button type="button" onclick="insertEx2aWord('train')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 font-black text-sm hover:border-amber-500 transition">train</button>
+          <button type="button" onclick="insertEx2aWord('Supporting')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 font-black text-sm hover:border-amber-500 transition">Supporting</button>
+          <button type="button" onclick="insertEx2aWord('sponsor')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 font-black text-sm hover:border-amber-500 transition">sponsor</button>
+          <button type="button" onclick="insertEx2aWord('sign')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 font-black text-sm hover:border-amber-500 transition">sign</button>
+        </div>
+      </div>
+
+      <!-- Exercise 2a Sentences -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">2a</span>
+            Replace the verbs in bold with the verbs in the box in the correct form:
+          </h3>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex2a-container">
+          
+          <!-- Item 1: host -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 1: Replace [organise]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Only rich countries can
+              <input type="text" data-ans="host" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-amber-950 bg-white text-base w-32 text-center focus:border-amber-600 focus:outline-none" placeholder="[verb 1]" />
+              a major sporting event like the Olympic Games.
+              <span class="text-xs text-slate-400 block mt-1">(Original: <em>can <strong>organise</strong></em>)</span>
+            </p>
+          </div>
+
+          <!-- Item 2: competes (or competes in) -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 2: Replace [takes part in]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It's more interesting when a less well-known team
+              <input type="text" data-ans="competes in,competes" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-amber-950 bg-white text-base w-36 text-center focus:border-amber-600 focus:outline-none" placeholder="[verb 2]" />
+              an important sporting final.
+              <span class="text-xs text-slate-400 block mt-1">(Original: <em><strong>takes part in</strong></em>)</span>
+            </p>
+          </div>
+
+          <!-- Item 3: train -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 3: Replace [prepare and practise]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It is better to
+              <input type="text" data-ans="train" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-amber-950 bg-white text-base w-32 text-center focus:border-amber-600 focus:outline-none" placeholder="[verb 3]" />
+              on your own than with other people.
+              <span class="text-xs text-slate-400 block mt-1">(Original: <em>to <strong>prepare and practise</strong></em>)</span>
+            </p>
+          </div>
+
+          <!-- Item 4: Supporting -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 4: Replace [Following]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              <input type="text" data-ans="supporting,support" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-amber-950 bg-white text-base w-36 text-center focus:border-amber-600 focus:outline-none" placeholder="[verb 4]" />
+              your national team gives you a feeling of pride.
+              <span class="text-xs text-slate-400 block mt-1">(Original: <em><strong>Following</strong> your national team</em>)</span>
+            </p>
+          </div>
+
+          <!-- Item 5: sponsor -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 5: Replace [provide money for]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It's wrong that fast food companies
+              <input type="text" data-ans="sponsor" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-amber-950 bg-white text-base w-32 text-center focus:border-amber-600 focus:outline-none" placeholder="[verb 5]" />
+              big sporting events by advertising their products.
+              <span class="text-xs text-slate-400 block mt-1">(Original: <em><strong>provide money for</strong> big sporting events</em>)</span>
+            </p>
+          </div>
+
+          <!-- Item 6: sign -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 6: Replace [hire]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Big football clubs often
+              <input type="text" data-ans="sign" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-amber-950 bg-white text-base w-32 text-center focus:border-amber-600 focus:outline-none" placeholder="[verb 6]" />
+              players for far too much money.
+              <span class="text-xs text-slate-400 block mt-1">(Original: <em>often <strong>hire</strong> players</em>)</span>
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 2b: Sports & Commerce Debate Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">2b</span>
+              Work in pairs. Do you agree or disagree with the sentences in Exercise 2a?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Tick the statements you agree with and record your arguments:</p>
+          </div>
+          <button onclick="saveEx2bNotes()" class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+            Save My Stance
+          </button>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3" id="ex2b-checklist">
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-1" class="w-5 h-5 text-amber-600 rounded-lg focus:ring-amber-500" />
+            <span class="text-sm font-bold text-slate-800">1. Only wealthy nations should host mega-events like the Olympics.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-2" class="w-5 h-5 text-amber-600 rounded-lg focus:ring-amber-500" />
+            <span class="text-sm font-bold text-slate-800">2. Finals are far more exciting when an underdog underdog team competes.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-3" class="w-5 h-5 text-amber-600 rounded-lg focus:ring-amber-500" />
+            <span class="text-sm font-bold text-slate-800">3. Solitary training is more productive than training in a squad.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-4" class="w-5 h-5 text-amber-600 rounded-lg focus:ring-amber-500" />
+            <span class="text-sm font-bold text-slate-800">4. Supporting your national team unites citizens with genuine pride.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-5" class="w-5 h-5 text-amber-600 rounded-lg focus:ring-amber-500" />
+            <span class="text-sm font-bold text-slate-800">5. Fast food & gambling brands should be banned from sponsoring sports.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-6" class="w-5 h-5 text-amber-600 rounded-lg focus:ring-amber-500" />
+            <span class="text-sm font-bold text-slate-800">6. Player transfer fees have become completely out of touch with reality.</span>
+          </label>
+        </div>
+
+        <div>
+          <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-2">My Pairwork Discussion Arguments:</label>
+          <textarea id="ex2b-discussion-text" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-amber-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. I agree with sentence 5 because promoting junk food at athletic competitions sends an unhealthy message to young fans..."></textarea>
+        </div>
+        <div id="ex2b-status" class="hidden p-3 rounded-xl bg-amber-100 text-amber-900 text-xs font-bold">
+          ✓ Your sports debate points have been saved.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: COMPOUND NOUNS (Exercise 3) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3</span>
+            <span class="text-emerald-200 text-xs font-medium">Page 129 • Athletic Psychology & Growth</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Compound Nouns: Character & Psychology of Sport</h2>
+          <p class="text-emerald-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill the gaps in sentences 1–6 with compound nouns from the box: <em>life lesson, peer pressure, personal best, self-discipline, self-belief, team work</em>. Tap any button in the word bank to insert it into the active input!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3()" class="px-5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Answers</span>
+          </button>
+          <button onclick="revealEx3()" class="px-4 py-2.5 bg-emerald-800/60 hover:bg-emerald-800 text-white border border-emerald-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Compound Nouns Word Bank Chips -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Compound Noun Bank:</span>
+          <span class="text-xs text-slate-400">Click a compound noun to insert into active input</span>
+        </div>
+        <div class="flex flex-wrap gap-2.5" id="ex3-word-bank">
+          <button type="button" onclick="insertEx3Noun('self-discipline')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 border-2 border-emerald-200 text-emerald-950 font-black text-sm hover:border-emerald-500 transition">self-discipline</button>
+          <button type="button" onclick="insertEx3Noun('peer pressure')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 border-2 border-emerald-200 text-emerald-950 font-black text-sm hover:border-emerald-500 transition">peer pressure</button>
+          <button type="button" onclick="insertEx3Noun('self-belief')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 border-2 border-emerald-200 text-emerald-950 font-black text-sm hover:border-emerald-500 transition">self-belief</button>
+          <button type="button" onclick="insertEx3Noun('team work')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 border-2 border-emerald-200 text-emerald-950 font-black text-sm hover:border-emerald-500 transition">team work</button>
+          <button type="button" onclick="insertEx3Noun('life lesson')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 border-2 border-emerald-200 text-emerald-950 font-black text-sm hover:border-emerald-500 transition">life lesson</button>
+          <button type="button" onclick="insertEx3Noun('personal best')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 border-2 border-emerald-200 text-emerald-950 font-black text-sm hover:border-emerald-500 transition">personal best</button>
+        </div>
+      </div>
+
+      <!-- Exercise 3 Sentence Items -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">3</span>
+            Complete the sentences with the compound nouns in the box:
+          </h3>
+          <span id="ex3-score-pill" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex3-container">
+          
+          <!-- Item 1: self-discipline -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It takes a lot of
+              <input type="text" data-ans="self-discipline,self discipline" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-950 bg-white text-base w-44 text-center focus:border-emerald-600 focus:outline-none" placeholder="[compound noun 1]" />
+              to get up at 5 a.m. every morning in winter to train.
+            </p>
+          </div>
+
+          <!-- Item 2: peer pressure -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Some teenagers stop doing sport because of
+              <input type="text" data-ans="peer pressure" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-950 bg-white text-base w-44 text-center focus:border-emerald-600 focus:outline-none" placeholder="[compound noun 2]" />
+              from their friends and classmates.
+            </p>
+          </div>
+
+          <!-- Item 3: self-belief -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              To be successful at sport, you need to have
+              <input type="text" data-ans="self-belief,self belief" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-950 bg-white text-base w-36 text-center focus:border-emerald-600 focus:outline-none" placeholder="[compound noun 3]" />
+              and be confident in your own abilities.
+            </p>
+          </div>
+
+          <!-- Item 4: team work -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Training with the other players has taught me a lot about
+              <input type="text" data-ans="team work,teamwork" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-950 bg-white text-base w-36 text-center focus:border-emerald-600 focus:outline-none" placeholder="[compound noun 4]" />
+              .
+            </p>
+          </div>
+
+          <!-- Item 5: life lesson -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              One
+              <input type="text" data-ans="life lesson" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-950 bg-white text-base w-36 text-center focus:border-emerald-600 focus:outline-none" placeholder="[compound noun 5]" />
+              sport has taught me is 'always learn from your mistakes'.
+            </p>
+          </div>
+
+          <!-- Item 6: personal best -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 6</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Even if I don't win, I always aim to achieve my
+              <input type="text" data-ans="personal best" class="ex3-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-950 bg-white text-base w-40 text-center focus:border-emerald-600 focus:outline-none" placeholder="[compound noun 6]" />
+              .
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: COLLOCATIONS (Exercise 4a & 4b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a & 4b</span>
+            <span class="text-blue-200 text-xs font-medium">Page 129 • High-Frequency Sports Verbs</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Sports Collocations: Win, Lose, Beat, Score & Miss</h2>
+          <p class="text-blue-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            In <strong>4a</strong>, place the target sporting objects into the correct verb columns (<em>to win/lose</em>, <em>to beat</em>, <em>to score/miss</em>). Note that <strong>one phrase ("a point") belongs in two categories</strong>! In <strong>4b</strong>, apply these verbs in their correct past or present forms.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4ab()" class="px-5 py-2.5 bg-white hover:bg-blue-50 text-blue-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 4a & 4b</span>
+          </button>
+          <button onclick="revealEx4ab()" class="px-4 py-2.5 bg-blue-800/60 hover:bg-blue-800 text-white border border-blue-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 4a Collocation Pool Chips -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
+          <div>
+            <h3 class="font-black text-slate-900 text-base">4a Collocation Objects Pool:</h3>
+            <p class="text-xs text-slate-500">Tap a chip to select it, then tap your target verb column below to place it.</p>
+          </div>
+          <span id="pool-count-badge" class="text-xs font-bold text-blue-800 bg-blue-50 px-3 py-1 rounded-xl">12 Available</span>
+        </div>
+
+        <div class="flex flex-wrap gap-2 min-h-[50px] p-3 bg-slate-50 rounded-2xl border border-dashed border-slate-300" id="matrix-chips-pool">
+          <span class="matrix-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-term="a championship" data-cats="win-lose">🏆 a championship</span>
+          <span class="matrix-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-term="a competition" data-cats="win-lose">🏅 a competition</span>
+          <span class="matrix-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-term="a game" data-cats="win-lose">🎮 a game</span>
+          <span class="matrix-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-term="a match" data-cats="win-lose">⚽ a match</span>
+          <span class="matrix-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-term="a race" data-cats="win-lose">🏁 a race</span>
+          <span class="matrix-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-term="a tournament" data-cats="win-lose">🎾 a tournament</span>
+          <span class="matrix-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-term="an opponent" data-cats="beat">🤺 an opponent</span>
+          <span class="matrix-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-term="a stronger team" data-cats="beat">💪 a stronger team</span>
+          <span class="matrix-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-term="Real Madrid" data-cats="beat">🛡️ Real Madrid</span>
+          <span class="matrix-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-term="a goal" data-cats="score-miss">🥅 a goal</span>
+          <span class="matrix-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-term="a penalty" data-cats="score-miss">🎯 a penalty</span>
+          <span class="matrix-chip px-3 py-1.5 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-xs shadow-2xs" data-term="a point" data-cats="win-lose,score-miss">⭐ a point (can fit 2 columns!)</span>
+        </div>
+      </div>
+
+      <!-- 4a 3 Verb Categories Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="collocation-matrix">
+        
+        <!-- Column 1: to win / lose -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between" onclick="targetMatrixDrop('win-lose')">
+          <div>
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+              <span class="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center text-sm font-black">🥇</span>
+                to win / lose
+              </span>
+              <span class="text-xs font-bold text-blue-800 bg-blue-50 px-2.5 py-1 rounded-xl count-tag">0 / 7</span>
+            </div>
+            <p class="text-xs text-slate-400 mb-2">Events, competitions, races, or points:</p>
+            <div class="matrix-zone min-h-[140px] p-2.5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-wrap content-start gap-1.5" data-zone="win-lose">
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: to beat -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between" onclick="targetMatrixDrop('beat')">
+          <div>
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+              <span class="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center text-sm font-black">🥊</span>
+                to beat
+              </span>
+              <span class="text-xs font-bold text-purple-800 bg-purple-50 px-2.5 py-1 rounded-xl count-tag">0 / 3</span>
+            </div>
+            <p class="text-xs text-slate-400 mb-2">Persons, opponents, or opposing teams:</p>
+            <div class="matrix-zone min-h-[140px] p-2.5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-wrap content-start gap-1.5" data-zone="beat">
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: to score / miss -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between" onclick="targetMatrixDrop('score-miss')">
+          <div>
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+              <span class="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-sm font-black">🥅</span>
+                to score / miss
+              </span>
+              <span class="text-xs font-bold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-xl count-tag">0 / 3</span>
+            </div>
+            <p class="text-xs text-slate-400 mb-2">Goals, penalties, shots, or points:</p>
+            <div class="matrix-zone min-h-[140px] p-2.5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-wrap content-start gap-1.5" data-zone="score-miss">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 4b Sentence Completion using Verbs in Correct Form -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">4b</span>
+            Complete the sentences with verbs from Exercise 4a in the correct form (<em>win, lose, beat, score, miss</em>):
+          </h3>
+          <span id="ex4b-score-pill" class="text-xs font-bold text-blue-800 bg-blue-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="space-y-4" id="ex4b-container">
+          
+          <!-- Sentence 1: beat -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4b-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              We played France in the final and
+              <input type="text" data-ans="beat" class="ex4b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-28 text-center focus:border-blue-600 focus:outline-none" placeholder="[verb]" />
+              them 1–0.
+            </p>
+          </div>
+
+          <!-- Sentence 2: lost -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4b-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It was an exciting match but unfortunately, Sri Lanka
+              <input type="text" data-ans="lost" class="ex4b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-28 text-center focus:border-blue-600 focus:outline-none" placeholder="[verb]" />
+              in the end.
+            </p>
+          </div>
+
+          <!-- Sentence 3: scored -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4b-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I
+              <input type="text" data-ans="scored" class="ex4b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-28 text-center focus:border-blue-600 focus:outline-none" placeholder="[verb]" />
+              the winning goal in the match on Saturday.
+            </p>
+          </div>
+
+          <!-- Sentence 4: beat -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4b-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              He played well but he couldn't
+              <input type="text" data-ans="beat" class="ex4b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-28 text-center focus:border-blue-600 focus:outline-none" placeholder="[verb]" />
+              his opponent.
+            </p>
+          </div>
+
+          <!-- Sentence 5: win -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4b-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I didn't expect to
+              <input type="text" data-ans="win" class="ex4b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-28 text-center focus:border-blue-600 focus:outline-none" placeholder="[verb]" />
+              a medal, so I was delighted to come third.
+            </p>
+          </div>
+
+          <!-- Sentence 6: missed -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4b-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 6</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I had to take a penalty but unfortunately, I
+              <input type="text" data-ans="missed,missed it" class="ex4b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-32 text-center focus:border-blue-600 focus:outline-none" placeholder="[verb]" />
+              .
+            </p>
+          </div>
+
+          <!-- Sentence 7: lost -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4b-item="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 7</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              My team has a good chance of being champions – they haven't
+              <input type="text" data-ans="lost" class="ex4b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-28 text-center focus:border-blue-600 focus:outline-none" placeholder="[verb]" />
+              a game so far this season.
+            </p>
+          </div>
+
+          <!-- Sentence 8: win -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4b-item="8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 8</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Although we didn't
+              <input type="text" data-ans="win" class="ex4b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-28 text-center focus:border-blue-600 focus:outline-none" placeholder="[verb]" />
+              the match, I was pleased with the way we played against a strong team.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: RULES & RECORDS (Exercise 5a & 5b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex5" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 5a & 5b</span>
+            <span class="text-red-200 text-xs font-medium">Page 129 • Sports Ethics & Rules</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Collocations with Rules, Goals & Records</h2>
+          <p class="text-red-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Complete the sentences with the correct form of the verbs in the box: <em>do, set, play, make, break (×2)</em>. Notice fixed collocations like <em>break records</em>, <em>set goals</em>, <em>break the rules</em>, <em>make an effort</em>, <em>do your best</em>, and <em>play by the rules</em>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx5a()" class="px-5 py-2.5 bg-white hover:bg-rose-50 text-rose-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Collocations</span>
+          </button>
+          <button onclick="revealEx5a()" class="px-4 py-2.5 bg-red-800/60 hover:bg-red-800 text-white border border-red-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Box for Exercise 5a -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Available Verb Pool:</span>
+          <span class="text-xs text-slate-400">do • set • play • make • break (×2)</span>
+        </div>
+        <div class="flex flex-wrap gap-2.5" id="ex5a-word-bank">
+          <button type="button" onclick="insertEx5aWord('breaking')" class="px-3.5 py-1.5 rounded-xl bg-red-50 border-2 border-red-200 text-red-950 font-black text-sm hover:border-red-500 transition">breaking</button>
+          <button type="button" onclick="insertEx5aWord('set')" class="px-3.5 py-1.5 rounded-xl bg-red-50 border-2 border-red-200 text-red-950 font-black text-sm hover:border-red-500 transition">set</button>
+          <button type="button" onclick="insertEx5aWord('break')" class="px-3.5 py-1.5 rounded-xl bg-red-50 border-2 border-red-200 text-red-950 font-black text-sm hover:border-red-500 transition">break</button>
+          <button type="button" onclick="insertEx5aWord('make')" class="px-3.5 py-1.5 rounded-xl bg-red-50 border-2 border-red-200 text-red-950 font-black text-sm hover:border-red-500 transition">make</button>
+          <button type="button" onclick="insertEx5aWord('do')" class="px-3.5 py-1.5 rounded-xl bg-red-50 border-2 border-red-200 text-red-950 font-black text-sm hover:border-red-500 transition">do</button>
+          <button type="button" onclick="insertEx5aWord('play')" class="px-3.5 py-1.5 rounded-xl bg-red-50 border-2 border-red-200 text-red-950 font-black text-sm hover:border-red-500 transition">play</button>
+        </div>
+      </div>
+
+      <!-- Exercise 5a Sentence Items -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-red-100 text-red-800 text-sm font-black flex items-center justify-center">5a</span>
+            Complete the sentences with the correct form of the verbs in the box:
+          </h3>
+          <span id="ex5a-score-pill" class="text-xs font-bold text-red-800 bg-red-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex5a-container">
+          
+          <!-- Sentence 1: breaking -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5a-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Professional sportspeople are more interested in winning than in
+              <input type="text" data-ans="breaking" class="ex5a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-red-950 bg-white text-base w-32 text-center focus:border-red-600 focus:outline-none" placeholder="[verb]" />
+              records.
+            </p>
+          </div>
+
+          <!-- Sentence 2: set -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5a-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              If you don't
+              <input type="text" data-ans="set" class="ex5a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-red-950 bg-white text-base w-28 text-center focus:border-red-600 focus:outline-none" placeholder="[verb]" />
+              yourself goals, you will never achieve your dreams.
+            </p>
+          </div>
+
+          <!-- Sentence 3: break -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5a-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              People who
+              <input type="text" data-ans="break" class="ex5a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-red-950 bg-white text-base w-28 text-center focus:border-red-600 focus:outline-none" placeholder="[verb]" />
+              the rules in sport should be banned from competing again.
+            </p>
+          </div>
+
+          <!-- Sentence 4: make + do -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5a-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 4 (Two Gaps)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It doesn't matter if you don't win, it's more important to
+              <input type="text" data-gap="4a" data-ans="make" class="ex5a-input-4 exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-red-950 bg-white text-base w-28 text-center focus:border-red-600 focus:outline-none" placeholder="[verb 1]" />
+              an effort and
+              <input type="text" data-gap="4b" data-ans="do" class="ex5a-input-4 exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-red-950 bg-white text-base w-28 text-center focus:border-red-600 focus:outline-none" placeholder="[verb 2]" />
+              your best.
+            </p>
+          </div>
+
+          <!-- Sentence 5: play -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5a-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              To be successful, you need to
+              <input type="text" data-ans="play" class="ex5a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-red-950 bg-white text-base w-28 text-center focus:border-red-600 focus:outline-none" placeholder="[verb]" />
+              by the rules.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 5b: Sports Ethics Debate & Pairwork -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-red-100 text-red-800 text-sm font-black flex items-center justify-center">5b</span>
+              Work in pairs. Do you agree or disagree with the statements in Exercise 5a?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Review model arguments and record your debate reflections:</p>
+          </div>
+          <button onclick="saveEx5bNotes()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+            Save My Stance
+          </button>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="debate-cards-grid">
+          
+          <!-- Card 1 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-red-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-red-700 uppercase">Statement 1: Records vs Winning</span>
+              <button onclick="speakText('Professional sportspeople are more interested in winning than in breaking records.')" class="text-xs text-slate-500 hover:text-red-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Winning matters more than records."</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>I agree:</strong> In championship tournaments, lifting the trophy is permanent; world records are eventually beaten.
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-red-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-red-700 uppercase">Statement 3: Lifetime Bans</span>
+              <button onclick="speakText('People who break the rules in sport should be banned from competing again.')" class="text-xs text-slate-500 hover:text-red-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Lifetime bans for rule breakers."</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>I agree:</strong> Doping and match-fixing destroy the integrity of competition and warrant zero-tolerance punishments.
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-red-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-red-700 uppercase">Statement 4: Doing Your Best</span>
+              <button onclick="speakText('It does not matter if you do not win, it is more important to make an effort and do your best.')" class="text-xs text-slate-500 hover:text-red-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Effort over victory."</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>I agree:</strong> True sportsmanship is about personal growth and resilience rather than obsession with winning at all costs.
+            </div>
+          </div>
+
+        </div>
+
+        <div>
+          <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-2">My Sports Philosophy & Discussion Arguments:</label>
+          <textarea id="ex5b-discussion-text" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-red-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. I agree with sentence 2 because setting measurable goals provides direction and keeps athletes disciplined during tough training cycles..."></textarea>
+        </div>
+        <div id="ex5b-status" class="hidden p-3 rounded-xl bg-red-100 text-red-900 text-xs font-bold">
+          ✓ Your sports philosophy notes have been saved.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: VOCABULARY LEXICON & AUDIO GUIDE -->
+    <!-- ========================================================================= -->
+    <section id="tab-lexicon" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 via-zinc-900 to-orange-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-orange-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Unit 8b Glossary</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 129 Reference & Pronunciation Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Comprehensive Activity & Sports Lexicon</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Full reference definitions, phonetic transcriptions, grammatical collocations, and one-click British English pronunciation.
+        </p>
+      </div>
+
+      <!-- Flashcards Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <!-- championship -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">championship</h4>
+            <button onclick="speakText('championship')" class="text-xs px-2.5 py-1 rounded-lg bg-orange-50 text-orange-800 font-bold hover:bg-orange-100 transition">🔊 /ˈtʃæm.pi.ən.ʃɪp/</button>
+          </div>
+          <span class="text-xs font-bold text-orange-600 uppercase">noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A high-level sports competition to find which player or team is the overall champion.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>win / compete in the world championship</em></div>
+        </div>
+
+        <!-- marathon -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">marathon</h4>
+            <button onclick="speakText('marathon')" class="text-xs px-2.5 py-1 rounded-lg bg-orange-50 text-orange-800 font-bold hover:bg-orange-100 transition">🔊 /ˈmær.ə.θən/</button>
+          </div>
+          <span class="text-xs font-bold text-orange-600 uppercase">noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A long-distance running race with an official distance of 42.195 kilometres (26.2 miles).</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>run / train for a marathon</em></div>
+        </div>
+
+        <!-- semi-final -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">semi-final</h4>
+            <button onclick="speakText('semi-final')" class="text-xs px-2.5 py-1 rounded-lg bg-orange-50 text-orange-800 font-bold hover:bg-orange-100 transition">🔊 /ˌsem.iˈfaɪ.nəl/</button>
+          </div>
+          <span class="text-xs font-bold text-orange-600 uppercase">compound noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">One of the two matches that immediately precede the final game in an elimination tournament.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>reach / knock out in the semi-final</em></div>
+        </div>
+
+        <!-- self-discipline -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">self-discipline</h4>
+            <button onclick="speakText('self-discipline')" class="text-xs px-2.5 py-1 rounded-lg bg-orange-50 text-orange-800 font-bold hover:bg-orange-100 transition">🔊 /ˌselfˈdɪs.ə.plɪn/</button>
+          </div>
+          <span class="text-xs font-bold text-orange-600 uppercase">compound noun [U]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">The ability to control oneself and make yourself work hard or behave in a particular way without needing anyone else to tell you.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>require immense self-discipline</em></div>
+        </div>
+
+        <!-- self-belief -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">self-belief</h4>
+            <button onclick="speakText('self-belief')" class="text-xs px-2.5 py-1 rounded-lg bg-orange-50 text-orange-800 font-bold hover:bg-orange-100 transition">🔊 /ˌself.bɪˈliːf/</button>
+          </div>
+          <span class="text-xs font-bold text-orange-600 uppercase">compound noun [U]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">Trust and confidence in your own abilities, judgements, and potential to succeed.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>unshakable self-belief in victory</em></div>
+        </div>
+
+        <!-- personal best -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">personal best</h4>
+            <button onclick="speakText('personal best')" class="text-xs px-2.5 py-1 rounded-lg bg-orange-50 text-orange-800 font-bold hover:bg-orange-100 transition">🔊 /ˌpɜː.sən.əl ˈbest/</button>
+          </div>
+          <span class="text-xs font-bold text-orange-600 uppercase">compound noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">The fastest time, highest score, or greatest distance ever achieved by an individual competitor.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>achieve / set a personal best</em></div>
+        </div>
+
+        <!-- beat vs win -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">beat vs. win</h4>
+            <button onclick="speakText('beat and win')" class="text-xs px-2.5 py-1 rounded-lg bg-orange-50 text-orange-800 font-bold hover:bg-orange-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-orange-600 uppercase">verb distinction</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">You <strong>beat</strong> an opponent or team (e.g. <em>beat France</em>). You <strong>win</strong> a match, game, medal, or prize (e.g. <em>win the match</em>).</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Rule:</strong> <em>beat an opponent / win a competition</em></div>
+        </div>
+
+        <!-- score vs miss -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">score vs. miss</h4>
+            <button onclick="speakText('score and miss')" class="text-xs px-2.5 py-1 rounded-lg bg-orange-50 text-orange-800 font-bold hover:bg-orange-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-orange-600 uppercase">verb distinction</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">To <strong>score</strong> is to successfully earn a goal or point. To <strong>miss</strong> is to fail to convert a penalty or shot.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Rule:</strong> <em>score a goal / miss a penalty</em></div>
+        </div>
+
+        <!-- break records vs play by rules -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">rules & records</h4>
+            <button onclick="speakText('break records and play by the rules')" class="text-xs px-2.5 py-1 rounded-lg bg-orange-50 text-orange-800 font-bold hover:bg-orange-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-orange-600 uppercase">sports idioms</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium"><strong>Break records:</strong> set a new historic standard. <strong>Play by the rules:</strong> behave fairly and ethically.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Rule:</strong> <em>break the world record / play by the rules</em></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Vocabulary page 83
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 8b Vocabulary
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 8: Activity • 8b Vocabulary • Page 129
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State management for scores
+    const state = {
+      score: {
+        ex1: 0,
+        ex2a: 0,
+        ex3: 0,
+        ex4a: 0,
+        ex4b: 0,
+        ex5a: 0
+      }
+    };
+
+    // Web Audio Synthesizer for feedback chimes
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.15); // C6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Text to Speech Pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.92;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-orange-600', 'text-white', 'shadow-md', 'shadow-orange-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-orange-600', 'text-white', 'shadow-md', 'shadow-orange-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // =========================================================================
+    // EXERCISE 1 LOGIC
+    // =========================================================================
+    function checkEx1() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex1-container [data-ex1-item]');
+
+      rows.forEach(row => {
+        const sel = row.querySelector('.ex1-select');
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!sel.value) {
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select</span>';
+          sel.classList.remove('border-orange-600', 'border-rose-400');
+          return;
+        }
+
+        if (sel.value === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-orange-600');
+        } else {
+          badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          sel.classList.remove('border-orange-600');
+          sel.classList.add('border-rose-400');
+        }
+      });
+
+      state.score.ex1 = correct;
+      document.getElementById('ex1-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 5);
+    }
+
+    function revealEx1() {
+      const answers = ['C', 'A', 'F', 'E', 'B', 'D'];
+      document.querySelectorAll('#ex1-container [data-ex1-item]').forEach((row, i) => {
+        const sel = row.querySelector('.ex1-select');
+        sel.value = answers[i];
+        sel.classList.remove('border-rose-400');
+        sel.classList.add('border-orange-600');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex1 = 6;
+      document.getElementById('ex1-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 2a & 2b LOGIC
+    // =========================================================================
+    let lastActiveEx2aInput = null;
+    document.querySelectorAll('.ex2a-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx2aInput = inp;
+      });
+    });
+
+    function insertEx2aWord(word) {
+      if (lastActiveEx2aInput) {
+        lastActiveEx2aInput.value = word;
+        lastActiveEx2aInput.focus();
+      } else {
+        const empty = Array.from(document.querySelectorAll('.ex2a-input')).find(i => !i.value.trim());
+        if (empty) {
+          empty.value = word;
+          empty.focus();
+        }
+      }
+    }
+
+    function checkEx2a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex2a-container [data-ex2a-item]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex2a-input');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Fill verb</span>';
+          inp.classList.remove('border-amber-500', 'bg-amber-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-amber-500', 'bg-amber-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-amber-500', 'bg-amber-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex2a = correct;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx2a() {
+      const answers = {
+        '1': 'host',
+        '2': 'competes in',
+        '3': 'train',
+        '4': 'Supporting',
+        '5': 'sponsor',
+        '6': 'sign'
+      };
+
+      for (let k in answers) {
+        const row = document.querySelector(`[data-ex2a-item="${k}"]`);
+        const inp = row.querySelector('.ex2a-input');
+        inp.value = answers[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-amber-500', 'bg-amber-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex2a = 6;
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    function saveEx2bNotes() {
+      const checked = [];
+      for (let i = 1; i <= 6; i++) {
+        if (document.getElementById(`ex2b-chk-${i}`).checked) {
+          checked.push(i);
+        }
+      }
+      const text = document.getElementById('ex2b-discussion-text').value;
+      localStorage.setItem('m8b_vocab_ex2b', JSON.stringify({ checked, text }));
+      const status = document.getElementById('ex2b-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // =========================================================================
+    // EXERCISE 3 LOGIC
+    // =========================================================================
+    let lastActiveEx3Input = null;
+    document.querySelectorAll('.ex3-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx3Input = inp;
+      });
+    });
+
+    function insertEx3Noun(noun) {
+      if (lastActiveEx3Input) {
+        lastActiveEx3Input.value = noun;
+        lastActiveEx3Input.focus();
+      } else {
+        const empty = Array.from(document.querySelectorAll('.ex3-input')).find(i => !i.value.trim());
+        if (empty) {
+          empty.value = noun;
+          empty.focus();
+        }
+      }
+    }
+
+    function checkEx3() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex3-container [data-ex3-item]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex3-input');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Fill noun</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3 = correct;
+      document.getElementById('ex3-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx3() {
+      const answers = {
+        '1': 'self-discipline',
+        '2': 'peer pressure',
+        '3': 'self-belief',
+        '4': 'team work',
+        '5': 'life lesson',
+        '6': 'personal best'
+      };
+
+      for (let k in answers) {
+        const row = document.querySelector(`[data-ex3-item="${k}"]`);
+        const inp = row.querySelector('.ex3-input');
+        inp.value = answers[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex3 = 6;
+      document.getElementById('ex3-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 4a & 4b LOGIC (Collocation Matrix + Sentences)
+    // =========================================================================
+    let selectedMatrixChip = null;
+
+    function initMatrixChips() {
+      document.querySelectorAll('.matrix-chip').forEach(chip => {
+        chip.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (chip.classList.contains('ring-2')) {
+            chip.classList.remove('ring-2', 'ring-blue-600');
+            selectedMatrixChip = null;
+          } else {
+            document.querySelectorAll('.matrix-chip').forEach(c => c.classList.remove('ring-2', 'ring-blue-600'));
+            chip.classList.add('ring-2', 'ring-blue-600');
+            selectedMatrixChip = chip;
+            speakText(chip.getAttribute('data-term'));
+          }
+        });
+      });
+    }
+
+    function targetMatrixDrop(zoneKey) {
+      if (selectedMatrixChip) {
+        const targetZone = document.querySelector(`.matrix-zone[data-zone="${zoneKey}"]`);
+        if (targetZone) {
+          targetZone.appendChild(selectedMatrixChip);
+          selectedMatrixChip.classList.remove('ring-2', 'ring-blue-600');
+          selectedMatrixChip = null;
+          updateMatrixCounts();
+        }
+      }
+    }
+
+    function updateMatrixCounts() {
+      const pool = document.getElementById('matrix-chips-pool');
+      const poolCount = pool.querySelectorAll('.matrix-chip').length;
+      document.getElementById('pool-count-badge').textContent = `${poolCount} Available`;
+
+      const limits = {
+        'win-lose': 7,
+        'beat': 3,
+        'score-miss': 3
+      };
+
+      for (let k in limits) {
+        const zone = document.querySelector(`.matrix-zone[data-zone="${k}"]`);
+        const count = zone.querySelectorAll('.matrix-chip').length;
+        const tag = zone.closest('.bg-white').querySelector('.count-tag');
+        if (tag) tag.textContent = `${count} / ${limits[k]}`;
+      }
+    }
+
+    function checkEx4ab() {
+      // 4a Matrix checking
+      let correct4a = 0;
+      document.querySelectorAll('.matrix-zone').forEach(zone => {
+        const zoneKey = zone.getAttribute('data-zone');
+        const chips = zone.querySelectorAll('.matrix-chip');
+
+        chips.forEach(chip => {
+          const allowedCats = chip.getAttribute('data-cats').split(',');
+          if (allowedCats.includes(zoneKey)) {
+            correct4a++;
+            chip.classList.remove('border-rose-400', 'bg-rose-50');
+            chip.classList.add('border-emerald-500', 'bg-emerald-50');
+          } else {
+            chip.classList.remove('border-emerald-500', 'bg-emerald-50');
+            chip.classList.add('border-rose-400', 'bg-rose-50');
+          }
+        });
+      });
+      state.score.ex4a = correct4a;
+
+      // 4b Sentences checking
+      let correct4b = 0;
+      document.querySelectorAll('#ex4b-container [data-ex4b-item]').forEach(row => {
+        const inp = row.querySelector('.ex4b-input');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Fill verb</span>';
+          inp.classList.remove('border-blue-500', 'bg-blue-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct4b++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-blue-500', 'bg-blue-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-blue-500', 'bg-blue-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+      state.score.ex4b = correct4b;
+      document.getElementById('ex4b-score-pill').textContent = `Score: ${correct4b}/8`;
+
+      updateTotalScore();
+      playBeep(correct4a >= 10 && correct4b >= 6);
+    }
+
+    function revealEx4ab() {
+      // Reveal 4a
+      const matrixTarget = {
+        'win-lose': ['a championship', 'a competition', 'a game', 'a match', 'a race', 'a tournament', 'a point'],
+        'beat': ['an opponent', 'a stronger team', 'Real Madrid'],
+        'score-miss': ['a goal', 'a penalty']
+      };
+
+      for (let zoneKey in matrixTarget) {
+        const zone = document.querySelector(`.matrix-zone[data-zone="${zoneKey}"]`);
+        matrixTarget[zoneKey].forEach(term => {
+          const chip = document.querySelector(`.matrix-chip[data-term="${term}"]`);
+          if (chip && zone) {
+            zone.appendChild(chip);
+            chip.classList.remove('border-rose-400', 'bg-rose-50', 'ring-2', 'ring-blue-600');
+            chip.classList.add('border-emerald-500', 'bg-emerald-50');
+          }
+        });
+      }
+      selectedMatrixChip = null;
+      updateMatrixCounts();
+      state.score.ex4a = 12;
+
+      // Reveal 4b
+      const answers4b = {
+        '1': 'beat',
+        '2': 'lost',
+        '3': 'scored',
+        '4': 'beat',
+        '5': 'win',
+        '6': 'missed',
+        '7': 'lost',
+        '8': 'win'
+      };
+
+      for (let k in answers4b) {
+        const row = document.querySelector(`[data-ex4b-item="${k}"]`);
+        const inp = row.querySelector('.ex4b-input');
+        inp.value = answers4b[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-blue-500', 'bg-blue-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex4b = 8;
+      document.getElementById('ex4b-score-pill').textContent = 'Score: 8/8';
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 5a & 5b LOGIC
+    // =========================================================================
+    let lastActiveEx5aInput = null;
+    document.querySelectorAll('.ex5a-input, .ex5a-input-4').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx5aInput = inp;
+      });
+    });
+
+    function insertEx5aWord(verb) {
+      if (lastActiveEx5aInput) {
+        lastActiveEx5aInput.value = verb;
+        lastActiveEx5aInput.focus();
+      } else {
+        const empty = Array.from(document.querySelectorAll('.ex5a-input, .ex5a-input-4')).find(i => !i.value.trim());
+        if (empty) {
+          empty.value = verb;
+          empty.focus();
+        }
+      }
+    }
+
+    function checkEx5a() {
+      let correct = 0;
+      // Normal single inputs 1, 2, 3, 5
+      const singleItems = [1, 2, 3, 5];
+      singleItems.forEach(num => {
+        const row = document.querySelector(`[data-ex5a-item="${num}"]`);
+        const inp = row.querySelector('.ex5a-input');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Fill verb</span>';
+          inp.classList.remove('border-red-500', 'bg-red-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-red-500', 'bg-red-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-red-500', 'bg-red-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      // Item 4 has two inputs: 'make' and 'do'
+      const row4 = document.querySelector(`[data-ex5a-item="4"]`);
+      const in4a = row4.querySelector('[data-gap="4a"]');
+      const in4b = row4.querySelector('[data-gap="4b"]');
+      const v4a = cleanStr(in4a.value);
+      const v4b = cleanStr(in4b.value);
+      const badge4 = row4.querySelector('.feedback-badge');
+
+      if (v4a === 'make' && v4b === 'do') {
+        correct += 2;
+        badge4.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Both Correct</span>';
+        in4a.classList.remove('border-rose-400', 'bg-rose-50');
+        in4a.classList.add('border-red-500', 'bg-red-50');
+        in4b.classList.remove('border-rose-400', 'bg-rose-50');
+        in4b.classList.add('border-red-500', 'bg-red-50');
+      } else {
+        badge4.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (make an effort / do your best)</span>';
+        if (v4a !== 'make') in4a.classList.add('border-rose-400');
+        if (v4b !== 'do') in4b.classList.add('border-rose-400');
+      }
+
+      state.score.ex5a = correct;
+      document.getElementById('ex5a-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 5);
+    }
+
+    function revealEx5a() {
+      const answers5a = {
+        '1': 'breaking',
+        '2': 'set',
+        '3': 'break',
+        '5': 'play'
+      };
+
+      for (let k in answers5a) {
+        const row = document.querySelector(`[data-ex5a-item="${k}"]`);
+        const inp = row.querySelector('.ex5a-input');
+        inp.value = answers5a[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-red-500', 'bg-red-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      const row4 = document.querySelector(`[data-ex5a-item="4"]`);
+      const in4a = row4.querySelector('[data-gap="4a"]');
+      const in4b = row4.querySelector('[data-gap="4b"]');
+      in4a.value = 'make';
+      in4b.value = 'do';
+      in4a.classList.remove('border-rose-400', 'bg-rose-50');
+      in4a.classList.add('border-red-500', 'bg-red-50');
+      in4b.classList.remove('border-rose-400', 'bg-rose-50');
+      in4b.classList.add('border-red-500', 'bg-red-50');
+      row4.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+
+      state.score.ex5a = 6;
+      document.getElementById('ex5a-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    function saveEx5bNotes() {
+      const text = document.getElementById('ex5b-discussion-text').value;
+      localStorage.setItem('m8b_vocab_ex5b', JSON.stringify({ text }));
+      const status = document.getElementById('ex5b-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // =========================================================================
+    // GLOBAL PROGRESS & RESET HANDLERS
+    // =========================================================================
+    function updateTotalScore() {
+      const total = state.score.ex1 + state.score.ex2a + state.score.ex3 + state.score.ex4a + state.score.ex4b + state.score.ex5a;
+      // Points distribution: 1 (6) + 2a (6) + 3 (6) + 4a (12) + 4b (8) + 5a (6) = 44 total points
+      const maxScore = 44;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 36) {
+        bar.classList.replace('bg-orange-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-orange-600');
+      }
+    }
+
+    // Reset All Answers
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // 1. Reset Ex 1 selects
+      document.querySelectorAll('.ex1-select').forEach(s => {
+        s.value = '';
+        s.classList.remove('border-orange-600', 'border-rose-400');
+      });
+
+      // 2. Reset Ex 2a inputs
+      document.querySelectorAll('.ex2a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-amber-500', 'bg-amber-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 3. Reset Ex 3 inputs
+      document.querySelectorAll('.ex3-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 4. Reset Ex 4a matrix chips
+      const pool = document.getElementById('matrix-chips-pool');
+      document.querySelectorAll('.matrix-zone .matrix-chip').forEach(c => {
+        c.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50', 'ring-2', 'ring-blue-600');
+        pool.appendChild(c);
+      });
+      selectedMatrixChip = null;
+      updateMatrixCounts();
+
+      // 5. Reset Ex 4b inputs
+      document.querySelectorAll('.ex4b-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-blue-500', 'bg-blue-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 6. Reset Ex 5a inputs
+      document.querySelectorAll('.ex5a-input, .ex5a-input-4').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-red-500', 'bg-red-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear all feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset state scores
+      state.score = { ex1: 0, ex2a: 0, ex3: 0, ex4a: 0, ex4b: 0, ex5a: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex3-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex4b-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex5a-score-pill').textContent = 'Score: 0/6';
+    });
+
+    // Auto-restore saved discussion notes on DOM load
+    window.addEventListener('DOMContentLoaded', () => {
+      initMatrixChips();
+      updateMatrixCounts();
+      try {
+        const saved2b = JSON.parse(localStorage.getItem('m8b_vocab_ex2b'));
+        if (saved2b) {
+          if (saved2b.checked && Array.isArray(saved2b.checked)) {
+            saved2b.checked.forEach(n => {
+              const el = document.getElementById(`ex2b-chk-${n}`);
+              if (el) el.checked = true;
+            });
+          }
+          if (saved2b.text) document.getElementById('ex2b-discussion-text').value = saved2b.text;
+        }
+
+        const saved5b = JSON.parse(localStorage.getItem('m8b_vocab_ex5b'));
+        if (saved5b && saved5b.text) {
+          document.getElementById('ex5b-discussion-text').value = saved5b.text;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

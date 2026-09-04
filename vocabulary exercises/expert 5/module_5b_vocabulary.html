@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 5b Vocabulary: Weather, Climate Change & Environmental Issues</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            weather: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              800: '#0c4a6e',
+            },
+            climate: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+            },
+            amberEco: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth animated transitions */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(3, 105, 161, 0.25);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-sky-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-sky-600 via-teal-600 to-emerald-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-sky-500/25 ring-2 ring-white">
+          5b
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 tracking-wide uppercase">Unit 5: The world around us</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 81</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Vocabulary: <span class="text-sky-600">Weather, Climate Change & Environment</span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-sky-600">0 / 37</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-sky-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-sky-600 text-white shadow-md shadow-sky-600/25">
+          1. Weather Definitions (1)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Weather Collocations (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Climate Change (3a & 3b)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Environmental Issues (4a & 4b)
+        </button>
+        <button data-tab="tab-ex5" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          5. Noise Pollution Text (5)
+        </button>
+        <button data-tab="tab-lexicon" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📚 Vocabulary Lexicon & Audio
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: WEATHER PHENOMENA (Exercise 1) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1</span>
+            <span class="text-sky-200 text-xs font-medium">Page 81 • Weather Phenomena</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Extreme Weather: Matching Words with Descriptions</h2>
+          <p class="text-sky-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Match the target weather words from the box with descriptions 1–7. Click any word in the bank to insert it directly into the active field, or choose from the dropdowns.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1()" class="px-5 py-2.5 bg-white hover:bg-sky-50 text-sky-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Weather</span>
+          </button>
+          <button onclick="revealEx1()" class="px-4 py-2.5 bg-sky-800/60 hover:bg-sky-800 text-white border border-sky-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Box for Exercise 1 -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Target Weather Words:</span>
+          <span class="text-xs text-slate-400">Click a word to hear audio & insert into active input</span>
+        </div>
+        <div class="flex flex-wrap gap-2.5" id="ex1-word-bank">
+          <button type="button" onclick="insertEx1Word('blizzard')" class="px-3.5 py-1.5 rounded-xl bg-sky-50 border-2 border-sky-200 text-sky-950 font-black text-sm hover:border-sky-500 transition flex items-center gap-1.5">
+            <span>❄️ blizzard</span>
+          </button>
+          <button type="button" onclick="insertEx1Word('drought')" class="px-3.5 py-1.5 rounded-xl bg-sky-50 border-2 border-sky-200 text-sky-950 font-black text-sm hover:border-sky-500 transition flex items-center gap-1.5">
+            <span>☀️ drought</span>
+          </button>
+          <button type="button" onclick="insertEx1Word('flood')" class="px-3.5 py-1.5 rounded-xl bg-sky-50 border-2 border-sky-200 text-sky-950 font-black text-sm hover:border-sky-500 transition flex items-center gap-1.5">
+            <span>🌊 flood</span>
+          </button>
+          <button type="button" onclick="insertEx1Word('fog')" class="px-3.5 py-1.5 rounded-xl bg-sky-50 border-2 border-sky-200 text-sky-950 font-black text-sm hover:border-sky-500 transition flex items-center gap-1.5">
+            <span>🌫️ fog</span>
+          </button>
+          <button type="button" onclick="insertEx1Word('heat wave')" class="px-3.5 py-1.5 rounded-xl bg-sky-50 border-2 border-sky-200 text-sky-950 font-black text-sm hover:border-sky-500 transition flex items-center gap-1.5">
+            <span>🔥 heat wave</span>
+          </button>
+          <button type="button" onclick="insertEx1Word('hurricane')" class="px-3.5 py-1.5 rounded-xl bg-sky-50 border-2 border-sky-200 text-sky-950 font-black text-sm hover:border-sky-500 transition flex items-center gap-1.5">
+            <span>🌀 hurricane</span>
+          </button>
+          <button type="button" onclick="insertEx1Word('thunder and lightning')" class="px-3.5 py-1.5 rounded-xl bg-sky-50 border-2 border-sky-200 text-sky-950 font-black text-sm hover:border-sky-500 transition flex items-center gap-1.5">
+            <span>⚡ thunder and lightning</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 1 Items Container -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-sky-100 text-sky-800 text-sm font-black flex items-center justify-center">1</span>
+            Match the words in the box with the descriptions:
+          </h3>
+          <span id="ex1-score-pill" class="text-xs font-bold text-sky-800 bg-sky-50 px-3 py-1 rounded-xl">Score: 0/7</span>
+        </div>
+
+        <div class="space-y-4" id="ex1-container">
+          
+          <!-- Item 1: hurricane -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="1" data-ans="hurricane">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              During the summer my country sometimes experiences strong violent winds that cause a lot of damage.
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <input type="text" class="ex1-input exercise-input px-3.5 py-2 rounded-xl border-2 border-slate-300 font-bold text-sky-900 bg-white text-sm w-48 text-center focus:border-sky-600 focus:outline-none" placeholder="weather term..." />
+              <button onclick="speakText('hurricane')" class="p-2 text-slate-400 hover:text-sky-600 transition" title="Listen">🔊</button>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 2: drought -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="2" data-ans="drought">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              Last year we had a long period of dry weather with very little rain.
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <input type="text" class="ex1-input exercise-input px-3.5 py-2 rounded-xl border-2 border-slate-300 font-bold text-sky-900 bg-white text-sm w-48 text-center focus:border-sky-600 focus:outline-none" placeholder="weather term..." />
+              <button onclick="speakText('drought')" class="p-2 text-slate-400 hover:text-sky-600 transition" title="Listen">🔊</button>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 3: flood -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="3" data-ans="flood">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              Last month some places had a lot of rain and many buildings and roads near rivers were damaged by the water.
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <input type="text" class="ex1-input exercise-input px-3.5 py-2 rounded-xl border-2 border-slate-300 font-bold text-sky-900 bg-white text-sm w-48 text-center focus:border-sky-600 focus:outline-none" placeholder="weather term..." />
+              <button onclick="speakText('flood')" class="p-2 text-slate-400 hover:text-sky-600 transition" title="Listen">🔊</button>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 4: heat wave -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="4" data-ans="heat wave,heatwave">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              At the moment we are having a long period of very high temperatures.
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <input type="text" class="ex1-input exercise-input px-3.5 py-2 rounded-xl border-2 border-slate-300 font-bold text-sky-900 bg-white text-sm w-48 text-center focus:border-sky-600 focus:outline-none" placeholder="weather term..." />
+              <button onclick="speakText('heat wave')" class="p-2 text-slate-400 hover:text-sky-600 transition" title="Listen">🔊</button>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 5: thunder and lightning -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="5" data-ans="thunder and lightning">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              In the summer we often have electrical storms which are very noisy and light up the sky.
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <input type="text" class="ex1-input exercise-input px-3.5 py-2 rounded-xl border-2 border-slate-300 font-bold text-sky-900 bg-white text-sm w-48 text-center focus:border-sky-600 focus:outline-none" placeholder="weather term..." />
+              <button onclick="speakText('thunder and lightning')" class="p-2 text-slate-400 hover:text-sky-600 transition" title="Listen">🔊</button>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 6: blizzard -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="6" data-ans="blizzard">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              If we have a severe snow storm during the winter, it can be difficult to get to work or school.
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <input type="text" class="ex1-input exercise-input px-3.5 py-2 rounded-xl border-2 border-slate-300 font-bold text-sky-900 bg-white text-sm w-48 text-center focus:border-sky-600 focus:outline-none" placeholder="weather term..." />
+              <button onclick="speakText('blizzard')" class="p-2 text-slate-400 hover:text-sky-600 transition" title="Listen">🔊</button>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 7: fog -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-item="7" data-ans="fog">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">7.</span>
+              Driving can be dangerous as it is very difficult to see through the thick cloud.
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <input type="text" class="ex1-input exercise-input px-3.5 py-2 rounded-xl border-2 border-slate-300 font-bold text-sky-900 bg-white text-sm w-48 text-center focus:border-sky-600 focus:outline-none" placeholder="weather term..." />
+              <button onclick="speakText('fog')" class="p-2 text-slate-400 hover:text-sky-600 transition" title="Listen">🔊</button>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: WEATHER COLLOCATIONS (Exercise 2a & 2b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-teal-600 via-sky-600 to-cyan-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-teal-200 text-xs font-medium">Collocation Accuracy & Sentence Formation</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Weather Collocations: Identifying Odd Ones Out & Applying Phrases</h2>
+          <p class="text-teal-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            In <strong>2a</strong>, select the adjective that <em>cannot</em> collocate with the noun. In <strong>2b</strong>, use the legitimate collocations to complete real-world weather reports.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2()" class="px-5 py-2.5 bg-white hover:bg-teal-50 text-teal-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 2a & 2b</span>
+          </button>
+          <button onclick="revealEx2()" class="px-4 py-2.5 bg-teal-800/60 hover:bg-teal-800 text-white border border-teal-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 2a: Identify the INCORRECT word that cannot collocate -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">2a</span>
+            Choose the option in italics which CANNOT be used with the nouns:
+          </h3>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-teal-800 bg-teal-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="ex2a-container">
+          
+          <!-- 1: weather -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a-q="1" data-ans="weak">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-teal-700 uppercase">1. Noun: weather</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-xs text-slate-500">Which cannot be used with <em>weather</em>?</p>
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">extreme</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">weak</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">severe</button>
+            </div>
+          </div>
+
+          <!-- 2: rain -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a-q="2" data-ans="strong">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-teal-700 uppercase">2. Noun: rain</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-xs text-slate-500">Which cannot be used with <em>rain</em>?</p>
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">light</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">heavy</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">strong</button>
+            </div>
+          </div>
+
+          <!-- 3: storm -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a-q="3" data-ans="hot">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-teal-700 uppercase">3. Noun: storm</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-xs text-slate-500">Which cannot be used with <em>storm</em>?</p>
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">tropical</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">violent</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">hot</button>
+            </div>
+          </div>
+
+          <!-- 4: fog -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a-q="4" data-ans="solid">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-teal-700 uppercase">4. Noun: fog</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-xs text-slate-500">Which cannot be used with <em>fog</em>?</p>
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">solid</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">freezing</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">thick</button>
+            </div>
+          </div>
+
+          <!-- 5: climate -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a-q="5" data-ans="severe">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-teal-700 uppercase">5. Noun: climate</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-xs text-slate-500">Which cannot be used with <em>climate</em>?</p>
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">mild</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">extreme</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">severe</button>
+            </div>
+          </div>
+
+          <!-- 6: temperatures -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a-q="6" data-ans="hot">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-teal-700 uppercase">6. Noun: temperatures</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-xs text-slate-500">Which cannot be used with <em>temperatures</em>?</p>
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">hot</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">high</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-teal-500">low</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 2b: Complete sentences with valid collocations from 2a -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">2b</span>
+            Complete the sentences with collocations from Exercise 2a:
+          </h3>
+          <span id="ex2b-score-pill" class="text-xs font-bold text-teal-800 bg-teal-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex2b-container">
+          
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2b-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              <input type="text" data-ans="thick fog,freezing fog" class="ex2b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-40 text-center focus:border-teal-600 focus:outline-none" placeholder="[fog collocation]" />
+              can be very dangerous and cause accidents on the road.
+            </p>
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2b-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              We have a(n)
+              <input type="text" data-ans="mild climate" class="ex2b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-40 text-center focus:border-teal-600 focus:outline-none" placeholder="[climate collocation]" />
+              which means we have warm summers and cool winters.
+            </p>
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2b-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Many people believe that
+              <input type="text" data-ans="extreme weather,severe weather" class="ex2b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-44 text-center focus:border-teal-600 focus:outline-none" placeholder="[weather collocation]" />
+              conditions like floods and droughts are caused by rising global temperatures.
+            </p>
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2b-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Very
+              <input type="text" data-ans="low temperatures" class="ex2b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-44 text-center focus:border-teal-600 focus:outline-none" placeholder="[temperature collocation]" />
+              , often below 0°C, are very common here.
+            </p>
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2b-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Last year we had very
+              <input type="text" data-ans="heavy rain" class="ex2b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-36 text-center focus:border-teal-600 focus:outline-none" placeholder="[rain collocation]" />
+              for weeks, which caused floods.
+            </p>
+          </div>
+
+          <!-- 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2b-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 6</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              The building was struck by lightning during a(n)
+              <input type="text" data-ans="violent storm,tropical storm" class="ex2b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-40 text-center focus:border-teal-600 focus:outline-none" placeholder="[storm collocation]" />
+              yesterday.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: CLIMATE CHANGE (Exercise 3a & 3b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-emerald-600 via-teal-700 to-cyan-800 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a & 3b</span>
+            <span class="text-emerald-200 text-xs font-medium">Page 81 • Global Environmental Science</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Climate Change: Collocations & Scientific Meanings</h2>
+          <p class="text-emerald-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            In <strong>3a</strong>, pair up the words (1–5) with (A–E) to form core ecological compound terms. In <strong>3b</strong>, connect each newly formed collocation to its exact scientific definition.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3()" class="px-5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 3a & 3b</span>
+          </button>
+          <button onclick="revealEx3()" class="px-4 py-2.5 bg-emerald-800/60 hover:bg-emerald-800 text-white border border-emerald-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 3a Matching Grid: Words 1-5 with A-E -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">3a</span>
+            Match words 1–5 with words A–E to make collocations:
+          </h3>
+          <span id="ex3a-score-pill" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">Score: 0/5</span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3" id="ex3a-container">
+          
+          <!-- 1: global -> C warming -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex3a-item="1" data-ans="C">
+            <div>
+              <span class="text-xs font-black text-slate-400 uppercase">Part 1</span>
+              <div class="text-lg font-black text-slate-900 mt-1">1. global</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex3a-select w-full p-2 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-emerald-950 focus:border-emerald-600 focus:outline-none">
+                <option value="">Match A-E...</option>
+                <option value="A">A. effect</option>
+                <option value="B">B. fuels</option>
+                <option value="C">C. warming</option>
+                <option value="D">D. ice cap</option>
+                <option value="E">E. fire</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 2: polar -> D ice cap -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex3a-item="2" data-ans="D">
+            <div>
+              <span class="text-xs font-black text-slate-400 uppercase">Part 2</span>
+              <div class="text-lg font-black text-slate-900 mt-1">2. polar</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex3a-select w-full p-2 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-emerald-950 focus:border-emerald-600 focus:outline-none">
+                <option value="">Match A-E...</option>
+                <option value="A">A. effect</option>
+                <option value="B">B. fuels</option>
+                <option value="C">C. warming</option>
+                <option value="D">D. ice cap</option>
+                <option value="E">E. fire</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 3: forest -> E fire -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex3a-item="3" data-ans="E">
+            <div>
+              <span class="text-xs font-black text-slate-400 uppercase">Part 3</span>
+              <div class="text-lg font-black text-slate-900 mt-1">3. forest</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex3a-select w-full p-2 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-emerald-950 focus:border-emerald-600 focus:outline-none">
+                <option value="">Match A-E...</option>
+                <option value="A">A. effect</option>
+                <option value="B">B. fuels</option>
+                <option value="C">C. warming</option>
+                <option value="D">D. ice cap</option>
+                <option value="E">E. fire</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 4: fossil -> B fuels -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex3a-item="4" data-ans="B">
+            <div>
+              <span class="text-xs font-black text-slate-400 uppercase">Part 4</span>
+              <div class="text-lg font-black text-slate-900 mt-1">4. fossil</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex3a-select w-full p-2 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-emerald-950 focus:border-emerald-600 focus:outline-none">
+                <option value="">Match A-E...</option>
+                <option value="A">A. effect</option>
+                <option value="B">B. fuels</option>
+                <option value="C">C. warming</option>
+                <option value="D">D. ice cap</option>
+                <option value="E">E. fire</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- 5: greenhouse -> A effect -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 flex flex-col justify-between" data-ex3a-item="5" data-ans="A">
+            <div>
+              <span class="text-xs font-black text-slate-400 uppercase">Part 5</span>
+              <div class="text-lg font-black text-slate-900 mt-1">5. greenhouse</div>
+            </div>
+            <div class="pt-2">
+              <select class="ex3a-select w-full p-2 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-emerald-950 focus:border-emerald-600 focus:outline-none">
+                <option value="">Match A-E...</option>
+                <option value="A">A. effect</option>
+                <option value="B">B. fuels</option>
+                <option value="C">C. warming</option>
+                <option value="D">D. ice cap</option>
+                <option value="E">E. fire</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 3b: Match the collocations with their scientific definitions -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">3b</span>
+            Match the collocations in Exercise 3a with their meanings:
+          </h3>
+          <span id="ex3b-score-pill" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">Score: 0/5</span>
+        </div>
+
+        <div class="space-y-4" id="ex3b-container">
+          
+          <!-- Meaning 1: polar ice cap -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3b-item="1" data-ans="polar ice cap">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              The frozen water that covers the top of the earth
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex3b-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-emerald-950 focus:border-emerald-600 focus:outline-none">
+                <option value="">Select collocation...</option>
+                <option value="global warming">global warming</option>
+                <option value="polar ice cap">polar ice cap</option>
+                <option value="forest fire">forest fire</option>
+                <option value="fossil fuels">fossil fuels</option>
+                <option value="greenhouse effect">greenhouse effect</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Meaning 2: fossil fuels -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3b-item="2" data-ans="fossil fuels">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              Coal, gas or oil you burn to produce heat or power
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex3b-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-emerald-950 focus:border-emerald-600 focus:outline-none">
+                <option value="">Select collocation...</option>
+                <option value="global warming">global warming</option>
+                <option value="polar ice cap">polar ice cap</option>
+                <option value="forest fire">forest fire</option>
+                <option value="fossil fuels">fossil fuels</option>
+                <option value="greenhouse effect">greenhouse effect</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Meaning 3: global warming -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3b-item="3" data-ans="global warming">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              An increase in world temperatures
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex3b-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-emerald-950 focus:border-emerald-600 focus:outline-none">
+                <option value="">Select collocation...</option>
+                <option value="global warming">global warming</option>
+                <option value="polar ice cap">polar ice cap</option>
+                <option value="forest fire">forest fire</option>
+                <option value="fossil fuels">fossil fuels</option>
+                <option value="greenhouse effect">greenhouse effect</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Meaning 4: greenhouse effect -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3b-item="4" data-ans="greenhouse effect">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              When pollution stops the sun's heat from escaping and the air gets warmer
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex3b-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-emerald-950 focus:border-emerald-600 focus:outline-none">
+                <option value="">Select collocation...</option>
+                <option value="global warming">global warming</option>
+                <option value="polar ice cap">polar ice cap</option>
+                <option value="forest fire">forest fire</option>
+                <option value="fossil fuels">fossil fuels</option>
+                <option value="greenhouse effect">greenhouse effect</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Meaning 5: forest fire -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3b-item="5" data-ans="forest fire">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              When a large area of trees is burning
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex3b-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-emerald-950 focus:border-emerald-600 focus:outline-none">
+                <option value="">Select collocation...</option>
+                <option value="global warming">global warming</option>
+                <option value="polar ice cap">polar ice cap</option>
+                <option value="forest fire">forest fire</option>
+                <option value="fossil fuels">fossil fuels</option>
+                <option value="greenhouse effect">greenhouse effect</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: ENVIRONMENTAL ISSUES (Exercise 4a & 4b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a & 4b</span>
+            <span class="text-amber-200 text-xs font-medium">Page 81 • Sustainability & Environmental Policy</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Environmental Issues & Civic Debate</h2>
+          <p class="text-amber-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill in the gaps with the correct environmental terminology: <em>air quality</em>, <em>air pollution</em>, <em>noise pollution</em>, <em>recycling</em>, <em>rubbish</em>, or <em>toxic waste</em>. Then vote on and debate each policy proposal!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4a()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 4a</span>
+          </button>
+          <button onclick="revealEx4a()" class="px-4 py-2.5 bg-amber-800/60 hover:bg-amber-800 text-white border border-amber-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Box for Exercise 4a -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Words in the Box:</span>
+          <span class="text-xs text-slate-400">Click a term to insert into active input</span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="ex4a-word-bank">
+          <button type="button" onclick="insertEx4aWord('air quality')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 font-black text-sm hover:border-amber-500 transition">air quality</button>
+          <button type="button" onclick="insertEx4aWord('air pollution')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 font-black text-sm hover:border-amber-500 transition">air pollution</button>
+          <button type="button" onclick="insertEx4aWord('noise pollution')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 font-black text-sm hover:border-amber-500 transition">noise pollution</button>
+          <button type="button" onclick="insertEx4aWord('recycling')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 font-black text-sm hover:border-amber-500 transition">recycling</button>
+          <button type="button" onclick="insertEx4aWord('rubbish')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 font-black text-sm hover:border-amber-500 transition">rubbish</button>
+          <button type="button" onclick="insertEx4aWord('toxic waste')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 font-black text-sm hover:border-amber-500 transition">toxic waste</button>
+        </div>
+      </div>
+
+      <!-- Exercise 4a Sentence Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">4a</span>
+            Complete the sentences with the words in the box:
+          </h3>
+          <span id="ex4a-score-pill" class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex4a-container">
+          
+          <!-- Item 1: noise pollution -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Airports should try to reduce
+              <input type="text" data-ans="noise pollution" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-amber-950 bg-white text-base w-44 text-center focus:border-amber-600 focus:outline-none" placeholder="gap 1" />
+              at night so that people living nearby can sleep.
+            </p>
+          </div>
+
+          <!-- Item 2: rubbish -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              There should be strict punishments for people who drop
+              <input type="text" data-ans="rubbish" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-amber-950 bg-white text-base w-32 text-center focus:border-amber-600 focus:outline-none" placeholder="gap 2" />
+              in the streets.
+            </p>
+          </div>
+
+          <!-- Item 3: recycling -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Governments should do more to encourage
+              <input type="text" data-ans="recycling" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-amber-950 bg-white text-base w-36 text-center focus:border-amber-600 focus:outline-none" placeholder="gap 3" />
+              of waste products like newspapers and plastic.
+            </p>
+          </div>
+
+          <!-- Item 4: toxic waste -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It should be against the law for factories to put
+              <input type="text" data-ans="toxic waste" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-amber-950 bg-white text-base w-40 text-center focus:border-amber-600 focus:outline-none" placeholder="gap 4" />
+              in the sea or rivers.
+            </p>
+          </div>
+
+          <!-- Item 5: air pollution -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Private cars should not be allowed in big cities, to reduce
+              <input type="text" data-ans="air pollution" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-amber-950 bg-white text-base w-40 text-center focus:border-amber-600 focus:outline-none" placeholder="gap 5" />
+              .
+            </p>
+          </div>
+
+          <!-- Item 6: air quality -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 6</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              The government needs to do something to improve the
+              <input type="text" data-ans="air quality" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-amber-950 bg-white text-base w-36 text-center focus:border-amber-600 focus:outline-none" placeholder="gap 6" />
+              in my city.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 4b: Civic Debate & Personal Stance Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">4b</span>
+              Tick the sentences in Exercise 4a that you agree with. Discuss your ideas:
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Select the policies you strongly endorse and formulate arguments for discussion:</p>
+          </div>
+          <button onclick="saveEx4bNotes()" class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+            Save My Stance
+          </button>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3" id="ex4b-checklist">
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex4b-chk-1" class="w-5 h-5 text-amber-600 rounded-lg focus:ring-amber-500" />
+            <span class="text-sm font-bold text-slate-800">1. Airports should reduce night flight noise.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex4b-chk-2" class="w-5 h-5 text-amber-600 rounded-lg focus:ring-amber-500" />
+            <span class="text-sm font-bold text-slate-800">2. Strict punishments for dropping street litter.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex4b-chk-3" class="w-5 h-5 text-amber-600 rounded-lg focus:ring-amber-500" />
+            <span class="text-sm font-bold text-slate-800">3. Stronger government incentives for plastic recycling.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex4b-chk-4" class="w-5 h-5 text-amber-600 rounded-lg focus:ring-amber-500" />
+            <span class="text-sm font-bold text-slate-800">4. Heavy legal criminalization of industrial toxic dumping.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex4b-chk-5" class="w-5 h-5 text-amber-600 rounded-lg focus:ring-amber-500" />
+            <span class="text-sm font-bold text-slate-800">5. Ban private combustion cars inside city centres.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex4b-chk-6" class="w-5 h-5 text-amber-600 rounded-lg focus:ring-amber-500" />
+            <span class="text-sm font-bold text-slate-800">6. Urgent municipal action needed for metropolitan air quality.</span>
+          </label>
+        </div>
+
+        <div>
+          <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-2">My Pairwork Discussion Arguments:</label>
+          <textarea id="ex4b-discussion-text" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-amber-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. I completely agree with sentence 5 because banning private cars in city centres encourages cycling and dramatically reduces particulate smog..."></textarea>
+        </div>
+        <div id="ex4b-status" class="hidden p-3 rounded-xl bg-amber-100 text-amber-900 text-xs font-bold">
+          ✓ Your environmental priorities and discussion arguments have been saved.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: NOISE POLLUTION READING (Exercise 5) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex5" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 5</span>
+            <span class="text-purple-200 text-xs font-medium">Page 81 • Extended Reading & Collocations</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Understanding Noise Pollution</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Choose the correct option in italics for each gap (1–6). Pay close attention to subtle differences between verb collocations like <em>affect vs. effect</em>, <em>takes place</em>, <em>deal with</em>, and <em>prevent</em>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx5()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Reading</span>
+          </button>
+          <button onclick="revealEx5()" class="px-4 py-2.5 bg-purple-800/60 hover:bg-purple-800 text-white border border-purple-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Reading Card -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">5</span>
+            Choose the correct options in italics to complete the text:
+          </h3>
+          <span id="ex5-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.6rem] sm:leading-[3rem] font-normal space-y-6" id="ex5-article">
+          <p>
+            Most of us are used to the sounds we hear in everyday life. Loud music, people talking on their phone and the traffic are part of our way of life. But we do not realise how much this can
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex5-gap="1" data-ans="affect">
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">move</button>
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">affect</button>
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">effect</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            us. Pollution is not limited to nature and resources; noise that upsets the natural rhythm of life also
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex5-gap="2" data-ans="produces">
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">supplies</button>
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">delivers</button>
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">produces</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            a form of pollution.
+          </p>
+
+          <p>
+            By definition, noise pollution
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex5-gap="3" data-ans="takes place">
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">causes</button>
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">brings</button>
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">takes place</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            when there is a lot of noise which upsets us or is unhealthy. In our environment it has become difficult to escape noise. For example, many people have to live next to busy roads, which
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex5-gap="4" data-ans="increases">
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">increases</button>
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">spreads</button>
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">grows</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            the amount of unwanted sounds they have to live with.
+          </p>
+
+          <p>
+            Noise pollution is serious and can lead to disturbed sleep, so we do need to
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex5-gap="5" data-ans="deal">
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">cope</button>
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">deal</button>
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">manage</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            with the problem. However, it is hard to think of ways to
+            <span class="inline-flex gap-1 mx-1.5 align-middle" data-ex5-gap="6" data-ans="prevent">
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">check</button>
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">avoid</button>
+              <button type="button" onclick="selectEx5Pill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-500 shadow-2xs">prevent</button>
+            </span>
+            <span class="feedback-badge text-xs font-bold mr-1"></span>
+            it increasing even more in the future.
+          </p>
+        </div>
+
+        <!-- Linguistic Notes Box -->
+        <div class="p-4 rounded-2xl bg-purple-50 border border-purple-200 text-xs text-purple-950 space-y-1.5">
+          <div class="font-extrabold flex items-center gap-1.5 text-sm">
+            <span>💡</span> Grammar & Collocation Insights:
+          </div>
+          <p>• <strong>affect vs effect:</strong> <em>affect</em> is a verb meaning "to influence/impact"; <em>effect</em> is almost always a noun ("have an effect on").</p>
+          <p>• <strong>deal with vs cope:</strong> We <em>deal with</em> a problem (take active steps). <em>Cope</em> usually takes an object with "with" to mean managing emotionally or enduring stress (e.g. <em>cope with pressure</em>).</p>
+          <p>• <strong>prevent vs avoid:</strong> We <em>prevent [something] from happening</em> or <em>prevent it increasing</em>. <em>Avoid</em> requires an active agent doing something to stay away from a danger (e.g. <em>avoid noisy areas</em>).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: VOCABULARY LEXICON & AUDIO GUIDE -->
+    <!-- ========================================================================= -->
+    <section id="tab-lexicon" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 to-sky-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-sky-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Unit 5b Glossary</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 81 Reference & Pronunciation Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Comprehensive Vocabulary Lexicon</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Full reference definitions, phonetic transcriptions, grammatical collocations, and one-click British English audio pronunciation.
+        </p>
+      </div>
+
+      <!-- Flashcards Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <!-- blizzard -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">blizzard</h4>
+            <button onclick="speakText('blizzard')" class="text-xs px-2.5 py-1 rounded-lg bg-sky-50 text-sky-800 font-bold hover:bg-sky-100 transition">🔊 /ˈblɪz.əd/</button>
+          </div>
+          <span class="text-xs font-bold text-sky-600 uppercase">noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A severe snowstorm with high winds and low visibility.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>be caught in a blizzard</em></div>
+        </div>
+
+        <!-- drought -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">drought</h4>
+            <button onclick="speakText('drought')" class="text-xs px-2.5 py-1 rounded-lg bg-sky-50 text-sky-800 font-bold hover:bg-sky-100 transition">🔊 /draʊt/</button>
+          </div>
+          <span class="text-xs font-bold text-sky-600 uppercase">noun [C/U]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A prolonged period of abnormally low rainfall, leading to a shortage of water.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>severe / prolonged drought</em></div>
+        </div>
+
+        <!-- hurricane -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">hurricane</h4>
+            <button onclick="speakText('hurricane')" class="text-xs px-2.5 py-1 rounded-lg bg-sky-50 text-sky-800 font-bold hover:bg-sky-100 transition">🔊 /ˈhʌr.ɪ.kən/</button>
+          </div>
+          <span class="text-xs font-bold text-sky-600 uppercase">noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A storm with a violent wind, in particular a tropical cyclone in the Caribbean.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>hurricane warning / hurricane-force winds</em></div>
+        </div>
+
+        <!-- polar ice cap -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">polar ice cap</h4>
+            <button onclick="speakText('polar ice cap')" class="text-xs px-2.5 py-1 rounded-lg bg-sky-50 text-sky-800 font-bold hover:bg-sky-100 transition">🔊 /ˈpəʊ.lər aɪs ˌkæp/</button>
+          </div>
+          <span class="text-xs font-bold text-sky-600 uppercase">compound noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A high-latitude region that is covered in immense sheets of perennial ice.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>melting of the polar ice caps</em></div>
+        </div>
+
+        <!-- greenhouse effect -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">greenhouse effect</h4>
+            <button onclick="speakText('greenhouse effect')" class="text-xs px-2.5 py-1 rounded-lg bg-sky-50 text-sky-800 font-bold hover:bg-sky-100 transition">🔊 /ˈɡriːn.haʊs ɪˌfekt/</button>
+          </div>
+          <span class="text-xs font-bold text-sky-600 uppercase">compound noun [singular]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">The trapping of the sun's warmth in a planet's lower atmosphere by greenhouse gases.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>accelerate the greenhouse effect</em></div>
+        </div>
+
+        <!-- toxic waste -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">toxic waste</h4>
+            <button onclick="speakText('toxic waste')" class="text-xs px-2.5 py-1 rounded-lg bg-sky-50 text-sky-800 font-bold hover:bg-sky-100 transition">🔊 /ˌtɒk.sɪk ˈweɪst/</button>
+          </div>
+          <span class="text-xs font-bold text-sky-600 uppercase">noun [U]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">Waste material containing poisonous chemicals that can cause death or injury to living creatures.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>illegal disposal of toxic waste</em></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Vocabulary page 53
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 5b Vocabulary
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 5: The world around us • 5b Vocabulary • Page 81
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic & Interactive State Scripts -->
+  <script>
+    // State management for scores
+    const state = {
+      score: {
+        ex1: 0,
+        ex2a: 0,
+        ex2b: 0,
+        ex3a: 0,
+        ex3b: 0,
+        ex4a: 0,
+        ex5: 0
+      }
+    };
+
+    // Web Audio synthesizer for crisp feedback beeps
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.15); // C6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Text to Speech Pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.92;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-sky-600', 'text-white', 'shadow-md', 'shadow-sky-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-sky-600', 'text-white', 'shadow-md', 'shadow-sky-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // =========================================================================
+    // EXERCISE 1 LOGIC
+    // =========================================================================
+    let lastActiveEx1Input = null;
+    document.querySelectorAll('.ex1-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx1Input = inp;
+      });
+    });
+
+    function insertEx1Word(word) {
+      speakText(word);
+      if (lastActiveEx1Input) {
+        lastActiveEx1Input.value = word;
+        lastActiveEx1Input.focus();
+      } else {
+        const emptyInp = Array.from(document.querySelectorAll('.ex1-input')).find(i => !i.value.trim());
+        if (emptyInp) {
+          emptyInp.value = word;
+          emptyInp.focus();
+        }
+      }
+    }
+
+    function checkEx1() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex1-container [data-ex1-item]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex1-input');
+        const allowed = row.getAttribute('data-ans').split(',').map(cleanStr);
+        const badge = row.querySelector('.feedback-badge');
+        const userVal = cleanStr(inp.value);
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Type term</span>';
+          inp.classList.remove('border-sky-500', 'bg-sky-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-sky-500', 'bg-sky-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-sky-500', 'bg-sky-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex1 = correct;
+      document.getElementById('ex1-score-pill').textContent = `Score: ${correct}/7`;
+      updateTotalScore();
+      playBeep(correct >= 5);
+    }
+
+    function revealEx1() {
+      const answers = {
+        '1': 'hurricane',
+        '2': 'drought',
+        '3': 'flood',
+        '4': 'heat wave',
+        '5': 'thunder and lightning',
+        '6': 'blizzard',
+        '7': 'fog'
+      };
+
+      for (let k in answers) {
+        const row = document.querySelector(`[data-ex1-item="${k}"]`);
+        const inp = row.querySelector('.ex1-input');
+        inp.value = answers[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-sky-500', 'bg-sky-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex1 = 7;
+      document.getElementById('ex1-score-pill').textContent = 'Score: 7/7';
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 2a & 2b LOGIC
+    // =========================================================================
+    function selectEx2aPill(btn) {
+      const container = btn.closest('.p-4');
+      container.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-teal-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-teal-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-teal-600', 'text-white', 'border-teal-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx2() {
+      // Check 2a (Odd one out)
+      let correct2a = 0;
+      const rows2a = document.querySelectorAll('#ex2a-container [data-ex2a-q]');
+
+      rows2a.forEach(row => {
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+        const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Choose option</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toLowerCase();
+        if (userVal === expected.toLowerCase()) {
+          correct2a++;
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-teal-600', 'border-teal-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          selectedBtn.classList.remove('bg-teal-600', 'border-teal-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex2a = correct2a;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correct2a}/6`;
+
+      // Check 2b (Sentence completion)
+      let correct2b = 0;
+      const rows2b = document.querySelectorAll('#ex2b-container [data-ex2b-item]');
+
+      rows2b.forEach(row => {
+        const inp = row.querySelector('.ex2b-input');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const badge = row.querySelector('.feedback-badge');
+        const userVal = cleanStr(inp.value);
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Fill gap</span>';
+          inp.classList.remove('border-teal-500', 'bg-teal-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct2b++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-teal-500', 'bg-teal-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-teal-500', 'bg-teal-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex2b = correct2b;
+      document.getElementById('ex2b-score-pill').textContent = `Score: ${correct2b}/6`;
+
+      updateTotalScore();
+      playBeep(correct2a >= 4 && correct2b >= 4);
+    }
+
+    function revealEx2() {
+      // Reveal 2a
+      const answers2a = {
+        '1': 'weak',
+        '2': 'strong',
+        '3': 'hot',
+        '4': 'solid',
+        '5': 'severe',
+        '6': 'hot'
+      };
+
+      for (let q in answers2a) {
+        const row = document.querySelector(`[data-ex2a-q="${q}"]`);
+        const btns = row.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim().toLowerCase() === answers2a[q].toLowerCase()) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-teal-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex2a = 6;
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 6/6';
+
+      // Reveal 2b
+      const answers2b = {
+        '1': 'thick fog',
+        '2': 'mild climate',
+        '3': 'extreme weather',
+        '4': 'low temperatures',
+        '5': 'heavy rain',
+        '6': 'violent storm'
+      };
+
+      for (let k in answers2b) {
+        const row = document.querySelector(`[data-ex2b-item="${k}"]`);
+        const inp = row.querySelector('.ex2b-input');
+        inp.value = answers2b[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-teal-500', 'bg-teal-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex2b = 6;
+      document.getElementById('ex2b-score-pill').textContent = 'Score: 6/6';
+
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 3a & 3b LOGIC
+    // =========================================================================
+    function checkEx3() {
+      // Check 3a
+      let correct3a = 0;
+      const rows3a = document.querySelectorAll('#ex3a-container [data-ex3a-item]');
+
+      rows3a.forEach(row => {
+        const sel = row.querySelector('.ex3a-select');
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!sel.value) {
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select</span>';
+          sel.classList.remove('border-emerald-500', 'border-rose-400');
+          return;
+        }
+
+        if (sel.value === expected) {
+          correct3a++;
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-emerald-500');
+        } else {
+          badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Need ${expected}</span>`;
+          sel.classList.remove('border-emerald-500');
+          sel.classList.add('border-rose-400');
+        }
+      });
+
+      state.score.ex3a = correct3a;
+      document.getElementById('ex3a-score-pill').textContent = `Score: ${correct3a}/5`;
+
+      // Check 3b
+      let correct3b = 0;
+      const rows3b = document.querySelectorAll('#ex3b-container [data-ex3b-item]');
+
+      rows3b.forEach(row => {
+        const sel = row.querySelector('.ex3b-select');
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!sel.value) {
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select</span>';
+          sel.classList.remove('border-emerald-500', 'border-rose-400');
+          return;
+        }
+
+        if (sel.value === expected) {
+          correct3b++;
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-emerald-500');
+        } else {
+          badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          sel.classList.remove('border-emerald-500');
+          sel.classList.add('border-rose-400');
+        }
+      });
+
+      state.score.ex3b = correct3b;
+      document.getElementById('ex3b-score-pill').textContent = `Score: ${correct3b}/5`;
+
+      updateTotalScore();
+      playBeep(correct3a >= 4 && correct3b >= 4);
+    }
+
+    function revealEx3() {
+      // Reveal 3a
+      const answers3a = ['C', 'D', 'E', 'B', 'A'];
+      document.querySelectorAll('#ex3a-container [data-ex3a-item]').forEach((row, i) => {
+        const sel = row.querySelector('.ex3a-select');
+        sel.value = answers3a[i];
+        sel.classList.remove('border-rose-400');
+        sel.classList.add('border-emerald-500');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex3a = 5;
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 5/5';
+
+      // Reveal 3b
+      const answers3b = [
+        'polar ice cap',
+        'fossil fuels',
+        'global warming',
+        'greenhouse effect',
+        'forest fire'
+      ];
+      document.querySelectorAll('#ex3b-container [data-ex3b-item]').forEach((row, i) => {
+        const sel = row.querySelector('.ex3b-select');
+        sel.value = answers3b[i];
+        sel.classList.remove('border-rose-400');
+        sel.classList.add('border-emerald-500');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex3b = 5;
+      document.getElementById('ex3b-score-pill').textContent = 'Score: 5/5';
+
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 4a & 4b LOGIC
+    // =========================================================================
+    let lastActiveEx4aInput = null;
+    document.querySelectorAll('.ex4a-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx4aInput = inp;
+      });
+    });
+
+    function insertEx4aWord(word) {
+      if (lastActiveEx4aInput) {
+        lastActiveEx4aInput.value = word;
+        lastActiveEx4aInput.focus();
+      } else {
+        const emptyInp = Array.from(document.querySelectorAll('.ex4a-input')).find(i => !i.value.trim());
+        if (emptyInp) {
+          emptyInp.value = word;
+          emptyInp.focus();
+        }
+      }
+    }
+
+    function checkEx4a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex4a-container [data-ex4a-item]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex4a-input');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const badge = row.querySelector('.feedback-badge');
+        const userVal = cleanStr(inp.value);
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Insert word</span>';
+          inp.classList.remove('border-amber-500', 'bg-amber-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-amber-500', 'bg-amber-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-amber-500', 'bg-amber-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex4a = correct;
+      document.getElementById('ex4a-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx4a() {
+      const keys = {
+        '1': 'noise pollution',
+        '2': 'rubbish',
+        '3': 'recycling',
+        '4': 'toxic waste',
+        '5': 'air pollution',
+        '6': 'air quality'
+      };
+
+      for (let k in keys) {
+        const row = document.querySelector(`[data-ex4a-item="${k}"]`);
+        const inp = row.querySelector('.ex4a-input');
+        inp.value = keys[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-amber-500', 'bg-amber-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex4a = 6;
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    function saveEx4bNotes() {
+      const checked = [];
+      for (let i = 1; i <= 6; i++) {
+        if (document.getElementById(`ex4b-chk-${i}`).checked) {
+          checked.push(i);
+        }
+      }
+      const text = document.getElementById('ex4b-discussion-text').value;
+      localStorage.setItem('m5b_vocab_ex4b', JSON.stringify({ checked, text }));
+      const status = document.getElementById('ex4b-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // =========================================================================
+    // EXERCISE 5 LOGIC (Noise Pollution Reading)
+    // =========================================================================
+    function selectEx5Pill(btn) {
+      const parent = btn.closest('[data-ex5-gap]');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-purple-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-purple-600', 'text-white', 'border-purple-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx5() {
+      let correct = 0;
+      const gaps = document.querySelectorAll('#ex5-article [data-ex5-gap]');
+
+      gaps.forEach(gap => {
+        const expected = gap.getAttribute('data-ans');
+        const badge = gap.nextElementSibling;
+        const selectedBtn = gap.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toLowerCase();
+        if (userVal === expected.toLowerCase()) {
+          correct++;
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-purple-600', 'border-purple-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          selectedBtn.classList.remove('bg-purple-600', 'border-purple-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex5 = correct;
+      document.getElementById('ex5-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx5() {
+      const answers = {
+        '1': 'affect',
+        '2': 'produces',
+        '3': 'takes place',
+        '4': 'increases',
+        '5': 'deal',
+        '6': 'prevent'
+      };
+
+      for (let g in answers) {
+        const gap = document.querySelector(`[data-ex5-gap="${g}"]`);
+        const badge = gap.nextElementSibling;
+        const btns = gap.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim().toLowerCase() === answers[g].toLowerCase()) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex5 = 6;
+      document.getElementById('ex5-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // GLOBAL PROGRESS & RESET HANDLERS
+    // =========================================================================
+    function updateTotalScore() {
+      const total = state.score.ex1 + state.score.ex2a + state.score.ex2b + state.score.ex3a + state.score.ex3b + state.score.ex4a + state.score.ex5;
+      const maxScore = 37; // 7 + 6 + 6 + 5 + 5 + 6 + 2(normalized sum) = 37 points
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 30) {
+        bar.classList.replace('bg-sky-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-sky-600');
+      }
+    }
+
+    // Reset All Answers
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // 1. Clear Ex 1
+      document.querySelectorAll('.ex1-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-sky-500', 'bg-sky-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 2. Clear Ex 2a
+      document.querySelectorAll('#ex2a-container .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-teal-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-teal-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // 3. Clear Ex 2b
+      document.querySelectorAll('.ex2b-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-teal-500', 'bg-teal-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 4. Clear Ex 3a & 3b
+      document.querySelectorAll('.ex3a-select, .ex3b-select').forEach(s => {
+        s.value = '';
+        s.classList.remove('border-emerald-500', 'border-rose-400');
+      });
+
+      // 5. Clear Ex 4a
+      document.querySelectorAll('.ex4a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-amber-500', 'bg-amber-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 6. Clear Ex 5
+      document.querySelectorAll('#ex5-article .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-purple-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-purple-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear all feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset state scores
+      state.score = { ex1: 0, ex2a: 0, ex2b: 0, ex3a: 0, ex3b: 0, ex4a: 0, ex5: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1-score-pill').textContent = 'Score: 0/7';
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex2b-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 0/5';
+      document.getElementById('ex3b-score-pill').textContent = 'Score: 0/5';
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex5-score-pill').textContent = 'Score: 0/6';
+    });
+
+    // Auto-restore saved 4b data
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved4b = JSON.parse(localStorage.getItem('m5b_vocab_ex4b'));
+        if (saved4b) {
+          if (saved4b.checked && Array.isArray(saved4b.checked)) {
+            saved4b.checked.forEach(n => {
+              const el = document.getElementById(`ex4b-chk-${n}`);
+              if (el) el.checked = true;
+            });
+          }
+          if (saved4b.text) document.getElementById('ex4b-discussion-text').value = saved4b.text;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

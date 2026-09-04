@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 9b Vocabulary: Media - Technology, Word Formation & Phrasal Verbs</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            tech: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            },
+            cyber: {
+              50: '#ecfeff',
+              100: '#cffafe',
+              500: '#06b6d4',
+              600: '#0891b2',
+              700: '#0e7490',
+            },
+            digital: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              500: '#64748b',
+              600: '#475569',
+              700: '#334155',
+              800: '#1e293b',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-600 via-blue-600 to-cyan-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-indigo-500/25 ring-2 ring-white">
+          9b
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 tracking-wide uppercase">Unit 9: Media</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 145</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Vocabulary: <span class="text-indigo-600">Technology, Word Formation & Phrasal Verbs</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-indigo-600">0 / 37</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-indigo-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-indigo-600 text-white shadow-md shadow-indigo-600/25">
+          1. Tech Verbs (1)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Devices & Software (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Word Formation (3a & 3b)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Phrasal Verbs (4a & 4b)
+        </button>
+        <button data-tab="tab-lexicon" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📚 Vocabulary Lexicon & Audio
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: TECHNOLOGY VERBS (Exercise 1) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1</span>
+            <span class="text-indigo-200 text-xs font-medium">Page 145 • Core Technology Verbs</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Everyday Technology & Online Verbs</h2>
+          <p class="text-indigo-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Choose the correct verb in italics for each sentence. Pay attention to common digital activities like messaging friends, googling information, accessing protected portals, and attaching files.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1()" class="px-5 py-2.5 bg-white hover:bg-indigo-50 text-indigo-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Verbs</span>
+          </button>
+          <button onclick="revealEx1()" class="px-4 py-2.5 bg-indigo-800/60 hover:bg-indigo-800 text-white border border-indigo-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 1 Question Cards with Pill Selection -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-800 text-sm font-black flex items-center justify-center">1</span>
+            Choose the correct options in italics to complete the sentences:
+          </h3>
+          <span id="ex1-score-pill" class="text-xs font-bold text-indigo-800 bg-indigo-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="grid gap-3.5" id="ex1-container">
+          
+          <!-- Item 1: access / message -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="1" data-ans="message">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              I usually use an app like WhatsApp to
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">access</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">message</button>
+              </span>
+              my friends.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 2: google / attach -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="2" data-ans="google">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              When you
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">google</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">attach</button>
+              </span>
+              something, you often get too many websites to choose from.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 3: go / access -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="3" data-ans="access">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              This is a good site for research but you have to pay to
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">go</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">access</button>
+              </span>
+              some parts of it.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 4: downloading / browsing -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="4" data-ans="browsing">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              I spend a lot of time
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">downloading</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">browsing</button>
+              </span>
+              news and current affairs websites.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 5: download / upgrade -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="5" data-ans="download">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              If a file is very big, it can take a long time to
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">download</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">upgrade</button>
+              </span>
+              .
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 6: attach / crash -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="6" data-ans="crash">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              My computer always seems to
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">attach</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">crash</button>
+              </span>
+              at important times.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 7: upgrade / browse -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="7" data-ans="upgrade">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">7.</span>
+              I usually
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">upgrade</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">browse</button>
+              </span>
+              my mobile every year because I like to have the latest features.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 8: attach / browse -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="8" data-ans="attach">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">8.</span>
+              My computer is very old, so it takes ages to
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">attach</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-indigo-500 shadow-2xs">browse</button>
+              </span>
+              large files.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: DIGITAL LIFE & HARDWARE/SOFTWARE (Exercise 2a & 2b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-blue-200 text-xs font-medium">Page 145 • Tech Terminology & Questions</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Digital Age Equipment, Apps & Gadgets</h2>
+          <p class="text-blue-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill the gaps in questions 1–8 with terms from the box: <em>apps, connection, devices, digital age, e-books, equipment, gadget, software</em>. Then practice asking and answering these questions in the speaking studio!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2a()" class="px-5 py-2.5 bg-white hover:bg-blue-50 text-blue-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Questions</span>
+          </button>
+          <button onclick="revealEx2a()" class="px-4 py-2.5 bg-blue-800/60 hover:bg-blue-800 text-white border border-blue-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Box for Exercise 2a -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Available Vocabulary Bank:</span>
+          <span class="text-xs text-slate-400">Click a word to insert into the active input</span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="ex2a-word-bank">
+          <button type="button" onclick="insertEx2aWord('digital age')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-950 font-black text-sm hover:border-blue-500 transition">digital age</button>
+          <button type="button" onclick="insertEx2aWord('e-books')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-950 font-black text-sm hover:border-blue-500 transition">e-books</button>
+          <button type="button" onclick="insertEx2aWord('devices')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-950 font-black text-sm hover:border-blue-500 transition">devices</button>
+          <button type="button" onclick="insertEx2aWord('connection')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-950 font-black text-sm hover:border-blue-500 transition">connection</button>
+          <button type="button" onclick="insertEx2aWord('apps')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-950 font-black text-sm hover:border-blue-500 transition">apps</button>
+          <button type="button" onclick="insertEx2aWord('software')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-950 font-black text-sm hover:border-blue-500 transition">software</button>
+          <button type="button" onclick="insertEx2aWord('equipment')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-950 font-black text-sm hover:border-blue-500 transition">equipment</button>
+          <button type="button" onclick="insertEx2aWord('gadget')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-950 font-black text-sm hover:border-blue-500 transition">gadget</button>
+        </div>
+      </div>
+
+      <!-- Exercise 2a Sentences Container -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">2a</span>
+            Complete the questions with the words/phrases in the box:
+          </h3>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-blue-800 bg-blue-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="space-y-4" id="ex2a-container">
+          
+          <!-- Item 1: digital age -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              What advantages does living in the
+              <input type="text" data-ans="digital age" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-36 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 1]" />
+              give us?
+            </p>
+          </div>
+
+          <!-- Item 2: e-books -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Do you ever read
+              <input type="text" data-ans="e-books,ebooks" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-32 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 2]" />
+              ? Why/Why not?
+            </p>
+          </div>
+
+          <!-- Item 3: devices -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              How many electronic
+              <input type="text" data-ans="devices" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-32 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 3]" />
+              do you own?
+            </p>
+          </div>
+
+          <!-- Item 4: connection -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              How fast is your internet
+              <input type="text" data-ans="connection" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-36 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 4]" />
+              ?
+            </p>
+          </div>
+
+          <!-- Item 5: apps -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              How many
+              <input type="text" data-ans="apps" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-28 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 5]" />
+              do you have on your phone? Do you use all of them?
+            </p>
+          </div>
+
+          <!-- Item 6: software -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 6</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Do you always upgrade your computer
+              <input type="text" data-ans="software" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-32 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 6]" />
+              every time you need to?
+            </p>
+          </div>
+
+          <!-- Item 7: equipment -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 7</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              What electronic
+              <input type="text" data-ans="equipment" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-36 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 7]" />
+              do you use for work or study?
+            </p>
+          </div>
+
+          <!-- Item 8: gadget -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 8</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Do you always buy the latest
+              <input type="text" data-ans="gadget" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-blue-950 bg-white text-base w-32 text-center focus:border-blue-600 focus:outline-none" placeholder="[term 8]" />
+              or do you prefer to wait?
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 2b: Interactive Speaking Rehearsal Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">2b</span>
+            Work in pairs. Take turns to ask and answer the questions in Exercise 2a:
+          </h3>
+          <span class="text-xs font-black uppercase tracking-wider text-blue-800 bg-blue-100 px-3 py-1 rounded-xl">Audio Speaking Cards</span>
+        </div>
+        <p class="text-sm text-slate-600">Click any card to listen to the question with natural British pronunciation and review authentic model answers:</p>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" id="speaking-cards-grid-2b">
+          
+          <!-- Card 1 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Q1: Digital Age</span>
+              <button onclick="speakText('What advantages does living in the digital age give us?')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Advantages of the digital age?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Model:</strong> "It gives us instant access to global information, seamless remote communication, and paperless convenience."
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Q2: E-books</span>
+              <button onclick="speakText('Do you ever read e-books? Why or why not?')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Do you ever read e-books?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Model:</strong> "Yes, especially when commuting, because an e-reader holds hundreds of novels without adding weight to my bag."
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Q5: Apps on Phone</span>
+              <button onclick="speakText('How many apps do you have on your phone? Do you use all of them?')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"How many apps on phone?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Model:</strong> "I have around sixty installed, but honestly I only use about a dozen regularly for messaging, banking, and podcasts."
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-blue-700 uppercase">Q8: Latest Gadgets</span>
+              <button onclick="speakText('Do you always buy the latest gadget or do you prefer to wait?')" class="text-xs text-slate-500 hover:text-blue-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Buy latest gadgets immediately?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Model:</strong> "I prefer to wait until early software bugs are patched and prices drop before investing in a new device."
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: WORD FORMATION (Exercise 3a & 3b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a & 3b</span>
+            <span class="text-teal-200 text-xs font-medium">Page 145 • Morphological Derivations</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Word Formation: Technology & Society Nouns & Verbs</h2>
+          <p class="text-teal-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            In <strong>3a</strong>, complete the table by deriving nouns or verbs (note dual forms like <em>impact</em> and spelling contrasts like <em>affect vs effect</em>). In <strong>3b</strong>, apply these words in their correct grammatical form!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3ab()" class="px-5 py-2.5 bg-white hover:bg-teal-50 text-teal-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 3a & 3b</span>
+          </button>
+          <button onclick="revealEx3ab()" class="px-4 py-2.5 bg-teal-800/60 hover:bg-teal-800 text-white border border-teal-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 3a: Word Formation Table -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">3a</span>
+            Complete the table with the corresponding verbs and nouns:
+          </h3>
+          <span id="ex3a-score-pill" class="text-xs font-bold text-teal-800 bg-teal-50 px-3 py-1 rounded-xl">Score: 0/7</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse" id="ex3a-table">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-50 text-xs font-black uppercase tracking-wider text-slate-500">
+                <th class="p-3.5 rounded-l-xl">Verb</th>
+                <th class="p-3.5 rounded-r-xl">Noun</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-sm font-bold text-slate-800">
+              
+              <!-- 1: develop -> development -->
+              <tr>
+                <td class="p-3.5 text-indigo-700">develop</td>
+                <td class="p-3.5">
+                  <input type="text" data-ex3a-gap="1" data-ans="development" class="ex3a-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="noun..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+              </tr>
+
+              <!-- 2: progress -> progress -->
+              <tr>
+                <td class="p-3.5">
+                  <input type="text" data-ex3a-gap="2" data-ans="progress" class="ex3a-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-40 focus:border-teal-600 focus:outline-none" placeholder="verb..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+                <td class="p-3.5 text-indigo-700">progress</td>
+              </tr>
+
+              <!-- 3: advance -> advance / advancement -->
+              <tr>
+                <td class="p-3.5 text-indigo-700">advance</td>
+                <td class="p-3.5">
+                  <input type="text" data-ex3a-gap="3" data-ans="advance,advancement" class="ex3a-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="noun..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+              </tr>
+
+              <!-- 4: impact -> impact -->
+              <tr>
+                <td class="p-3.5">
+                  <input type="text" data-ex3a-gap="4" data-ans="impact" class="ex3a-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-40 focus:border-teal-600 focus:outline-none" placeholder="verb..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+                <td class="p-3.5 text-indigo-700">impact</td>
+              </tr>
+
+              <!-- 5: influence -> influence -->
+              <tr>
+                <td class="p-3.5 text-indigo-700">influence</td>
+                <td class="p-3.5">
+                  <input type="text" data-ex3a-gap="5" data-ans="influence" class="ex3a-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="noun..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+              </tr>
+
+              <!-- 6: change -> change -->
+              <tr>
+                <td class="p-3.5 text-indigo-700">change</td>
+                <td class="p-3.5">
+                  <input type="text" data-ex3a-gap="6" data-ans="change" class="ex3a-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-44 focus:border-teal-600 focus:outline-none" placeholder="noun..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+              </tr>
+
+              <!-- 7: affect -> effect -->
+              <tr>
+                <td class="p-3.5">
+                  <input type="text" data-ex3a-gap="7" data-ans="affect" class="ex3a-input exercise-input px-3 py-1.5 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-sm w-40 focus:border-teal-600 focus:outline-none" placeholder="verb (starts with a)..." />
+                  <span class="feedback-badge text-xs font-bold ml-2"></span>
+                </td>
+                <td class="p-3.5 text-indigo-700">effect</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Exercise 3b: Sentence Completion Using Words from 3a -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">3b</span>
+            Complete the sentences with words from Exercise 3a in the correct form:
+          </h3>
+          <span id="ex3b-score-pill" class="text-xs font-bold text-teal-800 bg-teal-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex3b-container">
+          
+          <!-- Sentence 1: progress -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Reports say that they are making good
+              <input type="text" data-ans="progress" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-36 text-center focus:border-teal-600 focus:outline-none" placeholder="[noun 1]" />
+              towards a peace agreement.
+            </p>
+          </div>
+
+          <!-- Sentence 2: influence / impact -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Parents have enormous
+              <input type="text" data-ans="influence,impact" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-36 text-center focus:border-teal-600 focus:outline-none" placeholder="[noun 2]" />
+              on what and how much TV their children watch.
+            </p>
+          </div>
+
+          <!-- Sentence 3: effects / impact / impacts -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              World leaders are meeting to consider the environmental
+              <input type="text" data-ans="effects,impact,impacts,effect" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-36 text-center focus:border-teal-600 focus:outline-none" placeholder="[noun 3]" />
+              of global warming.
+            </p>
+          </div>
+
+          <!-- Sentence 4: developments / advances / changes -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It can be difficult to keep up with the speed of recent technological
+              <input type="text" data-ans="developments,advances,advancements,changes" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-44 text-center focus:border-teal-600 focus:outline-none" placeholder="[plural noun 4]" />
+              which have changed our lives enormously.
+            </p>
+          </div>
+
+          <!-- Sentence 5: affected / influenced / changed -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              One way that technology has
+              <input type="text" data-ans="affected,influenced,changed,transformed" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-36 text-center focus:border-teal-600 focus:outline-none" placeholder="[past participle 5]" />
+              news reporting is that we can get news updates instantly.
+            </p>
+          </div>
+
+          <!-- Sentence 6: develop / advance / progress / change -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 6</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              When Twitter first appeared in 2006, no one could imagine how quickly it would
+              <input type="text" data-ans="develop,grow,advance,progress,change" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-950 bg-white text-base w-36 text-center focus:border-teal-600 focus:outline-none" placeholder="[bare infinitive 6]" />
+              .
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: PHRASAL VERBS (Exercise 4a & 4b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a & 4b</span>
+            <span class="text-purple-200 text-xs font-medium">Page 145 • Technology Phrasal Verbs</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Phrasal Verbs with UP, INTO, and OUT</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            In <strong>4a</strong>, complete each question with the correct particle (<em>up</em>, <em>into</em>, or <em>out</em>). Notice idiomatic verb collocations like <em>hack into</em>, <em>set up</em>, <em>back up</em>, <em>run out of</em>, <em>pop up</em>, <em>use up</em>, <em>print out</em>, and <em>sign up</em>!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4a()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Particles</span>
+          </button>
+          <button onclick="revealEx4a()" class="px-4 py-2.5 bg-purple-800/60 hover:bg-purple-800 text-white border border-purple-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Particle Chip Inserter -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Target Particles:</span>
+          <span class="text-xs text-slate-400">Click a particle to insert into the active gap</span>
+        </div>
+        <div class="flex flex-wrap gap-3" id="ex4a-particle-bank">
+          <button type="button" onclick="insertEx4aParticle('into')" class="px-4 py-1.5 rounded-xl bg-purple-50 border-2 border-purple-200 text-purple-950 font-black text-sm hover:border-purple-500 transition">into</button>
+          <button type="button" onclick="insertEx4aParticle('up')" class="px-4 py-1.5 rounded-xl bg-purple-50 border-2 border-purple-200 text-purple-950 font-black text-sm hover:border-purple-500 transition">up</button>
+          <button type="button" onclick="insertEx4aParticle('out')" class="px-4 py-1.5 rounded-xl bg-purple-50 border-2 border-purple-200 text-purple-950 font-black text-sm hover:border-purple-500 transition">out</button>
+        </div>
+      </div>
+
+      <!-- Exercise 4a Question Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">4a</span>
+            Complete the questions with <em>up</em>, <em>into</em> or <em>out</em>:
+          </h3>
+          <span id="ex4a-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="space-y-4" id="ex4a-container">
+          
+          <!-- 1: hack into -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 1: [hack ...]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Are you worried about someone hacking
+              <input type="text" data-ans="into" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-24 text-center focus:border-purple-600 focus:outline-none" placeholder="particle" />
+              your bank account?
+            </p>
+          </div>
+
+          <!-- 2: set up -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 2: [set ...]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Do you find it easy or difficult to set
+              <input type="text" data-ans="up" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-24 text-center focus:border-purple-600 focus:outline-none" placeholder="particle" />
+              software on your computer?
+            </p>
+          </div>
+
+          <!-- 3: back up -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 3: [back ...]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Do you remember to back
+              <input type="text" data-ans="up" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-24 text-center focus:border-purple-600 focus:outline-none" placeholder="particle" />
+              your files regularly?
+            </p>
+          </div>
+
+          <!-- 4: run out of -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 4: [run ... of]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              How often do you run
+              <input type="text" data-ans="out" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-24 text-center focus:border-purple-600 focus:outline-none" placeholder="particle" />
+              of space in your computer or phone?
+            </p>
+          </div>
+
+          <!-- 5: pop up -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 5: [pop ...]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Do you find adverts that pop
+              <input type="text" data-ans="up" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-24 text-center focus:border-purple-600 focus:outline-none" placeholder="particle" />
+              on your screen annoying?
+            </p>
+          </div>
+
+          <!-- 6: use up -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 6: [use ...]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Do you use
+              <input type="text" data-ans="up" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-24 text-center focus:border-purple-600 focus:outline-none" placeholder="particle" />
+              all your data quickly on your mobile?
+            </p>
+          </div>
+
+          <!-- 7: print out -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 7: [print ... ]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Do you read on screen or do you prefer to print things
+              <input type="text" data-ans="out" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-24 text-center focus:border-purple-600 focus:outline-none" placeholder="particle" />
+              ?
+            </p>
+          </div>
+
+          <!-- 8: sign up -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-item="8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Question 8: [sign ...]</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Do you like to sign
+              <input type="text" data-ans="up" class="ex4a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-purple-950 bg-white text-base w-24 text-center focus:border-purple-600 focus:outline-none" placeholder="particle" />
+              for special offers?
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 4b: Phrasal Verbs Pairwork & Debate Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">4b</span>
+              Work in pairs. Take turns to ask and answer the questions in Exercise 4a:
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Review model phrasal verb answers and record your digital habits:</p>
+          </div>
+          <button onclick="saveEx4bNotes()" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+            Save My Habits
+          </button>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          <!-- Card 1 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-purple-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-purple-700 uppercase">Q1: Hack Into</span>
+              <button onclick="speakText('Are you worried about someone hacking into your bank account?')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Hacking into bank accounts?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Model:</strong> "Yes, that is why I always use two-factor authentication and unique passwords for financial apps."
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-purple-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-purple-700 uppercase">Q3: Back Up</span>
+              <button onclick="speakText('Do you remember to back up your files regularly?')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Backing up files regularly?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Model:</strong> "I configure automatic cloud backups every evening so I never lose important study documents."
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-purple-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-purple-700 uppercase">Q5: Pop Up</span>
+              <button onclick="speakText('Do you find adverts that pop up on your screen annoying?')" class="text-xs text-slate-500 hover:text-purple-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Annoying pop-up ads?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Model:</strong> "Extremely annoying! I use browser ad-blockers to stop pop-ups from interrupting my reading."
+            </div>
+          </div>
+
+        </div>
+
+        <div>
+          <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-2">My Digital Habits & Discussion Notes:</label>
+          <textarea id="ex4b-discussion-text" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-purple-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. I rarely run out of data because I download videos on Wi-Fi before traveling. I also prefer reading digital articles rather than printing them out..."></textarea>
+        </div>
+        <div id="ex4b-status" class="hidden p-3 rounded-xl bg-purple-100 text-purple-900 text-xs font-bold">
+          ✓ Your digital habits notes have been saved.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: VOCABULARY LEXICON & AUDIO GUIDE -->
+    <!-- ========================================================================= -->
+    <section id="tab-lexicon" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-indigo-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Unit 9b Glossary</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 145 Reference & Pronunciation Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Comprehensive Media & Technology Lexicon</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Full reference definitions, phonetic transcriptions, grammatical collocations, and one-click British English pronunciation.
+        </p>
+      </div>
+
+      <!-- Flashcards Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <!-- message -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">message</h4>
+            <button onclick="speakText('message')" class="text-xs px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-800 font-bold hover:bg-indigo-100 transition">🔊 /ˈmes.ɪdʒ/</button>
+          </div>
+          <span class="text-xs font-bold text-indigo-600 uppercase">verb [T]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">To send a short written digital communication to someone, especially using a smartphone app.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>message friends on WhatsApp</em></div>
+        </div>
+
+        <!-- google -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">google</h4>
+            <button onclick="speakText('google')" class="text-xs px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-800 font-bold hover:bg-indigo-100 transition">🔊 /ˈɡuː.ɡəl/</button>
+          </div>
+          <span class="text-xs font-bold text-indigo-600 uppercase">verb [T/I]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">To search for information on the internet using an online search engine.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>google a recipe / google for answers</em></div>
+        </div>
+
+        <!-- access -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">access</h4>
+            <button onclick="speakText('access')" class="text-xs px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-800 font-bold hover:bg-indigo-100 transition">🔊 /ˈæk.ses/</button>
+          </div>
+          <span class="text-xs font-bold text-indigo-600 uppercase">verb [T]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">To open, view, or use a computer file, database, or restricted website.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>access secure files / access the network</em></div>
+        </div>
+
+        <!-- browse -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">browse</h4>
+            <button onclick="speakText('browse')" class="text-xs px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-800 font-bold hover:bg-indigo-100 transition">🔊 /braʊz/</button>
+          </div>
+          <span class="text-xs font-bold text-indigo-600 uppercase">verb [I/T]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">To look through information on web pages casually without a specific search in mind.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>browse news websites / web browser</em></div>
+        </div>
+
+        <!-- crash -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">crash</h4>
+            <button onclick="speakText('crash')" class="text-xs px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-800 font-bold hover:bg-indigo-100 transition">🔊 /kræʃ/</button>
+          </div>
+          <span class="text-xs font-bold text-indigo-600 uppercase">verb [I]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">When a computer system or software application suddenly stops functioning or shuts down.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>computer crashes unexpectedly</em></div>
+        </div>
+
+        <!-- upgrade -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">upgrade</h4>
+            <button onclick="speakText('upgrade')" class="text-xs px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-800 font-bold hover:bg-indigo-100 transition">🔊 /ʌpˈɡreɪd/</button>
+          </div>
+          <span class="text-xs font-bold text-indigo-600 uppercase">verb [T]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">To replace hardware or software with an improved, modern, or more powerful version.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>upgrade your mobile phone / upgrade software</em></div>
+        </div>
+
+        <!-- affect vs effect -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">affect vs. effect</h4>
+            <button onclick="speakText('affect and effect')" class="text-xs px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-800 font-bold hover:bg-indigo-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-indigo-600 uppercase">verb vs. noun</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium"><strong>Affect (verb):</strong> to influence or produce a change in. <strong>Effect (noun):</strong> the result or outcome.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Rule:</strong> <em>technology affects news / environmental effects</em></div>
+        </div>
+
+        <!-- hack into -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">hack into</h4>
+            <button onclick="speakText('hack into')" class="text-xs px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-800 font-bold hover:bg-indigo-100 transition">🔊 /hæk ˈɪn.tuː/</button>
+          </div>
+          <span class="text-xs font-bold text-indigo-600 uppercase">phrasal verb</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">To gain unauthorized or illegal digital access to another person's computer or server.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>hack into a database / bank account</em></div>
+        </div>
+
+        <!-- back up -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">back up</h4>
+            <button onclick="speakText('back up')" class="text-xs px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-800 font-bold hover:bg-indigo-100 transition">🔊 /bæk ʌp/</button>
+          </div>
+          <span class="text-xs font-bold text-indigo-600 uppercase">phrasal verb</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">To create an exact duplicate copy of computer data to prevent catastrophic loss.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>back up essential files to the cloud</em></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Vocabulary page 93
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 9b Vocabulary
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 9: Media • 9b Vocabulary • Page 145
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic & Interactive State Scripts -->
+  <script>
+    // State management for scores
+    const state = {
+      score: {
+        ex1: 0,
+        ex2a: 0,
+        ex3a: 0,
+        ex3b: 0,
+        ex4a: 0
+      }
+    };
+
+    // Web Audio Synthesizer for feedback chimes
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.15); // C6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Text to Speech Pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.92;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // =========================================================================
+    // EXERCISE 1 LOGIC
+    // =========================================================================
+    function selectEx1Pill(btn) {
+      const container = btn.closest('.inline-flex');
+      container.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-indigo-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-indigo-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx1() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex1-container [data-ex1-q]');
+
+      rows.forEach(row => {
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+        const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Choose verb</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toLowerCase();
+        if (userVal === expected.toLowerCase()) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-indigo-600', 'border-indigo-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          selectedBtn.classList.remove('bg-indigo-600', 'border-indigo-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex1 = correct;
+      document.getElementById('ex1-score-pill').textContent = `Score: ${correct}/8`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx1() {
+      const answers = {
+        '1': 'message',
+        '2': 'google',
+        '3': 'access',
+        '4': 'browsing',
+        '5': 'download',
+        '6': 'crash',
+        '7': 'upgrade',
+        '8': 'attach'
+      };
+
+      for (let q in answers) {
+        const row = document.querySelector(`[data-ex1-q="${q}"]`);
+        const btns = row.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim().toLowerCase() === answers[q].toLowerCase()) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-indigo-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex1 = 8;
+      document.getElementById('ex1-score-pill').textContent = 'Score: 8/8';
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 2a & 2b LOGIC
+    // =========================================================================
+    let lastActiveEx2aInput = null;
+    document.querySelectorAll('.ex2a-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx2aInput = inp;
+      });
+    });
+
+    function insertEx2aWord(word) {
+      if (lastActiveEx2aInput) {
+        lastActiveEx2aInput.value = word;
+        lastActiveEx2aInput.focus();
+      } else {
+        const empty = Array.from(document.querySelectorAll('.ex2a-input')).find(i => !i.value.trim());
+        if (empty) {
+          empty.value = word;
+          empty.focus();
+        }
+      }
+    }
+
+    function checkEx2a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex2a-container [data-ex2a-item]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex2a-input');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Fill term</span>';
+          inp.classList.remove('border-blue-500', 'bg-blue-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-blue-500', 'bg-blue-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-blue-500', 'bg-blue-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex2a = correct;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correct}/8`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx2a() {
+      const answers = {
+        '1': 'digital age',
+        '2': 'e-books',
+        '3': 'devices',
+        '4': 'connection',
+        '5': 'apps',
+        '6': 'software',
+        '7': 'equipment',
+        '8': 'gadget'
+      };
+
+      for (let k in answers) {
+        const row = document.querySelector(`[data-ex2a-item="${k}"]`);
+        const inp = row.querySelector('.ex2a-input');
+        inp.value = answers[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-blue-500', 'bg-blue-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex2a = 8;
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 8/8';
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 3a & 3b LOGIC
+    // =========================================================================
+    function checkEx3ab() {
+      // 3a Table check
+      let correct3a = 0;
+      const inputs3a = document.querySelectorAll('.ex3a-input');
+
+      inputs3a.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+        const badge = inp.nextElementSibling;
+
+        if (allowed.includes(userVal)) {
+          correct3a++;
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-teal-500', 'bg-teal-50');
+        } else {
+          badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-teal-500', 'bg-teal-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+      state.score.ex3a = correct3a;
+      document.getElementById('ex3a-score-pill').textContent = `Score: ${correct3a}/7`;
+
+      // 3b Sentences check
+      let correct3b = 0;
+      document.querySelectorAll('#ex3b-container [data-ex3b-item]').forEach(row => {
+        const inp = row.querySelector('.ex3b-input');
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Fill gap</span>';
+          inp.classList.remove('border-teal-500', 'bg-teal-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (allowed.includes(userVal)) {
+          correct3b++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-teal-500', 'bg-teal-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${allowed[0]})</span>`;
+          inp.classList.remove('border-teal-500', 'bg-teal-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+      state.score.ex3b = correct3b;
+      document.getElementById('ex3b-score-pill').textContent = `Score: ${correct3b}/6`;
+
+      updateTotalScore();
+      playBeep(correct3a >= 5 && correct3b >= 4);
+    }
+
+    function revealEx3ab() {
+      // Reveal 3a
+      const answers3a = {
+        '1': 'development',
+        '2': 'progress',
+        '3': 'advance',
+        '4': 'impact',
+        '5': 'influence',
+        '6': 'change',
+        '7': 'affect'
+      };
+
+      for (let k in answers3a) {
+        const inp = document.querySelector(`[data-ex3a-gap="${k}"]`);
+        inp.value = answers3a[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-teal-500', 'bg-teal-50');
+        inp.nextElementSibling.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓</span>';
+      }
+      state.score.ex3a = 7;
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 7/7';
+
+      // Reveal 3b
+      const answers3b = {
+        '1': 'progress',
+        '2': 'influence',
+        '3': 'effects',
+        '4': 'developments',
+        '5': 'affected',
+        '6': 'develop'
+      };
+
+      for (let k in answers3b) {
+        const row = document.querySelector(`[data-ex3b-item="${k}"]`);
+        const inp = row.querySelector('.ex3b-input');
+        inp.value = answers3b[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-teal-500', 'bg-teal-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+      state.score.ex3b = 6;
+      document.getElementById('ex3b-score-pill').textContent = 'Score: 6/6';
+
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 4a & 4b LOGIC
+    // =========================================================================
+    let lastActiveEx4aInput = null;
+    document.querySelectorAll('.ex4a-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx4aInput = inp;
+      });
+    });
+
+    function insertEx4aParticle(particle) {
+      if (lastActiveEx4aInput) {
+        lastActiveEx4aInput.value = particle;
+        lastActiveEx4aInput.focus();
+      } else {
+        const empty = Array.from(document.querySelectorAll('.ex4a-input')).find(i => !i.value.trim());
+        if (empty) {
+          empty.value = particle;
+          empty.focus();
+        }
+      }
+    }
+
+    function checkEx4a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex4a-container [data-ex4a-item]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex4a-input');
+        const expected = cleanStr(inp.getAttribute('data-ans'));
+        const userVal = cleanStr(inp.value);
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Fill particle</span>';
+          inp.classList.remove('border-purple-500', 'bg-purple-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (userVal === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-purple-500', 'bg-purple-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          inp.classList.remove('border-purple-500', 'bg-purple-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex4a = correct;
+      document.getElementById('ex4a-score-pill').textContent = `Score: ${correct}/8`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx4a() {
+      const answers = {
+        '1': 'into',
+        '2': 'up',
+        '3': 'up',
+        '4': 'out',
+        '5': 'up',
+        '6': 'up',
+        '7': 'out',
+        '8': 'up'
+      };
+
+      for (let k in answers) {
+        const row = document.querySelector(`[data-ex4a-item="${k}"]`);
+        const inp = row.querySelector('.ex4a-input');
+        inp.value = answers[k];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-purple-500', 'bg-purple-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex4a = 8;
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 8/8';
+      updateTotalScore();
+    }
+
+    function saveEx4bNotes() {
+      const text = document.getElementById('ex4b-discussion-text').value;
+      localStorage.setItem('m9b_vocab_ex4b', JSON.stringify({ text }));
+      const status = document.getElementById('ex4b-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // =========================================================================
+    // GLOBAL PROGRESS & RESET HANDLERS
+    // =========================================================================
+    function updateTotalScore() {
+      const total = state.score.ex1 + state.score.ex2a + state.score.ex3a + state.score.ex3b + state.score.ex4a;
+      // Points distribution: 1 (8) + 2a (8) + 3a (7) + 3b (6) + 4a (8) = 37 total points
+      const maxScore = 37;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 30) {
+        bar.classList.replace('bg-indigo-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-indigo-600');
+      }
+    }
+
+    // Reset All Answers
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // 1. Reset 1 pills
+      document.querySelectorAll('#ex1-container .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-indigo-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-indigo-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // 2. Reset 2a inputs
+      document.querySelectorAll('.ex2a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-blue-500', 'bg-blue-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 3. Reset 3a inputs
+      document.querySelectorAll('.ex3a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-teal-500', 'bg-teal-50', 'border-rose-400', 'bg-rose-50');
+        if (i.nextElementSibling) i.nextElementSibling.innerHTML = '';
+      });
+
+      // 4. Reset 3b inputs
+      document.querySelectorAll('.ex3b-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-teal-500', 'bg-teal-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 5. Reset 4a inputs
+      document.querySelectorAll('.ex4a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-purple-500', 'bg-purple-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear all feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset state scores
+      state.score = { ex1: 0, ex2a: 0, ex3a: 0, ex3b: 0, ex4a: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 0/7';
+      document.getElementById('ex3b-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 0/8';
+    });
+
+    // Auto-restore saved discussion notes on DOM load
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved4b = JSON.parse(localStorage.getItem('m9b_vocab_ex4b'));
+        if (saved4b && saved4b.text) {
+          document.getElementById('ex4b-discussion-text').value = saved4b.text;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

@@ -1320,6 +1320,28 @@
                 }
             }
 
+            // Vocabulary Exercise Button Hydration
+            const vUrl = data.vocabUrl || (el ? (el.getAttribute('vocab-url') || el.getAttribute('data-vocab-ref')) : null);
+            const vTitle = data.vocabTitle || (el ? (el.getAttribute('vocab-title') || el.getAttribute('title')) : null) || 'Vocabulary Practice Exercises';
+            if (vUrl) {
+                let actionRow = section.querySelector('.action-row');
+                if (!actionRow) {
+                    actionRow = document.createElement('div');
+                    actionRow.className = 'action-row';
+                    actionRow.style.marginTop = '10px';
+                    const pageContent = section.querySelector('.page-content');
+                    if (pageContent) pageContent.appendChild(actionRow);
+                }
+                if (actionRow && !actionRow.querySelector('.vocab-exercise-trigger-btn')) {
+                    const vBtn = document.createElement('button');
+                    vBtn.className = 'btn-action vocab-exercise-trigger-btn';
+                    vBtn.setAttribute('data-vocab-ref', vUrl);
+                    vBtn.setAttribute('data-vocab-title', vTitle);
+                    vBtn.innerHTML = `📚 Vocabulary Exercises`;
+                    actionRow.appendChild(vBtn);
+                }
+            }
+
             // Vocabulary Hub / Cards Template Hydration
             if (data.words && Array.isArray(data.words)) {
                 const vocabCardsContainer = section.querySelector('[data-slot="cards"], .vocab-hub-grid');
@@ -1781,6 +1803,28 @@
                         gBtn.setAttribute('data-grammar-title', slideGTitle);
                         gBtn.innerHTML = `📝 Grammar Exercises`;
                         actionRow.appendChild(gBtn);
+                    }
+                }
+
+                // Vocabulary Exercise attribute support
+                const slideVUrl = el.getAttribute('vocab-url') || el.getAttribute('data-vocab-ref');
+                if (slideVUrl) {
+                    const slideVTitle = el.getAttribute('vocab-title') || el.getAttribute('title') || 'Vocabulary Practice Exercises';
+                    let actionRow = section.querySelector('.action-row');
+                    if (!actionRow) {
+                        actionRow = document.createElement('div');
+                        actionRow.className = 'action-row';
+                        actionRow.style.marginTop = '10px';
+                        const pageContent = section.querySelector('.page-content');
+                        if (pageContent) pageContent.appendChild(actionRow);
+                    }
+                    if (actionRow && !actionRow.querySelector('.vocab-exercise-trigger-btn')) {
+                        const vBtn = document.createElement('button');
+                        vBtn.className = 'btn-action vocab-exercise-trigger-btn';
+                        vBtn.setAttribute('data-vocab-ref', slideVUrl);
+                        vBtn.setAttribute('data-vocab-title', slideVTitle);
+                        vBtn.innerHTML = `📚 Vocabulary Exercises`;
+                        actionRow.appendChild(vBtn);
                     }
                 }
 

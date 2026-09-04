@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 6b Vocabulary: Buying and Selling - Types of Shops, Retail Verbs & Prepositions</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            retail: {
+              50: '#fdf4ff',
+              100: '#fae8ff',
+              200: '#f5d0fe',
+              500: '#d946ef',
+              600: '#c026d3',
+              700: '#a21caf',
+              800: '#86198f',
+              900: '#701a75',
+            },
+            market: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              200: '#fed7aa',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+            },
+            navyCommerce: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(192, 38, 211, 0.25);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-fuchsia-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-fuchsia-600 via-rose-600 to-amber-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-fuchsia-500/25 ring-2 ring-white">
+          6b
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-fuchsia-100 text-fuchsia-800 tracking-wide uppercase">Unit 6: Buying and selling</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 97</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Vocabulary: <span class="text-fuchsia-600">Types of Shops, Retail Verbs & Prepositions</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-fuchsia-600">0 / 32</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-fuchsia-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-fuchsia-600 text-white shadow-md shadow-fuchsia-600/25">
+          1. Types of Shops (1a & 1b)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Shopping Essentials (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Verbs & Phrases (3a & 3b)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Dependent Prepositions (4)
+        </button>
+        <button data-tab="tab-lexicon" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📚 Vocabulary Lexicon & Audio
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: TYPES OF SHOPS (Exercise 1a & 1b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-fuchsia-600 via-rose-600 to-amber-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1a & 1b</span>
+            <span class="text-fuchsia-200 text-xs font-medium">Page 97 • Types of Shops & Goods</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Types of Shops & Product Categorisation</h2>
+          <p class="text-fuchsia-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Match the 8 types of shops (1–8) with the goods and products they sell (A–H). Then record your recent shopping habits in the personal reflection log!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1a()" class="px-5 py-2.5 bg-white hover:bg-fuchsia-50 text-fuchsia-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 1a</span>
+          </button>
+          <button onclick="revealEx1a()" class="px-4 py-2.5 bg-fuchsia-800/60 hover:bg-fuchsia-800 text-white border border-fuchsia-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Products A-H Reference Legend Box -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Products & Goods Catalog (A–H):</span>
+          <span class="text-xs text-slate-400">Match these options with the shops below</span>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs sm:text-sm">
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2">
+            <span class="w-6 h-6 rounded-lg bg-fuchsia-100 text-fuchsia-800 font-black text-xs flex items-center justify-center shrink-0">A</span>
+            <span class="text-slate-700 font-medium">maps, books, kindles, music</span>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2">
+            <span class="w-6 h-6 rounded-lg bg-fuchsia-100 text-fuchsia-800 font-black text-xs flex items-center justify-center shrink-0">B</span>
+            <span class="text-slate-700 font-medium">many different types of things, including clothes and furniture</span>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2">
+            <span class="w-6 h-6 rounded-lg bg-fuchsia-100 text-fuchsia-800 font-black text-xs flex items-center justify-center shrink-0">C</span>
+            <span class="text-slate-700 font-medium">sports clothes and equipment</span>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2">
+            <span class="w-6 h-6 rounded-lg bg-fuchsia-100 text-fuchsia-800 font-black text-xs flex items-center justify-center shrink-0">D</span>
+            <span class="text-slate-700 font-medium">things people have used before</span>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2">
+            <span class="w-6 h-6 rounded-lg bg-fuchsia-100 text-fuchsia-800 font-black text-xs flex items-center justify-center shrink-0">E</span>
+            <span class="text-slate-700 font-medium">flowers</span>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2">
+            <span class="w-6 h-6 rounded-lg bg-fuchsia-100 text-fuchsia-800 font-black text-xs flex items-center justify-center shrink-0">F</span>
+            <span class="text-slate-700 font-medium">old and valuable furniture, paintings, jewellery</span>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2">
+            <span class="w-6 h-6 rounded-lg bg-fuchsia-100 text-fuchsia-800 font-black text-xs flex items-center justify-center shrink-0">G</span>
+            <span class="text-slate-700 font-medium">sweets, newspapers and magazines</span>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2">
+            <span class="w-6 h-6 rounded-lg bg-fuchsia-100 text-fuchsia-800 font-black text-xs flex items-center justify-center shrink-0">H</span>
+            <span class="text-slate-700 font-medium">medicines, soap, toothpaste, make up</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 1a Matching Grid -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-fuchsia-100 text-fuchsia-800 text-sm font-black flex items-center justify-center">1a</span>
+            Match the shops (1–8) with the products they sell (A–H):
+          </h3>
+          <span id="ex1a-score-pill" class="text-xs font-bold text-fuchsia-800 bg-fuchsia-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" id="ex1a-container">
+          
+          <!-- Shop 1: chemist's -> H -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1a-item="1" data-ans="H">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">1</span>
+              <button onclick="speakText('chemist\'s')" class="text-xs text-slate-400 hover:text-fuchsia-600 transition" title="Listen">🔊</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">chemist's</div>
+              <p class="text-xs text-slate-500 mt-0.5">pharmaceutical & health goods</p>
+            </div>
+            <div class="pt-1">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-fuchsia-950 focus:border-fuchsia-600 focus:outline-none">
+                <option value="">Select products...</option>
+                <option value="A">A. maps, books, kindles, music</option>
+                <option value="B">B. many different types of things</option>
+                <option value="C">C. sports clothes and equipment</option>
+                <option value="D">D. things people used before</option>
+                <option value="E">E. flowers</option>
+                <option value="F">F. old and valuable furniture</option>
+                <option value="G">G. sweets, newspapers and magazines</option>
+                <option value="H">H. medicines, soap, toothpaste, make up</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- Shop 2: newsagent's -> G -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1a-item="2" data-ans="G">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">2</span>
+              <button onclick="speakText('newsagent\'s')" class="text-xs text-slate-400 hover:text-fuchsia-600 transition" title="Listen">🔊</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">newsagent's</div>
+              <p class="text-xs text-slate-500 mt-0.5">periodicals & confectionery</p>
+            </div>
+            <div class="pt-1">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-fuchsia-950 focus:border-fuchsia-600 focus:outline-none">
+                <option value="">Select products...</option>
+                <option value="A">A. maps, books, kindles, music</option>
+                <option value="B">B. many different types of things</option>
+                <option value="C">C. sports clothes and equipment</option>
+                <option value="D">D. things people used before</option>
+                <option value="E">E. flowers</option>
+                <option value="F">F. old and valuable furniture</option>
+                <option value="G">G. sweets, newspapers and magazines</option>
+                <option value="H">H. medicines, soap, toothpaste, make up</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- Shop 3: antique shop -> F -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1a-item="3" data-ans="F">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">3</span>
+              <button onclick="speakText('antique shop')" class="text-xs text-slate-400 hover:text-fuchsia-600 transition" title="Listen">🔊</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">antique shop</div>
+              <p class="text-xs text-slate-500 mt-0.5">historic valuables & art</p>
+            </div>
+            <div class="pt-1">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-fuchsia-950 focus:border-fuchsia-600 focus:outline-none">
+                <option value="">Select products...</option>
+                <option value="A">A. maps, books, kindles, music</option>
+                <option value="B">B. many different types of things</option>
+                <option value="C">C. sports clothes and equipment</option>
+                <option value="D">D. things people used before</option>
+                <option value="E">E. flowers</option>
+                <option value="F">F. old and valuable furniture</option>
+                <option value="G">G. sweets, newspapers and magazines</option>
+                <option value="H">H. medicines, soap, toothpaste, make up</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- Shop 4: florist's -> E -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1a-item="4" data-ans="E">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">4</span>
+              <button onclick="speakText('florist\'s')" class="text-xs text-slate-400 hover:text-fuchsia-600 transition" title="Listen">🔊</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">florist's</div>
+              <p class="text-xs text-slate-500 mt-0.5">fresh floral arrangements</p>
+            </div>
+            <div class="pt-1">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-fuchsia-950 focus:border-fuchsia-600 focus:outline-none">
+                <option value="">Select products...</option>
+                <option value="A">A. maps, books, kindles, music</option>
+                <option value="B">B. many different types of things</option>
+                <option value="C">C. sports clothes and equipment</option>
+                <option value="D">D. things people used before</option>
+                <option value="E">E. flowers</option>
+                <option value="F">F. old and valuable furniture</option>
+                <option value="G">G. sweets, newspapers and magazines</option>
+                <option value="H">H. medicines, soap, toothpaste, make up</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- Shop 5: bookshop -> A -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1a-item="5" data-ans="A">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">5</span>
+              <button onclick="speakText('bookshop')" class="text-xs text-slate-400 hover:text-fuchsia-600 transition" title="Listen">🔊</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">bookshop</div>
+              <p class="text-xs text-slate-500 mt-0.5">literature, maps & media</p>
+            </div>
+            <div class="pt-1">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-fuchsia-950 focus:border-fuchsia-600 focus:outline-none">
+                <option value="">Select products...</option>
+                <option value="A">A. maps, books, kindles, music</option>
+                <option value="B">B. many different types of things</option>
+                <option value="C">C. sports clothes and equipment</option>
+                <option value="D">D. things people used before</option>
+                <option value="E">E. flowers</option>
+                <option value="F">F. old and valuable furniture</option>
+                <option value="G">G. sweets, newspapers and magazines</option>
+                <option value="H">H. medicines, soap, toothpaste, make up</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- Shop 6: second-hand store -> D -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1a-item="6" data-ans="D">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">6</span>
+              <button onclick="speakText('second-hand store')" class="text-xs text-slate-400 hover:text-fuchsia-600 transition" title="Listen">🔊</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">second-hand store</div>
+              <p class="text-xs text-slate-500 mt-0.5">pre-owned clothes & items</p>
+            </div>
+            <div class="pt-1">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-fuchsia-950 focus:border-fuchsia-600 focus:outline-none">
+                <option value="">Select products...</option>
+                <option value="A">A. maps, books, kindles, music</option>
+                <option value="B">B. many different types of things</option>
+                <option value="C">C. sports clothes and equipment</option>
+                <option value="D">D. things people used before</option>
+                <option value="E">E. flowers</option>
+                <option value="F">F. old and valuable furniture</option>
+                <option value="G">G. sweets, newspapers and magazines</option>
+                <option value="H">H. medicines, soap, toothpaste, make up</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- Shop 7: department store -> B -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1a-item="7" data-ans="B">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">7</span>
+              <button onclick="speakText('department store')" class="text-xs text-slate-400 hover:text-fuchsia-600 transition" title="Listen">🔊</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">department store</div>
+              <p class="text-xs text-slate-500 mt-0.5">multi-category large retail</p>
+            </div>
+            <div class="pt-1">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-fuchsia-950 focus:border-fuchsia-600 focus:outline-none">
+                <option value="">Select products...</option>
+                <option value="A">A. maps, books, kindles, music</option>
+                <option value="B">B. many different types of things</option>
+                <option value="C">C. sports clothes and equipment</option>
+                <option value="D">D. things people used before</option>
+                <option value="E">E. flowers</option>
+                <option value="F">F. old and valuable furniture</option>
+                <option value="G">G. sweets, newspapers and magazines</option>
+                <option value="H">H. medicines, soap, toothpaste, make up</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+          <!-- Shop 8: sports shop -> C -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3" data-ex1a-item="8" data-ans="C">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400">8</span>
+              <button onclick="speakText('sports shop')" class="text-xs text-slate-400 hover:text-fuchsia-600 transition" title="Listen">🔊</button>
+            </div>
+            <div>
+              <div class="text-base font-black text-slate-900">sports shop</div>
+              <p class="text-xs text-slate-500 mt-0.5">athletic gear & footwear</p>
+            </div>
+            <div class="pt-1">
+              <select class="ex1a-select w-full p-2.5 rounded-xl border-2 border-slate-300 bg-white text-xs font-bold text-fuchsia-950 focus:border-fuchsia-600 focus:outline-none">
+                <option value="">Select products...</option>
+                <option value="A">A. maps, books, kindles, music</option>
+                <option value="B">B. many different types of things</option>
+                <option value="C">C. sports clothes and equipment</option>
+                <option value="D">D. things people used before</option>
+                <option value="E">E. flowers</option>
+                <option value="F">F. old and valuable furniture</option>
+                <option value="G">G. sweets, newspapers and magazines</option>
+                <option value="H">H. medicines, soap, toothpaste, make up</option>
+              </select>
+              <div class="feedback-badge text-xs font-bold mt-1.5"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 1b: Pairwork Shopping Experience Reflection -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-fuchsia-100 text-fuchsia-800 text-sm font-black flex items-center justify-center">1b</span>
+              Work in pairs. When was the last time you went to these shops? What did you buy?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Reflect on your shopping habits and record model answers:</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="loadSampleEx1b()" class="px-4 py-2 bg-fuchsia-600 hover:bg-fuchsia-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+              Load Sample Notes
+            </button>
+            <button onclick="saveEx1bNotes()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">
+              Save My Notes
+            </button>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-1">1. Recent visit to a physical shop (where & when):</label>
+            <textarea id="ex1b-visit" rows="3" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" placeholder="e.g. Last Saturday I visited the local chemist's to buy vitamin supplements and sunscreen before my beach holiday..."></textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-1">2. Most memorable item purchased in a specialty shop:</label>
+            <textarea id="ex1b-bought" rows="3" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" placeholder="e.g. Two months ago I went to an antique shop in the historic quarter and discovered a beautiful vintage brass reading lamp..."></textarea>
+          </div>
+        </div>
+        <div id="ex1b-status" class="hidden p-3 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-bold">
+          ✓ Your personal shopping reflections have been saved.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: SHOPPING VOCABULARY (Exercise 2a & 2b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-rose-600 via-pink-600 to-amber-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-rose-200 text-xs font-medium">Page 97 • Retail Terminology & Customer Experience</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Shopping Transactions & In-Store Experience</h2>
+          <p class="text-rose-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill the gaps in sentences 1–6 with the target shopping terms from the box. Then evaluate each retail statement in the consumer debate studio!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2a()" class="px-5 py-2.5 bg-white hover:bg-rose-50 text-rose-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 2a</span>
+          </button>
+          <button onclick="revealEx2a()" class="px-4 py-2.5 bg-rose-800/60 hover:bg-rose-800 text-white border border-rose-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Chips -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Shopping Vocabulary Bank:</span>
+          <span class="text-xs text-slate-400">Click a word to insert into the active input</span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="ex2a-word-bank">
+          <button type="button" onclick="insertEx2aWord('bill')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-950 font-black text-sm hover:border-rose-500 transition">bill</button>
+          <button type="button" onclick="insertEx2aWord('customers')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-950 font-black text-sm hover:border-rose-500 transition">customers</button>
+          <button type="button" onclick="insertEx2aWord('fitting room')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-950 font-black text-sm hover:border-rose-500 transition">fitting room</button>
+          <button type="button" onclick="insertEx2aWord('order')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-950 font-black text-sm hover:border-rose-500 transition">order</button>
+          <button type="button" onclick="insertEx2aWord('receipt')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-950 font-black text-sm hover:border-rose-500 transition">receipt</button>
+          <button type="button" onclick="insertEx2aWord('sales assistant')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-950 font-black text-sm hover:border-rose-500 transition">sales assistant</button>
+        </div>
+      </div>
+
+      <!-- Exercise 2a Sentences -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">2a</span>
+            Complete the sentences with the words in the box:
+          </h3>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-rose-800 bg-rose-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex2a-container">
+          
+          <!-- Item 1: sales assistant -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              A good
+              <input type="text" data-ans="sales assistant" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-950 bg-white text-base w-44 text-center focus:border-rose-600 focus:outline-none" placeholder="[term 1]" />
+              needs to be confident and friendly with the people they serve.
+            </p>
+          </div>
+
+          <!-- Item 2: fitting room -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I never use the shop
+              <input type="text" data-ans="fitting room" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-950 bg-white text-base w-40 text-center focus:border-rose-600 focus:outline-none" placeholder="[term 2]" />
+              when I'm buying clothes – I prefer to try them at home.
+            </p>
+          </div>
+
+          <!-- Item 3: receipt -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              You should always get a(n)
+              <input type="text" data-ans="receipt" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-950 bg-white text-base w-32 text-center focus:border-rose-600 focus:outline-none" placeholder="[term 3]" />
+              in case you have to return the item to the shop.
+            </p>
+          </div>
+
+          <!-- Item 4: bill -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              In a restaurant I always check the
+              <input type="text" data-ans="bill" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-950 bg-white text-base w-28 text-center focus:border-rose-600 focus:outline-none" placeholder="[term 4]" />
+              carefully before paying.
+            </p>
+          </div>
+
+          <!-- Item 5: order -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              When you place a(n)
+              <input type="text" data-ans="order" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-950 bg-white text-base w-28 text-center focus:border-rose-600 focus:outline-none" placeholder="[term 5]" />
+              online, you often have to wait a long time to receive the product.
+            </p>
+          </div>
+
+          <!-- Item 6: customers -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-item="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 6</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It is important for shops to provide good after-sales service for their
+              <input type="text" data-ans="customers" class="ex2a-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-950 bg-white text-base w-36 text-center focus:border-rose-600 focus:outline-none" placeholder="[term 6]" />
+              .
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 2b: Consumer Habits Debate Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">2b</span>
+              Work in pairs. Do you agree or disagree with the sentences in Exercise 2a?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Select the consumer opinions that match your habits:</p>
+          </div>
+          <button onclick="saveEx2bNotes()" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+            Save My Stance
+          </button>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3" id="ex2b-checklist">
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-1" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">1. Friendly sales assistants make or break a shop.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-2" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">2. I avoid store fitting rooms and try clothes at home.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-3" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">3. I always keep paper/digital receipts for returns.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-4" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">4. I rigorously verify every item on a restaurant bill.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-5" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">5. Online deliveries take far too long in my region.</span>
+          </label>
+          <label class="p-3.5 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 flex items-center gap-3 cursor-pointer transition">
+            <input type="checkbox" id="ex2b-chk-6" class="w-5 h-5 text-rose-600 rounded-lg focus:ring-rose-500" />
+            <span class="text-sm font-bold text-slate-800">6. After-sales warranties matter more than cheap prices.</span>
+          </label>
+        </div>
+
+        <div>
+          <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-2">My Consumer Discussion Arguments:</label>
+          <textarea id="ex2b-discussion-text" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-rose-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. I agree with sentence 3 because keeping the receipt saved me money when a pair of running shoes had a manufacturing defect..."></textarea>
+        </div>
+        <div id="ex2b-status" class="hidden p-3 rounded-xl bg-rose-100 text-rose-900 text-xs font-bold">
+          ✓ Your consumer arguments have been saved.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: VERBS AND VERB PHRASES (Exercise 3a & 3b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a & 3b</span>
+            <span class="text-amber-200 text-xs font-medium">Page 97 • Retail Verb Collocations</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Retail Verbs & Collocation Accuracy</h2>
+          <p class="text-amber-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            In <strong>3a</strong>, select the correct verb in italics (*spend on*, *can't afford*, *exchange*, *cost*, *return*, *serve*, *advertise*, *browse*). Then practice asking and answering these questions in <strong>3b</strong>!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3a()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 3a</span>
+          </button>
+          <button onclick="revealEx3a()" class="px-4 py-2.5 bg-amber-800/60 hover:bg-amber-800 text-white border border-amber-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 3a Interactive Questions -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">3a</span>
+            Choose the correct options in italics to complete the sentences:
+          </h3>
+          <span id="ex3a-score-pill" class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="grid gap-3.5" id="ex3a-container">
+          
+          <!-- 1: spend / pay -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="1" data-ans="spend">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              How much do you usually
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">spend</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">pay</button>
+              </span>
+              on clothes every month?
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 2: afford / cost -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="2" data-ans="afford">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              Do you ever buy things that you can't really
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">afford</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">cost</button>
+              </span>
+              ?
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 3: exchange / serve -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="3" data-ans="exchange">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              For what reasons do people
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">exchange</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">serve</button>
+              </span>
+              items they buy?
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 4: buy / cost -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="4" data-ans="cost">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              How much does it
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">buy</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">cost</button>
+              </span>
+              to feed a family of four for a week?
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 5: offer / return -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="5" data-ans="return">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              Do you ever
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">offer</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">return</button>
+              </span>
+              something to a shop because you find it at a better price somewhere else?
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 6: browse / serve -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="6" data-ans="serve">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              In a clothes shop, is it important that the people who
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">browse</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">serve</button>
+              </span>
+              you are well-dressed?
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 7: advertise / serve -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="7" data-ans="advertise">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">7.</span>
+              Do you think companies should
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">advertise</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">serve</button>
+              </span>
+              unhealthy food products?
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- 8: browsing / spending -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex3a-q="8" data-ans="browsing">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">8.</span>
+              Do you like
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">browsing</button>
+                <button type="button" onclick="selectEx3aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">spending</button>
+              </span>
+              in the shops without actually buying anything?
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 3b: Speaking Cards with Audio Prompts -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">3b</span>
+            Work in pairs. Take turns to ask and answer the questions in Exercise 3a:
+          </h3>
+          <span class="text-xs font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-3 py-1 rounded-xl">Interactive Audio Cards</span>
+        </div>
+        <p class="text-sm text-slate-600">Listen to each conversational prompt and review model responses:</p>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" id="speaking-cards-grid">
+          
+          <!-- Card 1 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Q1: Spend on Clothes</span>
+              <button onclick="speakText('How much do you usually spend on clothes every month?')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Monthly clothing budget?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Model:</strong> "I usually budget around £50 a month, mainly replacing basics like socks and casual shirts."
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Q2: Can't Afford</span>
+              <button onclick="speakText('Do you ever buy things that you cannot really afford?')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Impulse buying beyond means?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Model:</strong> "Rarely, but I once splurged on designer headphones because they had exceptional noise cancellation."
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Q3: Exchange Items</span>
+              <button onclick="speakText('For what reasons do people exchange items they buy?')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Why exchange purchases?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Model:</strong> "Mainly if the clothing size is wrong, or if a gift duplicates something they already own."
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Q8: Browsing in Shops</span>
+              <button onclick="speakText('Do you like browsing in the shops without actually buying anything?')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Window shopping enjoyment?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600 leading-relaxed">
+              <strong>Model:</strong> "Yes, I love browsing independent bookshops or gadget stores just for creative inspiration."
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: DEPENDENT PREPOSITIONS (Exercise 4) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4</span>
+            <span class="text-teal-200 text-xs font-medium">Page 97 • Commercial Dependent Prepositions</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Online Shopping: Dependent Prepositions in Context</h2>
+          <p class="text-teal-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Complete the text with the prepositions in the box: <em>at</em>, <em>back</em>, <em>by</em>, <em>in</em> (×2), <em>on</em> (×5). Tap any preposition button to insert it into the active gap!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4()" class="px-5 py-2.5 bg-white hover:bg-teal-50 text-teal-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Prepositions</span>
+          </button>
+          <button onclick="revealEx4()" class="px-4 py-2.5 bg-teal-800/60 hover:bg-teal-800 text-white border border-teal-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Box for Exercise 4 -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Available Preposition Pool:</span>
+          <span class="text-xs text-slate-400">at • back • by • in (×2) • on (×5)</span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="ex4-word-bank">
+          <button type="button" onclick="insertEx4Prep('on')" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">on</button>
+          <button type="button" onclick="insertEx4Prep('in')" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">in</button>
+          <button type="button" onclick="insertEx4Prep('at')" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">at</button>
+          <button type="button" onclick="insertEx4Prep('back')" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">back</button>
+          <button type="button" onclick="insertEx4Prep('by')" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">by</button>
+        </div>
+      </div>
+
+      <!-- Article Reading Card with In-Line Inputs -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">4</span>
+            Complete the text with the prepositions in the box:
+          </h3>
+          <span id="ex4-score-pill" class="text-xs font-bold text-teal-800 bg-teal-50 px-3 py-1 rounded-xl">Score: 0/10</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.6rem] sm:leading-[3rem] font-normal space-y-6" id="ex4-article">
+          <div class="text-center font-black text-xl text-teal-950 border-b border-slate-100 pb-3">Online shopping</div>
+
+          <p>
+            Although most people still shop regularly
+            <span class="font-bold text-slate-400 mr-1">1</span>
+            <input type="text" data-ex4-gap="1" data-ans="on" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="prep 1" />
+            the high street, it is becoming more common for customers to shop online. The percentage of UK adults buying
+            <span class="font-bold text-slate-400 mr-1">2</span>
+            <input type="text" data-ex4-gap="2" data-ans="on" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="prep 2" />
+            the internet is increasing rapidly, and websites can crash when a store puts a new or popular product
+            <span class="font-bold text-slate-400 mr-1">3</span>
+            <input type="text" data-ex4-gap="3" data-ans="on" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="prep 3" />
+            sale. There are a number of reasons for this. Firstly, you can shop online using your phone or tablet anywhere and at any time, so it is far more convenient for busy customers. Secondly, online shopping gives us more choice of product and we can see which stores have the product we want
+            <span class="font-bold text-slate-400 mr-1">4</span>
+            <input type="text" data-ex4-gap="4" data-ans="in" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="prep 4" />
+            stock. Finally, online shopping allows us to compare prices easily and find products that are
+            <span class="font-bold text-slate-400 mr-1">5</span>
+            <input type="text" data-ex4-gap="5" data-ans="on" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="prep 5" />
+            special offer.
+          </p>
+
+          <p>
+            Of course, shopping online has disadvantages too. One of them is that you usually have to pay
+            <span class="font-bold text-slate-400 mr-1">6</span>
+            <input type="text" data-ex4-gap="6" data-ans="by" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="prep 6" />
+            credit card as you can't pay
+            <span class="font-bold text-slate-400 mr-1">7</span>
+            <input type="text" data-ex4-gap="7" data-ans="in" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="prep 7" />
+            cash. Buying clothes and shoes online is particularly popular but, of course, you are not able to try them
+            <span class="font-bold text-slate-400 mr-1">8</span>
+            <input type="text" data-ex4-gap="8" data-ans="on" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="prep 8" />
+            before you buy them and it can be more difficult to take something
+            <span class="font-bold text-slate-400 mr-1">9</span>
+            <input type="text" data-ex4-gap="9" data-ans="back" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="prep 9" />
+            if you're not happy with it. However, some shoppers overcome this problem by looking at and trying products in stores without buying, knowing that they can find the same product online
+            <span class="font-bold text-slate-400 mr-1">10</span>
+            <input type="text" data-ex4-gap="10" data-ans="at" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="prep 10" />
+            a discount.
+          </p>
+        </div>
+
+        <!-- Preposition Rules Callout -->
+        <div class="p-4 rounded-2xl bg-teal-50 border border-teal-200 text-xs text-teal-950 space-y-1.5">
+          <div class="font-extrabold flex items-center gap-1.5 text-sm">
+            <span>💡</span> Key Prepositional Collocations:
+          </div>
+          <p>• <strong>on:</strong> <em>on the high street</em>, <em>on the internet</em>, <em>on sale</em>, <em>on special offer</em>, <em>try on</em>.</p>
+          <p>• <strong>in:</strong> <em>in stock</em> (available in store), <em>in cash</em> (payment currency).</p>
+          <p>• <strong>by:</strong> <em>by credit card</em> (method of electronic payment).</p>
+          <p>• <strong>at:</strong> <em>at a discount</em> (reduced price point).</p>
+          <p>• <strong>back:</strong> <em>take [something] back</em> (return an unsatisfactory item).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: VOCABULARY LEXICON & AUDIO GUIDE -->
+    <!-- ========================================================================= -->
+    <section id="tab-lexicon" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 via-purple-950 to-fuchsia-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-fuchsia-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Unit 6b Glossary</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 97 Reference & Pronunciation Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Comprehensive Buying & Selling Lexicon</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Full reference definitions, phonetic transcriptions, grammatical collocations, and one-click British English pronunciation.
+        </p>
+      </div>
+
+      <!-- Flashcards Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <!-- chemist's -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">chemist's</h4>
+            <button onclick="speakText('chemist\'s')" class="text-xs px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-800 font-bold hover:bg-fuchsia-100 transition">🔊 /ˈkem.ɪsts/</button>
+          </div>
+          <span class="text-xs font-bold text-fuchsia-600 uppercase">noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A shop where medicinal drugs, toiletries, soap, and cosmetic products are prepared and sold.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>pick up a prescription at the chemist's</em></div>
+        </div>
+
+        <!-- newsagent's -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">newsagent's</h4>
+            <button onclick="speakText('newsagent\'s')" class="text-xs px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-800 font-bold hover:bg-fuchsia-100 transition">🔊 /ˈnjuːzˌeɪ.dʒənts/</button>
+          </div>
+          <span class="text-xs font-bold text-fuchsia-600 uppercase">noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A shop that primarily sells newspapers, magazines, sweets, tobacco, and confectionary.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>buy the morning paper at the newsagent's</em></div>
+        </div>
+
+        <!-- antique shop -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">antique shop</h4>
+            <button onclick="speakText('antique shop')" class="text-xs px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-800 font-bold hover:bg-fuchsia-100 transition">🔊 /ænˈtiːk ʃɒp/</button>
+          </div>
+          <span class="text-xs font-bold text-fuchsia-600 uppercase">noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A specialty store that sells valuable old objects, paintings, vintage jewellery, and furniture.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>browse rare clocks in an antique shop</em></div>
+        </div>
+
+        <!-- sales assistant -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">sales assistant</h4>
+            <button onclick="speakText('sales assistant')" class="text-xs px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-800 font-bold hover:bg-fuchsia-100 transition">🔊 /ˈseɪlz əˌsɪs.tənt/</button>
+          </div>
+          <span class="text-xs font-bold text-fuchsia-600 uppercase">compound noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A staff member in a retail store whose job is to serve customers, answer questions, and process payments.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>ask a helpful sales assistant</em></div>
+        </div>
+
+        <!-- fitting room -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">fitting room</h4>
+            <button onclick="speakText('fitting room')" class="text-xs px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-800 font-bold hover:bg-fuchsia-100 transition">🔊 /ˈfɪt.ɪŋ ˌruːm/</button>
+          </div>
+          <span class="text-xs font-bold text-fuchsia-600 uppercase">compound noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A private enclosure in a clothes shop where customers can try on clothes before purchasing them.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>queue for the fitting room</em></div>
+        </div>
+
+        <!-- receipt vs bill -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">receipt vs. bill</h4>
+            <button onclick="speakText('receipt and bill')" class="text-xs px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-800 font-bold hover:bg-fuchsia-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-fuchsia-600 uppercase">commerce distinction</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A <strong>bill</strong> states the money you *must pay* (e.g. at a restaurant). A <strong>receipt</strong> is proof that you have *already paid*.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Example:</strong> <em>check the restaurant bill / keep the shop receipt</em></div>
+        </div>
+
+        <!-- afford vs cost -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">afford vs. cost</h4>
+            <button onclick="speakText('afford and cost')" class="text-xs px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-800 font-bold hover:bg-fuchsia-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-fuchsia-600 uppercase">verb usage</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A buyer <strong>affords</strong> something (has enough money). An item <strong>costs</strong> a particular sum of money.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Example:</strong> <em>can't afford the jacket / it costs £120</em></div>
+        </div>
+
+        <!-- browse vs spend -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">browse vs. spend</h4>
+            <button onclick="speakText('browse and spend')" class="text-xs px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-800 font-bold hover:bg-fuchsia-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-fuchsia-600 uppercase">verb usage</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">To <strong>browse</strong> means looking through items casually without deciding to buy. To <strong>spend</strong> is using money.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Example:</strong> <em>browse in a bookstore / spend £30 on books</em></div>
+        </div>
+
+        <!-- in stock vs on special offer -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">in stock & on offer</h4>
+            <button onclick="speakText('in stock and on special offer')" class="text-xs px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-800 font-bold hover:bg-fuchsia-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-fuchsia-600 uppercase">retail idioms</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium"><strong>In stock:</strong> goods present in the warehouse/store. <strong>On special offer:</strong> items temporarily sold at a bargain price.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Example:</strong> <em>product is in stock on special offer</em></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Vocabulary page 63
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 6b Vocabulary
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 6: Buying and selling • 6b Vocabulary • Page 97
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State management for scores
+    const state = {
+      score: {
+        ex1a: 0,
+        ex2a: 0,
+        ex3a: 0,
+        ex4: 0
+      }
+    };
+
+    // Web Audio Synthesizer for feedback chimes
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.15); // C6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Text to Speech Pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.92;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-fuchsia-600', 'text-white', 'shadow-md', 'shadow-fuchsia-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-fuchsia-600', 'text-white', 'shadow-md', 'shadow-fuchsia-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // =========================================================================
+    // EXERCISE 1a LOGIC
+    // =========================================================================
+    function checkEx1a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex1a-container [data-ex1a-item]');
+
+      rows.forEach(row => {
+        const sel = row.querySelector('.ex1a-select');
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!sel.value) {
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select</span>';
+          sel.classList.remove('border-fuchsia-600', 'border-rose-400');
+          return;
+        }
+
+        if (sel.value === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-fuchsia-600');
+        } else {
+          badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          sel.classList.remove('border-fuchsia-600');
+          sel.classList.add('border-rose-400');
+        }
+      });
+
+      state.score.ex1a = correct;
+      document.getElementById('ex1a-score-pill').textContent = `Score: ${correct}/8`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx1a() {
+      const answers = ['H', 'G', 'F', 'E', 'A', 'D', 'B', 'C'];
+      document.querySelectorAll('#ex1a-container [data-ex1a-item]').forEach((row, i) => {
+        const sel = row.querySelector('.ex1a-select');
+        sel.value = answers[i];
+        sel.classList.remove('border-rose-400');
+        sel.classList.add('border-fuchsia-600');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex1a = 8;
+      document.getElementById('ex1a-score-pill').textContent = 'Score: 8/8';
+      updateTotalScore();
+    }
+
+    function loadSampleEx1b() {
+      document.getElementById('ex1b-visit').value = "Last weekend I went to the local bookshop to buy a travel guide for Japan and picked up a notebook for my language studies.";
+      document.getElementById('ex1b-bought').value = "A few months ago in a second-hand store, I found an authentic leather messenger bag in pristine condition for only a fraction of its original price.";
+      playBeep(true);
+    }
+
+    function saveEx1bNotes() {
+      const visit = document.getElementById('ex1b-visit').value;
+      const bought = document.getElementById('ex1b-bought').value;
+      localStorage.setItem('m6b_vocab_ex1b', JSON.stringify({ visit, bought }));
+      const status = document.getElementById('ex1b-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // =========================================================================
+    // EXERCISE 2a & 2b LOGIC
+    // =========================================================================
+    let lastActiveEx2aInput = null;
+    document.querySelectorAll('.ex2a-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx2aInput = inp;
+      });
+    });
+
+    function insertEx2aWord(word) {
+      if (lastActiveEx2aInput) {
+        lastActiveEx2aInput.value = word;
+        lastActiveEx2aInput.focus();
+      } else {
+        const empty = Array.from(document.querySelectorAll('.ex2a-input')).find(i => !i.value.trim());
+        if (empty) {
+          empty.value = word;
+          empty.focus();
+        }
+      }
+    }
+
+    function checkEx2a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex2a-container [data-ex2a-item]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex2a-input');
+        const expected = cleanStr(inp.getAttribute('data-ans'));
+        const userVal = cleanStr(inp.value);
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!userVal) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Fill gap</span>';
+          inp.classList.remove('border-rose-500', 'bg-rose-50', 'border-rose-400');
+          return;
+        }
+
+        if (userVal === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-rose-500', 'bg-rose-50');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          inp.classList.remove('border-rose-500');
+          inp.classList.add('border-rose-400');
+        }
+      });
+
+      state.score.ex2a = correct;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx2a() {
+      const answers = {
+        '1': 'sales assistant',
+        '2': 'fitting room',
+        '3': 'receipt',
+        '4': 'bill',
+        '5': 'order',
+        '6': 'customers'
+      };
+
+      for (let k in answers) {
+        const row = document.querySelector(`[data-ex2a-item="${k}"]`);
+        const inp = row.querySelector('.ex2a-input');
+        inp.value = answers[k];
+        inp.classList.remove('border-rose-400');
+        inp.classList.add('border-rose-500', 'bg-rose-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex2a = 6;
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    function saveEx2bNotes() {
+      const checked = [];
+      for (let i = 1; i <= 6; i++) {
+        if (document.getElementById(`ex2b-chk-${i}`).checked) {
+          checked.push(i);
+        }
+      }
+      const text = document.getElementById('ex2b-discussion-text').value;
+      localStorage.setItem('m6b_vocab_ex2b', JSON.stringify({ checked, text }));
+      const status = document.getElementById('ex2b-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // =========================================================================
+    // EXERCISE 3a LOGIC
+    // =========================================================================
+    function selectEx3aPill(btn) {
+      const container = btn.closest('.inline-flex');
+      container.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-amber-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-amber-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-amber-600', 'text-white', 'border-amber-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx3a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex3a-container [data-ex3a-q]');
+
+      rows.forEach(row => {
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+        const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Choose verb</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toLowerCase();
+        if (userVal === expected.toLowerCase()) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-amber-600', 'border-amber-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          selectedBtn.classList.remove('bg-amber-600', 'border-amber-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex3a = correct;
+      document.getElementById('ex3a-score-pill').textContent = `Score: ${correct}/8`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx3a() {
+      const answers = {
+        '1': 'spend',
+        '2': 'afford',
+        '3': 'exchange',
+        '4': 'cost',
+        '5': 'return',
+        '6': 'serve',
+        '7': 'advertise',
+        '8': 'browsing'
+      };
+
+      for (let q in answers) {
+        const row = document.querySelector(`[data-ex3a-q="${q}"]`);
+        const btns = row.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim().toLowerCase() === answers[q].toLowerCase()) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-amber-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex3a = 8;
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 8/8';
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // EXERCISE 4 LOGIC
+    // =========================================================================
+    let lastActiveEx4Input = null;
+    document.querySelectorAll('.ex4-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx4Input = inp;
+      });
+    });
+
+    function insertEx4Prep(prep) {
+      if (lastActiveEx4Input) {
+        lastActiveEx4Input.value = prep;
+        lastActiveEx4Input.focus();
+      } else {
+        const empty = Array.from(document.querySelectorAll('.ex4-input')).find(i => !i.value.trim());
+        if (empty) {
+          empty.value = prep;
+          empty.focus();
+        }
+      }
+    }
+
+    function checkEx4() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex4-input');
+
+      inputs.forEach(inp => {
+        const expected = cleanStr(inp.getAttribute('data-ans'));
+        const userVal = cleanStr(inp.value);
+
+        if (userVal === expected) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-teal-500', 'bg-teal-50');
+        } else {
+          inp.classList.remove('border-teal-500', 'bg-teal-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex4 = correct;
+      document.getElementById('ex4-score-pill').textContent = `Score: ${correct}/10`;
+      updateTotalScore();
+      playBeep(correct >= 7);
+    }
+
+    function revealEx4() {
+      const keys = [
+        "on",    // 1: on the high street
+        "on",    // 2: on the internet
+        "on",    // 3: on sale
+        "in",    // 4: in stock
+        "on",    // 5: on special offer
+        "by",    // 6: by credit card
+        "in",    // 7: in cash
+        "on",    // 8: try them on
+        "back",  // 9: take something back
+        "at"     // 10: at a discount
+      ];
+
+      const inputs = document.querySelectorAll('.ex4-input');
+      inputs.forEach((inp, idx) => {
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-teal-500', 'bg-teal-50');
+      });
+
+      state.score.ex4 = 10;
+      document.getElementById('ex4-score-pill').textContent = 'Score: 10/10';
+      updateTotalScore();
+    }
+
+    // =========================================================================
+    // GLOBAL PROGRESS & RESET HANDLERS
+    // =========================================================================
+    function updateTotalScore() {
+      const total = state.score.ex1a + state.score.ex2a + state.score.ex3a + state.score.ex4;
+      // Points distribution: 1a (8) + 2a (6) + 3a (8) + 4 (10) = 32 total points
+      const maxScore = 32;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 26) {
+        bar.classList.replace('bg-fuchsia-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-fuchsia-600');
+      }
+    }
+
+    // Reset All Answers
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // 1. Reset 1a selects
+      document.querySelectorAll('.ex1a-select').forEach(s => {
+        s.value = '';
+        s.classList.remove('border-fuchsia-600', 'border-rose-400');
+      });
+
+      // 2. Reset 2a inputs
+      document.querySelectorAll('.ex2a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-rose-500', 'bg-rose-50', 'border-rose-400');
+      });
+
+      // 3. Reset 3a pills
+      document.querySelectorAll('#ex3a-container .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-amber-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-amber-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // 4. Reset 4 inputs
+      document.querySelectorAll('.ex4-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-teal-500', 'bg-teal-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear all feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset state scores
+      state.score = { ex1a: 0, ex2a: 0, ex3a: 0, ex4: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1a-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex4-score-pill').textContent = 'Score: 0/10';
+    });
+
+    // Auto-restore saved 1b and 2b data on DOM load
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved1b = JSON.parse(localStorage.getItem('m6b_vocab_ex1b'));
+        if (saved1b) {
+          if (saved1b.visit) document.getElementById('ex1b-visit').value = saved1b.visit;
+          if (saved1b.bought) document.getElementById('ex1b-bought').value = saved1b.bought;
+        }
+
+        const saved2b = JSON.parse(localStorage.getItem('m6b_vocab_ex2b'));
+        if (saved2b) {
+          if (saved2b.checked && Array.isArray(saved2b.checked)) {
+            saved2b.checked.forEach(n => {
+              const el = document.getElementById(`ex2b-chk-${n}`);
+              if (el) el.checked = true;
+            });
+          }
+          if (saved2b.text) document.getElementById('ex2b-discussion-text').value = saved2b.text;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

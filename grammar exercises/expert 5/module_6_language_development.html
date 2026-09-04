@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 6: Language Development - be going to</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            market: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              200: '#fde68a',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
+              800: '#92400e',
+              900: '#78350f',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth tab switching and pill buttons */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.25);
+    }
+    /* Scrollbar aesthetics */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-amber-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-600 via-orange-600 to-rose-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-amber-500/25 ring-2 ring-white">
+          M6
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 tracking-wide uppercase">Unit 6: Buying and selling</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 90</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-amber-600">be going to</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Total Score</span>
+            <span id="global-score-pill" class="text-base font-black text-amber-600">0 / 37</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-amber-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-amber-600 text-white shadow-md shadow-amber-600/25">
+          1. Meaning & Function (1)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Gap Fill (2)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Questions & Speaking (3a & 3b)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Situations & Sentences (4)
+        </button>
+        <button data-tab="tab-ex5" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          5. Pairwork Intentions (5)
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 188
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: FUNCTION MATCHING (Exercise 1) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1</span>
+            <span class="text-amber-200 text-xs font-medium">Expert Grammar Page 188</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Plans vs Predictions: What Does "be going to" Express?</h2>
+          <p class="text-amber-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Determine whether each sentence communicates <strong>A (a planned future event)</strong> or <strong>B (a prediction based on knowledge or present evidence)</strong>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Choices</span>
+          </button>
+          <button onclick="revealEx1()" class="px-4 py-2.5 bg-amber-900/60 hover:bg-amber-900 text-white border border-amber-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Reference Guide for Categories A and B -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">A/B</span>
+            Two Key Uses of <em>be going to</em>
+          </h3>
+          <span class="text-xs text-slate-400">Match 1–6 to one category below</span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-2xl bg-amber-50/70 border-2 border-amber-200">
+            <span class="font-black text-amber-800 text-sm block mb-1">A: A planned future event / intention</span>
+            <p class="text-slate-700 font-medium leading-relaxed">
+              Used when a decision has already been made <em>before</em> speaking.
+              <br><em class="text-amber-900 font-semibold">"I'm going to buy my vegetables at the market."</em>
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-orange-50/70 border-2 border-orange-200">
+            <span class="font-black text-orange-800 text-sm block mb-1">B: A prediction based on knowledge or evidence</span>
+            <p class="text-slate-700 font-medium leading-relaxed">
+              Used when visible or sensory facts in the present make the future clear.
+              <br><em class="text-orange-900 font-semibold">"Look at the prices! This meal is going to be very expensive."</em>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Matching Rows with Pills -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">1</span>
+            Match the sentences (1–6) with what they express (A–B):
+          </h3>
+          <span id="ex1-score-pill" class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="grid gap-3.5" id="ex1-container">
+          <!-- Item 1 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="1" data-ans="B">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              "Look at the prices! This meal <span class="text-amber-700 font-black">is going to be</span> very expensive."
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">A (Plan)</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">B (Prediction)</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="2" data-ans="A">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              "I<span class="text-amber-700 font-black">'m going to buy</span> my vegetables at the market because the food is fresher there."
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">A (Plan)</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">B (Prediction)</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="3" data-ans="A">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              "<span class="text-amber-700 font-black">Are you going to cook</span> the meat in the oven or on the grill?"
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">A (Plan)</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">B (Prediction)</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="4" data-ans="A">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              "I<span class="text-amber-700 font-black">'m not going to buy</span> any more fast food – it's too unhealthy."
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">A (Plan)</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">B (Prediction)</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="5" data-ans="B">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              "This cake smells amazing – it<span class="text-amber-700 font-black">'s going to taste</span> delicious."
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">A (Plan)</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">B (Prediction)</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1-q="6" data-ans="B">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              "You<span class="text-amber-700 font-black">'re going to get</span> fat if you eat all that chocolate!"
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="inline-flex gap-1.5 align-middle">
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">A (Plan)</button>
+                <button type="button" onclick="selectEx1Pill(this)" class="pill-choice-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">B (Prediction)</button>
+              </div>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: GAP FILL (Exercise 2) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2</span>
+            <span class="text-amber-200 text-xs font-medium">Verb Conjugation & Auxiliary Agreement</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Completing Sentences with "be going to"</h2>
+          <p class="text-amber-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill in each blank with the correct form of <em>be going to</em> and the verb in brackets. Ensure subject-verb agreement (<em>am / is / are</em>) and negative forms (<em>'m not / isn't / aren't</em>).
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2()" class="px-5 py-2.5 bg-white hover:bg-orange-50 text-orange-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Verbs</span>
+          </button>
+          <button onclick="revealEx2()" class="px-4 py-2.5 bg-orange-900/60 hover:bg-orange-900 text-white border border-orange-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 2 Sentence Input Form -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-orange-100 text-orange-800 text-sm font-black flex items-center justify-center">2</span>
+            Complete the sentences with the correct form of <em>be going to</em> and the verbs in brackets:
+          </h3>
+          <span id="ex2-score-pill" class="text-xs font-bold text-orange-800 bg-orange-50 px-3 py-1 rounded-xl">Score: 0/10</span>
+        </div>
+
+        <div class="space-y-4" id="ex2-container">
+          <!-- Item 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 1: Prompt (not eat)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              This fish is not cooked, so I
+              <input type="text" data-ex2-gap="1" data-ans="'m not going to eat,am not going to eat" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-900 bg-white text-base w-52 text-center focus:border-orange-600 focus:outline-none" placeholder="(not eat)" />
+              it.
+            </p>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 2: Prompt (cook)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I need to go to the supermarket – I
+              <input type="text" data-ex2-gap="2" data-ans="'m going to cook,am going to cook" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-900 bg-white text-base w-48 text-center focus:border-orange-600 focus:outline-none" placeholder="(cook)" />
+              a meal for my family tonight.
+            </p>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 3: Prompt (not be)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              There are too many things on this menu – it
+              <input type="text" data-ex2-gap="3" data-ans="isn't going to be,is not going to be" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-900 bg-white text-base w-48 text-center focus:border-orange-600 focus:outline-none" placeholder="(not be)" />
+              easy to choose what to have.
+            </p>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 4: Prompt (have to)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              This table only seats four people, so we
+              <input type="text" data-ex2-gap="4" data-ans="'re going to have to,are going to have to" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-900 bg-white text-base w-56 text-center focus:border-orange-600 focus:outline-none" placeholder="(have to)" />
+              find a bigger one.
+            </p>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 5: Prompt (buy)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              My friend has decided to stop eating meat, so I
+              <input type="text" data-ex2-gap="5" data-ans="'m going to buy,am going to buy" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-900 bg-white text-base w-48 text-center focus:border-orange-600 focus:outline-none" placeholder="(buy)" />
+              her a vegetarian cook book.
+            </p>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 6: Prompt (drink)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Drinking coffee gives him a headache, so he
+              <input type="text" data-ex2-gap="6" data-ans="'s going to drink,is going to drink" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-900 bg-white text-base w-48 text-center focus:border-orange-600 focus:outline-none" placeholder="(drink)" />
+              tea instead.
+            </p>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 7: Prompt (try)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              There's a new Korean restaurant opening soon and we
+              <input type="text" data-ex2-gap="7" data-ans="'re going to try,are going to try" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-900 bg-white text-base w-48 text-center focus:border-orange-600 focus:outline-none" placeholder="(try)" />
+              it.
+            </p>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 8: Prompt (go) live</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              I'd like to learn how to cook because I
+              <input type="text" data-ex2-gap="8" data-ans="'m going to,am going to,'m going to go and,am going to go and" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-900 bg-white text-base w-48 text-center focus:border-orange-600 focus:outline-none" placeholder="(go)" />
+              live on my own next year.
+            </p>
+          </div>
+
+          <!-- Item 9 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="9">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 9: Prompt (not shop)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              That supermarket is quite expensive, so they
+              <input type="text" data-ex2-gap="9" data-ans="aren't going to shop,are not going to shop" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-900 bg-white text-base w-52 text-center focus:border-orange-600 focus:outline-none" placeholder="(not shop)" />
+              there any longer.
+            </p>
+          </div>
+
+          <!-- Item 10 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="10">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Item 10: Prompt (stop)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              My doctor says I eat too many sweet things, so I
+              <input type="text" data-ex2-gap="10" data-ans="'m going to stop,am going to stop" class="ex2-input exercise-input mx-1.5 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-900 bg-white text-base w-48 text-center focus:border-orange-600 focus:outline-none" placeholder="(stop)" />
+              eating cakes and biscuits.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: QUESTIONS & SPEAKING (Exercise 3a & 3b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-amber-700 via-rose-700 to-pink-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a & 3b</span>
+            <span class="text-rose-200 text-xs font-medium">Question Syntax & Audio Rehearsal</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Food & Future Questions: Question Synthesis</h2>
+          <p class="text-rose-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Form grammatically accurate questions with <em>be going to</em> from the prompt words. Then practice asking and answering each question with native audio models!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3a()" class="px-5 py-2.5 bg-white hover:bg-rose-50 text-rose-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Questions</span>
+          </button>
+          <button onclick="revealEx3a()" class="px-4 py-2.5 bg-rose-950/60 hover:bg-rose-950 text-white border border-rose-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 3a Interactive Question Builders -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">3a</span>
+            Write complete questions using <em>be going to</em>:
+          </h3>
+          <span id="ex3a-score-pill" class="text-xs font-bold text-rose-800 bg-rose-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="space-y-4" id="ex3a-container">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 1: where / you / have / lunch / tomorrow?</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Where are you going to have lunch tomorrow?" data-accepted="where are you going to have lunch tomorrow,where are you going to have lunch tomorrow?" />
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 2: who / cook / your evening meal / tonight?</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Who is going to cook your evening meal tonight?" data-accepted="who is going to cook your evening meal tonight,who is going to cook your evening meal tonight?,who's going to cook your evening meal tonight,who's going to cook your evening meal tonight?" />
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 3: you / eat out / this weekend?</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Are you going to eat out this weekend?" data-accepted="are you going to eat out this weekend,are you going to eat out this weekend?" />
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 4: you / cook / any meals / this week?</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Are you going to cook any meals this week?" data-accepted="are you going to cook any meals this week,are you going to cook any meals this week?" />
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 5: it / be / easier or more difficult to eat healthily / in the future?</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Is it going to be easier or more difficult to eat healthily in the future?" data-accepted="is it going to be easier or more difficult to eat healthily in the future,is it going to be easier or more difficult to eat healthily in the future?" />
+          </div>
+
+          <!-- 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 6: you / have / a coffee / after class?</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Are you going to have a coffee after class?" data-accepted="are you going to have a coffee after class,are you going to have a coffee after class?" />
+          </div>
+
+          <!-- 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 7: we / have / more choice of food / in the future?</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Are we going to have more choice of food in the future?" data-accepted="are we going to have more choice of food in the future,are we going to have more choice of food in the future?" />
+          </div>
+
+          <!-- 8 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Prompt 8: food prices / go / up or down / this year?</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Are food prices going to go up or down this year?" data-accepted="are food prices going to go up or down this year,are food prices going to go up or down this year?" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 3b Interactive Audio Speaking Flashcards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">3b</span>
+            Work in pairs. Take turns to ask and answer the questions in Exercise 3a:
+          </h3>
+          <span class="text-xs font-black uppercase tracking-wider text-rose-700 bg-rose-100 px-3 py-1 rounded-xl">Audio Pronunciation Studio</span>
+        </div>
+        <p class="text-sm text-slate-600">Click any card below to hear natural English pronunciation, review a sample answer with reasons, and practice speaking:</p>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" id="speaking-cards-grid">
+          <!-- Card 1 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black text-rose-700 uppercase">Q1: Lunch Plan</span>
+              <button onclick="speakText('Where are you going to have lunch tomorrow?')" class="text-xs text-slate-500 hover:text-rose-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900 leading-snug">"Where are you going to have lunch tomorrow?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "I'm going to have lunch in the cafeteria because I only have a short 30-minute break."
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black text-rose-700 uppercase">Q2: Evening Meal</span>
+              <button onclick="speakText('Who is going to cook your evening meal tonight?')" class="text-xs text-slate-500 hover:text-rose-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900 leading-snug">"Who is going to cook your evening meal tonight?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "My brother is going to cook pasta because it's his turn on our weekly dinner schedule."
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black text-rose-700 uppercase">Q3: Weekend Dining</span>
+              <button onclick="speakText('Are you going to eat out this weekend?')" class="text-xs text-slate-500 hover:text-rose-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900 leading-snug">"Are you going to eat out this weekend?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "Yes, I'm going to try that new sushi restaurant downtown with my best friend."
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black text-rose-700 uppercase">Q4: Cooking Plans</span>
+              <button onclick="speakText('Are you going to cook any meals this week?')" class="text-xs text-slate-500 hover:text-rose-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900 leading-snug">"Are you going to cook any meals this week?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "I'm going to prepare stir-fried rice on Thursday night so I can bring leftovers on Friday."
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black text-rose-700 uppercase">Q5: Healthy Food Future</span>
+              <button onclick="speakText('Is it going to be easier or more difficult to eat healthily in the future?')" class="text-xs text-slate-500 hover:text-rose-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900 leading-snug">"Is it going to be easier or more difficult to eat healthily in the future?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "I think it's going to be easier because organic and plant-based foods are becoming more affordable."
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black text-rose-700 uppercase">Q6: Post-Class Coffee</span>
+              <button onclick="speakText('Are you going to have a coffee after class?')" class="text-xs text-slate-500 hover:text-rose-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900 leading-snug">"Are you going to have a coffee after class?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "No, I'm not going to drink coffee because caffeine late in the afternoon stops me sleeping."
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black text-rose-700 uppercase">Q7: Food Variety</span>
+              <button onclick="speakText('Are we going to have more choice of food in the future?')" class="text-xs text-slate-500 hover:text-rose-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900 leading-snug">"Are we going to have more choice of food in the future?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "Definitely, international trade and culinary fusion mean supermarkets stock items from everywhere."
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-rose-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black text-rose-700 uppercase">Q8: Food Prices</span>
+              <button onclick="speakText('Are food prices going to go up or down this year?')" class="text-xs text-slate-500 hover:text-rose-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900 leading-snug">"Are food prices going to go up or down this year?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "They are probably going to go up due to inflation and higher transportation costs."
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: SITUATIONS & SENTENCES (Exercise 4) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-emerald-700 via-teal-700 to-cyan-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4</span>
+            <span class="text-emerald-200 text-xs font-medium">Communicative Intention Formulation</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Writing Sentences for Specific Real-World Situations</h2>
+          <p class="text-emerald-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Write intentions using <em>be going to</em> and the bracketed keyword prompts for each food or shopping scenario.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4()" class="px-5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 4</span>
+          </button>
+          <button onclick="revealEx4()" class="px-4 py-2.5 bg-emerald-950/60 hover:bg-emerald-950 text-white border border-emerald-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 4 Interactive Sentence Builder Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">4</span>
+            Write sentences for each situation using <em>be going to</em> and the prompts:
+          </h3>
+          <span id="ex4-score-pill" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">Score: 0/7</span>
+        </div>
+
+        <div class="space-y-4" id="ex4-container">
+          <!-- Item 1 (Example in book) -->
+          <div class="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-200">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-emerald-800 tracking-wider">1. Example Situation: You want to eat more healthy food. (chocolate and biscuits)</span>
+              <span class="text-xs font-bold text-emerald-700 bg-white px-2 py-0.5 rounded-md border border-emerald-300">Model Example</span>
+            </div>
+            <p class="text-base text-slate-800 font-medium mt-1">
+              &rarr; <strong>I'm going to stop eating chocolate and biscuits.</strong>
+            </p>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Situation 2: You want to spend less money on food. (grow vegetables)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex4-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I'm going to grow vegetables / my own vegetables." data-accepted="im going to grow vegetables,i am going to grow vegetables,im going to grow my own vegetables,i am going to grow my own vegetables" />
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Situation 3: You want to become a vegetarian. (eat meat)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex4-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I'm not going to eat meat anymore / I'm going to stop eating meat." data-accepted="im not going to eat meat,i am not going to eat meat,im not going to eat meat anymore,i am not going to eat meat anymore,im not going to eat meat any more,i am not going to eat meat any more,im going to stop eating meat,i am going to stop eating meat" />
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Situation 4: You want to eat more healthily. (advice)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex4-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I'm going to get some advice / ask for advice." data-accepted="im going to get some advice,i am going to get some advice,im going to ask for some advice,i am going to ask for some advice,im going to ask for advice,i am going to ask for advice,im going to follow some advice,i am going to follow some advice,im going to get advice,i am going to get advice" />
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Situation 5: You want to learn how to cook. (cookery course)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex4-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I'm going to do a cookery course / take a cookery course." data-accepted="im going to do a cookery course,i am going to do a cookery course,im going to take a cookery course,i am going to take a cookery course,im going to join a cookery course,i am going to join a cookery course" />
+          </div>
+
+          <!-- Item 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Situation 6: You want to find out how to make a particular dish. (recipe)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex4-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I'm going to find a recipe / look up a recipe / follow a recipe." data-accepted="im going to find a recipe,i am going to find a recipe,im going to look up a recipe,i am going to look up a recipe,im going to follow a recipe,i am going to follow a recipe,im going to search for a recipe,i am going to search for a recipe" />
+          </div>
+
+          <!-- Item 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4-row="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Situation 7: You want to find a good Japanese restaurant. (online)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex4-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I'm going to look online / search online." data-accepted="im going to look online,i am going to look online,im going to search online,i am going to search online,im going to find one online,i am going to find one online,im going to check online,i am going to check online" />
+          </div>
+
+          <!-- Item 8 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4-row="8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400 tracking-wider">Situation 8: You want to try Thai food. (restaurant)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex4-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. I'm going to go to a Thai restaurant." data-accepted="im going to go to a thai restaurant,i am going to go to a thai restaurant,im going to visit a thai restaurant,i am going to visit a thai restaurant,im going to try a thai restaurant,i am going to try a thai restaurant" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: PAIRWORK INTENTIONS (Exercise 5) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex5" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-teal-700 via-emerald-600 to-amber-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 5</span>
+            <span class="text-teal-200 text-xs font-medium">Personal Intentions & Future Goals</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">What Are You Going to Do This Year or Next Year?</h2>
+          <p class="text-teal-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Formulate personal intentions across 3 life domains: <em>work or studies</em>, <em>home and family life</em>, and <em>interests and hobbies</em>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="loadSampleIntentions()" class="px-4 py-2.5 bg-white hover:bg-teal-50 text-teal-900 text-xs sm:text-sm font-extrabold rounded-2xl shadow transition">
+            Load Models
+          </button>
+          <button onclick="saveIntentions()" class="px-4 py-2.5 bg-teal-950/60 hover:bg-teal-950 text-white border border-teal-300/40 text-xs sm:text-sm font-bold rounded-2xl transition">
+            Save Goals
+          </button>
+        </div>
+      </div>
+
+      <!-- Life Categories Intention Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">5</span>
+            Tell your partner about what you intend to do this year or next year:
+          </h3>
+          <span class="text-xs text-slate-400">Persistent storage</span>
+        </div>
+
+        <!-- Category 1: Work or Studies -->
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">💼</span>
+              <span class="text-xs font-black uppercase text-teal-700 tracking-wider">1. Your Work or Studies</span>
+            </div>
+            <button onclick="speakText(document.getElementById('plan-work').value || 'I am going to apply for university next year.')" class="text-xs text-slate-500 hover:text-teal-700 font-bold flex items-center gap-1">
+              🔊 Listen
+            </button>
+          </div>
+          <p class="text-xs text-slate-500 font-medium">Example: <em>"I'm going to apply for university next year."</em> / <em>"I'm going to pass the B2 First exam."</em></p>
+          <input type="text" id="plan-work" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type your work/study intention here..." />
+        </div>
+
+        <!-- Category 2: Home and Family Life -->
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">🏡</span>
+              <span class="text-xs font-black uppercase text-teal-700 tracking-wider">2. Your Home and Family Life</span>
+            </div>
+            <button onclick="speakText(document.getElementById('plan-family').value || 'I am going to redecorate my bedroom in the summer.')" class="text-xs text-slate-500 hover:text-teal-700 font-bold flex items-center gap-1">
+              🔊 Listen
+            </button>
+          </div>
+          <p class="text-xs text-slate-500 font-medium">Example: <em>"I'm going to redecorate my bedroom."</em> / <em>"We're going to visit my grandparents in the countryside."</em></p>
+          <input type="text" id="plan-family" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type your home/family intention here..." />
+        </div>
+
+        <!-- Category 3: Interests and Hobbies -->
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">🎾</span>
+              <span class="text-xs font-black uppercase text-teal-700 tracking-wider">3. Your Interests and Hobbies</span>
+            </div>
+            <button onclick="speakText(document.getElementById('plan-hobbies').value || 'I am going to join a tennis club later this year.')" class="text-xs text-slate-500 hover:text-teal-700 font-bold flex items-center gap-1">
+              🔊 Listen
+            </button>
+          </div>
+          <p class="text-xs text-slate-500 font-medium">Example: <em>"I'm going to join a tennis club later this year."</em> / <em>"I'm going to learn how to prepare traditional Japanese sushi."</em></p>
+          <input type="text" id="plan-hobbies" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type your hobby intention here..." />
+        </div>
+
+        <div id="ex5-status" class="hidden p-3.5 rounded-xl bg-teal-100 text-teal-950 text-xs font-bold flex items-center justify-between">
+          <span>✓ Your future intentions have been saved to your local browser storage.</span>
+          <span class="text-teal-700 font-semibold text-[11px]">Ready for speaking practice</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: EXPERT GRAMMAR REFERENCE (Page 188) -->
+    <!-- ========================================================================= -->
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 to-amber-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-amber-500 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 188 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Future Forms: <em>be going to</em></h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Comprehensive reference on forming intentions, talking about existing decisions, and predicting outcomes from visible present evidence.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Form and Structure Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 font-black text-base flex items-center justify-center">
+              FORM
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Grammar Form</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">am / is / are + going to + bare infinitive</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Affirmative (+)</div>
+              <p class="text-slate-700 font-medium">Subject + <strong>am / is / are + going to</strong> + verb</p>
+              <p class="text-slate-600 font-medium"><em>"I'<strong>m going to cook</strong> dinner tonight."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Negative (-)</div>
+              <p class="text-slate-700 font-medium">Subject + <strong>'m not / isn't / aren't + going to</strong> + verb</p>
+              <p class="text-slate-600 font-medium"><em>"They <strong>aren't going to shop</strong> there any longer."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Questions (?)</div>
+              <p class="text-slate-700 font-medium">(Wh-) + <strong>am / is / are + subject + going to</strong> + verb?</p>
+              <p class="text-slate-600 font-medium"><em>"<strong>Are you going to eat out</strong> this weekend?"</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Meaning and Usage Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-orange-100 text-orange-800 font-black text-base flex items-center justify-center">
+              USE
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Usage & Contrast with <em>will</em></h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Pre-planned intentions vs Instant decisions</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Planned Decisions:</div>
+              <p class="text-slate-600 font-medium">Use <strong>be going to</strong> when you decided <em>before</em> the time of speaking.</p>
+              <p class="text-slate-600 font-medium"><em>"I'<strong>m going to buy</strong> my vegetables at the market."</em></p>
+              <p class="text-xs text-amber-800 font-semibold">(Compare: <em>"The phone is ringing – I'll answer it."</em> &rarr; instant decision uses <em>will</em>)</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Predictions with Present Evidence:</div>
+              <p class="text-slate-600 font-medium">Use <strong>be going to</strong> when physical signs in the present indicate what will occur.</p>
+              <p class="text-slate-600 font-medium"><em>"Look at the prices! This meal <strong>is going to be</strong> expensive."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Verbs of Movement (go / come):</div>
+              <p class="text-slate-600 font-medium">With <em>go</em> or <em>come</em>, native speakers often use the present continuous instead of repeating <em>going to go</em>:</p>
+              <p class="text-slate-600 font-medium"><em>"I'<strong>m going to</strong> the market."</em> (or <em>"I'm going to go to the market."</em>)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 58
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 6a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 6: Buying and selling • Page 90 • Expert Grammar Page 188
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State management for individual exercises
+    const state = {
+      score: {
+        ex1: 0,
+        ex2: 0,
+        ex3a: 0,
+        ex4: 0
+      }
+    };
+
+    // Web Audio Synthesizer for instant feedback sounds
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(170, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Web Speech API for British English pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-amber-600', 'text-white', 'shadow-md', 'shadow-amber-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-amber-600', 'text-white', 'shadow-md', 'shadow-amber-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user string input
+    function cleanStr(s) {
+      return (s || '').toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()'?]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // EXERCISE 1 PILL SELECTION & CHECK
+    function selectEx1Pill(btn) {
+      const parent = btn.closest('.inline-flex');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-amber-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-amber-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-amber-600', 'text-white', 'border-amber-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx1() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex1-container [data-ex1-q]');
+
+      rows.forEach(row => {
+        const expected = row.getAttribute('data-ans'); // "A" or "B"
+        const badge = row.querySelector('.feedback-badge');
+        const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Select option</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.startsWith('A') ? 'A' : 'B';
+        if (userVal === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-amber-600', 'border-amber-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Need: ${expected}</span>`;
+          selectedBtn.classList.remove('bg-amber-600', 'border-amber-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex1 = correct;
+      document.getElementById('ex1-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx1() {
+      const answers = {
+        '1': 'B',
+        '2': 'A',
+        '3': 'A',
+        '4': 'A',
+        '5': 'B',
+        '6': 'B'
+      };
+
+      for (let q in answers) {
+        const row = document.querySelector(`[data-ex1-q="${q}"]`);
+        const btns = row.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          const letter = b.textContent.startsWith('A') ? 'A' : 'B';
+          if (letter === answers[q]) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'bg-amber-600');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-amber-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex1 = 6;
+      document.getElementById('ex1-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    // EXERCISE 2 CHECK & REVEAL
+    function checkEx2() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex2-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.some(ans => userVal === ans || userVal.replace(/\s/g, '') === ans.replace(/\s/g, ''))) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      // Update badges per row
+      document.querySelectorAll('[data-ex2-row]').forEach(row => {
+        const rowInput = row.querySelector('.ex2-input');
+        const badge = row.querySelector('.feedback-badge');
+        if (rowInput.classList.contains('border-emerald-500')) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck</span>';
+        }
+      });
+
+      state.score.ex2 = correct;
+      document.getElementById('ex2-score-pill').textContent = `Score: ${correct}/${inputs.length}`;
+      updateTotalScore();
+      playBeep(correct >= 7);
+    }
+
+    function revealEx2() {
+      const keys = {
+        '1': "'m not going to eat",
+        '2': "'m going to cook",
+        '3': "isn't going to be",
+        '4': "'re going to have to",
+        '5': "'m going to buy",
+        '6': "'s going to drink",
+        '7': "'re going to try",
+        '8': "'m going to",
+        '9': "aren't going to shop",
+        '10': "'m going to stop"
+      };
+
+      for (let gap in keys) {
+        const inp = document.querySelector(`[data-ex2-gap="${gap}"]`);
+        if (inp) {
+          inp.value = keys[gap];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        }
+      }
+
+      document.querySelectorAll('[data-ex2-row] .feedback-badge').forEach(b => {
+        b.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex2 = 10;
+      document.getElementById('ex2-score-pill').textContent = 'Score: 10/10';
+      updateTotalScore();
+    }
+
+    // EXERCISE 3a CHECK & REVEAL
+    function checkEx3a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex3a-container [data-ex3a-row]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex3a-input');
+        const badge = row.querySelector('.feedback-badge');
+        const accepted = inp.getAttribute('data-accepted').split(',').map(cleanStr);
+        const userClean = cleanStr(inp.value);
+
+        if (!userClean) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Type question</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (accepted.some(ans => userClean === ans || userClean.replace(/\s/g, '') === ans.replace(/\s/g, ''))) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck grammar</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3a = correct;
+      document.getElementById('ex3a-score-pill').textContent = `Score: ${correct}/8`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx3a() {
+      const keys = [
+        "Where are you going to have lunch tomorrow?",
+        "Who is going to cook your evening meal tonight?",
+        "Are you going to eat out this weekend?",
+        "Are you going to cook any meals this week?",
+        "Is it going to be easier or more difficult to eat healthily in the future?",
+        "Are you going to have a coffee after class?",
+        "Are we going to have more choice of food in the future?",
+        "Are food prices going to go up or down this year?"
+      ];
+
+      const rows = document.querySelectorAll('#ex3a-container [data-ex3a-row]');
+      rows.forEach((row, i) => {
+        const inp = row.querySelector('.ex3a-input');
+        const badge = row.querySelector('.feedback-badge');
+        inp.value = keys[i];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex3a = 8;
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 8/8';
+      updateTotalScore();
+    }
+
+    // EXERCISE 4 CHECK & REVEAL
+    function checkEx4() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex4-container [data-ex4-row]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex4-input');
+        const badge = row.querySelector('.feedback-badge');
+        const accepted = inp.getAttribute('data-accepted').split(',').map(cleanStr);
+        const userClean = cleanStr(inp.value);
+
+        if (!userClean) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Type sentence</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+          return;
+        }
+
+        if (accepted.some(ans => userClean === ans || userClean.includes(ans) || ans.includes(userClean))) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck wording</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex4 = correct;
+      document.getElementById('ex4-score-pill').textContent = `Score: ${correct}/7`;
+      updateTotalScore();
+      playBeep(correct >= 5);
+    }
+
+    function revealEx4() {
+      const keys = {
+        '2': "I'm going to grow my own vegetables.",
+        '3': "I'm not going to eat meat anymore.",
+        '4': "I'm going to ask for some advice.",
+        '5': "I'm going to do a cookery course.",
+        '6': "I'm going to look up a recipe.",
+        '7': "I'm going to look online.",
+        '8': "I'm going to go to a Thai restaurant."
+      };
+
+      for (let rowId in keys) {
+        const row = document.querySelector(`[data-ex4-row="${rowId}"]`);
+        if (row) {
+          const inp = row.querySelector('.ex4-input');
+          const badge = row.querySelector('.feedback-badge');
+          inp.value = keys[rowId];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+        }
+      }
+
+      state.score.ex4 = 7;
+      document.getElementById('ex4-score-pill').textContent = 'Score: 7/7';
+      updateTotalScore();
+    }
+
+    // EXERCISE 5 INTENTIONS STORAGE
+    function loadSampleIntentions() {
+      document.getElementById('plan-work').value = "I'm going to complete my business diploma and apply for university next year.";
+      document.getElementById('plan-family').value = "We're going to redecorate our kitchen and buy energy-saving appliances.";
+      document.getElementById('plan-hobbies').value = "I'm going to join a weekend cooking workshop and learn how to make Japanese ramen.";
+      playBeep(true);
+    }
+
+    function saveIntentions() {
+      const work = document.getElementById('plan-work').value;
+      const family = document.getElementById('plan-family').value;
+      const hobbies = document.getElementById('plan-hobbies').value;
+      localStorage.setItem('m6_grammar_ex5', JSON.stringify({ work, family, hobbies }));
+      document.getElementById('ex5-status').classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // Global Score Updating
+    function updateTotalScore() {
+      const total = state.score.ex1 + state.score.ex2 + state.score.ex3a + state.score.ex4;
+      const maxScore = 31; // 6 + 10 + 8 + 7 = 31 total question points
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 24) {
+        bar.classList.replace('bg-amber-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-amber-600');
+      }
+    }
+
+    // Reset All Fields Button
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Clear Ex 1
+      document.querySelectorAll('#ex1-container .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-amber-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-amber-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear Ex 2
+      document.querySelectorAll('.ex2-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear Ex 3a
+      document.querySelectorAll('.ex3a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear Ex 4
+      document.querySelectorAll('.ex4-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset scores
+      state.score = { ex1: 0, ex2: 0, ex3a: 0, ex4: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex2-score-pill').textContent = 'Score: 0/10';
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex4-score-pill').textContent = 'Score: 0/7';
+    });
+
+    // Auto-restore saved Ex 5 data on load
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved5 = JSON.parse(localStorage.getItem('m6_grammar_ex5'));
+        if (saved5) {
+          if (saved5.work) document.getElementById('plan-work').value = saved5.work;
+          if (saved5.family) document.getElementById('plan-family').value = saved5.family;
+          if (saved5.hobbies) document.getElementById('plan-hobbies').value = saved5.hobbies;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

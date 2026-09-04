@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 4: Vocabulary - The Animal Kingdom & Geographical Features</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            nature: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            },
+            ocean: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth animated transitions */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.25);
+    }
+    .animal-chip {
+      cursor: grab;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .animal-chip:active {
+      cursor: grabbing;
+      transform: scale(0.97);
+    }
+    .drop-column {
+      min-height: 120px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .drop-column.drag-over {
+      background-color: #f0fdf4;
+      border-color: #22c55e;
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-emerald-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-600 to-green-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-emerald-500/25 ring-2 ring-white">
+          4b
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 tracking-wide uppercase">Unit 4: Well-being</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 65</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Vocabulary: <span class="text-emerald-600">Animals, Features & Nature Verbs</span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-emerald-600">0 / 40</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-emerald-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-emerald-600 text-white shadow-md shadow-emerald-600/25">
+          1. Animal Kingdom (1a & 1b)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Animal Features (2)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Geographical Features (3a)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Landscapes (3b & 3c)
+        </button>
+        <button data-tab="tab-ex5" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          5. Nature Verbs (4a & 4b)
+        </button>
+        <button data-tab="tab-lexicon" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📚 Vocabulary Lexicon & Audio
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: THE ANIMAL KINGDOM (Exercise 1a & 1b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-green-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1a & 1b</span>
+            <span class="text-emerald-200 text-xs font-medium">Page 65 • Animal Kingdom</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Classifying Animals: 5 Major Biological Classes</h2>
+          <p class="text-emerald-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Sort the animals into <strong>Reptiles</strong>, <strong>Mammals</strong>, <strong>Insects</strong>, <strong>Sea creatures</strong>, and <strong>Birds</strong>. Tap each word chip or drag it into the corresponding category.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1a()" class="px-5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Animals</span>
+          </button>
+          <button onclick="revealEx1a()" class="px-4 py-2.5 bg-emerald-800/60 hover:bg-emerald-800 text-white border border-emerald-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Chips -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
+          <div>
+            <h3 class="font-black text-slate-900 text-base">Animal Word Bank (Tap an animal to select, then tap a category column):</h3>
+            <p class="text-xs text-slate-500">10 target animals from textbook Exercise 1a</p>
+          </div>
+          <span id="ex1a-bank-count" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">10 Available</span>
+        </div>
+
+        <div class="flex flex-wrap gap-2.5 min-h-[50px] p-3 bg-slate-50 rounded-2xl border border-dashed border-slate-300" id="animal-word-bank">
+          <span class="animal-chip px-3.5 py-2 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-sm shadow-xs hover:border-emerald-500 flex items-center gap-1.5" draggable="true" data-animal="alligator" data-correct="reptiles">
+            🦎 alligator
+          </span>
+          <span class="animal-chip px-3.5 py-2 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-sm shadow-xs hover:border-emerald-500 flex items-center gap-1.5" draggable="true" data-animal="ant" data-correct="insects">
+            🐜 ant
+          </span>
+          <span class="animal-chip px-3.5 py-2 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-sm shadow-xs hover:border-emerald-500 flex items-center gap-1.5" draggable="true" data-animal="butterfly" data-correct="insects">
+            🦋 butterfly
+          </span>
+          <span class="animal-chip px-3.5 py-2 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-sm shadow-xs hover:border-emerald-500 flex items-center gap-1.5" draggable="true" data-animal="eagle" data-correct="birds">
+            🦅 eagle
+          </span>
+          <span class="animal-chip px-3.5 py-2 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-sm shadow-xs hover:border-emerald-500 flex items-center gap-1.5" draggable="true" data-animal="gorilla" data-correct="mammals">
+            🦍 gorilla
+          </span>
+          <span class="animal-chip px-3.5 py-2 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-sm shadow-xs hover:border-emerald-500 flex items-center gap-1.5" draggable="true" data-animal="lizard" data-correct="reptiles">
+            🦎 lizard
+          </span>
+          <span class="animal-chip px-3.5 py-2 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-sm shadow-xs hover:border-emerald-500 flex items-center gap-1.5" draggable="true" data-animal="lobster" data-correct="sea-creatures">
+            🦞 lobster
+          </span>
+          <span class="animal-chip px-3.5 py-2 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-sm shadow-xs hover:border-emerald-500 flex items-center gap-1.5" draggable="true" data-animal="octopus" data-correct="sea-creatures">
+            🐙 octopus
+          </span>
+          <span class="animal-chip px-3.5 py-2 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-sm shadow-xs hover:border-emerald-500 flex items-center gap-1.5" draggable="true" data-animal="owl" data-correct="birds">
+            🦉 owl
+          </span>
+          <span class="animal-chip px-3.5 py-2 rounded-xl bg-white border-2 border-slate-200 text-slate-800 font-bold text-sm shadow-xs hover:border-emerald-500 flex items-center gap-1.5" draggable="true" data-animal="sheep" data-correct="mammals">
+            🐑 sheep
+          </span>
+        </div>
+      </div>
+
+      <!-- 5 Categories Drop Columns Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4" id="animal-categories-grid">
+        
+        <!-- Column: Reptiles -->
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs flex flex-col justify-between" data-category="reptiles">
+          <div>
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <span class="font-extrabold text-sm text-slate-900 flex items-center gap-1.5">
+                <span>🦎</span> Reptiles
+              </span>
+              <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-lg count-badge">0 / 2</span>
+            </div>
+            <div class="drop-column p-2 rounded-xl bg-slate-50/80 border border-slate-200 flex flex-col gap-2" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'reptiles')" onclick="handleClickDrop('reptiles')">
+            </div>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100">
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">+ Add 1 more reptile:</label>
+            <input type="text" id="add-reptile-input" placeholder="e.g. snake, crocodile" class="w-full text-xs p-2 rounded-lg border border-slate-300 font-medium bg-white focus:outline-none focus:border-emerald-500" />
+          </div>
+        </div>
+
+        <!-- Column: Mammals -->
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs flex flex-col justify-between" data-category="mammals">
+          <div>
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <span class="font-extrabold text-sm text-slate-900 flex items-center gap-1.5">
+                <span>🦍</span> Mammals
+              </span>
+              <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-lg count-badge">0 / 2</span>
+            </div>
+            <div class="drop-column p-2 rounded-xl bg-slate-50/80 border border-slate-200 flex flex-col gap-2" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'mammals')" onclick="handleClickDrop('mammals')">
+            </div>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100">
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">+ Add 1 more mammal:</label>
+            <input type="text" id="add-mammal-input" placeholder="e.g. tiger, horse, dog" class="w-full text-xs p-2 rounded-lg border border-slate-300 font-medium bg-white focus:outline-none focus:border-emerald-500" />
+          </div>
+        </div>
+
+        <!-- Column: Insects -->
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs flex flex-col justify-between" data-category="insects">
+          <div>
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <span class="font-extrabold text-sm text-slate-900 flex items-center gap-1.5">
+                <span>🐜</span> Insects
+              </span>
+              <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-lg count-badge">0 / 2</span>
+            </div>
+            <div class="drop-column p-2 rounded-xl bg-slate-50/80 border border-slate-200 flex flex-col gap-2" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'insects')" onclick="handleClickDrop('insects')">
+            </div>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100">
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">+ Add 1 more insect:</label>
+            <input type="text" id="add-insect-input" placeholder="e.g. bee, mosquito" class="w-full text-xs p-2 rounded-lg border border-slate-300 font-medium bg-white focus:outline-none focus:border-emerald-500" />
+          </div>
+        </div>
+
+        <!-- Column: Sea creatures -->
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs flex flex-col justify-between" data-category="sea-creatures">
+          <div>
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <span class="font-extrabold text-sm text-slate-900 flex items-center gap-1.5">
+                <span>🐙</span> Sea creatures
+              </span>
+              <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-lg count-badge">0 / 2</span>
+            </div>
+            <div class="drop-column p-2 rounded-xl bg-slate-50/80 border border-slate-200 flex flex-col gap-2" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'sea-creatures')" onclick="handleClickDrop('sea-creatures')">
+            </div>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100">
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">+ Add 1 more sea creature:</label>
+            <input type="text" id="add-sea-input" placeholder="e.g. shark, dolphin, crab" class="w-full text-xs p-2 rounded-lg border border-slate-300 font-medium bg-white focus:outline-none focus:border-emerald-500" />
+          </div>
+        </div>
+
+        <!-- Column: Birds -->
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs flex flex-col justify-between" data-category="birds">
+          <div>
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+              <span class="font-extrabold text-sm text-slate-900 flex items-center gap-1.5">
+                <span>🦅</span> Birds
+              </span>
+              <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-lg count-badge">0 / 2</span>
+            </div>
+            <div class="drop-column p-2 rounded-xl bg-slate-50/80 border border-slate-200 flex flex-col gap-2" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'birds')" onclick="handleClickDrop('birds')">
+            </div>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100">
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">+ Add 1 more bird:</label>
+            <input type="text" id="add-bird-input" placeholder="e.g. sparrow, parrot, penguin" class="w-full text-xs p-2 rounded-lg border border-slate-300 font-medium bg-white focus:outline-none focus:border-emerald-500" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 1b: Domestic vs Wild & Endangered Discussion Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">1b</span>
+            Domestic vs. Wild Animals & Endangered Species Analysis:
+          </h3>
+          <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">Discussion & Context</span>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <!-- Card 1: Domestic -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-black">🏠</span>
+              <span class="font-black text-sm text-slate-900">Domestic Animals</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed font-medium">
+              Kept on farms or as pets by humans. In Exercise 1a:
+            </p>
+            <div class="p-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-emerald-900">
+              • <strong>Sheep</strong> (domestic livestock)<br>
+              <em>(Other examples: cow, horse, cat, dog)</em>
+            </div>
+          </div>
+
+          <!-- Card 2: Wild -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg bg-teal-100 text-teal-800 flex items-center justify-center text-sm font-black">🌿</span>
+              <span class="font-black text-sm text-slate-900">Wild Animals</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed font-medium">
+              Living freely in nature without human domestication:
+            </p>
+            <div class="p-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-teal-950">
+              • <strong>Alligator, ant, butterfly, eagle, gorilla, lizard, lobster, octopus, owl</strong>.
+            </div>
+          </div>
+
+          <!-- Card 3: Endangered -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-800 flex items-center justify-center text-sm font-black">⚠️</span>
+              <span class="font-black text-sm text-slate-900">Endangered Species</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed font-medium">
+              Species at critical risk of extinction in the wild:
+            </p>
+            <div class="p-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-rose-950">
+              • <strong>Gorilla</strong> (Critically endangered due to poaching & deforestation)<br>
+              • Several species of <strong>eagles</strong> and <strong>butterflies</strong> are vulnerable.
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 flex items-start gap-3">
+          <span class="text-base shrink-0">💡</span>
+          <div>
+            <strong>Interactive Note:</strong> You can click on any animal chip in your categorized columns to hear its natural British pronunciation!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: ANIMAL FEATURES & LIFE (Exercise 2) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-teal-600 via-emerald-600 to-green-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2</span>
+            <span class="text-teal-200 text-xs font-medium">Page 65 • Anatomical & Ecological Terms</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Animal Features, Anatomy & Habitats</h2>
+          <p class="text-teal-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Complete each sentence using the correct target vocabulary from the box: <em>colouring</em>, <em>feathers</em>, <em>fur</em>, <em>habitat</em>, <em>life cycle</em>, <em>nest</em>, <em>species</em>, or <em>wings</em>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2()" class="px-5 py-2.5 bg-white hover:bg-teal-50 text-teal-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Answers</span>
+          </button>
+          <button onclick="revealEx2()" class="px-4 py-2.5 bg-teal-800/60 hover:bg-teal-800 text-white border border-teal-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Box for Exercise 2 -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Words in the Box:</span>
+          <span class="text-xs text-slate-400">Click a word to insert into active input</span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="ex2-word-bank">
+          <button type="button" onclick="insertEx2Word(this)" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">colouring</button>
+          <button type="button" onclick="insertEx2Word(this)" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">feathers</button>
+          <button type="button" onclick="insertEx2Word(this)" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">fur</button>
+          <button type="button" onclick="insertEx2Word(this)" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">habitat</button>
+          <button type="button" onclick="insertEx2Word(this)" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">life cycle</button>
+          <button type="button" onclick="insertEx2Word(this)" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">nest</button>
+          <button type="button" onclick="insertEx2Word(this)" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">species</button>
+          <button type="button" onclick="insertEx2Word(this)" class="px-3.5 py-1.5 rounded-xl bg-teal-50 border-2 border-teal-200 text-teal-950 font-black text-sm hover:border-teal-500 transition">wings</button>
+        </div>
+      </div>
+
+      <!-- Exercise 2 Sentence Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">2</span>
+            Complete the sentences with the words in the box:
+          </h3>
+          <span id="ex2-score-pill" class="text-xs font-bold text-teal-800 bg-teal-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="space-y-4" id="ex2-container">
+          
+          <!-- Item 1 (species + habitat) -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Some
+              <input type="text" data-ex2-gap="1a" data-ans="species" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-32 text-center focus:border-teal-600 focus:outline-none" placeholder="gap 1a" />
+              of animal are dying out because humans are destroying their natural
+              <input type="text" data-ex2-gap="1b" data-ans="habitat" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-32 text-center focus:border-teal-600 focus:outline-none" placeholder="gap 1b" />
+              so they no longer have a place to live.
+            </p>
+          </div>
+
+          <!-- Item 2 (life cycle) -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              This diagram shows the
+              <input type="text" data-ex2-gap="2" data-ans="life cycle" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-36 text-center focus:border-teal-600 focus:outline-none" placeholder="gap 2" />
+              of a salmon from the egg stage to adulthood.
+            </p>
+          </div>
+
+          <!-- Item 3 (fur) -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Many people are against the
+              <input type="text" data-ex2-gap="3" data-ans="fur" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-28 text-center focus:border-teal-600 focus:outline-none" placeholder="gap 3" />
+              trade – that is, the buying and selling of animal's coats.
+            </p>
+          </div>
+
+          <!-- Item 4 (wings) -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Penguins are an example of a bird that uses its
+              <input type="text" data-ex2-gap="4" data-ans="wings" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-28 text-center focus:border-teal-600 focus:outline-none" placeholder="gap 4" />
+              to swim instead of fly.
+            </p>
+          </div>
+
+          <!-- Item 5 (nest) -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              It is illegal in some countries to steal eggs from a bird's
+              <input type="text" data-ex2-gap="5" data-ans="nest" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-28 text-center focus:border-teal-600 focus:outline-none" placeholder="gap 5" />
+              in the wild.
+            </p>
+          </div>
+
+          <!-- Item 6 (colouring) -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 6</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              The
+              <input type="text" data-ex2-gap="6" data-ans="colouring,coloring" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-32 text-center focus:border-teal-600 focus:outline-none" placeholder="gap 6" />
+              of a horse can be anything from black or white to brown and grey.
+            </p>
+          </div>
+
+          <!-- Item 7 (feathers) -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2-row="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-400 uppercase">Sentence 7</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Male and female birds often have different coloured
+              <input type="text" data-ex2-gap="7" data-ans="feathers" class="ex2-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-teal-900 bg-white text-base w-32 text-center focus:border-teal-600 focus:outline-none" placeholder="gap 7" />
+              .
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: GEOGRAPHICAL FEATURES (Exercise 3a) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-cyan-600 via-sky-600 to-teal-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a</span>
+            <span class="text-cyan-200 text-xs font-medium">Page 65 • Landscapes & Earth Features</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Geographical Features: Attributes & Properties</h2>
+          <p class="text-cyan-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Answer questions 1–5 by selecting all the appropriate geographical features that possess each physical attribute. Words can be selected more than once.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3a()" class="px-5 py-2.5 bg-white hover:bg-cyan-50 text-cyan-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Features</span>
+          </button>
+          <button onclick="revealEx3a()" class="px-4 py-2.5 bg-cyan-800/60 hover:bg-cyan-800 text-white border border-cyan-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Geographical Features Reference Pill Cloud -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-2">
+        <span class="text-xs font-black uppercase tracking-wider text-slate-500">Available Geographical Vocabulary Pool:</span>
+        <div class="flex flex-wrap gap-2 pt-1 text-xs sm:text-sm font-bold text-slate-700">
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">beach</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">coast</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">desert</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">forest</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">hill</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">island</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">lake</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">mountain</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">ocean</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">rainforest</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">river</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">sea</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">waterfall</span>
+          <span class="px-3 py-1 bg-slate-100 rounded-xl">wood</span>
+        </div>
+      </div>
+
+      <!-- Exercise 3a Questions with multi-select tag toggles -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-800 text-sm font-black flex items-center justify-center">3a</span>
+            Look at the words in the box and select the features matching each question:
+          </h3>
+          <span id="ex3a-score-pill" class="text-xs font-bold text-cyan-800 bg-cyan-50 px-3 py-1 rounded-xl">Score: 0/5</span>
+        </div>
+
+        <div class="space-y-5" id="ex3a-container">
+          
+          <!-- Q1: Contain water -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex3a-q="1" data-ans="lake,ocean,river,sea,waterfall">
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-black text-slate-900 flex items-center gap-2">
+                <span class="text-cyan-600 font-bold">1.</span> Which of the features contain water?
+              </span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 chips-pool">
+              <!-- Dynamically populated tags with toggles -->
+            </div>
+          </div>
+
+          <!-- Q2: Next to or surrounded by water -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex3a-q="2" data-ans="beach,coast,island">
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-black text-slate-900 flex items-center gap-2">
+                <span class="text-cyan-600 font-bold">2.</span> Which are next to or surrounded by water?
+              </span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 chips-pool">
+            </div>
+          </div>
+
+          <!-- Q3: Contain many trees and plants -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex3a-q="3" data-ans="forest,rainforest,wood">
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-black text-slate-900 flex items-center gap-2">
+                <span class="text-cyan-600 font-bold">3.</span> Which contain many trees and plants?
+              </span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 chips-pool">
+            </div>
+          </div>
+
+          <!-- Q4: Contain sand -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex3a-q="4" data-ans="beach,desert">
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-black text-slate-900 flex items-center gap-2">
+                <span class="text-cyan-600 font-bold">4.</span> Which contain sand?
+              </span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 chips-pool">
+            </div>
+          </div>
+
+          <!-- Q5: High -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex3a-q="5" data-ans="hill,mountain,waterfall">
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-black text-slate-900 flex items-center gap-2">
+                <span class="text-cyan-600 font-bold">5.</span> Which are high?
+              </span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 chips-pool">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: LANDSCAPES (Exercise 3b & 3c) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-emerald-600 via-teal-700 to-cyan-800 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3b & 3c</span>
+            <span class="text-emerald-200 text-xs font-medium">Page 65 • Morphology & Country Descriptions</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Landscape Descriptions & Morphology</h2>
+          <p class="text-emerald-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Complete the country descriptions with the correct singular or plural forms of the words in bold. Then use the discussion studio to describe features in your own country.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3b()" class="px-5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 3b</span>
+          </button>
+          <button onclick="revealEx3b()" class="px-4 py-2.5 bg-emerald-800/60 hover:bg-emerald-800 text-white border border-emerald-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 3b Country Descriptions -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">3b</span>
+            Complete the descriptions with the correct form of the words in bold:
+          </h3>
+          <span id="ex3b-score-pill" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">Score: 0/12</span>
+        </div>
+
+        <div class="space-y-4" id="ex3b-container">
+          
+          <!-- Item 1: beach / coast / ocean / island -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b-row="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-emerald-700 uppercase tracking-wider">1. Words: beach / coast / ocean / island</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              My country is a(n)
+              <input type="text" data-ex3b-gap="1a" data-ans="island" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-32 text-center focus:border-emerald-600 focus:outline-none" placeholder="[island]" />
+              in the Indian
+              <input type="text" data-ex3b-gap="1b" data-ans="Ocean,ocean" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-32 text-center focus:border-emerald-600 focus:outline-none" placeholder="[Ocean]" />
+              . It has a long
+              <input type="text" data-ex3b-gap="1c" data-ans="coast" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-32 text-center focus:border-emerald-600 focus:outline-none" placeholder="[coast]" />
+              with many beautiful
+              <input type="text" data-ex3b-gap="1d" data-ans="beaches" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-32 text-center focus:border-emerald-600 focus:outline-none" placeholder="[beaches]" />
+              .
+            </p>
+          </div>
+
+          <!-- Item 2: hill / mountain -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-emerald-700 uppercase tracking-wider">2. Words: hill / mountain</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              The area where I live is quite flat, there aren't any
+              <input type="text" data-ex3b-gap="2a" data-ans="mountains" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-36 text-center focus:border-emerald-600 focus:outline-none" placeholder="[mountains]" />
+              – just a few
+              <input type="text" data-ex3b-gap="2b" data-ans="hills" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-32 text-center focus:border-emerald-600 focus:outline-none" placeholder="[hills]" />
+              which aren't very high.
+            </p>
+          </div>
+
+          <!-- Item 3: rainforest / river -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-emerald-700 uppercase tracking-wider">3. Words: rainforest / river</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Many tourists to my country visit the
+              <input type="text" data-ex3b-gap="3a" data-ans="rainforest" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-36 text-center focus:border-emerald-600 focus:outline-none" placeholder="[rainforest]" />
+              where they can see all sorts of plants and animals. The best way to get there is on a three-hour boat trip up the
+              <input type="text" data-ex3b-gap="3b" data-ans="river" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-32 text-center focus:border-emerald-600 focus:outline-none" placeholder="[river]" />
+              .
+            </p>
+          </div>
+
+          <!-- Item 4: sea / waterfall -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-emerald-700 uppercase tracking-wider">4. Words: sea / waterfall</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              An important natural attraction in my country is a
+              <input type="text" data-ex3b-gap="4a" data-ans="waterfall" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-36 text-center focus:border-emerald-600 focus:outline-none" placeholder="[waterfall]" />
+              which is over 200 metres high and empties into the
+              <input type="text" data-ex3b-gap="4b" data-ans="sea" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-28 text-center focus:border-emerald-600 focus:outline-none" placeholder="[sea]" />
+              .
+            </p>
+          </div>
+
+          <!-- Item 5: desert / forest -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-emerald-700 uppercase tracking-wider">5. Words: desert / forest</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              Much of my country is
+              <input type="text" data-ex3b-gap="5a" data-ans="desert" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-32 text-center focus:border-emerald-600 focus:outline-none" placeholder="[desert]" />
+              and it is very dry. You rarely see trees except in the city, and we do not have any
+              <input type="text" data-ex3b-gap="5b" data-ans="forests" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-32 text-center focus:border-emerald-600 focus:outline-none" placeholder="[forests]" />
+              .
+            </p>
+          </div>
+
+          <!-- Item 6: wood / lake -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-emerald-700 uppercase tracking-wider">6. Words: wood / lake</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <p class="text-base text-slate-900 font-medium leading-relaxed">
+              A popular tourist attraction in my country is a beautiful
+              <input type="text" data-ex3b-gap="6a" data-ans="lake" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-32 text-center focus:border-emerald-600 focus:outline-none" placeholder="[lake]" />
+              where you can do water sports. It is next to a(n)
+              <input type="text" data-ex3b-gap="6b" data-ans="wood" class="ex3b-input exercise-input mx-1 px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-32 text-center focus:border-emerald-600 focus:outline-none" placeholder="[wood]" />
+              where people often camp.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 3c: Speaking & Country Notebook Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">3c</span>
+              Work in pairs: Geographical features in your country:
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Discuss which features you have and name famous world examples of those you don't:</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="loadSampleEx3c()" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+              Load Sample Notes
+            </button>
+            <button onclick="saveNotesEx3c()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">
+              Save My Notes
+            </button>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-1">1. Features we HAVE in our country:</label>
+            <textarea id="ex3c-have" rows="3" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" placeholder="e.g. In Vietnam, we have a long coastline, stunning tropical beaches, majestic mountains in the north, and the vast Mekong River delta..."></textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-black uppercase tracking-wider text-slate-500 mb-1">2. Features we DO NOT have (with famous global examples):</label>
+            <textarea id="ex3c-donthave" rows="3" class="exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-slate-50 focus:bg-white text-sm" placeholder="e.g. We do not have vast deserts (like the Sahara Desert in Africa) or immense natural ice-covered fjords..."></textarea>
+          </div>
+        </div>
+        <div id="ex3c-status" class="hidden p-3 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-bold">
+          ✓ Your personal landscape reflection has been saved.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: VERBS (Exercise 4a & 4b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex5" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a & 4b</span>
+            <span class="text-amber-200 text-xs font-medium">Page 65 • Nature Verbs Collocations</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Environment & Nature Verbs</h2>
+          <p class="text-amber-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Choose the correct verb in italics for each sentence (<em>pick / plant / hunt / fish / protect / farm / grow</em>). Then debate whether you agree or disagree with the environmental policies!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4a()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Choices</span>
+          </button>
+          <button onclick="revealEx4a()" class="px-4 py-2.5 bg-amber-800/60 hover:bg-amber-800 text-white border border-amber-300/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 4a Interactive Pill Selector Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">4a</span>
+            Choose the correct options in italics to complete the sentences:
+          </h3>
+          <span id="ex4a-score-pill" class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-1 rounded-xl">Score: 0/7</span>
+        </div>
+
+        <div class="grid gap-3.5" id="ex4a-container">
+          
+          <!-- Item 1: pick / plant -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4a-q="1" data-ans="pick">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              You should never
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">pick</button>
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">plant</button>
+              </span>
+              flowers from the wild – they're better left where they are.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 2: hunt / fish -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4a-q="2" data-ans="fish">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              People should be allowed to
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">hunt</button>
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">fish</button>
+              </span>
+              in any lake and river.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 3: protect / farm -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4a-q="3" data-ans="protect">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              It's impossible to
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">protect</button>
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">farm</button>
+              </span>
+              all endangered plants and animals.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 4: farm / grow -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4a-q="4" data-ans="farm">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              The government should give more help and money to people who
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">farm</button>
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">grow</button>
+              </span>
+              the land.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 5: growing / hunting -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4a-q="5" data-ans="hunting">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              I think
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">growing</button>
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">hunting</button>
+              </span>
+              animals is cruel and should be forbidden.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 6: pick / grow -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4a-q="6" data-ans="grow">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              If they have a garden, people should
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">pick</button>
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">grow</button>
+              </span>
+              their own vegetables.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 7: plant / pick -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex4a-q="7" data-ans="plant">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">7.</span>
+              Farmers should only
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">plant</button>
+                <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3.5 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-amber-500 shadow-2xs">pick</button>
+              </span>
+              crops in a way which is good for the environment.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Exercise 4b: Agree or Disagree Opinion Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">4b</span>
+            Work in pairs: Do you agree or disagree with the statements in Exercise 4a?
+          </h3>
+          <span class="text-xs font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-3 py-1 rounded-xl">Debate Studio</span>
+        </div>
+        <p class="text-sm text-slate-600">Click to listen to each debate prompt, toggle your stance, and review model opinions with reasons:</p>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="opinion-cards-grid">
+          
+          <!-- Debate 1 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Statement 1: Wild Flowers</span>
+              <button onclick="speakText('You should never pick flowers from the wild - they are better left where they are.')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Never pick wild flowers."</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>I agree:</strong> Picking flowers removes vital nectar for bees and prevents seeds from reproducing in native habitats.
+            </div>
+          </div>
+
+          <!-- Debate 2 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Statement 2: Fishing Rights</span>
+              <button onclick="speakText('People should be allowed to fish in any lake and river.')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Allowed to fish in any lake & river?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>I disagree:</strong> Unregulated fishing leads to severe overfishing and ruins delicate freshwater ecosystems.
+            </div>
+          </div>
+
+          <!-- Debate 3 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Statement 5: Hunting</span>
+              <button onclick="speakText('I think hunting animals is cruel and should be forbidden.')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Hunting is cruel and should be banned."</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>I agree:</strong> Sport hunting causes unnecessary animal suffering and threatens fragile wildlife populations.
+            </div>
+          </div>
+
+          <!-- Debate 4 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Statement 6: Grow Veggies</span>
+              <button onclick="speakText('If they have a garden, people should grow their own vegetables.')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Grow your own vegetables."</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>I agree:</strong> Homegrown produce reduces food miles, cuts plastic packaging, and connects people with nature.
+            </div>
+          </div>
+
+          <!-- Debate 5 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Statement 7: Sustainable Crops</span>
+              <button onclick="speakText('Farmers should only plant crops in a way which is good for the environment.')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Eco-friendly crop planting."</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>I agree:</strong> Crop rotation and organic methods prevent soil exhaustion and guard water reserves from chemicals.
+            </div>
+          </div>
+
+          <!-- Debate 6 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-2.5 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Statement 4: Support Farmers</span>
+              <button onclick="speakText('The government should give more help and money to people who farm the land.')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-xs font-bold text-slate-900">"Government aid for farmers."</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>I agree:</strong> Financial subsidies empower farmers to adopt cleaner green technologies without going bankrupt.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: VOCABULARY REFERENCE & AUDIO LEXICON -->
+    <!-- ========================================================================= -->
+    <section id="tab-lexicon" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 to-emerald-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-emerald-500 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Unit 4b Glossary</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 65 Reference & Audio Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Comprehensive Vocabulary Lexicon</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Full reference definitions, phonetic transcriptions, grammatical collocations, and one-click British English pronunciation.
+        </p>
+      </div>
+
+      <!-- Flashcards Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <!-- Card: habitat -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">habitat</h4>
+            <button onclick="speakText('habitat')" class="text-xs px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 font-bold hover:bg-emerald-100 transition">🔊 /ˈhæb.ɪ.tæt/</button>
+          </div>
+          <span class="text-xs font-bold text-emerald-600 uppercase">noun [C/U]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">The natural environment in which an animal or plant normally lives or grows.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>destroy natural habitat</em></div>
+        </div>
+
+        <!-- Card: species -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">species</h4>
+            <button onclick="speakText('species')" class="text-xs px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 font-bold hover:bg-emerald-100 transition">🔊 /ˈspiː.ʃiːz/</button>
+          </div>
+          <span class="text-xs font-bold text-emerald-600 uppercase">noun [singular / plural]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A group of living organisms consisting of similar individuals capable of exchanging genes.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>endangered species</em></div>
+        </div>
+
+        <!-- Card: life cycle -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">life cycle</h4>
+            <button onclick="speakText('life cycle')" class="text-xs px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 font-bold hover:bg-emerald-100 transition">🔊 /ˈlaɪf ˌsaɪ.kəl/</button>
+          </div>
+          <span class="text-xs font-bold text-emerald-600 uppercase">compound noun [C]</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">The series of changes in the life of an organism, including reproduction and development.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>the life cycle of a salmon</em></div>
+        </div>
+
+        <!-- Card: coast vs beach -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">coast vs. beach</h4>
+            <button onclick="speakText('coast and beach')" class="text-xs px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 font-bold hover:bg-emerald-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-emerald-600 uppercase">geography contrast</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium"><strong>Coast:</strong> the whole land along a sea/ocean. <strong>Beach:</strong> the sandy or pebbly strip right by the water.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Example:</strong> <em>a long coast with many sandy beaches</em></div>
+        </div>
+
+        <!-- Card: forest vs wood -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">forest vs. wood</h4>
+            <button onclick="speakText('forest and wood')" class="text-xs px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 font-bold hover:bg-emerald-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-emerald-600 uppercase">scale distinction</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">A <strong>forest</strong> is a very large tract covered with trees; a <strong>wood</strong> is smaller and less dense than a forest.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Example:</strong> <em>camp in a small quiet wood</em></div>
+        </div>
+
+        <!-- Card: farm vs grow -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-base font-black text-slate-900">farm vs. grow</h4>
+            <button onclick="speakText('farm and grow')" class="text-xs px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 font-bold hover:bg-emerald-100 transition">🔊 Listen</button>
+          </div>
+          <span class="text-xs font-bold text-emerald-600 uppercase">verb usage</span>
+          <p class="text-xs text-slate-600 leading-relaxed font-medium">We <strong>farm</strong> the land / animals (manage agriculture). We <strong>grow</strong> crops, vegetables, or plants.</p>
+          <div class="p-2 rounded-xl bg-slate-50 text-xs text-slate-700"><strong>Collocation:</strong> <em>farm the land / grow your own vegetables</em></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Vocabulary page 43
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 4b Vocabulary
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 4: Well-being • 4b Vocabulary • Page 65
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State management for scores
+    const state = {
+      score: {
+        ex1a: 0,
+        ex2: 0,
+        ex3a: 0,
+        ex3b: 0,
+        ex4a: 0
+      }
+    };
+
+    // Web Audio synthesizer for crisp feedback beeps
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.15); // C6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Text to Speech Pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.92;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // DRAG AND DROP & CLICK INTERACTION FOR EXERCISE 1a
+    let selectedAnimalChip = null;
+
+    document.querySelectorAll('.animal-chip').forEach(chip => {
+      chip.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', chip.getAttribute('data-animal'));
+        chip.classList.add('opacity-50');
+      });
+
+      chip.addEventListener('dragend', () => {
+        chip.classList.remove('opacity-50');
+      });
+
+      chip.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // If already selected, deselect
+        if (chip.classList.contains('ring-2')) {
+          chip.classList.remove('ring-2', 'ring-emerald-600');
+          selectedAnimalChip = null;
+        } else {
+          document.querySelectorAll('.animal-chip').forEach(c => c.classList.remove('ring-2', 'ring-emerald-600'));
+          chip.classList.add('ring-2', 'ring-emerald-600');
+          selectedAnimalChip = chip;
+          speakText(chip.getAttribute('data-animal'));
+        }
+      });
+    });
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add('drag-over');
+    }
+
+    function handleDragLeave(e) {
+      e.currentTarget.classList.remove('drag-over');
+    }
+
+    function handleDrop(e, category) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('drag-over');
+      const animalName = e.dataTransfer.getData('text/plain');
+      const chip = document.querySelector(`[data-animal="${animalName}"]`);
+      if (chip) {
+        placeChipInCategory(chip, category);
+      }
+    }
+
+    function handleClickDrop(category) {
+      if (selectedAnimalChip) {
+        placeChipInCategory(selectedAnimalChip, category);
+        selectedAnimalChip.classList.remove('ring-2', 'ring-emerald-600');
+        selectedAnimalChip = null;
+      }
+    }
+
+    function placeChipInCategory(chip, category) {
+      const dropCol = document.querySelector(`[data-category="${category}"] .drop-column`);
+      if (dropCol) {
+        dropCol.appendChild(chip);
+        updateAnimalCounts();
+      }
+    }
+
+    function updateAnimalCounts() {
+      const bank = document.getElementById('animal-word-bank');
+      const bankCount = bank.querySelectorAll('.animal-chip').length;
+      document.getElementById('ex1a-bank-count').textContent = `${bankCount} Available`;
+
+      document.querySelectorAll('[data-category]').forEach(col => {
+        const cat = col.getAttribute('data-category');
+        const count = col.querySelectorAll('.drop-column .animal-chip').length;
+        const badge = col.querySelector('.count-badge');
+        if (badge) badge.textContent = `${count} / 2`;
+      });
+    }
+
+    function checkEx1a() {
+      let correct = 0;
+      let totalPlaced = 0;
+
+      document.querySelectorAll('[data-category]').forEach(col => {
+        const cat = col.getAttribute('data-category');
+        const chips = col.querySelectorAll('.drop-column .animal-chip');
+
+        chips.forEach(chip => {
+          totalPlaced++;
+          const expected = chip.getAttribute('data-correct');
+          if (cat === expected) {
+            correct++;
+            chip.classList.remove('border-rose-400', 'bg-rose-50');
+            chip.classList.add('border-emerald-500', 'bg-emerald-50');
+          } else {
+            chip.classList.remove('border-emerald-500', 'bg-emerald-50');
+            chip.classList.add('border-rose-400', 'bg-rose-50');
+          }
+        });
+      });
+
+      state.score.ex1a = correct;
+      updateTotalScore();
+      playBeep(correct >= 7);
+    }
+
+    function revealEx1a() {
+      const mapping = {
+        'alligator': 'reptiles',
+        'lizard': 'reptiles',
+        'gorilla': 'mammals',
+        'sheep': 'mammals',
+        'ant': 'insects',
+        'butterfly': 'insects',
+        'lobster': 'sea-creatures',
+        'octopus': 'sea-creatures',
+        'eagle': 'birds',
+        'owl': 'birds'
+      };
+
+      for (let animal in mapping) {
+        const chip = document.querySelector(`[data-animal="${animal}"]`);
+        const cat = mapping[animal];
+        placeChipInCategory(chip, cat);
+        chip.classList.remove('border-rose-400', 'bg-rose-50');
+        chip.classList.add('border-emerald-500', 'bg-emerald-50');
+      }
+
+      // Populate custom category extension inputs with textbook ideas
+      document.getElementById('add-reptile-input').value = 'crocodile';
+      document.getElementById('add-mammal-input').value = 'elephant';
+      document.getElementById('add-insect-input').value = 'bee';
+      document.getElementById('add-sea-input').value = 'dolphin';
+      document.getElementById('add-bird-input').value = 'penguin';
+
+      state.score.ex1a = 10;
+      updateTotalScore();
+    }
+
+    // EXERCISE 2 LOGIC
+    let lastActiveEx2Input = null;
+    document.querySelectorAll('.ex2-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx2Input = inp;
+      });
+    });
+
+    function insertEx2Word(btn) {
+      const word = btn.textContent.trim();
+      if (lastActiveEx2Input) {
+        lastActiveEx2Input.value = word;
+        lastActiveEx2Input.focus();
+      } else {
+        const emptyInp = Array.from(document.querySelectorAll('.ex2-input')).find(i => !i.value.trim());
+        if (emptyInp) {
+          emptyInp.value = word;
+          emptyInp.focus();
+        }
+      }
+    }
+
+    function checkEx2() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex2-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-teal-500', 'bg-teal-50');
+        } else {
+          inp.classList.remove('border-teal-500', 'bg-teal-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      // Update badges per row
+      document.querySelectorAll('[data-ex2-row]').forEach(row => {
+        const rowInputs = Array.from(row.querySelectorAll('.ex2-input'));
+        const rowBadge = row.querySelector('.feedback-badge');
+        const allCorrect = rowInputs.every(i => i.classList.contains('border-teal-500'));
+        if (allCorrect) {
+          rowBadge.innerHTML = '<span class="px-2.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+        } else {
+          rowBadge.innerHTML = '<span class="px-2.5 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck</span>';
+        }
+      });
+
+      state.score.ex2 = correct;
+      document.getElementById('ex2-score-pill').textContent = `Score: ${correct}/${inputs.length}`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx2() {
+      const keys = {
+        '1a': 'species',
+        '1b': 'habitat',
+        '2': 'life cycle',
+        '3': 'fur',
+        '4': 'wings',
+        '5': 'nest',
+        '6': 'colouring',
+        '7': 'feathers'
+      };
+
+      for (let k in keys) {
+        const inp = document.querySelector(`[data-ex2-gap="${k}"]`);
+        if (inp) {
+          inp.value = keys[k];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-teal-500', 'bg-teal-50');
+        }
+      }
+
+      document.querySelectorAll('[data-ex2-row] .feedback-badge').forEach(b => {
+        b.innerHTML = '<span class="px-2.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex2 = 8;
+      document.getElementById('ex2-score-pill').textContent = `Score: 8/8`;
+      updateTotalScore();
+    }
+
+    // EXERCISE 3a MULTI-TAG INITIALIZATION & CHECKING
+    const geoWords = [
+      'beach', 'coast', 'desert', 'forest', 'hill', 'island', 'lake',
+      'mountain', 'ocean', 'rainforest', 'river', 'sea', 'waterfall', 'wood'
+    ];
+
+    function initEx3aChips() {
+      document.querySelectorAll('#ex3a-container [data-ex3a-q]').forEach(qRow => {
+        const pool = qRow.querySelector('.chips-pool');
+        pool.innerHTML = '';
+        geoWords.forEach(w => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'geo-tag-btn px-3 py-1 rounded-xl text-xs font-bold border border-slate-300 bg-white text-slate-700 hover:border-cyan-500 transition';
+          btn.textContent = w;
+          btn.onclick = () => {
+            btn.classList.toggle('selected');
+            if (btn.classList.contains('selected')) {
+              btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+              btn.classList.add('bg-cyan-600', 'text-white', 'border-cyan-600');
+            } else {
+              btn.classList.remove('bg-cyan-600', 'text-white', 'border-cyan-600');
+              btn.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            }
+          };
+          pool.appendChild(btn);
+        });
+      });
+    }
+
+    function checkEx3a() {
+      let correctCount = 0;
+      const qRows = document.querySelectorAll('#ex3a-container [data-ex3a-q]');
+
+      qRows.forEach(row => {
+        const expected = row.getAttribute('data-ans').split(',').map(s => s.trim().toLowerCase()).sort();
+        const selected = Array.from(row.querySelectorAll('.geo-tag-btn.selected')).map(b => b.textContent.trim().toLowerCase()).sort();
+        const badge = row.querySelector('.feedback-badge');
+
+        const isExact = expected.length === selected.length && expected.every((val, index) => val === selected[index]);
+
+        if (isExact) {
+          correctCount++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ All Correct</span>';
+        } else {
+          // Check overlap
+          const missing = expected.filter(x => !selected.includes(x));
+          const extras = selected.filter(x => !expected.includes(x));
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected.join(', ')})</span>`;
+        }
+      });
+
+      state.score.ex3a = correctCount;
+      document.getElementById('ex3a-score-pill').textContent = `Score: ${correctCount}/5`;
+      updateTotalScore();
+      playBeep(correctCount >= 3);
+    }
+
+    function revealEx3a() {
+      const qRows = document.querySelectorAll('#ex3a-container [data-ex3a-q]');
+      qRows.forEach(row => {
+        const expected = row.getAttribute('data-ans').split(',').map(s => s.trim().toLowerCase());
+        const btns = row.querySelectorAll('.geo-tag-btn');
+        btns.forEach(b => {
+          const word = b.textContent.trim().toLowerCase();
+          if (expected.includes(word)) {
+            b.classList.add('selected', 'bg-cyan-600', 'text-white', 'border-cyan-600');
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+          } else {
+            b.classList.remove('selected', 'bg-cyan-600', 'text-white', 'border-cyan-600');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex3a = 5;
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 5/5';
+      updateTotalScore();
+    }
+
+    // EXERCISE 3b CHECK & REVEAL
+    function checkEx3b() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex3b-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      // Update badges per card row
+      document.querySelectorAll('[data-ex3b-row]').forEach(row => {
+        const rowInputs = Array.from(row.querySelectorAll('.ex3b-input'));
+        const rowBadge = row.querySelector('.feedback-badge');
+        const allCorrect = rowInputs.every(i => i.classList.contains('border-emerald-500'));
+        if (allCorrect) {
+          rowBadge.innerHTML = '<span class="px-2.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+        } else {
+          rowBadge.innerHTML = '<span class="px-2.5 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck</span>';
+        }
+      });
+
+      state.score.ex3b = correct;
+      document.getElementById('ex3b-score-pill').textContent = `Score: ${correct}/${inputs.length}`;
+      updateTotalScore();
+      playBeep(correct >= 9);
+    }
+
+    function revealEx3b() {
+      const keys = {
+        '1a': 'island',
+        '1b': 'Ocean',
+        '1c': 'coast',
+        '1d': 'beaches',
+        '2a': 'mountains',
+        '2b': 'hills',
+        '3a': 'rainforest',
+        '3b': 'river',
+        '4a': 'waterfall',
+        '4b': 'sea',
+        '5a': 'desert',
+        '5b': 'forests',
+        '6a': 'lake',
+        '6b': 'wood'
+      };
+
+      for (let k in keys) {
+        const inp = document.querySelector(`[data-ex3b-gap="${k}"]`);
+        if (inp) {
+          inp.value = keys[k];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        }
+      }
+
+      document.querySelectorAll('[data-ex3b-row] .feedback-badge').forEach(b => {
+        b.innerHTML = '<span class="px-2.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex3b = 12;
+      document.getElementById('ex3b-score-pill').textContent = 'Score: 12/12';
+      updateTotalScore();
+    }
+
+    function loadSampleEx3c() {
+      document.getElementById('ex3c-have').value = "In my country, we have a long coastline with white sand beaches, dense tropical rainforests, and huge river networks used for transport.";
+      document.getElementById('ex3c-donthave').value = "We do not have any dry deserts (such as the Sahara or Atacama) or snow-capped alpine mountains like the Himalayas.";
+      playBeep(true);
+    }
+
+    function saveNotesEx3c() {
+      const have = document.getElementById('ex3c-have').value;
+      const donthave = document.getElementById('ex3c-donthave').value;
+      localStorage.setItem('m4b_vocab_ex3c', JSON.stringify({ have, donthave }));
+      const status = document.getElementById('ex3c-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // EXERCISE 4a PILL SELECTION & VALIDATION
+    function selectEx4aPill(btn) {
+      const container = btn.closest('.inline-flex');
+      container.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-amber-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-amber-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-amber-600', 'text-white', 'border-amber-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx4a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex4a-container [data-ex4a-q]');
+
+      rows.forEach(row => {
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+        const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Choose option</span>';
+          return;
+        }
+
+        const userVal = selectedBtn.textContent.trim().toLowerCase();
+        if (userVal === expected.toLowerCase()) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          selectedBtn.classList.remove('bg-amber-600', 'border-amber-600');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ (${expected})</span>`;
+          selectedBtn.classList.remove('bg-amber-600', 'border-amber-600');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex4a = correct;
+      document.getElementById('ex4a-score-pill').textContent = `Score: ${correct}/7`;
+      updateTotalScore();
+      playBeep(correct >= 5);
+    }
+
+    function revealEx4a() {
+      const answers = {
+        '1': 'pick',
+        '2': 'fish',
+        '3': 'protect',
+        '4': 'farm',
+        '5': 'hunting',
+        '6': 'grow',
+        '7': 'plant'
+      };
+
+      for (let q in answers) {
+        const row = document.querySelector(`[data-ex4a-q="${q}"]`);
+        const btns = row.querySelectorAll('.pill-choice-btn');
+        btns.forEach(b => {
+          if (b.textContent.trim().toLowerCase() === answers[q].toLowerCase()) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-amber-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex4a = 7;
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 7/7';
+      updateTotalScore();
+    }
+
+    // Global Score Updating
+    function updateTotalScore() {
+      // Points distribution: Ex 1a (10) + Ex 2 (8) + Ex 3a (5) + Ex 3b (12) + Ex 4a (7) = 42 (normalized: pill shows / 40 or exact total)
+      const total = state.score.ex1a + state.score.ex2 + state.score.ex3a + state.score.ex3b + state.score.ex4a;
+      const maxScore = 42;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 32) {
+        bar.classList.replace('bg-emerald-600', 'bg-teal-500');
+      } else {
+        bar.classList.replace('bg-teal-500', 'bg-emerald-600');
+      }
+    }
+
+    // Reset All Answers
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // 1. Reset animal chips to word bank
+      const bank = document.getElementById('animal-word-bank');
+      document.querySelectorAll('.drop-column .animal-chip').forEach(c => {
+        c.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50', 'ring-2', 'ring-emerald-600');
+        bank.appendChild(c);
+      });
+      document.getElementById('add-reptile-input').value = '';
+      document.getElementById('add-mammal-input').value = '';
+      document.getElementById('add-insect-input').value = '';
+      document.getElementById('add-sea-input').value = '';
+      document.getElementById('add-bird-input').value = '';
+      updateAnimalCounts();
+
+      // 2. Clear Ex 2
+      document.querySelectorAll('.ex2-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-teal-500', 'bg-teal-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 3. Clear Ex 3a
+      document.querySelectorAll('.geo-tag-btn').forEach(b => {
+        b.classList.remove('selected', 'bg-cyan-600', 'text-white', 'border-cyan-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+      });
+
+      // 4. Clear Ex 3b
+      document.querySelectorAll('.ex3b-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 5. Clear Ex 4a
+      document.querySelectorAll('#ex4a-container .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-amber-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-amber-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset state scores
+      state.score = { ex1a: 0, ex2: 0, ex3a: 0, ex3b: 0, ex4a: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex2-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 0/5';
+      document.getElementById('ex3b-score-pill').textContent = 'Score: 0/12';
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 0/7';
+    });
+
+    // Auto-restore saved 3c notes & initialize chips on DOM load
+    window.addEventListener('DOMContentLoaded', () => {
+      initEx3aChips();
+      updateAnimalCounts();
+      try {
+        const saved3c = JSON.parse(localStorage.getItem('m4b_vocab_ex3c'));
+        if (saved3c) {
+          if (saved3c.have) document.getElementById('ex3c-have').value = saved3c.have;
+          if (saved3c.donthave) document.getElementById('ex3c-donthave').value = saved3c.donthave;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>
