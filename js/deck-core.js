@@ -20,8 +20,9 @@ class DeckEngine {
         this.setupKeyboardNav();
         this.setupTouchNav();
         this.setupSyncListeners();
+        this.setupHashNav();
 
-        // Check if there's a hash in URL (e.g. #slide-4)
+        // Check if there's a hash in URL (e.g. #slide-4 or #6)
         const initialSlide = this.getSlideFromHash();
         this.showSlide(initialSlide >= 0 ? initialSlide : 0);
     }
@@ -71,14 +72,34 @@ class DeckEngine {
     getSlideFromHash() {
         const hash = window.location.hash;
         if (!hash) return -1;
-        const match = hash.match(/#?(?:slide-)?(\d+)/i);
+        const clean = hash.replace(/^#/, '').trim();
+
+        // 1. Numeric or slide-N pattern (e.g. #6, #slide-6)
+        const match = clean.match(/^(?:slide-)?(\d+)$/i);
         if (match) {
             const slideNum = parseInt(match[1], 10);
             if (!isNaN(slideNum) && slideNum >= 1 && slideNum <= this.slides.length) {
                 return slideNum - 1;
             }
         }
+
+        // 2. Direct slide ID matching (e.g. #reading-walkthrough)
+        const targetEl = document.getElementById(clean);
+        if (targetEl && targetEl.classList.contains('slide')) {
+            const idx = this.slides.indexOf(targetEl);
+            if (idx >= 0) return idx;
+        }
+
         return -1;
+    }
+
+    setupHashNav() {
+        window.addEventListener('hashchange', () => {
+            const slideIdx = this.getSlideFromHash();
+            if (slideIdx >= 0 && slideIdx !== this.currentSlide) {
+                this.showSlide(slideIdx, false);
+            }
+        });
     }
 
     setupStageScale() {
@@ -144,8 +165,35 @@ class DeckEngine {
             if (document.documentElement.classList.contains('presenter-window') || (document.body && document.body.classList.contains('presenter-window'))) {
                 return;
             }
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+            if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName) || e.target.isContentEditable || e.target.closest('[contenteditable="true"]')) {
                 return;
+            }
+
+            // Quick numeric slide jumping (e.g. typing '6' jumps in 450ms or on immediate Enter)
+            if (/^[1-9]$/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey) {
+                this._numBuffer = (this._numBuffer || '') + e.key;
+                clearTimeout(this._numBufferTimer);
+                this._numBufferTimer = setTimeout(() => {
+                    if (this._numBuffer) {
+                        const targetSlide = parseInt(this._numBuffer, 10) - 1;
+                        if (targetSlide >= 0 && targetSlide < this.slides.length) {
+                            this.showSlide(targetSlide);
+                        }
+                        this._numBuffer = '';
+                    }
+                }, 450);
+                return;
+            } else if (e.key === 'Enter' && this._numBuffer) {
+                e.preventDefault();
+                clearTimeout(this._numBufferTimer);
+                const targetSlide = parseInt(this._numBuffer, 10) - 1;
+                if (targetSlide >= 0 && targetSlide < this.slides.length) {
+                    this.showSlide(targetSlide);
+                }
+                this._numBuffer = '';
+                return;
+            } else if (!/^[0-9]$/.test(e.key)) {
+                this._numBuffer = '';
             }
 
             if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
@@ -169,7 +217,7 @@ class DeckEngine {
             } else if (e.key === '-' || e.key === '_') {
                 e.preventDefault();
                 this.changeFontSize(-1);
-            } else if (e.key === '0') {
+            } else if (e.key === '0' && !this._numBuffer) {
                 e.preventDefault();
                 this.resetFontSize();
             }
@@ -505,7 +553,15 @@ class DeckEngine {
             activeSlideEl.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
             activeSlideEl.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
             activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
-            activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+            activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => {
+                exp.classList.add('show');
+                const wt = exp.closest('.walkthrough-container');
+                if (wt) {
+                    setTimeout(() => {
+                        exp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 50);
+                }
+            });
         }
         if (window.readingHighlighter) {
             window.readingHighlighter.highlightAll(rawContainerId || container.id || null, false);

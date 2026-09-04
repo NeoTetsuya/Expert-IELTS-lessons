@@ -24,6 +24,30 @@
     --notebook-width: 1800px;
     --notebook-height: 980px;
 
+    /* Systematic Design Tokens (derived from design-token, spacing-system, & emil-design-eng) */
+    --space-2xs: 4px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+
+    --radius-xs: 4px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+    --radius-pill: 9999px;
+
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-card: 0 4px 14px -2px rgba(0, 0, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+    --shadow-float: 0 12px 28px -4px rgba(0, 0, 0, 0.12), 0 6px 12px -2px rgba(0, 0, 0, 0.06);
+    --shadow-glow-accent: 0 0 0 3px rgba(37, 99, 235, 0.22);
+    --shadow-glow-correct: 0 0 0 3px rgba(16, 185, 129, 0.25);
+    --shadow-glow-error: 0 0 0 3px rgba(239, 68, 68, 0.25);
+
     /* Design Engineering Motion Tokens (Authoritative animate skill curves) */
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);        /* strong ease-out for UI */
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);   /* exponential ease-out for modals */

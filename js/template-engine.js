@@ -86,11 +86,11 @@
 
 <!-- 3. UP-TO-DOWN (STACKED) 1-QUESTION WALKTHROUGH TEMPLATE -->
 <template id="tmpl-walkthrough">
-    <section class="slide" data-skill="read">
+    <section class="slide" data-skill="read" data-template="walkthrough">
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-reading);"></div>
-                <div class="page-content" style="display: flex; flex-direction: column; gap: 12px; padding: 24px 44px 20px; height: 100%; box-sizing: border-box;">
+                <div class="page-content" style="display: flex; flex-direction: column; gap: 10px; padding: 24px 44px 20px; height: 100%; box-sizing: border-box; min-height: 0; overflow: hidden;">
                     <div class="slide-header" style="margin-bottom: 0;">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-reading); font-size: 13px; padding: 3px 10px;" data-slot="badge">Reading Strategy • Walkthrough</span>
@@ -104,7 +104,7 @@
                     </p>
 
                     <!-- Centered Walkthrough Container -->
-                    <div class="walkthrough-container" style="max-width: 1550px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; flex: 1; justify-content: flex-start; min-height: 0;">
+                    <div class="walkthrough-container" style="max-width: 1550px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; flex: 1 1 auto; justify-content: flex-start; min-height: 0; overflow-y: auto; overflow-x: hidden; padding-right: 8px;">
                         <!-- Top Box: Dedicated Passage Excerpt -->
                         <div class="card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 16px 24px;">
                             <div style="font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--col-reading); margin-bottom: 4px;" data-slot="passage-header">
@@ -126,7 +126,7 @@
                         </div>
                     </div>
 
-                    <div class="action-row" style="margin-top: auto; padding-top: 4px;">
+                    <div class="action-row" style="margin-top: auto; padding-top: 8px; flex-shrink: 0;">
                         <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answer</button>
                         <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="revealAnswers(this)">Show Evidence / Highlights</button>
@@ -1613,6 +1613,7 @@
                 // Transfer skill attribute (read, grammar, vocab, write, review)
                 const skill = el.getAttribute('skill') || el.getAttribute('data-skill') || section.getAttribute('data-skill') || 'read';
                 section.setAttribute('data-skill', skill);
+                section.setAttribute('data-template', templateName.toLowerCase());
 
                 // Dynamically color skill stripe and badges according to skill
                 const skillColorMap = {

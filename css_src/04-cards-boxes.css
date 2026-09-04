@@ -120,13 +120,14 @@
 .reading-pane {
     background: #ffffff;
     border: 1.5px solid var(--border-soft, rgba(0,0,0,0.08));
-    border-radius: 14px;
-    padding: 24px 30px;
+    border-radius: var(--radius-lg, 14px);
+    box-shadow: var(--shadow-subtle, 0 1px 3px rgba(0,0,0,0.08));
+    padding: var(--space-lg, 24px) var(--space-xl, 32px);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    line-height: 1.85;
+    gap: var(--space-md, 18px);
+    line-height: 1.75;
     font-size: calc(21px * var(--font-scale, 1));
     color: var(--text-body, #1e293b);
     scroll-behavior: smooth;
@@ -135,11 +136,12 @@
 }
 .reading-pane p {
     font-size: calc(21px * var(--font-scale, 1));
-    line-height: 1.85;
-    margin-bottom: 14px;
+    line-height: 1.75;
+    max-width: 68ch; /* Optimal readable measure from readable-measure skill (45-75ch) */
+    margin-bottom: var(--space-md, 16px);
 }
 .reading-pane::-webkit-scrollbar { width: 8px; }
-.reading-pane::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.reading-pane::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: var(--radius-xs, 4px); }
 
 .reading-pane h3 {
     font-family: var(--font-display, 'Space Grotesk', sans-serif);
@@ -147,8 +149,30 @@
     font-weight: 700;
     color: var(--text-dark, #0f172a);
     border-bottom: 3px solid var(--col-reading, #dc2626);
-    padding-bottom: 6px;
+    padding-bottom: var(--space-xs, 6px);
+    margin-bottom: var(--space-sm, 12px);
     font-style: italic;
+}
+
+/* Paragraph Marker Anchors (A, B, C, D...) for IELTS Reading Passages */
+.paragraph-marker,
+.passage-marker,
+.reading-pane strong:first-child:has(+ span, + em, + text) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 6px;
+    background: var(--col-reading, #2563eb);
+    color: #ffffff !important;
+    border-radius: var(--radius-xs, 4px);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-weight: 800;
+    font-size: 15px;
+    margin-right: var(--space-xs, 8px);
+    vertical-align: middle;
+    box-shadow: var(--shadow-subtle, 0 1px 3px rgba(0,0,0,0.08));
 }
 
 /* ==========================================================================

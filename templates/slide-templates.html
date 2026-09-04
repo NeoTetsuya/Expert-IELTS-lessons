@@ -64,7 +64,7 @@
                     </p>
 
                     <!-- Centered Walkthrough Container -->
-                    <div class="walkthrough-container" style="max-width: 1550px; width: 96%; margin: auto; display: flex; flex-direction: column; gap: 18px; justify-content: center; flex: 1; min-height: 0;">
+                    <div class="walkthrough-container" style="max-width: 1550px; width: 96%; margin: auto; display: flex; flex-direction: column; gap: 14px; justify-content: flex-start; flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; padding-right: 8px;">
                         <!-- Top Box: Dedicated Passage Excerpt -->
                         <div class="card" style="background: #ffffff; border: 2px solid #93c5fd; border-left: 7px solid var(--col-reading); border-radius: 14px; padding: 24px 32px; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
                             <div style="font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--col-reading); margin-bottom: 10px;" data-slot="passage-header">
@@ -86,7 +86,7 @@
                         </div>
                     </div>
 
-                    <div class="action-row" style="margin-top: 10px;">
+                    <div class="action-row" style="margin-top: auto; padding-top: 8px; flex-shrink: 0;">
                         <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answer</button>
                         <button class="btn-action" onclick="revealAnswers(this)">Show Evidence / Highlights</button>
                         <button class="btn-action" onclick="resetAnswers(this)">Reset</button>

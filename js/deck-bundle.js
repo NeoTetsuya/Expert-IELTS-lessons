@@ -93,11 +93,11 @@
 
 <!-- 3. UP-TO-DOWN (STACKED) 1-QUESTION WALKTHROUGH TEMPLATE -->
 <template id="tmpl-walkthrough">
-    <section class="slide" data-skill="read">
+    <section class="slide" data-skill="read" data-template="walkthrough">
         <div class="slide-inner">
             <div class="notebook">
                 <div class="skill-stripe" style="background: var(--col-reading);"></div>
-                <div class="page-content" style="display: flex; flex-direction: column; gap: 12px; padding: 24px 44px 20px; height: 100%; box-sizing: border-box;">
+                <div class="page-content" style="display: flex; flex-direction: column; gap: 10px; padding: 24px 44px 20px; height: 100%; box-sizing: border-box; min-height: 0; overflow: hidden;">
                     <div class="slide-header" style="margin-bottom: 0;">
                         <div class="slide-title-group">
                             <span class="skill-badge" style="background: var(--col-reading); font-size: 13px; padding: 3px 10px;" data-slot="badge">Reading Strategy • Walkthrough</span>
@@ -111,7 +111,7 @@
                     </p>
 
                     <!-- Centered Walkthrough Container -->
-                    <div class="walkthrough-container" style="max-width: 1550px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; flex: 1; justify-content: flex-start; min-height: 0;">
+                    <div class="walkthrough-container" style="max-width: 1550px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; flex: 1 1 auto; justify-content: flex-start; min-height: 0; overflow-y: auto; overflow-x: hidden; padding-right: 8px;">
                         <!-- Top Box: Dedicated Passage Excerpt -->
                         <div class="card" style="border-left: 6px solid var(--col-reading); border-radius: 12px; padding: 16px 24px;">
                             <div style="font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--col-reading); margin-bottom: 4px;" data-slot="passage-header">
@@ -133,7 +133,7 @@
                         </div>
                     </div>
 
-                    <div class="action-row" style="margin-top: auto; padding-top: 4px;">
+                    <div class="action-row" style="margin-top: auto; padding-top: 8px; flex-shrink: 0;">
                         <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answer</button>
                         <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="revealAnswers(this)">Show Evidence / Highlights</button>
@@ -1620,6 +1620,7 @@
                 // Transfer skill attribute (read, grammar, vocab, write, review)
                 const skill = el.getAttribute('skill') || el.getAttribute('data-skill') || section.getAttribute('data-skill') || 'read';
                 section.setAttribute('data-skill', skill);
+                section.setAttribute('data-template', templateName.toLowerCase());
 
                 // Dynamically color skill stripe and badges according to skill
                 const skillColorMap = {
@@ -1917,8 +1918,9 @@ class DeckEngine {
         this.setupKeyboardNav();
         this.setupTouchNav();
         this.setupSyncListeners();
+        this.setupHashNav();
 
-        // Check if there's a hash in URL (e.g. #slide-4)
+        // Check if there's a hash in URL (e.g. #slide-4 or #6)
         const initialSlide = this.getSlideFromHash();
         this.showSlide(initialSlide >= 0 ? initialSlide : 0);
     }
@@ -1968,14 +1970,34 @@ class DeckEngine {
     getSlideFromHash() {
         const hash = window.location.hash;
         if (!hash) return -1;
-        const match = hash.match(/#?(?:slide-)?(\d+)/i);
+        const clean = hash.replace(/^#/, '').trim();
+
+        // 1. Numeric or slide-N pattern (e.g. #6, #slide-6)
+        const match = clean.match(/^(?:slide-)?(\d+)$/i);
         if (match) {
             const slideNum = parseInt(match[1], 10);
             if (!isNaN(slideNum) && slideNum >= 1 && slideNum <= this.slides.length) {
                 return slideNum - 1;
             }
         }
+
+        // 2. Direct slide ID matching (e.g. #reading-walkthrough)
+        const targetEl = document.getElementById(clean);
+        if (targetEl && targetEl.classList.contains('slide')) {
+            const idx = this.slides.indexOf(targetEl);
+            if (idx >= 0) return idx;
+        }
+
         return -1;
+    }
+
+    setupHashNav() {
+        window.addEventListener('hashchange', () => {
+            const slideIdx = this.getSlideFromHash();
+            if (slideIdx >= 0 && slideIdx !== this.currentSlide) {
+                this.showSlide(slideIdx, false);
+            }
+        });
     }
 
     setupStageScale() {
@@ -2041,8 +2063,35 @@ class DeckEngine {
             if (document.documentElement.classList.contains('presenter-window') || (document.body && document.body.classList.contains('presenter-window'))) {
                 return;
             }
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+            if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName) || e.target.isContentEditable || e.target.closest('[contenteditable="true"]')) {
                 return;
+            }
+
+            // Quick numeric slide jumping (e.g. typing '6' jumps in 450ms or on immediate Enter)
+            if (/^[1-9]$/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey) {
+                this._numBuffer = (this._numBuffer || '') + e.key;
+                clearTimeout(this._numBufferTimer);
+                this._numBufferTimer = setTimeout(() => {
+                    if (this._numBuffer) {
+                        const targetSlide = parseInt(this._numBuffer, 10) - 1;
+                        if (targetSlide >= 0 && targetSlide < this.slides.length) {
+                            this.showSlide(targetSlide);
+                        }
+                        this._numBuffer = '';
+                    }
+                }, 450);
+                return;
+            } else if (e.key === 'Enter' && this._numBuffer) {
+                e.preventDefault();
+                clearTimeout(this._numBufferTimer);
+                const targetSlide = parseInt(this._numBuffer, 10) - 1;
+                if (targetSlide >= 0 && targetSlide < this.slides.length) {
+                    this.showSlide(targetSlide);
+                }
+                this._numBuffer = '';
+                return;
+            } else if (!/^[0-9]$/.test(e.key)) {
+                this._numBuffer = '';
             }
 
             if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
@@ -2066,7 +2115,7 @@ class DeckEngine {
             } else if (e.key === '-' || e.key === '_') {
                 e.preventDefault();
                 this.changeFontSize(-1);
-            } else if (e.key === '0') {
+            } else if (e.key === '0' && !this._numBuffer) {
                 e.preventDefault();
                 this.resetFontSize();
             }
@@ -2402,7 +2451,15 @@ class DeckEngine {
             activeSlideEl.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3').forEach(s => s.classList.add('active-syn'));
             activeSlideEl.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.add('active-vocab'));
             activeSlideEl.querySelectorAll('mark.evidence').forEach(m => m.classList.add('highlighted'));
-            activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => exp.classList.add('show'));
+            activeSlideEl.querySelectorAll('.item-explanation').forEach(exp => {
+                exp.classList.add('show');
+                const wt = exp.closest('.walkthrough-container');
+                if (wt) {
+                    setTimeout(() => {
+                        exp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 50);
+                }
+            });
         }
         if (window.readingHighlighter) {
             window.readingHighlighter.highlightAll(rawContainerId || container.id || null, false);
@@ -4509,7 +4566,11 @@ class StepRevealEngine {
                 container.querySelector('.q-card') ||
                 container.querySelector('.select-input') ||
                 container.querySelector('.blank-input') ||
-                container.querySelector('.opt-card')
+                container.querySelector('.opt-card') ||
+                container.querySelector('.choice-group') ||
+                container.querySelector('.tfng-group') ||
+                container.querySelector('.ynng-group') ||
+                container.querySelector('.mcq-options-container')
             );
 
             if (hasInteractives) {
@@ -4561,7 +4622,7 @@ class StepRevealEngine {
         const qCards = Array.from(container.querySelectorAll('.q-card, .strategy-card'));
         qCards.forEach(card => {
             const inputs = Array.from(card.querySelectorAll('.blank-input, .select-input'));
-            const choiceGroups = Array.from(card.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options'));
+            const choiceGroups = Array.from(card.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options, .mcq-options-container'));
             const synSpans = Array.from(card.querySelectorAll('.syn-pair-1, .syn-pair-2, .syn-pair-3, .vocab-word, .vocab-term'));
             
             let isUnsolved = false;
@@ -4595,7 +4656,18 @@ class StepRevealEngine {
             }
         });
 
-        // 3. Check for multi-option cards (.opt-card)
+        // 3. Check for standalone choice / TFNG groups not inside a .q-card
+        const allChoiceGroups = Array.from(container.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options, .mcq-options-container'));
+        allChoiceGroups.forEach(group => {
+            if (!group.closest('.q-card, .strategy-card') && group.dataset.state !== 'revealed' && !group.querySelector('.selected.correct')) {
+                units.push({
+                    type: 'choice-group',
+                    el: group
+                });
+            }
+        });
+
+        // 4. Check for multi-option cards (.opt-card)
         const optCards = Array.from(container.querySelectorAll('.opt-card'));
         optCards.forEach(card => {
             if (card.dataset.correct === 'true' && !card.classList.contains('correct-opt') && !card.classList.contains('selected')) {
@@ -4645,15 +4717,19 @@ class StepRevealEngine {
         });
 
         // Reveal choice / TFNG buttons inside card
-        card.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options').forEach(group => {
+        card.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options, .mcq-options-container').forEach(group => {
             const targetAns = (group.dataset.ans || group.getAttribute('data-ans') || '').trim().toLowerCase();
             if (targetAns) {
-                const validAnswers = targetAns.split('|').map(a => a.trim());
-                group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, [data-choice]').forEach(btn => {
+                group.dataset.state = 'revealed';
+                const validAnswers = targetAns.split('|').map(a => a.trim().toLowerCase());
+                group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, .mcq-card-option, [data-choice]').forEach(btn => {
                     const val = (btn.dataset.choice || btn.innerText || '').trim().toLowerCase();
                     btn.classList.remove('selected', 'wrong');
                     if (validAnswers.includes(val)) {
                         btn.classList.add('selected', 'correct');
+                        btn.dataset.state = 'correct';
+                    } else {
+                        btn.dataset.state = 'idle';
                     }
                 });
             }
@@ -4667,12 +4743,18 @@ class StepRevealEngine {
             v.classList.add('active-vocab');
         });
 
-        // Also activate corresponding synonyms in passage
+        // Also activate corresponding synonyms in passage & smooth center evidence (Evidence Grounding)
         if (parentSlide) {
             const qId = card.dataset.q;
             if (qId) {
                 parentSlide.querySelectorAll(`[data-q="${qId}"].syn-pair-1, [data-q="${qId}"].syn-pair-2, [data-q="${qId}"].syn-pair-3, .syn-pair-1[data-q="${qId}"], .syn-pair-2[data-q="${qId}"]`).forEach(s => s.classList.add('active-syn'));
                 parentSlide.querySelectorAll(`mark.evidence[data-q="${qId}"], mark.evidence#ev-${qId}`).forEach(m => m.classList.add('highlighted'));
+
+                // Smoothly scroll reading passage to center target evidence
+                const targetEvidence = parentSlide.querySelector(`mark.evidence[data-q="${qId}"], mark.evidence#ev-${qId}, [data-q="${qId}"].syn-pair-1`);
+                if (targetEvidence) {
+                    targetEvidence.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
             }
             // For single-question walkthroughs, activate all slide synonyms
             if (parentSlide.querySelector('.walkthrough-container')) {
@@ -4686,6 +4768,12 @@ class StepRevealEngine {
         const exp = card.querySelector('.item-explanation');
         if (exp) {
             exp.classList.add('show');
+            const wtContainer = card.closest('.walkthrough-container');
+            if (wtContainer) {
+                setTimeout(() => {
+                    exp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 50);
+            }
         }
 
         // Auto-trigger evidence highlight in passage if in reading split question-pane
@@ -4696,6 +4784,32 @@ class StepRevealEngine {
             if (qId && window.readingHighlighter) {
                 window.readingHighlighter.showEvidence(qId, evId);
             }
+        }
+    }
+
+    revealSingleChoiceGroup(group) {
+        if (!group) return;
+        const targetAns = (group.dataset.ans || group.getAttribute('data-ans') || '').trim().toLowerCase();
+        if (!targetAns) return;
+
+        group.dataset.state = 'revealed';
+        const validAnswers = targetAns.split('|').map(a => a.trim().toLowerCase());
+
+        group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, .mcq-card-option, [data-choice]').forEach(btn => {
+            const val = (btn.dataset.choice || btn.innerText || '').trim().toLowerCase();
+            btn.classList.remove('selected', 'wrong');
+            if (validAnswers.includes(val)) {
+                btn.classList.add('selected', 'correct');
+                btn.dataset.state = 'correct';
+            } else {
+                btn.dataset.state = 'idle';
+            }
+        });
+
+        const parent = group.closest('.card, .q-card, .q-item, .exercise-box, div');
+        if (parent) {
+            const exp = parent.querySelector('.item-explanation');
+            if (exp) exp.classList.add('show');
         }
     }
 
@@ -4742,6 +4856,9 @@ class StepRevealEngine {
             nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } else if (nextUnit.type === 'input') {
             this.revealSingleInput(nextUnit.el);
+            nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else if (nextUnit.type === 'choice-group') {
+            this.revealSingleChoiceGroup(nextUnit.el);
             nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } else if (nextUnit.type === 'opt-card') {
             nextUnit.el.classList.add('selected', 'correct-opt');
@@ -12798,14 +12915,22 @@ window.addEventListener('DOMContentLoaded', () => {
 /* ==================== MODULE: choice-selector.js ==================== */
 /**
  * =========================================================================
- * UNIVERSAL CHOICE & TFNG PILL SELECTOR ENGINE
+ * UNIVERSAL CHOICE & TFNG PILL SELECTOR ENGINE (State Machine Edition)
  * Course Presentations Architecture — Expert IELTS Masterclass
  * Interactive True/False/Not Given, Yes/No/Not Given & Multiple Choice pills
+ * 
+ * Powered by:
+ * - `state-machine`: Strict lifecycle (idle -> selected -> validating -> correct/wrong -> revealed)
+ * - `error-handling-ux`: Self-healing recovery on choice switch, blame-free retry
+ * - `feedback-patterns`: Evidence synchronization and sub-100ms response
  * =========================================================================
  */
 
 (function () {
     'use strict';
+
+    const GROUP_SELECTOR = '.choice-group, .tfng-group, .ynng-group, .mcq-options, .mcq-options-container';
+    const BUTTON_SELECTOR = '.choice-btn, .tfng-btn, .option-btn, .mcq-card-option, [data-choice]';
 
     class ChoiceSelectorEngine {
         constructor() {
@@ -12833,7 +12958,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         bindAll() {
-            document.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options').forEach(group => {
+            document.querySelectorAll(GROUP_SELECTOR).forEach(group => {
                 this.setupGroup(group);
             });
         }
@@ -12842,11 +12967,16 @@ window.addEventListener('DOMContentLoaded', () => {
             if (group._choiceInitialized) return;
             group._choiceInitialized = true;
 
+            if (!group.dataset.state) {
+                group.dataset.state = 'idle';
+            }
+
             const isMulti = group.hasAttribute('data-multi') || group.classList.contains('multi-select');
-            const buttons = group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, [data-choice]');
+            const buttons = group.querySelectorAll(BUTTON_SELECTOR);
 
             buttons.forEach((btn, idx) => {
                 if (!btn.id) btn.id = `choice-btn-${Date.now()}-${idx}-${Math.random().toString(36).substr(2, 3)}`;
+                if (!btn.dataset.state) btn.dataset.state = 'idle';
 
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -12855,24 +12985,56 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        /**
+         * State Machine Transition: SELECT
+         * Guard: If group is already revealed, prevent accidental manipulation
+         */
         selectButton(btn, group, isMulti, broadcast = true) {
+            // Guard: When revealed, lock answers unless reset
+            if (group.dataset.state === 'revealed') {
+                return;
+            }
+
             if (!isMulti) {
-                group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, [data-choice]').forEach(b => {
+                // Single-select mode: de-select siblings
+                group.querySelectorAll(BUTTON_SELECTOR).forEach(b => {
                     if (b !== btn) {
                         b.classList.remove('selected', 'correct', 'wrong');
+                        b.dataset.state = 'idle';
                     }
                 });
                 btn.classList.toggle('selected');
             } else {
+                // Multi-select mode
                 btn.classList.toggle('selected');
             }
+
+            // Self-healing error recovery (error-handling-ux skill):
+            // Selecting an option immediately clears any stale 'wrong' or error state
             btn.classList.remove('correct', 'wrong');
+            const isSelected = btn.classList.contains('selected');
+            btn.dataset.state = isSelected ? 'selected' : 'idle';
+
+            // Update group state
+            const hasAnySelected = group.querySelectorAll('.selected').length > 0;
+            group.dataset.state = hasAnySelected ? 'selected' : 'idle';
+
+            // Dispatch local event for multi-layer feedback / evidence grounding
+            group.dispatchEvent(new CustomEvent('choice:select', {
+                bubbles: true,
+                detail: {
+                    btnId: btn.id,
+                    value: (btn.dataset.choice || btn.innerText || '').trim(),
+                    isSelected,
+                    group
+                }
+            }));
 
             if (broadcast && window.presenterSyncEngine) {
                 window.presenterSyncEngine.emit('CHOICE_SELECT_ACTION', {
                     btnId: btn.id,
                     groupId: group.id || null,
-                    isSelected: btn.classList.contains('selected')
+                    isSelected
                 });
             }
         }
@@ -12881,24 +13043,32 @@ window.addEventListener('DOMContentLoaded', () => {
             if (!data || !data.btnId) return;
             const btn = document.getElementById(data.btnId);
             if (!btn) return;
-            const group = btn.closest('.choice-group, .tfng-group, .ynng-group, .mcq-options');
+            const group = btn.closest(GROUP_SELECTOR);
             if (!group) return;
 
             const isMulti = group.hasAttribute('data-multi') || group.classList.contains('multi-select');
             if (!isMulti) {
-                group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, [data-choice]').forEach(b => {
-                    b.classList.remove('selected');
+                group.querySelectorAll(BUTTON_SELECTOR).forEach(b => {
+                    b.classList.remove('selected', 'correct', 'wrong');
+                    b.dataset.state = 'idle';
                 });
             }
             if (data.isSelected) {
                 btn.classList.add('selected');
+                btn.dataset.state = 'selected';
+                group.dataset.state = 'selected';
             } else {
                 btn.classList.remove('selected');
+                btn.dataset.state = 'idle';
             }
         }
 
+        /**
+         * State Machine Transition: CHECK
+         * Evaluates student selection against answer key
+         */
         checkAnswers(container) {
-            const groups = container.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options');
+            const groups = container.querySelectorAll(GROUP_SELECTOR);
             if (groups.length === 0) return { total: 0, correct: 0 };
 
             let total = 0;
@@ -12909,52 +13079,80 @@ window.addEventListener('DOMContentLoaded', () => {
                 if (!targetAns) return;
 
                 total++;
-                const validAnswers = targetAns.split('|').map(a => a.trim());
+                const validAnswers = targetAns.split('|').map(a => a.trim().toLowerCase());
                 const selectedBtns = group.querySelectorAll('.selected');
                 const selectedVals = Array.from(selectedBtns).map(b => (b.dataset.choice || b.innerText || '').trim().toLowerCase());
 
-                let isGroupCorrect = selectedVals.length > 0 && selectedVals.every(v => validAnswers.includes(v)) && selectedVals.length === validAnswers.length;
+                let isGroupCorrect = selectedVals.length > 0 &&
+                    selectedVals.every(v => validAnswers.includes(v)) &&
+                    selectedVals.length === validAnswers.length;
 
                 selectedBtns.forEach(btn => {
                     const val = (btn.dataset.choice || btn.innerText || '').trim().toLowerCase();
                     btn.classList.remove('correct', 'wrong');
                     if (validAnswers.includes(val)) {
                         btn.classList.add('correct');
+                        btn.dataset.state = 'correct';
                     } else {
                         btn.classList.add('wrong');
+                        btn.dataset.state = 'wrong';
                     }
                 });
 
                 if (isGroupCorrect) {
                     correct++;
+                    group.dataset.state = 'correct';
+                } else if (selectedBtns.length > 0) {
+                    group.dataset.state = 'wrong';
                 }
             });
 
             return { total, correct };
         }
 
+        /**
+         * State Machine Transition: REVEAL
+         * Reveals canonical keys and transitions group to locked 'revealed' state
+         */
         revealKeys(container) {
-            const groups = container.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options');
+            const groups = container.querySelectorAll(GROUP_SELECTOR);
             groups.forEach(group => {
                 const targetAns = (group.dataset.ans || group.getAttribute('data-ans') || '').trim().toLowerCase();
                 if (!targetAns) return;
 
-                const validAnswers = targetAns.split('|').map(a => a.trim());
-                group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, [data-choice]').forEach(btn => {
+                group.dataset.state = 'revealed';
+                const validAnswers = targetAns.split('|').map(a => a.trim().toLowerCase());
+
+                group.querySelectorAll(BUTTON_SELECTOR).forEach(btn => {
                     const val = (btn.dataset.choice || btn.innerText || '').trim().toLowerCase();
                     btn.classList.remove('selected', 'wrong');
                     if (validAnswers.includes(val)) {
                         btn.classList.add('selected', 'correct');
+                        btn.dataset.state = 'correct';
+                    } else {
+                        btn.dataset.state = 'idle';
                     }
                 });
+
+                // Evidence synchronization trigger (feedback-patterns skill)
+                group.dispatchEvent(new CustomEvent('choice:revealed', {
+                    bubbles: true,
+                    detail: { group, targetAns }
+                }));
             });
         }
 
+        /**
+         * State Machine Transition: RESET
+         * Restores clean idle state
+         */
         resetTask(container) {
-            const groups = container.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options');
+            const groups = container.querySelectorAll(GROUP_SELECTOR);
             groups.forEach(group => {
-                group.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, [data-choice]').forEach(btn => {
+                group.dataset.state = 'idle';
+                group.querySelectorAll(BUTTON_SELECTOR).forEach(btn => {
                     btn.classList.remove('selected', 'correct', 'wrong');
+                    btn.dataset.state = 'idle';
                 });
             });
         }
