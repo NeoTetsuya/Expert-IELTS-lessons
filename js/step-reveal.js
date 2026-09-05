@@ -17,18 +17,87 @@ class StepRevealEngine {
 
     init() {
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.bindEvents());
+            document.addEventListener('DOMContentLoaded', () => {
+                this.bindEvents();
+                this.observeNewActionRows();
+            });
         } else {
             this.bindEvents();
+            this.observeNewActionRows();
         }
 
-        // Shortcut 'E' to reveal next item on active slide
+        // Shortcut 'E' to reveal next item on active slide.
+        // IMPORTANT: Yield to reading-highlighter.js when the active slide has evidence
+        // cycling buttons (.syn-btn / [data-ev]). On reading slides, 'E' is owned by
+        // reading-highlighter for cycling evidence; step-reveal should not also fire.
         document.addEventListener('keydown', (e) => {
-            if ((e.key === 'e' || e.key === 'E') && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
+            if ((e.key === 'e' || e.key === 'E')
+                && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)
+                && !e.target.isContentEditable) {
+                const activeSlide = document.querySelector('.slide.active');
+                if (activeSlide && activeSlide.querySelector('.syn-btn, [data-ev]')) return;
                 e.preventDefault();
                 this.revealNextOnActiveSlide();
             }
         });
+    }
+
+    /**
+     * MutationObserver: auto-inject Step Reveal buttons into .action-row
+     * elements added dynamically after DOMContentLoaded (e.g. template engine).
+     */
+    observeNewActionRows() {
+        let pending = false;
+        const observer = new MutationObserver((mutations) => {
+            const hasActionRow = mutations.some(m =>
+                Array.from(m.addedNodes).some(node =>
+                    node instanceof Element &&
+                    (node.classList.contains('action-row') || node.querySelector('.action-row'))
+                )
+            );
+            if (hasActionRow && !pending) {
+                pending = true;
+                // Defer to next task so all sibling mutations in this render batch are coalesced
+                setTimeout(() => { pending = false; this.bindEvents(); }, 0);
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+
+    /**
+     * Safe scroll helper — scrolls el into view within its nearest
+     * scrollable ancestor, never calling scrollIntoView (which disrupts
+     * outer frames in the Presenter View preview context).
+     */
+    scrollSafelyToElement(el) {
+        if (!el) return;
+        // Walk up to find the nearest scrollable container
+        let parent = el.parentElement;
+        while (parent && parent !== document.body) {
+            const { overflowY, overflow } = window.getComputedStyle(parent);
+            const isScrollable = (overflowY === 'auto' || overflowY === 'scroll' ||
+                                  overflow === 'auto' || overflow === 'scroll');
+            if (isScrollable && parent.scrollHeight > parent.clientHeight) {
+                const elTop = el.getBoundingClientRect().top;
+                const parentTop = parent.getBoundingClientRect().top;
+                const relativeTop = elTop - parentTop + parent.scrollTop;
+                const scrollTarget = relativeTop - (parent.clientHeight / 2) + (el.offsetHeight / 2);
+                parent.scrollTo({ top: Math.max(0, scrollTarget), behavior: 'smooth' });
+                return;
+            }
+            parent = parent.parentElement;
+        }
+        // Fallback: scroll the window itself — but only when NOT inside a CSS-transformed
+        // container (e.g. the Presenter View scaled preview). Inside a transform, getBoundingClientRect
+        // returns visual (post-scale) coordinates, making the scroll target wrong.
+        let transformedAncestor = el.parentElement;
+        while (transformedAncestor && transformedAncestor !== document.body) {
+            if (window.getComputedStyle(transformedAncestor).transform !== 'none') return;
+            transformedAncestor = transformedAncestor.parentElement;
+        }
+        const rect = el.getBoundingClientRect();
+        const targetY = rect.top + window.scrollY - (window.innerHeight / 2) + (rect.height / 2);
+        window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
     }
 
     bindEvents() {
@@ -229,7 +298,7 @@ class StepRevealEngine {
                 // Smoothly scroll reading passage to center target evidence
                 const targetEvidence = parentSlide.querySelector(`mark.evidence[data-q="${qId}"], mark.evidence#ev-${qId}, [data-q="${qId}"].syn-pair-1`);
                 if (targetEvidence) {
-                    targetEvidence.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    this.scrollSafelyToElement(targetEvidence);
                 }
             }
             // For single-question walkthroughs, activate all slide synonyms
@@ -247,7 +316,7 @@ class StepRevealEngine {
             const wtContainer = card.closest('.walkthrough-container');
             if (wtContainer) {
                 setTimeout(() => {
-                    exp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    this.scrollSafelyToElement(exp);
                 }, 50);
             }
         }
@@ -329,41 +398,36 @@ class StepRevealEngine {
         const nextUnit = unrevealedUnits[0];
         if (nextUnit.type === 'card') {
             this.revealSingleCard(nextUnit.el);
-            nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            this.scrollSafelyToElement(nextUnit.el);
         } else if (nextUnit.type === 'input') {
             this.revealSingleInput(nextUnit.el);
-            nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            this.scrollSafelyToElement(nextUnit.el);
         } else if (nextUnit.type === 'choice-group') {
             this.revealSingleChoiceGroup(nextUnit.el);
-            nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            this.scrollSafelyToElement(nextUnit.el);
         } else if (nextUnit.type === 'opt-card') {
             nextUnit.el.classList.add('selected', 'correct-opt');
             nextUnit.el.classList.remove('wrong-opt');
-            nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            this.scrollSafelyToElement(nextUnit.el);
         }
 
         if (broadcast && window.presenterSyncEngine) {
             window.presenterSyncEngine.emit('STEP_REVEAL_CMD', {});
         }
+
+        // If no more unrevealed items remain in container, mark step-reveal button as .done
+        const remaining = this.getUnrevealedItems(container);
+        if (remaining.length === 0) {
+            const stepBtn = container.querySelector('.btn-step-reveal') ||
+                            (container.closest('.slide') && container.closest('.slide').querySelector('.btn-step-reveal'));
+            if (stepBtn) {
+                stepBtn.classList.add('done');
+            }
+        }
     }
 
     injectStyles() {
-        if (document.getElementById('stepRevealStyles')) return;
-        const style = document.createElement('style');
-        style.id = 'stepRevealStyles';
-        style.textContent = `
-            .btn-step-reveal {
-                background: rgba(5, 150, 105, 0.12) !important;
-                border-color: rgba(5, 150, 105, 0.4) !important;
-                color: var(--col-vocab, #059669) !important;
-                font-weight: 700 !important;
-            }
-            .btn-step-reveal:hover {
-                background: var(--col-vocab, #059669) !important;
-                color: #ffffff !important;
-            }
-        `;
-        document.head.appendChild(style);
+        // Shimmer and styling rules are managed centrally in presentation-base.css
     }
 }
 

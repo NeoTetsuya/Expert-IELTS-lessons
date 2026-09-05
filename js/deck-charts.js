@@ -272,7 +272,7 @@ class DeckCharts {
             series = [],
             width = 680,
             height = 360,
-            margin = { top: 30, right: 120, bottom: 45, left: 60 }
+            margin = { top: 30, right: 140, bottom: 45, left: 60 }
         } = config;
 
         // Support both xCategories and xAxis aliases
@@ -354,6 +354,50 @@ class DeckCharts {
             <line x1="${margin.left}" y1="${margin.top + plotHeight}" x2="${margin.left + plotWidth}" y2="${margin.top + plotHeight}" class="chart-axis-line" stroke="#64748b" stroke-width="1.5" />
         `;
 
+        // Calculate collision-free positions for end-line labels
+        const endLabels = [];
+        series.forEach((s, sIdx) => {
+            if (s.data && s.data.length > 0 && xCategories.length > 0) {
+                const lineId = s.id || `series-${sIdx}`;
+                const lastVal = s.data[s.data.length - 1];
+                const lastX = margin.left + (xCategories.length - 1) * xStep;
+                const lastY = margin.top + plotHeight - ((lastVal - yMin) / (yMax - yMin)) * plotHeight;
+                endLabels.push({
+                    lineId,
+                    name: s.name,
+                    color: s.color,
+                    origX: lastX,
+                    origY: lastY,
+                    y: lastY
+                });
+            }
+        });
+
+        if (endLabels.length > 1) {
+            // Sort by target Y position (top to bottom)
+            endLabels.sort((a, b) => a.origY - b.origY);
+            const minGap = 16;
+            // Forward relaxation
+            for (let i = 1; i < endLabels.length; i++) {
+                if (endLabels[i].y < endLabels[i - 1].y + minGap) {
+                    endLabels[i].y = endLabels[i - 1].y + minGap;
+                }
+            }
+            // Backward containment if bottom overflows
+            const maxY = margin.top + plotHeight + 6;
+            if (endLabels[endLabels.length - 1].y > maxY) {
+                endLabels[endLabels.length - 1].y = maxY;
+                for (let i = endLabels.length - 2; i >= 0; i--) {
+                    if (endLabels[i].y > endLabels[i + 1].y - minGap) {
+                        endLabels[i].y = endLabels[i + 1].y - minGap;
+                    }
+                }
+            }
+        }
+
+        const labelMap = new Map();
+        endLabels.forEach(lbl => labelMap.set(lbl.lineId, lbl));
+
         // Render series
         series.forEach((s, sIdx) => {
             const lineId = s.id || `series-${sIdx}`;
@@ -377,12 +421,11 @@ class DeckCharts {
                 `;
             });
 
-            // End line label
-            if (s.data.length > 0 && xCategories.length > 0) {
-                const lastX = margin.left + (xCategories.length - 1) * xStep;
-                const lastY = margin.top + plotHeight - ((s.data[s.data.length - 1] - yMin) / (yMax - yMin)) * plotHeight;
+            // Collision-free End line label
+            const labelInfo = labelMap.get(lineId);
+            if (labelInfo) {
                 html += `
-                    <text x="${lastX + 8}" y="${lastY + 4}" fill="${s.color}" font-size="12" font-weight="700">${s.name}</text>
+                    <text x="${labelInfo.origX + 8}" y="${labelInfo.y + 4}" fill="${labelInfo.color}" font-size="12" font-weight="700" class="chart-end-label">${labelInfo.name}</text>
                 `;
             }
             html += `</g>`;

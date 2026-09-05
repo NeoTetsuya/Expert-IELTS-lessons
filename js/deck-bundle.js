@@ -82,7 +82,7 @@
 
                     <div class="action-row" style="margin-top: 10px;">
                         <button class="btn-action btn-primary" onclick="toggleAllHighlights(this)">Show Highlights</button>
-                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+                        <button class="btn-action btn-step-reveal" onclick="window.stepReveal?.(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="resetStrategySlide(this)">Reset</button>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
 
                     <div class="action-row" style="margin-top: auto; padding-top: 8px; flex-shrink: 0;">
                         <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answer</button>
-                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+                        <button class="btn-action btn-step-reveal" onclick="window.stepReveal?.(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="revealAnswers(this)">Show Evidence / Highlights</button>
                         <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
                     </div>
@@ -337,7 +337,7 @@
                     </div>
 
                     <div class="action-row" style="margin-top: 8px;">
-                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+                        <button class="btn-action btn-step-reveal" onclick="window.stepReveal?.(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="window.vocabBank?.speak(document.querySelector('.slide.active .insp-word')?.textContent || '')">🔊 Pronounce Active</button>
                     </div>
                 </div>
@@ -374,7 +374,7 @@
                     </div>
 
                     <div class="action-row" style="margin-top: 8px;">
-                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+                        <button class="btn-action btn-step-reveal" onclick="window.stepReveal?.(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="window.vocabBank?.speak(document.querySelector('.slide.active .insp-word')?.textContent || '')">🔊 Pronounce Active</button>
                     </div>
                 </div>
@@ -1916,10 +1916,8 @@
                 allSlides[0].classList.add('active', 'visible');
             }
 
-            // Rebind StepRevealEngine if available
-            if (window.stepRevealEngine && typeof window.stepRevealEngine.bindEvents === 'function') {
-                window.stepRevealEngine.bindEvents();
-            }
+            // StepRevealEngine button injection is handled automatically by its MutationObserver
+            // (observeNewActionRows) — no manual bindEvents() call needed here.
         }
     }
 
@@ -2571,6 +2569,7 @@ class DeckEngine {
         slideContext.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
         slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
         slideContext.querySelectorAll('.card, .q-card').forEach(c => c.classList.remove('revealed'));
+        slideContext.querySelectorAll('.btn-step-reveal').forEach(b => b.classList.remove('done'));
         if (window.readingHighlighter) {
             window.readingHighlighter.clearAll(rawContainerId || container.id || null, false);
         }
@@ -4258,11 +4257,8 @@ class TeacherHighlighter {
                 this.toggle();
             }
 
-            // 'C' key clears highlights when mode is active
-            if ((e.key === 'c' || e.key === 'C') && this.isActive && !e.ctrlKey) {
-                e.preventDefault();
-                this.clear();
-            }
+            // 'C' key clear is handled authoritatively by presentation-tools.js which calls
+            // both clearCanvas() and teacherHighlighter.clear() — no duplicate handler needed here.
 
             // 'Ctrl + Z' undoes last highlight
             if (e.ctrlKey && (e.key === 'z' || e.key === 'Z') && this.isActive) {
@@ -4282,8 +4278,8 @@ class TeacherHighlighter {
         const cpBtn = document.getElementById('btnCpHighlighter');
         if (cpBtn) cpBtn.classList.toggle('active', this.isActive);
 
-        const modeBtn = document.getElementById('modeBtnHighlighter');
-        if (modeBtn) modeBtn.classList.toggle('active', this.isActive);
+        // Note: .cp-mode-btn bar state is managed exclusively by PresenterViewUI.setToolMode()
+        // to avoid desync. Do NOT toggle modeBtnHighlighter here.
 
         const palette = document.getElementById('highlighterPalette');
         if (palette) palette.style.display = this.isActive ? 'flex' : 'none';
@@ -4585,18 +4581,87 @@ class StepRevealEngine {
 
     init() {
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.bindEvents());
+            document.addEventListener('DOMContentLoaded', () => {
+                this.bindEvents();
+                this.observeNewActionRows();
+            });
         } else {
             this.bindEvents();
+            this.observeNewActionRows();
         }
 
-        // Shortcut 'E' to reveal next item on active slide
+        // Shortcut 'E' to reveal next item on active slide.
+        // IMPORTANT: Yield to reading-highlighter.js when the active slide has evidence
+        // cycling buttons (.syn-btn / [data-ev]). On reading slides, 'E' is owned by
+        // reading-highlighter for cycling evidence; step-reveal should not also fire.
         document.addEventListener('keydown', (e) => {
-            if ((e.key === 'e' || e.key === 'E') && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
+            if ((e.key === 'e' || e.key === 'E')
+                && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)
+                && !e.target.isContentEditable) {
+                const activeSlide = document.querySelector('.slide.active');
+                if (activeSlide && activeSlide.querySelector('.syn-btn, [data-ev]')) return;
                 e.preventDefault();
                 this.revealNextOnActiveSlide();
             }
         });
+    }
+
+    /**
+     * MutationObserver: auto-inject Step Reveal buttons into .action-row
+     * elements added dynamically after DOMContentLoaded (e.g. template engine).
+     */
+    observeNewActionRows() {
+        let pending = false;
+        const observer = new MutationObserver((mutations) => {
+            const hasActionRow = mutations.some(m =>
+                Array.from(m.addedNodes).some(node =>
+                    node instanceof Element &&
+                    (node.classList.contains('action-row') || node.querySelector('.action-row'))
+                )
+            );
+            if (hasActionRow && !pending) {
+                pending = true;
+                // Defer to next task so all sibling mutations in this render batch are coalesced
+                setTimeout(() => { pending = false; this.bindEvents(); }, 0);
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+
+    /**
+     * Safe scroll helper — scrolls el into view within its nearest
+     * scrollable ancestor, never calling scrollIntoView (which disrupts
+     * outer frames in the Presenter View preview context).
+     */
+    scrollSafelyToElement(el) {
+        if (!el) return;
+        // Walk up to find the nearest scrollable container
+        let parent = el.parentElement;
+        while (parent && parent !== document.body) {
+            const { overflowY, overflow } = window.getComputedStyle(parent);
+            const isScrollable = (overflowY === 'auto' || overflowY === 'scroll' ||
+                                  overflow === 'auto' || overflow === 'scroll');
+            if (isScrollable && parent.scrollHeight > parent.clientHeight) {
+                const elTop = el.getBoundingClientRect().top;
+                const parentTop = parent.getBoundingClientRect().top;
+                const relativeTop = elTop - parentTop + parent.scrollTop;
+                const scrollTarget = relativeTop - (parent.clientHeight / 2) + (el.offsetHeight / 2);
+                parent.scrollTo({ top: Math.max(0, scrollTarget), behavior: 'smooth' });
+                return;
+            }
+            parent = parent.parentElement;
+        }
+        // Fallback: scroll the window itself — but only when NOT inside a CSS-transformed
+        // container (e.g. the Presenter View scaled preview). Inside a transform, getBoundingClientRect
+        // returns visual (post-scale) coordinates, making the scroll target wrong.
+        let transformedAncestor = el.parentElement;
+        while (transformedAncestor && transformedAncestor !== document.body) {
+            if (window.getComputedStyle(transformedAncestor).transform !== 'none') return;
+            transformedAncestor = transformedAncestor.parentElement;
+        }
+        const rect = el.getBoundingClientRect();
+        const targetY = rect.top + window.scrollY - (window.innerHeight / 2) + (rect.height / 2);
+        window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
     }
 
     bindEvents() {
@@ -4797,7 +4862,7 @@ class StepRevealEngine {
                 // Smoothly scroll reading passage to center target evidence
                 const targetEvidence = parentSlide.querySelector(`mark.evidence[data-q="${qId}"], mark.evidence#ev-${qId}, [data-q="${qId}"].syn-pair-1`);
                 if (targetEvidence) {
-                    targetEvidence.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    this.scrollSafelyToElement(targetEvidence);
                 }
             }
             // For single-question walkthroughs, activate all slide synonyms
@@ -4815,7 +4880,7 @@ class StepRevealEngine {
             const wtContainer = card.closest('.walkthrough-container');
             if (wtContainer) {
                 setTimeout(() => {
-                    exp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    this.scrollSafelyToElement(exp);
                 }, 50);
             }
         }
@@ -4897,41 +4962,36 @@ class StepRevealEngine {
         const nextUnit = unrevealedUnits[0];
         if (nextUnit.type === 'card') {
             this.revealSingleCard(nextUnit.el);
-            nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            this.scrollSafelyToElement(nextUnit.el);
         } else if (nextUnit.type === 'input') {
             this.revealSingleInput(nextUnit.el);
-            nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            this.scrollSafelyToElement(nextUnit.el);
         } else if (nextUnit.type === 'choice-group') {
             this.revealSingleChoiceGroup(nextUnit.el);
-            nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            this.scrollSafelyToElement(nextUnit.el);
         } else if (nextUnit.type === 'opt-card') {
             nextUnit.el.classList.add('selected', 'correct-opt');
             nextUnit.el.classList.remove('wrong-opt');
-            nextUnit.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            this.scrollSafelyToElement(nextUnit.el);
         }
 
         if (broadcast && window.presenterSyncEngine) {
             window.presenterSyncEngine.emit('STEP_REVEAL_CMD', {});
         }
+
+        // If no more unrevealed items remain in container, mark step-reveal button as .done
+        const remaining = this.getUnrevealedItems(container);
+        if (remaining.length === 0) {
+            const stepBtn = container.querySelector('.btn-step-reveal') ||
+                            (container.closest('.slide') && container.closest('.slide').querySelector('.btn-step-reveal'));
+            if (stepBtn) {
+                stepBtn.classList.add('done');
+            }
+        }
     }
 
     injectStyles() {
-        if (document.getElementById('stepRevealStyles')) return;
-        const style = document.createElement('style');
-        style.id = 'stepRevealStyles';
-        style.textContent = `
-            .btn-step-reveal {
-                background: rgba(5, 150, 105, 0.12) !important;
-                border-color: rgba(5, 150, 105, 0.4) !important;
-                color: var(--col-vocab, #059669) !important;
-                font-weight: 700 !important;
-            }
-            .btn-step-reveal:hover {
-                background: var(--col-vocab, #059669) !important;
-                color: #ffffff !important;
-            }
-        `;
-        document.head.appendChild(style);
+        // Shimmer and styling rules are managed centrally in presentation-base.css
     }
 }
 
@@ -10573,7 +10633,7 @@ class DeckCharts {
             series = [],
             width = 680,
             height = 360,
-            margin = { top: 30, right: 120, bottom: 45, left: 60 }
+            margin = { top: 30, right: 140, bottom: 45, left: 60 }
         } = config;
 
         // Support both xCategories and xAxis aliases
@@ -10655,6 +10715,50 @@ class DeckCharts {
             <line x1="${margin.left}" y1="${margin.top + plotHeight}" x2="${margin.left + plotWidth}" y2="${margin.top + plotHeight}" class="chart-axis-line" stroke="#64748b" stroke-width="1.5" />
         `;
 
+        // Calculate collision-free positions for end-line labels
+        const endLabels = [];
+        series.forEach((s, sIdx) => {
+            if (s.data && s.data.length > 0 && xCategories.length > 0) {
+                const lineId = s.id || `series-${sIdx}`;
+                const lastVal = s.data[s.data.length - 1];
+                const lastX = margin.left + (xCategories.length - 1) * xStep;
+                const lastY = margin.top + plotHeight - ((lastVal - yMin) / (yMax - yMin)) * plotHeight;
+                endLabels.push({
+                    lineId,
+                    name: s.name,
+                    color: s.color,
+                    origX: lastX,
+                    origY: lastY,
+                    y: lastY
+                });
+            }
+        });
+
+        if (endLabels.length > 1) {
+            // Sort by target Y position (top to bottom)
+            endLabels.sort((a, b) => a.origY - b.origY);
+            const minGap = 16;
+            // Forward relaxation
+            for (let i = 1; i < endLabels.length; i++) {
+                if (endLabels[i].y < endLabels[i - 1].y + minGap) {
+                    endLabels[i].y = endLabels[i - 1].y + minGap;
+                }
+            }
+            // Backward containment if bottom overflows
+            const maxY = margin.top + plotHeight + 6;
+            if (endLabels[endLabels.length - 1].y > maxY) {
+                endLabels[endLabels.length - 1].y = maxY;
+                for (let i = endLabels.length - 2; i >= 0; i--) {
+                    if (endLabels[i].y > endLabels[i + 1].y - minGap) {
+                        endLabels[i].y = endLabels[i + 1].y - minGap;
+                    }
+                }
+            }
+        }
+
+        const labelMap = new Map();
+        endLabels.forEach(lbl => labelMap.set(lbl.lineId, lbl));
+
         // Render series
         series.forEach((s, sIdx) => {
             const lineId = s.id || `series-${sIdx}`;
@@ -10678,12 +10782,11 @@ class DeckCharts {
                 `;
             });
 
-            // End line label
-            if (s.data.length > 0 && xCategories.length > 0) {
-                const lastX = margin.left + (xCategories.length - 1) * xStep;
-                const lastY = margin.top + plotHeight - ((s.data[s.data.length - 1] - yMin) / (yMax - yMin)) * plotHeight;
+            // Collision-free End line label
+            const labelInfo = labelMap.get(lineId);
+            if (labelInfo) {
                 html += `
-                    <text x="${lastX + 8}" y="${lastY + 4}" fill="${s.color}" font-size="12" font-weight="700">${s.name}</text>
+                    <text x="${labelInfo.origX + 8}" y="${labelInfo.y + 4}" fill="${labelInfo.color}" font-size="12" font-weight="700" class="chart-end-label">${labelInfo.name}</text>
                 `;
             }
             html += `</g>`;
@@ -12000,13 +12103,13 @@ class PresentationTools {
 
             <!-- Highlighter Palette -->
             <div class="highlighter-palette" id="highlighterPalette" style="display:none;">
-                <button class="highlighter-color-btn active" style="background:#facc15;" onclick="teacherHighlighter && teacherHighlighter.setColor(0)" title="Fluorescent Yellow"></button>
-                <button class="highlighter-color-btn" style="background:#4ade80;" onclick="teacherHighlighter && teacherHighlighter.setColor(1)" title="Neon Green"></button>
-                <button class="highlighter-color-btn" style="background:#38bdf8;" onclick="teacherHighlighter && teacherHighlighter.setColor(2)" title="Sky Cyan"></button>
-                <button class="highlighter-color-btn" style="background:#f472b6;" onclick="teacherHighlighter && teacherHighlighter.setColor(3)" title="Coral Pink"></button>
+                <button class="highlighter-color-btn active" style="background:#facc15;" onclick="window.teacherHighlighter && window.teacherHighlighter.setColor(0)" title="Fluorescent Yellow"></button>
+                <button class="highlighter-color-btn" style="background:#4ade80;" onclick="window.teacherHighlighter && window.teacherHighlighter.setColor(1)" title="Neon Green"></button>
+                <button class="highlighter-color-btn" style="background:#38bdf8;" onclick="window.teacherHighlighter && window.teacherHighlighter.setColor(2)" title="Sky Cyan"></button>
+                <button class="highlighter-color-btn" style="background:#f472b6;" onclick="window.teacherHighlighter && window.teacherHighlighter.setColor(3)" title="Coral Pink"></button>
                 <div class="highlighter-divider"></div>
-                <button class="highlighter-tool-btn" onclick="teacherHighlighter && teacherHighlighter.undo()" title="Undo Last Stroke (Ctrl+Z)">↩️ Undo</button>
-                <button class="highlighter-tool-btn" onclick="teacherHighlighter && teacherHighlighter.clear()" title="Clear All Highlights (C)">🗑️ Clear</button>
+                <button class="highlighter-tool-btn" onclick="window.teacherHighlighter && window.teacherHighlighter.undo()" title="Undo Last Stroke (Ctrl+Z)">↩️ Undo</button>
+                <button class="highlighter-tool-btn" onclick="window.teacherHighlighter && window.teacherHighlighter.clear()" title="Clear All Highlights (C)">🗑️ Clear</button>
             </div>
 
             <!-- Help Modal -->
@@ -12349,7 +12452,8 @@ class PresentationTools {
             if (document.documentElement.classList.contains('presenter-window') || (document.body && document.body.classList.contains('presenter-window'))) {
                 return;
             }
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA'
+                || e.target.isContentEditable || e.target.closest('[contenteditable="true"]')) {
                 return;
             }
             const key = e.key.toLowerCase();
@@ -15595,9 +15699,9 @@ class PresenterViewUI {
             }
         });
 
-        // Remote Step Reveal
+        // Remote Step Reveal — broadcast=false prevents re-emitting STEP_REVEAL_CMD (infinite loop)
         this.sync.on('STEP_REVEAL_CMD', () => {
-            if (window.stepRevealEngine) window.stepRevealEngine.revealNextOnActiveSlide();
+            if (window.stepRevealEngine) window.stepRevealEngine.revealNextOnActiveSlide(false);
         });
 
         // Remote Student Picker
@@ -15881,7 +15985,7 @@ class PresenterViewUI {
             if (data.action === 'check') {
                 window.deckEngine.checkAnswers(target, false);
             } else if (data.action === 'reveal') {
-                window.deckEngine.revealAnswers(target, false);
+                window.deckEngine.revealKeys(target, false); // unified with audience listener (revealAnswers is an alias)
             } else if (data.action === 'reset') {
                 window.deckEngine.resetTask(target, false);
             } else if (data.action === 'toggleOptCard' && typeof data.cardIndex === 'number') {
@@ -16465,7 +16569,10 @@ class PresenterViewUI {
 
     triggerStepReveal() {
         if (window.stepRevealEngine) {
-            window.stepRevealEngine.revealNextOnActiveSlide();
+            // Pass broadcast=false — the explicit emit below is the single source of truth.
+            // Without false, revealNextOnActiveSlide() would self-emit STEP_REVEAL_CMD internally,
+            // then this method emits it again, sending the command twice to the audience.
+            window.stepRevealEngine.revealNextOnActiveSlide(false);
             this.sync.emit('STEP_REVEAL_CMD', {});
             this.updatePresenterSlideView();
         }
@@ -16681,6 +16788,28 @@ class PresenterViewUI {
                 if (src.style.display) dest.style.display = src.style.display;
             }
         });
+
+        // Sync data-state on choice / TFNG / MCQ groups so the clone
+        // reflects revealed state and doesn't double-reveal on next click.
+        const srcGroups = srcElement.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options, .mcq-options-container');
+        const destGroups = destElement.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options, .mcq-options-container');
+        srcGroups.forEach((src, idx) => {
+            const dest = destGroups[idx];
+            if (!dest) return;
+            if (src.dataset.state) {
+                dest.dataset.state = src.dataset.state;
+            }
+            // Also sync individual button states within each group
+            const srcBtns = src.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, .mcq-card-option, [data-choice]');
+            const destBtns = dest.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, .mcq-card-option, [data-choice]');
+            srcBtns.forEach((srcBtn, bi) => {
+                const destBtn = destBtns[bi];
+                if (destBtn) {
+                    destBtn.className = srcBtn.className;
+                    if (srcBtn.dataset.state) destBtn.dataset.state = srcBtn.dataset.state;
+                }
+            });
+        });
     }
 
     /**
@@ -16820,7 +16949,11 @@ class PresenterViewUI {
                     e.preventDefault();
                     e.stopPropagation();
                     this.triggerStepReveal();
-                    this.syncFormValues(currentSlide, scaler);
+                    // Note: syncFormValues is intentionally omitted here.
+                    // triggerStepReveal() → updatePresenterSlideView() already does a full
+                    // re-clone + syncFormValues internally, so a second call here would
+                    // run on the newly-rebuilt DOM (correct) but the previous call would
+                    // have run on the old stale scaler content (wrong). Removed.
                     return;
                 } else if (btnText.includes('check')) {
                     e.preventDefault();
@@ -16831,7 +16964,7 @@ class PresenterViewUI {
                 } else if (btnText.includes('reveal') || btnText.includes('show evidence') || btnText.includes('show highlight')) {
                     e.preventDefault();
                     e.stopPropagation();
-                    if (window.deckEngine) window.deckEngine.revealAnswers(currentSlide, true);
+                    if (window.deckEngine) window.deckEngine.revealKeys(currentSlide, true); // unified with audience/presenter EXERCISE_ACTION listeners
                     this.syncFormValues(currentSlide, scaler);
                     return;
                 } else if (btnText.includes('reset')) {

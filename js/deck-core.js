@@ -629,6 +629,7 @@ class DeckEngine {
         slideContext.querySelectorAll('.vocab-word, .vocab-term').forEach(v => v.classList.remove('active-vocab'));
         slideContext.querySelectorAll('mark.evidence').forEach(m => m.classList.remove('highlighted', 'glow-pulse'));
         slideContext.querySelectorAll('.card, .q-card').forEach(c => c.classList.remove('revealed'));
+        slideContext.querySelectorAll('.btn-step-reveal').forEach(b => b.classList.remove('done'));
         if (window.readingHighlighter) {
             window.readingHighlighter.clearAll(rawContainerId || container.id || null, false);
         }

@@ -75,7 +75,7 @@
 
                     <div class="action-row" style="margin-top: 10px;">
                         <button class="btn-action btn-primary" onclick="toggleAllHighlights(this)">Show Highlights</button>
-                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+                        <button class="btn-action btn-step-reveal" onclick="window.stepReveal?.(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="resetStrategySlide(this)">Reset</button>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
 
                     <div class="action-row" style="margin-top: auto; padding-top: 8px; flex-shrink: 0;">
                         <button class="btn-action btn-primary" onclick="checkAnswers(this)">Check Answer</button>
-                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+                        <button class="btn-action btn-step-reveal" onclick="window.stepReveal?.(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="revealAnswers(this)">Show Evidence / Highlights</button>
                         <button class="btn-action" onclick="resetAnswers(this)">Reset</button>
                     </div>
@@ -330,7 +330,7 @@
                     </div>
 
                     <div class="action-row" style="margin-top: 8px;">
-                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+                        <button class="btn-action btn-step-reveal" onclick="window.stepReveal?.(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="window.vocabBank?.speak(document.querySelector('.slide.active .insp-word')?.textContent || '')">🔊 Pronounce Active</button>
                     </div>
                 </div>
@@ -367,7 +367,7 @@
                     </div>
 
                     <div class="action-row" style="margin-top: 8px;">
-                        <button class="btn-action btn-step-reveal" onclick="stepReveal(this)">👉 Step Reveal (E)</button>
+                        <button class="btn-action btn-step-reveal" onclick="window.stepReveal?.(this)">👉 Step Reveal (E)</button>
                         <button class="btn-action" onclick="window.vocabBank?.speak(document.querySelector('.slide.active .insp-word')?.textContent || '')">🔊 Pronounce Active</button>
                     </div>
                 </div>
@@ -1909,10 +1909,8 @@
                 allSlides[0].classList.add('active', 'visible');
             }
 
-            // Rebind StepRevealEngine if available
-            if (window.stepRevealEngine && typeof window.stepRevealEngine.bindEvents === 'function') {
-                window.stepRevealEngine.bindEvents();
-            }
+            // StepRevealEngine button injection is handled automatically by its MutationObserver
+            // (observeNewActionRows) — no manual bindEvents() call needed here.
         }
     }
 

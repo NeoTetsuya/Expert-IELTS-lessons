@@ -51,13 +51,13 @@ class PresentationTools {
 
             <!-- Highlighter Palette -->
             <div class="highlighter-palette" id="highlighterPalette" style="display:none;">
-                <button class="highlighter-color-btn active" style="background:#facc15;" onclick="teacherHighlighter && teacherHighlighter.setColor(0)" title="Fluorescent Yellow"></button>
-                <button class="highlighter-color-btn" style="background:#4ade80;" onclick="teacherHighlighter && teacherHighlighter.setColor(1)" title="Neon Green"></button>
-                <button class="highlighter-color-btn" style="background:#38bdf8;" onclick="teacherHighlighter && teacherHighlighter.setColor(2)" title="Sky Cyan"></button>
-                <button class="highlighter-color-btn" style="background:#f472b6;" onclick="teacherHighlighter && teacherHighlighter.setColor(3)" title="Coral Pink"></button>
+                <button class="highlighter-color-btn active" style="background:#facc15;" onclick="window.teacherHighlighter && window.teacherHighlighter.setColor(0)" title="Fluorescent Yellow"></button>
+                <button class="highlighter-color-btn" style="background:#4ade80;" onclick="window.teacherHighlighter && window.teacherHighlighter.setColor(1)" title="Neon Green"></button>
+                <button class="highlighter-color-btn" style="background:#38bdf8;" onclick="window.teacherHighlighter && window.teacherHighlighter.setColor(2)" title="Sky Cyan"></button>
+                <button class="highlighter-color-btn" style="background:#f472b6;" onclick="window.teacherHighlighter && window.teacherHighlighter.setColor(3)" title="Coral Pink"></button>
                 <div class="highlighter-divider"></div>
-                <button class="highlighter-tool-btn" onclick="teacherHighlighter && teacherHighlighter.undo()" title="Undo Last Stroke (Ctrl+Z)">↩️ Undo</button>
-                <button class="highlighter-tool-btn" onclick="teacherHighlighter && teacherHighlighter.clear()" title="Clear All Highlights (C)">🗑️ Clear</button>
+                <button class="highlighter-tool-btn" onclick="window.teacherHighlighter && window.teacherHighlighter.undo()" title="Undo Last Stroke (Ctrl+Z)">↩️ Undo</button>
+                <button class="highlighter-tool-btn" onclick="window.teacherHighlighter && window.teacherHighlighter.clear()" title="Clear All Highlights (C)">🗑️ Clear</button>
             </div>
 
             <!-- Help Modal -->
@@ -400,7 +400,8 @@ class PresentationTools {
             if (document.documentElement.classList.contains('presenter-window') || (document.body && document.body.classList.contains('presenter-window'))) {
                 return;
             }
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA'
+                || e.target.isContentEditable || e.target.closest('[contenteditable="true"]')) {
                 return;
             }
             const key = e.key.toLowerCase();

@@ -258,9 +258,9 @@ class PresenterViewUI {
             }
         });
 
-        // Remote Step Reveal
+        // Remote Step Reveal — broadcast=false prevents re-emitting STEP_REVEAL_CMD (infinite loop)
         this.sync.on('STEP_REVEAL_CMD', () => {
-            if (window.stepRevealEngine) window.stepRevealEngine.revealNextOnActiveSlide();
+            if (window.stepRevealEngine) window.stepRevealEngine.revealNextOnActiveSlide(false);
         });
 
         // Remote Student Picker
@@ -544,7 +544,7 @@ class PresenterViewUI {
             if (data.action === 'check') {
                 window.deckEngine.checkAnswers(target, false);
             } else if (data.action === 'reveal') {
-                window.deckEngine.revealAnswers(target, false);
+                window.deckEngine.revealKeys(target, false); // unified with audience listener (revealAnswers is an alias)
             } else if (data.action === 'reset') {
                 window.deckEngine.resetTask(target, false);
             } else if (data.action === 'toggleOptCard' && typeof data.cardIndex === 'number') {
@@ -1128,7 +1128,10 @@ class PresenterViewUI {
 
     triggerStepReveal() {
         if (window.stepRevealEngine) {
-            window.stepRevealEngine.revealNextOnActiveSlide();
+            // Pass broadcast=false — the explicit emit below is the single source of truth.
+            // Without false, revealNextOnActiveSlide() would self-emit STEP_REVEAL_CMD internally,
+            // then this method emits it again, sending the command twice to the audience.
+            window.stepRevealEngine.revealNextOnActiveSlide(false);
             this.sync.emit('STEP_REVEAL_CMD', {});
             this.updatePresenterSlideView();
         }
@@ -1344,6 +1347,28 @@ class PresenterViewUI {
                 if (src.style.display) dest.style.display = src.style.display;
             }
         });
+
+        // Sync data-state on choice / TFNG / MCQ groups so the clone
+        // reflects revealed state and doesn't double-reveal on next click.
+        const srcGroups = srcElement.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options, .mcq-options-container');
+        const destGroups = destElement.querySelectorAll('.choice-group, .tfng-group, .ynng-group, .mcq-options, .mcq-options-container');
+        srcGroups.forEach((src, idx) => {
+            const dest = destGroups[idx];
+            if (!dest) return;
+            if (src.dataset.state) {
+                dest.dataset.state = src.dataset.state;
+            }
+            // Also sync individual button states within each group
+            const srcBtns = src.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, .mcq-card-option, [data-choice]');
+            const destBtns = dest.querySelectorAll('.choice-btn, .tfng-btn, .option-btn, .mcq-card-option, [data-choice]');
+            srcBtns.forEach((srcBtn, bi) => {
+                const destBtn = destBtns[bi];
+                if (destBtn) {
+                    destBtn.className = srcBtn.className;
+                    if (srcBtn.dataset.state) destBtn.dataset.state = srcBtn.dataset.state;
+                }
+            });
+        });
     }
 
     /**
@@ -1483,7 +1508,11 @@ class PresenterViewUI {
                     e.preventDefault();
                     e.stopPropagation();
                     this.triggerStepReveal();
-                    this.syncFormValues(currentSlide, scaler);
+                    // Note: syncFormValues is intentionally omitted here.
+                    // triggerStepReveal() → updatePresenterSlideView() already does a full
+                    // re-clone + syncFormValues internally, so a second call here would
+                    // run on the newly-rebuilt DOM (correct) but the previous call would
+                    // have run on the old stale scaler content (wrong). Removed.
                     return;
                 } else if (btnText.includes('check')) {
                     e.preventDefault();
@@ -1494,7 +1523,7 @@ class PresenterViewUI {
                 } else if (btnText.includes('reveal') || btnText.includes('show evidence') || btnText.includes('show highlight')) {
                     e.preventDefault();
                     e.stopPropagation();
-                    if (window.deckEngine) window.deckEngine.revealAnswers(currentSlide, true);
+                    if (window.deckEngine) window.deckEngine.revealKeys(currentSlide, true); // unified with audience/presenter EXERCISE_ACTION listeners
                     this.syncFormValues(currentSlide, scaler);
                     return;
                 } else if (btnText.includes('reset')) {

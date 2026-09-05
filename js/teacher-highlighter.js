@@ -211,11 +211,8 @@ class TeacherHighlighter {
                 this.toggle();
             }
 
-            // 'C' key clears highlights when mode is active
-            if ((e.key === 'c' || e.key === 'C') && this.isActive && !e.ctrlKey) {
-                e.preventDefault();
-                this.clear();
-            }
+            // 'C' key clear is handled authoritatively by presentation-tools.js which calls
+            // both clearCanvas() and teacherHighlighter.clear() — no duplicate handler needed here.
 
             // 'Ctrl + Z' undoes last highlight
             if (e.ctrlKey && (e.key === 'z' || e.key === 'Z') && this.isActive) {
@@ -235,8 +232,8 @@ class TeacherHighlighter {
         const cpBtn = document.getElementById('btnCpHighlighter');
         if (cpBtn) cpBtn.classList.toggle('active', this.isActive);
 
-        const modeBtn = document.getElementById('modeBtnHighlighter');
-        if (modeBtn) modeBtn.classList.toggle('active', this.isActive);
+        // Note: .cp-mode-btn bar state is managed exclusively by PresenterViewUI.setToolMode()
+        // to avoid desync. Do NOT toggle modeBtnHighlighter here.
 
         const palette = document.getElementById('highlighterPalette');
         if (palette) palette.style.display = this.isActive ? 'flex' : 'none';
