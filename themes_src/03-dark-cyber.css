@@ -1,8 +1,9 @@
 /* ==========================================================================
    MODULE 03: DARK & CYBERPUNK THEMES (Neon, Deep Space & High Contrast Dark)
+   Enhanced with CRT scanlines, pixel stepped shadows, starlight glows & cyber grids
    ========================================================================== */
 
-/* 16. ELECTRIC STUDIO (Cyberpunk Dark Mode, Glowing Neon Cobalt & Glass) */
+/* 18. ELECTRIC STUDIO (Cyberpunk Dark Mode, Glowing Neon Cobalt & Glass) */
 [data-theme="electric"] {
     --font-display: 'Manrope', sans-serif;
     --font-body: 'Outfit', sans-serif;
@@ -24,26 +25,32 @@
     --card-border: 1.5px solid rgba(56, 189, 248, 0.3);
     --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.1);
     --card-radius: 14px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%2216%22%20y%3D%2216%22%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%222%22%20fill%3D%22currentColor%22%20opacity%3D%220.3%22%2F%3E%3Cline%20x1%3D%2224%22%20y1%3D%224%22%20x2%3D%2224%22%20y2%3D%2216%22%2F%3E%3Cline%20x1%3D%2224%22%20y1%3D%2232%22%20x2%3D%2224%22%20y2%3D%2244%22%2F%3E%3Cline%20x1%3D%224%22%20y1%3D%2224%22%20x2%3D%2216%22%20y2%3D%2224%22%2F%3E%3Cline%20x1%3D%2232%22%20y1%3D%2224%22%20x2%3D%2244%22%20y2%3D%2224%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%224%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2244%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%224%22%20cy%3D%2224%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2244%22%20cy%3D%2224%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3Cpath%20d%3D%22M10%2010l6%206%22%2F%3E%3Cpath%20d%3D%22M38%2038l-6-6%22%2F%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%2238%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.22;
 }
 
 [data-theme="electric"] .notebook {
     background: #0f172a;
     border: 1.5px solid rgba(56, 189, 248, 0.4);
-    box-shadow: 0 0 40px rgba(56, 189, 248, 0.2), 0 25px 80px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.2), 0 25px 80px rgba(0, 0, 0, 0.85);
+    background-image: radial-gradient(rgba(56, 189, 248, 0.12) 1px, transparent 1px);
+    background-size: 20px 20px;
 }
 
 [data-theme="electric"] .slide-title {
     font-family: 'Manrope', sans-serif;
     font-weight: 800;
     color: #f8fafc;
-    text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
+    letter-spacing: -0.02em;
 }
 
 [data-theme="electric"] .reading-pane,
 [data-theme="electric"] .question-pane {
-    background: rgba(15, 23, 42, 0.6) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: rgba(15, 23, 42, 0.7) !important;
+    border: 1px solid rgba(56, 189, 248, 0.25) !important;
     color: #e2e8f0 !important;
+    backdrop-filter: blur(12px) !important;
 }
 
 [data-theme="electric"] .card,
@@ -51,10 +58,18 @@
 [data-theme="electric"] .q-card,
 [data-theme="electric"] .model-breakdown-card {
     background: rgba(30, 41, 59, 0.75) !important;
-    border: 1.5px solid rgba(56, 189, 248, 0.25) !important;
+    border: 1.5px solid rgba(56, 189, 248, 0.3) !important;
     color: #f8fafc !important;
-    backdrop-filter: blur(12px) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 12px rgba(56, 189, 248, 0.08) !important;
+    backdrop-filter: blur(16px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 15px rgba(56, 189, 248, 0.12) !important;
+}
+
+[data-theme="electric"] .skill-badge {
+    background: rgba(56, 189, 248, 0.15) !important;
+    border: 1.5px solid #38bdf8 !important;
+    color: #38bdf8 !important;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.3) !important;
+    font-weight: 700;
 }
 
 [data-theme="electric"] .blank-input,
@@ -75,6 +90,7 @@
     background: #0284c7 !important;
     color: #ffffff !important;
     border-color: #38bdf8 !important;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4) !important;
 }
 
 [data-theme="electric"] mark.evidence {
@@ -84,7 +100,7 @@
 }
 
 
-/* 17. CREATIVE VOLTAGE (Avant-Garde Deep Violet, Hot Magenta & Acid Lime) */
+/* 19. CREATIVE VOLTAGE (Avant-Garde Deep Violet, Hot Magenta & Acid Lime) */
 [data-theme="voltage"] {
     --font-display: 'Syne', sans-serif;
     --font-body: 'Space Grotesk', sans-serif;
@@ -106,6 +122,8 @@
     --card-border: 1.5px solid rgba(236, 72, 153, 0.35);
     --card-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(236, 72, 153, 0.15);
     --card-radius: 16px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M28%204l-16%2022h14l-4%2018%2018-24H26z%22%2F%3E%3Cpath%20d%3D%22M38%2012c4%204%206%209%206%2015%22%2F%3E%3Cpath%20d%3D%22M4%2027c0-6%202-11%206-15%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2220%22%20stroke-dasharray%3D%224%204%22%20stroke-width%3D%221.5%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.24;
 }
 
 [data-theme="voltage"] .notebook {
@@ -119,12 +137,13 @@
     font-weight: 800;
     color: #fdf4ff;
     letter-spacing: -0.5px;
+    text-shadow: 0 0 24px rgba(236, 72, 153, 0.4);
 }
 
 [data-theme="voltage"] .reading-pane,
 [data-theme="voltage"] .question-pane {
-    background: rgba(19, 14, 36, 0.7) !important;
-    border: 1px solid rgba(167, 139, 250, 0.25) !important;
+    background: rgba(19, 14, 36, 0.75) !important;
+    border: 1px solid rgba(167, 139, 250, 0.3) !important;
     color: #f1f5f9 !important;
 }
 
@@ -134,9 +153,17 @@
 [data-theme="voltage"] .q-card,
 [data-theme="voltage"] .model-breakdown-card {
     background: rgba(30, 21, 54, 0.85) !important;
-    border: 1.5px solid rgba(236, 72, 153, 0.3) !important;
+    border: 1.5px solid rgba(236, 72, 153, 0.35) !important;
     color: #fdf4ff !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(236, 72, 153, 0.15) !important;
+}
+
+[data-theme="voltage"] .skill-badge {
+    background: #a3e635 !important;
+    color: #090514 !important;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    box-shadow: 0 0 15px rgba(163, 230, 53, 0.4);
 }
 
 [data-theme="voltage"] .blank-input,
@@ -154,7 +181,7 @@
 }
 
 
-/* 18. VELLUM (Deep Midnight Navy, Warm Golden-Amber Serifs & Dusty Teal) */
+/* 20. VELLUM (Celestial Midnight Navy, Golden-Amber Serifs & Dusty Teal) */
 [data-theme="vellum"] {
     --font-display: 'Cormorant Garamond', serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -176,6 +203,8 @@
     --card-border: 1.5px solid rgba(245, 158, 11, 0.3);
     --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(245, 158, 11, 0.1);
     --card-radius: 14px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2216%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2211%22%20stroke-dasharray%3D%223%203%22%2F%3E%3Cpath%20d%3D%22M24%2014v20%22%2F%3E%3Cpath%20d%3D%22M14%2024h20%22%2F%3E%3Cpath%20d%3D%22M18%2018l12%2012%22%2F%3E%3Cpath%20d%3D%22M18%2030l12-12%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%224%22%20fill%3D%22currentColor%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.20;
 }
 
 [data-theme="vellum"] .notebook {
@@ -190,7 +219,7 @@
     font-style: italic;
     font-size: 40px;
     color: #fbbf24;
-    text-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+    text-shadow: 0 0 20px rgba(245, 158, 11, 0.45);
 }
 
 [data-theme="vellum"] .card,
@@ -200,19 +229,27 @@
 [data-theme="vellum"] .reading-pane,
 [data-theme="vellum"] .model-breakdown-card {
     background: rgba(28, 37, 65, 0.85) !important;
-    border: 1.5px solid rgba(245, 158, 11, 0.25) !important;
+    border: 1.5px solid rgba(245, 158, 11, 0.3) !important;
     color: #f8fafc !important;
     backdrop-filter: blur(10px) !important;
+}
+
+[data-theme="vellum"] .skill-badge {
+    background: rgba(251, 191, 36, 0.2) !important;
+    color: #fbbf24 !important;
+    border: 1px solid rgba(251, 191, 36, 0.4) !important;
+    font-weight: 700;
 }
 
 [data-theme="vellum"] .btn-action.btn-primary {
     background: #d97706 !important;
     border-color: #f59e0b !important;
     color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(217, 119, 6, 0.4) !important;
 }
 
 
-/* 19. BROADSIDE (Pitch-Black Broadsheet Void & Fire Orange) */
+/* 21. BROADSIDE (Pitch-Black Broadsheet Void & Fire Orange) */
 [data-theme="broadside"] {
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -234,6 +271,8 @@
     --card-border: 1.5px solid rgba(255, 87, 34, 0.4);
     --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
     --card-radius: 8px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%226%22%20y%3D%226%22%20width%3D%2236%22%20height%3D%2236%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M12%2012h24%22%2F%3E%3Cpath%20d%3D%22M12%2018h24%22%2F%3E%3Cpath%20d%3D%22M12%2024h10%22%2F%3E%3Cpath%20d%3D%22M12%2028h10%22%2F%3E%3Cpath%20d%3D%22M12%2032h10%22%2F%3E%3Crect%20x%3D%2226%22%20y%3D%2224%22%20width%3D%2210%22%20height%3D%2212%22%20fill%3D%22currentColor%22%20opacity%3D%220.2%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.09;
 }
 
 [data-theme="broadside"] .notebook {
@@ -249,6 +288,9 @@
     text-transform: uppercase;
     color: #ffffff;
     letter-spacing: -0.5px;
+    border-bottom: 3px solid #ff5722;
+    padding-bottom: 6px;
+    display: inline-block;
 }
 
 [data-theme="broadside"] .card,
@@ -258,8 +300,16 @@
 [data-theme="broadside"] .reading-pane,
 [data-theme="broadside"] .model-breakdown-card {
     background: rgba(24, 24, 27, 0.9) !important;
-    border: 1.5px solid rgba(255, 87, 34, 0.35) !important;
+    border: 1.5px solid rgba(255, 87, 34, 0.4) !important;
+    border-left: 5px solid #ff5722 !important;
     color: #ffffff !important;
+}
+
+[data-theme="broadside"] .skill-badge {
+    background: #ff5722 !important;
+    color: #000000 !important;
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
 [data-theme="broadside"] .blank-input,
@@ -274,10 +324,11 @@
     border-color: #ea580c !important;
     color: #ffffff !important;
     font-weight: 800 !important;
+    box-shadow: 0 0 15px rgba(255, 87, 34, 0.4) !important;
 }
 
 
-/* 20. 8-BIT ORBIT (CRT Pixel-Art Arcade, Neon Cyan & Magenta) */
+/* 22. 8-BIT ORBIT (CRT Pixel-Art Arcade, Neon Cyan & Stepped Pixel Borders) */
 [data-theme="8-bit-orbit"] {
     --font-display: 'Press Start 2P', monospace;
     --font-body: 'Space Grotesk', sans-serif;
@@ -297,15 +348,20 @@
 
     --card-bg: rgba(10, 14, 39, 0.85);
     --card-border: 2px solid #5edcf4;
-    --card-shadow: 0 0 20px rgba(94, 220, 244, 0.25), 0 10px 30px rgba(0,0,0,0.6);
-    --card-radius: 4px;
+    --card-shadow: 4px 4px 0px #f0a6ca;
+    --card-radius: 0px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22currentColor%22%3E%3Cpath%20d%3D%22M18%206h12v4H18zM10%2010h4v6h-4zM34%2010h4v6h-4zM10%2016h28v10H10zM6%2022h4v8H6zM38%2022h4v8h-4zM14%2026h4v4h-4zM30%2026h4v4h-4zM14%2036h6v6h-6zM28%2036h6v6h-6zM10%2032h4v4h-4zM34%2032h4v4h-4z%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.28;
 }
 
 [data-theme="8-bit-orbit"] .notebook {
     background: #0f1b3d;
     border: 3px solid #f0a6ca;
-    border-radius: 6px;
-    box-shadow: 0 0 40px rgba(240, 166, 202, 0.3), 0 25px 80px rgba(0, 0, 0, 0.9);
+    border-radius: 0px;
+    box-shadow: 6px 6px 0px #5edcf4, 0 25px 80px rgba(0, 0, 0, 0.9);
+    background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%),
+                      radial-gradient(circle at center, #0f1b3d 0%, #080c1d 90%);
+    background-size: 100% 4px, 100% 100%;
 }
 
 [data-theme="8-bit-orbit"] .slide-title {
@@ -322,10 +378,20 @@
 [data-theme="8-bit-orbit"] .q-card,
 [data-theme="8-bit-orbit"] .reading-pane,
 [data-theme="8-bit-orbit"] .model-breakdown-card {
-    background: rgba(10, 14, 39, 0.85) !important;
+    background: rgba(10, 14, 39, 0.9) !important;
     border: 2px solid #5edcf4 !important;
     color: #f8fafc !important;
-    border-radius: 4px !important;
+    border-radius: 0px !important;
+    box-shadow: 4px 4px 0px #f0a6ca !important;
+}
+
+[data-theme="8-bit-orbit"] .skill-badge {
+    background: #5edcf4 !important;
+    color: #0a0e27 !important;
+    border-radius: 0px !important;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    padding: 6px 12px;
 }
 
 [data-theme="8-bit-orbit"] .btn-action.btn-primary {
@@ -333,5 +399,11 @@
     border-color: #38bdf8 !important;
     color: #0a0e27 !important;
     font-weight: 800 !important;
-    border-radius: 4px !important;
+    border-radius: 0px !important;
+    box-shadow: 4px 4px 0px #f0a6ca !important;
+}
+
+[data-theme="8-bit-orbit"] .btn-action.btn-primary:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #f0a6ca !important;
 }

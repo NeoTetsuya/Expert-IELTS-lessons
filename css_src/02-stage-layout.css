@@ -234,4 +234,18 @@ html, body {
         display: none !important;
     }
 }
-
+
+/* Theme Watermark / Signature Motif on Slides */
+.notebook::after {
+    content: '';
+    position: absolute;
+    bottom: 24px;
+    right: 28px;
+    width: 68px;
+    height: 68px;
+    background: var(--theme-watermark, none) no-repeat center / contain;
+    opacity: var(--theme-watermark-opacity, 0.08);
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}

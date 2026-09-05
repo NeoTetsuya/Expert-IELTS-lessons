@@ -89,7 +89,7 @@
 :is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) :is(.blank-input, .select-input) {
     background: #ffffff !important;
     color: #0f172a !important;
-    border: 1.5px solid #cbd5e1 !important;
+    border: 1.5px solid #cbd5e1;
 }
 
 :is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .select-input option {
@@ -125,7 +125,7 @@
 :is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(.blank-input, .select-input) {
     background: rgba(15, 23, 42, 0.88) !important;
     color: #f8fafc !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.28) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.28);
 }
 
 :is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .select-input option {
@@ -393,9 +393,10 @@
 /* ==================== THEME MODULE: 01-editorial.css ==================== */
 /* ==========================================================================
    MODULE 01: EDITORIAL THEMES (Classics, Literary Serifs & Natural Luxury)
+   Enhanced with signature ornaments, authentic paper textures, & literary hierarchy
    ========================================================================== */
 
-/* 1. ACADEMIC EDITORIAL (Default) */
+/* 1. ACADEMIC EDITORIAL (Default - Oxford/Cambridge Scholarly Journal) */
 [data-theme="academic"], :root:not([data-theme]) {
     --font-display: 'Playfair Display', serif;
     --font-body: 'DM Sans', sans-serif;
@@ -417,17 +418,50 @@
     --card-border: 1px solid #e2e8f0;
     --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     --card-radius: 12px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%206l18%209-18%209L6%2015z%22%2F%3E%3Cpath%20d%3D%22M12%2018v12c0%206%205.37%2011%2012%2011s12-5%2012-11V18%22%2F%3E%3Cpath%20d%3D%22M42%2016v14%22%2F%3E%3Ccircle%20cx%3D%2242%22%20cy%3D%2232%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3Cpath%20d%3D%22M18%2027c1.5%202%203.8%203%206%203s4.5-1%206-3%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.08;
 }
 
 [data-theme="academic"] .notebook {
     background: #f8fafc;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    border-left: 6px solid #1e3a8a;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), inset 12px 0 20px -10px rgba(30, 58, 138, 0.08);
 }
 
 [data-theme="academic"] .slide-title {
     font-family: 'Playfair Display', serif;
     letter-spacing: -0.5px;
+    border-bottom: 3px double rgba(180, 83, 9, 0.35);
+    padding-bottom: 8px;
+    display: inline-block;
+    max-width: 100%;
+}
+
+[data-theme="academic"] .card,
+[data-theme="academic"] .rule-card,
+[data-theme="academic"] .discuss-card,
+[data-theme="academic"] .q-card,
+[data-theme="academic"] .model-breakdown-card {
+    border: 1px solid #e2e8f0 !important;
+    border-left: 4px solid #1e3a8a !important;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+}
+
+[data-theme="academic"] .skill-badge {
+    background: #1e3a8a !important;
+    color: #ffffff !important;
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+[data-theme="academic"] .btn-action.btn-primary {
+    background: #1e3a8a !important;
+    border-color: #1e40af !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(30, 58, 138, 0.25) !important;
 }
 
 
@@ -453,13 +487,16 @@
     --card-border: 1px solid #d6cebe;
     --card-shadow: 0 4px 14px rgba(41, 37, 36, 0.08);
     --card-radius: 4px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2218%22%20stroke-dasharray%3D%225%203%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2213%22%2F%3E%3Cpath%20d%3D%22M15%2020h18%22%2F%3E%3Cpath%20d%3D%22M15%2028h18%22%2F%3E%3Cpath%20d%3D%22M24%2016v16%22%2F%3E%3Cpath%20d%3D%22M38%2020c2%202%204%202%206%200%22%2F%3E%3Cpath%20d%3D%22M38%2024c2%202%204%202%206%200%22%2F%3E%3Cpath%20d%3D%22M38%2028c2%202%204%202%206%200%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.12;
 }
 
 [data-theme="vintage"] .notebook {
     background: #f4ece1;
-    border: 1px solid #d6cebe;
+    border: 1.5px solid #d6cebe;
     border-radius: 4px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(180, 83, 9, 0.05);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 80px rgba(180, 83, 9, 0.08);
+    position: relative;
 }
 
 [data-theme="vintage"] .slide-title {
@@ -467,6 +504,10 @@
     font-weight: 900;
     letter-spacing: 0.5px;
     color: #1c1917;
+    border-bottom: 2px solid #a8a29e;
+    padding-bottom: 8px;
+    display: inline-block;
+    max-width: 100%;
 }
 
 [data-theme="vintage"] .card,
@@ -476,8 +517,18 @@
 [data-theme="vintage"] .model-breakdown-card {
     background: #faf6ef !important;
     border: 1px solid #d6cebe !important;
+    border-top: 3px double #78716c !important;
     border-radius: 4px !important;
     box-shadow: 0 2px 8px rgba(41, 37, 36, 0.06) !important;
+}
+
+[data-theme="vintage"] .skill-badge {
+    background: #78716c !important;
+    color: #faf6ef !important;
+    font-family: var(--font-mono);
+    border: 1px dashed #d6cebe;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 }
 
 [data-theme="vintage"] .blank-input,
@@ -493,6 +544,8 @@
     border-color: #7c2d12 !important;
     color: #ffffff !important;
     border-radius: 3px !important;
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
 }
 
 
@@ -516,23 +569,26 @@
 
     --card-bg: #ffffff;
     --card-border: 1.5px solid #e7e5e4;
-    --card-shadow: 0 4px 20px rgba(28, 25, 23, 0.05);
-    --card-radius: 14px;
+    --card-shadow: 0 10px 30px rgba(28, 25, 23, 0.04), 0 2px 8px rgba(5, 150, 105, 0.04);
+    --card-radius: 16px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%225%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2213%22%20r%3D%226%22%2F%3E%3Ccircle%20cx%3D%2235%22%20cy%3D%2224%22%20r%3D%226%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2235%22%20r%3D%226%22%2F%3E%3Ccircle%20cx%3D%2213%22%20cy%3D%2224%22%20r%3D%226%22%2F%3E%3Cpath%20d%3D%22M24%2024l16%2016%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.10;
 }
 
 [data-theme="soft-editorial"] .notebook {
     background: #fdfbf7;
     border: 1.5px solid #e7e5e4;
-    border-radius: 16px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+    border-radius: 18px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38), inset 0 0 40px rgba(244, 236, 225, 0.5);
 }
 
 [data-theme="soft-editorial"] .slide-title {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 700;
     font-size: 38px;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
     color: #1c1917;
+    font-style: italic;
 }
 
 [data-theme="soft-editorial"] .card,
@@ -543,14 +599,25 @@
 [data-theme="soft-editorial"] .model-breakdown-card {
     background: #ffffff !important;
     border: 1.5px solid #e7e5e4 !important;
-    box-shadow: 0 4px 14px rgba(28, 25, 23, 0.04) !important;
+    border-top: 3.5px solid #059669 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 8px 24px rgba(28, 25, 23, 0.04) !important;
     color: #1c1917 !important;
+}
+
+[data-theme="soft-editorial"] .skill-badge {
+    background: #f0fdf4 !important;
+    color: #059669 !important;
+    border: 1px solid #bbf7d0 !important;
+    font-weight: 700;
 }
 
 [data-theme="soft-editorial"] .btn-action.btn-primary {
     background: #059669 !important;
     border-color: #047857 !important;
     color: #ffffff !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25) !important;
 }
 
 
@@ -576,13 +643,15 @@
     --card-border: 1.5px solid #d1fae5;
     --card-shadow: 0 4px 18px rgba(6, 78, 59, 0.08);
     --card-radius: 12px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%206l-9%2012h5l-7%2011h6l-6%2011h22l-6-11h6l-7-11h5z%22%2F%3E%3Cpath%20d%3D%22M24%2040v6%22%2F%3E%3Cpath%20d%3D%22M10%2044c4-3%209-4%2014-4s10%201%2014%204%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.12;
 }
 
 [data-theme="editorial-forest"] .notebook {
     background: #fcfbf7;
     border: 2px solid #064e3b;
     border-radius: 14px;
-    box-shadow: 0 24px 70px rgba(6, 26, 20, 0.5);
+    box-shadow: 0 24px 70px rgba(6, 26, 20, 0.5), inset 0 0 0 2px #d1fae5;
 }
 
 [data-theme="editorial-forest"] .slide-title {
@@ -590,6 +659,8 @@
     font-weight: 700;
     font-size: 38px;
     color: #064e3b;
+    border-left: 5px solid #064e3b;
+    padding-left: 12px;
 }
 
 [data-theme="editorial-forest"] .card,
@@ -600,13 +671,22 @@
 [data-theme="editorial-forest"] .model-breakdown-card {
     background: #ffffff !important;
     border: 1.5px solid #d1fae5 !important;
+    border-left: 4px solid #064e3b !important;
     color: #064e3b !important;
+}
+
+[data-theme="editorial-forest"] .skill-badge {
+    background: #db2777 !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    letter-spacing: 0.04em;
 }
 
 [data-theme="editorial-forest"] .btn-action.btn-primary {
     background: #064e3b !important;
     border-color: #047857 !important;
     color: #ffffff !important;
+    box-shadow: 0 4px 14px rgba(6, 78, 59, 0.3) !important;
 }
 
 
@@ -638,13 +718,14 @@
     background: #fbf5eb;
     border: 2px solid #7a1f35;
     border-radius: 14px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(242, 182, 198, 0.2);
 }
 
 [data-theme="editorial-tri-tone"] .slide-title {
     font-family: 'Bodoni Moda', serif;
     font-weight: 900;
     color: #7a1f35;
+    letter-spacing: 0.02em;
 }
 
 [data-theme="editorial-tri-tone"] .card,
@@ -654,13 +735,21 @@
 [data-theme="editorial-tri-tone"] .model-breakdown-card {
     background: #ffffff !important;
     border: 1.5px solid #f2b6c6 !important;
+    border-top: 4px solid #7a1f35 !important;
     color: #7a1f35 !important;
+}
+
+[data-theme="editorial-tri-tone"] .skill-badge {
+    background: #7a1f35 !important;
+    color: #fbf5eb !important;
+    border: 1px solid #f2b6c6;
 }
 
 [data-theme="editorial-tri-tone"] .btn-action.btn-primary {
     background: #7a1f35 !important;
     border-color: #5c1426 !important;
     color: #ffffff !important;
+    box-shadow: 0 4px 14px rgba(122, 31, 53, 0.3) !important;
 }
 
 
@@ -692,13 +781,17 @@
     background: #f1e9d6;
     border: 2.5px solid #065f46;
     border-radius: 14px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(60, 216, 150, 0.3);
 }
 
 [data-theme="emerald-editorial"] .slide-title {
     font-family: 'Bodoni Moda', serif;
     font-weight: 800;
     color: #0f1a5c;
+    border-bottom: 3px double #065f46;
+    padding-bottom: 6px;
+    display: inline-block;
+    max-width: 100%;
 }
 
 [data-theme="emerald-editorial"] .card,
@@ -712,10 +805,17 @@
     color: #0f1a5c !important;
 }
 
+[data-theme="emerald-editorial"] .skill-badge {
+    background: #0f1a5c !important;
+    color: #3cd896 !important;
+    font-weight: 700;
+}
+
 [data-theme="emerald-editorial"] .btn-action.btn-primary {
     background: #065f46 !important;
     border-color: #047857 !important;
     color: #ffffff !important;
+    box-shadow: 0 4px 14px rgba(6, 95, 70, 0.3) !important;
 }
 
 
@@ -740,20 +840,21 @@
     --card-bg: #ffffff;
     --card-border: 1.5px solid #e7e5e4;
     --card-shadow: 0 4px 18px rgba(63, 98, 18, 0.06);
-    --card-radius: 12px;
+    --card-radius: 18px;
 }
 
 [data-theme="grove"] .notebook {
     background: #f7f6f2;
     border: 2px solid #3f6212;
-    border-radius: 14px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    border-radius: 18px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), inset 0 0 40px rgba(63, 98, 18, 0.04);
 }
 
 [data-theme="grove"] .slide-title {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 700;
     color: #3f6212;
+    font-style: italic;
 }
 
 [data-theme="grove"] .card,
@@ -763,13 +864,24 @@
 [data-theme="grove"] .model-breakdown-card {
     background: #ffffff !important;
     border: 1.5px solid #dcfce7 !important;
+    border-left: 5px solid #3f6212 !important;
+    border-radius: 16px !important;
     color: #27272a !important;
+}
+
+[data-theme="grove"] .skill-badge {
+    background: #3f6212 !important;
+    color: #ffffff !important;
+    border-radius: 9999px;
+    font-weight: 700;
 }
 
 [data-theme="grove"] .btn-action.btn-primary {
     background: #3f6212 !important;
     border-color: #365314 !important;
     color: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 14px rgba(63, 98, 18, 0.25) !important;
 }
 
 
@@ -794,14 +906,15 @@
     --card-bg: #f5f0e4;
     --card-border: 1px solid #d4cebe;
     --card-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    --card-radius: 4px;
+    --card-radius: 2px;
 }
 
 [data-theme="monochrome"] .notebook {
     background: #fafadf;
-    border: 1.5px solid #1a1a16;
-    border-radius: 4px;
+    border: 2px solid #1a1a16;
+    border-radius: 2px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(26, 26, 22, 0.04) 31px, rgba(26, 26, 22, 0.04) 32px);
 }
 
 [data-theme="monochrome"] .slide-title {
@@ -810,6 +923,8 @@
     color: #1a1a16;
     border-bottom: 2px solid #1a1a16;
     padding-bottom: 6px;
+    letter-spacing: 0.04em;
+    display: inline-block;
 }
 
 [data-theme="monochrome"] .card,
@@ -818,9 +933,19 @@
 [data-theme="monochrome"] .q-card,
 [data-theme="monochrome"] .model-breakdown-card {
     background: #f5f0e4 !important;
-    border: 1px solid #1a1a16 !important;
+    border: 1.5px solid #1a1a16 !important;
     border-radius: 2px !important;
     color: #1a1a16 !important;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.15) !important;
+}
+
+[data-theme="monochrome"] .skill-badge {
+    background: #1a1a16 !important;
+    color: #fafadf !important;
+    border-radius: 0px !important;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 [data-theme="monochrome"] .btn-action.btn-primary {
@@ -857,7 +982,7 @@
 
 [data-theme="cartesian"] .notebook {
     background: #ede8e0;
-    border: 1.5px solid #b8b0a4;
+    border: 1px solid #b8b0a4;
     border-radius: 10px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
 }
@@ -867,6 +992,7 @@
     font-weight: 700;
     font-style: italic;
     color: #1a1a1a;
+    letter-spacing: -0.01em;
 }
 
 [data-theme="cartesian"] .card,
@@ -876,19 +1002,31 @@
 [data-theme="cartesian"] .model-breakdown-card {
     background: #f8f6f2 !important;
     border: 1px solid #b8b0a4 !important;
+    border-radius: 6px !important;
     color: #1a1a1a !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
+}
+
+[data-theme="cartesian"] .skill-badge {
+    background: #1a1a1a !important;
+    color: #ede8e0 !important;
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-weight: 600;
 }
 
 [data-theme="cartesian"] .btn-action.btn-primary {
     background: #1a1a1a !important;
     border-color: #000000 !important;
     color: #ffffff !important;
+    border-radius: 4px !important;
 }
 
 
 /* ==================== THEME MODULE: 02-bold-brutalist.css ==================== */
 /* ==========================================================================
    MODULE 02: BOLD & NEOBRUTALIST THEMES (High Contrast, Geometric, Impact)
+   Enhanced with hard offset shadows, blueprint grids, chamfered cuts & Bauhaus geometry
    ========================================================================== */
 
 /* 10. BOLD SIGNAL (Brutalist Modern, High-Impact Coral & Chunky Shadows) */
@@ -913,20 +1051,22 @@
     --card-border: 2.5px solid #09090b;
     --card-shadow: 5px 5px 0px #09090b;
     --card-radius: 6px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M26%204l-14%2022h14l-4%2018%2018-24H26z%22%2F%3E%3Cpath%20d%3D%22M6%2010l8-8%22%2F%3E%3Cpath%20d%3D%22M6%2022l14-14%22%2F%3E%3Cpath%20d%3D%22M6%2034l20-20%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.15;
 }
 
 [data-theme="bold-signal"] .notebook {
     background: #ffffff;
-    border: 3px solid #09090b;
+    border: 3.5px solid #09090b;
     border-radius: 8px;
-    box-shadow: 12px 12px 0px #e11d48, 24px 24px 0px rgba(0,0,0,0.5);
+    box-shadow: 10px 10px 0px #e11d48, 20px 20px 0px #09090b;
 }
 
 [data-theme="bold-signal"] .slide-title {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.03em;
     color: #09090b;
 }
 
@@ -936,27 +1076,44 @@
 [data-theme="bold-signal"] .q-card,
 [data-theme="bold-signal"] .model-breakdown-card {
     background: #ffffff !important;
-    border: 2px solid #09090b !important;
+    border: 2.5px solid #09090b !important;
     border-radius: 6px !important;
-    box-shadow: 4px 4px 0px #09090b !important;
+    box-shadow: 5px 5px 0px #09090b !important;
+}
+
+[data-theme="bold-signal"] .skill-badge {
+    background: #09090b !important;
+    color: #ffffff !important;
+    border: 2px solid #09090b !important;
+    border-radius: 4px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em;
+    box-shadow: 3px 3px 0px #e11d48 !important;
 }
 
 [data-theme="bold-signal"] .btn-action {
-    border: 2px solid #09090b !important;
+    border: 2.5px solid #09090b !important;
     border-radius: 6px !important;
     font-weight: 800 !important;
     text-transform: uppercase !important;
-    box-shadow: 3px 3px 0px #09090b !important;
+    box-shadow: 4px 4px 0px #09090b !important;
+    transition: transform 120ms ease-out, box-shadow 120ms ease-out !important;
 }
 
 [data-theme="bold-signal"] .btn-action:hover {
     transform: translate(-2px, -2px);
-    box-shadow: 5px 5px 0px #09090b !important;
+    box-shadow: 6px 6px 0px #09090b !important;
+}
+
+[data-theme="bold-signal"] .btn-action:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #09090b !important;
 }
 
 [data-theme="bold-signal"] .blank-input,
 [data-theme="bold-signal"] .select-input {
-    border: 2px solid #09090b !important;
+    border: 2.5px solid #09090b !important;
     border-radius: 4px !important;
     font-weight: 700 !important;
     background: #f4f4f5 !important;
@@ -983,15 +1140,15 @@
 
     --card-bg: #ffffff;
     --card-border: 2.5px solid #000000;
-    --card-shadow: 4px 4px 0px #000000;
-    --card-radius: 6px;
+    --card-shadow: 5px 5px 0px #000000;
+    --card-radius: 8px;
 }
 
 [data-theme="block-frame"] .notebook {
     background: #ffffff;
-    border: 3px solid #000000;
-    border-radius: 8px;
-    box-shadow: 8px 8px 0px #000000, 0 20px 60px rgba(0,0,0,0.5);
+    border: 3.5px solid #000000;
+    border-radius: 10px;
+    box-shadow: 8px 8px 0px #facc15, 16px 16px 0px #000000;
 }
 
 [data-theme="block-frame"] .slide-title {
@@ -999,6 +1156,7 @@
     font-weight: 900;
     color: #000000;
     text-transform: uppercase;
+    letter-spacing: -0.02em;
 }
 
 [data-theme="block-frame"] .card,
@@ -1007,10 +1165,20 @@
 [data-theme="block-frame"] .q-card,
 [data-theme="block-frame"] .model-breakdown-card {
     background: #ffffff !important;
+    border: 3px solid #000000 !important;
+    border-radius: 8px !important;
+    box-shadow: 5px 5px 0px #000000 !important;
+    color: #000000 !important;
+}
+
+[data-theme="block-frame"] .skill-badge {
+    background: #facc15 !important;
+    color: #000000 !important;
     border: 2.5px solid #000000 !important;
     border-radius: 6px !important;
-    box-shadow: 4px 4px 0px #000000 !important;
-    color: #000000 !important;
+    font-weight: 900 !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+    transform: rotate(-1deg);
 }
 
 [data-theme="block-frame"] .btn-action.btn-primary {
@@ -1018,7 +1186,13 @@
     border: 2.5px solid #000000 !important;
     color: #000000 !important;
     font-weight: 900 !important;
-    box-shadow: 3px 3px 0px #000000 !important;
+    border-radius: 6px !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+}
+
+[data-theme="block-frame"] .btn-action.btn-primary:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000000 !important;
 }
 
 
@@ -1044,19 +1218,21 @@
     --card-border: 1.5px solid #e8e0d4;
     --card-shadow: 0 4px 20px rgba(26, 26, 26, 0.06);
     --card-radius: 10px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%2044v-14c0-6%204-10%208-14%22%2F%3E%3Cpath%20d%3D%22M32%2016v-8%22%2F%3E%3Cpath%20d%3D%22M32%2024c4-2%208-6%208-12%22%2F%3E%3Cpath%20d%3D%22M24%2030c-4-4-8-8-8-14v-8%22%2F%3E%3Cpath%20d%3D%22M16%2022c-3-2-6-5-6-10%22%2F%3E%3Cpath%20d%3D%22M4%2042c6-2%2014-2%2020%200s14%202%2020%200%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.14;
 }
 
 [data-theme="coral"] .notebook {
     background: #f5f0e8;
-    border: 2px solid #e85d5d;
+    border: 2.5px solid #e85d5d;
     border-radius: 12px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(232, 93, 93, 0.05);
 }
 
 [data-theme="coral"] .slide-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    letter-spacing: 1px;
+    font-size: 46px;
+    letter-spacing: 1.5px;
     color: #e85d5d;
 }
 
@@ -1067,7 +1243,17 @@
 [data-theme="coral"] .model-breakdown-card {
     background: #ffffff !important;
     border: 1.5px solid #e8e0d4 !important;
+    border-top: 3.5px solid #e85d5d !important;
     color: #1a1a1a !important;
+}
+
+[data-theme="coral"] .skill-badge {
+    background: #e85d5d !important;
+    color: #ffffff !important;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    padding: 3px 12px;
 }
 
 [data-theme="coral"] .btn-action.btn-primary {
@@ -1075,10 +1261,12 @@
     border-color: #d44a4a !important;
     color: #ffffff !important;
     font-weight: 800 !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 14px rgba(232, 93, 93, 0.3) !important;
 }
 
 
-/* 13. COBALT GRID (Technical Precision, Cobalt Blue & Graph Paper) */
+/* 13. COBALT GRID (Technical Precision, Cobalt Blue & Blueprint Graph Paper) */
 [data-theme="cobalt-grid"] {
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'DM Sans', sans-serif;
@@ -1099,15 +1287,16 @@
     --card-bg: #ffffff;
     --card-border: 1.5px solid #2563eb;
     --card-shadow: 4px 4px 0px rgba(37, 99, 235, 0.15);
-    --card-radius: 8px;
+    --card-radius: 6px;
 }
 
 [data-theme="cobalt-grid"] .notebook {
     background: #ffffff;
-    border: 2px solid #2563eb;
-    border-radius: 10px;
+    border: 2.5px solid #2563eb;
+    border-radius: 8px;
     box-shadow: 8px 8px 0px #2563eb, 0 20px 60px rgba(0, 0, 0, 0.5);
-    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-image: linear-gradient(rgba(37, 99, 235, 0.08) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(37, 99, 235, 0.08) 1px, transparent 1px);
     background-size: 24px 24px;
 }
 
@@ -1116,6 +1305,9 @@
     font-weight: 800;
     color: #2563eb;
     letter-spacing: -0.5px;
+    border-bottom: 2px solid #2563eb;
+    padding-bottom: 6px;
+    display: inline-block;
 }
 
 [data-theme="cobalt-grid"] .card,
@@ -1125,8 +1317,18 @@
 [data-theme="cobalt-grid"] .model-breakdown-card {
     background: #ffffff !important;
     border: 1.5px solid #2563eb !important;
-    border-radius: 8px !important;
+    border-radius: 6px !important;
+    box-shadow: 4px 4px 0px rgba(37, 99, 235, 0.12) !important;
     color: #09090b !important;
+}
+
+[data-theme="cobalt-grid"] .skill-badge {
+    background: #2563eb !important;
+    color: #ffffff !important;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    border-radius: 2px;
 }
 
 [data-theme="cobalt-grid"] .btn-action.btn-primary {
@@ -1134,6 +1336,8 @@
     border-color: #1d4ed8 !important;
     color: #ffffff !important;
     font-weight: 800 !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
 }
 
 
@@ -1163,17 +1367,17 @@
 
 [data-theme="biennale-yellow"] .notebook {
     background: #fbf9f4;
-    border: 2px solid #f59e0b;
+    border: 2.5px solid #f59e0b;
     border-radius: 14px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), inset 0 0 0 1px #fef08a;
 }
 
 [data-theme="biennale-yellow"] .slide-title {
     font-family: 'Playfair Display', serif;
     font-weight: 800;
     color: #1e1b4b;
-    border-left: 6px solid #f59e0b;
-    padding-left: 12px;
+    border-left: 8px solid #f59e0b;
+    padding-left: 14px;
 }
 
 [data-theme="biennale-yellow"] .card,
@@ -1182,8 +1386,16 @@
 [data-theme="biennale-yellow"] .q-card,
 [data-theme="biennale-yellow"] .model-breakdown-card {
     background: #ffffff !important;
-    border: 1.5px solid #fef08a !important;
+    border: 1.5px solid #fde047 !important;
+    border-top: 4px solid #1e1b4b !important;
     color: #1e1b4b !important;
+}
+
+[data-theme="biennale-yellow"] .skill-badge {
+    background: #f59e0b !important;
+    color: #1e1b4b !important;
+    font-weight: 800;
+    letter-spacing: 0.04em;
 }
 
 [data-theme="biennale-yellow"] .btn-action.btn-primary {
@@ -1191,10 +1403,11 @@
     border-color: #d97706 !important;
     color: #1e1b4b !important;
     font-weight: 800 !important;
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3) !important;
 }
 
 
-/* 15. STENCIL & TABLET (Bone Paper, Archaeological Terracotta & Ochre) */
+/* 15. STENCIL & TABLET (Bone Paper, Archaeological Terracotta & Chamfered Cuts) */
 [data-theme="stencil-tablet"] {
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'DM Sans', sans-serif;
@@ -1216,6 +1429,8 @@
     --card-border: 1.5px solid #e2dcc9;
     --card-shadow: 0 4px 16px rgba(160, 106, 60, 0.08);
     --card-radius: 6px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%226%22%20y%3D%2210%22%20width%3D%2236%22%20height%3D%2228%22%20rx%3D%224%22%2F%3E%3Cpath%20d%3D%22M14%2018h6v12h-6%22%2F%3E%3Cpath%20d%3D%22M28%2018h6v12h-6%22%2F%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2214%22%20r%3D%221.5%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%2214%22%20r%3D%221.5%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2234%22%20r%3D%221.5%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%2234%22%20r%3D%221.5%22%20fill%3D%22currentColor%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.16;
 }
 
 [data-theme="stencil-tablet"] .notebook {
@@ -1230,6 +1445,7 @@
     font-weight: 900;
     color: #a06a3c;
     text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 
 [data-theme="stencil-tablet"] .card,
@@ -1241,13 +1457,25 @@
     border: 1.5px solid #e2dcc9 !important;
     border-left: 5px solid #a06a3c !important;
     color: #0a0a0a !important;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+[data-theme="stencil-tablet"] .skill-badge {
+    background: #a06a3c !important;
+    color: #ffffff !important;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
 }
 
 [data-theme="stencil-tablet"] .btn-action.btn-primary {
     background: #a06a3c !important;
     border-color: #8c582e !important;
     color: #ffffff !important;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
 }
+
 
 /* 16. BAUHAUS BOLD (Modernist Manifesto, Archivo Black, Pure Off-White & Offset Solid Shadows) */
 [data-theme="bauhaus-bold"] {
@@ -1271,6 +1499,8 @@
     --card-border: 3.5px solid #0a0a0a;
     --card-shadow: 6px 6px 0px #0a0a0a;
     --card-radius: 0px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2218%22%20r%3D%2210%22%20fill%3D%22%23dc2626%22%20opacity%3D%220.6%22%2F%3E%3Crect%20x%3D%2222%22%20y%3D%2216%22%20width%3D%2218%22%20height%3D%2218%22%20fill%3D%22%232563eb%22%20opacity%3D%220.6%22%2F%3E%3Cpath%20d%3D%22M18%2042l12-20%2012%2020z%22%20fill%3D%22%23eab308%22%20opacity%3D%220.7%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.16;
 }
 
 [data-theme="bauhaus-bold"] .notebook {
@@ -1300,11 +1530,22 @@
     color: #0a0a0a !important;
 }
 
+[data-theme="bauhaus-bold"] .skill-badge {
+    background: #e63b2e !important;
+    color: #ffffff !important;
+    border: 2px solid #0a0a0a !important;
+    border-radius: 0px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    box-shadow: 3px 3px 0px #0a0a0a !important;
+}
+
 [data-theme="bauhaus-bold"] .btn-action {
     border-radius: 0px !important;
     border: 2.5px solid #0a0a0a !important;
     box-shadow: 4px 4px 0px #0a0a0a !important;
     font-weight: 800 !important;
+    transition: transform 120ms ease-out, box-shadow 120ms ease-out !important;
 }
 [data-theme="bauhaus-bold"] .btn-action:hover {
     transform: translate(-2px, -2px);
@@ -1320,6 +1561,7 @@
     color: #ffffff !important;
     border-color: #0a0a0a !important;
 }
+
 
 /* 17. SWISS IKB (International Klein Blue, Hairline Scaffold Grid & Light Grotesk) */
 [data-theme="swiss-ikb"] {
@@ -1343,6 +1585,8 @@
     --card-border: 1px solid #e0e0e0;
     --card-shadow: 0 4px 16px rgba(0, 47, 167, 0.06);
     --card-radius: 0px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2216%22%2F%3E%3Cline%20x1%3D%2224%22%20y1%3D%224%22%20x2%3D%2224%22%20y2%3D%2244%22%2F%3E%3Cline%20x1%3D%224%22%20y1%3D%2224%22%20x2%3D%2244%22%20y2%3D%2224%22%2F%3E%3Crect%20x%3D%2220%22%20y%3D%2220%22%20width%3D%228%22%20height%3D%228%22%20fill%3D%22currentColor%22%2F%3E%3Cpath%20d%3D%22M12%206h4%22%2F%3E%3Cpath%20d%3D%22M12%2042h4%22%2F%3E%3Cpath%20d%3D%22M6%2012v4%22%2F%3E%3Cpath%20d%3D%22M42%2012v4%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.14;
 }
 
 [data-theme="swiss-ikb"] .notebook {
@@ -1367,8 +1611,16 @@
     background: #ffffff !important;
     border: 1px solid #e0e0e0 !important;
     border-radius: 0px !important;
-    border-top: 3px solid #002fa7 !important;
+    border-top: 3.5px solid #002fa7 !important;
     color: #0a0a0a !important;
+}
+
+[data-theme="swiss-ikb"] .skill-badge {
+    background: #002fa7 !important;
+    color: #ffffff !important;
+    border-radius: 0px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em;
 }
 
 [data-theme="swiss-ikb"] .btn-action.btn-primary {
@@ -1377,15 +1629,17 @@
     border-radius: 0px !important;
     color: #ffffff !important;
     font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(0, 47, 167, 0.25) !important;
 }
 
 
 /* ==================== THEME MODULE: 03-dark-cyber.css ==================== */
 /* ==========================================================================
    MODULE 03: DARK & CYBERPUNK THEMES (Neon, Deep Space & High Contrast Dark)
+   Enhanced with CRT scanlines, pixel stepped shadows, starlight glows & cyber grids
    ========================================================================== */
 
-/* 16. ELECTRIC STUDIO (Cyberpunk Dark Mode, Glowing Neon Cobalt & Glass) */
+/* 18. ELECTRIC STUDIO (Cyberpunk Dark Mode, Glowing Neon Cobalt & Glass) */
 [data-theme="electric"] {
     --font-display: 'Manrope', sans-serif;
     --font-body: 'Outfit', sans-serif;
@@ -1407,26 +1661,32 @@
     --card-border: 1.5px solid rgba(56, 189, 248, 0.3);
     --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.1);
     --card-radius: 14px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%2216%22%20y%3D%2216%22%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%222%22%20fill%3D%22currentColor%22%20opacity%3D%220.3%22%2F%3E%3Cline%20x1%3D%2224%22%20y1%3D%224%22%20x2%3D%2224%22%20y2%3D%2216%22%2F%3E%3Cline%20x1%3D%2224%22%20y1%3D%2232%22%20x2%3D%2224%22%20y2%3D%2244%22%2F%3E%3Cline%20x1%3D%224%22%20y1%3D%2224%22%20x2%3D%2216%22%20y2%3D%2224%22%2F%3E%3Cline%20x1%3D%2232%22%20y1%3D%2224%22%20x2%3D%2244%22%20y2%3D%2224%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%224%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2244%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%224%22%20cy%3D%2224%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2244%22%20cy%3D%2224%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3Cpath%20d%3D%22M10%2010l6%206%22%2F%3E%3Cpath%20d%3D%22M38%2038l-6-6%22%2F%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%2238%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.22;
 }
 
 [data-theme="electric"] .notebook {
     background: #0f172a;
     border: 1.5px solid rgba(56, 189, 248, 0.4);
-    box-shadow: 0 0 40px rgba(56, 189, 248, 0.2), 0 25px 80px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.2), 0 25px 80px rgba(0, 0, 0, 0.85);
+    background-image: radial-gradient(rgba(56, 189, 248, 0.12) 1px, transparent 1px);
+    background-size: 20px 20px;
 }
 
 [data-theme="electric"] .slide-title {
     font-family: 'Manrope', sans-serif;
     font-weight: 800;
     color: #f8fafc;
-    text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
+    letter-spacing: -0.02em;
 }
 
 [data-theme="electric"] .reading-pane,
 [data-theme="electric"] .question-pane {
-    background: rgba(15, 23, 42, 0.6) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: rgba(15, 23, 42, 0.7) !important;
+    border: 1px solid rgba(56, 189, 248, 0.25) !important;
     color: #e2e8f0 !important;
+    backdrop-filter: blur(12px) !important;
 }
 
 [data-theme="electric"] .card,
@@ -1434,10 +1694,18 @@
 [data-theme="electric"] .q-card,
 [data-theme="electric"] .model-breakdown-card {
     background: rgba(30, 41, 59, 0.75) !important;
-    border: 1.5px solid rgba(56, 189, 248, 0.25) !important;
+    border: 1.5px solid rgba(56, 189, 248, 0.3) !important;
     color: #f8fafc !important;
-    backdrop-filter: blur(12px) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 12px rgba(56, 189, 248, 0.08) !important;
+    backdrop-filter: blur(16px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 15px rgba(56, 189, 248, 0.12) !important;
+}
+
+[data-theme="electric"] .skill-badge {
+    background: rgba(56, 189, 248, 0.15) !important;
+    border: 1.5px solid #38bdf8 !important;
+    color: #38bdf8 !important;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.3) !important;
+    font-weight: 700;
 }
 
 [data-theme="electric"] .blank-input,
@@ -1458,6 +1726,7 @@
     background: #0284c7 !important;
     color: #ffffff !important;
     border-color: #38bdf8 !important;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4) !important;
 }
 
 [data-theme="electric"] mark.evidence {
@@ -1467,7 +1736,7 @@
 }
 
 
-/* 17. CREATIVE VOLTAGE (Avant-Garde Deep Violet, Hot Magenta & Acid Lime) */
+/* 19. CREATIVE VOLTAGE (Avant-Garde Deep Violet, Hot Magenta & Acid Lime) */
 [data-theme="voltage"] {
     --font-display: 'Syne', sans-serif;
     --font-body: 'Space Grotesk', sans-serif;
@@ -1489,6 +1758,8 @@
     --card-border: 1.5px solid rgba(236, 72, 153, 0.35);
     --card-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(236, 72, 153, 0.15);
     --card-radius: 16px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M28%204l-16%2022h14l-4%2018%2018-24H26z%22%2F%3E%3Cpath%20d%3D%22M38%2012c4%204%206%209%206%2015%22%2F%3E%3Cpath%20d%3D%22M4%2027c0-6%202-11%206-15%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2220%22%20stroke-dasharray%3D%224%204%22%20stroke-width%3D%221.5%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.24;
 }
 
 [data-theme="voltage"] .notebook {
@@ -1502,12 +1773,13 @@
     font-weight: 800;
     color: #fdf4ff;
     letter-spacing: -0.5px;
+    text-shadow: 0 0 24px rgba(236, 72, 153, 0.4);
 }
 
 [data-theme="voltage"] .reading-pane,
 [data-theme="voltage"] .question-pane {
-    background: rgba(19, 14, 36, 0.7) !important;
-    border: 1px solid rgba(167, 139, 250, 0.25) !important;
+    background: rgba(19, 14, 36, 0.75) !important;
+    border: 1px solid rgba(167, 139, 250, 0.3) !important;
     color: #f1f5f9 !important;
 }
 
@@ -1517,9 +1789,17 @@
 [data-theme="voltage"] .q-card,
 [data-theme="voltage"] .model-breakdown-card {
     background: rgba(30, 21, 54, 0.85) !important;
-    border: 1.5px solid rgba(236, 72, 153, 0.3) !important;
+    border: 1.5px solid rgba(236, 72, 153, 0.35) !important;
     color: #fdf4ff !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(236, 72, 153, 0.15) !important;
+}
+
+[data-theme="voltage"] .skill-badge {
+    background: #a3e635 !important;
+    color: #090514 !important;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    box-shadow: 0 0 15px rgba(163, 230, 53, 0.4);
 }
 
 [data-theme="voltage"] .blank-input,
@@ -1537,7 +1817,7 @@
 }
 
 
-/* 18. VELLUM (Deep Midnight Navy, Warm Golden-Amber Serifs & Dusty Teal) */
+/* 20. VELLUM (Celestial Midnight Navy, Golden-Amber Serifs & Dusty Teal) */
 [data-theme="vellum"] {
     --font-display: 'Cormorant Garamond', serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -1559,6 +1839,8 @@
     --card-border: 1.5px solid rgba(245, 158, 11, 0.3);
     --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(245, 158, 11, 0.1);
     --card-radius: 14px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2216%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2211%22%20stroke-dasharray%3D%223%203%22%2F%3E%3Cpath%20d%3D%22M24%2014v20%22%2F%3E%3Cpath%20d%3D%22M14%2024h20%22%2F%3E%3Cpath%20d%3D%22M18%2018l12%2012%22%2F%3E%3Cpath%20d%3D%22M18%2030l12-12%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%224%22%20fill%3D%22currentColor%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.20;
 }
 
 [data-theme="vellum"] .notebook {
@@ -1573,7 +1855,7 @@
     font-style: italic;
     font-size: 40px;
     color: #fbbf24;
-    text-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+    text-shadow: 0 0 20px rgba(245, 158, 11, 0.45);
 }
 
 [data-theme="vellum"] .card,
@@ -1583,19 +1865,27 @@
 [data-theme="vellum"] .reading-pane,
 [data-theme="vellum"] .model-breakdown-card {
     background: rgba(28, 37, 65, 0.85) !important;
-    border: 1.5px solid rgba(245, 158, 11, 0.25) !important;
+    border: 1.5px solid rgba(245, 158, 11, 0.3) !important;
     color: #f8fafc !important;
     backdrop-filter: blur(10px) !important;
+}
+
+[data-theme="vellum"] .skill-badge {
+    background: rgba(251, 191, 36, 0.2) !important;
+    color: #fbbf24 !important;
+    border: 1px solid rgba(251, 191, 36, 0.4) !important;
+    font-weight: 700;
 }
 
 [data-theme="vellum"] .btn-action.btn-primary {
     background: #d97706 !important;
     border-color: #f59e0b !important;
     color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(217, 119, 6, 0.4) !important;
 }
 
 
-/* 19. BROADSIDE (Pitch-Black Broadsheet Void & Fire Orange) */
+/* 21. BROADSIDE (Pitch-Black Broadsheet Void & Fire Orange) */
 [data-theme="broadside"] {
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -1617,6 +1907,8 @@
     --card-border: 1.5px solid rgba(255, 87, 34, 0.4);
     --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
     --card-radius: 8px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%226%22%20y%3D%226%22%20width%3D%2236%22%20height%3D%2236%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M12%2012h24%22%2F%3E%3Cpath%20d%3D%22M12%2018h24%22%2F%3E%3Cpath%20d%3D%22M12%2024h10%22%2F%3E%3Cpath%20d%3D%22M12%2028h10%22%2F%3E%3Cpath%20d%3D%22M12%2032h10%22%2F%3E%3Crect%20x%3D%2226%22%20y%3D%2224%22%20width%3D%2210%22%20height%3D%2212%22%20fill%3D%22currentColor%22%20opacity%3D%220.2%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.09;
 }
 
 [data-theme="broadside"] .notebook {
@@ -1632,6 +1924,9 @@
     text-transform: uppercase;
     color: #ffffff;
     letter-spacing: -0.5px;
+    border-bottom: 3px solid #ff5722;
+    padding-bottom: 6px;
+    display: inline-block;
 }
 
 [data-theme="broadside"] .card,
@@ -1641,8 +1936,16 @@
 [data-theme="broadside"] .reading-pane,
 [data-theme="broadside"] .model-breakdown-card {
     background: rgba(24, 24, 27, 0.9) !important;
-    border: 1.5px solid rgba(255, 87, 34, 0.35) !important;
+    border: 1.5px solid rgba(255, 87, 34, 0.4) !important;
+    border-left: 5px solid #ff5722 !important;
     color: #ffffff !important;
+}
+
+[data-theme="broadside"] .skill-badge {
+    background: #ff5722 !important;
+    color: #000000 !important;
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
 [data-theme="broadside"] .blank-input,
@@ -1657,10 +1960,11 @@
     border-color: #ea580c !important;
     color: #ffffff !important;
     font-weight: 800 !important;
+    box-shadow: 0 0 15px rgba(255, 87, 34, 0.4) !important;
 }
 
 
-/* 20. 8-BIT ORBIT (CRT Pixel-Art Arcade, Neon Cyan & Magenta) */
+/* 22. 8-BIT ORBIT (CRT Pixel-Art Arcade, Neon Cyan & Stepped Pixel Borders) */
 [data-theme="8-bit-orbit"] {
     --font-display: 'Press Start 2P', monospace;
     --font-body: 'Space Grotesk', sans-serif;
@@ -1680,15 +1984,20 @@
 
     --card-bg: rgba(10, 14, 39, 0.85);
     --card-border: 2px solid #5edcf4;
-    --card-shadow: 0 0 20px rgba(94, 220, 244, 0.25), 0 10px 30px rgba(0,0,0,0.6);
-    --card-radius: 4px;
+    --card-shadow: 4px 4px 0px #f0a6ca;
+    --card-radius: 0px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22currentColor%22%3E%3Cpath%20d%3D%22M18%206h12v4H18zM10%2010h4v6h-4zM34%2010h4v6h-4zM10%2016h28v10H10zM6%2022h4v8H6zM38%2022h4v8h-4zM14%2026h4v4h-4zM30%2026h4v4h-4zM14%2036h6v6h-6zM28%2036h6v6h-6zM10%2032h4v4h-4zM34%2032h4v4h-4z%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.28;
 }
 
 [data-theme="8-bit-orbit"] .notebook {
     background: #0f1b3d;
     border: 3px solid #f0a6ca;
-    border-radius: 6px;
-    box-shadow: 0 0 40px rgba(240, 166, 202, 0.3), 0 25px 80px rgba(0, 0, 0, 0.9);
+    border-radius: 0px;
+    box-shadow: 6px 6px 0px #5edcf4, 0 25px 80px rgba(0, 0, 0, 0.9);
+    background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%),
+                      radial-gradient(circle at center, #0f1b3d 0%, #080c1d 90%);
+    background-size: 100% 4px, 100% 100%;
 }
 
 [data-theme="8-bit-orbit"] .slide-title {
@@ -1705,10 +2014,20 @@
 [data-theme="8-bit-orbit"] .q-card,
 [data-theme="8-bit-orbit"] .reading-pane,
 [data-theme="8-bit-orbit"] .model-breakdown-card {
-    background: rgba(10, 14, 39, 0.85) !important;
+    background: rgba(10, 14, 39, 0.9) !important;
     border: 2px solid #5edcf4 !important;
     color: #f8fafc !important;
-    border-radius: 4px !important;
+    border-radius: 0px !important;
+    box-shadow: 4px 4px 0px #f0a6ca !important;
+}
+
+[data-theme="8-bit-orbit"] .skill-badge {
+    background: #5edcf4 !important;
+    color: #0a0e27 !important;
+    border-radius: 0px !important;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    padding: 6px 12px;
 }
 
 [data-theme="8-bit-orbit"] .btn-action.btn-primary {
@@ -1716,16 +2035,23 @@
     border-color: #38bdf8 !important;
     color: #0a0e27 !important;
     font-weight: 800 !important;
-    border-radius: 4px !important;
+    border-radius: 0px !important;
+    box-shadow: 4px 4px 0px #f0a6ca !important;
+}
+
+[data-theme="8-bit-orbit"] .btn-action.btn-primary:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #f0a6ca !important;
 }
 
 
 /* ==================== THEME MODULE: 04-tactile-retro.css ==================== */
 /* ==========================================================================
    MODULE 04: TACTILE & RETRO THEMES (Sticky Notes, Windows 95, Cassette)
+   Enhanced with 3D bevels, Post-it peel shadows, cassette stripes & copper foil
    ========================================================================== */
 
-/* 21. DARK BOTANICAL (Organic Luxury, Emerald Green, Antique Gold & Warm Ivory) */
+/* 23. DARK BOTANICAL (Organic Luxury, Emerald Green, Antique Gold & Warm Ivory) */
 [data-theme="botanical"] {
     --font-display: 'Cormorant Garamond', serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -1746,12 +2072,15 @@
     --card-bg: #ffffff;
     --card-border: 1px solid #d1fae5;
     --card-shadow: 0 6px 20px rgba(6, 78, 59, 0.08);
-    --card-radius: 12px;
+    --card-radius: 14px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%2040c12-4%2022-14%2026-26%22%2F%3E%3Cpath%20d%3D%22M34%2014c4-8%208-10%208-10s-2%204-10%208c-4%202-5%206-4%208%202%201%206%200%208-4z%22%2F%3E%3Cpath%20d%3D%22M22%2025c-4-4-5-8-5-8s4%201%208%205c3%203%203%206%201%207s-3%200-4-4z%22%2F%3E%3Cpath%20d%3D%22M14%2033c-3-3-4-6-4-6s3%201%206%204c2%202%202%204%201%205s-2%200-3-3z%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2220%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2228%22%20r%3D%222%22%20fill%3D%22currentColor%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.12;
 }
 
 [data-theme="botanical"] .notebook {
     background: #fbf9f4;
     border: 2px solid #065f46;
+    border-radius: 16px;
     box-shadow: 0 20px 60px rgba(4, 26, 20, 0.5), 0 0 0 1px rgba(212, 165, 116, 0.4);
 }
 
@@ -1762,12 +2091,17 @@
     font-size: 40px;
     color: #064e3b;
     letter-spacing: 0.5px;
+    border-bottom: 2px solid #d4af37;
+    padding-bottom: 6px;
+    display: inline-block;
 }
 
 [data-theme="botanical"] .skill-badge {
     background: #065f46 !important;
+    color: #fbf9f4 !important;
     font-family: 'Plus Jakarta Sans', sans-serif;
     letter-spacing: 1px;
+    border: 1px solid #d4af37 !important;
 }
 
 [data-theme="botanical"] .card,
@@ -1776,18 +2110,22 @@
 [data-theme="botanical"] .q-card,
 [data-theme="botanical"] .model-breakdown-card {
     background: #ffffff !important;
-    border: 1px solid #d1fae5 !important;
-    box-shadow: 0 4px 18px rgba(6, 78, 59, 0.06) !important;
+    border: 1.5px solid #d1fae5 !important;
+    border-top: 3.5px solid #065f46 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 6px 20px rgba(6, 78, 59, 0.06) !important;
 }
 
 [data-theme="botanical"] .btn-action.btn-primary {
     background: #059669 !important;
     border-color: #047857 !important;
     color: #ffffff !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3) !important;
 }
 
 
-/* 22. PIN & PAPER (Sticky Notes, Handwritten Ink & Corkboard Warmth) */
+/* 24. PIN & PAPER (Sticky Notes, Handwritten Ink & Corkboard Warmth) */
 [data-theme="pin-and-paper"] {
     --font-display: 'Caveat', cursive;
     --font-body: 'DM Sans', sans-serif;
@@ -1815,14 +2153,15 @@
     background: #fffbeb;
     border: 2px solid #eab308;
     border-radius: 12px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), inset 0 0 50px rgba(234, 179, 8, 0.08);
 }
 
 [data-theme="pin-and-paper"] .slide-title {
     font-family: 'Caveat', cursive;
-    font-size: 46px;
+    font-size: 48px;
     font-weight: 700;
     color: #1e3a8a;
+    letter-spacing: 0.5px;
 }
 
 [data-theme="pin-and-paper"] .card,
@@ -1832,18 +2171,29 @@
 [data-theme="pin-and-paper"] .model-breakdown-card {
     background: #ffffff !important;
     border: 1.5px solid #fde047 !important;
-    border-top: 4px solid #eab308 !important;
+    border-top: 5px solid #eab308 !important;
+    border-radius: 8px !important;
     color: #1e3a8a !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06), 2px 4px 10px rgba(234, 179, 8, 0.12) !important;
+}
+
+[data-theme="pin-and-paper"] .skill-badge {
+    background: #eab308 !important;
+    color: #1e3a8a !important;
+    font-weight: 800;
+    border-radius: 4px;
 }
 
 [data-theme="pin-and-paper"] .btn-action.btn-primary {
     background: #1e40af !important;
     border-color: #1e3a8a !important;
     color: #ffffff !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25) !important;
 }
 
 
-/* 23. SAKURA CHROMA (Japanese Retro Cassette, Warm Cream, Vermillion & Pink) */
+/* 25. SAKURA CHROMA (Japanese Retro Cassette, Warm Cream, Vermillion & Pink) */
 [data-theme="sakura-chroma"] {
     --font-display: 'Outfit', sans-serif;
     --font-body: 'DM Sans', sans-serif;
@@ -1871,7 +2221,7 @@
     background: #faf6ed;
     border: 2.5px solid #ea580c;
     border-radius: 12px;
-    box-shadow: 8px 8px 0px rgba(236, 72, 153, 0.3), 0 20px 60px rgba(0, 0, 0, 0.5);
+    box-shadow: 8px 8px 0px rgba(236, 72, 153, 0.35), 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 [data-theme="sakura-chroma"] .slide-title {
@@ -1879,6 +2229,9 @@
     font-weight: 900;
     color: #ea580c;
     letter-spacing: -0.5px;
+    border-bottom: 3px solid #ec4899;
+    padding-bottom: 6px;
+    display: inline-block;
 }
 
 [data-theme="sakura-chroma"] .card,
@@ -1889,17 +2242,29 @@
     background: #ffffff !important;
     border: 2px solid #fed7aa !important;
     border-left: 6px solid #ea580c !important;
+    border-top: 3px solid #ec4899 !important;
     color: #1c1917 !important;
+    box-shadow: 4px 4px 0px rgba(234, 88, 12, 0.15) !important;
+}
+
+[data-theme="sakura-chroma"] .skill-badge {
+    background: linear-gradient(135deg, #ea580c 0%, #ec4899 100%) !important;
+    color: #ffffff !important;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    border-radius: 6px;
 }
 
 [data-theme="sakura-chroma"] .btn-action.btn-primary {
     background: linear-gradient(135deg, #ea580c 0%, #ec4899 100%) !important;
     border-color: #f97316 !important;
     color: #ffffff !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 14px rgba(234, 88, 12, 0.3) !important;
 }
 
 
-/* 24. RETRO WINDOWS 95 (Nostalgic 3D Gray, Navy Title Bars & Pixel Fonts) */
+/* 26. RETRO WINDOWS 95 (Nostalgic 3D Gray, Navy Title Bars & Classic Bevels) */
 [data-theme="retro-windows"] {
     --font-display: 'VT323', monospace;
     --font-body: 'DM Sans', sans-serif;
@@ -1927,15 +2292,26 @@
     background: #c0c0c0;
     border: 3px outset #ffffff;
     border-radius: 0px;
-    box-shadow: 4px 4px 0px #000000;
+    box-shadow: 6px 6px 0px #000000;
 }
 
 [data-theme="retro-windows"] .slide-title {
     font-family: 'VT323', monospace;
     font-size: 38px;
-    background: #000080;
+    background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
     color: #ffffff;
-    padding: 2px 10px;
+    padding: 3px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    letter-spacing: 1px;
+}
+
+[data-theme="retro-windows"] .slide-title::after {
+    content: "■";
+    font-size: 18px;
+    color: #c0c0c0;
+    margin-left: 12px;
 }
 
 [data-theme="retro-windows"] .card,
@@ -1949,16 +2325,28 @@
     color: #000000 !important;
 }
 
+[data-theme="retro-windows"] .skill-badge {
+    background: #c0c0c0 !important;
+    color: #000000 !important;
+    border: 2px outset #ffffff !important;
+    border-radius: 0px !important;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
 [data-theme="retro-windows"] .btn-action {
     background: #c0c0c0 !important;
     border: 2px outset #ffffff !important;
     border-radius: 0px !important;
     color: #000000 !important;
     font-weight: 700 !important;
+    transition: none !important;
 }
 
 [data-theme="retro-windows"] .btn-action:active {
     border: 2px inset #ffffff !important;
+    transform: translate(1px, 1px);
 }
 
 [data-theme="retro-windows"] .btn-action.btn-primary {
@@ -1967,7 +2355,15 @@
     color: #ffffff !important;
 }
 
-/* 25. KRAFT PAPER (Tactile Coarse Kraft Paper, Deep Charcoal Brown Ink & Copper Rust Accent) */
+[data-theme="retro-windows"] .blank-input,
+[data-theme="retro-windows"] .select-input {
+    border: 2px inset #808080 !important;
+    border-radius: 0px !important;
+    background: #ffffff !important;
+}
+
+
+/* 27. KRAFT PAPER (Tactile Coarse Kraft Paper, Charcoal Espresso Ink & Copper Rust) */
 [data-theme="kraft-paper"] {
     --font-display: 'Fraunces', serif;
     --font-body: 'DM Sans', sans-serif;
@@ -1989,6 +2385,8 @@
     --card-border: 1.5px solid #d4c0a1;
     --card-shadow: 0 4px 16px rgba(42, 30, 19, 0.08);
     --card-radius: 8px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%226%22%20y%3D%228%22%20width%3D%2236%22%20height%3D%2232%22%20rx%3D%222%22%2F%3E%3Cline%20x1%3D%226%22%20y1%3D%2220%22%20x2%3D%2242%22%20y2%3D%2220%22%2F%3E%3Cpath%20d%3D%22M16%2028h16%22%2F%3E%3Cpath%20d%3D%22M16%2034h10%22%2F%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2231%22%20r%3D%224%22%20stroke-dasharray%3D%222%202%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.14;
 }
 
 [data-theme="kraft-paper"] .notebook {
@@ -2004,6 +2402,9 @@
     font-style: italic;
     color: #2a1e13;
     letter-spacing: -0.02em;
+    border-bottom: 2px dashed #a35b2a;
+    padding-bottom: 6px;
+    display: inline-block;
 }
 
 [data-theme="kraft-paper"] .card,
@@ -2013,8 +2414,16 @@
 [data-theme="kraft-paper"] .model-breakdown-card {
     background: #f8efe0 !important;
     border: 1.5px solid #d4c0a1 !important;
-    border-left: 4px solid #a35b2a !important;
+    border-left: 5px solid #a35b2a !important;
     color: #2a1e13 !important;
+    box-shadow: 0 4px 14px rgba(42, 30, 19, 0.06) !important;
+}
+
+[data-theme="kraft-paper"] .skill-badge {
+    background: #a35b2a !important;
+    color: #f8efe0 !important;
+    border-radius: 4px;
+    font-weight: 700;
 }
 
 [data-theme="kraft-paper"] .btn-action.btn-primary {
@@ -2022,6 +2431,7 @@
     border-color: #8a481d !important;
     color: #ffffff !important;
     font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(163, 91, 42, 0.3) !important;
 }
 
 

@@ -1,5 +1,6 @@
 /* ==========================================================================
    MODULE 02: BOLD & NEOBRUTALIST THEMES (High Contrast, Geometric, Impact)
+   Enhanced with hard offset shadows, blueprint grids, chamfered cuts & Bauhaus geometry
    ========================================================================== */
 
 /* 10. BOLD SIGNAL (Brutalist Modern, High-Impact Coral & Chunky Shadows) */
@@ -24,20 +25,22 @@
     --card-border: 2.5px solid #09090b;
     --card-shadow: 5px 5px 0px #09090b;
     --card-radius: 6px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M26%204l-14%2022h14l-4%2018%2018-24H26z%22%2F%3E%3Cpath%20d%3D%22M6%2010l8-8%22%2F%3E%3Cpath%20d%3D%22M6%2022l14-14%22%2F%3E%3Cpath%20d%3D%22M6%2034l20-20%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.15;
 }
 
 [data-theme="bold-signal"] .notebook {
     background: #ffffff;
-    border: 3px solid #09090b;
+    border: 3.5px solid #09090b;
     border-radius: 8px;
-    box-shadow: 12px 12px 0px #e11d48, 24px 24px 0px rgba(0,0,0,0.5);
+    box-shadow: 10px 10px 0px #e11d48, 20px 20px 0px #09090b;
 }
 
 [data-theme="bold-signal"] .slide-title {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.03em;
     color: #09090b;
 }
 
@@ -47,27 +50,44 @@
 [data-theme="bold-signal"] .q-card,
 [data-theme="bold-signal"] .model-breakdown-card {
     background: #ffffff !important;
-    border: 2px solid #09090b !important;
+    border: 2.5px solid #09090b !important;
     border-radius: 6px !important;
-    box-shadow: 4px 4px 0px #09090b !important;
+    box-shadow: 5px 5px 0px #09090b !important;
+}
+
+[data-theme="bold-signal"] .skill-badge {
+    background: #09090b !important;
+    color: #ffffff !important;
+    border: 2px solid #09090b !important;
+    border-radius: 4px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em;
+    box-shadow: 3px 3px 0px #e11d48 !important;
 }
 
 [data-theme="bold-signal"] .btn-action {
-    border: 2px solid #09090b !important;
+    border: 2.5px solid #09090b !important;
     border-radius: 6px !important;
     font-weight: 800 !important;
     text-transform: uppercase !important;
-    box-shadow: 3px 3px 0px #09090b !important;
+    box-shadow: 4px 4px 0px #09090b !important;
+    transition: transform 120ms ease-out, box-shadow 120ms ease-out !important;
 }
 
 [data-theme="bold-signal"] .btn-action:hover {
     transform: translate(-2px, -2px);
-    box-shadow: 5px 5px 0px #09090b !important;
+    box-shadow: 6px 6px 0px #09090b !important;
+}
+
+[data-theme="bold-signal"] .btn-action:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #09090b !important;
 }
 
 [data-theme="bold-signal"] .blank-input,
 [data-theme="bold-signal"] .select-input {
-    border: 2px solid #09090b !important;
+    border: 2.5px solid #09090b !important;
     border-radius: 4px !important;
     font-weight: 700 !important;
     background: #f4f4f5 !important;
@@ -94,15 +114,15 @@
 
     --card-bg: #ffffff;
     --card-border: 2.5px solid #000000;
-    --card-shadow: 4px 4px 0px #000000;
-    --card-radius: 6px;
+    --card-shadow: 5px 5px 0px #000000;
+    --card-radius: 8px;
 }
 
 [data-theme="block-frame"] .notebook {
     background: #ffffff;
-    border: 3px solid #000000;
-    border-radius: 8px;
-    box-shadow: 8px 8px 0px #000000, 0 20px 60px rgba(0,0,0,0.5);
+    border: 3.5px solid #000000;
+    border-radius: 10px;
+    box-shadow: 8px 8px 0px #facc15, 16px 16px 0px #000000;
 }
 
 [data-theme="block-frame"] .slide-title {
@@ -110,6 +130,7 @@
     font-weight: 900;
     color: #000000;
     text-transform: uppercase;
+    letter-spacing: -0.02em;
 }
 
 [data-theme="block-frame"] .card,
@@ -118,10 +139,20 @@
 [data-theme="block-frame"] .q-card,
 [data-theme="block-frame"] .model-breakdown-card {
     background: #ffffff !important;
+    border: 3px solid #000000 !important;
+    border-radius: 8px !important;
+    box-shadow: 5px 5px 0px #000000 !important;
+    color: #000000 !important;
+}
+
+[data-theme="block-frame"] .skill-badge {
+    background: #facc15 !important;
+    color: #000000 !important;
     border: 2.5px solid #000000 !important;
     border-radius: 6px !important;
-    box-shadow: 4px 4px 0px #000000 !important;
-    color: #000000 !important;
+    font-weight: 900 !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+    transform: rotate(-1deg);
 }
 
 [data-theme="block-frame"] .btn-action.btn-primary {
@@ -129,7 +160,13 @@
     border: 2.5px solid #000000 !important;
     color: #000000 !important;
     font-weight: 900 !important;
-    box-shadow: 3px 3px 0px #000000 !important;
+    border-radius: 6px !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+}
+
+[data-theme="block-frame"] .btn-action.btn-primary:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000000 !important;
 }
 
 
@@ -155,19 +192,21 @@
     --card-border: 1.5px solid #e8e0d4;
     --card-shadow: 0 4px 20px rgba(26, 26, 26, 0.06);
     --card-radius: 10px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%2044v-14c0-6%204-10%208-14%22%2F%3E%3Cpath%20d%3D%22M32%2016v-8%22%2F%3E%3Cpath%20d%3D%22M32%2024c4-2%208-6%208-12%22%2F%3E%3Cpath%20d%3D%22M24%2030c-4-4-8-8-8-14v-8%22%2F%3E%3Cpath%20d%3D%22M16%2022c-3-2-6-5-6-10%22%2F%3E%3Cpath%20d%3D%22M4%2042c6-2%2014-2%2020%200s14%202%2020%200%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.14;
 }
 
 [data-theme="coral"] .notebook {
     background: #f5f0e8;
-    border: 2px solid #e85d5d;
+    border: 2.5px solid #e85d5d;
     border-radius: 12px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(232, 93, 93, 0.05);
 }
 
 [data-theme="coral"] .slide-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    letter-spacing: 1px;
+    font-size: 46px;
+    letter-spacing: 1.5px;
     color: #e85d5d;
 }
 
@@ -178,7 +217,17 @@
 [data-theme="coral"] .model-breakdown-card {
     background: #ffffff !important;
     border: 1.5px solid #e8e0d4 !important;
+    border-top: 3.5px solid #e85d5d !important;
     color: #1a1a1a !important;
+}
+
+[data-theme="coral"] .skill-badge {
+    background: #e85d5d !important;
+    color: #ffffff !important;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    padding: 3px 12px;
 }
 
 [data-theme="coral"] .btn-action.btn-primary {
@@ -186,10 +235,12 @@
     border-color: #d44a4a !important;
     color: #ffffff !important;
     font-weight: 800 !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 14px rgba(232, 93, 93, 0.3) !important;
 }
 
 
-/* 13. COBALT GRID (Technical Precision, Cobalt Blue & Graph Paper) */
+/* 13. COBALT GRID (Technical Precision, Cobalt Blue & Blueprint Graph Paper) */
 [data-theme="cobalt-grid"] {
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'DM Sans', sans-serif;
@@ -210,15 +261,16 @@
     --card-bg: #ffffff;
     --card-border: 1.5px solid #2563eb;
     --card-shadow: 4px 4px 0px rgba(37, 99, 235, 0.15);
-    --card-radius: 8px;
+    --card-radius: 6px;
 }
 
 [data-theme="cobalt-grid"] .notebook {
     background: #ffffff;
-    border: 2px solid #2563eb;
-    border-radius: 10px;
+    border: 2.5px solid #2563eb;
+    border-radius: 8px;
     box-shadow: 8px 8px 0px #2563eb, 0 20px 60px rgba(0, 0, 0, 0.5);
-    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-image: linear-gradient(rgba(37, 99, 235, 0.08) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(37, 99, 235, 0.08) 1px, transparent 1px);
     background-size: 24px 24px;
 }
 
@@ -227,6 +279,9 @@
     font-weight: 800;
     color: #2563eb;
     letter-spacing: -0.5px;
+    border-bottom: 2px solid #2563eb;
+    padding-bottom: 6px;
+    display: inline-block;
 }
 
 [data-theme="cobalt-grid"] .card,
@@ -236,8 +291,18 @@
 [data-theme="cobalt-grid"] .model-breakdown-card {
     background: #ffffff !important;
     border: 1.5px solid #2563eb !important;
-    border-radius: 8px !important;
+    border-radius: 6px !important;
+    box-shadow: 4px 4px 0px rgba(37, 99, 235, 0.12) !important;
     color: #09090b !important;
+}
+
+[data-theme="cobalt-grid"] .skill-badge {
+    background: #2563eb !important;
+    color: #ffffff !important;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    border-radius: 2px;
 }
 
 [data-theme="cobalt-grid"] .btn-action.btn-primary {
@@ -245,6 +310,8 @@
     border-color: #1d4ed8 !important;
     color: #ffffff !important;
     font-weight: 800 !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
 }
 
 
@@ -274,17 +341,17 @@
 
 [data-theme="biennale-yellow"] .notebook {
     background: #fbf9f4;
-    border: 2px solid #f59e0b;
+    border: 2.5px solid #f59e0b;
     border-radius: 14px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), inset 0 0 0 1px #fef08a;
 }
 
 [data-theme="biennale-yellow"] .slide-title {
     font-family: 'Playfair Display', serif;
     font-weight: 800;
     color: #1e1b4b;
-    border-left: 6px solid #f59e0b;
-    padding-left: 12px;
+    border-left: 8px solid #f59e0b;
+    padding-left: 14px;
 }
 
 [data-theme="biennale-yellow"] .card,
@@ -293,8 +360,16 @@
 [data-theme="biennale-yellow"] .q-card,
 [data-theme="biennale-yellow"] .model-breakdown-card {
     background: #ffffff !important;
-    border: 1.5px solid #fef08a !important;
+    border: 1.5px solid #fde047 !important;
+    border-top: 4px solid #1e1b4b !important;
     color: #1e1b4b !important;
+}
+
+[data-theme="biennale-yellow"] .skill-badge {
+    background: #f59e0b !important;
+    color: #1e1b4b !important;
+    font-weight: 800;
+    letter-spacing: 0.04em;
 }
 
 [data-theme="biennale-yellow"] .btn-action.btn-primary {
@@ -302,10 +377,11 @@
     border-color: #d97706 !important;
     color: #1e1b4b !important;
     font-weight: 800 !important;
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3) !important;
 }
 
 
-/* 15. STENCIL & TABLET (Bone Paper, Archaeological Terracotta & Ochre) */
+/* 15. STENCIL & TABLET (Bone Paper, Archaeological Terracotta & Chamfered Cuts) */
 [data-theme="stencil-tablet"] {
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'DM Sans', sans-serif;
@@ -327,6 +403,8 @@
     --card-border: 1.5px solid #e2dcc9;
     --card-shadow: 0 4px 16px rgba(160, 106, 60, 0.08);
     --card-radius: 6px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%226%22%20y%3D%2210%22%20width%3D%2236%22%20height%3D%2228%22%20rx%3D%224%22%2F%3E%3Cpath%20d%3D%22M14%2018h6v12h-6%22%2F%3E%3Cpath%20d%3D%22M28%2018h6v12h-6%22%2F%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2214%22%20r%3D%221.5%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%2214%22%20r%3D%221.5%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2234%22%20r%3D%221.5%22%20fill%3D%22currentColor%22%2F%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%2234%22%20r%3D%221.5%22%20fill%3D%22currentColor%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.16;
 }
 
 [data-theme="stencil-tablet"] .notebook {
@@ -341,6 +419,7 @@
     font-weight: 900;
     color: #a06a3c;
     text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 
 [data-theme="stencil-tablet"] .card,
@@ -352,13 +431,25 @@
     border: 1.5px solid #e2dcc9 !important;
     border-left: 5px solid #a06a3c !important;
     color: #0a0a0a !important;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+[data-theme="stencil-tablet"] .skill-badge {
+    background: #a06a3c !important;
+    color: #ffffff !important;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
 }
 
 [data-theme="stencil-tablet"] .btn-action.btn-primary {
     background: #a06a3c !important;
     border-color: #8c582e !important;
     color: #ffffff !important;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
 }
+
 
 /* 16. BAUHAUS BOLD (Modernist Manifesto, Archivo Black, Pure Off-White & Offset Solid Shadows) */
 [data-theme="bauhaus-bold"] {
@@ -382,6 +473,8 @@
     --card-border: 3.5px solid #0a0a0a;
     --card-shadow: 6px 6px 0px #0a0a0a;
     --card-radius: 0px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2218%22%20r%3D%2210%22%20fill%3D%22%23dc2626%22%20opacity%3D%220.6%22%2F%3E%3Crect%20x%3D%2222%22%20y%3D%2216%22%20width%3D%2218%22%20height%3D%2218%22%20fill%3D%22%232563eb%22%20opacity%3D%220.6%22%2F%3E%3Cpath%20d%3D%22M18%2042l12-20%2012%2020z%22%20fill%3D%22%23eab308%22%20opacity%3D%220.7%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.16;
 }
 
 [data-theme="bauhaus-bold"] .notebook {
@@ -411,11 +504,22 @@
     color: #0a0a0a !important;
 }
 
+[data-theme="bauhaus-bold"] .skill-badge {
+    background: #e63b2e !important;
+    color: #ffffff !important;
+    border: 2px solid #0a0a0a !important;
+    border-radius: 0px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    box-shadow: 3px 3px 0px #0a0a0a !important;
+}
+
 [data-theme="bauhaus-bold"] .btn-action {
     border-radius: 0px !important;
     border: 2.5px solid #0a0a0a !important;
     box-shadow: 4px 4px 0px #0a0a0a !important;
     font-weight: 800 !important;
+    transition: transform 120ms ease-out, box-shadow 120ms ease-out !important;
 }
 [data-theme="bauhaus-bold"] .btn-action:hover {
     transform: translate(-2px, -2px);
@@ -431,6 +535,7 @@
     color: #ffffff !important;
     border-color: #0a0a0a !important;
 }
+
 
 /* 17. SWISS IKB (International Klein Blue, Hairline Scaffold Grid & Light Grotesk) */
 [data-theme="swiss-ikb"] {
@@ -454,6 +559,8 @@
     --card-border: 1px solid #e0e0e0;
     --card-shadow: 0 4px 16px rgba(0, 47, 167, 0.06);
     --card-radius: 0px;
+    --theme-watermark: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2216%22%2F%3E%3Cline%20x1%3D%2224%22%20y1%3D%224%22%20x2%3D%2224%22%20y2%3D%2244%22%2F%3E%3Cline%20x1%3D%224%22%20y1%3D%2224%22%20x2%3D%2244%22%20y2%3D%2224%22%2F%3E%3Crect%20x%3D%2220%22%20y%3D%2220%22%20width%3D%228%22%20height%3D%228%22%20fill%3D%22currentColor%22%2F%3E%3Cpath%20d%3D%22M12%206h4%22%2F%3E%3Cpath%20d%3D%22M12%2042h4%22%2F%3E%3Cpath%20d%3D%22M6%2012v4%22%2F%3E%3Cpath%20d%3D%22M42%2012v4%22%2F%3E%3C%2Fsvg%3E");
+    --theme-watermark-opacity: 0.14;
 }
 
 [data-theme="swiss-ikb"] .notebook {
@@ -478,8 +585,16 @@
     background: #ffffff !important;
     border: 1px solid #e0e0e0 !important;
     border-radius: 0px !important;
-    border-top: 3px solid #002fa7 !important;
+    border-top: 3.5px solid #002fa7 !important;
     color: #0a0a0a !important;
+}
+
+[data-theme="swiss-ikb"] .skill-badge {
+    background: #002fa7 !important;
+    color: #ffffff !important;
+    border-radius: 0px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em;
 }
 
 [data-theme="swiss-ikb"] .btn-action.btn-primary {
@@ -488,4 +603,5 @@
     border-radius: 0px !important;
     color: #ffffff !important;
     font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(0, 47, 167, 0.25) !important;
 }

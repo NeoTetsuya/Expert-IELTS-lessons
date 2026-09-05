@@ -9,11 +9,11 @@ graph TB
     end
 
     subgraph "Styling Layer"
-        CSS_SRC["css_src/ (12 modular CSS files)"]
+        CSS_SRC["css_src/ (19 modular CSS files)"]
         THEME_SRC["themes_src/ (5 modular theme files)"]
         BUILD["build-bundle.js (Node)"]
         CSS_OUT["presentation-base.css"]
-        THEMES["themes.css (24 themes compiled)"]
+        THEMES["themes.css (27 themes compiled)"]
         CSS_SRC --> BUILD --> CSS_OUT
         THEME_SRC --> BUILD --> THEMES
         THEMES --> CSS_OUT
@@ -748,34 +748,37 @@ Always link standalone grammar exercises to grammar masterclasses and practice s
 
 ---
 
-## 8. Theme System Quick Reference (24 Themes)
+## 8. Theme System Quick Reference (27 Themes)
 
 | Theme ID | Font Display | Font Body | Aesthetic & Mood | Scheme |
 |:---|:---|:---|:---|:---|
-| `academic` | Playfair Display | DM Sans | Classic Oxford Navy & Cream | Light |
-| `bold-signal` | Space Grotesk | Plus Jakarta Sans | Brutalist Coral & Sharp Shadows | Light |
-| `electric` | Manrope | Outfit | Cyberpunk Neon Cobalt & Dark Glass | Dark |
+| `academic` | Playfair Display | DM Sans | Classic Oxford Navy & Cream with Margin Rule | Light |
+| `bold-signal` | Space Grotesk | Plus Jakarta Sans | Brutalist Coral, Double Offset Shadows & Signal Accents | Light |
+| `electric` | Manrope | Outfit | Cyberpunk Neon Cobalt, Matrix Grid & Dark Glass | Dark |
 | `botanical` | Cormorant Garamond | Plus Jakarta Sans | Organic Emerald, Antique Gold & Warm Ivory | Light |
-| `voltage` | Syne | Space Grotesk | Avant-Garde Deep Violet & Acid Lime | Dark |
-| `vintage` | Bodoni Moda | DM Sans | Aged Sepia Newsprint & Bodoni Serif | Light |
-| `soft-editorial` | Cormorant Garamond | Outfit | Warm Almond Paper with Sage & Blush | Light |
-| `cobalt-grid` | Space Grotesk | DM Sans | Technical Precision Graph Paper & Cobalt Blue | Light |
-| `vellum` | Cormorant Garamond | Plus Jakarta Sans | Deep Midnight Navy, Amber Serifs & Dusty Teal | Dark |
+| `voltage` | Syne | Space Grotesk | Avant-Garde Deep Violet, Chromatic Glow & Acid Lime | Dark |
+| `vintage` | Bodoni Moda | DM Sans | Aged Sepia Newsprint, Vignette Shadow & Bodoni Serif | Light |
+| `soft-editorial` | Cormorant Garamond | Outfit | Warm Almond Paper with Pillowy Shadows, Sage & Blush | Light |
+| `cobalt-grid` | Space Grotesk | DM Sans | Technical Precision Blueprint Graph Paper & Cobalt Blue | Light |
+| `vellum` | Cormorant Garamond | Plus Jakarta Sans | Deep Midnight Navy, Glowing Amber Serifs & Dusty Teal | Dark |
 | `sakura-chroma` | Outfit | DM Sans | Vintage Japanese Cassette, Vermillion & Pink | Light |
-| `editorial-forest` | Cormorant Garamond | DM Sans | Deep Pine Green, Dusty Blush & Warm Parchment | Light |
-| `broadside` | Space Grotesk | Plus Jakarta Sans | Pitch-Black Broadsheet Void & Fire Orange | Dark |
-| `8-bit-orbit` | Press Start 2P | Space Grotesk | CRT Pixel-Art Arcade, Neon Cyan & Magenta | Dark |
-| `biennale-yellow` | Playfair Display | DM Sans | Solar Yellow, Parchment & Deep Indigo | Light |
+| `editorial-forest` | Cormorant Garamond | DM Sans | Deep Pine Green, Dusty Blush & Warm Alpine Parchment | Light |
+| `broadside` | Space Grotesk | Plus Jakarta Sans | Pitch-Black Broadsheet Void & Searing Fire Orange | Dark |
+| `8-bit-orbit` | Press Start 2P | Space Grotesk | CRT TV Scanlines, Stepped Pixel Borders & Arcade Glow | Dark |
+| `biennale-yellow` | Playfair Display | DM Sans | Venice Biennale Solar Yellow, Parchment & Deep Indigo | Light |
 | `block-frame` | Space Grotesk | Plus Jakarta Sans | Neobrutalist Pastel Blocks & Chunky Black Borders | Light |
-| `coral` | Bebas Neue | DM Sans | Warm Cream Paper, Saturated Coral & Ink | Light |
+| `coral` | Bebas Neue | DM Sans | High-Fashion Editorial, Saturated Coral & Ink | Light |
 | `editorial-tri-tone` | Bodoni Moda | DM Sans | Dusty Pink, Mustard Cream & Deep Burgundy | Light |
-| `emerald-editorial` | Bodoni Moda | Manrope | Vivid Emerald Green, Navy Ink & Paper Cream | Light |
-| `grove` | Cormorant Garamond | Plus Jakarta Sans | Natural Organic Earthy Olive & Warm Stone | Light |
-| `monochrome` | Lora | DM Sans | Ivory Ledger Paper & Pure Ink-Black Typographic Restraint | Light |
-| `pin-and-paper` | Caveat | DM Sans | Yellow Sticky Notes, Handwritten Ink & Corkboard | Light |
-| `retro-windows` | VT323 | DM Sans | Windows 95 Nostalgic 3D Gray, Navy Bars & Pixel Type | Light |
-| `stencil-tablet` | Space Grotesk | DM Sans | Bone Paper, Archaeological Terracotta & Ochre | Light |
-| `cartesian` | Playfair Display | Plus Jakarta Sans | Quiet Minimalist Bone & Classical Playfair Elegance | Light |
+| `emerald-editorial` | Bodoni Moda | Manrope | Diplomatic Gazette Masthead, Navy Ink & Paper Cream | Light |
+| `grove` | Cormorant Garamond | Plus Jakarta Sans | Natural Organic Earthy Olive & Warm Limestone | Light |
+| `monochrome` | Lora | DM Sans | Ivory Ledger Paper, Accounting Ruling Lines & Black Ink | Light |
+| `pin-and-paper` | Caveat | DM Sans | Yellow Sticky Notes, Pushpin Headers & Handwritten Script | Light |
+| `retro-windows` | VT323 | DM Sans | Windows 95 Nostalgic 3D Gray, Navy Title Bars & 3D Bevels | Light |
+| `stencil-tablet` | Space Grotesk | DM Sans | Bone Paper, Chamfered Corners & Archaeological Terracotta | Light |
+| `cartesian` | Playfair Display | Plus Jakarta Sans | Quiet Minimalist Bone, Golden Ratio Rules & Playfair | Light |
+| `bauhaus-bold` | Archivo Black | Inter | 1920s Bauhaus Modernist Manifesto & Primary Shapes | Light |
+| `swiss-ikb` | Inter (Light) | Inter | International Style Hairline Grid & Yves Klein Blue | Light |
+| `kraft-paper` | Fraunces | DM Sans | Tactile Coarse Kraft Paper, Copper Foil & Charcoal Ink | Light |
 
 Apply via: `<html data-theme="coral">` — switchable live with <kbd>Shift+T</kbd> or through the Teacher's Toolkit & HUD Theme Modal.
 
@@ -807,7 +810,7 @@ Stage 4 → Grammar / Vocab / Writing Mastery
 | <kbd>G</kbd> | Slide Grid Navigator & Search | Teacher Tools |
 | <kbd>Shift + X</kbd> | Hide / Show Teacher Toolkit HUD | HUD Controls |
 | <kbd>Shift + A</kbd> | Toggle 16:9 / 4:3 Aspect Ratio | Stage Geometry |
-| <kbd>Shift + T</kbd> | Cycle 24 Theme Presets | Deck Theme Engine |
+| <kbd>Shift + T</kbd> | Cycle 27 Theme Presets | Deck Theme Engine |
 | <kbd>H</kbd> | Toggle Teacher Highlighter Pen | Annotation |
 | <kbd>L</kbd> | Toggle Laser Pointer Dot | Annotation |
 | <kbd>P</kbd> | Toggle Drawing Pen | Annotation |

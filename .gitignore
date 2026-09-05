@@ -26,9 +26,14 @@ scratch/
 node_modules/
 beautiful-html-templates-main/
 
-# Local Skills (Keep only ielts-presentation-authoring tracked)
+# Local Skills (Track core IELTS authoring skills)
 .agents/skills/*
 !.agents/skills/ielts-presentation-authoring/
+!.agents/skills/ielts-presentation-authoring/**
+!.agents/skills/ielts-reading-grounder/
+!.agents/skills/ielts-reading-grounder/**
+!.agents/skills/ielts-exercise-builder/
+!.agents/skills/ielts-exercise-builder/**
 
 # Local Grammar Sources Reference Files
 references/grammar_sources/
