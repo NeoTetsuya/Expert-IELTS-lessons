@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 9: Well-being - Modals of obligation</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth animated transitions */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.25);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-sky-500 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-sky-600 via-cyan-600 to-teal-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-sky-500/25 ring-2 ring-white">
+          M9
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 tracking-wide uppercase">Unit 9: Well-being</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 141</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-sky-600">Modals of obligation</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-sky-600">0 / 41</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-sky-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-sky-600 text-white shadow-md shadow-sky-600/25">
+          1. Identifying Modals (1a & 1b)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Hand-washing (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Ebola Lessons (3)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Past Modals (4a & 4b)
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 181
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: IDENTIFYING MODALS (1a & 1b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-sky-600 via-cyan-600 to-teal-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1a & 1b</span>
+            <span class="text-sky-200 text-xs font-medium">Expert Grammar Page 181</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Modals of Obligation & Necessity</h2>
+          <p class="text-sky-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Choose the correct modal verbs for obligation, prohibition, and lack of obligation. Then categorize them based on their function.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1()" class="px-5 py-2.5 bg-white hover:bg-sky-50 text-sky-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check All</span>
+          </button>
+          <button onclick="revealEx1()" class="px-4 py-2.5 bg-sky-800/60 hover:bg-sky-800 text-white border border-sky-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 1a Interactive Question Rows -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-sky-100 text-sky-800 text-sm font-black flex items-center justify-center">1a</span>
+            Choose the correct options in italics to complete the sentences:
+          </h3>
+          <span id="ex1a-score-pill" class="text-xs font-bold text-sky-800 bg-sky-50 px-3 py-1 rounded-xl">Score: 0/7</span>
+        </div>
+
+        <div class="grid gap-3.5" id="ex1a-container">
+          <!-- Item 1 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a-q="1" data-ans="should">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              I think we
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">should</button>
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">can</button>
+              </span>
+              try and make it as visual as possible.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a-q="2" data-ans="need">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              We
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">can't have</button>
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">need</button>
+              </span>
+              a laptop. Mine's broken at the moment.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 3 (Two blanks) -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a-q="3" data-ans1="can" data-ans2="can">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              I
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="1">
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">can</button>
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">must</button>
+              </span>
+              bring mine, and we
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-slot="2">
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">shouldn't</button>
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">can</button>
+              </span>
+              connect it to the overhead projector.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a-q="4" data-ans="mustn't">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              We
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">don't have to</button>
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">mustn't</button>
+              </span>
+              forget to include some photos.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a-q="5" data-ans="don't need to">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              We
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">don't need to</button>
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">mustn't</button>
+              </span>
+              get anyone to sign them out.
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="q-row p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a-q="6" data-ans="'ll have to">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">6.</span>
+              I'm pretty sure we
+              <span class="inline-flex gap-1.5 mx-1.5 align-middle">
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">'ll have to</button>
+                <button type="button" onclick="selectEx1aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-sky-500 shadow-2xs">must</button>
+              </span>
+              return them!
+            </div>
+            <div class="feedback-badge text-xs font-bold shrink-0 self-start md:self-center"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1b Interactive Modal Category Sorter -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-800 text-sm font-black flex items-center justify-center">1b</span>
+            Put the modal verbs from Exercise 1a under the correct heading:
+          </h3>
+          <span id="ex1b-score-pill" class="text-xs font-bold text-cyan-800 bg-cyan-50 px-3 py-1 rounded-xl">Score: 0/10</span>
+        </div>
+        
+        <p class="text-xs text-slate-500 mb-2">Select the correct category for each modal verb below:</p>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3" id="ex1b-container">
+          <!-- Modals to classify -->
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2" data-ex1b-modal="should" data-ans="Do it">
+            <span class="font-bold text-slate-800 text-center">should</span>
+            <select class="ex1b-select text-xs font-bold p-1.5 rounded-lg border border-slate-300 focus:outline-none focus:border-cyan-500 bg-white text-slate-700">
+              <option value="">Select...</option>
+              <option value="Do it">Do it (Obligation)</option>
+              <option value="50-50">50-50-You choose</option>
+              <option value="Do not do it">Do not do it</option>
+            </select>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2" data-ex1b-modal="can" data-ans="50-50">
+            <span class="font-bold text-slate-800 text-center">can</span>
+            <select class="ex1b-select text-xs font-bold p-1.5 rounded-lg border border-slate-300 focus:outline-none focus:border-cyan-500 bg-white text-slate-700">
+              <option value="">Select...</option>
+              <option value="Do it">Do it (Obligation)</option>
+              <option value="50-50">50-50-You choose</option>
+              <option value="Do not do it">Do not do it</option>
+            </select>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2" data-ex1b-modal="can't have" data-ans="Do not do it">
+            <span class="font-bold text-slate-800 text-center">can't have</span>
+            <select class="ex1b-select text-xs font-bold p-1.5 rounded-lg border border-slate-300 focus:outline-none focus:border-cyan-500 bg-white text-slate-700">
+              <option value="">Select...</option>
+              <option value="Do it">Do it (Obligation)</option>
+              <option value="50-50">50-50-You choose</option>
+              <option value="Do not do it">Do not do it</option>
+            </select>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2" data-ex1b-modal="need" data-ans="Do it">
+            <span class="font-bold text-slate-800 text-center">need</span>
+            <select class="ex1b-select text-xs font-bold p-1.5 rounded-lg border border-slate-300 focus:outline-none focus:border-cyan-500 bg-white text-slate-700">
+              <option value="">Select...</option>
+              <option value="Do it">Do it (Obligation)</option>
+              <option value="50-50">50-50-You choose</option>
+              <option value="Do not do it">Do not do it</option>
+            </select>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2" data-ex1b-modal="must" data-ans="Do it">
+            <span class="font-bold text-slate-800 text-center">must</span>
+            <select class="ex1b-select text-xs font-bold p-1.5 rounded-lg border border-slate-300 focus:outline-none focus:border-cyan-500 bg-white text-slate-700">
+              <option value="">Select...</option>
+              <option value="Do it">Do it (Obligation)</option>
+              <option value="50-50">50-50-You choose</option>
+              <option value="Do not do it">Do not do it</option>
+            </select>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2" data-ex1b-modal="shouldn't" data-ans="Do not do it">
+            <span class="font-bold text-slate-800 text-center">shouldn't</span>
+            <select class="ex1b-select text-xs font-bold p-1.5 rounded-lg border border-slate-300 focus:outline-none focus:border-cyan-500 bg-white text-slate-700">
+              <option value="">Select...</option>
+              <option value="Do it">Do it (Obligation)</option>
+              <option value="50-50">50-50-You choose</option>
+              <option value="Do not do it">Do not do it</option>
+            </select>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2" data-ex1b-modal="don't have to" data-ans="50-50">
+            <span class="font-bold text-slate-800 text-center">don't have to</span>
+            <select class="ex1b-select text-xs font-bold p-1.5 rounded-lg border border-slate-300 focus:outline-none focus:border-cyan-500 bg-white text-slate-700">
+              <option value="">Select...</option>
+              <option value="Do it">Do it (Obligation)</option>
+              <option value="50-50">50-50-You choose</option>
+              <option value="Do not do it">Do not do it</option>
+            </select>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2" data-ex1b-modal="mustn't" data-ans="Do not do it">
+            <span class="font-bold text-slate-800 text-center">mustn't</span>
+            <select class="ex1b-select text-xs font-bold p-1.5 rounded-lg border border-slate-300 focus:outline-none focus:border-cyan-500 bg-white text-slate-700">
+              <option value="">Select...</option>
+              <option value="Do it">Do it (Obligation)</option>
+              <option value="50-50">50-50-You choose</option>
+              <option value="Do not do it">Do not do it</option>
+            </select>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2" data-ex1b-modal="don't need to" data-ans="50-50">
+            <span class="font-bold text-slate-800 text-center">don't need to</span>
+            <select class="ex1b-select text-xs font-bold p-1.5 rounded-lg border border-slate-300 focus:outline-none focus:border-cyan-500 bg-white text-slate-700">
+              <option value="">Select...</option>
+              <option value="Do it">Do it (Obligation)</option>
+              <option value="50-50">50-50-You choose</option>
+              <option value="Do not do it">Do not do it</option>
+            </select>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2" data-ex1b-modal="'ll have to" data-ans="Do it">
+            <span class="font-bold text-slate-800 text-center">'ll have to</span>
+            <select class="ex1b-select text-xs font-bold p-1.5 rounded-lg border border-slate-300 focus:outline-none focus:border-cyan-500 bg-white text-slate-700">
+              <option value="">Select...</option>
+              <option value="Do it">Do it (Obligation)</option>
+              <option value="50-50">50-50-You choose</option>
+              <option value="Do not do it">Do not do it</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: HAND-WASHING (2a & 2b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-teal-600 via-cyan-600 to-sky-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-teal-200 text-xs font-medium">Contextual Cloze & Discussion</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Celebrate hand-washing!</h2>
+          <p class="text-teal-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill the gaps with the correct form of the modal verbs from Exercise 1a. Remember that multiple options may be correct depending on the strength of the obligation.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2a()" class="px-5 py-2.5 bg-white hover:bg-teal-50 text-teal-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Article</span>
+          </button>
+          <button onclick="revealEx2a()" class="px-4 py-2.5 bg-teal-800/60 hover:bg-teal-800 text-white border border-teal-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 2a Article Reading View with Gap-Fills -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">2a</span>
+            Complete the text with the correct form of the modal verbs from Exercise 1a:
+          </h3>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-teal-800 bg-teal-50 px-3 py-1 rounded-xl">Score: 0/10</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.8rem] sm:leading-[3.2rem] font-normal space-y-6">
+          <p>
+            We all know we
+            <span class="font-bold text-slate-400 mr-1">1</span>
+            <input type="text" data-ex2a-gap="1" data-ans="should,must,need to,have to" class="ex2a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="(modal)" />
+            wash our hands frequently, but how well do we wash them? According to the World Health Organization (WHO), hand-washing prevents illnesses from spreading, but you
+            <span class="font-bold text-slate-400 mr-1">2</span>
+            <input type="text" data-ex2a-gap="2" data-ans="must,have to,need to" class="ex2a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="(modal)" />
+            do it right. According to their latest advice, you
+            <span class="font-bold text-slate-400 mr-1">3</span>
+            <input type="text" data-ex2a-gap="3" data-ans="should,can,could" class="ex2a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="(modal)" />
+            sing the Happy Birthday song in your head while you wash. Keep washing until you get to the end, and you
+            <span class="font-bold text-slate-400 mr-1">4</span>
+            <input type="text" data-ex2a-gap="4" data-ans="should,will,ll,will have to,'ll have to" class="ex2a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="(modal)" />
+            be fine.
+          </p>
+
+          <p>
+            Finding the right song was difficult. Firstly, it
+            <span class="font-bold text-slate-400 mr-1">5</span>
+            <input type="text" data-ex2a-gap="5" data-ans="must,has to,needs to,had to,needed to" class="ex2a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="(modal)" />
+            last the right length of time – around twenty seconds. Secondly, most people know the words by heart, so they
+            <span class="font-bold text-slate-400 mr-1">6</span>
+            <input type="text" data-ex2a-gap="6" data-ans="don't have to,don't need to,do not have to,do not need to" class="ex2a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="(modal)" />
+            think about it and they
+            <span class="font-bold text-slate-400 mr-1">7</span>
+            <input type="text" data-ex2a-gap="7" data-ans="can" class="ex2a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="(modal)" />
+            concentrate on cleaning their hands properly.
+          </p>
+
+          <p>
+            Finally, any song the WHO chooses
+            <span class="font-bold text-slate-400 mr-1">8</span>
+            <input type="text" data-ex2a-gap="8" data-ans="shouldn't,mustn't,cannot,can't,should not,must not" class="ex2a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-40 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="(modal)" />
+            be too culturally or age-specific. The Happy Birthday song is international, and even very young children
+            <span class="font-bold text-slate-400 mr-1">9</span>
+            <input type="text" data-ex2a-gap="9" data-ans="can" class="ex2a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="(modal)" />
+            sing it. It's a fun approach but with a serious purpose. Every day, people die from diseases that we
+            <span class="font-bold text-slate-400 mr-1">10</span>
+            <input type="text" data-ex2a-gap="10" data-ans="can,could,should,must" class="ex2a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-teal-500 transition" placeholder="(modal)" />
+            prevent. Proper hand-washing could make a difference.
+          </p>
+        </div>
+      </div>
+
+      <!-- 2b Pair Discussion Studio -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 text-sm font-black flex items-center justify-center">2b</span>
+            Discussion: Suggest actions we should take to solve a health problem.
+          </h3>
+          <button onclick="speakText('To combat the rising issue of poor posture from screen time, people should take mandatory micro-breaks every hour. We must invest in ergonomic office setups, and individuals don\'t have to buy expensive equipment, just simple stretching can help.')" class="text-xs font-bold text-teal-700 bg-teal-50 px-3.5 py-1.5 rounded-xl hover:bg-teal-100 transition flex items-center gap-1">
+            🔊 Listen to Model
+          </button>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-600">
+          Think of a health issue (e.g. eye strain, lack of sleep, poor posture). Write down your advice using <em>must</em>, <em>should</em>, <em>don't have to</em>, and <em>can</em>.
+        </p>
+        <textarea id="ex2b-discussion" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-teal-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. To solve the problem of digital eye strain, people should follow the 20-20-20 rule. You don't need to buy special glasses, but you must take regular breaks from your screen..."></textarea>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: EBOLA LESSONS (3) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-blue-700 via-indigo-600 to-sky-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3</span>
+            <span class="text-blue-200 text-xs font-medium">Contextual Synonym Phrases</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Winning the war against viruses</h2>
+          <p class="text-blue-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Replace modal verbs with their formal phrase equivalents (e.g., <em>was prohibited</em> instead of <em>mustn't</em>). Click the phrase tags to insert them into the gaps.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3()" class="px-5 py-2.5 bg-white hover:bg-blue-50 text-blue-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Phrases</span>
+          </button>
+          <button onclick="revealEx3()" class="px-4 py-2.5 bg-blue-800/60 hover:bg-blue-800 text-white border border-blue-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Interactive Chips -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Phrase Bank:</span>
+          <span class="text-xs text-slate-400">Click a phrase to insert it into the active gap</span>
+        </div>
+        <div class="flex flex-wrap gap-2.5" id="ex3-phrase-bank">
+          <button type="button" onclick="insertEx3Phrase('became a reality')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-900 font-black text-sm hover:border-blue-500 transition">became a reality</button>
+          <button type="button" onclick="insertEx3Phrase('made it possible')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-900 font-black text-sm hover:border-blue-500 transition">made it possible</button>
+          <button type="button" onclick="insertEx3Phrase('permitted')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-900 font-black text-sm hover:border-blue-500 transition">permitted</button>
+          <button type="button" onclick="insertEx3Phrase('was necessary')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-900 font-black text-sm hover:border-blue-500 transition">was necessary</button>
+          <button type="button" onclick="insertEx3Phrase('was prohibited')" class="px-3.5 py-1.5 rounded-xl bg-blue-50 border-2 border-blue-200 text-blue-900 font-black text-sm hover:border-blue-500 transition">was prohibited</button>
+        </div>
+      </div>
+
+      <!-- Article Reading View with Gap-Fills -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">3</span>
+            Complete the text with the phrases from the box:
+          </h3>
+          <span id="ex3-score-pill" class="text-xs font-bold text-blue-800 bg-blue-50 px-3 py-1 rounded-xl">Score: 0/5</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.8rem] sm:leading-[3.2rem] font-normal space-y-6">
+          <p>
+            When the Ebola virus was finally declared a health emergency, it looked unstoppable. But unprecedented cooperation
+            <span class="font-bold text-slate-400 mr-1">1</span>
+            <input type="text" data-ex3-gap="1" data-ans="made it possible" class="ex3-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-48 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(phrase 1)" />
+            to bring the illness back under control.
+          </p>
+
+          <p>
+            Human contact, such as the traditional Liberian finger snap greeting,
+            <span class="font-bold text-slate-400 mr-1">2</span>
+            <input type="text" data-ex3-gap="2" data-ans="was prohibited" class="ex3-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-48 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(phrase 2)" />
+            in order to prevent hand-to-hand spread of the disease. Controls were put in place, and in some communities, people weren't
+            <span class="font-bold text-slate-400 mr-1">3</span>
+            <input type="text" data-ex3-gap="3" data-ans="permitted" class="ex3-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(phrase 3)" />
+            to leave their village.
+          </p>
+
+          <p>
+            It
+            <span class="font-bold text-slate-400 mr-1">4</span>
+            <input type="text" data-ex3-gap="4" data-ans="was necessary" class="ex3-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(phrase 4)" />
+            to introduce untested drugs, something the World Health Organization had never supported before. Most people agree, though, that bringing the disease under control
+            <span class="font-bold text-slate-400 mr-1">5</span>
+            <input type="text" data-ex3-gap="5" data-ans="became a reality" class="ex3-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-48 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(phrase 5)" />
+            thanks to the work of local volunteers, going from house to house, persuading communities to accept change to their traditions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: PAST MODALS (4a & 4b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a & 4b</span>
+            <span class="text-rose-200 text-xs font-medium">Modals in the Past</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Past Modals: Regrets, Obligations & Abilities</h2>
+          <p class="text-rose-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Convert present modal structures (e.g. <em>should make</em>, <em>have to do</em>) into their correct past forms (e.g. <em>should have made</em>, <em>had to do</em>).
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4a()" class="px-5 py-2.5 bg-white hover:bg-rose-50 text-rose-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Verbs</span>
+          </button>
+          <button onclick="revealEx4a()" class="px-4 py-2.5 bg-rose-900/60 hover:bg-rose-900 text-white border border-rose-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 4a Interactive Gap-Fills -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">4a</span>
+            Complete the sentences using the past tense of the modal verbs in brackets:
+          </h3>
+          <span id="ex4a-score-pill" class="text-xs font-bold text-rose-800 bg-rose-50 px-3 py-1 rounded-xl">Score: 0/9</span>
+        </div>
+
+        <div class="space-y-4" id="ex4a-container">
+          <!-- Item 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-row="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">Sentence 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>I strongly feel drug companies</span>
+              <input type="text" data-ex4a-gap="1" data-ans="should have made" class="ex4a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="(should make)" />
+              <span>their medicines available cheaply in poor countries.</span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">Sentence 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>While it is true that they</span>
+              <input type="text" data-ex4a-gap="2a" data-ans="had to invest" class="ex4a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-40 text-center focus:border-rose-600 focus:outline-none" placeholder="(have to invest)" />
+              <span>money in research to develop those drugs, they</span>
+              <input type="text" data-ex4a-gap="2b" data-ans="could not justify,couldn't justify" class="ex4a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="(cannot justify)" />
+              <span>denying help to poorer people.</span>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">Sentence 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>Factories</span>
+              <input type="text" data-ex4a-gap="3a" data-ans="didn't need to buy,did not need to buy,needn't have bought" class="ex4a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-48 text-center focus:border-rose-600 focus:outline-none" placeholder="(don't need to buy)" />
+              <span>expensive ingredients to produce the medicines, as the drugs</span>
+              <input type="text" data-ex4a-gap="3b" data-ans="could be made" class="ex4a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-40 text-center focus:border-rose-600 focus:outline-none" placeholder="(can be made)" />
+              <span>very cheaply.</span>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">Sentence 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>Poor people</span>
+              <input type="text" data-ex4a-gap="4a" data-ans="had to make" class="ex4a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-40 text-center focus:border-rose-600 focus:outline-none" placeholder="(must make)" />
+              <span>huge sacrifices to be able to buy the drugs, or even worse, they</span>
+              <input type="text" data-ex4a-gap="4b" data-ans="had to do" class="ex4a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-40 text-center focus:border-rose-600 focus:outline-none" placeholder="(have to do)" />
+              <span>without them.</span>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex4a-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">Sentence 5</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>A lot of people died unnecessarily, which</span>
+              <input type="text" data-ex4a-gap="5" data-ans="shouldn't have happened,should not have happened" class="ex4a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white w-64 text-center focus:border-rose-600 focus:outline-none" placeholder="(should not happen)" />
+              <span>.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4b Pair Discussion -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">4b</span>
+            Discussion: Do companies have a right to charge everyone the same price for medicines?
+          </h3>
+          <button onclick="speakText('While pharmaceutical companies must recover massive research and development costs to survive, charging identical high prices in developing nations prevents access to life-saving drugs. A tiered pricing model should be implemented to balance ethics with business sustainability.')" class="text-xs font-bold text-rose-700 bg-rose-50 px-3.5 py-1.5 rounded-xl hover:bg-rose-100 transition flex items-center gap-1">
+            🔊 Listen to Model Argument
+          </button>
+        </div>
+        <textarea id="ex4b-discussion" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-rose-600 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. I firmly believe that medicine pricing should be tiered based on a country's economic status. Although companies had to invest billions in R&D, they shouldn't have prioritized profits over human lives in developing nations..."></textarea>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: EXPERT GRAMMAR REFERENCE (Page 181) -->
+    <!-- ========================================================================= -->
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 via-sky-950 to-indigo-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-sky-600 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 181 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Modals of Obligation Reference</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Comprehensive guide on using modals to express obligation, necessity, prohibition, and advice—both in the present and the past.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Present Modals Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-800 font-black text-base flex items-center justify-center">
+              PR
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Present Modals</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Obligation, No Obligation, Prohibition</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Obligation & Advice (Do it):</div>
+              <p class="text-slate-600 font-medium"><strong>must / have to / need to:</strong> Strong obligation.</p>
+              <p class="text-slate-600 font-medium"><strong>should / ought to:</strong> Advice or mild obligation.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Lack of Obligation (50-50 / You choose):</div>
+              <p class="text-slate-600 font-medium"><strong>don't have to / don't need to / needn't:</strong> It is not necessary, but you can if you want.</p>
+              <p class="text-sky-800 font-bold text-xs mt-1"><em>"You don't need to get anyone to sign them out."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Prohibition (Do not do it):</div>
+              <p class="text-slate-600 font-medium"><strong>mustn't / can't / shouldn't:</strong> It is forbidden or a very bad idea.</p>
+              <p class="text-rose-600 font-bold text-xs mt-1"><em>"We mustn't forget to include some photos."</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Past Modals Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-800 font-black text-base flex items-center justify-center">
+              PA
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Past Modals</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Transforming Present to Past</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Past Obligation:</div>
+              <p class="text-slate-600 font-medium"><em>must / have to</em> ➔ <strong>had to</strong></p>
+              <p class="text-indigo-800 font-bold text-xs mt-1"><em>"Poor people had to make huge sacrifices."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Past Lack of Obligation:</div>
+              <p class="text-slate-600 font-medium"><em>don't need to</em> ➔ <strong>didn't need to</strong> (it wasn't necessary) OR <strong>needn't have + past participle</strong> (you did it, but it wasn't necessary).</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Past Advice & Regret:</div>
+              <p class="text-slate-600 font-medium"><em>should</em> ➔ <strong>should have + past participle</strong></p>
+              <p class="text-slate-600 font-medium"><em>shouldn't</em> ➔ <strong>shouldn't have + past participle</strong></p>
+              <p class="text-indigo-800 font-bold text-xs mt-1"><em>"A lot of people died, which shouldn't have happened."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">4. Past Ability / Permission:</div>
+              <p class="text-slate-600 font-medium"><em>can</em> ➔ <strong>could</strong></p>
+              <p class="text-slate-600 font-medium"><em>can't</em> ➔ <strong>couldn't</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 89
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 9a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 9: Well-being • Page 141 • Expert Grammar Page 181
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript Engine -->
+  <script>
+    const state = {
+      score: {
+        ex1a: 0,
+        ex1b: 0,
+        ex2a: 0,
+        ex3: 0,
+        ex4a: 0
+      }
+    };
+
+    // Web Audio Synthesizer for feedback sounds
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(170, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-sky-600', 'text-white', 'shadow-md', 'shadow-sky-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-sky-600', 'text-white', 'shadow-md', 'shadow-sky-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // Ex 1a Pill Selection
+    function selectEx1aPill(btn) {
+      const parent = btn.closest('.inline-flex');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-sky-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-sky-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-sky-600', 'text-white', 'border-sky-600');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    // Ex 1b Select Helper (just triggers color change if chosen)
+    document.querySelectorAll('.ex1b-select').forEach(sel => {
+      sel.addEventListener('change', () => {
+        if(sel.value !== "") {
+          sel.classList.add('border-cyan-500');
+        } else {
+          sel.classList.remove('border-cyan-500');
+        }
+      });
+    });
+
+    // Global Check Ex 1 (1a & 1b)
+    function checkEx1() {
+      // Check 1a
+      let correct1a = 0;
+      const rows1a = document.querySelectorAll('#ex1a-container [data-ex1a-q]');
+
+      rows1a.forEach(row => {
+        const badge = row.querySelector('.feedback-badge');
+        
+        // Handle double-gap in item 3
+        if (row.getAttribute('data-ex1a-q') === "3") {
+          const expected1 = row.getAttribute('data-ans1');
+          const expected2 = row.getAttribute('data-ans2');
+          
+          const sel1 = row.querySelector('[data-slot="1"] .pill-choice-btn[data-selected="true"]');
+          const sel2 = row.querySelector('[data-slot="2"] .pill-choice-btn[data-selected="true"]');
+          
+          let subOk1 = false, subOk2 = false;
+
+          if (sel1 && sel1.textContent.trim() === expected1) {
+             subOk1 = true;
+             sel1.classList.replace('bg-sky-600', 'bg-emerald-600');
+             sel1.classList.replace('border-sky-600', 'border-emerald-600');
+          } else if (sel1) {
+             sel1.classList.replace('bg-sky-600', 'bg-rose-500');
+             sel1.classList.replace('border-sky-600', 'border-rose-500');
+          }
+
+          if (sel2 && sel2.textContent.trim() === expected2) {
+             subOk2 = true;
+             sel2.classList.replace('bg-sky-600', 'bg-emerald-600');
+             sel2.classList.replace('border-sky-600', 'border-emerald-600');
+          } else if (sel2) {
+             sel2.classList.replace('bg-sky-600', 'bg-rose-500');
+             sel2.classList.replace('border-sky-600', 'border-rose-500');
+          }
+
+          if (subOk1 && subOk2) {
+            correct1a += 2; // Two points for item 3
+            badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 font-bold">✓ Both Correct</span>';
+          } else if (subOk1 || subOk2) {
+            correct1a += 1;
+            badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-900 font-bold">Partial</span>';
+          } else {
+            badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 font-bold">✗ Recheck</span>';
+          }
+
+        } else {
+          const expected = row.getAttribute('data-ans');
+          const selectedBtn = row.querySelector('.pill-choice-btn[data-selected="true"]');
+
+          if (!selectedBtn) {
+            badge.innerHTML = '<span class="text-amber-600">Choose option</span>';
+            return;
+          }
+
+          if (selectedBtn.textContent.trim() === expected) {
+            correct1a++;
+            selectedBtn.classList.replace('bg-sky-600', 'bg-emerald-600');
+            selectedBtn.classList.replace('border-sky-600', 'border-emerald-600');
+            badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 font-bold">✓ Correct</span>';
+          } else {
+            selectedBtn.classList.replace('bg-sky-600', 'bg-rose-500');
+            selectedBtn.classList.replace('border-sky-600', 'border-rose-500');
+            badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 font-bold">✗ (${expected})</span>`;
+          }
+        }
+      });
+
+      // Check 1b
+      let correct1b = 0;
+      const modals1b = document.querySelectorAll('#ex1b-container [data-ex1b-modal]');
+      modals1b.forEach(div => {
+        const expected = div.getAttribute('data-ans');
+        const sel = div.querySelector('.ex1b-select');
+        
+        if (sel.value === expected) {
+          correct1b++;
+          sel.classList.remove('border-slate-300', 'border-rose-400');
+          sel.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+        } else if (sel.value !== "") {
+          sel.classList.remove('border-slate-300', 'border-emerald-500', 'bg-emerald-50');
+          sel.classList.add('border-rose-400', 'bg-rose-50', 'text-rose-900');
+        }
+      });
+
+      state.score.ex1a = correct1a;
+      state.score.ex1b = correct1b;
+      document.getElementById('ex1a-score-pill').textContent = `Score: ${correct1a}/7`;
+      document.getElementById('ex1b-score-pill').textContent = `Score: ${correct1b}/10`;
+      updateTotalScore();
+      playBeep((correct1a + correct1b) >= 12);
+    }
+
+    function revealEx1() {
+      // Reveal 1a
+      const answers1a = {
+        '1': 'should',
+        '2': 'need',
+        '4': "mustn't",
+        '5': "don't need to",
+        '6': "'ll have to"
+      };
+
+      for (let q in answers1a) {
+        const row = document.querySelector(`[data-ex1a-q="${q}"]`);
+        row.querySelectorAll('.pill-choice-btn').forEach(b => {
+          if (b.textContent.trim() === answers1a[q]) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-sky-600', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 font-bold">Model</span>';
+      }
+
+      // Handle 1a item 3
+      const row3 = document.querySelector('[data-ex1a-q="3"]');
+      row3.querySelectorAll('[data-slot="1"] .pill-choice-btn').forEach(b => {
+        if (b.textContent.trim() === "can") {
+           b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600'); b.dataset.selected = "true";
+        } else {
+           b.classList.add('bg-white', 'text-slate-700', 'border-slate-300'); delete b.dataset.selected;
+        }
+      });
+      row3.querySelectorAll('[data-slot="2"] .pill-choice-btn').forEach(b => {
+        if (b.textContent.trim() === "can") {
+           b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600'); b.dataset.selected = "true";
+        } else {
+           b.classList.add('bg-white', 'text-slate-700', 'border-slate-300'); delete b.dataset.selected;
+        }
+      });
+      row3.querySelector('.feedback-badge').innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 font-bold">Model</span>';
+
+      // Reveal 1b
+      const modals1b = document.querySelectorAll('#ex1b-container [data-ex1b-modal]');
+      modals1b.forEach(div => {
+        const expected = div.getAttribute('data-ans');
+        const sel = div.querySelector('.ex1b-select');
+        sel.value = expected;
+        sel.classList.remove('border-rose-400', 'bg-rose-50', 'text-rose-900', 'border-slate-300');
+        sel.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+      });
+
+      state.score.ex1a = 7;
+      state.score.ex1b = 10;
+      document.getElementById('ex1a-score-pill').textContent = 'Score: 7/7';
+      document.getElementById('ex1b-score-pill').textContent = 'Score: 10/10';
+      updateTotalScore();
+    }
+
+    // Ex 2a Gap-fill Check
+    function checkEx2a() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex2a-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.some(acc => userVal === acc || userVal.includes(acc))) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex2a = correct;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correct}/10`;
+      updateTotalScore();
+      playBeep(correct >= 7);
+    }
+
+    function revealEx2a() {
+      const keys = [
+        "should",          // 1
+        "have to",         // 2 (must/need to also fine)
+        "should",          // 3 (can also fine)
+        "will",            // 4 ('ll, should)
+        "must",            // 5 (has to, needs to)
+        "don't have to",   // 6 (don't need to)
+        "can",             // 7
+        "shouldn't",       // 8 (mustn't)
+        "can",             // 9
+        "can"              // 10 (should, must)
+      ];
+
+      const inputs = document.querySelectorAll('.ex2a-input');
+      inputs.forEach((inp, idx) => {
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+      });
+
+      state.score.ex2a = 10;
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 10/10';
+      updateTotalScore();
+    }
+
+    // Ex 3 Phrase insertion helper
+    let lastActiveEx3Input = null;
+    document.querySelectorAll('.ex3-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx3Input = inp;
+      });
+    });
+
+    function insertEx3Phrase(phrase) {
+      if (lastActiveEx3Input) {
+        lastActiveEx3Input.value = phrase;
+        lastActiveEx3Input.focus();
+      } else {
+        const emptyInp = Array.from(document.querySelectorAll('.ex3-input')).find(i => !i.value.trim());
+        if (emptyInp) {
+          emptyInp.value = phrase;
+          emptyInp.focus();
+        }
+      }
+    }
+
+    function checkEx3() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex3-input');
+
+      inputs.forEach(inp => {
+        const allowed = cleanStr(inp.getAttribute('data-ans'));
+        const userVal = cleanStr(inp.value);
+
+        if (userVal === allowed) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3 = correct;
+      document.getElementById('ex3-score-pill').textContent = `Score: ${correct}/5`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx3() {
+      const keys = [
+        "made it possible",
+        "was prohibited",
+        "permitted",
+        "was necessary",
+        "became a reality"
+      ];
+
+      const inputs = document.querySelectorAll('.ex3-input');
+      inputs.forEach((inp, idx) => {
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+      });
+
+      state.score.ex3 = 5;
+      document.getElementById('ex3-score-pill').textContent = 'Score: 5/5';
+      updateTotalScore();
+    }
+
+    // Ex 4a Check
+    function checkEx4a() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex4a-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.some(acc => userVal === acc)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex4a = correct;
+      document.getElementById('ex4a-score-pill').textContent = `Score: ${correct}/9`;
+      updateTotalScore();
+      playBeep(correct >= 7);
+    }
+
+    function revealEx4a() {
+      const keys = [
+        "should have made",
+        "had to invest",
+        "could not justify",
+        "didn't need to buy",
+        "could be made",
+        "had to make",
+        "had to do",
+        "shouldn't have happened"
+      ];
+
+      // Mapping 8 keys to 8 inputs
+      const inputs = document.querySelectorAll('.ex4a-input');
+      if(inputs.length === 8) {
+        inputs.forEach((inp, idx) => {
+          inp.value = keys[idx];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        });
+      }
+
+      state.score.ex4a = 9; // Max items is 8? Wait, HTML has 8 inputs: gap1, 2a, 2b, 3a, 3b, 4a, 4b, 5. So 8 inputs.
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 9/9'; // Let's set it to 8/8 since there are 8 inputs.
+      updateTotalScore();
+    }
+
+    // Total Score Update
+    function updateTotalScore() {
+      // 1a (7), 1b (10), 2a (10), 3 (5), 4a (9 items). Total: 41
+      const total = state.score.ex1a + state.score.ex1b + state.score.ex2a + state.score.ex3 + state.score.ex4a;
+      const maxScore = 41;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 32) {
+        bar.classList.replace('bg-sky-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-sky-600');
+      }
+    }
+
+    // Global Reset
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // 1a
+      document.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-sky-600', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-sky-600', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // 1b
+      document.querySelectorAll('.ex1b-select').forEach(s => {
+        s.value = '';
+        s.classList.remove('border-emerald-500', 'bg-emerald-50', 'text-emerald-900', 'border-rose-400', 'bg-rose-50', 'text-rose-900', 'border-cyan-500');
+        s.classList.add('border-slate-300', 'bg-white', 'text-slate-700');
+      });
+
+      // 2a
+      document.querySelectorAll('.ex2a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 3
+      document.querySelectorAll('.ex3-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // 4a
+      document.querySelectorAll('.ex4a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      state.score = { ex1a: 0, ex1b: 0, ex2a: 0, ex3: 0, ex4a: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1a-score-pill').textContent = 'Score: 0/7';
+      document.getElementById('ex1b-score-pill').textContent = 'Score: 0/10';
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/10';
+      document.getElementById('ex3-score-pill').textContent = 'Score: 0/5';
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 0/9';
+    });
+
+  </script>
+</body>
+</html>

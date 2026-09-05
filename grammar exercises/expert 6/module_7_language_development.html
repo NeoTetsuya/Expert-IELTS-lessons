@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 7: Around the World - Zero & First Conditional</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+              800: '#9a3412',
+              900: '#7c2d12',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.25);
+    }
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-orange-600 selection:text-white pb-12">
+
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-600 via-orange-600 to-rose-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-orange-600/25 ring-2 ring-white">
+          M7
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-900 tracking-wide uppercase">Unit 7: Around the world</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 109</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-orange-700">Zero and First Conditional</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-orange-700">0 / 33</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-orange-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-orange-700 text-white shadow-md shadow-orange-700/25">
+          1. Condition Connectors (1a & 1b)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Global Transport & Tech (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Future Plans Studio (3a & 3b)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Hotels of the Future (4a & 4b)
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 178
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Banner -->
+      <div class="bg-gradient-to-r from-orange-800 via-amber-700 to-rose-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1a & 1b</span>
+            <span class="text-orange-200 text-xs font-medium">Expert Grammar Page 178</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Zero & First Conditional: Sentence Matching & Connectors</h2>
+          <p class="text-orange-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Match sentence beginnings with endings. Discover how alternative words such as <em>unless</em>, <em>provided that</em>, and <em>otherwise</em> introduce conditions and future consequences.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1a()" class="px-5 py-2.5 bg-white hover:bg-orange-50 text-orange-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 1a</span>
+          </button>
+          <button onclick="revealEx1a()" class="px-4 py-2.5 bg-orange-950/60 hover:bg-orange-950 text-white border border-orange-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Explanations / Sentence Endings Reference Grid -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-orange-100 text-orange-800 text-sm font-black flex items-center justify-center">A–E</span>
+            Sentence Endings Options Bank
+          </h3>
+          <span class="text-xs font-semibold text-slate-400">Match with 1–5 below</span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs sm:text-sm">
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-orange-700 text-sm block mb-1">A</span>
+            <p class="text-slate-700 font-medium">...we'll stop at the viewpoint on our way back.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-orange-700 text-sm block mb-1">B</span>
+            <p class="text-slate-700 font-medium">...you'll see all the main tourist spots are clearly marked.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-orange-700 text-sm block mb-1">C</span>
+            <p class="text-slate-700 font-medium">...unless anyone has any more questions!</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-orange-700 text-sm block mb-1">D</span>
+            <p class="text-slate-700 font-medium">...you can cross the harbour more quickly than driving round.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 sm:col-span-2 lg:col-span-2">
+            <span class="font-black text-orange-700 text-sm block mb-1">E</span>
+            <p class="text-slate-700 font-medium">...otherwise we won't have enough time to get round the harbour.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-orange-100 text-orange-800 text-sm font-black flex items-center justify-center">1a</span>
+            Match the beginnings of the sentences (1–5) with the endings (A–E):
+          </h3>
+          <span id="ex1a-score-pill" class="text-xs font-bold text-orange-800 bg-orange-50 px-3 py-1 rounded-xl">Score: 0/5</span>
+        </div>
+
+        <div class="space-y-3" id="ex1a-container">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a-item="1" data-ans="B">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              "<mark class="bg-orange-100 text-orange-950 px-1.5 py-0.5 rounded font-bold">If</mark> you look at the map on the wall here,"
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-orange-950 focus:border-orange-600 focus:outline-none" onchange="checkEx1aQuick()">
+                <option value="">Choose ending...</option>
+                <option value="A">A (...we'll stop at the viewpoint on our way back)</option>
+                <option value="B">B (...you'll see all the main tourist spots are clearly marked)</option>
+                <option value="C">C (...unless anyone has any more questions!)</option>
+                <option value="D">D (...you can cross the harbour more quickly than driving round)</option>
+                <option value="E">E (...otherwise we won't have enough time to get round the harbour)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a-item="2" data-ans="E">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              "We're going by boat on this trip,"
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-orange-950 focus:border-orange-600 focus:outline-none" onchange="checkEx1aQuick()">
+                <option value="">Choose ending...</option>
+                <option value="A">A (...we'll stop at the viewpoint on our way back)</option>
+                <option value="B">B (...you'll see all the main tourist spots are clearly marked)</option>
+                <option value="C">C (...unless anyone has any more questions!)</option>
+                <option value="D">D (...you can cross the harbour more quickly than driving round)</option>
+                <option value="E">E (...otherwise we won't have enough time to get round the harbour)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a-item="3" data-ans="D">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              "<mark class="bg-orange-100 text-orange-950 px-1.5 py-0.5 rounded font-bold">If</mark> you take a boat from the pier,"
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-orange-950 focus:border-orange-600 focus:outline-none" onchange="checkEx1aQuick()">
+                <option value="">Choose ending...</option>
+                <option value="A">A (...we'll stop at the viewpoint on our way back)</option>
+                <option value="B">B (...you'll see all the main tourist spots are clearly marked)</option>
+                <option value="C">C (...unless anyone has any more questions!)</option>
+                <option value="D">D (...you can cross the harbour more quickly than driving round)</option>
+                <option value="E">E (...otherwise we won't have enough time to get round the harbour)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a-item="4" data-ans="A">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              "<mark class="bg-orange-100 text-orange-950 px-1.5 py-0.5 rounded font-bold">Provided that</mark> we have enough time,"
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-orange-950 focus:border-orange-600 focus:outline-none" onchange="checkEx1aQuick()">
+                <option value="">Choose ending...</option>
+                <option value="A">A (...we'll stop at the viewpoint on our way back)</option>
+                <option value="B">B (...you'll see all the main tourist spots are clearly marked)</option>
+                <option value="C">C (...unless anyone has any more questions!)</option>
+                <option value="D">D (...you can cross the harbour more quickly than driving round)</option>
+                <option value="E">E (...otherwise we won't have enough time to get round the harbour)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3" data-ex1a-item="5" data-ans="C">
+            <div class="text-base text-slate-900 font-medium leading-relaxed">
+              <span class="font-extrabold text-slate-400 mr-2">5.</span>
+              "We'll get started now,"
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex1a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-orange-950 focus:border-orange-600 focus:outline-none" onchange="checkEx1aQuick()">
+                <option value="">Choose ending...</option>
+                <option value="A">A (...we'll stop at the viewpoint on our way back)</option>
+                <option value="B">B (...you'll see all the main tourist spots are clearly marked)</option>
+                <option value="C">C (...unless anyone has any more questions!)</option>
+                <option value="D">D (...you can cross the harbour more quickly than driving round)</option>
+                <option value="E">E (...otherwise we won't have enough time to get round the harbour)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-orange-100 text-orange-800 text-sm font-black flex items-center justify-center">1b</span>
+            Condition Connectors & Tense Analysis:
+          </h3>
+          <button onclick="toggleEx1bExpl()" class="text-xs font-extrabold text-orange-700 bg-orange-50 px-3.5 py-1.5 rounded-xl border border-orange-200 hover:bg-orange-100 transition">
+            Toggle Grammar Breakdown
+          </button>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="font-black text-orange-700 block text-sm">Condition Introduction Words:</span>
+            <p class="text-slate-700 leading-relaxed font-medium">
+              • <strong>If:</strong> Introduces a possible condition (1 & 3).<br>
+              • <strong>Otherwise:</strong> Means <em>"if we don't"</em> or <em>"or else"</em> (2).<br>
+              • <strong>Provided that:</strong> Means <em>"only if / on condition that"</em> (4).<br>
+              • <strong>Unless:</strong> Means <em>"if not / except if"</em> (5).
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="font-black text-amber-700 block text-sm">Tense Structure Patterns:</span>
+            <p class="text-slate-700 leading-relaxed font-medium">
+              • <strong>In the condition clause:</strong> We use the <strong>present simple</strong> (or present continuous), NOT <em>will</em>: <em>look</em>, <em>have</em>, <em>take</em>, <em>has</em>.<br>
+              • <strong>In the result clause:</strong> We use <strong>will / won't + base verb</strong>, or a modal verb (<em>can</em>), or an imperative.
+            </p>
+          </div>
+        </div>
+
+        <div id="ex1b-explanation" class="p-4 rounded-2xl bg-orange-50 border border-orange-200 text-xs sm:text-sm text-orange-950 space-y-1">
+          <p class="font-extrabold">💡 Notice the punctuation:</p>
+          <p>When the condition clause comes first (Sentences 1, 3, 4), a <strong>comma</strong> separates it from the result clause. When the result clause comes first (Sentences 2, 5), no comma is required before <em>unless</em> or <em>otherwise</em> (unless preceded by a semicolon or period).</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-ex2" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-amber-700 via-orange-700 to-rose-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-orange-200 text-xs font-medium">Future Global Transport & Tech Predictions</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">First Conditional: Future Transport & Infrastructure</h2>
+          <p class="text-orange-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Complete the 10 predictive statements with the correct form of the verbs in brackets. Watch clause order: condition clauses use the present simple, result clauses use <em>will</em> + infinitive.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2a()" class="px-5 py-2.5 bg-white hover:bg-orange-50 text-orange-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check All 2a</span>
+          </button>
+          <button onclick="revealEx2a()" class="px-4 py-2.5 bg-orange-950/60 hover:bg-orange-950 text-white border border-orange-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 2a 10 Questions -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-orange-100 text-orange-800 text-sm font-black flex items-center justify-center">2a</span>
+              Complete sentences (1–10) with the correct form of the verbs in brackets:
+            </h3>
+            <p class="text-xs text-slate-500 mt-1">Use the first conditional pattern (result clause = <em>will</em>; condition clause = <em>present simple</em>)</p>
+          </div>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-orange-800 bg-orange-50 px-3 py-1 rounded-xl">Score: 0/10</span>
+        </div>
+
+        <div class="space-y-4" id="ex2a-container">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">1. Air Travel Costs</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>It</span>
+              <input type="text" data-ex2a-gap="1a" data-ans="will be,'ll be" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(be)" />
+              <span>problematic if air travel</span>
+              <input type="text" data-ex2a-gap="1b" data-ans="gets" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(get)" />
+              <span>cheaper in the next ten years.</span>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">2. Road Congestion & Investment</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>There</span>
+              <input type="text" data-ex2a-gap="2a" data-ans="will be,'ll be" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(be)" />
+              <span>more problems with traffic unless we</span>
+              <input type="text" data-ex2a-gap="2b" data-ans="invest" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(invest)" />
+              <span>in roads.</span>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">3. High-Speed Rail Links</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>Provided that the government</span>
+              <input type="text" data-ex2a-gap="3a" data-ans="builds" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(build)" />
+              <span>high-speed links in the future, train journey times</span>
+              <input type="text" data-ex2a-gap="3b" data-ans="will halve,'ll halve" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-32 text-center" placeholder="(halve)" />
+              <span>.</span>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">4. Commercial Space Travel</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>Many people</span>
+              <input type="text" data-ex2a-gap="4a" data-ans="will choose,'ll choose" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-32 text-center" placeholder="(choose)" />
+              <span>to travel to space when the technology</span>
+              <input type="text" data-ex2a-gap="4b" data-ans="makes" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(make)" />
+              <span>it possible.</span>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">5. Maritime Ports & Megaships</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>Ports</span>
+              <input type="text" data-ex2a-gap="5a" data-ans="will need,'ll need" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(need)" />
+              <span>to be bigger if companies</span>
+              <input type="text" data-ex2a-gap="5b" data-ans="keep" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(keep)" />
+              <span>making bigger ships.</span>
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">6. Even If Condition</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>Even if traffic</span>
+              <input type="text" data-ex2a-gap="6a" data-ans="gets" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(get)" />
+              <span>worse, cars</span>
+              <input type="text" data-ex2a-gap="6b" data-ans="will still be,'ll still be" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-32 text-center" placeholder="(still be)" />
+              <span>popular.</span>
+            </div>
+          </div>
+
+          <!-- 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">7. Bridge and Tunnel Infrastructure</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>Countries</span>
+              <input type="text" data-ex2a-gap="7a" data-ans="will build,'ll build" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(build)" />
+              <span>more bridge and tunnel links if cars</span>
+              <input type="text" data-ex2a-gap="7b" data-ans="continue" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(continue)" />
+              <span>to be popular.</span>
+            </div>
+          </div>
+
+          <!-- 8 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">8. Overcrowded Rail Transit</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>Trains</span>
+              <input type="text" data-ex2a-gap="8a" data-ans="will become,'ll become" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-32 text-center" placeholder="(become)" />
+              <span>more crowded unless we</span>
+              <input type="text" data-ex2a-gap="8b" data-ans="find" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(find)" />
+              <span>a solution to the road problems.</span>
+            </div>
+          </div>
+
+          <!-- 9 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="9">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">9. Radical Urban Plans & Otherwise</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>We need to</span>
+              <input type="text" data-ex2a-gap="9a" data-ans="create" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(create)" />
+              <span>radical new plans, otherwise, major cities</span>
+              <input type="text" data-ex2a-gap="9b" data-ans="will come,'ll come" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(come)" />
+              <span>to a standstill.</span>
+            </div>
+          </div>
+
+          <!-- 10 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex2a-row="10">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">10. Space Agency Collaboration</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>Provided that space agencies</span>
+              <input type="text" data-ex2a-gap="10a" data-ans="share" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-28 text-center" placeholder="(share)" />
+              <span>their ideas, space technology</span>
+              <input type="text" data-ex2a-gap="10b" data-ans="will improve,'ll improve" class="ex2a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-orange-950 bg-white w-32 text-center" placeholder="(improve)" />
+              <span>air transport in future.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-orange-100 text-orange-800 text-sm font-black flex items-center justify-center">2b</span>
+              Work in pairs: Discuss the statements in Exercise 2a. Can you agree?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Formulate conditional arguments for IELTS Speaking Part 3 and Task 2</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="loadSampleDebate2b()" class="px-4 py-2 bg-orange-700 hover:bg-orange-800 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+              Load Debate Samples
+            </button>
+            <button onclick="saveDebateNotes2b()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">
+              Save Notes
+            </button>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <label class="block text-xs font-black uppercase text-slate-600">Debate Topic 1: Autonomous cars vs. Road gridlock (Sentence 6 & 7)</label>
+            <textarea id="ex2b-note-1" rows="2" class="w-full p-3 rounded-xl border border-slate-300 text-sm font-medium bg-white focus:outline-none focus:border-orange-600" placeholder="e.g. Even if traffic worsens, cars will still be favored because commuters value personal autonomy and door-to-door convenience over crowded public transport..."></textarea>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <label class="block text-xs font-black uppercase text-slate-600">Debate Topic 2: High-speed rail investment (Sentence 3 & 8)</label>
+            <textarea id="ex2b-note-2" rows="2" class="w-full p-3 rounded-xl border border-slate-300 text-sm font-medium bg-white focus:outline-none focus:border-orange-600" placeholder="e.g. Provided that governments subsidize high-speed rail, intercity travel will become faster and more sustainable than short-haul domestic flights..."></textarea>
+          </div>
+        </div>
+        <div id="ex2b-save-status" class="hidden p-3 rounded-xl bg-orange-100 text-orange-950 text-xs font-bold">
+          ✓ Your group debate notes have been saved to local browser storage!
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-amber-600 via-rose-700 to-indigo-800 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a & 3b</span>
+            <span class="text-amber-200 text-xs font-medium">Personalized Conditional Production</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Future Plans: Zero & First Conditional Studio</h2>
+          <p class="text-amber-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Formulate personalized, true sentences about your future ambitions using conditional conjunctions (<em>If</em>, <em>When</em>, <em>Provided that</em>, <em>Unless</em>, <em>Otherwise</em>). Rehearse speaking aloud with native audio models!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="loadSamplePlans3a()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Load Samples</span>
+          </button>
+          <button onclick="savePlans3a()" class="px-4 py-2.5 bg-amber-950/60 hover:bg-amber-950 text-white border border-amber-400/40 text-sm font-bold rounded-2xl transition">
+            Save Profile
+          </button>
+        </div>
+      </div>
+
+      <!-- 3a 8 Interactive Prompt Fields -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">3a</span>
+            Practise making true sentences about your future plans:
+          </h3>
+          <span class="text-xs font-semibold text-slate-400">Complete each conditional stem</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-xs font-black uppercase text-amber-700">1. If I pass this exam...</span>
+            <input type="text" id="ex3a-plan-1" class="exercise-input w-full p-2.5 rounded-xl border border-slate-300 text-sm font-bold text-slate-800 bg-white" placeholder="e.g. I will celebrate with my classmates and apply for university abroad." />
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-xs font-black uppercase text-amber-700">2. When I finish my studies...</span>
+            <input type="text" id="ex3a-plan-2" class="exercise-input w-full p-2.5 rounded-xl border border-slate-300 text-sm font-bold text-slate-800 bg-white" placeholder="e.g. I will travel across Europe for a month before seeking a job." />
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-xs font-black uppercase text-amber-700">3. Provided that everything goes to plan...</span>
+            <input type="text" id="ex3a-plan-3" class="exercise-input w-full p-2.5 rounded-xl border border-slate-300 text-sm font-bold text-slate-800 bg-white" placeholder="e.g. I will be living in Melbourne this time next year." />
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-xs font-black uppercase text-amber-700">4. I hope I... if I get lucky. Otherwise, I...</span>
+            <input type="text" id="ex3a-plan-4" class="exercise-input w-full p-2.5 rounded-xl border border-slate-300 text-sm font-bold text-slate-800 bg-white" placeholder="e.g. I hope I get an overseas scholarship. Otherwise, I will seek a local internship." />
+          </div>
+
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-xs font-black uppercase text-amber-700">5. I'll see my friends... unless...</span>
+            <input type="text" id="ex3a-plan-5" class="exercise-input w-full p-2.5 rounded-xl border border-slate-300 text-sm font-bold text-slate-800 bg-white" placeholder="e.g. I'll see my friends this Saturday unless I have to work an urgent overtime shift." />
+          </div>
+
+          <!-- 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-xs font-black uppercase text-amber-700">6. If I get really fluent in English, I...</span>
+            <input type="text" id="ex3a-plan-6" class="exercise-input w-full p-2.5 rounded-xl border border-slate-300 text-sm font-bold text-slate-800 bg-white" placeholder="e.g. I will apply for jobs at multinational tech consultancies." />
+          </div>
+
+          <!-- 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-xs font-black uppercase text-amber-700">7. If I have to change careers in the future, I...</span>
+            <input type="text" id="ex3a-plan-7" class="exercise-input w-full p-2.5 rounded-xl border border-slate-300 text-sm font-bold text-slate-800 bg-white" placeholder="e.g. I will pursue data science or renewable energy management." />
+          </div>
+
+          <!-- 8 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="text-xs font-black uppercase text-amber-700">8. Provided that I have enough money, I...</span>
+            <input type="text" id="ex3a-plan-8" class="exercise-input w-full p-2.5 rounded-xl border border-slate-300 text-sm font-bold text-slate-800 bg-white" placeholder="e.g. I will buy an apartment near the city centre." />
+          </div>
+        </div>
+
+        <div id="ex3a-save-status" class="hidden p-3 rounded-xl bg-amber-100 text-amber-950 text-xs font-bold">
+          ✓ Your personal future plans have been saved to local browser storage!
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">3b</span>
+            Work in pairs: Ask and answer about future plans (IELTS Speaking Part 1):
+          </h3>
+          <span class="text-xs font-black uppercase text-amber-800 bg-amber-100 px-3 py-1 rounded-xl">Interactive Audio Cards</span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4" id="speaking-cards-grid">
+          <!-- Card 1 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Q1: Exam Success</span>
+              <button onclick="speakText('What will you do if you pass your IELTS exam with a high score?')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"What will you do if you pass your exam?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "If I achieve a Band 7.5 or higher, I will immediately finalize my postgraduate visa application."
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Q2: Finishing Studies</span>
+              <button onclick="speakText('When you finish your studies, where will you work?')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"When you finish your studies, where will you go?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "When I graduate, I'll probably spend a few weeks visiting family before beginning job interviews."
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-slate-50 space-y-3 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-700 uppercase">Q3: Careers</span>
+              <button onclick="speakText('If you have to change your career in future, what field will you enter?')" class="text-xs text-slate-500 hover:text-amber-700 font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
+            </div>
+            <p class="text-sm font-extrabold text-slate-900">"If you have to change careers, what will you do?"</p>
+            <div class="text-xs bg-white p-2.5 rounded-xl border border-slate-200 text-slate-600">
+              <strong>Model:</strong> "Provided that I have the time to retrain, I will transition into environmental consultancy or AI design."
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-ex4" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-orange-800 via-rose-700 to-purple-800 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a & 4b</span>
+            <span class="text-orange-200 text-xs font-medium">Futuristic Hospitality Cloze Text</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Hotels of the Future: Automated Service & Smart Mirrors</h2>
+          <p class="text-orange-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Complete the 18 gaps in the article with the correct form of the verbs in brackets. Pay close attention to time clauses (*when*, *until*, *provided that*) vs. main result clauses with *will*.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4a()" class="px-5 py-2.5 bg-white hover:bg-orange-50 text-orange-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Article</span>
+          </button>
+          <button onclick="revealEx4a()" class="px-4 py-2.5 bg-orange-950/60 hover:bg-orange-950 text-white border border-orange-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 4a Article Reading View with 18 In-line Gaps -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-orange-100 text-orange-800 text-sm font-black flex items-center justify-center">4a</span>
+            Complete the text with the correct form of the verbs in brackets:
+          </h3>
+          <span id="ex4a-score-pill" class="text-xs font-bold text-orange-800 bg-orange-50 px-3 py-1 rounded-xl">Score: 0/18</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.8rem] sm:leading-[3.3rem] font-normal space-y-6">
+          <p>
+            When people
+            <span class="font-bold text-slate-400 mr-1">1</span>
+            <input type="text" data-ex4a-gap="1" data-ans="check into" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-40 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(check into)" />
+            a hotel in the future, they
+            <span class="font-bold text-slate-400 mr-1">2</span>
+            <input type="text" data-ex4a-gap="2" data-ans="will not need,won't need" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(not need)" />
+            to speak to a single human until they
+            <span class="font-bold text-slate-400 mr-1">3</span>
+            <input type="text" data-ex4a-gap="3" data-ans="walk" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(walk)" />
+            out again. Several hotels already offer automated services to guests.
+          </p>
+
+          <p>
+            For example, when you
+            <span class="font-bold text-slate-400 mr-1">4</span>
+            <input type="text" data-ex4a-gap="4" data-ans="arrive" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(arrive)" />
+            at Lowry hotel in Manchester, a robot receptionist
+            <span class="font-bold text-slate-400 mr-1">5</span>
+            <input type="text" data-ex4a-gap="5" data-ans="will greet,'ll greet" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(greet)" />
+            you. If today's hotels
+            <span class="font-bold text-slate-400 mr-1">6</span>
+            <input type="text" data-ex4a-gap="6" data-ans="are" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(be)" />
+            any indication of the future, innovations in bathroom technology
+            <span class="font-bold text-slate-400 mr-1">7</span>
+            <input type="text" data-ex4a-gap="7" data-ans="will probably start,probably will start" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-52 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(probably start)" />
+            in the hotel industry.
+          </p>
+
+          <p>
+            New showers which don't need water are already in development. When a test subject
+            <span class="font-bold text-slate-400 mr-1">8</span>
+            <input type="text" data-ex4a-gap="8" data-ans="steps" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(step)" />
+            in, sound waves
+            <span class="font-bold text-slate-400 mr-1">9</span>
+            <input type="text" data-ex4a-gap="9" data-ans="will shake,'ll shake" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(shake)" />
+            the dirt off their body in the near future.
+          </p>
+
+          <p>
+            It's not just the bathrooms, though. Most hotels offer a gym service, but in future, rather than waste valuable floor space with all that equipment, a virtual trainer
+            <span class="font-bold text-slate-400 mr-1">10</span>
+            <input type="text" data-ex4a-gap="10" data-ans="will work out,'ll work out" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-40 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(work out)" />
+            with you in your room if you
+            <span class="font-bold text-slate-400 mr-1">11</span>
+            <input type="text" data-ex4a-gap="11" data-ans="request" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(request)" />
+            that service.
+          </p>
+
+          <p>
+            And if you
+            <span class="font-bold text-slate-400 mr-1">12</span>
+            <input type="text" data-ex4a-gap="12" data-ans="call" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(call)" />
+            room service, you
+            <span class="font-bold text-slate-400 mr-1">13</span>
+            <input type="text" data-ex4a-gap="13" data-ans="will not need,won't need" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(not need)" />
+            to worry about waking the night staff, with the new robot waiters coming to hotels soon. You
+            <span class="font-bold text-slate-400 mr-1">14</span>
+            <input type="text" data-ex4a-gap="14" data-ans="will not have,won't have" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(not have)" />
+            to connect your laptop to the hotel wifi either, provided that you
+            <span class="font-bold text-slate-400 mr-1">15</span>
+            <input type="text" data-ex4a-gap="15" data-ans="choose" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(choose)" />
+            a hotel with the latest smart mirrors. These mirrors display your emails while you put your make-up on.
+          </p>
+
+          <p>
+            And if none of that
+            <span class="font-bold text-slate-400 mr-1">16</span>
+            <input type="text" data-ex4a-gap="16" data-ans="appeals" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(appeal)" />
+            , how about something truly unusual for your next holiday? When you
+            <span class="font-bold text-slate-400 mr-1">17</span>
+            <input type="text" data-ex4a-gap="17" data-ans="book" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(book)" />
+            into the Poseidon resort in Fiji, you
+            <span class="font-bold text-slate-400 mr-1">18</span>
+            <input type="text" data-ex4a-gap="18" data-ans="will sleep,'ll sleep" class="ex4a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-orange-500 transition" placeholder="(sleep)" />
+            with the sharks, literally. The hotel is entirely underwater.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4b Pairwork Reflection on Hotels of the Future -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-orange-100 text-orange-800 text-sm font-black flex items-center justify-center">4b</span>
+            Discussion: Would you like to stay in hotels like these? Why / Why not?
+          </h3>
+          <button onclick="speakText('I would love to stay in the Poseidon underwater resort because observing marine life through panoramic glass windows would be an unforgettable adventure.')" class="text-xs font-bold text-orange-700 bg-orange-50 px-3.5 py-1.5 rounded-xl hover:bg-orange-100 transition flex items-center gap-1">
+            🔊 Listen to Model Opinion
+          </button>
+        </div>
+        <textarea id="ex4b-discussion" rows="2" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-orange-600 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. While robot receptionists and sound-wave showers sound highly efficient, I personally feel that hospitality requires warm human empathy. However, provided that it is safe, sleeping underwater in Fiji sounds breathtaking..."></textarea>
+      </div>
+    </section>
+
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 via-orange-950 to-amber-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-orange-600 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 178 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Zero and First Conditional</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Comprehensive reference on conditional structures, clause order, alternative connectors (<em>unless</em>, <em>provided that</em>, <em>otherwise</em>, <em>even if</em>), and modal variations.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Zero Conditional Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 font-black text-base flex items-center justify-center">
+              0C
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Zero Conditional</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Universal Truths, Habits & Facts</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Form: <em>If / When + present simple, present simple</em></div>
+              <p class="text-slate-600 font-medium"><em>"If you heat water to 100°C, it boils."</em></p>
+              <p class="text-slate-600 font-medium"><em>"When people get stressed, their heart rate increases."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Real, permanent situations:</div>
+              <p class="text-slate-600 font-medium">Used for outcomes that always occur whenever the condition is met. <strong>If</strong> and <strong>when</strong> have virtually the same meaning here.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- First Conditional Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-orange-100 text-orange-800 font-black text-base flex items-center justify-center">
+              1C
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">First Conditional</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Real Possibilities & Future Consequences</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Form: <em>If + present simple, will / won't + infinitive</em></div>
+              <p class="text-slate-600 font-medium"><em>"If air travel gets cheaper, more people will fly."</em></p>
+              <p class="text-xs text-rose-600 font-bold">✗ NEVER use <s>will</s> in the if-clause: <s>If it will get cheaper...</s></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Variations in the result clause:</div>
+              <p class="text-slate-600 font-medium">• Modal verbs: <em>can, could, may, might, should</em> (e.g. <em>"If you take a boat, you can cross more quickly."</em>)</p>
+              <p class="text-slate-600 font-medium">• Imperatives: <em>"If you need assistance, press the button."</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alternative Condition Connectors Matrix -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+          <span>⚡</span> Alternative Condition Conjunctions Reference
+        </h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-orange-700 block text-base mb-1">Unless (= if not)</span>
+            <p class="text-slate-700 leading-relaxed font-medium">
+              <em>"There will be traffic problems <strong>unless</strong> we invest in roads."</em> (if we don't invest).
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-orange-700 block text-base mb-1">Provided that (= only if)</span>
+            <p class="text-slate-700 leading-relaxed font-medium">
+              <em>"<strong>Provided that</strong> space agencies share ideas, technology will advance."</em> (on condition that).
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-orange-700 block text-base mb-1">Otherwise (= or else)</span>
+            <p class="text-slate-700 leading-relaxed font-medium">
+              <em>"We need radical plans, <strong>otherwise</strong> cities will come to a standstill."</em>
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-orange-700 block text-base mb-1">Even if (= whether or not)</span>
+            <p class="text-slate-700 leading-relaxed font-medium">
+              <em>"<strong>Even if</strong> traffic gets worse, cars will still be popular."</em>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 69
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 7a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 7: Around the world • Page 109 • Expert Grammar Page 178
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const state = {
+      score: {
+        ex1a: 0,
+        ex2a: 0,
+        ex4a: 0
+      }
+    };
+
+    // Web Audio Synthesizer for feedback sounds
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(170, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-orange-700', 'text-white', 'shadow-md', 'shadow-orange-700/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-orange-700', 'text-white', 'shadow-md', 'shadow-orange-700/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Clean user strings
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    function checkEx1aQuick() {
+      checkEx1a(false);
+    }
+
+    function checkEx1a(playSound = true) {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex1a-container [data-ex1a-item]');
+
+      rows.forEach(row => {
+        const sel = row.querySelector('.ex1a-select');
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!sel.value) {
+          badge.innerHTML = '';
+          sel.classList.remove('border-rose-400', 'border-emerald-500');
+          return;
+        }
+
+        if (sel.value === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-emerald-500');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Need: ${expected}</span>`;
+          sel.classList.remove('border-emerald-500');
+          sel.classList.add('border-rose-400');
+        }
+      });
+
+      state.score.ex1a = correct;
+      document.getElementById('ex1a-score-pill').textContent = `Score: ${correct}/5`;
+      updateTotalScore();
+      if (playSound && correct > 0) {
+        playBeep(correct >= 4);
+      }
+    }
+
+    function revealEx1a() {
+      const keys = ['B', 'E', 'D', 'A', 'C'];
+      const rows = document.querySelectorAll('#ex1a-container [data-ex1a-item]');
+      rows.forEach((row, i) => {
+        const sel = row.querySelector('.ex1a-select');
+        sel.value = keys[i];
+        sel.classList.remove('border-rose-400');
+        sel.classList.add('border-emerald-500');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex1a = 5;
+      document.getElementById('ex1a-score-pill').textContent = 'Score: 5/5';
+      updateTotalScore();
+    }
+
+    function toggleEx1bExpl() {
+      const exp = document.getElementById('ex1b-explanation');
+      exp.classList.toggle('hidden');
+    }
+
+    function checkEx2a() {
+      let correctSentences = 0;
+      const rows = document.querySelectorAll('#ex2a-container [data-ex2a-row]');
+
+      rows.forEach(row => {
+        const inputs = Array.from(row.querySelectorAll('.ex2a-input'));
+        const badge = row.querySelector('.feedback-badge');
+        let rowAllCorrect = true;
+
+        inputs.forEach(inp => {
+          const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+          const userVal = cleanStr(inp.value);
+
+          if (allowed.includes(userVal)) {
+            inp.classList.remove('border-rose-400', 'bg-rose-50');
+            inp.classList.add('border-emerald-500', 'bg-emerald-50');
+          } else {
+            rowAllCorrect = false;
+            inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+            inp.classList.add('border-rose-400', 'bg-rose-50');
+          }
+        });
+
+        if (rowAllCorrect) {
+          correctSentences++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Both Correct</span>';
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck verbs</span>';
+        }
+      });
+
+      state.score.ex2a = correctSentences;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correctSentences}/10`;
+      updateTotalScore();
+      playBeep(correctSentences >= 7);
+    }
+
+    function revealEx2a() {
+      const keys = {
+        '1': ['will be', 'gets'],
+        '2': ['will be', 'invest'],
+        '3': ['builds', 'will halve'],
+        '4': ['will choose', 'makes'],
+        '5': ['will need', 'keep'],
+        '6': ['gets', 'will still be'],
+        '7': ['will build', 'continue'],
+        '8': ['will become', 'find'],
+        '9': ['create', 'will come'],
+        '10': ['share', 'will improve']
+      };
+
+      for (let r in keys) {
+        const row = document.querySelector(`[data-ex2a-row="${r}"]`);
+        const inputs = row.querySelectorAll('.ex2a-input');
+        inputs[0].value = keys[r][0];
+        inputs[1].value = keys[r][1];
+
+        inputs.forEach(inp => {
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      state.score.ex2a = 10;
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 10/10';
+      updateTotalScore();
+    }
+
+    function loadSampleDebate2b() {
+      document.getElementById('ex2b-note-1').value = "Even if traffic congestion gets worse, cars will remain dominant unless public transit offers equal privacy and convenience.";
+      document.getElementById('ex2b-note-2').value = "Provided that governments invest in high-speed rail, intercity travel times will halve and carbon emissions will decline sharply.";
+      playBeep(true);
+    }
+
+    function saveDebateNotes2b() {
+      const n1 = document.getElementById('ex2b-note-1').value;
+      const n2 = document.getElementById('ex2b-note-2').value;
+      localStorage.setItem('m7_debate_ex2b', JSON.stringify({ n1, n2 }));
+      const status = document.getElementById('ex2b-save-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    function loadSamplePlans3a() {
+      document.getElementById('ex3a-plan-1').value = "I will celebrate with my friends and apply for an overseas Master's degree.";
+      document.getElementById('ex3a-plan-2').value = "I will look for a junior consulting position in international logistics.";
+      document.getElementById('ex3a-plan-3').value = "I will be studying at an Australian university this time next year.";
+      document.getElementById('ex3a-plan-4').value = "I hope I secure an international scholarship. Otherwise, I will look for paid local internships.";
+      document.getElementById('ex3a-plan-5').value = "I'll see my friends for dinner on Friday unless my train is delayed.";
+      document.getElementById('ex3a-plan-6').value = "I will apply for international diplomacy or multilateral NGO careers.";
+      document.getElementById('ex3a-plan-7').value = "I will retrain in software engineering or renewable energy systems.";
+      document.getElementById('ex3a-plan-8').value = "I will travel to Japan and explore traditional Kyoto architecture.";
+      playBeep(true);
+    }
+
+    function savePlans3a() {
+      const plans = {};
+      for (let i = 1; i <= 8; i++) {
+        plans[i] = document.getElementById(`ex3a-plan-${i}`).value;
+      }
+      localStorage.setItem('m7_plans_ex3a', JSON.stringify(plans));
+      const status = document.getElementById('ex3a-save-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    function checkEx4a() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex4a-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex4a = correct;
+      document.getElementById('ex4a-score-pill').textContent = `Score: ${correct}/18`;
+      updateTotalScore();
+      playBeep(correct >= 13);
+    }
+
+    function revealEx4a() {
+      const keys = [
+        "check into",            // 1
+        "will not need",         // 2
+        "walk",                  // 3
+        "arrive",                // 4
+        "will greet",            // 5
+        "are",                   // 6
+        "will probably start",   // 7
+        "steps",                 // 8
+        "will shake",            // 9
+        "will work out",         // 10
+        "request",               // 11
+        "call",                  // 12
+        "will not need",         // 13
+        "will not have",         // 14
+        "choose",                // 15
+        "appeals",               // 16
+        "book",                  // 17
+        "will sleep"             // 18
+      ];
+
+      const inputs = document.querySelectorAll('.ex4a-input');
+      inputs.forEach((inp, idx) => {
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+      });
+
+      state.score.ex4a = 18;
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 18/18';
+      updateTotalScore();
+    }
+
+    function updateTotalScore() {
+      const total = state.score.ex1a + state.score.ex2a + state.score.ex4a;
+      // Max score: 5 + 10 + 18 = 33
+      const maxScore = 33;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 26) {
+        bar.classList.replace('bg-orange-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-orange-600');
+      }
+    }
+
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Clear 1a selects
+      document.querySelectorAll('.ex1a-select').forEach(s => {
+        s.value = '';
+        s.classList.remove('border-emerald-500', 'border-rose-400');
+      });
+
+      // Clear 2a inputs
+      document.querySelectorAll('.ex2a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 4a inputs
+      document.querySelectorAll('.ex4a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset state
+      state.score = { ex1a: 0, ex2a: 0, ex4a: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1a-score-pill').textContent = 'Score: 0/5';
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/10';
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 0/18';
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const savedDebate = JSON.parse(localStorage.getItem('m7_debate_ex2b'));
+        if (savedDebate) {
+          if (savedDebate.n1) document.getElementById('ex2b-note-1').value = savedDebate.n1;
+          if (savedDebate.n2) document.getElementById('ex2b-note-2').value = savedDebate.n2;
+        }
+
+        const savedPlans = JSON.parse(localStorage.getItem('m7_plans_ex3a'));
+        if (savedPlans) {
+          for (let i = 1; i <= 8; i++) {
+            if (savedPlans[i]) document.getElementById(`ex3a-plan-${i}`).value = savedPlans[i];
+          }
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

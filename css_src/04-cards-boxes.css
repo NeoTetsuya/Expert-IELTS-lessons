@@ -414,4 +414,82 @@
     animation: fadeIn 0.25s ease;
 }
 
+/* ==========================================================================
+   HIGH-LEGIBILITY PRESENTATION TYPOGRAPHY & REFERENCE GROUPS
+   Standard presentation defaults across all modules
+   ========================================================================== */
+.writing-model-text {
+    font-size: calc(19.5px * var(--font-scale, 1));
+    line-height: 1.75;
+    color: var(--text-dark, #1e293b);
+}
+
+.writing-prompt-quote {
+    font-size: calc(20px * var(--font-scale, 1));
+    line-height: 1.7;
+    color: var(--text-dark, #0f172a);
+}
+
+.ref-item-block {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+}
+
+.ref-query-text {
+    font-size: calc(20px * var(--font-scale, 1));
+    line-height: 1.6;
+    font-weight: 600;
+    color: var(--text-dark, #1e293b);
+    margin-bottom: 8px;
+}
+
+.ref-target-word {
+    font-size: calc(24px * var(--font-scale, 1));
+    font-weight: 800;
+    color: #7c3aed;
+    background: rgba(124, 58, 237, 0.12);
+    padding: 2px 14px;
+    border-radius: 8px;
+    display: inline-block;
+    box-shadow: 0 1px 3px rgba(124, 58, 237, 0.15);
+}
+
+.anatomy-sentence-text {
+    font-size: calc(19.5px * var(--font-scale, 1));
+    line-height: 1.65;
+    margin-bottom: 12px;
+    color: var(--text-dark, #1e293b);
+}
+
+.sentence-ordering-item {
+    padding: 16px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+}
+
+.sentence-ordering-text {
+    font-size: calc(19px * var(--font-scale, 1));
+    line-height: 1.65;
+    font-weight: 500;
+    color: var(--text-dark, #1e293b);
+    flex: 1;
+}
+
+.analysis-chip, .box-chip {
+    font-size: calc(18px * var(--font-scale, 1));
+    line-height: 1.65;
+    padding: 14px 18px;
+}
+
+.item-explanation {
+    font-size: calc(16.5px * var(--font-scale, 1));
+    line-height: 1.65;
+}
+
+
 

@@ -897,6 +897,84 @@ html, body {
     animation: fadeIn 0.25s ease;
 }
 
+/* ==========================================================================
+   HIGH-LEGIBILITY PRESENTATION TYPOGRAPHY & REFERENCE GROUPS
+   Standard presentation defaults across all modules
+   ========================================================================== */
+.writing-model-text {
+    font-size: calc(19.5px * var(--font-scale, 1));
+    line-height: 1.75;
+    color: var(--text-dark, #1e293b);
+}
+
+.writing-prompt-quote {
+    font-size: calc(20px * var(--font-scale, 1));
+    line-height: 1.7;
+    color: var(--text-dark, #0f172a);
+}
+
+.ref-item-block {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+}
+
+.ref-query-text {
+    font-size: calc(20px * var(--font-scale, 1));
+    line-height: 1.6;
+    font-weight: 600;
+    color: var(--text-dark, #1e293b);
+    margin-bottom: 8px;
+}
+
+.ref-target-word {
+    font-size: calc(24px * var(--font-scale, 1));
+    font-weight: 800;
+    color: #7c3aed;
+    background: rgba(124, 58, 237, 0.12);
+    padding: 2px 14px;
+    border-radius: 8px;
+    display: inline-block;
+    box-shadow: 0 1px 3px rgba(124, 58, 237, 0.15);
+}
+
+.anatomy-sentence-text {
+    font-size: calc(19.5px * var(--font-scale, 1));
+    line-height: 1.65;
+    margin-bottom: 12px;
+    color: var(--text-dark, #1e293b);
+}
+
+.sentence-ordering-item {
+    padding: 16px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+}
+
+.sentence-ordering-text {
+    font-size: calc(19px * var(--font-scale, 1));
+    line-height: 1.65;
+    font-weight: 500;
+    color: var(--text-dark, #1e293b);
+    flex: 1;
+}
+
+.analysis-chip, .box-chip {
+    font-size: calc(18px * var(--font-scale, 1));
+    line-height: 1.65;
+    padding: 14px 18px;
+}
+
+.item-explanation {
+    font-size: calc(16.5px * var(--font-scale, 1));
+    line-height: 1.65;
+}
+
+
 
 /* Scrollable Writing Model Essay Pane */
 .writing-model-pane {
@@ -4285,4 +4363,191 @@ table td, table th {
     background: rgba(30, 41, 59, 0.95) !important;
     border-color: rgba(255, 255, 255, 0.25) !important;
     color: #f8fafc !important;
+}
+
+/* ==========================================================================
+   UNIVERSAL PRESENTATION FONT SIZING & SCALE SYSTEM (presentation-font-sizes.css)
+   Guarantees high-legibility, presentation-distance readability across ALL
+   slides, question cards, extracts, notes, strategy cards, and walkthroughs.
+   Works in conjunction with --font-scale (default 1).
+   ========================================================================== */
+
+/* 1. Universal Cards & Content Boxes */
+.card {
+    font-size: calc(20px * var(--font-scale, 1));
+    line-height: 1.7;
+}
+
+.card p {
+    font-size: calc(19.5px * var(--font-scale, 1));
+    line-height: 1.7;
+}
+
+.card li {
+    font-size: calc(19px * var(--font-scale, 1));
+    line-height: 1.65;
+}
+
+.card em,
+.card p em,
+.card i {
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.card strong,
+.card b {
+    font-size: inherit;
+    font-weight: 700;
+}
+
+/* 2. Question Cards (Q-Card) Titles & Question Prompts */
+.card.q-card > div:first-child,
+.q-card > h4,
+.q-card .q-title,
+.q-card [style*="font-weight:800"],
+.q-card [style*="font-weight: 800"] {
+    font-size: calc(21px * var(--font-scale, 1)) !important;
+    line-height: 1.45 !important;
+    font-weight: 800;
+}
+
+.q-card > div[style*="font-weight:700"]:first-child,
+.q-card > div[style*="font-weight: 700"]:first-child {
+    font-size: calc(21px * var(--font-scale, 1)) !important;
+    line-height: 1.45 !important;
+    font-weight: 700;
+}
+
+/* 3. Question Card Quotes & Sentence Stems (e.g. Slide 4) */
+.card.q-card > p,
+.q-card p,
+.q-card .sentence-quote,
+.q-card .passage-extract,
+.q-card > div > em,
+.q-card > p > em {
+    font-size: calc(19.5px * var(--font-scale, 1)) !important;
+    line-height: 1.65 !important;
+    margin-bottom: 12px;
+}
+
+/* 4. Notes, Lead-in Cards & Purpose Explanations (e.g. Slide 3) */
+.card:not(.q-card) {
+    font-size: calc(20px * var(--font-scale, 1)) !important;
+    line-height: 1.7 !important;
+}
+
+.card:not(.q-card) p,
+.card:not(.q-card) div {
+    font-size: calc(19.5px * var(--font-scale, 1));
+    line-height: 1.7;
+}
+
+.card:not(.q-card) strong:first-child {
+    font-size: calc(20.5px * var(--font-scale, 1));
+    line-height: 1.6;
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+/* 5. Discussion Cards & Interactive Dialogue Prompts */
+.discuss-card {
+    padding: 22px 28px !important;
+    gap: 20px !important;
+}
+
+.discuss-text {
+    font-size: calc(21px * var(--font-scale, 1)) !important;
+    line-height: 1.65 !important;
+}
+
+.discuss-text strong {
+    font-size: inherit;
+    font-weight: 700;
+}
+
+.discuss-num {
+    font-size: calc(24px * var(--font-scale, 1)) !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+}
+
+/* 6. Context Extract Quotes & Blockquotes */
+blockquote:not(.writing-prompt-quote) {
+    font-size: calc(19.5px * var(--font-scale, 1)) !important;
+    line-height: 1.7 !important;
+    padding: 16px 22px !important;
+}
+
+/* 7. Rule & Strategy Cards */
+.rule-card {
+    font-size: calc(19.5px * var(--font-scale, 1)) !important;
+    line-height: 1.7 !important;
+    padding: 18px 24px !important;
+}
+
+.strategy-card,
+.strategy-card .sentence-text {
+    font-size: calc(19.5px * var(--font-scale, 1)) !important;
+    line-height: 1.65 !important;
+}
+
+/* 8. Item Explanations & Rationale */
+.item-explanation {
+    font-size: calc(16.5px * var(--font-scale, 1)) !important;
+    line-height: 1.65 !important;
+    margin-top: 10px !important;
+}
+
+/* 9. Walkthrough Steps & Containers */
+.walkthrough-container p,
+.walkthrough-step-content {
+    font-size: calc(19.5px * var(--font-scale, 1)) !important;
+    line-height: 1.7 !important;
+}
+
+.walkthrough-step-title {
+    font-size: calc(21px * var(--font-scale, 1)) !important;
+    font-weight: 700;
+}
+
+/* 10. Reading Passages */
+.reading-pane {
+    font-size: calc(20.5px * var(--font-scale, 1)) !important;
+    line-height: 1.85 !important;
+}
+
+.reading-pane p {
+    font-size: inherit !important;
+    line-height: inherit !important;
+    margin-bottom: 16px;
+}
+
+/* 11. Word Chips, Badges & Pills */
+.word-chip, .vocab-chip {
+    font-size: calc(18px * var(--font-scale, 1)) !important;
+    padding: 8px 18px !important;
+}
+
+.tag-pill {
+    font-size: calc(16px * var(--font-scale, 1)) !important;
+    padding: 6px 16px !important;
+}
+
+/* 12. Slide Header Subtitle & Instructions */
+.slide-subtitle {
+    font-size: calc(21px * var(--font-scale, 1)) !important;
+    line-height: 1.55 !important;
+}
+
+/* 13. Form Inputs & Select Controls (Preserve Appropriate Functional Size) */
+.select-input {
+    font-size: calc(17.5px * var(--font-scale, 1)) !important;
+    padding: 8px 16px !important;
+}
+
+.blank-input {
+    font-size: calc(18px * var(--font-scale, 1)) !important;
+    padding: 7px 15px !important;
 }

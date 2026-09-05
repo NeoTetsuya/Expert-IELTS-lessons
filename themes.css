@@ -97,6 +97,81 @@
     color: #0f172a !important;
 }
 
+/* Light Theme High-Legibility Content Defaults */
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .ref-item-block {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .ref-query-text {
+    font-size: calc(20px * var(--font-scale, 1)) !important;
+    line-height: 1.6 !important;
+    font-weight: 600;
+    color: #0f172a !important;
+    margin-bottom: 8px;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .ref-target-word {
+    font-size: calc(24px * var(--font-scale, 1)) !important;
+    font-weight: 800 !important;
+    color: #7c3aed !important;
+    background: rgba(124, 58, 237, 0.12) !important;
+    border: 1px solid rgba(124, 58, 237, 0.2) !important;
+    padding: 2px 14px !important;
+    border-radius: 8px !important;
+    display: inline-block;
+    box-shadow: 0 1px 3px rgba(124, 58, 237, 0.15);
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .writing-model-text {
+    font-size: calc(19.5px * var(--font-scale, 1)) !important;
+    line-height: 1.75 !important;
+    color: #1e293b !important;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .writing-prompt-quote {
+    font-size: calc(20px * var(--font-scale, 1)) !important;
+    line-height: 1.7 !important;
+    color: #0f172a !important;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .anatomy-sentence-text {
+    font-size: calc(19.5px * var(--font-scale, 1)) !important;
+    line-height: 1.65 !important;
+    color: #0f172a !important;
+    margin-bottom: 12px;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .sentence-ordering-item {
+    padding: 16px 22px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 18px !important;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .sentence-ordering-text {
+    font-size: calc(19px * var(--font-scale, 1)) !important;
+    line-height: 1.65 !important;
+    font-weight: 500;
+    color: #0f172a !important;
+    flex: 1;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) :is(.analysis-chip, .box-chip) {
+    font-size: calc(18px * var(--font-scale, 1)) !important;
+    line-height: 1.65 !important;
+    padding: 14px 18px !important;
+}
+
+:is([data-theme="academic"], [data-theme="bold-signal"], [data-theme="vintage"], [data-theme="botanical"], [data-theme="block-frame"], [data-theme="coral"], [data-theme="soft-editorial"], [data-theme="cartesian"], [data-theme="bauhaus-bold"], [data-theme="swiss-ikb"], [data-theme="kraft-paper"], [data-theme="monochrome"], [data-theme="pin-and-paper"], [data-theme="retro-windows"], [data-theme="stencil-tablet"], [data-theme="biennale-yellow"], [data-theme="sakura-chroma"], [data-theme="cobalt-grid"], [data-theme="grove"], [data-theme="emerald-editorial"], [data-theme="editorial-tri-tone"], :root:not([data-theme])) .item-explanation {
+    font-size: calc(16.5px * var(--font-scale, 1)) !important;
+    line-height: 1.65 !important;
+}
+
 
 /* ==========================================================================
    PART 2: DARK THEMES LEGIBILITY & CONTRAST
@@ -147,6 +222,84 @@
 
 :is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .box-chip strong {
     color: #38bdf8 !important;
+}
+
+/* Dark Theme High-Legibility Content Defaults */
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .ref-item-block {
+    background: rgba(30, 41, 59, 0.85) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .ref-query-text {
+    font-size: calc(20px * var(--font-scale, 1)) !important;
+    line-height: 1.6 !important;
+    font-weight: 600;
+    color: #f8fafc !important;
+    margin-bottom: 8px;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .ref-target-word {
+    font-size: calc(24px * var(--font-scale, 1)) !important;
+    font-weight: 800 !important;
+    color: #c084fc !important;
+    background: rgba(192, 132, 252, 0.22) !important;
+    border: 1px solid rgba(192, 132, 252, 0.35) !important;
+    padding: 2px 14px !important;
+    border-radius: 8px !important;
+    display: inline-block;
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.35) !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .writing-model-text {
+    font-size: calc(19.5px * var(--font-scale, 1)) !important;
+    line-height: 1.75 !important;
+    color: #f8fafc !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .writing-prompt-quote {
+    font-size: calc(20px * var(--font-scale, 1)) !important;
+    line-height: 1.7 !important;
+    color: #f8fafc !important;
+    background: rgba(15, 23, 42, 0.85) !important;
+    border-left: 4px solid #c084fc !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .anatomy-sentence-text {
+    font-size: calc(19.5px * var(--font-scale, 1)) !important;
+    line-height: 1.65 !important;
+    color: #f8fafc !important;
+    margin-bottom: 12px;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .sentence-ordering-item {
+    padding: 16px 22px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 18px !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .sentence-ordering-text {
+    font-size: calc(19px * var(--font-scale, 1)) !important;
+    line-height: 1.65 !important;
+    font-weight: 500;
+    color: #f8fafc !important;
+    flex: 1;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) :is(.analysis-chip, .box-chip) {
+    font-size: calc(18px * var(--font-scale, 1)) !important;
+    line-height: 1.65 !important;
+    padding: 14px 18px !important;
+}
+
+:is([data-theme="electric"], [data-theme="voltage"], [data-theme="vellum"], [data-theme="broadside"], [data-theme="8-bit-orbit"], [data-theme="dark"], .dark-theme) .item-explanation {
+    font-size: calc(16.5px * var(--font-scale, 1)) !important;
+    line-height: 1.65 !important;
+    color: #cbd5e1 !important;
 }
 
 /* ==========================================================================

@@ -52,7 +52,7 @@ function scanDecks() {
             }
 
             // 2. Extract Slide Count
-            const slideMatches = content.match(/<section\s+class=["'][^"']*slide[^"']*["']/gi) || [];
+            const slideMatches = content.match(/<(?:section\s+class=["'][^"']*slide[^"']*["']|slide-card\b)/gi) || [];
             const slideCount = slideMatches.length || 1;
 
             // 3. Extract Module Identifier
@@ -133,19 +133,23 @@ function updateIndexHtml() {
     console.log(`Found ${decks.length} presentation decks across course folders.`);
 
     let indexContent = fs.readFileSync(indexHtmlPath, 'utf8');
+    let updatedCount = 0;
 
-    const cardsHtml = decks.map(d => generateCardHtml(d)).join('\n\n');
+    // Match each individual <article class="module-card" ... </article>
+    indexContent = indexContent.replace(/<article class="module-card"[\s\S]*?<\/article>/gi, (cardHtml) => {
+        const deck = decks.find(d => cardHtml.includes(`href="${d.relUrl}"`));
+        if (deck) {
+            const counterRegex = /<span class="slide-counter">[^<]*<\/span>/;
+            if (counterRegex.test(cardHtml)) {
+                updatedCount++;
+                return cardHtml.replace(counterRegex, `<span class="slide-counter">${deck.slideCount} Slides</span>`);
+            }
+        }
+        return cardHtml;
+    });
 
-    // Replace inside <main class="modules-grid" id="modulesGrid">
-    const gridRegex = /(<main class="modules-grid" id="modulesGrid">)[\s\S]*?(<\/main>)/i;
-
-    if (gridRegex.test(indexContent)) {
-        indexContent = indexContent.replace(gridRegex, `$1\n${cardsHtml}\n    $2`);
-        fs.writeFileSync(indexHtmlPath, indexContent, 'utf8');
-        console.log('✓ index.html successfully updated with all current decks!');
-    } else {
-        console.error('Could not locate <main class="modules-grid" id="modulesGrid"> in index.html');
-    }
+    fs.writeFileSync(indexHtmlPath, indexContent, 'utf8');
+    console.log(`✓ index.html successfully updated: synchronized slide counters for ${updatedCount} decks!`);
 }
 
 updateIndexHtml();

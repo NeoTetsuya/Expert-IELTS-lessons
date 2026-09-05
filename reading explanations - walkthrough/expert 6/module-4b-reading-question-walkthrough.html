@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Reading Masterclass | The Science of Interstellar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        orbitron: ['"Orbitron"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        spaceTheme: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            800: '#0c4a6e',
+                            900: '#082f49',
+                            950: '#051926'
+                        },
+                        cosmic: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                            950: '#1e1b4b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(2, 132, 199, 0.25); border-radius: 999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(2, 132, 199, 0.5); }
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #0284c7, #6366f1, #38bdf8);
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+        .keyword-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+        }
+        .passage-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.58rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        .answer-badge {
+            animation: pulseSubtle 3s infinite;
+        }
+        @keyframes pulseSubtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-sky-100 selection:text-sky-900">
+
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-spaceTheme-700 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-spaceTheme-900/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-spaceTheme-700 bg-spaceTheme-50 px-2 py-0.5 rounded-full border border-spaceTheme-200">IELTS Reading Analysis</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích chuyên sâu 12 câu hỏi (Matching Features & Sentence Completion)</span>
+                        </div>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">The Science of Interstellar: Fact or Fiction?</h1>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-spaceTheme-100 text-spaceTheme-800 px-2.5 py-1 rounded-lg">Câu 1/12</span>
+                </div>
+            </div>
+
+            <!-- Global View Switcher -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+                <button id="tab-presentation" onclick="switchView('presentation')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-spaceTheme-700 text-white shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                    </svg>
+                    <span>Slide Từng Câu</span>
+                </button>
+                <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    <span>Xem Tất Cả (List)</span>
+                </button>
+                <button id="tab-concepts" onclick="switchView('concepts')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                    <span>4 Hiện Tượng Vũ Trụ</span>
+                </button>
+                <button id="tab-synonyms" onclick="switchView('synonyms')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    <span>Ma Trận Paraphrase</span>
+                </button>
+                <button id="tab-vocab" onclick="switchView('vocab')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span>Từ Vựng Trọng Tâm</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
+        <section id="view-presentation" class="space-y-6 block">
+            
+            <!-- Quick Question Selector Chips -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Matching Features (Q1–Q6)</span>
+                    </div>
+                    <div class="text-xs text-slate-400 flex items-center gap-2">
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2" id="question-nav-chips">
+                    <!-- Dynamic question buttons inserted by JS -->
+                </div>
+            </div>
+
+            <!-- Slide Main Card -->
+            <div id="slide-card-container" class="relative">
+                <!-- Dynamically rendered slide content -->
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span>Câu Trước</span>
+                </button>
+
+                <div class="flex items-center gap-3">
+                    <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 12</span>
+                </div>
+
+                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-spaceTheme-700 hover:bg-spaceTheme-800 text-white font-semibold shadow-md shadow-spaceTheme-900/10 active:scale-95 transition-all">
+                    <span>Câu Kế Tiếp</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- VIEW 2: ALL QUESTIONS CONTINUOUS LIST -->
+        <section id="view-all" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 12 Câu Hỏi</h2>
+                    <p class="text-sm text-slate-500">Xem toàn bộ phát biểu đề bài, câu văn chứa bằng chứng, ma trận từ đồng nghĩa và phân tích logic tiếng Việt.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="filterAllQuestions('all')" class="filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-spaceTheme-700 text-white">Tất Cả (1–12)</button>
+                    <button onclick="filterAllQuestions('features')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Matching Features (1–6)</button>
+                    <button onclick="filterAllQuestions('sentence')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Sentence Completion (7–12)</button>
+                </div>
+            </div>
+
+            <div id="all-questions-container" class="space-y-6">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- VIEW 3: 4 SCIENTIFIC CONCEPTS (OPTIONS A–D) -->
+        <section id="view-concepts" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-spaceTheme-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-spaceTheme-700">Physics & Sci-Fi Realities (Options A–D)</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900 font-orbitron">4 Hiện Tượng Khoa Học Trong Phim Interstellar</h2>
+                        <p class="text-sm text-slate-600 mt-1">Đánh giá tính xác thực khoa học do nhà vật lý thiên văn Kip Thorne thẩm định: Đâu là sự thật đã được chứng minh, đâu là dự đoán và đâu chỉ là hư cấu điện ảnh.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6" id="concepts-grid-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: SYNONYMS & PARAPHRASE MATRIX -->
+        <section id="view-synonyms" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-spaceTheme-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-spaceTheme-700">Paraphrase & Semantic Alignment</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Ma Trận Từ Đồng Nghĩa & Diễn Đạt Tương Đương</h2>
+                        <p class="text-sm text-slate-600 mt-1">Đối chiếu chi tiết giữa câu hỏi trong đề thi với văn bản thực tế trong bài đọc của từng câu.</p>
+                    </div>
+                    <div class="bg-spaceTheme-50 border border-spaceTheme-200 rounded-xl px-4 py-2.5 text-center">
+                        <span class="text-xs text-spaceTheme-700 font-semibold block uppercase">Tổng hợp</span>
+                        <span class="text-xl font-extrabold text-spaceTheme-900">12 Cặp Paraphrase Cốt Lõi</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600">
+                                <th class="py-3 px-4 w-16 text-center">Câu</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Đề Thi (Question)</th>
+                                <th class="py-3 px-4 w-1/4">Từ / Cụm từ trong Bài Đọc (Passage)</th>
+                                <th class="py-3 px-4 w-36 text-center">Đáp Án</th>
+                                <th class="py-3 px-4">Ý Nghĩa & Phân Tích Logic Tiếng Việt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="synonyms-table-body" class="divide-y divide-slate-100 text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: VOCABULARY HUB -->
+        <section id="view-vocab" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-spaceTheme-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-spaceTheme-700">Astrophysics & Space Science Lexicon</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Kho Từ Vựng Trọng Tâm & Phát Âm Chuẩn</h2>
+                        <p class="text-sm text-slate-600 mt-1">Từ vựng học thuật chủ đề vật lý thiên văn, giãn nở thời gian, hố giun, lỗ đen và quỹ đạo vũ trụ kèm phiên âm IPA và audio phát âm.</p>
+                    </div>
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="vocab-search-input" onkeyup="searchVocab(this.value)" placeholder="Tìm kiếm từ vựng hoặc nghĩa..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-spaceTheme-600 focus:ring-1 focus:ring-spaceTheme-600 bg-slate-50/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="vocab-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+    const conceptsPool = [
+        {
+            key: 'A',
+            title: 'Travelling through a wormhole',
+            realityStatus: 'Giả thuyết lý thuyết / Chưa từng quan sát trong tự nhiên',
+            description: 'Đường hầm kết nối không - thời gian cho phép di chuyển tức thời giữa hai điểm xa xôi trong vũ trụ giống như con sâu đục lỗ xuyên qua quả táo. Về mặt lý thuyết có thể tồn tại, nhưng các nhà khoa học chưa rõ làm sao để giữ nó mở đủ lâu.',
+            resolvedQuestions: 'Câu 4 (Q4)',
+            evidenceQuote: 'Wormholes can exist in theory but nobody knows how they could stay open long enough for someone to travel through them. Therefore they will probably never exist naturally in the universe.'
+        },
+        {
+            key: 'B',
+            title: 'Avoiding a black hole',
+            realityStatus: 'Tương tự thực tế nhưng phương pháp trong phim bất khả thi',
+            description: 'Tận dụng lực hấp dẫn của thiên thể để tăng tốc (trợ lực hấp dẫn / gravitational slingshot) đã được thực hiện ngoài đời thực (quay quanh Trái Đất và Sao Hỏa để đuổi theo sao chổi). Tuy nhiên, thoát khỏi lực hút khổng lồ của lỗ đen và giảm tốc để hạ cánh thì tàu vũ trụ chắc chắn sẽ vỡ nát.',
+            resolvedQuestions: 'Câu 3, Câu 5 (Q3, Q5)',
+            evidenceQuote: 'This is not as strange as it sounds as something like this has been done in real life... space mission travelling around Earth and Mars to get enough speed to chase a comet. However, to escape a black hole... the ship would almost certainly fall apart.'
+        },
+        {
+            key: 'C',
+            title: 'All food crops on Earth dying',
+            realityStatus: 'Khó xảy ra trên diện rộng toàn cầu',
+            description: 'Trái Đất bị diệt vong do một loại bệnh dịch xóa sổ toàn bộ cây trồng. Trong thực tế, các dịch bệnh nguy hiểm chỉ tấn công một nhóm thực vật cụ thể chứ không diệt vong đồng loạt nhiều loài, và khủng hoảng nông nghiệp nếu có chỉ xảy ra ở cấp độ cục bộ.',
+            resolvedQuestions: 'Câu 2 (Q2)',
+            evidenceQuote: 'It is quite possible that the system could fail but this would be only at a local level. In addition, deadly diseases usually only attack one group of plants, not multiple groups...'
+        },
+        {
+            key: 'D',
+            title: 'People ageing at different speeds',
+            realityStatus: 'Sự thật khoa học đã được kiểm chứng (Thuyết tương đối Einstein)',
+            description: 'Thời gian trôi chậm hơn trong trường hấp dẫn mạnh và ở tốc độ cao (giãn nở thời gian - time dilation). Hiện tượng này xảy ra ngay trên Trái Đất (thời gian tầng 10 trôi nhanh hơn tầng hầm một phần triệu giây) và các vệ tinh định vị GPS bắt buộc phải hiệu chỉnh bù 40 micro-giây mỗi ngày.',
+            resolvedQuestions: 'Câu 1, Câu 6 (Q1, Q6)',
+            evidenceQuote: 'Could that be true? Well yes, we have evidence of this. On Earth the effect is small, adding just a few microseconds a day... time is moving ever so slightly more quickly on the 10th floor compared to a basement. As a result, GPS satellites circling the Earth need to be changed...'
+        }
+    ];
+
+    const questionsData = [
+        {
+            id: 1,
+            qNum: "Question 1",
+            group: "features",
+            type: "Matching Features",
+            wordLimit: "Chọn ký tự từ A đến D",
+            contextHeader: "Khoa học đã chứng minh hiện tượng này là hoàn toàn có thật",
+            promptText: "The science has proved to be true.",
+            correctKey: "D",
+            conceptName: "People ageing at different speeds",
+            passageSnippet: "When two characters travel to a distant planet, they age by only a few hours, but return to find their shipmate is 26 years older. <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>Could that be true? Well yes, we have evidence of this. On Earth the effect is small, adding just a few microseconds a day to the time of space</mark>.",
+            paragraphRef: "Đoạn 2 (Paragraph 2)",
+            paraphrases: [
+                { qPart: "The science has proved to be true", pPart: "Could that be true? Well yes, we have evidence of this", meaning: "Khoa học đã chứng minh là đúng / Có bằng chứng thực nghiệm rõ ràng về điều này" },
+                { qPart: "People ageing at different speeds", pPart: "characters can age at different speeds depending on where they are in the universe", meaning: "con người lão hóa với tốc độ khác nhau tùy thuộc vị trí trong vũ trụ" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Xác định hiện tượng khoa học viễn tưởng trong phim đã được kiểm chứng tính xác thực ngoài đời thực.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'proved to be true', 'evidence'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Bàn về chi tiết nhân vật già đi với tốc độ khác nhau (<em>'characters can age at different speeds'</em>): <em>'Could that be true? <strong>Well yes, we have evidence of this</strong>. On Earth the effect is small...'</em>.",
+                    "<strong>Khớp nghĩa paraphrase:</strong> 'We have evidence of this' (chúng ta có bằng chứng về điều này) đồng nghĩa với việc khoa học đã chứng minh điều này là đúng (<em>'science has proved to be true'</em>).",
+                    "<strong>Kết luận:</strong> Hiện tượng được nhắc đến là <strong>D (People ageing at different speeds)</strong>."
+                ],
+                traps: "Tránh nhầm với B (Avoiding a black hole): Lỗ đen có thật nhưng việc tàu lượn quanh lỗ đen mà không bị nát thì chưa được chứng minh là khả thi."
+            },
+            vocabHighlights: ["astrophysicist", "microseconds", "speculation"]
+        },
+        {
+            id: 2,
+            qNum: "Question 2",
+            group: "features",
+            type: "Matching Features",
+            wordLimit: "Chọn ký tự từ A đến D",
+            contextHeader: "Khó có khả năng xảy ra trên quy mô lớn toàn cầu",
+            promptText: "This is unlikely to happen on a large scale.",
+            correctKey: "C",
+            conceptName: "All food crops on Earth dying",
+            passageSnippet: "The main idea behind Interstellar is that the Earth is dying... the last crop – corn – is entirely used up, or is killed by the same disease that killed all the other crops... <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>It is quite possible that the system could fail but this would be only at a local level. In addition, deadly diseases usually only attack one group of plants, not multiple groups</mark>...",
+            paragraphRef: "Đoạn 3 (Paragraph 3)",
+            paraphrases: [
+                { qPart: "unlikely to happen on a large scale", pPart: "would be only at a local level / deadly diseases usually only attack one group of plants, not multiple groups", meaning: "chỉ xảy ra ở cấp độ cục bộ / không thể bùng phát trên quy mô lớn toàn cầu" },
+                { qPart: "All food crops on Earth dying", pPart: "last crop – corn – is entirely used up, or is killed by the same disease that killed all the other crops", meaning: "toàn bộ các loại cây trồng trên Trái Đất bị hủy diệt bởi dịch bệnh" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Tìm hiện tượng mà bài đọc khẳng định nếu xảy ra thì cũng chỉ mang tính cục bộ (local), khó có thể bùng phát trên diện rộng (large scale).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'unlikely to happen', 'large scale', 'local level'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 3):</strong> Bàn về chi tiết mọi cây lương thực trên Trái Đất bị diệt vong: <em>'...this would be <strong>only at a local level</strong>. In addition, deadly diseases usually only attack one group of plants, not multiple groups...'</em>",
+                    "<strong>Phân tích logic:</strong> 'Only at a local level' (chỉ ở cấp độ địa phương, cục bộ) trái ngược hoàn toàn với diện rộng toàn cầu (<em>'large scale'</em>), chứng minh điều này khó lòng xảy ra trên quy mô lớn.",
+                    "<strong>Kết luận:</strong> Hiện tượng tương ứng là <strong>C (All food crops on Earth dying)</strong>."
+                ],
+                traps: "Phim lấy bối cảnh nạn đói toàn cầu, nhưng chuyên gia phân tích chỉ ra dịch bệnh thực vật không thể quét sạch mọi họ cây cùng lúc."
+            },
+            vocabHighlights: ["speculation", "multiple", "crop varieties"]
+        },
+        {
+            id: 3,
+            qNum: "Question 3",
+            group: "features",
+            type: "Matching Features",
+            wordLimit: "Chọn ký tự từ A đến D",
+            contextHeader: "Phương pháp mà nhân vật trong phim sử dụng là không đủ / thiếu an toàn trong thực tế",
+            promptText: "The method used in the film was not sufficient.",
+            correctKey: "B",
+            conceptName: "Avoiding a black hole",
+            passageSnippet: "In the film, the main character solves this problem by travelling around the black hole and using that speed to get to the planet... <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>However, to escape a black hole, you would need a huge amount of speed. You also need to slow down again quickly to land on the planet, and the ship would almost certainly fall apart</mark>.",
+            paragraphRef: "Đoạn 5 (Paragraph 5)",
+            paraphrases: [
+                { qPart: "The method used in the film was not sufficient", pPart: "However, to escape a black hole, you would need a huge amount of speed... and the ship would almost certainly fall apart", meaning: "phương pháp bay quanh lỗ đen để tăng tốc không đủ an toàn và khả thi, con tàu chắc chắn sẽ vỡ nát" },
+                { qPart: "Avoiding a black hole", pPart: "To stop the black hole pulling it in / escape a black hole", meaning: "tránh bị lỗ đen hút vào" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Xác định tình huống mà giải pháp của nhân vật trong phim bị chuyên gia nhận định là không đủ / sẽ dẫn tới thảm họa ngoài đời thực.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'method used in the film', 'not sufficient', 'fall apart'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 5):</strong> Nhân vật chính giải quyết lực hút của lỗ đen bằng cách bay lượn quanh lỗ đen để lấy đà văng tới hành tinh. Tác giả chỉ trích: <em>'However, to escape a black hole, you would need a huge amount of speed. You also need to slow down again quickly... and <strong>the ship would almost certainly fall apart</strong>'</em>.",
+                    "<strong>Đánh giá tính khả thi:</strong> Con tàu chắc chắn sẽ vỡ tan tành nếu thực hiện thao tác đó ➔ Phương pháp sử dụng trong phim là không đủ / bất khả thi trong thực tế.",
+                    "<strong>Kết luận:</strong> Hiện tượng là <strong>B (Avoiding a black hole)</strong>."
+                ],
+                traps: "Chú ý phân biệt với câu 5: Cùng nói về lỗ đen, nhưng câu 5 nói về phần 'đã từng thử nghiệm thành công' (với Trái Đất/Sao Hỏa), còn câu 3 nói về phương pháp áp dụng với lỗ đen là không đủ."
+            },
+            vocabHighlights: ["black hole", "fall apart", "comet"]
+        },
+        {
+            id: 4,
+            qNum: "Question 4",
+            group: "features",
+            type: "Matching Features",
+            wordLimit: "Chọn ký tự từ A đến D",
+            contextHeader: "Các nhà khoa học chưa rõ hiện tượng này vận hành ra sao trong thực tế",
+            promptText: "Scientists are unclear about how this could work in practice.",
+            correctKey: "A",
+            conceptName: "Travelling through a wormhole",
+            passageSnippet: "<mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>Wormholes can exist in theory but nobody knows how they could stay open long enough for someone to travel through them. Therefore they will probably never exist naturally in the universe</mark>.",
+            paragraphRef: "Đoạn 4 (Paragraph 4)",
+            paraphrases: [
+                { qPart: "Scientists are unclear about how this could work in practice", pPart: "can exist in theory but nobody knows how they could stay open long enough for someone to travel through them", meaning: "có thể tồn tại trên lý thuyết nhưng không ai biết cách làm sao để nó duy trì trạng thái mở đủ lâu trong thực tế" },
+                { qPart: "Travelling through a wormhole", pPart: "jumping through a wormhole / travel quickly from one part of space to another", meaning: "du hành xuyên qua lỗ sâu (hố giun)" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Tìm hiện tượng chỉ mới tồn tại trên phương trình toán học lý thuyết, còn về mặt thực hành thì chưa ai biết cách thức vận hành.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'unclear', 'how this could work in practice', 'in theory'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> Nói về hố giun (wormhole): <em>'Wormholes <strong>can exist in theory but nobody knows how they could stay open long enough</strong> for someone to travel through them'</em>.",
+                    "<strong>Khớp nghĩa paraphrase:</strong> 'Nobody knows how...' (không ai biết làm thế nào) tương đương với 'Scientists are unclear about how this could work in practice' (các nhà khoa học chưa rõ cơ chế vận hành thực tế).",
+                    "<strong>Kết luận:</strong> Hiện tượng tương ứng là <strong>A (Travelling through a wormhole)</strong>."
+                ],
+                traps: "Đoạn 4 nêu giả thuyết có người ngoài hành tinh đặt hố giun ở đó, nhưng tác giả nhấn mạnh 'little chance humans will find a way to control space and time in this way'."
+            },
+            vocabHighlights: ["wormhole", "in theory", "speculation"]
+        },
+        {
+            id: 5,
+            qNum: "Question 5",
+            group: "features",
+            type: "Matching Features",
+            wordLimit: "Chọn ký tự từ A đến D",
+            contextHeader: "Một kỹ thuật tương tự đã từng hoạt động thành công trong thực tế",
+            promptText: "Something similar worked in reality.",
+            correctKey: "B",
+            conceptName: "Avoiding a black hole",
+            passageSnippet: "In the film, the main character solves this problem by travelling around the black hole and using that speed to get to the planet. <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>This is not as strange as it sounds as something like this has been done in real life. It did not involve a black hole, but it did involve a space mission travelling around Earth and Mars to get enough speed to chase a comet</mark>.",
+            paragraphRef: "Đoạn 5 (Paragraph 5)",
+            paraphrases: [
+                { qPart: "Something similar worked in reality", pPart: "something like this has been done in real life / space mission travelling around Earth and Mars to chase a comet", meaning: "một thao tác tương tự như vậy đã từng được thực hiện ngoài đời thực (sứ mệnh bay quanh Trái Đất và Sao Hỏa để tăng tốc)" },
+                { qPart: "Avoiding a black hole", pPart: "travelling around the black hole and using that speed", meaning: "kỹ thuật lợi dụng trường hấp dẫn của hố đen để tăng tốc" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Xác định hiện tượng/kỹ thuật mà bài đọc xác nhận đã có tiền lệ tương tự được áp dụng thành công trong các chuyến thám hiểm không gian có thật.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'Something similar', 'worked in reality', 'done in real life'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 5):</strong> Tác giả nhận định về việc bay lượn vòng để tăng tốc: <em>'This is not as strange as it sounds as <strong>something like this has been done in real life</strong>. It did not involve a black hole, but it did involve a space mission travelling around Earth and Mars to get enough speed to chase a comet'</em>.",
+                    "<strong>Khớp nghĩa đối chiếu:</strong> 'done in real life' chính là 'worked in reality'; việc lượn quanh Trái Đất/Sao Hỏa là 'something similar' của kỹ thuật lượn quanh hố đen.",
+                    "<strong>Kết luận:</strong> Lựa chọn chính xác là <strong>B (Avoiding a black hole)</strong>."
+                ],
+                traps: "Lưu ý quy tắc đề bài: 'NB You may use any letter more than once'. Chữ B được dùng cho cả câu 3 và câu 5."
+            },
+            vocabHighlights: ["comet", "space mission", "black hole"]
+        },
+        {
+            id: 6,
+            qNum: "Question 6",
+            group: "features",
+            type: "Matching Features",
+            wordLimit: "Chọn ký tự từ A đến D",
+            contextHeader: "Hiện tượng có tác động lên chúng ta ngay trên Trái Đất nhưng ở mức độ cực kỳ nhỏ",
+            promptText: "It affects us on Earth but in a very small way.",
+            correctKey: "D",
+            conceptName: "People ageing at different speeds",
+            passageSnippet: "When two characters travel to a distant planet, they age by only a few hours, but return to find their shipmate is 26 years older... <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>On Earth the effect is small, adding just a few microseconds a day to the time of space. However, it means that time is moving ever so slightly more quickly on the 10th floor compared to a basement</mark>. As a result, GPS satellites circling the Earth need to be changed...",
+            paragraphRef: "Đoạn 2 (Paragraph 2)",
+            paraphrases: [
+                { qPart: "affects us on Earth but in a very small way", pPart: "On Earth the effect is small, adding just a few microseconds a day / time moving ever so slightly more quickly", meaning: "trên Trái Đất tác động này rất nhỏ, chỉ chênh lệch vài micro-giây mỗi ngày" },
+                { qPart: "It", pPart: "characters can age at different speeds / time moving at different rates", meaning: "sự giãn nở thời gian / lão hóa với tốc độ khác nhau" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Tìm hiện tượng vũ trụ có diễn ra trên Trái Đất nhưng biên độ tác động vi mô (rất nhỏ).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'affects us on Earth', 'very small way', 'microseconds'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Tác giả giải thích về sự giãn nở thời gian: <em>'<strong>On Earth the effect is small</strong>, adding just a few microseconds a day to the time of space. However, it means that time is moving ever so slightly more quickly on the 10th floor compared to a basement'</em>.",
+                    "<strong>Khớp nghĩa trực diện:</strong> 'effect is small' = 'affects us in a very small way'.",
+                    "<strong>Kết luận:</strong> Hiện tượng tương ứng là <strong>D (People ageing at different speeds)</strong>."
+                ],
+                traps: "Ký tự D được lặp lại cho câu 1 và câu 6 (đúng với chỉ dẫn NB)."
+            },
+            vocabHighlights: ["microseconds", "gravitational dilation", "GPS satellites"]
+        },
+        {
+            id: 7,
+            qNum: "Question 7",
+            group: "sentence",
+            type: "Sentence Completion",
+            wordLimit: "NO MORE THAN TWO WORDS",
+            contextHeader: "Chuyên gia mà đạo diễn Christopher Nolan đã nhờ cố vấn khoa học",
+            promptText: "To ensure the science was correct, the filmmaker asked a famous [ 7 ] for help.",
+            completedSentence: "To ensure the science was correct, the filmmaker asked a famous <span class='text-spaceTheme-700 font-bold underline'>astrophysicist</span> for help.",
+            correctAnswer: "astrophysicist",
+            passageSnippet: "Director Christopher Nolan wanted to get details right and <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>got advice from well-known astrophysicist Professor Kip Thorne</mark>. So is the film more science fact than science fiction? Well, not exactly.",
+            paragraphRef: "Đoạn 1 (Paragraph 1)",
+            paraphrases: [
+                { qPart: "the filmmaker", pPart: "Director Christopher Nolan", meaning: "nhà làm phim / đạo diễn Christopher Nolan" },
+                { qPart: "ensure the science was correct", pPart: "wanted to get details right", meaning: "muốn đảm bảo các chi tiết chính xác" },
+                { qPart: "asked a famous [ 7 ] for help", pPart: "got advice from well-known astrophysicist Professor Kip Thorne", meaning: "nhận lời khuyên / tư vấn từ nhà vật lý thiên văn nổi tiếng" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ chỉ nghề nghiệp/chuyên môn của người nổi tiếng mà đạo diễn xin trợ giúp.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'filmmaker', 'asked a famous... for help', 'science correct'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 1):</strong> <em>'Director Christopher Nolan [= the filmmaker] wanted to get details right [= ensure science correct] and <strong>got advice from well-known astrophysicist</strong> Professor Kip Thorne'</em>.",
+                    "<strong>Cặp từ đồng nghĩa:</strong> 'famous' tương đương hoàn hảo với 'well-known'. Danh từ đứng ngay trước tên riêng giáo sư là <strong>astrophysicist</strong> (nhà vật lý thiên văn).",
+                    "<strong>Kết luận:</strong> Từ cần điền là <strong>astrophysicist</strong>."
+                ],
+                traps: "Không điền 'Professor' vì đề bài hỏi danh từ nghề nghiệp chung sau 'a famous...', và 'astrophysicist' phản ánh đúng chuyên ngành khoa học."
+            },
+            vocabHighlights: ["astrophysicist", "well-known", "got advice"]
+        },
+        {
+            id: 8,
+            qNum: "Question 8",
+            group: "sentence",
+            type: "Sentence Completion",
+            wordLimit: "NO MORE THAN TWO WORDS",
+            contextHeader: "Đại lượng vật lý trôi nhanh hơn ở trên đỉnh các tòa nhà cao tầng",
+            promptText: "[ 8 ] is a little faster for people on the top of tall buildings.",
+            completedSentence: "<span class='text-spaceTheme-700 font-bold underline'>Time</span> is a little faster for people on the top of tall buildings.",
+            correctAnswer: "Time",
+            passageSnippet: "On Earth the effect is small, adding just a few microseconds a day to the time of space. However, it means that <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>time is moving ever so slightly more quickly on the 10th floor compared to a basement</mark>.",
+            paragraphRef: "Đoạn 2 (Paragraph 2)",
+            paraphrases: [
+                { qPart: "on the top of tall buildings", pPart: "on the 10th floor compared to a basement", meaning: "ở tầng 10 so với tầng hầm (trên các tầng cao của tòa nhà)" },
+                { qPart: "is a little faster", pPart: "is moving ever so slightly more quickly", meaning: "chuyển động nhanh hơn một chút xíu" },
+                { qPart: "[ 8 ]", pPart: "time", meaning: "thời gian" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ đóng vai trò chủ ngữ của câu chỉ thứ trôi nhanh hơn trên các tầng cao.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'faster', 'top of tall buildings'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> <em>'...it means that <strong>time is moving ever so slightly more quickly</strong> [= a little faster] <strong>on the 10th floor</strong> [= on the top of tall buildings] compared to a basement'</em>.",
+                    "<strong>Khớp nghĩa từ vựng:</strong> Chủ ngữ của động từ 'is moving quickly' chính là <strong>time</strong> (thời gian).",
+                    "<strong>Kết luận:</strong> Từ cần điền là <strong>Time</strong>."
+                ],
+                traps: "Chú ý viết hoa chữ cái đầu câu 'Time' nếu điền vào vị trí đầu câu."
+            },
+            vocabHighlights: ["microseconds", "slightly", "dilation"]
+        },
+        {
+            id: 9,
+            qNum: "Question 9",
+            group: "sentence",
+            type: "Sentence Completion",
+            wordLimit: "NO MORE THAN TWO WORDS",
+            contextHeader: "Thói quen tự túc lương thực của con người thời nay",
+            promptText: "These days, few people [ 9 ] food.",
+            completedSentence: "These days, few people <span class='text-spaceTheme-700 font-bold underline'>grow</span> (hoặc <span class='text-spaceTheme-700 font-bold underline'>grow their own</span>) food.",
+            correctAnswer: "grow / grow their own",
+            passageSnippet: "<mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>It is true that most people today do not grow their own food</mark> and depend on a global system of production.",
+            paragraphRef: "Đoạn 3 (Paragraph 3)",
+            paraphrases: [
+                { qPart: "These days, few people", pPart: "most people today do not", meaning: "hầu hết mọi người ngày nay không làm (đồng nghĩa với: ngày nay rất ít người làm)" },
+                { qPart: "[ 9 ] food", pPart: "grow their own food", meaning: "tự trồng trọt, canh tác lương thực" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một động từ/cụm động từ đứng sau chủ ngữ 'few people' đi với tân ngữ 'food'.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'These days', 'few people', 'food'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 3):</strong> <em>'It is true that <strong>most people today do not grow their own food</strong> and depend on a global system...'</em>",
+                    "<strong>Chuyển đổi phủ định tương đương:</strong> 'Most people do not...' (Đa số mọi người không...) tương đương với 'Few people...' (Rất ít người...). Hành động đi với 'food' là <strong>grow</strong> (hoặc cụm <strong>grow their own</strong>).",
+                    "<strong>Kết luận:</strong> Điền <strong>grow</strong> (1 từ) hoặc <strong>grow their own</strong> (nếu giới hạn cho phép, tuy nhiên 'grow' là lựa chọn ngữ pháp tối ưu và an toàn nhất)."
+                ],
+                traps: "Cụm 'grow their own' gồm 3 từ, nếu quy tắc là NO MORE THAN TWO WORDS thì 'grow' là đáp án hợp lệ hoàn hảo (1 từ)."
+            },
+            vocabHighlights: ["crop varieties", "global system", "produce"]
+        },
+        {
+            id: 10,
+            qNum: "Question 10",
+            group: "sentence",
+            type: "Sentence Completion",
+            wordLimit: "NO MORE THAN TWO WORDS",
+            contextHeader: "Tính chất lây lan hạn chế của các căn bệnh nguy hiểm đối với cây trồng",
+            promptText: "Dangerous diseases are unlikely to attack [ 10 ] crop varieties.",
+            completedSentence: "Dangerous diseases are unlikely to attack <span class='text-spaceTheme-700 font-bold underline'>multiple</span> crop varieties.",
+            correctAnswer: "multiple",
+            passageSnippet: "In addition, <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>deadly diseases usually only attack one group of plants, not multiple groups</mark>, and diseases which affect more than one plant species are generally not that deadly.",
+            paragraphRef: "Đoạn 3 (Paragraph 3)",
+            paraphrases: [
+                { qPart: "Dangerous diseases", pPart: "deadly diseases", meaning: "các căn bệnh gây chết người / dịch bệnh nguy hiểm" },
+                { qPart: "unlikely to attack", pPart: "usually only attack one group... not", meaning: "thường chỉ tấn công một nhóm, không tấn công..." },
+                { qPart: "[ 10 ] crop varieties", pPart: "multiple groups / more than one plant species", meaning: "nhiều giống cây trồng khác nhau" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một từ hạn định/tính từ bổ nghĩa cho cụm danh từ 'crop varieties' (các giống cây trồng).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'Dangerous diseases', 'unlikely to attack', 'crop varieties'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 3):</strong> <em>'deadly diseases usually only attack one group of plants, <strong>not multiple groups</strong>...'</em>",
+                    "<strong>Khớp nghĩa paraphrase:</strong> 'unlikely to attack' thay thế cho 'not attack'. Từ điền trước danh từ giống cây trồng là <strong>multiple</strong> (nhiều giống loài).",
+                    "<strong>Kết luận:</strong> Từ cần điền là <strong>multiple</strong>."
+                ],
+                traps: "Không điền 'multiple groups' vì sau chỗ trống đã có sẵn danh từ 'crop varieties' (multiple crop varieties = multiple groups of plants)."
+            },
+            vocabHighlights: ["multiple", "crop varieties", "plant species"]
+        },
+        {
+            id: 11,
+            qNum: "Question 11",
+            group: "sentence",
+            type: "Sentence Completion",
+            wordLimit: "NO MORE THAN TWO WORDS",
+            contextHeader: "Nguồn gốc tên gọi của đường hầm không - thời gian",
+            promptText: "An insect’s journey through a piece of fruit gave the [ 11 ] its name.",
+            completedSentence: "An insect’s journey through a piece of fruit gave the <span class='text-spaceTheme-700 font-bold underline'>wormhole</span> its name.",
+            correctAnswer: "wormhole",
+            passageSnippet: "<mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>The term wormhole originally comes from a wormhole in an apple and it is the same kind of idea in space. An ant can reach the other side of an apple much faster if it goes through a hole in the centre</mark>.",
+            paragraphRef: "Đoạn 4 (Paragraph 4)",
+            paraphrases: [
+                { qPart: "An insect’s journey through a piece of fruit", pPart: "An ant... goes through a hole in the centre of an apple", meaning: "chuyến đi của con kiến (côn trùng) xuyên qua lỗ tâm quả táo (trái cây)" },
+                { qPart: "gave the [ 11 ] its name", pPart: "The term wormhole originally comes from", meaning: "thuật ngữ / tên gọi lỗ sâu (wormhole) bắt nguồn từ" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một danh từ chỉ thực thể/thuật ngữ vũ trụ được đặt tên theo hình tượng con sâu đục quả táo.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'insect's journey', 'piece of fruit', 'gave... its name'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> Tác giả viết: <em>'The term <strong>wormhole</strong> originally comes from a wormhole in an apple... An ant [= insect] can reach the other side of an apple [= fruit] much faster if it goes through a hole...'</em>",
+                    "<strong>Khớp nghĩa:</strong> Khái niệm được đặt tên chính là <strong>wormhole</strong> (lỗ sâu / hố giun).",
+                    "<strong>Kết luận:</strong> Từ cần điền là <strong>wormhole</strong>."
+                ],
+                traps: "Viết liền một từ 'wormhole' theo đúng văn bản gốc của bài đọc."
+            },
+            vocabHighlights: ["wormhole", "term", "space-time"]
+        },
+        {
+            id: 12,
+            qNum: "Question 12",
+            group: "sentence",
+            type: "Sentence Completion",
+            wordLimit: "NO MORE THAN TWO WORDS",
+            contextHeader: "Số phận của con tàu vũ trụ nếu cố bay tốc độ cao thoát khỏi lỗ đen",
+            promptText: "If a space craft went fast enough to avoid a black hole, it would most likely [ 12 ].",
+            completedSentence: "If a space craft went fast enough to avoid a black hole, it would most likely <span class='text-spaceTheme-700 font-bold underline'>fall apart</span>.",
+            correctAnswer: "fall apart",
+            passageSnippet: "However, to escape a black hole, you would need a huge amount of speed. <mark class='bg-sky-100 text-sky-950 font-bold px-1 rounded'>You also need to slow down again quickly to land on the planet, and the ship would almost certainly fall apart</mark>.",
+            paragraphRef: "Đoạn 5 (Paragraph 5)",
+            paraphrases: [
+                { qPart: "space craft", pPart: "the ship / spaceship", meaning: "con tàu vũ trụ" },
+                { qPart: "would most likely [ 12 ]", pPart: "would almost certainly fall apart", meaning: "gần như chắc chắn sẽ bị vỡ nát tan tành" },
+                { qPart: "went fast enough to avoid a black hole", pPart: "to escape a black hole, you would need a huge amount of speed", meaning: "để thoát khỏi lỗ đen cần tốc độ cực cao" }
+            ],
+            vietnameseAnalysis: {
+                logic: "Cần một động từ/cụm động từ nguyên mẫu đứng sau 'would most likely' chỉ hậu quả xảy ra với con tàu vũ trụ.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'space craft', 'avoid a black hole', 'most likely'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 5):</strong> Tác giả viết: <em>'...to escape a black hole, you would need a huge amount of speed. You also need to slow down again quickly... and the ship <strong>would almost certainly fall apart</strong>'</em>.",
+                    "<strong>Cặp paraphrase:</strong> 'would most likely' tương đương với 'would almost certainly'. Hậu quả trực tiếp đối với con tàu là <strong>fall apart</strong> (vỡ vụn / nát tan).",
+                    "<strong>Kết luận:</strong> Cụm từ cần điền là <strong>fall apart</strong> (2 từ, đáp ứng đúng giới hạn NO MORE THAN TWO WORDS)."
+                ],
+                traps: "Giữ nguyên dạng nguyên mẫu 'fall apart' sau trợ động từ khuyết thiếu 'would'."
+            },
+            vocabHighlights: ["fall apart", "black hole", "super-high speed"]
+        }
+    ];
+
+    const vocabData = {
+        'astrophysicist': {
+            ipa: '/ˌæs.trəʊˈfɪz.ɪ.sɪst/',
+            type: 'noun',
+            vi: 'Nhà vật lý thiên văn (chuyên gia nghiên cứu tính chất vật lý của các thiên thể)',
+            eg: 'Acclaimed astrophysicist Kip Thorne served as the primary scientific consultant on the film set.'
+        },
+        'speculation': {
+            ipa: '/ˌspek.jəˈleɪ.ʃən/',
+            type: 'noun',
+            vi: 'Sự suy đoán, phỏng đoán lý thuyết chưa có bằng chứng thực nghiệm chắc chắn',
+            eg: 'Theoretical physics often bridges the delicate boundary between proven mathematics and imaginative speculation.'
+        },
+        'microseconds': {
+            ipa: '/ˈmaɪ.krəʊˌsek.əndz/',
+            type: 'noun (plural)',
+            vi: 'Micro-giây (đơn vị đo thời gian bằng một phần triệu giây)',
+            eg: 'Atomic clocks aboard orbiting satellites drift by several microseconds daily due to gravitational dilation.'
+        },
+        'wormhole': {
+            ipa: '/ˈwɜːm.həʊl/',
+            type: 'noun',
+            vi: 'Lỗ sâu / Hố giun (cầu nối giả thuyết xuyên qua không - thời gian)',
+            eg: 'Traversing a stable wormhole would theoretically enable interstellar travel across distant galaxies.'
+        },
+        'comet': {
+            ipa: '/ˈkɒm.ɪt/',
+            type: 'noun',
+            vi: 'Sao chổi (thiên thể gồm băng và bụi quay quanh mặt trời để lại vệt đuôi khí)',
+            eg: 'The robotic probe successfully executed a gravitational slingshot manoeuvre to intercept the accelerating comet.'
+        },
+        'black hole': {
+            ipa: '/blæk həʊl/',
+            type: 'noun phrase',
+            vi: 'Hố đen / Lỗ đen vũ trụ (vùng không gian có lực hấp dẫn cực lớn hút mọi vật chất)',
+            eg: 'Nothing, not even electromagnetic radiation, can escape once drawn inside the event horizon of a black hole.'
+        },
+        'gravitational dilation': {
+            ipa: '/ˌɡræv.ɪˈteɪ.ʃən.əl daɪˈleɪ.ʃən/',
+            type: 'noun phrase',
+            vi: 'Sự giãn nở thời gian do hấp dẫn (thời gian trôi chậm hơn ở nơi có trường hấp dẫn mạnh)',
+            eg: 'Einstein predicted that gravitational dilation causes clocks at sea level to tick slower than those on mountaintops.'
+        },
+        'fall apart': {
+            ipa: '/fɔːl əˈpɑːt/',
+            type: 'phrasal verb',
+            vi: 'Vỡ vụn, tan tành thành từng mảnh (do lực cơ học hoặc áp suất quá lớn)',
+            eg: 'Extreme aerodynamic friction and tidal forces would cause the delicate spacecraft hull to fall apart.'
+        },
+        'in theory': {
+            ipa: '/ɪn ˈθɪə.ri/',
+            type: 'idiom / adverb phrase',
+            vi: 'Về mặt lý thuyết, trên phương diện mô hình toán học',
+            eg: 'While space-time tunnels are mathematically permissible in theory, engineering one remains physically unfeasible.'
+        },
+        'multiple': {
+            ipa: '/ˈmʌl.tɪ.pəl/',
+            type: 'adjective',
+            vi: 'Nhiều, đa dạng (nhiều giống loài, nhóm thực vật khác nhau)',
+            eg: 'Botanical pathogens rarely possess the genetic mutability required to decimate multiple distinct crop families.'
+        },
+        'crop varieties': {
+            ipa: '/krɒp vəˈraɪ.ə.tiz/',
+            type: 'noun phrase',
+            vi: 'Các giống cây trồng nông nghiệp',
+            eg: 'Cultivating biodiverse crop varieties shields global food security from catastrophic parasitic blight.'
+        },
+        'super-high speed': {
+            ipa: '/ˌsuː.pə ˈhaɪ spiːd/',
+            type: 'noun phrase',
+            vi: 'Vận tốc siêu cao / cực đại',
+            eg: 'To escape a supermassive gravitational well, vehicles must attain super-high speed relative to the event horizon.'
+        }
+    };
+    </script>
+
+    <script>
+    let currentQuestionIndex = 0; // 0 to 11
+
+    function initApp() {
+        renderNavChips();
+        renderCurrentSlide();
+        renderAllQuestionsList();
+        renderConceptsGrid();
+        renderSynonymsTable();
+        renderVocabGrid();
+        setupKeyboardNavigation();
+    }
+
+    function renderNavChips() {
+        const container = document.getElementById('question-nav-chips');
+        container.innerHTML = '';
+        questionsData.forEach((q, idx) => {
+            const btn = document.createElement('button');
+            const isActive = idx === currentQuestionIndex;
+            btn.className = `px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                isActive 
+                ? 'bg-spaceTheme-700 text-white shadow-sm ring-2 ring-spaceTheme-600 ring-offset-1' 
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`;
+            
+            if (q.group === 'features') {
+                btn.innerHTML = `Q${q.id}: [ ${q.correctKey} ]`;
+            } else {
+                btn.innerHTML = `Q${q.id}: ${q.correctAnswer.split('/')[0].trim()}`;
+            }
+
+            btn.onclick = () => {
+                currentQuestionIndex = idx;
+                renderNavChips();
+                renderCurrentSlide();
+            };
+            container.appendChild(btn);
+        });
+
+        const curQ = questionsData[currentQuestionIndex];
+        const typeBadge = document.getElementById('quick-type-badge');
+        if (typeBadge) {
+            typeBadge.textContent = curQ.group === 'features' ? 'Matching Features (Q1–Q6)' : 'Sentence Completion (Q7–Q12)';
+        }
+
+        const mob = document.getElementById('mobile-curr-indicator');
+        if (mob) {
+            mob.textContent = `Câu ${currentQuestionIndex + 1}/12 (${curQ.group === 'features' ? curQ.correctKey : curQ.correctAnswer.split('/')[0].trim()})`;
+        }
+    }
+
+    function navigateQuestion(delta) {
+        const next = currentQuestionIndex + delta;
+        if (next >= 0 && next < questionsData.length) {
+            currentQuestionIndex = next;
+            renderNavChips();
+            renderCurrentSlide();
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+    }
+
+    function renderCurrentSlide() {
+        const q = questionsData[currentQuestionIndex];
+        const container = document.getElementById('slide-card-container');
+        const counter = document.getElementById('slide-counter-badge');
+        if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        if (btnPrev) {
+            btnPrev.disabled = currentQuestionIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+        }
+        if (btnNext) {
+            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+        }
+
+        let ansDisplay = '';
+        let speechTarget = '';
+
+        if (q.group === 'features') {
+            ansDisplay = `Đáp án: [ ${q.correctKey} ] — ${q.conceptName}`;
+            speechTarget = q.conceptName;
+        } else {
+            ansDisplay = `Đáp án: ${q.correctAnswer.toUpperCase()}`;
+            speechTarget = q.correctAnswer.split('/')[0].trim();
+        }
+
+        container.innerHTML = `
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+                
+                <!-- Slide Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-2xl bg-spaceTheme-100 text-spaceTheme-800 flex items-center justify-center font-extrabold text-base border border-spaceTheme-200">
+                            ${q.id}
+                        </span>
+                        <div>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-spaceTheme-700">${q.type}</span>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">${q.qNum}: ${q.contextHeader}</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                            Yêu cầu: ${q.wordLimit}
+                        </span>
+                        <span class="text-xs font-semibold px-3 py-1 bg-spaceTheme-50 text-spaceTheme-700 rounded-full border border-spaceTheme-200">
+                            ${q.paragraphRef}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Prompt Box -->
+                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                        ${q.group === 'features' ? 'Mệnh Đề Trong Đề Bài (Statement)' : 'Câu Chứa Chỗ Trống (Sentence Completion)'}
+                    </span>
+                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">${q.promptText}</p>
+                </div>
+
+                <!-- Answer Reveal Banner -->
+                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-spaceTheme-50/80 via-sky-50/50 to-white border border-spaceTheme-200">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-spaceTheme-700">Đáp Án Chuẩn Xác</span>
+                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
+                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm bg-spaceTheme-700 text-white answer-badge">
+                                ${ansDisplay}
+                            </span>
+                        </div>
+                    </div>
+
+                    <button onclick="playSpeech('${speechTarget.replace(/[^a-zA-Z0-9 ]/g, '')}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-spaceTheme-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <span>Phát âm đáp án</span>
+                    </button>
+                </div>
+
+                ${q.completedSentence ? `
+                    <!-- Completed Sentence Preview -->
+                    <div class="mt-4 p-4 rounded-xl bg-slate-900 text-white text-sm sm:text-base leading-relaxed">
+                        <span class="text-xs text-sky-400 font-bold uppercase tracking-wider block mb-1">Câu hoàn chỉnh:</span>
+                        <p class="font-medium">${q.completedSentence}</p>
+                    </div>
+                ` : ''}
+
+                <!-- Evidence in Reading Passage -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-spaceTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Manh Mối Bằng Chứng (${q.paragraphRef})</h4>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-sky-50/40 border border-sky-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
+                        "${q.passageSnippet}"
+                    </div>
+                </div>
+
+                <!-- Paraphrase & Synonym Mapping Table -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Cách Paraphrase</h4>
+                    </div>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
+                                <tr>
+                                    <th class="py-2.5 px-4 w-1/3">Đề bài (Question ${q.id})</th>
+                                    <th class="py-2.5 px-4 w-1/3">Bài đọc (${q.paragraphRef})</th>
+                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 bg-white">
+                                ${q.paraphrases.map(p => `
+                                    <tr>
+                                        <td class="py-3 px-4 font-semibold text-blue-700 bg-blue-50/20">${p.qPart}</td>
+                                        <td class="py-3 px-4 font-semibold text-amber-800 bg-amber-50/20">${p.pPart}</td>
+                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Vietnamese In-Depth Explanation & Logic -->
+                <div class="mt-6 bg-spaceTheme-50/40 border border-spaceTheme-200/80 rounded-2xl p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-spaceTheme-600"></span>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-spaceTheme-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
+                    </div>
+
+                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
+
+                    <div class="space-y-2 mb-4">
+                        ${q.vietnameseAnalysis.stepByStep.map(step => `
+                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <span class="text-spaceTheme-600 mt-1 font-bold">▸</span>
+                                <div>${step}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${q.vietnameseAnalysis.traps ? `
+                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
+                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
+                            <span>${q.vietnameseAnalysis.traps}</span>
+                        </div>
+                    ` : ''}
+                </div>
+
+                <!-- Highlighted Vocabulary in this question -->
+                <div class="mt-6 pt-5 border-t border-slate-100">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
+                    <div class="flex flex-wrap gap-3">
+                        ${q.vocabHighlights.map(v => {
+                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
+                            return `
+                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-spaceTheme-400 transition-colors">
+                                    <button onclick="playSpeech('${v}')" class="text-spaceTheme-700 hover:text-spaceTheme-900" title="Nghe phát âm chuẩn UK">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </button>
+                                    <div>
+                                        <span class="font-bold text-sm text-slate-900">${v}</span>
+                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
+                                        <span class="text-xs text-spaceTheme-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+            </div>
+        `;
+    }
+
+    function renderAllQuestionsList(filter = 'all') {
+        const container = document.getElementById('all-questions-container');
+        container.innerHTML = '';
+
+        const filtered = questionsData.filter(q => {
+            if (filter === 'all') return true;
+            return q.group === filter;
+        });
+
+        filtered.forEach(q => {
+            const card = document.createElement('div');
+            card.className = "gradient-border bg-white rounded-2xl p-6 shadow-sm";
+
+            let ansBadgeText = q.group === 'features' ? `ĐÁP ÁN: [ ${q.correctKey} ] — ${q.conceptName}` : `ĐÁP ÁN: ${q.correctAnswer.toUpperCase()}`;
+
+            card.innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-spaceTheme-700 text-white font-bold text-xs flex items-center justify-center">
+                            ${q.id}
+                        </span>
+                        <h3 class="font-bold text-slate-900">${q.qNum} - <span class="text-slate-500 font-medium">${q.contextHeader}</span></h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-mono font-bold px-3 py-1 rounded-md border bg-sky-100 text-sky-800 border-sky-300">
+                            ${ansBadgeText}
+                        </span>
+                        <span class="text-xs text-slate-400">${q.paragraphRef}</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 mb-3 text-sm">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nội dung câu hỏi:</span>
+                    <p class="font-bold text-slate-800">${q.promptText}</p>
+                </div>
+
+                <div class="bg-sky-50/60 p-3.5 rounded-xl border border-sky-200/80 mb-4 text-xs sm:text-sm italic text-slate-700">
+                    <strong>Manh mối bài đọc (${q.paragraphRef}):</strong> "${q.passageSnippet}"
+                </div>
+
+                <div class="mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <div class="flex flex-wrap gap-2">
+                        ${q.paraphrases.map(p => `
+                            <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
+                                <span class="text-blue-700 font-bold">${p.qPart}</span> ➔ <span class="text-amber-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="bg-spaceTheme-50/40 border border-spaceTheme-200 p-4 rounded-xl text-xs sm:text-sm text-slate-700">
+                    <p class="font-bold text-spaceTheme-900 mb-1.5">Giải thích logic Tiếng Việt:</p>
+                    <p class="mb-2">${q.vietnameseAnalysis.logic}</p>
+                    <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
+                        ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function filterAllQuestions(type) {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+            b.className = 'filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200';
+        });
+        if (event && event.target) {
+            event.target.className = 'filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-spaceTheme-700 text-white';
+        }
+        renderAllQuestionsList(type);
+    }
+
+    function renderConceptsGrid() {
+        const container = document.getElementById('concepts-grid-container');
+        container.innerHTML = '';
+
+        conceptsPool.forEach(item => {
+            const card = document.createElement('div');
+            card.className = "bg-white border border-slate-200 rounded-2xl p-6 shadow-2xs hover:border-spaceTheme-400 hover:shadow-md transition-all flex flex-col justify-between";
+
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-xl font-black text-sm flex items-center justify-center bg-spaceTheme-700 text-white shadow-2xs font-mono">
+                                ${item.key}
+                            </span>
+                            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Concept ${item.key}</span>
+                        </div>
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-spaceTheme-100 text-spaceTheme-800 border border-spaceTheme-200">
+                            Đáp án: ${item.resolvedQuestions}
+                        </span>
+                    </div>
+
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-1 leading-snug">${item.title}</h3>
+                    <span class="text-xs font-bold text-cosmic-600 uppercase tracking-wider block mb-2">${item.realityStatus}</span>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">${item.description}</p>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 bg-slate-50/80 -mx-6 -mb-6 p-4 rounded-b-2xl">
+                    <span class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Trích dẫn trong bài đọc:</span>
+                    <p class="text-xs text-slate-700 italic">"${item.evidenceQuote}"</p>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderSynonymsTable() {
+        const tbody = document.getElementById('synonyms-table-body');
+        tbody.innerHTML = '';
+
+        questionsData.forEach(q => {
+            q.paraphrases.forEach((p, pIndex) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors";
+                
+                let answerDisplay = '';
+                if (q.group === 'features') {
+                    answerDisplay = `[ ${q.correctKey} ] ${q.conceptName}`;
+                } else {
+                    answerDisplay = q.correctAnswer;
+                }
+
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center font-bold text-slate-700">
+                        ${pIndex === 0 ? `<span class="bg-sky-100 text-sky-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="keyword-chip">${p.qPart}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="passage-chip">${p.pPart}</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="text-xs font-bold uppercase px-2.5 py-1 bg-spaceTheme-700 text-white rounded shadow-2xs">
+                            ${answerDisplay}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
+                        ${p.meaning}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    }
+
+    function renderVocabGrid(filterWord = '') {
+        const container = document.getElementById('vocab-grid-container');
+        container.innerHTML = '';
+
+        const words = Object.keys(vocabData).filter(w => {
+            if (!filterWord) return true;
+            const query = filterWord.toLowerCase();
+            return w.toLowerCase().includes(query) || vocabData[w].vi.toLowerCase().includes(query);
+        });
+
+        if (words.length === 0) {
+            container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">Không tìm thấy từ vựng phù hợp.</div>`;
+            return;
+        }
+
+        words.forEach(w => {
+            const item = vocabData[w];
+            const card = document.createElement('div');
+            card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-spaceTheme-400 transition-all flex flex-col justify-between";
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <h4 class="text-lg font-bold text-slate-900">${w}</h4>
+                        <button onclick="playSpeech('${w}')" class="w-8 h-8 rounded-full bg-spaceTheme-50 text-spaceTheme-700 hover:bg-spaceTheme-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs" title="Nghe phát âm chuẩn UK">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${item.ipa}</span>
+                        <span class="text-xs italic text-spaceTheme-700 font-semibold">${item.type}</span>
+                    </div>
+                    <p class="text-sm font-semibold text-spaceTheme-900 mb-3">${item.vi}</p>
+                </div>
+                <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-lg">
+                    "${item.eg}"
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function searchVocab(val) {
+        renderVocabGrid(val);
+    }
+
+    function playSpeech(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.88;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function switchView(viewName) {
+        const views = ['presentation', 'all', 'concepts', 'synonyms', 'vocab'];
+        views.forEach(v => {
+            const sec = document.getElementById(`view-${v}`);
+            const tabBtn = document.getElementById(`tab-${v}`);
+            if (sec) sec.classList.add('hidden');
+            if (tabBtn) {
+                tabBtn.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+            }
+        });
+
+        const activeSec = document.getElementById(`view-${viewName}`);
+        const activeTab = document.getElementById(`tab-${viewName}`);
+        if (activeSec) activeSec.classList.remove('hidden');
+        if (activeTab) {
+            activeTab.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-spaceTheme-700 text-white shadow-sm';
+        }
+    }
+
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            const presView = document.getElementById('view-presentation');
+            if (presView && !presView.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    navigateQuestion(1);
+                } else if (e.key === 'ArrowLeft') {
+                    navigateQuestion(-1);
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

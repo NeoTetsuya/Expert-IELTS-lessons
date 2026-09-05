@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 10: Community - Quantifiers</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth animated transitions */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-indigo-600 selection:text-white pb-12">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-purple-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-indigo-500/25 ring-2 ring-white">
+          M10
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 tracking-wide uppercase">Unit 10: Community</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 157</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-indigo-600">Quantifiers</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200/90 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-indigo-600">0 / 31</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-indigo-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-indigo-600 text-white shadow-md shadow-indigo-600/25">
+          1. Quantifier Table (1)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Few vs Little (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. True For You (3a & 3b)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Crowds Essay (4a & 4b)
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 182
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: QUANTIFIER TABLE MATRIX (Exercise 1) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1</span>
+            <span class="text-indigo-200 text-xs font-medium">Expert Grammar Page 182</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Countable & Uncountable Quantifiers</h2>
+          <p class="text-indigo-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Distinguish between quantifiers used with plural countable nouns (e.g. <em>people, events, visitors</em>) and uncountable nouns (e.g. <em>time, work, planning</em>).
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1()" class="px-5 py-2.5 bg-white hover:bg-indigo-50 text-indigo-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Table</span>
+          </button>
+          <button onclick="revealEx1()" class="px-4 py-2.5 bg-indigo-800/60 hover:bg-indigo-800 text-white border border-indigo-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Phrase Bank Reference Box -->
+      <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Phrase Bank from Coursebook:</span>
+          <span class="text-xs text-slate-400">Click a quantifier to insert into the active input</span>
+        </div>
+        <div class="flex flex-wrap gap-2.5" id="ex1-phrase-bank">
+          <button type="button" onclick="insertEx1Phrase('a lot of')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-sm hover:border-indigo-500 transition">a lot of (work)</button>
+          <button type="button" onclick="insertEx1Phrase('a little')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-sm hover:border-indigo-500 transition">a little (planning)</button>
+          <button type="button" onclick="insertEx1Phrase('few')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-sm hover:border-indigo-500 transition">few (visitors)</button>
+          <button type="button" onclick="insertEx1Phrase('a large number of')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-sm hover:border-indigo-500 transition">a large number of (people)</button>
+          <button type="button" onclick="insertEx1Phrase('plenty of')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-sm hover:border-indigo-500 transition">plenty of (time)</button>
+        </div>
+      </div>
+
+      <!-- Interactive Table -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-800 text-sm font-black flex items-center justify-center">1</span>
+            Complete the table with the appropriate quantifiers:
+          </h3>
+          <span id="ex1-score-pill" class="text-xs font-bold text-indigo-800 bg-indigo-50 px-3 py-1 rounded-xl">Score: 0/5</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse border border-slate-200 rounded-2xl overflow-hidden text-sm sm:text-base">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200">
+                <th class="p-4 font-black text-indigo-900 w-1/2 uppercase tracking-wider bg-indigo-50/40">
+                  Countable Nouns (Plural)
+                </th>
+                <th class="p-4 font-black text-purple-900 w-1/2 uppercase tracking-wider bg-purple-50/40">
+                  Uncountable Nouns
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-800 font-medium">
+              <tr class="hover:bg-slate-50/50 transition">
+                <td class="p-4 font-bold text-slate-900">many</td>
+                <td class="p-4 font-bold text-slate-900">much</td>
+              </tr>
+              <tr class="hover:bg-slate-50/50 transition">
+                <td class="p-4 font-bold text-slate-900">a lot of</td>
+                <td class="p-4">
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-slate-400 text-xs">1.</span>
+                    <input type="text" data-ex1-gap="1" data-ans="a lot of" class="ex1-input exercise-input p-2 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-slate-50 focus:bg-white focus:border-indigo-500 w-full sm:w-60" placeholder="(quantifier 1)" />
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50/50 transition">
+                <td class="p-4 font-bold text-slate-900">some / any</td>
+                <td class="p-4 font-bold text-slate-900">some / any</td>
+              </tr>
+              <tr class="hover:bg-slate-50/50 transition">
+                <td class="p-4 font-bold text-slate-900">a few</td>
+                <td class="p-4">
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-slate-400 text-xs">2.</span>
+                    <input type="text" data-ex1-gap="2" data-ans="a little" class="ex1-input exercise-input p-2 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-slate-50 focus:bg-white focus:border-indigo-500 w-full sm:w-60" placeholder="(quantifier 2)" />
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50/50 transition">
+                <td class="p-4">
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-slate-400 text-xs">3.</span>
+                    <input type="text" data-ex1-gap="3" data-ans="few" class="ex1-input exercise-input p-2 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-slate-50 focus:bg-white focus:border-indigo-500 w-full sm:w-60" placeholder="(quantifier 3)" />
+                  </div>
+                </td>
+                <td class="p-4 font-bold text-slate-900">little</td>
+              </tr>
+              <tr class="hover:bg-slate-50/50 transition">
+                <td class="p-4">
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-slate-400 text-xs">4.</span>
+                    <input type="text" data-ex1-gap="4" data-ans="a large number of" class="ex1-input exercise-input p-2 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-slate-50 focus:bg-white focus:border-indigo-500 w-full sm:w-60" placeholder="(quantifier 4)" />
+                  </div>
+                </td>
+                <td class="p-4 font-bold text-slate-900">a large amount of</td>
+              </tr>
+              <tr class="hover:bg-slate-50/50 transition">
+                <td class="p-4 font-bold text-slate-900">plenty of</td>
+                <td class="p-4">
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-slate-400 text-xs">5.</span>
+                    <input type="text" data-ex1-gap="5" data-ans="plenty of" class="ex1-input exercise-input p-2 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-slate-50 focus:bg-white focus:border-indigo-500 w-full sm:w-60" placeholder="(quantifier 5)" />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: FEW VS LITTLE (Exercise 2a, 2b & 2c) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex2" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-violet-200 text-xs font-medium">Positive vs Negative Connotation</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">A few vs. Few & A little vs. Little</h2>
+          <p class="text-violet-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            <strong>A few / A little</strong> have a positive meaning (= a small amount / enough). <strong>Few / Little</strong> have a negative meaning (= not enough / almost none).
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2()" class="px-5 py-2.5 bg-white hover:bg-violet-50 text-violet-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check All (2a & 2b)</span>
+          </button>
+          <button onclick="revealEx2()" class="px-4 py-2.5 bg-violet-800/60 hover:bg-violet-800 text-white border border-violet-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 2a Meaning Matcher Cards -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-violet-100 text-violet-800 text-sm font-black flex items-center justify-center">2a</span>
+            Match the underlined words in sentences (1–4) with meaning A or B:
+          </h3>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-violet-800 bg-violet-50 px-3 py-1 rounded-xl">Score: 0/4</span>
+        </div>
+
+        <!-- Meaning Definitions Legend -->
+        <div class="grid sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-950 font-medium">
+            <strong class="text-emerald-800 block text-base font-black mb-1">Meaning A: "a small number or amount"</strong>
+            Positive feeling: there are some, it is enough or at least sufficient.
+          </div>
+          <div class="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-950 font-medium">
+            <strong class="text-rose-800 block text-base font-black mb-1">Meaning B: "not enough / almost none"</strong>
+            Negative feeling: insufficient, disappointing lack of people or time.
+          </div>
+        </div>
+
+        <div class="grid gap-3.5" id="ex2a-container">
+          <!-- 1 -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3" data-ex2a-q="1" data-ans="A">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-extrabold text-slate-400 mr-2">1.</span>
+              <span class="underline decoration-indigo-500 decoration-2 font-bold">A few</span> people attended the event.
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex2a-select p-2 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-violet-950 focus:border-violet-600 focus:outline-none">
+                <option value="">Select meaning...</option>
+                <option value="A">A (a small number or amount)</option>
+                <option value="B">B (not enough)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3" data-ex2a-q="2" data-ans="B">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-extrabold text-slate-400 mr-2">2.</span>
+              <span class="underline decoration-indigo-500 decoration-2 font-bold">Few</span> children went to the festival.
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex2a-select p-2 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-violet-950 focus:border-violet-600 focus:outline-none">
+                <option value="">Select meaning...</option>
+                <option value="A">A (a small number or amount)</option>
+                <option value="B">B (not enough)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3" data-ex2a-q="3" data-ans="B">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-extrabold text-slate-400 mr-2">3.</span>
+              There's <span class="underline decoration-indigo-500 decoration-2 font-bold">little</span> time to answer all the questions.
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex2a-select p-2 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-violet-950 focus:border-violet-600 focus:outline-none">
+                <option value="">Select meaning...</option>
+                <option value="A">A (a small number or amount)</option>
+                <option value="B">B (not enough)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3" data-ex2a-q="4" data-ans="A">
+            <div class="text-base text-slate-900 font-medium">
+              <span class="font-extrabold text-slate-400 mr-2">4.</span>
+              We have <span class="underline decoration-indigo-500 decoration-2 font-bold">a little</span> time to finish the essay.
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <select class="ex2a-select p-2 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-violet-950 focus:border-violet-600 focus:outline-none">
+                <option value="">Select meaning...</option>
+                <option value="A">A (a small number or amount)</option>
+                <option value="B">B (not enough)</option>
+              </select>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2b Cloze Text -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-violet-100 text-violet-800 text-sm font-black flex items-center justify-center">2b</span>
+            Complete the text with <em>a few</em>, <em>few</em>, <em>a little</em> or <em>little</em>:
+          </h3>
+          <span id="ex2b-score-pill" class="text-xs font-bold text-violet-800 bg-violet-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.8rem] sm:leading-[3.2rem] font-normal space-y-6">
+          <p>
+            There are
+            <span class="font-bold text-slate-400 mr-1">1</span>
+            <input type="text" data-ex2b-gap="1" data-ans="a few" class="ex2b-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-violet-500 transition" placeholder="(quantifier 1)" />
+            organised events where we live, but not many. Unfortunately,
+            <span class="font-bold text-slate-400 mr-1">2</span>
+            <input type="text" data-ex2b-gap="2" data-ans="few" class="ex2b-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-violet-500 transition" placeholder="(quantifier 2)" />
+            of them are for teenagers; they are almost all for children or adults. Teenagers therefore spend
+            <span class="font-bold text-slate-400 mr-1">3</span>
+            <input type="text" data-ex2b-gap="3" data-ans="little" class="ex2b-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-violet-500 transition" placeholder="(quantifier 3)" />
+            time at organised events where they would be able to have fun in a safe environment. Instead, they may gather in public places.
+          </p>
+
+          <p>
+            <span class="font-bold text-slate-400 mr-1">4</span>
+            <input type="text" data-ex2b-gap="4" data-ans="A few,a few" class="ex2b-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-violet-500 transition" placeholder="(quantifier 4)" />
+            of these groups of teenagers cause problems but this is a small percentage. Unfortunately it is these
+            <span class="font-bold text-slate-400 mr-1">5</span>
+            <input type="text" data-ex2b-gap="5" data-ans="few" class="ex2b-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-violet-500 transition" placeholder="(quantifier 5)" />
+            teenagers who give them all a bad name. If we all put
+            <span class="font-bold text-slate-400 mr-1">6</span>
+            <input type="text" data-ex2b-gap="6" data-ans="a little" class="ex2b-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-violet-500 transition" placeholder="(quantifier 6)" />
+            effort into organising more events for teenagers and getting them involved in these, we would learn just how wonderful these young people are.
+          </p>
+        </div>
+      </div>
+
+      <!-- 2c Discussion Card -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-violet-100 text-violet-800 text-sm font-black flex items-center justify-center">2c</span>
+            Discussion: What is the main point the writer is making? Do you agree?
+          </h3>
+          <button onclick="speakText('The author argues that teenagers are unfairly blamed for antisocial behavior simply because communities fail to organize engaging events for them. Investing a little time in youth activities would reveal their positive potential.')" class="text-xs font-bold text-violet-700 bg-violet-50 px-3.5 py-1.5 rounded-xl hover:bg-violet-100 transition flex items-center gap-1">
+            🔊 Listen to Model Analysis
+          </button>
+        </div>
+        <textarea id="ex2c-discussion" rows="2" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-violet-500 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. The writer highlights that teenagers lack dedicated community spaces. I strongly agree because when youth centers close down, teenagers congregate in public parks where a minority might cause trouble..."></textarea>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: TRUE FOR YOU (Exercise 3a & 3b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-purple-700 via-indigo-600 to-blue-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a & 3b</span>
+            <span class="text-purple-200 text-xs font-medium">Personalized Community Profiles</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Personal Quantifiers Studio</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Complete sentences (1–6) with a quantifier from Exercise 1a (<em>many, much, a lot of, a few, a little, few, little, a large number of, plenty of</em>) so they are true for your life.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3a()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Validate Quantifiers</span>
+          </button>
+          <button onclick="saveEx3aProfile()" class="px-4 py-2.5 bg-purple-800/60 hover:bg-purple-800 text-white border border-purple-400/40 text-sm font-bold rounded-2xl transition">
+            Save Profile
+          </button>
+        </div>
+      </div>
+
+      <!-- Quantifier Chips Guide -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Allowed Quantifiers Bank:</span>
+          <span class="text-xs text-slate-400">Select correct countability for each sentence</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-900 font-bold text-xs">many</span>
+          <span class="px-3 py-1 rounded-xl bg-purple-50 border border-purple-200 text-purple-900 font-bold text-xs">much</span>
+          <span class="px-3 py-1 rounded-xl bg-slate-100 border border-slate-200 text-slate-800 font-bold text-xs">a lot of</span>
+          <span class="px-3 py-1 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-900 font-bold text-xs">a few</span>
+          <span class="px-3 py-1 rounded-xl bg-purple-50 border border-purple-200 text-purple-900 font-bold text-xs">a little</span>
+          <span class="px-3 py-1 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-900 font-bold text-xs">few</span>
+          <span class="px-3 py-1 rounded-xl bg-purple-50 border border-purple-200 text-purple-900 font-bold text-xs">little</span>
+          <span class="px-3 py-1 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-900 font-bold text-xs">a large number of</span>
+          <span class="px-3 py-1 rounded-xl bg-purple-50 border border-purple-200 text-purple-900 font-bold text-xs">a large amount of</span>
+          <span class="px-3 py-1 rounded-xl bg-slate-100 border border-slate-200 text-slate-800 font-bold text-xs">plenty of</span>
+        </div>
+      </div>
+
+      <!-- 3a 6 Sentence Prompts with Justification inputs -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">3a</span>
+            Complete the sentences with a quantifier from Exercise 1a:
+          </h3>
+          <span id="ex3a-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex3a-container">
+          <!-- 1 Countable plural: fun events -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="1" data-type="countable">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">1. Fun events (Countable plural)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>There are</span>
+              <input type="text" data-ex3a-inp="1" class="ex3a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white w-48 text-center focus:border-indigo-600 focus:outline-none" placeholder="e.g. a few / many" />
+              <span>fun events in the area where I live.</span>
+            </div>
+            <input type="text" id="ex3a-just-1" class="w-full text-xs p-2 rounded-lg border border-slate-200 bg-white text-slate-600" placeholder="Justify: e.g. For example, there is a music festival and a big carnival in the summer." />
+          </div>
+
+          <!-- 2 Uncountable: time -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="2" data-type="uncountable">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">2. Free time (Uncountable)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>I spend</span>
+              <input type="text" data-ex3a-inp="2" class="ex3a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white w-48 text-center focus:border-indigo-600 focus:outline-none" placeholder="e.g. a lot of / a little" />
+              <span>time on things I enjoy doing.</span>
+            </div>
+            <input type="text" id="ex3a-just-2" class="w-full text-xs p-2 rounded-lg border border-slate-200 bg-white text-slate-600" placeholder="Justify: e.g. Because of university studies, I only have time to read books on weekends." />
+          </div>
+
+          <!-- 3 Countable plural: close friends -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="3" data-type="countable">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">3. Close friends (Countable plural)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>I have</span>
+              <input type="text" data-ex3a-inp="3" class="ex3a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white w-48 text-center focus:border-indigo-600 focus:outline-none" placeholder="e.g. a few / plenty of" />
+              <span>close friends.</span>
+            </div>
+            <input type="text" id="ex3a-just-3" class="w-full text-xs p-2 rounded-lg border border-slate-200 bg-white text-slate-600" placeholder="Justify: e.g. I prefer maintaining a tight circle of three trusted childhood friends." />
+          </div>
+
+          <!-- 4 Countable plural: green areas -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="4" data-type="countable">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">4. Green areas (Countable plural)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>There are</span>
+              <input type="text" data-ex3a-inp="4" class="ex3a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white w-48 text-center focus:border-indigo-600 focus:outline-none" placeholder="e.g. plenty of / few" />
+              <span>green areas in my city/town.</span>
+            </div>
+            <input type="text" id="ex3a-just-4" class="w-full text-xs p-2 rounded-lg border border-slate-200 bg-white text-slate-600" placeholder="Justify: e.g. My municipality recently opened several botanical parks and riverside walkways." />
+          </div>
+
+          <!-- 5 Countable plural: concerts -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="5" data-type="countable">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">5. Concerts (Countable plural)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>I go to</span>
+              <input type="text" data-ex3a-inp="5" class="ex3a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white w-48 text-center focus:border-indigo-600 focus:outline-none" placeholder="e.g. few / a lot of" />
+              <span>concerts.</span>
+            </div>
+            <input type="text" id="ex3a-just-5" class="w-full text-xs p-2 rounded-lg border border-slate-200 bg-white text-slate-600" placeholder="Justify: e.g. Concert tickets are rather expensive, so I only attend two or three per year." />
+          </div>
+
+          <!-- 6 Countable plural: sports events -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3a-row="6" data-type="countable">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">6. Sports events (Countable plural)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="text-sm sm:text-base text-slate-900 font-medium leading-relaxed flex flex-wrap items-center gap-2">
+              <span>I watch</span>
+              <input type="text" data-ex3a-inp="6" class="ex3a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-indigo-900 bg-white w-48 text-center focus:border-indigo-600 focus:outline-none" placeholder="e.g. many / few" />
+              <span>sports events.</span>
+            </div>
+            <input type="text" id="ex3a-just-6" class="w-full text-xs p-2 rounded-lg border border-slate-200 bg-white text-slate-600" placeholder="Justify: e.g. I rarely follow traditional sports, although I occasionally watch the World Cup." />
+          </div>
+        </div>
+
+        <div id="ex3a-save-status" class="hidden p-3 rounded-xl bg-purple-100 text-purple-900 text-xs font-bold">
+          ✓ Your personal profile and justifications have been saved to local browser storage!
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: CROWDS ESSAY (Exercise 4a & 4b) -->
+    <!-- ========================================================================= -->
+    <section id="tab-ex4" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a & 4b</span>
+            <span class="text-blue-200 text-xs font-medium">IELTS Academic Writing Task 2 Essay</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Being Part of a Large Crowd</h2>
+          <p class="text-blue-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Fill the gaps in the essay using the quantifiers from the bank. Notice the nuance between <em>too many</em>, <em>enough</em>, <em>plenty</em>, and <em>large number</em>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4b()" class="px-5 py-2.5 bg-white hover:bg-blue-50 text-blue-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Essay</span>
+          </button>
+          <button onclick="revealEx4b()" class="px-4 py-2.5 bg-blue-800/60 hover:bg-blue-800 text-white border border-blue-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- 4a Brainstorming Prompt Panel -->
+      <div class="p-6 bg-indigo-50 rounded-3xl border-2 border-indigo-200/80 space-y-3">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-xl bg-indigo-600 text-white text-sm font-black flex items-center justify-center">4a</span>
+          <span class="text-xs font-black uppercase tracking-wider text-indigo-700">IELTS Essay Prompt Analysis</span>
+        </div>
+        <p class="text-base sm:text-lg font-extrabold text-indigo-950">
+          "Some people believe that it is good for us to spend time in a large crowd. Do the advantages of this outweigh the disadvantages?"
+        </p>
+        <div class="grid md:grid-cols-2 gap-4 text-xs sm:text-sm pt-2">
+          <div class="p-3.5 rounded-2xl bg-white border border-indigo-200 text-indigo-950 space-y-1">
+            <strong class="text-emerald-700 font-black">Advantages (Pros):</strong>
+            <ul class="list-disc list-inside space-y-1 text-slate-700">
+              <li>Generates an intense sense of community, shared energy, and collective excitement.</li>
+              <li>Feeling connected to thousands of people who share the same passion (football, concerts).</li>
+              <li>Reduces loneliness and creates lasting cultural memories.</li>
+            </ul>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-white border border-indigo-200 text-indigo-950 space-y-1">
+            <strong class="text-rose-700 font-black">Disadvantages (Cons):</strong>
+            <ul class="list-disc list-inside space-y-1 text-slate-700">
+              <li>Crush dangers, stampedes, and inadequate crowd control.</li>
+              <li>Noise pollution, claustrophobia, and limited personal space.</li>
+              <li>Increased risk of theft, antisocial friction, or public transit chaos.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Word Bank Interactive Chips -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Essay Quantifiers Bank:</span>
+          <span class="text-xs text-slate-400">Click a phrase tag to insert it into the active gap</span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="ex4-phrase-bank">
+          <button type="button" onclick="insertEx4Phrase('a few')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-xs sm:text-sm hover:border-indigo-500 transition">a few</button>
+          <button type="button" onclick="insertEx4Phrase('a large amount of')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-xs sm:text-sm hover:border-indigo-500 transition">a large amount of</button>
+          <button type="button" onclick="insertEx4Phrase('large number')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-xs sm:text-sm hover:border-indigo-500 transition">large number</button>
+          <button type="button" onclick="insertEx4Phrase('enough')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-xs sm:text-sm hover:border-indigo-500 transition">enough</button>
+          <button type="button" onclick="insertEx4Phrase('few')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-xs sm:text-sm hover:border-indigo-500 transition">few</button>
+          <button type="button" onclick="insertEx4Phrase('many')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-xs sm:text-sm hover:border-indigo-500 transition">many</button>
+          <button type="button" onclick="insertEx4Phrase('most of us')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-xs sm:text-sm hover:border-indigo-500 transition">most of us</button>
+          <button type="button" onclick="insertEx4Phrase('plenty')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-xs sm:text-sm hover:border-indigo-500 transition">plenty</button>
+          <button type="button" onclick="insertEx4Phrase('too many')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-xs sm:text-sm hover:border-indigo-500 transition">too many</button>
+          <button type="button" onclick="insertEx4Phrase('too little')" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 border-2 border-indigo-200 text-indigo-900 font-black text-xs sm:text-sm hover:border-indigo-500 transition">too little</button>
+        </div>
+      </div>
+
+      <!-- 4b Essay Gap-Fill Container -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 text-sm font-black flex items-center justify-center">4b</span>
+            Complete the essay with the quantifiers from the box:
+          </h3>
+          <span id="ex4b-score-pill" class="text-xs font-bold text-blue-800 bg-blue-50 px-3 py-1 rounded-xl">Score: 0/10</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.8rem] sm:leading-[3.2rem] font-normal space-y-6">
+          <p>
+            There are many occasions when we find ourselves in a large crowd. Football matches, festivals and concerts are
+            <span class="font-bold text-slate-400 mr-1">1</span>
+            <input type="text" data-ex4-gap="1" data-ans="a few" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(gap 1)" />
+            examples. This essay will argue that being part of a crowd provides more benefits than disadvantages.
+          </p>
+
+          <p>
+            <span class="font-bold text-slate-400 mr-1">2</span>
+            <input type="text" data-ex4-gap="2" data-ans="most of us,Most of us" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-40 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(gap 2)" />
+            enjoy spending time in crowds at some point in our lives. This is because a
+            <span class="font-bold text-slate-400 mr-1">3</span>
+            <input type="text" data-ex4-gap="3" data-ans="large number" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-44 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(gap 3)" />
+            of events, such as football matches or concerts, provide a sense of community. We want to spend time with people who have the same interests and passions as us because we feel that we belong to something.
+          </p>
+
+          <p>
+            In addition to this, research shows that when we feel that we have something in common with people in a crowd, we do not notice that we have
+            <span class="font-bold text-slate-400 mr-1">4</span>
+            <input type="text" data-ex4-gap="4" data-ans="too little" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(gap 4)" />
+            space around us. Instead, we think we have
+            <span class="font-bold text-slate-400 mr-1">5</span>
+            <input type="text" data-ex4-gap="5" data-ans="plenty" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(gap 5)" />
+            of room because we feel safe with those people.
+          </p>
+
+          <p>
+            Finally, we experience more pleasure when we share a positive event with others than when we experience it on our own. The sound of a crowd shouting and cheering can generate
+            <span class="font-bold text-slate-400 mr-1">6</span>
+            <input type="text" data-ex4-gap="6" data-ans="a large amount of" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-52 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(gap 6)" />
+            excitement so we feel happier.
+          </p>
+
+          <p>
+            In conclusion, being in a crowd can provide many advantages. It is true that some crowds can be unpleasant and create a feeling of danger, especially when there are
+            <span class="font-bold text-slate-400 mr-1">7</span>
+            <input type="text" data-ex4-gap="7" data-ans="too many" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-36 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(gap 7)" />
+            people or there is not
+            <span class="font-bold text-slate-400 mr-1">8</span>
+            <input type="text" data-ex4-gap="8" data-ans="enough" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-32 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(gap 8)" />
+            crowd control. However,
+            <span class="font-bold text-slate-400 mr-1">9</span>
+            <input type="text" data-ex4-gap="9" data-ans="few" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-24 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(gap 9)" />
+            organised events are like this. The majority of them bring a sense of community, the feeling that you belong and an increased feeling of excitement which
+            <span class="font-bold text-slate-400 mr-1">10</span>
+            <input type="text" data-ex4-gap="10" data-ans="many" class="ex4-input exercise-input px-3 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-28 text-center bg-slate-50 focus:bg-white focus:border-blue-500 transition" placeholder="(gap 10)" />
+            people can enjoy.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: EXPERT GRAMMAR REFERENCE (Page 182) -->
+    <!-- ========================================================================= -->
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-indigo-600 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 182 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Quantifiers Reference</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Comprehensive guide to quantifiers with countable and uncountable nouns, positive vs negative connotation (*few* vs *a few*), and formal academic quantifiers for IELTS.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Countable vs Uncountable Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-800 font-black text-base flex items-center justify-center">
+              CU
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Countable vs. Uncountable</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Noun Compatibility Rules</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Plural Countable Nouns ONLY:</div>
+              <p class="text-slate-600 font-medium">• <strong>many, a few, few, several, a (large) number of</strong></p>
+              <p class="text-indigo-800 font-bold text-xs mt-1"><em>"A large number of events provide a sense of community."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Uncountable Nouns ONLY:</div>
+              <p class="text-slate-600 font-medium">• <strong>much, a little, little, a (large) amount/quantity of, a bit of</strong></p>
+              <p class="text-indigo-800 font-bold text-xs mt-1"><em>"The sound of cheering generates a large amount of excitement."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. BOTH Countable & Uncountable:</div>
+              <p class="text-slate-600 font-medium">• <strong>a lot of, lots of, plenty of, some, any, hardly any, enough, no</strong></p>
+              <p class="text-slate-600 font-medium"><em>"plenty of room"</em> (uncountable) / <em>"plenty of events"</em> (countable)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Few vs A Few Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-800 font-black text-base flex items-center justify-center">
+              FL
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Connotation: Few vs. A few</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Positive vs. Negative Meaning</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-1">
+              <div class="font-extrabold text-emerald-950">1. A FEW / A LITTLE (Positive = some):</div>
+              <p class="text-slate-700 font-medium">Emphasizes that there is a small amount, but it is enough or reassuring.</p>
+              <p class="text-emerald-900 font-bold text-xs mt-1"><em>"A few people attended."</em> (At least some people came).</p>
+              <p class="text-emerald-900 font-bold text-xs"><em>"We have a little time to finish."</em> (We still have some time).</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-rose-50 border border-rose-200 space-y-1">
+              <div class="font-extrabold text-rose-950">2. FEW / LITTLE (Negative = not enough / almost none):</div>
+              <p class="text-slate-700 font-medium">Emphasizes scarcity, disappointment, or absence.</p>
+              <p class="text-rose-900 font-bold text-xs mt-1"><em>"Few children went to the festival."</em> (Hardly any children went).</p>
+              <p class="text-rose-900 font-bold text-xs"><em>"There's little time to answer."</em> (Almost no time remaining).</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Too many vs. Too little:</div>
+              <p class="text-slate-600 font-medium"><strong>too many</strong> + plural noun (excess): <em>"too many people"</em></p>
+              <p class="text-slate-600 font-medium"><strong>too little</strong> + uncountable noun (deficiency): <em>"too little space"</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formal Academic IELTS Writing Task 1 & 2 Tips -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+          <span>⚡</span> Quantifiers in IELTS Academic Writing (Task 1 & Task 2)
+        </h3>
+        <div class="grid sm:grid-cols-3 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-indigo-800 block text-base mb-1">A large number of</span>
+            <p class="text-slate-700 leading-relaxed font-medium">
+              Takes a <strong>plural verb</strong>: <em>"A large number of spectators <strong>were</strong> present at the stadium."</em>
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-indigo-800 block text-base mb-1">A large amount of</span>
+            <p class="text-slate-700 leading-relaxed font-medium">
+              Takes a <strong>singular verb</strong>: <em>"A large amount of money <strong>was</strong> invested in crowd security."</em>
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-indigo-800 block text-base mb-1">Formal Replacements</span>
+            <p class="text-slate-700 leading-relaxed font-medium">
+              In Task 2 essays, replace informal <em>"lots of"</em> with <strong>a significant proportion of</strong>, <strong>a considerable number of</strong>, or <strong>plenty of</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 99
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 10a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 10: Community • Page 157 • Expert Grammar Page 182
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript Engine -->
+  <script>
+    const state = {
+      score: {
+        ex1: 0,
+        ex2a: 0,
+        ex2b: 0,
+        ex3a: 0,
+        ex4b: 0
+      }
+    };
+
+    // Web Audio Synthesizer for feedback sounds
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(170, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Text to Speech
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-600/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-600/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // Exercise 1 Phrase Inserter
+    let lastActiveEx1Input = null;
+    document.querySelectorAll('.ex1-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx1Input = inp;
+      });
+    });
+
+    function insertEx1Phrase(phrase) {
+      if (lastActiveEx1Input) {
+        lastActiveEx1Input.value = phrase;
+        lastActiveEx1Input.focus();
+      } else {
+        const emptyInp = Array.from(document.querySelectorAll('.ex1-input')).find(i => !i.value.trim());
+        if (emptyInp) {
+          emptyInp.value = phrase;
+          emptyInp.focus();
+        }
+      }
+    }
+
+    // Exercise 1 Validation
+    function checkEx1() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex1-input');
+
+      inputs.forEach(inp => {
+        const allowed = cleanStr(inp.getAttribute('data-ans'));
+        const userVal = cleanStr(inp.value);
+
+        if (userVal === allowed) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex1 = correct;
+      document.getElementById('ex1-score-pill').textContent = `Score: ${correct}/5`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx1() {
+      const keys = [
+        "a lot of",            // 1
+        "a little",            // 2
+        "few",                 // 3
+        "a large number of",   // 4
+        "plenty of"            // 5
+      ];
+
+      const inputs = document.querySelectorAll('.ex1-input');
+      inputs.forEach((inp, idx) => {
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+      });
+
+      state.score.ex1 = 5;
+      document.getElementById('ex1-score-pill').textContent = 'Score: 5/5';
+      updateTotalScore();
+    }
+
+    // Exercise 2a Check
+    function checkEx2a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex2a-container [data-ex2a-q]');
+
+      rows.forEach(row => {
+        const sel = row.querySelector('.ex2a-select');
+        const expected = row.getAttribute('data-ans');
+        const badge = row.querySelector('.feedback-badge');
+
+        if (!sel.value) {
+          badge.innerHTML = '<span class="text-amber-600">Select meaning</span>';
+          return;
+        }
+
+        if (sel.value === expected) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-emerald-500');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Need: ${expected}</span>`;
+          sel.classList.remove('border-emerald-500');
+          sel.classList.add('border-rose-400');
+        }
+      });
+
+      state.score.ex2a = correct;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correct}/4`;
+      return correct;
+    }
+
+    // Exercise 2b Check
+    function checkEx2b() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex2b-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex2b = correct;
+      document.getElementById('ex2b-score-pill').textContent = `Score: ${correct}/6`;
+      return correct;
+    }
+
+    function checkEx2() {
+      const c2a = checkEx2a();
+      const c2b = checkEx2b();
+      updateTotalScore();
+      playBeep((c2a + c2b) >= 7);
+    }
+
+    function revealEx2() {
+      // 2a
+      const keys2a = ['A', 'B', 'B', 'A'];
+      document.querySelectorAll('#ex2a-container [data-ex2a-q]').forEach((row, i) => {
+        const sel = row.querySelector('.ex2a-select');
+        sel.value = keys2a[i];
+        sel.classList.remove('border-rose-400');
+        sel.classList.add('border-emerald-500');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+      state.score.ex2a = 4;
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 4/4';
+
+      // 2b
+      const keys2b = ['a few', 'few', 'little', 'A few', 'few', 'a little'];
+      document.querySelectorAll('.ex2b-input').forEach((inp, idx) => {
+        inp.value = keys2b[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+      });
+      state.score.ex2b = 6;
+      document.getElementById('ex2b-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    // Exercise 3a Validation
+    function checkEx3a() {
+      let correct = 0;
+      const validCountable = ['many', 'a few', 'few', 'a lot of', 'plenty of', 'a large number of', 'some', 'no'];
+      const validUncountable = ['much', 'a little', 'little', 'a lot of', 'plenty of', 'a large amount of', 'some', 'no'];
+
+      document.querySelectorAll('#ex3a-container [data-ex3a-row]').forEach(row => {
+        const inp = row.querySelector('.ex3a-input');
+        const badge = row.querySelector('.feedback-badge');
+        const type = row.getAttribute('data-type');
+        const val = cleanStr(inp.value);
+
+        if (!val) {
+          badge.innerHTML = '<span class="text-amber-600">Enter quantifier</span>';
+          return;
+        }
+
+        const isValid = (type === 'countable' && validCountable.includes(val)) ||
+                        (type === 'uncountable' && validUncountable.includes(val));
+
+        if (isValid) {
+          correct++;
+          badge.innerHTML = '<span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 font-bold">✓ Valid Quantifier</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = `<span class="px-2 py-0.5 rounded-lg bg-rose-100 text-rose-900 font-bold">✗ Incompatible with ${type}</span>`;
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3a = correct;
+      document.getElementById('ex3a-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function saveEx3aProfile() {
+      const data = {};
+      for (let i = 1; i <= 6; i++) {
+        const val = document.querySelector(`[data-ex3a-inp="${i}"]`).value;
+        const just = document.getElementById(`ex3a-just-${i}`).value;
+        data[i] = { quantifier: val, justification: just };
+      }
+      localStorage.setItem('m10_community_ex3a', JSON.stringify(data));
+      const status = document.getElementById('ex3a-save-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    // Exercise 4 Phrase Inserter
+    let lastActiveEx4Input = null;
+    document.querySelectorAll('.ex4-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx4Input = inp;
+      });
+    });
+
+    function insertEx4Phrase(phrase) {
+      if (lastActiveEx4Input) {
+        lastActiveEx4Input.value = phrase;
+        lastActiveEx4Input.focus();
+      } else {
+        const emptyInp = Array.from(document.querySelectorAll('.ex4-input')).find(i => !i.value.trim());
+        if (emptyInp) {
+          emptyInp.value = phrase;
+          emptyInp.focus();
+        }
+      }
+    }
+
+    // Exercise 4b Check
+    function checkEx4b() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex4-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex4b = correct;
+      document.getElementById('ex4b-score-pill').textContent = `Score: ${correct}/10`;
+      updateTotalScore();
+      playBeep(correct >= 7);
+    }
+
+    function revealEx4b() {
+      const keys = [
+        "a few",              // 1
+        "most of us",          // 2
+        "large number",        // 3
+        "too little",          // 4
+        "plenty",              // 5
+        "a large amount of",   // 6
+        "too many",            // 7
+        "enough",              // 8
+        "few",                 // 9
+        "many"                 // 10
+      ];
+
+      const inputs = document.querySelectorAll('.ex4-input');
+      inputs.forEach((inp, idx) => {
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+      });
+
+      state.score.ex4b = 10;
+      document.getElementById('ex4b-score-pill').textContent = 'Score: 10/10';
+      updateTotalScore();
+    }
+
+    // Total Score Update
+    function updateTotalScore() {
+      // 1 (5), 2a (4), 2b (6), 3a (6), 4b (10). Total = 31
+      const total = state.score.ex1 + state.score.ex2a + state.score.ex2b + state.score.ex3a + state.score.ex4b;
+      const maxScore = 31;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 25) {
+        bar.classList.replace('bg-indigo-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-indigo-600');
+      }
+    }
+
+    // Reset All Answers
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Clear 1
+      document.querySelectorAll('.ex1-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 2a
+      document.querySelectorAll('.ex2a-select').forEach(s => {
+        s.value = '';
+        s.classList.remove('border-emerald-500', 'border-rose-400');
+      });
+
+      // Clear 2b
+      document.querySelectorAll('.ex2b-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 3a
+      document.querySelectorAll('.ex3a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 4b
+      document.querySelectorAll('.ex4-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear feedback badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset state
+      state.score = { ex1: 0, ex2a: 0, ex2b: 0, ex3a: 0, ex4b: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1-score-pill').textContent = 'Score: 0/5';
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/4';
+      document.getElementById('ex2b-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex4b-score-pill').textContent = 'Score: 0/10';
+    });
+
+    // Auto-restore saved profile
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const savedProfile = JSON.parse(localStorage.getItem('m10_community_ex3a'));
+        if (savedProfile) {
+          for (let i = 1; i <= 6; i++) {
+            if (savedProfile[i]) {
+              const inp = document.querySelector(`[data-ex3a-inp="${i}"]`);
+              const just = document.getElementById(`ex3a-just-${i}`);
+              if (inp && savedProfile[i].quantifier) inp.value = savedProfile[i].quantifier;
+              if (just && savedProfile[i].justification) just.value = savedProfile[i].justification;
+            }
+          }
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

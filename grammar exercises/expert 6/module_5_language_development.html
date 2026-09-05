@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 5: Art and Leisure - Grammar to Connect Ideas</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              800: '#9f1239',
+              900: '#881337',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.25);
+    }
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-rose-600 selection:text-white pb-12">
+
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-rose-600 via-pink-600 to-amber-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-rose-600/25 ring-2 ring-white">
+          M5
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-900 tracking-wide uppercase">Unit 5: Art and leisure</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 77</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-rose-700">Grammar to Connect Ideas</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-rose-700">0 / 28</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-rose-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-rose-700 text-white shadow-md shadow-rose-700/25">
+          1. Cohesion Words (1a & 1b)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Owning Art (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Summary Nouns (3a & 3b)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Essay Repetition Studio (4a & 4b)
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 176
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Banner -->
+      <div class="bg-gradient-to-r from-rose-800 via-pink-700 to-amber-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1a & 1b</span>
+            <span class="text-rose-200 text-xs font-medium">Expert Grammar Page 176</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Connecting Ideas: Reference, Substitution & Ellipsis</h2>
+          <p class="text-rose-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Discover how pronouns (<em>this, that, these</em>), substitutes (<em>so, do so, such</em>), and modal ellipsis (<em>can</em>) prevent repetitive phrasing in art criticism and academic discourse.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1a()" class="px-5 py-2.5 bg-white hover:bg-rose-50 text-rose-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 1a</span>
+          </button>
+          <button onclick="revealEx1a()" class="px-4 py-2.5 bg-rose-900/60 hover:bg-rose-900 text-white border border-rose-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Word Bank Chips -->
+      <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Available Cohesive Words:</span>
+          <span class="text-xs text-slate-400">Click a word to insert into the focused gap</span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="ex1a-word-bank">
+          <button type="button" onclick="insertEx1Word('can')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-900 font-black text-sm hover:border-rose-500 transition">can</button>
+          <button type="button" onclick="insertEx1Word('do so')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-900 font-black text-sm hover:border-rose-500 transition">do so</button>
+          <button type="button" onclick="insertEx1Word('so')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-900 font-black text-sm hover:border-rose-500 transition">so</button>
+          <button type="button" onclick="insertEx1Word('such')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-900 font-black text-sm hover:border-rose-500 transition">such</button>
+          <button type="button" onclick="insertEx1Word('these')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-900 font-black text-sm hover:border-rose-500 transition">these</button>
+          <button type="button" onclick="insertEx1Word('this')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-900 font-black text-sm hover:border-rose-500 transition">this</button>
+          <button type="button" onclick="insertEx1Word('this')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-900 font-black text-sm hover:border-rose-500 transition">this</button>
+          <button type="button" onclick="insertEx1Word('that')" class="px-3.5 py-1.5 rounded-xl bg-rose-50 border-2 border-rose-200 text-rose-900 font-black text-sm hover:border-rose-500 transition">that</button>
+        </div>
+      </div>
+
+      <!-- Exercise 1a Interactive Question Rows -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">1a</span>
+            Complete the sentences with the words from the box (more than one answer may be possible):
+          </h3>
+          <span id="ex1a-score-pill" class="text-xs font-bold text-rose-800 bg-rose-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="space-y-4" id="ex1a-container">
+          <!-- Item 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1a-row="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">Sentence 1: Ellipsis of verb phrase</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Many people believe that they can't understand art, but they</span>
+              <input type="text" data-ex1a-gap="1" data-ans="can" class="ex1a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-28 text-center focus:border-rose-600 focus:outline-none" placeholder="(verb)" />
+              <span>.</span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1a-row="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">Sentence 2: Pronoun reference</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Of course, colour is also essential, but we'll be looking at</span>
+              <input type="text" data-ex1a-gap="2" data-ans="that,this" class="ex1a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-32 text-center focus:border-rose-600 focus:outline-none" placeholder="(pronoun)" />
+              <span>in next week's talk.</span>
+            </div>
+          </div>
+
+          <!-- Item 3 (two gaps) -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1a-row="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">Sentence 3: Demonstrative determiner & pronoun</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>There are very obvious vertical lines in the houses. The artist is using</span>
+              <input type="text" data-ex1a-gap="3a" data-ans="this,that" class="ex1a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-32 text-center focus:border-rose-600 focus:outline-none" placeholder="(word 1)" />
+              <span>method here to emphasise that</span>
+              <input type="text" data-ex1a-gap="3b" data-ans="this,that" class="ex1a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-32 text-center focus:border-rose-600 focus:outline-none" placeholder="(word 2)" />
+              <span>is a very urban scene.</span>
+            </div>
+          </div>
+
+          <!-- Item 4 (two gaps) -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1a-row="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">Sentence 4: Demonstrative determiner & substitute verb</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>The train tracks... he's asking the audience to follow</span>
+              <input type="text" data-ex1a-gap="4a" data-ans="these" class="ex1a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-32 text-center focus:border-rose-600 focus:outline-none" placeholder="(word 1)" />
+              <span>lines. If we</span>
+              <input type="text" data-ex1a-gap="4b" data-ans="do so" class="ex1a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-32 text-center focus:border-rose-600 focus:outline-none" placeholder="(phrase 2)" />
+              <span>, we can see that there's a city in the distance.</span>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1a-row="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">Sentence 5: Demonstrative determiner / such</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>We see the top lines of the roofs and the direction of the track.</span>
+              <input type="text" data-ex1a-gap="5" data-ans="These,Such,these,such" class="ex1a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-32 text-center focus:border-rose-600 focus:outline-none" placeholder="(determiner)" />
+              <span>features all help to make us look in a certain direction.</span>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex1a-row="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-400">Sentence 6: Degree substitution with so</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>These shapes help to relax the image, perhaps less</span>
+              <input type="text" data-ex1a-gap="6" data-ans="so" class="ex1a-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-rose-900 bg-white text-base w-24 text-center focus:border-rose-600 focus:outline-none" placeholder="(so)" />
+              <span>than the colour, but it all helps.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">1b</span>
+            What do the gapped words in sentences (1–6) refer to?
+          </h3>
+          <button onclick="toggleEx1bReferenceHints()" class="text-xs font-extrabold text-rose-700 bg-rose-50 px-3 py-1.5 rounded-xl border border-rose-200 hover:bg-rose-100 transition">
+            Toggle Grammar Breakdown
+          </button>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="font-black text-rose-700 block">1. 'can' refers to:</span>
+            <p class="text-slate-700 font-medium"><em>"...understand art"</em> (modal auxiliary ellipsis avoids repeating the whole predicate).</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="font-black text-rose-700 block">2. 'that / this' refers to:</span>
+            <p class="text-slate-700 font-medium"><em>"colour"</em> (referring back to the specific element mentioned previously).</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="font-black text-rose-700 block">3. 'this method' & 'this' refer to:</span>
+            <p class="text-slate-700 font-medium">The technique of using <em>"vertical lines"</em>, and <em>"the painting / scene itself"</em>.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="font-black text-rose-700 block">4. 'these' & 'do so' refer to:</span>
+            <p class="text-slate-700 font-medium"><em>"these"</em> = the lines of the train tracks; <em>"do so"</em> = follow the lines with our eyes.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="font-black text-rose-700 block">5. 'These / Such features' refers to:</span>
+            <p class="text-slate-700 font-medium"><em>"the top lines of the roofs and the direction of the track"</em> grouped together.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <span class="font-black text-rose-700 block">6. 'so' refers to:</span>
+            <p class="text-slate-700 font-medium"><em>"relax the image"</em> (substituting for the clause/adjective phrase to express degree).</p>
+          </div>
+        </div>
+
+        <div id="ex1b-explanation" class="hidden p-4 rounded-2xl bg-rose-50 border border-rose-200 text-xs sm:text-sm text-rose-950 space-y-1">
+          <p class="font-extrabold">💡 Cohesion Mechanism Analysis:</p>
+          <p>These devices ensure text flows naturally without annoying verbatim repetition. <strong>Ellipsis</strong> leaves words out when the meaning is obvious (1). <strong>Demonstratives</strong> (<em>this, that, these, those</em>) point backward or forward (2, 3, 4, 5). <strong>Substitution</strong> uses general words like <em>so</em> or <em>do so</em> to replace entire verb phrases (4, 6).</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-ex2" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-pink-700 via-rose-700 to-amber-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-pink-200 text-xs font-medium">Art Investment Contextual Cloze</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">The Cost of Owning Art: Demonstratives & Determiners</h2>
+          <p class="text-pink-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Select the correct determiners and pronouns in italics throughout the article. Pay close attention to near vs distant time, singular vs plural, and general human classes (<em>those with money / those who do</em>).
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2a()" class="px-5 py-2.5 bg-white hover:bg-rose-50 text-rose-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Choices</span>
+          </button>
+          <button onclick="revealEx2a()" class="px-4 py-2.5 bg-rose-900/60 hover:bg-rose-900 text-white border border-rose-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 2a Interactive Text View -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 text-sm font-black flex items-center justify-center">2a</span>
+            Choose the correct options in italics to complete the text:
+          </h3>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-rose-800 bg-rose-50 px-3 py-1 rounded-xl">Score: 0/8</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.6rem] sm:leading-[3rem] font-normal space-y-6">
+          <p>
+            Year on year, people are prepared to spend record-breaking amounts on artwork. For
+            <!-- 1 these / those -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex2a-slot="1" data-ans="those">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">these</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">those</button>
+            </span>
+            with the money, it's an attractive investment. When Andy Warhol's <em>Triple Elvis</em> painting last came on the market in 1977, it sold for $83,000. At
+            <!-- 2 this / that -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex2a-slot="2" data-ans="that">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">this</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">that</button>
+            </span>
+            time, it was a lot to pay for modern art.
+            <!-- 3 Such / That -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex2a-slot="3" data-ans="That">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">Such</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">That</button>
+            </span>
+            same painting sold for $83 million in 2015, making it a good investment for its owners.
+          </p>
+
+          <p>
+            <!-- 4 This / Such -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex2a-slot="4" data-ans="Such">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">This</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">Such</button>
+            </span>
+            numbers might be enough to persuade you to invest, but you also need to think of the cost of owning art. Insurance, security and climate control all add up. Few people have the money to meet
+            <!-- 5 this / such -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex2a-slot="5" data-ans="such">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">this</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">such</button>
+            </span>
+            high yearly costs, and
+            <!-- 6 these / those -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex2a-slot="6" data-ans="those">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">these</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">those</button>
+            </span>
+            who do, often feel more comfortable with their painting locked in a cupboard.
+          </p>
+
+          <p>
+            Unfortunately, for
+            <!-- 7 this / these -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex2a-slot="7" data-ans="these">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">this</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">these</button>
+            </span>
+            reasons, a lot of important works of art are now owned by casinos, where security is already very high. If you want to see
+            <!-- 8 these / those -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex2a-slot="8" data-ans="these">
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">these</button>
+              <button type="button" onclick="selectEx2aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-rose-600 shadow-2xs">those</button>
+            </span>
+            cultural treasures, you might have to walk past the gambling tables.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-pink-100 text-pink-800 text-sm font-black flex items-center justify-center">2b</span>
+              Discussion: Describe your favourite painting or piece of artwork
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">How valuable is it? Where is it kept? Why do you like it?</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="speakText('My favourite painting is The Starry Night by Vincent van Gogh. It is kept in the Museum of Modern Art in New York. The swirling brushstrokes and celestial lighting convey an extraordinary depth of emotion that feels completely alive.')" class="text-xs font-bold text-rose-700 bg-rose-50 px-3 py-1.5 rounded-xl hover:bg-rose-100 transition flex items-center gap-1">
+              🔊 Listen to Model
+            </button>
+            <button onclick="saveEx2bArtNotes()" class="px-4 py-2 bg-rose-700 hover:bg-rose-800 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+              Save My Notes
+            </button>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
+            <label class="block text-xs font-black uppercase text-slate-600">Artwork Name & Location:</label>
+            <input type="text" id="ex2b-art-name" placeholder="e.g. The Starry Night (MoMA, New York)" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm font-medium bg-white focus:outline-none focus:border-rose-600" />
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
+            <label class="block text-xs font-black uppercase text-slate-600">Estimated Value & Security:</label>
+            <input type="text" id="ex2b-art-value" placeholder="e.g. Priceless / insured for over $100M" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm font-medium bg-white focus:outline-none focus:border-rose-600" />
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
+            <label class="block text-xs font-black uppercase text-slate-600">Why do you like it?</label>
+            <input type="text" id="ex2b-art-why" placeholder="e.g. Dynamic composition, vivid color contrast" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm font-medium bg-white focus:outline-none focus:border-rose-600" />
+          </div>
+        </div>
+        <div id="ex2b-save-status" class="hidden p-3 rounded-xl bg-rose-100 text-rose-900 text-xs font-bold">
+          ✓ Your artwork description has been saved to local storage!
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-amber-600 via-rose-700 to-purple-800 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a & 3b</span>
+            <span class="text-amber-200 text-xs font-medium">Academic Cohesion with Summary Noun Phrases</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Connecting Complex Ideas with Summary Phrases</h2>
+          <p class="text-amber-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Summary noun phrases (e.g. <em>this stunning architecture, such recent improvements</em>) encapsulate an entire preceding sentence or complex idea into a concise noun phrase.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3a()" class="px-5 py-2.5 bg-white hover:bg-amber-50 text-amber-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Summary Phrases</span>
+          </button>
+          <button onclick="revealEx3a()" class="px-4 py-2.5 bg-amber-950/60 hover:bg-amber-950 text-white border border-amber-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Summary Phrases Bank -->
+      <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-500">Summary Phrases Bank:</span>
+          <span class="text-xs text-slate-400">Click a phrase tag to insert it into the active gap</span>
+        </div>
+        <div class="flex flex-wrap gap-2.5" id="ex3a-phrase-bank">
+          <button type="button" onclick="insertEx3Phrase('this change in attitude')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">this change in attitude</button>
+          <button type="button" onclick="insertEx3Phrase('such recent improvements')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">such recent improvements</button>
+          <button type="button" onclick="insertEx3Phrase('these sleepovers')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">these sleepovers</button>
+          <button type="button" onclick="insertEx3Phrase('these wealthy investors')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">these wealthy investors</button>
+          <button type="button" onclick="insertEx3Phrase('this stunning architecture')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-900 font-black text-sm hover:border-amber-500 transition">this stunning architecture</button>
+        </div>
+      </div>
+
+      <!-- Exercise 3a Text with Gap-fill Fields -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">3a</span>
+            Complete the sentences with the summary phrases from the box:
+          </h3>
+          <span id="ex3a-score-pill" class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-1 rounded-xl">Score: 0/5</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.8rem] sm:leading-[3.2rem] font-normal space-y-6">
+          <p>
+            Museums have tried to make their service better by opening later in the evenings and offering interactive displays.
+            <span class="font-bold text-slate-400 mr-1">1</span>
+            <input type="text" data-ex3a-gap="1" data-ans="such recent improvements" class="ex3a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-64 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(phrase 1)" />
+            have resulted in higher visitor numbers.
+          </p>
+
+          <p>
+            Many museums offer overnight stays for teenagers.
+            <span class="font-bold text-slate-400 mr-1">2</span>
+            <input type="text" data-ex3a-gap="2" data-ans="these sleepovers" class="ex3a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-48 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(phrase 2)" />
+            have been made popular by films such as <em>Night at the Museum</em>.
+          </p>
+
+          <p>
+            Social events are also common. The Natural History Museum in London has beautiful arches and sculptures.
+            <span class="font-bold text-slate-400 mr-1">3</span>
+            <input type="text" data-ex3a-gap="3" data-ans="this stunning architecture" class="ex3a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-64 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(phrase 3)" />
+            has made it popular for private events such as weddings.
+          </p>
+
+          <p>
+            Most museums are supported by major technology companies.
+            <span class="font-bold text-slate-400 mr-1">4</span>
+            <input type="text" data-ex3a-gap="4" data-ans="these wealthy investors" class="ex3a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-60 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(phrase 4)" />
+            have the money to fund large interactive displays.
+          </p>
+
+          <p>
+            All in all, museums now see their role as entertainment, not documentation, and
+            <span class="font-bold text-slate-400 mr-1">5</span>
+            <input type="text" data-ex3a-gap="5" data-ans="this change in attitude" class="ex3a-input exercise-input px-3.5 py-1 border-2 border-slate-300 font-bold rounded-xl text-base w-60 text-center bg-slate-50 focus:bg-white focus:border-amber-500 transition" placeholder="(phrase 5)" />
+            has made museums more popular than ever before.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 text-sm font-black flex items-center justify-center">3b</span>
+            Discussion: Do you think schoolchildren should visit museums? Why / Why not?
+          </h3>
+          <button onclick="speakText('Schoolchildren should definitely visit museums because handling interactive artifacts transforms abstract historical facts into unforgettable sensory memories.')" class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1.5 rounded-xl hover:bg-amber-100 transition flex items-center gap-1">
+            🔊 Listen to Model Opinion
+          </button>
+        </div>
+        <textarea id="ex3b-discussion" rows="2" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-amber-600 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. Visiting museums enables schoolchildren to engage directly with real cultural treasures. Such educational excursions stimulate curiosity in science and world heritage far more effectively than static textbook reading..."></textarea>
+      </div>
+    </section>
+
+    <section id="tab-ex4" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-purple-800 via-rose-700 to-indigo-800 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a & 4b</span>
+            <span class="text-purple-200 text-xs font-medium">IELTS Writing Task 2 Cohesion Studio</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Eliminating Repetition: Restructuring for Academic Flow</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Examine the essay prompt on historic preservation. Compare the repetitive student draft with the cohesive Band 8.5+ model utilizing pronouns, nominalisation, and ellipsis.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="loadSampleRewriteEx4()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Load Model Rewrite</span>
+          </button>
+          <button onclick="saveEx4Notes()" class="px-4 py-2.5 bg-purple-950/60 hover:bg-purple-950 text-white border border-purple-400/40 text-sm font-bold rounded-2xl transition">
+            Save Draft
+          </button>
+        </div>
+      </div>
+
+      <!-- 4a Essay Prompt & Brainstorming Callout -->
+      <div class="p-6 bg-purple-50 rounded-3xl border-2 border-purple-200/80 space-y-3">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-xl bg-purple-600 text-white text-sm font-black flex items-center justify-center">4a</span>
+          <span class="text-xs font-black uppercase tracking-wider text-purple-700">IELTS Essay Prompt Analysis</span>
+        </div>
+        <p class="text-base sm:text-lg font-extrabold text-purple-950">
+          "Should we invest in looking after old buildings, or should we replace them when they are no longer functional?"
+        </p>
+        <div class="grid md:grid-cols-2 gap-4 text-xs sm:text-sm pt-2">
+          <div class="p-3.5 rounded-2xl bg-white border border-purple-200 text-purple-950 space-y-1">
+            <strong class="text-emerald-700 font-black">Arguments FOR Preserving Old Buildings:</strong>
+            <ul class="list-disc list-inside space-y-1 text-slate-700">
+              <li>They embody historical identity and cultural heritage.</li>
+              <li>Architectural uniqueness attracts tourism revenue.</li>
+              <li>Embodied carbon in existing structures is conserved.</li>
+            </ul>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-white border border-purple-200 text-purple-950 space-y-1">
+            <strong class="text-rose-700 font-black">Arguments FOR Replacing Them:</strong>
+            <ul class="list-disc list-inside space-y-1 text-slate-700">
+              <li>Exorbitant continuous repair and maintenance costs.</li>
+              <li>Poor insulation leads to severe carbon waste and high energy bills.</li>
+              <li>Modern buildings accommodate disabled access and modern tech better.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4b Side-by-Side Original Repetitive Draft vs Cohesive Rewritten Version -->
+      <div class="grid lg:grid-cols-2 gap-6">
+        
+        <!-- Original Choppy & Repetitive Text -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-700 text-xs font-black flex items-center justify-center">✗</span>
+              <h3 class="font-extrabold text-base text-slate-900">Original Unedited Extract (Repetitive)</h3>
+            </div>
+            <span class="text-xs bg-rose-100 text-rose-800 font-bold px-2.5 py-0.5 rounded-full">Score: Band 5.5</span>
+          </div>
+
+          <div class="text-slate-700 text-sm sm:text-base leading-relaxed space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+            <p>
+              I think that we should look after the old buildings in our city. <span class="bg-rose-100 text-rose-900 font-bold px-1 rounded">The old buildings</span> represent our history and our cultural past. <span class="bg-rose-100 text-rose-900 font-bold px-1 rounded">Representing our cultural past</span> is important because it makes our cities look unique. <span class="bg-rose-100 text-rose-900 font-bold px-1 rounded">When we make our cities look unique</span>, they are more attractive to tourists, and <span class="bg-rose-100 text-rose-900 font-bold px-1 rounded">being attractive to tourists</span> is good for tourism.
+            </p>
+            <p>
+              However, it can be expensive to run a very old building. <span class="bg-rose-100 text-rose-900 font-bold px-1 rounded">Very old buildings</span> often need a lot of repairs. <span class="bg-rose-100 text-rose-900 font-bold px-1 rounded">Very old buildings</span> often don't have the latest windows, doors and insulation. <span class="bg-rose-100 text-rose-900 font-bold px-1 rounded">Not having the latest windows doors and insulation</span> means that they are inefficient. <span class="bg-rose-100 text-rose-900 font-bold px-1 rounded">Being inefficient</span> is bad for the environment as well as our wallets.
+            </p>
+          </div>
+          <p class="text-xs text-rose-700 font-medium">⚠️ Notice the heavy repetition of identical noun phrases and clumsy gerund clauses chained back-to-back.</p>
+        </div>
+
+        <!-- Cohesive Band 8.5+ Model Rewrite -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 text-xs font-black flex items-center justify-center">✓</span>
+              <h3 class="font-extrabold text-base text-slate-900">Cohesive Academic Model (Band 8.5+)</h3>
+            </div>
+            <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-0.5 rounded-full">High Cohesion</span>
+          </div>
+
+          <div class="text-slate-800 text-sm sm:text-base leading-relaxed space-y-4 bg-emerald-50/50 p-5 rounded-2xl border border-emerald-200">
+            <p>
+              I think that we should look after the old buildings in our city, <mark class="bg-emerald-200 text-emerald-950 font-bold px-1 rounded">as these</mark> represent our history and cultural heritage. <mark class="bg-emerald-200 text-emerald-950 font-bold px-1 rounded">This connection</mark> is important because it lends our cities a unique character, <mark class="bg-emerald-200 text-emerald-950 font-bold px-1 rounded">which in turn</mark> makes them more appealing to visitors and boosts the local economy.
+            </p>
+            <p>
+              However, maintaining <mark class="bg-emerald-200 text-emerald-950 font-bold px-1 rounded">such historic structures</mark> can be extremely expensive. Not only do <mark class="bg-emerald-200 text-emerald-950 font-bold px-1 rounded">they</mark> frequently require costly repairs, but they also lack modern insulation, windows and doors. <mark class="bg-emerald-200 text-emerald-950 font-bold px-1 rounded">This inefficiency</mark> harms both the environment and public finances.
+            </p>
+          </div>
+          <p class="text-xs text-emerald-700 font-medium">✨ Uses: <em>as these</em> (demonstrative pronoun), <em>This connection</em> (summary noun), <em>which in turn</em> (relative clause), <em>such historic structures</em> (determiner + synonym), and <em>This inefficiency</em> (nominalisation).</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">4b</span>
+            Your Practice Workspace: Rewrite the essay extract in your own words
+          </h3>
+          <button onclick="evaluateEx4Rewrite()" class="px-4 py-2 bg-purple-700 hover:bg-purple-800 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+            Check Cohesive Markers
+          </button>
+        </div>
+        <textarea id="ex4-user-draft" rows="4" class="exercise-input w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-purple-600 focus:outline-none bg-slate-50 text-slate-800" placeholder="Type your improved version here avoiding repetition using pronouns (these, they), summary nouns (this heritage, such structures), or relative clauses..."></textarea>
+        <div id="ex4-eval-feedback" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+      </div>
+    </section>
+
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 via-rose-950 to-indigo-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-rose-600 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 176 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Grammar to Connect Ideas</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Mastering reference pronouns, substitution, ellipsis, demonstratives, and summary noun phrases for high-level coherence and cohesion in academic English.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Reference & Demonstratives -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-800 font-black text-base flex items-center justify-center">
+              RD
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Reference & Demonstratives</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Pointing Backward & Forward</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. This, That, These, Those:</div>
+              <p class="text-slate-600 font-medium"><strong>This / These:</strong> Refer to things just mentioned or situations physically/temporally close: <em>"These shapes help to relax the image."</em></p>
+              <p class="text-slate-600 font-medium"><strong>That / Those:</strong> Refer to things further away in time, or classes of people: <em>"For <u>those with the money</u>..."</em> / <em>"At <u>that time</u>..."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Such:</div>
+              <p class="text-slate-600 font-medium">Means <em>"of this type / so great"</em>: <em>"Few people have the money to meet <strong>such</strong> high yearly costs."</em></p>
+              <p class="text-slate-600 font-medium"><em>"<strong>Such</strong> numbers might be enough to persuade you..."</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Substitution & Ellipsis -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 font-black text-base flex items-center justify-center">
+              SE
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Substitution & Ellipsis</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Avoiding Direct Repetition</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Substitution with 'so' and 'do so':</div>
+              <p class="text-slate-600 font-medium"><strong>do so:</strong> Replaces a verb and its object: <em>"He asked us to follow the lines. If we <strong>do so</strong>, we can see..."</em></p>
+              <p class="text-slate-600 font-medium"><strong>so:</strong> Replaces a clause or adjective of degree: <em>"...perhaps less <strong>so</strong> than the colour."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Modal Ellipsis:</div>
+              <p class="text-slate-600 font-medium">Leaving out the main verb after an auxiliary: <em>"Many people believe they can't understand art, but they <strong>can</strong> [understand art]."</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Nouns Reference Matrix -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+          <span>⚡</span> Summary Nouns: Encapsulating Ideas
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600">
+          In IELTS Academic Writing, replacing a whole previous clause with a summary noun (<em>this problem, such initiatives, this change, these improvements</em>) is the hallmark of Band 8+ cohesion:
+        </p>
+        <div class="grid sm:grid-cols-3 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-rose-700 block text-base mb-1">Actions ➔ Nouns</span>
+            <p class="text-slate-700">Opening later & interactive screens ➔ <em>"<strong>Such recent improvements</strong> have resulted in..."</em></p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-rose-700 block text-base mb-1">Descriptions ➔ Nouns</span>
+            <p class="text-slate-700">Beautiful arches & sculptures ➔ <em>"<strong>This stunning architecture</strong> has made it..."</em></p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-rose-700 block text-base mb-1">Mindsets ➔ Nouns</span>
+            <p class="text-slate-700">Seeing their role as entertainment ➔ <em>"<strong>This change in attitude</strong> has made..."</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 49
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 5a Language development A and B
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 5: Art and leisure • Page 77 • Expert Grammar Page 176
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State management for scores
+    const state = {
+      score: {
+        ex1a: 0,
+        ex2a: 0,
+        ex3a: 0,
+        ex4: 0
+      }
+    };
+
+    // Web Audio Synthesizer for feedback sounds
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(170, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // Text to Speech
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Tab Navigation Logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-rose-700', 'text-white', 'shadow-md', 'shadow-rose-700/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-rose-700', 'text-white', 'shadow-md', 'shadow-rose-700/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    let lastActiveEx1Input = null;
+    document.querySelectorAll('.ex1a-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx1Input = inp;
+      });
+    });
+
+    function insertEx1Word(word) {
+      if (lastActiveEx1Input) {
+        lastActiveEx1Input.value = word;
+        lastActiveEx1Input.focus();
+      } else {
+        const emptyInp = Array.from(document.querySelectorAll('.ex1a-input')).find(i => !i.value.trim());
+        if (emptyInp) {
+          emptyInp.value = word;
+          emptyInp.focus();
+        }
+      }
+    }
+
+    function checkEx1a() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex1a-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.includes(userVal)) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      // Update row badges
+      document.querySelectorAll('#ex1a-container [data-ex1a-row]').forEach(row => {
+        const rowInputs = Array.from(row.querySelectorAll('.ex1a-input'));
+        const badge = row.querySelector('.feedback-badge');
+        const allCorrect = rowInputs.every(i => i.classList.contains('border-emerald-500'));
+        if (allCorrect && rowInputs.every(i => i.value.trim())) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck</span>';
+        }
+      });
+
+      state.score.ex1a = correct;
+      document.getElementById('ex1a-score-pill').textContent = `Score: ${correct}/8`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx1a() {
+      const keys = {
+        '1': 'can',
+        '2': 'that',
+        '3a': 'this',
+        '3b': 'this',
+        '4a': 'these',
+        '4b': 'do so',
+        '5': 'These',
+        '6': 'so'
+      };
+
+      for (let k in keys) {
+        const inp = document.querySelector(`[data-ex1a-gap="${k}"]`);
+        if (inp) {
+          inp.value = keys[k];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        }
+      }
+
+      document.querySelectorAll('#ex1a-container [data-ex1a-row] .feedback-badge').forEach(b => {
+        b.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex1a = 8;
+      document.getElementById('ex1a-score-pill').textContent = 'Score: 8/8';
+      updateTotalScore();
+    }
+
+    function toggleEx1bReferenceHints() {
+      const exp = document.getElementById('ex1b-explanation');
+      exp.classList.toggle('hidden');
+    }
+
+    function selectEx2aPill(btn) {
+      const parent = btn.closest('[data-ex2a-slot]');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-rose-700', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-rose-700', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-rose-700', 'text-white', 'border-rose-700');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx2a() {
+      let correct = 0;
+      const slots = document.querySelectorAll('[data-ex2a-slot]');
+
+      slots.forEach(slot => {
+        const expected = slot.getAttribute('data-ans').toLowerCase();
+        const selectedBtn = slot.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) return;
+
+        const userVal = selectedBtn.textContent.trim().toLowerCase();
+        if (userVal === expected) {
+          correct++;
+          selectedBtn.classList.remove('bg-rose-700', 'border-rose-700');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          selectedBtn.classList.remove('bg-rose-700', 'border-rose-700');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex2a = correct;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correct}/8`;
+      updateTotalScore();
+      playBeep(correct >= 6);
+    }
+
+    function revealEx2a() {
+      const answers = {
+        '1': 'those',
+        '2': 'that',
+        '3': 'That',
+        '4': 'Such',
+        '5': 'such',
+        '6': 'those',
+        '7': 'these',
+        '8': 'these'
+      };
+
+      for (let s in answers) {
+        const slot = document.querySelector(`[data-ex2a-slot="${s}"]`);
+        slot.querySelectorAll('.pill-choice-btn').forEach(b => {
+          if (b.textContent.trim().toLowerCase() === answers[s].toLowerCase()) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-rose-700', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+      }
+
+      state.score.ex2a = 8;
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 8/8';
+      updateTotalScore();
+    }
+
+    function saveEx2bArtNotes() {
+      const n = document.getElementById('ex2b-art-name').value;
+      const v = document.getElementById('ex2b-art-value').value;
+      const w = document.getElementById('ex2b-art-why').value;
+      localStorage.setItem('m5_art_ex2b', JSON.stringify({ n, v, w }));
+      const status = document.getElementById('ex2b-save-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    let lastActiveEx3Input = null;
+    document.querySelectorAll('.ex3a-input').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        lastActiveEx3Input = inp;
+      });
+    });
+
+    function insertEx3Phrase(phrase) {
+      if (lastActiveEx3Input) {
+        lastActiveEx3Input.value = phrase;
+        lastActiveEx3Input.focus();
+      } else {
+        const emptyInp = Array.from(document.querySelectorAll('.ex3a-input')).find(i => !i.value.trim());
+        if (emptyInp) {
+          emptyInp.value = phrase;
+          emptyInp.focus();
+        }
+      }
+    }
+
+    function checkEx3a() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex3a-input');
+
+      inputs.forEach(inp => {
+        const expected = cleanStr(inp.getAttribute('data-ans'));
+        const userVal = cleanStr(inp.value);
+
+        if (userVal === expected) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3a = correct;
+      document.getElementById('ex3a-score-pill').textContent = `Score: ${correct}/5`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx3a() {
+      const keys = [
+        "such recent improvements",
+        "these sleepovers",
+        "this stunning architecture",
+        "these wealthy investors",
+        "this change in attitude"
+      ];
+
+      const inputs = document.querySelectorAll('.ex3a-input');
+      inputs.forEach((inp, idx) => {
+        inp.value = keys[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+      });
+
+      state.score.ex3a = 5;
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 5/5';
+      updateTotalScore();
+    }
+
+    function loadSampleRewriteEx4() {
+      document.getElementById('ex4-user-draft').value = 
+        "I believe that we should look after the old buildings in our city, as these represent our rich cultural heritage. " +
+        "This connection is important because it lends our urban landscape a unique character, which in turn attracts international tourists. " +
+        "However, maintaining such historic structures can be prohibitively expensive. " +
+        "Not only do they frequently demand costly repairs, but they also lack modern insulation and energy-efficient windows. " +
+        "This environmental inefficiency harms both the planet and municipal budgets.";
+      playBeep(true);
+      evaluateEx4Rewrite();
+    }
+
+    function evaluateEx4Rewrite() {
+      const text = document.getElementById('ex4-user-draft').value.trim();
+      const fb = document.getElementById('ex4-eval-feedback');
+      fb.classList.remove('hidden');
+
+      if (!text || text.length < 50) {
+        fb.className = "p-3 rounded-xl text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300";
+        fb.innerHTML = "⚠️ Please write or paste an improved paragraph (at least 50 words) to evaluate cohesive devices.";
+        return;
+      }
+
+      // Check for cohesive indicators
+      const clean = cleanStr(text);
+      const devices = [
+        { name: "demonstratives (these / this / such)", found: clean.includes("these") || clean.includes("this") || clean.includes("such") },
+        { name: "pronoun substitution (they / them)", found: clean.includes("they") || clean.includes("them") },
+        { name: "summary nouns (heritage / connection / structures / inefficiency)", found: clean.includes("heritage") || clean.includes("connection") || clean.includes("structures") || clean.includes("inefficiency") || clean.includes("character") },
+        { name: "relative clause connectors (which / that / as)", found: clean.includes("which") || clean.includes("that") || clean.includes("as") }
+      ];
+
+      const foundCount = devices.filter(d => d.found).length;
+      if (foundCount >= 3) {
+        fb.className = "p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-950 border border-emerald-300";
+        fb.innerHTML = `✓ <strong>Excellent Cohesion!</strong> Found ${foundCount}/4 major cohesive patterns. Your text successfully eliminates verbatim repetition through pronouns, summary nouns, and relative connectors.`;
+        state.score.ex4 = 7;
+        playBeep(true);
+      } else {
+        fb.className = "p-3 rounded-xl text-xs font-bold bg-rose-100 text-rose-950 border border-rose-300";
+        fb.innerHTML = `✗ <strong>Try incorporating more variety:</strong> Try using <em>these</em>, <em>such historic buildings</em>, or summary nouns like <em>this connection</em> or <em>this inefficiency</em>.`;
+        state.score.ex4 = 3;
+        playBeep(false);
+      }
+      updateTotalScore();
+    }
+
+    function saveEx4Notes() {
+      const draft = document.getElementById('ex4-user-draft').value;
+      localStorage.setItem('m5_art_ex4', draft);
+      const fb = document.getElementById('ex4-eval-feedback');
+      fb.classList.remove('hidden');
+      fb.className = "p-3 rounded-xl text-xs font-bold bg-purple-100 text-purple-900 border border-purple-300";
+      fb.innerHTML = "✓ Your essay draft has been saved to local browser storage!";
+      playBeep(true);
+    }
+
+    function updateTotalScore() {
+      const total = state.score.ex1a + state.score.ex2a + state.score.ex3a + state.score.ex4;
+      // Max score: 8 + 8 + 5 + 7 = 28
+      const maxScore = 28;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 22) {
+        bar.classList.replace('bg-rose-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-rose-600');
+      }
+    }
+
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Clear 1a
+      document.querySelectorAll('.ex1a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 2a pills
+      document.querySelectorAll('[data-ex2a-slot] .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-rose-700', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-rose-700', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear 3a
+      document.querySelectorAll('.ex3a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 4
+      document.getElementById('ex4-user-draft').value = '';
+      document.getElementById('ex4-eval-feedback').classList.add('hidden');
+
+      // Clear badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset state
+      state.score = { ex1a: 0, ex2a: 0, ex3a: 0, ex4: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1a-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/8';
+      document.getElementById('ex3a-score-pill').textContent = 'Score: 0/5';
+    });
+
+    // Auto-restore saved discussion and essay data
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved2b = JSON.parse(localStorage.getItem('m5_art_ex2b'));
+        if (saved2b) {
+          if (saved2b.n) document.getElementById('ex2b-art-name').value = saved2b.n;
+          if (saved2b.v) document.getElementById('ex2b-art-value').value = saved2b.v;
+          if (saved2b.w) document.getElementById('ex2b-art-why').value = saved2b.w;
+        }
+
+        const saved4 = localStorage.getItem('m5_art_ex4');
+        if (saved4) {
+          document.getElementById('ex4-user-draft').value = saved4;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

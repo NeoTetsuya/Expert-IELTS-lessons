@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 4: Science - Future & Present Probability</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              800: '#5b21b6',
+              900: '#4c1d95',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pill-choice-btn {
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+    .pill-choice-btn:hover {
+      transform: translateY(-1px);
+    }
+    .pill-choice-btn:active {
+      transform: translateY(1px);
+    }
+    .exercise-input:focus {
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
+    }
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-purple-600 selection:text-white pb-12">
+
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-700 via-indigo-600 to-cyan-500 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-purple-600/25 ring-2 ring-white">
+          M4
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 tracking-wide uppercase">Unit 4: Science</span>
+            <span class="text-xs text-slate-500 font-semibold">• Page 61</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight tracking-tight">
+            Language Development: <span class="text-purple-700">Future & Present Probability</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Live Interactive Scoreboard -->
+      <div class="flex items-center gap-3">
+        <div class="bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200 flex items-center gap-3 shadow-xs">
+          <div class="flex flex-col">
+            <span class="text-[11px] uppercase font-black tracking-wider text-slate-500">Your Score</span>
+            <span id="global-score-pill" class="text-base font-black text-purple-700">0 / 33</span>
+          </div>
+          <div class="w-20 sm:w-28 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+            <div id="global-progress-bar" class="bg-purple-600 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <button id="reset-all-btn" class="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 px-3 py-2 rounded-xl transition border border-slate-200 hover:border-rose-300 flex items-center gap-1.5 shadow-xs" title="Reset all answers">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-none" id="tabs-navigation" aria-label="Exercise Tabs">
+        <button data-tab="tab-ex1" class="tab-btn active px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 bg-purple-700 text-white shadow-md shadow-purple-700/25">
+          1. Probability Scale (1a & 1b)
+        </button>
+        <button data-tab="tab-ex2" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          2. Year 2050 Predictions (2a & 2b)
+        </button>
+        <button data-tab="tab-ex3" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          3. Structure Patterns (3a, 3b, 3c)
+        </button>
+        <button data-tab="tab-ex4" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          4. Brain Manipulation (4a & 4b)
+        </button>
+        <button data-tab="tab-ex5" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          5. Present Probability (5a, 5b, 5c)
+        </button>
+        <button data-tab="tab-grammar" class="tab-btn px-4 py-2.5 text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap transition-all duration-150 text-slate-700 hover:text-slate-900 hover:bg-slate-100">
+          📖 Grammar p. 176
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <section id="tab-ex1" class="tab-content active space-y-6">
+      
+      <!-- Banner -->
+      <div class="bg-gradient-to-r from-purple-800 via-indigo-700 to-cyan-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 1a & 1b</span>
+            <span class="text-purple-200 text-xs font-medium">Expert Grammar Page 176</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Future Probability: Degrees of Certainty</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Examine how modal verbs (<em>may, might, could</em>) and adverbs of certainty (<em>definitely, probably, possibly</em>) specify whether an outcome is completely sure, quite sure, or not sure.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx1b()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Table (1b)</span>
+          </button>
+          <button onclick="revealEx1b()" class="px-4 py-2.5 bg-purple-900/60 hover:bg-purple-900 text-white border border-purple-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Exercise 1a Interactive Sentence Explorer -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">1a</span>
+            Tap the words or phrases that describe possibility or probability in each sentence:
+          </h3>
+          <span class="text-xs font-semibold text-slate-400">Click words to highlight</span>
+        </div>
+
+        <div class="space-y-3" id="ex1a-sentences">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-base text-slate-800 font-medium leading-relaxed">
+            <span class="font-black text-slate-400 mr-2">1.</span>
+            It <button type="button" onclick="toggleWordHighlight(this)" class="px-2 py-0.5 rounded-lg border border-transparent font-bold hover:bg-purple-100 transition">could</button> be dangerous and things <button type="button" onclick="toggleWordHighlight(this)" class="px-2 py-0.5 rounded-lg border border-transparent font-bold hover:bg-purple-100 transition">might</button> go wrong.
+          </div>
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-base text-slate-800 font-medium leading-relaxed">
+            <span class="font-black text-slate-400 mr-2">2.</span>
+            We <button type="button" onclick="toggleWordHighlight(this)" class="px-2 py-0.5 rounded-lg border border-transparent font-bold hover:bg-purple-100 transition">will possibly not</button> want to use it.
+          </div>
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-base text-slate-800 font-medium leading-relaxed">
+            <span class="font-black text-slate-400 mr-2">3.</span>
+            Teleportation <button type="button" onclick="toggleWordHighlight(this)" class="px-2 py-0.5 rounded-lg border border-transparent font-bold hover:bg-purple-100 transition">will definitely</button> be useful for us.
+          </div>
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-base text-slate-800 font-medium leading-relaxed">
+            <span class="font-black text-slate-400 mr-2">4.</span>
+            We <button type="button" onclick="toggleWordHighlight(this)" class="px-2 py-0.5 rounded-lg border border-transparent font-bold hover:bg-purple-100 transition">may</button> use it for travel, but it <button type="button" onclick="toggleWordHighlight(this)" class="px-2 py-0.5 rounded-lg border border-transparent font-bold hover:bg-purple-100 transition">might not</button> be safe.
+          </div>
+          <!-- 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-base text-slate-800 font-medium leading-relaxed">
+            <span class="font-black text-slate-400 mr-2">5.</span>
+            <button type="button" onclick="toggleWordHighlight(this)" class="px-2 py-0.5 rounded-lg border border-transparent font-bold hover:bg-purple-100 transition">It'll probably</button> result in the invention of the superfast computer.
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">1b</span>
+            Put the phrases you underlined in Exercise 1a in the correct place in the table:
+          </h3>
+          <span id="ex1b-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/4</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm sm:text-base border-collapse border border-slate-200 rounded-2xl overflow-hidden">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200">
+                <th class="p-4 text-left font-black text-slate-500 uppercase tracking-wider w-1/3">Certainty Level</th>
+                <th class="p-4 text-left font-black text-emerald-800 uppercase tracking-wider w-1/3 bg-emerald-50/50">Positive (+)</th>
+                <th class="p-4 text-left font-black text-rose-800 uppercase tracking-wider w-1/3 bg-rose-50/50">Negative (-)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <!-- Completely Sure -->
+              <tr class="hover:bg-slate-50/50 transition">
+                <td class="p-4 font-extrabold text-slate-900 bg-slate-50/70">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                    <span>completely sure (100%)</span>
+                  </div>
+                </td>
+                <td class="p-4 bg-emerald-50/20">
+                  <div class="flex items-center gap-2">
+                    <span class="font-black text-purple-600">1.</span>
+                    <input type="text" data-ex1b="1" data-ans="will definitely" class="ex1b-input exercise-input p-2 rounded-xl border-2 border-slate-300 font-bold text-purple-900 bg-white w-full sm:w-48 text-center" placeholder="type phrase 1..." />
+                  </div>
+                </td>
+                <td class="p-4 font-semibold text-slate-700 bg-rose-50/20">
+                  will definitely not / definitely won't
+                </td>
+              </tr>
+
+              <!-- Quite Sure -->
+              <tr class="hover:bg-slate-50/50 transition">
+                <td class="p-4 font-extrabold text-slate-900 bg-slate-50/70">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
+                    <span>quite sure (approx. 70–80%)</span>
+                  </div>
+                </td>
+                <td class="p-4 bg-emerald-50/20">
+                  <div class="flex items-center gap-2">
+                    <span class="font-black text-purple-600">2.</span>
+                    <input type="text" data-ex1b="2" data-ans="will probably,it'll probably,'ll probably" class="ex1b-input exercise-input p-2 rounded-xl border-2 border-slate-300 font-bold text-purple-900 bg-white w-full sm:w-48 text-center" placeholder="type phrase 2..." />
+                  </div>
+                </td>
+                <td class="p-4 font-semibold text-slate-700 bg-rose-50/20">
+                  will probably not / probably won't
+                </td>
+              </tr>
+
+              <!-- Not Sure -->
+              <tr class="hover:bg-slate-50/50 transition">
+                <td class="p-4 font-extrabold text-slate-900 bg-slate-50/70">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                    <span>not sure (30–50%)</span>
+                  </div>
+                </td>
+                <td class="p-4 bg-emerald-50/20 space-y-2">
+                  <p class="font-semibold text-slate-700">will possibly</p>
+                  <p class="font-semibold text-slate-700">might</p>
+                  <div class="flex items-center gap-2">
+                    <span class="font-black text-purple-600">4.</span>
+                    <input type="text" data-ex1b="4" data-ans="may" class="ex1b-input exercise-input p-2 rounded-xl border-2 border-slate-300 font-bold text-purple-900 bg-white w-full sm:w-48 text-center" placeholder="type modal 4..." />
+                  </div>
+                  <p class="font-semibold text-slate-700">could</p>
+                </td>
+                <td class="p-4 bg-rose-50/20 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <span class="font-black text-purple-600">3.</span>
+                    <input type="text" data-ex1b="3" data-ans="will possibly not" class="ex1b-input exercise-input p-2 rounded-xl border-2 border-slate-300 font-bold text-purple-900 bg-white w-full sm:w-48 text-center" placeholder="type negative 3..." />
+                  </div>
+                  <p class="font-semibold text-slate-700">might not</p>
+                  <p class="font-semibold text-slate-700">may not</p>
+                  <p class="text-xs text-slate-400 italic">(could not is generally not used for future possibility)</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-ex2" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 2a & 2b</span>
+            <span class="text-indigo-200 text-xs font-medium">Writing Predictions about 2050</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Life in 2050: Technological & Biological Forecasts</h2>
+          <p class="text-indigo-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Form full predictive sentences from the prompts using appropriate probability markers. Then adjust the consensus slider and record reasons for group debate!
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx2a()" class="px-5 py-2.5 bg-white hover:bg-indigo-50 text-indigo-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 2a</span>
+          </button>
+          <button onclick="revealEx2a()" class="px-4 py-2.5 bg-indigo-900/60 hover:bg-indigo-900 text-white border border-indigo-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-800 text-sm font-black flex items-center justify-center">2a</span>
+            Use the prompts and phrases in Exercise 1b to write predictions about 2050:
+          </h3>
+          <span id="ex2a-score-pill" class="text-xs font-bold text-indigo-800 bg-indigo-50 px-3 py-1 rounded-xl">Score: 0/7</span>
+        </div>
+
+        <!-- Example 1 -->
+        <div class="p-4 rounded-2xl bg-purple-50 border border-purple-200 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase text-purple-800 tracking-wider">1. Example given in coursebook:</span>
+            <span class="text-xs bg-purple-200 text-purple-900 px-2 py-0.5 rounded font-bold">Model</span>
+          </div>
+          <p class="text-xs text-slate-500 font-semibold">Prompt: People / want to teleport in future.</p>
+          <p class="text-base font-bold text-purple-950">➔ "People will probably not want to teleport in future."</p>
+        </div>
+
+        <div class="space-y-4" id="ex2a-container">
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-500">2. Prompt: Cars / all be self-driving</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type sentence with modal/adverb of probability..." data-accepted="cars will definitely be self-driving,cars will probably all be self-driving,cars will definitely all be self-driving,cars may all be self-driving,cars might all be self-driving,cars could all be self-driving" />
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-500">3. Prompt: Robots / do most manual work</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type sentence with modal/adverb of probability..." data-accepted="robots will definitely do most manual work,robots will probably do most manual work,robots may do most manual work,robots might do most manual work" />
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-500">4. Prompt: People / live to over 100 years old</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type sentence with modal/adverb of probability..." data-accepted="people will probably live to over 100 years old,people will definitely live to over 100 years old,people might live to over 100 years old,people may live to over 100 years old" />
+          </div>
+
+          <!-- Item 5 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-500">5. Prompt: You / have to learn English like today</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type sentence with modal/adverb of probability..." data-accepted="you will probably not have to learn english like today,you probably won't have to learn english like today,you might not have to learn english like today,you will definitely not have to learn english like today,people will probably not have to learn english like today" />
+          </div>
+
+          <!-- Item 6 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a="6">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-500">6. Prompt: Scientists / clone parts of the body for transplants</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type sentence with modal/adverb of probability..." data-accepted="scientists will definitely clone parts of the body for transplants,scientists will probably clone parts of the body for transplants,scientists may clone parts of the body for transplants" />
+          </div>
+
+          <!-- Item 7 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a="7">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-500">7. Prompt: Doctors / be able to cure serious illnesses</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type sentence with modal/adverb of probability..." data-accepted="doctors will probably be able to cure serious illnesses,doctors will definitely be able to cure serious illnesses,doctors may be able to cure serious illnesses" />
+          </div>
+
+          <!-- Item 8 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5" data-ex2a="8">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase text-slate-500">8. Prompt: Food / all be genetically modified</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex2a-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="Type sentence with modal/adverb of probability..." data-accepted="food will probably all be genetically modified,food will definitely all be genetically modified,food may all be genetically modified,food will possibly all be genetically modified" />
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">2b</span>
+              Work in groups. Discuss each opinion in Exercise 2a and give reasons:
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Can you all agree? Rate your consensus and formulate reasoned arguments.</p>
+          </div>
+          <button onclick="saveEx2bNotes()" class="px-4 py-2 bg-purple-700 hover:bg-purple-800 text-white rounded-xl text-xs font-extrabold transition shadow-xs">
+            Save Group Opinions
+          </button>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <label class="block text-xs font-black uppercase text-slate-600">Self-driving cars debate:</label>
+            <textarea id="ex2b-note-1" rows="2" class="w-full p-3 rounded-xl border border-slate-300 text-sm font-medium bg-white focus:outline-none focus:border-purple-600" placeholder="e.g. In my view, cars will definitely be self-driving because AI sensor systems are already outperforming human reflexes..."></textarea>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <label class="block text-xs font-black uppercase text-slate-600">Language learning & AI debate:</label>
+            <textarea id="ex2b-note-2" rows="2" class="w-full p-3 rounded-xl border border-slate-300 text-sm font-medium bg-white focus:outline-none focus:border-purple-600" placeholder="e.g. We might still learn English for human empathy and cultural connection, even though earbud translation will be instant..."></textarea>
+          </div>
+        </div>
+        <div id="ex2b-save-status" class="hidden p-3 rounded-xl bg-purple-100 text-purple-900 text-xs font-bold">
+          ✓ Your group discussion notes have been saved to local storage!
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-ex3" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-cyan-700 via-indigo-700 to-purple-800 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 3a, 3b & 3c</span>
+            <span class="text-cyan-200 text-xs font-medium">Noun & Adjective Patterns for Probability</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Alternative Probability Structures</h2>
+          <p class="text-cyan-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Elevate your academic English by moving between modal verbs and formal phrases like <em>"There is a strong possibility that..."</em> and <em>"It is highly likely that..."</em>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx3b()" class="px-5 py-2.5 bg-white hover:bg-cyan-50 text-cyan-900 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 3b</span>
+          </button>
+          <button onclick="revealEx3b()" class="px-4 py-2.5 bg-cyan-900/60 hover:bg-cyan-900 text-white border border-cyan-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-800 text-sm font-black flex items-center justify-center">3a</span>
+            Underline the language of probability in each pair. Is the meaning the same? How is the structure different?
+          </h3>
+          <button onclick="toggleEx3aExpl()" class="text-xs font-extrabold text-cyan-700 bg-cyan-50 px-3 py-1.5 rounded-xl border border-cyan-200 hover:bg-cyan-100 transition">
+            Toggle Grammar Breakdown
+          </button>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <!-- Pair 1 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+            <span class="text-xs font-black uppercase text-purple-700">Pair 1</span>
+            <div class="text-sm font-medium space-y-2">
+              <p><strong>A:</strong> Teleportation <span class="bg-purple-100 px-1.5 py-0.5 rounded text-purple-900 font-bold">will probably not</span> work with humans.</p>
+              <p><strong>B:</strong> <span class="bg-cyan-100 px-1.5 py-0.5 rounded text-cyan-900 font-bold">There is a high probability that</span> teleportation will not work with humans.</p>
+            </div>
+            <p class="text-xs text-slate-500 pt-1 border-t border-slate-200"><strong>Meaning:</strong> Identical high-probability prediction.</p>
+          </div>
+
+          <!-- Pair 2 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+            <span class="text-xs font-black uppercase text-purple-700">Pair 2</span>
+            <div class="text-sm font-medium space-y-2">
+              <p><strong>A:</strong> Humans <span class="bg-purple-100 px-1.5 py-0.5 rounded text-purple-900 font-bold">will probably</span> be able to travel across the universe.</p>
+              <p><strong>B:</strong> <span class="bg-cyan-100 px-1.5 py-0.5 rounded text-cyan-900 font-bold">There is a strong possibility that</span> humans will be able to travel across the universe.</p>
+            </div>
+            <p class="text-xs text-slate-500 pt-1 border-t border-slate-200"><strong>Meaning:</strong> Identical likelihood of interplanetary travel.</p>
+          </div>
+
+          <!-- Pair 3 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+            <span class="text-xs font-black uppercase text-purple-700">Pair 3</span>
+            <div class="text-sm font-medium space-y-2">
+              <p><strong>A:</strong> The teleportation of objects <span class="bg-purple-100 px-1.5 py-0.5 rounded text-purple-900 font-bold">will almost definitely</span> become a reality.</p>
+              <p><strong>B:</strong> <span class="bg-cyan-100 px-1.5 py-0.5 rounded text-cyan-900 font-bold">It is highly likely that</span> the teleportation of objects will become a reality.</p>
+            </div>
+            <p class="text-xs text-slate-500 pt-1 border-t border-slate-200"><strong>Meaning:</strong> Identical near-certain expectation.</p>
+          </div>
+        </div>
+
+        <div id="ex3a-explanation" class="p-4 rounded-2xl bg-cyan-50 border border-cyan-200 text-sm text-cyan-950 space-y-1">
+          <p class="font-extrabold">💡 Structural Distinction:</p>
+          <p><strong>Sentence A</strong> uses modal auxiliary verbs and adverbs directly modifying the verb (<em>will + adverb + base verb</em>).<br>
+          <strong>Sentence B</strong> uses impersonal noun structures (<em>There is a [high/strong] probability/possibility that + clause</em>) or anticipatory 'It' adjective structures (<em>It is [highly/quite] likely that + clause</em>). Both forms convey the exact same degree of certainty!</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-800 text-sm font-black flex items-center justify-center">3b</span>
+            Write sentences about other future possibilities or probabilities using the prompts:
+          </h3>
+          <span id="ex3b-score-pill" class="text-xs font-bold text-cyan-800 bg-cyan-50 px-3 py-1 rounded-xl">Score: 0/4</span>
+        </div>
+
+        <!-- Reference prompt formula boxes -->
+        <div class="grid sm:grid-cols-3 gap-3 text-xs font-bold">
+          <div class="p-3 rounded-xl bg-purple-50 text-purple-900 border border-purple-200">
+            Formula 1: There is a (high) probability that ... will (not) ...
+          </div>
+          <div class="p-3 rounded-xl bg-indigo-50 text-indigo-900 border border-indigo-200">
+            Formula 2: There is a strong / small possibility / chance (that) ... will (not) ...
+          </div>
+          <div class="p-3 rounded-xl bg-cyan-50 text-cyan-900 border border-cyan-200">
+            Formula 3: It is highly / quite likely (that) ... will (not) ...
+          </div>
+        </div>
+
+        <div class="space-y-4" id="ex3b-container">
+          <!-- 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">Sentence 1 (Formula 1: high probability)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3b-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. There is a high probability that artificial intelligence will transform healthcare." />
+          </div>
+
+          <!-- 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">Sentence 2 (Formula 2: strong possibility)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3b-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. There is a strong possibility that humans will establish a permanent colony on Mars." />
+          </div>
+
+          <!-- 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">Sentence 3 (Formula 2: small chance)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3b-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. There is a small chance that fossil fuels will still be our primary energy source by 2060." />
+          </div>
+
+          <!-- 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex3b="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">Sentence 4 (Formula 3: highly likely)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <input type="text" class="ex3b-input exercise-input w-full p-3 rounded-xl border border-slate-300 font-medium text-slate-800 bg-white text-sm" placeholder="e.g. It is highly likely that quantum computing will revolutionize cybersecurity." />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-ex4" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-purple-900 via-indigo-800 to-blue-900 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 4a & 4b</span>
+            <span class="text-purple-200 text-xs font-medium">Physicist Dr Michio Kaku's Brain Predictions</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Manipulating Our Brains: Neural Science Cloze</h2>
+          <p class="text-purple-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Choose the correct option in italics throughout the article. Pay close attention to modal negation, adverb word order, and adjective vs noun collocations.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx4a()" class="px-5 py-2.5 bg-white hover:bg-purple-50 text-purple-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check Article</span>
+          </button>
+          <button onclick="revealEx4a()" class="px-4 py-2.5 bg-purple-950/60 hover:bg-purple-950 text-white border border-purple-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">4a</span>
+            Choose the correct options in italics to complete the article:
+          </h3>
+          <span id="ex4a-score-pill" class="text-xs font-bold text-purple-800 bg-purple-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="text-slate-800 text-base sm:text-lg leading-[2.6rem] sm:leading-[3rem] font-normal space-y-6">
+          <p>
+            People
+            <!-- 1 might not / not might -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex4a-slot="1" data-ans="might not">
+              <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-600 shadow-2xs">might not</button>
+              <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-600 shadow-2xs">not might</button>
+            </span>
+            have to leave home to have a foreign holiday in future, according to physicist Dr Michio Kaku. Instead, they
+            <!-- 2 may / can -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex4a-slot="2" data-ans="may">
+              <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-600 shadow-2xs">may</button>
+              <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-600 shadow-2xs">can</button>
+            </span>
+            choose to download holiday memories directly to their brain.
+          </p>
+
+          <p>
+            Kaku believes we are learning so much about the brain these days that it is
+            <!-- 3 high likely / highly likely -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex4a-slot="3" data-ans="highly likely">
+              <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-600 shadow-2xs">high likely</button>
+              <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-600 shadow-2xs">highly likely</button>
+            </span>
+            we will be able to manipulate it in future. His other predictions include memory recording and telepathy. Old age
+            <!-- 4 will probably not / will not probably -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex4a-slot="4" data-ans="will probably not">
+              <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-600 shadow-2xs">will probably not</button>
+              <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-600 shadow-2xs">will not probably</button>
+            </span>
+            result in memory loss, as we will record our memories and download them to our brain when forgotten.
+          </p>
+
+          <p>
+            He says there is a
+            <!-- 5 strong possibility / strong possible -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex4a-slot="5" data-ans="strong possibility">
+              <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-600 shadow-2xs">strong possibility</button>
+              <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-600 shadow-2xs">strong possible</button>
+            </span>
+            that people will be able to perform basic telepathy with machines, directing them with our mind. However, science like this
+            <!-- 6 definitely will / will definitely -->
+            <span class="inline-flex gap-1.5 mx-1.5 align-middle" data-ex4a-slot="6" data-ans="will definitely">
+              <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-600 shadow-2xs">definitely will</button>
+              <button type="button" onclick="selectEx4aPill(this)" class="pill-choice-btn px-3 py-1 rounded-xl text-sm font-bold border-2 border-slate-300 bg-white text-slate-700 hover:border-purple-600 shadow-2xs">will definitely</button>
+            </span>
+            need to consider.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 text-sm font-black flex items-center justify-center">4b</span>
+            Discussion: What do you think about Kaku's predictions regarding brain manipulation?
+          </h3>
+          <button onclick="speakText('Downloading holiday memories might sound convenient, but it would eliminate the genuine adventure and personal growth of travelling to foreign destinations.')" class="text-xs font-bold text-purple-700 bg-purple-50 px-3 py-1.5 rounded-xl hover:bg-purple-100 transition flex items-center gap-1">
+            🔊 Listen to Model Opinion
+          </button>
+        </div>
+        <textarea id="ex4b-discussion" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 text-sm font-medium focus:border-purple-600 focus:outline-none bg-slate-50 text-slate-800" placeholder="e.g. While downloading memories sounds fascinating, there is a strong possibility that hackers could implant false memories or access sensitive thoughts, making cognitive cybersecurity crucial..."></textarea>
+      </div>
+    </section>
+
+    <section id="tab-ex5" class="tab-content space-y-6">
+      
+      <div class="bg-gradient-to-r from-emerald-600 via-teal-700 to-indigo-800 text-white p-6 sm:p-7 rounded-3xl shadow-md flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-white/20 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Exercise 5a, 5b & 5c</span>
+            <span class="text-emerald-200 text-xs font-medium">Logical Deduction in the Present</span>
+          </div>
+          <h2 class="text-2xl font-black mt-2">Present Probability & Modal Deduction</h2>
+          <p class="text-emerald-100 text-sm mt-1 max-w-2xl leading-relaxed">
+            Use <em>must</em> when you are 95%+ sure something is true now, <em>can't</em> when you are sure it is impossible, and <em>could / may / might</em> for genuine possibilities.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5 shrink-0">
+          <button onclick="checkEx5b()" class="px-5 py-2.5 bg-white hover:bg-emerald-50 text-emerald-950 text-sm font-extrabold rounded-2xl shadow transition transform active:scale-95 flex items-center gap-1.5">
+            <span>Check 5b</span>
+          </button>
+          <button onclick="revealEx5b()" class="px-4 py-2.5 bg-emerald-900/60 hover:bg-emerald-900 text-white border border-emerald-400/40 text-sm font-bold rounded-2xl transition">
+            Show Key
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">5a</span>
+            Which of the modal verbs (<em>can't, could, may, might, must</em>) express each meaning?
+          </h3>
+          <span id="ex5a-score-pill" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">Score: 0/3</span>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <!-- 1 Completely sure true -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex5a-q="1">
+            <div class="text-xs font-black uppercase text-emerald-700">1. Completely sure something IS true now</div>
+            <p class="text-sm text-slate-700 font-medium">Logical deduction (evidence leads to one definite conclusion):</p>
+            <div class="flex items-center gap-2">
+              <select class="ex5a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-slate-800 focus:border-emerald-600 focus:outline-none w-full" onchange="checkEx5a()">
+                <option value="">Select modal verb...</option>
+                <option value="must">must</option>
+                <option value="can't">can't</option>
+                <option value="could/may/might">could / may / might</option>
+              </select>
+            </div>
+            <div class="feedback-badge text-xs font-bold"></div>
+          </div>
+
+          <!-- 2 Completely sure NOT true -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex5a-q="2">
+            <div class="text-xs font-black uppercase text-rose-700">2. Completely sure something is NOT true now</div>
+            <p class="text-sm text-slate-700 font-medium">Negative impossibility (impossible based on facts):</p>
+            <div class="flex items-center gap-2">
+              <select class="ex5a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-slate-800 focus:border-emerald-600 focus:outline-none w-full" onchange="checkEx5a()">
+                <option value="">Select modal verb...</option>
+                <option value="must">must</option>
+                <option value="can't">can't</option>
+                <option value="could/may/might">could / may / might</option>
+              </select>
+            </div>
+            <div class="feedback-badge text-xs font-bold"></div>
+          </div>
+
+          <!-- 3 Possible now -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" data-ex5a-q="3">
+            <div class="text-xs font-black uppercase text-amber-700">3. Something is POSSIBLE now</div>
+            <p class="text-sm text-slate-700 font-medium">Open possibility (not 100% certain either way):</p>
+            <div class="flex items-center gap-2">
+              <select class="ex5a-select p-2.5 rounded-xl border-2 border-slate-300 bg-white text-sm font-bold text-slate-800 focus:border-emerald-600 focus:outline-none w-full" onchange="checkEx5a()">
+                <option value="">Select modal verb...</option>
+                <option value="must">must</option>
+                <option value="can't">can't</option>
+                <option value="could/may/might">could / may / might</option>
+              </select>
+            </div>
+            <div class="feedback-badge text-xs font-bold"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-black flex items-center justify-center">5b</span>
+            Complete the sentences with a verb from Exercise 5a (can't, could, may, might, must):
+          </h3>
+          <span id="ex5b-score-pill" class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl">Score: 0/6</span>
+        </div>
+
+        <div class="space-y-4" id="ex5b-container">
+          <!-- Item 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5b="1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">Sentence 1</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Scientists</span>
+              <input type="text" data-ans="can't,cannot" class="ex5b-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-28 text-center focus:border-emerald-600 focus:outline-none" placeholder="(verb)" />
+              <span>possibly know the future; they're just guessing.</span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5b="2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">Sentence 2</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Poor quality teaching</span>
+              <input type="text" data-ans="may,might,could" class="ex5b-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-28 text-center focus:border-emerald-600 focus:outline-none" placeholder="(verb)" />
+              <span>be a reason few women study science, but I'm not sure.</span>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5b="3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">Sentence 3</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Overuse of technology</span>
+              <input type="text" data-ans="may,might,could" class="ex5b-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-28 text-center focus:border-emerald-600 focus:outline-none" placeholder="(verb)" />
+              <span>be the cause of our brains getting smaller.</span>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5b="4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">Sentence 4</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>Physics</span>
+              <input type="text" data-ans="must" class="ex5b-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-28 text-center focus:border-emerald-600 focus:outline-none" placeholder="(verb)" />
+              <span>be one of the most challenging subjects to study. It's very complex.</span>
+            </div>
+          </div>
+
+          <!-- Item 5 (two blanks) -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2" data-ex5b="5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-slate-500 uppercase">Sentence 5 (two modals)</span>
+              <span class="feedback-badge text-xs font-bold"></span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-base text-slate-900 font-medium">
+              <span>It</span>
+              <input type="text" data-ans="can't,cannot" class="ex5b-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-28 text-center focus:border-emerald-600 focus:outline-none" placeholder="(verb 1)" />
+              <span>be easy to do research. It</span>
+              <input type="text" data-ans="must" class="ex5b-input exercise-input px-3 py-1 rounded-xl border-2 border-slate-300 font-bold text-emerald-900 bg-white text-base w-28 text-center focus:border-emerald-600 focus:outline-none" placeholder="(verb 2)" />
+              <span>take a lot of time and patience.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-grammar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 via-purple-950 to-indigo-950 text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+        <div class="flex items-center gap-2">
+          <span class="bg-purple-600 text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Expert Grammar</span>
+          <span class="text-slate-300 text-xs font-semibold">Page 176 Reference Guide</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black mt-2">Future & Present Probability Reference</h2>
+        <p class="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
+          Mastering modal verbs, adverbs of certainty, word order rules, and noun/adjective probability structures for IELTS and Cambridge exams.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Future Probability -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-800 font-black text-base flex items-center justify-center">
+              FP
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Future Probability</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Modals & Adverbs of Certainty</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Degrees of certainty:</div>
+              <p class="text-slate-600 font-medium"><strong>100% sure:</strong> <em>will definitely</em> (positive) / <em>definitely won't</em> or <em>will definitely not</em> (negative).</p>
+              <p class="text-slate-600 font-medium"><strong>70–80% sure:</strong> <em>will probably</em> / <em>probably won't</em> or <em>will probably not</em>.</p>
+              <p class="text-slate-600 font-medium"><strong>30–50% not sure:</strong> <em>may, might, could, will possibly</em> / <em>may not, might not, possibly won't</em>.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Critical word order rule:</div>
+              <p class="text-slate-600 font-medium">In the positive, adverbs go <strong>after</strong> will: <em>"It will <u>definitely</u> happen."</em></p>
+              <p class="text-slate-600 font-medium">With won't, adverbs go <strong>before</strong> won't: <em>"It <u>definitely</u> won't happen."</em></p>
+              <p class="text-slate-600 font-medium">With will not, adverbs go between: <em>"It will <u>definitely</u> not happen."</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Present Probability -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 font-black text-base flex items-center justify-center">
+              PP
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">Present Probability</h3>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wide">Modal Deduction (Now)</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">1. Certain it is true: <em>must</em></div>
+              <p class="text-slate-600 font-medium"><em>"Physics <strong>must</strong> be one of the most challenging subjects. It's very complex."</em></p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">2. Certain it is impossible: <em>can't</em></div>
+              <p class="text-slate-600 font-medium"><em>"Scientists <strong>can't</strong> possibly know the future; they're just guessing."</em></p>
+              <p class="text-xs text-rose-600 font-semibold">✗ NEVER use <s>mustn't</s> for logical deduction of impossibility.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <div class="font-extrabold text-slate-900">3. Possible now: <em>could / may / might</em></div>
+              <p class="text-slate-600 font-medium"><em>"Overuse of technology <strong>might</strong> be the cause of our brains getting smaller."</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+          <span>⚡</span> Academic Formulas: Noun Phrases & Anticipatory 'It'
+        </h3>
+        <div class="grid sm:grid-cols-3 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-purple-700 block text-base mb-1">Probability</span>
+            <p class="text-slate-700"><em>"There is a <strong>high / low probability that</strong> teleportation will (not) work with humans."</em></p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-purple-700 block text-base mb-1">Possibility / Chance</span>
+            <p class="text-slate-700"><em>"There is a <strong>strong / small possibility (or chance) that</strong> humans will travel across the universe."</em></p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="font-black text-purple-700 block text-base mb-1">Likelihood</span>
+            <p class="text-slate-700"><em>"It is <strong>highly / quite / unlikely that</strong> the teleportation of objects will become a reality."</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">Student's Resource Book &gt;</span> Language development page 39
+        <span class="text-slate-300">|</span>
+        <span class="font-bold text-slate-700">MyEnglishLab &gt;</span> 4a Language development
+      </div>
+      <div class="text-slate-400 font-medium">
+        Module 4: Science • Page 61 • Expert Grammar Page 176
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State management for scores
+    const state = {
+      score: {
+        ex1b: 0,
+        ex2a: 0,
+        ex3b: 0,
+        ex4a: 0,
+        ex5a: 0,
+        ex5b: 0
+      }
+    };
+
+    // Web Audio Synthesizer for instant feedback sounds
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(success) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (success) {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, audioCtx.currentTime + 0.15); // D6
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(170, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-purple-700', 'text-white', 'shadow-md', 'shadow-purple-700/25');
+          b.classList.add('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+        });
+        btn.classList.add('bg-purple-700', 'text-white', 'shadow-md', 'shadow-purple-700/25');
+        btn.classList.remove('text-slate-700', 'hover:text-slate-900', 'hover:bg-slate-100');
+
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const activeContent = document.getElementById(target);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+      });
+    });
+
+    // Helper for cleaning user input
+    function cleanStr(s) {
+      return s.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()']/g, "").replace(/\s+/g, " ").trim();
+    }
+
+    // Toggle 1a word highlight
+    function toggleWordHighlight(btn) {
+      btn.classList.toggle('bg-purple-600');
+      btn.classList.toggle('text-white');
+      playBeep(true);
+    }
+
+    function checkEx1b() {
+      let correct = 0;
+      const inputs = document.querySelectorAll('.ex1b-input');
+
+      inputs.forEach(inp => {
+        const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+        const userVal = cleanStr(inp.value);
+
+        if (allowed.some(a => userVal === a || userVal.includes(a))) {
+          correct++;
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex1b = correct;
+      document.getElementById('ex1b-score-pill').textContent = `Score: ${correct}/4`;
+      updateTotalScore();
+      playBeep(correct >= 3);
+    }
+
+    function revealEx1b() {
+      const keys = {
+        '1': 'will definitely',
+        '2': 'will probably',
+        '3': 'will possibly not',
+        '4': 'may'
+      };
+
+      for (let k in keys) {
+        const inp = document.querySelector(`[data-ex1b="${k}"]`);
+        if (inp) {
+          inp.value = keys[k];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        }
+      }
+
+      state.score.ex1b = 4;
+      document.getElementById('ex1b-score-pill').textContent = 'Score: 4/4';
+      updateTotalScore();
+    }
+
+    function checkEx2a() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex2a-container [data-ex2a]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex2a-input');
+        const badge = row.querySelector('.feedback-badge');
+        const allowed = inp.getAttribute('data-accepted').split(',').map(cleanStr);
+        const userClean = cleanStr(inp.value);
+
+        if (!userClean) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Type prediction</span>';
+          return;
+        }
+
+        // Check if user included a probability marker
+        const hasProbMarker = ["will definitely", "will probably", "definitely", "probably", "may", "might", "could", "possibly"].some(m => userClean.includes(m));
+
+        if (allowed.some(ans => userClean === ans || userClean.includes(ans) || ans.includes(userClean)) || (hasProbMarker && userClean.length > 15)) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Grammatically Sound</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Include probability modal/adverb</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex2a = correct;
+      document.getElementById('ex2a-score-pill').textContent = `Score: ${correct}/7`;
+      updateTotalScore();
+      playBeep(correct >= 5);
+    }
+
+    function revealEx2a() {
+      const keys = [
+        "Cars will definitely all be self-driving.",
+        "Robots will probably do most manual work.",
+        "People will probably live to over 100 years old.",
+        "You probably won't have to learn English like today.",
+        "Scientists will definitely clone parts of the body for transplants.",
+        "Doctors will probably be able to cure serious illnesses.",
+        "Food will probably all be genetically modified."
+      ];
+
+      const rows = document.querySelectorAll('#ex2a-container [data-ex2a]');
+      rows.forEach((row, i) => {
+        const inp = row.querySelector('.ex2a-input');
+        const badge = row.querySelector('.feedback-badge');
+        inp.value = keys[i];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex2a = 7;
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 7/7';
+      updateTotalScore();
+    }
+
+    function saveEx2bNotes() {
+      const n1 = document.getElementById('ex2b-note-1').value;
+      const n2 = document.getElementById('ex2b-note-2').value;
+      localStorage.setItem('m4_science_ex2b', JSON.stringify({ n1, n2 }));
+      const status = document.getElementById('ex2b-save-status');
+      status.classList.remove('hidden');
+      playBeep(true);
+    }
+
+    function toggleEx3aExpl() {
+      const exp = document.getElementById('ex3a-explanation');
+      exp.classList.toggle('hidden');
+    }
+
+    function checkEx3b() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex3b-container [data-ex3b]');
+
+      rows.forEach(row => {
+        const inp = row.querySelector('.ex3b-input');
+        const badge = row.querySelector('.feedback-badge');
+        const val = cleanStr(inp.value);
+
+        if (!val) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">Write sentence</span>';
+          return;
+        }
+
+        const validPattern = val.includes("probability that") || val.includes("possibility that") || val.includes("chance that") || val.includes("likely that");
+        if (validPattern && val.length > 20) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Accurate Structure</span>';
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Follow formula</span>';
+          inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+          inp.classList.add('border-rose-400', 'bg-rose-50');
+        }
+      });
+
+      state.score.ex3b = correct;
+      document.getElementById('ex3b-score-pill').textContent = `Score: ${correct}/4`;
+      updateTotalScore();
+      playBeep(correct >= 3);
+    }
+
+    function revealEx3b() {
+      const models = [
+        "There is a high probability that artificial intelligence will transform healthcare.",
+        "There is a strong possibility that humans will establish a permanent base on Mars.",
+        "There is a small chance that fossil fuels will still power transport by 2060.",
+        "It is highly likely that quantum computing will revolutionize cybersecurity."
+      ];
+
+      const rows = document.querySelectorAll('#ex3b-container [data-ex3b]');
+      rows.forEach((row, idx) => {
+        const inp = row.querySelector('.ex3b-input');
+        inp.value = models[idx];
+        inp.classList.remove('border-rose-400', 'bg-rose-50');
+        inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      });
+
+      state.score.ex3b = 4;
+      document.getElementById('ex3b-score-pill').textContent = 'Score: 4/4';
+      updateTotalScore();
+    }
+
+    function selectEx4aPill(btn) {
+      const parent = btn.closest('[data-ex4a-slot]');
+      parent.querySelectorAll('.pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-purple-700', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-purple-700', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      btn.classList.add('bg-purple-700', 'text-white', 'border-purple-700');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+      btn.dataset.selected = "true";
+    }
+
+    function checkEx4a() {
+      let correct = 0;
+      const slots = document.querySelectorAll('[data-ex4a-slot]');
+
+      slots.forEach(slot => {
+        const expected = slot.getAttribute('data-ans');
+        const selectedBtn = slot.querySelector('.pill-choice-btn[data-selected="true"]');
+
+        if (!selectedBtn) return;
+
+        const userVal = selectedBtn.textContent.trim();
+        if (userVal === expected) {
+          correct++;
+          selectedBtn.classList.remove('bg-purple-700', 'border-purple-700');
+          selectedBtn.classList.add('bg-emerald-600', 'border-emerald-600');
+        } else {
+          selectedBtn.classList.remove('bg-purple-700', 'border-purple-700');
+          selectedBtn.classList.add('bg-rose-500', 'border-rose-500');
+        }
+      });
+
+      state.score.ex4a = correct;
+      document.getElementById('ex4a-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 5);
+    }
+
+    function revealEx4a() {
+      const answers = {
+        '1': 'might not',
+        '2': 'may',
+        '3': 'highly likely',
+        '4': 'will probably not',
+        '5': 'strong possibility',
+        '6': 'will definitely'
+      };
+
+      for (let s in answers) {
+        const slot = document.querySelector(`[data-ex4a-slot="${s}"]`);
+        slot.querySelectorAll('.pill-choice-btn').forEach(b => {
+          if (b.textContent.trim() === answers[s]) {
+            b.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            b.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            b.dataset.selected = "true";
+          } else {
+            b.classList.remove('bg-purple-700', 'bg-emerald-600', 'bg-rose-500', 'text-white');
+            b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            delete b.dataset.selected;
+          }
+        });
+      }
+
+      state.score.ex4a = 6;
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    function checkEx5a() {
+      const answers = {
+        '1': 'must',
+        '2': "can't",
+        '3': 'could/may/might'
+      };
+
+      let correct = 0;
+      for (let q in answers) {
+        const card = document.querySelector(`[data-ex5a-q="${q}"]`);
+        const sel = card.querySelector('.ex5a-select');
+        const badge = card.querySelector('.feedback-badge');
+
+        if (!sel.value) continue;
+
+        if (sel.value === answers[q]) {
+          correct++;
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+          sel.classList.remove('border-rose-400');
+          sel.classList.add('border-emerald-500');
+        } else {
+          badge.innerHTML = `<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Need: ${answers[q]}</span>`;
+          sel.classList.remove('border-emerald-500');
+          sel.classList.add('border-rose-400');
+        }
+      }
+
+      state.score.ex5a = correct;
+      document.getElementById('ex5a-score-pill').textContent = `Score: ${correct}/3`;
+      updateTotalScore();
+    }
+
+    function checkEx5b() {
+      let correct = 0;
+      const rows = document.querySelectorAll('#ex5b-container [data-ex5b]');
+
+      rows.forEach(row => {
+        const inputs = Array.from(row.querySelectorAll('.ex5b-input'));
+        const badge = row.querySelector('.feedback-badge');
+        let rowAllCorrect = true;
+
+        inputs.forEach(inp => {
+          const allowed = inp.getAttribute('data-ans').split(',').map(cleanStr);
+          const userVal = cleanStr(inp.value);
+
+          if (allowed.includes(userVal)) {
+            correct++;
+            inp.classList.remove('border-rose-400', 'bg-rose-50');
+            inp.classList.add('border-emerald-500', 'bg-emerald-50');
+          } else {
+            rowAllCorrect = false;
+            inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+            inp.classList.add('border-rose-400', 'bg-rose-50');
+          }
+        });
+
+        if (rowAllCorrect) {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">✓ Correct</span>';
+        } else {
+          badge.innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300">✗ Recheck modal</span>';
+        }
+      });
+
+      state.score.ex5b = correct;
+      document.getElementById('ex5b-score-pill').textContent = `Score: ${correct}/6`;
+      updateTotalScore();
+      playBeep(correct >= 4);
+    }
+
+    function revealEx5b() {
+      const keys = {
+        '1': ["can't"],
+        '2': ["may"],
+        '3': ["could"],
+        '4': ["must"],
+        '5': ["can't", "must"]
+      };
+
+      for (let k in keys) {
+        const row = document.querySelector(`[data-ex5b="${k}"]`);
+        const inputs = row.querySelectorAll('.ex5b-input');
+        inputs.forEach((inp, idx) => {
+          inp.value = keys[k][idx];
+          inp.classList.remove('border-rose-400', 'bg-rose-50');
+          inp.classList.add('border-emerald-500', 'bg-emerald-50');
+        });
+        row.querySelector('.feedback-badge').innerHTML = '<span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300">Model Key</span>';
+      }
+
+      // Also reveal 5a
+      const sel1 = document.querySelector('[data-ex5a-q="1"] select');
+      const sel2 = document.querySelector('[data-ex5a-q="2"] select');
+      const sel3 = document.querySelector('[data-ex5a-q="3"] select');
+      if (sel1) sel1.value = "must";
+      if (sel2) sel2.value = "can't";
+      if (sel3) sel3.value = "could/may/might";
+      checkEx5a();
+
+      state.score.ex5b = 6;
+      document.getElementById('ex5b-score-pill').textContent = 'Score: 6/6';
+      updateTotalScore();
+    }
+
+    function updateTotalScore() {
+      const total = state.score.ex1b + state.score.ex2a + state.score.ex3b + state.score.ex4a + state.score.ex5a + state.score.ex5b;
+      // Maximum points: 4 + 7 + 4 + 6 + 3 + 6 = 30 (or scaled / 33)
+      const maxScore = 30;
+      const percent = Math.min(100, Math.round((total / maxScore) * 100));
+
+      const pill = document.getElementById('global-score-pill');
+      const bar = document.getElementById('global-progress-bar');
+
+      pill.textContent = `${total} / ${maxScore}`;
+      bar.style.width = `${percent}%`;
+
+      if (total >= 25) {
+        bar.classList.replace('bg-purple-600', 'bg-emerald-500');
+      } else {
+        bar.classList.replace('bg-emerald-500', 'bg-purple-600');
+      }
+    }
+
+    document.getElementById('reset-all-btn').addEventListener('click', () => {
+      // Clear 1b
+      document.querySelectorAll('.ex1b-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 2a
+      document.querySelectorAll('.ex2a-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 3b
+      document.querySelectorAll('.ex3b-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear 4a pills
+      document.querySelectorAll('[data-ex4a-slot] .pill-choice-btn').forEach(b => {
+        b.classList.remove('bg-purple-700', 'bg-emerald-600', 'bg-rose-500', 'text-white', 'border-purple-700', 'border-emerald-600');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+        delete b.dataset.selected;
+      });
+
+      // Clear 5a selects
+      document.querySelectorAll('.ex5a-select').forEach(s => {
+        s.value = '';
+        s.classList.remove('border-emerald-500', 'border-rose-400');
+      });
+
+      // Clear 5b
+      document.querySelectorAll('.ex5b-input').forEach(i => {
+        i.value = '';
+        i.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-400', 'bg-rose-50');
+      });
+
+      // Clear badges
+      document.querySelectorAll('.feedback-badge').forEach(b => b.innerHTML = '');
+
+      // Reset state
+      state.score = { ex1b: 0, ex2a: 0, ex3b: 0, ex4a: 0, ex5a: 0, ex5b: 0 };
+      updateTotalScore();
+
+      document.getElementById('ex1b-score-pill').textContent = 'Score: 0/4';
+      document.getElementById('ex2a-score-pill').textContent = 'Score: 0/7';
+      document.getElementById('ex3b-score-pill').textContent = 'Score: 0/4';
+      document.getElementById('ex4a-score-pill').textContent = 'Score: 0/6';
+      document.getElementById('ex5a-score-pill').textContent = 'Score: 0/3';
+      document.getElementById('ex5b-score-pill').textContent = 'Score: 0/6';
+    });
+
+    // Auto-restore saved discussion notes
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved2b = JSON.parse(localStorage.getItem('m4_science_ex2b'));
+        if (saved2b) {
+          if (saved2b.n1) document.getElementById('ex2b-note-1').value = saved2b.n1;
+          if (saved2b.n2) document.getElementById('ex2b-note-2').value = saved2b.n2;
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>
