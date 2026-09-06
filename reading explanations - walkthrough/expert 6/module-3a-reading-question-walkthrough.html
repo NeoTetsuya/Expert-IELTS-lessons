@@ -17,7 +17,7 @@
                         mono: ['"JetBrains Mono"', 'monospace'],
                     },
                     colors: {
-                        brandTheme: {
+                        indigoTheme: {
                             50: '#eef2ff',
                             100: '#e0e7ff',
                             200: '#c7d2fe',
@@ -27,6 +27,14 @@
                             800: '#3730a3',
                             900: '#312e81',
                             950: '#1e1b4b'
+                        },
+                        amberTheme: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309'
                         }
                     }
                 }
@@ -41,7 +49,7 @@
         .gradient-border {
             position: relative;
             background: linear-gradient(135deg, #ffffff, #faf5ff);
-            border: 1px solid rgba(226, 232, 240, 0.85);
+            border: 1px solid rgba(226, 232, 240, 0.9);
         }
         .gradient-border::before {
             content: '';
@@ -51,28 +59,14 @@
             border-top-left-radius: inherit;
             border-top-right-radius: inherit;
         }
-        .keyword-chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.18rem 0.58rem;
-            border-radius: 0.375rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background-color: #ede9fe;
-            color: #5b21b6;
-            border: 1px solid #ddd6fe;
-        }
-        .passage-chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.18rem 0.58rem;
-            border-radius: 0.375rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background-color: #fef3c7;
-            color: #92400e;
-            border: 1px solid #fde68a;
-        }
+        .paired-chip-1 { background-color: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+        .paired-chip-2 { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .paired-chip-3 { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        
+        .paired-hl-1 { background-color: #dbeafe; color: #1e3a8a; text-decoration: underline; text-decoration-color: #3b82f6; text-decoration-thickness: 2.5px; text-underline-offset: 3px; }
+        .paired-hl-2 { background-color: #fef3c7; color: #78350f; text-decoration: underline; text-decoration-color: #f59e0b; text-decoration-thickness: 2.5px; text-underline-offset: 3px; }
+        .paired-hl-3 { background-color: #dcfce7; color: #14532d; text-decoration: underline; text-decoration-color: #22c55e; text-decoration-thickness: 2.5px; text-underline-offset: 3px; }
+        
         .answer-badge {
             animation: pulseSubtle 3s infinite;
         }
@@ -84,35 +78,35 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-indigo-100 selection:text-indigo-900">
 
-    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-brandTheme-700 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-brandTheme-900/10">
+                    <div class="w-10 h-10 rounded-xl bg-indigoTheme-700 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-indigo-900/10">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477-4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs uppercase font-extrabold tracking-wider text-brandTheme-700 bg-brandTheme-50 px-2 py-0.5 rounded-full border border-brandTheme-200">Module 3a Reading Analysis</span>
-                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích toàn diện 14 câu hỏi (Matching Paragraphs, Gap Fill & Summary Completion)</span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700 bg-indigoTheme-50 px-2 py-0.5 rounded-full border border-indigoTheme-200">IELTS Reading Masterclass</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Focus Slide Presentation Mode</span>
                         </div>
-                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">Education Systems: A Chinese Approach & Conclusions</h1>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">Education Systems: A Chinese Approach & Conclusions (Questions 1–14)</h1>
                     </div>
                 </div>
                 <div class="md:hidden">
-                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-lg">Câu 1/14</span>
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-indigoTheme-100 text-indigoTheme-800 px-2.5 py-1 rounded-lg">Câu 1/14</span>
                 </div>
             </div>
 
             <!-- Global View Switcher -->
             <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
-                <button id="tab-presentation" onclick="switchView('presentation')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-brandTheme-700 text-white shadow-sm">
+                <button id="tab-presentation" onclick="switchView('presentation')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-indigoTheme-700 text-white shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                     </svg>
-                    <span>Slide Từng Câu</span>
+                    <span>Focus Presentation Mode</span>
                 </button>
                 <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -124,7 +118,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
-                    <span>Phân Tích Hộp Lựa Chọn</span>
+                    <span>Hộp Lựa Chọn (Word Banks)</span>
                 </button>
                 <button id="tab-synonyms" onclick="switchView('synonyms')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -134,7 +128,7 @@
                 </button>
                 <button id="tab-vocab" onclick="switchView('vocab')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477-4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
                     <span>Từ Vựng Trọng Tâm</span>
                 </button>
@@ -144,50 +138,52 @@
 
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
 
-        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
         <section id="view-presentation" class="space-y-6 block">
             
-            <!-- Quick Question Selector Chips -->
+            <!-- Quick Question Selector Chips (Blind selector: no answers leaked upfront) -->
             <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
                 <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
-                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Matching Paragraphs (Q1–Q4)</span>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi (Focus Slide):</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-target-badge">Câu 1: Matching Paragraphs</span>
                     </div>
                     <div class="text-xs text-slate-400 flex items-center gap-2">
-                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển slide</span>
                     </div>
                 </div>
 
                 <div class="flex flex-wrap gap-2" id="question-nav-chips">
-                    <!-- Injected by JS -->
+                    <!-- Dynamic blind chips inserted by JS -->
                 </div>
             </div>
 
-            <!-- Slide Main Card -->
+            <!-- Slide Main Card Container -->
             <div id="slide-card-container" class="relative">
-                <!-- Dynamically rendered slide content -->
+                <!-- Dynamically populated slide card -->
             </div>
 
             <!-- Bottom Navigation Bar -->
             <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
-                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                <button onclick="navigateSlide(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                     <span>Câu Trước</span>
                 </button>
 
                 <div class="flex items-center gap-3">
                     <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 14</span>
+                    <button onclick="toggleAnswerReveal()" id="btn-toggle-reveal" class="text-xs font-bold px-4 py-2 rounded-xl bg-indigoTheme-50 text-indigoTheme-700 border border-indigoTheme-200 hover:bg-indigoTheme-100 transition-all flex items-center gap-1.5 shadow-2xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                        <span id="btn-reveal-text">Hiện Đáp Án & Khớp Nối</span>
+                    </button>
                 </div>
 
-                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brandTheme-700 hover:bg-brandTheme-800 text-white font-semibold shadow-md shadow-brandTheme-900/10 active:scale-95 transition-all">
+                <button onclick="navigateSlide(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigoTheme-700 hover:bg-indigoTheme-800 text-white font-semibold shadow-md shadow-indigo-900/10 active:scale-95 transition-all">
                     <span>Câu Kế Tiếp</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </button>
             </div>
         </section>
 
-        <!-- VIEW 2: ALL QUESTIONS CONTINUOUS LIST -->
         <section id="view-all" class="space-y-6 hidden">
             <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
@@ -195,7 +191,7 @@
                     <p class="text-sm text-slate-500">Xem đầy đủ bằng chứng bài đọc, đáp án chuẩn, ma trận paraphrase và phân tích logic tiếng Việt theo từng phần thi.</p>
                 </div>
                 <div class="flex flex-wrap items-center gap-2">
-                    <button onclick="filterAllQuestions('all')" class="filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-brandTheme-700 text-white">Tất Cả (1–14)</button>
+                    <button onclick="filterAllQuestions('all')" class="filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-indigoTheme-700 text-white">Tất Cả (1–14)</button>
                     <button onclick="filterAllQuestions('matching')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Matching (Q1–Q4)</button>
                     <button onclick="filterAllQuestions('gapfill')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Gap Fill (Q5–Q9)</button>
                     <button onclick="filterAllQuestions('summary')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Summary A–I (Q10–Q14)</button>
@@ -207,14 +203,13 @@
             </div>
         </section>
 
-        <!-- VIEW 3: OPTIONS ANALYSIS (WORD BANK & OPTIONS GRID) -->
         <section id="view-options" class="space-y-6 hidden">
             <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
-                            <span class="text-xs uppercase font-extrabold tracking-wider text-brandTheme-700">Vocabulary Banks & Distractor Analysis</span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700">Vocabulary Banks & Distractor Analysis</span>
                         </div>
                         <h2 class="text-2xl font-bold text-slate-900">Phân Tích Chi Tiết 2 Hộp Lựa Chọn (Word Banks)</h2>
                         <p class="text-sm text-slate-600 mt-1">Đối chiếu từ đúng và giải mã bẫy nhiễu cho Part 1 Gap Fill (10 từ) và Part 2 Summary Completion (9 lựa chọn A–I).</p>
@@ -224,7 +219,7 @@
                 <!-- Part 1 Bank -->
                 <div class="mt-6">
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="px-2.5 py-1 rounded bg-indigo-100 text-indigo-800 text-xs font-bold uppercase">Hộp Từ Part 1 (Questions 5–9)</span>
+                        <span class="px-2.5 py-1 rounded bg-indigoTheme-100 text-indigoTheme-800 text-xs font-bold uppercase">Hộp Từ Part 1 (Questions 5–9)</span>
                         <span class="text-xs text-slate-500">5 từ ĐÚNG và 5 từ BẪY NHIỄU</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5" id="gapfill-bank-container">
@@ -245,21 +240,20 @@
             </div>
         </section>
 
-        <!-- VIEW 4: SYNONYMS & PARAPHRASE MATRIX -->
         <section id="view-synonyms" class="space-y-6 hidden">
             <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
-                            <span class="text-xs uppercase font-extrabold tracking-wider text-brandTheme-700">Paraphrase & Semantic Alignment</span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700">Paraphrase & Semantic Alignment</span>
                         </div>
                         <h2 class="text-2xl font-bold text-slate-900">Ma Trận Từ Đồng Nghĩa & Diễn Đạt Tương Đương</h2>
                         <p class="text-sm text-slate-600 mt-1">Đối chiếu chi tiết giữa câu hỏi trong đề thi với văn bản thực tế trong cả 2 bài đọc.</p>
                     </div>
                     <div class="bg-indigo-50 border border-indigo-200 rounded-xl px-4 py-2.5 text-center">
-                        <span class="text-xs text-brandTheme-700 font-semibold block uppercase">Tổng hợp</span>
-                        <span class="text-xl font-extrabold text-brandTheme-900">14 Cặp Paraphrase Cốt Lõi</span>
+                        <span class="text-xs text-indigoTheme-700 font-semibold block uppercase">Tổng hợp</span>
+                        <span class="text-xl font-extrabold text-indigoTheme-900">14 Cặp Paraphrase Cốt Lõi</span>
                     </div>
                 </div>
 
@@ -282,14 +276,13 @@
             </div>
         </section>
 
-        <!-- VIEW 5: VOCABULARY HUB -->
         <section id="view-vocab" class="space-y-6 hidden">
             <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
-                            <span class="text-xs uppercase font-extrabold tracking-wider text-brandTheme-700">Educational Pedagogy & Cognitive Science Lexicon</span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700">Educational Pedagogy & Cognitive Science Lexicon</span>
                         </div>
                         <h2 class="text-2xl font-bold text-slate-900">Kho Từ Vựng Trọng Tâm & Phát Âm Chuẩn</h2>
                         <p class="text-sm text-slate-600 mt-1">Từ vựng học thuật chủ đề mô hình giáo dục so sánh, kỷ luật học đường, tự học qua đám mây kèm phiên âm IPA chuẩn và audio phát âm.</p>
@@ -347,22 +340,48 @@
             contextHeader: "Sự khác biệt về kỷ luật lớp học được quan sát giữa hai nền văn hóa",
             statementText: "the differences in discipline that they observed",
             correctAnswer: "C",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>The biggest difference between the two cultures was the lack of discipline in British schools. One Chinese teacher pointed out, ‘In China we don’t need classroom management skills because everyone is disciplined by nature, by families, by society.’</mark> Interestingly, students admitted that they found themselves behaving worse...",
+            passageSnippet: "The biggest difference between the two cultures was the lack of discipline in British schools. One Chinese teacher pointed out, ‘In China we don’t need classroom management skills because everyone is disciplined by nature, by families, by society.’ Interestingly, students admitted that they found themselves behaving worse...",
             paragraphRef: "Đoạn C (Passage 1, Paragraph C)",
-            paraphrases: [
-                { qPart: "the differences in discipline", pPart: "The biggest difference... was the lack of discipline / disciplined by nature, by families, by society", meaning: "sự khác biệt lớn nhất về kỷ luật (thiếu kỷ luật ở Anh đối lập với kỷ luật tự nhiên được rèn giũa ở Trung Quốc)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Sự khác biệt lớn nhất giữa hai nền văn hóa",
+                    questionSnippet: "the differences",
+                    passageSnippet: "The biggest difference between the two cultures",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Đoạn C khẳng định điểm khác biệt lớn nhất giữa hai nền văn hóa (The biggest difference between the two cultures) chính là vấn đề kỷ luật."
+                },
+                {
+                    tag: "2",
+                    theme: "Vấn đề kỷ luật trong lớp học",
+                    questionSnippet: "in discipline that they observed",
+                    passageSnippet: "the lack of discipline in British schools / disciplined by nature, by families, by society",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Sự thiếu kỷ luật ở các trường học Anh đối lập với kỷ luật tự giác được rèn giũa từ gia đình và xã hội tại Trung Quốc."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Đoạn D (Bẫy từ 'discipline is king')",
+                    reason: "Đoạn D có câu 'in a classroom where discipline is king', nhưng trọng tâm của đoạn D là bàn về sự sáng tạo (creativity) và tư duy ngoài khuôn khổ, không phân tích sự khác biệt về kỷ luật giữa 2 nước như Đoạn C."
+                },
+                {
+                    option: "Đoạn B (Bẫy mô tả học sinh)",
+                    reason: "Đoạn B chỉ mô tả quy trình thực hiện thí nghiệm (5 giáo viên dạy 50 học sinh), không quan sát hay phân tích hành vi kỷ luật."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Đề bài yêu cầu tìm đoạn văn mô tả sự khác biệt về kỷ luật được quan sát trong lớp học.",
                 stepByStep: [
-                    "<strong>Đọc lướt câu đầu tiên của từng đoạn (Skimming):</strong>",
+                    "<strong>Đọc lướt câu chủ đề các đoạn (Skimming):</strong>",
                     "• Đoạn A: Nói về lý do đằng sau thí nghiệm (<em>'The reasons behind the experiment were obvious...'</em>).",
                     "• Đoạn B: Nói về cách triển khai (<em>'five teachers were brought... put in a UK school...'</em>).",
                     "• Đoạn C: Mở đầu trực diện: <em>'<strong>The biggest difference</strong> between the two cultures was <strong>the lack of discipline</strong> in British schools'</em>.",
-                    "<strong>Đối chiếu nội dung:</strong> Toàn bộ Đoạn C bàn sâu về vấn đề quản lý lớp học, việc học sinh Anh cư xử kém hơn và phản ứng tiêu cực với áp lực kỷ luật.",
-                    "<strong>Kết luận:</strong> Đoạn chính xác là <strong>C</strong>."
-                ],
-                traps: "Không nhầm với Đoạn D vì Đoạn D tập trung vào 'creativity' (sự sáng tạo) và 'thinking outside the box', dù có nhắc qua từ discipline nhưng ý chính của D là tư duy sáng tạo."
+                    "<strong>Đối chiếu nội dung:</strong> Toàn bộ Đoạn C bàn sâu về vấn đề quản lý lớp học, việc học sinh Anh cư xử kém hơn và phản ứng tiêu cực trước áp lực kỷ luật.",
+                    "<strong>Kết luận:</strong> Đoạn chính xác là <strong>Paragraph C</strong>."
+                ]
             },
             vocabHighlights: ["unusual", "inevitable", "unfamiliarity"]
         },
@@ -376,19 +395,41 @@
             contextHeader: "Bản mô tả cách thức tiến hành và tổ chức thí nghiệm",
             statementText: "a description of how they carried out the experiment",
             correctAnswer: "B",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>In the experiment five teachers were brought from China and put in a UK school. They taught a group of 50 students maths, reading, science and modern languages. The students in the study group, and another control group who received regular lessons, were tested at the end of the period and an analysis of the results was carried out. In addition, both teachers and students who participated in the experiment were given interviews...</mark>",
+            passageSnippet: "In the experiment five teachers were brought from China and put in a UK school. They taught a group of 50 students maths, reading, science and modern languages. The students in the study group, and another control group who received regular lessons, were tested at the end of the period and an analysis of the results was carried out. In addition, both teachers and students who participated in the experiment were given interviews...",
             paragraphRef: "Đoạn B (Passage 1, Paragraph B)",
-            paraphrases: [
-                { qPart: "how they carried out the experiment", pPart: "five teachers were brought from China... taught a group of 50 students... tested at the end... interviews with one of the researchers", meaning: "quy trình thực hiện: đưa 5 giáo viên sang Anh dạy 50 em, chia nhóm đối chứng, kiểm tra cuối kỳ và phỏng vấn" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Quy trình thực hiện thí nghiệm",
+                    questionSnippet: "a description of how they carried out",
+                    passageSnippet: "five teachers were brought from China and put in a UK school. They taught a group of 50 students",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Các bước triển khai: đưa 5 giáo viên Trung Quốc sang một trường học ở Anh, giao dạy cho nhóm 50 học sinh."
+                },
+                {
+                    tag: "2",
+                    theme: "Phương pháp kiểm chứng và đo lường",
+                    questionSnippet: "the experiment",
+                    passageSnippet: "tested at the end of the period and an analysis of the results was carried out. In addition... were given interviews",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Đo lường bằng cách kiểm tra so sánh với nhóm đối chứng (control group) và phỏng vấn cả giáo viên lẫn học sinh."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Đoạn A (Bẫy động cơ nghiên cứu)",
+                    reason: "Đoạn A bàn về nguyên nhân và bối cảnh (the reasons behind the experiment) chứ không mô tả quy trình thực tế được tiến hành như thế nào."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Đề bài yêu cầu tìm đoạn văn mô tả các bước tiến hành thực tế của thí nghiệm.",
                 stepByStep: [
                     "<strong>Đọc câu mở đoạn Đoạn B:</strong> <em>'In the experiment five teachers were brought from China and put in a UK school...'</em>",
-                    "<strong>Nhận diện thông tin quy trình:</strong> Đoạn B liệt kê cụ thể các bước: số lượng giáo viên (5), quy mô học sinh (50), các môn giảng dạy (maths, reading, science, modern languages), cách thức đo lường kết quả (so sánh với control group, làm bài kiểm tra) và phỏng vấn kết thúc.",
-                    "<strong>Kết luận:</strong> Đoạn miêu tả cách thực hiện là <strong>B</strong>."
-                ],
-                traps: "Đoạn A bàn về nguyên nhân/động cơ thực hiện (reasons), còn Đoạn B mới là các bước triển khai thực nghiệm cụ thể (how)."
+                    "<strong>Nhận diện thông tin quy trình:</strong> Đoạn B liệt kê cụ thể: số lượng giáo viên (5), quy mô học sinh (50), các môn giảng dạy (Toán, Đọc, Khoa học, Ngoại ngữ), đối tượng so sánh (control group), bài thi cuối kỳ và phỏng vấn.",
+                    "<strong>Kết luận:</strong> Đoạn miêu tả cách thực hiện là <strong>Paragraph B</strong>."
+                ]
             },
             vocabHighlights: ["triumph", "unfamiliarity", "creativity"]
         },
@@ -402,23 +443,43 @@
             contextHeader: "Thái độ khác biệt đối với tư duy sáng tạo và phản biện trong lớp học",
             statementText: "the different attitudes to creative thinking that they observed",
             correctAnswer: "D",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>Another key issue was that of the role of creativity in a classroom where discipline is king. While it was obvious that the British students would benefit from settling down... it was also clear that the UK education system does, sometimes, encourage students to think outside of the box, be risk-takers, ask questions and challenge ideas. The Chinese teachers were uncomfortable with any attempt to ask questions...</mark>",
+            passageSnippet: "Another key issue was that of the role of creativity in a classroom where discipline is king. While it was obvious that the British students would benefit from settling down... it was also clear that the UK education system does, sometimes, encourage students to think outside of the box, be risk-takers, ask questions and challenge ideas. The Chinese teachers were uncomfortable with any attempt to ask questions...",
             paragraphRef: "Đoạn D (Passage 1, Paragraph D)",
-            paraphrases: [
-                { qPart: "different attitudes to creative thinking", pPart: "role of creativity / think outside of the box, be risk-takers, challenge ideas VS Chinese teachers uncomfortable with questions stopping the lesson flow", meaning: "thái độ đối với sáng tạo: phương Tây khuyến khích tư duy đột phá, dám chấp nhận rủi ro, trong khi giáo viên Trung Quốc khó chịu khi học sinh đặt câu hỏi làm gián đoạn bài giảng" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Khuyến khích tư duy sáng tạo và phản biện",
+                    questionSnippet: "attitudes to creative thinking",
+                    passageSnippet: "the role of creativity... encourage students to think outside of the box, be risk-takers, ask questions and challenge ideas",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Hệ thống Anh khuyến khích nghĩ ngoài khuôn khổ (think outside the box), dám chấp nhận rủi ro và thách thức các ý tưởng."
+                },
+                {
+                    tag: "2",
+                    theme: "Thái độ không hài lòng từ phía giáo viên Trung Quốc",
+                    questionSnippet: "the different attitudes... observed",
+                    passageSnippet: "The Chinese teachers were uncomfortable with any attempt to ask questions... no opportunity for free-thinking",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Giáo viên Trung Quốc cảm thấy không thoải mái với câu hỏi bất ngờ làm gián đoạn giáo án định sẵn không có chỗ cho tư duy tự do."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Đoạn C (Bẫy kỹ năng quản lý lớp)",
+                    reason: "Đoạn C tập trung vào 'classroom management' và kỷ luật xã hội, hoàn toàn không bàn về tư duy sáng tạo hay 'thinking outside the box'."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Đề bài yêu cầu tìm đoạn văn phân tích thái độ đối với tư duy sáng tạo (creative thinking).",
                 stepByStep: [
                     "<strong>Định vị câu chủ đề Đoạn D:</strong> <em>'Another key issue was that of <strong>the role of creativity</strong> in a classroom where discipline is king.'</em>",
-                    "<strong>Phân tích nội dung so sánh:</strong>",
-                    "• Hệ thống Anh: Khuyến khích nghĩ ngoài khuôn khổ (<em>'think outside of the box'</em>), dám mạo hiểm (<em>'risk-takers'</em>), đặt câu hỏi và thách thức các ý tưởng.",
-                    "• Giáo viên Trung Quốc: Không thoải mái (<em>'uncomfortable'</em>) khi học sinh ngắt lời hỏi bài vì phá vỡ giáo án định sẵn không có chỗ cho tư duy tự do (<em>'no opportunity for free-thinking'</em>).",
-                    "<strong>Kết luận:</strong> Đoạn chính xác là <strong>D</strong>."
-                ],
-                traps: "Chú ý cụm thành ngữ 'think outside of the box' và danh từ 'free-thinking' chính là các biểu hiện của 'creative thinking'."
+                    "<strong>Phân tích nội dung so sánh:</strong> Phương Tây khuyến khích 'think outside the box', đặt câu hỏi và dám thử thách; trong khi giáo viên Trung Quốc khó chịu ('uncomfortable') vì bài giảng không có chỗ cho tư duy tự do ('no opportunity for free-thinking').",
+                    "<strong>Kết luận:</strong> Đoạn chính xác là <strong>Paragraph D</strong>."
+                ]
             },
-            vocabHighlights: ["creativity", "unusual", "inevitable"]
+            vocabHighlights: ["creativity", "free-thinking", "inevitable"]
         },
         {
             id: 4,
@@ -430,19 +491,41 @@
             contextHeader: "Lý do và bối cảnh dẫn tới quyết định tiến hành thí nghiệm của BBC",
             statementText: "the reasons for carrying out the experiment",
             correctAnswer: "A",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>The reasons behind the experiment were obvious. Chinese students regularly come near the top in internationals comparison tests of students around the planet. They triumph in Maths, Reading and Science, while in the UK, young people have been getting lower marks in recent years. Many in Britain have been wondering if it is time to adopt Chinese methods of education here</mark>.",
+            passageSnippet: "The reasons behind the experiment were obvious. Chinese students regularly come near the top in internationals comparison tests of students around the planet. They triumph in Maths, Reading and Science, while in the UK, young people have been getting lower marks in recent years. Many in Britain have been wondering if it is time to adopt Chinese methods of education here.",
             paragraphRef: "Đoạn A (Passage 1, Paragraph A)",
-            paraphrases: [
-                { qPart: "the reasons for carrying out the experiment", pPart: "The reasons behind the experiment were obvious / Chinese students regularly come near the top... while in the UK young people have been getting lower marks", meaning: "nguyên nhân: học sinh Trung Quốc liên tục đứng đầu các bài thi quốc tế (PISA) còn học sinh Anh sa sút điểm số, thúc đẩy tìm hiểu để áp dụng" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Nguyên nhân thúc đẩy nghiên cứu",
+                    questionSnippet: "the reasons for carrying out the experiment",
+                    passageSnippet: "The reasons behind the experiment were obvious",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Câu mở đầu khẳng định trực tiếp: Lý do đằng sau thí nghiệm là vô cùng rõ ràng (The reasons behind the experiment were obvious)."
+                },
+                {
+                    tag: "2",
+                    theme: "Bối cảnh chênh lệch điểm thi quốc tế",
+                    questionSnippet: "reasons for carrying out",
+                    passageSnippet: "Chinese students regularly come near the top... while in the UK, young people have been getting lower marks",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Học sinh Trung Quốc luôn dẫn đầu các bài thi so sánh quốc tế trong khi điểm số của học sinh Anh sụt giảm nghiêm trọng."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Đoạn B (Bẫy thực hiện thí nghiệm)",
+                    reason: "Đoạn B mô tả 'how' (cách tiến hành), còn Đoạn A mới là 'why/reasons' (nguyên nhân, lý do thôi thúc tiến hành)."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Đề bài yêu cầu tìm đoạn văn nêu rõ lý do tại sao BBC lại thực hiện cuộc thử nghiệm này.",
                 stepByStep: [
                     "<strong>Đọc câu mở đầu Đoạn A:</strong> <em>'<strong>The reasons behind the experiment were obvious</strong>.'</em>",
-                    "<strong>Lý do cụ thể:</strong> Học sinh Trung Quốc thống trị (<em>'triumph'</em>) các kỳ thi so sánh quốc tế ở môn Toán, Đọc và Khoa học, trong khi học sinh Anh bị sụt giảm điểm số trong những năm gần đây. Người Anh tự hỏi liệu có nên áp dụng phương pháp của Trung Quốc.",
-                    "<strong>Kết luận:</strong> Đoạn chính xác là <strong>A</strong>."
-                ],
-                traps: "Phần mở bài (chưa gán chữ cái) chỉ giới thiệu thí nghiệm chung, còn Đoạn A được gán nhãn chính thức bắt đầu bằng việc giải thích lý do thực hiện."
+                    "<strong>Lý do cụ thể:</strong> Học sinh Trung Quốc thống trị (<em>'triumph'</em>) các kỳ thi PISA quốc tế ở môn Toán, Đọc và Khoa học, trong khi học sinh Anh sa sút điểm số, khiến dư luận Anh băn khoăn liệu có nên áp dụng phương pháp Trung Quốc.",
+                    "<strong>Kết luận:</strong> Đoạn chính xác là <strong>Paragraph A</strong>."
+                ]
             },
             vocabHighlights: ["triumph", "unusual", "inevitable"]
         },
@@ -455,22 +538,35 @@
             part: "Part 1: The Experiment",
             contextHeader: "Nhóm học sinh nhận bài học bình thường được dùng để so sánh kết quả",
             statementText: "The test results of students with the Chinese teachers were compared to the results of a [ 5 ]",
-            completedSentence: "The test results of students with the Chinese teachers were compared to the results of a <span class='text-brandTheme-700 font-bold underline'>control group</span>, and they were asked about their experiences at the end of the experiment.",
+            completedSentence: "The test results of students with the Chinese teachers were compared to the results of a <span class='text-indigoTheme-700 font-bold underline'>control group</span>, and they were asked about their experiences at the end of the experiment.",
             correctAnswer: "control group",
-            passageSnippet: "The students in the study group, and another <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>control group</mark> who received regular lessons, were tested at the end of the period and an analysis of the results was carried out.",
+            passageSnippet: "The students in the study group, and another control group who received regular lessons, were tested at the end of the period and an analysis of the results was carried out.",
             paragraphRef: "Đoạn B (Passage 1, Paragraph B)",
-            paraphrases: [
-                { qPart: "compared to the results of a [ 5 ]", pPart: "students in the study group, and another control group who received regular lessons, were tested", meaning: "kết quả của nhóm học thí nghiệm được so sánh đối chiếu với một nhóm đối chứng (control group) học chương trình bình thường" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "So sánh kết quả giữa hai nhóm",
+                    questionSnippet: "compared to the results of a [ 5 ]",
+                    passageSnippet: "students in the study group, and another control group who received regular lessons, were tested",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Thành tích của nhóm học thí nghiệm (study group) được đem đối chiếu với một nhóm đối chứng học bình thường (control group)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "study group",
+                    reason: "Bẫy thuật ngữ: 'study group' là nhóm học trực tiếp với giáo viên Trung Quốc; đối tượng dùng để so sánh đối chiếu phải là nhóm đối chứng 'control group'."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Chỗ trống sau mạo từ 'a' cần một danh từ/cụm danh từ đếm được số ít chỉ đối tượng được dùng để so sánh kết quả kiểm tra với nhóm học sinh của giáo viên Trung Quốc.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'test results', 'compared to', 'Chinese teachers'.",
                     "<strong>Đối chiếu bài đọc (Đoạn B):</strong> Tác giả viết: <em>'The students in the study group, and another <strong>control group</strong> who received regular lessons, were tested at the end...'</em>",
-                    "<strong>Phân tích thuật ngữ nghiên cứu:</strong> Trong các thí nghiệm khoa học, nhóm nhận thử nghiệm (study group) luôn được so sánh với nhóm đối chứng (<strong>control group</strong>) nhằm đảm bảo tính khách quan.",
+                    "<strong>Thuật ngữ khoa học:</strong> Nhóm đối chứng trong thí nghiệm khoa học luôn là <strong>control group</strong>.",
                     "<strong>Kết luận:</strong> Cụm từ cần điền là <strong>control group</strong>."
-                ],
-                traps: "Tránh nhầm lẫn với 'study group' vì 'study group' chính là nhóm học sinh học cùng các giáo viên Trung Quốc."
+                ]
             },
             vocabHighlights: ["control group", "study group", "inevitable"]
         },
@@ -483,22 +579,35 @@
             part: "Part 1: The Experiment",
             contextHeader: "Nội dung học sinh và giáo viên được hỏi trong các cuộc phỏng vấn",
             statementText: "and they were asked about their [ 6 ] at the end of the experiment.",
-            completedSentence: "...and they were asked about their <span class='text-brandTheme-700 font-bold underline'>experiences</span> at the end of the experiment.",
+            completedSentence: "...and they were asked about their <span class='text-indigoTheme-700 font-bold underline'>experiences</span> at the end of the experiment.",
             correctAnswer: "experiences",
-            passageSnippet: "In addition, both teachers and students who participated in the experiment <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>were given interviews with one of the researchers on how they felt about what happened</mark>.",
+            passageSnippet: "In addition, both teachers and students who participated in the experiment were given interviews with one of the researchers on how they felt about what happened.",
             paragraphRef: "Đoạn B (Passage 1, Paragraph B)",
-            paraphrases: [
-                { qPart: "asked about their [ 6 ]", pPart: "given interviews... on how they felt about what happened", meaning: "được phỏng vấn về cảm xúc và những gì đã trải qua (những trải nghiệm cá nhân - experiences)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Hỏi về cảm xúc và những gì đã trải qua",
+                    questionSnippet: "asked about their [ 6 ]",
+                    passageSnippet: "were given interviews with one of the researchers on how they felt about what happened",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Phỏng vấn về cảm nhận trước những gì đã diễn ra (how they felt about what happened) chính là hỏi về trải nghiệm (experiences)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "time",
+                    reason: "Bẫy từ mơ hồ: Dù người tham gia có thể nói về 'time in school', từ 'experiences' trong hộp từ mới diễn đạt chuẩn xác câu hỏi phỏng vấn cảm nhận cá nhân."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Chỗ trống sau tính từ sở hữu 'their' cần một danh từ để chỉ điều mà những người tham gia được phỏng vấn hỏi thăm ở cuối kỳ thử nghiệm.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'asked about their', 'at the end of the experiment'.",
                     "<strong>Đối chiếu bài đọc (Đoạn B):</strong> Tác giả nêu rõ: <em>'both teachers and students who participated in the experiment were given interviews with one of the researchers <strong>on how they felt about what happened</strong>'</em>.",
-                    "<strong>Khớp nghĩa hộp từ:</strong> Việc hỏi về cảm xúc và những gì đã diễn ra trong suốt khóa học chính là hỏi về trải nghiệm cá nhân (<strong>experiences</strong>).",
+                    "<strong>Khớp nghĩa hộp từ:</strong> Cảm nhận về những gì đã xảy ra trong thí nghiệm = trải nghiệm của họ (<strong>experiences</strong>).",
                     "<strong>Kết luận:</strong> Từ cần điền là <strong>experiences</strong>."
-                ],
-                traps: "Không chọn 'time' vì ngữ cảnh nói về việc phỏng vấn cảm nhận cá nhân, danh từ phù hợp nhất trong danh sách cho sẵn là 'experiences'."
+                ]
             },
             vocabHighlights: ["experiences", "control group", "study group"]
         },
@@ -511,22 +620,35 @@
             part: "Part 1: The Experiment",
             contextHeader: "Đánh giá của giáo viên Trung Quốc về mức độ nền nếp của học sinh quê nhà",
             statementText: "Chinese teachers thought their students were better [ 7 ] than the British children.",
-            completedSentence: "Chinese teachers thought their students were better <span class='text-brandTheme-700 font-bold underline'>educated</span> than the British children.",
+            completedSentence: "Chinese teachers thought their students were better <span class='text-indigoTheme-700 font-bold underline'>educated</span> than the British children.",
             correctAnswer: "educated",
-            passageSnippet: "One Chinese teacher pointed out, <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>‘In China we don’t need classroom management skills because everyone is disciplined by nature, by families, by society.’</mark>",
+            passageSnippet: "One Chinese teacher pointed out, ‘In China we don’t need classroom management skills because everyone is disciplined by nature, by families, by society.’",
             paragraphRef: "Đoạn C (Passage 1, Paragraph C)",
-            paraphrases: [
-                { qPart: "better [ 7 ] than the British children", pPart: "disciplined by nature, by families, by society / culture of expectations", meaning: "được giáo dục và uốn nắn nền nếp tốt hơn từ nhỏ (better educated / disciplined)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Nền nếp giáo dục và rèn giũa",
+                    questionSnippet: "better [ 7 ] than the British children",
+                    passageSnippet: "In China we don’t need classroom management skills because everyone is disciplined by nature, by families, by society",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Học sinh Trung Quốc tự giác và được rèn giũa nghiêm khắc từ gia đình đến xã hội, thể hiện sự giáo dục bài bản (better educated)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "behaved",
+                    reason: "Bẫy ngữ pháp: 'Behaved' là động từ, nếu muốn ghép thành tính từ bổ nghĩa so sánh chuẩn xác trong danh sách từ có sẵn thì 'educated' là lựa chọn hợp lý nhất."
+                }
             ],
             vietnameseAnalysis: {
-                logic: "Sau cụm 'were better' cần một quá khứ phân từ/tính từ đóng vai trò bổ ngữ so sánh cho 'their students' (học sinh Trung Quốc) so với học sinh Anh.",
+                logic: "Sau cụm 'were better' cần một quá khứ phân từ/tính từ đóng vai trò bổ ngữ so sánh cho 'their students' so với học sinh Anh.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'Chinese teachers thought', 'better [ 7 ]', 'British children'.",
-                    "<strong>Đối chiếu bài đọc (Đoạn C):</strong> Giáo viên Trung Quốc khẳng định ở Trung Quốc không cần kỹ năng quản lý lớp vì học sinh tự giác và được rèn giũa nghiêm khắc từ gia đình và xã hội (<em>'disciplined by nature, by families, by society'</em>).",
-                    "<strong>Khớp nghĩa hộp từ:</strong> Trong các từ cho sẵn, tính từ <strong>educated</strong> (được giáo dục/rèn giũa bài bản về nhân cách và hành vi) khớp hoàn hảo về ngữ pháp lẫn hàm nghĩa.",
+                    "<strong>Đối chiếu bài đọc (Đoạn C):</strong> Giáo viên Trung Quốc khẳng định học sinh quê nhà được uốn nắn nền nếp tự nhiên từ gia đình và xã hội (<em>'disciplined by nature, by families, by society'</em>).",
+                    "<strong>Khớp nghĩa hộp từ:</strong> Tính từ <strong>educated</strong> (được giáo dục và rèn giũa nền nếp toàn diện) khớp chính xác.",
                     "<strong>Kết luận:</strong> Từ cần điền là <strong>educated</strong>."
-                ],
-                traps: "Thí sinh có thể phân vân với 'behaved', nhưng nếu dùng 'behaved' phải đi kèm trạng từ thành 'better behaved', trong khi bài kiểm tra cung cấp dạng từ chuẩn trong danh sách là 'educated'."
+                ]
             },
             vocabHighlights: ["educated", "behaved", "unfamiliarity"]
         },
@@ -539,23 +661,44 @@
             part: "Part 1: The Experiment",
             contextHeader: "Lời thú nhận của học sinh Anh về hành vi quậy phá của bản thân",
             statementText: "However, the British children [ 8 ] that they were particularly naughty because they felt uncomfortable.",
-            completedSentence: "However, the British children <span class='text-brandTheme-700 font-bold underline'>admitted</span> that they were particularly naughty because they felt uncomfortable.",
+            completedSentence: "However, the British children <span class='text-indigoTheme-700 font-bold underline'>admitted</span> that they were particularly naughty because they felt uncomfortable.",
             correctAnswer: "admitted",
-            passageSnippet: "The young people themselves <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>admitted to behaving worse than they usually would</mark>... Interestingly, students admitted that they found themselves behaving worse during the experiment than they normally would for their British teachers. Many pointed to the fact that the unfamiliarity of the teacher made them feel less comfortable...",
+            passageSnippet: "The young people themselves admitted to behaving worse than they usually would... Interestingly, students admitted that they found themselves behaving worse during the experiment than they normally would for their British teachers. Many pointed to the fact that the unfamiliarity of the teacher made them feel less comfortable...",
             paragraphRef: "Intro & Đoạn C (Passage 1, Intro & Paragraph C)",
-            paraphrases: [
-                { qPart: "British children [ 8 ] that they were particularly naughty", pPart: "students admitted that they found themselves behaving worse / young people themselves admitted", meaning: "học sinh Anh đã thừa nhận/thú nhận rằng các em cư xử hư hỏng và quậy phá hơn bình thường" },
-                { qPart: "felt uncomfortable", pPart: "made them feel less comfortable than they normally would", meaning: "khiến các em cảm thấy không thoải mái như khi học với giáo viên Anh" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Học sinh thành thật thú nhận hành vi",
+                    questionSnippet: "British children [ 8 ] that they were particularly naughty",
+                    passageSnippet: "The young people themselves admitted to behaving worse... students admitted that they found themselves behaving worse",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Học sinh tự thừa nhận (admitted) mình cư xử tệ hơn bình thường (behaving worse = particularly naughty)."
+                },
+                {
+                    tag: "2",
+                    theme: "Nguyên nhân do cảm thấy không thoải mái",
+                    questionSnippet: "because they felt uncomfortable",
+                    passageSnippet: "unfamiliarity of the teacher made them feel less comfortable",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Sự xa lạ của phương pháp khiến các em cảm thấy ít thoải mái hơn so với bình thường."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "denied",
+                    reason: "Bẫy trái nghĩa: Học sinh không hề phủ nhận (denied) mà rất thành thật tự nhận (admitted) mình quậy phá hơn."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Cần một động từ chính ở thì quá khứ đơn đi sau chủ ngữ 'the British children' và đứng trước mệnh đề 'that' chỉ hành động phát ngôn thừa nhận.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'British children', 'naughty', 'felt uncomfortable'.",
-                    "<strong>Đối chiếu bài đọc:</strong> Cả phần mở bài và Đoạn C đều dùng động từ then chốt: <em>'The young people themselves <strong>admitted</strong> to behaving worse...'</em> và <em>'students <strong>admitted</strong> that they found themselves behaving worse... made them feel less comfortable'</em>.",
-                    "<strong>Khớp nghĩa hộp từ:</strong> Động từ quá khứ chính xác là <strong>admitted</strong> (thừa nhận).",
+                    "<strong>Đối chiếu bài đọc:</strong> Bài đọc lặp lại 2 lần động từ: <em>'The young people themselves <strong>admitted</strong> to behaving worse...'</em> và <em>'students <strong>admitted</strong> that they found themselves behaving worse... made them feel less comfortable'</em>.",
+                    "<strong>Khớp nghĩa hộp từ:</strong> Động từ quá khứ chính xác là <strong>admitted</strong>.",
                     "<strong>Kết luận:</strong> Từ cần điền là <strong>admitted</strong>."
-                ],
-                traps: "Không chọn 'denied' (phủ nhận) vì văn bản nhấn mạnh học sinh rất thành thật thú nhận việc mình cư xử tệ hơn bình thường."
+                ]
             },
             vocabHighlights: ["admitted", "unfamiliarity", "inevitable"]
         },
@@ -568,22 +711,35 @@
             part: "Part 1: The Experiment",
             contextHeader: "Hạn chế của môi trường kỷ luật khắt khe đối với năng lực tư duy sáng tạo",
             statementText: "In addition, the class rules meant that the children felt unable to use their [ 9 ] well.",
-            completedSentence: "In addition, the class rules meant that the children felt unable to use their <span class='text-brandTheme-700 font-bold underline'>imagination</span> well.",
+            completedSentence: "In addition, the class rules meant that the children felt unable to use their <span class='text-indigoTheme-700 font-bold underline'>imagination</span> well.",
             correctAnswer: "imagination",
-            passageSnippet: "...it was also clear that the UK education system does, sometimes, encourage students to think outside of the box, be risk-takers, ask questions and challenge ideas. <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>The Chinese teachers were uncomfortable with any attempt to ask questions, as it would stop the flow of the lesson they had planned in which there was no opportunity for free-thinking</mark>.",
+            passageSnippet: "...it was also clear that the UK education system does, sometimes, encourage students to think outside of the box, be risk-takers, ask questions and challenge ideas. The Chinese teachers were uncomfortable with any attempt to ask questions, as it would stop the flow of the lesson they had planned in which there was no opportunity for free-thinking.",
             paragraphRef: "Đoạn D (Passage 1, Paragraph D)",
-            paraphrases: [
-                { qPart: "class rules meant that the children felt unable to use their [ 9 ] well", pPart: "no opportunity for free-thinking / uncomfortable with any attempt to ask questions / stop the flow of the lesson", meaning: "quy củ nghiêm ngặt không cho học sinh cơ hội tư duy tự do hay vận dụng trí tưởng tượng (imagination) sáng tạo" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Không có cơ hội phát huy trí tưởng tượng và tư duy tự do",
+                    questionSnippet: "class rules meant that the children felt unable to use their [ 9 ] well",
+                    passageSnippet: "there was no opportunity for free-thinking / think outside of the box / stop the flow of the lesson",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Không có cơ hội tư duy tự do (free-thinking) hay nghĩ ngoài khuôn khổ tương đương với việc không thể phát huy trí tưởng tượng (imagination)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "creativity",
+                    reason: "Bẫy từ vựng ngoài hộp: Dù đoạn văn có từ 'creativity', từ này KHÔNG có trong hộp từ đề bài cho; từ đồng nghĩa tương đương duy nhất trong hộp là 'imagination'."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Sau tính từ sở hữu 'their' cần một danh từ chỉ năng lực trí tuệ mà học sinh không thể phát huy do quy định khắt khe của lớp học.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'class rules', 'unable to use', 'well'.",
-                    "<strong>Đối chiếu bài đọc (Đoạn D):</strong> Tác giả chỉ ra lớp học của giáo viên Trung Quốc xem kỷ luật là tối thượng (<em>'discipline is king'</em>), không hoan nghênh câu hỏi bất ngờ và <em>'there was no opportunity for free-thinking'</em>.",
-                    "<strong>Khớp nghĩa hộp từ:</strong> Việc bị tước đoạt cơ hội tư duy tự do (<em>free-thinking</em>) và nghĩ ngoài khuôn khổ (<em>think outside of the box</em>) đồng nghĩa với việc không được sử dụng trí tưởng tượng: <strong>imagination</strong>.",
+                    "<strong>Đối chiếu bài đọc (Đoạn D):</strong> Tác giả chỉ ra lớp học kỷ luật thép của giáo viên Trung Quốc không có chỗ cho tư duy tự do (<em>'no opportunity for free-thinking'</em>).",
+                    "<strong>Khớp nghĩa hộp từ:</strong> 'Free-thinking' và 'think outside the box' được thay thế hoàn hảo bởi <strong>imagination</strong>.",
                     "<strong>Kết luận:</strong> Từ cần điền là <strong>imagination</strong>."
-                ],
-                traps: "Hộp từ không có từ 'creativity', do đó từ đồng nghĩa tương đương duy nhất trong danh sách là 'imagination'."
+                ]
             },
             vocabHighlights: ["imagination", "creativity", "free-thinking"]
         },
@@ -596,23 +752,37 @@
             part: "Part 2: Conclusions",
             contextHeader: "Sự quan tâm quá mức của hệ thống giáo dục Anh đối với điểm số thi cử",
             statementText: "The author believes the British have an excessive [ 10 ] in student results.",
-            completedSentence: "The author believes the British have an excessive <span class='text-brandTheme-700 font-bold underline'>interest</span> (Option E) in student results.",
+            completedSentence: "The author believes the British have an excessive <span class='text-indigoTheme-700 font-bold underline'>interest</span> (Option E) in student results.",
             correctLetter: "E",
             correctWord: "interest",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>All of this suggests that an obsession with testing does not exist in the UK, which would be untrue</mark>. The purpose of the experiment was to see if British students would benefit from the Chinese approach. However, the message that the test result is the only thing that matters may not be getting through to students.",
+            correctAnswer: "E",
+            passageSnippet: "All of this suggests that an obsession with testing does not exist in the UK, which would be untrue. The purpose of the experiment was to see if British students would benefit from the Chinese approach. However, the message that the test result is the only thing that matters may not be getting through to students.",
             paragraphRef: "Đoạn 1 (Passage 2, Paragraph 1)",
-            paraphrases: [
-                { qPart: "excessive [ 10 ] in student results", pPart: "an obsession with testing... test result is the only thing that matters", meaning: "sự quan tâm thái quá / nỗi ám ảnh đối với kết quả thi cử của học sinh (obsession = excessive interest)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Nỗi ám ảnh / sự quan tâm quá mức vào thi cử",
+                    questionSnippet: "an excessive [ 10 ] in student results",
+                    passageSnippet: "an obsession with testing does not exist in the UK, which would be untrue... test result is the only thing that matters",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "'Obsession with testing' (nỗi ám ảnh với thi cử) được diễn đạt lại bằng cụm 'excessive interest in student results' (sự quan tâm thái quá đến kết quả thi)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option B (technology)",
+                    reason: "Bẫy từ vựng: Bài 2 có nhắc đến máy tính đám mây ở đoạn dưới, nhưng câu 10 đang nói về thái độ đối với điểm số thi cử."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Cần một danh từ sau tính từ 'excessive' và đi với giới từ 'in' để miêu tả thái độ của người Anh đối với kết quả học sinh.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'author believes', 'British', 'excessive [ 10 ] in student results'.",
-                    "<strong>Đối chiếu bài đọc (Passage 2, Đoạn 1):</strong> Tác giả phản bác quan niệm cho rằng người Anh không quan tâm thi cử: <em>'All of this suggests that an <strong>obsession with testing</strong> does not exist in the UK, which would be untrue... the test result is the only thing that matters...'</em>",
-                    "<strong>Phân tích từ vựng & Collocation:</strong> 'Obsession' (nỗi ám ảnh, sự bận tâm quá mức) được diễn đạt lại bằng cụm 'excessive <strong>interest</strong>' (sự quan tâm thái quá), đi liền tự nhiên với giới từ <em>'interest in student results'</em>.",
-                    "<strong>Kết luận:</strong> Đáp án là ký tự <strong>E (interest)</strong>."
-                ],
-                traps: "Không chọn 'environment' hay 'benefit' vì cấu trúc ngữ pháp 'have an excessive interest in' là chuẩn xác nhất."
+                    "<strong>Đối chiếu bài đọc (Passage 2, Đoạn 1):</strong> Tác giả viết: <em>'All of this suggests that an <strong>obsession with testing</strong> does not exist in the UK, which would be untrue... test result is the only thing that matters...'</em>",
+                    "<strong>Khớp nghĩa Options A–I:</strong> 'Obsession' = 'excessive <strong>interest</strong>' (Option E), đi tự nhiên với cấu trúc <em>'interest in student results'</em>.",
+                    "<strong>Kết luận:</strong> Đáp án là <strong>E (interest)</strong>."
+                ]
             },
             vocabHighlights: ["obsession", "radical", "chaos"]
         },
@@ -625,23 +795,37 @@
             part: "Part 2: Conclusions",
             contextHeader: "Nguyên nhân tạo ra điểm số cao của giáo viên Trung Quốc theo lý giải của học sinh",
             statementText: "Students felt that the positive results of Chinese educators was thanks to their teaching [ 11 ] more than anything else.",
-            completedSentence: "Students felt that the positive results of Chinese educators was thanks to their teaching <span class='text-brandTheme-700 font-bold underline'>hours</span> (Option D) more than anything else.",
+            completedSentence: "Students felt that the positive results of Chinese educators was thanks to their teaching <span class='text-indigoTheme-700 font-bold underline'>hours</span> (Option D) more than anything else.",
             correctLetter: "D",
             correctWord: "hours",
-            passageSnippet: "One young person commented that ‘Their teaching methods did get results but we didn’t always feel we were learning much. <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>They get results because we are in school for so long</mark>.’",
+            correctAnswer: "D",
+            passageSnippet: "One young person commented that ‘Their teaching methods did get results but we didn’t always feel we were learning much. They get results because we are in school for so long.’",
             paragraphRef: "Đoạn 1 (Passage 2, Paragraph 1)",
-            paraphrases: [
-                { qPart: "thanks to their teaching [ 11 ]", pPart: "They get results because we are in school for so long", meaning: "đạt kết quả là nhờ học sinh phải ở trường quá lâu (số giờ giảng dạy / thời lượng học quá dài: teaching hours)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Thời lượng học tập kéo dài ở trường",
+                    questionSnippet: "thanks to their teaching [ 11 ]",
+                    passageSnippet: "They get results because we are in school for so long",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Đạt kết quả không phải do phương pháp mà do học sinh bị giữ lại trường quá lâu (in school for so long = teaching hours)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option C (styles)",
+                    reason: "Bẫy cụm từ quen thuộc: Người học hay nghĩ đến 'teaching styles'. Nhưng học sinh nhấn mạnh không phải phong cách mà chính thời lượng ngồi học kéo dài ('so long' = hours) mới tạo ra điểm số."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Cần một danh từ sau từ 'teaching' để tạo thành cụm danh từ chỉ lý do then chốt giúp mang lại điểm số cao theo lời học sinh.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'positive results', 'educators was thanks to', 'more than anything else'.",
-                    "<strong>Đối chiếu bài đọc (Passage 2, Đoạn 1):</strong> Một học sinh nhận xét: <em>'Their teaching methods did get results... <strong>They get results because we are in school for so long</strong>'</em> (Họ có kết quả vì chúng tôi phải ở trường trong thời gian quá dài).",
-                    "<strong>Khớp nghĩa Options A–I:</strong> Việc 'ở trường quá lâu' (<em>in school for so long</em>) phản ánh thời lượng và số giờ học kéo dài: <strong>hours</strong> (Option D: teaching hours = số giờ dạy học/thời lượng lên lớp).",
-                    "<strong>Kết luận:</strong> Đáp án là ký tự <strong>D (hours)</strong>."
-                ],
-                traps: "Bẫy từ 'styles': Thí sinh thường nghĩ đến 'teaching styles' (phong cách giảng dạy). Tuy nhiên, học sinh chỉ ra chính thời lượng ngồi học kéo dài ('so long' = hours) mới là nguyên nhân thực sự chứ không phải phương pháp hay phong cách."
+                    "<strong>Đối chiếu bài đọc (Passage 2, Đoạn 1):</strong> Học sinh nhận xét: <em>'They get results because <strong>we are in school for so long</strong>'</em>.",
+                    "<strong>Khớp nghĩa Options A–I:</strong> 'In school for so long' = số giờ học kéo dài: <strong>hours</strong> (Option D: teaching hours).",
+                    "<strong>Kết luận:</strong> Đáp án là <strong>D (hours)</strong>."
+                ]
             },
             vocabHighlights: ["essential", "monopoly", "radical"]
         },
@@ -654,24 +838,37 @@
             part: "Part 2: Conclusions",
             contextHeader: "Cách nhìn nhận tích cực của chuyên gia Ấn Độ về một lớp học có phần lộn xộn",
             statementText: "In India, some educational experts have seen a disorderly classroom as a [ 12 ].",
-            completedSentence: "In India, some educational experts have seen a disorderly classroom as a <span class='text-brandTheme-700 font-bold underline'>benefit</span> (Option H).",
+            completedSentence: "In India, some educational experts have seen a disorderly classroom as a <span class='text-indigoTheme-700 font-bold underline'>benefit</span> (Option H).",
             correctLetter: "H",
             correctWord: "benefit",
-            passageSnippet: "In India, a far more radical approach is being taken. At the cutting edge of educational research is the idea that <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>a little chaos in the classroom is not necessarily a bad thing</mark>.",
+            correctAnswer: "H",
+            passageSnippet: "In India, a far more radical approach is being taken. At the cutting edge of educational research is the idea that a little chaos in the classroom is not necessarily a bad thing.",
             paragraphRef: "Đoạn 2 (Passage 2, Paragraph 2)",
-            paraphrases: [
-                { qPart: "disorderly classroom", pPart: "a little chaos in the classroom", meaning: "một chút hỗn loạn / không trật tự trong lớp học" },
-                { qPart: "seen ... as a [ 12 ]", pPart: "is not necessarily a bad thing / minimally invasive education", meaning: "không hẳn là điều xấu (được xem là một điều tích cực / có lợi ích: benefit)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Lớp học lộn xộn không hẳn là điều xấu",
+                    questionSnippet: "disorderly classroom as a [ 12 ]",
+                    passageSnippet: "a little chaos in the classroom is not necessarily a bad thing",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Một chút hỗn loạn (chaos = disorderly) không nhất thiết là điều xấu, tức được nhìn nhận như một lợi ích tích cực (benefit)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option F (environment)",
+                    reason: "Bẫy từ vựng: Mặc dù lớp học là một môi trường (environment), cụm 'as a benefit' mới tương phản trực diện với nhận định 'not necessarily a bad thing'."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Sau mạo từ 'a' cần một danh từ số ít chỉ cách các chuyên gia đánh giá tích cực về một lớp học có phần thiếu trật tự.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'In India', 'educational experts', 'disorderly classroom as a...'.",
-                    "<strong>Đối chiếu bài đọc (Passage 2, Đoạn 2):</strong> Tác giả mô tả cách tiếp cận đột phá tại Ấn Độ: <em>'At the cutting edge of educational research is the idea that <strong>a little chaos in the classroom is not necessarily a bad thing</strong>.'</em>",
-                    "<strong>Khớp nghĩa Options A–I:</strong> 'A little chaos' = 'a disorderly classroom'. Việc khẳng định 'không hẳn là điều xấu' đồng nghĩa với việc xem nó là một điều hữu ích, đem lại giá trị tích cực: <strong>benefit</strong> (Option H).",
-                    "<strong>Kết luận:</strong> Đáp án là ký tự <strong>H (benefit)</strong>."
-                ],
-                traps: "Không chọn 'environment' vì 'seen as an environment' không hợp nghĩa so với ý niệm 'not a bad thing' (hàm ý lợi ích)."
+                    "<strong>Đối chiếu bài đọc (Passage 2, Đoạn 2):</strong> <em>'...the idea that <strong>a little chaos in the classroom is not necessarily a bad thing</strong>.'</em>",
+                    "<strong>Khớp nghĩa Options A–I:</strong> 'A little chaos' = 'disorderly classroom'; 'not necessarily a bad thing' = được xem là có lợi: <strong>benefit</strong> (Option H).",
+                    "<strong>Kết luận:</strong> Đáp án là <strong>H (benefit)</strong>."
+                ]
             },
             vocabHighlights: ["chaos", "radical", "essential"]
         },
@@ -684,23 +881,41 @@
             part: "Part 2: Conclusions",
             contextHeader: "Thử nghiệm loại bỏ sự hiện diện của giáo viên khỏi lớp học tại Ấn Độ",
             statementText: "In one project, researchers have tried removing [ 13 ] from classrooms with some success.",
-            completedSentence: "In one project, researchers have tried removing <span class='text-brandTheme-700 font-bold underline'>teachers</span> (Option G) from classrooms with some success.",
+            completedSentence: "In one project, researchers have tried removing <span class='text-indigoTheme-700 font-bold underline'>teachers</span> (Option G) from classrooms with some success.",
             correctLetter: "G",
             correctWord: "teachers",
-            passageSnippet: "Professor Sugata Mitra has introduced the ‘Classroom in the Cloud’ based on his ‘Hole in the Wall’ experiments, which have shown that students can teach themselves and each other through self-instruction. In fact, his research suggests that <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>the presence of someone in charge is neither essential nor desirable</mark>.",
+            correctAnswer: "G",
+            passageSnippet: "Professor Sugata Mitra has introduced the ‘Classroom in the Cloud’ based on his ‘Hole in the Wall’ experiments, which have shown that students can teach themselves and each other through self-instruction. In fact, his research suggests that the presence of someone in charge is neither essential nor desirable.",
             paragraphRef: "Đoạn 2 (Passage 2, Paragraph 2)",
-            paraphrases: [
-                { qPart: "removing [ 13 ] from classrooms", pPart: "the presence of someone in charge is neither essential nor desirable / self-instruction", meaning: "sự hiện diện của người đứng đầu/quản lý (giáo viên - teachers) là không cần thiết, học sinh có thể tự dạy nhau" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Không cần người quản lý đứng lớp",
+                    questionSnippet: "removing [ 13 ] from classrooms",
+                    passageSnippet: "the presence of someone in charge is neither essential nor desirable / teach themselves and each other",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Sự hiện diện của người quản trị/đứng đầu lớp (someone in charge = teachers) không còn cần thiết vì học sinh có thể tự dạy nhau."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option I (classmates)",
+                    reason: "Bẫy hiểu nhầm: Mô hình này khuyến khích bạn cùng lớp (classmates) tự dạy nhau, nên đối tượng bị rút bỏ phải là giáo viên (teachers)."
+                },
+                {
+                    option: "Option A (unnecessary)",
+                    reason: "Bẫy từ loại: 'Unnecessary' là tính từ, trong khi vị trí sau động từ 'removing' bắt buộc phải là một danh từ số nhiều chỉ người/vật."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Cần một danh từ số nhiều làm tân ngữ cho động từ 'removing' để chỉ đối tượng được rút khỏi lớp học trong dự án thực nghiệm.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'In one project', 'removing [ 13 ] from classrooms', 'success'.",
-                    "<strong>Đối chiếu bài đọc (Passage 2, Đoạn 2):</strong> Trong dự án 'Classroom in the Cloud' của Giáo sư Sugata Mitra, học sinh tự học lẫn nhau (<em>'teach themselves and each other'</em>). Nghiên cứu chỉ ra rằng: <em>'the presence of <strong>someone in charge</strong> is neither essential nor desirable'</em>.",
-                    "<strong>Khớp nghĩa Options A–I:</strong> 'Someone in charge' trong ngữ cảnh trường học chính là giáo viên đứng lớp: <strong>teachers</strong> (Option G). Việc không cần sự hiện diện của họ đồng nghĩa với việc thử nghiệm loại bỏ giáo viên ra khỏi lớp.",
-                    "<strong>Kết luận:</strong> Đáp án là ký tự <strong>G (teachers)</strong>."
-                ],
-                traps: "Bẫy từ 'unnecessary': Thí sinh dễ bị phân tâm bởi nghĩa 'không cần thiết', nhưng ở vị trí câu 13 sau động từ 'removing' bắt buộc phải là một danh từ chỉ người/vật bị loại bỏ ('removing teachers')."
+                    "<strong>Đối chiếu bài đọc (Passage 2, Đoạn 2):</strong> Giáo sư Sugata Mitra chứng minh học sinh tự dạy nhau và khẳng định: <em>'the presence of <strong>someone in charge</strong> is neither essential nor desirable'</em>.",
+                    "<strong>Khớp nghĩa Options A–I:</strong> 'Someone in charge' trong lớp học chính là giáo viên: <strong>teachers</strong> (Option G).",
+                    "<strong>Kết luận:</strong> Đáp án là <strong>G (teachers)</strong>."
+                ]
             },
             vocabHighlights: ["essential", "chaos", "monopoly"]
         },
@@ -713,23 +928,37 @@
             part: "Part 2: Conclusions",
             contextHeader: "Mỗi hệ thống giáo dục phản ánh môi trường văn hóa - xã hội xung quanh nó",
             statementText: "The author concludes that education systems tend to be the result of the [ 14 ] around them.",
-            completedSentence: "The author concludes that education systems tend to be the result of the <span class='text-brandTheme-700 font-bold underline'>environment</span> (Option F) around them.",
+            completedSentence: "The author concludes that education systems tend to be the result of the <span class='text-indigoTheme-700 font-bold underline'>environment</span> (Option F) around them.",
             correctLetter: "F",
             correctWord: "environment",
-            passageSnippet: "Secondly, <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>each country has an educational approach which is unique and reflects the values and expectations of its society</mark>, after decades, if not centuries, of experiment and practice. If nothing else, this experiment proves that point to be true.",
+            correctAnswer: "F",
+            passageSnippet: "Secondly, each country has an educational approach which is unique and reflects the values and expectations of its society, after decades, if not centuries, of experiment and practice. If nothing else, this experiment proves that point to be true.",
             paragraphRef: "Đoạn 3 (Passage 2, Paragraph 3)",
-            paraphrases: [
-                { qPart: "result of the [ 14 ] around them", pPart: "reflects the values and expectations of its society, after decades, if not centuries, of experiment and practice", meaning: "phản ánh các giá trị và kỳ vọng của xã hội / môi trường văn hóa xã hội xung quanh (environment around them)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Phản ánh môi trường văn hóa và xã hội xung quanh",
+                    questionSnippet: "result of the [ 14 ] around them",
+                    passageSnippet: "reflects the values and expectations of its society, after decades, if not centuries, of experiment and practice",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Hệ thống giáo dục phản ánh giá trị và kỳ vọng của xã hội qua hàng thế kỷ, tức là sản phẩm của môi trường (environment) xung quanh."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option B (technology)",
+                    reason: "Bẫy hiện đại: Công nghệ chỉ là công cụ hỗ trợ, còn kết luận của tác giả nhấn mạnh nguồn gốc văn hóa - xã hội (society/environment) qua nhiều thế kỷ."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Cần một danh từ đi sau mạo từ 'the' và trước cụm 'around them' để thể hiện yếu tố hình thành nên phương pháp giáo dục của mỗi quốc gia.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'author concludes', 'education systems', 'result of the... around them'.",
-                    "<strong>Đối chiếu bài đọc (Passage 2, Đoạn 3):</strong> Ở kết luận thứ hai, tác giả khẳng định: <em>'each country has an educational approach which is unique and <strong>reflects the values and expectations of its society</strong>, after decades, if not centuries...'</em>",
-                    "<strong>Khớp nghĩa Options A–I:</strong> 'Values and expectations of its society' (các giá trị và kỳ vọng của xã hội bao quanh) được tóm lược hoàn hảo bằng danh từ chỉ môi trường sống/xã hội xung quanh: <strong>environment</strong> (Option F).",
-                    "<strong>Kết luận:</strong> Đáp án là ký tự <strong>F (environment)</strong>."
-                ],
-                traps: "Không chọn 'styles' hay 'technology' vì câu kết đoạn nhấn mạnh mối tương quan hữu cơ giữa nền giáo dục và môi trường xã hội hình thành nên nó qua nhiều thế kỷ."
+                    "<strong>Đối chiếu bài đọc (Passage 2, Đoạn 3):</strong> <em>'...each country has an educational approach which is unique and <strong>reflects the values and expectations of its society</strong>, after decades, if not centuries...'</em>",
+                    "<strong>Khớp nghĩa Options A–I:</strong> 'Values and expectations of its society' = môi trường văn hóa xã hội bao quanh: <strong>environment</strong> (Option F).",
+                    "<strong>Kết luận:</strong> Đáp án là <strong>F (environment)</strong>."
+                ]
             },
             vocabHighlights: ["monopoly", "unique", "environment"]
         }
@@ -812,7 +1041,8 @@
     </script>
 
     <script>
-    let currentQuestionIndex = 0; // 0 to 13
+    let currentSlideIndex = 0; // 0 to 13
+    let isAnswerRevealed = false; // default hidden for interactive blind presentation
 
     function initApp() {
         renderNavChips();
@@ -824,231 +1054,364 @@
         setupKeyboardNavigation();
     }
 
+    // Nav chips with BLIND selector (no answers leaked on top bar)
     function renderNavChips() {
         const container = document.getElementById('question-nav-chips');
+        if (!container) return;
         container.innerHTML = '';
         questionsData.forEach((q, idx) => {
             const btn = document.createElement('button');
-            const isActive = idx === currentQuestionIndex;
+            const isActive = idx === currentSlideIndex;
+            btn.className = `px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                isActive 
+                ? 'bg-indigoTheme-700 text-white shadow-sm ring-2 ring-indigoTheme-600 ring-offset-1 scale-102' 
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`;
             
-            let badgeBg = 'bg-slate-100 text-slate-700 hover:bg-slate-200';
-            if (isActive) {
-                badgeBg = 'bg-brandTheme-700 text-white shadow-sm ring-2 ring-brandTheme-600 ring-offset-1';
-            }
+            let typeLabel = 'Matching';
+            if (q.group === 'gapfill') typeLabel = 'Gap Fill';
+            if (q.group === 'summary') typeLabel = 'Summary';
 
-            btn.className = `px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${badgeBg}`;
-            
-            if (q.group === 'matching') {
-                btn.innerHTML = `Q${q.id}: [ ${q.correctAnswer} ]`;
-            } else if (q.group === 'gapfill') {
-                btn.innerHTML = `Q${q.id}: [ ${q.correctAnswer} ]`;
-            } else {
-                btn.innerHTML = `Q${q.id}: [ ${q.correctLetter} ]`;
-            }
+            btn.innerHTML = `
+                <div class="flex items-center gap-1">
+                    <span>Q${q.id}:</span>
+                    <span class="font-extrabold">${typeLabel}</span>
+                </div>
+            `;
 
             btn.onclick = () => {
-                currentQuestionIndex = idx;
+                currentSlideIndex = idx;
+                isAnswerRevealed = false;
                 renderNavChips();
                 renderCurrentSlide();
             };
             container.appendChild(btn);
         });
 
-        const curQ = questionsData[currentQuestionIndex];
-        const typeBadge = document.getElementById('quick-type-badge');
-        if (typeBadge) {
-            typeBadge.textContent = `${curQ.type} (${curQ.group === 'matching' ? 'Q1–Q4' : curQ.group === 'gapfill' ? 'Q5–Q9' : 'Q10–Q14'})`;
+        const curQ = questionsData[currentSlideIndex];
+        const badge = document.getElementById('quick-target-badge');
+        if (badge) {
+            badge.textContent = `${curQ.qNum} - ${curQ.type} (${curQ.part})`;
         }
 
         const mob = document.getElementById('mobile-curr-indicator');
         if (mob) {
-            mob.textContent = `Câu ${currentQuestionIndex + 1}/14 (${curQ.group === 'summary' ? curQ.correctLetter : curQ.correctAnswer})`;
+            mob.textContent = `${curQ.qNum}: ${curQ.type}`;
         }
     }
 
-    function navigateQuestion(delta) {
-        const next = currentQuestionIndex + delta;
+    function navigateSlide(delta) {
+        const next = currentSlideIndex + delta;
         if (next >= 0 && next < questionsData.length) {
-            currentQuestionIndex = next;
+            currentSlideIndex = next;
+            isAnswerRevealed = false;
             renderNavChips();
             renderCurrentSlide();
             window.scrollTo({ top: 120, behavior: 'smooth' });
         }
     }
 
+    function toggleAnswerReveal() {
+        isAnswerRevealed = !isAnswerRevealed;
+        renderCurrentSlide();
+    }
+
+    function checkUserGuess(guessedVal) {
+        const q = questionsData[currentSlideIndex];
+        const msgContainer = document.getElementById('user-guess-feedback');
+        if (!msgContainer) return;
+
+        let isCorrect = false;
+        if (q.group === 'matching') {
+            isCorrect = (guessedVal.toUpperCase() === q.correctAnswer.toUpperCase());
+        } else if (q.group === 'gapfill') {
+            isCorrect = (guessedVal.toLowerCase() === q.correctAnswer.toLowerCase());
+        } else if (q.group === 'summary') {
+            isCorrect = (guessedVal.toUpperCase() === q.correctLetter.toUpperCase());
+        }
+
+        if (isCorrect) {
+            let answerText = q.correctAnswer;
+            if (q.group === 'summary') {
+                answerText = `[ ${q.correctLetter} ] ${q.correctWord}`;
+            }
+            msgContainer.innerHTML = `
+                <div class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm font-bold flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                    <span>Chính xác tuyệt đối! Đáp án chuẩn là <strong>${answerText}</strong>.</span>
+                </div>
+            `;
+            isAnswerRevealed = true;
+            setTimeout(() => {
+                renderCurrentSlide();
+            }, 600);
+        } else {
+            msgContainer.innerHTML = `
+                <div class="p-3 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl text-sm font-bold flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-rose-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    <span>Lựa chọn <strong>${guessedVal}</strong> chưa chính xác. Hãy đối chiếu kỹ từ khóa và trích đoạn bài đọc!</span>
+                </div>
+            `;
+        }
+    }
+
     function renderCurrentSlide() {
-        const q = questionsData[currentQuestionIndex];
+        const q = questionsData[currentSlideIndex];
         const container = document.getElementById('slide-card-container');
+        if (!container) return;
+        
         const counter = document.getElementById('slide-counter-badge');
         if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnRevealText = document.getElementById('btn-reveal-text');
+        if (btnRevealText) {
+            btnRevealText.textContent = isAnswerRevealed ? 'Ẩn Phân Tích & Reset' : 'Hiện Đáp Án & Khớp Nối';
+        }
 
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
         if (btnPrev) {
-            btnPrev.disabled = currentQuestionIndex === 0;
-            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+            btnPrev.disabled = currentSlideIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentSlideIndex === 0);
         }
         if (btnNext) {
-            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
-            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+            btnNext.disabled = currentSlideIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentSlideIndex === questionsData.length - 1);
         }
 
-        let ansDisplay = '';
-        let ansBadgeColor = 'bg-brandTheme-700 text-white';
+        let ansDisplayText = '';
+        let ansBadgeColor = 'bg-indigoTheme-700 text-white';
 
         if (q.group === 'matching') {
-            ansDisplay = `Đáp án: Paragraph ${q.correctAnswer}`;
+            ansDisplayText = `ĐÁP ÁN: PARAGRAPH ${q.correctAnswer}`;
         } else if (q.group === 'gapfill') {
-            ansDisplay = `Đáp án: ${q.correctAnswer.toUpperCase()}`;
+            ansDisplayText = `ĐÁP ÁN: ${q.correctAnswer.toUpperCase()}`;
         } else {
-            ansDisplay = `Đáp án: [ ${q.correctLetter} ] — ${q.correctWord.toUpperCase()}`;
+            ansDisplayText = `ĐÁP ÁN: [ ${q.correctLetter} ] — ${q.correctWord.toUpperCase()}`;
+        }
+
+        let displayStatementText = q.statementText;
+        let displayPassageSnippet = q.passageSnippet;
+
+        if (isAnswerRevealed && q.keyCriteria) {
+            q.keyCriteria.forEach(item => {
+                if (item.questionSnippet && displayStatementText.includes(item.questionSnippet)) {
+                    displayStatementText = displayStatementText.replace(item.questionSnippet, `<span class="${item.colorClassHl} font-bold px-1 rounded">${item.questionSnippet}</span>`);
+                }
+                if (item.passageSnippet && displayPassageSnippet.includes(item.passageSnippet)) {
+                    displayPassageSnippet = displayPassageSnippet.replace(item.passageSnippet, `<span class="${item.colorClassHl} font-bold px-1 rounded">${item.passageSnippet}</span>`);
+                }
+            });
         }
 
         container.innerHTML = `
-            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all space-y-6">
                 
-                <!-- Slide Header -->
+                <!-- Slide Header Banner -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
                     <div class="flex items-center gap-3">
-                        <span class="w-10 h-10 rounded-2xl bg-indigo-100 text-brandTheme-800 flex items-center justify-center font-extrabold text-base border border-indigo-200">
+                        <span class="w-12 h-12 rounded-2xl bg-indigoTheme-100 text-indigoTheme-800 flex items-center justify-center font-black text-lg border border-indigoTheme-200 shadow-2xs">
                             ${q.id}
                         </span>
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="text-xs uppercase font-extrabold tracking-wider text-brandTheme-700">${q.type}</span>
+                                <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700">${q.type}</span>
                                 <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">${q.part}</span>
                             </div>
-                            <h3 class="text-lg sm:text-xl font-bold text-slate-900 mt-0.5">${q.qNum}: ${q.contextHeader}</h3>
+                            <h3 class="text-xl sm:text-2xl font-black text-slate-900">${q.qNum} <span class="text-slate-500 text-sm font-normal">— ${q.contextHeader}</span></h3>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                        <span class="text-xs font-semibold px-3 py-1.5 bg-slate-100 text-slate-600 rounded-xl border border-slate-200">
                             Yêu cầu: ${q.wordLimit}
                         </span>
-                        <span class="text-xs font-semibold px-3 py-1 bg-indigo-50 text-brandTheme-700 rounded-full border border-indigo-200">
-                            ${q.paragraphRef}
-                        </span>
                     </div>
                 </div>
 
-                <!-- Prompt Box -->
-                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                        ${q.group === 'matching' ? 'Chủ Đề Cần Ghép Đoạn (Topic)' : 'Nội Dung Câu Hỏi Chứa Chỗ Trống'}
-                    </span>
-                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">"${q.statementText}"</p>
-                </div>
+                <!-- Focus Mode: Side-by-Side Comparison Workspace -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
+                    <!-- Left: Task & Statement Prompt Card -->
+                    <div class="lg:col-span-6 bg-slate-50/80 rounded-2xl p-5 border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigoTheme-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    Nội Dung Cần Thẩm Định (Statement)
+                                </span>
+                                <span class="text-xs text-slate-400 font-mono">${q.paragraphRef}</span>
+                            </div>
+                            <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed bg-white/90 p-4 rounded-xl border border-slate-200">"${displayStatementText}"</p>
+                            
+                            <div class="mt-4">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Trích đoạn chứng cứ trong bài:</span>
+                                <p class="text-sm font-medium text-slate-700 italic bg-indigo-50/50 p-3.5 rounded-xl border border-indigo-200/60 leading-relaxed">"${displayPassageSnippet}"</p>
+                            </div>
+                        </div>
 
-                <!-- Answer Reveal Banner -->
-                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-indigo-50/80 via-purple-50/50 to-white border border-indigo-200">
-                    <div>
-                        <span class="text-xs font-extrabold uppercase tracking-wider text-brandTheme-700">Đáp Án Chuẩn Xác</span>
-                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
-                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm ${ansBadgeColor} answer-badge">
-                                ${ansDisplay}
+                        <!-- Interactive Guessing Pad -->
+                        <div class="mt-5 pt-4 border-t border-slate-200/80">
+                            <span class="text-xs font-bold text-slate-500 block mb-2">
+                                ${q.group === 'matching' 
+                                    ? 'Học sinh tự chọn thử đoạn văn (A, B, C, D):' 
+                                    : (q.group === 'gapfill' 
+                                        ? 'Chọn từ phù hợp từ Hộp Từ Vựng Part 1:' 
+                                        : 'Chọn lựa chọn chuẩn từ Hộp A–I Part 2:')}
                             </span>
+                            <div class="flex flex-wrap gap-2">
+                                ${q.group === 'matching' ? ['A', 'B', 'C', 'D'].map(p => `
+                                    <button onclick="checkUserGuess('${p}')" class="px-4 py-2 rounded-xl font-extrabold text-xs border transition-all ${
+                                        isAnswerRevealed && p === q.correctAnswer 
+                                        ? `${ansBadgeColor} border-transparent shadow-sm ring-2 ring-indigoTheme-400` 
+                                        : 'bg-white text-slate-700 hover:bg-slate-100 border-slate-300'
+                                    }">
+                                        Đoạn ${p}
+                                    </button>
+                                `).join('') : ''}
+
+                                ${q.group === 'gapfill' ? gapFillBankData.map(item => `
+                                    <button onclick="checkUserGuess('${item.word}')" class="px-3 py-1.5 rounded-xl font-bold text-xs border transition-all ${
+                                        isAnswerRevealed && item.word === q.correctAnswer 
+                                        ? `${ansBadgeColor} border-transparent shadow-sm ring-2 ring-indigoTheme-400` 
+                                        : 'bg-white text-slate-700 hover:bg-slate-100 border-slate-300'
+                                    }">
+                                        ${item.word}
+                                    </button>
+                                `).join('') : ''}
+
+                                ${q.group === 'summary' ? summaryOptionsData.map(opt => `
+                                    <button onclick="checkUserGuess('${opt.letter}')" class="px-3 py-1.5 rounded-xl font-bold text-xs border transition-all ${
+                                        isAnswerRevealed && opt.letter === q.correctLetter 
+                                        ? `${ansBadgeColor} border-transparent shadow-sm ring-2 ring-indigoTheme-400` 
+                                        : 'bg-white text-slate-700 hover:bg-slate-100 border-slate-300'
+                                    }">
+                                        [${opt.letter}] ${opt.text}
+                                    </button>
+                                `).join('') : ''}
+                            </div>
+                            <div id="user-guess-feedback" class="mt-2.5"></div>
                         </div>
                     </div>
 
-                    <button onclick="playSpeech('${q.group === 'summary' ? q.correctWord : (q.group === 'gapfill' ? q.correctAnswer : q.statementText.replace(/'/g, "\\'"))}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        <span>${q.group === 'matching' ? 'Phát âm chủ đề' : 'Phát âm đáp án'}</span>
-                    </button>
+                    <!-- Right: Verified Answer & Analysis Preview -->
+                    <div class="lg:col-span-6 rounded-2xl p-5 border transition-all flex flex-col justify-between ${
+                        isAnswerRevealed 
+                        ? 'bg-gradient-to-br from-indigoTheme-50/70 via-purple-50/30 to-white border-indigoTheme-300 shadow-sm' 
+                        : 'bg-slate-50 border-dashed border-slate-300'
+                    }">
+                        ${isAnswerRevealed ? `
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-black uppercase tracking-wider text-indigoTheme-800 flex items-center gap-1.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                        Đáp Án Thẩm Định Chuẩn Xác
+                                    </span>
+                                    <button onclick="playSpeech('${(q.completedSentence || q.statementText).replace(/'/g, "\\'")}')" class="text-indigoTheme-700 hover:text-indigoTheme-900 flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded bg-white border border-slate-200" title="Phát âm câu hỏi">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-indigoTheme-700" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                        <span>Nghe nhận định</span>
+                                    </button>
+                                </div>
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="text-2xl sm:text-3xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm ${ansBadgeColor} answer-badge">
+                                        ${ansDisplayText}
+                                    </span>
+                                </div>
+                                <p class="text-sm font-semibold text-slate-800 leading-relaxed">${q.vietnameseAnalysis.logic}</p>
+
+                                ${q.completedSentence ? `
+                                    <div class="mt-4 p-3.5 rounded-xl bg-slate-900 text-white text-xs sm:text-sm">
+                                        <span class="text-indigo-300 font-bold uppercase tracking-wider block mb-1">Câu hoàn chỉnh:</span>
+                                        <p class="font-medium">${q.completedSentence}</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-indigoTheme-200/60 flex items-center justify-between">
+                                <span class="text-xs font-bold text-indigoTheme-900">Vị trí bài đọc: <strong>${q.paragraphRef}</strong></span>
+                                <span class="text-xs font-mono font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-md">Chứng cứ chuẩn xác</span>
+                            </div>
+                        ` : `
+                            <div class="flex flex-col items-center justify-center h-full py-10 text-center text-slate-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mb-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                <p class="text-sm font-semibold text-slate-600 mb-1">Chế độ Tập Trung Độc Lập (Focus Mode)</p>
+                                <p class="text-xs text-slate-400 max-w-sm">Đọc kỹ đề bài bên trái, chọn thử một phương án hoặc bấm nút <strong>"Hiện Đáp Án & Khớp Nối"</strong> để xem phân tích đối chiếu chi tiết.</p>
+                            </div>
+                        `}
+                    </div>
+
                 </div>
 
-                ${q.completedSentence ? `
-                    <div class="mt-4 p-4 rounded-xl bg-slate-900 text-white text-sm sm:text-base leading-relaxed">
-                        <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider block mb-1">Câu hoàn chỉnh:</span>
-                        <p class="font-medium">${q.completedSentence}</p>
+                ${isAnswerRevealed ? `
+                    <!-- Color-Coded Paired Alignment Breakdown -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigoTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-slate-900">Bảng Khớp Nối Từng Chi Tiết (Highlights & Underlines Alignment)</h4>
+                        </div>
+
+                        <div class="space-y-3">
+                            ${q.keyCriteria.map(item => `
+                                <div class="p-4 rounded-xl border bg-white shadow-2xs space-y-2">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 rounded text-xs font-black uppercase ${item.colorClassChip}">Tiêu chí ${item.tag}</span>
+                                        <span class="text-xs font-bold text-slate-800">${item.theme}</span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+                                            <span class="text-[11px] font-bold text-slate-400 uppercase block mb-1">Cụm từ trong Đề Thi / Câu Hỏi:</span>
+                                            <p class="${item.colorClassHl} font-semibold inline">"${item.questionSnippet}"</p>
+                                        </div>
+                                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+                                            <span class="text-[11px] font-bold text-slate-400 uppercase block mb-1">Câu văn trong ${q.paragraphRef}:</span>
+                                            <p class="${item.colorClassHl} font-semibold inline">"${item.passageSnippet}"</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-slate-600 mt-1 italic pl-1 border-l-2 border-indigoTheme-500">${item.expl}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Distractor Traps & Why not others -->
+                    <div class="bg-amberTheme-50/50 border border-amberTheme-200 rounded-2xl p-5 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amberTheme-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-amberTheme-800">Cảnh Báo Bẫy Gây Nhiễu (Tại sao không chọn các phương án khác?)</h4>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${q.distractorTraps.map(trap => `
+                                <div class="bg-white p-3.5 rounded-xl border border-amber-200 text-xs">
+                                    <span class="font-extrabold text-red-700 block mb-1">❌ ${trap.option}</span>
+                                    <p class="text-slate-700 leading-relaxed">${trap.reason}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Step-by-Step Logic in Vietnamese -->
+                    <div class="bg-indigoTheme-50/40 border border-indigoTheme-200 rounded-2xl p-5 space-y-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigoTheme-800 block">Tóm Tắt Logic Giải Bài (Tiếng Việt)</span>
+                        <p class="text-sm font-medium text-slate-800 mb-2">${q.vietnameseAnalysis.logic}</p>
+                        <ul class="space-y-1.5 pl-4 list-disc text-xs sm:text-sm text-slate-700">
+                            ${q.vietnameseAnalysis.stepByStep.map(step => `<li>${step}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- Associated Vocabulary Chips -->
+                    <div class="pt-4 border-t border-slate-100">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">Từ Vựng Trọng Tâm Trong Câu Này:</span>
+                        <div class="flex flex-wrap gap-2">
+                            ${q.vocabHighlights.map(v => `
+                                <button onclick="playSpeech('${v}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:border-indigoTheme-400 transition-colors shadow-2xs">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-indigoTheme-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    <span>${v}</span>
+                                </button>
+                            `).join('')}
+                        </div>
                     </div>
                 ` : ''}
-
-                <!-- Evidence in Reading Passage -->
-                <div class="mt-6">
-                    <div class="flex items-center gap-2 mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-brandTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Bằng Chứng (${q.paragraphRef})</h4>
-                    </div>
-                    <div class="p-5 rounded-2xl bg-indigo-50/40 border border-indigo-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
-                        "${q.passageSnippet}"
-                    </div>
-                </div>
-
-                <!-- Paraphrase & Synonym Mapping Table -->
-                <div class="mt-6">
-                    <div class="flex items-center gap-2 mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Paraphrase</h4>
-                    </div>
-                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
-                        <table class="w-full text-left border-collapse text-sm">
-                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
-                                <tr>
-                                    <th class="py-2.5 px-4 w-1/3">Câu hỏi / Đề thi (${q.qNum})</th>
-                                    <th class="py-2.5 px-4 w-1/3">Văn bản bài đọc (${q.paragraphRef})</th>
-                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100 bg-white">
-                                ${q.paraphrases.map(p => `
-                                    <tr>
-                                        <td class="py-3 px-4 font-semibold text-indigo-800 bg-indigo-50/30">${p.qPart}</td>
-                                        <td class="py-3 px-4 font-semibold text-purple-800 bg-purple-50/20">${p.pPart}</td>
-                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Vietnamese In-Depth Explanation & Logic -->
-                <div class="mt-6 bg-indigo-50/40 border border-indigo-200/80 rounded-2xl p-6">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="w-2.5 h-2.5 rounded-full bg-brandTheme-600"></span>
-                        <h4 class="text-sm font-bold uppercase tracking-wider text-brandTheme-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
-                    </div>
-
-                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
-
-                    <div class="space-y-2 mb-4">
-                        ${q.vietnameseAnalysis.stepByStep.map(step => `
-                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
-                                <span class="text-brandTheme-600 mt-1 font-bold">▸</span>
-                                <div>${step}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-
-                    ${q.vietnameseAnalysis.traps ? `
-                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
-                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
-                            <span>${q.vietnameseAnalysis.traps}</span>
-                        </div>
-                    ` : ''}
-                </div>
-
-                <!-- Highlighted Vocabulary in this question -->
-                <div class="mt-6 pt-5 border-t border-slate-100">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
-                    <div class="flex flex-wrap gap-3">
-                        ${q.vocabHighlights.map(v => {
-                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
-                            return `
-                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-indigo-400 transition-colors">
-                                    <button onclick="playSpeech('${v}')" class="text-brandTheme-700 hover:text-brandTheme-900" title="Nghe phát âm chuẩn UK">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                    </button>
-                                    <div>
-                                        <span class="font-bold text-sm text-slate-900">${v}</span>
-                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
-                                        <span class="text-xs text-brandTheme-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                </div>
 
             </div>
         `;
@@ -1056,6 +1419,7 @@
 
     function renderAllQuestionsList(filter = 'all') {
         const container = document.getElementById('all-questions-container');
+        if (!container) return;
         container.innerHTML = '';
 
         const filtered = questionsData.filter(q => {
@@ -1081,7 +1445,7 @@
             card.innerHTML = `
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
                     <div class="flex items-center gap-2.5">
-                        <span class="w-7 h-7 rounded-lg bg-brandTheme-700 text-white font-bold text-xs flex items-center justify-center">
+                        <span class="w-7 h-7 rounded-lg bg-indigoTheme-700 text-white font-bold text-xs flex items-center justify-center">
                             ${q.id}
                         </span>
                         <h3 class="font-bold text-slate-900">${q.qNum} - <span class="text-slate-500 font-medium">${q.contextHeader}</span></h3>
@@ -1112,11 +1476,11 @@
                 </div>
 
                 <div class="mb-4">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Tiêu chí đối chiếu cốt lõi:</span>
                     <div class="flex flex-wrap gap-2">
-                        ${q.paraphrases.map(p => `
+                        ${q.keyCriteria.map(p => `
                             <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
-                                <span class="text-indigo-700 font-bold">${p.qPart}</span> ➔ <span class="text-purple-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                                <span class="text-indigoTheme-700 font-bold">${p.questionSnippet}</span> ➔ <span class="text-purple-800 font-bold">${p.passageSnippet}</span>: <em>${p.expl}</em>
                             </div>
                         `).join('')}
                     </div>
@@ -1128,7 +1492,6 @@
                     <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
                         ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
                     </ul>
-                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
                 </div>
             `;
             container.appendChild(card);
@@ -1140,7 +1503,7 @@
             b.className = 'filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200';
         });
         if (event && event.target) {
-            event.target.className = 'filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-brandTheme-700 text-white';
+            event.target.className = 'filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-indigoTheme-700 text-white';
         }
         renderAllQuestionsList(type);
     }
@@ -1148,18 +1511,19 @@
     function renderOptionsBanks() {
         // Render Gap Fill Bank (Part 1)
         const gContainer = document.getElementById('gapfill-bank-container');
+        if (!gContainer) return;
         gContainer.innerHTML = '';
         gapFillBankData.forEach(item => {
             const card = document.createElement('div');
             card.className = `p-4 rounded-2xl border transition-all flex flex-col justify-between ${
-                item.isUsed ? 'bg-white border-indigo-200 shadow-2xs hover:border-indigo-400' : 'bg-slate-50 border-slate-200 opacity-80'
+                item.isUsed ? 'bg-white border-indigoTheme-200 shadow-2xs hover:border-indigoTheme-400' : 'bg-slate-50 border-slate-200 opacity-80'
             }`;
             card.innerHTML = `
                 <div>
                     <div class="flex items-center justify-between mb-2">
                         <span class="font-mono font-bold text-sm text-slate-900">${item.word}</span>
                         <span class="text-[11px] font-extrabold uppercase px-2 py-0.5 rounded-full ${
-                            item.isUsed ? 'bg-indigo-100 text-indigo-800' : 'bg-amber-100 text-amber-800'
+                            item.isUsed ? 'bg-indigoTheme-100 text-indigoTheme-800' : 'bg-amber-100 text-amber-800'
                         }">
                             ${item.isUsed ? item.usedFor : 'Bẫy nhiễu'}
                         </span>
@@ -1172,6 +1536,7 @@
 
         // Render Summary Bank (Part 2)
         const sContainer = document.getElementById('summary-bank-container');
+        if (!sContainer) return;
         sContainer.innerHTML = '';
         summaryOptionsData.forEach(item => {
             const card = document.createElement('div');
@@ -1200,39 +1565,37 @@
 
     function renderSynonymsTable() {
         const tbody = document.getElementById('synonyms-table-body');
+        if (!tbody) return;
         tbody.innerHTML = '';
 
         questionsData.forEach(q => {
-            q.paraphrases.forEach((p, pIndex) => {
+            q.keyCriteria.forEach((crit, cIdx) => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-50/80 transition-colors";
-                
-                let answerDisplay = '';
-                if (q.group === 'matching') {
-                    answerDisplay = `Paragraph ${q.correctAnswer}`;
-                } else if (q.group === 'gapfill') {
-                    answerDisplay = q.correctAnswer;
-                } else {
-                    answerDisplay = `[ ${q.correctLetter} ] ${q.correctWord}`;
+
+                let ansBadge = 'bg-indigoTheme-700 text-white';
+                let ansText = `Đoạn ${q.correctAnswer}`;
+                if (q.group === 'gapfill') {
+                    ansText = q.correctAnswer;
+                } else if (q.group === 'summary') {
+                    ansText = `[ ${q.correctLetter} ] ${q.correctWord}`;
                 }
 
                 tr.innerHTML = `
                     <td class="py-3 px-4 text-center font-bold text-slate-700">
-                        ${pIndex === 0 ? `<span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                        ${cIdx === 0 ? `<span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-lg block font-mono">Q${q.id}</span>` : ''}
                     </td>
                     <td class="py-3 px-4">
-                        <span class="keyword-chip">${p.qPart}</span>
+                        <span class="${crit.colorClassHl} px-1.5 py-0.5 rounded font-semibold text-xs leading-relaxed block">${crit.questionSnippet}</span>
                     </td>
                     <td class="py-3 px-4">
-                        <span class="passage-chip">${p.pPart}</span>
+                        <span class="${crit.colorClassHl} px-1.5 py-0.5 rounded font-semibold text-xs leading-relaxed block">${crit.passageSnippet}</span>
                     </td>
                     <td class="py-3 px-4 text-center">
-                        <span class="text-xs font-bold uppercase px-2.5 py-1 bg-brandTheme-700 text-white rounded shadow-2xs">
-                            ${answerDisplay}
-                        </span>
+                        ${cIdx === 0 ? `<span class="text-xs font-bold uppercase px-2.5 py-1 rounded shadow-2xs ${ansBadge}">${ansText}</span>` : ''}
                     </td>
-                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
-                        ${p.meaning}
+                    <td class="py-3 px-4 text-slate-700 text-xs">
+                        ${crit.expl}
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -1242,6 +1605,7 @@
 
     function renderVocabGrid(filterWord = '') {
         const container = document.getElementById('vocab-grid-container');
+        if (!container) return;
         container.innerHTML = '';
 
         const words = Object.keys(vocabData).filter(w => {
@@ -1258,20 +1622,20 @@
         words.forEach(w => {
             const item = vocabData[w];
             const card = document.createElement('div');
-            card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-indigo-400 transition-all flex flex-col justify-between";
+            card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-indigoTheme-400 transition-all flex flex-col justify-between";
             card.innerHTML = `
                 <div>
                     <div class="flex items-center justify-between gap-2 mb-2">
                         <h4 class="text-lg font-bold text-slate-900">${w}</h4>
-                        <button onclick="playSpeech('${w}')" class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs" title="Nghe phát âm chuẩn UK">
+                        <button onclick="playSpeech('${w}')" class="w-8 h-8 rounded-full bg-indigo-50 text-indigoTheme-700 hover:bg-indigoTheme-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs" title="Nghe phát âm chuẩn UK">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </button>
                     </div>
                     <div class="flex items-center gap-2 mb-3">
                         <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${item.ipa}</span>
-                        <span class="text-xs italic text-indigo-700 font-semibold">${item.type}</span>
+                        <span class="text-xs italic text-indigoTheme-700 font-semibold">${item.type}</span>
                     </div>
-                    <p class="text-sm font-semibold text-indigo-900 mb-3">${item.vi}</p>
+                    <p class="text-sm font-semibold text-indigoTheme-900 mb-3">${item.vi}</p>
                 </div>
                 <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-lg">
                     "${item.eg}"
@@ -1310,7 +1674,7 @@
         const activeTab = document.getElementById(`tab-${viewName}`);
         if (activeSec) activeSec.classList.remove('hidden');
         if (activeTab) {
-            activeTab.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-brandTheme-700 text-white shadow-sm';
+            activeTab.className = 'view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all bg-indigoTheme-700 text-white shadow-sm';
         }
     }
 
@@ -1319,9 +1683,9 @@
             const presView = document.getElementById('view-presentation');
             if (presView && !presView.classList.contains('hidden')) {
                 if (e.key === 'ArrowRight') {
-                    navigateQuestion(1);
+                    navigateSlide(1);
                 } else if (e.key === 'ArrowLeft') {
-                    navigateQuestion(-1);
+                    navigateSlide(-1);
                 }
             }
         });

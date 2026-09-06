@@ -27,6 +27,14 @@
                             800: '#3730a3',
                             900: '#312e81',
                             950: '#1e1b4b'
+                        },
+                        amberTheme: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309'
                         }
                     }
                 }
@@ -41,7 +49,7 @@
         .gradient-border {
             position: relative;
             background: linear-gradient(135deg, #ffffff, #faf5ff);
-            border: 1px solid rgba(226, 232, 240, 0.85);
+            border: 1px solid rgba(226, 232, 240, 0.9);
         }
         .gradient-border::before {
             content: '';
@@ -51,28 +59,14 @@
             border-top-left-radius: inherit;
             border-top-right-radius: inherit;
         }
-        .keyword-chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.18rem 0.58rem;
-            border-radius: 0.375rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background-color: #ede9fe;
-            color: #5b21b6;
-            border: 1px solid #ddd6fe;
-        }
-        .passage-chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.18rem 0.58rem;
-            border-radius: 0.375rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background-color: #fef3c7;
-            color: #92400e;
-            border: 1px solid #fde68a;
-        }
+        .paired-chip-1 { background-color: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+        .paired-chip-2 { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .paired-chip-3 { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        
+        .paired-hl-1 { background-color: #dbeafe; color: #1e3a8a; text-decoration: underline; text-decoration-color: #3b82f6; text-decoration-thickness: 2.5px; text-underline-offset: 3px; }
+        .paired-hl-2 { background-color: #fef3c7; color: #78350f; text-decoration: underline; text-decoration-color: #f59e0b; text-decoration-thickness: 2.5px; text-underline-offset: 3px; }
+        .paired-hl-3 { background-color: #dcfce7; color: #14532d; text-decoration: underline; text-decoration-color: #22c55e; text-decoration-thickness: 2.5px; text-underline-offset: 3px; }
+        
         .answer-badge {
             animation: pulseSubtle 3s infinite;
         }
@@ -84,7 +78,8 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-indigo-100 selection:text-indigo-900">
 
-    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -95,14 +90,14 @@
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700 bg-indigoTheme-50 px-2 py-0.5 rounded-full border border-indigoTheme-200">IELTS Reading Analysis</span>
-                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích chuyên sâu 12 câu hỏi (Matching Information & Yes/No/Not Given)</span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700 bg-indigoTheme-50 px-2 py-0.5 rounded-full border border-indigoTheme-200">IELTS Reading Masterclass</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Focus Slide Presentation Mode</span>
                         </div>
-                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">Clothes and Identity: We Are What We Wear</h1>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">Clothes and Identity: We Are What We Wear (Questions 1–12)</h1>
                     </div>
                 </div>
                 <div class="md:hidden">
-                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-lg">Câu 1/12</span>
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-indigoTheme-100 text-indigoTheme-800 px-2.5 py-1 rounded-lg">Câu 1/12</span>
                 </div>
             </div>
 
@@ -112,7 +107,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                     </svg>
-                    <span>Slide Từng Câu</span>
+                    <span>Focus Presentation Mode</span>
                 </button>
                 <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -144,43 +139,47 @@
 
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
 
-        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
+        <!-- VIEW 1: PRESENTATION FOCUS MODE (BLIND SELECTOR) -->
         <section id="view-presentation" class="space-y-6 block">
             
-            <!-- Quick Question Selector Chips -->
+            <!-- Quick Question Selector Chips (Blind selector: no answers leaked upfront) -->
             <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
                 <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
-                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Matching Information (Q1–Q6)</span>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi (Focus Slide):</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-target-badge">Câu 1: Matching Info</span>
                     </div>
                     <div class="text-xs text-slate-400 flex items-center gap-2">
-                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển slide</span>
                     </div>
                 </div>
 
                 <div class="flex flex-wrap gap-2" id="question-nav-chips">
-                    <!-- Dynamic question buttons inserted by JS -->
+                    <!-- Dynamic chips inserted by JS without revealing answers -->
                 </div>
             </div>
 
-            <!-- Slide Main Card -->
+            <!-- Slide Main Card Container -->
             <div id="slide-card-container" class="relative">
-                <!-- Dynamically rendered slide content -->
+                <!-- Dynamically populated slide card -->
             </div>
 
             <!-- Bottom Navigation Bar -->
             <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
-                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                <button onclick="navigateSlide(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                     <span>Câu Trước</span>
                 </button>
 
                 <div class="flex items-center gap-3">
                     <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 12</span>
+                    <button onclick="toggleAnswerReveal()" id="btn-toggle-reveal" class="text-xs font-bold px-4 py-2 rounded-xl bg-indigoTheme-50 text-indigoTheme-700 border border-indigoTheme-200 hover:bg-indigoTheme-100 transition-all flex items-center gap-1.5 shadow-2xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                        <span id="btn-reveal-text">Hiện Đáp Án & Khớp Nối</span>
+                    </button>
                 </div>
 
-                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigoTheme-700 hover:bg-indigoTheme-800 text-white font-semibold shadow-md shadow-indigo-900/10 active:scale-95 transition-all">
+                <button onclick="navigateSlide(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigoTheme-700 hover:bg-indigoTheme-800 text-white font-semibold shadow-md shadow-indigo-900/10 active:scale-95 transition-all">
                     <span>Câu Kế Tiếp</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </button>
@@ -192,7 +191,7 @@
             <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 12 Câu Hỏi</h2>
-                    <p class="text-sm text-slate-500">Xem đầy đủ bằng chứng bài đọc, đáp án chuẩn, ma trận paraphrase và phân tích logic tiếng Việt.</p>
+                    <p class="text-sm text-slate-500">Xem đầy đủ bằng chứng bài đọc, đáp án chuẩn, ma trận đối chiếu từ vựng và phân tích logic tiếng Việt.</p>
                 </div>
                 <div class="flex flex-wrap items-center gap-2">
                     <button onclick="filterAllQuestions('all')" class="filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-indigoTheme-700 text-white">Tất Cả (1–12)</button>
@@ -346,23 +345,49 @@
             wordLimit: "Chọn ký tự từ A đến F",
             contextHeader: "Mua đồ để cảm thấy thỏa mãn khi người khác chú ý và ấn tượng",
             statementText: "People purchase things so they can feel good when other people notice them.",
-            correctParagraph: "Paragraph C",
             correctLetter: "C",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>We enjoy shopping because it allows us to compare ourselves with others. Our new Prada shoes may be lovely, but our pleasure in them depends on impressing others</mark>.",
+            correctParagraph: "Paragraph C",
+            correctAnswer: "C",
+            passageSnippet: "We enjoy shopping because it allows us to compare ourselves with others. Our new Prada shoes may be lovely, but our pleasure in them depends on impressing others.",
             paragraphRef: "Đoạn C (Paragraph C)",
-            paraphrases: [
-                { qPart: "purchase things", pPart: "buying objects / shopping / Our new Prada shoes", meaning: "mua sắm đồ đạc, sản phẩm hàng hiệu" },
-                { qPart: "feel good when other people notice them", pPart: "pleasure in them depends on impressing others / compare ourselves with others", meaning: "niềm vui/sự khoái cảm phụ thuộc vào việc gây ấn tượng với người khác (được người khác chú ý)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Hành vi mua sắm hàng hóa",
+                    questionSnippet: "purchase things",
+                    passageSnippet: "shopping / Our new Prada shoes",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Mua sắm đồ đạc (purchase things) được biểu đạt bằng ví dụ thực tế về việc mua giày hiệu Prada trong khi đi mua sắm (shopping)."
+                },
+                {
+                    tag: "2",
+                    theme: "Cảm giác vui sướng khi người khác chú ý và ngưỡng mộ",
+                    questionSnippet: "feel good when other people notice them",
+                    passageSnippet: "our pleasure in them depends on impressing others",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Niềm vui sướng khi sở hữu món đồ (pleasure) phụ thuộc hoàn toàn vào việc gây ấn tượng với người xung quanh (impressing others)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Đoạn A (Bẫy từ khóa truyền tải)",
+                    reason: "Đoạn A có nói 'promote ourselves to others', nhưng đó là về thời trang như một công cụ giao tiếp thị giác nói chung, không phân tích động cơ tâm lý mua hàng (purchase things) để thỏa mãn cảm xúc."
+                },
+                {
+                    option: "Đoạn F (Bẫy nhận diện cá nhân)",
+                    reason: "Đoạn F có nhắc đến 'people immediately recognise you', nhưng nói về việc mặc đồng phục cố định của người nổi tiếng, không nói về khoái cảm khi mua đồ mới."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Câu hỏi yêu cầu tìm đoạn văn nhắc đến: 'Mọi người mua sắm đồ đạc để họ có thể cảm thấy hài lòng khi người khác chú ý tới họ'.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'purchase things', 'feel good', 'other people notice'.",
                     "<strong>Đối chiếu bài đọc (Đoạn C):</strong> Tác giả bàn về tâm lý mua sắm: <em>'We enjoy shopping because it allows us to compare ourselves with others. Our new Prada shoes may be lovely, but <strong>our pleasure in them depends on impressing others</strong>'</em>.",
-                    "<strong>Phân tích ngữ nghĩa:</strong> 'our pleasure' = 'feel good'; 'impressing others' = 'other people notice them'; 'buying objects / Prada shoes' = 'purchase things'.",
+                    "<strong>Phân tích tương đương:</strong> 'our pleasure' = 'feel good'; 'impressing others' = 'other people notice them'; 'buying objects / Prada shoes' = 'purchase things'.",
                     "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph C</strong>."
-                ],
-                traps: "Đoạn A có nói 'promote ourselves to others', nhưng đó là về thời trang nói chung như phương tiện giao tiếp, không nói sâu về hành vi mua sắm (purchase) để tìm kiếm sự hài lòng khi người khác trầm trồ như Đoạn C."
+                ]
             },
             vocabHighlights: ["dopamine", "buyer’s guilt", "sociability"]
         },
@@ -374,13 +399,40 @@
             wordLimit: "Chọn ký tự từ A đến F",
             contextHeader: "Những nhân vật quyền lực trong ngành thời trang trung thành với cùng một kiểu trang phục",
             statementText: "Some people in the fashion business choose the same type of clothes regularly.",
-            correctParagraph: "Paragraph F",
             correctLetter: "F",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>Uniforms are frequently adopted by fashion and other industry leaders. For example, fashion magazine editor Anna Wintour only wears printed sleeveless dresses, and famous model Kate Moss is addicted to skinny jeans and ankle boots. Wearing the same clothes every day means you do not have to worry about what to wear and people immediately recognise you</mark>.",
+            correctParagraph: "Paragraph F",
+            correctAnswer: "F",
+            passageSnippet: "Uniforms are frequently adopted by fashion and other industry leaders. For example, fashion magazine editor Anna Wintour only wears printed sleeveless dresses, and famous model Kate Moss is addicted to skinny jeans and ankle boots. Wearing the same clothes every day means you do not have to worry about what to wear and people immediately recognise you.",
             paragraphRef: "Đoạn F (Paragraph F)",
-            paraphrases: [
-                { qPart: "Some people in the fashion business", pPart: "fashion and other industry leaders / fashion magazine editor Anna Wintour / famous model Kate Moss", meaning: "những người lãnh đạo ngành thời trang: tổng biên tập tạp chí Anna Wintour, siêu mẫu Kate Moss" },
-                { qPart: "choose the same type of clothes regularly", pPart: "only wears printed sleeveless dresses / addicted to skinny jeans / wearing the same clothes every day", meaning: "chỉ mặc duy nhất một kiểu đầm / nghiện quần jean bó / mặc cùng một kiểu trang phục mỗi ngày" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Nhân vật lãnh đạo trong ngành thời trang",
+                    questionSnippet: "Some people in the fashion business",
+                    passageSnippet: "fashion and other industry leaders. For example, fashion magazine editor Anna Wintour... famous model Kate Moss",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Các nhân vật tiêu biểu trong ngành thời trang (people in the fashion business) gồm tổng biên tập tạp chí thời trang Anna Wintour và siêu mẫu Kate Moss."
+                },
+                {
+                    tag: "2",
+                    theme: "Thường xuyên mặc cùng một kiểu trang phục",
+                    questionSnippet: "choose the same type of clothes regularly",
+                    passageSnippet: "only wears printed sleeveless dresses / addicted to skinny jeans / Wearing the same clothes every day",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Chỉ mặc duy nhất đầm sát nách in hoa, nghiện quần jean bó hoặc mặc cùng một kiểu trang phục mỗi ngày (Wearing the same clothes every day)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Đoạn B (Bẫy may đo trang phục)",
+                    reason: "Đoạn B nói về bộ vest may đo riêng cho người đàn ông (suit made especially for him), nhưng đó là trong một nghiên cứu tâm lý, không nói về nhân vật trong ngành thời trang."
+                },
+                {
+                    option: "Đoạn E (Bẫy đồng phục áo blouse)",
+                    reason: "Đoạn E nói về áo blouse phòng thí nghiệm (lab coat) của nhà khoa học/bác sĩ, không liên quan đến giới thời trang."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Câu hỏi tìm đoạn văn chứa thông tin: 'Một số người trong ngành thời trang thường xuyên chọn mặc cùng một kiểu trang phục'.",
@@ -389,10 +441,9 @@
                     "<strong>Đối chiếu bài đọc (Đoạn F):</strong> Tác giả viết: <em>'Uniforms are frequently adopted by <strong>fashion and other industry leaders</strong>. For example, fashion magazine editor Anna Wintour <strong>only wears printed sleeveless dresses</strong>, and famous model Kate Moss is addicted to skinny jeans... <strong>Wearing the same clothes every day</strong>...'</em>",
                     "<strong>Khớp nghĩa:</strong> Anna Wintour và Kate Moss là đại diện của 'people in the fashion business', và họ mặc trang phục quen thuộc hàng ngày ('same clothes every day' = 'regularly').",
                     "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph F</strong>."
-                ],
-                traps: "Không nhầm lẫn với đồng phục nhóm của dân punk hay nhân viên tài chính (City worker) ở đầu đoạn F; câu hỏi chỉ đích danh 'people in the fashion business'."
+                ]
             },
-            vocabHighlights: ["adopted", "accessories", "uniform"]
+            vocabHighlights: ["adopted", "accessories", "fitting into society"]
         },
         {
             id: 3,
@@ -402,25 +453,47 @@
             wordLimit: "Chọn ký tự từ A đến F",
             contextHeader: "Hình thành quan điểm về nam giới và nữ giới dựa trên các tiêu chí hoàn toàn khác nhau",
             statementText: "People form opinions about males and females using different criteria.",
-            correctParagraph: "Paragraph D",
             correctLetter: "D",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>The shopping experience is not always the same for both genders, however. From a young age, women are judged on their appearance, and men on skills and abilities</mark>.",
+            correctParagraph: "Paragraph D",
+            correctAnswer: "D",
+            passageSnippet: "The shopping experience is not always the same for both genders, however. From a young age, women are judged on their appearance, and men on skills and abilities.",
             paragraphRef: "Đoạn D (Paragraph D)",
-            paraphrases: [
-                { qPart: "form opinions about / criteria", pPart: "judged on their appearance [women] / on skills and abilities [men]", meaning: "đánh giá phụ nữ dựa trên ngoại hình, còn nam giới dựa trên kỹ năng và năng lực" },
-                { qPart: "males and females", pPart: "men and women / both genders", meaning: "cả hai giới: đàn ông và phụ nữ" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Đánh giá về nam giới và nữ giới",
+                    questionSnippet: "form opinions about males and females",
+                    passageSnippet: "both genders... women are judged... and men",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "'form opinions about' đồng nghĩa với 'are judged on' (được đánh giá/nhận xét dựa trên tiêu chuẩn xã hội)."
+                },
+                {
+                    tag: "2",
+                    theme: "Sử dụng các tiêu chí khác biệt",
+                    questionSnippet: "using different criteria",
+                    passageSnippet: "women are judged on their appearance, and men on skills and abilities",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Hai tiêu chí hoàn toàn khác biệt: phụ nữ bị đánh giá dựa vào ngoại hình (appearance), còn nam giới dựa vào kỹ năng và năng lực (skills and abilities)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Đoạn B (Bẫy đánh giá tính cách trong 1 giây)",
+                    reason: "Đoạn B nói con người đánh giá tính cách dựa trên ngoại hình trong 1 giây (judgement about personality), nhưng nói chung về con người chứ không phân chia tiêu chí giữa nam và nữ."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'Mọi người hình thành nhận xét/quan điểm về nam và nữ bằng những tiêu chí khác nhau'.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'males and females', 'different criteria', 'form opinions'.",
                     "<strong>Đối chiếu bài đọc (Đoạn D):</strong> Tác giả phân tích: <em>'From a young age, <strong>women are judged on their appearance, and men on skills and abilities</strong>'</em>.",
-                    "<strong>Phân tích tương đương:</strong> 'judged on' = 'form opinions about'; hai tiêu chí khác nhau là 'appearance' (ngoại hình) đối với nữ và 'skills and abilities' (kỹ năng & năng lực) đối với nam.",
+                    "<strong>Phân tích đối chiếu:</strong> 'judged on' = 'form opinions about'; hai tiêu chí khác nhau là 'appearance' (ngoại hình) đối với nữ và 'skills and abilities' (kỹ năng & năng lực) đối với nam.",
                     "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph D</strong>."
-                ],
-                traps: "Đoạn D sau đó nói về thói quen mua sắm của nam và nữ (nam mua nhanh, nữ đi cùng bạn bè), nhưng câu chủ đề nêu bật tiêu chí đánh giá xã hội khác nhau giữa hai giới nằm ngay câu thứ hai của đoạn."
+                ]
             },
-            vocabHighlights: ["genders", "appearance", "self-identity"]
+            vocabHighlights: ["self-identity", "sociability", "fitting into society"]
         },
         {
             id: 4,
@@ -430,25 +503,47 @@
             wordLimit: "Chọn ký tự từ A đến F",
             contextHeader: "Người đàn ông mặc trang phục may đo thiết kế riêng tạo ấn tượng tích cực hơn",
             statementText: "A person wearing specially designed clothes made a more positive impression.",
-            correctParagraph: "Paragraph B",
             correctLetter: "B",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>In a recent study supported by a tailoring company, participants were shown images of a man for three seconds. The first image showed him in a suit made especially for him. The second showed him in a suit bought from a highstreet shop. People thought the man in the first image was more confident, successful and a higher earner than in the second</mark>.",
+            correctParagraph: "Paragraph B",
+            correctAnswer: "B",
+            passageSnippet: "In a recent study supported by a tailoring company, participants were shown images of a man for three seconds. The first image showed him in a suit made especially for him. The second showed him in a suit bought from a highstreet shop. People thought the man in the first image was more confident, successful and a higher earner than in the second.",
             paragraphRef: "Đoạn B (Paragraph B)",
-            paraphrases: [
-                { qPart: "specially designed clothes", pPart: "a suit made especially for him (supported by a tailoring company)", meaning: "bộ âu phục được may đo thiết kế riêng cho anh ấy" },
-                { qPart: "made a more positive impression", pPart: "more confident, successful and a higher earner than in the second", meaning: "tạo ấn tượng tự tin hơn, thành đạt hơn và có mức thu nhập cao hơn" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Trang phục được may đo thiết kế riêng",
+                    questionSnippet: "wearing specially designed clothes",
+                    passageSnippet: "suit made especially for him (supported by a tailoring company)",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Bộ âu phục được may đo thiết kế riêng (suit made especially for him) chính là 'specially designed clothes'."
+                },
+                {
+                    tag: "2",
+                    theme: "Tạo ấn tượng tích cực vượt trội",
+                    questionSnippet: "made a more positive impression",
+                    passageSnippet: "more confident, successful and a higher earner than in the second",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Người mặc bộ vest may riêng được nhìn nhận tự tin hơn, thành công hơn và có mức thu nhập cao hơn (ấn tượng tích cực hơn hẳn)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Đoạn E (Bẫy áo blouse bác sĩ)",
+                    reason: "Đoạn E nói về áo blouse giúp người mặc tập trung hơn, không phải bộ đồ may đo riêng tạo ấn tượng tốt cho người đối diện."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Câu hỏi tìm đoạn văn nhắc đến: 'Một người mặc trang phục được thiết kế riêng tạo nên ấn tượng tích cực hơn'.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'specially designed clothes', 'positive impression'.",
-                    "<strong>Đối chiếu bài đọc (Đoạn B):</strong> Tác giả dẫn chứng thí nghiệm của một công ty may đo: Người tham gia nhìn ảnh một người đàn ông mặc bộ vest may đo riêng (<em>'suit made especially for him'</em>) và một bộ vest mua ngoài cửa hàng thông thường (<em>'highstreet shop'</em>).",
-                    "<strong>Đánh giá ấn tượng:</strong> Bức ảnh mặc đồ may đo riêng khiến mọi người đánh giá anh ta tự tin hơn, thành đạt hơn và kiếm nhiều tiền hơn (<em>'more confident, successful and a higher earner'</em> ➔ ấn tượng tích cực hơn).",
+                    "<strong>Đối chiếu bài đọc (Đoạn B):</strong> Tác giả dẫn chứng thí nghiệm: Người tham gia nhìn ảnh người đàn ông mặc bộ vest may đo riêng (<em>'suit made especially for him'</em>) và bộ vest mua ngoài cửa hàng may sẵn (<em>'highstreet shop'</em>).",
+                    "<strong>Đánh giá ấn tượng:</strong> Bức ảnh mặc đồ may riêng khiến mọi người đánh giá anh ta tự tin hơn, thành đạt hơn và kiếm nhiều tiền hơn (<em>'more confident, successful and a higher earner'</em> ➔ ấn tượng tích cực hơn).",
                     "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph B</strong>."
-                ],
-                traps: "Chú ý phân biệt giữa Q4 (thí nghiệm bộ vest may đo) và Q5 (quyết định trong 1 giây nói chung) - cả hai đều nằm ở đoạn B nhưng mang nội dung dẫn chứng khác nhau."
+                ]
             },
-            vocabHighlights: ["halo effect", "tailoring", "sociability"]
+            vocabHighlights: ["halo effect", "sociability", "adopted"]
         },
         {
             id: 5,
@@ -458,26 +553,47 @@
             wordLimit: "Chọn ký tự từ A đến F",
             contextHeader: "Dùng vẻ bề ngoài để phán đoán tính cách một người gần như ngay lập tức",
             statementText: "We use looks to make a judgement about someone’s personality almost immediately.",
-            correctParagraph: "Paragraph B",
             correctLetter: "B",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>We make decisions based on a person’s appearance within a second. Clothing style gives information about a person’s character, sociability and intelligence</mark>.",
+            correctParagraph: "Paragraph B",
+            correctAnswer: "B",
+            passageSnippet: "We make decisions based on a person’s appearance within a second. Clothing style gives information about a person’s character, sociability and intelligence.",
             paragraphRef: "Đoạn B (Paragraph B)",
-            paraphrases: [
-                { qPart: "looks", pPart: "appearance / clothing style", meaning: "ngoại hình, vẻ bề ngoài, phong cách ăn mặc" },
-                { qPart: "make a judgement about someone's personality", pPart: "make decisions / gives information about a person's character, sociability", meaning: "đưa ra nhận định, đánh giá về tính cách và độ hòa đồng của ai đó" },
-                { qPart: "almost immediately", pPart: "within a second", meaning: "trong vòng một giây (gần như ngay lập tức)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Ngoại hình và đánh giá tính cách",
+                    questionSnippet: "use looks to make a judgement about someone’s personality",
+                    passageSnippet: "decisions based on a person’s appearance... Clothing style gives information about a person’s character, sociability",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Ngoại hình (looks = appearance / clothing style) cung cấp dữ liệu để đưa ra phán đoán về tính cách (character, sociability = personality)."
+                },
+                {
+                    tag: "2",
+                    theme: "Tốc độ gần như tức thì",
+                    questionSnippet: "almost immediately",
+                    passageSnippet: "within a second",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Diễn ra trong chớp mắt, vỏn vẹn trong vòng một giây ('within a second' = 'almost immediately')."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Đoạn A (Bẫy từ 'immediate visual communication')",
+                    reason: "Đoạn A nhắc đến 'immediate visual communication' là tốc độ truyền thông điệp của thời trang, còn đoạn B mới là nơi con người dùng nó để phán xét tính cách của người khác chỉ trong 1 giây."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Câu hỏi yêu cầu tìm đoạn văn chứa: 'Chúng ta sử dụng ngoại hình để đánh giá về tính cách của ai đó gần như ngay lập tức'.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'looks', 'judgement', 'personality', 'almost immediately'.",
-                    "<strong>Đối chiếu bài đọc (Đoạn B):</strong> Ngay câu thứ hai của Đoạn B viết: <em>'We make decisions based on a person’s <strong>appearance within a second</strong>. Clothing style gives information about a person’s <strong>character, sociability and intelligence</strong>'</em>.",
-                    "<strong>Khớp nghĩa ngữ nghĩa:</strong> 'looks' = 'appearance'; 'almost immediately' = 'within a second'; 'judgement about personality' = 'decisions based on... character and sociability'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn B):</strong> Ngay đầu Đoạn B viết: <em>'We make decisions based on a person’s <strong>appearance within a second</strong>. Clothing style gives information about a person’s <strong>character, sociability and intelligence</strong>'</em>.",
+                    "<strong>Khớp nghĩa:</strong> 'looks' = 'appearance'; 'almost immediately' = 'within a second'; 'judgement about personality' = 'decisions based on... character and sociability'.",
                     "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph B</strong>."
-                ],
-                traps: "Đoạn A có nói 'immediate visual communication', nhưng đó là nói về thời trang truyền tải thông điệp nhanh, không nói về việc con người dùng nó để phán xét tính cách người khác trong 1 giây như đoạn B."
+                ]
             },
-            vocabHighlights: ["sociability", "appearance", "halo effect"]
+            vocabHighlights: ["sociability", "halo effect", "self-identity"]
         },
         {
             id: 6,
@@ -487,13 +603,36 @@
             wordLimit: "Chọn ký tự từ A đến F",
             contextHeader: "Trang phục khoác lên người giúp chúng ta tập trung chú ý tốt hơn",
             statementText: "The clothes we wear can help us focus better.",
-            correctParagraph: "Paragraph E",
             correctLetter: "E",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>Researchers found that simply wearing a lab coat increased performance on attention-related tasks. And, more interestingly, when it was described as a doctor’s coat as opposed to a painter’s, sustained attention increased even more. Psychologists call this effect ‘enclothed cognition’</mark>.",
+            correctParagraph: "Paragraph E",
+            correctAnswer: "E",
+            passageSnippet: "Researchers found that simply wearing a lab coat increased performance on attention-related tasks. And, more interestingly, when it was described as a doctor’s coat as opposed to a painter’s, sustained attention increased even more. Psychologists call this effect ‘enclothed cognition’.",
             paragraphRef: "Đoạn E (Paragraph E)",
-            paraphrases: [
-                { qPart: "help us focus better", pPart: "increased performance on attention-related tasks / sustained attention increased even more", meaning: "tăng hiệu suất trong các bài kiểm tra chú ý / sự chú ý bền bỉ gia tăng (tập trung tốt hơn)" },
-                { qPart: "The clothes we wear", pPart: "wearing a lab coat / described as a doctor’s coat / enclothed cognition", meaning: "việc mặc áo blouse phòng thí nghiệm / nhận thức gắn liền với y phục" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Y phục khoác lên cơ thể",
+                    questionSnippet: "The clothes we wear",
+                    passageSnippet: "simply wearing a lab coat / described as a doctor’s coat / enclothed cognition",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Hành động mặc áo blouse phòng thí nghiệm hay áo bác sĩ thể hiện khái niệm y phục ta mặc lên người (The clothes we wear)."
+                },
+                {
+                    tag: "2",
+                    theme: "Cải thiện khả năng tập trung chú ý",
+                    questionSnippet: "help us focus better",
+                    passageSnippet: "increased performance on attention-related tasks... sustained attention increased even more",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Gia tăng năng lực giải quyết các bài kiểm tra cần chú ý và sự chú ý bền bỉ gia tăng mạnh hơn (focus better = sustained attention)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Đoạn C (Bẫy dopamine và hứng thú)",
+                    reason: "Đoạn C nói về chất dopamine tạo cảm giác háo hức hưng phấn khi đi mua sắm, hoàn toàn không phải sự tập trung nhận thức của não bộ."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Câu hỏi tìm đoạn văn nhắc đến: 'Quần áo chúng ta mặc có thể giúp chúng ta tập trung tốt hơn'.",
@@ -502,10 +641,9 @@
                     "<strong>Đối chiếu bài đọc (Đoạn E):</strong> Tác giả bàn về hiệu ứng 'enclothed cognition': <em>'simply wearing a lab coat <strong>increased performance on attention-related tasks</strong>... sustained <strong>attention increased even more</strong>'</em>.",
                     "<strong>Phân tích paraphrase:</strong> 'attention' (sự chú ý, tập trung) và 'attention-related tasks' tương đương hoàn hảo với 'focus better'.",
                     "<strong>Kết luận:</strong> Đoạn chứa thông tin là <strong>Paragraph E</strong>."
-                ],
-                traps: "Chú ý thuật ngữ khoa học 'enclothed cognition' (nhận thức gắn liền trang phục), thể hiện trang phục làm thay đổi khả năng nhận thức và tập trung của não bộ."
+                ]
             },
-            vocabHighlights: ["cognitive", "enclothed cognition", "sustained attention"]
+            vocabHighlights: ["enclothed cognition", "cognitive", "sustained attention"]
         },
         {
             id: 7,
@@ -516,23 +654,48 @@
             contextHeader: "Quần áo không chỉ dừng lại ở việc gửi thông điệp hình ảnh tới người khác",
             statementText: "The clothes we wear do more than send messages to people.",
             correctAnswer: "YES",
-            passageSnippet: "Fashion is about meanings and symbols that give us immediate visual communication. <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>But I would suggest it is also about decision-making, performance and fitting into society</mark>.",
+            passageSnippet: "Fashion is about meanings and symbols that give us immediate visual communication. But I would suggest it is also about decision-making, performance and fitting into society.",
             paragraphRef: "Đoạn A (Paragraph A)",
-            paraphrases: [
-                { qPart: "send messages to people", pPart: "give us immediate visual communication / meanings and symbols", meaning: "giao tiếp thị giác tức thì / truyền tải ý nghĩa và biểu tượng (gửi thông điệp)" },
-                { qPart: "do more than", pPart: "also about decision-making, performance and fitting into society", meaning: "còn liên quan đến việc ra quyết định, hiệu suất và hòa nhập vào xã hội (làm được nhiều hơn thế)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Gửi thông điệp giao tiếp thị giác",
+                    questionSnippet: "send messages to people",
+                    passageSnippet: "give us immediate visual communication / meanings and symbols",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Phương tiện giao tiếp thị giác tức thì (immediate visual communication) mang ý nghĩa và biểu tượng chính là việc gửi thông điệp."
+                },
+                {
+                    tag: "2",
+                    theme: "Vượt ra ngoài việc chỉ gửi thông điệp",
+                    questionSnippet: "do more than",
+                    passageSnippet: "But I would suggest it is also about decision-making, performance and fitting into society",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Tác giả khẳng định thời trang CÒN liên quan đến việc ra quyết định, hiệu suất và hòa nhập cộng đồng (làm được nhiều hơn thế)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "NO (Bẫy đọc ngắt quãng)",
+                    reason: "Thí sinh chỉ đọc câu đầu tiên rồi nghĩ tác giả chỉ cho rằng thời trang là giao tiếp thị giác, bỏ qua liên từ chuyển ý 'But I would suggest it is ALSO about...'."
+                },
+                {
+                    option: "NOT GIVEN (Bẫy suy đoán)",
+                    reason: "Nghĩ bài không nói thẳng 'do more than', nhưng cấu trúc mở rộng 'not only... but also' biểu thị trọn vẹn ý nghĩa này."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Nhận định cho rằng: 'Quần áo chúng ta mặc làm được nhiều điều hơn là chỉ đơn thuần gửi thông điệp tới mọi người'.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'clothes we wear', 'do more than', 'send messages'.",
                     "<strong>Đối chiếu bài đọc (Đoạn A):</strong> Tác giả công nhận thời trang là công cụ giao tiếp thị giác mang ý nghĩa biểu tượng (<em>'immediate visual communication'</em> = <em>'send messages'</em>).",
-                    "<strong>Quan điểm tác giả:</strong> Tác giả bổ sung nhận định cá nhân: <em>'But I would suggest it is <strong>also about decision-making, performance and fitting into society</strong>'</em> (Nó còn bao hàm việc ra quyết định, hiệu suất hành động và sự hòa nhập xã hội).",
+                    "<strong>Quan điểm tác giả:</strong> Tác giả bổ sung nhận định cá nhân: <em>'But I would suggest it is <strong>also about decision-making, performance and fitting into society</strong>'</em>.",
                     "<strong>Kết luận:</strong> Tác giả đồng tình rằng quần áo làm được nhiều điều hơn việc chỉ truyền tải thông điệp ➔ <strong>YES</strong>."
-                ],
-                traps: "Chú ý liên từ chuyển ý 'But I would suggest it is ALSO about...' - đây chính là dấu hiệu tác giả mở rộng chức năng của thời trang vượt ra ngoài việc gửi thông điệp."
+                ]
             },
-            vocabHighlights: ["visual communication", "performance", "fitting into society"]
+            vocabHighlights: ["visual communication", "fitting into society", "accessories"]
         },
         {
             id: 8,
@@ -543,11 +706,33 @@
             contextHeader: "Giả định rằng người có ngoại hình đẹp sẽ có những phẩm chất cá nhân tốt hơn",
             statementText: "We assume that good-looking people have better personal qualities.",
             correctAnswer: "YES",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>Attractive people generate a ‘halo effect’, which makes us believe everything connected with that person is positive. Consequently, we often think attractive people are more intelligent, healthy and sociable compared with unattractive people</mark>.",
+            passageSnippet: "Attractive people generate a ‘halo effect’, which makes us believe everything connected with that person is positive. Consequently, we often think attractive people are more intelligent, healthy and sociable compared with unattractive people.",
             paragraphRef: "Đoạn B (Paragraph B)",
-            paraphrases: [
-                { qPart: "good-looking people", pPart: "Attractive people", meaning: "những người có ngoại hình ưa nhìn, cuốn hút" },
-                { qPart: "assume ... have better personal qualities", pPart: "halo effect... think attractive people are more intelligent, healthy and sociable", meaning: "cho rằng họ thông minh hơn, khỏe mạnh hơn và hòa đồng hơn (phẩm chất tốt hơn)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Người có ngoại hình ưa nhìn",
+                    questionSnippet: "good-looking people",
+                    passageSnippet: "Attractive people",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "'Attractive people' (những người có ngoại hình lôi cuốn, hấp dẫn) đồng nghĩa với 'good-looking people'."
+                },
+                {
+                    tag: "2",
+                    theme: "Mặc định họ có phẩm chất cá nhân tốt hơn",
+                    questionSnippet: "assume that... have better personal qualities",
+                    passageSnippet: "halo effect... believe everything connected with that person is positive... think attractive people are more intelligent, healthy and sociable",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Hiệu ứng hào quang khiến chúng ta mặc định tin rằng họ thông minh hơn, khỏe khoắn hơn và hòa đồng hơn (phẩm chất tốt hơn)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "NO (Bẫy thực tế khách quan)",
+                    reason: "Thí sinh cho rằng ngoài đời ngoại hình không quyết định phẩm chất nên chọn NO. Nhưng đề thi hỏi về TÂM LÝ CON NGƯỜI (We assume that...), và bài đọc xác nhận con người thực sự có xu hướng mặc định như vậy."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Nhận định: 'Chúng ta mặc định rằng những người có ngoại hình ưa nhìn sẽ sở hữu những phẩm chất cá nhân tốt đẹp hơn'.",
@@ -555,11 +740,10 @@
                     "<strong>Định vị từ khóa:</strong> 'assume', 'good-looking people', 'better personal qualities'.",
                     "<strong>Đối chiếu bài đọc (Đoạn B):</strong> Tác giả giải thích về 'hiệu ứng hào quang' (halo effect): <em>'makes us believe everything connected with that person is positive. Consequently, we often <strong>think attractive people are more intelligent, healthy and sociable</strong> compared with unattractive people'</em>.",
                     "<strong>Khớp nghĩa:</strong> Việc 'think attractive people are more intelligent, healthy and sociable' chính là việc mặc định người ưa nhìn có phẩm chất tốt hơn (<em>'better personal qualities'</em>).",
-                    "<strong>Kết luận:</strong> Trùng khớp hoàn toàn với quan điểm bài đọc ➔ <strong>YES</strong>."
-                ],
-                traps: "Cặp từ đồng nghĩa trọng tâm: 'good-looking' = 'attractive'; 'personal qualities' được cụ thể hóa bằng 'intelligent, healthy and sociable'."
+                    "<strong>Kết luận:</strong> Trùng khớp hoàn toàn với bài đọc ➔ <strong>YES</strong>."
+                ]
             },
-            vocabHighlights: ["halo effect", "attractive", "sociable"]
+            vocabHighlights: ["halo effect", "sociability", "self-identity"]
         },
         {
             id: 9,
@@ -570,23 +754,44 @@
             contextHeader: "Cảm giác hối hận sau khi mua đồ có khiến chúng ta ngừng mua sắm",
             statementText: "When we regret buying something, we stop shopping.",
             correctAnswer: "NO",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>You’d think that buyer’s guilt would stop us shopping but it doesn’t. In fact, psychologists found that feeling guilty often pushes us to shop more</mark>.",
+            passageSnippet: "You’d think that buyer’s guilt would stop us shopping but it doesn’t. In fact, psychologists found that feeling guilty often pushes us to shop more.",
             paragraphRef: "Đoạn C (Paragraph C)",
-            paraphrases: [
-                { qPart: "regret buying something", pPart: "buyer’s guilt / feeling guilty", meaning: "cảm giác tội lỗi, ân hận sau khi mua một món đồ" },
-                { qPart: "we stop shopping", pPart: "stop us shopping but it doesn't / pushes us to shop more", meaning: "Mâu thuẫn trực tiếp: đề nói chúng ta ngừng mua sắm, bài khẳng định nó KHÔNG ngăn được mà còn thúc đẩy mua nhiều hơn" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Cảm giác hối hận sau mua sắm",
+                    questionSnippet: "regret buying something",
+                    passageSnippet: "buyer’s guilt / feeling guilty",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "'Buyer's guilt' (cảm giác tội lỗi/day dứt của người mua) đồng nghĩa với 'regret buying something'."
+                },
+                {
+                    tag: "2",
+                    theme: "Liệu có dừng mua sắm hay không?",
+                    questionSnippet: "we stop shopping",
+                    passageSnippet: "would stop us shopping but it doesn’t. In fact... pushes us to shop more",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Mâu thuẫn trực tiếp: Đề bảo ngừng mua sắm, nhưng tác giả nhấn mạnh nó KHÔNG hề dừng lại mà còn thôi thúc ta mua sắm nhiều hơn nữa."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "YES (Bẫy giả định thông thường)",
+                    reason: "Đoạn văn mở đầu bằng 'You’d think that buyer’s guilt would stop us shopping...'. Nếu đọc không hết câu, thí sinh tưởng tác giả đồng tình, nhưng ngay sau đó là 'but it doesn’t'."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Khẳng định của đề bài: 'Khi chúng ta hối hận vì đã mua một thứ gì đó, chúng ta sẽ dừng việc mua sắm lại'.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'regret buying', 'stop shopping'.",
                     "<strong>Đối chiếu bài đọc (Đoạn C):</strong> Tác giả viết: <em>'You’d think that buyer’s guilt would stop us shopping <strong>but it doesn’t</strong>. In fact, psychologists found that feeling guilty often <strong>pushes us to shop more</strong>'</em>.",
-                    "<strong>Phân tích mâu thuẫn:</strong> 'Buyer's guilt' (cảm giác tội lỗi/hối hận của người mua) không hề làm chúng ta ngừng mua sắm mà ngược lại, còn thúc ép chúng ta mua sắm nhiều hơn nữa (<em>'pushes us to shop more'</em>).",
+                    "<strong>Phân tích mâu thuẫn:</strong> Cảm giác tội lỗi/hối hận của người mua không hề làm chúng ta ngừng mua sắm mà ngược lại, còn thúc ép chúng ta mua sắm nhiều hơn nữa (<em>'pushes us to shop more'</em>).",
                     "<strong>Kết luận:</strong> Mâu thuẫn 180 độ với bài đọc ➔ <strong>NO</strong>."
-                ],
-                traps: "Chú ý cụm từ 'buyer’s guilt' = 'regret buying something'. Cụm 'but it doesn't' phủ định trực tiếp ý niệm 'stop shopping'."
+                ]
             },
-            vocabHighlights: ["buyer’s guilt", "dopamine", "motivated"]
+            vocabHighlights: ["buyer’s guilt", "dopamine", "sociability"]
         },
         {
             id: 10,
@@ -597,23 +802,44 @@
             contextHeader: "Sự thay đổi theo thời gian trong cách thức tìm kiếm đồ đạc của nam và nữ",
             statementText: "The way men and women look for things has changed over the years.",
             correctAnswer: "NO",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>If we compare this to the past when men hunted alone, as fast as possible, and women spent time with each other selecting berries, nuts and vegetables, we can see shopping is the same. Women take their time and do it with friends. Men prefer to shop alone and fast</mark>.",
+            passageSnippet: "If we compare this to the past when men hunted alone, as fast as possible, and women spent time with each other selecting berries, nuts and vegetables, we can see shopping is the same. Women take their time and do it with friends. Men prefer to shop alone and fast.",
             paragraphRef: "Đoạn D (Paragraph D)",
-            paraphrases: [
-                { qPart: "look for things", pPart: "shopping / hunted / selecting berries, nuts", meaning: "tìm kiếm đồ vật / săn bắn và hái lượm / mua sắm" },
-                { qPart: "has changed over the years", pPart: "we can see shopping is the same", meaning: "Mâu thuẫn trực tiếp: đề nói cách tìm kiếm đã thay đổi qua năm tháng, nhưng bài khẳng định cách mua sắm vẫn y hệt như thời xa xưa" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Cách tìm kiếm đồ đạc / mua sắm",
+                    questionSnippet: "The way men and women look for things",
+                    passageSnippet: "men hunted alone... women spent time... selecting berries... shopping is the same",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Hành vi săn bắn, hái lượm của tổ tiên được so sánh đối chiếu trực tiếp với thói quen mua sắm ngày nay của nam và nữ."
+                },
+                {
+                    tag: "2",
+                    theme: "Đã thay đổi theo thời gian hay vẫn như cũ?",
+                    questionSnippet: "has changed over the years",
+                    passageSnippet: "we can see shopping is the same",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Mâu thuẫn trực tiếp: Đề bài bảo đã thay đổi (has changed), nhưng tác giả khẳng định thói quen vẫn y hệt như xưa (shopping is the same)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "NOT GIVEN (Bẫy từ 'change')",
+                    reason: "Đoạn D có câu 'It is beginning to change', nhưng ngữ cảnh là nói về tỷ lệ đàn ông ghét đi mua sắm cùng vợ, còn về bản chất cách thức mua sắm giữa hai giới thì tác giả khẳng định 'is the same'."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Đề bài nhận định: 'Cách đàn ông và phụ nữ tìm kiếm đồ đạc đã thay đổi qua năm tháng'.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'men and women', 'look for things', 'changed over the years'.",
                     "<strong>Đối chiếu bài đọc (Đoạn D):</strong> Tác giả so sánh hiện tại với quá khứ thời nguyên thủy: Đàn ông săn bắn nhanh một mình, phụ nữ tụ họp chọn quả hái lượm. Sau đó tác giả khẳng định: <em>'we can see <strong>shopping is the same</strong>. Women take their time and do it with friends. Men prefer to shop alone and fast'</em>.",
-                    "<strong>Phân tích sự trái ngược:</strong> 'shopping is the same' (hành vi mua sắm/tìm kiếm đồ đạc vẫn y như thế, không hề đổi khác) mâu thuẫn hoàn toàn với 'has changed over the years'.",
+                    "<strong>Phân tích đối lập:</strong> 'shopping is the same' (hành vi mua sắm/tìm kiếm đồ đạc vẫn y như thế, không hề đổi khác) mâu thuẫn hoàn toàn với 'has changed over the years'.",
                     "<strong>Kết luận:</strong> Trái ngược trực tiếp với văn bản ➔ <strong>NO</strong>."
-                ],
-                traps: "Đoạn D có câu 'It is beginning to change', nhưng vế đó nói về tỷ lệ đàn ông ghét đi mua sắm cùng vợ, còn khi bàn về bản chất thói quen tìm kiếm giữa nam và nữ thì tác giả khẳng định 'is the same'."
+                ]
             },
-            vocabHighlights: ["hunted", "selecting", "genders"]
+            vocabHighlights: ["fitting into society", "self-identity", "sociability"]
         },
         {
             id: 11,
@@ -624,10 +850,24 @@
             contextHeader: "Cảm nhận của nhân viên y tế về việc được nhận diện qua đồng phục",
             statementText: "Medical workers like to be recognised in their uniforms.",
             correctAnswer: "NOT GIVEN",
-            passageSnippet: "Researchers found that simply wearing a lab coat increased performance on attention-related tasks. And, more interestingly, <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>when it was described as a doctor’s coat as opposed to a painter’s, sustained attention increased even more</mark>. Psychologists call this effect ‘enclothed cognition’.",
+            passageSnippet: "Researchers found that simply wearing a lab coat increased performance on attention-related tasks. And, more interestingly, when it was described as a doctor’s coat as opposed to a painter’s, sustained attention increased even more. Psychologists call this effect ‘enclothed cognition’.",
             paragraphRef: "Đoạn E (Paragraph E)",
-            paraphrases: [
-                { qPart: "Medical workers like to be recognised in their uniforms", pPart: "described as a doctor’s coat as opposed to a painter’s", meaning: "Bài đọc chỉ nói việc mô tả chiếc áo blouse là 'áo bác sĩ' giúp người tham gia tăng khả năng tập trung, HOÀN TOÀN KHÔNG đề cập đến việc nhân viên y tế có thích được nhận diện trong đồng phục hay không." }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Yếu tố nhân viên y tế thích được nhận diện",
+                    questionSnippet: "Medical workers like to be recognised in their uniforms",
+                    passageSnippet: "described as a doctor’s coat as opposed to a painter’s / sustained attention increased",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Bài chỉ nói khi gọi chiếc áo là 'doctor's coat' thì người làm thí nghiệm tập trung hơn; HOÀN TOÀN KHÔNG đề cập cảm nghĩ hay sở thích của nhân viên y tế thật ngoài đời."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "YES (Bẫy ghép nối chi tiết rời rạc)",
+                    reason: "Thấy từ 'doctor’s coat' ở đoạn E và thấy ý 'people immediately recognise you' ở đoạn F rồi tự suy diễn là nhân viên y tế thích được nhận diện. Trong IELTS, không được tự suy diễn ngoài văn bản."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Đề bài cho rằng: 'Các nhân viên y tế thích được mọi người nhận ra khi mặc đồng phục của họ'.",
@@ -635,13 +875,12 @@
                     "<strong>Định vị từ khóa:</strong> 'Medical workers', 'like to be recognised', 'uniforms'.",
                     "<strong>Đối chiếu bài đọc (Đoạn E & F):</strong>",
                     "- Đoạn E nhắc đến 'doctor's coat' (áo của bác sĩ) trong thí nghiệm về hiệu ứng tâm lý tăng sự tập trung.",
-                    "- Đoạn F nhắc đến việc mặc cùng một bộ đồ giúp người khác nhận ra bạn ('people immediately recognise you' - nói về Anna Wintour và Kate Moss).",
-                    "<strong>Đánh giá sự xuất hiện thông tin:</strong> Tác giả HOÀN TOÀN KHÔNG đưa ra thông tin nào về cảm xúc hay sở thích của các nhân viên y tế thực tế (họ thích hay ghét việc bị nhận ra khi mặc đồng phục).",
-                    "<strong>Kết luận:</strong> Thông tin không thể xác định ➔ <strong>NOT GIVEN</strong>."
-                ],
-                traps: "Bẫy ghép nối từ khóa rời rạc: Thí sinh thấy từ 'doctor’s coat' ở đoạn E và từ 'recognise' ở đoạn F rồi tự ghép lại và suy diễn là Đúng. Nhưng bài không hề bàn về nhân viên y tế thực thụ thích hay không thích điều đó."
+                    "- Đoạn F nhắc đến việc mặc cùng một bộ đồ giúp người khác nhận ra bạn ('people immediately recognise you' - nói về các biểu tượng thời trang).",
+                    "<strong>Đánh giá thông tin:</strong> Tác giả HOÀN TOÀN KHÔNG đưa ra thông tin nào về cảm xúc của các nhân viên y tế thực tế (họ thích hay ghét việc bị nhận ra khi mặc đồng phục).",
+                    "<strong>Kết luận:</strong> Thông tin không có trong bài ➔ <strong>NOT GIVEN</strong>."
+                ]
             },
-            vocabHighlights: ["enclothed cognition", "sustained attention", "uniforms"]
+            vocabHighlights: ["enclothed cognition", "sustained attention", "adopted"]
         },
         {
             id: 12,
@@ -652,10 +891,24 @@
             contextHeader: "Mục đích của đa số mọi người khi mặc đồ thời trang là để trông giống người khác",
             statementText: "Most people choose to wear fashion so they can look like others.",
             correctAnswer: "NO",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>This is a problem for fashion, as people think it is about looking different. But once an item becomes fashionable, it is no longer different</mark>.",
+            passageSnippet: "This is a problem for fashion, as people think it is about looking different. But once an item becomes fashionable, it is no longer different.",
             paragraphRef: "Đoạn F (Paragraph F)",
-            paraphrases: [
-                { qPart: "choose to wear fashion so they can look like others", pPart: "people think it is about looking different", meaning: "Mâu thuẫn trực tiếp: đề nói mọi người mặc thời trang để trông giống người khác, nhưng bài viết khẳng định mọi người nghĩ rằng thời trang là để trông KHÁC BIỆT (looking different)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Mục đích khi mặc đồ thời trang",
+                    questionSnippet: "choose to wear fashion so they can look like others",
+                    passageSnippet: "people think it is about looking different",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Mâu thuẫn trực tiếp: Đề bảo mọi người mặc thời trang để trông giống người khác (look like others), nhưng bài viết khẳng định mọi người nghĩ rằng thời trang là để trông KHÁC BIỆT (looking different)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "YES (Bẫy từ 'part of the group')",
+                    reason: "Đoạn F có nói con người muốn thuộc về một nhóm ('desire to be part of the group'), nhưng câu hỏi dùng chủ ngữ 'Most people' ứng với nhận định cốt lõi 'people think it is about looking different'."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Đề bài khẳng định: 'Hầu hết mọi người chọn mặc thời trang để họ có thể trông giống như những người khác'.",
@@ -664,10 +917,9 @@
                     "<strong>Đối chiếu bài đọc (Đoạn F):</strong> Tác giả nêu nghịch lý của thời trang: <em>'This is a problem for fashion, as <strong>people think it is about looking different</strong>. But once an item becomes fashionable, it is no longer different'</em>.",
                     "<strong>Phân tích logic:</strong> Đa số mọi người đều nghĩ và kỳ vọng rằng việc mặc thời trang là để tạo sự khác biệt, nổi bật cá tính riêng (<em>'looking different'</em>), chứ không phải để trông giống người khác (<em>'look like others'</em>).",
                     "<strong>Kết luận:</strong> Quan điểm của tác giả mâu thuẫn trực tiếp với câu hỏi ➔ <strong>NO</strong>."
-                ],
-                traps: "Mặc dù đầu đoạn F có nói về 'desire to be part of the group' (muốn thuộc về một nhóm), câu hỏi dùng từ 'Most people' ứng với nhận định tổng quát 'people think it is about looking different'."
+                ]
             },
-            vocabHighlights: ["looking different", "fashionable", "adopted"]
+            vocabHighlights: ["fitting into society", "adopted", "accessories"]
         }
     ];
 
@@ -745,10 +997,9 @@
             eg: 'Curating a distinctive wardrobe allows individuals to construct and reinforce an empowering self-identity.'
         }
     };
-    </script>
 
-    <script>
-    let currentQuestionIndex = 0; // 0 to 11
+    let currentSlideIndex = 0; // 0 to 11
+    let isAnswerRevealed = false; // default hidden for interactive blind presentation
 
     function initApp() {
         renderNavChips();
@@ -760,231 +1011,324 @@
         setupKeyboardNavigation();
     }
 
+    // Nav chips with BLIND selector (no answers leaked on top bar)
     function renderNavChips() {
         const container = document.getElementById('question-nav-chips');
+        if (!container) return;
         container.innerHTML = '';
         questionsData.forEach((q, idx) => {
             const btn = document.createElement('button');
-            const isActive = idx === currentQuestionIndex;
+            const isActive = idx === currentSlideIndex;
+            btn.className = `px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                isActive 
+                ? 'bg-indigoTheme-700 text-white shadow-sm ring-2 ring-indigoTheme-600 ring-offset-1 scale-102' 
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`;
             
-            let badgeBg = 'bg-slate-100 text-slate-700 hover:bg-slate-200';
-            if (isActive) {
-                badgeBg = 'bg-indigoTheme-700 text-white shadow-sm ring-2 ring-indigoTheme-600 ring-offset-1';
-            }
-
-            btn.className = `px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${badgeBg}`;
-            
-            if (q.group === 'matching') {
-                btn.innerHTML = `Q${q.id}: [ ${q.correctLetter} ]`;
-            } else {
-                btn.innerHTML = `Q${q.id}: [ ${q.correctAnswer} ]`;
-            }
+            const typeLabel = q.group === 'matching' ? 'Matching' : 'YNNG';
+            btn.innerHTML = `
+                <div class="flex items-center gap-1">
+                    <span>Q${q.id}:</span>
+                    <span class="font-extrabold">${typeLabel}</span>
+                </div>
+            `;
 
             btn.onclick = () => {
-                currentQuestionIndex = idx;
+                currentSlideIndex = idx;
+                isAnswerRevealed = false; // reset reveal state when switching slide
                 renderNavChips();
                 renderCurrentSlide();
             };
             container.appendChild(btn);
         });
 
-        const curQ = questionsData[currentQuestionIndex];
-        const typeBadge = document.getElementById('quick-type-badge');
-        if (typeBadge) {
-            typeBadge.textContent = curQ.group === 'matching' 
-                ? 'Matching Information (Q1–Q6)' 
-                : 'Yes / No / Not Given (Q7–Q12)';
+        const curQ = questionsData[currentSlideIndex];
+        const badge = document.getElementById('quick-target-badge');
+        if (badge) {
+            badge.textContent = `${curQ.qNum} - ${curQ.type}`;
         }
 
         const mob = document.getElementById('mobile-curr-indicator');
         if (mob) {
-            mob.textContent = `Câu ${currentQuestionIndex + 1}/12 (${curQ.group === 'matching' ? curQ.correctLetter : curQ.correctAnswer})`;
+            mob.textContent = `${curQ.qNum}: ${curQ.group === 'matching' ? 'Matching Info' : 'Yes/No/NG'}`;
         }
     }
 
-    function navigateQuestion(delta) {
-        const next = currentQuestionIndex + delta;
+    function navigateSlide(delta) {
+        const next = currentSlideIndex + delta;
         if (next >= 0 && next < questionsData.length) {
-            currentQuestionIndex = next;
+            currentSlideIndex = next;
+            isAnswerRevealed = false;
             renderNavChips();
             renderCurrentSlide();
             window.scrollTo({ top: 120, behavior: 'smooth' });
         }
     }
 
+    function toggleAnswerReveal() {
+        isAnswerRevealed = !isAnswerRevealed;
+        renderCurrentSlide();
+    }
+
+    function checkUserGuess(guessedAns) {
+        const q = questionsData[currentSlideIndex];
+        const msgContainer = document.getElementById('user-guess-feedback');
+        if (!msgContainer) return;
+
+        const isCorrect = (guessedAns === q.correctAnswer);
+        if (isCorrect) {
+            const correctTitle = q.group === 'matching' ? `Đoạn ${q.correctAnswer} (${q.correctParagraph})` : q.correctAnswer;
+            msgContainer.innerHTML = `
+                <div class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm font-bold flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                    <span>Chính xác tuyệt đối! Đáp án chuẩn xác là <strong>${correctTitle}</strong>.</span>
+                </div>
+            `;
+            isAnswerRevealed = true;
+            setTimeout(() => {
+                renderCurrentSlide();
+            }, 600);
+        } else {
+            msgContainer.innerHTML = `
+                <div class="p-3 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl text-sm font-bold flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-rose-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    <span>Lựa chọn <strong>${guessedAns}</strong> chưa chính xác. Hãy đối chiếu kỹ từ khóa và trích đoạn bài đọc!</span>
+                </div>
+            `;
+        }
+    }
+
     function renderCurrentSlide() {
-        const q = questionsData[currentQuestionIndex];
+        const q = questionsData[currentSlideIndex];
         const container = document.getElementById('slide-card-container');
+        if (!container) return;
+        
         const counter = document.getElementById('slide-counter-badge');
         if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnRevealText = document.getElementById('btn-reveal-text');
+        if (btnRevealText) {
+            btnRevealText.textContent = isAnswerRevealed ? 'Ẩn Phân Tích & Reset' : 'Hiện Đáp Án & Khớp Nối';
+        }
 
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
         if (btnPrev) {
-            btnPrev.disabled = currentQuestionIndex === 0;
-            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+            btnPrev.disabled = currentSlideIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentSlideIndex === 0);
         }
         if (btnNext) {
-            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
-            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+            btnNext.disabled = currentSlideIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentSlideIndex === questionsData.length - 1);
         }
 
         let ansBadgeColor = 'bg-indigoTheme-700 text-white';
-        let ansDisplay = '';
-        if (q.group === 'matching') {
-            ansDisplay = `Đoạn: ${q.correctLetter}`;
-        } else {
-            ansDisplay = `Đáp án: ${q.correctAnswer}`;
+        let ansDisplayText = `ĐÁP ÁN: Đoạn ${q.correctAnswer}`;
+        if (q.group === 'ynng') {
+            ansDisplayText = `ĐÁP ÁN: ${q.correctAnswer}`;
             if (q.correctAnswer === 'YES') ansBadgeColor = 'bg-emerald-600 text-white';
             if (q.correctAnswer === 'NO') ansBadgeColor = 'bg-rose-600 text-white';
             if (q.correctAnswer === 'NOT GIVEN') ansBadgeColor = 'bg-amber-500 text-white';
         }
 
+        let displayStatementText = q.statementText;
+        let displayPassageSnippet = q.passageSnippet;
+
+        if (isAnswerRevealed && q.keyCriteria) {
+            q.keyCriteria.forEach(item => {
+                if (item.questionSnippet && displayStatementText.includes(item.questionSnippet)) {
+                    displayStatementText = displayStatementText.replace(item.questionSnippet, `<span class="${item.colorClassHl} font-bold px-1 rounded">${item.questionSnippet}</span>`);
+                }
+                if (item.passageSnippet && displayPassageSnippet.includes(item.passageSnippet)) {
+                    displayPassageSnippet = displayPassageSnippet.replace(item.passageSnippet, `<span class="${item.colorClassHl} font-bold px-1 rounded">${item.passageSnippet}</span>`);
+                }
+            });
+        }
+
+        const guessOptions = q.group === 'matching' ? ['A', 'B', 'C', 'D', 'E', 'F'] : ['YES', 'NO', 'NOT GIVEN'];
+
         container.innerHTML = `
-            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all space-y-6">
                 
-                <!-- Slide Header -->
+                <!-- Slide Header Banner -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
                     <div class="flex items-center gap-3">
-                        <span class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigoTheme-800 flex items-center justify-center font-extrabold text-base border border-indigo-200">
+                        <span class="w-12 h-12 rounded-2xl bg-indigoTheme-100 text-indigoTheme-800 flex items-center justify-center font-black text-lg border border-indigoTheme-200 shadow-2xs">
                             ${q.id}
                         </span>
                         <div>
-                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700">${q.type}</span>
-                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">${q.qNum}: ${q.contextHeader}</h3>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700">${q.type}</span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-black text-slate-900">${q.qNum} <span class="text-slate-500 text-sm font-normal">— ${q.contextHeader}</span></h3>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                        <span class="text-xs font-semibold px-3 py-1.5 bg-slate-100 text-slate-600 rounded-xl border border-slate-200">
                             Yêu cầu: ${q.wordLimit}
                         </span>
-                        <span class="text-xs font-semibold px-3 py-1 bg-indigo-50 text-indigoTheme-700 rounded-full border border-indigo-200">
-                            ${q.paragraphRef}
-                        </span>
                     </div>
                 </div>
 
-                <!-- Statement Prompt Box -->
-                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                        ${q.group === 'matching' ? 'Nội Dung Phát Biểu Cần Định Vị (Statement)' : 'Nhận Định Kiểm Tra Quan Điểm (Statement)'}
-                    </span>
-                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">"${q.statementText}"</p>
-                </div>
-
-                <!-- Answer Reveal Banner -->
-                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-indigo-50/80 via-purple-50/50 to-white border border-indigo-200">
-                    <div>
-                        <span class="text-xs font-extrabold uppercase tracking-wider text-indigoTheme-700">Đáp Án Chuẩn Xác</span>
-                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
-                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm ${ansBadgeColor} answer-badge">
-                                ${ansDisplay}
-                            </span>
-                            ${q.group === 'matching' ? `<span class="text-sm font-semibold text-slate-600">(${q.correctParagraph})</span>` : ''}
-                        </div>
-                    </div>
-
-                    <button onclick="playSpeech('${q.statementText.replace(/'/g, "\\'")}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        <span>Phát âm nhận định</span>
-                    </button>
-                </div>
-
-                <!-- Evidence in Reading Passage -->
-                <div class="mt-6">
-                    <div class="flex items-center gap-2 mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigoTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Bằng Chứng (${q.paragraphRef})</h4>
-                    </div>
-                    <div class="p-5 rounded-2xl bg-indigo-50/40 border border-indigo-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
-                        "${q.passageSnippet}"
-                    </div>
-                </div>
-
-                <!-- Paraphrase & Synonym Mapping Table -->
-                <div class="mt-6">
-                    <div class="flex items-center gap-2 mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Paraphrase</h4>
-                    </div>
-                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
-                        <table class="w-full text-left border-collapse text-sm">
-                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
-                                <tr>
-                                    <th class="py-2.5 px-4 w-1/3">Nhận định trong đề (${q.qNum})</th>
-                                    <th class="py-2.5 px-4 w-1/3">Văn bản bài đọc (${q.paragraphRef})</th>
-                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100 bg-white">
-                                ${q.paraphrases.map(p => `
-                                    <tr>
-                                        <td class="py-3 px-4 font-semibold text-indigo-800 bg-indigo-50/30">${p.qPart}</td>
-                                        <td class="py-3 px-4 font-semibold text-purple-800 bg-purple-50/20">${p.pPart}</td>
-                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Vietnamese In-Depth Explanation & Logic -->
-                <div class="mt-6 bg-indigo-50/40 border border-indigo-200/80 rounded-2xl p-6">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="w-2.5 h-2.5 rounded-full bg-indigoTheme-600"></span>
-                        <h4 class="text-sm font-bold uppercase tracking-wider text-indigoTheme-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
-                    </div>
-
-                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
-
-                    <div class="space-y-2 mb-4">
-                        ${q.vietnameseAnalysis.stepByStep.map(step => `
-                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
-                                <span class="text-indigoTheme-600 mt-1 font-bold">▸</span>
-                                <div>${step}</div>
+                <!-- Focus Mode: Side-by-Side Comparison Workspace -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
+                    <!-- Left: Task & Statement Prompt Card -->
+                    <div class="lg:col-span-6 bg-slate-50/80 rounded-2xl p-5 border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigoTheme-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    Nội Dung Cần Thẩm Định (Statement)
+                                </span>
+                                <span class="text-xs text-slate-400 font-mono">${q.group === 'matching' ? 'Matching Information' : 'YNNG'}</span>
                             </div>
-                        `).join('')}
-                    </div>
-
-                    ${q.vietnameseAnalysis.traps ? `
-                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
-                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
-                            <span>${q.vietnameseAnalysis.traps}</span>
+                            <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed bg-white/90 p-4 rounded-xl border border-slate-200">"${displayStatementText}"</p>
+                            
+                            <div class="mt-4">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Trích đoạn chứng cứ trong bài:</span>
+                                <p class="text-sm font-medium text-slate-700 italic bg-indigo-50/50 p-3.5 rounded-xl border border-indigo-200/60 leading-relaxed">"${displayPassageSnippet}"</p>
+                            </div>
                         </div>
-                    ` : ''}
+
+                        <!-- Interactive Guessing Pad (Active when answer is hidden) -->
+                        <div class="mt-5 pt-4 border-t border-slate-200/80">
+                            <span class="text-xs font-bold text-slate-500 block mb-2">Học sinh tự chọn thử đáp án (${q.group === 'matching' ? 'Đoạn A–F' : 'YES / NO / NOT GIVEN'}):</span>
+                            <div class="flex flex-wrap gap-2">
+                                ${guessOptions.map(ans => `
+                                    <button onclick="checkUserGuess('${ans}')" class="px-4 py-2 rounded-xl font-extrabold text-xs border transition-all ${
+                                        isAnswerRevealed && ans === q.correctAnswer 
+                                        ? `${ansBadgeColor} border-transparent shadow-sm ring-2 ring-indigoTheme-400` 
+                                        : 'bg-white text-slate-700 hover:bg-slate-100 border-slate-300'
+                                    }">
+                                        ${q.group === 'matching' ? `Đoạn ${ans}` : ans}
+                                    </button>
+                                `).join('')}
+                            </div>
+                            <div id="user-guess-feedback" class="mt-2.5"></div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Verified Answer & Analysis Preview -->
+                    <div class="lg:col-span-6 rounded-2xl p-5 border transition-all flex flex-col justify-between ${
+                        isAnswerRevealed 
+                        ? 'bg-gradient-to-br from-indigoTheme-50/70 via-purple-50/30 to-white border-indigoTheme-300 shadow-sm' 
+                        : 'bg-slate-50 border-dashed border-slate-300'
+                    }">
+                        ${isAnswerRevealed ? `
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-black uppercase tracking-wider text-indigoTheme-800 flex items-center gap-1.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                        Đáp Án Thẩm Định Chuẩn Xác
+                                    </span>
+                                    <button onclick="playSpeech('${q.statementText.replace(/'/g, "\\'")}')" class="text-indigoTheme-700 hover:text-indigoTheme-900 flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded bg-white border border-slate-200" title="Phát âm nhận định">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-indigoTheme-700" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                        <span>Nghe nhận định</span>
+                                    </button>
+                                </div>
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="text-2xl sm:text-3xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm ${ansBadgeColor} answer-badge">
+                                        ${ansDisplayText}
+                                    </span>
+                                </div>
+                                <p class="text-sm font-semibold text-slate-800 leading-relaxed">${q.vietnameseAnalysis.logic}</p>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-indigoTheme-200/60 flex items-center justify-between">
+                                <span class="text-xs font-bold text-indigoTheme-900">Vị trí bài đọc: <strong>${q.paragraphRef}</strong></span>
+                                <span class="text-xs font-mono font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-md">Chứng cứ chuẩn xác</span>
+                            </div>
+                        ` : `
+                            <div class="flex flex-col items-center justify-center h-full py-10 text-center text-slate-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mb-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                <p class="text-sm font-semibold text-slate-600 mb-1">Chế độ Tập Trung Độc Lập (Focus Mode)</p>
+                                <p class="text-xs text-slate-400 max-w-sm">Đọc kỹ nhận định bên trái, chọn thử một phương án hoặc bấm nút <strong>"Hiện Đáp Án & Khớp Nối"</strong> để xem phân tích đối chiếu chi tiết.</p>
+                            </div>
+                        `}
+                    </div>
+
                 </div>
 
-                <!-- Highlighted Vocabulary in this question -->
-                <div class="mt-6 pt-5 border-t border-slate-100">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
-                    <div class="flex flex-wrap gap-3">
-                        ${q.vocabHighlights.map(v => {
-                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
-                            return `
-                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-indigo-400 transition-colors">
-                                    <button onclick="playSpeech('${v}')" class="text-indigoTheme-700 hover:text-indigoTheme-900" title="Nghe phát âm chuẩn UK">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                    </button>
-                                    <div>
-                                        <span class="font-bold text-sm text-slate-900">${v}</span>
-                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
-                                        <span class="text-xs text-indigoTheme-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
+                ${isAnswerRevealed ? `
+                    <!-- Color-Coded Paired Alignment Breakdown -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigoTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-slate-900">Bảng Khớp Nối Từng Chi Tiết (Highlights & Underlines Alignment)</h4>
+                        </div>
+
+                        <div class="space-y-3">
+                            ${q.keyCriteria.map(item => `
+                                <div class="p-4 rounded-xl border bg-white shadow-2xs space-y-2">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 rounded text-xs font-black uppercase ${item.colorClassChip}">Tiêu chí ${item.tag}</span>
+                                        <span class="text-xs font-bold text-slate-800">${item.theme}</span>
                                     </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+                                            <span class="text-[11px] font-bold text-slate-400 uppercase block mb-1">Cụm từ trong Nhận Định (Statement):</span>
+                                            <p class="${item.colorClassHl} font-semibold inline">"${item.questionSnippet}"</p>
+                                        </div>
+                                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+                                            <span class="text-[11px] font-bold text-slate-400 uppercase block mb-1">Câu văn trong ${q.paragraphRef}:</span>
+                                            <p class="${item.colorClassHl} font-semibold inline">"${item.passageSnippet}"</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-slate-600 mt-1 italic pl-1 border-l-2 border-indigoTheme-500">${item.expl}</p>
                                 </div>
-                            `;
-                        }).join('')}
+                            `).join('')}
+                        </div>
                     </div>
-                </div>
+
+                    <!-- Distractor Traps & Why not others -->
+                    <div class="bg-amberTheme-50/50 border border-amberTheme-200 rounded-2xl p-5 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amberTheme-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-amberTheme-800">Cảnh Báo Bẫy Gây Nhiễu (Tại sao không chọn các phương án khác?)</h4>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${q.distractorTraps.map(trap => `
+                                <div class="bg-white p-3.5 rounded-xl border border-amber-200 text-xs">
+                                    <span class="font-extrabold text-red-700 block mb-1">❌ ${trap.option}</span>
+                                    <p class="text-slate-700 leading-relaxed">${trap.reason}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Step-by-Step Logic in Vietnamese -->
+                    <div class="bg-indigoTheme-50/40 border border-indigoTheme-200 rounded-2xl p-5 space-y-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigoTheme-800 block">Tóm Tắt Logic Giải Bài (Tiếng Việt)</span>
+                        <p class="text-sm font-medium text-slate-800 mb-2">${q.vietnameseAnalysis.logic}</p>
+                        <ul class="space-y-1.5 pl-4 list-disc text-xs sm:text-sm text-slate-700">
+                            ${q.vietnameseAnalysis.stepByStep.map(step => `<li>${step}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- Associated Vocabulary Chips -->
+                    <div class="pt-4 border-t border-slate-100">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">Từ Vựng Trọng Tâm Trong Câu Này:</span>
+                        <div class="flex flex-wrap gap-2">
+                            ${q.vocabHighlights.map(v => `
+                                <button onclick="playSpeech('${v}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:border-indigoTheme-400 transition-colors shadow-2xs">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-indigoTheme-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    <span>${v}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
 
             </div>
         `;
     }
-    </script>
 
-    <script>
     function renderAllQuestionsList(filter = 'all') {
         const container = document.getElementById('all-questions-container');
+        if (!container) return;
         container.innerHTML = '';
 
         const filtered = questionsData.filter(q => {
@@ -996,16 +1340,13 @@
             const card = document.createElement('div');
             card.className = "gradient-border bg-white rounded-2xl p-6 shadow-sm";
 
-            let ansBadgeText = '';
-            let ansColor = 'bg-indigo-100 text-indigo-800 border-indigo-300';
-            
-            if (q.group === 'matching') {
-                ansBadgeText = `ĐÁP ÁN: ${q.correctLetter} (${q.correctParagraph})`;
-            } else {
-                ansBadgeText = `ĐÁP ÁN: ${q.correctAnswer}`;
-                if (q.correctAnswer === 'YES') ansColor = 'bg-emerald-100 text-emerald-800 border-emerald-300';
-                if (q.correctAnswer === 'NO') ansColor = 'bg-rose-100 text-rose-800 border-rose-300';
-                if (q.correctAnswer === 'NOT GIVEN') ansColor = 'bg-amber-100 text-amber-800 border-amber-300';
+            let ansColor = "bg-indigo-100 text-indigo-800 border-indigo-300";
+            let ansTitle = `ĐÁP ÁN: Đoạn ${q.correctAnswer} (${q.paragraphRef})`;
+            if (q.group === 'ynng') {
+                ansTitle = `ĐÁP ÁN: ${q.correctAnswer}`;
+                if (q.correctAnswer === 'YES') ansColor = "bg-emerald-100 text-emerald-800 border-emerald-300";
+                if (q.correctAnswer === 'NO') ansColor = "bg-rose-100 text-rose-800 border-rose-300";
+                if (q.correctAnswer === 'NOT GIVEN') ansColor = "bg-amber-100 text-amber-800 border-amber-300";
             }
 
             card.innerHTML = `
@@ -1018,7 +1359,7 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="text-xs font-mono font-bold px-3 py-1 rounded-md border ${ansColor}">
-                            ${ansBadgeText}
+                            ${ansTitle}
                         </span>
                         <span class="text-xs text-slate-400">${q.paragraphRef}</span>
                     </div>
@@ -1034,11 +1375,11 @@
                 </div>
 
                 <div class="mb-4">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Tiêu chí đối chiếu cốt lõi:</span>
                     <div class="flex flex-wrap gap-2">
-                        ${q.paraphrases.map(p => `
+                        ${q.keyCriteria.map(p => `
                             <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
-                                <span class="text-indigo-700 font-bold">${p.qPart}</span> ➔ <span class="text-purple-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                                <span class="text-indigo-700 font-bold">${p.questionSnippet}</span> ➔ <span class="text-purple-800 font-bold">${p.passageSnippet}</span>: <em>${p.expl}</em>
                             </div>
                         `).join('')}
                     </div>
@@ -1050,7 +1391,6 @@
                     <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
                         ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
                     </ul>
-                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
                 </div>
             `;
             container.appendChild(card);
@@ -1069,6 +1409,7 @@
 
     function renderParagraphsMap() {
         const container = document.getElementById('paragraphs-grid-container');
+        if (!container) return;
         container.innerHTML = '';
 
         paragraphsOverview.forEach(p => {
@@ -1112,42 +1453,41 @@
             container.appendChild(card);
         });
     }
-    </script>
 
-    <script>
     function renderSynonymsTable() {
         const tbody = document.getElementById('synonyms-table-body');
+        if (!tbody) return;
         tbody.innerHTML = '';
 
         questionsData.forEach(q => {
-            q.paraphrases.forEach((p, pIndex) => {
+            q.keyCriteria.forEach((crit, cIdx) => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-50/80 transition-colors";
-                
-                let answerDisplay = '';
-                if (q.group === 'matching') {
-                    answerDisplay = `Đoạn ${q.correctLetter}`;
-                } else {
-                    answerDisplay = q.correctAnswer;
+
+                let ansBadge = 'bg-indigoTheme-700 text-white';
+                let ansText = `Đoạn ${q.correctAnswer}`;
+                if (q.group === 'ynng') {
+                    ansText = q.correctAnswer;
+                    if (q.correctAnswer === 'YES') ansBadge = 'bg-emerald-600 text-white';
+                    if (q.correctAnswer === 'NO') ansBadge = 'bg-rose-600 text-white';
+                    if (q.correctAnswer === 'NOT GIVEN') ansBadge = 'bg-amber-500 text-white';
                 }
 
                 tr.innerHTML = `
                     <td class="py-3 px-4 text-center font-bold text-slate-700">
-                        ${pIndex === 0 ? `<span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                        ${cIdx === 0 ? `<span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-lg block font-mono">Q${q.id}</span>` : ''}
                     </td>
                     <td class="py-3 px-4">
-                        <span class="keyword-chip">${p.qPart}</span>
+                        <span class="${crit.colorClassHl} px-1.5 py-0.5 rounded font-semibold text-xs leading-relaxed block">${crit.questionSnippet}</span>
                     </td>
                     <td class="py-3 px-4">
-                        <span class="passage-chip">${p.pPart}</span>
+                        <span class="${crit.colorClassHl} px-1.5 py-0.5 rounded font-semibold text-xs leading-relaxed block">${crit.passageSnippet}</span>
                     </td>
                     <td class="py-3 px-4 text-center">
-                        <span class="text-xs font-bold uppercase px-2.5 py-1 bg-indigoTheme-700 text-white rounded shadow-2xs">
-                            ${answerDisplay}
-                        </span>
+                        ${cIdx === 0 ? `<span class="text-xs font-bold uppercase px-2.5 py-1 rounded shadow-2xs ${ansBadge}">${ansText}</span>` : ''}
                     </td>
-                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
-                        ${p.meaning}
+                    <td class="py-3 px-4 text-slate-700 text-xs">
+                        ${crit.expl}
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -1157,6 +1497,7 @@
 
     function renderVocabGrid(filterWord = '') {
         const container = document.getElementById('vocab-grid-container');
+        if (!container) return;
         container.innerHTML = '';
 
         const words = Object.keys(vocabData).filter(w => {
@@ -1234,9 +1575,9 @@
             const presView = document.getElementById('view-presentation');
             if (presView && !presView.classList.contains('hidden')) {
                 if (e.key === 'ArrowRight') {
-                    navigateQuestion(1);
+                    navigateSlide(1);
                 } else if (e.key === 'ArrowLeft') {
-                    navigateQuestion(-1);
+                    navigateSlide(-1);
                 }
             }
         });

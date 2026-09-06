@@ -27,6 +27,14 @@
                             800: '#3730a3',
                             900: '#312e81',
                             950: '#1e1b4b'
+                        },
+                        amberTheme: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309'
                         }
                     }
                 }
@@ -41,7 +49,7 @@
         .gradient-border {
             position: relative;
             background: linear-gradient(135deg, #ffffff, #faf5ff);
-            border: 1px solid rgba(226, 232, 240, 0.85);
+            border: 1px solid rgba(226, 232, 240, 0.9);
         }
         .gradient-border::before {
             content: '';
@@ -51,28 +59,14 @@
             border-top-left-radius: inherit;
             border-top-right-radius: inherit;
         }
-        .keyword-chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.18rem 0.58rem;
-            border-radius: 0.375rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background-color: #ede9fe;
-            color: #5b21b6;
-            border: 1px solid #ddd6fe;
-        }
-        .passage-chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.18rem 0.58rem;
-            border-radius: 0.375rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background-color: #fef3c7;
-            color: #92400e;
-            border: 1px solid #fde68a;
-        }
+        .paired-chip-1 { background-color: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+        .paired-chip-2 { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .paired-chip-3 { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        
+        .paired-hl-1 { background-color: #dbeafe; color: #1e3a8a; text-decoration: underline; text-decoration-color: #3b82f6; text-decoration-thickness: 2.5px; text-underline-offset: 3px; }
+        .paired-hl-2 { background-color: #fef3c7; color: #78350f; text-decoration: underline; text-decoration-color: #f59e0b; text-decoration-thickness: 2.5px; text-underline-offset: 3px; }
+        .paired-hl-3 { background-color: #dcfce7; color: #14532d; text-decoration: underline; text-decoration-color: #22c55e; text-decoration-thickness: 2.5px; text-underline-offset: 3px; }
+        
         .answer-badge {
             animation: pulseSubtle 3s infinite;
         }
@@ -84,7 +78,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-indigo-100 selection:text-indigo-900">
 
-    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -95,14 +89,14 @@
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700 bg-indigoTheme-50 px-2 py-0.5 rounded-full border border-indigoTheme-200">IELTS Reading Analysis</span>
-                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích chuyên sâu 13 câu hỏi (Yes/No/Not Given & Summary with Word Bank)</span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700 bg-indigoTheme-50 px-2 py-0.5 rounded-full border border-indigoTheme-200">IELTS Reading Masterclass</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Focus Slide Presentation Mode</span>
                         </div>
-                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">The Dark Side of Emotional Intelligence</h1>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">The Dark Side of Emotional Intelligence (Questions 1–13)</h1>
                     </div>
                 </div>
                 <div class="md:hidden">
-                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-lg">Câu 1/13</span>
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-indigoTheme-100 text-indigoTheme-800 px-2.5 py-1 rounded-lg">Câu 1/13</span>
                 </div>
             </div>
 
@@ -112,7 +106,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                     </svg>
-                    <span>Slide Từng Câu</span>
+                    <span>Focus Presentation Mode</span>
                 </button>
                 <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -143,44 +137,47 @@
     </header>
 
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
-
-        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
+        <!-- VIEW 1: PRESENTATION FOCUS MODE (BLIND SELECTOR - NO ANSWERS LEAKED) -->
         <section id="view-presentation" class="space-y-6 block">
             
-            <!-- Quick Question Selector Chips -->
+            <!-- Quick Question Selector Chips (Blind selector: no answers leaked upfront) -->
             <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
                 <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
-                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Yes / No / Not Given (Q1–Q6)</span>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi (Focus Slide):</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-target-badge">Câu 1: Yes / No / Not Given</span>
                     </div>
                     <div class="text-xs text-slate-400 flex items-center gap-2">
-                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển slide</span>
                     </div>
                 </div>
 
                 <div class="flex flex-wrap gap-2" id="question-nav-chips">
-                    <!-- Dynamic buttons inserted by JS -->
+                    <!-- Dynamic blind chips inserted by JS -->
                 </div>
             </div>
 
-            <!-- Slide Main Card -->
+            <!-- Slide Main Card Container -->
             <div id="slide-card-container" class="relative">
-                <!-- Dynamically rendered slide content -->
+                <!-- Dynamically populated slide card -->
             </div>
 
             <!-- Bottom Navigation Bar -->
             <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
-                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                <button onclick="navigateSlide(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                     <span>Câu Trước</span>
                 </button>
 
                 <div class="flex items-center gap-3">
                     <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 13</span>
+                    <button onclick="toggleAnswerReveal()" id="btn-toggle-reveal" class="text-xs font-bold px-4 py-2 rounded-xl bg-indigoTheme-50 text-indigoTheme-700 border border-indigoTheme-200 hover:bg-indigoTheme-100 transition-all flex items-center gap-1.5 shadow-2xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                        <span id="btn-reveal-text">Hiện Đáp Án & Khớp Nối</span>
+                    </button>
                 </div>
 
-                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigoTheme-700 hover:bg-indigoTheme-800 text-white font-semibold shadow-md shadow-indigo-900/10 active:scale-95 transition-all">
+                <button onclick="navigateSlide(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigoTheme-700 hover:bg-indigoTheme-800 text-white font-semibold shadow-md shadow-indigo-900/10 active:scale-95 transition-all">
                     <span>Câu Kế Tiếp</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </button>
@@ -192,7 +189,7 @@
             <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 13 Câu Hỏi</h2>
-                    <p class="text-sm text-slate-500">Xem đầy đủ bằng chứng bài đọc, đáp án chuẩn, ma trận paraphrase và phân tích logic tiếng Việt.</p>
+                    <p class="text-sm text-slate-500">Xem đầy đủ bằng chứng bài đọc, đáp án chuẩn, ma trận paraphrase và phân tích logic tiếng Việt theo từng phần thi.</p>
                 </div>
                 <div class="flex flex-wrap items-center gap-2">
                     <button onclick="filterAllQuestions('all')" class="filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-indigoTheme-700 text-white">Tất Cả (1–13)</button>
@@ -205,7 +202,6 @@
                 <!-- Dynamically populated -->
             </div>
         </section>
-
         <!-- VIEW 3: WORD BANK REPOSITORY (A–L) -->
         <section id="view-wordbank" class="space-y-6 hidden">
             <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
@@ -321,11 +317,33 @@
             contextHeader: "Các chính trị gia sử dụng trí tuệ cảm xúc như công cụ tạo ra sự thay đổi xã hội",
             statementText: "Politicians have tried to use emotional intelligence as a tool for social change.",
             correctAnswer: "YES",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>Since the 1995 publication of Daniel Goleman’s bestseller, Emotional Intelligence, the idea has been used by government leaders and educators as the solution to a wide range of problems. If we can encourage emotional intelligence among school children, leaders and doctors, we’ll have more caring educational institutions, workplaces and better healthcare</mark>.",
+            passageSnippet: "Since the 1995 publication of Daniel Goleman’s bestseller, Emotional Intelligence, the idea has been used by government leaders and educators as the solution to a wide range of problems. If we can encourage emotional intelligence among school children, leaders and doctors, we’ll have more caring educational institutions, workplaces and better healthcare.",
             paragraphRef: "Đoạn 1 (Paragraph 1)",
-            paraphrases: [
-                { qPart: "Politicians", pPart: "government leaders", meaning: "các nhà lãnh đạo chính phủ / chính trị gia" },
-                { qPart: "use ... as a tool for social change", pPart: "used ... as the solution to a wide range of problems / have more caring educational institutions, workplaces and better healthcare", meaning: "sử dụng như giải pháp giải quyết hàng loạt vấn đề xã hội / tạo ra môi trường giáo dục, nơi làm việc và y tế tốt đẹp hơn (thay đổi xã hội)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Các chính trị gia / lãnh đạo chính phủ",
+                    questionSnippet: "Politicians",
+                    passageSnippet: "government leaders",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "'Politicians' đồng nghĩa trực tiếp với 'government leaders' (các nhà lãnh đạo chính phủ)."
+                },
+                {
+                    tag: "2",
+                    theme: "Công cụ tạo ra sự thay đổi xã hội tích cực",
+                    questionSnippet: "use emotional intelligence as a tool for social change",
+                    passageSnippet: "used by government leaders... as the solution to a wide range of problems. If we can encourage emotional intelligence... we’ll have more caring educational institutions, workplaces and better healthcare",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Ứng dụng EQ làm giải pháp giải quyết nhiều vấn đề để trường học, nơi làm việc và y tế tốt hơn chính là công cụ thay đổi xã hội."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "NOT GIVEN (Bẫy từ vựng 'social change')",
+                    reason: "Thí sinh có thể nghĩ bài không có đúng cụm 'social change'. Tuy nhiên, việc cải thiện hệ thống giáo dục, bệnh viện và nơi làm việc để giải quyết các vấn đề xã hội chính là paraphrase của 'social change'."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Khẳng định: 'Các chính trị gia đã cố gắng sử dụng trí tuệ cảm xúc như một công cụ để tạo ra sự thay đổi xã hội'.",
@@ -334,8 +352,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 1):</strong> Tác giả viết: <em>'the idea has been used by <strong>government leaders</strong> [= politicians] as the solution to a wide range of problems... more caring educational institutions, workplaces and better healthcare'</em>.",
                     "<strong>Phân tích tương đương:</strong> Các nhà lãnh đạo chính phủ áp dụng EQ để giải quyết các vấn đề và cải thiện trường học, bệnh viện, nơi làm việc — đây chính là việc dùng nó làm công cụ tạo ra sự thay đổi xã hội tích cực (social change).",
                     "<strong>Kết luận:</strong> Trùng khớp hoàn toàn với bài đọc ➔ <strong>YES</strong>."
-                ],
-                traps: "Chú ý cặp từ đồng nghĩa: 'government leaders' = 'politicians'."
+                ]
             },
             vocabHighlights: ["emotional intelligence", "methodologies"]
         },
@@ -348,10 +365,24 @@
             contextHeader: "Tiêu chuẩn tại trường học và bệnh viện đã có sự cải thiện thực tế từ năm 1995",
             statementText: "Schools and hospitals have seen an improvement in standards since 1995.",
             correctAnswer: "NOT GIVEN",
-            passageSnippet: "If we can encourage emotional intelligence among school children, leaders and doctors, we’ll have more caring educational institutions, workplaces and better healthcare. <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>As a result, emotional intelligence is now taught widely in secondary schools, business schools and medical schools</mark>.",
+            passageSnippet: "If we can encourage emotional intelligence among school children, leaders and doctors, we’ll have more caring educational institutions, workplaces and better healthcare. As a result, emotional intelligence is now taught widely in secondary schools, business schools and medical schools.",
             paragraphRef: "Đoạn 1 (Paragraph 1)",
-            paraphrases: [
-                { qPart: "Schools and hospitals have seen an improvement in standards since 1995", pPart: "we’ll have more caring educational institutions... better healthcare / taught widely", meaning: "Bài đọc chỉ nói việc phổ cập EQ với HY VỌNG sẽ có trường học quan tâm hơn và y tế tốt hơn, HOÀN TOÀN KHÔNG khẳng định các tiêu chuẩn (standards) thực tế đã được cải thiện hay chưa." }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Kỳ vọng cải thiện trường học và bệnh viện",
+                    questionSnippet: "Schools and hospitals have seen an improvement in standards since 1995",
+                    passageSnippet: "If we can encourage emotional intelligence... we’ll have more caring educational institutions... and better healthcare. As a result, emotional intelligence is now taught widely",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Bài chỉ nói EQ được giảng dạy với HY VỌNG sẽ giúp trường học và y tế chăm sóc tốt hơn; HOÀN TOÀN KHÔNG có dữ liệu chứng minh các tiêu chuẩn (standards) thực tế đã tăng lên."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "YES (Bẫy nhầm lẫn giữa kỳ vọng và thực tế)",
+                    reason: "Đoạn văn dùng cấu trúc điều kiện 'If we can... we’ll have...' (kỳ vọng trong tương lai) và nói EQ đang được dạy rộng rãi. Thí sinh tự suy diễn rằng nếu được dạy rộng rãi thì tiêu chuẩn ắt hẳn đã tăng."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Đề bài nhận định: 'Các trường học và bệnh viện đã chứng kiến sự cải thiện về các tiêu chuẩn kể từ năm 1995'.",
@@ -360,8 +391,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 1):</strong> Tác giả nêu giả thuyết kỳ vọng: <em>'If we can encourage emotional intelligence... we'll have more caring educational institutions... and better healthcare. As a result, emotional intelligence is now taught widely...'</em>.",
                     "<strong>Đánh giá thực tế:</strong> Bài viết chỉ xác nhận việc EQ đang được <strong>giảng dạy rộng rãi</strong>, nhưng KHÔNG HỀ cung cấp bất kỳ số liệu hay xác nhận nào về việc các tiêu chuẩn (standards) trong trường học và bệnh viện thực tế đã được nâng cao hay chưa.",
                     "<strong>Kết luận:</strong> Thông tin không thể kiểm chứng được từ văn bản ➔ <strong>NOT GIVEN</strong>."
-                ],
-                traps: "Bẫy suy diễn giữa kỳ vọng và thực tế: Đoạn văn dùng cấu trúc điều kiện 'If we can... we'll have...' (kỳ vọng trong tương lai), không phải là sự xác nhận tiêu chuẩn đã thực sự tăng lên trong thực tế."
+                ]
             },
             vocabHighlights: ["emotional intelligence", "comprehensively"]
         },
@@ -374,11 +404,33 @@
             contextHeader: "Khả năng ghi nhớ sự thật của khán giả khi người nói khuấy động cảm xúc mãnh liệt",
             statementText: "Menges’ study showed that people had better recall of facts if a speaker stirred strong feelings.",
             correctAnswer: "NO",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>Research led by University of Cambridge Professor Jochen Menges suggested that, when a leader gave an inspiring speech filled with emotion, the audience was less likely to challenge the message and remembered less of the content. Interestingly, though, audience members were so moved by the speech that they believed that they had remembered more of it</mark>.",
+            passageSnippet: "Research led by University of Cambridge Professor Jochen Menges suggested that, when a leader gave an inspiring speech filled with emotion, the audience was less likely to challenge the message and remembered less of the content. Interestingly, though, audience members were so moved by the speech that they believed that they had remembered more of it.",
             paragraphRef: "Đoạn 2 (Paragraph 2)",
-            paraphrases: [
-                { qPart: "better recall of facts", pPart: "remembered less of the content", meaning: "Mâu thuẫn trực tiếp: đề nói ghi nhớ sự thật tốt hơn, bài nghiên cứu khẳng định khán giả ghi nhớ ÍT HƠN nội dung bài phát biểu" },
-                { qPart: "speaker stirred strong feelings", pPart: "inspiring speech filled with emotion", meaning: "bài phát biểu truyền cảm hứng tràn ngập cảm xúc" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Người nói khuấy động cảm xúc mạnh mẽ",
+                    questionSnippet: "speaker stirred strong feelings",
+                    passageSnippet: "when a leader gave an inspiring speech filled with emotion",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Bài phát biểu truyền cảm hứng tràn ngập cảm xúc (inspiring speech filled with emotion) chính là khuấy động cảm xúc mạnh mẽ."
+                },
+                {
+                    tag: "2",
+                    theme: "Khả năng ghi nhớ dữ kiện tốt hơn hay kém đi?",
+                    questionSnippet: "people had better recall of facts",
+                    passageSnippet: "remembered less of the content",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Mâu thuẫn trực tiếp: Đề bài nói nhớ tốt hơn (better recall), nhưng nghiên cứu khẳng định họ nhớ ÍT HƠN nội dung (remembered less of the content)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "YES (Bẫy niềm tin chủ quan của người nghe)",
+                    reason: "Câu tiếp theo nói 'they believed that they had remembered more of it'. Nhưng câu hỏi hỏi về KẾT QUẢ NGHIÊN CỨU ('Menges' study showed'), mà kết quả thực tế là họ nhớ ít hơn ('remembered less')."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Đề bài khẳng định: 'Nghiên cứu của Menges cho thấy mọi người có khả năng ghi nhớ các dữ kiện tốt hơn nếu diễn giả khuấy động cảm xúc mạnh mẽ'.",
@@ -387,8 +439,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Tác giả trình bày kết quả nghiên cứu của Giáo sư Jochen Menges: Khi lãnh đạo có bài phát biểu đầy cảm xúc (<em>'inspiring speech filled with emotion'</em>), khán giả <em>'<strong>remembered less of the content</strong>'</em> (ghi nhớ ít nội dung hơn).",
                     "<strong>Phân tích mâu thuẫn:</strong> 'Remembered less' (nhớ ít hơn) trái ngược 180 độ với 'had better recall' (ghi nhớ tốt hơn). Mặc dù người nghe tự ảo tưởng rằng mình nhớ nhiều hơn (<em>'believed they had remembered more'</em>), sự thật thực nghiệm là họ nhớ kém hơn.",
                     "<strong>Kết luận:</strong> Trái ngược trực tiếp với bài đọc ➔ <strong>NO</strong>."
-                ],
-                traps: "Chú ý bẫy tâm lý: Khán giả 'tin rằng mình nhớ nhiều hơn' (they believed that they had remembered more), nhưng kết quả thực tế của nghiên cứu (study showed) là họ nhớ ít hơn (remembered less)."
+                ]
             },
             vocabHighlights: ["methodologies", "manipulative"]
         },
@@ -401,11 +452,33 @@
             contextHeader: "Người có trí tuệ cảm xúc cao làm đồng nghiệp cảm thấy ngớ ngẩn thường xuyên hơn người khác",
             statementText: "Emotionally intelligent people make colleagues feel silly more often than others.",
             correctAnswer: "NOT GIVEN",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>In a study led by psychologist Stephane Cote of the University of Toronto, university employees filled out a survey about their manipulative tendencies, and took a test measuring their emotional intelligence. Then, Cote’s team studied how they interacted on the job. The employees who engaged in the most harmful behaviours were masters of manipulation with high emotional intelligence, using their emotional skills to demean and embarrass their peers for personal gain</mark>.",
+            passageSnippet: "In a study led by psychologist Stephane Cote of the University of Toronto, university employees filled out a survey about their manipulative tendencies, and took a test measuring their emotional intelligence. Then, Cote’s team studied how they interacted on the job. The employees who engaged in the most harmful behaviours were masters of manipulation with high emotional intelligence, using their emotional skills to demean and embarrass their peers for personal gain.",
             paragraphRef: "Đoạn 3 (Paragraph 3)",
-            paraphrases: [
-                { qPart: "make colleagues feel silly", pPart: "demean and embarrass their peers", meaning: "hạ thấp và làm bẽ mặt / ngượng ngùng đồng nghiệp" },
-                { qPart: "more often than others", pPart: "most harmful behaviours were masters of manipulation with high emotional intelligence", meaning: "Bài chỉ nói những kẻ có hành vi gây hại nhất là người có EQ cao kết hợp tính thao túng, KHÔNG hề so sánh tần suất chung (more often than others) của toàn bộ người có EQ cao so với người khác." }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Hành vi làm bẽ mặt đồng nghiệp",
+                    questionSnippet: "make colleagues feel silly",
+                    passageSnippet: "using their emotional skills to demean and embarrass their peers for personal gain",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Làm nhục và bẽ mặt đồng nghiệp (demean and embarrass peers) tương đương với 'make colleagues feel silly'."
+                },
+                {
+                    tag: "2",
+                    theme: "So sánh tần suất: thường xuyên hơn những người khác?",
+                    questionSnippet: "more often than others",
+                    passageSnippet: "employees who engaged in the most harmful behaviours were masters of manipulation with high emotional intelligence",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Bài chỉ nói những kẻ có hành vi độc hại nhất là kẻ có tính thao túng kết hợp EQ cao; hoàn toàn KHÔNG kết luận người có EQ cao nói chung làm bẽ mặt người khác nhiều hơn người bình thường."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "YES (Bẫy khái quát hóa một nhóm nhỏ)",
+                    reason: "Thí sinh thấy cụm 'demean and embarrass' vội chọn YES mà không để ý đề bài tổng quát hóa 'Emotionally intelligent people' và đưa ra so sánh 'more often than others' vốn không có căn cứ trong bài."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Đề bài nhận định: 'Những người có trí tuệ cảm xúc cao làm đồng nghiệp cảm thấy ngớ ngẩn/bẽ mặt thường xuyên hơn những người khác'.",
@@ -414,8 +487,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 3):</strong> Nghiên cứu của Cote cho thấy những nhân viên thực hiện các hành vi gây hại nhất là những kẻ bậc thầy thao túng có EQ cao (<em>'masters of manipulation with high emotional intelligence'</em>), họ dùng kỹ năng cảm xúc để làm bẽ mặt đồng nghiệp (<em>'demean and embarrass their peers'</em> = make colleagues feel silly).",
                     "<strong>Đánh giá so sánh:</strong> Bài đọc chỉ ra một nhóm nhỏ (những người có tính thao túng kết hợp EQ cao) làm điều này. Tác giả HOÀN TOÀN KHÔNG đưa ra kết luận so sánh mang tính khái quát rằng 'những người có EQ cao nói chung làm bẽ mặt đồng nghiệp thường xuyên hơn người khác'.",
                     "<strong>Kết luận:</strong> Mối quan hệ so sánh tần suất không tồn tại trong bài ➔ <strong>NOT GIVEN</strong>."
-                ],
-                traps: "Bẫy so sánh khái quát hóa (Comparative Generalization Trap): Bài đọc chỉ nói về người thao túng có EQ cao, không nói toàn bộ người có EQ cao đều làm bẽ mặt đồng nghiệp 'nhiều hơn người khác'."
+                ]
             },
             vocabHighlights: ["manipulative", "demean", "personal gain"]
         },
@@ -430,9 +502,22 @@
             correctAnswer: "NOT GIVEN",
             passageSnippet: "Of course, people aren’t always using emotional intelligence for evil ends and emotional intelligence is certainly a skill that can be taught to others... Recently, psychologists from the University of Central Florida comprehensively analysed every study that has ever examined the link between emotional intelligence and job performance...",
             paragraphRef: "Đoạn 4 & 5 (Paragraphs 4 & 5)",
-            paraphrases: [
-                { qPart: "job satisfaction", pPart: "job performance", meaning: "Bài đọc chỉ nghiên cứu về hiệu suất công việc (job performance), hoàn toàn KHÔNG hề đề cập đến sự hài lòng trong công việc (job satisfaction)." },
-                { qPart: "emotional awareness training", pPart: "skill that can be taught to others / teach emotional intelligence", meaning: "kỹ năng có thể giảng dạy, nhưng không có thông tin về việc nhân viên cảm thấy thỏa mãn hơn sau khóa học." }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Khái niệm sự hài lòng trong công việc",
+                    questionSnippet: "People experience more job satisfaction after emotional awareness training",
+                    passageSnippet: "emotional intelligence is certainly a skill that can be taught... link between emotional intelligence and job performance",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Bài đọc chỉ nghiên cứu mối liên hệ giữa EQ và hiệu suất công việc (job performance), hoàn toàn KHÔNG hề nhắc đến mức độ hài lòng (job satisfaction)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "YES (Bẫy đồng nhất 'job performance' và 'job satisfaction')",
+                    reason: "Hiệu suất công việc (job performance) và sự thỏa mãn/hài lòng trong công việc (job satisfaction) là hai khái niệm tâm lý học hoàn toàn khác nhau."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Đề bài cho rằng: 'Mọi người trải nghiệm sự hài lòng với công việc nhiều hơn sau khóa đào tạo nhận thức cảm xúc'.",
@@ -441,8 +526,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 4 & 5):</strong> Tác giả đề cập EQ là kỹ năng có thể dạy được (<em>'can be taught to others'</em>) và nghiên cứu của ĐH Central Florida phân tích mối liên hệ giữa EQ và <strong>hiệu suất công việc</strong> (<em>'job performance'</em>).",
                     "<strong>Đánh giá sự xuất hiện của thông tin:</strong> Khái niệm 'sự hài lòng trong công việc' (<em>job satisfaction</em>) và cảm xúc của nhân viên sau đào tạo HOÀN TOÀN KHÔNG được nhắc đến trong bất kỳ đoạn nào của bài viết.",
                     "<strong>Kết luận:</strong> Thông tin không có trong bài đọc ➔ <strong>NOT GIVEN</strong>."
-                ],
-                traps: "Tránh nhầm lẫn giữa 'job performance' (hiệu suất/năng suất làm việc) với 'job satisfaction' (mức độ hài lòng, yêu thích công việc)."
+                ]
             },
             vocabHighlights: ["comprehensively", "job performance", "advocating"]
         },
@@ -455,11 +539,33 @@
             contextHeader: "Anita Roddick vận dụng sức mạnh cảm xúc vì những mục đích cao đẹp",
             statementText: "Anita Roddick used emotional appeals for good causes.",
             correctAnswer: "YES",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>In a study of emotions at the Body Shop, a research team led by Stanford professor Joanne Martin discovered that founder Anita Roddick used emotions to inspire her employees to fundraise for charity. As Roddick explained, ‘Whenever we wanted to persuade our staff to support a particular project we always tried to break their hearts.’ Roddick was often held up as an example of an emotionally intelligent leader</mark>.",
+            passageSnippet: "In a study of emotions at the Body Shop, a research team led by Stanford professor Joanne Martin discovered that founder Anita Roddick used emotions to inspire her employees to fundraise for charity. As Roddick explained, ‘Whenever we wanted to persuade our staff to support a particular project we always tried to break their hearts.’ Roddick was often held up as an example of an emotionally intelligent leader.",
             paragraphRef: "Đoạn 4 (Paragraph 4)",
-            paraphrases: [
-                { qPart: "used emotional appeals", pPart: "used emotions to inspire her employees... tried to break their hearts", meaning: "vận dụng cảm xúc để truyền cảm hứng / làm lay động trái tim nhân viên (lời kêu gọi cảm xúc)" },
-                { qPart: "good causes", pPart: "fundraise for charity / support a particular project", meaning: "gây quỹ từ thiện / ủng hộ các dự án nhân ái (những mục đích cao đẹp)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Sử dụng những lời kêu gọi mang tính cảm xúc",
+                    questionSnippet: "Anita Roddick used emotional appeals",
+                    passageSnippet: "founder Anita Roddick used emotions to inspire her employees... always tried to break their hearts",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Dùng cảm xúc để truyền cảm hứng và làm lay động trái tim nhân viên chính là vận dụng lời kêu gọi cảm xúc (emotional appeals)."
+                },
+                {
+                    tag: "2",
+                    theme: "Vì những mục đích tốt đẹp, nhân đạo",
+                    questionSnippet: "for good causes",
+                    passageSnippet: "to fundraise for charity... support a particular project",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Gây quỹ từ thiện (fundraise for charity) và ủng hộ các dự án cộng đồng chính là những mục đích tốt đẹp (good causes)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "NO (Bẫy hiểu sai nghĩa đen 'break their hearts')",
+                    reason: "Thí sinh có thể nghĩ 'break their hearts' là làm tổn thương nhân viên. Nhưng trong ngữ cảnh này, đó là cách nói ẩn dụ để chạm vào lòng trắc ẩn của họ nhằm quyên góp từ thiện."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Đề bài khẳng định: 'Anita Roddick đã sử dụng những lời kêu gọi mang tính cảm xúc cho những mục đích tốt đẹp'.",
@@ -468,8 +574,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> Tác giả lấy dẫn chứng tại chuỗi cửa hàng The Body Shop: Người sáng lập Anita Roddick <em>'used emotions to inspire her employees to <strong>fundraise for charity</strong>'</em> (sử dụng cảm xúc để truyền cảm hứng cho nhân viên gây quỹ từ thiện).",
                     "<strong>Phân tích ngữ nghĩa:</strong> 'Fundraise for charity' (gây quỹ từ thiện) chính là ví dụ điển hình của 'good causes' (mục đích tốt đẹp/nhân văn); việc 'tried to break their hearts' chính là 'used emotional appeals'.",
                     "<strong>Kết luận:</strong> Trùng khớp hoàn toàn với bài đọc ➔ <strong>YES</strong>."
-                ],
-                traps: "Chú ý câu tục ngữ / ẩn dụ: 'tried to break their hearts' ở đây mang nghĩa chạm vào lòng trắc ẩn để nhân viên nhiệt tình làm từ thiện."
+                ]
             },
             vocabHighlights: ["charity", "fundraise", "manipulative"]
         },
@@ -484,11 +589,34 @@
             completedSentence: "In the University of Florida study, emotional intelligence had a more <span class='text-indigoTheme-700 font-bold underline'>negative</span> (Option E) effect on people who worked in jobs such as accountancy and motor repairs than others.",
             correctLetter: "E",
             correctWord: "negative",
-            passageSnippet: "They found that in jobs that required extensive attention to emotions, higher emotional intelligence translated into better work. <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>However, in jobs such as mechanics, scientists and accountants the results were reversed</mark>. Although more research is needed, one promising explanation is that these employees were paying attention to emotions when they should have been focusing on their tasks.",
+            correctAnswer: "E",
+            passageSnippet: "They found that in jobs that required extensive attention to emotions, higher emotional intelligence translated into better work. However, in jobs such as mechanics, scientists and accountants the results were reversed. Although more research is needed, one promising explanation is that these employees were paying attention to emotions when they should have been focusing on their tasks.",
             paragraphRef: "Đoạn 5 (Paragraph 5)",
-            paraphrases: [
-                { qPart: "a more [ 7 ] effect", pPart: "the results were reversed (từ 'better work' đảo ngược thành kết quả tồi tệ/tiêu cực hơn)", meaning: "tác động tiêu cực hơn (a more negative effect)" },
-                { qPart: "accountancy and motor repairs", pPart: "mechanics, scientists and accountants", meaning: "thợ cơ khí sửa xe và kế toán viên" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Nghề nghiệp kỹ thuật / kế toán / cơ khí",
+                    questionSnippet: "jobs such as accountancy and motor repairs",
+                    passageSnippet: "jobs such as mechanics, scientists and accountants",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "'Mechanics' tương ứng với 'motor repairs', 'accountants' tương ứng với 'accountancy'."
+                },
+                {
+                    tag: "2",
+                    theme: "Hiệu ứng đảo ngược từ tốt sang xấu",
+                    questionSnippet: "had a more [ 7 ] effect",
+                    passageSnippet: "better work. However... the results were reversed",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Với công việc khác thì EQ mang lại kết quả tốt hơn (better work), nhưng ở đây kết quả bị đảo ngược (reversed) thành tiêu cực hơn (more negative)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option D (disrespect)",
+                    reason: "Bẫy từ loại và ngữ nghĩa: Sau 'a more' và trước danh từ 'effect' bắt buộc phải là tính từ so sánh hơn ('a more negative effect')."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Cần một tính từ trước danh từ 'effect' để miêu tả tác động của EQ lên những người làm kế toán và sửa xe trong nghiên cứu của ĐH Florida.",
@@ -497,8 +625,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 5):</strong> Với công việc cần cảm xúc, EQ cao mang lại hiệu quả tốt hơn (<em>'better work'</em>). Ngược lại, đối với thợ cơ khí (mechanics) và kế toán (accountants), kết quả bị đảo ngược (<em>'the results were reversed'</em>).",
                     "<strong>Phân tích logic:</strong> Đảo ngược của 'tốt hơn' (better) chính là 'kém đi/tiêu cực hơn' ➔ Tính từ tương ứng trong Word Bank là <strong>negative</strong>.",
                     "<strong>Kết luận:</strong> Đáp án là ký tự <strong>E (negative)</strong>."
-                ],
-                traps: "Không chọn 'disrespect' hay 'complaints' vì đứng trước danh từ 'effect' sau từ so sánh 'more' cần một tính từ chỉ mức độ tác động."
+                ]
             },
             vocabHighlights: ["comprehensively", "job performance", "reversed"]
         },
@@ -513,11 +640,34 @@
             completedSentence: "They found that emotionally intelligent people made faces and gestures their main <span class='text-indigoTheme-700 font-bold underline'>focus</span> (Option B), which weakened other skills.",
             correctLetter: "B",
             correctWord: "focus",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>Although more research is needed, one promising explanation is that these employees were paying attention to emotions when they should have been focusing on their tasks. If your job is to analyse data or repair cars, it can be quite distracting to read the facial expressions, vocal tones and body language of the people around you</mark>.",
+            correctAnswer: "B",
+            passageSnippet: "Although more research is needed, one promising explanation is that these employees were paying attention to emotions when they should have been focusing on their tasks. If your job is to analyse data or repair cars, it can be quite distracting to read the facial expressions, vocal tones and body language of the people around you.",
             paragraphRef: "Đoạn 5 (Paragraph 5)",
-            paraphrases: [
-                { qPart: "made faces and gestures their main [ 8 ]", pPart: "paying attention to emotions / read the facial expressions, vocal tones and body language", meaning: "chăm chú nhìn biểu cảm khuôn mặt và cử chỉ cơ thể làm trọng tâm chính (main focus)" },
-                { qPart: "weakened other skills", pPart: "when they should have been focusing on their tasks / quite distracting", meaning: "làm xao nhãng, suy yếu khả năng tập trung vào nhiệm vụ chuyên môn" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Biểu cảm gương mặt và cử chỉ cơ thể",
+                    questionSnippet: "faces and gestures",
+                    passageSnippet: "facial expressions, vocal tones and body language",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "'Faces and gestures' tóm gọn cụm 'facial expressions and body language'."
+                },
+                {
+                    tag: "2",
+                    theme: "Biến thành tâm điểm chú ý chính",
+                    questionSnippet: "made... their main [ 8 ]",
+                    passageSnippet: "paying attention to emotions when they should have been focusing on their tasks / quite distracting",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Dành sự chú ý (paying attention) thay vì tập trung vào nhiệm vụ tương đương với việc biến nó thành trọng tâm chú ý chính (main focus)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option L (decision)",
+                    reason: "Bẫy cụm từ quen thuộc: 'made their main decision' không hợp nghĩa khi miêu tả việc quan sát cử chỉ nét mặt của người khác."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Cần một danh từ đi sau tính từ 'main' để chỉ việc công nhân biến nét mặt và cử chỉ thành tâm điểm/sự chú ý chính của họ.",
@@ -526,8 +676,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 5):</strong> Tác giả giải thích: Thay vì tập trung vào chuyên môn, các nhân viên này <em>'were paying attention to emotions... read the facial expressions, vocal tones and body language'</em> (chăm chú đọc biểu cảm mặt và ngôn ngữ cơ thể) khiến họ bị phân tâm.",
                     "<strong>Khớp nghĩa Word Bank:</strong> Biến một thứ thành đối tượng 'paying attention' chính là biến nó thành <strong>focus</strong> (tiêu điểm / tâm điểm chú ý chính).",
                     "<strong>Kết luận:</strong> Đáp án là ký tự <strong>B (focus)</strong>."
-                ],
-                traps: "Tránh nhầm với 'decision' hay 'enthusiasm' vì cụm từ 'made something their main focus' là cấu trúc diễn đạt tự nhiên và chính xác về mặt ngữ nghĩa."
+                ]
             },
             vocabHighlights: ["facial expressions", "distracting", "comprehensively"]
         },
@@ -542,10 +691,25 @@
             completedSentence: "They concluded that emotional intelligence can matter in some <span class='text-indigoTheme-700 font-bold underline'>situations</span> (Option G).",
             correctLetter: "G",
             correctWord: "situations",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>Instead of assuming that emotional intelligence is always useful, we need to think more carefully about where and when it matters</mark>.",
+            correctAnswer: "G",
+            passageSnippet: "Instead of assuming that emotional intelligence is always useful, we need to think more carefully about where and when it matters.",
             paragraphRef: "Đoạn 6 (Paragraph 6)",
-            paraphrases: [
-                { qPart: "can matter in some [ 9 ]", pPart: "think more carefully about where and when it matters", meaning: "suy nghĩ cẩn trọng xem nó có ý nghĩa ở đâu và khi nào (trong những tình huống/bối cảnh nào)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Chỉ quan trọng trong một số hoàn cảnh nhất định",
+                    questionSnippet: "can matter in some [ 9 ]",
+                    passageSnippet: "think more carefully about where and when it matters",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Nơi chốn và thời điểm nó có ý nghĩa (where and when it matters) chính là các tình huống/hoàn cảnh cụ thể (situations)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option F (speeches)",
+                    reason: "Bẫy từ vựng ở đoạn 2: Đoạn 2 có nói về các bài diễn văn nhưng kết luận của nghiên cứu ở đoạn 6 khái quát hơn nhiều, áp dụng cho các tình huống (situations) công việc."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Cần một danh từ đếm được số nhiều đi sau từ định lượng 'some' để diễn tả các bối cảnh mà EQ thực sự quan trọng.",
@@ -554,8 +718,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 6):</strong> Tác giả mở đầu đoạn bằng lời kết luận: Thay vì mặc định EQ luôn hữu ích, chúng ta cần suy xét kỹ <em>'about where and when it matters'</em> (ở đâu và vào thời điểm nào thì nó quan trọng).",
                     "<strong>Khớp nghĩa Word Bank:</strong> Khái niệm 'where and when it matters' (nơi chốn và thời điểm) được quy về danh từ tổng quát là hoàn cảnh / tình huống: <strong>situations</strong>.",
                     "<strong>Kết luận:</strong> Đáp án là ký tự <strong>G (situations)</strong>."
-                ],
-                traps: "Chú ý danh từ số nhiều: 'some situations' (một số tình huống cụ thể)."
+                ]
             },
             vocabHighlights: ["where and when it matters", "regulating emotions"]
         },
@@ -570,10 +733,25 @@
             completedSentence: "For example, <span class='text-indigoTheme-700 font-bold underline'>managers</span> (Option J) were asked questions about workers’ behaviour after a series of tests of emotional intelligence.",
             correctLetter: "J",
             correctWord: "managers",
-            passageSnippet: "In a recent study at a healthcare company, employees were asked to complete a test about managing and regulating emotions, and then <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>managers were asked to evaluate how much time employees spent helping their colleagues and customers</mark>.",
+            correctAnswer: "J",
+            passageSnippet: "In a recent study at a healthcare company, employees were asked to complete a test about managing and regulating emotions, and then managers were asked to evaluate how much time employees spent helping their colleagues and customers.",
             paragraphRef: "Đoạn 6 (Paragraph 6)",
-            paraphrases: [
-                { qPart: "[ 10 ] were asked questions about workers' behaviour", pPart: "managers were asked to evaluate how much time employees spent helping", meaning: "các nhà quản lý được yêu cầu đánh giá xem nhân viên dành bao nhiêu thời gian giúp đỡ người khác" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Đối tượng được yêu cầu đánh giá hành vi nhân viên",
+                    questionSnippet: "[ 10 ] were asked questions about workers’ behaviour",
+                    passageSnippet: "managers were asked to evaluate how much time employees spent helping their colleagues and customers",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Các cấp quản lý (managers) chính là đối tượng được hỏi (were asked) để đánh giá hành vi giúp đỡ của công nhân."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option A (researchers)",
+                    reason: "Bẫy chủ thể thực hiện: 'Researchers' là nhóm người tiến hành khảo sát, còn nhóm ĐƯỢC HỎI để nhận xét nhân viên là 'managers'."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Cần một danh từ số nhiều chỉ người đóng vai trò chủ ngữ thực hiện việc trả lời câu hỏi đánh giá hành vi nhân viên.",
@@ -582,8 +760,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 6):</strong> Trong nghiên cứu tại công ty y tế, sau khi nhân viên làm bài kiểm tra quản lý cảm xúc, <em>'<strong>managers</strong> were asked to evaluate how much time employees spent helping...'</em>.",
                     "<strong>Xác định chủ thể:</strong> Người được hỏi để đánh giá công nhân chính là các cấp quản lý: <strong>managers</strong>.",
                     "<strong>Kết luận:</strong> Đáp án là ký tự <strong>J (managers)</strong>."
-                ],
-                traps: "Bẫy từ vựng: Thí sinh dễ bị phân vân với 'researchers' (các nhà nghiên cứu). Tuy nhiên, 'researchers' là người đi hỏi, còn người ĐƯỢC HỎI (were asked) để nhận xét công nhân là 'managers'."
+                ]
             },
             vocabHighlights: ["regulating emotions", "evaluate", "unjustly"]
         },
@@ -598,10 +775,25 @@
             completedSentence: "They observed <span class='text-indigoTheme-700 font-bold underline'>no</span> (Option H) difference between workers with high or low emotional intelligence when it came to helpfulness.",
             correctLetter: "H",
             correctWord: "no",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>The relationship between emotional intelligence and helping simply didn’t exist: helping is driven more by our motivations and values</mark>.",
+            correctAnswer: "H",
+            passageSnippet: "The relationship between emotional intelligence and helping simply didn’t exist: helping is driven more by our motivations and values.",
             paragraphRef: "Đoạn 6 (Paragraph 6)",
-            paraphrases: [
-                { qPart: "observed [ 11 ] difference ... when it came to helpfulness", pPart: "relationship between emotional intelligence and helping simply didn’t exist", meaning: "mối liên hệ giữa EQ và sự giúp đỡ hoàn toàn không tồn tại (không hề có sự khác biệt nào giữa người EQ cao và thấp)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Không tồn tại mối liên hệ nào",
+                    questionSnippet: "observed [ 11 ] difference ... when it came to helpfulness",
+                    passageSnippet: "The relationship between emotional intelligence and helping simply didn’t exist",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Mối quan hệ không hề tồn tại (simply didn't exist) đồng nghĩa với việc không thấy có sự khác biệt nào (observed no difference)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option I (significant)",
+                    reason: "Bẫy từ vựng: Bài đọc có câu 'emotional intelligence was significant when examining a different behaviour', nhưng đó là ở vế sau khi nói về việc lên tiếng phản biện, còn với lòng giúp đỡ thì không có mối liên hệ nào."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Cần một từ hạn định phủ định đứng trước danh từ 'difference' để chỉ việc không tìm thấy bất kỳ sự khác biệt nào.",
@@ -610,8 +802,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 6):</strong> Kết quả đánh giá chỉ ra: <em>'The relationship between emotional intelligence and helping <strong>simply didn’t exist</strong>'</em> (mối quan hệ giữa EQ và lòng tốt giúp đỡ đơn giản là không tồn tại).",
                     "<strong>Khớp nghĩa Word Bank:</strong> Mối quan hệ không tồn tại đồng nghĩa với việc họ quan sát thấy KHÔNG CÓ sự khác biệt nào (<em>'observed <strong>no</strong> difference'</em>).",
                     "<strong>Kết luận:</strong> Đáp án là ký tự <strong>H (no)</strong>."
-                ],
-                traps: "Bẫy từ 'significant': Bài đọc có từ 'significant' ở câu tiếp theo nhưng vế đó nói về hành vi phản biện (challenging situations), còn đối với lòng giúp đỡ (helpfulness) thì hoàn toàn không có mối liên hệ nào ('no difference')."
+                ]
             },
             vocabHighlights: ["helpfulness", "motivations", "values"]
         },
@@ -626,10 +817,24 @@
             completedSentence: "They found that workers with higher emotional intelligence felt more comfortable making <span class='text-indigoTheme-700 font-bold underline'>complaints</span> (Option K) than others.",
             correctLetter: "K",
             correctWord: "complaints",
-            passageSnippet: "However, emotional intelligence was significant when examining a different behaviour: <mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>challenging existing situations and speaking up with ideas and suggestions for improvement. Emotionally intelligent employees spoke up more often and more effectively. When colleagues were treated unjustly, they felt they had to speak up, but were able to keep their anger in check and reason with others</mark>.",
+            passageSnippet: "However, emotional intelligence was significant when examining a different behaviour: challenging existing situations and speaking up with ideas and suggestions for improvement. Emotionally intelligent employees spoke up more often and more effectively. When colleagues were treated unjustly, they felt they had to speak up, but were able to keep their anger in check and reason with others.",
             paragraphRef: "Đoạn 6 & 7 (Paragraphs 6 & 7)",
-            paraphrases: [
-                { qPart: "felt more comfortable making [ 12 ]", pPart: "felt they had to speak up / challenging existing situations / spoke up more often and more effectively", meaning: "cảm thấy thoải mái và chủ động lên tiếng phản ánh, khiếu nại, chất vấn bất công (making complaints)" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Dám lên tiếng phản kháng bất công",
+                    questionSnippet: "felt more comfortable making [ 12 ] than others",
+                    passageSnippet: "challenging existing situations and speaking up... When colleagues were treated unjustly, they felt they had to speak up",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Lên tiếng thách thức tình trạng hiện tại và đòi công bằng khi bị đối xử bất công được diễn đạt bằng hành động đưa ra khiếu nại / phàn nàn (making complaints)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option L (decision)",
+                    reason: "Bẫy collocation: 'making decisions' nghe rất thuận tai nhưng bài đọc không bàn về việc ra quyết định mà nhấn mạnh việc 'speaking up when treated unjustly' (lên tiếng khiếu nại)."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Cần một danh từ sau động từ 'making' để miêu tả hành động mà nhân viên có EQ cao cảm thấy tự tin và thoải mái thực hiện hơn những người khác.",
@@ -638,8 +843,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 6 & 7):</strong> EQ cao phát huy tác dụng rõ rệt khi: thách thức hiện trạng (<em>'challenging existing situations'</em>) và lên tiếng phản kháng khi đồng nghiệp bị đối xử bất công (<em>'when colleagues were treated unjustly, they felt they had to speak up'</em>).",
                     "<strong>Khớp nghĩa Word Bank:</strong> Hành động lên tiếng thách thức thực trạng bất công chính là đưa ra những lời phàn nàn / khiếu nại mang tính xây dựng: <strong>complaints</strong> (make complaints = khiếu nại, phản ánh điều chưa đúng).",
                     "<strong>Kết luận:</strong> Đáp án là ký tự <strong>K (complaints)</strong>."
-                ],
-                traps: "Không chọn 'decision' hay 'speeches' vì trong bài không nói họ ra quyết định hay đọc diễn văn, mà là 'speak up when treated unjustly' (khiếu nại, phản ánh bất công)."
+                ]
             },
             vocabHighlights: ["challenging", "unjustly", "advocating"]
         },
@@ -654,11 +858,34 @@
             completedSentence: "Not only that, but their supervisors were more likely to listen because the <span class='text-indigoTheme-700 font-bold underline'>enthusiasm</span> (Option C) of emotionally intelligent people made their ideas easier to accept.",
             correctLetter: "C",
             correctWord: "enthusiasm",
-            passageSnippet: "<mark class='bg-indigo-100 text-indigo-950 font-bold px-1 rounded'>When they brought ideas for innovation to senior leaders, their ability to express enthusiasm helped them avoid threatening leaders</mark>.",
+            correctAnswer: "C",
+            passageSnippet: "When they brought ideas for innovation to senior leaders, their ability to express enthusiasm helped them avoid threatening leaders.",
             paragraphRef: "Đoạn 7 (Paragraph 7)",
-            paraphrases: [
-                { qPart: "supervisors were more likely to listen / made their ideas easier to accept", pPart: "brought ideas for innovation to senior leaders ... avoid threatening leaders", meaning: "trình bày ý tưởng đổi mới tới cấp trên mà không gây cảm giác đe dọa, khiến cấp trên dễ tiếp thu" },
-                { qPart: "the [ 13 ] of emotionally intelligent people", pPart: "their ability to express enthusiasm", meaning: "sự hào hứng, nhiệt huyết của họ" }
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Cấp trên dễ tiếp nhận ý tưởng đổi mới",
+                    questionSnippet: "supervisors were more likely to listen because... made their ideas easier to accept",
+                    passageSnippet: "brought ideas for innovation to senior leaders... helped them avoid threatening leaders",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Các nhà lãnh đạo cấp cao (senior leaders = supervisors) không cảm thấy bị đe dọa, cởi mở lắng nghe ý tưởng hơn."
+                },
+                {
+                    tag: "2",
+                    theme: "Nhờ năng lực biểu đạt sự nhiệt huyết",
+                    questionSnippet: "the [ 13 ] of emotionally intelligent people",
+                    passageSnippet: "their ability to express enthusiasm",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Khả năng thể hiện sự nhiệt huyết (enthusiasm) của nhân viên có EQ cao giúp giảm bớt rào cản phòng vệ của sếp."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option F (speeches)",
+                    reason: "Bẫy ngữ cảnh: Không phải nhờ 'the speeches' mà chính là nhờ thái độ nhiệt huyết, hào hứng ('the enthusiasm') khi trình bày ý tưởng."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Cần một danh từ sau mạo từ 'the' để chỉ phẩm chất/thái độ của người có EQ cao giúp ý tưởng của họ được sếp dễ dàng chấp thuận.",
@@ -667,8 +894,7 @@
                     "<strong>Đối chiếu bài đọc (Đoạn 7):</strong> Câu cuối đoạn 7 khẳng định: Khi mang ý tưởng đổi mới tới các nhà lãnh đạo cấp cao (<em>'senior leaders'</em> = supervisors), <em>'their ability to express <strong>enthusiasm</strong> helped them avoid threatening leaders'</em> (khả năng thể hiện sự nhiệt huyết giúp họ không tạo cảm giác đe dọa lãnh đạo).",
                     "<strong>Khớp nghĩa Word Bank:</strong> Phẩm chất trực tiếp được nêu tên là <strong>enthusiasm</strong> (sự nhiệt tình, hào hứng).",
                     "<strong>Kết luận:</strong> Đáp án là ký tự <strong>C (enthusiasm)</strong>."
-                ],
-                traps: "Từ 'enthusiasm' xuất hiện nguyên vẹn trong văn bản bài đọc, khớp hoàn hảo về mặt ngữ pháp lẫn ngữ nghĩa."
+                ]
             },
             vocabHighlights: ["enthusiasm", "innovation", "senior leaders"]
         }
@@ -751,7 +977,8 @@
     </script>
 
     <script>
-    let currentQuestionIndex = 0; // 0 to 12
+    let currentSlideIndex = 0; // 0 to 12
+    let isAnswerRevealed = false; // default hidden for interactive blind presentation
 
     function initApp() {
         renderNavChips();
@@ -763,229 +990,344 @@
         setupKeyboardNavigation();
     }
 
+    // Nav chips with BLIND selector (no answers leaked on top bar)
     function renderNavChips() {
         const container = document.getElementById('question-nav-chips');
+        if (!container) return;
         container.innerHTML = '';
         questionsData.forEach((q, idx) => {
             const btn = document.createElement('button');
-            const isActive = idx === currentQuestionIndex;
+            const isActive = idx === currentSlideIndex;
+            btn.className = `px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                isActive 
+                ? 'bg-indigoTheme-700 text-white shadow-sm ring-2 ring-indigoTheme-600 ring-offset-1 scale-102' 
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`;
             
-            let badgeBg = 'bg-slate-100 text-slate-700 hover:bg-slate-200';
-            if (isActive) {
-                badgeBg = 'bg-indigoTheme-700 text-white shadow-sm ring-2 ring-indigoTheme-600 ring-offset-1';
-            }
-
-            btn.className = `px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${badgeBg}`;
-            
-            if (q.group === 'ynng') {
-                btn.innerHTML = `Q${q.id}: [ ${q.correctAnswer} ]`;
-            } else {
-                btn.innerHTML = `Q${q.id}: [ ${q.correctLetter} ]`;
-            }
+            const typeLabel = q.group === 'ynng' ? 'YNNG' : 'Word Bank';
+            btn.innerHTML = `
+                <div class="flex items-center gap-1">
+                    <span>Q${q.id}:</span>
+                    <span class="font-extrabold">${typeLabel}</span>
+                </div>
+            `;
 
             btn.onclick = () => {
-                currentQuestionIndex = idx;
+                currentSlideIndex = idx;
+                isAnswerRevealed = false; // reset reveal state when switching slide
                 renderNavChips();
                 renderCurrentSlide();
             };
             container.appendChild(btn);
         });
 
-        const curQ = questionsData[currentQuestionIndex];
-        const typeBadge = document.getElementById('quick-type-badge');
-        if (typeBadge) {
-            typeBadge.textContent = curQ.group === 'ynng' 
-                ? 'Yes / No / Not Given (Q1–Q6)' 
-                : 'Summary with Word Bank (Q7–Q13)';
+        const curQ = questionsData[currentSlideIndex];
+        const badge = document.getElementById('quick-target-badge');
+        if (badge) {
+            badge.textContent = `${curQ.qNum} - ${curQ.type} (${curQ.paragraphRef})`;
         }
 
         const mob = document.getElementById('mobile-curr-indicator');
         if (mob) {
-            mob.textContent = `Câu ${currentQuestionIndex + 1}/13 (${curQ.group === 'ynng' ? curQ.correctAnswer : curQ.correctLetter})`;
+            mob.textContent = `${curQ.qNum}: ${curQ.group === 'ynng' ? 'Yes/No/NG' : 'Word Bank'}`;
         }
     }
 
-    function navigateQuestion(delta) {
-        const next = currentQuestionIndex + delta;
+    function navigateSlide(delta) {
+        const next = currentSlideIndex + delta;
         if (next >= 0 && next < questionsData.length) {
-            currentQuestionIndex = next;
+            currentSlideIndex = next;
+            isAnswerRevealed = false;
             renderNavChips();
             renderCurrentSlide();
             window.scrollTo({ top: 120, behavior: 'smooth' });
         }
     }
 
+    function toggleAnswerReveal() {
+        isAnswerRevealed = !isAnswerRevealed;
+        renderCurrentSlide();
+    }
+
+    function checkUserGuess(guessedVal) {
+        const q = questionsData[currentSlideIndex];
+        const msgContainer = document.getElementById('user-guess-feedback');
+        if (!msgContainer) return;
+
+        let isCorrect = false;
+        if (q.group === 'ynng') {
+            isCorrect = (guessedVal.toUpperCase() === q.correctAnswer.toUpperCase());
+        } else {
+            isCorrect = (guessedVal.toUpperCase() === q.correctLetter.toUpperCase());
+        }
+
+        if (isCorrect) {
+            let correctDisplayText = q.correctAnswer;
+            if (q.group === 'summary') {
+                correctDisplayText = `[ ${q.correctLetter} ] ${q.correctWord.toUpperCase()}`;
+            }
+            msgContainer.innerHTML = `
+                <div class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm font-bold flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                    <span>Chính xác tuyệt đối! Đáp án chuẩn xác là <strong>${correctDisplayText}</strong>.</span>
+                </div>
+            `;
+            isAnswerRevealed = true;
+            setTimeout(() => {
+                renderCurrentSlide();
+            }, 600);
+        } else {
+            msgContainer.innerHTML = `
+                <div class="p-3 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl text-sm font-bold flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-rose-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    <span>Lựa chọn <strong>${guessedVal}</strong> chưa chính xác. Hãy đối chiếu kỹ từ khóa và lập luận trong bài!</span>
+                </div>
+            `;
+        }
+    }
+
     function renderCurrentSlide() {
-        const q = questionsData[currentQuestionIndex];
+        const q = questionsData[currentSlideIndex];
         const container = document.getElementById('slide-card-container');
+        if (!container) return;
+        
         const counter = document.getElementById('slide-counter-badge');
         if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnRevealText = document.getElementById('btn-reveal-text');
+        if (btnRevealText) {
+            btnRevealText.textContent = isAnswerRevealed ? 'Ẩn Phân Tích & Reset' : 'Hiện Đáp Án & Khớp Nối';
+        }
 
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
         if (btnPrev) {
-            btnPrev.disabled = currentQuestionIndex === 0;
-            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+            btnPrev.disabled = currentSlideIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentSlideIndex === 0);
         }
         if (btnNext) {
-            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
-            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+            btnNext.disabled = currentSlideIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentSlideIndex === questionsData.length - 1);
         }
 
         let ansBadgeColor = 'bg-indigoTheme-700 text-white';
-        let ansDisplay = '';
+        let ansDisplayText = '';
         if (q.group === 'ynng') {
-            ansDisplay = `Đáp án: ${q.correctAnswer}`;
+            ansDisplayText = `ĐÁP ÁN: ${q.correctAnswer}`;
             if (q.correctAnswer === 'YES') ansBadgeColor = 'bg-emerald-600 text-white';
             if (q.correctAnswer === 'NO') ansBadgeColor = 'bg-rose-600 text-white';
             if (q.correctAnswer === 'NOT GIVEN') ansBadgeColor = 'bg-amber-500 text-white';
         } else {
-            ansDisplay = `Đáp án: [ ${q.correctLetter} ] — ${q.correctWord.toUpperCase()}`;
+            ansDisplayText = `ĐÁP ÁN: [ ${q.correctLetter} ] — ${q.correctWord.toUpperCase()}`;
+        }
+
+        let displayStatementText = q.statementText;
+        let displayPassageSnippet = q.passageSnippet;
+
+        if (isAnswerRevealed && q.keyCriteria) {
+            q.keyCriteria.forEach(item => {
+                if (item.questionSnippet && displayStatementText.includes(item.questionSnippet)) {
+                    displayStatementText = displayStatementText.replace(item.questionSnippet, `<span class="${item.colorClassHl} font-bold px-1 rounded">${item.questionSnippet}</span>`);
+                }
+                if (item.passageSnippet && displayPassageSnippet.includes(item.passageSnippet)) {
+                    displayPassageSnippet = displayPassageSnippet.replace(item.passageSnippet, `<span class="${item.colorClassHl} font-bold px-1 rounded">${item.passageSnippet}</span>`);
+                }
+            });
         }
 
         container.innerHTML = `
-            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all space-y-6">
                 
-                <!-- Slide Header -->
+                <!-- Slide Header Banner -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
                     <div class="flex items-center gap-3">
-                        <span class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigoTheme-800 flex items-center justify-center font-extrabold text-base border border-indigo-200">
+                        <span class="w-12 h-12 rounded-2xl bg-indigoTheme-100 text-indigoTheme-800 flex items-center justify-center font-black text-lg border border-indigoTheme-200 shadow-2xs">
                             ${q.id}
                         </span>
                         <div>
-                            <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700">${q.type}</span>
-                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">${q.qNum}: ${q.contextHeader}</h3>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs uppercase font-extrabold tracking-wider text-indigoTheme-700">${q.type}</span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-black text-slate-900">${q.qNum} <span class="text-slate-500 text-sm font-normal">— ${q.contextHeader}</span></h3>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                        <span class="text-xs font-semibold px-3 py-1.5 bg-slate-100 text-slate-600 rounded-xl border border-slate-200">
                             Yêu cầu: ${q.wordLimit}
                         </span>
-                        <span class="text-xs font-semibold px-3 py-1 bg-indigo-50 text-indigoTheme-700 rounded-full border border-indigo-200">
-                            ${q.paragraphRef}
-                        </span>
                     </div>
                 </div>
 
-                <!-- Statement Prompt Box -->
-                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                        ${q.group === 'ynng' ? 'Nhận Định Kiểm Tra Quan Điểm (Statement)' : 'Nội Dung Câu Tóm Tắt Chứa Chỗ Trống (Summary)'}
-                    </span>
-                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">"${q.statementText}"</p>
-                </div>
+                <!-- Focus Mode: Side-by-Side Comparison Workspace -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
+                    <!-- Left: Task & Statement Prompt Card -->
+                    <div class="lg:col-span-6 bg-slate-50/80 rounded-2xl p-5 border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigoTheme-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    Nội Dung Cần Thẩm Định (${q.group === 'ynng' ? 'Statement' : 'Summary Blank'})
+                                </span>
+                                <span class="text-xs text-slate-400 font-mono">${q.paragraphRef}</span>
+                            </div>
+                            <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed bg-white/90 p-4 rounded-xl border border-slate-200">"${displayStatementText}"</p>
+                            
+                            <div class="mt-4">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Trích đoạn chứng cứ trong bài:</span>
+                                <p class="text-sm font-medium text-slate-700 italic bg-indigo-50/50 p-3.5 rounded-xl border border-indigo-200/60 leading-relaxed">"${displayPassageSnippet}"</p>
+                            </div>
+                        </div>
 
-                <!-- Answer Reveal Banner -->
-                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-indigo-50/80 via-purple-50/50 to-white border border-indigo-200">
-                    <div>
-                        <span class="text-xs font-extrabold uppercase tracking-wider text-indigoTheme-700">Đáp Án Chuẩn Xác</span>
-                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
-                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm ${ansBadgeColor} answer-badge">
-                                ${ansDisplay}
+                        <!-- Interactive Guessing Pad -->
+                        <div class="mt-5 pt-4 border-t border-slate-200/80">
+                            <span class="text-xs font-bold text-slate-500 block mb-2">
+                                ${q.group === 'ynng' 
+                                    ? 'Học sinh tự chọn thử đáp án (YES / NO / NOT GIVEN):' 
+                                    : 'Chọn từ phù hợp từ Hộp Từ Vựng A–L:'}
                             </span>
+                            <div class="flex flex-wrap gap-2">
+                                ${q.group === 'ynng' ? ['YES', 'NO', 'NOT GIVEN'].map(ans => `
+                                    <button onclick="checkUserGuess('${ans}')" class="px-4 py-2 rounded-xl font-extrabold text-xs border transition-all ${
+                                        isAnswerRevealed && ans === q.correctAnswer 
+                                        ? `${ansBadgeColor} border-transparent shadow-sm ring-2 ring-indigoTheme-400` 
+                                        : 'bg-white text-slate-700 hover:bg-slate-100 border-slate-300'
+                                    }">
+                                        ${ans}
+                                    </button>
+                                `).join('') : wordBankData.map(item => `
+                                    <button onclick="checkUserGuess('${item.key}')" class="px-3 py-1.5 rounded-xl font-bold text-xs border transition-all ${
+                                        isAnswerRevealed && item.key === q.correctLetter 
+                                        ? `${ansBadgeColor} border-transparent shadow-sm ring-2 ring-indigoTheme-400` 
+                                        : 'bg-white text-slate-700 hover:bg-slate-100 border-slate-300'
+                                    }">
+                                        [${item.key}] ${item.text}
+                                    </button>
+                                `).join('')}
+                            </div>
+                            <div id="user-guess-feedback" class="mt-2.5"></div>
                         </div>
                     </div>
 
-                    <button onclick="playSpeech('${q.group === 'ynng' ? q.statementText.replace(/'/g, "\\'") : q.correctWord}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        <span>${q.group === 'ynng' ? 'Phát âm nhận định' : 'Phát âm từ điền'}</span>
-                    </button>
+                    <!-- Right: Verified Answer & Analysis Preview -->
+                    <div class="lg:col-span-6 rounded-2xl p-5 border transition-all flex flex-col justify-between ${
+                        isAnswerRevealed 
+                        ? 'bg-gradient-to-br from-indigoTheme-50/70 via-purple-50/30 to-white border-indigoTheme-300 shadow-sm' 
+                        : 'bg-slate-50 border-dashed border-slate-300'
+                    }">
+                        ${isAnswerRevealed ? `
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-black uppercase tracking-wider text-indigoTheme-800 flex items-center gap-1.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                        Đáp Án Thẩm Định Chuẩn Xác
+                                    </span>
+                                    <button onclick="playSpeech('${(q.completedSentence || q.statementText).replace(/'/g, "\\'")}')" class="text-indigoTheme-700 hover:text-indigoTheme-900 flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded bg-white border border-slate-200" title="Phát âm câu hỏi">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-indigoTheme-700" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                        <span>Nghe nhận định</span>
+                                    </button>
+                                </div>
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="text-2xl sm:text-3xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm ${ansBadgeColor} answer-badge">
+                                        ${ansDisplayText}
+                                    </span>
+                                </div>
+                                <p class="text-sm font-semibold text-slate-800 leading-relaxed">${q.vietnameseAnalysis.logic}</p>
+
+                                ${q.completedSentence ? `
+                                    <div class="mt-4 p-3.5 rounded-xl bg-slate-900 text-white text-xs sm:text-sm">
+                                        <span class="text-indigo-300 font-bold uppercase tracking-wider block mb-1">Câu hoàn chỉnh:</span>
+                                        <p class="font-medium">${q.completedSentence}</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-indigoTheme-200/60 flex items-center justify-between">
+                                <span class="text-xs font-bold text-indigoTheme-900">Vị trí bài đọc: <strong>${q.paragraphRef}</strong></span>
+                                <span class="text-xs font-mono font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-md">Chứng cứ chuẩn xác</span>
+                            </div>
+                        ` : `
+                            <div class="flex flex-col items-center justify-center h-full py-10 text-center text-slate-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mb-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                <p class="text-sm font-semibold text-slate-600 mb-1">Chế độ Tập Trung Độc Lập (Focus Mode)</p>
+                                <p class="text-xs text-slate-400 max-w-sm">Đọc kỹ đề bài bên trái, chọn thử một phương án hoặc bấm nút <strong>"Hiện Đáp Án & Khớp Nối"</strong> để xem phân tích đối chiếu chi tiết.</p>
+                            </div>
+                        `}
+                    </div>
+
                 </div>
 
-                ${q.completedSentence ? `
-                    <!-- Completed Summary Sentence Box -->
-                    <div class="mt-4 p-4 rounded-xl bg-slate-900 text-white text-sm sm:text-base leading-relaxed">
-                        <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider block mb-1">Câu tóm tắt hoàn chỉnh:</span>
-                        <p class="font-medium">${q.completedSentence}</p>
+                ${isAnswerRevealed ? `
+                    <!-- Color-Coded Paired Alignment Breakdown -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigoTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-slate-900">Bảng Khớp Nối Từng Chi Tiết (Highlights & Underlines Alignment)</h4>
+                        </div>
+
+                        <div class="space-y-3">
+                            ${q.keyCriteria.map(item => `
+                                <div class="p-4 rounded-xl border bg-white shadow-2xs space-y-2">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 rounded text-xs font-black uppercase ${item.colorClassChip}">Tiêu chí ${item.tag}</span>
+                                        <span class="text-xs font-bold text-slate-800">${item.theme}</span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+                                            <span class="text-[11px] font-bold text-slate-400 uppercase block mb-1">Cụm từ trong Đề Thi / Nhận Định:</span>
+                                            <p class="${item.colorClassHl} font-semibold inline">"${item.questionSnippet}"</p>
+                                        </div>
+                                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+                                            <span class="text-[11px] font-bold text-slate-400 uppercase block mb-1">Câu văn trong ${q.paragraphRef}:</span>
+                                            <p class="${item.colorClassHl} font-semibold inline">"${item.passageSnippet}"</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-slate-600 mt-1 italic pl-1 border-l-2 border-indigoTheme-500">${item.expl}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Distractor Traps & Why not others -->
+                    <div class="bg-amberTheme-50/50 border border-amberTheme-200 rounded-2xl p-5 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amberTheme-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-amberTheme-800">Cảnh Báo Bẫy Gây Nhiễu (Tại sao không chọn các phương án khác?)</h4>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${q.distractorTraps.map(trap => `
+                                <div class="bg-white p-3.5 rounded-xl border border-amber-200 text-xs">
+                                    <span class="font-extrabold text-red-700 block mb-1">❌ ${trap.option}</span>
+                                    <p class="text-slate-700 leading-relaxed">${trap.reason}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Step-by-Step Logic in Vietnamese -->
+                    <div class="bg-indigoTheme-50/40 border border-indigoTheme-200 rounded-2xl p-5 space-y-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigoTheme-800 block">Tóm Tắt Logic Giải Bài (Tiếng Việt)</span>
+                        <p class="text-sm font-medium text-slate-800 mb-2">${q.vietnameseAnalysis.logic}</p>
+                        <ul class="space-y-1.5 pl-4 list-disc text-xs sm:text-sm text-slate-700">
+                            ${q.vietnameseAnalysis.stepByStep.map(step => `<li>${step}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- Associated Vocabulary Chips -->
+                    <div class="pt-4 border-t border-slate-100">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">Từ Vựng Trọng Tâm Trong Câu Này:</span>
+                        <div class="flex flex-wrap gap-2">
+                            ${q.vocabHighlights.map(v => `
+                                <button onclick="playSpeech('${v}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:border-indigoTheme-400 transition-colors shadow-2xs">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-indigoTheme-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    <span>${v}</span>
+                                </button>
+                            `).join('')}
+                        </div>
                     </div>
                 ` : ''}
-
-                <!-- Evidence in Reading Passage -->
-                <div class="mt-6">
-                    <div class="flex items-center gap-2 mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigoTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Bằng Chứng (${q.paragraphRef})</h4>
-                    </div>
-                    <div class="p-5 rounded-2xl bg-indigo-50/40 border border-indigo-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
-                        "${q.passageSnippet}"
-                    </div>
-                </div>
-
-                <!-- Paraphrase & Synonym Mapping Table -->
-                <div class="mt-6">
-                    <div class="flex items-center gap-2 mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Paraphrase</h4>
-                    </div>
-                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
-                        <table class="w-full text-left border-collapse text-sm">
-                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
-                                <tr>
-                                    <th class="py-2.5 px-4 w-1/3">Nhận định / Tóm tắt (${q.qNum})</th>
-                                    <th class="py-2.5 px-4 w-1/3">Văn bản bài đọc (${q.paragraphRef})</th>
-                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100 bg-white">
-                                ${q.paraphrases.map(p => `
-                                    <tr>
-                                        <td class="py-3 px-4 font-semibold text-indigo-800 bg-indigo-50/30">${p.qPart}</td>
-                                        <td class="py-3 px-4 font-semibold text-purple-800 bg-purple-50/20">${p.pPart}</td>
-                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Vietnamese In-Depth Explanation & Logic -->
-                <div class="mt-6 bg-indigo-50/40 border border-indigo-200/80 rounded-2xl p-6">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="w-2.5 h-2.5 rounded-full bg-indigoTheme-600"></span>
-                        <h4 class="text-sm font-bold uppercase tracking-wider text-indigoTheme-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
-                    </div>
-
-                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
-
-                    <div class="space-y-2 mb-4">
-                        ${q.vietnameseAnalysis.stepByStep.map(step => `
-                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
-                                <span class="text-indigoTheme-600 mt-1 font-bold">▸</span>
-                                <div>${step}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-
-                    ${q.vietnameseAnalysis.traps ? `
-                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
-                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
-                            <span>${q.vietnameseAnalysis.traps}</span>
-                        </div>
-                    ` : ''}
-                </div>
-
-                <!-- Highlighted Vocabulary in this question -->
-                <div class="mt-6 pt-5 border-t border-slate-100">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
-                    <div class="flex flex-wrap gap-3">
-                        ${q.vocabHighlights.map(v => {
-                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
-                            return `
-                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-indigo-400 transition-colors">
-                                    <button onclick="playSpeech('${v}')" class="text-indigoTheme-700 hover:text-indigoTheme-900" title="Nghe phát âm chuẩn UK">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                    </button>
-                                    <div>
-                                        <span class="font-bold text-sm text-slate-900">${v}</span>
-                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
-                                        <span class="text-xs text-indigoTheme-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                </div>
 
             </div>
         `;
@@ -993,6 +1335,7 @@
 
     function renderAllQuestionsList(filter = 'all') {
         const container = document.getElementById('all-questions-container');
+        if (!container) return;
         container.innerHTML = '';
 
         const filtered = questionsData.filter(q => {
@@ -1039,16 +1382,22 @@
                     <p class="font-bold text-slate-800">"${q.statementText}"</p>
                 </div>
 
+                ${q.completedSentence ? `
+                    <div class="bg-slate-900 text-white p-3 rounded-xl mb-3 text-xs sm:text-sm">
+                        <strong class="text-indigo-400">Câu tóm tắt hoàn chỉnh:</strong> ${q.completedSentence}
+                    </div>
+                ` : ''}
+
                 <div class="bg-indigo-50/60 p-3.5 rounded-xl border border-indigo-200/80 mb-4 text-xs sm:text-sm italic text-slate-700">
                     <strong>Manh mối bài đọc (${q.paragraphRef}):</strong> "${q.passageSnippet}"
                 </div>
 
                 <div class="mb-4">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Tiêu chí đối chiếu cốt lõi:</span>
                     <div class="flex flex-wrap gap-2">
-                        ${q.paraphrases.map(p => `
+                        ${q.keyCriteria.map(p => `
                             <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
-                                <span class="text-indigo-700 font-bold">${p.qPart}</span> ➔ <span class="text-purple-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                                <span class="text-indigoTheme-700 font-bold">${p.questionSnippet}</span> ➔ <span class="text-purple-800 font-bold">${p.passageSnippet}</span>: <em>${p.expl}</em>
                             </div>
                         `).join('')}
                     </div>
@@ -1060,7 +1409,6 @@
                     <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
                         ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
                     </ul>
-                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
                 </div>
             `;
             container.appendChild(card);
@@ -1079,6 +1427,7 @@
 
     function renderWordBankGrid() {
         const container = document.getElementById('wordbank-grid-container');
+        if (!container) return;
         container.innerHTML = '';
 
         wordBankData.forEach(item => {
@@ -1123,37 +1472,39 @@
 
     function renderSynonymsTable() {
         const tbody = document.getElementById('synonyms-table-body');
+        if (!tbody) return;
         tbody.innerHTML = '';
 
         questionsData.forEach(q => {
-            q.paraphrases.forEach((p, pIndex) => {
+            q.keyCriteria.forEach((crit, cIdx) => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-50/80 transition-colors";
-                
-                let answerDisplay = '';
+
+                let ansBadge = 'bg-indigoTheme-700 text-white';
+                let ansText = q.correctAnswer;
                 if (q.group === 'ynng') {
-                    answerDisplay = q.correctAnswer;
+                    if (q.correctAnswer === 'YES') ansBadge = 'bg-emerald-600 text-white';
+                    if (q.correctAnswer === 'NO') ansBadge = 'bg-rose-600 text-white';
+                    if (q.correctAnswer === 'NOT GIVEN') ansBadge = 'bg-amber-500 text-white';
                 } else {
-                    answerDisplay = `[ ${q.correctLetter} ] ${q.correctWord}`;
+                    ansText = `[ ${q.correctLetter} ] ${q.correctWord}`;
                 }
 
                 tr.innerHTML = `
                     <td class="py-3 px-4 text-center font-bold text-slate-700">
-                        ${pIndex === 0 ? `<span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                        ${cIdx === 0 ? `<span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-lg block font-mono">Q${q.id}</span>` : ''}
                     </td>
                     <td class="py-3 px-4">
-                        <span class="keyword-chip">${p.qPart}</span>
+                        <span class="${crit.colorClassHl} px-1.5 py-0.5 rounded font-semibold text-xs leading-relaxed block">${crit.questionSnippet}</span>
                     </td>
                     <td class="py-3 px-4">
-                        <span class="passage-chip">${p.pPart}</span>
+                        <span class="${crit.colorClassHl} px-1.5 py-0.5 rounded font-semibold text-xs leading-relaxed block">${crit.passageSnippet}</span>
                     </td>
                     <td class="py-3 px-4 text-center">
-                        <span class="text-xs font-bold uppercase px-2.5 py-1 bg-indigoTheme-700 text-white rounded shadow-2xs">
-                            ${answerDisplay}
-                        </span>
+                        ${cIdx === 0 ? `<span class="text-xs font-bold uppercase px-2.5 py-1 rounded shadow-2xs ${ansBadge}">${ansText}</span>` : ''}
                     </td>
-                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
-                        ${p.meaning}
+                    <td class="py-3 px-4 text-slate-700 text-xs">
+                        ${crit.expl}
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -1163,6 +1514,7 @@
 
     function renderVocabGrid(filterWord = '') {
         const container = document.getElementById('vocab-grid-container');
+        if (!container) return;
         container.innerHTML = '';
 
         const words = Object.keys(vocabData).filter(w => {
@@ -1240,9 +1592,9 @@
             const presView = document.getElementById('view-presentation');
             if (presView && !presView.classList.contains('hidden')) {
                 if (e.key === 'ArrowRight') {
-                    navigateQuestion(1);
+                    navigateSlide(1);
                 } else if (e.key === 'ArrowLeft') {
-                    navigateQuestion(-1);
+                    navigateSlide(-1);
                 }
             }
         });

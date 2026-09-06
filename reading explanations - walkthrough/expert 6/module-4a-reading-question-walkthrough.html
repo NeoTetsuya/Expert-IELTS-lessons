@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IELTS Reading Masterclass | Ig Nobel Prizes for Unusual Research</title>
+    <title>IELTS Reading Masterclass | Recognising Scientific Achievement & Ig Nobel Prizes</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,7 +51,7 @@
         .gradient-border {
             position: relative;
             background: linear-gradient(135deg, #ffffff, #fffdfa);
-            border: 1px solid rgba(226, 232, 240, 0.85);
+            border: 1px solid rgba(226, 232, 240, 0.9);
         }
         .gradient-border::before {
             content: '';
@@ -61,28 +61,14 @@
             border-top-left-radius: inherit;
             border-top-right-radius: inherit;
         }
-        .keyword-chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.18rem 0.58rem;
-            border-radius: 0.375rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background-color: #fef3c7;
-            color: #92400e;
-            border: 1px solid #fde68a;
-        }
-        .passage-chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.18rem 0.58rem;
-            border-radius: 0.375rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background-color: #e0e7ff;
-            color: #3730a3;
-            border: 1px solid #c7d2fe;
-        }
+        .paired-chip-1 { background-color: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+        .paired-chip-2 { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .paired-chip-3 { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        
+        .paired-hl-1 { background-color: #dbeafe; color: #1e3a8a; text-decoration: underline; text-decoration-color: #3b82f6; text-decoration-thickness: 2.5px; text-underline-offset: 3px; }
+        .paired-hl-2 { background-color: #fef3c7; color: #78350f; text-decoration: underline; text-decoration-color: #f59e0b; text-decoration-thickness: 2.5px; text-underline-offset: 3px; }
+        .paired-hl-3 { background-color: #dcfce7; color: #14532d; text-decoration: underline; text-decoration-color: #22c55e; text-decoration-thickness: 2.5px; text-underline-offset: 3px; }
+
         .answer-badge {
             animation: pulseSubtle 3s infinite;
         }
@@ -94,7 +80,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-amber-100 selection:text-amber-900">
 
-    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 transition-all shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -105,14 +91,14 @@
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs uppercase font-extrabold tracking-wider text-nobelTheme-700 bg-nobelTheme-50 px-2 py-0.5 rounded-full border border-nobelTheme-200">IELTS Reading Analysis</span>
-                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Phân tích chuyên sâu 4 câu Matching Features</span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-nobelTheme-700 bg-nobelTheme-50 px-2 py-0.5 rounded-full border border-nobelTheme-200">IELTS Reading Masterclass</span>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Focus Slide Presentation Mode</span>
                         </div>
-                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">Scientists Awarded Ig Nobel Prizes for Unusual Research</h1>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">Recognising Scientific Achievement & Ig Nobel Prizes (Questions 1–8)</h1>
                     </div>
                 </div>
                 <div class="md:hidden">
-                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-nobelTheme-100 text-nobelTheme-800 px-2.5 py-1 rounded-lg">Câu 1/4</span>
+                    <span id="mobile-curr-indicator" class="text-xs font-bold bg-nobelTheme-100 text-nobelTheme-800 px-2.5 py-1 rounded-lg">Câu 1/8</span>
                 </div>
             </div>
 
@@ -122,7 +108,13 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                     </svg>
-                    <span>Slide Từng Câu</span>
+                    <span>Focus Presentation Mode</span>
+                </button>
+                <button id="tab-passages" onclick="switchView('passages')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span>2 Bài Đọc Gốc (Full Texts)</span>
                 </button>
                 <button id="tab-all" onclick="switchView('all')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -134,7 +126,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                     </svg>
-                    <span>4 Hồ Sơ Nghiên Cứu</span>
+                    <span>Giải Thưởng & Hồ Sơ</span>
                 </button>
                 <button id="tab-synonyms" onclick="switchView('synonyms')" class="view-tab-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -154,59 +146,112 @@
 
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
 
-        <!-- VIEW 1: PRESENTATION / SLIDE MODE -->
+        <!-- VIEW 1: PRESENTATION FOCUS MODE (BLIND SELECTOR) -->
         <section id="view-presentation" class="space-y-6 block">
             
-            <!-- Quick Question Selector Chips -->
+            <!-- Quick Question Selector Chips (Blind selector: no answers leaked upfront) -->
             <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
                 <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi:</span>
-                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-type-badge">Matching Features (Q1–Q4)</span>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Chọn nhanh câu hỏi (Focus Slide):</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium" id="quick-target-badge">Câu 1: Part 1 - Prizes (A–C)</span>
                     </div>
                     <div class="text-xs text-slate-400 flex items-center gap-2">
-                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển câu</span>
+                        <span>Dùng phím <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-600 font-mono">→</kbd> để chuyển slide</span>
                     </div>
                 </div>
 
                 <div class="flex flex-wrap gap-2" id="question-nav-chips">
-                    <!-- Dynamic question buttons inserted by JS -->
+                    <!-- Dynamic blind chips inserted by JS -->
                 </div>
             </div>
 
-            <!-- Slide Main Card -->
+            <!-- Slide Main Card Container -->
             <div id="slide-card-container" class="relative">
-                <!-- Dynamically rendered slide content -->
+                <!-- Dynamically populated slide card -->
             </div>
 
             <!-- Bottom Navigation Bar -->
             <div class="flex items-center justify-between bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
-                <button onclick="navigateQuestion(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
+                <button onclick="navigateSlide(-1)" id="btn-prev" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 font-semibold text-slate-700 hover:bg-slate-50 active:scale-95 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                     <span>Câu Trước</span>
                 </button>
 
                 <div class="flex items-center gap-3">
-                    <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 4</span>
+                    <span id="slide-counter-badge" class="font-bold text-slate-800 text-base font-mono">1 / 8</span>
+                    <button onclick="toggleAnswerReveal()" id="btn-toggle-reveal" class="text-xs font-bold px-4 py-2 rounded-xl bg-nobelTheme-50 text-nobelTheme-700 border border-nobelTheme-200 hover:bg-nobelTheme-100 transition-all flex items-center gap-1.5 shadow-2xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                        <span id="btn-reveal-text">Hiện Đáp Án & Khớp Nối</span>
+                    </button>
                 </div>
 
-                <button onclick="navigateQuestion(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-nobelTheme-700 hover:bg-nobelTheme-800 text-white font-semibold shadow-md shadow-nobelTheme-900/10 active:scale-95 transition-all">
+                <button onclick="navigateSlide(1)" id="btn-next" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-nobelTheme-700 hover:bg-nobelTheme-800 text-white font-semibold shadow-md shadow-nobelTheme-900/10 active:scale-95 transition-all">
                     <span>Câu Kế Tiếp</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </button>
             </div>
         </section>
 
-        <!-- VIEW 2: ALL QUESTIONS CONTINUOUS LIST -->
+        <!-- VIEW 2: FULL ORIGINAL PASSAGES -->
+        <section id="view-passages" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-nobelTheme-600"></span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-nobelTheme-700">Complete Reading Source Texts</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Văn Bản 2 Bài Đọc Gốc Đầy Đủ</h2>
+                        <p class="text-sm text-slate-600 mt-1">Đọc toàn văn hai bài đọc để nắm bắt cấu trúc ngữ cảnh và tự định vị manh mối bằng chứng cho cả 8 câu hỏi.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                    <!-- Passage 1 Box -->
+                    <div class="bg-amber-50/40 border border-amber-200/80 rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center justify-between border-b border-amber-200/60 pb-3">
+                            <span class="px-2.5 py-1 rounded bg-amber-100 text-amber-900 font-extrabold text-xs uppercase tracking-wider">Bài Đọc Phần 1</span>
+                            <span class="text-xs text-slate-500 font-mono">Dành cho Câu 1–4</span>
+                        </div>
+                        <h3 class="text-lg font-black text-slate-900 tracking-tight">RECOGNISING SCIENTIFIC ACHIEVEMENT</h3>
+                        <div class="text-sm leading-relaxed text-slate-700 space-y-3">
+                            <p>There are countless awards and prizes in science. Many institutes offer their own national awards, and then there are international prizes too. Probably the most famous of all of these are the annual Nobel Prizes. Established in his will, the awards were the creation of Swedish chemist Alfred Nobel. They have recognised significant achievements in disciplines including chemistry, physics and medicine since 1895. Each prize can be given to more than one scientist, although one cannot be offered to teams of more than three. Winners attend a formal dinner and receive a gold medal, a diploma and a sum of money, which could be as much as $1 million.</p>
+                            <p>The UNESCO Niels Bohr Medal was first given 100 years after the birth of quantum physicist Niels Bohr to commemorate his contribution to science. Unlike the Nobel Prize, it is not an annual award. The medal has been given out a dozen times since 1985 to people whose research in physics has or could make a significant impact on the world. In 2010, three different researchers were given the medal for their outstanding work.</p>
+                            <p>The world’s oldest surviving prize for science is the UK’s Royal Society’s Copley Medal. It is not only for physicists. It is given each year to any researchers who have made a significant achievement in an area of science. It was first given in 1731, 170 years before the first Nobel Prize was won. Today it consists of a silver medal and £5000 but the original prize was the interest on £100 donated by wealthy landowner Sir Godfrey Copley.</p>
+                            <p>Finally, the Ig Nobel prizes aim to recognise research which first makes us smile and then makes us think. While their research may not change the world, the researchers’ unusual experiments offer an insight into how something – often small and sometimes unimportant – works. Every year the prizes are given out at a humorous award ceremony. Only Sir Andre Geim has won both the Ig Nobel Prize and Nobel Prize. He won the former for his research into using magnets to raise a frog into the air. He won the latter with his later work on the discovery of graphene, a form of carbon.</p>
+                        </div>
+                    </div>
+
+                    <!-- Passage 2 Box -->
+                    <div class="bg-indigo-50/40 border border-indigo-200/80 rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center justify-between border-b border-indigo-200/60 pb-3">
+                            <span class="px-2.5 py-1 rounded bg-indigo-100 text-indigo-900 font-extrabold text-xs uppercase tracking-wider">Bài Đọc Phần 2</span>
+                            <span class="text-xs text-slate-500 font-mono">Dành cho Câu 5–8</span>
+                        </div>
+                        <h3 class="text-lg font-black text-slate-900 tracking-tight">SCIENTISTS AWARDED IG NOBEL PRIZES FOR UNUSUAL RESEARCH</h3>
+                        <div class="text-sm leading-relaxed text-slate-700 space-y-3">
+                            <p><strong>[Đoạn 1 - Michael Smith]:</strong> Michael Smith, of Cornell University, was stung several times a day in different places on his body to find out which parts are the most sensitive. After weeks of research he found that many bee and wasp stings were uncomfortable, and the worst places to be stung were the upper lip and nostril, with the latter being the most painful.</p>
+                            <p><strong>[Đoạn 2 - Justin Schmidt]:</strong> He created the Schmidt Sting Pain Index which rates pain caused by bees, wasps and ants. Schmidt believes he’s been stung more than a thousand times by 150 different species. While a honey bee only provides a level-two sting, a bullet ant causes the most pain at level four.</p>
+                            <p><strong>[Đoạn 3 - Oxford University]:</strong> The scientists learnt that doctors can diagnose appendicitis – a serious medical condition – by the levels of pain the patient feels when travelling over speed bumps. Dr Helen Ashdown of the University of Oxford said: ‘It may sound odd, but asking patients whether their pain worsened going over speed bumps on their way to hospital could help doctors in a diagnosis.’ Once doctors have used this method to determine what the problem is, they can give the patient the correct medical treatment more quickly.</p>
+                            <p><strong>[Đoạn 4 - The University of Chile]:</strong> It went to scientists from the University of Chile who attached a weighted stick to the back end of a chicken. The stick, which shared similar characteristics to a tail, resulted in the bird walking in a similar manner to a dinosaur.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 3: ALL QUESTIONS CONTINUOUS LIST -->
         <section id="view-all" class="space-y-6 hidden">
             <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 4 Câu Matching Features</h2>
-                    <p class="text-sm text-slate-500">Xem toàn bộ câu hỏi, đáp án chuẩn xác, bằng chứng bài đọc, ma trận từ đồng nghĩa và giải thích logic tiếng Việt.</p>
+                    <h2 class="text-lg font-bold text-slate-900">Danh Sách Toàn Diện 8 Câu Matching Features</h2>
+                    <p class="text-sm text-slate-500">Xem toàn bộ bằng chứng hai bài đọc, đáp án chuẩn xác, đối chiếu từ vựng tương đương và giải thích logic tiếng Việt.</p>
                 </div>
-                <div class="bg-nobelTheme-50 border border-nobelTheme-200 rounded-xl px-4 py-2 text-center">
-                    <span class="text-xs text-nobelTheme-700 font-bold uppercase">Dạng Bài</span>
-                    <span class="text-sm font-extrabold text-nobelTheme-900 block">MATCHING FEATURES (A–D)</span>
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="filterAllQuestions('all')" class="filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-nobelTheme-700 text-white">Tất Cả (1–8)</button>
+                    <button onclick="filterAllQuestions('part1')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Part 1: Scientific Prizes (1–4)</button>
+                    <button onclick="filterAllQuestions('part2')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Part 2: Ig Nobel Research (5–8)</button>
                 </div>
             </div>
 
@@ -215,27 +260,43 @@
             </div>
         </section>
 
-        <!-- VIEW 3: RESEARCH PROFILES (OPTIONS A–D) -->
+        <!-- VIEW 4: RESEARCH PROFILES & PRIZES (OPTIONS A–C & A–D) -->
         <section id="view-profiles" class="space-y-6 hidden">
             <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="w-3 h-3 rounded-full bg-nobelTheme-600"></span>
-                            <span class="text-xs uppercase font-extrabold tracking-wider text-nobelTheme-700">The 4 Ig Nobel Laureates (Options A–D)</span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-nobelTheme-700">Scientific Awards & Research Profiles</span>
                         </div>
-                        <h2 class="text-2xl font-bold text-slate-900">Hồ Sơ 4 Công Trình Nghiên Cứu Đoạt Giải Ig Nobel</h2>
-                        <p class="text-sm text-slate-600 mt-1">Khám phá chi tiết phương pháp, đối tượng thử nghiệm và ý nghĩa khoa học của 4 công trình: <em>"khiến bạn bật cười rồi khiến bạn phải suy ngẫm"</em>.</p>
+                        <h2 class="text-2xl font-bold text-slate-900">Tổng Hợp Giải Thưởng Khoa Học & 4 Công Trình Nghiên Cứu</h2>
+                        <p class="text-sm text-slate-600 mt-1">Hồ sơ đối chiếu chi tiết giữa 3 giải thưởng lớn ở Phần 1 (A–C) và 4 nghiên cứu đoạt giải Ig Nobel ở Phần 2 (A–D).</p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6" id="profiles-grid-container">
-                    <!-- Populated by JS -->
+                <!-- Part 1 Prizes Grid -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="px-2.5 py-1 rounded bg-amber-100 text-amber-800 text-xs font-bold uppercase">Phần 1: 3 Giải Thưởng Khoa Học (Options A–C)</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="prizes-grid-container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Part 2 Ig Nobel Profiles Grid -->
+                <div class="mt-10 pt-8 border-t border-slate-200">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="px-2.5 py-1 rounded bg-indigo-100 text-indigo-800 text-xs font-bold uppercase">Phần 2: 4 Công Trình Đoạt Giải Ig Nobel (Options A–D)</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="profiles-grid-container">
+                        <!-- Populated by JS -->
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- VIEW 4: SYNONYMS & PARAPHRASE MATRIX -->
+        <!-- VIEW 5: SYNONYMS & PARAPHRASE MATRIX -->
         <section id="view-synonyms" class="space-y-6 hidden">
             <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
@@ -245,11 +306,11 @@
                             <span class="text-xs uppercase font-extrabold tracking-wider text-nobelTheme-700">Paraphrase & Semantic Alignment</span>
                         </div>
                         <h2 class="text-2xl font-bold text-slate-900">Ma Trận Từ Đồng Nghĩa & Diễn Đạt Tương Đương</h2>
-                        <p class="text-sm text-slate-600 mt-1">Đối chiếu chi tiết giữa câu hỏi trong đề thi với văn bản thực tế trong bài đọc của từng câu.</p>
+                        <p class="text-sm text-slate-600 mt-1">Đối chiếu chi tiết giữa câu hỏi trong đề thi với văn bản thực tế trong bài đọc của cả 8 câu.</p>
                     </div>
                     <div class="bg-nobelTheme-50 border border-nobelTheme-200 rounded-xl px-4 py-2.5 text-center">
                         <span class="text-xs text-nobelTheme-700 font-semibold block uppercase">Tổng hợp</span>
-                        <span class="text-xl font-extrabold text-nobelTheme-900">4 Cặp Paraphrase Cốt Lõi</span>
+                        <span class="text-xl font-extrabold text-nobelTheme-900">8 Cặp Paraphrase Cốt Lõi</span>
                     </div>
                 </div>
 
@@ -272,17 +333,17 @@
             </div>
         </section>
 
-        <!-- VIEW 5: VOCABULARY HUB -->
+        <!-- VIEW 6: VOCABULARY HUB -->
         <section id="view-vocab" class="space-y-6 hidden">
             <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="w-3 h-3 rounded-full bg-nobelTheme-600"></span>
-                            <span class="text-xs uppercase font-extrabold tracking-wider text-nobelTheme-700">Experimental Biology & Medical Lexicon</span>
+                            <span class="text-xs uppercase font-extrabold tracking-wider text-nobelTheme-700">Scientific Awards & Experimental Biology Lexicon</span>
                         </div>
                         <h2 class="text-2xl font-bold text-slate-900">Kho Từ Vựng Trọng Tâm & Phát Âm Chuẩn</h2>
-                        <p class="text-sm text-slate-600 mt-1">Từ vựng học thuật chủ đề sinh lý học, chẩn đoán y khoa, hành vi động vật và thí nghiệm khoa học kèm phiên âm IPA và audio phát âm.</p>
+                        <p class="text-sm text-slate-600 mt-1">Từ vựng học thuật chủ đề giải thưởng khoa học, quang học, sinh lý học, chẩn đoán y khoa kèm phiên âm IPA và audio phát âm.</p>
                     </div>
                     <div class="relative w-full md:w-72">
                         <input type="text" id="vocab-search-input" onkeyup="searchVocab(this.value)" placeholder="Tìm kiếm từ vựng hoặc nghĩa..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-nobelTheme-600 focus:ring-1 focus:ring-nobelTheme-600 bg-slate-50/50">
@@ -301,7 +362,37 @@
     </main>
 
     <script>
-    const optionsPool = [
+    const part1PrizesPool = [
+        {
+            key: 'A',
+            name: 'The Ig Nobel Prize',
+            frequency: 'Hàng năm (Annual humorous ceremony)',
+            scope: 'Nhiều lĩnh vực nghiên cứu kỳ lạ khác nhau',
+            description: 'Tôn vinh những công trình khoa học lúc đầu khiến người ta bật cười, sau đó khiến người ta phải suy ngẫm sâu sắc. Lễ trao giải diễn ra tại buổi lễ hài hước, trao giải cho thí nghiệm dùng nam châm nâng ếch bay lơ lửng.',
+            resolvedQuestions: 'Câu 3, Câu 4 (Q3, Q4)',
+            evidenceQuote: 'aim to recognise research which first makes us smile and then makes us think... given out at a humorous award ceremony... research into using magnets to raise a frog into the air.'
+        },
+        {
+            key: 'B',
+            name: 'The UNESCO Niels Bohr Medal',
+            frequency: 'Không định kỳ thường niên (Not an annual award)',
+            scope: 'Duy nhất một chuyên ngành: Vật Lý (Physics only)',
+            description: 'Được trao lần đầu vào năm 1985 (100 năm sau ngày sinh của Niels Bohr) nhằm tôn vinh những đóng góp có tác động lớn hoặc tiềm năng tác động lớn đến thế giới thuộc lĩnh vực Vật lý.',
+            resolvedQuestions: 'Câu 1 (Q1)',
+            evidenceQuote: 'to commemorate his contribution to science. Unlike the Nobel Prize, it is not an annual award... to people whose research in physics has or could make a significant impact on the world.'
+        },
+        {
+            key: 'C',
+            name: 'The Copley Medal',
+            frequency: 'Hàng năm (Each year)',
+            scope: 'Bất kỳ lĩnh vực khoa học nào (Any area of science)',
+            description: 'Giải thưởng khoa học lâu đời nhất thế giới còn tồn tại do Hội Hoàng gia Anh (UK Royal Society) trao tặng, thành lập từ năm 1731 (gần 300 năm / gần 3 thế kỷ lịch sử), sớm hơn giải Nobel 170 năm.',
+            resolvedQuestions: 'Câu 2 (Q2)',
+            evidenceQuote: 'The world’s oldest surviving prize for science is the UK’s Royal Society’s Copley Medal... It was first given in 1731, 170 years before the first Nobel Prize was won.'
+        }
+    ];
+
+    const part2ResearchersPool = [
         {
             key: 'A',
             name: 'Michael Smith',
@@ -309,7 +400,7 @@
             prizeCategory: 'Physiology Prize',
             researchTitle: 'Vị trí bị ong đốt nhạy cảm và đau đớn nhất trên cơ thể người',
             description: 'Để ong đốt lặp đi lặp lại tại 25 vị trí khác nhau trên cơ thể để lập bản đồ mức độ nhạy cảm đau đớn. Kết luận môi trên và lỗ mũi là nơi đau đớn dữ dội nhất.',
-            resolvedQuestion: 'Câu 4 (Q4)',
+            resolvedQuestion: 'Câu 8 (Q8)',
             keyQuote: 'was stung several times a day in different places on his body to find out which parts are the most sensitive... worst places to be stung were the upper lip and nostril'
         },
         {
@@ -319,7 +410,7 @@
             prizeCategory: 'Physiology Prize (Đồng giải thưởng)',
             researchTitle: 'Chỉ số thang đo mức độ đau đớn do côn trùng đốt (Schmidt Sting Pain Index)',
             description: 'Trải qua hơn 1.000 vết đốt từ 150 loài côn trùng khác nhau (ong mật, ong vò vẽ, kiến đạn) để xây dựng thang điểm đau đớn từ cấp độ 1 đến cấp độ 4.',
-            resolvedQuestion: 'Câu 3 (Q3)',
+            resolvedQuestion: 'Câu 7 (Q7)',
             keyQuote: 'rates pain caused by bees, wasps and ants. Schmidt believes he’s been stung more than a thousand times by 150 different species.'
         },
         {
@@ -329,7 +420,7 @@
             prizeCategory: 'Diagnostic Medicine Prize',
             researchTitle: 'Chẩn đoán viêm ruột thừa cấp thông qua cảm giác đau khi đi qua gờ giảm tốc',
             description: 'Khảo sát và phát hiện cơn đau bụng tăng vọt khi xe cứu thương chở bệnh nhân đi qua gờ giảm tốc (speed bumps) giúp bác sĩ chẩn đoán viêm ruột thừa nhanh và chính xác hơn.',
-            resolvedQuestion: 'Câu 1 (Q1)',
+            resolvedQuestion: 'Câu 5 (Q5)',
             keyQuote: 'doctors can diagnose appendicitis... by the levels of pain the patient feels when travelling over speed bumps... help doctors in a diagnosis.'
         },
         {
@@ -339,140 +430,436 @@
             prizeCategory: 'Biology Prize',
             researchTitle: 'Gắn que đối trọng vào đuôi gà mô phỏng dáng đi của khủng long bạo chúa',
             description: 'Gắn một thanh que có trọng lượng vào phía sau cơ thể một con gà để mô phỏng sự dịch chuyển trọng tâm cơ thể tương tự khủng long đuôi dài, khiến con gà đi hệt như khủng long.',
-            resolvedQuestion: 'Câu 2 (Q2)',
+            resolvedQuestion: 'Câu 6 (Q6)',
             keyQuote: 'attached a weighted stick to the back end of a chicken... resulted in the bird walking in a similar manner to a dinosaur.'
         }
     ];
 
     const questionsData = [
+        // PART 1: RECOGNISING SCIENTIFIC ACHIEVEMENT (Questions 1–4)
         {
             id: 1,
             qNum: "Question 1",
+            part: "part1",
+            partTitle: "Part 1: Recognising Scientific Achievement",
+            type: "Matching Features",
+            wordLimit: "Chọn ký tự từ A đến C",
+            contextHeader: "Chỉ công nhận và vinh danh một chuyên ngành khoa học duy nhất",
+            promptText: "It recognises only one field of science.",
+            correctOptionKey: "B",
+            optionName: "The UNESCO Niels Bohr Medal",
+            passageSnippet: "The UNESCO Niels Bohr Medal was first given 100 years after the birth of quantum physicist Niels Bohr to commemorate his contribution to science. Unlike the Nobel Prize, it is not an annual award. The medal has been given out a dozen times since 1985 to people whose research in physics has or could make a significant impact on the world.",
+            paragraphRef: "Đoạn 2 (Passage 1, Paragraph 2)",
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Duy nhất một chuyên ngành khoa học (Vật lý)",
+                    questionSnippet: "recognises only one field of science",
+                    passageSnippet: "to people whose research in physics has or could make a significant impact on the world",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Huy chương Niels Bohr chỉ dành cho các nghiên cứu thuộc chuyên ngành Vật lý ('research in physics'), khớp hoàn hảo với 'only one field of science'."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option C (The Copley Medal)",
+                    reason: "BẪY ĐỌC LƯỚT: Copley Medal được tác giả nói rõ: 'It is not only for physicists. It is given each year to any researchers who have made a significant achievement in an area of science' (dành cho mọi ngành khoa học, không chỉ vật lý)."
+                },
+                {
+                    option: "The Nobel Prizes (trong bài đọc)",
+                    reason: "BẪY DANH TIẾNG: Giải Nobel bao gồm nhiều lĩnh vực khác nhau: 'chemistry, physics and medicine' chứ không chỉ một lĩnh vực."
+                }
+            ],
+            vietnameseAnalysis: {
+                logic: "Xác định giải thưởng khoa học chỉ dành riêng cho duy nhất một lĩnh vực chuyên môn.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'recognises only one field of science', 'physics', 'field'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Tác giả viết về Huy chương Niels Bohr: <em>'The medal has been given out a dozen times since 1985 to people whose <strong>research in physics</strong> has or could make a significant impact on the world'</em>.",
+                    "<strong>Đối chiếu các giải khác:</strong>",
+                    "• Giải Copley (C): <em>'It is <strong>not only for physicists</strong>... given to any researchers in an area of science'</em> (mọi ngành).",
+                    "• Giải Nobel: gồm <em>chemistry, physics and medicine</em> (nhiều ngành).",
+                    "• Giải Ig Nobel (A): nghiên cứu hài hước ở nhiều đề tài sinh học, vật lý, y học.",
+                    "<strong>Kết luận:</strong> Giải thưởng duy nhất chỉ công nhận 1 lĩnh vực (Vật lý) là <strong>B (The UNESCO Niels Bohr Medal)</strong>."
+                ]
+            },
+            vocabHighlights: ["quantum physicist", "commemorate", "impact on the world"]
+        },
+        {
+            id: 2,
+            qNum: "Question 2",
+            part: "part1",
+            partTitle: "Part 1: Recognising Scientific Achievement",
+            type: "Matching Features",
+            wordLimit: "Chọn ký tự từ A đến C",
+            contextHeader: "Giải thưởng đã có lịch sử tồn tại gần ba thế kỷ",
+            promptText: "It has existed for almost three centuries.",
+            correctOptionKey: "C",
+            optionName: "The Copley Medal",
+            passageSnippet: "The world’s oldest surviving prize for science is the UK’s Royal Society’s Copley Medal. It is not only for physicists. It is given each year to any researchers who have made a significant achievement in an area of science. It was first given in 1731, 170 years before the first Nobel Prize was won.",
+            paragraphRef: "Đoạn 3 (Passage 1, Paragraph 3)",
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Tồn tại gần ba thế kỷ (gần 300 năm)",
+                    questionSnippet: "existed for almost three centuries",
+                    passageSnippet: "world’s oldest surviving prize for science... It was first given in 1731, 170 years before the first Nobel Prize",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Trao lần đầu từ năm 1731 đến nay (thế kỷ 21) là gần 300 năm (gần 3 thế kỷ), là giải thưởng khoa học cổ nhất còn tồn tại trên thế giới."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option B (The UNESCO Niels Bohr Medal)",
+                    reason: "BẪY CON SỐ: Huy chương Niels Bohr được trao lần đầu năm 1985 (100 năm sau ngày sinh của Niels Bohr), tức mới tồn tại vài thập kỷ."
+                },
+                {
+                    option: "The Nobel Prize",
+                    reason: "Giải Nobel bắt đầu từ 1895 (hơn 1 thế kỷ), trong khi Copley Medal có từ 1731 (sớm hơn Nobel 170 năm)."
+                }
+            ],
+            vietnameseAnalysis: {
+                logic: "Xác định giải thưởng có niên đại lâu đời nhất, kéo dài gần 300 năm (3 centuries).",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'existed', 'almost three centuries', '1731', 'oldest surviving'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 3):</strong> <em>'The world’s oldest surviving prize for science is the UK’s Royal Society’s <strong>Copley Medal</strong>... It was <strong>first given in 1731</strong>, 170 years before the first Nobel Prize was won'</em>.",
+                    "<strong>Tính toán thời gian:</strong> Từ năm 1731 đến thời điểm hiện tại là gần 300 năm (tương đương gần 3 thế kỷ: <em>'almost three centuries'</em>).",
+                    "<strong>Kết luận:</strong> Đáp án chính xác là <strong>C (The Copley Medal)</strong>."
+                ]
+            },
+            vocabHighlights: ["oldest surviving", "centuries", "landowner"]
+        },
+        {
+            id: 3,
+            qNum: "Question 3",
+            part: "part1",
+            partTitle: "Part 1: Recognising Scientific Achievement",
+            type: "Matching Features",
+            wordLimit: "Chọn ký tự từ A đến C",
+            contextHeader: "Giải thưởng được tổ chức trao tại một sự kiện hài hước, vui nhộn",
+            promptText: "The prize is awarded at a funny event.",
+            correctOptionKey: "A",
+            optionName: "The Ig Nobel Prize",
+            passageSnippet: "Finally, the Ig Nobel prizes aim to recognise research which first makes us smile and then makes us think. While their research may not change the world, the researchers’ unusual experiments offer an insight into how something – often small and sometimes unimportant – works. Every year the prizes are given out at a humorous award ceremony.",
+            paragraphRef: "Đoạn 4 (Passage 1, Paragraph 4)",
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Được trao tặng tại một sự kiện hài hước",
+                    questionSnippet: "awarded at a funny event",
+                    passageSnippet: "Every year the prizes are given out at a humorous award ceremony",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "'given out at' = 'awarded at'; 'humorous award ceremony' = 'funny event'."
+                },
+                {
+                    tag: "2",
+                    theme: "Khiến người ta bật cười rồi suy ngẫm",
+                    questionSnippet: "The prize (Ig Nobel)",
+                    passageSnippet: "research which first makes us smile and then makes us think",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Mục đích giải thưởng nhằm tôn vinh những nghiên cứu khiến người ta bật cười (smile)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "The Nobel Prize (Option so sánh)",
+                    reason: "BẪY TƯƠNG PHẢN: Người đoạt giải Nobel chính thức tham dự một bữa tiệc tối trang trọng ('formal dinner'), hoàn toàn đối lập với buổi lễ hài hước ('humorous ceremony') của Ig Nobel."
+                }
+            ],
+            vietnameseAnalysis: {
+                logic: "Tìm giải thưởng được trao tặng trong một buổi lễ có không khí hài hước, vui nhộn.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'awarded', 'funny event', 'ceremony'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> Viết về giải Ig Nobel: <em>'Every year the prizes are given out at a <strong>humorous award ceremony</strong>'</em>.",
+                    "<strong>Khớp nghĩa paraphrase:</strong> 'given out' = 'awarded'; 'humorous award ceremony' chính là 'funny event' (sự kiện hài hước).",
+                    "<strong>Kết luận:</strong> Đáp án chính xác là <strong>A (The Ig Nobel Prize)</strong>."
+                ]
+            },
+            vocabHighlights: ["humorous", "award ceremony", "insight"]
+        },
+        {
+            id: 4,
+            qNum: "Question 4",
+            part: "part1",
+            partTitle: "Part 1: Recognising Scientific Achievement",
+            type: "Matching Features",
+            wordLimit: "Chọn ký tự từ A đến C",
+            contextHeader: "Giải thưởng được trao cho công trình làm một con vật bay lơ lửng trên không",
+            promptText: "It was awarded for making an animal fly.",
+            correctOptionKey: "A",
+            optionName: "The Ig Nobel Prize",
+            passageSnippet: "Only Sir Andre Geim has won both the Ig Nobel Prize and Nobel Prize. He won the former for his research into using magnets to raise a frog into the air. He won the latter with his later work on the discovery of graphene, a form of carbon.",
+            paragraphRef: "Đoạn 4 (Passage 1, Paragraph 4)",
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Làm một con vật bay lên không trung",
+                    questionSnippet: "making an animal fly",
+                    passageSnippet: "using magnets to raise a frog into the air",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Một con ếch (a frog = an animal); dùng nam châm nâng lên không trung (raise into the air = making fly / levitate)."
+                },
+                {
+                    tag: "2",
+                    theme: "Giải thưởng tương ứng",
+                    questionSnippet: "It was awarded for",
+                    passageSnippet: "He won the former [= Ig Nobel Prize] for his research into...",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "'the former' ám chỉ giải thưởng được nhắc đến trước trong câu trước, chính là Ig Nobel Prize."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option B & C",
+                    reason: "Không có giải thưởng nào khác trao cho việc dùng từ trường nâng động vật lơ lửng."
+                }
+            ],
+            vietnameseAnalysis: {
+                logic: "Xác định giải thưởng tôn vinh công trình làm cho một loài động vật bay lơ lửng trên không trung.",
+                stepByStep: [
+                    "<strong>Định vị từ khóa:</strong> 'awarded', 'making an animal fly', 'frog', 'air'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> Giáo sư Andre Geim đoạt cả hai giải Ig Nobel và Nobel: <em>'He won the former [= the Ig Nobel Prize] for his research into <strong>using magnets to raise a frog into the air</strong>'</em>.",
+                    "<strong>Phân tích quy chiếu:</strong> 'the former' là giải Ig Nobel; 'a frog' là một con vật (animal); 'raise into the air' tương đương với 'making fly'.",
+                    "<strong>Kết luận:</strong> Đáp án là <strong>A (The Ig Nobel Prize)</strong> (Lưu ý: Letter A được dùng nhiều hơn 1 lần đúng theo hướng dẫn 'You can use a letter more than once')."
+                ]
+            },
+            vocabHighlights: ["magnets", "raise into the air", "graphene"]
+        },
+
+        // PART 2: SCIENTISTS AWARDED IG NOBEL PRIZES FOR UNUSUAL RESEARCH (Questions 5–8)
+        {
+            id: 5,
+            qNum: "Question 5",
+            part: "part2",
+            partTitle: "Part 2: Ig Nobel Prizes for Unusual Research",
             type: "Matching Features",
             wordLimit: "Chọn ký tự từ A đến D",
             contextHeader: "Phương pháp hỗ trợ bác sĩ chẩn đoán và xác định căn bệnh",
             promptText: "It may allow medical practitioners to identify an illness.",
             correctOptionKey: "C",
             optionName: "Oxford University",
-            passageSnippet: "<mark class='bg-amber-100 text-amber-950 font-bold px-1 rounded'>The scientists learnt that doctors can diagnose appendicitis – a serious medical condition – by the levels of pain the patient feels when travelling over speed bumps. Dr Helen Ashdown of the University of Oxford said: ‘It may sound odd, but asking patients whether their pain worsened going over speed bumps on their way to hospital could help doctors in a diagnosis.’</mark> Once doctors have used this method to determine what the problem is, they can give the patient the correct medical treatment more quickly.",
-            paragraphRef: "Đoạn 3 (Paragraph 3)",
-            paraphrases: [
-                { qPart: "medical practitioners", pPart: "doctors", meaning: "các y bác sĩ / người hành nghề y" },
-                { qPart: "identify an illness", pPart: "diagnose appendicitis / help doctors in a diagnosis / determine what the problem is", meaning: "chẩn đoán bệnh viêm ruột thừa / hỗ trợ bác sĩ chẩn đoán / xác định căn bệnh là gì" },
-                { qPart: "It may allow", pPart: "could help doctors / can give correct treatment more quickly", meaning: "có thể giúp đỡ / cho phép thực hiện việc đó" }
+            passageSnippet: "The scientists learnt that doctors can diagnose appendicitis – a serious medical condition – by the levels of pain the patient feels when travelling over speed bumps. Dr Helen Ashdown of the University of Oxford said: ‘It may sound odd, but asking patients whether their pain worsened going over speed bumps on their way to hospital could help doctors in a diagnosis.’ Once doctors have used this method to determine what the problem is, they can give the patient the correct medical treatment more quickly.",
+            paragraphRef: "Đoạn 3 (Passage 2, Paragraph 3)",
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Nhân viên y tế / Bác sĩ",
+                    questionSnippet: "medical practitioners",
+                    passageSnippet: "doctors",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "'medical practitioners' đồng nghĩa với 'doctors'."
+                },
+                {
+                    tag: "2",
+                    theme: "Chẩn đoán / Xác định căn bệnh",
+                    questionSnippet: "identify an illness",
+                    passageSnippet: "diagnose appendicitis / help doctors in a diagnosis / determine what the problem is",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "'diagnose appendicitis' (chẩn đoán viêm ruột thừa) = 'identify an illness'."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option A & B (Smith / Schmidt)",
+                    reason: "Cả hai nghiên cứu ong đốt đều là sinh lý học thực nghiệm trên vết cắn, không phải công cụ chẩn đoán bệnh tật của bác sĩ."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Xác định nhà khoa học hoặc cơ sở nghiên cứu tìm ra phương pháp giúp y bác sĩ chẩn đoán bệnh tật.",
                 stepByStep: [
-                    "<strong>Định vị từ khóa:</strong> 'medical practitioners' (người hành nghề y), 'identify an illness' (xác định căn bệnh).",
-                    "<strong>Đối chiếu bài đọc (Đoạn 3):</strong> Nói về nghiên cứu của các nhà khoa học tại Đại học Oxford (<em>'Oxford University'</em>): <em>'...doctors [= medical practitioners] can diagnose appendicitis – a serious medical condition [= identify an illness]... could help doctors in a diagnosis'</em>.",
-                    "<strong>Khớp nghĩa paraphrase:</strong> 'medical practitioners' chính là 'doctors'; 'identify an illness' tương đương hoàn hảo với 'diagnose appendicitis' (chẩn đoán bệnh viêm ruột thừa).",
+                    "<strong>Định vị từ khóa:</strong> 'medical practitioners', 'identify an illness', 'diagnose'.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 3):</strong> Nói về nghiên cứu của các nhà khoa học tại Đại học Oxford: <em>'...doctors [= medical practitioners] can diagnose appendicitis – a serious medical condition [= identify an illness]... could help doctors in a diagnosis'</em>.",
                     "<strong>Kết luận:</strong> Đáp án chính xác là <strong>C (Oxford University)</strong>."
-                ],
-                traps: "Đoạn 1 và 2 nói về 'physiology' (sinh lý học) nhưng đó là nghiên cứu về vết ong đốt, không hề liên quan đến việc bác sĩ chẩn đoán bệnh lý cho bệnh nhân."
+                ]
             },
             vocabHighlights: ["diagnose", "appendicitis", "practitioners"]
         },
         {
-            id: 2,
-            qNum: "Question 2",
+            id: 6,
+            qNum: "Question 6",
+            part: "part2",
+            partTitle: "Part 2: Ig Nobel Prizes for Unusual Research",
             type: "Matching Features",
             wordLimit: "Chọn ký tự từ A đến D",
             contextHeader: "Thí nghiệm khiến loài động vật thay đổi dáng di chuyển",
             promptText: "It caused an animal to move differently.",
             correctOptionKey: "D",
             optionName: "The University of Chile",
-            passageSnippet: "<mark class='bg-amber-100 text-amber-950 font-bold px-1 rounded'>It went to scientists from the University of Chile who attached a weighted stick to the back end of a chicken. The stick, which shared similar characteristics to a tail, resulted in the bird walking in a similar manner to a dinosaur</mark>.",
-            paragraphRef: "Đoạn 4 (Paragraph 4)",
-            paraphrases: [
-                { qPart: "an animal", pPart: "a chicken / the bird", meaning: "một loài động vật: con gà / con chim" },
-                { qPart: "move differently", pPart: "walking in a similar manner to a dinosaur", meaning: "đi bộ theo phong cách giống loài khủng long (thay đổi cách di chuyển thông thường)" },
-                { qPart: "It caused", pPart: "resulted in", meaning: "dẫn tới kết quả là / khiến cho" }
+            passageSnippet: "It went to scientists from the University of Chile who attached a weighted stick to the back end of a chicken. The stick, which shared similar characteristics to a tail, resulted in the bird walking in a similar manner to a dinosaur.",
+            paragraphRef: "Đoạn 4 (Passage 2, Paragraph 4)",
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Một loài động vật",
+                    questionSnippet: "an animal",
+                    passageSnippet: "a chicken / the bird",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Con gà / con chim là loài động vật được thử nghiệm."
+                },
+                {
+                    tag: "2",
+                    theme: "Di chuyển khác đi",
+                    questionSnippet: "move differently",
+                    passageSnippet: "resulted in the bird walking in a similar manner to a dinosaur",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Bước đi giống hệt khủng long thay vì dáng đi gà bình thường."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option A & B (Côn trùng)",
+                    reason: "Ong và kiến chỉ được dùng để đốt chứ không bị can thiệp làm thay đổi dáng di chuyển."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Xác định công trình nghiên cứu can thiệp làm thay đổi cách thức di chuyển của một loài động vật.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'caused', 'an animal', 'move differently'.",
-                    "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> Giải Sinh học thuộc về các nhà khoa học từ Đại học Chile (<em>'University of Chile'</em>): họ gắn một que nặng vào đuôi gà: <em>'resulted in [= caused] the bird [= an animal] walking in a similar manner to a dinosaur [= move differently]'</em>.",
-                    "<strong>Phân tích ngữ nghĩa:</strong> Con gà (con vật) bình thường đi kiểu gà, sau khi gắn que nặng thì bước đi giống hệt khủng long bạo chúa -> cách thức di chuyển bị thay đổi hoàn toàn.",
+                    "<strong>Đối chiếu bài đọc (Đoạn 4):</strong> Giải Sinh học thuộc về các nhà khoa học từ Đại học Chile: họ gắn một que nặng vào đuôi gà: <em>'resulted in [= caused] the bird [= an animal] walking in a similar manner to a dinosaur [= move differently]'</em>.",
                     "<strong>Kết luận:</strong> Đáp án là <strong>D (The University of Chile)</strong>."
-                ],
-                traps: "Đoạn 1 và 2 có nhắc đến ong, kiến (insects), nhưng côn trùng không bị can thiệp để 'di chuyển khác đi'."
+                ]
             },
             vocabHighlights: ["characteristics", "weighted stick", "dinosaur"]
         },
         {
-            id: 3,
-            qNum: "Question 3",
+            id: 7,
+            qNum: "Question 7",
+            part: "part2",
+            partTitle: "Part 2: Ig Nobel Prizes for Unusual Research",
             type: "Matching Features",
             wordLimit: "Chọn ký tự từ A đến D",
             contextHeader: "Trải nghiệm bị tổn thương bởi vô số loài côn trùng đa dạng",
             promptText: "It involved being hurt by many different insect types.",
             correctOptionKey: "B",
             optionName: "Justin Schmidt",
-            passageSnippet: "<mark class='bg-amber-100 text-amber-950 font-bold px-1 rounded'>He created the Schmidt Sting Pain Index which rates pain caused by bees, wasps and ants. Schmidt believes he’s been stung more than a thousand times by 150 different species</mark>. While a honey bee only provides a level-two sting, a bullet ant causes the most pain at level four.",
-            paragraphRef: "Đoạn 2 (Paragraph 2)",
-            paraphrases: [
-                { qPart: "being hurt", pPart: "stung more than a thousand times / pain caused by", meaning: "bị đốt hơn một ngàn lần / chịu đau đớn (bị làm đau, thương tích)" },
-                { qPart: "many different insect types", pPart: "150 different species / bees, wasps and ants", meaning: "150 loài côn trùng khác nhau: ong mật, ong vò vẽ và kiến" },
-                { qPart: "It involved", pPart: "He created the Schmidt Sting Pain Index...", meaning: "nghiên cứu liên quan đến quá trình này" }
+            passageSnippet: "He created the Schmidt Sting Pain Index which rates pain caused by bees, wasps and ants. Schmidt believes he’s been stung more than a thousand times by 150 different species. While a honey bee only provides a level-two sting, a bullet ant causes the most pain at level four.",
+            paragraphRef: "Đoạn 2 (Passage 2, Paragraph 2)",
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Bị tổn thương / Bị đốt",
+                    questionSnippet: "being hurt",
+                    passageSnippet: "stung more than a thousand times / rates pain caused by",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Bị đốt hơn 1000 lần gây đau đớn."
+                },
+                {
+                    tag: "2",
+                    theme: "Nhiều loài côn trùng khác nhau",
+                    questionSnippet: "many different insect types",
+                    passageSnippet: "150 different species / bees, wasps and ants",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "150 loài côn trùng khác nhau (ong mật, ong vò vẽ, kiến đạn)."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option A (Michael Smith)",
+                    reason: "BẪY PHÂN BIỆT: Michael Smith chỉ để ong đốt vào 25 vị trí khác nhau trên cơ thể người (chỉ thử 1 loài ong), còn Justin Schmidt thử trên 150 loài côn trùng khác nhau."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Xác định nhà khoa học tự nguyện để nhiều loài côn trùng khác nhau đốt mình để đánh giá mức độ đau.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'being hurt', 'many different insect types'.",
-                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Tiến sĩ Justin Schmidt (<em>'Dr Justin Schmidt'</em>) sáng lập chỉ số đau Schmidt Sting Pain Index: <em>'Schmidt believes he’s been stung [= being hurt] more than a thousand times by <strong>150 different species</strong> [= many different insect types: bees, wasps, ants]'</em>.",
-                    "<strong>Phân biệt với Michael Smith (A):</strong>",
-                    "• Michael Smith (A) chỉ để <strong>một loài ong</strong> đốt vào 25 vị trí khác nhau trên người mình (chỉ tập trung vào <em>vị trí</em>, không thử nghiệm nhiều loài).",
-                    "• Justin Schmidt (B) thử nghiệm trên <strong>150 loài côn trùng khác nhau</strong> (nhiều loài côn trùng - many different insect types).",
-                    "<strong>Kết luận:</strong> Đáp án chính xác tuyệt đối là <strong>B (Justin Schmidt)</strong>."
-                ],
-                traps: "Bẫy phân vân giữa A và B: Rất nhiều thí sinh nhầm lẫn giữa Michael Smith và Justin Schmidt. Chú ý: Michael Smith thử nghiệm 25 vị trí trên 1 cơ thể; còn Justin Schmidt thử nghiệm 150 loài côn trùng khác nhau."
+                    "<strong>Đối chiếu bài đọc (Đoạn 2):</strong> Tiến sĩ Justin Schmidt sáng lập thang đo độ đau: <em>'been stung more than a thousand times by <strong>150 different species</strong> [= many different insect types]'</em>.",
+                    "<strong>Kết luận:</strong> Đáp án chính xác là <strong>B (Justin Schmidt)</strong>."
+                ]
             },
             vocabHighlights: ["stung", "species", "pain index"]
         },
         {
-            id: 4,
-            qNum: "Question 4",
+            id: 8,
+            qNum: "Question 8",
+            part: "part2",
+            partTitle: "Part 2: Ig Nobel Prizes for Unusual Research",
             type: "Matching Features",
             wordLimit: "Chọn ký tự từ A đến D",
             contextHeader: "Mối liên hệ giữa mức độ đau đớn và vị trí bị đốt trên cơ thể",
             promptText: "It linked pain levels to the location of the pain.",
             correctOptionKey: "A",
             optionName: "Michael Smith",
-            passageSnippet: "<mark class='bg-amber-100 text-amber-950 font-bold px-1 rounded'>Michael Smith, of Cornell University, was stung several times a day in different places on his body to find out which parts are the most sensitive. After weeks of research he found that many bee and wasp stings were uncomfortable, and the worst places to be stung were the upper lip and nostril, with the latter being the most painful</mark>.",
-            paragraphRef: "Đoạn 1 (Paragraph 1)",
-            paraphrases: [
-                { qPart: "location of the pain", pPart: "twenty-five different places on his body / which parts / upper lip and nostril", meaning: "vị trí đau: 25 vị trí khác nhau trên cơ thể / phần môi trên và lỗ mũi" },
-                { qPart: "pain levels", pPart: "most sensitive / uncomfortable / the worst places / the most painful", meaning: "mức độ nhạy cảm đau đớn: khó chịu, tồi tệ nhất, đau đớn nhất" },
-                { qPart: "linked ... to ...", pPart: "find out which parts are the most sensitive", meaning: "tìm ra mối liên hệ xem bộ phận nào nhạy cảm đau nhất" }
+            passageSnippet: "Michael Smith, of Cornell University, was stung several times a day in different places on his body to find out which parts are the most sensitive. After weeks of research he found that many bee and wasp stings were uncomfortable, and the worst places to be stung were the upper lip and nostril, with the latter being the most painful.",
+            paragraphRef: "Đoạn 1 (Passage 2, Paragraph 1)",
+            keyCriteria: [
+                {
+                    tag: "1",
+                    theme: "Vị trí của cơn đau trên cơ thể",
+                    questionSnippet: "location of the pain",
+                    passageSnippet: "in different places on his body / which parts / upper lip and nostril",
+                    colorClassChip: "paired-chip-1",
+                    colorClassHl: "paired-hl-1",
+                    expl: "Các vị trí khác nhau trên cơ thể: môi trên, lỗ mũi."
+                },
+                {
+                    tag: "2",
+                    theme: "Mức độ đau",
+                    questionSnippet: "pain levels",
+                    passageSnippet: "most sensitive / uncomfortable / the worst places / the most painful",
+                    colorClassChip: "paired-chip-2",
+                    colorClassHl: "paired-hl-2",
+                    expl: "Nhạy cảm nhất, tồi tệ nhất, đau đớn nhất."
+                }
+            ],
+            distractorTraps: [
+                {
+                    option: "Option B (Justin Schmidt)",
+                    reason: "BẪY TIÊU CHÍ: Justin Schmidt xếp loại đau theo LOÀI (level 1-4), còn Michael Smith xếp loại đau theo VỊ TRÍ trên cơ thể người."
+                }
             ],
             vietnameseAnalysis: {
                 logic: "Xác định nhà khoa học nghiên cứu mối liên hệ giữa cường độ đau và vị trí đau trên cơ thể.",
                 stepByStep: [
                     "<strong>Định vị từ khóa:</strong> 'linked pain levels', 'location of the pain'.",
-                    "<strong>Đối chiếu bài đọc (Đoạn 1):</strong> Michael Smith (<em>'Michael Smith, of Cornell University'</em>): <em>'was stung several times a day in <strong>different places on his body</strong> [= location] to find out which parts are the <strong>most sensitive / most painful</strong> [= pain levels]'</em>.",
-                    "<strong>Kết quả nghiên cứu:</strong> Ông chỉ ra rằng lỗ mũi và môi trên là hai vị trí đau đớn nhất trên cơ thể khi bị đốt.",
-                    "<strong>Kết luận:</strong> Người liên kết mức độ đau với vị trí trên cơ thể là <strong>A (Michael Smith)</strong>."
-                ],
-                traps: "Tránh nhầm với B: Justin Schmidt phân loại độ đau theo loài côn trùng (level 2 bee, level 4 bullet ant), còn Michael Smith phân loại độ đau theo vị trí bộ phận trên cơ thể người."
+                    "<strong>Đối chiếu bài đọc (Đoạn 1):</strong> Michael Smith (ĐH Cornell): <em>'was stung... in <strong>different places on his body</strong> [= location] to find out which parts are the <strong>most sensitive / most painful</strong> [= pain levels]'</em>.",
+                    "<strong>Kết luận:</strong> Đáp án là <strong>A (Michael Smith)</strong>."
+                ]
             },
             vocabHighlights: ["physiology", "nostril", "sensitive"]
         }
     ];
 
     const vocabData = {
-        'physiology': {
-            ipa: '/ˌfɪz.iˈɒl.ə.dʒi/',
-            type: 'noun',
-            vi: 'Sinh lý học (ngành sinh học nghiên cứu chức năng cơ thể sống)',
-            eg: 'Research in insect sting physiology revealed profound variations in human sensory pain thresholds.'
+        'quantum physicist': {
+            ipa: '/ˈkwɒn.təm ˈfɪz.ɪ.sɪst/',
+            type: 'noun phrase',
+            vi: 'Nhà vật lý lượng tử (chuyên gia nghiên cứu hành vi vật chất ở quy mô hạ nguyên tử)',
+            eg: 'Quantum physicist Niels Bohr formulated revolutionary models of atomic structure.'
         },
-        'diagnose': {
-            ipa: '/ˈdaɪ.əɡ.nəʊz/',
+        'commemorate': {
+            ipa: '/kəˈmem.ə.reɪt/',
             type: 'verb',
-            vi: 'Chẩn đoán bệnh (xác định căn bệnh qua triệu chứng)',
-            eg: 'Doctors can diagnose acute abdominal inflammation more accurately by monitoring vehicle vibration responses.'
+            vi: 'Kỷ niệm, tưởng niệm, vinh danh cống hiến',
+            eg: 'The UNESCO medal was established to commemorate historic contributions to international physics.'
+        },
+        'oldest surviving': {
+            ipa: '/ˈəʊl.dɪst səˈvaɪ.vɪŋ/',
+            type: 'adjective phrase',
+            vi: 'Lâu đời nhất còn tồn tại đến ngày nay',
+            eg: 'The Copley Medal is widely regarded as the oldest surviving continuous science prize in the world.'
+        },
+        'humorous': {
+            ipa: '/ˈhjuː.mə.rəs/',
+            type: 'adjective',
+            vi: 'Hài hước, dí dỏm, mang tính châm biếm thông minh',
+            eg: 'The Ig Nobel ceremony adopts a decidedly humorous tone to celebrate unconventional scientific curiosity.'
+        },
+        'graphene': {
+            ipa: '/ˈɡræf.iːn/',
+            type: 'noun',
+            vi: 'Graphene (dạng thù hình carbon hai chiều siêu bền và dẫn điện)',
+            eg: 'Sir Andre Geim shared the Nobel Prize for his groundbreaking isolation of single-layer graphene.'
         },
         'appendicitis': {
             ipa: '/əˌpen.dəˈsaɪ.təs/',
@@ -480,11 +867,11 @@
             vi: 'Viêm ruột thừa (tình trạng ruột thừa bị viêm sưng nguy cấp)',
             eg: 'Severe pain triggered when driving over road speed bumps strongly indicates appendicitis.'
         },
-        'characteristics': {
-            ipa: '/ˌkær.ək.təˈrɪs.tɪks/',
-            type: 'noun (plural)',
-            vi: 'Những đặc tính, đặc điểm nhận dạng',
-            eg: 'The attached weighted appendage closely replicated the morphological characteristics of a theropod tail.'
+        'diagnose': {
+            ipa: '/ˈdaɪ.əɡ.nəʊz/',
+            type: 'verb',
+            vi: 'Chẩn đoán bệnh (xác định căn bệnh qua triệu chứng)',
+            eg: 'Doctors can diagnose acute abdominal inflammation more accurately by monitoring vehicle vibration responses.'
         },
         'nostril': {
             ipa: '/ˈnɒs.trəl/',
@@ -498,23 +885,11 @@
             vi: 'Gờ giảm tốc (gờ nâng cao trên mặt đường buộc xe chạy chậm)',
             eg: 'Ambulance transit over asphalt speed bumps provoked sharp peritoneal pain in surgical patients.'
         },
-        'practitioners': {
-            ipa: '/prækˈtɪʃ.ən.əz/',
-            type: 'noun (plural)',
-            vi: 'Người hành nghề chuyên môn (y bác sĩ, chuyên gia)',
-            eg: 'Frontline medical practitioners frequently employ rapid observational heuristics in triage assessment.'
-        },
-        'sensitive': {
-            ipa: '/ˈsen.sɪ.tɪv/',
-            type: 'adjective',
-            vi: 'Nhạy cảm, dễ phản ứng với kích thích đau đớn',
-            eg: 'Facial nerve endings are remarkably more sensitive to chemical venom than epidermal arm tissue.'
-        },
-        'stung': {
-            ipa: '/stʌŋ/',
-            type: 'verb (past/participle)',
-            vi: 'Bị đốt, bị chích (bởi côn trùng có ngòi độc)',
-            eg: 'The entomologist was voluntarily stung hundreds of times to calibrate his comparative discomfort index.'
+        'weighted stick': {
+            ipa: '/ˈweɪ.tɪd stɪk/',
+            type: 'noun phrase',
+            vi: 'Thanh que có gắn thêm trọng lượng đối trọng',
+            eg: 'Affixing a weighted stick altered the biomechanical center of gravity in avian locomotion trials.'
         },
         'species': {
             ipa: '/ˈspiː.ʃiːz/',
@@ -527,18 +902,13 @@
             type: 'adjective',
             vi: 'Kỳ lạ, khác thường, độc đáo',
             eg: 'The Ig Nobel ceremony celebrates highly unusual research that illuminates unexpected aspects of nature.'
-        },
-        'weighted stick': {
-            ipa: '/ˈweɪ.tɪd stɪk/',
-            type: 'noun phrase',
-            vi: 'Thanh que có gắn thêm trọng lượng đối trọng',
-            eg: 'Affixing a weighted stick altered the biomechanical center of gravity in avian locomotion trials.'
         }
     };
     </script>
 
     <script>
-    let currentQuestionIndex = 0; // 0 to 3
+    let currentSlideIndex = 0; // 0 to 7 (8 questions total)
+    let isAnswerRevealed = false; // default hidden for interactive blind presentation
 
     function initApp() {
         renderNavChips();
@@ -550,203 +920,328 @@
         setupKeyboardNavigation();
     }
 
+    // Nav chips with BLIND selector (no answers leaked on top bar)
     function renderNavChips() {
         const container = document.getElementById('question-nav-chips');
+        if (!container) return;
         container.innerHTML = '';
         questionsData.forEach((q, idx) => {
             const btn = document.createElement('button');
-            const isActive = idx === currentQuestionIndex;
-            btn.className = `px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            const isActive = idx === currentSlideIndex;
+            btn.className = `px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                 isActive 
-                ? 'bg-nobelTheme-700 text-white shadow-sm ring-2 ring-nobelTheme-600 ring-offset-1' 
+                ? 'bg-nobelTheme-700 text-white shadow-sm ring-2 ring-nobelTheme-600 ring-offset-1 scale-102' 
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`;
-            btn.innerHTML = `Q${q.id}: [ ${q.correctOptionKey} ]`;
+            
+            const partTag = q.part === 'part1' ? 'P1 (A–C)' : 'P2 (A–D)';
+            btn.innerHTML = `
+                <div class="flex items-center gap-1">
+                    <span>Q${q.id}:</span>
+                    <span class="font-extrabold">${partTag}</span>
+                </div>
+            `;
+
             btn.onclick = () => {
-                currentQuestionIndex = idx;
+                currentSlideIndex = idx;
+                isAnswerRevealed = false; // reset reveal state when switching slide
                 renderNavChips();
                 renderCurrentSlide();
             };
             container.appendChild(btn);
         });
 
+        const curQ = questionsData[currentSlideIndex];
+        const badge = document.getElementById('quick-target-badge');
+        if (badge) {
+            badge.textContent = `${curQ.qNum} - ${curQ.partTitle} (${curQ.wordLimit})`;
+        }
+
         const mob = document.getElementById('mobile-curr-indicator');
-        if (mob) mob.textContent = `Câu ${currentQuestionIndex + 1}/4 (Chọn: ${questionsData[currentQuestionIndex].correctOptionKey})`;
+        if (mob) {
+            mob.textContent = `${curQ.qNum}: ${curQ.part === 'part1' ? 'Prizes (A–C)' : 'Researchers (A–D)'}`;
+        }
     }
 
-    function navigateQuestion(delta) {
-        const next = currentQuestionIndex + delta;
+    function navigateSlide(delta) {
+        const next = currentSlideIndex + delta;
         if (next >= 0 && next < questionsData.length) {
-            currentQuestionIndex = next;
+            currentSlideIndex = next;
+            isAnswerRevealed = false;
             renderNavChips();
             renderCurrentSlide();
             window.scrollTo({ top: 120, behavior: 'smooth' });
         }
     }
 
+    function toggleAnswerReveal() {
+        isAnswerRevealed = !isAnswerRevealed;
+        renderCurrentSlide();
+    }
+
+    function checkUserGuess(guessedKey) {
+        const q = questionsData[currentSlideIndex];
+        const msgContainer = document.getElementById('user-guess-feedback');
+        if (!msgContainer) return;
+
+        const isCorrect = (guessedKey.toUpperCase() === q.correctOptionKey.toUpperCase());
+        if (isCorrect) {
+            msgContainer.innerHTML = `
+                <div class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm font-bold flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                    <span>Chính xác tuyệt đối! Đáp án chuẩn xác là <strong>[ ${q.correctOptionKey} ] — ${q.optionName}</strong>.</span>
+                </div>
+            `;
+            isAnswerRevealed = true;
+            setTimeout(() => {
+                renderCurrentSlide();
+            }, 600);
+        } else {
+            msgContainer.innerHTML = `
+                <div class="p-3 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl text-sm font-bold flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-rose-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    <span>Lựa chọn <strong>[ ${guessedKey} ]</strong> chưa chính xác. Hãy đối chiếu kỹ đặc điểm mô tả trong bài đọc!</span>
+                </div>
+            `;
+        }
+    }
+
     function renderCurrentSlide() {
-        const q = questionsData[currentQuestionIndex];
+        const q = questionsData[currentSlideIndex];
         const container = document.getElementById('slide-card-container');
+        if (!container) return;
+        
         const counter = document.getElementById('slide-counter-badge');
         if (counter) counter.textContent = `${q.id} / ${questionsData.length}`;
+
+        const btnRevealText = document.getElementById('btn-reveal-text');
+        if (btnRevealText) {
+            btnRevealText.textContent = isAnswerRevealed ? 'Ẩn Phân Tích & Reset' : 'Hiện Đáp Án & Khớp Nối';
+        }
 
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
         if (btnPrev) {
-            btnPrev.disabled = currentQuestionIndex === 0;
-            btnPrev.classList.toggle('opacity-50', currentQuestionIndex === 0);
+            btnPrev.disabled = currentSlideIndex === 0;
+            btnPrev.classList.toggle('opacity-50', currentSlideIndex === 0);
         }
         if (btnNext) {
-            btnNext.disabled = currentQuestionIndex === questionsData.length - 1;
-            btnNext.classList.toggle('opacity-50', currentQuestionIndex === questionsData.length - 1);
+            btnNext.disabled = currentSlideIndex === questionsData.length - 1;
+            btnNext.classList.toggle('opacity-50', currentSlideIndex === questionsData.length - 1);
         }
 
+        let displayStatementText = q.promptText;
+        let displayPassageSnippet = q.passageSnippet;
+
+        if (isAnswerRevealed && q.keyCriteria) {
+            q.keyCriteria.forEach(item => {
+                if (item.questionSnippet && displayStatementText.includes(item.questionSnippet)) {
+                    displayStatementText = displayStatementText.replace(item.questionSnippet, `<span class="${item.colorClassHl} font-bold px-1 rounded">${item.questionSnippet}</span>`);
+                }
+                if (item.passageSnippet && displayPassageSnippet.includes(item.passageSnippet)) {
+                    displayPassageSnippet = displayPassageSnippet.replace(item.passageSnippet, `<span class="${item.colorClassHl} font-bold px-1 rounded">${item.passageSnippet}</span>`);
+                }
+            });
+        }
+
+        const activePool = q.part === 'part1' ? part1PrizesPool : part2ResearchersPool;
+
         container.innerHTML = `
-            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all">
+            <div class="gradient-border bg-white rounded-3xl p-6 sm:p-8 shadow-sm transition-all space-y-6">
                 
-                <!-- Slide Header -->
+                <!-- Slide Header Banner -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
                     <div class="flex items-center gap-3">
-                        <span class="w-10 h-10 rounded-2xl bg-nobelTheme-100 text-nobelTheme-800 flex items-center justify-center font-extrabold text-base border border-nobelTheme-200">
+                        <span class="w-12 h-12 rounded-2xl bg-nobelTheme-100 text-nobelTheme-800 flex items-center justify-center font-black text-lg border border-nobelTheme-200 shadow-2xs">
                             ${q.id}
                         </span>
                         <div>
-                            <span class="text-xs uppercase font-extrabold tracking-wider text-nobelTheme-700">${q.type}</span>
-                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">${q.qNum}: ${q.contextHeader}</h3>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs uppercase font-extrabold tracking-wider text-nobelTheme-700">${q.type}</span>
+                                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600">${q.partTitle}</span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-black text-slate-900">${q.qNum} <span class="text-slate-500 text-sm font-normal">— ${q.contextHeader}</span></h3>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
+                        <span class="text-xs font-semibold px-3 py-1.5 bg-slate-100 text-slate-600 rounded-xl border border-slate-200">
                             Yêu cầu: ${q.wordLimit}
                         </span>
-                        <span class="text-xs font-semibold px-3 py-1 bg-nobelTheme-50 text-nobelTheme-700 rounded-full border border-nobelTheme-200">
-                            ${q.paragraphRef}
-                        </span>
                     </div>
                 </div>
 
-                <!-- Statement Prompt Box -->
-                <div class="mt-6 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Nội Dung Mệnh Đề Cần Ghép (Statement)</span>
-                    <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">"${q.promptText}"</p>
-                </div>
-
-                <!-- Answer Reveal Banner -->
-                <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-nobelTheme-50/80 via-amber-50/50 to-white border border-nobelTheme-200">
-                    <div>
-                        <span class="text-xs font-extrabold uppercase tracking-wider text-nobelTheme-700">Nhà Khoa Học / Tổ Chức Ghép Đúng</span>
-                        <div class="flex items-center gap-3 mt-1.5 flex-wrap">
-                            <span class="text-xl sm:text-2xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm bg-nobelTheme-700 text-white answer-badge">
-                                Đáp án: [ ${q.correctOptionKey} ]
-                            </span>
-                            <span class="text-base sm:text-lg font-extrabold text-slate-900">
-                                ${q.optionName}
-                            </span>
-                        </div>
-                    </div>
-
-                    <button onclick="playSpeech('${q.optionName}')" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-50 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm transition-all shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-nobelTheme-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        <span>Phát âm tên đáp án</span>
-                    </button>
-                </div>
-
-                <!-- Evidence in Reading Passage -->
-                <div class="mt-6">
-                    <div class="flex items-center gap-2 mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-nobelTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Đoạn Văn Chứa Manh Mối Bằng Chứng (${q.paragraphRef})</h4>
-                    </div>
-                    <div class="p-5 rounded-2xl bg-amber-50/40 border border-amber-200/70 text-slate-800 text-sm sm:text-base leading-relaxed italic relative">
-                        "${q.passageSnippet}"
-                    </div>
-                </div>
-
-                <!-- Paraphrase & Synonym Mapping Table -->
-                <div class="mt-6">
-                    <div class="flex items-center gap-2 mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-nobelTheme-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Bảng Đối Chiếu Từ Đồng Nghĩa & Paraphrase</h4>
-                    </div>
-                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
-                        <table class="w-full text-left border-collapse text-sm">
-                            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 text-xs uppercase">
-                                <tr>
-                                    <th class="py-2.5 px-4 w-1/3">Mệnh đề câu hỏi (${q.qNum})</th>
-                                    <th class="py-2.5 px-4 w-1/3">Văn bản bài đọc (${q.paragraphRef})</th>
-                                    <th class="py-2.5 px-4">Giải thích ý nghĩa tương đương</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100 bg-white">
-                                ${q.paraphrases.map(p => `
-                                    <tr>
-                                        <td class="py-3 px-4 font-semibold text-amber-800 bg-amber-50/30">${p.qPart}</td>
-                                        <td class="py-3 px-4 font-semibold text-indigo-800 bg-indigo-50/20">${p.pPart}</td>
-                                        <td class="py-3 px-4 text-slate-600">${p.meaning}</td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Vietnamese In-Depth Explanation & Logic -->
-                <div class="mt-6 bg-nobelTheme-50/40 border border-nobelTheme-200/80 rounded-2xl p-6">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="w-2.5 h-2.5 rounded-full bg-nobelTheme-600"></span>
-                        <h4 class="text-sm font-bold uppercase tracking-wider text-nobelTheme-900">Phân Tích Chi Tiết & Chiến Lược Làm Bài (Tiếng Việt)</h4>
-                    </div>
-
-                    <p class="text-sm text-slate-700 mb-4 font-medium">${q.vietnameseAnalysis.logic}</p>
-
-                    <div class="space-y-2 mb-4">
-                        ${q.vietnameseAnalysis.stepByStep.map(step => `
-                            <div class="flex items-start gap-2.5 text-sm text-slate-700">
-                                <span class="text-nobelTheme-600 mt-1 font-bold">▸</span>
-                                <div>${step}</div>
+                <!-- Focus Mode: Side-by-Side Comparison Workspace -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
+                    <!-- Left: Task Prompt & Evidence Snippet -->
+                    <div class="lg:col-span-6 bg-slate-50/80 rounded-2xl p-5 border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-nobelTheme-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    Mệnh Đề Trong Đề Bài (Statement)
+                                </span>
+                                <span class="text-xs text-slate-400 font-mono">${q.paragraphRef}</span>
                             </div>
-                        `).join('')}
-                    </div>
-
-                    ${q.vietnameseAnalysis.traps ? `
-                        <div class="p-3.5 rounded-xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-red-900 flex items-start gap-2.5">
-                            <span class="font-bold text-red-700 shrink-0">⚠️ Cảnh báo bẫy thi cử:</span>
-                            <span>${q.vietnameseAnalysis.traps}</span>
+                            <p class="text-base sm:text-lg font-bold text-slate-800 leading-relaxed bg-white/90 p-4 rounded-xl border border-slate-200">"${displayStatementText}"</p>
+                            
+                            <div class="mt-4">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Trích đoạn chứng cứ trong bài đọc:</span>
+                                <p class="text-sm font-medium text-slate-700 italic bg-amber-50/50 p-3.5 rounded-xl border border-amber-200/60 leading-relaxed">"${displayPassageSnippet}"</p>
+                            </div>
                         </div>
-                    ` : ''}
+
+                        <!-- Interactive Guessing Pad -->
+                        <div class="mt-5 pt-4 border-t border-slate-200/80">
+                            <span class="text-xs font-bold text-slate-500 block mb-2">
+                                Học sinh tự chọn thử phương án (${q.part === 'part1' ? 'A–C: Các giải thưởng' : 'A–D: Các nhà nghiên cứu'}):
+                            </span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                ${activePool.map(item => `
+                                    <button onclick="checkUserGuess('${item.key}')" class="p-2.5 text-left rounded-xl text-xs border transition-all flex items-center gap-2 ${
+                                        isAnswerRevealed && item.key === q.correctOptionKey 
+                                        ? 'bg-nobelTheme-700 text-white border-transparent shadow-sm ring-2 ring-nobelTheme-400' 
+                                        : 'bg-white text-slate-700 hover:bg-slate-100 border-slate-300'
+                                    }">
+                                        <span class="w-6 h-6 rounded-lg font-black text-xs flex items-center justify-center shrink-0 ${
+                                            isAnswerRevealed && item.key === q.correctOptionKey ? 'bg-white text-nobelTheme-900' : 'bg-slate-100 text-slate-700'
+                                        }">[${item.key}]</span>
+                                        <span class="font-bold line-clamp-1">${item.name}</span>
+                                    </button>
+                                `).join('')}
+                            </div>
+                            <div id="user-guess-feedback" class="mt-2.5"></div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Verified Answer & Analysis Preview -->
+                    <div class="lg:col-span-6 rounded-2xl p-5 border transition-all flex flex-col justify-between ${
+                        isAnswerRevealed 
+                        ? 'bg-gradient-to-br from-nobelTheme-50/70 via-amber-50/30 to-white border-nobelTheme-300 shadow-sm' 
+                        : 'bg-slate-50 border-dashed border-slate-300'
+                    }">
+                        ${isAnswerRevealed ? `
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-black uppercase tracking-wider text-nobelTheme-800 flex items-center gap-1.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                        Đáp Án Thẩm Định Chuẩn Xác
+                                    </span>
+                                    <button onclick="playSpeech('${q.optionName.replace(/'/g, "\\'")}')" class="text-nobelTheme-700 hover:text-nobelTheme-900 flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded bg-white border border-slate-200" title="Phát âm tên đáp án">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-nobelTheme-700" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                        <span>Nghe tên đáp án</span>
+                                    </button>
+                                </div>
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="text-2xl sm:text-3xl font-black uppercase px-4 py-1.5 rounded-xl shadow-sm bg-nobelTheme-700 text-white answer-badge">
+                                        ĐÁP ÁN: [ ${q.correctOptionKey} ] — ${q.optionName}
+                                    </span>
+                                </div>
+                                <p class="text-sm font-semibold text-slate-800 leading-relaxed">${q.vietnameseAnalysis.logic}</p>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-nobelTheme-200/60 flex items-center justify-between">
+                                <span class="text-xs font-bold text-nobelTheme-900">Vị trí bài đọc: <strong>${q.paragraphRef}</strong></span>
+                                <span class="text-xs font-mono font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-md">Chứng cứ rõ ràng</span>
+                            </div>
+                        ` : `
+                            <div class="flex flex-col items-center justify-center h-full py-10 text-center text-slate-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mb-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                <p class="text-sm font-semibold text-slate-600 mb-1">Chế độ Tập Trung Độc Lập (Focus Mode)</p>
+                                <p class="text-xs text-slate-400 max-w-sm">Đọc kỹ đề bài bên trái, chọn thử một phương án hoặc bấm nút <strong>"Hiện Đáp Án & Khớp Nối"</strong> để xem phân tích đối chiếu chi tiết.</p>
+                            </div>
+                        `}
+                    </div>
+
                 </div>
 
-                <!-- Highlighted Vocabulary in this question -->
-                <div class="mt-6 pt-5 border-t border-slate-100">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Từ Vựng Trọng Tâm Trong Câu Hỏi Này</span>
-                    <div class="flex flex-wrap gap-3">
-                        ${q.vocabHighlights.map(v => {
-                            const wordObj = vocabData[v] || { ipa: '', type: '', vi: '' };
-                            return `
-                                <div class="flex items-center gap-2 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-2xs hover:border-nobelTheme-400 transition-colors">
-                                    <button onclick="playSpeech('${v}')" class="text-nobelTheme-700 hover:text-nobelTheme-900" title="Nghe phát âm chuẩn UK">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                    </button>
-                                    <div>
-                                        <span class="font-bold text-sm text-slate-900">${v}</span>
-                                        <span class="text-xs text-slate-400 font-mono ml-1">${wordObj.ipa}</span>
-                                        <span class="text-xs text-nobelTheme-700 font-medium ml-1.5 block sm:inline">(${wordObj.vi})</span>
+                ${isAnswerRevealed ? `
+                    <!-- Color-Coded Paired Alignment Breakdown -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-nobelTheme-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-slate-900">Bảng Khớp Nối Từng Chi Tiết (Highlights & Underlines Alignment)</h4>
+                        </div>
+
+                        <div class="space-y-3">
+                            ${q.keyCriteria.map(item => `
+                                <div class="p-4 rounded-xl border bg-white shadow-2xs space-y-2">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 rounded text-xs font-black uppercase ${item.colorClassChip}">Tiêu chí ${item.tag}</span>
+                                        <span class="text-xs font-bold text-slate-800">${item.theme}</span>
                                     </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+                                            <span class="text-[11px] font-bold text-slate-400 uppercase block mb-1">Cụm từ trong Đề Thi:</span>
+                                            <p class="${item.colorClassHl} font-semibold inline">"${item.questionSnippet}"</p>
+                                        </div>
+                                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+                                            <span class="text-[11px] font-bold text-slate-400 uppercase block mb-1">Câu văn trong ${q.paragraphRef}:</span>
+                                            <p class="${item.colorClassHl} font-semibold inline">"${item.passageSnippet}"</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-slate-600 mt-1 italic pl-1 border-l-2 border-nobelTheme-500">${item.expl}</p>
                                 </div>
-                            `;
-                        }).join('')}
+                            `).join('')}
+                        </div>
                     </div>
-                </div>
+
+                    <!-- Distractor Traps & Why not others -->
+                    <div class="bg-amber-50/50 border border-amber-200 rounded-2xl p-5 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-amber-800">Cảnh Báo Bẫy Gây Nhiễu (Tại sao không chọn các phương án khác?)</h4>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${q.distractorTraps.map(trap => `
+                                <div class="bg-white p-3.5 rounded-xl border border-amber-200 text-xs">
+                                    <span class="font-extrabold text-red-700 block mb-1">❌ ${trap.option}</span>
+                                    <p class="text-slate-700 leading-relaxed">${trap.reason}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Step-by-Step Logic in Vietnamese -->
+                    <div class="bg-nobelTheme-50/40 border border-nobelTheme-200 rounded-2xl p-5 space-y-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-nobelTheme-800 block">Tóm Tắt Logic Giải Bài (Tiếng Việt)</span>
+                        <p class="text-sm font-medium text-slate-800 mb-2">${q.vietnameseAnalysis.logic}</p>
+                        <ul class="space-y-1.5 pl-4 list-disc text-xs sm:text-sm text-slate-700">
+                            ${q.vietnameseAnalysis.stepByStep.map(step => `<li>${step}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- Associated Vocabulary Chips -->
+                    <div class="pt-4 border-t border-slate-100">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">Từ Vựng Trọng Tâm Trong Câu Này:</span>
+                        <div class="flex flex-wrap gap-2">
+                            ${q.vocabHighlights.map(v => `
+                                <button onclick="playSpeech('${v}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:border-nobelTheme-400 transition-colors shadow-2xs">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-nobelTheme-600" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    <span>${v}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
 
             </div>
         `;
     }
 
-    function renderAllQuestionsList() {
+    function renderAllQuestionsList(filter = 'all') {
         const container = document.getElementById('all-questions-container');
+        if (!container) return;
         container.innerHTML = '';
 
-        questionsData.forEach(q => {
+        const filtered = questionsData.filter(q => {
+            if (filter === 'all') return true;
+            return q.part === filter;
+        });
+
+        filtered.forEach(q => {
             const card = document.createElement('div');
             card.className = "gradient-border bg-white rounded-2xl p-6 shadow-sm";
 
@@ -776,11 +1271,11 @@
                 </div>
 
                 <div class="mb-4">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Từ đồng nghĩa cốt lõi:</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Tiêu chí đối chiếu cốt lõi:</span>
                     <div class="flex flex-wrap gap-2">
-                        ${q.paraphrases.map(p => `
+                        ${q.keyCriteria.map(p => `
                             <div class="text-xs bg-slate-100 rounded-lg px-2.5 py-1 text-slate-700 border border-slate-200">
-                                <span class="text-amber-800 font-bold">${p.qPart}</span> ➔ <span class="text-indigo-800 font-bold">${p.pPart}</span>: <em>${p.meaning}</em>
+                                <span class="text-nobelTheme-700 font-bold">${p.questionSnippet}</span> ➔ <span class="text-purple-800 font-bold">${p.passageSnippet}</span>: <em>${p.expl}</em>
                             </div>
                         `).join('')}
                     </div>
@@ -792,75 +1287,113 @@
                     <ul class="space-y-1 pl-4 list-disc text-slate-600 mb-2">
                         ${q.vietnameseAnalysis.stepByStep.map(s => `<li>${s}</li>`).join('')}
                     </ul>
-                    ${q.vietnameseAnalysis.traps ? `<p class="text-red-700 mt-2"><strong>⚠️ Bẫy:</strong> ${q.vietnameseAnalysis.traps}</p>` : ''}
                 </div>
             `;
             container.appendChild(card);
         });
     }
 
-    function renderProfilesGrid() {
-        const container = document.getElementById('profiles-grid-container');
-        container.innerHTML = '';
-
-        optionsPool.forEach(opt => {
-            const card = document.createElement('div');
-            card.className = "bg-white border border-slate-200 rounded-2xl p-6 shadow-2xs hover:border-nobelTheme-400 hover:shadow-md transition-all flex flex-col justify-between";
-
-            card.innerHTML = `
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <div class="flex items-center gap-2">
-                            <span class="w-8 h-8 rounded-xl font-black text-sm flex items-center justify-center bg-nobelTheme-700 text-white shadow-2xs font-mono">
-                                ${opt.key}
-                            </span>
-                            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">${opt.affiliation}</span>
-                        </div>
-                        <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-nobelTheme-100 text-nobelTheme-800 border border-nobelTheme-200">
-                            ${opt.resolvedQuestion}
-                        </span>
-                    </div>
-
-                    <h3 class="text-lg font-extrabold text-slate-900 mb-1 leading-snug">${opt.name}</h3>
-                    <span class="text-xs font-bold text-scienceTheme-600 uppercase tracking-wider block mb-2">${opt.prizeCategory}</span>
-                    <h4 class="font-bold text-sm text-nobelTheme-900 mb-2 leading-snug">${opt.researchTitle}</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed mb-4">${opt.description}</p>
-                </div>
-
-                <div class="pt-3 border-t border-slate-100 bg-slate-50/80 -mx-6 -mb-6 p-4 rounded-b-2xl">
-                    <span class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Trích dẫn bài đọc:</span>
-                    <p class="text-xs text-slate-700 italic">"${opt.keyQuote}"</p>
-                </div>
-            `;
-            container.appendChild(card);
+    function filterAllQuestions(type) {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+            b.className = 'filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200';
         });
+        if (event && event.target) {
+            event.target.className = 'filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-bold bg-nobelTheme-700 text-white';
+        }
+        renderAllQuestionsList(type);
+    }
+
+    function renderProfilesGrid() {
+        // Render Part 1 Prizes Grid
+        const prizesContainer = document.getElementById('prizes-grid-container');
+        if (prizesContainer) {
+            prizesContainer.innerHTML = '';
+            part1PrizesPool.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:border-nobelTheme-400 hover:shadow-md transition-all flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="w-8 h-8 rounded-xl font-black text-sm flex items-center justify-center bg-nobelTheme-700 text-white shadow-2xs font-mono">
+                                    ${p.key}
+                                </span>
+                                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Option ${p.key}</span>
+                            </div>
+                            <span class="text-[11px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-200">
+                                Đáp án: ${p.resolvedQuestions}
+                            </span>
+                        </div>
+                        <h3 class="text-base font-extrabold text-slate-900 mb-1 leading-snug">${p.name}</h3>
+                        <span class="text-xs font-bold text-nobelTheme-700 uppercase tracking-wider block mb-2">${p.frequency}</span>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">${p.description}</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 text-xs text-slate-700 italic bg-slate-50 p-2.5 rounded-xl">
+                        "${p.evidenceQuote}"
+                    </div>
+                `;
+                prizesContainer.appendChild(card);
+            });
+        }
+
+        // Render Part 2 Profiles Grid
+        const profilesContainer = document.getElementById('profiles-grid-container');
+        if (profilesContainer) {
+            profilesContainer.innerHTML = '';
+            part2ResearchersPool.forEach(opt => {
+                const card = document.createElement('div');
+                card.className = "bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs hover:border-nobelTheme-400 hover:shadow-md transition-all flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="w-8 h-8 rounded-xl font-black text-sm flex items-center justify-center bg-indigo-700 text-white shadow-2xs font-mono">
+                                    ${opt.key}
+                                </span>
+                                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">${opt.affiliation}</span>
+                            </div>
+                            <span class="text-[11px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 border border-indigo-200">
+                                Đáp án: ${opt.resolvedQuestion}
+                            </span>
+                        </div>
+                        <h3 class="text-base font-extrabold text-slate-900 mb-1 leading-snug">${opt.name}</h3>
+                        <span class="text-xs font-bold text-scienceTheme-600 uppercase tracking-wider block mb-1">${opt.prizeCategory}</span>
+                        <h4 class="font-bold text-xs text-slate-800 mb-2 leading-snug">${opt.researchTitle}</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3">${opt.description}</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 text-xs text-slate-700 italic bg-slate-50 p-2.5 rounded-xl">
+                        "${opt.keyQuote}"
+                    </div>
+                `;
+                profilesContainer.appendChild(card);
+            });
+        }
     }
 
     function renderSynonymsTable() {
         const tbody = document.getElementById('synonyms-table-body');
+        if (!tbody) return;
         tbody.innerHTML = '';
 
         questionsData.forEach(q => {
-            q.paraphrases.forEach((p, pIndex) => {
+            q.keyCriteria.forEach((crit, cIdx) => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-50/80 transition-colors";
                 tr.innerHTML = `
                     <td class="py-3 px-4 text-center font-bold text-slate-700">
-                        ${pIndex === 0 ? `<span class="bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-md">Q${q.id}</span>` : ''}
+                        ${cIdx === 0 ? `<span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded-lg block font-mono">Q${q.id}</span>` : ''}
                     </td>
                     <td class="py-3 px-4">
-                        <span class="keyword-chip">${p.qPart}</span>
+                        <span class="${crit.colorClassHl} px-1.5 py-0.5 rounded font-semibold text-xs leading-relaxed block">${crit.questionSnippet}</span>
                     </td>
                     <td class="py-3 px-4">
-                        <span class="passage-chip">${p.pPart}</span>
+                        <span class="${crit.colorClassHl} px-1.5 py-0.5 rounded font-semibold text-xs leading-relaxed block">${crit.passageSnippet}</span>
                     </td>
                     <td class="py-3 px-4 text-center">
-                        <span class="text-xs font-bold uppercase px-2.5 py-1 bg-nobelTheme-700 text-white rounded shadow-2xs">
-                            ${q.correctOptionKey} (${q.optionName})
-                        </span>
+                        ${cIdx === 0 ? `<span class="text-xs font-bold uppercase px-2.5 py-1 bg-nobelTheme-700 text-white rounded shadow-2xs">[ ${q.correctOptionKey} ] ${q.optionName}</span>` : ''}
                     </td>
-                    <td class="py-3 px-4 text-slate-700 text-xs sm:text-sm">
-                        ${p.meaning}
+                    <td class="py-3 px-4 text-slate-700 text-xs">
+                        ${crit.expl}
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -870,6 +1403,7 @@
 
     function renderVocabGrid(filterWord = '') {
         const container = document.getElementById('vocab-grid-container');
+        if (!container) return;
         container.innerHTML = '';
 
         const words = Object.keys(vocabData).filter(w => {
@@ -924,7 +1458,7 @@
     }
 
     function switchView(viewName) {
-        const views = ['presentation', 'all', 'profiles', 'synonyms', 'vocab'];
+        const views = ['presentation', 'passages', 'all', 'profiles', 'synonyms', 'vocab'];
         views.forEach(v => {
             const sec = document.getElementById(`view-${v}`);
             const tabBtn = document.getElementById(`tab-${v}`);
@@ -947,9 +1481,9 @@
             const presView = document.getElementById('view-presentation');
             if (presView && !presView.classList.contains('hidden')) {
                 if (e.key === 'ArrowRight') {
-                    navigateQuestion(1);
+                    navigateSlide(1);
                 } else if (e.key === 'ArrowLeft') {
-                    navigateQuestion(-1);
+                    navigateSlide(-1);
                 }
             }
         });
