@@ -2400,43 +2400,38 @@ class DeckEngine {
             window.readingHighlighter.highlightAll(rawContainerId || container.id || null, false);
         }
 
-        // Check category sorter exercises
+        // Aggregate all engine results into a single toast (prevents race condition where
+        // each engine's showToastNotification call overwrites the previous one)
+        let _totalCorrect = 0, _totalItems = 0;
+        const _toastParts = [];
+
         if (window.categorySorter) {
-            const catResult = window.categorySorter.checkAnswers(container);
-            if (catResult.total > 0) {
-                this.showToastNotification(`✅ ${catResult.correct} / ${catResult.total} categorized correctly`);
-            }
+            const r = window.categorySorter.checkAnswers(container);
+            if (r.total > 0) { _totalCorrect += r.correct; _totalItems += r.total; _toastParts.push(`${r.correct}/${r.total} sorted`); }
         }
-
-        // Check matching pairs exercises
         if (window.matchingPairsEngine) {
-            const matchResult = window.matchingPairsEngine.checkAnswers(container);
-            if (matchResult.total > 0) {
-                this.showToastNotification(`✅ ${matchResult.correct} / ${matchResult.total} matched correctly`);
-            }
+            const r = window.matchingPairsEngine.checkAnswers(container);
+            if (r.total > 0) { _totalCorrect += r.correct; _totalItems += r.total; _toastParts.push(`${r.correct}/${r.total} matched`); }
         }
-
-        // Check choice / TFNG pills
         if (window.choiceSelectorEngine) {
-            const choiceResult = window.choiceSelectorEngine.checkAnswers(container);
-            if (choiceResult.total > 0) {
-                this.showToastNotification(`✅ ${choiceResult.correct} / ${choiceResult.total} choices correct`);
-            }
+            const r = window.choiceSelectorEngine.checkAnswers(container);
+            if (r.total > 0) { _totalCorrect += r.correct; _totalItems += r.total; _toastParts.push(`${r.correct}/${r.total} choices`); }
         }
-
-        // Check sentence scramble exercises
         if (window.sentenceScrambleEngine) {
-            const scrambleResult = window.sentenceScrambleEngine.checkAnswers(container);
-            if (scrambleResult.total > 0) {
-                this.showToastNotification(`✅ ${scrambleResult.correct} / ${scrambleResult.total} sentences correct`);
-            }
+            const r = window.sentenceScrambleEngine.checkAnswers(container);
+            if (r.total > 0) { _totalCorrect += r.correct; _totalItems += r.total; _toastParts.push(`${r.correct}/${r.total} sentences`); }
         }
-
-        // Show score toast for standard inputs
         const allInputs = container.querySelectorAll('.blank-input[data-ans], .select-input[data-ans]');
         if (allInputs.length > 0) {
             const correctCount = container.querySelectorAll('.blank-input.correct, .select-input.correct').length;
-            this.showToastNotification(`✅ ${correctCount} / ${allInputs.length} correct`);
+            _totalCorrect += correctCount; _totalItems += allInputs.length;
+            _toastParts.push(`${correctCount}/${allInputs.length} gaps`);
+        }
+        if (_totalItems > 0) {
+            const _summary = _toastParts.length > 1
+                ? `✅ ${_totalCorrect}/${_totalItems} — ${_toastParts.join(' · ')}`
+                : `✅ ${_totalCorrect} / ${_totalItems} correct`;
+            this.showToastNotification(_summary);
         }
 
         if (broadcast && window.presenterSyncEngine) {
@@ -2512,9 +2507,6 @@ class DeckEngine {
         if (window.dragGapfillEngine) {
             window.dragGapfillEngine.syncBankChips(container);
         }
-        if (window.choiceSelectorEngine) {
-            window.choiceSelectorEngine.revealKeys(container);
-        }
 
         if (broadcast && window.presenterSyncEngine) {
             window.presenterSyncEngine.emit('EXERCISE_ACTION', {
@@ -2557,6 +2549,11 @@ class DeckEngine {
             if (input.classList.contains('blank-input') && window.DeckComponents?.autoResizeBlank) {
                 DeckComponents.autoResizeBlank(input);
             }
+        });
+
+        // Clear opt-card answer feedback (correct-opt / wrong-opt stay visible after reset without this)
+        container.querySelectorAll('.opt-card').forEach(card => {
+            card.classList.remove('correct-opt', 'wrong-opt', 'selected');
         });
 
         if (window.dragGapfillEngine) {
@@ -2878,6 +2875,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 class DeckComponents {
     static init() {
+        // Guard: prevent double-init (both deck-components.js and deck-core.js register DOMContentLoaded listeners)
+        // A second run would re-run hydrateBlanksAndInputs() and wipe input values restored by ProgressTracker
+        if (DeckComponents._initialized) return;
+        DeckComponents._initialized = true;
         this.hydrateHUD();
         this.hydrateTabs();
         this.hydrateExerciseActions();
@@ -8730,22 +8731,50 @@ class ProgressTracker {
     }
 
     /**
-     * Calculates total questions and correct count across the presentation
+     * Calculates total questions and correct count across the presentation.
+     * Tracks: blank-input, select-input, opt-card, plus all 4 specialist engines
+     * (category-sorter chips, matching-pairs items, sentence-scramble chips, choice-selector pills).
      */
     calculateStats() {
         let total = 0;
         let correct = 0;
 
+        // Standard gap-fill inputs and dropdowns
         document.querySelectorAll('.blank-input, .select-input').forEach(input => {
             total++;
             if (input.classList.contains('correct')) correct++;
         });
 
+        // Opt-cards (multi-select TRUE/FALSE/NG style)
         document.querySelectorAll('.opt-card').forEach(card => {
             if (card.dataset.correct === 'true') {
                 total++;
                 if (card.classList.contains('correct-opt')) correct++;
             }
+        });
+
+        // Category-sorter chips (each chip that has been placed counts)
+        document.querySelectorAll('.sort-chip:not(.unplaced)').forEach(chip => {
+            total++;
+            if (chip.classList.contains('correct')) correct++;
+        });
+
+        // Matching-pairs: count left-side items that have been paired
+        document.querySelectorAll('.match-left-item.is-paired').forEach(item => {
+            total++;
+            if (item.classList.contains('correct')) correct++;
+        });
+
+        // Sentence-scramble chips placed in a target line
+        document.querySelectorAll('.scramble-target-line .scramble-chip').forEach(chip => {
+            total++;
+            if (chip.classList.contains('correct')) correct++;
+        });
+
+        // Choice-selector pills (only count ones that have been answered)
+        document.querySelectorAll('.choice-btn.correct, .choice-btn.wrong').forEach(btn => {
+            total++;
+            if (btn.classList.contains('correct')) correct++;
         });
 
         return {
@@ -14183,7 +14212,7 @@ class PresenterSyncEngine {
         }
 
         // Periodic heartbeat & peer discovery
-        setInterval(() => {
+        this._heartbeatInterval = setInterval(() => {
             const isPresenter = window.presenterViewUI ? window.presenterViewUI.isPresenter : false;
             this.emit('HEARTBEAT', { senderId: this.instanceId, isPresenter, lessonKey: this.lessonKey });
 
@@ -14294,6 +14323,16 @@ class PresenterSyncEngine {
         if (dot) {
             dot.className = connected ? 'cp-sync-dot connected' : 'cp-sync-dot waiting';
             dot.title = connected ? 'Synchronized with audience presentation window' : 'Waiting for audience presentation window...';
+        }
+    }
+
+    /**
+     * Cleans up intervals and BroadcastChannel when the sync engine is no longer needed.
+     */
+    destroy() {
+        clearInterval(this._heartbeatInterval);
+        if (this.channel) {
+            try { this.channel.close(); } catch (e) {}
         }
     }
 }
@@ -16023,10 +16062,23 @@ class PresenterViewUI {
         const isSpotlight = window.presentationSpotlight ? window.presentationSpotlight.isSpotlight : false;
 
         const inputsData = [];
+        const optCardData = [];
         const slide = (window.deckEngine.slides && window.deckEngine.slides[currentSlide]) || document.querySelector('.slide.active');
         if (slide) {
+            // Only carry the answer-state classes — never the full className string (prevents stale/injected classes)
             slide.querySelectorAll('.blank-input, .select-input, input, select, textarea').forEach((inp, i) => {
-                inputsData.push({ index: i, value: inp.value, className: inp.className });
+                const stateClasses = ['correct', 'wrong', 'incorrect'].filter(c => inp.classList.contains(c));
+                inputsData.push({ index: i, value: inp.value, stateClasses });
+            });
+
+            // Opt-card state snapshot: selected + graded feedback classes
+            slide.querySelectorAll('.opt-card').forEach((card, i) => {
+                optCardData.push({
+                    index: i,
+                    selected: card.classList.contains('selected'),
+                    correctOpt: card.classList.contains('correct-opt'),
+                    wrongOpt: card.classList.contains('wrong-opt')
+                });
             });
         }
 
@@ -16039,7 +16091,10 @@ class PresenterViewUI {
             isBlackout,
             isWhiteout,
             isSpotlight,
-            inputsData
+            inputsData,
+            optCardData,
+            // Progress stats passed directly so presenter window (which has empty sessionStorage) can render real score
+            progressStats: window.progressTracker ? window.progressTracker.calculateStats() : null
         });
     }
 
@@ -16103,11 +16158,25 @@ class PresenterViewUI {
                 if (slide) {
                     const allInputs = slide.querySelectorAll('.blank-input, .select-input, input, select, textarea');
                     state.inputsData.forEach(item => {
-                        if (allInputs[item.index]) {
-                            allInputs[item.index].value = item.value;
-                            allInputs[item.index].className = item.className;
-                        }
+                        if (!allInputs[item.index]) return;
+                        const el = allInputs[item.index];
+                        el.value = item.value;
+                        // Restore only known answer-state classes (never overwrite full className from network)
+                        el.classList.remove('correct', 'wrong', 'incorrect');
+                        (item.stateClasses || []).forEach(c => el.classList.add(c));
                     });
+
+                    // Restore opt-card graded + selected state
+                    if (Array.isArray(state.optCardData)) {
+                        const allCards = slide.querySelectorAll('.opt-card');
+                        state.optCardData.forEach(item => {
+                            const card = allCards[item.index];
+                            if (!card) return;
+                            card.classList.toggle('selected', !!item.selected);
+                            card.classList.toggle('correct-opt', !!item.correctOpt);
+                            card.classList.toggle('wrong-opt', !!item.wrongOpt);
+                        });
+                    }
                 }
             }
             if (state.aspectRatio && window.deckEngine) {
@@ -16121,6 +16190,11 @@ class PresenterViewUI {
                 this.updateTimerDisplay(state.timerSeconds);
             }
             this.updatePresenterSlideView();
+
+            // Render real score stats received from audience (presenter sessionStorage is always empty)
+            if (state.progressStats && window.progressTracker) {
+                window.progressTracker.renderReviewDashboard(state.progressStats);
+            }
         });
 
         // Remote slide navigation from audience
@@ -16415,7 +16489,9 @@ class PresenterViewUI {
                 const stagePct = (mouseX / containerRect.width) * 100;
                 stageCol.style.flex = `0 0 ${stagePct}%`;
                 notesCol.style.flex = `0 0 ${100 - stagePct}%`;
-                this.updatePresenterSlideView();
+                // Debounced — prevents DOM-clone thrash on every pixel moved during drag
+                clearTimeout(this._resizeDebounce);
+                this._resizeDebounce = setTimeout(() => this.updatePresenterSlideView(), 60);
             }
         });
 

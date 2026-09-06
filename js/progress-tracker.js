@@ -93,22 +93,50 @@ class ProgressTracker {
     }
 
     /**
-     * Calculates total questions and correct count across the presentation
+     * Calculates total questions and correct count across the presentation.
+     * Tracks: blank-input, select-input, opt-card, plus all 4 specialist engines
+     * (category-sorter chips, matching-pairs items, sentence-scramble chips, choice-selector pills).
      */
     calculateStats() {
         let total = 0;
         let correct = 0;
 
+        // Standard gap-fill inputs and dropdowns
         document.querySelectorAll('.blank-input, .select-input').forEach(input => {
             total++;
             if (input.classList.contains('correct')) correct++;
         });
 
+        // Opt-cards (multi-select TRUE/FALSE/NG style)
         document.querySelectorAll('.opt-card').forEach(card => {
             if (card.dataset.correct === 'true') {
                 total++;
                 if (card.classList.contains('correct-opt')) correct++;
             }
+        });
+
+        // Category-sorter chips (each chip that has been placed counts)
+        document.querySelectorAll('.sort-chip:not(.unplaced)').forEach(chip => {
+            total++;
+            if (chip.classList.contains('correct')) correct++;
+        });
+
+        // Matching-pairs: count left-side items that have been paired
+        document.querySelectorAll('.match-left-item.is-paired').forEach(item => {
+            total++;
+            if (item.classList.contains('correct')) correct++;
+        });
+
+        // Sentence-scramble chips placed in a target line
+        document.querySelectorAll('.scramble-target-line .scramble-chip').forEach(chip => {
+            total++;
+            if (chip.classList.contains('correct')) correct++;
+        });
+
+        // Choice-selector pills (only count ones that have been answered)
+        document.querySelectorAll('.choice-btn.correct, .choice-btn.wrong').forEach(btn => {
+            total++;
+            if (btn.classList.contains('correct')) correct++;
         });
 
         return {

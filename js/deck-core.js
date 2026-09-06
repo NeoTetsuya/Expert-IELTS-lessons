@@ -460,43 +460,38 @@ class DeckEngine {
             window.readingHighlighter.highlightAll(rawContainerId || container.id || null, false);
         }
 
-        // Check category sorter exercises
+        // Aggregate all engine results into a single toast (prevents race condition where
+        // each engine's showToastNotification call overwrites the previous one)
+        let _totalCorrect = 0, _totalItems = 0;
+        const _toastParts = [];
+
         if (window.categorySorter) {
-            const catResult = window.categorySorter.checkAnswers(container);
-            if (catResult.total > 0) {
-                this.showToastNotification(`✅ ${catResult.correct} / ${catResult.total} categorized correctly`);
-            }
+            const r = window.categorySorter.checkAnswers(container);
+            if (r.total > 0) { _totalCorrect += r.correct; _totalItems += r.total; _toastParts.push(`${r.correct}/${r.total} sorted`); }
         }
-
-        // Check matching pairs exercises
         if (window.matchingPairsEngine) {
-            const matchResult = window.matchingPairsEngine.checkAnswers(container);
-            if (matchResult.total > 0) {
-                this.showToastNotification(`✅ ${matchResult.correct} / ${matchResult.total} matched correctly`);
-            }
+            const r = window.matchingPairsEngine.checkAnswers(container);
+            if (r.total > 0) { _totalCorrect += r.correct; _totalItems += r.total; _toastParts.push(`${r.correct}/${r.total} matched`); }
         }
-
-        // Check choice / TFNG pills
         if (window.choiceSelectorEngine) {
-            const choiceResult = window.choiceSelectorEngine.checkAnswers(container);
-            if (choiceResult.total > 0) {
-                this.showToastNotification(`✅ ${choiceResult.correct} / ${choiceResult.total} choices correct`);
-            }
+            const r = window.choiceSelectorEngine.checkAnswers(container);
+            if (r.total > 0) { _totalCorrect += r.correct; _totalItems += r.total; _toastParts.push(`${r.correct}/${r.total} choices`); }
         }
-
-        // Check sentence scramble exercises
         if (window.sentenceScrambleEngine) {
-            const scrambleResult = window.sentenceScrambleEngine.checkAnswers(container);
-            if (scrambleResult.total > 0) {
-                this.showToastNotification(`✅ ${scrambleResult.correct} / ${scrambleResult.total} sentences correct`);
-            }
+            const r = window.sentenceScrambleEngine.checkAnswers(container);
+            if (r.total > 0) { _totalCorrect += r.correct; _totalItems += r.total; _toastParts.push(`${r.correct}/${r.total} sentences`); }
         }
-
-        // Show score toast for standard inputs
         const allInputs = container.querySelectorAll('.blank-input[data-ans], .select-input[data-ans]');
         if (allInputs.length > 0) {
             const correctCount = container.querySelectorAll('.blank-input.correct, .select-input.correct').length;
-            this.showToastNotification(`✅ ${correctCount} / ${allInputs.length} correct`);
+            _totalCorrect += correctCount; _totalItems += allInputs.length;
+            _toastParts.push(`${correctCount}/${allInputs.length} gaps`);
+        }
+        if (_totalItems > 0) {
+            const _summary = _toastParts.length > 1
+                ? `✅ ${_totalCorrect}/${_totalItems} — ${_toastParts.join(' · ')}`
+                : `✅ ${_totalCorrect} / ${_totalItems} correct`;
+            this.showToastNotification(_summary);
         }
 
         if (broadcast && window.presenterSyncEngine) {
@@ -572,9 +567,6 @@ class DeckEngine {
         if (window.dragGapfillEngine) {
             window.dragGapfillEngine.syncBankChips(container);
         }
-        if (window.choiceSelectorEngine) {
-            window.choiceSelectorEngine.revealKeys(container);
-        }
 
         if (broadcast && window.presenterSyncEngine) {
             window.presenterSyncEngine.emit('EXERCISE_ACTION', {
@@ -617,6 +609,11 @@ class DeckEngine {
             if (input.classList.contains('blank-input') && window.DeckComponents?.autoResizeBlank) {
                 DeckComponents.autoResizeBlank(input);
             }
+        });
+
+        // Clear opt-card answer feedback (correct-opt / wrong-opt stay visible after reset without this)
+        container.querySelectorAll('.opt-card').forEach(card => {
+            card.classList.remove('correct-opt', 'wrong-opt', 'selected');
         });
 
         if (window.dragGapfillEngine) {

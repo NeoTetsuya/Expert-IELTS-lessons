@@ -90,7 +90,7 @@ Files in `md files/` (e.g., `md files/e6/m4 content.md`) follow a standardized h
 | **Interactive Grid** | `template="exercise-grid"`<br>*(Use for general grids, walkthroughs, grammar matrices, & model comparisons)* | `<div slot="grid">` | Two-column cards, walkthrough containers, 3-column grammar matrices, or model paragraph comparisons. |
 | **Essay Model** | `template="writing-model"` | `<div slot="prompt">`<br>`<div slot="annotations">`<br>`<div slot="model">` | Left col: prompt card & structural outline. Right col: scrollable model essay with highlighted signposts. |
 | **Pre-Reading Strategy** | `template="strategy"` | `<div slot="sentences">`<br>`<div slot="guide">` | Left col: question sentences to deconstruct. Right col: step-by-step strategy guide. |
-| **Mastery Checklist** | `template="summary-checklist"` | `<div slot="grid">` | Two-column checklist items with checkmark badges for module sign-off. |
+| **Module Sign-off Checklist** | `template="summary-checklist"` | `<div slot="grid">` | **Exclusively for the final review/summary slide.** Two-column checklist items with checkmark badges. Do NOT use for exercise content — use `exercise-grid` instead. |
 | **Gap-Fill Passage** | `template="gap-fill-passage"` | `<div slot="passage">`<br>`<div slot="rules-col">` | Left col: narrative passage with inline blank inputs. Right col: grammar rules or word banks. |
 | **Lexicon Hub** | `template="vocab-cards"` or `template="vocab-grid"` | `<div slot="cards">`<br>`<div slot="inspector">` | Left col: word card chips. Right col: phonetic transcription and collocation inspector. |
 
@@ -207,6 +207,15 @@ Every reading split-view slide **must include the entire reading passage**:
 - [ ] Is every single answer in the markdown converted into an **interactive input or select**?
 - [ ] Are there **zero** static answer keys or plain text cheat sheets?
 - [ ] Are all `<slide-card>` template names from the approved registry (`reading-split`, `exercise-grid`, etc.)?
+- [ ] Is `template="summary-checklist"` used **only** for the final review slide (not for exercise content)? Use `template="exercise-grid"` for all other multi-column exercise layouts.
 - [ ] Are redundant inner `.action-row` blocks removed (relying on the template's bottom action bar)?
 - [ ] Does every interactive input have `data-ans="..."` and an accompanying `.item-explanation`?
 - [ ] Has `index.html` been updated with the accurate slide count?
+
+### Engine Gotchas
+
+- **`summary-checklist` vs `exercise-grid`**: Only use `summary-checklist` on the final review/summary slide. For any slide with exercise content (blanks, selects, cards, grids), always use `exercise-grid`. Using `summary-checklist` on exercise slides causes incorrect template rendering.
+- **`revealKeys()` does not proxy `revealMultiOpts()`**: On slides that use exclusively `.opt-card` items (no blank inputs or select dropdowns), set the Reveal button to call `revealMultiOpts(id)` directly. `revealKeys()` will not reveal opt-cards.
+- **`checkAnswers()` unified toast**: `checkAnswers()` emits a single aggregated toast for all exercise types on the slide. Do not add separate `showToastNotification` calls for individual engines — they will fire in addition to the aggregated toast.
+- **Progress Tracker & drag engines**: The auto-save does not fire on drag events (category-sorter, matching-pairs, sentence-scramble). Student drag state is NOT persisted in sessionStorage and will not be restored on page refresh. This is by design.
+- **Presenter score widget**: The score widget in the Presenter Cockpit always receives its data from the audience window via `SYNC_RESPONSE.progressStats`. It does not read `sessionStorage` (which is always empty in the presenter tab).

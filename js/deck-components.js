@@ -9,6 +9,10 @@
 
 class DeckComponents {
     static init() {
+        // Guard: prevent double-init (both deck-components.js and deck-core.js register DOMContentLoaded listeners)
+        // A second run would re-run hydrateBlanksAndInputs() and wipe input values restored by ProgressTracker
+        if (DeckComponents._initialized) return;
+        DeckComponents._initialized = true;
         this.hydrateHUD();
         this.hydrateTabs();
         this.hydrateExerciseActions();

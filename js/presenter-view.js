@@ -349,10 +349,23 @@ class PresenterViewUI {
         const isSpotlight = window.presentationSpotlight ? window.presentationSpotlight.isSpotlight : false;
 
         const inputsData = [];
+        const optCardData = [];
         const slide = (window.deckEngine.slides && window.deckEngine.slides[currentSlide]) || document.querySelector('.slide.active');
         if (slide) {
+            // Only carry the answer-state classes — never the full className string (prevents stale/injected classes)
             slide.querySelectorAll('.blank-input, .select-input, input, select, textarea').forEach((inp, i) => {
-                inputsData.push({ index: i, value: inp.value, className: inp.className });
+                const stateClasses = ['correct', 'wrong', 'incorrect'].filter(c => inp.classList.contains(c));
+                inputsData.push({ index: i, value: inp.value, stateClasses });
+            });
+
+            // Opt-card state snapshot: selected + graded feedback classes
+            slide.querySelectorAll('.opt-card').forEach((card, i) => {
+                optCardData.push({
+                    index: i,
+                    selected: card.classList.contains('selected'),
+                    correctOpt: card.classList.contains('correct-opt'),
+                    wrongOpt: card.classList.contains('wrong-opt')
+                });
             });
         }
 
@@ -365,7 +378,10 @@ class PresenterViewUI {
             isBlackout,
             isWhiteout,
             isSpotlight,
-            inputsData
+            inputsData,
+            optCardData,
+            // Progress stats passed directly so presenter window (which has empty sessionStorage) can render real score
+            progressStats: window.progressTracker ? window.progressTracker.calculateStats() : null
         });
     }
 
@@ -429,11 +445,25 @@ class PresenterViewUI {
                 if (slide) {
                     const allInputs = slide.querySelectorAll('.blank-input, .select-input, input, select, textarea');
                     state.inputsData.forEach(item => {
-                        if (allInputs[item.index]) {
-                            allInputs[item.index].value = item.value;
-                            allInputs[item.index].className = item.className;
-                        }
+                        if (!allInputs[item.index]) return;
+                        const el = allInputs[item.index];
+                        el.value = item.value;
+                        // Restore only known answer-state classes (never overwrite full className from network)
+                        el.classList.remove('correct', 'wrong', 'incorrect');
+                        (item.stateClasses || []).forEach(c => el.classList.add(c));
                     });
+
+                    // Restore opt-card graded + selected state
+                    if (Array.isArray(state.optCardData)) {
+                        const allCards = slide.querySelectorAll('.opt-card');
+                        state.optCardData.forEach(item => {
+                            const card = allCards[item.index];
+                            if (!card) return;
+                            card.classList.toggle('selected', !!item.selected);
+                            card.classList.toggle('correct-opt', !!item.correctOpt);
+                            card.classList.toggle('wrong-opt', !!item.wrongOpt);
+                        });
+                    }
                 }
             }
             if (state.aspectRatio && window.deckEngine) {
@@ -447,6 +477,11 @@ class PresenterViewUI {
                 this.updateTimerDisplay(state.timerSeconds);
             }
             this.updatePresenterSlideView();
+
+            // Render real score stats received from audience (presenter sessionStorage is always empty)
+            if (state.progressStats && window.progressTracker) {
+                window.progressTracker.renderReviewDashboard(state.progressStats);
+            }
         });
 
         // Remote slide navigation from audience
@@ -741,7 +776,9 @@ class PresenterViewUI {
                 const stagePct = (mouseX / containerRect.width) * 100;
                 stageCol.style.flex = `0 0 ${stagePct}%`;
                 notesCol.style.flex = `0 0 ${100 - stagePct}%`;
-                this.updatePresenterSlideView();
+                // Debounced — prevents DOM-clone thrash on every pixel moved during drag
+                clearTimeout(this._resizeDebounce);
+                this._resizeDebounce = setTimeout(() => this.updatePresenterSlideView(), 60);
             }
         });
 

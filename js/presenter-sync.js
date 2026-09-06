@@ -46,7 +46,7 @@ class PresenterSyncEngine {
         }
 
         // Periodic heartbeat & peer discovery
-        setInterval(() => {
+        this._heartbeatInterval = setInterval(() => {
             const isPresenter = window.presenterViewUI ? window.presenterViewUI.isPresenter : false;
             this.emit('HEARTBEAT', { senderId: this.instanceId, isPresenter, lessonKey: this.lessonKey });
 
@@ -157,6 +157,16 @@ class PresenterSyncEngine {
         if (dot) {
             dot.className = connected ? 'cp-sync-dot connected' : 'cp-sync-dot waiting';
             dot.title = connected ? 'Synchronized with audience presentation window' : 'Waiting for audience presentation window...';
+        }
+    }
+
+    /**
+     * Cleans up intervals and BroadcastChannel when the sync engine is no longer needed.
+     */
+    destroy() {
+        clearInterval(this._heartbeatInterval);
+        if (this.channel) {
+            try { this.channel.close(); } catch (e) {}
         }
     }
 }
