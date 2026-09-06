@@ -13,7 +13,7 @@ window.module4Data = window.module04Data = {
         moduleNum: "04",
         title: "Science & Beyond",
         subtitle: "IELTS Academic Preparation Masterclass",
-        slidesCount: 56,
+        slidesCount: 59,
         tags: [
             { text: "Reading 4a/4b", bg: "var(--col-reading)" },
             { text: "Grammar: Probability Matrix", bg: "var(--col-grammar)" },

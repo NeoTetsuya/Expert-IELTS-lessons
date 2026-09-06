@@ -13,7 +13,7 @@ window.module5Data = {
         moduleNum: "05",
         title: "The World Around Us",
         subtitle: "IELTS Academic Preparation Masterclass",
-        slidesCount: 32,
+        slidesCount: 33,
         tags: [
             { text: "Reading 5a/5b", bg: "var(--col-reading)" },
             { text: "Grammar: -ing vs Infinitives", bg: "var(--col-grammar)" },

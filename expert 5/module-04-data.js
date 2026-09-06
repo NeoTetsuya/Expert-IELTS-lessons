@@ -13,7 +13,7 @@ window.module4Data = {
         moduleNum: "04",
         title: "Well-being",
         subtitle: "IELTS Academic Preparation Masterclass",
-        slidesCount: 30,
+        slidesCount: 34,
         tags: [
             { text: "Reading 4a/4b", bg: "var(--col-reading)" },
             { text: "Grammar: Past Simple & Continuous", bg: "var(--col-grammar)" },
